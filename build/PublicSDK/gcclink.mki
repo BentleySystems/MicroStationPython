@@ -1,0 +1,56 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if $(BUILD_TOOLSET) != "LINUX_CLANG" && $(BUILD_TOOLSET) != "ANDROID_CLANG"
+    %error gcclink.mki should only be used when the toolset is LINUX_CLANG or ANDROID_CLANG
+%endif
+
+%if defined (DLM_NO_DLL)
+    %warn GCCLINK IGNORING DLM_NO_DLL=$(DLM_NO_DLL) - GCCLINK *ONLY* creates SOs
+    %return
+%endif
+
+%if !DLM_NO_BENTLEY_LIB 
+    %if !defined (BentleyLib)
+        BentleyLib=libBentley.so
+    %endif
+    BentleyLibFullPath=$(BuildContext)SubParts/Libs/$(BentleyLib)
+    %ifnofile $(BentleyLibFullPath)
+        %undef BentleyLibFullPath
+    %endif
+%endif
+
+BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE=
+
+%include dlmlinkCommon.mki
+
+BENTLEY_TOOLCONTEXT_LINK_NAME           = $(DLM_NAME)
+BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER = $(DLM_API_NUMBER)
+BENTLEY_TOOLCONTEXT_LINK_DEST           = $(DLM_DEST)
+BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST    = $(DLM_OBJECT_DEST)
+BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES   = $(DLM_OBJECT_FILES)
+BENTLEY_TOOLCONTEXT_LINK_LIBRARIES      = $(LINKER_LIBRARIES) $(BentleyLibFullPath)
+
+%if "Android" == $(TARGET_PLATFORM)
+    %include androidToolContextLink.mki
+%elif "Linux" == $(TARGET_PLATFORM)
+    %if defined (CREATE_STATIC_LIBRARIES)
+        %include linuxLlvmToolContextStaticLink.mki
+    %else
+        %include linuxLlvmToolContextDynamicLink.mki
+    %endif
+%else
+    %error No link MKI available for using clang to build $(TARGET_PLATFORM).
+%endif
+
+%if defined (DLM_CONTEXT_LOCATION) && !defined (DLM_NO_CONTEXT_LINK)
+$(DLM_CONTEXT_LOCATION)$[@nondir $(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME)] : $(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME)
+    $(LinkFirstDepToFirstTarget)
+%endif
+
+# TRICKY: must create link using name w/o version number. This stands in for the .lib file.
+%if defined (DLM_CONTEXT_LOCATION) && !defined (DLM_NO_CONTEXT_LINK)
+$(DLM_CONTEXT_LOCATION)lib$(DLM_NAME).so : $(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME)
+    $(LinkFirstDepToFirstTarget)
+%endif

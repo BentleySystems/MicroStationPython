@@ -1,0 +1,24 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#       Directory creation rule.
+#
+#   If directory/exists.ext doesn't exist, create the directory.  This is obsolete;
+#   you should use:
+#
+#   always:
+#       ~mkdir $(newDir)
+#
+#--------------------------------------------------------------------------------------
+%if !defined (__createdirMKI__)
+    __createdirMKI__ = 1
+
+    tstdir      = direxist.ext
+
+    .ext.ext:
+        !~@mkdir  ${$%}
+
+%endif
+

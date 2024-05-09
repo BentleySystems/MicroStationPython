@@ -1,0 +1,209 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if defined (ANDROIDTOOLCONTEXT_MKE)
+    %return
+%endif
+ANDROIDTOOLCONTEXT_MKE = 1
+
+ANDROID = 1
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# INPUTS
+#
+#   ANDROID_NDK_ROOT    - The Android NDK root directory. Should point to the directory that contains the toolchains and platforms subdirectories. Should have a trailing '\'.
+#   DEBUG               - (optional) Set this if you want to disable optimization when compiling.
+
+%if !defined(ANDROID_NDK_ROOT)
+    %error ANDROID_NDK_ROOT must be defined.
+%endif
+
+%if ($[@findstring r21, $(ANDROID_NDK_ROOT)] != "r21"))
+    %error Must use NDK r21 (ANDROID_NDK_ROOT=$(ANDROID_NDK_ROOT)).
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# OUTPUTS
+#
+#   This MKI file defines the following macros for use in compiling and linking native code for Android platforms:
+#
+# ----------
+#  Compiler
+# ----------
+#
+# BENTLEY_ANDROID_COMPILE_CommonOptions         - Compiler options (C++ and C)
+# BENTLEY_ANDROID_COMPILE_CppOptions            - Compiler options (C++-specific)
+# BENTLEY_ANDROID_COMPILE_DebugOptions          - Add to command line to get a debug build
+# BENTLEY_ANDROID_COMPILE_OptimizeOptions       - Add to command line to get an optimized build
+#
+# ----------
+#  Linker
+# ----------
+#                                       
+# BENTLEY_ANDROID_LINK_OpenGLLibraries          - The libraries that you must link if you call OpenGL functions.
+# BENTLEY_ANDROID_LINK_Options                  - Command-line options that you should use when linking a '.so'.
+# BENTLEY_ANDROID_LINK_SystemLibraries          - The system libraries that every .so must link with. These must come *last* in the link statement.
+#
+# -----------
+#  Toolchain 
+# -----------
+#
+# BENTLEY_ANDROID_TOOLCHAIN_ar                  - ar
+# BENTLEY_ANDROID_TOOLCHAIN_ccompile            - clang compiler for .c files
+# BENTLEY_ANDROID_TOOLCHAIN_compile             - clang++ compiler for .cpp files
+# BENTLEY_ANDROID_TOOLCHAIN_link                - clang linker
+# BENTLEY_ANDROID_TOOLCHAIN_preprocess          - clang++ compiler preprocessor
+# BENTLEY_ANDROID_TOOLCHAIN_strip               - strip
+# BENTLEY_ANDROID_TOOLCHAIN_strip_options       - the normal options for strip
+#
+# --------
+#   Misc
+# --------
+#
+# BENTLEY_ANDROID_Gdbserver                     - The full path to the prebuilt gdbserver program
+# BENTLEY_ANDROID_GdbUsrInclude                 - Put the value of this expression into gdb.setup to help gdb find system functions.
+# BENTLEY_ANDROID_libcpp_shared                 - The name (not including the directory) of libc++_shared.so.
+# BENTLEY_ANDROID_libcpp_shared_fullpath        - The full path to libc++_shared.so. Note that this is automatically included in BENTLEY_ANDROID_LINK_SystemLibraries.
+# BENTLEY_ANDROID_UseUnixFilenames              - If defined, then the toolchain commands require unix-style / path separators.
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# The Android toolchain programs require Unix path separators.
+BENTLEY_ANDROID_UseUnixFilenames = 1
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# See https://android.magicer.xyz/ndk/guides/standalone_toolchain.html
+
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidARM64"
+    ANDROID_ARCH = arm64
+    ANDROID_ABI = arm64-v8a
+    ANDROID_TOOLCHAIN_DIR = aarch64-linux-android-4.9
+    ANDROID_TOOLCHAIN_NAME = aarch64-linux-android
+    ANDROID_TARGET = aarch64-none-linux-android
+    ANDROID_LIB_DIR = lib
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidX64"
+    ANDROID_ARCH = x86_64
+    ANDROID_ABI = x86_64
+    ANDROID_TOOLCHAIN_DIR = x86_64-4.9
+    ANDROID_TOOLCHAIN_NAME = x86_64-linux-android
+    ANDROID_TARGET = x86_64-none-linux-android
+    ANDROID_LIB_DIR = lib64
+%else
+    %error Unexpected TARGET_PROCESSOR_ARCHITECTURE '$(TARGET_PROCESSOR_ARCHITECTURE)'.
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+%if defined (winNT)
+    ANDROID_PREBUILT=windows-x86_64
+%elif defined (__apple)
+    ANDROID_PREBUILT=darwin-x86_64
+%elif defined (__linux)
+    %error Not supported
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+ANDROID_TARGET_API_LEVEL = 28
+ANDROID_MIN_API_LEVEL = 24
+
+BENTLEY_ANDROID_Gdbserver       =% ${ANDROID_NDK_ROOT}/prebuilt/android-$(ANDROID_ARCH)/gdbserver/gdbserver
+BENTLEY_ANDROID_GdbUsrInclude   =% ${ANDROID_NDK_ROOT}/platforms/android-$(ANDROID_TARGET_API_LEVEL)/arch-$(ANDROID_ARCH)/usr/include ${ANDROID_NDK_ROOT}/sources/cxx-stl/system/include
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+BENTLEY_ANDROID_TOOLCHAIN_ar                =% ${ANDROID_NDK_ROOT}/toolchains/$(ANDROID_TOOLCHAIN_DIR)/prebuilt/$(ANDROID_PREBUILT)/bin/$(ANDROID_TOOLCHAIN_NAME)-ar$(toolchainExeext)
+BENTLEY_ANDROID_TOOLCHAIN_ccompile          =% ${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/$(ANDROID_PREBUILT)/bin/clang++$(toolchainExeext) -x c 
+BENTLEY_ANDROID_TOOLCHAIN_compile           =% ${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/$(ANDROID_PREBUILT)/bin/clang++$(toolchainExeext)
+BENTLEY_ANDROID_TOOLCHAIN_link              =% ${ANDROID_NDK_ROOT}/toolchains/llvm/prebuilt/$(ANDROID_PREBUILT)/bin/clang++$(toolchainExeext)
+BENTLEY_ANDROID_TOOLCHAIN_preprocess        =% $(BENTLEY_ANDROID_TOOLCHAIN_compile) -E -P -x c++
+BENTLEY_ANDROID_TOOLCHAIN_strip             =% ${ANDROID_NDK_ROOT}/toolchains/$(ANDROID_TOOLCHAIN_DIR)/prebuilt/$(ANDROID_PREBUILT)/bin/$(ANDROID_TOOLCHAIN_NAME)-strip$(toolchainExeext)
+BENTLEY_ANDROID_TOOLCHAIN_strip_options     = --preserve-dates --strip-debug --strip-unneeded -v
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Start with the basic clang options that we use
+
+CLANG_SYSROOT = ${ANDROID_NDK_ROOT}/platforms/android-$(ANDROID_TARGET_API_LEVEL)/arch-$(ANDROID_ARCH)/
+
+%include clang_common_opts.mki
+
+# We want libstdc++ on Linux, and libc++ elsewhere.
+# libc++ is new to Linux, and is not available on many distributions... and many .so files use libstdc++, which is not ABI compatible with libc++.
+LLVMCppCompOpts + -stdlib=libc++
+LLVMLinkOpts + -stdlib=libc++
+
+# Symbols are opt-in on this platform due to size / lack of use.
+%if defined (LLVM_DEBUG)
+    LLVMDebugOpts + -g
+%endif
+
+BENTLEY_ANDROID_COMPILE_CommonOptions           = $(LLVMCommonCompOpts) --sysroot=$(CLANG_SYSROOT)
+BENTLEY_ANDROID_COMPILE_CppOptions              = $(LLVMCppCompOpts)
+BENTLEY_ANDROID_COMPILE_DebugOptions            = $(LLVMDebugOpts)
+BENTLEY_ANDROID_COMPILE_OptimizeOptions         = $(LLVMOptimizeOptions)
+
+# Add Android and NDK-specific configuration
+
+BENTLEY_ANDROID_COMPILE_CommonOptions + -DANDROID -D__ANDROID_API__=$(ANDROID_MIN_API_LEVEL) --gcc-toolchain=${ANDROID_NDK_ROOT}/toolchains/$(ANDROID_TOOLCHAIN_DIR)/prebuilt/$(ANDROID_PREBUILT)
+
+# Specify target architecture and FPU
+# See https://developer.android.com/ndk/guides/standalone_toolchain.html
+
+BENTLEY_ANDROID_COMPILE_CommonOptions + --target=$(ANDROID_TARGET)$(ANDROID_MIN_API_LEVEL)
+
+BENTLEY_ANDROID_COMPILE_CommonOptions +% \
+    -I${ANDROID_NDK_ROOT}/sources/cxx-stl/llvm-libc++/include \
+    -I${ANDROID_NDK_ROOT}/sources/android/support/include \
+    -I${ANDROID_NDK_ROOT}/sysroot/usr/include \
+    -I${ANDROID_NDK_ROOT}/sysroot/usr/include/$(ANDROID_TOOLCHAIN_NAME) \
+    -I${ANDROID_NDK_ROOT}/sources/cxx-stl/system/include \
+    -I${ANDROID_NDK_ROOT}/sources/android/native_app_glue
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# System libraries
+
+BENTLEY_ANDROID_libcpp_shared           = libc++_shared.so
+BENTLEY_ANDROID_libcpp_shared_fullpath  = ${ANDROID_NDK_ROOT}/sources/cxx-stl/llvm-libc++/libs/$(ANDROID_ABI)/$(BENTLEY_ANDROID_libcpp_shared)
+BENTLEY_ANDROID_libcpp_static           = libc++_static.a
+BENTLEY_ANDROID_libcpp_static_fullpath  = ${ANDROID_NDK_ROOT}/sources/cxx-stl/llvm-libc++/libs/$(ANDROID_ABI)/$(BENTLEY_ANDROID_libcpp_static)
+
+# Must be IN ORDER
+BENTLEY_ANDROID_LINK_OpenGLLibraries =% \
+    ${ANDROID_NDK_ROOT}/platforms/android-$(ANDROID_TARGET_API_LEVEL)/arch-$(ANDROID_ARCH)/usr/$(ANDROID_LIB_DIR)/libEGL.so \
+    ${ANDROID_NDK_ROOT}/platforms/android-$(ANDROID_TARGET_API_LEVEL)/arch-$(ANDROID_ARCH)/usr/$(ANDROID_LIB_DIR)/libGLESv2.so \
+    ${ANDROID_NDK_ROOT}/platforms/android-$(ANDROID_TARGET_API_LEVEL)/arch-$(ANDROID_ARCH)/usr/$(ANDROID_LIB_DIR)/libGLESv1_CM.so \
+    ${ANDROID_NDK_ROOT}/platforms/android-$(ANDROID_TARGET_API_LEVEL)/arch-$(ANDROID_ARCH)/usr/$(ANDROID_LIB_DIR)/libGLESv3.so
+
+# Must be last. Must be IN ORDER
+BENTLEY_ANDROID_LINK_SystemLibraries = \
+    -latomic \
+    -lm \
+    -llog \
+    ${ANDROID_NDK_ROOT}/platforms/android-$(ANDROID_TARGET_API_LEVEL)/arch-$(ANDROID_ARCH)/usr/$(ANDROID_LIB_DIR)/libandroid.so \
+    ${ANDROID_NDK_ROOT}/sources/cxx-stl/llvm-libc++/libs/$(ANDROID_ABI)/libc++_static.a \
+    ${ANDROID_NDK_ROOT}/sources/cxx-stl/llvm-libc++/libs/$(ANDROID_ABI)/libc++abi.a
+
+# Link options
+BENTLEY_ANDROID_LINK_Options = \
+    --gcc-toolchain=${ANDROID_NDK_ROOT}/toolchains/$(ANDROID_TOOLCHAIN_DIR)/prebuilt/$(ANDROID_PREBUILT) \
+    --sysroot ${ANDROID_NDK_ROOT}/platforms/android-$(ANDROID_MIN_API_LEVEL)/arch-$(ANDROID_ARCH) \
+    --target=$(ANDROID_TARGET)$(ANDROID_MIN_API_LEVEL) \
+    -fPIC \
+    -L${ANDROID_NDK_ROOT}/sources/cxx-stl/llvm-libc++/libs/$(ANDROID_ABI) \
+    -nostdlib++ \
+    -shared \
+    -Wl,--exclude-libs,libatomic.a \
+    -Wl,--exclude-libs,libgcc.a \
+    -Wl,--no-undefined \
+    $(LLVMLinkOpts)
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+always:
+    ~set BENTLEY_ANDROID_LINK_Options           $[@subst \, \/, $(BENTLEY_ANDROID_LINK_Options)]
+    ~set BENTLEY_ANDROID_LINK_OpenGLLibraries   $[@subst \, \/, $(BENTLEY_ANDROID_LINK_OpenGLLibraries)]
+    ~set BENTLEY_ANDROID_LINK_SystemLibraries   $[@subst \, \/, $(BENTLEY_ANDROID_LINK_SystemLibraries)]
+    ~set BENTLEY_ANDROID_GdbUsrInclude          $[@subst \, \/, $(BENTLEY_ANDROID_GdbUsrInclude)]

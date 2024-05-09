@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="BentleyBase" nameSpacePrefix="bentley" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.02" prefix="bsca" />
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECCustomAttributes>
+        <TreeColorCustomAttributes xmlns="Bentley_Standard_CustomAttributes.01.02" />
+    </ECCustomAttributes>
+    <ECClass typeName="BENTLEY_BASE_OBJECT" description="Bentley Base Object" displayLabel="Bentley Base Object" isDomainClass="True">
+        <ECCustomAttributes>
+            <GlobalIdSpecification xmlns="Bentley_Standard_CustomAttributes.01.02">
+                <PropertyName>GUID</PropertyName>
+            </GlobalIdSpecification>
+            <SyncIDSpecification xmlns="Bentley_Standard_CustomAttributes.01.02">
+                <Property>GUID</Property>
+            </SyncIDSpecification>
+        </ECCustomAttributes>
+        <ECProperty propertyName="GUID" typeName="string" description="Unique ID for each component. Must be used as business key." displayLabel="Guid" readOnly="True" />
+    </ECClass>
+    <ECRelationshipClass typeName="BENTLEY_BASE_OBJECT_EMBEDS_BENTLEY_BASE_OBJECT" displayLabel="Bentley Base Object Embeds Bentley Base Object" isDomainClass="True" strength="embedding" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="Bentley Base Object Embeds Bentley Base Object" polymorphic="True">
+            <Class class="BENTLEY_BASE_OBJECT" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Bentley Base Object Embeds Bentley Base Object (reversed)" polymorphic="True">
+            <Class class="BENTLEY_BASE_OBJECT" />
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="BENTLEY_BASE_OBJECT_HOLDS_BENTLEY_BASE_OBJECT" displayLabel="Bentley Base Object Holds Bentley Base Object" isDomainClass="True" strength="holding" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="Bentley Base Object Holds Bentley Base Object" polymorphic="True">
+            <Class class="BENTLEY_BASE_OBJECT" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Bentley Base Object Holds Bentley Base Object (reversed)" polymorphic="True">
+            <Class class="BENTLEY_BASE_OBJECT" />
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="BENTLEY_BASE_OBJECT_REFERENCES_BENTLEY_BASE_OBJECT" displayLabel="Bentley Base Object References Bentley Base Object" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,N)" roleLabel="Bentley Base Object References Bentley Base Object" polymorphic="True">
+            <Class class="BENTLEY_BASE_OBJECT" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Bentley Base Object References Bentley Base Object (reversed)" polymorphic="True">
+            <Class class="BENTLEY_BASE_OBJECT" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="BentleyCustomObject" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="IsBentleyCustomObject" typeName="boolean" description="Determines if an object is a Bentley Custom object and not derived from ISO 15926" />
+    </ECClass>
+    <ECClass typeName="COMMON_GEOMETRY" description="This will list down all geometry classes" displayLabel="Common Geometry" isDomainClass="False">
+        <ECArrayProperty propertyName="GEOMETRY" typeName="Bentley.Geometry.Common.IGeometry" description="Geometry" displayLabel="Geometry" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Geometry</Name>
+                    <DisplayLabel>Geometry</DisplayLabel>
+                    <Description>Geometry</Description>
+                    <Priority>200000</Priority>
+                    <Expand>True</Expand>
+                    <Standard>0</Standard>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>400000</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="RANGE3D" displayLabel="Range3D" isStruct="True" isDomainClass="True">
+        <BaseClass>COMMON_GEOMETRY</BaseClass>
+        <ECProperty propertyName="xMax" typeName="double" />
+        <ECProperty propertyName="xMin" typeName="double" />
+        <ECProperty propertyName="yMax" typeName="double" />
+        <ECProperty propertyName="yMin" typeName="double" />
+        <ECProperty propertyName="zMax" typeName="double" />
+        <ECProperty propertyName="zMin" typeName="double" />
+    </ECClass>
+    <ECClass typeName="TRANSFORM3D" description="This class gives transformation" displayLabel="Transform3D" isStruct="True" isDomainClass="True">
+        <BaseClass>COMMON_GEOMETRY</BaseClass>
+        <ECProperty propertyName="M00" typeName="double" />
+        <ECProperty propertyName="M01" typeName="double" />
+        <ECProperty propertyName="M02" typeName="double" />
+        <ECProperty propertyName="M03" typeName="double" />
+        <ECProperty propertyName="M04" typeName="double" />
+        <ECProperty propertyName="M05" typeName="double" />
+        <ECProperty propertyName="M06" typeName="double" />
+        <ECProperty propertyName="M07" typeName="double" />
+        <ECProperty propertyName="M08" typeName="double" />
+        <ECProperty propertyName="M09" typeName="double" />
+        <ECProperty propertyName="M10" typeName="double" />
+        <ECProperty propertyName="M11" typeName="double" />
+        <ECProperty propertyName="M12" typeName="double" />
+        <ECProperty propertyName="M13" typeName="double" />
+        <ECProperty propertyName="M14" typeName="double" />
+        <ECProperty propertyName="M15" typeName="double" />
+    </ECClass>
+</ECSchema>

@@ -1,0 +1,170 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+#  See the usage description in this file's sister-file called MultiCppCompileRule.mki
+#
+#  Inputs:
+#
+#  $(DisableMultiCompile) - If for some reason you want to compile the files one at a time.
+#
+#
+#  $(RedoCppMakefile)     - When you change your makefile (or anything else identified by $(MultiCompileDepends), MultiCppCompileRule.mki
+#                           writes each .cpp.obj build rule that is currently in your makefile to a temporary file called $(o)$(_MakeFileName)_cpp$(MultiCompileNdx).mke.
+#                           MultiCppCompileGo.mki will then *include* the generated makefile below. That has the effect of re-evaluating
+#                           all of your .cpp.obj rules again. Each will fire, because each depends on $(MultiCompileDepends). 
+#  Outputs:
+#
+#  $(MultiCompileObjectList) - The object list that you will present to the linker for the compilands that you
+#                              bracketed with MultiCppCompileRule.mke/MultiCppCompileGo.mki.
+#
+%if !defined (__MultiCppCompileRule_MKI__)
+   %error You must included MultiCppCompileRule.mki before including MultiCppCompileGo.mki.  See the usage description in MultiCppCompileRule.mki.
+%endif
+
+%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED"  || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "APPLE_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG" || $(BUILD_TOOLSET) == "EMCC"
+    %include MultiCppCompileGoGCC.mki
+    %return
+%endif
+
+%undef MultiCompileCppList
+%undef MultiCompileCList
+
+MultiCompileCppList = $[@readfile $(MultiCompileCppListFile)]
+MultiCompileCList   = $[@readfile $(MultiCompileCListFile)]
+
+%if defined (MultiCompileDepends)
+
+    %undef MultiCompileDepends
+    %undef continuationChar
+
+    .(cxx,cpp).obj:
+            !~set NeedsCompiledCppList $(NeedsCompiledCppList) $<
+
+    .c.obj:
+            !~set NeedsCompiledCList $(NeedsCompiledCList) $<
+
+    %iffile $(RedoCppMakefile)
+        %include $(RedoCppMakefile)
+    %endif
+    
+    %iffile $(RedoCMakefile)
+        %include $(RedoCMakefile)
+    %endif
+
+%else
+    %if defined (NeedsCompiledCppList)
+        always:
+            !~set MultiCompileCppList $(MultiCompileCppList) $(NeedsCompiledCppList)
+            !~set MultiCompileCppList $[@sort $(MultiCompileCppList)]
+            >$(MultiCompileCppListFile)
+            $(MultiCompileCppList)
+            <
+    %endif
+
+    %if defined (NeedsCompiledCList)
+        always:
+            !~set MultiCompileCList $(MultiCompileCList) $(NeedsCompiledCList)
+            !~set MultiCompileCList $[@sort $(MultiCompileCList)]
+            >$(MultiCompileCListFile)
+            $(MultiCompileCList)
+            <
+    %endif
+
+%endif
+
+%if ($(MultiCompileCppList) != " ")
+    MultiCompileCppObjectList = $[@addprefix $$(o), $[@addsuffix .obj, $[@basename $[@strip $(MultiCompileCppList)]]]]
+    MultiCompileObjectList +% $(MultiCompileCppObjectList)
+%endif
+
+%if ($(MultiCompileCList) != " ")
+    MultiCompileCObjectList = $[@addprefix $$(o), $[@addsuffix .obj, $[@basename $[@strip $(MultiCompileCList)]]]]
+    MultiCompileObjectList +% $(MultiCompileCObjectList)
+%endif
+
+%undef MultiCompileCppList
+%undef MultiCompileCList
+
+OutOfDateCppOptFile=$(o)$(_MakeFileName)OutOfDateCppSources$(MultiCompileNdx).opt
+OutOfDateCOptFile  =$(o)$(_MakeFileName)OutOfDateCSources$(MultiCompileNdx).opt
+
+%if defined (DEBUG_MULTI_COMPILE)
+    %message NeedsCompiledCppList=$(NeedsCompiledCppList)
+    %message MultiCompileObjectList=$(MultiCompileObjectList)
+    %message OutOfDateCppOptFile=$(OutOfDateCppOptFile)
+%endif
+
+
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    MultiCompileObjectList=" "
+    always:
+        !-@$(deleteCmd) $(OutOfDateCppOptFile)
+        !-@$(deleteCmd) $(OutOfDateCOptFile)
+
+%else
+    %if defined (NeedsCompiledCppList)
+        SaveCTargetSpec =% $[CTargetSpec]
+        %if !defined (DisableMultiCompile)
+            CTargetSpec = $(o)
+            $(OutOfDateCppOptFile) :
+                > $@
+                $(RecipeCPPCompileArgs) $(NeedsCompiledCppList)
+                <
+                %if defined (ENABLE_COMPILER_ANALYZE) # so the AppSec team can see/verify the analysis compiler options in the logs.
+                    %message Multi-Compile Compiler Command and Options: $(CCCompCmd) $(RecipeCPPCompileArgs)
+                %endif
+                $(CCCompCmd) @$@
+
+        %endif
+        CTargetSpec =% $[SaveCTargetSpec]
+        %undef NeedsCompiledCppList
+    %endif
+
+
+    %if defined (NeedsCompiledCList)
+        SaveCTargetSpec =% $[CTargetSpec]
+        %if !defined (DisableMultiCompile)
+            CTargetSpec = $(o)
+            $(OutOfDateCOptFile) :
+                > $@
+                $(NeedsCompiledCList)
+                <
+                %if defined (ENABLE_COMPILER_ANALYZE) # so the AppSec team can see/verify the analysis compiler options in the logs.
+                    %message Multi-Compile Compiler Command and Options: $(RecipeCCompile)
+                %endif
+                $(RecipeCCompile) @$@
+
+        %endif
+        CTargetSpec =% $[SaveCTargetSpec]
+        %undef NeedsCompiledCList
+    %endif
+%endif
+
+%if defined (SaveMultiCompileDepends)
+    MultiCompileDepends =% $[SaveMultiCompileDepends]
+    %undef SaveMultiCompileDepends
+%endif
+
+#
+# Restore the value that IntermediatePdbFile had before MultiCppCompileRule.mki was included.  That will enable
+# subsequent, non-multi-compiles to take place normally in the including bmake context.
+#
+IntermediatePdbFile=%$[SaveMultiCompileIntermediatePdbFile]
+
+#
+#  Restore the suffix rules from mdl.mki. Without this dlmlink.mki will fail when trying to compile DelayLoadHook.c.
+#  I wish there were a way the push/pop suffix rules. I rather hate to repeat these here because I cannot be certain
+#  that these were the rules that were in place in the context before MultiCppCompileRule.mki overwrote them.
+#
+    .c.obj:
+        $(msg)
+        $(RecipeCCompile) $<
+        ~time
+
+    .(cxx,cpp,cc).obj:
+        $(msg)
+        $(RecipeCPPCompile) $< $(CCompRedirect)
+        ~time
+

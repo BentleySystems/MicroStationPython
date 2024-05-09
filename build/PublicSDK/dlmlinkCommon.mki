@@ -1,0 +1,51 @@
+#--------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if !defined (DLM_EXTENSION)
+    DLM_EXTENSION   = $(shlibext)
+%endif
+
+%if !defined (DLM_OUT_NAME)
+    DLM_OUT_NAME    = $(DLM_DEST)$(shlibprefix)$(DLM_NAME)$(DLM_API_NUMBER)$(DLM_EXTENSION)
+%endif
+
+%if !defined (DlmLinkCmd)
+    DlmLinkCmd = $(CLinkCmd)
+%endif
+
+
+%if !defined (DLM_DEST)
+    %if !defined (BSI)
+        DLM_DEST = $(mdlapps)
+    %else
+        DLM_DEST = $(mdlAsNeeded)
+    %endif
+%endif
+
+
+%if !defined (DLM_NOENTRY)
+    %if !defined (DLM_ENTRY_SRC)
+        %error define DLM_ENTRY_SRC
+    %endif
+
+    %if !defined (DLM_ENTRY_NAME)
+        DLM_ENTRY_NAME = dllentry
+    %endif
+%endif
+
+#---------------------------------------------------------
+#  Set up to inject a version
+#----------------------------------------------------------
+%if defined (BSI_VERSIONING) && !defined (DLM_NO_VERSION)
+    %include $(SrcRoot)bsicommon/sharedmki/dlmversion.mki
+%endif
+
+#---------------------------------------------------------
+#  Determine the rights-compliant status for this file.
+#---------------------------------------------------------
+%if !defined (MSJ_SKIP_SIGNRSCS) && !defined (DLM_NO_SIGN)
+    %include signrscsdefs.mki
+%endif
+

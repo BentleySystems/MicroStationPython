@@ -1,0 +1,66 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    %error  TARGET_PROCESSOR_ARCHITECTURE not defined
+%endif
+
+%if !defined (CTargetSpec)
+    CTargetSpec = $@
+%endif
+
+%if defined (CCCompOpts)
+    %warn CLANG IGNORES CCCompOpts=$(CCCompOpts)
+%endif
+
+ClangCommonCompOpts   = $(BENTLEY_LINUX_COMPILE_CommonOptions)
+ClangCppCompOpts      = $(BENTLEY_LINUX_COMPILE_CppOptions)
+
+%if !defined (DEBUG) || defined (PRG)
+    ClangConfigurationOptions = $(BENTLEY_LINUX_COMPILE_OptimizeOptions)
+%else
+    %if !defined (LLVM_DEBUG)
+        ClangConfigurationOptions = $(BENTLEY_LINUX_COMPILE_DebugOptionsNoSymbols)
+    %else
+        ClangConfigurationOptions = $(BENTLEY_LINUX_COMPILE_DebugOptions)
+    %endif
+%endif
+
+# Articles on Linux shared libraries:
+# http://tldp.org/HOWTO/Program-Library-HOWTO/shared-libraries.html
+# http://www.yolinux.com/TUTORIALS/LibraryArchives-StaticAndDynamic.html
+
+# Build the following into .SOs and executables to tell the runtime loader where to look when trying to find required .SOs.
+BENTLEY_LINUX_LINK_RPathLink = -Wl,-rpath=.
+
+# Tell the *linker* where to look when trying to resolve the dependencies of the .SO files that are passed to it.
+BENTLEY_LINUX_LINK_RPathLink + -Wl,-rpath-link=$(BuildContext)SubParts/Assemblies
+
+# These macros are used below and by the clang precompiledheader and multicppcompile mki files
+RecipeCppCompileArgs = $(CCPchOpts) $(cIncs) $(cDefs) $(cuser) $(ProductIncludes) $(ClangCommonCompOpts) $(ClangCppCompOpts)  $(ClangConfigurationOptions) $(PublicApiIncludes)
+RecipeCCompileArgs   = $(CCPchOpts) $(cIncs) $(cDefs) $(cuser) $(ProductIncludes) $(ClangCommonCompOpts)                      $(ClangConfigurationOptions) $(PublicApiIncludes)
+
+# This macro is used by build/GenerateTestFileList.py (for all platforms)
+RecipeCPPreprocess = $(BENTLEY_LINUX_TOOLCHAIN_preprocess) $(RecipeCppCompileArgs)
+
+# This macro is used by MultiCppCompileRule/GoGCC.mki, which is actually used for both GCC and LLVM toolchains.
+CCCompCmd = $(BENTLEY_LINUX_TOOLCHAIN_compile)
+
+.(cpp,cxx,cc).o:
+    $(msg)
+    $(BENTLEY_LINUX_TOOLCHAIN_compile) $(RecipeCppCompileArgs) -o$(CTargetSpec) $< $(CCompRedirect)
+    ~time
+
+CCompCmd = $(BENTLEY_LINUX_TOOLCHAIN_ccompile)
+
+.c.o:
+    $(msg)
+    $(BENTLEY_LINUX_TOOLCHAIN_ccompile) $(RecipeCCompileArgs) -o$(CTargetSpec) $< $(CCompRedirect)
+    ~time
+
+# Assembly files (notably for compiling ICU's data into the assembly).
+.s.o:
+    $(msg)
+    $(BENTLEY_LINUX_TOOLCHAIN_compile) $(RecipeCCompileArgs) -o$(CTargetSpec) $< $(CCompRedirect)
+    ~time

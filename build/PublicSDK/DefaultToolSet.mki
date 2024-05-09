@@ -1,0 +1,26 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if defined (BUILD_TOOLSET)
+    %return
+%endif
+
+# This file is included from mdl.mki to set the default toolset, unless it is already set.
+%if defined (OVERRIDE_DEFAULT_TOOLSET)
+    %error OVERRIDE_DEFAULT_TOOLSET not supported. Set BUILD_TOOLSET before including mdl.mki
+%endif
+
+%if defined (OVERRIDE_DEFAULT_TOOLSET)
+    %error OVERRIDE_DEFAULT_VC_TOOLSET not supported.
+%endif
+
+%if defined (winNT)
+    BUILD_TOOLSET = VS2019
+%elif defined (__apple)
+    BUILD_TOOLSET = CLANG
+%elif defined (__linux)
+    BUILD_TOOLSET = LINUX_CLANG
+%else
+    %error Could not deduce a default toolset from your environment. Please manually set BUILD_TOOLSET instead.
+%endif

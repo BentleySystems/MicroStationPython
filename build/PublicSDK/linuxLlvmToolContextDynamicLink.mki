@@ -1,0 +1,40 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%ifndef BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST
+    BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST = $(BENTLEY_TOOLCONTEXT_LINK_DEST)
+%endif
+
+%ifndef BENTLEY_TOOLCONTEXT_LINK_SONAME
+    BENTLEY_TOOLCONTEXT_LINK_SONAME = lib$(BENTLEY_TOOLCONTEXT_LINK_NAME)$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).so
+%endif
+
+BENTLEY_TOOLCONTEXT_RAW_LINK_OUT_NAME = $(BENTLEY_TOOLCONTEXT_LINK_DEST)lib$(BENTLEY_TOOLCONTEXT_LINK_NAME)$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).so
+BENTLEY_TOOLCONTEXT_LINK_OUT_NAME = $[@subst \, \/, $(BENTLEY_TOOLCONTEXT_RAW_LINK_OUT_NAME)]
+
+LinkResponseFile = $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST)$(BENTLEY_TOOLCONTEXT_LINK_NAME)link.rsp
+
+$(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME) : $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES) $(_MakeFileSpec)
+    |[== Building $@, ($=) ==]
+    >$(LinkResponseFile)
+    %ifdef BENTLEY_LINUX_LINK_Options
+        $(BENTLEY_LINUX_LINK_Options)
+    %endif
+    -shared
+    -Wl,-soname,$(BENTLEY_TOOLCONTEXT_LINK_SONAME)
+    -o "$(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME)"
+    $[@subst \, \/, $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES)]
+    %ifdef BENTLEY_TOOLCONTEXT_LINK_LIBRARIES
+        $[@subst \, \/, $(BENTLEY_TOOLCONTEXT_LINK_LIBRARIES)]
+    %endif
+    $(BENTLEY_LINUX_LINK_SystemLibs)
+    <
+    $(BENTLEY_LINUX_TOOLCHAIN_link) @$(LinkResponseFile)
+    ~time
+
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    always:
+        -$(deleteCmd) $(LinkResponseFile)
+%endif

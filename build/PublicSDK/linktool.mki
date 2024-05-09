@@ -1,0 +1,611 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------*/
+#
+# INSTRUCTIONS FOR USING linktool.mki TO BUILD AN EXECUTABLE:
+#
+# 1) Include mdl.mki.
+#
+# 2) Define the following macro names:
+#
+#       EXE_NAME        Basename of output
+#       EXE_DEST        Destination of finished exe
+#       EXE_SYMB_DEST   Destination of symbol file, defaults to EXE_DEST
+#       LINKER_LIBRARIES  = the list of dynamic library files to be linked that should not be delayloaded.
+#       LINKER_LIBRARIES_DELAYLOADED = the list of dynamic library files to be linked and delayloaded.
+#       EXE_OUT_NAME    Fully qualified output name, contructed from EXE_NAME and EXE_DEST if not defined
+#       EXE_OBJS        List of object files
+#       EXE_TMP_DIR     Directory for temporary files, defaults to $(EXE_DEST)
+#       EXE_LOPT1       Link options to be added to the beginning of
+#                       link command line on platforms where order matters
+#       EXE_LOPT2       Link options to be added to the end of
+#                       link command line on platforms where order matters
+#
+#       EXE_EXTENSION = If set, will be used instead of exe as the extension.
+#           If set to nothing, we can write a mke file that will work with older versions
+#           of linktool.mki which required the including mke file to add the extension to
+#           EXE_NAME.
+#
+#       EXE_NO_SIGN         If set, .exe will not be signed.  Otherwise, it will be.
+#
+#       EXE_STD_MANIFEST    If defined, embeds the default manifest file for EXEs.  (not needed if BSI is set).
+#       EXE_MANIFEST_FILE   If set, embeds the specified manifest file.
+#       EXE_EXECUTION_LEVEL If set, will be the value of "requestedExecutionLevel level=".  Default is "asInvoker".
+#                           Valid values are "asInvoker", "requireAdministrator" and "highestAvailable".
+#       EXE_USES_COMM_CTRLS       If set, Windows Common Controls version definition is generated in manifest file
+#       EXE_COMM_CTRLS_VERSION    If set, overrides the value of "version =", which is by default "6.0.0.0".
+#       EXE_COMM_CTRLS_64BIT      If set, the value of "processorArchitecture=" is set to "ia64". Default is "X86".
+#       EXE_COMM_CTRLS_PUBLIC_KEY If set, overrides the value of "publicKeyToken =", which is by default "6595b64144ccf1df".
+#       EXE_WIN_APP         If set, it's a Windows app rather than a console app
+#       EXE_UNICODE         If set, the startup uses wWinMain / wmain rather than WinMain / main.
+#
+# 3) include linktool.mki
+#
+
+%iffile $(BuildContext)ToolContextApplicationLink.mki
+    BENTLEY_TOOLCONTEXT_LINK_DEST = $(EXE_DEST)
+    BENTLEY_TOOLCONTEXT_LINK_NAME = $(EXE_NAME)
+    BENTLEY_TOOLCONTEXT_LINK_EXTENSION = $(EXE_EXTENSION)
+    BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES = $(EXE_OBJS)
+    BENTLEY_TOOLCONTEXT_LINK_LIBRARIES = $(LINKER_LIBRARIES)
+
+    %if defined (EXE_TMP_DIR)
+        BENTLEY_TOOLCONTEXT_LINK_TEMP_DIR = $(EXE_TMP_DIR)
+    %else
+        BENTLEY_TOOLCONTEXT_LINK_TEMP_DIR = $(EXE_DEST)
+    %endif
+
+    %include $(BuildContext)ToolContextApplicationLink.mki
+
+    %if defined (EXE_CONTEXT_LOCATION) && !defined (EXE_NO_CONTEXT_LINK)
+        EXE_OUT_NAME = $[@subst \, \/, $(EXE_DEST)$(EXE_NAME)$(EXE_EXTENSION)]
+        $(EXE_CONTEXT_LOCATION)$(EXE_NAME)$(EXE_EXTENSION) : $(EXE_OUT_NAME)
+            $(LinkFirstDepToFirstTarget)
+    %endif
+
+    %return
+%endif
+
+%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED"
+
+    LinkerOptions=-lrt -lstdc++
+
+    %if defined (ELECTRIC_FENCE)
+        LinkerOptions + -lefence
+    %endif
+
+    EXE_OUT_NAME=$(EXE_DEST)$(EXE_NAME)$(EXE_EXTENSION)
+
+    $(EXE_OUT_NAME): $(EXE_OBJS)
+        %if $(TARGET_PLATFORM) == "Android"
+            $(BENTLEY_ANDROID_TOOLCHAIN_link) $(BENTLEY_ANDROID_LINK_Options) \
+                -Wl,--gc-sections -Wl,-z,nocopyreloc \
+                -no-canonical-prefixes  \
+                -lgcc \
+                -Wl,-z,relro \
+                -Wl,-z,now \
+                $(BENTLEY_ANDROID_libcpp_shared_fullpath) \
+                -o $@
+        %else
+            g++ $(EXE_OBJS) $(LINKER_LIBRARIES) $(LinkerOptions) -o $@
+        %endif
+        chmod +x $@
+        chmod 777 $@
+
+    %if defined (EXE_CONTEXT_LOCATION) && !defined (EXE_NO_CONTEXT_LINK)
+        $(EXE_CONTEXT_LOCATION)$(EXE_NAME)$(EXE_EXTENSION) : $(EXE_OUT_NAME)
+            $(LinkFirstDepToFirstTarget)
+    %endif
+
+    %return
+
+%endif
+
+%if $(BUILD_TOOLSET) == "LINUX_CLANG"
+
+    LinkerOptions=$(BENTLEY_LINUX_LINK_Options) $(BENTLEY_LINUX_LINK_SystemLibs) $(BENTLEY_LINUX_LINK_RPathLink) 
+
+    %if defined (ELECTRIC_FENCE)
+        LinkerOptions + -lefence
+    %endif
+
+    EXE_OUT_NAME=$(EXE_DEST)$(EXE_NAME)$(EXE_EXTENSION)
+
+    $(EXE_OUT_NAME): $(EXE_OBJS)
+        $(BENTLEY_LINUX_TOOLCHAIN_link) $(EXE_OBJS) $(LINKER_LIBRARIES) $(LinkerOptions) -o $@
+        chmod +x $@
+        chmod 777 $@
+
+    %if defined (EXE_CONTEXT_LOCATION) && !defined (EXE_NO_CONTEXT_LINK)
+        $(EXE_CONTEXT_LOCATION)$(EXE_NAME)$(EXE_EXTENSION) : $(EXE_OUT_NAME)
+            $(LinkFirstDepToFirstTarget)
+    %endif
+
+    %return
+
+%endif
+
+%if $(BUILD_TOOLSET) == "APPLE_CLANG"
+
+    # You'll notice this has a striking resemblence to llvmlink.mki.
+
+    # Architecture
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX86"
+        LinkOptions + -arch i386
+        isSimulator = 1
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX64"
+        LinkOptions + -arch x86_64
+        isSimulator = 1
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64Simulator"
+        LinkOptions + -arch arm64
+        isSimulator = 1
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM"
+        LinkOptions + -arch armv7
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64"
+        LinkOptions + -arch arm64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARMActive"
+        LinkOptions + -arch arm64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSX64"
+        LinkOptions + -arch x86_64
+        LinkOptions + -framework CoreFoundation -framework Foundation -framework IOKit -framework SystemConfiguration -framework Security
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSARM64"
+        LinkOptions + -arch arm64
+        LinkOptions + -framework CoreFoundation -framework Foundation -framework IOKit -framework SystemConfiguration -framework Security
+    %else
+        %error Unknown/unexpected TARGET_PROCESSOR_ARCHITECTURE; could not set -arch.
+    %endif
+
+    %ifdef CLANG_SANITIZE
+       LinkOptions + -fsanitize=$(CLANG_SANITIZE)
+    %endif
+    LinkOptions + -isysroot $(CLANG_SYSROOT)
+    LinkOptions + -std=c++11 
+    LinkOptions + -stdlib=libc++ 
+
+    # Specific to the iOS simulator vs. device build
+    %if defined(isSimulator)
+        LinkOptions + -dead_strip -mios-simulator-version-min=$(IOS_DEPLOYMENT_TARGET)
+    %elif $(TARGET_PLATFORM) == "iOS"
+        LinkOptions + -dead_strip -miphoneos-version-min=$(IOS_DEPLOYMENT_TARGET)
+    %else
+        LinkOptions + -mmacosx-version-min=$(MACOS_DEPLOYMENT_TARGET)
+    %endif
+
+    # Allow same behavior as Windows to load libraries next to the executable.
+    %if !defined (CLANG_NO_RELATIVE_LOADING)
+        LinkOptions + -Wl,-rpath,@loader_path/.
+    %endif
+
+    EXE_OUT_NAME = $(EXE_DEST)$(EXE_NAME)$(EXE_EXTENSION)
+
+    $(EXE_OUT_NAME) : $(EXE_OBJS)
+        xcrun clang++ $(LinkOptions) $(EXE_OBJS) $(LINKER_LIBRARIES) -o $@
+        chmod +x $@
+        chmod 777 $@
+
+    %if defined (EXE_CONTEXT_LOCATION) && !defined (EXE_NO_CONTEXT_LINK)
+        $(EXE_CONTEXT_LOCATION)$(EXE_NAME)$(EXE_EXTENSION) : $(EXE_OUT_NAME)
+            $(LinkFirstDepToFirstTarget)
+    %endif
+
+    %return
+
+%endif
+
+%if $(BUILD_TOOLSET) == "EMCC"
+
+    # Optimization
+    # Emscripten runs optimizations at two different points
+    # Once compiling from C/C++ to bitcode and again from 
+    # bitcode to JS. 
+    # These are the optimizations for bitcode to JS.
+    %if !defined (DEBUG) || defined (PRG)
+        # WARNING: These build settings have not been tested
+
+
+        # Allows you to use emrun to start a localhost for local debugging
+        # TODO Might want to be removed for Release/PRG  ??
+        LinkOptions + --emrun
+
+        # OUTLINING_LIMIT sets the maximum size a function can be in the outputted js
+        # There are trade-offs when using it. Outlining decreases maximum function size, 
+        # but does so at the cost of increasing overall code size as well as performance
+        # (outlining itself makes code less optimized, and requires emscripten to 
+        # disable some passes that are incompatible with it).
+        LinkOptions + OUTLINING_LIMIT=110000
+    
+        LinkOptions + -O3
+        LinkOptions + -s TOTAL_MEMORY=268435456
+        LinkOptions + -s DISABLE_EXCEPTION_CATCHING=1
+        LinkOptions + -s ERROR_ON_UNDEFINED_SYMBOLS=1
+    %else
+
+        LinkOptions + --emrun
+
+        # From Emscripten's src\settings.js
+        # If 1, build in libcxxabi's full c++ demangling code, to allow stackTrace()
+        # to emit fully proper demangled c++ names
+        LinkOptions + -s DEMANGLE_SUPPORT=1
+        
+        LinkOptions + -s OUTLINING_LIMIT=110000
+
+        # Separates the javascript into two different files
+        # TODO: More investigating needs to be done before including this
+        # LinkOptions + --separate-asm
+
+        # Set to debug level to 2 because thats what is being used when 
+        # Compiling from C/C++ to bitcode. So anything higher wouldn't change the 
+        # level of debug
+        LinkOptions + -g2
+
+        LinkOptions + -O1
+
+        # DISABLE_EXCEPTION_CATCHING
+        #   0 - generate code to actually catch exceptions
+        #   1 - disable exception catching at all
+        #   2 - disable exception catching, but enables catching in whitelist
+        LinkOptions + -s DISABLE_EXCEPTION_CATCHING=0
+
+        LinkOptions + -s ASSERTIONS=1
+
+        # From Emscripten's src\settings.js
+        # TOTAL_MEMORY - The total amount of memory to use. Using more memory than this will
+        # cause us to expand the heap, which can be costly with typed arrays:
+        # we need to copy the old heap into a new one in that case.
+        LinkOptions + -s TOTAL_MEMORY=268435456
+
+        # This is disabled because we don't want the slow start-up time that comes
+        # from allowing the stack to grow. If there isn't enough memory 
+        # we should look into increasing the TOTAL_MEMORY instead of allowing
+        # growth.
+        # LinkOptions + -s ALLOW_MEMORY_GROWTH=1
+    %endif
+
+    %if defined (EXE_SHELL)
+        LinkOptions + --shell-file $(EXE_SHELL)
+    %endif
+
+    %if !defined (EXE_EXTENSION)
+        EXE_EXTENSION = $(exeext)
+    %endif
+
+    %if defined (LINKER_LIBRARIES)
+        %undef LINKER_LIBRARIES
+    %endif
+
+    LINKER_LIBRARIES = $[@wildcard $(BuildContext)SubParts/Libs/*$(libext)]
+
+    EXE_OUT_NAME = $(EXE_DEST)$(EXE_NAME)$(EXE_EXTENSION)
+    JS_OUT_NAME = $(EXE_DEST)$(EXE_NAME).js
+    DATA_OUT_NAME = $(EXE_DEST)$(EXE_NAME).data
+    MEM_OUT_NAME = $(EXE_OUT_NAME).mem
+
+    $(EXE_OUT_NAME) : $(EXE_OBJS)
+        $(LinkCommand) $(LinkOptions) $(EXE_OBJS) $(LINKER_LIBRARIES) $(EXE_PRELOAD_FILES) -o $@
+
+    %if defined (EXE_CONTEXT_LOCATION) && !defined (EXE_NO_CONTEXT_LINK)
+        $(EXE_CONTEXT_LOCATION)$(EXE_NAME)$(EXE_EXTENSION) : $(EXE_OUT_NAME)
+            $(LinkFirstDepToFirstTarget)
+
+        $(EXE_CONTEXT_LOCATION)$(EXE_NAME).js : $(JS_OUT_NAME)
+            $(LinkFirstDepToFirstTarget)
+
+        %iffile $(MEM_OUT_NAME)
+            $(EXE_CONTEXT_LOCATION)$(EXE_NAME)$(EXE_EXTENSION).mem : $(MEM_OUT_NAME)
+                $(LinkFirstDepToFirstTarget)
+        %endif 
+
+        %iffile $(DATA_OUT_NAME)
+            $(EXE_CONTEXT_LOCATION)$(EXE_NAME).data : $(DATA_OUT_NAME)
+                $(LinkFirstDepToFirstTarget)
+        %endif
+    %endif
+
+    %return 
+
+%endif
+
+%if defined (EXE_USES_CXX)
+    %warn EXE_USES_CXX is no longer supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (EXE_USES_CPP)
+    %warn EXE_USES_CPP is not supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (EXE_DELAYLOAD_SYSFILES)
+    %warn EXE_DELAYLOAD_SYSFILES is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (EXE_NO_DELAYLOAD)
+    %warn EXE_NO_DELAYLOAD is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (EXE_LIBS)
+    %warn EXE_LIBS is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (EXE_NT_LIBS)
+    %warn EXE_NT_LIBS is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (_oldDelayload)
+    _dlmError = 1
+    %warn =====================================================================================================================
+    %warn Use LINKER_LIBRARIES_DELAYLOADED for all libraries that should be delayloaded.
+    %warn Use LINKER_LIBRARIES  for all libraries that will not be delayloaded. This should include libraries you know you'll always
+    %warn     need and most system libraries. 
+    %warn If you have EXE_NO_DELAYLOAD set but are not using EXE_LIBS or EXE_NT_LIBS you should just remove it.
+    %warn ====
+    %warn *** If you are not yet using these variables, everything will be arbitrarily delayloaded or not based on DLM_NO_DELAYLOAD.
+    %warn ***   All excludes are ignored.  You should update to use these new variables as soon as possible.
+    %warn =====================================================================================================================
+
+    %if defined (EXE_NO_DELAYLOAD) && !defined(FORCE_DELAYLOAD)
+        LINKER_LIBRARIES  = $(EXE_LIBS) $(EXE_NT_LIBS)
+    %else
+        LINKER_LIBRARIES_DELAYLOADED = $(EXE_LIBS) $(EXE_NT_LIBS)
+    %endif
+
+%endif
+
+%if defined (_dlmError)
+    %if defined (LINKTOOL_WARNINGS_AS_ERRORS)
+        %error stopping linktool because LINKTOOL_WARNINGS_AS_ERRORS is set
+    %endif
+    %warn You can set LINKTOOL_WARNINGS_AS_ERRORS=1 to stop in the build when these errors were found.
+%endif
+
+#--------------------------------------------------------------------------------------
+# Set the output name if not defined
+#--------------------------------------------------------------------------------------
+%if !defined (EXE_DEST) && !defined (EXE_NAME)
+    %error  EXE_NAME and EXE_DEST must be defined before including linktool.mki
+%endif
+
+%if !defined (EXE_EXTENSION)
+    EXE_EXTENSION = .exe
+%endif
+
+EXE_OUT_NAME    = $(EXE_DEST)$(EXE_NAME)$(EXE_EXTENSION)
+
+%if !defined (EXE_TMP_DIR)
+    EXE_TMP_DIR = $(EXE_DEST)
+%endif
+
+
+BENTLEY_TOOLCONTEXT_EXE_NAME            = $(EXE_NAME)
+BENTLEY_TOOLCONTEXT_EXE_DEST            = $(EXE_DEST)
+BENTLEY_TOOLCONTEXT_EXE_OUT_NAME        = $(EXE_OUT_NAME)
+BENTLEY_TOOLCONTEXT_EXE_OBJECT_DEST     = $(EXE_TMP_DIR)
+BENTLEY_TOOLCONTEXT_EXE_OBJECT_FILES    = $(EXE_OBJS)
+BENTLEY_TOOLCONTEXT_EXE_LIBRARIES       = $(LINKER_LIBRARIES) $(LINKER_LIBRARIES_DELAYLOADED) $(VER_RESOURCE_OBJ)
+
+# Set up the symbol file location
+%if !defined (EXE_NO_SYMB)
+    %if !defined (EXE_SYMB_OPTS)
+        %if !defined (EXE_SYMB_NAME)
+            %if !defined (EXE_SYMB_DEST)
+                EXE_SYMB_DEST = $(EXE_DEST)
+            %endif
+            EXE_SYMB_NAME = $(EXE_SYMB_DEST)$(EXE_NAME)_exe.pdb
+        %endif
+        BENTLEY_TOOLCONTEXT_EXE_CREATE_SYMB = 1
+        BENTLEY_TOOLCONTEXT_EXE_SYMB_PATH   = $(EXE_SYMB_NAME)
+    %else
+        BENTLEY_TOOLCONTEXT_EXE_OPTIONS_PRE + $(EXE_SYMB_OPTS)
+    %endif
+    
+    always:
+        !~@mkdir $(EXE_SYMB_DEST)
+%endif
+
+# Set up to inject a version resource.
+# Want to reuse the dlmversion include, so set up the vars for it.
+%if defined (BSI_VERSIONING) && !defined (EXE_NO_VERSION)
+    DLM_NAME = $(EXE_NAME)
+    DLM_OBJECT_DEST = $(EXE_TMP_DIR)
+    %include dlmversion.mki
+%endif
+
+# Build as a windows app rather than a console app.
+%if defined (MFC_WIN_APP)
+    EXE_WIN_APP=1
+%endif
+
+# Determine the signing status for this file.
+%if !defined (MSJ_SKIP_SIGNRSCS) && !defined (EXE_NO_SIGN)
+    %include signrscsdefs.mki
+%endif
+
+# Generate assembly info file for CLR builds
+%if defined (COMPILE_FOR_CLR)
+    %include generateAssemblyInfocpp.mki
+%endif
+
+# Delay-loaded libraries
+%if defined (LINKER_LIBRARIES_DELAYLOADED)
+    always:
+        >$(EXE_TMP_DIR)AddDelayLoad.rsp
+        $(LINKER_LIBRARIES_DELAYLOADED)
+        <
+        $(AddDelayLoadCmd) < $(EXE_TMP_DIR)AddDelayLoad.rsp > $(EXE_TMP_DIR)AddDelayLoadOpts.rsp
+        
+    BENTLEY_TOOLCONTEXT_EXE_OPTIONS_POST + $[@readfile $(EXE_TMP_DIR)AddDelayLoadOpts.rsp]
+%endif
+
+#  Setup for embedding a manifest into the .exe file
+%if !defined (STATIC_LINK_EXE) && !defined (STATIC_C_RUNTIME) && !defined (NoExeManifest)
+    #  VS2005+ Linker generates a manifest, except when STATIC_LINK_EXE or STATIC_C_RUNTIME is defined
+    exeLinkerManifestXml = $(EXE_TMP_DIR)$(EXE_NAME)_linkergenerated_manifest.xml
+    %if !defined (BMAKE_DELETE_ALL_TARGETS)
+        BENTLEY_TOOLCONTEXT_EXE_OPTIONS_PRE + -manifestfile:$(exeLinkerManifestXml)
+    %else
+        always:
+            -$(deleteCmd) $(exeLinkerManifestXml)
+    %endif
+%endif
+%if defined (EXE_MANIFEST_FILE)
+    #  Includer-specified EXE manifest
+    boilerplateManifestXml = $(EXE_MANIFEST_FILE)
+%else
+    #  Generate a boilerplate EXE manifest
+    boilerplateManifestXml = $(EXE_TMP_DIR)$(EXE_NAME)_boilerplate_manifest.xml
+
+    "$(boilerplateManifestXml)" : $(exeDependencies)
+        >  $(boilerplateManifestXml)
+        \<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+        \<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+    %if defined (BSI_VERSIONING) && !defined (EXE_NO_VERSION)
+          \<assemblyIdentity
+             version="$(REL_V).$(MAJ_V).$(MIN_V).$(SUBMIN_V)"
+             processorArchitecture="X86"
+             name="$(EXE_NAME)$(EXE_EXTENSION)"
+             type="win32"\/>
+    %endif
+    %if defined (BSI)
+          \<description>Bentley Systems, Inc. - $(EXE_NAME)$(EXE_EXTENSION)<\/description>
+    %else
+          \<description>$(EXE_NAME)$(EXE_EXTENSION)<\/description>
+    %endif
+    %if defined (EXE_USES_COMM_CTRLS)
+          \<dependency>
+            \<dependentAssembly>
+              \<assemblyIdentity type="win32"
+              name="Microsoft.Windows.Common-Controls"
+        %if !defined (EXE_COMM_CTRLS_VERSION)
+              version="6.0.0.0"
+        %else
+              version=$(EXE_COMM_CTRLS_VERSION)
+        %endif
+        %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64" || $(TARGET_PROCESSOR_ARCHITECTURE)=="WinRTx64"
+              processorArchitecture="amd64"
+        %else
+              processorArchitecture="X86"
+        %endif
+        %if !defined (EXE_COMM_CTRLS_PUBLIC_KEY)
+              publicKeyToken="6595b64144ccf1df"
+        %else
+              publicKeyToken=$(EXE_COMM_CTRLS_PUBLIC_KEY)
+        %endif
+              language="*"><\/assemblyIdentity>
+            \<\/dependentAssembly>
+          \<\/dependency>
+    %endif
+          \<ms_asmv2:trustInfo xmlns:ms_asmv2="urn:schemas-microsoft-com:asm.v2">
+            \<ms_asmv2:security>
+              \<ms_asmv2:requestedPrivileges>
+                \<ms_asmv2:requestedExecutionLevel
+    %if !defined (EXE_EXECUTION_LEVEL)
+                   level="asInvoker"
+    %else
+                   level=$(EXE_EXECUTION_LEVEL)
+    %endif
+                   uiAccess="false"\/>
+              \<\/ms_asmv2:requestedPrivileges>
+            \<\/ms_asmv2:security>
+          \<\/ms_asmv2:trustInfo>
+        \<\/assembly>
+        <
+%endif
+%if defined (exeLinkerManifestXml)
+    #  Linker will generate a manifest that will be merged with the boilerplate
+    finalManifestXml = $(EXE_TMP_DIR)$(EXE_NAME)_merged_manifest.xml
+    %if defined (BMAKE_DELETE_ALL_TARGETS)
+        always:
+            -$(deleteCmd) $(finalManifestXml)
+    %endif
+%else
+    #  Boilerplate manifest is the final one - no merging
+    finalManifestXml = $(boilerplateManifestXml)
+%endif
+%if !defined (BMAKE_DELETE_ALL_TARGETS)
+    #  Boilerplate manifest must exist for Vista compatibility
+    %ifnofile $(boilerplateManifestXml)
+        %error Manifest file $(boilerplateManifestXml) not found for $(EXE_OUT_NAME)
+    %endif
+%endif
+
+# Windows specifics
+
+# Set the subsystem and entry point options for WIndows
+%if defined (MFC_WIN_APP)
+    guiOpts = -subsystem:windows$(subsystemVersion)
+%else
+    %if !defined (guiEntry)
+        %if defined (EXE_UNICODE)
+            guiEntry = wWinMainCRTStartup
+        %else
+            guiEntry = WinMainCRTStartup
+        %endif
+    %endif
+    guiOpts = -subsystem:windows$(subsystemVersion) -entry:$(guiEntry)
+%endif
+
+%if !defined (consoleEntry)
+    %if defined (EXE_UNICODE)
+        consoleEntry = wmainCRTStartup
+    %else
+        consoleEntry = mainCRTStartup
+    %endif
+%endif
+
+consoleOpts = -subsystem:console$(subsystemVersion) -entry:$(consoleEntry)
+
+%if defined (EXE_WIN_APP)
+    BENTLEY_TOOLCONTEXT_EXE_OPTIONS_PRE + $(guiOpts)
+%else
+    BENTLEY_TOOLCONTEXT_EXE_OPTIONS_PRE + $(consoleOpts)
+    BENTLEY_TOOLCONTEXT_EXE_LIBRARIES   + $(BENTLEY_WIN32_LINK_ConsoleLibraries)
+%endif
+
+# Append the specified additional options (so that they can override the predefined ones)
+BENTLEY_TOOLCONTEXT_EXE_OPTIONS_PRE     + $(EXE_LOPT1)
+BENTLEY_TOOLCONTEXT_EXE_OPTIONS_POST    + $(EXE_LOPT2)
+
+# Create a post-link script to create manifest, sign the executable, etc.
+BENTLEY_TOOLCONTEXT_EXE_POST_LINK = $(EXE_TMP_DIR)PostLinkScript.bat
+
+$(BENTLEY_TOOLCONTEXT_EXE_POST_LINK) : $(_MakeFileSpec) $(boilerplateManifestXml)
+    > $@
+    %if defined (EXE_STD_MANIFEST) || defined (EXE_MANIFEST_FILE)
+        %if defined (exeLinkerManifestXml)
+            $(BENTLEY_WIN32_TOOLCHAIN_manifest) $(exeLinkerManifestXml) $(boilerplateManifestXml) -out:$(finalManifestXml)  # Merge linker generated manifest with boilerplate manifest
+        %endif
+        $(BENTLEY_WIN32_TOOLCHAIN_manifest) $(finalManifestXml) -outputresource:"$(EXE_OUT_NAME);\#1"                       # Embed the manifest
+    %endif
+    %if defined (BSI_VERSIONING) && !defined (EXE_NO_VERSION)
+        $(BBPYTHONCMD) $(SrcRoot)bsicommon/build/RetryCommand.py $(InjectVersionCmd) "$(EXE_OUT_NAME)" @$(versionArgsFile) $(EXE_VERSION_OPTIONS)
+    %endif
+    %if defined (ASSEMBLY_STRONGNAME) && defined (ASSEMBLY_DELAYSIGN) && defined (COMPILE_FOR_CLR)
+        %if defined (ASSEMBLY_TESTSIGN)
+            sn -TS "$(EXE_OUT_NAME)" $(ASSEMBLY_TESTKEYFILE)
+        %elif !defined (ASSEMBLY_SKIPPABLE_VERIFICATION)
+            sn -R "$(EXE_OUT_NAME)" $(ASSEMBLY_KEYFILE)
+        %endif
+    %endif
+    %if !defined (MSJ_SKIP_SIGNRSCS) && !defined (EXE_NO_SIGN)
+        $(signcodecmd) "$(EXE_OUT_NAME)"
+    %endif
+    <
+    
+    
+%if !defined (ToolContextLinkExeMki)
+  %error ToolContextLinkExeMki must be defined before using linktool.mki
+%endif
+
+# Link the executable
+%include $(ToolContextLinkExeMki)
+
+# Create the necessary symbolic links
+%if defined (EXE_CONTEXT_LOCATION) && !defined (EXE_NO_CONTEXT_LINK)
+"$(EXE_CONTEXT_LOCATION)$(EXE_NAME)$(EXE_EXTENSION)" : "$(EXE_OUT_NAME)"
+    $(LinkFirstDepToFirstTarget)
+%endif

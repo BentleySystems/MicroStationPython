@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ECSchema schemaName="DuplicatePrefixes" version="01.00" displayLabel="Base schema" description="Base schema" nameSpacePrefix="duplicate" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ec="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ods="Bentley_ODS.01.02">
+  <ECSchemaReference name="BaseSchema" version="01.00" prefix="duplicate" />
+
+  <ECClass typeName="MyClass" description="Class in duplicate schema" displayLabel="MyClass" isDomainClass="True">
+    <ECProperty propertyName="Name" typeName="string" displayLabel="Name" />
+  </ECClass>
+
+  <ECClass typeName="Circle" description="Circle" isDomainClass="true">
+    <BaseClass>duplicate:ellipse</BaseClass>
+  </ECClass>
+</ECSchema>

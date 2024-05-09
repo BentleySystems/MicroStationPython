@@ -1,0 +1,28 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if !defined (__Common_MKI__)
+    %error      unixcommon.mki cannot be used by itself. It must be included from common.mki
+%endif
+
+%if !defined (unix)
+    %error      unixcommon.mki can only be used on a Unix platform.
+%endif
+
+#--------- unix Macros -------------------------------
+#
+# Note: These identify tools that are used to BUILD the software.
+#       This has nothing to do with the target platform where the software that we build is expected to run.
+#
+deleteCmd           = rm
+dirCmd              = ls
+copyCmd             = cp
+mkdirCmd            = mkdir
+rmdirCmd            = rm 
+rmdirRecursiveCmd   = rm -r -f
+bsicommon_ospathsep = :
+scriptExt           = .sh
+
+CopyFirstDepToFirstTarget=cp $< $@

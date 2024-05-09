@@ -1,0 +1,158 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+#
+#   WARNING: This .mki file is used for both GCC, LLVM and EMCC
+#
+
+%undef MultiCompileCppList
+%undef MultiCompileCList
+
+MultiCompileCppList = $[@readfile $(MultiCompileCppListFile)]
+MultiCompileCList   = $[@readfile $(MultiCompileCListFile)]
+
+%if defined (MultiCompileDepends)
+
+    %undef MultiCompileDepends
+    %undef continuationChar
+
+    .(cxx,cpp,cc).o:
+            !~set NeedsCompiledCppList $(NeedsCompiledCppList) $<
+
+    .c.o:
+            !~set NeedsCompiledCList $(NeedsCompiledCList) $<
+
+    %iffile $(RedoCppMakefile)
+        %include $(RedoCppMakefile)
+    %endif
+    
+    %iffile $(RedoCMakefile)
+        %include $(RedoCMakefile)
+    %endif
+
+%else
+    %if defined (NeedsCompiledCppList)
+        always:
+            !~set MultiCompileCppList $(MultiCompileCppList) $(NeedsCompiledCppList)
+            !~set MultiCompileCppList $[@sort $(MultiCompileCppList)]
+            >$(MultiCompileCppListFile)
+            $(MultiCompileCppList)
+            <
+    %endif
+
+    %if defined (NeedsCompiledCList)
+        always:
+            !~set MultiCompileCList $(MultiCompileCList) $(NeedsCompiledCList)
+            !~set MultiCompileCList $[@sort $(MultiCompileCList)]
+            >$(MultiCompileCListFile)
+            $(MultiCompileCList)
+            <
+    %endif
+
+%endif
+
+%if ($(MultiCompileCppList) != " ")
+    MultiCompileCppObjectList = $[@addprefix $$(o), $[@addsuffix .o, $[@basename $[@strip $(MultiCompileCppList)]]]]
+    MultiCompileObjectList +% $(MultiCompileCppObjectList)
+%endif
+
+%if ($(MultiCompileCList) != " ")
+    MultiCompileCObjectList = $[@addprefix $$(o), $[@addsuffix .o, $[@basename $[@strip $(MultiCompileCList)]]]]
+    MultiCompileObjectList +% $(MultiCompileCObjectList)
+%endif
+
+%undef MultiCompileCppList
+%undef MultiCompileCList
+
+OutOfDateCppOptFile=$(o)$(_MakeFileName)OutOfDateCppSources$(MultiCompileNdx).opt
+OutOfDateCOptFile  =$(o)$(_MakeFileName)OutOfDateCSources$(MultiCompileNdx).opt
+
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    MultiCompileObjectList=" "
+    always:
+        !-@$(deleteCmd) $(OutOfDateCppOptFile)
+        !-@$(deleteCmd) $(OutOfDateCOptFile)
+
+%else
+    
+    %if defined (NeedsCompiledCppList)
+
+        %ifdef BENTLEY_ANDROID_UseUnixFilenames
+            always:
+                ~set NeedsCompiledCppList $[@subst \, \/, $(NeedsCompiledCppList)]
+        %endif
+
+        %if !defined (DisableMultiCompile)
+            # GCC, LLVM, and EMCC only compile one at a time, even when given multiple compilands. Use a helper script to spawn multiple processes, but let MSVC continue to do its own optimizations.
+            %if ( $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED" || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "APPLE_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG"  || $(BUILD_TOOLSET) == "EMCC" )
+                $(OutOfDateCppOptFile) :
+                    > $@
+                    $(NeedsCompiledCppList)
+                    <
+                    ~chdir $(o)
+                    $(BBPYTHONCMD) $(_currentFilePath)GccMultiCompileHelper.py $(CCCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCppCompileArgs) @$@
+            %else
+                $(OutOfDateCppOptFile) :
+                    > $@
+                    $(NeedsCompiledCppList)
+                    <
+                    ~chdir $(o)
+                    $(CCCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCPPCompileArgs) @$@
+            %endif
+        %endif
+
+        %undef NeedsCompiledCppList
+    %endif
+
+    %if defined (NeedsCompiledCList)
+
+        %ifdef BENTLEY_ANDROID_UseUnixFilenames
+            always:
+                ~set NeedsCompiledCList $[@subst \, \/, $(NeedsCompiledCList)]
+        %endif
+
+        %if !defined (DisableMultiCompile)
+            # GCC, LLVM, and EMCC only compile one at a time, even when given multiple compilands. Use a helper script to spawn multiple processes, but let MSVC continue to do its own optimizations.
+            %if ( $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED" || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "APPLE_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG" || $(BUILD_TOOLSET) == "EMCC" )
+                $(OutOfDateCOptFile) :
+                    > $@
+                    $(NeedsCompiledCList)
+                    <
+                    ~chdir $(o)
+                    $(BBPYTHONCMD) $(_currentFilePath)GccMultiCompileHelper.py $(CCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCCompileArgs) @$@
+            %else
+                $(OutOfDateCOptFile) :
+                    > $@
+                    $(NeedsCompiledCList)
+                    <
+                    ~chdir $(o)
+                    $(CCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCCompileArgs) @$@
+            %endif
+        %endif
+
+        %undef NeedsCompiledCList
+    %endif
+
+%endif
+
+%if defined (SaveMultiCompileDepends)
+    MultiCompileDepends =% $[SaveMultiCompileDepends]
+    %undef SaveMultiCompileDepends
+%endif
+
+#
+#  Restore the suffix rules from mdl.mki. Without this dlmlink.mki will fail when trying to compile DelayLoadHook.c.
+#  I wish there were a way the push/pop suffix rules. I rather hate to repeat these here because I cannot be certain
+#  that these were the rules that were in place in the context before MultiCppCompileRule.mki overwrote them.
+#
+    .c.o:
+        $(msg)
+        $(CCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCCompileArgs) -o $(CTargetSpec) $<
+        ~time
+
+    .(cxx,cpp,cc).o:
+        $(msg)
+        $(CCCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCPPCompileArgs) -o $(CTargetSpec) $<
+        ~time

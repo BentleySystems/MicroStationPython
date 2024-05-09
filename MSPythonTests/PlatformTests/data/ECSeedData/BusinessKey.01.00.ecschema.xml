@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="BusinessKey" nameSpacePrefix="bizkey" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECClass typeName="BusinessKeyGetValueCriteria" displayLabel="Business Key Get Value Criteria" isDomainClass="True" isCustomAttributeClass="True">
+        <ECArrayProperty propertyName="Criteria" typeName="string" minOccurs="0" maxOccurs="unbounded" />
+        <ECProperty propertyName="MethodName" typeName="string" displayLabel="BusinessKey Provider Method Name" />
+    </ECClass>
+    <ECClass typeName="ECBusinessKeyGroup" description="Business Key Group" displayLabel="Business Key Group" isCustomAttributeClass="True">
+        <ECProperty propertyName="GROUP_NAME" typeName="string" description="Group Name" displayLabel="Group Name" />
+        <ECProperty propertyName="GROUP_DISPLAY_NAME" typeName="string" description="Group Display Name" displayLabel="Group Display Name" />
+        <ECProperty propertyName="ICON_NAME" typeName="string" description="Name of an icon to be used when displaying a group." displayLabel="Icon Name" />
+    </ECClass>
+    <ECClass typeName="RequiresUniqueBusinessKey" displayLabel="Requires Unique BusinessKey" isDomainClass="True" isCustomAttributeClass="True">
+         <ECProperty propertyName="ClassScope" typeName="string" description="Determines scope of an objects uniqueness by class name." displayLabel="Class Scope" />
+    </ECClass>
+</ECSchema>

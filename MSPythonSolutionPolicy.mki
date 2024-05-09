@@ -1,0 +1,96 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonSolutionPolicy.mki $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+%if defined (BSI)
+%include $(SharedMki)DefinePublicApiIncludes.mki
+%include $(SharedMki)CommonCompileLinkPolicy.mki
+%endif
+nameToDefine = __MSPYTHONDLL_BUILD__
+%include cdefapnd.mki
+
+%if defined (__MSPythonPolicy_mki__)
+    %return
+%endif
+
+__MSPythonPolicy_mki__  = 1
+
+PyhonApps    = $(SrcRoot)MSPython/MSPythonApps/
+PyhonCore    = $(SrcRoot)MSPython/MSPythonCore/
+PyhonWrapper = $(SrcRoot)MSPython/MSPythonWrapper/
+
+PythonInternalHeaders = $(SrcRoot)MSPython/InternalAPI/
+PythonPublicHeaders   = $(SrcRoot)MSPython/PublicAPI/MSPythonCore/
+PythonLibDir          = $(SrcRoot)adobuildartifact/BentleyCPythonLayoutFull/
+PythonLibName         = $(PythonLibDir)libs/python312.lib
+
+%if defined (MSMDE)
+    PublicApiRscIncludes = -i${MSMDE}/include/
+%endif
+
+dirToSearch = $(PythonLibDir)
+%include cincapnd.mki
+
+dirToSearch = $(PythonLibDir)include
+%include cincapnd.mki
+
+dirToSearch = $(PythonLibDir)libs
+%include cincapnd.mki
+
+dirToSearch = $(PythonInternalHeaders)
+%include cincapnd.mki
+
+dirToSearch = $(PythonPublicHeaders)
+%include cincapnd.mki
+
+%if defined (BSI)
+    dirToSearch=$(BuildContext)VendorAPI/Boost_1_82
+    %include cincapnd.mki
+%else
+    dirToSearch=$(OutBuildContexts)PowerPlatformSDK/VendorAPI/Boost_1_82
+    cIncs +% -I$[dirToSearch]
+%endif
+
+dirToSearch = $(PyhonCore)ScriptEngineManager
+%include cincapnd.mki
+
+%if defined (BSI)
+    dirToSearch=$(BuildContext)VendorAPI/Boost_1_82
+    %include cincapnd.mki
+%else
+    dirToSearch=$(OutBuildContexts)PowerPlatformSDK/VendorAPI/Boost_1_82
+    cIncs +% -I$[dirToSearch]
+%endif
+
+
+%if defined (mdltools)  ## for MdlExample-MSPython build
+    dirToSearch = $(mdltools)include
+    %include cincapnd.mki
+%endif
+
+%if defined (SDKINC)  ## for Microstation SDK build
+    dirToSearch = $(SDKINC)
+    %include cincapnd.mki
+%endif 
+
+%if defined (mdltools)  ## for MdlExample-MSPython build so everything is rebuild with the SDK settings
+    out            = $(OutputRootDir)Build/MSPythonExample/
+%else
+    out            = $(OutputRootDir)Build/MSPython/
+%endif
+
+toolsPath      = $(BuildContext)SubParts/Assemblies/
+mstnToolsPath  = $(BuildContext)SubParts/Assemblies/
+
+gensrc         = $(OutputRootDir)Build/MSPython/gensrc/
+gensrcTransKit = $(gensrc)TransKitGenSrc/
+
+%if !defined (mdlasneeded)
+    mdlasneeded = $(OutputRootDir)Build/PowerPlatform/Bentley/PseudoStation/mdlsys/asneeded/
+%endif
+
+
+

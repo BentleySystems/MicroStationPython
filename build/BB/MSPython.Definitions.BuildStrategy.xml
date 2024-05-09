@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BuildStrategy  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="../../../BentleyBuild/BuildStrategy.xsd">
+    
+    <ImportStrategy Name="Base" />
+
+    <ImportStrategy Name="PowerplatformPython.Definitions" SubDir="build/BB" Repository="PowerPlatformPython" />
+
+    <LastKnownGoodSource Name="MSPython" Type="dev" DevServer="TempPPLkgs" FirebugServer="TempPPLkgs" PrgServer="TempPPLkgs" />
+    <PartStrategy PartFile="MSPython*" PartName="*" BuildFromSource="Always"  SaveLKG="true" />
+
+    <!-- LKGs -->
+    
+</BuildStrategy>

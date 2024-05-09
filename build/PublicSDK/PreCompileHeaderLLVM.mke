@@ -1,0 +1,33 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if !defined (ArgumentsMki)
+    %error $(_MakeFileName).mke is designed to be launched only from PreCompileHeader.mki. Did you mean to include PreCompileHeader.mke instead?
+%endif
+
+msg = |[== Building $@, ($=) ==]
+
+DependsItemsTxt = $(PchDependencySetDir)$(PchDependencySetName)DependsItems.txt
+
+%iffile $(DependsItemsTxt)
+    AutoDependencies = $[@readfile $(DependsItemsTxt)]
+%endif
+
+# ArgumentsMki is defined on the command line of $(_bmake) statement that builds PreCompileHeader.mke from within PreCompileHeader.mki
+# CompileOptionsMki is defined in the .mke file that %includes PreCompileHeader.mki. It defines compiler options that need to be the same when the .pch and .cpp files are compiled.
+
+%include $(ArgumentsMki)
+%if !defined (CompileOptionsMki)
+  %warn You probably should define CompileOptionsMki to a file that contains the compiler options in common for creating you .pch file and compiling the source files.
+%else
+  %include $(CompileOptionsMki)
+%endif
+
+%if !defined(__mdlMKI__)
+    %include mdl.mki
+%endif
+
+$(PchOutputDir)$(PchTargetBasename).h.pch : $(PchExplicitDepends) $(ArgumentsMki) $(AutoDependencies)
+    !$(msg)
+    $(CCCompCmd) -x c++-header $(LLVMPrimaryArchOpts) $(RecipeCPPCompileArgs) $(PchCompilandSrcDir)$(PchCompilandBasename).h -o $@

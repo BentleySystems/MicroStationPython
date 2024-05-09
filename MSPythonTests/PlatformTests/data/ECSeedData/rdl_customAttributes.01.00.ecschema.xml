@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="rdl_customAttributes" nameSpacePrefix="rdlca" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+	<ECSchemaReference name="iip_mdb_customAttributes" version="01.00" prefix="iipmdbca"/>
+	<ECClass typeName="RDL_Attributes" isDomainClass="True" isCustomAttributeClass="True">
+		<ECProperty propertyName="INST_UOM" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>0</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="META_SID" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>1</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="META_NAME" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>2</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="META_TYPE" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>3</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_SID" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>4</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_TYPE" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>5</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_NAME" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>6</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_ALTERNATIVE_NAME" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>7</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_DEFINITION" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>8</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_REMARKS" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>9</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_ABBREVIATION" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>10</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_SYMBOL" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>11</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_PC_ID" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>12</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_SUBJECT_AREA_SID" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>13</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_SUBJECT_AREA" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>14</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_STATUS_SID" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>15</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+				<ECProperty propertyName="INST_STATUS" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>16</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+				<ECProperty propertyName="INST_DT_MODIFIED" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>17</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+				<ECProperty propertyName="INST_MODIFIED_BY" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>18</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+				<ECProperty propertyName="INST_FACT_EXPONENT" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>19</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+				<ECProperty propertyName="INST_LIN_MULTIPLIER" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>20</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_LIN_OFFSET" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>21</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_LOG_A" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>22</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_LOG_B" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>23</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_LOG_C" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>24</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_CLASS_SID" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>25</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_CLASS_NAME" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>26</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_CHCN_ASS_SID" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>27</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_DESCRIPTION" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>28</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_VALUE" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>29</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="INST_UOM_SID" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>30</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="SELECTION" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>31</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+		<ECProperty propertyName="HierNumber" typeName="string">
+			<ECCustomAttributes>
+				<MDB_Attributes xmlns="iip_mdb_customAttributes.01.00">
+					<colNumber>32</colNumber>
+				</MDB_Attributes>
+			</ECCustomAttributes>
+		</ECProperty>
+	</ECClass>
+</ECSchema>

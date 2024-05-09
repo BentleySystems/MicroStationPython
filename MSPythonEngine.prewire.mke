@@ -1,0 +1,21 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonEngine\MSPythonEngine.prewire.mke $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+
+PolicyFile      = $(SrcRoot)MSPython/MSPythonAssertPolicy.mki
+%include mdl.mki
+
+MSPythonEngineSrc = $(OutputRootDir)Build/PowerplatformPython/
+MSPythonEngineOut = $(BuildContext)Delivery/
+
+%if !exists ($(MSPythonEngineSrc))
+    %error python libs is not found at "$(MSPythonEngineSrc)".
+%endif
+
+always:
+    ~linkdir "$(MSPythonEngineOut)python=$(MSPythonEngineSrc)PrewireCPythonFiles"
+

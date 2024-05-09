@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="OpenPlant_Model_Server" nameSpacePrefix="opms" version="1.0" description="MCS Application level schema" displayLabel="OpenPlantModelServer.01.00" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.01" prefix="bsca" />
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECCustomAttributes>
+        <TreeColorCustomAttributes xmlns="Bentley_Standard_CustomAttributes.01.01" />
+    </ECCustomAttributes>
+    <ECClass typeName="OPMS_BLOBDATA" displayLabel="Opms Blob Data" isDomainClass="True">
+        <ECArrayProperty propertyName="ELEMENT_BLOB" typeName="string" description="Array property to store Element Byte data as string" displayLabel="Element Blob" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="OPMS_DATA" displayLabel="Opms Data" isDomainClass="True">
+        <ECProperty propertyName="OPMS_MODIFY_ID" typeName="string" description="Attribute to identify modify by for component" displayLabel="Opms Modify Id">
+            <ECCustomAttributes>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="OPMS_DELETE_ID" typeName="string" description="Attribute to Identify Delete By for component" displayLabel="Opms Delete Id">
+            <ECCustomAttributes>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="OPMS_CREATE_ID" typeName="string" description="Attribute to identify create by for component" displayLabel="Opms Create Id">
+            <ECCustomAttributes>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="OPMS_CHECKOUT_STATUS" typeName="string" displayLabel="Opms Checkout Status" readOnly="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="EC_InstanceID" typeName="string" description="Unique identifier for instances of your business class" displayLabel="ProjectWise Instance ID" readOnly="True">
+            <ECCustomAttributes>
+                <!-- <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty> -->
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="OPMS_REFERENCED_ELEMENT" typeName="boolean" description="Informs whether the element is referenced for the current user" displayLabel="Opms Referenced Element">
+            <ECCustomAttributes>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DESIGN_STATE" typeName="string" displayLabel="Design State">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="OPMS_OPERATION_ID" typeName="string" description="Checkout ID associated with each component" displayLabel="Opms Operation Id" readOnly="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPMS_DATA</Name>
+                    <DisplayLabel>ModelServer Info</DisplayLabel>
+                    <Description>MCS Specific Property</Description>
+                    <Priority>2</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="OPMS_DOCUMENT_ID" typeName="string" description="Parent Document ID" displayLabel="Opms Document Id" />
+    </ECClass>
+</ECSchema>

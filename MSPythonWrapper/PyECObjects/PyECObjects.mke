@@ -1,0 +1,116 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonWrapper\PyECObjects\PyECObjects.mke $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+appName             = MSPyECObjects
+PolicyFile          = $(SrcRoot)MSPython/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(SrcRoot)MSPython/MSPythonSolutionPolicy.mki
+
+%include mdl.mki
+
+#----------------------------------------------------------------------
+#       Create output directories
+#----------------------------------------------------------------------
+o = $(out)PyECObjects/
+
+always:
+    !~@mkdir $(o)
+
+#---------------------------------------------
+#       Compile the source files 
+#---------------------------------------------
+CCompOpts + -bigobj -MP
+
+MultiCompileDepends = $(_MakeFileSpec)
+
+PchCompiland        = $(SrcRoot)MSPython/MSPythonPCH.cpp
+PchOutputDir        = $(o)
+PchArgumentsDepends = $(MultiCompileDepends)
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302  -wd4471 -wd5205
+%include $(SharedMki)PreCompileHeader.mki
+
+CCPchOpts = $(UsePrecompiledHeaderOptions)
+
+dependencies    =   $(SrcRoot)MSPython/MSPythonPCH.h
+
+%include MultiCppCompileRule.mki
+
+PyDgnECSource        = $(PyhonWrapper)PyECObjects/source/
+PyDgnECDependencies  = $(dependencies)
+
+$(o)auiitem$(oext)                                  : $(PyDgnECSource)auiitem.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)auiprovider$(oext)                              : $(PyDgnECSource)auiprovider.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)eccontext$(oext)                                : $(PyDgnECSource)eccontext.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecdbuffer$(oext)                                : $(PyDgnECSource)ecdbuffer.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecenabler$(oext)                                : $(PyDgnECSource)ecenabler.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecexpressions$(oext)                            : $(PyDgnECSource)ecexpressions.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecimagekey$(oext)                               : $(PyDgnECSource)ecimagekey.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecinstance$(oext)                               : $(PyDgnECSource)ecinstance.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecinstanceiterable$(oext)                       : $(PyDgnECSource)ecinstanceiterable.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecobjects$(oext)                                : $(PyDgnECSource)ecobjects.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecprovider$(oext)                               : $(PyDgnECSource)ecprovider.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecschema$(oext)                                 : $(PyDgnECSource)ecschema.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecvalue$(oext)                                  : $(PyDgnECSource)ecvalue.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)presentationmetadatahelper$(oext)               : $(PyDgnECSource)presentationmetadatahelper.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)PyECObjects$(oext)                              : $(PyDgnECSource)PyECObjects.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)standaloneecinstance$(oext)                     : $(PyDgnECSource)standaloneecinstance.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)standaloneecrelationshipinstance$(oext)         : $(PyDgnECSource)standaloneecrelationshipinstance.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)standardcustomattributehelper$(oext)            : $(PyDgnECSource)standardcustomattributehelper.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)supplementalschema$(oext)                       : $(PyDgnECSource)supplementalschema.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+
+%include MultiCppCompileGo.mki
+
+CCPchOpts =
+
+#----------------------------------------------------------------------
+#   Set up to use dlmlink.mki
+#----------------------------------------------------------------------
+DLM_NAME                    = $(appName)
+DLM_DEST                    = $(o)
+DLM_EXPORT_DEST             = $(o)
+DLM_OBJECT_DEST             = $(o)
+DLM_LIBDEF_SRC              = $(_MakeFilePath)
+DLM_OBJECT_FILES            = $(MultiCompileObjectList) \
+                              $(o)MSPythonPCH$(oext)
+
+DLM_EXTENSION               = .pyd
+DLM_NOENTRY                 = 1
+DLM_NO_INITIALIZE_FUNCTION  = 1
+DLM_NO_DLS                  = 1
+DLM_NO_DEF                  = 1
+LINKER_LIBRARIES            = $(PythonLibName) \
+                              $(ContextSubpartsLibs)bentley.lib \
+                              $(ContextSubpartsLibs)BentleyAllocator.lib \
+                              $(ContextSubpartsLibs)ECObjects.lib \
+                              $(ContextSubpartsLibs)MSPythonCore.lib
+
+
+DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
+DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/
+
+# No lib needed for this project
+%undef DLM_CREATE_LIB_CONTEXT_LINK
+
+%include dlmlink.mki

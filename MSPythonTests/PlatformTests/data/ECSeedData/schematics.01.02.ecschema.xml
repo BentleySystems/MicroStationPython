@@ -1,0 +1,1550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="schematics" nameSpacePrefix="sch" version="1.02" description="schematics" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.02" prefix="bsca" />
+    <ECSchemaReference name="bmf" version="01.02" prefix="bmf" />
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECCustomAttributes>
+        <DisplayOptions xmlns="Bentley_Standard_CustomAttributes.01.02">
+            <Hidden>True</Hidden>
+        </DisplayOptions>
+    </ECCustomAttributes>
+    <ECClass typeName="SCHEMATICS_CAD_CUSTOM_ATTRIBUTES" description="Schematics CAD General Default Settings" displayLabel="Schematics CAD Custom Attributes" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>bmf:BMF_CAD_CUSTOM_ATTRIBUTES</BaseClass>
+        <ECProperty propertyName="CellName" typeName="string" displayLabel="Cell Name" />
+        <ECProperty propertyName="CellLibrary" typeName="string" displayLabel="Cell Library" />
+        <ECProperty propertyName="CELL_TEXT_ORIENTATION" typeName="int" description="text orientation of the cell: possible values  (0 ignore, 1 left to right for horizontal, 2 left to right horizontal bottom to top for vertical)" displayLabel="Cell Text Orientation" />
+    </ECClass>
+    <ECClass typeName="EDIT_HANDLE_SETTINGS" description="Edit handle settings" displayLabel="Edit Handle Settings" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="BY_CONNECT_POINT" typeName="boolean" description="Allows dragging via pre-defined connect points" displayLabel="Drag By Connect Point" />
+        <ECProperty propertyName="BY_RANGE_CORNERS" typeName="boolean" description="Allows dragging via range corners" displayLabel="Drag By Range Corners" />
+        <ECProperty propertyName="BY_RANGE" typeName="boolean" description="Allows dragging via 8 range points" displayLabel="Drag By Range" />
+    </ECClass>
+    <ECClass typeName="INSERTION_SETTINGS" description="Insertion settings" displayLabel="Insertion Settings" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="BY_CONNECT_POINT" typeName="boolean" description="Allows placement via pre-defined connect points" displayLabel="Insert By Connect Point" />
+        <ECProperty propertyName="BY_RANGE_CORNERS" typeName="boolean" description="Allows placement via range corners" displayLabel="Insert By Range Corners" />
+        <ECProperty propertyName="BY_RANGE" typeName="boolean" description="Allows placement via 8 range points" displayLabel="Insert By Range" />
+        <ECProperty propertyName="BY_DEFAULT" typeName="string" description="Default insertion point: origin, connectpoint: name, range: name" displayLabel="Insert By Default" />
+    </ECClass>
+    <ECClass typeName="JUMPER_MAPPING" description="class priority and jumper to use" displayLabel="Jumper Mapping" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>bmf:bmf_display_list_attributes</BaseClass>
+        <ECCustomAttributes>
+            <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <DefaultValue>0</DefaultValue>
+                <IsGraphical>False</IsGraphical>
+            </BMF_PROP_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ORDER" typeName="int" description="Priority" displayLabel="Priority" />
+    </ECClass>
+    <ECClass typeName="SCHEMATICS_BASE_COMPONENT" description="Schematics Base Component" displayLabel="Schematics Base Component" isDomainClass="True">
+        <BaseClass>bmf:BMF_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <SCHEMATICS_CAD_CUSTOM_ATTRIBUTES xmlns="schematics.01.01">
+                <ElementTemplate>Misc\Default</ElementTemplate>
+            </SCHEMATICS_CAD_CUSTOM_ATTRIBUTES>
+            <EDIT_HANDLE_SETTINGS>
+                <BY_CONNECT_POINT>True</BY_CONNECT_POINT>
+                <BY_RANGE_CORNERS>False</BY_RANGE_CORNERS>
+                <BY_RANGE>False</BY_RANGE>
+            </EDIT_HANDLE_SETTINGS>
+            <INSERTION_SETTINGS>
+                <BY_CONNECT_POINT>True</BY_CONNECT_POINT>
+                <BY_RANGE_CORNERS>False</BY_RANGE_CORNERS>
+                <BY_RANGE>False</BY_RANGE>
+                <BY_DEFAULT>Origin</BY_DEFAULT>
+            </INSERTION_SETTINGS>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.SchematicsBaseComponent</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <JUMPER_MAPPING xmlns="schematics.01.01">
+                <CLASS_NAME>JUMPER</CLASS_NAME>
+                <ORDER>-1</ORDER>
+            </JUMPER_MAPPING>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>False</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>True</REPEAT_INSERT>
+                <MIRROR_ENABLED>True</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>True</ROTATE_ENABLED>
+                <SCALE_ENABLED>True</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>False</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+        <ECProperty propertyName="CELLNAME" typeName="string" description="Cell Name" displayLabel="Cell Name" />
+        <ECProperty propertyName="CELLLIBRARY" typeName="string" description="Cell Library" displayLabel="Cell Library" />
+        <ECProperty propertyName="SPACING_CLASSNAME" typeName="string" description="Name of class that specifies spacing around component" displayLabel="Spacing Class Name">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>SPACING_DEFAULT</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CELL_ANNOTATION_OVERRIDE_ENABLED" typeName="boolean" description="Enables annotation origin offset to be overriden by definition on cell" displayLabel="Cell Annotation Override Enabled">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>True</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SPECIFIC_TYPE" typeName="string" description="Specific component type" displayLabel="Specific Component Type">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="GENERAL_TYPE" typeName="string" description="General component type" displayLabel="General Component Type">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SCHEMATICS_COMPONENT" description="Schematics Component" displayLabel="Schematics Component" isDomainClass="True">
+        <BaseClass>SCHEMATICS_BASE_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.SchematicsComponent</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+        <ECProperty propertyName="FLOW_DEPENDENT" typeName="boolean" description="Direction depends on flow" displayLabel="Flow Dependent">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MIRROR_ENABLED" typeName="boolean" description="Component can be mirrored" displayLabel="Mirror Enabled">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ROTATE_ENABLED" typeName="boolean" description="Component can be rotated" displayLabel="Rotate Enabled">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SCHEMATICS_ANNOTATION" description="Schematics annotation" displayLabel="Schematics Annotation" isDomainClass="False">
+        <BaseClass>bmf:BMF_ANNOTATION</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.SchematicsAnnotation</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>True</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>True</REPEAT_INSERT>
+                <MIRROR_ENABLED>False</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>True</ROTATE_ENABLED>
+                <SCALE_ENABLED>True</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>True</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+            <BMF_COMPONENTBUILDER_EXCLUDE xmlns="bmf.01.01">
+                <ExcludeSubClass>True</ExcludeSubClass>
+            </BMF_COMPONENTBUILDER_EXCLUDE>
+        </ECCustomAttributes>
+        <ECProperty propertyName="TEXT_ALIGNMENT" typeName="int" description="From selected text style = 0,TopLeft = 1,TopCenter = 2,TopRight = 3,MiddleLeft = 4,MiddleCenter = 5,MiddleRight = 6,BottomLeft = 7,BottomCenter = 8,BottomRight = 9" displayLabel="Text Alignment">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>4</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ALTERNATE_DISPLAY_LABEL" typeName="string" description="Alternate display label for the class" displayLabel="Alternate display label" />
+        <ECProperty propertyName="LIMIT_TO_CLASSES" typeName="string" description="Contains the list of class that can be annotated" displayLabel="Classes to annotate" />
+    </ECClass>
+    <ECClass typeName="BASE_BORDER" description="Base Border Sheet" displayLabel="Base Border Sheet" isDomainClass="True">
+        <BaseClass>SCHEMATICS_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>False</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>False</REPEAT_INSERT>
+                <MIRROR_ENABLED>False</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>False</ROTATE_ENABLED>
+                <SCALE_ENABLED>False</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>False</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+        <ECProperty propertyName="DOCUMENT_NAME" typeName="string" description="Document Name" displayLabel="Document Name">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue />
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DOCUMENT_DESCRIPTION" typeName="string" description="Document Description" displayLabel="Document Description">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DOCUMENT_PROPERTIES</Name>
+                    <DisplayLabel>Document Properties</DisplayLabel>
+                    <Description>Document Properties</Description>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>DocDescription</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="APPROVED_BY" typeName="string" description="Approved By" displayLabel="Approved By">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DOCUMENT_PROPERTIES</Name>
+                    <DisplayLabel>Document Properties</DisplayLabel>
+                    <Description>Document Properties</Description>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>SAM</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SHEET_NUMBER" typeName="string" description="Sheet Number" displayLabel="Sheet Number">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DOCUMENT_PROPERTIES</Name>
+                    <DisplayLabel>Document Properties</DisplayLabel>
+                    <Description>Document Properties</Description>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>1</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="BASE_CELLPLACEMENT" displayLabel="Base Cell Placement" isDomainClass="True">
+        <BaseClass>SCHEMATICS_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.SchematicsComponent</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+        <ECProperty propertyName="CELL_ANNOTATION_OVERRIDE_ENABLED" typeName="boolean" description="Enables annotation origin offset to be overriden by definition on cell" displayLabel="Cell Annotation Override Enabled">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>True</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DESIGN_STATE" typeName="int" description="Determines the life cycle state of a component." displayLabel="Design State">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>2</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <StandardActionValues xmlns="bmf.01.01">
+                    <ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>As Built</DisplayString>
+                            <Value>0</Value>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>In Analysis</DisplayString>
+                            <Value>1</Value>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>In Checking</DisplayString>
+                            <Value>2</Value>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>In Construction</DisplayString>
+                            <Value>3</Value>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>In Preliminary</DisplayString>
+                            <Value>4</Value>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>In Procurement</DisplayString>
+                            <Value>5</Value>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>In Study</DisplayString>
+                            <Value>6</Value>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>Issued For Construction</DisplayString>
+                            <Value>7</Value>
+                        </ValueActionMap>
+                    </ValueActionMap>
+                    <MustBeFromList>True</MustBeFromList>
+                    <SELECT_COMPONENT_BEFORE_ACTION>False</SELECT_COMPONENT_BEFORE_ACTION>
+                </StandardActionValues>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>ComponentStateInfo</Name>
+                    <DisplayLabel>State Information</DisplayLabel>
+                    <Description>Component State Information</Description>
+                    <Priority>0</Priority>
+                </Category>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>StandardActionValue</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="FLOW_DEPENDENT" typeName="boolean" description="Direction depends on flow" displayLabel="Flow Dependent">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MIRROR_ENABLED" typeName="boolean" description="Component can be mirrored" displayLabel="Mirror Enabled">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ORIGIN" typeName="point3d" description="Origin" displayLabel="Origin">
+            <ECCustomAttributes>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>CoordinateSystem</Name>
+                    <DisplayLabel>Coordinate System</DisplayLabel>
+                    <Description>Coordinate System</Description>
+                    <Priority>200000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0,0,0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>400000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ROTATE_ENABLED" typeName="boolean" description="Component can be rotated" displayLabel="Rotate Enabled">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="VALIDATION_STATE" typeName="int" description="Determines if a components state is valid within the application design session.  The value is used as a way to measure integrity for a component within a drawing." displayLabel="Validation State">
+            <ECCustomAttributes>
+                <StandardActionValues xmlns="bmf.01.01">
+                    <ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>Not Yet Validated</DisplayString>
+                            <Value>0</Value>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>Valid</DisplayString>
+                            <Value>1</Value>
+                            <KeyIn>pid component assigntemplate</KeyIn>
+                        </ValueActionMap>
+                        <ValueActionMap>
+                            <DisplayString>InValid</DisplayString>
+                            <Value>2</Value>
+                            <KeyIn>pid component assigntemplate States\InValid</KeyIn>
+                        </ValueActionMap>
+                    </ValueActionMap>
+                    <MustBeFromList>True</MustBeFromList>
+                    <SELECT_COMPONENT_BEFORE_ACTION>True</SELECT_COMPONENT_BEFORE_ACTION>
+                </StandardActionValues>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>StandardActionValue</Name>
+                </ExtendType>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>ComponentStateInfo</Name>
+                    <DisplayLabel>State Information</DisplayLabel>
+                    <Description>Component State Information</Description>
+                    <Priority>0</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="VALIDITY_FAILURE_DESCRIPTION" typeName="string" description="Reason why component is considered to have a InValid Validation State." displayLabel="Validity Failure Description" />
+        <ECProperty propertyName="XAXIS" typeName="point3d" description="X Axis" displayLabel="X Axis">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>1,0,0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>399999</Priority>
+                </PropertyPriority>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>CoordinateSystem</Name>
+                    <DisplayLabel>Coordinate System</DisplayLabel>
+                    <Description>Coordinate System</Description>
+                    <Priority>200000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="YAXIS" typeName="point3d" description="Y Axis" displayLabel="Y Axis">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0,1,0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>399998</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>CoordinateSystem</Name>
+                    <DisplayLabel>Coordinate System</DisplayLabel>
+                    <Description>Coordinate System</Description>
+                    <Priority>200000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ZAXIS" typeName="point3d" description="Z Axis" displayLabel="Z Axis">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>CoordinateSystem</Name>
+                    <DisplayLabel>Coordinate System</DisplayLabel>
+                    <Description>Coordinate System</Description>
+                    <Priority>200000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>399997</Priority>
+                </PropertyPriority>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0,0,1</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="BUBBLE" description="Schematics Bubble" displayLabel="Bubble" isDomainClass="True">
+        <BaseClass>SCHEMATICS_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.Bubble</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <BMF_CAD_LOCK_SETTINGS xmlns="bmf.01.01">
+                <AXIS_START_ANGLE>0</AXIS_START_ANGLE>
+                <AXIS_LOCK_ANGLE>90</AXIS_LOCK_ANGLE>
+                <SNAP_MODE>65536</SNAP_MODE>
+                <SNAP_DIVISOR>2</SNAP_DIVISOR>
+                <GRID_LOCK>True</GRID_LOCK>
+                <SNAP_LOCK>False</SNAP_LOCK>
+                <AXIS_LOCK>False</AXIS_LOCK>
+            </BMF_CAD_LOCK_SETTINGS>
+        </ECCustomAttributes>
+        <ECProperty propertyName="LEADER_POINT" typeName="point3d" description="Leader line end point" displayLabel="Leader line end point">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0,0,0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="INSTRUMENT_LEADER_LINE_CLASS_NAME" typeName="string" displayLabel="Instrument Line Leader Line class name">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Bubble Settings</Name>
+                    <DisplayLabel>Bubble Settings</DisplayLabel>
+                    <Description>Bubble Settings</Description>
+                    <Priority>100000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue></DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <PROPERTY_DISPLAY_FILTERS xmlns="bmf.01.01">
+                    <Visible>False</Visible>
+                    <ReadOnly>True</ReadOnly>
+                </PROPERTY_DISPLAY_FILTERS>                
+            </ECCustomAttributes>
+        </ECProperty>        
+        <ECProperty propertyName="DRAW_LEADER_LINE" typeName="boolean" description="Flag to draw leader line" displayLabel="Draw Leader Line">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Bubble Settings</Name>
+                    <DisplayLabel>Bubble Settings</DisplayLabel>
+                    <Description>Bubble Settings</Description>
+                    <Priority>100000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <BooleanDisplay xmlns="EditorCustomAttributes.01.00">
+                    <TrueString>Leader On</TrueString>
+                    <FalseString>Leader Off</FalseString>
+                </BooleanDisplay>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>True</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BUBBLE_RADIUS" typeName="double" description="Bubble Radius" displayLabel="Bubble Radius">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Bubble Settings</Name>
+                    <DisplayLabel>Bubble Settings</DisplayLabel>
+                    <Description>Bubble Settings</Description>
+                    <Priority>100000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0.25</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ELONGATED_WIDTH" typeName="double" description="Elongated Width" displayLabel="Elongated Width">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Bubble Settings</Name>
+                    <DisplayLabel>Bubble Settings</DisplayLabel>
+                    <Description>Bubble Settings</Description>
+                    <Priority>100000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ElongatedHexPanelDoubleTrimValue" typeName="double" displayLabel="Elongated Hex Panel Double Trim Value">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>          
+        <ECProperty propertyName="DISPLAY_BUBBLE_DIALOG" typeName="boolean" description="Flag to display instrument dialog" displayLabel="Display Bubble Dialog">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BUBBLE_LOCATION" typeName="int" description="Bubble Location" displayLabel="Bubble Location">
+            <ECCustomAttributes>
+                <StandardValues xmlns="EditorCustomAttributes.01.00">
+                    <MustBeFromList>True</MustBeFromList>
+                    <ValueMap>
+                        <ValueMap>
+                            <DisplayString>Field</DisplayString>
+                            <Value>1</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>Control Room Panel</DisplayString>
+                            <Value>2</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>Local Panel</DisplayString>
+                            <Value>4</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>Back Control Room Panel</DisplayString>
+                            <Value>8</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>Back Local Panel</DisplayString>
+                            <Value>16</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>User Type 1</DisplayString>
+                            <Value>32</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>User Type 2</DisplayString>
+                            <Value>64</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>User Type 3</DisplayString>
+                            <Value>128</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>User Type 4</DisplayString>
+                            <Value>256</Value>
+                        </ValueMap>
+                    </ValueMap>
+                </StandardValues>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>Bubble Settings</Name>
+                    <DisplayLabel>Bubble Settings</DisplayLabel>
+                    <Description>Bubble Settings</Description>
+                    <Priority>100000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>1</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LEADER_START" typeName="point3d" description="Leader Line start point" displayLabel="Leader Line start point">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0,0,0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LEADER_DRAWN" typeName="boolean" description="Leader line drawn" displayLabel="Leader line drawn">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="BUBBLE_PARAMETRIC" description="Parametric Bubble" displayLabel="Bubble Parametric" isDomainClass="True">
+        <BaseClass>BUBBLE</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.BubbleParametric</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <SCHEMATICS_CAD_CUSTOM_ATTRIBUTES xmlns="schematics.01.01">
+                <ElementTemplate>Default</ElementTemplate>
+            </SCHEMATICS_CAD_CUSTOM_ATTRIBUTES>
+            <EDIT_HANDLE_SETTINGS>
+                <BY_CONNECT_POINT>True</BY_CONNECT_POINT>
+                <BY_RANGE_CORNERS>False</BY_RANGE_CORNERS>
+                <BY_RANGE>True</BY_RANGE>
+            </EDIT_HANDLE_SETTINGS>
+            <INSERTION_SETTINGS>
+                <BY_CONNECT_POINT>False</BY_CONNECT_POINT>
+                <BY_RANGE_CORNERS>False</BY_RANGE_CORNERS>
+                <BY_RANGE>True</BY_RANGE>
+                <BY_DEFAULT>Origin</BY_DEFAULT>
+            </INSERTION_SETTINGS>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>False</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>True</REPEAT_INSERT>
+                <MIRROR_ENABLED>False</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>True</ROTATE_ENABLED>
+                <SCALE_ENABLED>False</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>False</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+        <ECProperty propertyName="DISPLAY_BUBBLE_DIALOG" typeName="boolean" description="Flag to display bubble dialog" displayLabel="Display Bubble Dialog">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>True</DefaultValue>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SCHEMATICS_BUSINESSKEY_DEFINITIONS" displayLabel="Schematics BusinessKey Definitions" isDomainClass="True" />
+    <ECClass typeName="BusinessKeyGetValueCriteria" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>SCHEMATICS_BUSINESSKEY_DEFINITIONS</BaseClass>
+        <ECArrayProperty propertyName="Criteria" typeName="string" minOccurs="0" maxOccurs="unbounded" />
+        <ECProperty propertyName="MethodName" typeName="string" />
+    </ECClass>
+    <ECClass typeName="RUN_LINK" description="A component that links run components or graphics" displayLabel="Run Link" isDomainClass="True">
+        <BaseClass>SCHEMATICS_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.RunLink</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+        <ECProperty propertyName="INHERIT_INRUN_TEMPLATE" typeName="boolean" description="Inherit inrun template" displayLabel="Inherit inrun template">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="END_CONDITION_CLASSNAME" typeName="string" description="Current End Condition class Name. This property should not be shown in the element info. The END_CONDITION_DISPLAYLABEL shows in the element info. These two class should be in sync " displayLabel="Current End Condition class name" />
+        <ECProperty propertyName="END_CONDITION_DISPLAY" typeName="string" description="Current end condition display. This property should sync up with the END_CONDITION_CLASS property" displayLabel="End Condition">
+            <ECCustomAttributes>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ValveEndConditions</Name>
+                </ExtendType>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>GENERAL</Name>
+                    <DisplayLabel>General Info</DisplayLabel>
+                    <Description>General Properties</Description>
+                    <Priority>1</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>None</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DATA_CHANGE" description="Data changes from one end to the other" displayLabel="Data Change" isDomainClass="True">
+        <BaseClass>RUN_LINK</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.DataChange</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>False</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>True</REPEAT_INSERT>
+                <MIRROR_ENABLED>False</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>False</ROTATE_ENABLED>
+                <SCALE_ENABLED>False</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>False</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="DATA_CHANGE_3WAY" description="Three way data change component" displayLabel="Data Change 3Way" isDomainClass="True">
+        <BaseClass>DATA_CHANGE</BaseClass>
+        <ECCustomAttributes>
+            <BMF_CAD_LOCK_SETTINGS xmlns="bmf.01.01">
+                <AXIS_LOCK_ANGLE>90</AXIS_LOCK_ANGLE>
+                <SNAP_MODE>4</SNAP_MODE>
+                <SNAP_DIVISOR>1</SNAP_DIVISOR>
+                <GRID_LOCK>False</GRID_LOCK>
+                <SNAP_LOCK>True</SNAP_LOCK>
+                <AXIS_LOCK>False</AXIS_LOCK>
+            </BMF_CAD_LOCK_SETTINGS>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.DataChange3Way</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="DATA_CHANGE_ANGLE" description="Data Change Angle" displayLabel="Data Change Angle" isDomainClass="True">
+        <BaseClass>DATA_CHANGE</BaseClass>
+        <ECCustomAttributes>
+            <BMF_CAD_LOCK_SETTINGS xmlns="bmf.01.01">
+                <AXIS_START_ANGLE>0</AXIS_START_ANGLE>
+                <AXIS_LOCK_ANGLE>90</AXIS_LOCK_ANGLE>
+                <SNAP_MODE>4</SNAP_MODE>
+                <SNAP_DIVISOR>1</SNAP_DIVISOR>
+                <GRID_LOCK>False</GRID_LOCK>
+                <SNAP_LOCK>True</SNAP_LOCK>
+                <AXIS_LOCK>False</AXIS_LOCK>
+            </BMF_CAD_LOCK_SETTINGS>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.DataChangeAngle</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="RUN_DATA_STRUCTURES" description="Logical grouping of data structures required by runs" displayLabel="Run Data Structures" isStruct="True" isDomainClass="True" />
+    <ECClass typeName="RUN_BREAK" description="Data used to break a run" displayLabel="Run Break" isStruct="True" isDomainClass="True">
+        <BaseClass>RUN_DATA_STRUCTURES</BaseClass>
+        <ECProperty propertyName="BREAKING_ID" typeName="string" description="Id of component causing this break" displayLabel="Breaking Id" />
+        <ECProperty propertyName="START_POINT" typeName="point3d" description="Start point" displayLabel="Start Point" />
+        <ECProperty propertyName="END_POINT" typeName="point3d" description="End point" displayLabel="End Point" />
+    </ECClass>
+    <ECClass typeName="RUN_SEGMENT" description="Run segment" displayLabel="Run Segment" isStruct="True" isDomainClass="True">
+        <BaseClass>RUN_DATA_STRUCTURES</BaseClass>
+        <ECProperty propertyName="INDEX" typeName="int" description="Zero based index into array of these" displayLabel="Index" />
+        <ECArrayProperty propertyName="BREAKS" typeName="RUN_BREAK" description="Breaks" displayLabel="Breaks" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+    </ECClass>
+    <ECClass typeName="RUN" description="Schematics Run" displayLabel="Run" isDomainClass="True">
+        <BaseClass>SCHEMATICS_BASE_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <BMF_CAD_LOCK_SETTINGS xmlns="bmf.01.01">
+                <AXIS_LOCK_ANGLE>90</AXIS_LOCK_ANGLE>
+                <SNAP_MODE>4</SNAP_MODE>
+                <SNAP_DIVISOR>2</SNAP_DIVISOR>
+                <GRID_LOCK>True</GRID_LOCK>
+                <SNAP_LOCK>True</SNAP_LOCK>
+                <AXIS_LOCK>True</AXIS_LOCK>
+            </BMF_CAD_LOCK_SETTINGS>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.SchematicsRun</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>False</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>False</REPEAT_INSERT>
+                <MIRROR_ENABLED>False</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>False</ROTATE_ENABLED>
+                <SCALE_ENABLED>False</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>False</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+        <ECArrayProperty propertyName="VERTICES" typeName="point3d" description="Vertices" displayLabel="Vertices" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECProperty propertyName="FLOW" typeName="int" description="Flow" displayLabel="Flow">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>FlowArrowDirection</Name>
+                </ExtendType>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Flow Arrows</Name>
+                    <DisplayLabel>Flow Arrows</DisplayLabel>
+                    <Description>Flow Arrows</Description>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>399998</Priority>
+                </PropertyPriority>
+                <BMF_NOTIFY_RELATED_COMPONENT_OF_PROPERTY_VALUE_CHANGE xmlns="bmf.01.01">
+                    <BMF_NOTIFY_RELATIONSHIPS>
+                        <BMF_NOTIFY_RELATIONSHIP>
+                            <NOTIFY_TARGET>True</NOTIFY_TARGET>
+                            <RELATIONSHIP_CLASS_NAME>RUN_HAS_IN_RUN</RELATIONSHIP_CLASS_NAME>
+                        </BMF_NOTIFY_RELATIONSHIP>
+                    </BMF_NOTIFY_RELATIONSHIPS>
+                </BMF_NOTIFY_RELATED_COMPONENT_OF_PROPERTY_VALUE_CHANGE>
+                <RequiresReload xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SHOW_FLOW_ARROWS" typeName="boolean" description="Automatically show flow arrows on run" displayLabel="Show Flow Arrows">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>false</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Flow Arrows</Name>
+                    <DisplayLabel>Flow Arrows</DisplayLabel>
+                    <Description>Flow Arrows</Description>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>399999</Priority>
+                </PropertyPriority>
+                <RequiresReload xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="FLOW_ARROW_LOCATION" typeName="int" description="location of automatic flow arrow within a section of the run" displayLabel="Flow Arrow Location">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>0</DefaultValue>
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>FlowArrowPlacement</Name>
+                </ExtendType>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Flow Arrows</Name>
+                    <DisplayLabel>Flow Arrows</DisplayLabel>
+                    <Description>Flow Arrows</Description>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>399997</Priority>
+                </PropertyPriority>
+                <RequiresReload xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="SEGMENTS" typeName="RUN_SEGMENT" description="Segments" displayLabel="Segments" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+    </ECClass>
+    <ECRelationshipClass typeName="DATA_CHANGE_CONNECTS_TO_RUN" description="Data change connects to run" displayLabel="Data Change Connects To Run" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="Data Change Connects To Run" polymorphic="True">
+            <Class class="DATA_CHANGE" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Data Change Connects To Run (reversed)" polymorphic="True">
+            <Class class="RUN" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="DATA_CHANGE_PROPERTY_NAMES" description="Data Change Property Names" displayLabel="Data Change Property Names" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="MERGE_RUN_PROPERTY_LIST_NAME" typeName="string" description="Name of the list of properties to display for merge run dialog" displayLabel="Merge Run Property List Name" />
+        <ECProperty propertyName="TEXT_PROPERTY_NAME_1" typeName="string" description="Name of property to be used to set the left text" displayLabel="Text Property Name 1" />
+        <ECProperty propertyName="TEXT_PROPERTY_NAME_2" typeName="string" description="Name of property to be used to set the right text" displayLabel="Text Property Name 2" />
+        <ECProperty propertyName="RUN_TEXT_PROPERTY_NAME" typeName="string" displayLabel="Run Text Property Name" />
+    </ECClass>
+    <ECClass typeName="RUN_PROPERTY_NAMES" description="Run Property Names" displayLabel="Run Property Names" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="TEXT_SIZE_PROPERTY_NAME" typeName="string" displayLabel="Run Text Size Property Name" />
+        <ECProperty propertyName="DESIGN_SIZE_PROPERTY_NAME" typeName="string" displayLabel="Run Design Size Property Name" />
+        <ECProperty propertyName="NOMINAL_DIAMETER_PROPERTY_NAME" typeName="string" displayLabel="Run Nominal Diameter Property Name" />
+    </ECClass>    
+    <ECClass typeName="DATA_CHANGE_SINGLE_WAY" description="Data change single way" displayLabel="Data Change Single Way" isDomainClass="True">
+        <BaseClass>DATA_CHANGE</BaseClass>
+    </ECClass>
+    <ECClass typeName="ECBusinessKeyGroup" description="Business key group" displayLabel="Business Key Group" isDomainClass="False" isCustomAttributeClass="True">
+        <BaseClass>SCHEMATICS_BUSINESSKEY_DEFINITIONS</BaseClass>
+        <ECProperty propertyName="GROUP_DISPLAY_NAME" typeName="string" displayLabel="Group Display Name" description="Group display name" />
+        <ECProperty propertyName="GROUP_NAME" typeName="string" displayLabel="Group Name" description="Group name" />
+        <ECProperty propertyName="ICON_NAME" typeName="string" displayLabel="Icon Name" description="Name of an icon to be used when displaying a group." />
+    </ECClass>
+    <ECClass typeName="END_RUN" description="Run terminator" displayLabel="End Run" isDomainClass="True">
+        <BaseClass>RUN_LINK</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.EndRun</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <BMF_CAD_LOCK_SETTINGS xmlns="bmf.01.01">
+                <AXIS_LOCK_ANGLE>90</AXIS_LOCK_ANGLE>
+                <SNAP_MODE>2</SNAP_MODE>
+                <SNAP_DIVISOR>1</SNAP_DIVISOR>
+                <GRID_LOCK>True</GRID_LOCK>
+                <SNAP_LOCK>True</SNAP_LOCK>
+                <AXIS_LOCK>False</AXIS_LOCK>
+            </BMF_CAD_LOCK_SETTINGS>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECRelationshipClass typeName="END_RUN_CONNECTS_TO_RUN" description="End run connects to run" displayLabel="End Run Connects To Run" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <ECCustomAttributes>
+            <ReferenceTypeRelationship xmlns="Bentley_Standard_CustomAttributes.01.02" />
+        </ECCustomAttributes>
+        <Source cardinality="(1,1)" roleLabel="End Run Connects To Run" polymorphic="True">
+            <Class class="END_RUN" />
+        </Source>
+        <Target cardinality="(0,1)" roleLabel="End Run Connects To Run (reversed)" polymorphic="True">
+            <Class class="RUN" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="SCHEMATICS_COMPONENT_CUSTOM_ATTRIBUTES" description="Schematics component custom attributes" displayLabel="Schematics Component Custom Attributes" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="USE_PREDEFINED_POINTS_FOR_RANGE" typeName="boolean" description="Indicate whether to use predefined connect points to determine the component's range" displayLabel="Use Predefined Points for Range" />
+    </ECClass>
+    <ECClass typeName="IN_RUN" description="In Run component that can be placed in a Run." displayLabel="In Run" isDomainClass="True">
+        <BaseClass>RUN_LINK</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.InRun</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <BMF_CAD_LOCK_SETTINGS xmlns="bmf.01.01">
+                <AXIS_START_ANGLE>0</AXIS_START_ANGLE>
+                <AXIS_LOCK_ANGLE>90</AXIS_LOCK_ANGLE>
+                <SNAP_MODE>8</SNAP_MODE>
+                <SNAP_DIVISOR>1</SNAP_DIVISOR>
+                <GRID_LOCK>True</GRID_LOCK>
+                <SNAP_LOCK>True</SNAP_LOCK>
+                <AXIS_LOCK>False</AXIS_LOCK>
+            </BMF_CAD_LOCK_SETTINGS>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>False</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>True</REPEAT_INSERT>
+                <MIRROR_ENABLED>True</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>True</ROTATE_ENABLED>
+                <SCALE_ENABLED>False</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>False</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+            <SCHEMATICS_COMPONENT_CUSTOM_ATTRIBUTES xmlns="schematics.01.01">
+                <USE_PREDEFINED_POINTS_FOR_RANGE>False</USE_PREDEFINED_POINTS_FOR_RANGE>
+            </SCHEMATICS_COMPONENT_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="FLOW_ARROW" description="Base Class for open flow arrow consisting of a shape. This Component breaks the line and creates a gap" displayLabel="Flow Arrow" isDomainClass="True">
+        <BaseClass>IN_RUN</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.FlowArrow</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+        <ECProperty propertyName="FLOW_DEPENDENT" typeName="boolean" description="Direction depends on flow" displayLabel="Flow Dependent">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>True</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MANUALLY_PLACED" typeName="boolean" description="manually placed" displayLabel="Manually Placed">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>True</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="INHERIT_INRUN_TEMPLATE" typeName="boolean" description="Inherit inrun template" displayLabel="Inherit inrun template">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>True</DefaultValue>
+                    <FormatString />
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="END_CONDITION_DISPLAY" typeName="string" description="Current end condition display. This property should sync up with the END_CONDITION_CLASS property" displayLabel="End Condition">
+            <ECCustomAttributes>
+                <PROPERTY_DISPLAY_FILTERS xmlns="bmf.01.01">
+                    <Visible>False</Visible>
+                    <ReadOnly>True</ReadOnly>
+                </PROPERTY_DISPLAY_FILTERS>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="FLOW_ARROW_MAPPING" description="Determines directional or bi-directional flow arrow to be placed on a run" displayLabel="Flow Arrow Mapping" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="DIRECTIONAL_CLASSNAME" typeName="string" description="Directional flow arrow class name" displayLabel="Directional Class Name" />
+        <ECProperty propertyName="BI_DIRECTIONAL_CLASSNAME" typeName="string" description="Bi-directional flow arrow class name" displayLabel="Bi-Directional Class Name" />
+    </ECClass>
+    <ECClass typeName="IN_RUN_3WAY" description="Three way in run component" displayLabel="In Run 3Way" isDomainClass="True">
+        <BaseClass>IN_RUN</BaseClass>
+        <ECCustomAttributes>
+            <BMF_CAD_LOCK_SETTINGS xmlns="bmf.01.01">
+                <AXIS_LOCK_ANGLE>90</AXIS_LOCK_ANGLE>
+                <SNAP_MODE>4</SNAP_MODE>
+                <SNAP_DIVISOR>1</SNAP_DIVISOR>
+                <GRID_LOCK>False</GRID_LOCK>
+                <SNAP_LOCK>True</SNAP_LOCK>
+                <AXIS_LOCK>False</AXIS_LOCK>
+            </BMF_CAD_LOCK_SETTINGS>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.InRun3Way</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SIZE" typeName="string" description="Size" displayLabel="Size">
+            <ECCustomAttributes>
+                <BMF_ANNO_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <ORIGIN_OFFSET>0,0.25,0</ORIGIN_OFFSET>
+                    <DIRECTION>1,0,0</DIRECTION>
+                    <VISIBILITY>True</VISIBILITY>
+                    <TEXT_STYLE>PID</TEXT_STYLE>
+                </BMF_ANNO_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="IN_RUN_4WAY" description="Four way in run component" displayLabel="In Run 4Way" isDomainClass="True">
+        <BaseClass>IN_RUN_3WAY</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.InRun4Way</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="IN_RUN_ANGLE" description="In run angle component" displayLabel="In Run Angle" isDomainClass="True">
+        <BaseClass>IN_RUN</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.InRunAngle</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <BMF_CAD_LOCK_SETTINGS xmlns="bmf.01.01">
+                <AXIS_LOCK_ANGLE>90</AXIS_LOCK_ANGLE>
+                <SNAP_MODE>4</SNAP_MODE>
+                <SNAP_DIVISOR>1</SNAP_DIVISOR>
+                <GRID_LOCK>False</GRID_LOCK>
+                <SNAP_LOCK>True</SNAP_LOCK>
+                <AXIS_LOCK>False</AXIS_LOCK>
+            </BMF_CAD_LOCK_SETTINGS>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SIZE" typeName="string" description="Size" displayLabel="Size">
+            <ECCustomAttributes>
+                <BMF_ANNO_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <ORIGIN_OFFSET>0,0.25,0</ORIGIN_OFFSET>
+                    <DIRECTION>1,0,0</DIRECTION>
+                    <VISIBILITY>True</VISIBILITY>
+                    <TEXT_STYLE>PID</TEXT_STYLE>
+                </BMF_ANNO_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECRelationshipClass typeName="IN_RUN_HAS_BUBBLE" description="In run has bubble" displayLabel="In Run Has Bubble" isDomainClass="True" strength="holding" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="Contains Bubble" polymorphic="True">
+            <Class class="IN_RUN" />
+        </Source>
+        <Target cardinality="(0,1)" roleLabel="Is contained by In Run" polymorphic="True">
+            <Class class="BUBBLE" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="JUMPER" description="Jumps for line intersections and breaks" displayLabel="Jumper" isDomainClass="True">
+        <BaseClass>SCHEMATICS_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.Jumper</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+        <ECProperty propertyName="START_POINT" typeName="point3d" description="Start of jumper" displayLabel="Start point">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="END_POINT" typeName="point3d" description="End of jumper" displayLabel="End Point">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <IsGraphical>True</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECRelationshipClass typeName="JUMPER_JUMPS_SCHEMATICS_BASE_COMPONENT" description="Jumper Jumps Schematics Base Component" displayLabel="Jumper Jumps Schematics Base Component" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,N)" roleLabel="Jumps Schematics Base Component" polymorphic="True">
+            <Class class="JUMPER" />
+        </Source>
+        <Target cardinality="(1,1)" roleLabel="Is jumped by Jumper" polymorphic="True">
+            <Class class="SCHEMATICS_BASE_COMPONENT" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="NON_BREAKING_FLOW_ARROW" description="Base Class for open flow arrow consisting of lines. This Component does not break the line and creates no gap" displayLabel="Non Breaking Flow Arrow" isDomainClass="True">
+        <BaseClass>FLOW_ARROW</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%PID_ASSEMBLY_DIR%Bentley.Plant.Application.Pid.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.Application.Pid.Catalog.InRunNoBreakFlowArrow</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+        <ECProperty propertyName="INHERIT_INRUN_TEMPLATE" typeName="boolean" description="Inherit inrun template" displayLabel="Inherit inrun template">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>True</DefaultValue>
+                    <FormatString />
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="ORIENT_DATA_CHANGE_PROPERTY_NAMES" description="Orientation Data Change Property Name" displayLabel="Orientation Data Change Property Name" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>DATA_CHANGE_PROPERTY_NAMES</BaseClass>
+        <ECProperty propertyName="ORIENTATION_PROPERTY_NAME_1" typeName="string" description="Orientation Property Name 1" displayLabel="Orientation Property Name 1" />
+        <ECProperty propertyName="ORIENTATION_PROPERTY_NAME_2" typeName="string" description="Orientation Property Name 2" displayLabel="Orientation Property Name 2" />
+        <ECProperty propertyName="RUN_ORIENTATION_PROPERTY_NAME" typeName="string" description="Run Orientation Property Name" displayLabel="Run Orientation Property Name" />
+    </ECClass>
+    <ECClass typeName="RUN_MAPPING" description="Run mapping" displayLabel="Run Mapping" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>bmf:bmf_display_list_attributes</BaseClass>
+    </ECClass>
+    <ECClass typeName="PAGE_CONNECTOR" description="On Off Page Connector" displayLabel="Page Connector" isDomainClass="True">
+        <BaseClass>END_RUN</BaseClass>
+        <ECCustomAttributes>
+            <SCHEMATICS_CAD_CUSTOM_ATTRIBUTES xmlns="schematics.01.01">
+                <ElementTemplate>Connectors</ElementTemplate>
+                <CellName />
+            </SCHEMATICS_CAD_CUSTOM_ATTRIBUTES>
+            <INSERTION_SETTINGS>
+                <BY_CONNECT_POINT>True</BY_CONNECT_POINT>
+                <BY_RANGE_CORNERS>False</BY_RANGE_CORNERS>
+                <BY_RANGE>False</BY_RANGE>
+                <BY_DEFAULT>ConnectPoint.OFF</BY_DEFAULT>
+            </INSERTION_SETTINGS>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.PageConnector</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <RUN_MAPPING xmlns="schematics.01.01">
+                <CLASS_NAME>RUN</CLASS_NAME>
+            </RUN_MAPPING>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>False</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>False</REPEAT_INSERT>
+                <MIRROR_ENABLED>True</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>True</ROTATE_ENABLED>
+                <SCALE_ENABLED>False</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>False</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ROTATE_ENABLED" typeName="boolean" description="Component can be rotated" displayLabel="Rotate Enabled" />
+        <ECProperty propertyName="BY_OFF_PAGE" typeName="boolean" displayLabel="By Off Page" />
+        <ECProperty propertyName="LINKED_FILE_NAME" typeName="string" description="Full path to the linked drawing file." displayLabel="Linked File Name">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>GENERAL</Name>
+                    <DisplayLabel>General Info</DisplayLabel>
+                </Category>
+                <PROPERTY_DISPLAY_FILTERS xmlns="bmf.01.01">
+                    <Visible>True</Visible>
+                    <ReadOnly>True</ReadOnly>
+                </PROPERTY_DISPLAY_FILTERS>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LINKED_CONNECTOR_ID" typeName="string" description="Id of linked page connector" displayLabel="Linked Connector Id">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>GENERAL</Name>
+                    <DisplayLabel>General Info</DisplayLabel>
+                </Category>
+                <PROPERTY_DISPLAY_FILTERS xmlns="bmf.01.01">
+                    <Visible>True</Visible>
+                    <ReadOnly>True</ReadOnly>
+                </PROPERTY_DISPLAY_FILTERS>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LINKED_MODEL" typeName="string" description="Name of linked model." displayLabel="Linked Model Name">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>GENERAL</Name>
+                    <DisplayLabel>General Info</DisplayLabel>
+                </Category>
+                <BMF_ANNO_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <ORIGIN_OFFSET>0,0,0</ORIGIN_OFFSET>
+                    <DIRECTION>0,0,0</DIRECTION>
+                    <VISIBILITY>True</VISIBILITY>
+                    <TEXT_STYLE>PID</TEXT_STYLE>
+                    <PLACEMENT_COUNT>0</PLACEMENT_COUNT>
+                </BMF_ANNO_CUSTOM_ATTRIBUTES>
+                <PROPERTY_DISPLAY_FILTERS xmlns="bmf.01.01">
+                    <Visible>True</Visible>
+                    <ReadOnly>True</ReadOnly>
+                </PROPERTY_DISPLAY_FILTERS>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TYPE" typeName="string" description="Type of Connector" displayLabel="Connector Type">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>GENERAL</Name>
+                    <DisplayLabel>General Info</DisplayLabel>
+                </Category>
+                <PROPERTY_DISPLAY_FILTERS xmlns="bmf.01.01">
+                    <Visible>True</Visible>
+                    <ReadOnly>True</ReadOnly>
+                </PROPERTY_DISPLAY_FILTERS>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PIPERUN_ID" typeName="string" description="Id of Piperun" displayLabel="Piperun Id">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>GENERAL</Name>
+                    <DisplayLabel>General Info</DisplayLabel>
+                </Category>
+                <PROPERTY_DISPLAY_FILTERS xmlns="bmf.01.01">
+                    <Visible>True</Visible>
+                    <ReadOnly>True</ReadOnly>
+                </PROPERTY_DISPLAY_FILTERS>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LABEL" typeName="string" description="Label which is displayed next to the connector." displayLabel="Label">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>&lt;not linked&gt;</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>GENERAL</Name>
+                    <DisplayLabel>General Info</DisplayLabel>
+                </Category>
+                <BMF_ANNO_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <ORIGIN_OFFSET>0,0,0</ORIGIN_OFFSET>
+                    <DIRECTION>0,0,0</DIRECTION>
+                    <VISIBILITY>False</VISIBILITY>
+                    <TEXT_STYLE>PID</TEXT_STYLE>
+                    <PLACEMENT_COUNT>0</PLACEMENT_COUNT>
+                </BMF_ANNO_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PAGE_CONNECTOR_PROPERTY_NAMES" displayLabel="Page Connector Property Name" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="TYPE_PROPERTY_NAME" typeName="string" displayLabel="Type Property Name" />
+        <ECProperty propertyName="PIPE_LINE_PROPERTY_NAME" typeName="string" displayLabel="Pipe Line Property Name" />
+        <ECProperty propertyName="PIPE_RUN_PROPERTY_NAME" typeName="string" displayLabel="Pipe Run Property Name" />
+        <ECProperty propertyName="RUN_SIZE_PROPERTY_NAME" typeName="string" displayLabel="Run Size Property Name" />
+        <ECProperty propertyName="PIPE_SPEC_PROPERTY_NAME" typeName="string" displayLabel="Pipe Spec Property Name" />
+        <ECProperty propertyName="DOCUMENT_PROPERTY_NAME" typeName="string" displayLabel="Document Property Name" />
+    </ECClass>
+    <ECClass typeName="RUN_AUTO_ROUTING" description="Properties for auto-routing a run" displayLabel="Run Auto-Routing" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="END_DISTANCE" typeName="double" description="Distance from end of run for auto-routing" displayLabel="Auto-routing End Distance" />
+        <ECProperty propertyName="PROMPT_FOR_DIRECTION_FROM_RUN" typeName="boolean" description="Prompt for direction from run" displayLabel="Prompt For Direction From Run" />
+    </ECClass>
+    <ECRelationshipClass typeName="RUN_HAS_IN_RUN" description="Run Has In Run" displayLabel="Run Has In Run" isDomainClass="True" strength="embedding" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="Contains In Run" polymorphic="True">
+            <Class class="RUN" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Is contained by Run" polymorphic="True">
+            <Class class="IN_RUN" />
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="RUN_HAS_JUMPER" description="Run has Jumper" displayLabel="Run Has Jumper" isDomainClass="True" strength="holding" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="Has Jumper" polymorphic="True">
+            <Class class="RUN" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Contained by Run" polymorphic="True">
+            <Class class="JUMPER" />
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="RUN_LINK_HAS_BUBBLE" description="Run link has bubble" displayLabel="Run Link Has Bubble" isDomainClass="True" strength="holding" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="Contains Bubble" polymorphic="True">
+            <Class class="RUN_LINK" />
+        </Source>
+        <Target cardinality="(0,1)" roleLabel="Is contained by In Run" polymorphic="True">
+            <Class class="BUBBLE" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="SCHEMATICS_ASSEMBLY" displayLabel="Schematics Assembly" isDomainClass="True">
+        <BaseClass>bmf:BMF_ASSEMBLY</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.SchematicsAssembly</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+            <BMF_COMPONENT_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                <INSERT_ENABLED>False</INSERT_ENABLED>
+                <REPLACE_ENABLED>False</REPLACE_ENABLED>
+                <REPEAT_INSERT>True</REPEAT_INSERT>
+                <MIRROR_ENABLED>True</MIRROR_ENABLED>
+                <MOVE_ENABLED>True</MOVE_ENABLED>
+                <ROTATE_ENABLED>True</ROTATE_ENABLED>
+                <SCALE_ENABLED>True</SCALE_ENABLED>
+                <TRANSFORM_RELATED_ANNOTATION_ENABLED>True</TRANSFORM_RELATED_ANNOTATION_ENABLED>
+                <PARENT_DISPLAY_ENABLED>False</PARENT_DISPLAY_ENABLED>
+            </BMF_COMPONENT_CUSTOM_ATTRIBUTES>
+        </ECCustomAttributes>
+        <ECProperty propertyName="MIRROR_ENABLED" typeName="boolean" description="Assembly can be mirrored" displayLabel="Mirror Enabled">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ROTATE_ENABLED" typeName="boolean" description="Assembly can be rotated" displayLabel="Rotate Enabled">
+            <ECCustomAttributes>
+                <BMF_PROP_CUSTOM_ATTRIBUTES xmlns="bmf.01.01">
+                    <DefaultValue>False</DefaultValue>
+                    <IsGraphical>False</IsGraphical>
+                </BMF_PROP_CUSTOM_ATTRIBUTES>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECRelationshipClass typeName="SCHEMATICS_BASE_COMPONENT_REFERENCES_BUBBLE" description="Schematics base component references bubble" displayLabel="Schematics Base Component References Bubble" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="References Bubble" polymorphic="True">
+            <Class class="SCHEMATICS_BASE_COMPONENT" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Is referenced by Schematics Base Component" polymorphic="True">
+            <Class class="BUBBLE" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="SCHEMATICS_BUBBLE_CLASS_LISTS" description="List Class for Annotation Bubbles and Instruments" displayLabel="Schematics Bubble Class List" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="BODY_LIST_NAME" typeName="string" displayLabel="Body List Name" />
+        <ECProperty propertyName="DIVIDER_LIST_NAME" typeName="string" displayLabel="Divider List Name" />
+    </ECClass>
+    <ECClass typeName="SCHEMATICS_BYPASS_ASSEMBLY" description="Bypass Assembly" displayLabel="Schematics Bypass Assembly" isDomainClass="True">
+        <BaseClass>SCHEMATICS_ASSEMBLY</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.SchematicsByPassAssembly</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="SCHEMATICS_DOCUMENT" description="Base Class for Schematics Documents" displayLabel="Schematics Document" isDomainClass="True">
+        <BaseClass>bmf:BMF_DOCUMENT</BaseClass>
+        <ECProperty propertyName="SHEET_NUMBER" typeName="string" displayLabel="Sheet Number">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>DOCUMENT_PROPERTIES</Name>
+                    <DisplayLabel>Document Properties</DisplayLabel>
+                    <Description>Document Properties</Description>
+                    <Priority>0</Priority>
+                </Category>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="APPROVED_BY" typeName="string" displayLabel="Approved By">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>DOCUMENT_PROPERTIES</Name>
+                    <DisplayLabel>Document Properties</DisplayLabel>
+                    <Description>Document Properties</Description>
+                    <Priority>0</Priority>
+                </Category>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DOCUMENT_DESCRIPTION" typeName="string" displayLabel="Document Description">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>DOCUMENT_PROPERTIES</Name>
+                    <DisplayLabel>Document Properties</DisplayLabel>
+                    <Description>Document Properties</Description>
+                    <Priority>0</Priority>
+                </Category>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SCHEMATICS_DOCUMENT_INFORMATION" displayLabel="Schematics Document Information" isDomainClass="False" isCustomAttributeClass="True">
+        <ECProperty propertyName="CLASS" typeName="string" description="Document Class Name" displayLabel="Class" />
+        <ECProperty propertyName="DESCRIPTION" typeName="string" description="Document Description" displayLabel="Description" />
+        <ECProperty propertyName="INSTANCE" typeName="string" displayLabel="Instance" />
+        <ECProperty propertyName="SCHEMA" typeName="string" description="Document Schema" displayLabel="Schema" />
+    </ECClass>
+    <ECClass typeName="SCHEMATICS_INLINE_ASSEMBLY" description="Assembly of collinear Inline components that make up a complex inline component or system.  The components can be treated as single object or as individual objects based on insertion settings. The Schematics Inline Assembly is the base assembly type for all Schematics Inline assembly types." displayLabel="Schematics Inline Assembly" isDomainClass="True">
+        <BaseClass>SCHEMATICS_ASSEMBLY</BaseClass>
+        <ECCustomAttributes>
+            <DOTNET_ASSEMBLY_CLASS_INFO xmlns="bmf.01.01">
+                <COMPONENT_HANDLER>
+                    <ASSEMBLY_PATH>%SCHEM_ASSEMBLY_DIR%Bentley.Plant.ApplicationFramework.Schematics.Catalog.dll</ASSEMBLY_PATH>
+                    <CLRName>Bentley.Plant.ApplicationFramework.Schematics.Catalog.SchematicsInlineAssembly</CLRName>
+                </COMPONENT_HANDLER>
+                <ADD_IN_HANDLERS />
+            </DOTNET_ASSEMBLY_CLASS_INFO>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="SPEC_DEFINITION_CONTAINER" description="Specification Definition Container Class" displayLabel="Specification Definition Container Class" isDomainClass="True" />
+    <ECClass typeName="SPEC_ALIAS_STRUCTURE" description="Specification Alias Structure" displayLabel="Specification Alias Structure" isStruct="True" isDomainClass="True">
+        <BaseClass>SPEC_DEFINITION_CONTAINER</BaseClass>
+        <ECProperty propertyName="PROPERTY" typeName="string" description="Property Alias Name" displayLabel="Property Alias Name" />
+        <ECProperty propertyName="SOURCE_VALUE" typeName="string" description="Source value to match with destination value" displayLabel="Source value to match with destination value" />
+        <ECProperty propertyName="DESTINATION_VALUE" typeName="string" description="Value to populate in EC Property" displayLabel="Value to populate in EC Property" />
+    </ECClass>
+    <ECClass typeName="SPEC_DEFINITION_STRUCTURE" description="Specification Definition Structure" displayLabel="Specification Definition Structure" isStruct="True" isDomainClass="True">
+        <BaseClass>SPEC_DEFINITION_CONTAINER</BaseClass>
+        <ECProperty propertyName="SOURCE_FIELDNAME" typeName="string" description="Source Field Name inwhich to populate destination field value." displayLabel="Source Field Name" />
+        <ECProperty propertyName="DESTINATION_FIELDNAME" typeName="string" description="Destination Field Name from spec database" displayLabel="Destination Field Name" />
+        <ECProperty propertyName="SOURCE_DISPLAYNAME" typeName="string" description="Source Display Name to be displayed in record selection dialog" displayLabel="Source Display Name" />
+        <ECProperty propertyName="PORT_NAME" typeName="string" description="Port Name" displayLabel="Port Name" />
+        </ECClass>
+    <ECClass typeName="SPEC_CONDITION_STRUCTURE" description="Specification Condition Structure" displayLabel="Specification Condition Structure" isStruct="True" isDomainClass="True">
+        <BaseClass>SPEC_DEFINITION_CONTAINER</BaseClass>
+        <ECProperty propertyName="EC_QUERY_FIELDNAME" typeName="string" description="Spec Field Name to query." displayLabel="Source Field Name" />
+        <ECProperty propertyName="VALUE_FIELDNAME" typeName="string" description="Source Field Name from which the value should be retrieved to populate the condition" displayLabel="Destination Field Name" />
+        <ECProperty propertyName="VALUE_SUFFIX" typeName="string" description="Suffix for adding to the query. This would be used for SIZE to add an MM or quote to the source field value in the select statement" displayLabel="Condition Field suffix Value" />
+        <ECProperty propertyName="REMOVE_SUFFIX" typeName="boolean" description="Remove the suffix value in the VALUE_SUFFIX property. True= remove False= add" displayLabel="Remove suffix value" />
+    </ECClass>
+    <ECClass typeName="SPEC_DEFINITION_QUERY_STRUCTURE" description="Specification Definition query Structure" displayLabel="Specification Definition Query Structure" isStruct="True" isDomainClass="True">
+        <BaseClass>SPEC_DEFINITION_CONTAINER</BaseClass>
+        <ECProperty propertyName="EC_QUERY_FIELDNAME" typeName="string" description="EC Field Name inwhich to get value to query by." displayLabel="EC Property Query Field Name" />
+        <ECProperty propertyName="EC_QUERY_FIELDNAME_SUFFIX_VALUE" typeName="string" description="Suffix for adding to the query. This would be used for SIZE to add an MM or quote to the source field value in the select statement" displayLabel="EC Property Query Field name suffix Value" />
+        <ECProperty propertyName="REMOVE_SUFFIX" typeName="boolean" description="Remove the suffix value in the EC_QUERY_FIELDNAME_SUFFIX_VALUE property. True= remove False= add" displayLabel="Remove suffix value" />
+    </ECClass>
+    <ECClass typeName="SPEC_DEFINITION_MAPPING" description="Specification Definition Mapping" displayLabel="Specification Definition Mapping" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>SPEC_DEFINITION_CONTAINER</BaseClass>
+        <ECArrayProperty propertyName="PROPERTY_MAPPING" typeName="SPEC_DEFINITION_STRUCTURE" description="Property Mapping" displayLabel="Property Mapping" minOccurs="1" maxOccurs="unbounded" isStruct="True" />
+        <ECArrayProperty propertyName="TABLES_LIST" typeName="string" description="Tables List" displayLabel="Tables List" minOccurs="1" maxOccurs="unbounded" />
+        <ECProperty propertyName="SQL_SELECT" typeName="string" description="Sql Select Where Statement" displayLabel="Sql Select Where Statement" />
+        <ECArrayProperty propertyName="QUERY_MAPPING" typeName="SPEC_DEFINITION_QUERY_STRUCTURE" description="Query Mapping fields" displayLabel="Query Mapping fields" minOccurs="1" maxOccurs="unbounded" isStruct="True" />
+        <ECArrayProperty propertyName="ALIAS_MAPPING" typeName="SPEC_ALIAS_STRUCTURE" description="Alias Mappings" displayLabel="Alias Mappings" minOccurs="1" maxOccurs="unbounded" isStruct="True" />
+    </ECClass>
+    <ECClass typeName="SPEC_DEFINITION_MAPPING_FOR_OPENPLANT_SPECS" description="Specification Definition Mapping for OpenPlant specs" displayLabel="Specification Definition Mapping for OpenPlant Specs" isDomainClass="True" isCustomAttributeClass="True">
+    <BaseClass>SPEC_DEFINITION_CONTAINER</BaseClass>
+        <ECArrayProperty propertyName="PROPERTY_MAPPING" typeName="SPEC_DEFINITION_STRUCTURE" description="Property Mapping" displayLabel="Property Mapping" minOccurs="1" maxOccurs="unbounded" isStruct="True" />
+        <ECArrayProperty propertyName="CONDITION_MAPPING" typeName="SPEC_CONDITION_STRUCTURE" description="Condition Mapping" displayLabel="Condition Mapping" minOccurs="1" maxOccurs="unbounded" isStruct="True" />
+        <ECArrayProperty propertyName="ALIAS_MAPPING" typeName="SPEC_ALIAS_STRUCTURE" description="Alias Mappings" displayLabel="Alias Mappings" minOccurs="1" maxOccurs="unbounded" isStruct="True" />
+    </ECClass>
+    <ECClass typeName="SPEC_POINTER" description="Pointer to spec mapping class" displayLabel="Pointer to spec mapping class" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>SPEC_DEFINITION_CONTAINER</BaseClass>
+        <ECProperty propertyName="SPEC_MAPPING_CLASS" typeName="string" description="Spec mapping class" displayLabel="Spec mapping class" />
+        <ECProperty propertyName="SPEC_MAPPING_CLASS_FOR_OPENPLANT_SPECS" typeName="string" description="Spec mapping class for OpenPlant specs" displayLabel="Spec mapping class for OpenPlant specs" />
+        <ECProperty propertyName="USE_ECCLASS_FOR_OPENPLANT_SPECS" typeName="string" description="Alternate class to use for spec lookup in OpenPlant specs" displayLabel="Alternate lookup class for OpenPlant specs" />
+    </ECClass>
+</ECSchema>

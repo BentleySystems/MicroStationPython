@@ -1,0 +1,260 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+# Sets up command-line arguments for the clang compiler and linker. 
+# These settings are *probably* common to all platforms that use clang.
+# For now
+#
+
+# Required Inputs:
+# Optional Inputs:
+# LLVM_DEBUG
+# REQUIRE_IEEE_COMPLIANT
+# BETHREAD_USE_PTHREAD
+# NO_DEFAULT_CLANG_WARNINGS 
+# IS_THIRD_PARTY_LIBRARY
+# CLANG_ENFORCE_OVERRIDE
+# NDEBUG
+# GCC_DEFAULT_VISIBILITY
+# CLANG_ALLOW_UNDEFINED
+
+# -------------------------------------
+# Optimization
+
+LLVMOptimizeOptions = -Os
+
+LLVMOptimizeOptions+ -finline-functions
+
+LLVMOptimizeOptions+ -fomit-frame-pointer # don't keep the frame pointer in a register for functions that don't need one; this avoids the instructions to save, set up and restore frame pointers
+
+# PRG implies no asserts.
+%if defined (PRG)
+    %if defined (DEBUG)
+        %error Cannot define PRG and DEBUG.
+    %endif
+    %if !defined(NDEBUG) && !defined(PRG_NO_NDEBUG)
+        always:
+            |Setting NDEBUG=1 because PRG was set.
+        
+        NDEBUG = 1
+    %endif
+%endif
+
+%if defined (NDEBUG)
+    LLVMOptimizeOptions + -DNDEBUG=1
+%endif
+
+# -------------------------------------
+# Debug
+
+LLVMDebugOpts = -O0
+
+%if defined(CLANG_ANALYZE)
+    LLVMDebugOpts + --analyze
+%endif
+
+LLVMDebugOpts+ -fstack-protector-strong 
+
+%if !defined(DONT_DEFINE_DEBUG)
+    LLVMDebugOpts + -DDEBUG=1
+%endif
+
+# -------------------------------------
+# Sanitize
+%if defined(CLANG_SANITIZE)
+    LLVMCommonCompOpts + -fsanitize=$(CLANG_SANITIZE)
+    %if $(BUILD_TOOLSET) == "LINUX_CLANG"
+        LLVMLinkOpts + -fsanitize=$(CLANG_SANITIZE)
+    %endif
+%endif
+
+# -------------------------------------
+# Threading
+
+%if defined (BETHREAD_USE_PTHREAD)
+    LLVMCommonCompOpts+ -pthread
+    LLVMCommonCompOpts+ -DBETHREAD_USE_PTHREAD
+%endif
+
+# -------------------------------------
+# Turn warnings down for legacy code
+
+# The primary purpose of NO_DEFAULT_CLANG_WARNINGS is to allow builds of third-party libraries to bypass warnings since we don't want to modify them to clean them up.
+%if !defined(NO_DEFAULT_CLANG_WARNINGS) && !defined(IS_THIRD_PARTY_LIBRARY)
+    # Clang doesn't really have warning "levels" like MSVC...
+    # There's 'all', 'all + extra', and 'everything'.
+    # 'all' is a group of warnings that is recommended (by the Clang team) for all new code, and are highly suggestive of problems.
+    # 'all + extra' will yield more false positives, but are still considered helpful most of the time.
+    # 'everything' is actually not recommeneded for practical use.
+    # I take this to mean 'all' is the best starting point; adding 'extra' most likely has diminishing returns.
+    # Also, treat warnings as errors.
+    # It is also important to inject this at the front of the options so that calling MKE files can easily cutomize LLVMCommonCompOpts to ignore warnings (last-in wins).
+    LLVMCommonCompOpts2 =% $(LLVMCommonCompOpts)
+    LLVMCommonCompOpts =% -Werror
+    %ifndef CLANG_DISABLE_ALL_WARNINGS
+        LLVMCommonCompOpts + -Wall
+    %endif
+    LLVMCommonCompOpts + $(LLVMCommonCompOpts2)
+
+    # Even 'all' has some warnings we consider dubious in value, so selectively disable some of them:
+
+    # Allow mixing of || and && in a single conditional without forcing parentheses for clarity.
+    LLVMCommonCompOpts + -Wno-logical-op-parentheses
+
+    # Don't force switch statements to contain every member of an enumeration or a default statement.
+    LLVMCommonCompOpts + -Wno-switch
+
+    # Don't force constructor initializer lists to be in the same order the object declares its members.
+    LLVMCommonCompOpts + -Wno-reorder
+
+    # Allow using the result of an assignment as a condition without parentheses.
+    LLVMCommonCompOpts + -Wno-parentheses
+
+    # Allow /* within a comment block.
+    LLVMCommonCompOpts + -Wno-comment
+
+    # Allow offsetof on non-POD objects. There are many places that we feel POD is over-restrictive, and we are confident it will work anyway.
+    LLVMCommonCompOpts + -Wno-invalid-offsetof
+
+    # This allows you to declare and assign a variable and only use it in an assert (since asserts are compiled out when NDEBUG).
+    %if defined (NDEBUG) && defined (IGNORE_UNUSED)
+        LLVMCommonCompOpts + -Wno-unused-variable
+    %endif
+
+    # This allows casting from int to void*
+    LLVMCommonCompOpts + -Wno-int-to-void-pointer-cast
+
+    # Allow legacy compilands to opt-out of 'override' specifier checking.
+    %if defined(NO_CLANG_ENFORCE_OVERRIDE)
+        LLVMCommonCompOpts + -Wno-inconsistent-missing-override
+    %endif
+
+    # Required to not modify/update boost.
+    LLVMCommonCompOpts + -Wno-unused-local-typedef
+
+    # expression with side effects will be evaluated despite being used as an operand to '...'
+    # It is common to dereference a smart pointer inside the typeid operator, so allow this.
+    LLVMCommonCompOpts + -Wno-potentially-evaluated-expression
+%else
+    # Otherwise disable warnings by default.
+    LLVMCommonCompOpts + -w
+%endif
+
+# Clang has a pretty miserly error limit (i.e. 20'ish) by default... you can set this to crank it up.
+# LLVMCommonCompOpts + -ferror-limit=100
+
+# Dial back warning verbosity a little bit... somewhat a per-developer preference I suppose.
+LLVMCommonCompOpts + -fno-caret-diagnostics -fno-diagnostics-fixit-info
+
+# -------------------------------------
+# Hide symbols by default; this allows the same opt-in pattern that we have under MSVC.
+%if !defined (GCC_DEFAULT_VISIBILITY)
+    LLVMCommonCompOpts + -fvisibility=hidden -fvisibility-inlines-hidden
+%else
+    LLVMCommonCompOpts + -fvisibility=$(GCC_DEFAULT_VISIBILITY)
+    %message Visibility override set to -fvisibility=$(GCC_DEFAULT_VISIBILITY)
+    # Set the following so that, even if -fvisibility is overriden to be 'standard', we still export inline functions, because
+    # "... it is usually better to hide all inline functions. Some complex issues arise when you export inline functions from dynamic shared libraries.
+    # source: https://developer.apple.com/library/mac/#documentation/developertools/Conceptual/CppRuntimeEnv/Articles/SymbolVisibility.html
+    LLVMCommonCompOpts + -fvisibility-inlines-hidden
+%endif
+
+# -------------------------------------------------------
+# Language features (maybe should be in clang_common_opts.mki)
+# -------------------------------------------------------
+
+# Configure stdint.h - These macros are not part of the C++ standard, but our code uses them. They are/will be in C++11.
+#       Define uint64_t. 
+LLVMCppCompOpts+ -D__STDC_INT64__
+#       Define macros such as INTPTR_MAX.
+LLVMCppCompOpts+ -D__STDC_LIMIT_MACROS
+
+# llvm-config --cxxflags recommends these options:
+LLVMCppCompOpts+ -D__STDC_CONSTANT_MACROS
+LLVMCppCompOpts+ -D__STDC_FORMAT_MACROS
+%ifndef CLANG_ALLOW_OVERLOAD_VIRTUAL
+	LLVMCppCompOpts+ -Woverloaded-virtual
+%endif
+%ifndef CLANG_ALLOW_CAST_DROP_QUAL
+	LLVMCppCompOpts+ -Wcast-qual
+%endif
+
+#   Force char to be signed, to match other platforms
+LLVMCommonCompOpts+ -fsigned-char
+
+# Required to not modify/update boost.
+LLVMCommonCompOpts + -Wno-unused-local-typedef
+
+# expression with side effects will be evaluated despite being used as an operand to '...'
+# It is common to dereference a smart pointer inside the typeid operator, so allow this.
+LLVMCommonCompOpts + -Wno-potentially-evaluated-expression
+
+#   C++ Exceptions
+LLVMCommonCompOpts+ -fexceptions -funwind-tables
+#   C++ RTTI
+LLVMCppCompOpts+ -frtti
+
+# d:\android-ndk-r12\platforms\android-19\arch-arm\usr\include\locale.h:55:1: error: empty struct has size 0 in C, size 1 in C++ [-Werror,-Wextern-c-compat]
+LLVMCppCompOpts+ -Wno-extern-c-compat
+
+# d:\android-ndk-r12\platforms\android-19\arch-arm\usr\include\math.h:24:9: error: '__pure2' macro redefined [-Werror,-Wmacro-redefined]
+# d:\android-ndk-r12\platforms\android-19\arch-arm\usr\include\sys/cdefs.h:198:9: note: previous definition is here
+LLVMCommonCompOpts+ -Wno-macro-redefined
+
+#  -Wformat -Werror=format-security    - Scrutinize printf format strings and arguments. Very stringent. 
+# We must not opt into this, as our code does not pass this check. For example,
+# consoleprovider.cpp:415:49: error: format string is not a string literal (potentially insecure) [-Werror,-Wformat-security]
+LLVMCppCompOpts+ -Wno-format-security
+
+# Some additional options that NDK-BUILD and OpenCASCADE set. 
+# ***TBD: Research these, to make sure that they are what we want.
+LLVMCommonCompOpts+ -fPIC 
+LLVMCommonCompOpts+ -ffunction-sections 
+LLVMCommonCompOpts+ -Wno-invalid-command-line-argument -Wno-unused-command-line-argument -no-canonical-prefixes 
+LLVMCommonCompOpts+ -Wa,--noexecstack 
+
+#---------------------------
+# Link options
+LLVMLinkOpts + -Wl,--fatal-warnings
+LLVMLinkOpts + -Wl,--warn-shared-textrel
+LLVMLinkOpts + -Wl,-z,noexecstack 
+LLVMLinkOpts + -Wl,-z,relro
+LLVMLinkOpts + -Wl,-z,now
+LLVMLinkOpts + -Wl,--build-id 
+LLVMLinkOpts + -Qunused-arguments
+
+%ifndef CLANG_ALLOW_UNDEFINED
+	LLVMLinkOpts + -Wl,--no-undefined
+%endif
+
+# Required to support dynamic_cast where where dlopen is used to load shared objects, as in the case of JNI. See http://gcc.gnu.org/faq.html#dso
+# Note: I tried --dynamic-list-cpp-typeinfo but found that it had no effect.
+LLVMLinkOpts + -Wl,--export-dynamic
+
+# -----------------
+# *** Advertise features of C++11 that are missing (temporarily?). BentleyConfig.h will check these macros and set others
+# -----------------
+%if defined (BENTLEY_CPP_MISSING_WCHAR_SUPPORT)
+    LLVMCommonCompOpts+ -DBENTLEY_CPP_MISSING_WCHAR_SUPPORT
+%endif
+
+# -------------------------------------
+# Specify the C++ standard that we are using
+# I'm not sure of better ways to break this up, or even better separate architecture from simulator/device targets.
+LLVMCommonCompOpts + -c
+
+%if defined (BUILD_WITH_C20)
+    LLVMCppCompOpts + -std=c++20
+    LLVMLinkOpts + -std=c++20
+%elif defined (BUILD_WITH_C17)
+    LLVMCppCompOpts + -std=c++17
+    LLVMLinkOpts + -std=c++17
+%else
+    LLVMCppCompOpts + -std=c++14
+    LLVMLinkOpts + -std=c++14
+%endif
+
+# We want libstdc++ on Linux, and libc++ elsewhere.
+# libc++ is new to Linux, and is not available on many distributions... and many .so files use libstdc++, which is not ABI compatible with libc++.

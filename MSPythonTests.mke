@@ -1,0 +1,74 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonTests.mke $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+PolicyFile          = $(SrcRoot)MSPython/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(SrcRoot)MSPython/MSPythonSolutionPolicy.mki
+
+appName     = MSPythonTests
+sAppName    = MSPythonTests
+
+%include mdl.mki
+
+
+#----------------------------------------------------------------------
+# Define macros specific to this program
+#----------------------------------------------------------------------
+TestDir     = $(SrcRoot)MSPython/MSPythonTests/
+
+#----------------------------------------------------------------------
+# Define Include paths
+#----------------------------------------------------------------------
+dirToSearch = $(TestDir)PythonInterop/
+%include cincapnd.mki
+
+#----------------------------------------------------------------------
+#       Create output directories
+#----------------------------------------------------------------------
+o = $(out)MSPythonTests/
+
+always:
+    !~@mkdir $(o)
+
+CCompOpts + \/MD
+# CLinkOpts
+
+
+MultiCompileDepends = $(_MakeFileSpec)
+
+DLM_OBJECT_DEST         = $(o)
+DLM_LIBDEF_SRC          = $(_MakeFilePath)
+LINKER_LIBRARIES        = $(PythonLibName) \
+                          $(ContextSubpartsLibs)Bentley.lib \
+                          $(ContextSubpartsLibs)BentleyGeom.lib \
+                          $(ContextSubpartsLibs)mdlbltin.lib
+
+DLM_NAME                = $(appName)
+DLM_DEST                = $(o)
+DLM_EXPORT_DEST         = $(o)
+DLM_NOENTRY             = 1
+DLM_NOINITFUNC          = 1
+DLM_NO_DLS              = 1
+DLM_NO_DEF              = 1
+DLM_EXTENSION           = .pyd
+
+DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
+DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/
+DLM_CREATE_LIB_CONTEXT_LINK = 1
+
+#------------------------------------------------
+#       Compile the source files
+#------------------------------------------------
+MultiCompileDepends=$(_MakeFileSpec)
+%include MultiCppCompileRule.mki
+
+%include $(TestDir)PythonInterop/PythonInterop.mki
+
+%include MultiCppCompileGo.mki
+DLM_OBJECT_FILES =% $(MultiCompileObjectList)
+
+%include dlmlink.mki
+

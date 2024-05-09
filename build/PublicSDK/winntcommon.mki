@@ -1,0 +1,49 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if !defined (__Common_MKI__)
+    %error      winntcommon.mki cannot be used by itself. It must be included from common.mki
+%endif
+
+%if !defined (winNT)
+    %error      winntcommon.mki can only be used on a Win32 platform.
+%endif
+
+#--------- winNT Macros -------------------------------
+#
+# Note: These identify tools that are used to BUILD the software.
+#       This has nothing to do with the target platform where the software that we build is expected to run.
+#
+deleteCmd           = del
+dirCmd              = dir
+copyCmd             = echo f | xcopy \/Y \/Z \/F
+mkdirCmd            = mkdir
+rmdirCmd            = rd
+rmdirRecursiveCmd   = rd\/S\/Q
+makeFileWritable    = attrib -r
+typeFileCmd         = type
+nativeMakeCmd       = nmake.exe
+maxOutputLen        = 2048
+toolchainExeext     = .exe
+bsicommon_ospathsep = ;
+scriptExt           = .bat
+pytestCmd           = pytest.exe
+
+%if !defined (singletonCmd)
+    singletonCmd = singleton
+%endif
+
+%if !defined (AddDelayLoadCmd)
+    AddDelayLoadCmd = AddDelayLoad
+%endif
+
+CopyFirstDepToFirstTarget   = $(copyCmd) $< $@
+
+#----------------------------------------------------------
+#  Set up the mt.exe manifest command
+#  Should rely on path, like cl or link.
+#----------------------------------------------------------
+manifestCmd = mt.exe
+

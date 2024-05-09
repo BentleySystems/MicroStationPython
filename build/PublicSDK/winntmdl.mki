@@ -1,0 +1,480 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+#    Note: Must be included from mdl.mki. Do not use this file directly.
+#
+#----------------------------------------------------------------------------
+%if !defined (__mdlMKI__)
+    %error  winntmdl.mki cannot be used by itself. It must be included from mdl.mki
+%endif
+
+%if $(TARGET_PLATFORM) != "Windows" && $(TARGET_PLATFORM) != "WinRT"
+    %error  winntmdl.mki can only build binaries that are to run under Windows (including WinRT).
+%endif
+
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    %error TARGET_PROCESSOR_ARCHITECTURE not defined
+%endif
+
+# PRG means optimized build
+%if defined (PRG)
+    NDEBUG = 1
+%endif
+# Can't be both debug and optimized build
+%if defined (DEBUG) && defined (NDEBUG)
+    %error Can not set both DEBUG and NDEBUG options
+%endif
+# Default to DEBUG
+%if !defined (DEBUG) && !defined (NDEBUG) && !defined(DONT_DEFINE_DEBUG)
+    %warn Neither DEBUG nor NDEBUG options are set. Choosing the default DEBUG option.
+    DEBUG = 1
+%endif
+
+%if !defined (CTargetSpec)
+    CTargetSpec = $@
+%endif
+
+%if defined (CCCompOpts)
+    %warn VC IGNORES CCCompOpts=$(CCCompOpts)
+%endif
+
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# _/_/_/_/_/_/_ Compiler command-line options  /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# Common compiler options which will be appended to c, c++ and clr compiler command
+_commonCompOpts     =
+
+# Preserve previous compiler options
+_prevCCompOpts      =% $(CCompOpts)
+_prevCCCompOpts     =% $(CCCompOpts)
+_prevCCompOptsCLR   =% $(CCompOptsCLR)
+
+# Need to be able to control warnings-as-errors on a per-part basis, so it must be done here, and not the shared tool context file.
+WarningsAsErrorsArg =
+%if !defined(NOSTRICT) && !defined(IS_THIRD_PARTY_LIBRARY)
+    WarningsAsErrorsArg = -WX
+%endif
+
+%if defined(IS_THIRD_PARTY_LIBRARY)
+    # don't even print/generate the warnings because CodeWright iterates all warnings when stepping through compiler output
+    warnLevel = -w
+%endif
+
+# Common options
+CCompOpts       =% $(BENTLEY_WIN32_COMPILE_CommonOptions) $(WarningsAsErrorsArg) $(_prevCCompOpts)
+CCCompOpts      =% $(BENTLEY_WIN32_COMPILE_CppOptions) $(WarningsAsErrorsArg) $(_prevCCCompOpts)
+CCompOptsCLR    =% $(BENTLEY_WIN32_COMPILE_CommonOptionsCLR) $(WarningsAsErrorsArg) $(_prevCCompOptsCLR)
+
+%undef _prevCCompOpts
+%undef _prevCCCompOpts
+%undef _prevCCompOptsCLR
+
+# Optimized or release build
+%if defined (NDEBUG)
+    CConfigurationOptions = $(BENTLEY_WIN32_COMPILE_OptimizeOptions)
+%else
+    CConfigurationOptions = $(BENTLEY_WIN32_COMPILE_DebugOptions)
+%endif
+
+# Want code analysis
+%if defined (ENABLE_COMPILER_ANALYZE) && defined(DISABLE_COMPILER_ANALYZE_FOR_UNIT_TESTS)
+    %message Skipping static analysis for $(_MakeFileSpec)
+    SKIP_COMPILER_ANALYZE=1
+%endif
+
+%if defined (ENABLE_COMPILER_ANALYZE) && !defined (SKIP_COMPILER_ANALYZE) && !defined (IS_THIRD_PARTY_LIBRARY)
+    %if defined (ANALYZE_WARNINGS_TO_ERRORS)
+        CCompAnalyze = -analyze
+    %else
+        CCompAnalyze = -analyze:WX-
+    %endif
+
+    %if defined (SECURITY_ONLY_COMPILER_ANALYZE)
+        CCompAnalyze + -wd6001 -wd6011 -wd6014 -wd6031 -wd6059 -wd6063 -wd6064 -wd6066 -wd6067 -wd6101 -wd6102 -wd6103 -wd6211 -wd6214 -wd6215 -wd6216 -wd6217 -wd6219 -wd6220 -wd6221 -wd6225 -wd6226 -wd6230 -wd6235 -wd6236 -wd6237 -wd6239 -wd6240 -wd6242 -wd6244 -wd6246 -wd6250 -wd6255 -wd6258 -wd6259 -wd6260 -wd6262 -wd6263 -wd6268 -wd6269 -wd6270 -wd6271 -wd6272 -wd6273 -wd6274 -wd6276 -wd6278 -wd6279 -wd6280 -wd6281 -wd6282 -wd6283 -wd6284 -wd6285 -wd6286 -wd6287 -wd6288 -wd6289 -wd6290 -wd6291 -wd6292 -wd6293 -wd6294 -wd6295 -wd6296 -wd6297 -wd6298 -wd6299 -wd6302 -wd6303 -wd6306 -wd6308 -wd6310 -wd6312 -wd6313 -wd6314 -wd6315 -wd6316 -wd6317 -wd6318 -wd6319 -wd6320 -wd6322 -wd6323 -wd6324 -wd6326 -wd6328 -wd6329 -wd6330 -wd6331 -wd6332 -wd6333 -wd6334 -wd6335 -wd6336 -wd6340 -wd6381 -wd6384 -wd6387 -wd6388 -wd6400 -wd6401 -wd6500 -wd6501 -wd6503 -wd6504 -wd6505 -wd6506 -wd6508 -wd6509 -wd6510 -wd6511 -wd6513 -wd6514 -wd6515 -wd6516 -wd6517 -wd6518 -wd6522 -wd6525 -wd6527 -wd6530 -wd6540 -wd6551 -wd6552 -wd6701 -wd6702 -wd6703 -wd6704 -wd6705 -wd6706 -wd6707 -wd6993 -wd26100 -wd26101 -wd26105 -wd26110 -wd26111 -wd26112 -wd26115 -wd26116 -wd26117 -wd26130 -wd26135 -wd26140 -wd26160 -wd26165 -wd26166 -wd26167 -wd28020 -wd28021 -wd28022 -wd28023 -wd28024 -wd28039 -wd28101 -wd28103 -wd28104 -wd28105 -wd28106 -wd28107 -wd28108 -wd28109 -wd28110 -wd28111 -wd28112 -wd28113 -wd28114 -wd28120 -wd28121 -wd28122 -wd28123 -wd28124 -wd28125 -wd28126 -wd28127 -wd28128 -wd28129 -wd28131 -wd28132 -wd28133 -wd28134 -wd28135 -wd28137 -wd28138 -wd28141 -wd28143 -wd28144 -wd28145 -wd28146 -wd28147 -wd28150 -wd28151 -wd28152 -wd28153 -wd28156 -wd28157 -wd28158 -wd28159 -wd28160 -wd28161 -wd28162 -wd28163 -wd28164 -wd28165 -wd28166 -wd28167 -wd28168 -wd28169 -wd28170 -wd28171 -wd28172 -wd28173 -wd28175 -wd28176 -wd28182 -wd28183 -wd28193 -wd28194 -wd28195 -wd28196 -wd28197 -wd28198 -wd28199 -wd28202 -wd28203 -wd28204 -wd28205 -wd28206 -wd28207 -wd28208 -wd28209 -wd28210 -wd28211 -wd28212 -wd28213 -wd28214 -wd28215 -wd28216 -wd28217 -wd28218 -wd28219 -wd28220 -wd28221 -wd28222 -wd28223 -wd28224 -wd28225 -wd28226 -wd28227 -wd28228 -wd28229 -wd28230 -wd28231 -wd28232 -wd28233 -wd28234 -wd28235 -wd28236 -wd28237 -wd28238 -wd28239 -wd28240 -wd28241 -wd28243 -wd28244 -wd28245 -wd28246 -wd28250 -wd28251 -wd28252 -wd28253 -wd28254 -wd28260 -wd28262 -wd28263 -wd28266 -wd28267 -wd28272 -wd28273 -wd28275 -wd28278 -wd28279 -wd28280 -wd28282 -wd28283 -wd28284 -wd28285 -wd28286 -wd28287 -wd28288 -wd28289 -wd28290 -wd28291 -wd28300 -wd28301 -wd28302 -wd28303 -wd28304 -wd28305 -wd28306 -wd28307 -wd28308 -wd28309 -wd28310 -wd28311 -wd28312 -wd28350 -wd28351 -wd28601 -wd28602 -wd28604 -wd28615 -wd28616 -wd28617 -wd28623 -wd28624 -wd28636 -wd28637 -wd28638 -wd28639 -wd28640 -wd28645 -wd28648 -wd28649 -wd28650 -wd28714 -wd28715 -wd28716 -wd28717 -wd28721 -wd28730 -wd28735 -wd28736 -wd28750 -wd28751
+    %endif
+    
+    %if !defined(COMPILER_ANALYZE_STACK_SIZE)
+        COMPILER_ANALYZE_STACK_SIZE = 1048576
+    %endif
+
+    CCompAnalyze + -analyze:stacksize $(COMPILER_ANALYZE_STACK_SIZE)
+
+    %if !defined (ENABLE_COMPILER_ANALYZE_STRICT)
+        # TODO: make all of our code check return values.
+        # https://docs.microsoft.com/en-us/cpp/code-quality/c6031?view=msvc-170
+        CCompAnalyze + -wd6031
+
+        # TODO: remove all uses of _alloca from the code (use ScopedArray or std::vector instead).
+        # https://docs.microsoft.com/en-us/cpp/code-quality/c6255?view=msvc-170
+        CCompAnalyze + -wd6255
+
+        # Our memory-allocation policy is to crash. Therefore, we don't get any value from 
+        # warning C6308: 'realloc' might return null pointer: assigning null pointer to 'm_data', which is passed as an argument to 'realloc', will cause the original memory block to be leaked.
+        CCompAnalyze + -wd6308
+
+        %if defined (DISABLE_COMPILER_ANALYZE_CHECK_UNINITIALIZED_MEMORY)
+            # Allow a mke file to opt out of the uninitialized memory use check. That is needed by DLLs that make
+            # heavy use of the geometry structs, such as DPoint3d, DVec3d, Transform, and RotMatrix.
+            # These structs, by design, do not have constructors. Instead, they have a number of functions that function as constructors in that
+            # they set all of the properties of `this` using various recipes. DPoint3d::Zero and Transform::InitIdentity are examples.
+            # Static analysis has trouble with this � it warns that the initialization method is being called on an uninitialized object.
+            # Ditto for arrays of such objects. That�s a false positive. We do not want to pay the cost of zero-initializing the structs
+            # or arrays first, just to silence this warning.
+            CCompAnalyze + -wd6001
+
+            %message Skipping static analysis checking for use of uninitialized memory (6001) for $(_MakeFilePath)
+
+        %endif
+
+    %endif
+
+    %if !defined (ENABLE_COMPILER_ANALYZE_EXTERNAL)
+        CCompAnalyze + -external:env:INCLUDE
+        CCompAnalyze + -external:W4
+        CCompAnalyze + -analyze:external-
+    %endif
+
+    _commonCompOpts + $(CCompAnalyze)
+    
+    BSI_MSVC_ANALYZE = 1
+    _commonCompOpts + -DBSI_MSVC_ANALYZE
+	
+    %if defined (SECURITY_ONLY_COMPILER_ANALYZE)
+        _commonCompOpts + -wd6001 -wd6011 -wd6014 -wd6031 -wd6059 -wd6063 -wd6064 -wd6066 -wd6067 -wd6101 -wd6211 -wd6214 -wd6215 -wd6216 -wd6217 -wd6219 -wd6220 -wd6221 -wd6225 -wd6226 -wd6230 -wd6235 -wd6236 -wd6237 -wd6239 -wd6240 -wd6242 -wd6244 -wd6246 -wd6250 -wd6255 -wd6258 -wd6259 -wd6260 -wd6262 -wd6263 -wd6268 -wd6269 -wd6270 -wd6271 -wd6272 -wd6273 -wd6274 -wd6276 -wd6278 -wd6279 -wd6280 -wd6281 -wd6282 -wd6283 -wd6284 -wd6285 -wd6286 -wd6287 -wd6288 -wd6289 -wd6290 -wd6291 -wd6292 -wd6293 -wd6294 -wd6295 -wd6296 -wd6297 -wd6298 -wd6299 -wd6302 -wd6303 -wd6306 -wd6308 -wd6310 -wd6312 -wd6313 -wd6314 -wd6315 -wd6316 -wd6317 -wd6318 -wd6319 -wd6320 -wd6322 -wd6323 -wd6324 -wd6326 -wd6328 -wd6329 -wd6330 -wd6331 -wd6332 -wd6333 -wd6334 -wd6335 -wd6336 -wd6340 -wd6381 -wd6384 -wd6387 -wd6388 -wd6400 -wd6401 -wd6500 -wd6501 -wd6503 -wd6504 -wd6505 -wd6506 -wd6508 -wd6509 -wd6510 -wd6511 -wd6513 -wd6514 -wd6515 -wd6516 -wd6517 -wd6518 -wd6522 -wd6525 -wd6527 -wd6530 -wd6540 -wd6551 -wd6552 -wd6701 -wd6702 -wd6703 -wd6704 -wd6705 -wd6706 -wd6707 -wd6995 -wd26100 -wd26101 -wd26105 -wd26110 -wd26111 -wd26112 -wd26115 -wd26116 -wd26117 -wd26130 -wd26135 -wd26140 -wd26160 -wd26165 -wd26166 -wd26167 -wd28020 -wd28021 -wd28022 -wd28023 -wd28024 -wd28039 -wd28103 -wd28104 -wd28105 -wd28106 -wd28107 -wd28108 -wd28109 -wd28112 -wd28113 -wd28125 -wd28137 -wd28138 -wd28159 -wd28160 -wd28163 -wd28164 -wd28182 -wd28183 -wd28193 -wd28194 -wd28195 -wd28196 -wd28197 -wd28198 -wd28199 -wd28202 -wd28203 -wd28204 -wd28205 -wd28206 -wd28207 -wd28208 -wd28209 -wd28210 -wd28211 -wd28212 -wd28213 -wd28214 -wd28215 -wd28216 -wd28217 -wd28218 -wd28219 -wd28220 -wd28221 -wd28222 -wd28223 -wd28224 -wd28225 -wd28226 -wd28227 -wd28228 -wd28229 -wd28230 -wd28231 -wd28232 -wd28233 -wd28234 -wd28235 -wd28236 -wd28237 -wd28238 -wd28239 -wd28240 -wd28241 -wd28243 -wd28244 -wd28245 -wd28246 -wd28250 -wd28251 -wd28252 -wd28253 -wd28254 -wd28262 -wd28263 -wd28267 -wd28272 -wd28273 -wd28275 -wd28278 -wd28279 -wd28280 -wd28282 -wd28283 -wd28284 -wd28285 -wd28286 -wd28287 -wd28288 -wd28289 -wd28290 -wd28291 -wd28300 -wd28301 -wd28302 -wd28303 -wd28304 -wd28305 -wd28306 -wd28307 -wd28308 -wd28309 -wd28350 -wd28351 -wd28715
+    %endif
+%endif
+
+# A few modules such as ImagePP and ACISCore stipulate asynchronous exception model so that they can catch FP exceptions in the midst of C++ code.
+%if defined (CPP_EXCEPTION_USE_ASYNC)
+    %warn "********************CPP_EXCEPTION_USE_ASYNC****************************"
+    %warn "Use of asynchronous C++ exception model imposes a performance penalty."
+    %warn "This is a Windows-only feature and should not be required by portable code."
+    %warn "***********************************************************************"
+    Winntmdl_mki_CCompOpts =% $[@subst EHsc, EHa, $(CCompOpts)]
+    CCompOpts =% $(Winntmdl_mki_CCompOpts)
+    %undef Winntmdl_mki_CCompOpts
+%endif
+
+# ***
+# *** WIP_STATIC_CRT: Do we really need this option?
+# ***
+# Use the static version of the C runtime
+%if defined (STATIC_LINK_EXE) || defined (STATIC_C_RUNTIME)
+    cRuntime        = libcmt.lib
+
+    # VERACODE - Set Runtime Library to Multi-threaded Debug or Multi-threaded Debug DLL (/MTd, /MDd, or /LDd).
+    %if defined(IS_VERACODE_BUILD)
+        _commonCompOpts + -MTd
+    %else
+        _commonCompOpts + -MT
+    %endif
+# Use the dll version of the C runtime
+%else
+    # VERACODE - Set Runtime Library to Multi-threaded Debug or Multi-threaded Debug DLL (/MTd, /MDd, or /LDd).
+    %if defined(IS_VERACODE_BUILD)
+        cRuntime = msvcrtd.lib
+        _commonCompOpts + -MDd
+    %else
+        cRuntime = msvcrt.lib
+        _commonCompOpts + -MD
+    %endif
+%endif
+
+# ***
+# *** WIP_STATIC_CRT: Do we really need this option?
+# ***
+# Use the static version of the C++ runtime
+%if defined (STATIC_CPP_RUNTIME)
+    cppRuntime  = libcpmt.lib
+# Use the dll version of the C++ runtime
+%else
+    cppRuntime  = msvcprt.lib
+%endif
+
+# Warnings level
+%if !defined (warnLevel)
+    %if defined (HAVE_PERMISSION_TO_COMPILE_AT_W3)
+        warnLevel = -W3
+    %elif defined (DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS)
+        %message DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS=$(DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS)
+        warnLevel = -W3
+    %else
+        warnLevel = -W4 -DBENTLEY_WARNINGS_HIGHEST_LEVEL
+    %endif
+%endif
+_commonCompOpts + $(warnLevel)
+
+# Want more warnings
+%if (defined (WARNINGS_UP) && !defined (HAVE_PERMISSION_TO_COMPILE_AT_W3))
+    # conversion from 'type1' to 'type2', possible loss of data
+    _commonCompOpts + -we4242
+    # WIP_WINRT - We get error 4263 in C:\PROGRA~2\MICROS~2.0\VC\INCLUDE\vccorlib.h when compiling "private ref class Array { ... T& get(unsigned int index) const;"
+    %if $(TARGET_PLATFORM) != "WinRT"
+        # member function does not override any base class virtual member function
+        _commonCompOpts + -we4263
+        # no override available for virtual member function from base 'class'; function is hidden
+        _commonCompOpts + -we4264
+    %endif
+    # class has virtual functions, but destructor is not virtual
+    # CCompOpts + -we4265
+    # no override available for virtual member function from base 'type'; function is hidden
+    _commonCompOpts + -we4266
+    # truncation from 'type 1' to 'type 2'
+    _commonCompOpts + -we4302
+    # wide string literal cast to 'LPSTR'
+    _commonCompOpts + -we4905
+    # string literal cast to 'LPWSTR'
+    _commonCompOpts + -we4906
+
+    %ifndef DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS
+    _commonCompOpts + -Zc:strictStrings
+    %endif
+
+    # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+    _commonCompOpts + -we4928
+
+    %if !defined (NDEBUG) # May be used in an assert
+        # local variable is initialized but not referenced
+        _commonCompOpts + -we4189
+    %endif
+%endif
+
+# Opt-in to Visual C++ conformance mode (a mode much closer to ISO C++
+# standards conformance). Microsoft says this will someday be the default, and
+# they are encouraging developers to pro-actively enable it and prepare. Auto-
+# generated WinRT/WRL code violates conformance mode, so need to opt-out for
+# WinRT archtectures.
+%if (("VS2017" == $(BUILD_TOOLSET)) || ("VS2019" == $(BUILD_TOOLSET))) && !defined(IS_THIRD_PARTY_LIBRARY) && !defined(ALLOW_MSVC_PERMISSIVE) && ("WinRT" != $(TARGET_PLATFORM))
+    _commonCompOpts + -permissive-
+%endif
+
+#  Without this, ATL macros that cause calls to WideCharToMultiByte or MultiByteToWideChar
+#  use CP_THREAD_ACP instead of CP_ACP.  Prior to VC7, these macros used CP_ACP. All of
+#  MicroStation's explicit calls to these functions specify CP_ACP as the code page arg.
+#  Consequently, if D_CONVERSION_DONT_USE_THREAD_LOCALE is not defined strings converted
+#  via the ATL macros cannot be converted back in MicroStation.
+_commonCompOpts + -D_CONVERSION_DONT_USE_THREAD_LOCALE
+
+%if defined (_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES)
+    _commonCompOpts + -D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=$(_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES)
+%endif
+%if defined (_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT)
+    _commonCompOpts + -D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT=$(_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT)
+%endif
+%if !defined (NO_LEAN_AND_MEAN)
+    _commonCompOpts + -DWIN32_LEAN_AND_MEAN
+%endif
+%if !defined (LOGO)
+    _commonCompOpts + -nologo
+%endif
+%if defined (NDEBUG)
+    _commonCompOpts + -DNDEBUG=1
+%endif
+
+# Windows version defs
+%if $(TARGET_PLATFORM) == "WinRT"
+    _WIN32_WINNT=0x0602
+%endif
+%if defined (WINVER)
+    _commonCompOpts + -DWINVER=$(WINVER)
+%endif
+%if defined (_WIN32_WINNT)
+    _commonCompOpts + -D_WIN32_WINNT=$(_WIN32_WINNT)
+%endif
+%if defined (_WIN32_IE)
+    _commonCompOpts + -D_WIN32_IE=$(_WIN32_IE)
+%endif
+%if defined (NTDDI_VERSION)
+    _commonCompOpts + -DNTDDI_VERSION=$(NTDDI_VERSION)
+%endif
+%if (MSVC_VERSION >= 1700)
+    _commonCompOpts + -DNTDDI_WIN7SP1=0x06010100
+%endif
+
+# Debugging information (.pdb file)
+%if !defined (NO_DEBUG_INFO)
+    # Directory of the PDB file
+    %if !defined(CCompPDBDir)
+        CCompPDBDir = $(@D)
+    %endif
+
+    # Name of the PDB file
+    %if !defined (CCompPDBName)
+        %if defined (CREATE_STATIC_LIBRARIES) && defined (appName)
+            CCompPDBName =% $(appName)
+        %else
+            CCompPDBName = objects
+        %endif
+    %endif
+
+    # Path of the PDB file
+    %if !defined (IntermediatePdbFile)
+        IntermediatePdbFile = $(CCompPDBDir)$(CCompPDBName).pdb
+    %endif
+
+    %if defined (DEBUG_INFO_IN_OBJ)
+        # Produces an .obj file containing full symbolic debugging information and does not produce a .pdb file.
+        # For distributors of third-party libraries, there is an advantage to not having a .pdb file.
+        _commonCompOpts + -Z7
+    %elif defined (BUILD_DEBUG_LINE_NUMBERS_ONLY)
+        # For 3rd party Developers: Line numbers, no symbols, Normal call stacks (disable FPO)
+        _commonCompOpts + -Zd -Fd$(IntermediatePdbFile)
+    %else
+        _commonCompOpts + -Zi -Fd$(IntermediatePdbFile)
+        # As of VS2013, this option will allow better debugging of optimized DLLs.
+        %if (MSVC_VERSION >= 1800) && !defined (DEBUG)
+            _commonCompOpts + -Zo
+        %endif
+    %endif
+%endif
+
+# Runtime checks
+# VERACODE - requires default runtime checks (e.g. cannot explicitly set any -RTC options).
+%if !defined (BUILD_NO_STACK_CHECK) && ($[@findstring WinRT, $(TARGET_PROCESSOR_ARCHITECTURE)] == " ") && !defined(IS_VERACODE_BUILD)
+    %if defined (DEBUG) || defined (DEBUG_G)
+        # /RTCs Stack Frame runtime checking
+        # /RTCu Uninitialized local usage checks
+        # In VS2015 Update 2, if you enable RTCc, you must define _ALLOW_RTCc_IN_STL in order to include STL headers. Microsoft claims that RTCc flags valid code, so you must either disable, or acknowledge that you realize this.
+        %if !defined (VCRuntimeCheckOption)
+            VCRuntimeCheckOption + -RTCsuc -D_ALLOW_RTCc_IN_STL
+        %endif
+        CCompOpts + $(VCRuntimeCheckOption)
+    %endif
+%endif
+
+# Whole program optimization
+%if !defined (DEBUG) && defined (WholeProgramOptimization)
+    _commonCompOpts + -GL
+%endif
+
+# Enable WinRT extensions
+%if $(TARGET_PLATFORM) == "WinRT" && defined (ENABLE_CPP_CX_EXTENSIONS)
+    _commonCompOpts + -ZW -D_WINRT_DLL
+%endif
+
+# Force compile all source files as C or C++
+FileTypeControl     =
+FileTypeControlC    = -TC
+FileTypeControlCPP  = -TP
+_commonCompOpts + $(FileTypeControl)
+
+# Specify some platform-specific options
+%if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86" || $(TARGET_PROCESSOR_ARCHITECTURE)=="WinRTx86"
+    winNTx86        =  1
+    dllEntry        =   @12
+    ntCPU           =   X86
+    resCPU          =   x86
+    rcCPU           =   _X86_
+%elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x64" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+    winNTx64        =  1
+    ntCPU           =   X64
+    resCPU          =   x64
+    rcCPU           =   _X64_
+%endif
+
+# Want code analysis
+%if defined (PerformCodeAnalysis)
+    nameToDefine=CODE_ANALYSIS
+    %include cdefapnd.mki
+%endif
+
+# Set this when creating static libraries to make sure there is no __declspec(import) or __declspec(export)
+%if defined (CREATE_STATIC_LIBRARIES)
+    nameToDefine = CREATE_STATIC_LIBRARIES
+    %include cdefapnd.mki
+%endif
+
+# MFC app?
+%if defined (MFC_WIN_APP)
+    # Use MFC's dll
+    nameToDefine=_AFXDLL
+    %include cdefapnd.mki
+
+    # Then the C runtime
+    nameToDefine=_DLL
+    %include cdefapnd.mki
+%endif
+
+# Resource compiler options
+rcOpt +  -d$(targetProduct) -dVARIETY=$(VARIETY)
+%if PRG
+    rcOpt +  -dPRG
+%else
+    rcOpt +  -dUSER="\"$(USERNAME) on $(COMPUTERNAME)\""
+%endif
+
+# Append common options
+CCompOpts       +% $[_commonCompOpts]
+CCompOptsCLR    +% $[_commonCompOpts]
+%undef _commonCompOpts
+
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# _/_/_/_/_/_/_ Linker command-line options  /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# Common options
+CLibOpts     = $(BENTLEY_WIN32_LIB_Options) $(WarningsAsErrorsArg)
+
+# Optimized or release build
+%if !defined (DEBUG) || defined (PRG)
+    LConfigurationOptions = $(BENTLEY_WIN32_LINK_OptimizeOptions)
+    CLinkOptsCLR          + -assemblydebug
+%else
+    LConfigurationOptions = $(BENTLEY_WIN32_LINK_DebugOptions)
+%endif
+
+# Libraries
+CLibsNoRuntime      = $(BENTLEY_WIN32_LINK_CLibraries)
+CLibs               = $(BENTLEY_WIN32_LINK_CLibraries) $(cRuntime)
+guiLibs             = $(BENTLEY_WIN32_LINK_GuiLibraries) $(cRuntime)
+consoleLibs         = $(BENTLEY_WIN32_LINK_ConsoleLibraries) $(cRuntime)
+oleLibs             = $(BENTLEY_WIN32_LINK_OleLibraries)
+mfcLibs             = $(BENTLEY_WIN32_LINK_MfcLibraries)
+winntmdl_mfculib    = $(BENTLEY_WIN32_LINK_MfcLibraries)
+
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# _/_/_/_/_/_/_ Compiler recipes  /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# These macros are used below and by the precompiledheader and multicppcompile mki files
+RecipeCCompileArgs      = $(cIncs) $(cDefs) $(ProductIncludes) $(PublicApiIncludes) $(CConfigurationOptions) $(CCompOpts) $(CPchOpts) $[@addprefix -fp:, $(CCompFpOpts)] $(cUser) -Fo$(CTargetSpec)
+RecipeCppCompileArgs    = $(RecipeCCompileArgs) $(CCCompOpts) $(CCPchOpts)
+RecipeCppPreprocessArgs = $(RecipeCppCompileArgs) $(CPPPreprocessOpts) -EP
+RecipeRCCompileArgs     = $(rcOpt) -d$(rcCPU) -dwinNT $(ProductRcIncludes) $(rcExtraOpts)
+
+RecipeCCompile          = $(BENTLEY_WIN32_TOOLCHAIN_compile) $(RecipeCCompileArgs)
+RecipeCppCompile        = $(BENTLEY_WIN32_TOOLCHAIN_compile) $(RecipeCppCompileArgs)
+RecipeCPPreprocess      = $(BENTLEY_WIN32_TOOLCHAIN_preprocess) $(RecipeCppPreprocessArgs)
+
+# These macros are used by MultiCppCompileRule/Go.mki.
+CCompCmd    = $(BENTLEY_WIN32_TOOLCHAIN_compile)
+CCCompCmd   = $(BENTLEY_WIN32_TOOLCHAIN_compile)
+CLinkCmd    = $(BENTLEY_WIN32_TOOLCHAIN_link)
+CLibCmd     = $(BENTLEY_WIN32_TOOLCHAIN_lib)
+CPreprocCmd = $(BENTLEY_WIN32_TOOLCHAIN_preprocess)
+
+.c.obj:
+    $(msg)
+    $(RecipeCCompile) $< $(CCompRedirect)
+    ~time
+
+.(cxx,cpp,cc).obj:
+    $(msg)
+    $(RecipeCppCompile) $< $(CCompRedirect)
+    ~time
+
+.rc.res:
+    $(msg)
+    $(BENTLEY_WIN32_TOOLCHAIN_rccompile) $(RecipeRCCompileArgs) -Fo$(CTargetSpec) $%$*.rc
+    ~time
+
+.def.lib:
+    $(msg)
+    $(CLibCmd) $(CLibOpts) -out:$@ -def:$%$*.def -machine:$(ntCPU)
+    ~time
+
+# Assembly files (notably for compiling ICU's data into the assembly).
+.s.obj:
+    $(msg)
+    $(BENTLEY_WIN32_TOOLCHAIN_compileAsm) -Fo $@ -c $<
+    ~time

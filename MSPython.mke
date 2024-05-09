@@ -1,0 +1,80 @@
+#
+# To successfully run this make file you will need to have python installed and pytest (pip install pytest)
+# In the case where you will need to debug python tests pytest-env (pip install pytest-env) and modify the pytest.ini file with the location of the ..../PlatformTests/data directory
+#
+# In order to get the build of the python SDK working some environment variables need to be set prior to calling bmake on this file these are:
+#
+# set BMAKE_OPT= -I<location of MSPython\build\PublicSDK> -I<location of Microstation SDK include directory>
+# set BB_DEFAULT_TOOLSET=VS2019
+# set SrcRoot=<location of MSPython source code>
+# set OutRoot=<location of build artifacts>
+# set PythonDir=<location of python installation>
+#
+# i.e. 
+#
+# set BMAKE_OPT= -IC:\src\ADOPython\MSPython\build\PublicSDK\ -IC:\DevTools\MicroStationCONNECTSDK\include\
+# set BB_DEFAULT_TOOLSET=VS2019
+# set SrcRoot=C:\src\ADOPython\
+# set OutRoot=C:\Temp\Python\
+# set PythonDir=C:\DevTools\Python\Python312\
+
+TARGET_PROCESSOR_ARCHITECTURE=x64
+
+
+%include PlatformSetup.mki
+%include createdir.mki
+%include common.mki
+
+always:
+    $(MakeProgram) $(SrcRoot)\MSPython\build\PublicSDK\BootstrapToolSet.mke
+
+
+always:
+	!~@mkdir $(OutputRootDir)
+	!~@mkdir $(OutBuildDir)
+	!~@mkdir $(OutPythonDir)
+
+ContextSubPartsAssemblies=$(BuildContext)SubParts/Assemblies/
+
+%if !defined (SDKLIB) && defined (mdltools) ## for MdlExample-MSPython build
+    SDKLIB = $(mdltools)library/
+%endif
+
+%if !defined (SDKBIN) && defined (mdltools) ## for MdlExample-MSPython build
+    SDKBIN = $(mdltools)bin/
+%endif
+
+%if !defined (SDKINC) && defined (mdltools) ## for MdlExample-MSPython build
+    SDKINC = $(mdltools)include/
+%endif
+
+# copy libs from Microstation sdk dir to build output
+always:
+	!~linkmultifiles  "$(ContextSubPartsLibs)=$(SDKLIB)*.*"
+	!~linkmultifiles  "$(ContextSubPartsAssemblies)=$(SDKBIN)*.*"
+
+
+#
+#
+# Build code pybind11 libraries
+#
+#
+
+always:
+    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonCore.mke
+    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyBentley\PyBentley.mke
+    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyBentleyGeom\PyBentleyGeom.mke
+    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyDgnPlatform\PyDgnPlatform.mke
+    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyDgnView\PyDgnView.mke
+    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyECObjects\PyECObjects.mke
+    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyMstnPlatform\PyMstnPlatform.mke
+ 
+
+#==================================================================================
+# Disable running the tests, particularly for SDK as only examples are build and
+# variables "MSPythonDir" and "PATH" defined in PlatformTests.mke does not match for SDK,
+# enable this once the issue is fixed.
+#==================================================================================
+
+#always:
+#    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonTests\PlatformTests\PlatformTests.mke

@@ -1,0 +1,832 @@
+<TestClass xmlns="SimpleTest_FirstSchema.01.00">
+    <BaseClassMember>987</BaseClassMember>
+    <IntegerMember>12</IntegerMember>
+    <CustomFormatInt>13</CustomFormatInt>
+    <BooleanMember>False</BooleanMember>
+    <DoubleMember>456.789</DoubleMember>
+    <StringMember>Test string</StringMember>
+    <NilValueMember xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+    <FileNameMember>c:\usr\barry\test.txt</FileNameMember>
+    <NegativeMember>-42</NegativeMember>
+    <DateTimeMember>633374681466664305</DateTimeMember>
+    <StartPoint>1.1,2.2,3.3</StartPoint>
+    <EndPoint>4.4,7.7,6.6</EndPoint>
+    <SecondEmbeddedStruct>
+        <Struct1BoolMember>False</Struct1BoolMember>
+        <Struct1IntMember>4</Struct1IntMember>
+    </SecondEmbeddedStruct>
+    <FormattedStruct>
+        <Struct3DoubleMember>17.443</Struct3DoubleMember>
+        <Struct3IntMember>531992</Struct3IntMember>
+        <Struct3BoolMember>True</Struct3BoolMember>
+    </FormattedStruct>
+    <FormattedArray>
+        <int>0</int>
+        <int>101</int>
+        <int>202</int>
+        <int>303</int>
+        <int>404</int>
+        <int>505</int>
+        <int>606</int>
+        <int>707</int>
+        <int>808</int>
+        <int>909</int>
+    </FormattedArray>
+    <IntArray>
+        <int>41556</int>
+        <int>32757</int>
+        <int>56789</int>
+        <int>32757</int>
+        <int>21482</int>
+    </IntArray>
+    <OneMemberIntArray>
+        <int>3</int>
+    </OneMemberIntArray>
+    <PointArray>
+        <point3d>4,0,0</point3d>
+        <point3d>1,1,1</point3d>
+        <point3d>2,2,2</point3d>
+        <point3d>3,3,3</point3d>
+        <point3d>4,4,4</point3d>
+        <point3d>5,5,5</point3d>
+    </PointArray>
+    <DateArray>
+        <dateTime>633374681466764453</dateTime>
+        <dateTime>633375545466764453</dateTime>
+        <dateTime>633376409466764453</dateTime>
+        <dateTime>633377273466764453</dateTime>
+        <dateTime>633378137466764453</dateTime>
+        <dateTime>633379001466764453</dateTime>
+        <dateTime>633379865466764453</dateTime>
+        <dateTime>633380729466764453</dateTime>
+        <dateTime>633381593466764453</dateTime>
+        <dateTime>633382457466764453</dateTime>
+        <dateTime>633383321466764453</dateTime>
+        <dateTime>633384185466764453</dateTime>
+        <dateTime>633385049466764453</dateTime>
+        <dateTime>633385913466764453</dateTime>
+        <dateTime>633386777466764453</dateTime>
+        <dateTime>633387641466764453</dateTime>
+        <dateTime>633388505466764453</dateTime>
+        <dateTime>633389369466764453</dateTime>
+        <dateTime>633390233466764453</dateTime>
+        <dateTime>633391097466764453</dateTime>
+        <dateTime>633391961466764453</dateTime>
+        <dateTime>633392825466764453</dateTime>
+        <dateTime>633393689466764453</dateTime>
+        <dateTime>633394553466764453</dateTime>
+        <dateTime>633395417466764453</dateTime>
+        <dateTime>633396281466764453</dateTime>
+        <dateTime>633397145466764453</dateTime>
+        <dateTime>633398009466764453</dateTime>
+        <dateTime>633398873466764453</dateTime>
+        <dateTime>633399737466764453</dateTime>
+        <dateTime>633400601466764453</dateTime>
+        <dateTime>633401465466764453</dateTime>
+        <dateTime>633402329466764453</dateTime>
+        <dateTime>633403193466764453</dateTime>
+        <dateTime>633404057466864601</dateTime>
+        <dateTime>633404921466864601</dateTime>
+        <dateTime>633405785466864601</dateTime>
+        <dateTime>633406649466864601</dateTime>
+        <dateTime>633407513466864601</dateTime>
+        <dateTime>633408377466864601</dateTime>
+        <dateTime>633409241466864601</dateTime>
+        <dateTime>633410105466864601</dateTime>
+        <dateTime>633410969466864601</dateTime>
+        <dateTime>633411833466864601</dateTime>
+        <dateTime>633412697466864601</dateTime>
+        <dateTime>633413561466864601</dateTime>
+        <dateTime>633414425466864601</dateTime>
+        <dateTime>633415289466864601</dateTime>
+        <dateTime>633416153466864601</dateTime>
+        <dateTime>633417017466864601</dateTime>
+        <dateTime>633417881466864601</dateTime>
+        <dateTime>633418745466864601</dateTime>
+        <dateTime>633419609466864601</dateTime>
+        <dateTime>633420473466864601</dateTime>
+        <dateTime>633421337466864601</dateTime>
+        <dateTime>633422201466864601</dateTime>
+        <dateTime>633423065466864601</dateTime>
+        <dateTime>633423929466864601</dateTime>
+        <dateTime>633424793466864601</dateTime>
+        <dateTime>633425657466864601</dateTime>
+        <dateTime>633426521466864601</dateTime>
+        <dateTime>633427385466864601</dateTime>
+        <dateTime>633428249466864601</dateTime>
+        <dateTime>633429113466864601</dateTime>
+        <dateTime>633429977466864601</dateTime>
+        <dateTime>633430841466864601</dateTime>
+        <dateTime>633431705466864601</dateTime>
+        <dateTime>633432569466864601</dateTime>
+        <dateTime>633433433466864601</dateTime>
+        <dateTime>633434297466864601</dateTime>
+        <dateTime>633435161466864601</dateTime>
+        <dateTime>633436025466864601</dateTime>
+        <dateTime>633436889466864601</dateTime>
+        <dateTime>633437753466864601</dateTime>
+        <dateTime>633438617466864601</dateTime>
+        <dateTime>633439481466864601</dateTime>
+        <dateTime>633440345466864601</dateTime>
+        <dateTime>633441209466864601</dateTime>
+        <dateTime>633442073466864601</dateTime>
+        <dateTime>633442937466864601</dateTime>
+        <dateTime>633443801466864601</dateTime>
+        <dateTime>633444665466864601</dateTime>
+        <dateTime>633445529466864601</dateTime>
+        <dateTime>633446393466864601</dateTime>
+        <dateTime>633447257466864601</dateTime>
+        <dateTime>633448121466864601</dateTime>
+        <dateTime>633448985466864601</dateTime>
+        <dateTime>633449849466864601</dateTime>
+        <dateTime>633450713466864601</dateTime>
+        <dateTime>633451577466864601</dateTime>
+        <dateTime>633452441466864601</dateTime>
+        <dateTime>633453305466864601</dateTime>
+        <dateTime>633454169466864601</dateTime>
+        <dateTime>633455033466864601</dateTime>
+        <dateTime>633455897466864601</dateTime>
+        <dateTime>633456761466864601</dateTime>
+        <dateTime>633457625466864601</dateTime>
+        <dateTime>633458489466864601</dateTime>
+        <dateTime>633459353466864601</dateTime>
+        <dateTime>633460217466864601</dateTime>
+        <dateTime>633461081466864601</dateTime>
+        <dateTime>633461945466864601</dateTime>
+        <dateTime>633462809466864601</dateTime>
+        <dateTime>633463673466864601</dateTime>
+        <dateTime>633464537466864601</dateTime>
+        <dateTime>633465401466864601</dateTime>
+        <dateTime>633466265466864601</dateTime>
+        <dateTime>633467129466864601</dateTime>
+        <dateTime>633467993466864601</dateTime>
+        <dateTime>633468857466864601</dateTime>
+        <dateTime>633469721466864601</dateTime>
+        <dateTime>633470585466864601</dateTime>
+        <dateTime>633471449466864601</dateTime>
+        <dateTime>633472313466864601</dateTime>
+        <dateTime>633473177466864601</dateTime>
+        <dateTime>633474041466864601</dateTime>
+        <dateTime>633474905466864601</dateTime>
+        <dateTime>633475769466864601</dateTime>
+        <dateTime>633476633466864601</dateTime>
+        <dateTime>633477497466864601</dateTime>
+        <dateTime>633478361466864601</dateTime>
+        <dateTime>633479225466864601</dateTime>
+        <dateTime>633480089466864601</dateTime>
+        <dateTime>633480953466864601</dateTime>
+        <dateTime>633481817466864601</dateTime>
+        <dateTime>633482681466864601</dateTime>
+        <dateTime>633483545466864601</dateTime>
+        <dateTime>633484409466864601</dateTime>
+        <dateTime>633485273466864601</dateTime>
+        <dateTime>633486137466864601</dateTime>
+        <dateTime>633487001466864601</dateTime>
+        <dateTime>633487865466864601</dateTime>
+        <dateTime>633488729466864601</dateTime>
+        <dateTime>633489593466864601</dateTime>
+        <dateTime>633490457466864601</dateTime>
+        <dateTime>633491321466864601</dateTime>
+        <dateTime>633492185466864601</dateTime>
+        <dateTime>633493049466864601</dateTime>
+        <dateTime>633493913466864601</dateTime>
+        <dateTime>633494777466864601</dateTime>
+        <dateTime>633495641466864601</dateTime>
+        <dateTime>633496505466864601</dateTime>
+        <dateTime>633497369466864601</dateTime>
+        <dateTime>633498233466864601</dateTime>
+        <dateTime>633499097466864601</dateTime>
+        <dateTime>633499961466864601</dateTime>
+        <dateTime>633500825466864601</dateTime>
+        <dateTime>633501689466864601</dateTime>
+        <dateTime>633502553466864601</dateTime>
+        <dateTime>633503417466864601</dateTime>
+        <dateTime>633504281466864601</dateTime>
+        <dateTime>633505145466864601</dateTime>
+        <dateTime>633506009466864601</dateTime>
+        <dateTime>633506873466864601</dateTime>
+        <dateTime>633507737466864601</dateTime>
+        <dateTime>633508601466864601</dateTime>
+        <dateTime>633509465466864601</dateTime>
+        <dateTime>633510329466864601</dateTime>
+        <dateTime>633511193466864601</dateTime>
+        <dateTime>633512057466864601</dateTime>
+        <dateTime>633512921466864601</dateTime>
+        <dateTime>633513785466864601</dateTime>
+        <dateTime>633514649466864601</dateTime>
+        <dateTime>633515513466864601</dateTime>
+        <dateTime>633516377466864601</dateTime>
+        <dateTime>633517241466864601</dateTime>
+        <dateTime>633518105466864601</dateTime>
+        <dateTime>633518969466864601</dateTime>
+        <dateTime>633519833466864601</dateTime>
+        <dateTime>633520697466864601</dateTime>
+        <dateTime>633521561466864601</dateTime>
+        <dateTime>633522425466864601</dateTime>
+        <dateTime>633523289466864601</dateTime>
+        <dateTime>633524153466864601</dateTime>
+        <dateTime>633525017466864601</dateTime>
+        <dateTime>633525881466864601</dateTime>
+        <dateTime>633526745466864601</dateTime>
+        <dateTime>633527609466864601</dateTime>
+        <dateTime>633528473466864601</dateTime>
+        <dateTime>633529337466864601</dateTime>
+        <dateTime>633530201466864601</dateTime>
+        <dateTime>633531065466864601</dateTime>
+        <dateTime>633531929466864601</dateTime>
+        <dateTime>633532793466864601</dateTime>
+        <dateTime>633533657466864601</dateTime>
+        <dateTime>633534521466864601</dateTime>
+        <dateTime>633535385466864601</dateTime>
+        <dateTime>633536249466864601</dateTime>
+        <dateTime>633537113466864601</dateTime>
+        <dateTime>633537977466864601</dateTime>
+        <dateTime>633538841466864601</dateTime>
+        <dateTime>633539705466864601</dateTime>
+        <dateTime>633540569466864601</dateTime>
+        <dateTime>633541433466864601</dateTime>
+        <dateTime>633542297466964749</dateTime>
+        <dateTime>633543161466964749</dateTime>
+        <dateTime>633544025466964749</dateTime>
+        <dateTime>633544889466964749</dateTime>
+        <dateTime>633545753466964749</dateTime>
+        <dateTime>633546617466964749</dateTime>
+        <dateTime>633547481466964749</dateTime>
+        <dateTime>633548345466964749</dateTime>
+        <dateTime>633549209466964749</dateTime>
+        <dateTime>633550073466964749</dateTime>
+        <dateTime>633550937466964749</dateTime>
+        <dateTime>633551801466964749</dateTime>
+        <dateTime>633552665466964749</dateTime>
+        <dateTime>633553529466964749</dateTime>
+        <dateTime>633554393466964749</dateTime>
+        <dateTime>633555257466964749</dateTime>
+        <dateTime>633556121466964749</dateTime>
+        <dateTime>633556985466964749</dateTime>
+        <dateTime>633557849466964749</dateTime>
+        <dateTime>633558713466964749</dateTime>
+        <dateTime>633559577466964749</dateTime>
+        <dateTime>633560441466964749</dateTime>
+        <dateTime>633561305466964749</dateTime>
+        <dateTime>633562169466964749</dateTime>
+        <dateTime>633563033466964749</dateTime>
+        <dateTime>633563897466964749</dateTime>
+        <dateTime>633564761466964749</dateTime>
+        <dateTime>633565625466964749</dateTime>
+        <dateTime>633566489466964749</dateTime>
+        <dateTime>633567353466964749</dateTime>
+        <dateTime>633568217466964749</dateTime>
+        <dateTime>633569081466964749</dateTime>
+        <dateTime>633569945466964749</dateTime>
+        <dateTime>633570809466964749</dateTime>
+        <dateTime>633571673466964749</dateTime>
+        <dateTime>633572537466964749</dateTime>
+        <dateTime>633573401466964749</dateTime>
+        <dateTime>633574265466964749</dateTime>
+        <dateTime>633575129466964749</dateTime>
+        <dateTime>633575993466964749</dateTime>
+        <dateTime>633576857466964749</dateTime>
+        <dateTime>633577721466964749</dateTime>
+        <dateTime>633578585466964749</dateTime>
+        <dateTime>633579449466964749</dateTime>
+        <dateTime>633580313466964749</dateTime>
+        <dateTime>633581177466964749</dateTime>
+        <dateTime>633582041466964749</dateTime>
+        <dateTime>633582905466964749</dateTime>
+        <dateTime>633583769466964749</dateTime>
+        <dateTime>633584633466964749</dateTime>
+        <dateTime>633585497466964749</dateTime>
+        <dateTime>633586361466964749</dateTime>
+        <dateTime>633587225466964749</dateTime>
+        <dateTime>633588089466964749</dateTime>
+        <dateTime>633588953466964749</dateTime>
+        <dateTime>633589817466964749</dateTime>
+        <dateTime>633590681466964749</dateTime>
+        <dateTime>633591545466964749</dateTime>
+        <dateTime>633592409466964749</dateTime>
+        <dateTime>633593273466964749</dateTime>
+        <dateTime>633594137466964749</dateTime>
+        <dateTime>633595001466964749</dateTime>
+        <dateTime>633595865466964749</dateTime>
+        <dateTime>633596729466964749</dateTime>
+        <dateTime>633597593466964749</dateTime>
+        <dateTime>633598457466964749</dateTime>
+        <dateTime>633599321466964749</dateTime>
+        <dateTime>633600185466964749</dateTime>
+        <dateTime>633601049466964749</dateTime>
+        <dateTime>633601913466964749</dateTime>
+        <dateTime>633602777466964749</dateTime>
+        <dateTime>633603641466964749</dateTime>
+        <dateTime>633604505466964749</dateTime>
+        <dateTime>633605369466964749</dateTime>
+        <dateTime>633606233466964749</dateTime>
+        <dateTime>633607097466964749</dateTime>
+        <dateTime>633607961466964749</dateTime>
+        <dateTime>633608825466964749</dateTime>
+        <dateTime>633609689466964749</dateTime>
+        <dateTime>633610553466964749</dateTime>
+        <dateTime>633611417466964749</dateTime>
+        <dateTime>633612281466964749</dateTime>
+        <dateTime>633613145466964749</dateTime>
+        <dateTime>633614009466964749</dateTime>
+        <dateTime>633614873466964749</dateTime>
+        <dateTime>633615737466964749</dateTime>
+        <dateTime>633616601466964749</dateTime>
+        <dateTime>633617465466964749</dateTime>
+        <dateTime>633618329466964749</dateTime>
+        <dateTime>633619193466964749</dateTime>
+        <dateTime>633620057466964749</dateTime>
+        <dateTime>633620921466964749</dateTime>
+        <dateTime>633621785466964749</dateTime>
+        <dateTime>633622649466964749</dateTime>
+        <dateTime>633623513466964749</dateTime>
+        <dateTime>633624377466964749</dateTime>
+        <dateTime>633625241466964749</dateTime>
+        <dateTime>633626105466964749</dateTime>
+        <dateTime>633626969466964749</dateTime>
+        <dateTime>633627833466964749</dateTime>
+        <dateTime>633628697466964749</dateTime>
+        <dateTime>633629561466964749</dateTime>
+        <dateTime>633630425466964749</dateTime>
+        <dateTime>633631289466964749</dateTime>
+        <dateTime>633632153466964749</dateTime>
+        <dateTime>633633017466964749</dateTime>
+    </DateArray>
+    <StringArray>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+        <string>String 0</string>
+        <string>String 1</string>
+        <string>String 2</string>
+        <string>String 3</string>
+        <string>String 4</string>
+        <string>String 5</string>
+        <string>String 6</string>
+        <string>String 7</string>
+        <string>String 8</string>
+        <string>String 9</string>
+        <string>String 10</string>
+        <string>String 11</string>
+        <string>String 12</string>
+        <string>String 13</string>
+        <string>String 14</string>
+        <string>String 15</string>
+        <string>String 16</string>
+        <string>String 17</string>
+        <string>String 18</string>
+        <string>String 19</string>
+        <string>String 20</string>
+        <string>String 21</string>
+        <string>String 22</string>
+        <string>String 23</string>
+        <string>String 24</string>
+        <string>String 25</string>
+        <string>String 26</string>
+        <string>String 27</string>
+        <string>String 28</string>
+        <string>String 29</string>
+    </StringArray>
+    <SmallIntArray>
+        <int>0</int>
+        <int>1</int>
+        <int>2</int>
+        <int>3</int>
+        <int>4</int>
+        <int>5</int>
+        <int>6</int>
+        <int>7</int>
+        <int>8</int>
+        <int>9</int>
+        <int>10</int>
+        <int>11</int>
+        <int>12</int>
+        <int>13</int>
+        <int>14</int>
+        <int>15</int>
+        <int>16</int>
+        <int>17</int>
+        <int>18</int>
+        <int>19</int>
+        <int>20</int>
+        <int>21</int>
+        <int>22</int>
+        <int>23</int>
+        <int>24</int>
+        <int>25</int>
+        <int>26</int>
+        <int>27</int>
+        <int>28</int>
+        <int>29</int>
+        <int>30</int>
+        <int>31</int>
+        <int>32</int>
+        <int>33</int>
+        <int>34</int>
+        <int>35</int>
+        <int>36</int>
+        <int>37</int>
+        <int>38</int>
+        <int>39</int>
+        <int>40</int>
+        <int>41</int>
+        <int>42</int>
+        <int>43</int>
+        <int>44</int>
+        <int>45</int>
+        <int>46</int>
+        <int>47</int>
+        <int>48</int>
+        <int>49</int>
+        <int>50</int>
+        <int>51</int>
+        <int>52</int>
+        <int>53</int>
+        <int>54</int>
+        <int>55</int>
+        <int>56</int>
+        <int>57</int>
+        <int>58</int>
+        <int>59</int>
+        <int>60</int>
+        <int>61</int>
+        <int>62</int>
+        <int>63</int>
+        <int>64</int>
+        <int>65</int>
+        <int>66</int>
+        <int>67</int>
+        <int>68</int>
+        <int>69</int>
+        <int>70</int>
+        <int>71</int>
+        <int>72</int>
+        <int>73</int>
+        <int>74</int>
+        <int>75</int>
+        <int>76</int>
+        <int>77</int>
+        <int>78</int>
+        <int>79</int>
+        <int>80</int>
+        <int>81</int>
+        <int>82</int>
+        <int>83</int>
+        <int>84</int>
+        <int>85</int>
+        <int>86</int>
+        <int>87</int>
+        <int>88</int>
+        <int>89</int>
+        <int>90</int>
+        <int>91</int>
+        <int>92</int>
+        <int>93</int>
+        <int>94</int>
+        <int>95</int>
+        <int>96</int>
+        <int>97</int>
+        <int>98</int>
+        <int>99</int>
+    </SmallIntArray>
+    <StructArray>
+        <Struct2>
+            <Struct2StringMember>testInstance.StructArray[0].Struct2StringMember</Struct2StringMember>
+            <Struct2DoubleMember>123456.789</Struct2DoubleMember>
+            <NestedArray>
+                <Struct1>
+                    <Struct1BoolMember>True</Struct1BoolMember>
+                    <Struct1IntMember>0</Struct1IntMember>
+                </Struct1>
+                <Struct1>
+                    <Struct1BoolMember>False</Struct1BoolMember>
+                    <Struct1IntMember>10</Struct1IntMember>
+                </Struct1>
+                <Struct1>
+                    <Struct1BoolMember>True</Struct1BoolMember>
+                    <Struct1IntMember>20</Struct1IntMember>
+                </Struct1>
+                <Struct1>
+                    <Struct1BoolMember>False</Struct1BoolMember>
+                    <Struct1IntMember>30</Struct1IntMember>
+                </Struct1>
+            </NestedArray>
+        </Struct2>
+        <Struct2>
+            <Struct2StringMember>testInstance.StructArray[1].Struct2StringMember</Struct2StringMember>
+            <Struct2DoubleMember>23456.789</Struct2DoubleMember>
+            <NestedArray>
+                <Struct1>
+                    <Struct1BoolMember>False</Struct1BoolMember>
+                    <Struct1IntMember>0</Struct1IntMember>
+                </Struct1>
+                <Struct1>
+                    <Struct1BoolMember>True</Struct1BoolMember>
+                    <Struct1IntMember>101</Struct1IntMember>
+                </Struct1>
+                <Struct1>
+                    <Struct1BoolMember>False</Struct1BoolMember>
+                    <Struct1IntMember>202</Struct1IntMember>
+                </Struct1>
+                <Struct1>
+                    <Struct1BoolMember>True</Struct1BoolMember>
+                    <Struct1IntMember>303</Struct1IntMember>
+                </Struct1>
+                <Struct1>
+                    <Struct1BoolMember>False</Struct1BoolMember>
+                    <Struct1IntMember>404</Struct1IntMember>
+                </Struct1>
+            </NestedArray>
+        </Struct2>
+        <Struct2>
+            <Struct2StringMember>Added.Struct2StringMember</Struct2StringMember>
+        </Struct2>
+        <Struct2>
+            <Struct2StringMember>testInstance.StructArray[2].Struct2StringMember</Struct2StringMember>
+        </Struct2>
+    </StructArray>
+    <ColorStructMember>1;[255,128,128];(Pantone\Linen)</ColorStructMember>
+    <EmbeddedStruct />
+    <EmptyIntArray />
+    <FixedSizeIntArray>
+        <int>11</int>
+        <int>12</int>
+        <int>13</int>
+        <int>14</int>
+        <int>15</int>
+    </FixedSizeIntArray>
+    <FixedSizeStringArray>
+        <string>StringValue101</string>
+        <string>StringValue102</string>
+        <string>StringValue103</string>
+        <string>StringValue104</string>
+        <string>StringValue105</string>
+    </FixedSizeStringArray>
+</TestClass>

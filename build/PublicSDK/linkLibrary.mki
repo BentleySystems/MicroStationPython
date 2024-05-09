@@ -1,0 +1,32 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+# The purpose of this file is to allow MKE files to produce shared or static libraries without
+# each one having the same branch for dlmlink vs. creatlib. Linking a static library needs a subset
+# of parameters from linking a shared library, so callers of this file should pretend they are
+# linking a shared library (e.g. as if they are using dlmlink and defining the DLM_ family of
+# variables) and if doing a static build, this file will carry over the required values for static
+# linking.
+
+%if !defined (CREATE_STATIC_LIBRARIES)
+
+    %include dlmlink.mki
+    %return
+
+%endif
+
+%if !defined (DLM_NAME) || !defined (DLM_DEST) || !defined (DLM_OBJECT_FILES) || !defined (DLM_CONTEXT_LOCATION)
+    %error linkLibrary requires the following dlmlink-based variables to be defined, so it can carry them over to creatlib: DLM_NAME, DLM_DEST, DLM_OBJECT_FILES, DLM_CONTEXT_LOCATION
+%endif
+
+LIB_NAME                = $(DLM_NAME)
+LIB_DEST                = $(DLM_DEST)
+LIB_TMP_DIR             = $(DLM_DEST)
+LIB_OBJS                = $(DLM_OBJECT_FILES)
+LIB_LST_NAME            = $(LIB_TMP_DIR)$(LIB_NAME).lst
+LIB_CONTEXT_LOCATION    = $(DLM_CONTEXT_LOCATION)
+LIB_OBJECT_DEST         = $(DLM_OBJECT_DEST)
+
+%include creatlib.mki

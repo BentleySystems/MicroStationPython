@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="KeyInTest" CommandClass="MacroCommand" CommandWord="KEYINTEST">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="KeyInTest">
+            <Keyword CommandWord="TESTA" />
+            <Keyword CommandWord="TESTB" />
+            <Keyword CommandWord="TESTC" />
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="KEYINTEST TESTA"                     Function="callbacka" />
+        <KeyinHandler Keyin="KEYINTEST TESTB"                     Function="callbackb" />
+        <KeyinHandler Keyin="KEYINTEST TESTC"                     Function="callbackc" />
+    </KeyinHandlers>
+</KeyinTree>

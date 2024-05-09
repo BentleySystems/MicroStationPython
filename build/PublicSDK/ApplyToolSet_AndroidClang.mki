@@ -1,0 +1,36 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+# $(BuildToolCache) is provided by BB, and is in our BuildContext, populated with directory symlinks into the external tool cache (environment variable: ToolCache).
+# The sub-directories are the names of the repositories, defined in RepositoryLists.BuildStrategy.xml.
+%if defined(WipPartEnable_AndroidToolCache)
+    ANDROID_NDK_ROOT = $(BuildToolCache)AndrdNDK-r21e/
+    ANDROID_SDK_ROOT = $(BuildToolCache)AndrdSDK-2020a/
+    GRADLE_HOME = $(BuildToolCache)Gradle-4_10_3/
+    JAVA_HOME = $(BuildToolCache)JDK-1_8_0_191/
+    JAVA_JDK_ROOT = $(JAVA_HOME)
+
+    always:
+        !~@putenv ANDROID_NDK_ROOT=$(ANDROID_NDK_ROOT)
+        !~@putenv ANDROID_SDK_ROOT=$(ANDROID_SDK_ROOT)
+        !~@putenv GRADLE_HOME=$(GRADLE_HOME)
+        !~@putenv JAVA_HOME=$(JAVA_HOME)
+        !~@putenv JAVA_JDK_ROOT=$(JAVA_JDK_ROOT)
+%endif
+
+%if defined (TOOLSET_DIAGNOSTICS)
+    %message Using toolset '$(BUILD_TOOLSET)' targetting '$(TARGET_PROCESSOR_ARCHITECTURE)'.
+    %message toolset> Using Android NDK at '$(ANDROID_NDK_ROOT)'.
+    %message toolset> Using Android SDK at '$(ANDROID_SDK_ROOT)'.
+    %message toolset> Using Java at '$(JAVA_HOME)'.
+    %message toolset> Using JDK at '$(JAVA_JDK_ROOT)'.
+    %message toolset> Using Gradle at '$(GRADLE_HOME)'.
+%endif
+
+%if $(TARGET_PLATFORM) == "Android"
+    %include AndroidToolContextLLVM.mki
+%else
+    %error No tool context available for using clang to build $(TARGET_PLATFORM).
+%endif

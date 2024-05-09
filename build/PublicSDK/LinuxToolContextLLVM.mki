@@ -1,0 +1,177 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if defined (LINUXTOOLCONTEXT_MKE)
+    %return
+%endif
+LINUXTOOLCONTEXT_MKE = 1
+
+LINUX_TOOLCONTEXT_PATH =% $(SrcRoot)bsicommon/PublicSDK/linuxToolContextLLVM.mki
+
+# Outputs:
+#   This mki file defines the following macros for use in compiling and linking native code for Android platforms:
+#
+# ----------
+#  Compiler
+# ----------
+# Use these macros to set up the g++ compiler command line in your mke file:
+# BENTLEY_LINUX_COMPILE_CommonOptions    -   Compiler options (C++ and C)
+# BENTLEY_LINUX_COMPILE_CppOptions       -   Compiler options (C++-specific)
+# BENTLEY_LINUX_COMPILE_OptimizeOptions  -   Add to command line to get an optimized build
+# BENTLEY_LINUX_COMPILE_DebugOptions     -   Add to command line to get a debug build
+# BENTLEY_LINUX_COMPILE_DebugOptionsNoSymbols - Add to command line to get a non-optimized build (with no debugging symbols).
+#
+# Example:
+#       buildTmp = your temporary build directory ...
+#
+#       #Identify DgnClientFx include files
+#       DgnClientFxIncludes = -I....
+#
+#       # Define a rule
+#       .cpp.o:
+#          $(BENTLEY_LINUX_TOOLCHAIN_compile) $(BENTLEY_LINUX_COMPILE_CommonOptions) $(BENTLEY_LINUX_COMPILE_CppOptions) $(DgnClientFxIncludes) -o$@  $<
+#          ~time
+#       
+#       # List the files to be compiled.
+#
+#       $(buildTmp)file1.o : file1.cpp
+#       
+#       $(buildTmp)file2.o : file2.cpp 
+#
+# ----------
+#  Linker
+# ----------
+# BENTLEY_LINUX_LINK_Options            - Command-line options that you should use when linking a .so
+# BENTLEY_LINUX_LINK_SystemLibraries    - The system libraries that every .so must link with. These must come *last* in the link statement.
+#
+# Example:
+#       # Create the .so (with symbols)
+#       BENTLEY_TOOLCONTEXT_LINK_NAME = $(appName)
+#       BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES = $(buildTmp)file1.o $(buildTmp)file2.o
+#       BENTLEY_TOOLCONTEXT_LINK_DEST = $(o)
+#       BENTLEY_TOOLCONTEXT_LINK_LIBRARIES = ... bentley libraries ...
+#       %include %(BuildContext)ToolContextLink.mki
+#
+# -----------
+#  Toolchain 
+# -----------
+# BENTLEY_LINUX_TOOLCHAIN_compile - clang++ compiler for .cpp files
+# BENTLEY_LINUX_TOOLCHAIN_ccompile- clang compiler for .c files
+# BENTLEY_LINUX_TOOLCHAIN_preprocess - clang++ compiler preprocessor
+# BENTLEY_LINUX_TOOLCHAIN_link    - clang linker
+# BENTLEY_LINUX_TOOLCHAIN_nm      - nm
+# BENTLEY_LINUX_TOOLCHAIN_cppfilt - c++filt
+# BENTLEY_LINUX_TOOLCHAIN_strip   - strip
+# BENTLEY_LINUX_TOOLCHAIN_strip_options - the normal options for strip
+# BENTLEY_LINUX_TOOLCHAIN_ar      - ar
+# BENTLEY_LINUX_TOOLCHAIN_copyFile- copy a file
+# BENTLEY_LINUX_TOOLCHAIN_copyDir - copy directory recursively
+# BENTLEY_LINUX_TOOLCHAIN_deleteFile- delete a file
+# BENTLEY_LINUX_TOOLCHAIN_removeDirectory - remove an entire directory
+# BENTLEY_LINUX_TOOLCHAIN_makeFileWriteable - make a file writeable
+
+BENTLEY_LINUX_UseUnixFilenames   = 1
+
+%if !defined (LLVM_DIR)
+    llvm13 = /usr/lib/llvm-13
+    %if exists ($(llvm13))
+        LLVM_DIR =% $(llvm13)
+    %else
+        LLVM_DIR =% /usr/lib/llvm-7
+    %endif
+    always:
+        ~putenv LLVM_DIR=$(LLVM_DIR)
+
+%else
+    %warn Using non-default clang installation due to LLVM_DIR set in your environment
+%endif
+
+ClangDir=$(LLVM_DIR)/bin/
+
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# _/_/_/_/_/_/_ Toolchain programs /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+
+BENTLEY_LINUX_TOOLCHAIN_compile       =% $(ClangDir)clang++
+BENTLEY_LINUX_TOOLCHAIN_ccompile      =% $(BENTLEY_LINUX_TOOLCHAIN_compile) -x c 
+BENTLEY_LINUX_TOOLCHAIN_preprocess    =% $(BENTLEY_LINUX_TOOLCHAIN_compile) -E -P -x c++
+BENTLEY_LINUX_TOOLCHAIN_link          =% $(ClangDir)clang++
+BENTLEY_LINUX_TOOLCHAIN_nm            =% $(ClangDir)llvm-nm
+BENTLEY_LINUX_TOOLCHAIN_objdump       =% $(ClangDir)llvm-objdump
+BENTLEY_LINUX_TOOLCHAIN_cppfilt       =% /usr/bin/c++filt
+BENTLEY_LINUX_TOOLCHAIN_strip         =% /usr/bin/strip
+BENTLEY_LINUX_TOOLCHAIN_strip_options = --preserve-dates --strip-debug --strip-unneeded -v
+BENTLEY_LINUX_TOOLCHAIN_ar            =% $(ClangDir)llvm-ar
+
+BENTLEY_LINUX_TOOLCHAIN_copyFile          = cp
+BENTLEY_LINUX_TOOLCHAIN_copyDir           = cp -r
+BENTLEY_LINUX_TOOLCHAIN_deleteFile        = rm
+BENTLEY_LINUX_TOOLCHAIN_removeDirectory   = rm -r
+BENTLEY_LINUX_TOOLCHAIN_makeFileWriteable = chmod +w
+
+%ifnofile $(BENTLEY_LINUX_TOOLCHAIN_compile)
+    %error clang compiler $(BENTLEY_LINUX_TOOLCHAIN_compile) does not exist
+%endif
+
+# Intel OneAPI environment export
+%if defined (INTEL_ONE_API_CONFIG_FILE)
+    EnvMkiPath = $(OutRoot)$(TARGET_PROCESSOR_DIRECTORY)/OneApiEnv.mki
+
+    OneAPISetVarsCommand = source /opt/intel/oneapi/setvars.sh --config=$(INTEL_ONE_API_CONFIG_FILE)
+
+    $(EnvMkiPath) : $(_CurrentFileSpec)
+        |Regenerating environment MKI file '$(EnvMkiPath)' from '$(OneAPISetVarsCommand)'...
+        @$(BBPYTHONCMD) $(SrcRoot)bsicommon/PublicSDK/CaptureCommandEnv.py $(EnvMkiPath) --exclude=Platform $(OneAPISetVarsCommand)
+        |Done.
+
+    %if !defined (BMAKE_DELETE_ALL_TARGETS)
+        %include $(EnvMkiPath)
+    %endif
+%endif
+
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# _/_/_/_/_/_/_ Compiler command-line options  /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+
+# -------------------------------------------------------
+#   Start with the basic clang options that we use
+# -------------------------------------------------------
+LLVM_VERSION=0x0308
+
+%include clang_common_opts.mki
+
+# We want libstdc++ on Linux, and libc++ elsewhere.
+# libc++ is new to Linux, and is not available on many distributions... and many .so files use libstdc++, which is not ABI compatible with libc++.
+LLVMCppCompOpts + -stdlib=libstdc++
+LLVMLinkOpts + -stdlib=libstdc++
+
+#clang7+ emit addrsig section in each object file for identical code folding that cause issue with objcopy and other binutils utilities
+#we could eventually remove this when we upgrade the linux distribution of our build machine (binutils has been fixed in later versions)
+LLVMCommonCompOpts + -fno-addrsig
+
+# Symbols are opt-out on this platform because they're normally useful (debugging, or uploading for stack trace symbolication).
+%if !defined (LLVM_NO_SYMBOLS)
+    LLVMCommonCompOpts + -g
+%endif
+
+BENTLEY_LINUX_COMPILE_CommonOptions = $(LLVMCommonCompOpts) 
+BENTLEY_LINUX_COMPILE_CommonOptions + -fuse-init-array
+BENTLEY_LINUX_COMPILE_CommonOptions + -fcolor-diagnostics -fdiagnostics-show-option
+
+BENTLEY_LINUX_COMPILE_CppOptions = $(LLVMCppCompOpts)
+BENTLEY_LINUX_COMPILE_DebugOptions = $(LLVMDebugOpts)
+BENTLEY_LINUX_COMPILE_OptimizeOptions = $(LLVMOptimizeOptions)
+
+# While it would be possible to add support for JavaScript in Linux, we don't need it and so we haven't put the work into it.
+BENTLEYCONFIG_NO_JAVASCRIPT = 1
+BENTLEY_LINUX_COMPILE_CommonOptions + -DBENTLEYCONFIG_NO_JAVASCRIPT
+
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+# _/_/_/_/_/_/_ Linker command-line options  /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
+
+BENTLEY_LINUX_LINK_Options= $(LLVMLinkOpts)
+
+BENTLEY_LINUX_LINK_SystemLibs = -ldl
+BENTLEY_LINUX_LINK_SystemLibs + -lpthread

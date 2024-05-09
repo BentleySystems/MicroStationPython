@@ -1,0 +1,68 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if $(BUILD_TOOLSET) != "APPLE_CLANG"
+    %error llvmlib.mki should only be used when the toolset is LLVM
+%endif
+
+%if defined (LIB_LST_NAME)
+    %warn LLVMLIB.MKI: LIB_LST_NAME not yet supported for LLVM
+%endif
+
+%if !defined (LIB_OBJS)
+    %warn LLVMLIB.MKI: LIB_OBJS must be set
+    %return
+%endif
+
+%if defined (LIB_MULTI_PASS_BUILD)
+    %warn LLVMLIB.MKI: LIB_MULTI_PASS_BUILD not yet supported for LLVM
+    %return
+%endif
+
+LibOptions =
+LibFileList =
+
+# Architecture
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX86"
+    LibOptions + -arch_only i386
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX64"
+    LibOptions + -arch_only x86_64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64Simulator"
+    LibOptions + -arch_only arm64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM"
+    LibOptions + -arch_only armv7
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64"
+    LibOptions + -arch_only arm64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARMActive"
+    LibOptions + -arch_only arm64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSX64"
+    LibOptions + -arch_only x86_64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSARM64"
+    LibOptions + -arch_only arm64
+%else
+    %error Unknown/unexpected TARGET_PROCESSOR_ARCHITECTURE; could not set -arch.
+%endif
+
+# LLVM_WIP: The following are the default options based on creating a new XCode project for CPP compiles.
+# I'm not sure of better ways to break this up, or even better separate architecture from simulator/device targets.
+LibOptions + -syslibroot $(CLANG_SYSROOT)
+LibOptions + -static
+
+# I don't believe libtool supports response files... it does, however, support -filelist, which gets us most of the way there.
+# Note, however, that the file for -filelist is a newline-delimited list of files; you also cannot have extra blank lines.
+LibFileList = $(LIB_TMP_DIR)$(LIB_NAME).LinkFileList
+
+# ######################################################
+$(LibFileList) : $(_MakeFileSpec)
+    >$(LibFileList).tmp
+    $[@strip $(LIB_OBJS)]
+    <
+    $(BBPYTHONCMD) $(bsiScripts)RegexReplaceInFile.py "\s+" "\n" $(LibFileList).tmp $(LibFileList)
+
+# ######################################################
+$(LIB_OUT_NAME) : $(LIB_OBJS)
+    $(msg)
+    $(LibCommand) $(LibOptions) -o $(LIB_OUT_NAME) -filelist $(LibFileList)
+    ~time

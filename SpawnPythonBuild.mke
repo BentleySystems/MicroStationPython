@@ -1,0 +1,140 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: SpawnPythonBuild.mke $
+#
+#  $Copyright: (c) 2018 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+MS_NO_PATH_AUGMENT = 1
+PolicyFile = $(SrcRoot)PowerPlatformSDK/privmki/AssertPowerPlatformSDKPolicy.mki
+%include mdl.mki
+
+%if not defined ExampleToRun
+    # It is assumed that we run $(ExampleToRun)\$(ExampleToRun).mke.  This was to make it
+    # so that one argument could be passed in and used as the makefile name and the build
+    # directory.  If this is a hardship, we can always pass in two arguments.
+    %error ExampleToRun must be defined.  Usually this is passed in on the command line
+%endif
+
+ExampleBuildDir = $[@basename $(ExampleToRun)]
+ExampleOut = $(OutputRootDir)ExampleBuild/$(ExampleBuildDir)/
+
+always:
+    ~@mkdir $(ExampleOut)
+
+# Files used in this process
+varCleanInclFile        = $(ExampleOut)VarcleanInclusions.txt
+varCleanBatFile         = $(ExampleOut)MstnExampleEnvClean.bat
+varCleanCreateFile      = $(ExampleOut)CreateEnvClean.bat
+SpawnMstnExampleBat     = $(ExampleOut)SpawnMstnExample.bat
+
+# Create the varclean bat file that will include all the SET statemets to remove most environment variables
+CreateVarcleanInclusionFile:
+    $(msg)
+    > $(varCleanInclFile)
+    BSITRANSKIT
+    TRANSKITSHAREDSHELL
+    MSMDE
+    LANGUAGE
+    REL_V
+    MAJ_V
+    MIN_V
+    SUBMIN_V
+    NOBUILDMSTN
+    NOBUILDMSTNVIEW
+    NOBUILDDRAFT
+    WORKING_ON_PORT_TO_NEW_TOOLSET
+    PRG_WIPBUILD
+    PRG_BETABUILD
+    NO_BUILD_POWERPLATFORM_TRANSKIT
+    NO_WIXLIB_INSTALLER
+    MS_RTCONFIG
+    RCCODEPAGE
+    MS
+    MDL_TOOLS_CODEPAGE
+    WINZIPCL
+    DEVEXPRESS
+    AUTOCAD_PLATFORM
+    <
+
+always:
+    ~@mkdir $(temp)
+    > $(varCleanCreateFile)
+    @ECHO OFF
+    @ECHO \#-------------------------------------------------------------------------
+    @ECHO \# CreateEnvClean.bat is clearing the inherited environment variables that
+    @ECHO \# indicate source directories. This make sure that nothing creeps into our
+    @ECHO \# example builds that assumes that source is available.
+    @ECHO \#-------------------------------------------------------------------------
+    set BSI=
+    python $(SrcRoot)bsitools/anycpu/varclean.py $(varCleanInclFile) > $(varCleanBatFile)
+    <
+
+
+# If doing a clean, just have the makefile flush itself
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    bmakeOptsToPass = +aD 
+%endif
+
+# For debugging
+# bmakeOptsToPass = -v
+
+outbase = $(OutRoot)$(DEFAULT_TARGET_PROCESSOR_DIRECTORY)/
+%if exists ($(outbase)product/MicroStationSDK)
+    sdkdir = $(outbase)product/MicroStationSDK/
+%elif exists ($(outbase)product/MicroStationSDKNoDocs)
+    sdkdir = $(outbase)product/MicroStationSDKNoDocs/
+%else
+    %error Unable to find SDK dir in $(outbase)product 
+%endif
+builddir = $(outbase)product/SDKStation/SDKStation/
+publicEnvVarBat = $(SrcRoot)MSPython/mstnpythonvars.bat
+pythonMKIDir = $(SrcRoot)MSPython/build/publicSDK/
+
+always:
+    ~@mkdir $(builddir)mdlapps/
+
+%include DefaultToolSet.mki
+
+# create the batch file to run that will set up the exact environment we want for the example build
+always:
+    > $(SpawnMstnExampleBat)
+    call $(varCleanCreateFile)
+    call $(varCleanBatFile)
+    set REL_V=$(REL_V)
+    set MAJ_V=$(MAJ_V)
+    set MIN_V=$(MIN_V)
+    set SUBMIN_V=$(SUBMIN_V)
+    set LANGUAGE=$(LANGUAGE)
+    set MDL_TOOLS_CODEPAGE=$(MDL_TOOLS_CODEPAGE)
+    set RCCODEPAGE=$(RCCODEPAGE)
+    set SrcRoot=$(SrcRoot)
+    set PythonDir=$(PythonDir)
+    set DEFAULT_TARGET_PROCESSOR_ARCHITECTURE=$(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
+    REM This puts the output in a conveniently deletable place
+    set MSMDE_OUTPUT=$(OutBuildDir)$(ExampleBuildDir)/
+    %if defined (WORKING_ON_PORT_TO_NEW_TOOLSET)
+        set WORKING_ON_PORT_TO_NEW_TOOLSET=$(WORKING_ON_PORT_TO_NEW_TOOLSET)
+        set SrcBsiCommon=$(SrcBsiCommon)
+    %endif
+    %if defined (BUILD_USING_VS2019)
+        set BUILD_USING_VS2019=1
+    %endif
+    %if defined (BUILD_USING_VS2017)
+        set BUILD_USING_VS2017=1
+    %endif
+    %if defined (BUILD_USING_VS2015)
+        set BUILD_USING_VS2015=1
+    %endif
+    set > %temp%/LastExampleEnv.txt
+    <
+
+# Doing a "call" to publicEnvVarBat in the preceding batch file seems to have the effect of spawning 
+#  a shell and bringing back a lot of the python-set (bb) environment.
+    
+tmp_command = cmd.exe \/X \/c "$(SpawnMstnExampleBat) & $(publicEnvVarBat) $(builddir) $(sdkdir) $(pythonMKIDir) & bmake.exe $(bmakeOptsToPass) $(ExampleToRun)"
+
+always:
+    %warn $(tmp_command)
+    $(tmp_command)
+

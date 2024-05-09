@@ -1,0 +1,285 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if defined (__APPLYTOOLSET_VS2019_MKI__)
+    %warn Redundantly including ApplyToolSet_VS2019.mki.
+    %return
+%endif
+
+__APPLYTOOLSET_VS2019_MKI__ = 1
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# N.B. We only want to regenerate the toolset file if this MKI changes; there is no bmake macro for that (e.g. _MakeFilePath gives you the outer MKE file path, not of this MKI file).
+thisMkiPath = $(_CurrentFileSpec)
+
+%if defined (TOOLSET_DIAGNOSTICS)
+    %message toolset> Using toolset '$(BUILD_TOOLSET)', targetting '$(TARGET_PROCESSOR_ARCHITECTURE)'.
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# TCC 13 has a bug that prevents vcvarsall.bat from working (related to using %ProgramFiles(x86)%).
+# I think it's reasonable to simply require 14, as opposed to testing even older versions to see if they pass.
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+ShellVersionString = $[@readstdout ver]
+%if (" " != $[@findstring TCC, $(ShellVersionString)])
+    %if (" " == $[@findstring 14., $(ShellVersionString)])
+        %error If using TCC, you must use version 14.xx. Please install from \\winxx\DevProg\TCC and update your shortcuts. You may optionally uninstall your old version(s).
+    %endif
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Detect Visual Studio's path
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# E.g. C:/VisualStudio/VS2019/
+%if !defined(VS2019_Dir)
+    VS2019_Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7", "16.0"]]
+    %if " " == $(VS2019_Dir)
+        %if defined (TOOLSET_DIAGNOSTICS)
+            always:
+                |Registry lookup for VS2019_Dir failed, trying vswhere...
+        %endif        
+
+        # It has been reported that Microsoft has stopped writing the above registry key in the latest installer for Visual Studio.
+        # If it's not there from an older installation, try using their new tool to find an installation.
+        # They did this because they allow multiple installations of VS, and they don't want people to think there's a single global installation.
+        # Try Professional first, but also try Enterprise.
+        # The tool doesn't seem to detect VS 2019 Build Tools, so presume those were detected from the registry lookup.
+
+        vswhere = $(SrcRoot)MSPython/build/PublicSDK/vswhere.exe
+        
+        %if defined (TOOLSET_DIAGNOSTICS)
+        %if "full" == $(TOOLSET_DIAGNOSTICS)
+            always:
+                |
+                |All Visual Studios:
+                |
+                $(vswhere)
+        %endif        
+        %endif        
+
+        vswhere_cmd = $(vswhere) -version [16.0,17.0) -latest -products Microsoft.VisualStudio.Product.Professional -format value -property installationPath
+
+        VS2019_Dir = $[@readstdout $(vswhere_cmd)]/
+
+        %if defined (TOOLSET_DIAGNOSTICS)
+            always:
+                |$(vswhere) reported '$(VS2019_Dir)' for Microsoft.VisualStudio.Product.Professional.
+        %endif        
+
+        %if !exists ($(VS2019_Dir))
+            vswhere_cmd_ = $(vswhere) -version [16.0,17.0) -latest -products Microsoft.VisualStudio.Product.Enterprise -format value -property installationPath
+            vswhere_cmd = $[@subst \, \/, $(vswhere_cmd_)]
+            VS2019_Dir = $[@readstdout $(vswhere_cmd)]/
+        
+            %if defined (TOOLSET_DIAGNOSTICS)
+                always:
+                    |$(vswhere) reported '$(VS2019_Dir)' for Microsoft.VisualStudio.Product.Enterprise
+            %endif
+        %endif
+    %endif
+
+    %if !exists ($(VS2019_Dir))
+        %error Could not determine location of Visual Studio 2019 via registry or vswhere.exe tool. Are you sure it's installed?
+    %endif
+%endif
+
+%if defined (TOOLSET_DIAGNOSTICS)
+    %message toolset> Found Visual Studio at '$(VS2019_Dir)'.
+%endif
+
+ActiveVisualStudioDir = $(VS2019_Dir)
+
+always:
+    ~@putenv ActiveVisualStudioDir=$(ActiveVisualStudioDir)
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Determine vcvars argument
+# On desktop, always use 64-bit tools (why not?), meaning x86 "cross" compiles.
+# For UWP, use 32-bit tools because Visual Studio packaging, on optimized builds,
+#   will always invoke the 32-bit .Net native compiler (regardless of msbuild architecture or reqested target architecture),
+#   and you cannot mix 64-bit tools with this 32-bit compiler.
+#   If you try, you'll get cryptic messages about failure to load ilc.exe when creating appx bundles.
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "x64"
+    VcvarsArgs = amd64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "x86"
+    VcvarsArgs = amd64_x86
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+    VcvarsArgs = x86_amd64 store
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"
+    VcvarsArgs = x86 store
+%else
+    %error Could not map TARGET_PROCESSOR_ARCHITECTURE '$(TARGET_PROCESSOR_ARCHITECTURE)' to a known vcvars argument.
+%endif
+
+%if defined (INTEL_ONE_API_CONFIG_FILE)
+    %if !exists ($(INTEL_ONE_API_CONFIG_FILE))
+        %error INTEL_ONE_API_CONFIG_FILE doesn't exist at $(INTEL_ONE_API_CONFIG_FILE)
+    %endif
+    VcvarsCommand = "$(VS2019_Dir)VC/Auxiliary/Build/vcvarsall.bat" $(VcvarsArgs) ^& "$(ONEAPI_ROOT)setvars.bat" --config "$(INTEL_ONE_API_CONFIG_FILE)"
+%else
+    VcvarsCommand = "$(VS2019_Dir)VC/Auxiliary/Build/vcvarsall.bat" $(VcvarsArgs)
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Capture and apply environment changes from vcvars
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+%if defined (TOOLSET_DIAGNOSTICS)
+    %message toolset> Configuring the environment via '$(VcvarsCommand)'.
+%endif
+
+EnvMkiPath = $(OutRoot)$(TARGET_PROCESSOR_DIRECTORY)/ToolSetEnv.mki
+
+# N.B. vcvarsall will set the "Platform" environment variable, but this interacts with MSBuild, and we'd rather have the "Any CPU" default, so exclude setting this variable.
+
+$(EnvMkiPath) : $(thisMkiPath)
+    |Regenerating environment MKI file '$(EnvMkiPath)' from '$(VcvarsCommand)'...
+    @python.exe $(_CurrentFilePath)captureCommandEnv.py $(EnvMkiPath) --exclude=Platform $(VcvarsCommand)
+    |Done.
+
+%if !defined (BMAKE_DELETE_ALL_TARGETS)
+    %include $(EnvMkiPath)
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# CUSTOM .Net Changes
+# These changes have organically crept back in from older branches, and I'm not sure if they're actually still relevant or correct.
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+%if !defined (TargetFrameworkVersion)
+    TargetFrameworkVersion=v4.7.2
+%else
+    %warn TargetFrameworkVersion should only be set by ApplyToolSet*.mki files. You might get this if your .mke file launches another .mke file.
+%endif
+
+%if !defined (MultiTargetingToolsVersion)
+    MultiTargetingToolsVersion=4.0
+%endif
+
+always:
+    ~@putenv MultiTargetingToolsVersion=$(MultiTargetingToolsVersion)
+
+FrameworkSDKDir=$(WindowsSdkDir)
+always:
+    ~@putenv FrameworkSDKDir=$(FrameworkSDKDir)
+
+%if defined (TOOLSET_DIAGNOSTICS)
+%if "full" == $(TOOLSET_DIAGNOSTICS)
+    %message toolset> Setting (custom, bmake-only) TargetFrameworkVersion=$(TargetFrameworkVersion)
+    %message toolset> Setting (custom) MultiTargetingToolsVersion=$(MultiTargetingToolsVersion)
+%endif
+%endif
+
+%if !defined (_notasks)
+    # Find the .NET reference assemblies directory using the same MSBUILD task used by visual studio.  This allows you to use framework assemblies directly
+    always:
+        !~@task Microsoft.Build.Tasks.GetReferenceAssemblyPaths \
+            -i:TargetFrameworkMoniker=".NETFramework,Version=$(TargetFrameworkVersion)" \
+            -o:ReferenceAssemblies=FullFrameworkReferenceAssemblyPaths \
+            -o:test=ReferenceAssemblyPaths \
+            -o:DisplayName=TargetFrameworkMonikerDisplayName
+        !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${ReferenceAssemblies}" -o:FrameworkReferenceAssembliesNoTrailingSlash=ShortNames
+        ~@putenv ASSEMBLY_TARGET_DISPLAYNAME=$(DisplayName)
+                    
+    %if $(TargetFrameworkVersion) == "v4.5" || $(TargetFrameworkVersion) == "v4.5.1" || $(TargetFrameworkVersion) == "v4.5.2"
+        v45FrameworkAssemblies=%$[FrameworkReferenceAssembliesNoTrailingSlash]/
+    %elif $(TargetFrameworkVersion) == "v4.6" || $(TargetFrameworkVersion) == "v4.6.1"
+        v46FrameworkAssemblies=%$[FrameworkReferenceAssembliesNoTrailingSlash]/
+    %endif
+
+    %if defined (TOOLSET_DIAGNOSTICS)
+    %if "full" == $(TOOLSET_DIAGNOSTICS)
+        %message toolset> Setting (custom, bmake-only) v45FrameworkAssemblies=$(v45FrameworkAssemblies)
+    %endif
+    %endif
+
+    FrameworkReferenceAssemblies    = $(FrameworkReferenceAssembliesNoTrailingSlash)/
+    ReferenceAssemblies             = $(FrameworkReferenceAssemblies)
+    FxCopReferenceAssembliesPath    = $[FrameworkReferenceAssembliesNoTrailingSlash]
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+        TargetProcessorArchitecture=AMD64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+        TargetProcessorArchitecture=x86
+    %else
+        TargetProcessorArchitecture=msil
+    %endif
+
+    # TargetFrameworkVersion=v$(MultiTargetingToolsVersion)
+    TargetedRuntimeVersion = $(TargetFrameworkVersion)
+    TargetFrameworkMoniker=.NETFramework,Version=$(TargetFrameworkVersion)
+
+    always:
+        ~@putenv FrameworkDir=$(FrameworkDir)
+        ~@putenv FrameworkVersion=$(TargetFrameworkVersion)
+        ~@putenv TargetFrameworkVersion=$(TargetFrameworkVersion)
+        ~@putenv ASSEMBLY_TARGET_VERSION=$(TargetFrameworkVersion)
+
+%else
+    ReferenceAssemblies=$(FrameworkDir)$(FrameworkVersion)
+%endif
+
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# CUSTOM UWP changes
+# Not a huge fan of making these, but likely preferrable to delegating to individual components later that will probably get it wrong.
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# %if ("WinRT" == $(TARGET_PLATFORM))
+#     # So the compiler can find, for example, platform.winmd, when targetting the Windows store.
+#     # I actually found many platform.winmd files on my computer... even multiple within the Visual Studio directory.
+#     # The previous toolset added the equivalent of $(ActiveVisualStudioDir)VC/vcpackages/ before.
+#     # However, the quickvision team believes the following is more appropriate, so giving that a try.
+#     #LIBPATH + ;$(ActiveVisualStudioDir)VC/Tools/MSVC/14.10.25017/lib/x86/store/references/
+# 
+#     always:
+#         ~@putenv LIBPATH=$(LIBPATH)
+# 
+#     %if defined (TOOLSET_DIAGNOSTICS)
+#     %if "full" == $(TOOLSET_DIAGNOSTICS)
+#         %message toolset> Setting (custom) LIBPATH=$(LIBPATH)
+#     %endif
+#     %endif
+# %endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Custom version variables
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+MSVC_VERSION = 1920
+CSC_VERSION = 4000
+CSC_VERSION_DEF = CSC_VERSION_$(CSC_VERSION)
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Diagnostics
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+%if defined (TOOLSET_DIAGNOSTICS)
+%if "full" == $(TOOLSET_DIAGNOSTICS)
+    %message toolset> Setting (custom) CSC_VERSION=$(CSC_VERSION)
+    %message toolset> Setting (custom) CSC_VERSION_DEF=$(CSC_VERSION_DEF)
+    %message toolset> Setting (custom) MSVC_VERSION=$(MSVC_VERSION)
+%endif
+    %if defined (PRG)
+        %message toolset> PRG is set (=> Optimized, No Asserts)
+    %else
+        %if defined (NDEBUG)
+            %message toolset> NDEBUG is set (No Asserts)
+        %else
+            %message toolset> NDEBUG is NOT set (Asserts)
+        %endif
+        %if defined (DEBUG)
+            %message toolset> DEBUG is set (Non-Optimized)
+        %else
+            %message toolset> DEBUG is NOT set (Optimized)
+        %endif
+    %endif
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Apply common toolset options (e.g. compiler and linker settings)
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+%include $(_CurrentFilePath)windowsToolContext.mki

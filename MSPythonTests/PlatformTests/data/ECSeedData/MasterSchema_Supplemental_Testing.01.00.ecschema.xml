@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="MasterSchema_Supplemental_Testing" nameSpacePrefix="msst" version="1.00" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.09" prefix="bsca" />
+    <ECCustomAttributes>
+        <SupplementalSchemaMetaData xmlns="Bentley_Standard_CustomAttributes.01.09">
+            <PrimarySchemaName>MasterSchema</PrimarySchemaName>
+            <PrimarySchemaMajorVersion>1</PrimarySchemaMajorVersion>
+            <PrimarySchemaMinorVersion>0</PrimarySchemaMinorVersion>
+            <Precedence>1</Precedence>
+            <Purpose>Testing</Purpose>
+            <IsUserSpecific>False</IsUserSpecific>
+        </SupplementalSchemaMetaData>
+    </ECCustomAttributes>
+    <ECClass typeName="ellipse" description="Ellipse" displayLabel="Ellipse" isDomainClass="True">
+        <ECCustomAttributes>
+            <DisplayOptions xmlns="Bentley_Standard_CustomAttributes.01.09">
+                <Hidden>True</Hidden>
+            </DisplayOptions>
+        </ECCustomAttributes>
+    </ECClass>
+
+</ECSchema>

@@ -1,0 +1,101 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if $(BUILD_TOOLSET) != "APPLE_CLANG"
+    %error llvmlink.mki should only be used when the toolset is LLVM
+%endif
+
+%if defined (DLM_NO_DLL)
+    %warn LLVMLINK IGNORING DLM_NO_DLL=$(DLM_NO_DLL) - LLVMLINK *ONLY* creates dylibs
+    %return
+%endif
+
+%if !DLM_NO_BENTLEY_LIB
+    BentleyLibFullPath=$(BuildContext)SubParts/Libs/libBentley.dylib
+    %ifnofile $(BentleyLibFullPath)
+        %undef BentleyLibFullPath
+    %endif
+%endif
+
+# Architecture
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX86"
+    LinkOptions + -arch i386
+    isSimulator = 1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX64"
+    LinkOptions + -arch x86_64
+    isSimulator = 1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64Simulator"
+    LinkOptions + -arch arm64
+    isSimulator = 1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM"
+    LinkOptions + -arch armv7
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64"
+    LinkOptions + -arch arm64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARMActive"
+    LinkOptions + -arch arm64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSX64"
+    LinkOptions + -arch x86_64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSARM64"
+    LinkOptions + -arch arm64
+%else
+    %error Unknown/unexpected TARGET_PROCESSOR_ARCHITECTURE; could not set -arch.
+%endif
+
+# LLVM_WIP: The following are the default options based on creating a new XCode project for CPP compiles.
+# I'm not sure of better ways to break this up, or even better separate architecture from simulator/device targets.
+LinkOptions + -isysroot $(CLANG_SYSROOT)
+LinkOptions + -shared
+LinkOptions + -std=c++11
+LinkOptions + -stdlib=libc++
+%ifdef CLANG_SANITIZE
+    LinkOptions + -fsanitize=$(CLANG_SANITIZE)
+%endif
+
+%if $(TARGET_PLATFORM) == "MacOS"
+    LinkOptions + -lstdc++
+
+    %ifdef CLANG_ALLOW_UNDEFINED
+        LinkOptions + -undefined suppress -flat_namespace
+    %endif
+    LinkOptions + -mmacosx-version-min=$(MACOS_DEPLOYMENT_TARGET)
+%elif $(TARGET_PLATFORM) == "iOS"
+    # Specific to the iOS simulator vs. device build
+    %if defined(isSimulator)
+        LinkOptions + -dead_strip -mios-simulator-version-min=$(IOS_DEPLOYMENT_TARGET)
+    %else
+        LinkOptions + -dead_strip -miphoneos-version-min=$(IOS_DEPLOYMENT_TARGET)
+    %endif
+%endif
+
+# Allow same behavior as Windows to load libraries next to the executable.
+%if !defined (CLANG_NO_RELATIVE_LOADING)
+    LinkOptions + -install_name @rpath/$[@nondir $(DLM_OUT_NAME)]
+%endif
+
+LinkResponseFile = $(DLM_OBJECT_DEST)$(DLM_NAME)Arguments.rsp
+
+LINKER_LIBRARIES + $(BentleyLibFullPath)
+
+%include dlmlinkCommon.mki
+
+# ######################################################
+$(DLM_OUT_NAME) : $(DLM_OBJECT_FILES)
+    $(msg)
+    >$(LinkResponseFile)
+    $(LinkOptions) -o $(DLM_OUT_NAME) $(DLM_OBJECT_FILES) $(LINKER_LIBRARIES)
+    <
+    $(LinkCommand) @$(LinkResponseFile)
+    ~time
+
+%if defined (DLM_CONTEXT_LOCATION) && !defined (DLM_NO_CONTEXT_LINK)
+    $(DLM_CONTEXT_LOCATION)$(shlibprefix)$(DLM_NAME)$(DLM_API_NUMBER)$(DLM_EXTENSION) : $(DLM_OUT_NAME)
+        $(LinkFirstDepToFirstTarget)
+%endif
+
+%if defined (DLM_CONTEXT_LOCATION) && !defined (DLM_NO_CONTEXT_LINK)
+    # TRICKY: Must create link using name w/o version number. This stands in for the .lib file.
+    $(DLM_CONTEXT_LOCATION)$(shlibprefix)$(DLM_NAME)$(DLM_EXTENSION) : $(DLM_OUT_NAME)
+        $(LinkFirstDepToFirstTarget)
+%endif

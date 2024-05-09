@@ -1,0 +1,25 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+# The purpose of this file is to help disable compiler warnings for code we can/will not change in the middle of an MKE file.
+# If the entire MKE file is for a third-party library, you should instead simply set IS_THIRD_PARTY_LIBRARY=1 before including mdl.mki.
+# N.B. If you use MultiCppCompileRule, you must include this file /before/ MultiCppCompileRule.
+
+%if (" " != $[@findstring CLANG, $(BUILD_TOOLSET)])
+
+    PUSH_THIRD_PARTY_IGNORE_OriginalLLVMCommonCompOpts =% $[LLVMCommonCompOpts]
+    LLVMCommonCompOpts + -w
+
+%elif (" " != $[@findstring VS, $(BUILD_TOOLSET)])
+
+    PUSH_THIRD_PARTY_IGNORE_OriginalMsvcCCompOpts =% $[CCompOpts]
+    
+    %if (defined(BSI_MSVC_ANALYZE))
+        CCompOpts + -analyze-
+    %endif
+
+    CCompOpts + -WX- -w
+
+%endif

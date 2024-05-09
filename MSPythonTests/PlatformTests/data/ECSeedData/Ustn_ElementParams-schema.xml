@@ -1,0 +1,1162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="Ustn_ElementParams" nameSpacePrefix="tbep" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECClass typeName="CriteriaStruct" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="Criteria" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="ActivePoint" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Type" typeName="int">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_ActivePointValue</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="AreaMode" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="int">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_AreaMode</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="AreaPatternAngle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="double">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Standard>11</Standard>
+                </ExtendType>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="StringParam" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CellName" isStruct="True" isDomainClass="True">
+        <BaseClass>StringParam</BaseClass>
+    </ECClass>
+    <ECClass typeName="Color" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="ColorType">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DetailCalloutStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DSDetailCallout</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DimensionStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DimensionStyle</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DrawingTitleStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DSDrawingTitle</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="ElementClass" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="int">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_Class</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="ElevationCalloutStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DSElevationCallout</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="FillColor" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="FillColorType">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="FillMode" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="int">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_AreaFill</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Level" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_LevelName</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="LineStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_LineStyleName</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="LineStyleParam" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="LSScale" typeName="double" displayLabel="Line Style Scale" MinimumValue="1E-07">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DashScale" typeName="double" displayLabel="Dash Scale" MinimumValue="1E-07">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="GapScale" typeName="double" displayLabel="Gap Scale" MinimumValue="1E-07">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="StartWidth" typeName="double" displayLabel="Start Width" MinimumValue="0">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowDistanceValueAsString</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="EndWidth" typeName="double" displayLabel="End Width" MinimumValue="0">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>96000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowDistanceValueAsString</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ShiftDistance" typeName="double" displayLabel="Shift Distance">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>95000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowDistanceValueAsString</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ShiftFraction" typeName="double" displayLabel="Shift Fraction">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>94000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Material" isStruct="True" isDomainClass="True">
+        <BaseClass>StringParam</BaseClass>
+        <ECProperty propertyName="Type" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="MlineStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_MlineStyle</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PatternAngle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Angle1" typeName="double" displayLabel="Angle 1">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Standard>11</Standard>
+                </ExtendType>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Angle2" typeName="double" displayLabel="Angle 2">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Standard>11</Standard>
+                </ExtendType>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PatternDelta" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="X" typeName="double">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Standard>8</Standard>
+                </ExtendType>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Y" typeName="double">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Standard>8</Standard>
+                </ExtendType>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="ScaleParam" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="double" MinimumValue="1E-07">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PatternScale" isStruct="True" isDomainClass="True">
+        <BaseClass>ScaleParam</BaseClass>
+    </ECClass>
+    <ECClass typeName="Priority" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="int">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Scale" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="point3d">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SectionCalloutStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DSSectionCallout</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="TerminatorScale" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="double" MinimumValue="1E-07">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="TextStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_TextStyle</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="TextStyleOverride" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="TextHeight" typeName="double" displayLabel="Height">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowNonZeroDistanceValueAsString</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TextWidth" typeName="double" displayLabel="Width">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowNonZeroDistanceValueAsString</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Font" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_FontName</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TextSlant" typeName="double" displayLabel="Slant">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>96000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Standard>11</Standard>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TextJustification" typeName="int" displayLabel="Text Justification">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>95000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_TextJustification</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="NodeJustification" typeName="int" displayLabel="Node Justification">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>94000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_TextNodeJustification</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LineLength" typeName="int" displayLabel="Line Length">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>93000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LineSpacing" typeName="double" displayLabel="Line Spacing">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>92000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowDistanceValueAsString</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CharacterSpacing" typeName="double" displayLabel="Interchar Spacing">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>91000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowDistanceValueAsString</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UseFractions" typeName="boolean" displayLabel="Fractions">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>90000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UseVerticalText" typeName="boolean" displayLabel="Vertical Text">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>89000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UnderlineText" typeName="boolean" displayLabel="Underline">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>88000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="TitleTextStyle" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="string">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DSTitleText</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Transparency" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="double">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Weight" isStruct="True" isDomainClass="True">
+        <BaseClass>CriteriaStruct</BaseClass>
+        <ECProperty propertyName="Value" typeName="int">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <RequiresRefresh xmlns="EditorCustomAttributes.01.00" />
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_Weight</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Ustn_ElementParams" isStruct="True" isDomainClass="True">
+        <ECArrayProperty propertyName="Levels" typeName="Level" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>General</Name>
+                    <DisplayLabel>General Settings</DisplayLabel>
+                    <Priority>300000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_LevelStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="Colors" typeName="Color" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>General</Name>
+                    <DisplayLabel>General Settings</DisplayLabel>
+                    <Priority>300000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_ColorStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="LineStyles" typeName="LineStyle" displayLabel="Line Styles" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>General</Name>
+                    <DisplayLabel>General Settings</DisplayLabel>
+                    <Priority>300000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowLineStyleArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_LineStyleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="Weights" typeName="Weight" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>General</Name>
+                    <DisplayLabel>General Settings</DisplayLabel>
+                    <Priority>300000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowLineWeightArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_WeightStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="ElementClasses" typeName="ElementClass" displayLabel="Classes" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>General</Name>
+                    <DisplayLabel>General Settings</DisplayLabel>
+                    <Priority>300000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>96000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowClassArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_ClassStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="Transparencies" typeName="Transparency" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>General</Name>
+                    <DisplayLabel>General Settings</DisplayLabel>
+                    <Priority>300000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>95000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_TransparencyStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="Priorities" typeName="Priority" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>General</Name>
+                    <DisplayLabel>General Settings</DisplayLabel>
+                    <Priority>300000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>94000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_PriorityStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="LineStyleParams" typeName="LineStyleParam" displayLabel="Line Style Parameters" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>General</Name>
+                    <DisplayLabel>General Settings</DisplayLabel>
+                    <Priority>300000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>93500</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="AreaModes" typeName="AreaMode" displayLabel="Areas" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Linear</Name>
+                    <DisplayLabel>Closed Linear Settings</DisplayLabel>
+                    <Priority>200000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_AreaModeStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="FillModes" typeName="FillMode" displayLabel="Fill Types" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Linear</Name>
+                    <DisplayLabel>Closed Linear Settings</DisplayLabel>
+                    <Priority>200000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_AreaFillStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="FillColors" typeName="FillColor" displayLabel="Fill Colors" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Linear</Name>
+                    <DisplayLabel>Closed Linear Settings</DisplayLabel>
+                    <Priority>200000</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_FillColorStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="CellNames" typeName="CellName" displayLabel="Active Cell" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Cell</Name>
+                    <DisplayLabel>Cell Settings</DisplayLabel>
+                    <Priority>199998</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_CellNameStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="Scales" typeName="Scale" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Cell</Name>
+                    <DisplayLabel>Cell Settings</DisplayLabel>
+                    <Priority>199998</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99500</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>NonZeroPointStructType</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="Terminators" typeName="CellName" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Cell</Name>
+                    <DisplayLabel>Cell Settings</DisplayLabel>
+                    <Priority>199998</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_TerminatorStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="TerminatorScales" typeName="TerminatorScale" displayLabel="Terminator Scales" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Cell</Name>
+                    <DisplayLabel>Cell Settings</DisplayLabel>
+                    <Priority>199998</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_TerminatorScaleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="ActivePoints" typeName="ActivePoint" displayLabel="Active Points" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>ActivePoints</Name>
+                    <DisplayLabel>Point Settings</DisplayLabel>
+                    <Priority>199997</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowActivePointArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_ActivePointStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="TextStyles" typeName="TextStyle" displayLabel="Text Styles" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Text</Name>
+                    <DisplayLabel>Text Settings</DisplayLabel>
+                    <Priority>199999</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_TextStylesStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="TextStyleOverrides" typeName="TextStyleOverride" displayLabel="TextStyle Overrides" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Text</Name>
+                    <DisplayLabel>Text Settings</DisplayLabel>
+                    <Priority>199999</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="PatternCells" typeName="CellName" displayLabel="Area Pattern Cells" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Pattern</Name>
+                    <DisplayLabel>Pattern/Hatch Settings</DisplayLabel>
+                    <Priority>199996</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_PatternCellStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="PatternScales" typeName="PatternScale" displayLabel="Area Pattern Scales" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Pattern</Name>
+                    <DisplayLabel>Pattern/Hatch Settings</DisplayLabel>
+                    <Priority>199996</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_PatternScaleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="AreaPatternDeltas" typeName="PatternDelta" displayLabel="Area Pattern Spacing" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Pattern</Name>
+                    <DisplayLabel>Pattern/Hatch Settings</DisplayLabel>
+                    <Priority>199996</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowDeltaXYArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_PatternDeltaStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="AreaPatternAngles" typeName="AreaPatternAngle" displayLabel="Area Pattern Angles" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Pattern</Name>
+                    <DisplayLabel>Pattern/Hatch Settings</DisplayLabel>
+                    <Priority>199996</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>96000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowAngleArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_AreaPatAngleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="PatternDeltas" typeName="PatternDelta" displayLabel="Hatch Spacing" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Pattern</Name>
+                    <DisplayLabel>Pattern/Hatch Settings</DisplayLabel>
+                    <Priority>199996</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>94000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowDeltaXYArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_PatternDeltaStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="PatternAngles" typeName="PatternAngle" displayLabel="Hatch Angles" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Pattern</Name>
+                    <DisplayLabel>Pattern/Hatch Settings</DisplayLabel>
+                    <Priority>199996</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>93000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowPatternAngleArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_PatternAngleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="MlineStyles" typeName="MlineStyle" displayLabel="Multiline Styles" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Multiline</Name>
+                    <DisplayLabel>Multi-line Settings</DisplayLabel>
+                    <Priority>199995</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_MlineStyleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="DimensionStyles" typeName="DimensionStyle" displayLabel="Dimension Styles" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Dimension</Name>
+                    <DisplayLabel>Dimension Settings</DisplayLabel>
+                    <Priority>199994</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DimensionStyleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="Materials" typeName="Material" displayLabel="Material" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Materials</Name>
+                    <DisplayLabel>Material Settings</DisplayLabel>
+                    <Priority>199993</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_MaterialStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="TitleTextStyles" typeName="TitleTextStyle" displayLabel="Title Text Style" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DetailingSymbols</Name>
+                    <DisplayLabel>Detail Symbols</DisplayLabel>
+                    <Priority>199992</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_TitleTextStyleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="DrawingTitleStyles" typeName="DrawingTitleStyle" displayLabel="Drawing Title Style" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DetailingSymbols</Name>
+                    <DisplayLabel>Detail Symbols</DisplayLabel>
+                    <Priority>199992</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DrawingTitleStyleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="DetailCalloutStyles" typeName="DetailCalloutStyle" displayLabel="Detail Callout Style" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DetailingSymbols</Name>
+                    <DisplayLabel>Detail Symbols</DisplayLabel>
+                    <Priority>199992</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_DetailCalloutStyleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="ElevationCalloutStyles" typeName="ElevationCalloutStyle" displayLabel="Elevation Callout Style" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DetailingSymbols</Name>
+                    <DisplayLabel>Detail Symbols</DisplayLabel>
+                    <Priority>199992</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_ElevationCalloutStyleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="SectionCalloutStyles" typeName="SectionCalloutStyle" displayLabel="Section Callout Style" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DetailingSymbols</Name>
+                    <DisplayLabel>Detail Symbols</DisplayLabel>
+                    <Priority>199992</Priority>
+                    <Expand>True</Expand>
+                </Category>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100000</Priority>
+                </PropertyPriority>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ShowArrayAsString</Name>
+                </ExtendType>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>ElementParams_SectionCalloutStyleStruct</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+</ECSchema>

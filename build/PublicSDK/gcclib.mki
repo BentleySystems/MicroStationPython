@@ -1,0 +1,38 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if ($(BUILD_TOOLSET) != "LINUX_GCC_DEPRECATED" ) && ($(BUILD_TOOLSET) != "ANDROID_CLANG")
+    %error unsupported toolset - $(BUILD_TOOLSET)
+%endif
+
+%if !defined (LIB_OBJS)
+    %warn GCCLIB.MKI: LIB_OBJS must be set
+    %return
+%endif
+
+%if defined (LIB_MULTI_PASS_BUILD)
+    %warn GCCLIB.MKI: LIB_MULTI_PASS_BUILD not yet supported for GCC/clang
+    %return
+%endif
+
+#--------------------------------------------------------------------------------------
+#   GCC options files must use UNIX-style forward slashes for file names
+#--------------------------------------------------------------------------------------
+AR_COMMAND_OPTIONS = crs $(LIB_OUT_NAME) $[@realpath $(LIB_OBJS)]
+
+%ifdef BENTLEY_ANDROID_UseUnixFilenames
+    always:
+        ~set AR_COMMAND_OPTIONS $[@subst \, \/, $(AR_COMMAND_OPTIONS)]
+%endif
+
+#--------------------------------------------------------------------------------------
+#   Create the library
+#--------------------------------------------------------------------------------------
+$(LIB_OUT_NAME) : $(LIB_OBJS)
+    $(msg)
+    > $(creatlib_cmd)
+    $(AR_COMMAND_OPTIONS)
+    <
+    $(BENTLEY_ANDROID_TOOLCHAIN_ar) @$(creatlib_cmd)
+    ~time

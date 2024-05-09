@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ec:ECSchema schemaName="Bentley_JSpace_ClassEditor_CustomAttributes" nameSpacePrefix="bjeca" version="2.0" xmlns:ec="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ec:ECClass typeName="CustomAttributeInfo" isDomainClass="True" isStruct="False" isCustomAttributeClass="True">
+        <ec:ECProperty propertyName="IsForSchema" typeName="boolean"/>
+        <ec:ECProperty propertyName="IsForClasses" typeName="boolean"/>
+        <ec:ECProperty propertyName="IsForProperties" typeName="boolean"/>
+        <ec:ECProperty propertyName="IsMandatory" typeName="boolean"/>
+    </ec:ECClass>
+</ec:ECSchema>

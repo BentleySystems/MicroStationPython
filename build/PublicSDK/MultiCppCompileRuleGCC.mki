@@ -1,0 +1,138 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+#
+#   WARNING: This .mki file is used for both GCC, LLVM and EMCC
+#
+
+%undef NeedsCompiledCppList
+%undef NeedsCompiledCList
+%undef MultiCompileCppList
+%undef MultiCompileCList
+%undef MultiCompileCObjectList
+%undef MultiCompileCppObjectList
+%undef MultiCompileObjectList
+
+# Tricky: must use temp macro to hold old value of MultiCompileNdx, since assignment will start by removing the existing value of MultiCompileNdx before evaluating the right hand side
+WasNdx =% $(MultiCompileNdx)
+MultiCompileNdx =% $[@strip $[@math_add $(WasNdx), "1"]]
+
+MultiCompileCppListFile=$(o)$(_MakeFileName)CppSources$(MultiCompileNdx).txt
+MultiCompileCListFile  =$(o)$(_MakeFileName)CSources$(MultiCompileNdx).txt
+
+#
+#  If the includer defines MultiCompileDepends, then we are able to try to detect when compilands have been removed from the section.
+#  If they choose not to define MultiCompileDepends then we will still work, but with the limitation that we cannot determine that
+#  compilands have been removed and thus we could end up presenting an .obj for a removed compiland to the linker.
+#
+%if defined (MultiCompileDepends)
+    MultiCompileDependsIsDefined=1
+    SaveMultiCompileDepends =% $[MultiCompileDepends]
+
+    RedoCppMakefile=$(o)$(_MakeFileName)_cpp$(MultiCompileNdx).mke
+    RedoCMakefile=$(o)$(_MakeFileName)_c$(MultiCompileNdx).mke
+
+    $(o)$(_MakeFileName)MultiCompile$(MultiCompileNdx).time : ${MultiCompileDepends}
+        $(msg)
+        !> $@
+        This file assists in detection of the removal of multi-compiled dependency blocks from section $(MultiCompileNdx) in $(_MakeFileSpec).
+        <
+        !~set MultiCompileDependsChanged 1
+    %iffile $(o)$(_MakeFileName)MultiCompile$(MultiCompileNdx).time
+        !~set RebuildCompilandLists 1
+        %iffile $(RedoCppMakefile)
+            !$(deleteCmd) $(RedoCppMakefile)
+        %endif
+        %iffile $(RedoCMakefile)
+            !$(deleteCmd) $(RedoCMakefile)
+        %endif
+        %iffile $(MultiCompileCppListFile)
+            !$(deleteCmd) $(MultiCompileCppListFile)
+        %endif
+        %iffile $(MultiCompileCListFile)
+            !$(deleteCmd) $(MultiCompileCListFile)
+        %endif
+    %endif
+        ~time
+
+    %if defined (RebuildCompilandLists)
+        %undef RebuildCompilandLists
+        #
+        #  We need continuationChar to be backslash since we're actually creating make files with dependency lines below.
+        #  This means that in a makefile section that is bracketed by the multicompile .mki files, that there cannot be
+        #  any code that has any dependency upon the value of continuationChar whatsoever.
+        #
+        continuationChar=//
+    %else
+        %undef MultiCompileDepends
+    %endif
+%endif
+
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    %iffile $(RedoCppMakefile)
+        always:
+            !$(deleteCmd) $(RedoCppMakefile)
+    %endif
+
+    %iffile $(RedoCMakefile)
+        always:
+            !$(deleteCmd) $(RedoCMakefile)
+    %endif
+
+    %iffile $(MultiCompileCppListFile)
+        always:
+            !$(deleteCmd) $(MultiCompileCppListFile)
+    %endif
+
+    %iffile $(MultiCompileCListFile)
+        always:
+            !$(deleteCmd) $(MultiCompileCListFile)
+    %endif
+%endif
+
+.(cxx,cpp,cc).o:
+    !| NeedsCompileCppList is $(NeedsCompileCppList)
+    !|**> $@ <$=>
+    %if defined (MultiCompileDependsIsDefined)
+        ~assert ("$[@findstring $${MultiCompileDepends}, $!]" != " "), "All multi-compiled dependency lists must include the $${MultiCompileDepends} macro. Correct the dependency block for $<."
+        ~assert ("$(@D) " == "$(o) "), "Multi-compiled objects must go to $$(o) as their object directory. Failing on dependency $<"
+        ~assert ("$(@B) " == "$[@basename $<] "), "Multi-compiled files must compile to objects with the same name. Failing on dependency $<"
+    %endif
+    %if defined (MultiCompileDepends)
+        !>> $(RedoCppMakefile)
+        ~flipBackSlashes $!
+        ~endl
+        <
+        !>>$(MultiCompileCppListFile)
+        $<
+        <
+    %else
+        !~set NeedsCompiledCppList $(NeedsCompiledCppList) $<
+    %endif
+    %if defined (DisableMultiCompile)
+        %warn DisableMultiCompile is defined - this may cause MultiCompileObjectList to be incorrect
+        $(CCCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCPPCompileArgs) -o $(CTargetSpec) $<
+    %endif
+
+.c.o:
+    !|**> $@ <$?>
+    %if defined (MultiCompileDepends)
+        !>> $(RedoCMakefile)
+        ~flipBackSlashes $!
+        ~endl
+        <
+        !>> $(MultiCompileCListFile)
+        $<
+        <
+    %else
+        !~set NeedsCompiledCList $(NeedsCompiledCList) $<
+    %endif
+    %if defined (DisableMultiCompile)
+        %warn DisableMultiCompile is defined - this may cause MultiCompileObjectList to be incorrect
+        $(CCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCCompileArgs) -o $(CTargetSpec) $<
+    %endif
+
+%undef MultiCompileDependsChanged
+%undef MultiCompileDependsIsDefined

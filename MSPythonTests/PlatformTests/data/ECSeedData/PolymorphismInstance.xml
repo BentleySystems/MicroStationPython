@@ -1,0 +1,17 @@
+<RootClass xmlns="Polymorphism.01.00">
+    <InRootClass>-1</InRootClass>
+    <PolymorphArray>
+        <BaseClass>
+            <InBaseClass>0</InBaseClass>
+        </BaseClass>
+        <SubClass1>
+            <InBaseClass>1</InBaseClass>
+            <InSubClass1>2</InSubClass1>
+        </SubClass1>
+        <SubClass2>
+            <InBaseClass>3</InBaseClass>
+            <InSubClass1>4</InSubClass1>
+            <InSubClass2>5</InSubClass2>
+        </SubClass2>
+    </PolymorphArray>
+</RootClass>

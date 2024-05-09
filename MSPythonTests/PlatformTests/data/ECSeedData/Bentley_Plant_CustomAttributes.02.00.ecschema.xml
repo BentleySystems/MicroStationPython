@@ -1,0 +1,2127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="Bentley_Plant_CustomAttributes" nameSpacePrefix="bpca" version="2.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_JSpace_ClassEditor_CustomAttributes" version="02.00" prefix="bjeca" />
+    <ECSchemaReference name="DictionaryMetaData" version="01.00" prefix="dmd" />
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECClass typeName="MappingBase" isCustomAttributeClass="True" />
+    <ECClass typeName="AP_2D_AttributeProperties" displayLabel="AutoPLANT_P&amp;ID_Property_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="PropertyName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ColumnName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TableName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="AP_2D_ClassProperties" displayLabel="AutoPLANT_P&amp;ID_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="AP_2D_Specific_Properties_EC_ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="AP_2D_Relationship_Properties_EC_ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="InstanceIdAttribute" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TagReg_Table" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Source_Table" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TLink_Table" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SourceIDTable" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TargetIDTable" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SourceIDColumn" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TargetIDColumn" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LinkColumn" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="InputOutPut" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="Tables" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="AssociatedFields" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="AssociatedValues" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 2D</Name>
+                    <Description>AutoPLANT 2D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 2D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="AP_2D_ExtPropertyMap" displayLabel="AutoPLANT_P&amp;ID_ExtPropertyMap" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECProperty propertyName="PropertyID" typeName="string" />
+    </ECClass>
+    <ECClass typeName="AP_3D_AttributeProperties" displayLabel="AutoPLANT_PDW_Property_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="PropertyName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 3D</Name>
+                    <Description>AutoPLANT 3D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 3D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ColumnName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 3D</Name>
+                    <Description>AutoPLANT 3D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 3D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TableName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 3D</Name>
+                    <Description>AutoPLANT 3D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 3D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsValueToBeMapped" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ValueMapName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="AP_3D_ClassProperties" displayLabel="AutoPLANT_PDW_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="AP_3D_Specific_Properties_EC_ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 3D</Name>
+                    <Description>AutoPLANT 3D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 3D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="AP_3D_Relationship_Properties_EC_ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 3D</Name>
+                    <Description>AutoPLANT 3D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 3D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ModuleName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 3D</Name>
+                    <Description>AutoPLANT 3D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 3D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPLANT 3D</Name>
+                    <Description>AutoPLANT 3D attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPLANT 3D</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="ClassNames" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="ModuleNames" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECProperty propertyName="IsEquipment" typeName="boolean" description="Is this an Equipment class" />
+    </ECClass>
+    <ECClass typeName="AutoPIPE_AttributeProperties" displayLabel="AutoPIPE_Property_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="TableName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPIPE</Name>
+                    <Description>AutoPIPE attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPIPE</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="FieldName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPIPE</Name>
+                    <Description>AutoPIPE attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPIPE</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TablePointer" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPIPE</Name>
+                    <Description>AutoPIPE attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPIPE</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Description" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPIPE</Name>
+                    <Description>AutoPIPE attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPIPE</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="AutoPIPE_ClassProperties" displayLabel="AutoPIPE_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="TableName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPIPE</Name>
+                    <Description>AutoPIPE attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPIPE</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ComponentType" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AutoPIPE</Name>
+                    <Description>AutoPIPE attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AutoPIPE</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="AutoPIPE_KindOfQuantity_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+    </ECClass>
+    <ECClass typeName="AutoPIPE_Unit_Map" displayLabel="AutoPIPE Unit Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+    </ECClass>
+    <ECClass typeName="AutoPLANT_PDW_Value_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECProperty propertyName="ValueNameInAutoPLANT_3D" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="AXSYSPROCESS_AttributeProperties" displayLabel="AXSYS_PROCESS_Property_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Attribute" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AXSYS.Process</Name>
+                    <Description>AXSYS.Process attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AXSYS.Process</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="AXSYSPROCESS_ClassProperties" displayLabel="AXSYS_PROCESS_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SSMCLSNM" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AXSYS.Process</Name>
+                    <Description>AXSYS.Process attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AXSYS.Process</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DataClass_Name" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AXSYS.Process</Name>
+                    <Description>AXSYS.Process attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AXSYS.Process</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Type" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AXSYS.Process</Name>
+                    <Description>AXSYS.Process attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AXSYS.Process</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Gtyp" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AXSYS.Process</Name>
+                    <Description>AXSYS.Process attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AXSYS.Process</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Styp" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>AXSYS.Process</Name>
+                    <Description>AXSYS.Process attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>AXSYS.Process</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TargetAttribute" typeName="string" displayLabel="Target Attribute">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SourceAttribute" typeName="string" displayLabel="Source Attribute">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="DependantClassName" typeName="string" displayLabel="Dependant Class Name" minOccurs="1" maxOccurs="1" />
+        <ECArrayProperty propertyName="RelationshipToDependantClass" typeName="string" displayLabel="Relationship To Dependant Class" minOccurs="1" maxOccurs="1" />
+        <ECProperty propertyName="DependantClassUseInheritedProperties" typeName="string" description="When the class used as a dependant Class, will it use the Inherited properties from Parent class (Yes/No)" displayLabel="Dependant Class Use Inherited Properties" />
+        <ECProperty propertyName="ScanString" typeName="string" />
+    </ECClass>
+    <ECClass typeName="CAE_To_Plant_ClassMapping" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SourceName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>CAE To Plant Class Mapping</Name>
+                    <Description>CAE To Plant Class Mapping attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>CAE To Plant Class Mapping</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TargetName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>CAE To Plant Class Mapping</Name>
+                    <Description>CAE To Plant Class Mapping attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>CAE To Plant Class Mapping</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CAE_To_Plant_MapTargets" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SourceName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>CAE To Plant Map Targets</Name>
+                    <Description>CAE To Plant Map Targets attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>CAE To Plant Map Targets</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TargetName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>CAE To Plant Map Targets</Name>
+                    <Description>CAE To Plant Map Targets attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>CAE To Plant Map Targets</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Targets" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>CAE To Plant Map Targets</Name>
+                    <Description>CAE To Plant Map Targets attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>CAE To Plant Map Targets</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CAE_To_Plant_PropertyMapping" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SourceName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>CAE To Plant Property Mapping</Name>
+                    <Description>CAE To Plant Property Mapping attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>CAE To Plant Property Mapping</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TargetName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>CAE To Plant Property Mapping</Name>
+                    <Description>CAE To Plant Property Mapping attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>CAE To Plant Property Mapping</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="Sources" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>CAE To Plant Property Mapping</Name>
+                    <Description>CAE To Plant Property Mapping attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>CAE To Plant Property Mapping</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="CodeGenerationBase" isCustomAttributeClass="True" />
+    <ECClass typeName="ClassCodeGeneration" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>CodeGenerationBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="GeneratedName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Class</Name>
+                    <Description>Class level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Class</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="FileName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Class</Name>
+                    <Description>Class level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Class</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="AccessPrivilege" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Class</Name>
+                    <Description>Class level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Class</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="EW_AssociationProperties" displayLabel="eWarehouse_Association_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="AssociationName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ReverseAssociationName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DatamartTable" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DatamartSourceUIDColumn" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DatamartTargetUIDColumn" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="EW_AttributeProperties" displayLabel="eWarehouse_Property_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="AttributeName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ViewRole" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="EditRole" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MultiValue" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DefaultValidate" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Mandatory" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DesignCaseCandidate" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="FreezeAtLCState" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MandatoryAtLCState" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="KeyAttributeAtLCState" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsSpecialProperty" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SpecialPropertyType" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DMEntity" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Ignore" typeName="boolean" />
+    </ECClass>
+    <ECClass typeName="EW_ClassProperties" displayLabel="eWarehouse_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ObjectType" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Definition" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LifecycleChain" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DataMartObjectTable" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DataMartAttributeTable" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>EWarehouse</Name>
+                    <Description>EWarehouse attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>EWarehouse</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="EW_DMS_Map_Base" displayLabel="eWarehouse DMS Map Base" isDomainClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECProperty propertyName="DMSClientID" typeName="int">
+            <ECCustomAttributes>
+                <StandardValues xmlns="EditorCustomAttributes.01.00">
+                    <MustBeFromList>True</MustBeFromList>
+                    <ValueMap>
+                        <ValueMap>
+                            <DisplayString>ContentServerExplorer</DisplayString>
+                            <Value>0</Value>
+                        </ValueMap>
+                        <ValueMap>
+                            <DisplayString>ContentServerWEL</DisplayString>
+                            <Value>1</Value>
+                        </ValueMap>
+                    </ValueMap>
+                </StandardValues>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="EW_DMS_DocID_Map" displayLabel="eWarehouse DMS DocID Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>EW_DMS_Map_Base</BaseClass>
+    </ECClass>
+    <ECClass typeName="EW_DMS_TipDocID_Map" displayLabel="eWarehouse DMS Tip DocID Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>EW_DMS_Map_Base</BaseClass>
+    </ECClass>
+    <ECClass typeName="EW_DMS_URL_Map" displayLabel="eWarehouse DMS URL Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>EW_DMS_Map_Base</BaseClass>
+        <ECProperty propertyName="DMSClientName" typeName="string" />
+    </ECClass>
+    <ECClass typeName="EW_DMS_Version_Map" displayLabel="eWarehouse DMS Version Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+    </ECClass>
+    <ECClass typeName="FILE_BACKED_OBJECT" displayLabel="FILE BACKED OBJECT" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+    </ECClass>
+    <ECClass typeName="IconInfo_ClassProperties" displayLabel="IconInfo_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECProperty propertyName="ClassIconFileName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="InstanceIconFileName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="IFS_AssociationProperties" displayLabel="IFS_Association_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RelationType" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SuperDescription" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SubDescription" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Description" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SuperOnlyOne" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SubOnlyOne" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ObjectSuperDescription" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ObjectSubDescription" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ConnectionType" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="IFS_AttributeProperties" displayLabel="IFS_Property_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ID" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Name" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Fixed" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Enabled" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Description" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="IFS_ClassProperties" displayLabel="IFS_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Class" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Identity" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Description" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Mechanical_Type" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Object_Level" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsDesignPartClass" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsElectricalClass" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsInstrumentClass" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsMechanicalClass" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsObjectClass" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsProcessClass" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>IFS</Name>
+                    <Description>IFS Attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>IFS</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Notes" isCustomAttributeClass="True" />
+    <ECClass typeName="Plant_To_CAE_MapTargets" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SourceName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Plant To CAE Map Targets</Name>
+                    <Description>Plant To CAE Map Targets attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Plant To CAE Map Targets</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TargetName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Plant To CAE Map Targets</Name>
+                    <Description>Plant To CAE Map Targets attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Plant To CAE Map Targets</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Targets" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Plant To CAE Map Targets</Name>
+                    <Description>Plant To CAE Map Targets attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Plant To CAE Map Targets</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Plant_To_CAE_PropertyMapping" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SourceName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Plant To CAE Property Mapping</Name>
+                    <Description>Plant To CAE Property Mapping attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Plant To CAE Property Mapping</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TargetName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Plant To CAE Property Mapping</Name>
+                    <Description>Plant To CAE Property Mapping attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Plant To CAE Property Mapping</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="Sources" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Plant To CAE Property Mapping</Name>
+                    <Description>Plant To CAE Property Mapping attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Plant To CAE Property Mapping</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="PlantSpace_DesignSeries_Value_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECProperty propertyName="ValueNameInPSDS" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PropertyCodeGeneration" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>CodeGenerationBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="GeneratedName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Property</Name>
+                    <Description>Property level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Property</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="FileName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Property</Name>
+                    <Description>Property level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Property</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="AccessPrivilege" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Property</Name>
+                    <Description>Property level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Property</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PSDS_AttributeProperties" displayLabel="PlantSpace_DesignSeries_Property_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="PropertyName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsValueToBeMapped" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ValueMapName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="PSDS_ClassProperties" displayLabel="PlantSpace_DesignSeries_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="InstanceIdAttribute" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="ClassNames" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECProperty propertyName="AttributeDataType" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Source_Table" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PSDS_Specific_Properties_EC_ClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UniqueID_Table" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="UniqueID_Column" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>DesignSeries</Name>
+                    <Description>Design Series attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Design Series</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="HasDifferentNominalEndSizes" typeName="boolean" displayLabel="Has Different Nominal End Sizes">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="RDL" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECProperty propertyName="RDLRefClass" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SchemaCodeGeneration" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>CodeGenerationBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>True</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SolutionPath" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Schema</Name>
+                    <Description>Schema level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Schema</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SolutionName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Schema</Name>
+                    <Description>Schema level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Schema</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ProjectName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Schema</Name>
+                    <Description>Schema level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Schema</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Namespace" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>Schema</Name>
+                    <Description>Schema level code generation attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>Schema</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="SchemaNotes" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>Notes</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Creator" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>SchemaDesignNotes</Name>
+                    <Description>SchemaDesignNotes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>SchemaDesignNotes</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CreatedOn" typeName="dateTime">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>SchemaDesignNotes</Name>
+                    <Description>SchemaDesignNotes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>SchemaDesignNotes</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Comments" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>SchemaDesignNotes</Name>
+                    <Description>SchemaDesignNotes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>SchemaDesignNotes</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="XMP_AttributeProperties" displayLabel="XMpLant_Property_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>True</IsForProperties>
+                <IsForClasses>False</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="PropertyName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DataType" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ValueMapName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DefaultValue" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Units" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsValueToBeMapped" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="IsAttributeItemOrGeneric" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="XMP_ClassProperties" displayLabel="XMpLant_Class_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECCustomAttributes>
+            <CustomAttributeInfo xmlns="Bentley_JSpace_ClassEditor_CustomAttributes.02.00">
+                <IsMandatory>True</IsMandatory>
+                <IsForProperties>False</IsForProperties>
+                <IsForClasses>True</IsForClasses>
+                <IsForSchema>False</IsForSchema>
+            </CustomAttributeInfo>
+        </ECCustomAttributes>
+        <ECArrayProperty propertyName="ComponentClassNames" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00" />
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="ClassNameArray" typeName="string" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+                <Category xmlns="EditorCustomAttributes.01.00">
+                    <Name>XMpLant</Name>
+                    <Description>XMpLant attributes</Description>
+                    <Priority>200000</Priority>
+                    <DisplayLabel>XMpLant</DisplayLabel>
+                </Category>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECProperty propertyName="IsReducingComponent" typeName="boolean">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="XMpLant_Value_Map" isDomainClass="True" isCustomAttributeClass="True">
+        <BaseClass>MappingBase</BaseClass>
+        <ECProperty propertyName="ValueNameInXMpLant" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+</ECSchema>

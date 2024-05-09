@@ -1,0 +1,79 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if !defined (BENTLEY_ANDROID_TOOLCHAIN_link)
+    %error You must include $(BuildContext)ToolContext.mki before including this file.
+%endif
+
+# Links a shared library (so) for the Android platform.
+
+%if !defined(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES) || !defined(BENTLEY_TOOLCONTEXT_LINK_NAME) || !defined(BENTLEY_TOOLCONTEXT_LINK_DEST) 
+    %warn Inputs:
+    %warn -------
+    %warn BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES     - the .o and .a files to be linked in
+    %warn BENTLEY_TOOLCONTEXT_LINK_NAME             - the name of the shared object to be created, not including the "lib" prefix or the ".so" suffix.
+    %warn BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER   - optional. A version number to be appended to $$(BENTLEY_TOOLCONTEXT_LINK_NAME) in order to define the SO name and the output library file name. Defaults to the empty string.
+    %warn BENTLEY_TOOLCONTEXT_LINK_SONAME           - optional. The soname. Defaults to lib$$(BENTLEY_TOOLCONTEXT_LINK_NAME)$$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).so
+    %warn BENTLEY_TOOLCONTEXT_LINK_DEST             - the directory where the .so is to be created (with trailing /). The output file is $$(BENTLEY_TOOLCONTEXT_LINK_DEST)lib$$(BENTLEY_TOOLCONTEXT_LINK_NAME)$$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).so
+    %warn BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST      - optional. Where to write temporary files. Defaults to BENTLEY_TOOLCONTEXT_LINK_DEST
+    %warn BENTLEY_TOOLCONTEXT_LINK_LIBRARIES        - optional. Additional .so files to link with. If supplied, these libraries will appear after BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES and before the system libraries in the link statement.
+    %warn BENTLEY_TOOLCONTEXT_LINK_OPTIONS_NO_WHOLE_ARCHIVE - optional. Define this if you do *not* want -Wl,--whole-archive. The default is --whole-archive.
+    %warn BENTLEY_TOOLCONTEXT_LINK_WHOLE_ARCHIVE_LIBS - optional. Adds libraries to the link command between BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES and BENTLEY_TOOLCONTEXT_LINK_LIBRARIES, always with the whole-archive flag set. Intended for high-level libraries that contain JNI exports.
+    %warn BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE      - optional. Link options that are inserted before BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES.
+    %warn BENTLEY_TOOLCONTEXT_LINK_OPTIONS_POST     - optional. Link options that are inserted after BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES.
+    %warn -------
+    %warn Outputs:
+    %warn -------
+    %warn BENTLEY_TOOLCONTEXT_LINK_OUT_NAME         - The full filename of the shared library file that was created: $(BENTLEY_TOOLCONTEXT_LINK_DEST)lib$(BENTLEY_TOOLCONTEXT_LINK_NAME)$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).so 
+    %warn -------
+
+    %error A required macro is not defined.
+%endif
+
+%ifndef BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST
+    BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST = $(BENTLEY_TOOLCONTEXT_LINK_DEST)
+%endif
+
+%ifndef BENTLEY_TOOLCONTEXT_LINK_SONAME
+    BENTLEY_TOOLCONTEXT_LINK_SONAME = lib$(BENTLEY_TOOLCONTEXT_LINK_NAME)$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).so
+%endif
+
+BENTLEY_TOOLCONTEXT_LINK_OUT_NAME=$(BENTLEY_TOOLCONTEXT_LINK_DEST)lib$(BENTLEY_TOOLCONTEXT_LINK_NAME)$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).so
+
+BENTLEY_TOOLCONTEXT_LINK__RSP = $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST)$(BENTLEY_TOOLCONTEXT_LINK_NAME)link.rsp
+
+$(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME) : $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES) $(BENTLEY_TOOLCONTEXT_LINK_WHOLE_ARCHIVE_LIBS) $(BENTLEY_TOOLCONTEXT_LINK_LIBRARIES) $(_MakeFileSpec)
+    |[== Building $@, ($=) ==]
+    >$(BENTLEY_TOOLCONTEXT_LINK__RSP)
+    -Wl,-soname,$(BENTLEY_TOOLCONTEXT_LINK_SONAME)
+    -o $[@subst \, \/, $(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME)]
+    $(BENTLEY_ANDROID_LINK_Options) \
+    $(BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE) \
+    -Wl,--no-map-whole-files \
+    %if !defined (BENTLEY_TOOLCONTEXT_LINK_OPTIONS_NO_WHOLE_ARCHIVE)
+        -Wl,--whole-archive
+    %endif
+    $[@subst \, \/, $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES)] \
+    $(BENTLEY_TOOLCONTEXT_LINK_OPTIONS_POST) \
+    %if defined (BENTLEY_TOOLCONTEXT_LINK_WHOLE_ARCHIVE_LIBS)
+        -Wl,--whole-archive
+        $[@subst \, \/, $(BENTLEY_TOOLCONTEXT_LINK_WHOLE_ARCHIVE_LIBS)] \
+    %endif
+    -Wl,--no-whole-archive \
+    $(BENTLEY_ANDROID_LINK_StaticSystemLibraries) \
+    %ifdef BENTLEY_TOOLCONTEXT_LINK_LIBRARIES
+        $[@subst \, \/, $(BENTLEY_TOOLCONTEXT_LINK_LIBRARIES)] \
+    %endif
+    $(BENTLEY_ANDROID_LINK_SystemLibraries)
+    <
+    $(BENTLEY_ANDROID_TOOLCHAIN_link)  @$(BENTLEY_TOOLCONTEXT_LINK__RSP)
+    ~time
+
+%if !defined (BMAKE_DELETE_ALL_TARGETS)
+    always:
+        ~d $(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME).map
+        ~d $(BENTLEY_TOOLCONTEXT_LINK__RSP)
+%endif
+
+%undef BENTLEY_TOOLCONTEXT_LINK__RSP

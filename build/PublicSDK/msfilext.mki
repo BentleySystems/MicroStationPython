@@ -1,0 +1,65 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if defined (__MSFilExt_MKI__)
+    %return
+%endif
+__MSFilExt_MKI__=1
+
+%if $(TARGET_PLATFORM) == "iOS" || $(TARGET_PLATFORM) == "MacOS"
+
+    shlibprefix         = lib
+    shlibext            = .dylib
+    shlibdebugext       = .dylib
+    stlibprefix         = lib
+    stlibext            = .a
+    stlibdebugext       = .a
+    libprefix           = lib
+    libext              = .dylib
+    oext                = .o
+
+%elif $(TARGET_PLATFORM) == "Javascript"
+    shlibprefix         = lib
+    shlibext            = .bc
+    shlibdebugext       = .bc
+    stlibprefix         = lib
+    stlibext            = .bc
+    stlibdebugext       = .bc
+    libprefix           = lib
+    libext              = .bc
+    oext                = .o
+    exeext              = .html
+
+%elif $(TARGET_PLATFORM) == "Unix" || $(USE_UNIX_FILENAMES) == 1
+    shlibprefix         = lib
+    shlibext            = .so
+    shlibdebugext       = .so
+    stlibprefix         = lib
+    stlibext            = .a
+    stlibdebugext       = .a
+    libprefix           = lib
+    libext              = .so
+    oext                = .o
+
+%elif $(TARGET_PLATFORM) == "Windows" || $(TARGET_PLATFORM) == "WinRT"
+    oext                = .obj
+    libext              = .lib
+    stlibext            = .lib
+    exeext              = .exe
+    shlibext            = .dll
+    shlibdebugext       = .pdb
+    stlibdebugext       = .pdb
+
+%else
+
+    %error TARGET_PLATFORM=$(TARGET_PLATFORM) - unrecognized platform
+
+%endif
+
+%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED"
+    pchext              = .h.gch
+%else
+    pchext              = .pch
+%endif

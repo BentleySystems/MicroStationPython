@@ -1,0 +1,77 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+PolicyFile          = $(SrcRoot)MSPython/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(SrcRoot)MSPython/MSPythonSolutionPolicy.mki
+
+%include mdl.mki
+
+%if !defined (BSI)
+    %if defined (SolutionPolicyMki)
+        %include $(SolutionPolicyMki)
+    %endif
+%endif
+
+%if !defined (PythonDir)
+    %error $$(PythonDir) must be defined to a python install directory
+%endif
+
+o = $(out)MSPythonTests/
+
+BuildContextDelivery=$(BuildContext)Delivery/
+
+always:
+    !~@mkdir $(o)
+
+#
+#
+# NEEDS_WORK pytest tests only run if the python .pyd files are in the same location as the main Bentley5.dlls etc.
+# temporarily link the files into the main Microstation directory to run the tests then unlink them
+#
+#
+
+%if defined (BSI)
+    pytestcmd=pytest.exe
+    MSPythonDir=$(OutRoot)Winx64/Product/Mstn/MicroStation/
+%else
+    MSPythonDir=$(MS)
+%endif
+
+always:
+    ~putenv PATH=%PATH%;$(OutRoot)Winx64/Product/Mstn/MicroStation/;$(OutRoot)Winx64/Product/Mstn/MicroStation/Assemblies;$(OutRoot)Winx64/Product/Mstn/MicroStation/$(OutRoot)Winx64/Product/Mstn/MicroStation/FileHandler;
+    ~putenv PYTHONPATH=$(MSPythonDir)
+    ~putenv MS=$(MSPythonDir)
+    ~putenv PYTHONPYCACHEPREFIX=$(o)
+    ~putenv MSPYTESTDATA=$(SrcRoot)MSPython/MSPythonTests/PlatformTests/data/
+    ~chdir $(MSPythonDir)
+# ^^^^ need to execute in the same directory as Microstation to run PYTHONPATH doesnt seem to work
+
+always:
+    $(PythonDir)/python.exe $(SrcRoot)MSPython/MSPythonTests/PlatformTests/pytestFileCreate.py
+
+# create symlinks to correct location of the files for pytest run
+
+%if !defined (BSI)
+always:
+    ~linkfile "$(MSPythonDir)MSPyBentley.pyd=$(BuildContext)Delivery/MSPyBentley.pyd"
+    ~linkfile "$(MSPythonDir)MSPyBentleyGeom.pyd=$(BuildContext)Delivery/MSPyBentleyGeom.pyd"
+    ~linkfile "$(MSPythonDir)MSPyDgnPlatform.pyd=$(BuildContext)Delivery/MSPyDgnPlatform.pyd"
+    ~linkfile "$(MSPythonDir)MSPyDgnView.pyd=$(BuildContext)Delivery/MSPyDgnView.pyd"
+    ~linkfile "$(MSPythonDir)MSPyECObjects.pyd=$(BuildContext)Delivery/MSPyECObjects.pyd"
+    ~linkfile "$(MSPythonDir)MSPyMstnPlatform.pyd=$(BuildContext)Delivery/MSPyMstnPlatform.pyd"
+    ~linkfile "$(MSPythonDir)UstnPython.dll=$(BuildContext)Delivery/UstnPython.dll"
+    ~linkfile "$(MSPythonDir)MSPythonCore.dll=$(BuildContext)Delivery/MSPythonCore.dll"
+
+%endif
+
+always:
+    $(PythonDir)/python.exe  -m pytest $(SrcRoot)MSPython/MSPythonTests/PlatformTests/PublishedTests/ -o cache_dir=$(o)
+
+%if defined (BSI)
+always:
+     $(PythonDir)/python.exe  -m pytest  $(SrcRoot)MSPython/MSPythonTests/PlatformTests/InternalTests/ -o cache_dir=$(o)
+%endif

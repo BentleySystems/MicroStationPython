@@ -1,0 +1,14 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if !defined(__linux)
+    %error This toolset is for Linux only
+%endif
+
+%if $(TARGET_PLATFORM) == "Linux"
+    %include LinuxToolContextLLVM.mki
+%else
+    %error No tool context available for using clang to build $(TARGET_PLATFORM).
+%endif

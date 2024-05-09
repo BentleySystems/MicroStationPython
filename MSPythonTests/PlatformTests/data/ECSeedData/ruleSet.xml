@@ -1,0 +1,863 @@
+<RuleSet xmlns="ECRules.01.00">
+    <Name>Banana</Name>
+    <Description>Banana</Description>
+    <ReadOnly>False</ReadOnly>
+    <Rules>
+        <Rule>
+            <Name>同じプロパティを持つ要素間のクラッシュを抑制。</Name>
+            <Description>クラッシュしている要素が同じ{_0_}を持っている場合はクラッシュを抑制</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <CombinationOperator>None</CombinationOperator>
+                        <CodeSnippet>InstanceHelper.PropertyValuesAreEqual (this.ItemA.GetPropertyValue ("{_0_}"), this.ItemB.GetPropertyValue ("{_0_}"), false)</CodeSnippet>
+                        <TypeReferences>
+                            <string>Bentley.Rules.InstanceHelper</string>
+                        </TypeReferences>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>クラッシュを抑制</Name>
+                        <LeftCodeSnippet>this.Suppress()</LeftCodeSnippet>
+                        <IsAssignment>False</IsAssignment>
+                    </RuleActionStatement>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>new RuleHaltAction ()</LeftCodeSnippet>
+                        <TypeReferences>
+                            <string>System.Workflow.Activities.Rules.RuleHaltAction</string>
+                        </TypeReferences>
+                        <Name>処理を停止</Name>
+                        <IsAssignment>False</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions />
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECProperty</ContextType>
+                        <Context>ShowClassChangeButton='true'ShowSchemaChangeButton='true'ClassTypeFilter='DoNotShowRelationships'ReturnFullyQualifiedNames='true'</Context>
+                    </ReplacementLocatorContext>
+                    <ReplacementName>-プロパティ値-</ReplacementName>
+                    <Name>-プロパティ値-</Name>
+                    <CodeSnippet>"Go Banana"</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>10</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>aOrderedRule</Name>
+            <Description>This Rule Runs Second</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <Name>Count is forty-two</Name>
+                        <CombinationOperator>None</CombinationOperator>
+                        <CodeSnippet>this.Count == 42</CodeSnippet>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Set count</Name>
+                        <LeftCodeSnippet>this.Count</LeftCodeSnippet>
+                        <RightCodeSnippet>84</RightCodeSnippet>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                    <RuleActionStatement>
+                        <Name>Set confirmed to true</Name>
+                        <LeftCodeSnippet>this.Confirmed</LeftCodeSnippet>
+                        <RightCodeSnippet>true</RightCodeSnippet>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions />
+            </ElseActions>
+            <CodeReplacements />
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>AOrderedRule</Name>
+            <Description>This Rule Runs First</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <Name>Count is zero</Name>
+                        <CombinationOperator>None</CombinationOperator>
+                        <CodeSnippet>this.Count == 0</CodeSnippet>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Set count</Name>
+                        <LeftCodeSnippet>this.Count</LeftCodeSnippet>
+                        <RightCodeSnippet>42</RightCodeSnippet>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                    <RuleActionStatement>
+                        <Name>Set confirmed to false</Name>
+                        <LeftCodeSnippet>this.Confirmed</LeftCodeSnippet>
+                        <RightCodeSnippet>false</RightCodeSnippet>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions />
+            </ElseActions>
+            <CodeReplacements />
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>Ignore Intersections between objects of type 'Wheel'</Name>
+            <Description>Ignore Intersections between objects of type '{_0_}'</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <CombinationOperator>None</CombinationOperator>
+                        <CodeSnippet>ECClassHelper.AreEqual (this.ObjectA.Instance.ClassDefinition, this.ObjectB.Instance.ClassDefinition)</CodeSnippet>
+                        <Name>Are of the same type</Name>
+                        <TypeReferences>
+                            <string>Bentley.ECObjects.Schema.ECClassHelper</string>
+                        </TypeReferences>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <CodeSnippet>this.ObjectA.Instance.ClassDefinition.Name == {_0_} || this.ObjectB.Instance.ClassDefinition.Name == {_0_}</CodeSnippet>
+                        <Name>One is of type {_0_}</Name>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Set {_1_} to True</Name>
+                        <LeftCodeSnippet>{_1_}</LeftCodeSnippet>
+                        <RightCodeSnippet>true</RightCodeSnippet>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Set {_1_} to False</Name>
+                        <LeftCodeSnippet>{_1_}</LeftCodeSnippet>
+                        <RightCodeSnippet>false</RightCodeSnippet>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementName>type name</ReplacementName>
+                    <ReplacementType>System.String</ReplacementType>
+                    <Name>Wheel</Name>
+                    <CodeSnippet>"Wheel"</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>1</ReplacementId>
+                    <ReplacementType>System.Boolean</ReplacementType>
+                    <ReplacementName>boolean variable</ReplacementName>
+                    <CodeSnippet>this.IgnoreInterference</CodeSnippet>
+                    <Name>Ignore Interference</Name>
+                    <SupportsAssignment>True</SupportsAssignment>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>Move large files to folder</Name>
+            <Description>Move file backed instances of class '{_0_}' to the folder {_2_} if its size is greater than {_1_} KB</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <Name>If class is {_0_}</Name>
+                        <CombinationOperator>None</CombinationOperator>
+                        <CodeSnippet>this.Instance.Class.Name == "{_0_}"</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <Name>If size is greater than {_1_} KB</Name>
+                        <CombinationOperator>And</CombinationOperator>
+                        <CodeSnippet>(this.GetPropertyValue ("Size").DoubleValue/1024.0) &gt; {_1_}</CodeSnippet>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Move file to folder {_2_}</Name>
+                        <LeftCodeSnippet>FileOperationHelper.MoveFile (this.Connection, this.Moniker, {_2_}, "Moved By Rule")</LeftCodeSnippet>
+                        <TypeReferences>
+                            <string>Bentley.EC.Persistence.FileSystemResource.FileOperationHelper</string>
+                        </TypeReferences>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions />
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECClass</ContextType>
+                        <Context>SchemaName='Bentley_DMS.01.00'ClassName='DMSDocument'</Context>
+                    </ReplacementLocatorContext>
+                    <ReplacementName>class name</ReplacementName>
+                    <Name>Document</Name>
+                    <CodeSnippet>DMSDocument</CodeSnippet>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>1</ReplacementId>
+                    <ReplacementType>System.Double</ReplacementType>
+                    <ReplacementName>file size</ReplacementName>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>2</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECFolder</ContextType>
+                    </ReplacementLocatorContext>
+                    <ReplacementName>folder name</ReplacementName>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>False</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>Replacement Tester</Name>
+            <Description>Enter double '{_0_}' greater than 10, unitized double {_8_} greater than 1000.0 miles, float '{_1_}' less than 100, long '{_2_}' is not equal to 43, int '{_3_}' is less than 10,000, short '{_4_}' is greater than 5, bool '{_5_}' is false, string '{_6_}' has more than 5 chars and the date '{_7_}' is after August 2, 1984.</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <CombinationOperator>None</CombinationOperator>
+                        <Name>{_0_} is greater than 10, and show the parameter again {_0_}</Name>
+                        <CodeSnippet>{_0_} &gt; 10.0</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_1_} is less than 100</Name>
+                        <CodeSnippet>{_1_} &lt; 100.0</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_2_} is not equal to 43</Name>
+                        <CodeSnippet>{_2_} != 43</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_3_} is less than 10000</Name>
+                        <CodeSnippet>{_3_} &lt; 10000</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_4_} is greater than 5</Name>
+                        <CodeSnippet>{_4_} &gt; 5</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_5_} is false</Name>
+                        <CodeSnippet>!{_5_}</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_6_} is greater than 5 characters long and {_0_} less than 100</Name>
+                        <CodeSnippet>{_6_}.Length &gt; 5 &amp;&amp; {_0_} &lt; 100</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_7_} is after August 2, 1984</Name>
+                        <CodeSnippet>DateTime.FromBinary ({_7_}).CompareTo (DateTime.Parse ("August 2, 1984", CultureInfo.InvariantCulture)) &gt; 0</CodeSnippet>
+                        <TypeReferences>
+                            <string>System.DateTime</string>
+                            <string>System.Globalization.CultureInfo</string>
+                        </TypeReferences>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_8_} is less than 1000 miles</Name>
+                        <CodeSnippet>{_8_} &lt; 1000.0</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_9_} is a class</Name>
+                        <CodeSnippet>{_9_} != null</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_10_} is a schema</Name>
+                        <CodeSnippet>{_10_} != null</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_11_} is a property</Name>
+                        <CodeSnippet>{_11_} != null</CodeSnippet>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>this.IgnoreInterference</LeftCodeSnippet>
+                        <RightCodeSnippet>true</RightCodeSnippet>
+                        <Name>Set IgnoreInterference to True</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions />
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.Double</ReplacementType>
+                    <ReplacementName>double value</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>1</ReplacementId>
+                    <ReplacementType>System.Single</ReplacementType>
+                    <ReplacementName>float value</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>2</ReplacementId>
+                    <ReplacementType>System.Int64</ReplacementType>
+                    <ReplacementName>long value</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>3</ReplacementId>
+                    <ReplacementType>System.Int32</ReplacementType>
+                    <ReplacementName>int value</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>4</ReplacementId>
+                    <ReplacementType>System.Int16</ReplacementType>
+                    <ReplacementName>short value</ReplacementName>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>5</ReplacementId>
+                    <ReplacementType>System.Boolean</ReplacementType>
+                    <ReplacementName>boolean value</ReplacementName>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>6</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>string value</ReplacementName>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>7</ReplacementId>
+                    <ReplacementType>System.DateTime</ReplacementType>
+                    <ReplacementName>date value</ReplacementName>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>8</ReplacementId>
+                    <ReplacementType>System.Double</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECUnitDouble</ContextType>
+                        <Context>BaseUnit='MILE'DisplayUnit='METRE'</Context>
+                    </ReplacementLocatorContext>
+                    <ReplacementName>double value</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>9</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECClass</ContextType>
+                        <Context>ShowClassChangeButton='true'ShowSchemaChangeButton='true'</Context>
+                    </ReplacementLocatorContext>
+                    <ReplacementName>pick a class</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>10</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECSchema</ContextType>
+                        <Context>ShowSchemaChangeButton='true'</Context>
+                    </ReplacementLocatorContext>
+                    <ReplacementName>pick a schema</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>11</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECProperty</ContextType>
+                        <Context>ShowClassChangeButton='true'ShowSchemaChangeButton='true'</Context>
+                    </ReplacementLocatorContext>
+                    <ReplacementName>pick a property</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>Set property value based on the value of another property</Name>
+            <Description>If property value {_0_} equals {_1_} set property {_2_} to {_3_}</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <Name>property value {_0_} equals {_1_}</Name>
+                        <CodeSnippet>InstanceHelper.PropertyValueEquals (this.ObjectA.GetPropertyValue ("{_0_}"), {_1_})</CodeSnippet>
+                        <CombinationOperator>None</CombinationOperator>
+                        <TypeReferences>
+                            <string>Bentley.Rules.InstanceHelper</string>
+                        </TypeReferences>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>this.ObjectB.GetPropertyValue ("{_2_}").NativeValue</LeftCodeSnippet>
+                        <RightCodeSnippet>{_3_}</RightCodeSnippet>
+                        <Name>set property {_2_} to {_3_}</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>this.ObjectB.GetPropertyValue ("{_2_}").NativeValue</LeftCodeSnippet>
+                        <RightCodeSnippet>"banana"</RightCodeSnippet>
+                        <Name>set property {_2_} to banana</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECProperty</ContextType>
+                        <Context>SchemaName='Bentley_DMS.01.00'ClassName='DMSDocument'PropertyName='FileName'ShowClassChangeButton='true'ShowSchemaChangeButton='true'</Context>
+                    </ReplacementLocatorContext>
+                    <RelatedReplacementIds>
+                        <int>1</int>
+                    </RelatedReplacementIds>
+                    <ReplacementName>named</ReplacementName>
+                    <Name>Color</Name>
+                    <CodeSnippet>Color</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>1</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>this value</ReplacementName>
+                    <Name>"Green"</Name>
+                    <CodeSnippet>"Green"</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>2</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECProperty</ContextType>
+                        <Context>SchemaName='ECRules.01.00'ShowClassChangeButton='true'PropertyTypeFilter='ShowOnlyRelatedProperties'</Context>
+                    </ReplacementLocatorContext>
+                    <RelatedReplacementIds>
+                        <int>3</int>
+                    </RelatedReplacementIds>
+                    <ReplacementName>named</ReplacementName>
+                    <Name>Color</Name>
+                    <CodeSnippet>Color</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>3</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>value</ReplacementName>
+                    <Name>"Green!!"</Name>
+                    <CodeSnippet>"Green!!"</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>True</Validated>
+        </Rule>
+        <Rule>
+            <Name>Set property value based on the value of another property missing replacement</Name>
+            <Description>If property value {_0_} equals {_1_} set property {_2_} to {_3_}</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <Name>property value {_0_} equals {_1_}</Name>
+                        <CodeSnippet>InstanceHelper.PropertyValueEquals (this.ObjectA.GetPropertyValue ("{_0_}"), {_1_})</CodeSnippet>
+                        <CombinationOperator>None</CombinationOperator>
+                        <TypeReferences>
+                            <string>Bentley.Rules.InstanceHelper</string>
+                        </TypeReferences>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>this.ObjectB.GetPropertyValue ("{_2_}").NativeValue</LeftCodeSnippet>
+                        <RightCodeSnippet>{_3_}</RightCodeSnippet>
+                        <Name>set property {_2_} to {_3_}</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>this.ObjectB.GetPropertyValue ("{_2_}").NativeValue</LeftCodeSnippet>
+                        <RightCodeSnippet>"banana"</RightCodeSnippet>
+                        <Name>set property {_2_} to banana</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECProperty</ContextType>
+                        <Context>ShowClassChangeButton='true'ShowSchemaChangeButton='true'</Context>
+                    </ReplacementLocatorContext>
+                    <RelatedReplacementIds>
+                        <int>1</int>
+                    </RelatedReplacementIds>
+                    <ReplacementName>named</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>1</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>this value</ReplacementName>
+                    <Name>"Green"</Name>
+                    <CodeSnippet>"Green"</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>2</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementLocatorContext>
+                        <ContextType>ECProperty</ContextType>
+                        <Context>SchemaName='ECRules.01.00'ShowClassChangeButton='true'PropertyTypeFilter='ShowOnlyRelatedProperties'</Context>
+                    </ReplacementLocatorContext>
+                    <RelatedReplacementIds>
+                        <int>3</int>
+                    </RelatedReplacementIds>
+                    <ReplacementName>named</ReplacementName>
+                    <Name>Color</Name>
+                    <CodeSnippet>Color</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>3</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>value</ReplacementName>
+                    <Name>"Green!!"</Name>
+                    <CodeSnippet>"Green!!"</CodeSnippet>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>True</Validated>
+        </Rule>
+        <Rule>
+            <Name>Some things are equal, some aren't</Name>
+            <Description>{_0_} equals {_1_} And {_2_} does not equal {_3_} set {_4_} to true other wise set it to false</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <CombinationOperator>None</CombinationOperator>
+                        <Name>{_0_} equals {_1_}</Name>
+                        <CodeSnippet>{_0_} == {_1_}</CodeSnippet>
+                    </RuleConditionStatement>
+                    <RuleConditionStatement>
+                        <CombinationOperator>And</CombinationOperator>
+                        <Name>{_2_} does not equal {_3_}</Name>
+                        <CodeSnippet>{_2_} != {_3_}</CodeSnippet>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>{_4_}</LeftCodeSnippet>
+                        <RightCodeSnippet>true</RightCodeSnippet>
+                        <Name>Set {_4_} to True</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>{_4_}</LeftCodeSnippet>
+                        <RightCodeSnippet>false</RightCodeSnippet>
+                        <Name>Set {_4_} to False</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>some string</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>1</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>some other string</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>2</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>some other other string</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>3</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>some other other other string</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+                <CodeReplacementStatement>
+                    <ReplacementId>4</ReplacementId>
+                    <ReplacementType>System.Boolean</ReplacementType>
+                    <ReplacementName>boolean variable</ReplacementName>
+                    <CodeSnippet>this.IgnoreInterference</CodeSnippet>
+                    <Name>Ignore Interference</Name>
+                    <SupportsAssignment>True</SupportsAssignment>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>String greater than some length</Name>
+            <Description>The string '{_0_}' has more than 5 chars.</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <CombinationOperator>None</CombinationOperator>
+                        <Name>{_0_} is greater than 5 characters long</Name>
+                        <CodeSnippet>{_0_}.Length &gt; 5</CodeSnippet>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>this.IgnoreInterference</LeftCodeSnippet>
+                        <RightCodeSnippet>true</RightCodeSnippet>
+                        <Name>Set IgnoreInterference to True</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions />
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>string value</ReplacementName>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>String Input Tester</Name>
+            <Description>The string {_0_} equals 'ba\cr"t$%^&amp;'</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <CombinationOperator>None</CombinationOperator>
+                        <Name>{_0_} equals 'ba\cr"t$%^'</Name>
+                        <CodeSnippet>{_0_} == "ba\\cr\"t$%^"</CodeSnippet>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Display Equal!</Name>
+                        <LeftCodeSnippet>MessageBox.Show ("Equal!")</LeftCodeSnippet>
+                        <TypeReferences>
+                            <string>System.Windows.Forms.MessageBox</string>
+                        </TypeReferences>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Display Not Equal!</Name>
+                        <LeftCodeSnippet>MessageBox.Show ("Not Equal!")</LeftCodeSnippet>
+                        <TypeReferences>
+                            <string>System.Windows.Forms.MessageBox</string>
+                        </TypeReferences>
+                    </RuleActionStatement>
+                </Actions>
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.String</ReplacementType>
+                    <ReplacementName>some string</ReplacementName>
+                    <SupportsAssignment>False</SupportsAssignment>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>Super Simple Rule</Name>
+            <Description>This rule really doesn't do anything</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <Name>always true</Name>
+                        <CombinationOperator>None</CombinationOperator>
+                        <CodeSnippet>true == true</CodeSnippet>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Display True!</Name>
+                        <LeftCodeSnippet>MessageBox.Show ("True!")</LeftCodeSnippet>
+                        <TypeReferences>
+                            <string>System.Windows.Forms.MessageBox</string>
+                        </TypeReferences>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <Name>Display False!</Name>
+                        <LeftCodeSnippet>MessageBox.Show ("False!")</LeftCodeSnippet>
+                        <TypeReferences>
+                            <string>System.Windows.Forms.MessageBox</string>
+                        </TypeReferences>
+                    </RuleActionStatement>
+                </Actions>
+            </ElseActions>
+            <CodeReplacements />
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>False</Active>
+            <Validated>False</Validated>
+        </Rule>
+        <Rule>
+            <Name>The date is after August 2, 1984</Name>
+            <Description>'{_0_}' is after August 2, 1984</Description>
+            <Conditions>
+                <Conditions>
+                    <RuleConditionStatement>
+                        <CombinationOperator>None</CombinationOperator>
+                        <Name>{_0_} is after August 2, 1984</Name>
+                        <CodeSnippet>DateTime.FromBinary ({_0_}).CompareTo (DateTime.Parse ("August 2, 1984", CultureInfo.InvariantCulture)) &gt; 0</CodeSnippet>
+                        <TypeReferences>
+                            <string>System.DateTime</string>
+                            <string>System.Globalization.CultureInfo</string>
+                        </TypeReferences>
+                    </RuleConditionStatement>
+                </Conditions>
+            </Conditions>
+            <ThenActions>
+                <Actions>
+                    <RuleActionStatement>
+                        <LeftCodeSnippet>this.IgnoreInterference</LeftCodeSnippet>
+                        <RightCodeSnippet>true</RightCodeSnippet>
+                        <Name>Set IgnoreInterference to True</Name>
+                        <IsAssignment>True</IsAssignment>
+                    </RuleActionStatement>
+                </Actions>
+            </ThenActions>
+            <ElseActions>
+                <Actions />
+            </ElseActions>
+            <CodeReplacements>
+                <CodeReplacementStatement>
+                    <ReplacementId>0</ReplacementId>
+                    <ReplacementType>System.DateTime</ReplacementType>
+                    <ReplacementName>date value</ReplacementName>
+                </CodeReplacementStatement>
+            </CodeReplacements>
+            <Context />
+            <Priority>0</Priority>
+            <Reevaluate>False</Reevaluate>
+            <Active>True</Active>
+            <Validated>False</Validated>
+        </Rule>
+    </Rules>
+    <Context />
+</RuleSet>

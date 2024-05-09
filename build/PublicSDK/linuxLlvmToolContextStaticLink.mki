@@ -1,0 +1,20 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+LocalCommonOptions = $(BENTLEY_LINUXGCC_STATIC_LINK_CommonOptions) crs
+
+$(LIB_OUT_NAME) : $(LIB_OBJS)
+    $(msg)
+    > $(creatlib_cmd)
+    $(LocalCommonOptions)
+    $[@subst \, \/, $(LIB_OUT_NAME)]
+    $[@subst \, \/, $[@realpath $(LIB_OBJS)]]
+    <
+    $(BENTLEY_LINUX_TOOLCHAIN_ar) @$(creatlib_cmd)
+    ~time
+
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    always:
+        -$(deleteCmd) $(creatlib_cmd)
+%endif

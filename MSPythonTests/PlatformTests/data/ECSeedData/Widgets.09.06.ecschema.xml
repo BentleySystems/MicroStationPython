@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?><ECSchema xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0" schemaName="Widgets" nameSpacePrefix="wid" version="09.06" description="Widgets Description" displayLabel="Widgets Display Label" xmlns:ec="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca"/>
+    <ECClass typeName="AccessCustomAttributes" isDomainClass="False" isCustomAttributeClass="True">
+        <ECProperty propertyName="AccessLevel" typeName="int"/>
+        <ECProperty propertyName="Writeable" typeName="boolean"/>
+    </ECClass>
+    <ECClass typeName="BaseClass" isDomainClass="True">
+        <ECProperty propertyName="BaseClassMember" typeName="int"/>
+    </ECClass>
+    <ECClass typeName="Struct1" displayLabel="StructOne" isStruct="True" isDomainClass="False">
+        <ECProperty propertyName="Struct1BoolMember" typeName="boolean"/>
+        <ECProperty propertyName="Struct1IntMember" typeName="int"/>
+    </ECClass>
+    <ECClass typeName="Struct2" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="Struct2StringMember" typeName="string"/>
+        <ECProperty propertyName="Struct2DoubleMember" typeName="double"/>
+        <ECArrayProperty propertyName="NestedArray" typeName="Struct1" minOccurs="0" maxOccurs="unbounded" isStruct="True"/>
+    </ECClass>
+    <ECRelationshipClass typeName="BaseClassAsSourceRelationship" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(1,1)" polymorphic="True">
+            <Class class="BaseClass"/>
+        </Source>
+        <Target cardinality="(1,1)" polymorphic="True">
+            <Class class="Struct2"/>
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="BaseRelationshipClass" isDomainClass="False" strength="referencing" strengthDirection="forward">
+        <ECProperty propertyName="MyIntegerMember" typeName="int"/>
+        <ECProperty propertyName="MyLongMember" typeName="long"/>
+        <Source cardinality="(0,1)" polymorphic="True"/>
+        <Target cardinality="(0,1)" polymorphic="True"/>
+    </ECRelationshipClass>
+    <ECClass typeName="Struct3" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="Struct3DoubleMember" typeName="double"/>
+        <ECProperty propertyName="Struct3IntMember" typeName="int"/>
+        <ECProperty propertyName="Struct3BoolMember" typeName="boolean"/>
+    </ECClass>
+    <ECClass typeName="TestClass" isDomainClass="True">
+        <BaseClass>BaseClass</BaseClass>
+        <ECProperty propertyName="IntegerMember" typeName="int"/>
+        <ECProperty propertyName="NegativeMember" typeName="int"/>
+        <ECProperty propertyName="CustomFormatInt" typeName="int"/>
+        <ECProperty propertyName="LongMember" typeName="long"/>
+        <ECProperty propertyName="BooleanMember" typeName="boolean"/>
+        <ECProperty propertyName="DoubleMember" typeName="double" readOnly="True"/>
+        <ECProperty propertyName="DateTimeMember" typeName="dateTime"/>
+        <ECProperty propertyName="StartPoint" typeName="point3d" description="This is the start point property description" displayLabel="Start Point Label"/>
+        <ECProperty propertyName="EndPoint" typeName="point3d"/>
+        <ECStructProperty propertyName="EmbeddedStruct" typeName="Struct1"/>
+        <ECStructProperty propertyName="SecondEmbeddedStruct" typeName="Struct1"/>
+        <ECArrayProperty propertyName="IntArray" typeName="int" minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="SmallIntArray" typeName="int" minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="StringArray" typeName="string" minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="DateArray" typeName="dateTime" minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="StructArray" typeName="Struct2" minOccurs="0" maxOccurs="unbounded" isStruct="True"/>
+        <ECArrayProperty propertyName="EmptyIntArray" typeName="int" minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="OneMemberIntArray" typeName="int" minOccurs="0" maxOccurs="unbounded"/>
+        <ECProperty propertyName="ColorStructMember" typeName="string"/>
+        <ECStructProperty propertyName="FormattedStruct" typeName="Struct3"/>
+        <ECArrayProperty propertyName="FormattedArray" typeName="int" minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="PointArray" typeName="point3d" minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="StringMember" typeName="string" description="This is the string property description" displayLabel="StringDisplayLabel" minOccurs="0" maxOccurs="1"/>
+    </ECClass>
+    <ECClass typeName="Test2Class" isDomainClass="True">
+        <ECProperty propertyName="Test2StringMember" typeName="string"/>
+    </ECClass>
+    <ECRelationshipClass typeName="ClonedRelationshipClass" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <BaseClass>BaseRelationshipClass</BaseClass>
+        <Source cardinality="(1,1)" roleLabel="source constraint2" polymorphic="True">
+            <Class class="TestClass"/>
+        </Source>
+        <Target cardinality="(1,1)" roleLabel="target constraint2" polymorphic="True">
+            <Class class="Struct2"/>
+            <Class class="Test2Class"/>
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="ClonedRelationshipClassWithNormalBaseClass" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <BaseClass>BaseClass</BaseClass>
+        <Source cardinality="(1,1)" roleLabel="source constraint2" polymorphic="True">
+            <Class class="TestClass"/>
+        </Source>
+        <Target cardinality="(1,1)" roleLabel="target constraint2" polymorphic="True">
+            <Class class="Struct2"/>
+            <Class class="Test2Class"/>
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="ExplicitRelationshipClass" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <BaseClass>BaseRelationshipClass</BaseClass>
+        <Source cardinality="(1,1)" roleLabel="source constraint2" polymorphic="True">
+            <Class class="TestClass"/>
+        </Source>
+        <Target cardinality="(1,1)" roleLabel="target constraint2" polymorphic="True">
+            <Class class="Struct2"/>
+            <Class class="Test2Class"/>
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="HelloClass" isDomainClass="True"/>
+    <ECRelationshipClass typeName="ImplicitRelationshipClass" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(1,1)" roleLabel="source constraint" polymorphic="True">
+            <Class class="TestClass"/>
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="target constraint" polymorphic="True">
+            <Class class="Test2Class"/>
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="RelatedClass" isDomainClass="True">
+        <BaseClass>TestClass</BaseClass>
+    </ECClass>
+    <ECRelationshipClass typeName="TestClassToBaseClass" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <BaseClass>BaseRelationshipClass</BaseClass>
+        <Source cardinality="(1,1)" roleLabel="source constraint2" polymorphic="True">
+            <Class class="TestClass"/>
+        </Source>
+        <Target cardinality="(1,1)" roleLabel="target constraint2" polymorphic="True">
+            <Class class="BaseClass"/>
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="TestClassa" isDomainClass="True"/>
+    <ECClass typeName="ecProject" description="Project Class" displayLabel="Project" isDomainClass="True">
+        <ECProperty propertyName="Name" typeName="string" displayLabel="Project Name"/>
+    </ECClass>
+    <ECClass typeName="ecWidget" description="Widget" displayLabel="Widget" isDomainClass="True">
+        <ECProperty propertyName="EC_InstanceID" typeName="int" description="Unique identifier for instances of your business class"/>
+        <ECProperty propertyName="ecstringattr" typeName="string" displayLabel="stringattr"/>
+        <ECProperty propertyName="eclongattr" typeName="string" displayLabel="longattr"/>
+    </ECClass>
+</ECSchema>

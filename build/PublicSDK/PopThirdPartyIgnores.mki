@@ -1,0 +1,22 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+# See PushThirdPartyIgnores.mki.
+
+%if (" " != $[@findstring CLANG, $(BUILD_TOOLSET)])
+
+    LLVMCommonCompOpts =% $[PUSH_THIRD_PARTY_IGNORE_OriginalLLVMCommonCompOpts]
+    %undef PUSH_THIRD_PARTY_IGNORE_OriginalLLVMCommonCompOpts
+
+%elif (" " != $[@findstring VS, $(BUILD_TOOLSET)])
+
+    %if (defined(BSI_MSVC_ANALYZE))
+
+        CCompOpts =% $[PUSH_THIRD_PARTY_IGNORE_OriginalMsvcCCompOpts]
+        %undef PUSH_THIRD_PARTY_IGNORE_OriginalMsvcCCompOpts
+
+    %endif
+
+%endif

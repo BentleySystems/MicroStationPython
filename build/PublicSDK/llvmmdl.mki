@@ -1,0 +1,303 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if $(BUILD_TOOLSET) != "APPLE_CLANG"
+    %error llvmmdl.mki should be used only when the toolset is LLVM
+%endif
+
+%if !defined (__mdlMKI__)
+    %error llvmmdl.mki cannot be used by itself. It must be included from mdl.mki
+%endif
+
+%if !defined (CTargetSpec)
+    CTargetSpec = $@
+%endif
+
+%if defined (CCCompOpts)
+    %warn LLVM IGNORING CCCompOpts=$(CCCompOpts)
+%endif
+
+msg = |[== Building $@, ($=) ==]
+
+####################################################################################################
+# These arguments come from making a new XCode iOS project, and seeing what it does. As we better understand them, they are free to change, but I figured this is as good as any to start with.
+####################################################################################################
+
+# Architecture
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX86"
+    LLVMPrimaryArchOpts = -arch i386
+    isSimulator = 1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX64"
+    LLVMPrimaryArchOpts = -arch x86_64
+    isSimulator = 1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64Simulator"
+    LLVMPrimaryArchOpts = -arch arm64
+    isSimulator = 1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM"
+    LLVMPrimaryArchOpts = -arch armv7
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64"
+    LLVMPrimaryArchOpts = -arch arm64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARMActive"
+    LLVMPrimaryArchOpts = -arch arm64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSX64"
+    LLVMPrimaryArchOpts + -arch x86_64
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSARM64"
+    LLVMPrimaryArchOpts + -arch arm64
+%else
+    %error Unknown/unexpected TARGET_PROCESSOR_ARCHITECTURE; could not set -arch.
+%endif
+
+# Optimization
+%if !defined (DEBUG) || defined (PRG)
+    LLVMCommonCompOpts + -Os -DNS_BLOCK_ASSERTIONS=1
+
+    # We've used this flag for older versions, but it's no longer supported.
+    GreaterThan6_1 = $[@readstdout "$(BBPYTHONCMD) $(_CurrentFilePath)DetectClangVersion.py 602.0.49"]
+    %if $(GreaterThan6_1) != "YES"
+        LLVMCommonCompOpts + -finline-functions
+    %endif
+%else
+    LLVMCommonCompOpts + -O0
+
+    %if !defined(DONT_DEFINE_DEBUG)
+        LLVMCommonCompOpts + -DDEBUG=1
+    %endif
+%endif
+
+# PRG implies no asserts.
+%if defined (PRG)
+    %if defined (DEBUG)
+        %error Cannot define PRG and DEBUG.
+    %endif
+    %if !defined(NDEBUG) && !defined(PRG_NO_NDEBUG)
+        always:
+            |Setting NDEBUG=1 because PRG was set.
+        
+        NDEBUG = 1
+    %endif
+%endif
+
+%if defined (NDEBUG)
+    LLVMCommonCompOpts + -DNDEBUG=1
+%endif
+
+%if !defined (REQUIRE_IEEE_COMPLIANT)
+    LLVMCommonCompOpts + -ffast-math
+%endif
+
+%if defined (BETHREAD_USE_PTHREAD)
+    LLVMCommonCompOpts+ -DBETHREAD_USE_PTHREAD
+%endif
+
+# *** Advertise features of C++11 that are missing (temporarily?). BentleyConfig.h will check these macros and set others
+%if defined (BENTLEY_CPP_MISSING_WCHAR_SUPPORT)
+    LLVMCommonCompOpts+ -DBENTLEY_CPP_MISSING_WCHAR_SUPPORT
+%endif
+
+# The primary purpose of NO_DEFAULT_CLANG_WARNINGS is to allow builds of third-party libraries to bypass warnings since we don't want to modify them to clean them up.
+%if !defined(NO_DEFAULT_CLANG_WARNINGS) && !defined(IS_THIRD_PARTY_LIBRARY)
+    # Clang doesn't really have warning "levels" like MSVC...
+    # There's 'all', 'all + extra', and 'everything'.
+    # 'all' is a group of warnings that is recommended (by the Clang team) for all new code, and are highly suggestive of problems.
+    # 'all + extra' will yield more false positives, but are still considered helpful most of the time.
+    # 'everything' is actually not recommeneded for practical use.
+    # I take this to mean 'all' is the best starting point; adding 'extra' most likely has diminishing returns.
+    # Also, treat warnings as errors.
+    # It is also important to inject this at the front of the options so that calling MKE files can easily cutomize LLVMCommonCompOpts to ignore warnings (last-in wins).
+    LLVMCommonCompOpts2 =% $(LLVMCommonCompOpts)
+    LLVMCommonCompOpts =% -Werror -Wall $(LLVMCommonCompOpts2)
+
+    # Even 'all' has some warnings we consider dubious in value, so selectively disable some of them:
+
+    # Allow mixing of || and && in a single conditional without forcing parentheses for clarity.
+    LLVMCommonCompOpts + -Wno-logical-op-parentheses
+
+    # Don't force switch statements to contain every member of an enumeration or a default statement.
+    LLVMCommonCompOpts + -Wno-switch
+
+    # Don't force constructor initializer lists to be in the same order the object declares its members.
+    LLVMCommonCompOpts + -Wno-reorder
+
+    # Allow using the result of an assignment as a condition without parentheses.
+    LLVMCommonCompOpts + -Wno-parentheses
+
+    # Allow /* within a comment block.
+    LLVMCommonCompOpts + -Wno-comment
+
+    # Allow offsetof on non-POD objects. There are many places that we feel POD is over-restrictive, and we are confident it will work anyway.
+    LLVMCommonCompOpts + -Wno-invalid-offsetof
+
+    # This allows you to declare and assign a variable and only use it in an assert (since asserts are compiled out when NDEBUG).
+    %if defined (NDEBUG) && defined (IGNORE_UNUSED)
+        LLVMCommonCompOpts + -Wno-unused-variable
+    %endif
+
+    # This allows casting from int to void*
+    LLVMCommonCompOpts + -Wno-int-to-void-pointer-cast
+
+    # We want to ignore these warnings for Apple LLVM 7.0, but they don't even exist prior, so guard.
+    IsClang7_0_0OrGreater = $[@readstdout "$(BBPYTHONCMD) $(_CurrentFilePath)DetectClangVersion.py 700.0.53"]
+    %if "YES" == $(IsClang7_0_0OrGreater)
+        # Allow legacy compilands to opt-out of 'override' specifier checking.
+        %if defined(NO_CLANG_ENFORCE_OVERRIDE)
+            LLVMCommonCompOpts + -Wno-inconsistent-missing-override
+        %endif
+
+        # Required to not modify/update boost.
+        LLVMCommonCompOpts + -Wno-unused-local-typedef
+
+        # expression with side effects will be evaluated despite being used as an operand to '...'
+        # It is common to dereference a smart pointer inside the typeid operator, so allow this.
+        LLVMCommonCompOpts + -Wno-potentially-evaluated-expression
+    %endif
+
+    # We want to ignore these warnings for Apple LLVM 8.1, but they don't even exist prior, so guard.
+    IsClang8_1_0OrGreater = $[@readstdout "$(BBPYTHONCMD) $(_CurrentFilePath)DetectClangVersion.py 802.0.38"]
+    %if $(IsClang8_1_0OrGreater) == "YES"
+        # Don't enforce case sensitivity for #include.
+        LLVMCommonCompOpts + -Wno-nonportable-include-path
+    %endif
+
+    # error: local variable '...' will be copied despite being returned by name [-Werror,-Wreturn-std-move]
+    # note: call 'std::move' explicitly to avoid copying
+    # Utf8PrintfString is a sub-class, but adds no data members or virtuals, so I believe it would be safe to do the explicit move.
+    # But this is too prolific to fix on bim0200, so disabling.
+    # This is new with Xcode 10.2, correlating to Apple LLVM 10.0.1.
+    IsClang10_0_1OrGreater = $[@readstdout "$(BBPYTHONCMD) $(_CurrentFilePath)DetectClangVersion.py 1001.0.46.3"]
+    %if $(IsClang10_0_1OrGreater) == "YES"
+        # Don't enforce case sensitivity for #include.
+        LLVMCommonCompOpts + -Wno-return-std-move
+    %endif
+
+    # Ignore unused but set variables since other compilers (gcc) already are ignoring this warning.
+    # This was recently introduced to clang.
+    IsClang13_1_6OrGreater = $[@readstdout "$(BBPYTHONCMD) $(_CurrentFilePath)DetectClangVersion.py 1316.0.21.2"]
+    %if $(IsClang13_1_6OrGreater) == "YES"
+        LLVMCommonCompOpts + -Wno-unused-but-set-variable
+    %endif
+%else
+    # Otherwise disable warnings by default.
+    LLVMCommonCompOpts + -w
+%endif
+
+# Dial back warning verbosity a little bit... somewhat a per-developer preference I suppose.
+LLVMCommonCompOpts + -fno-caret-diagnostics -fno-diagnostics-fixit-info
+
+# Hide symbols by default; this allows the same opt-in pattern that we have under MSVC.
+%if !defined (GCC_DEFAULT_VISIBILITY)
+    LLVMCommonCompOpts + -fvisibility=hidden -fvisibility-inlines-hidden
+%else
+    LLVMCommonCompOpts + -fvisibility=$(GCC_DEFAULT_VISIBILITY)
+    %message Visibility override set to -fvisibility=$(GCC_DEFAULT_VISIBILITY)
+    # Set the following so that, even if -fvisibility is overriden to be 'standard', we still export inline functions, because
+    # "... it is usually better to hide all inline functions. Some complex issues arise when you export inline functions from dynamic shared libraries.
+    # source: https://developer.apple.com/library/mac/#documentation/developertools/Conceptual/CppRuntimeEnv/Articles/SymbolVisibility.html
+    LLVMCommonCompOpts + -fvisibility-inlines-hidden
+%endif
+
+# Generate dwarf debug symbols in the O files; XCode prefers this to stabs (the default).
+# This does not cause dSYM files to get created; that's a separate tool, and we aren't doing that at this time.
+%if defined (LLVM_DEBUG)
+    LLVMCommonCompOpts + -gdwarf-2
+%endif
+
+# I'm not sure of better ways to break this up, or even better separate architecture from simulator/device targets.
+LLVMCommonCompOpts + -c
+LLVMCommonCompOpts + -isysroot $(CLANG_SYSROOT)
+
+%if $(TARGET_PLATFORM) == "iOS"
+    %if defined (isSimulator) && defined (IOS_DEPLOYMENT_TARGET)
+        LLVMCommonCompOpts + -mios-simulator-version-min=$(IOS_DEPLOYMENT_TARGET)
+    %elif !defined (isSimulator) && defined (IOS_DEPLOYMENT_TARGET)
+        LLVMCommonCompOpts + -miphoneos-version-min=$(IOS_DEPLOYMENT_TARGET)
+    %endif
+%elif $(TARGET_PLATFORM) == "MacOS" && defined (MACOS_DEPLOYMENT_TARGET)
+    LLVMCommonCompOpts + -mmacosx-version-min=$(MACOS_DEPLOYMENT_TARGET)
+%endif
+
+%ifdef CLANG_SANITIZE
+    LLVMCommonCompOpts + -fsanitize=$(CLANG_SANITIZE)
+%endif
+
+%if defined (BUILD_WITH_C20)
+    LLVMCppCompOpts + -std=c++20
+%elif defined (BUILD_WITH_C17)
+    LLVMCppCompOpts + -std=c++17
+%else
+    LLVMCppCompOpts + -std=c++14
+%endif
+LLVMCppCompOpts + -stdlib=libc++
+
+#NEEDS WORK: unless I disable the "narrowing" warning, clang gives me a warning when I convert an int to a double!!!
+# LLVMCppCompOpts + -Wc++11-narrowing
+
+# The -mthumb option appears to be arm7 specific, and -fasm-blocks is intel specific
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM"
+    LLVMCommonCompOpts + -mthumb
+%elif (" " != $[@findstring arm, $(LLVMPrimaryArchOpts)])
+    LLVMCommonCompOpts + -fexceptions -fasm-blocks
+%endif
+
+%if (" " != $[@findstring "MacOS", $(TARGET_PROCESSOR_ARCHITECTURE)])
+    BENTLEYCONFIG_NO_JAVASCRIPT = 1
+    LLVMCommonCompOpts + -DBENTLEYCONFIG_NO_JAVASCRIPT
+%endif
+
+# Note: The -x language option must be done in the rule below because things like PCH will re-use the Recipe* variables below, but still need separate control over it.
+# Similar to -arch archtecture option(s).
+
+RecipeCppCompileArgs = $(CCPchOpts) $(cIncs) $(cDefs) $(cuser) $(ProductIncludes) $(LLVMAdditionalArchOpts) $(LLVMCommonCompOpts) $(LLVMCppCompOpts) $(PublicApiIncludes)
+RecipeCCompileArgs = $(CPchOpts) $(cIncs) $(cDefs) $(cuser) $(ProductIncludes) $(LLVMCommonCompOpts) $(LLVMCCompOpts) $(PublicApiIncludes)
+
+# Pre-processing cannot include multiple archiectures.
+# Since if we compile for multiple architectures we just pass multiple -arch, I do not expect it to matter which -arch survives, as long as it's only one.
+CPreprocCmd = $(CCCompCmd) -E -P -x c++ $(LLVMPrimaryArchOpts)
+RecipeCPPreprocess = $(CPreprocCmd) $(RecipeCppCompileArgs)
+
+# Allow callers to enable Objective-C++.
+AppleCppFileTypeControl_Cpp = -x c++
+AppleCppFileTypeControl_ObjCpp = -x objective-c++
+
+# Default to normal C++.
+%if !defined (AppleCppFileTypeControl)
+    AppleCppFileTypeControl = $(AppleCppFileTypeControl_Cpp)
+%endif
+
+# LLVMSpecialCompOpts is reserved for special options injected by other MKI files, or the calling MKE file.
+
+# ######################################################
+# CPP.O recipe
+.(cpp,cxx,cc).o:
+    $(msg)
+    $(CCCompCmd) $(AppleCppFileTypeControl) $(LLVMSpecialCompOpts) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCppCompileArgs) -o$(CTargetSpec) $< $(CCompRedirect)
+    ~time
+
+# ######################################################
+# C.O recipe
+.c.o:
+    $(msg)
+    $(CCompCmd) -x c $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCCompileArgs) $(LLVMSpecialCompOpts) -o$(CTargetSpec) $< $(CCompRedirect)
+    ~time
+
+# ######################################################
+# MM.O recipe
+.mm.o:
+    $(msg)
+    $(CCCompCmd) $(AppleCppFileTypeControl_ObjCpp) -fobjc-arc -fobjc-abi-version=2 $(LLVMSpecialCompOpts) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCppCompileArgs) -o$(CTargetSpec) $< $(CCompRedirect)
+    ~time
+
+# ######################################################
+# M.O recipe
+.m.o:
+    $(msg)
+    $(CCompCmd) -fobjc-arc -fobjc-abi-version=2 $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCCompileArgs) $(LLVMSpecialCompOpts) -o$(CTargetSpec) $< $(CCompRedirect)
+    ~time
+
+# ######################################################
+# S.O recipe
+# Assembly files (notably for compiling ICU's data into the assembly).
+.s.o:
+    $(msg)
+    $(CCompCmd) $(LLVMPrimaryArchOpts) $(LLVMArch2Opts) $(RecipeCCompileArgs) $(LLVMSpecialCompOpts) -o$(CTargetSpec) $< $(CCompRedirect)
+    ~time

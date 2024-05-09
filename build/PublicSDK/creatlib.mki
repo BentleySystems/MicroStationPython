@@ -1,0 +1,157 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+# INSTRUCTIONS FOR USING creatlib.mki TO BUILD A LIBRARY:
+#
+# 1) Include mdl.mki.
+#
+# 2) Define the following macro names:
+#
+#       LIB_NAME        Basename of library
+#       LIB_DEST        Destination for library
+#       LIB_OBJS        List of object files
+#       LIB_TMP_DIR     Directory for temporary files
+#       LIB_NAME_VERSION  = a number that is put into the LIB name. (example: 3 would mean foo3.lib)
+#
+#    If the number of objects in $(LIB_OUT_NAME) is so large that the length
+#    of $(LIB_OBJS) would exceed 32K, the library cannot be built in a
+#    single pass. Define the following macros for a multiple pass build:
+#
+#       LIB_MULTI_PASS_BUILD    Set (to 1) when a multiple pass build is needed
+#       LIB_MULTI_PASS_FINAL    Set (to 1) on final, cleanup pass of build
+#       LIB_MULTI_NAME      Unique, pass-specific output name
+#               MDL library: the name of the intermediate library
+#               Windows NT: the name of the intermediate library
+#               UNIX: the name of the intermediate list file
+#
+#    See libsrc\nlib30\nlib.mke for a multiple pass build example.
+#
+#    By default, the list file is created in the same directory as the library
+#    and has a .lst extension. To override the default, define the following
+#    macro:
+#
+#       LIB_LST_NAME    Fully qualified list file name (or alternate extension)
+#
+#    By default, the lib is given the extension ".lib" but this may be overridden.
+#
+#       LIB_EXTENSION = If set, will be used instead of lib as the extension.
+#
+#    If set to nothing, we can write a mke file that will work with older versions
+#    of creatlib.mki which required the including mke file to add the extension to
+#    LIB_NAME.
+#
+# 3) include creatlib.mki
+#
+
+%if !defined (LIB_DEST) && !defined (LIB_NAME)
+    %error  LIB_NAME and LIB_DEST must be defined before including creatlib.mki
+%endif
+
+%if !defined (LIB_EXTENSION)
+    LIB_EXTENSION = $(stlibext)
+%endif
+
+LIB_FULL_NAME   = $(stlibprefix)$(LIB_NAME)$(LIB_NAME_VERSION)$(LIB_EXTENSION)
+LIB_OUT_NAME    = $(LIB_DEST)$(LIB_FULL_NAME)
+
+%if !defined (LIB_TMP_DIR)
+    LIB_TMP_DIR = ${LIB_DEST}/
+%endif
+
+creatlib_cmd = $(LIB_TMP_DIR)$(LIB_NAME)_creatlib.cmd
+
+#--------------------------------------------------------------------------------------
+#                Build/Link Commands
+#--------------------------------------------------------------------------------------
+
+%iffile $(BuildContext)ToolContextStaticLink.mki
+    %include $(BuildContext)ToolContextStaticLink.mki
+    LIB_PDB_SUBDIR=
+%elif $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED" || $(BUILD_TOOLSET) == "ANDROID_CLANG" || $(BUILD_TOOLSET) == "LINUX_CLANG"
+    %if "Android" == $(TARGET_PLATFORM)
+        %include gcclib.mki
+    %elif "Linux" == $(TARGET_PLATFORM)
+        %include linuxLlvmToolContextStaticLink.mki
+    %else
+        %error No link MKI available for using clang to build $(TARGET_PLATFORM).
+    %endif
+
+    LIB_PDB_SUBDIR=
+
+%elif $(BUILD_TOOLSET) == "APPLE_CLANG"
+
+    %include llvmlib.mki
+    
+    LIB_PDB_SUBDIR=
+
+%elif $(BUILD_TOOLSET) == "EMCC"
+
+    %include emcclib.mki
+
+    LIB_PDB_SUBDIR=
+
+%else
+
+    # In a multiple pass build, a library is built on each pass and the final pass
+    # is used to "lib" the component libraries together into $(LIB_OUT_NAME).
+
+    LIB_OBJS + $(DLM_OBJECT_PCH)
+
+    %if defined (LIB_MULTI_PASS_BUILD) && !defined (LIB_MULTI_PASS_FINAL)
+        $(LIB_MULTI_NAME) <.lst>        $(LIB_OBJS)
+    %elif defined (LIB_LST_NAME)
+
+        $(LIB_OUT_NAME) <$(LIB_LST_NAME)>   $(LIB_OBJS)
+    %else
+        $(LIB_OUT_NAME) <.lst>          $(LIB_OBJS)
+    %endif
+            $(msg)
+            > $(creatlib_cmd)
+            -out:$@
+            -verbose
+            $(CREATLIB_OPTS)
+            $(LIB_OBJS)
+            <
+            $(CLibCmd) @$(creatlib_cmd)
+            ~time
+
+    %if !defined (LIB_PDB_NAME) 
+        %if defined (CCompPDBName) && $(CCompPDBName) != "objects"
+            LIB_PDB_NAME = $(CCompPDBName).pdb
+        %endif
+    %endif
+
+    %if !defined (LIB_PDB_SOURCE_DIR) && !defined (LIB_NO_CONTEXT_LINK)
+        LIB_PDB_SOURCE_DIR = $(LIB_DEST)$(LIB_PDB_SUBDIR)
+    %endif
+
+    %if defined (BSI_SOURCEINDEX) && !defined (DLM_NO_SOURCEINDEX) && defined (LIB_PDB_NAME)
+        %if !defined (_incrementalPass)
+            always:
+                $(SrcToPdbCmd) $(LIB_PDB_SOURCE_DIR)$(LIB_PDB_NAME)
+        %endif
+    %endif
+
+    %if defined (LIB_PDB_NAME) && defined (LIB_CONTEXT_LOCATION) && defined (LIB_PDB_SOURCE_DIR)
+        $(LIB_CONTEXT_LOCATION)$(LIB_PDB_NAME) : $(LIB_PDB_SOURCE_DIR)$(LIB_PDB_NAME)
+            $(msg)
+            $(LinkFirstDepToFirstTarget)
+    %endif
+
+%endif
+
+%if defined (DLM_LIB_CONTEXT_LOCATION) && defined (LIB_CREATE_CONTEXT_LINK)
+    $(DLM_LIB_CONTEXT_LOCATION)$(LIB_FULL_NAME) : $(LIB_OUT_NAME)
+        $(msg)
+        $(LinkFirstDepToFirstTarget)
+%endif
+
+%if defined (LIB_CONTEXT_LOCATION) && !defined (LIB_NO_CONTEXT_LINK)
+    $(LIB_CONTEXT_LOCATION)$(LIB_FULL_NAME) : $(LIB_OUT_NAME)
+        $(msg)
+        $(LinkFirstDepToFirstTarget)
+%endif
+

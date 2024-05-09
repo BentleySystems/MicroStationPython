@@ -1,0 +1,66 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if !defined (THIN_ARCHIVE_NAME)
+    THIN_ARCHIVE_NAME = SubParts_StaticLibs.a
+%endif
+
+%if !defined (o)
+    %error You must define o
+%endif
+
+%if "APPLE_CLANG" == $(BUILD_TOOLSET)
+
+    # Apple toolchains don't support thin archives, but do use 'libtool' (vs. 'ar'), which supports creating archives of archives.
+
+always:
+    !~@mkdir $(o)
+
+LIB_NAME = $[@subst "lib" "" $[@subst ".a" "" $(THIN_ARCHIVE_NAME)]]
+LIB_DEST = $(o)
+LIB_TMP_DIR = $(o)
+%if defined(THIN_ARCHIVE_INPUTS)
+    LIB_OBJS = $(THIN_ARCHIVE_INPUTS)
+%else
+    LIB_OBJS = $[@realpath $[@wildcard $(BuildContext)SubParts/Libs/*$(stlibext)]]
+    %if defined (THIN_ARCHIVE_ADDITIONAL_LIBS_DIR)
+        LIB_OBJS + $[@realpath $[@wildcard $(THIN_ARCHIVE_ADDITIONAL_LIBS_DIR)/*$(stlibext)]]
+    %endif
+%endif
+LIB_LST_NAME = $(LIB_TMP_DIR)$(LIB_NAME).lst
+# LIB_CONTEXT_LOCATION = $(BuildContext)Delivery/
+
+    %include creatlib.mki
+
+    THIN_ARCHIVE_PATH = $(LIB_OUT_NAME)
+
+    %return
+%endif
+
+%ifdef __linux
+    # WARNING: Do not use BENTLEY_LINUX_TOOLCHAIN_ar, as it does not yet support creation of Thin archives
+    ArCmd = ar
+%endif
+
+
+always:
+    !~@mkdir $(o)
+
+THIN_ARCHIVE_PATH = $(o)$(THIN_ARCHIVE_NAME)
+THIN_ARCHIVE_RSP_PATH = $(THIN_ARCHIVE_PATH).rsp
+%if !defined(THIN_ARCHIVE_INPUTS)
+    THIN_ARCHIVE_INPUTS = $[@realpath $[@wildcard $(BuildContext)SubParts/Libs/*$(stlibext)]]
+    %if defined (THIN_ARCHIVE_ADDITIONAL_LIBS_DIR)
+        THIN_ARCHIVE_INPUTS + $[@realpath $[@wildcard $(THIN_ARCHIVE_ADDITIONAL_LIBS_DIR)/*$(stlibext)]]
+    %endif
+%endif
+$(THIN_ARCHIVE_PATH) : $(THIN_ARCHIVE_INPUTS)
+    $(msg)
+    > $(THIN_ARCHIVE_RSP_PATH)
+    crsT $(THIN_ARCHIVE_PATH) $(THIN_ARCHIVE_INPUTS)
+    <
+    $(ArCmd) @$(THIN_ARCHIVE_RSP_PATH)
+    ~time
+

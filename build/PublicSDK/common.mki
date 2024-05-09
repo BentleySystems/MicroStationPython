@@ -1,0 +1,52 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+#    Make Include File common to all development environments
+#
+#    Note: define environment variable MS pointing to your MicroStation
+#           root directory.
+#
+#--------------------------------------------------------------------------------------
+%if defined (__Common_MKI__)
+    %return
+%endif
+__Common_MKI__=1
+
+%include    msfilext.mki
+%include    createdir.mki
+
+#----------------------------------------------------------
+#        Define Default Source Directories
+#----------------------------------------------------------
+%if !defined (baseDir)
+    baseDir = $(_MakeFilePath)
+%endif
+
+#----------------------------------------------------------
+#        Define native commands for copy/delete/mkdir/ etc.
+#----------------------------------------------------------
+%if !defined(winNT) || defined(__linux)
+    %include    unixcommon.mki
+%else
+    %include    winntcommon.mki
+%endif
+
+#----------------------------------------------------------------------------
+#        Define MakeProgram
+#----------------------------------------------------------------------------
+MakeProgram =% $(_bmake)
+
+
+#----------------------------------------------------------------------------
+#        Define Configuration
+#----------------------------------------------------------------------------
+%if defined(debug)
+    Configuration = Debug
+%else
+    Configuration = Release
+%endif
+
+

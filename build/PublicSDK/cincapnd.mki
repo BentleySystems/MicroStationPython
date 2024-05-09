@@ -1,0 +1,33 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+#   This bmake include file appends a C compiler 'include search'
+#   switch to the $(cIncs) macro.  The directory name added should be
+#   specified by the macro $(dirToSearch).
+#
+#   This limits the number of places that need to be edited when
+#   a new compiler/platform with a different method of specifying
+#   and include search path is encountered.
+#
+#--------------------------------------------------------------------------------------
+%if defined (dirToSearch)
+    cIncs +% -I$[dirToSearch]
+    %ifnofile $(dirToSearch)
+        %error '$(dirToSearch)' was added to the include path via cincapnd.mki but does not exist. ($[_MakeFileSpec])
+    %endif
+
+    %undef dirToSearch
+%else
+    %if assemDirToSearch
+        cIncs +% -AI$[assemDirToSearch]
+        %ifnofile $(assemDirToSearch)
+            %error '$(assemDirToSearch)' was added to the assembly include path via cincapnd.mki but does not exist. ($[_MakeFileSpec])
+        %endif
+    %else
+        %error You must define the 'dirToSearch' macro before including cincapnd.mki.
+    %endif
+%endif # dirToSearch
+

@@ -1,0 +1,107 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonWrapper\PyBentley\PyBentley.mke $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+appName             = MSPyBentley
+PolicyFile          = $(SrcRoot)MSPython/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(SrcRoot)MSPython/MSPythonSolutionPolicy.mki
+
+%include mdl.mki
+
+#----------------------------------------------------------------------
+#       Create output directories
+#----------------------------------------------------------------------
+o = $(out)PyBentley/
+
+always:
+    !~@mkdir $(o)
+
+#---------------------------------------------
+#       Compile the source files 
+#---------------------------------------------
+CCompOpts + -bigobj -MP
+
+MultiCompileDepends = $(_MakeFileSpec)
+
+PchCompiland        = $(SrcRoot)MSPython/MSPythonPCH.cpp
+PchOutputDir        = $(o)
+PchArgumentsDepends = $(MultiCompileDepends)
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302 -wd4471 -wd5205
+%include $(SharedMki)PreCompileHeader.mki
+
+CCPchOpts = $(UsePrecompiledHeaderOptions)
+
+dependencies    =   $(SrcRoot)MSPython/MSPythonPCH.h
+
+%include MultiCppCompileRule.mki
+
+PyBentleySource        = $(PyhonWrapper)PyBentley/source/
+PyBentleyDependencies  = $(dependencies) \
+                         $(PythonInternalHeaders)OpqueTypes_Bentley.h
+
+$(o)base64utilities$(oext)                : $(PyBentleySource)base64utilities.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)befile$(oext)                         : $(PyBentleySource)befile.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)befilelistiterator$(oext)             : $(PyBentleySource)befilelistiterator.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)befilename$(oext)                     : $(PyBentleySource)befilename.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)betextfile$(oext)                     : $(PyBentleySource)betextfile.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)codepages$(oext)                      : $(PyBentleySource)codepages.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)PyBentley$(oext)                      : $(PyBentleySource)PyBentley.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)valueformat$(oext)                    : $(PyBentleySource)valueformat.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)valueformat.r$(oext)                  : $(PyBentleySource)valueformat.r.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)wstring$(oext)                        : $(PyBentleySource)wstring.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)datetime$(oext)                       : $(PyBentleySource)datetime.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)dsig$(oext)                           : $(PyBentleySource)dsig.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)heapzone$(oext)                       : $(PyBentleySource)heapzone.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)bestringutilities$(oext)              : $(PyBentleySource)bestringutilities.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+$(o)namespacemanager$(oext)               : $(PyBentleySource)namespacemanager.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
+
+%include MultiCppCompileGo.mki
+
+CCPchOpts =
+
+#----------------------------------------------------------------------
+#   Set up to use dlmlink.mki
+#----------------------------------------------------------------------
+DLM_NAME                    = $(appName)
+DLM_DEST                    = $(o)
+DLM_EXPORT_DEST             = $(o)
+DLM_OBJECT_DEST             = $(o)
+DLM_LIBDEF_SRC              = $(_MakeFilePath)
+DLM_OBJECT_FILES            = $(MultiCompileObjectList) \
+                              $(o)MSPythonPCH$(oext)
+
+DLM_EXTENSION               = .pyd
+DLM_NOENTRY                 = 1
+DLM_NO_INITIALIZE_FUNCTION  = 1
+DLM_NO_DLS                  = 1
+DLM_NO_DEF                  = 1
+LINKER_LIBRARIES            = $(PythonLibName) \
+                              $(ContextSubpartsLibs)bentley.lib \
+                              $(ContextSubpartsLibs)BentleyAllocator.lib \
+                              $(ContextSubpartsLibs)RmgrTools.lib \
+                              $(ContextSubpartsLibs)MSPythonCore.lib
+
+DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
+DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/
+
+# No lib needed for this project
+%undef DLM_CREATE_LIB_CONTEXT_LINK
+
+%include dlmlink.mki

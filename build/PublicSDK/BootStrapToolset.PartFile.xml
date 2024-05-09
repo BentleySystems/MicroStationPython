@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<BuildContext
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../bentleybuild/PartFile.xsd"
+    >
+    
+    <!--
+        This part is designed to be the "ToolsetPart" that is run by BB once,
+        before any other part. The name of this part must match the
+        ToolsetPart declaration in your buildstrategy (normally provided in
+        the base build strategy by default). Additionally, you should always
+        be building this part, and never be consuming from an LKG.
+    -->
+    <Part Name="BootStrapToolset" BentleyBuildMakeFile="BootStrapToolset.mke">
+        <SubPart PartName="AndroidToolCache"/>
+<!--
+        <SubPart PartName="LinuxBuildTools"/>
+        <SubPart PartName="MacBuildTools"/>
+-->
+    </Part>
+
+    <Part Name="MacBuildTools" OnlyPlatforms="macos*,ios*">
+        <RequiredRepository>Bsitools-MacX64</RequiredRepository>
+    </Part>    
+
+    <Part Name="LinuxBuildTools" OnlyPlatforms="linux*">
+        <RequiredRepository>Bsitools-LinuxX64</RequiredRepository>
+    </Part>
+
+    <!-- SET WipPartEnable_AndroidToolCache=1 -->
+    <Part Name="AndroidToolCache" OnlyPlatforms="Android*" WipPartEnable="AndroidToolCache">
+        <SubToolPart Name="AndroidTools"/>
+    </Part>
+
+    <ToolPart Name="AndroidTools">
+        <RequiredRepository>AndrdNDK-r21e</RequiredRepository>
+        <RequiredRepository>AndrdSDK-2020a</RequiredRepository>
+        <RequiredRepository>Gradle-4_10_3</RequiredRepository>
+        <RequiredRepository>JDK-1_8_0_191</RequiredRepository>
+    </ToolPart>
+
+    <!-- For strategies (e.g. third party builds) that don't actually need any of our toolset logic. -->
+    <Part Name="NoToolset" />
+
+</BuildContext>

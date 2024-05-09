@@ -1,0 +1,38 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/signrightscompliantdefs.mki $
+#
+#  $Copyright: (c) 2009 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+
+# This file is included by signrightscompliant.mke and equivalent EC make files to define the
+# code signing commands to apply to the MAs and EXEs that the caller wants to sign
+# as rights-compliant.
+
+# If this is running in the PRG room, then this is an official build
+%if defined (SUBNET_PRG)
+    %if !defined (PRG_RSIGN_RC1_ARGS)
+        %error PRG Must set PRG_RSIGN_RC1_ARGS in order to digitally sign rights-compliant applications and resource files
+    %endif
+    rsignrc1args        = $(PRG_RSIGN_RC1_ARGS)
+%else
+    rsignrc1args        = --iKN -v $(certDir)developerrc1.pvk -spc $(certDir)developerrc1.cer
+%endif
+
+dllsignTool = $(bsiX86Tools)dllsign.exe
+
+# Projectwise has to build against multiple versions of MicroStation,
+# so it needs to use the RC signing command from the correct version
+%ifndef rsignrc1cmd
+    rsignrc1cmd     = $(singletonCmd) $(mstnToolsPath)rsign $(rsignrc1args)
+%endif
+
+mvbasignrc1cmd  = $(singletonCmd) $(mstnToolsPath)mvbasign $(rsignrc1args)
+dllsignrc1cmd   = ___dllsign_is_no_longer_used___
+
+%if defined (TRANSKIT_SKIP_DLLSIGN)
+dllsignrc1cmd = @echo Transkit - skip dllsign of
+%endif
+
+# End

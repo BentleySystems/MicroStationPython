@@ -1,0 +1,238 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if defined (__mdlMKI__)
+    %warn mdl.mki is being included redundantly in $(_MakeFileSpec)
+    %if defined (DebugRedundantMkiIncludes)
+        %error DebugRedundantMkiIncludes is defined.
+    %endif
+    %return
+%endif
+__mdlMKI__  = 1
+
+
+#============================================================================
+#   Define the default toolset for the platform according to target architecture
+#============================================================================
+%if defined (BSI)
+    %include $(SrcRoot)bsicommon/sharedmki/InternalPlatformSetup.mki
+%else
+    %include PlatformSetup.mki
+%endif
+
+
+#============================================================================
+#   common include and system-specific commands (e.g., copy) for the environment
+#============================================================================
+%include    common.mki
+
+
+#============================================================================
+#   If not already set to something else, set the compilation/link tool set.
+#============================================================================
+%include    DefaultToolSet.mki
+
+
+#============================================================================
+#   Use BUILD_TOOLSET to define the compile/link/library commands.
+#============================================================================
+%include    ApplyToolSet.mki
+
+
+#============================================================================
+#   basic build definitions
+#============================================================================
+msg = |[== Building $@, ($=) ==]
+
+
+#============================================================================
+#   Define tools commands and inference rules common to all platforms
+#============================================================================
+%if !defined (toolsPath)
+    toolsPath           = $(ContextSubpartsAssembliesDir)
+%endif
+
+%if !defined (RCompCmd)
+    RCompCmd            = $(toolsPath)rcomp
+%endif
+
+%if !defined (RTypeCmd)
+    RTypeCmd            = $(toolsPath)rsctype
+%endif
+
+%if !defined (RLibCmd)
+    RLibCmd             = $(toolsPath)rlib
+%endif
+
+#----------------------------------------------------------
+#   Compiling resource source from type definition file
+#----------------------------------------------------------
+    .mt.r:
+        $(msg)
+        > $(o)make.opt
+        -o$@
+    %if        privateInc
+        -i${privateInc}
+    %endif
+        $(rscCompIncs)
+        $(altIncs)
+        $(PublicApiRscIncludes)
+        $(platformOpts)
+        $(moreRTypeOpts)
+        $(ProductRcIncludes)
+        $<
+        <
+        $(RTypeCmd)         @$(o)make.opt
+        ~time
+
+#----------------------------------------------------------
+#   Compiling resource source files
+#----------------------------------------------------------
+    .r.rsc:
+         $(msg)
+        > $(o)make.opt
+        $(rcompOpts)
+        -w
+        -o$@
+        ${PublicApiRscIncludes}
+    %if privateInc
+        -i${privateInc}
+    %endif
+        $(rscCompIncs)
+        $(altIncs)
+        $(ProductRcIncludes)
+    %if langSpec
+        -i${langSpec}
+    %endif
+    %if debug
+        -dDEBUG
+    %endif
+        $(moreRscCompileOpts)
+        $(platformOpts)
+    %if genSrc
+        -i${genSrc}
+    %endif
+        $<
+        <
+    %if DeleteTargetFirst
+        ~@task Microsoft.Build.Tasks.Delete -i:Files=$@ -i:Condition="'$@'!='' and Exists('$@')"
+    %endif
+        $(RCompCmd) @$(o)make.opt
+        ~time
+
+#----------------------------------------------------------
+#   Creating include files from command table resources
+#----------------------------------------------------------
+    .r.h:
+         $(msg)
+        > $(o)make.opt
+        -ho$@
+        -o$(o)$*.rsc
+    %if privateInc
+        -i${privateInc}
+    %endif
+        $(rcompOpts)
+        $(rscCompIncs)
+        ${PublicApiRscIncludes}
+        $(altIncs)
+        $(ProductRcIncludes)
+        $(platformOpts)
+        $(moreRscCompileOpts)
+        $<
+        <
+        $(RCompCmd) @$(o)make.opt
+        ~time
+
+
+#----------------------------------------------------------
+#   Applying digital signature to resource file
+#----------------------------------------------------------
+rsignmsg    =        |[== Digitally Signing $= ==]
+
+.rsc.signed:
+    $(rsignmsg)
+    $(rsigncmd) $<
+    > $@
+        signed
+    <
+    ~time
+
+.exe.signed:
+    $(rsignmsg)
+    $(signcodecmd) $<
+    > $@
+        signed
+    <
+    ~time
+
+.cab.signed:
+    $(rsignmsg)
+    $(signcodecmd) $<
+    > $@
+        signed
+    <
+    ~time
+
+.CAB.signed:
+    $(rsignmsg)
+    $(signcodecmd) $<
+    > $@
+        signed
+    <
+    ~time
+
+.MSI.signed:
+    $(rsignmsg)
+    $(signcodecmd) $<
+    > $@
+        signed
+    <
+    ~time
+
+.msi.signed:
+    $(rsignmsg)
+    $(signcodecmd) $<
+    > $@
+        signed
+    <
+    ~time
+
+.dll.signed:
+    $(rsignmsg)
+    $(dllsignAuthenticCmd) $<
+    $(signcodecmd) $<
+    > $@
+        signed
+    <
+    ~time
+
+.DLL.signed:
+    $(rsignmsg)
+    $(dllsignAuthenticCmd) $<
+    $(signcodecmd) $<
+    > $@
+        signed
+    <
+    ~time
+
+rsignrc1msg  =        |[== Digitally Signing Rights-Compliant $= ==]
+
+mvbasignrc1msg=        |[== Digitally Signing Rights-Compliant $= ==]
+
+.rsc.rc1signed:
+    $(rsignrc1msg)
+    $(rsignrc1cmd) $<
+    > $@
+        rc1signed
+    <
+    ~time
+
+.mvba.rc1signed:
+    $(mvbasignrc1msg)
+    $(mvbasignrc1cmd) $<
+    > $@
+        rc1signed
+    <
+    ~time
+

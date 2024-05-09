@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ECSchema schemaName="SquareSchema" version="01.00" displayLabel="Square Reference" description="Schema with circular reference" nameSpacePrefix="sq" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ec="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ods="Bentley_ODS.01.02">
+    <ECSchemaReference name="CircleSchema" version="01.00" prefix="cir" />
+
+</ECSchema>

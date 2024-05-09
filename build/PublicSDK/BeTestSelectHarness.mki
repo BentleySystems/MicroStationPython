@@ -1,0 +1,17 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if $(TARGET_PLATFORM)=="Windows" || $(TARGET_PLATFORM)=="Linux" || $(TARGET_PLATFORM)=="MacOS" || $(TARGET_PLATFORM)=="Javascript"
+    BE_TEST_TESTHARNESS=GUnitTests
+    USE_GTEST=1
+
+    nameToDefine=USE_GTEST=1
+    %include cdefapnd.mki
+%else
+    BE_TEST_TESTHARNESS=BUnitTests
+    USE_BTEST=1
+
+    nameToDefine=USE_BTEST=1
+    %include cdefapnd.mki
+%endif

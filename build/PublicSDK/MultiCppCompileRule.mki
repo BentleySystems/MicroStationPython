@@ -1,0 +1,242 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+#  The two files MultiCppCompileRule.mki and MultiCppCompileGo.mki should be used together in a single bmake context
+#  to bracket the dependency blocks of C/C++ compilands that are completely uniform. This will cause the compilands
+#  represented by the bracketed dependency blocks to all be compiled with a single invocation of the Visual C compiler,
+#  thus improving compile-time performance. By taking the additional step of using precompiled headers in combination
+#  with multi-compilation you will improve your build times substantially. You can use multi-compilation and precompiled
+#  headers both apart from each other, but the two fit together very well since both require similar uniformity across
+#  compilands.
+#
+#  Note that you CAN bracket .c and .cpp files in a single section. A section can contain EITHER C sources that are
+#  compiled as C++ as well as C++ sources OR C sources compiled as C as well as C++ sources. A bracketed section cannot
+#  contain C sources some of which are compiled as C++ and some of which are compiled as C.
+#
+#  The pattern of use is to include MultiCppCompileRule.mki before your uniform set of dependency blocks and to include
+#  MultiCppCompileGo.mki after. The first .mki causes the out-of-date cpp/c files to be simply recorded and the 2nd .mki
+#  actually pulls the trigger and invokes the compiler against all of the out-of-date sources.
+#
+#  After the inclusion of MultiCppCompileGo.mki the files will have been compiled and $(MultiCompileObjectList) will contain
+#  the full list of .obj files for the bracketed section of your makefile. This means that you no longer have to manually
+#  maintain those .obj filenames in a bmake macro. This makes your makefile a little easier to maintain.
+#
+#  If you have multiple clumps of uniformly compiled sources, but the clumps are compiled differently from each other,
+#  then you can bracket each clump with MultiCppCompileRule.mki/MultiCppCompileGo.mki. After each include of
+#  MultiCppCompileGo.mki you will want to capture the current value of $(MultiCompileObjectList) by doing something like:
+#
+#        section10Objs =% $(MultiCompileObjectList)
+#
+#  To use multi-compilation your source file names must match your .obj file names (except for the file extension of course).
+#  Also, all .obj files must be compiled into the same output directory and use the same intermediate .pdb file.
+#
+#  Inputs:
+#
+#  $(o)            - Points to an intermediate output directory where uniform objects should be built to.
+#
+#  $(MultiCompileDepends) - Optional but highly recommended. Usually you want to set this to a value of $(_MakeFileSpec) plus any .mki files
+#                           that are included within your multi-compile section that contain c/cpp dependency blocks for the section.
+#                           By defining this macro and then adding ${MultiCompileDepends} to all multi-compiled
+#                           dependency blocks, you enable the automatic detection of the removal of compilands from the section.
+#                           Note that you MUST use the curly brace expansion method on ${MultiCompileDepends} when you add it
+#                           to a dependency.  If MultiCompileDepends is defined but ${MultiCompileDepends} does not appear directly in
+#                           the list of dependencies you will get an error message to that effect.
+#  $(MultiCompileIntermediatePdbFile) - Optional.  The name of the intermediate pdb that you want the C/C++ to utilize.
+#
+#  $(DisableMultiCompile) - Optional. Set this if for some reason you want to compile the files one at a time.
+#
+#  Outputs:
+#
+#  The outputs of the MultiCppCompileGo.mki file are much more interesting than the outputs of this file. You won't
+#  need any of the outputs of this file directly since these outputs are probably interesting only to
+#  MultiCppCompileGo.mki (to which they serve as inputs). But we describe the outputs nevertheless.
+#
+#  $(RedoCppMakefile)     - When you change your makefile (or anything else identified by $(MultiCompileDepends), this makefile
+#                           will write each .cpp.obj build rule that is currently in your makefile to a temporary file called $(o)$(_MakeFileName)_cpp$(MultiCompileNdx).mke.
+#                           MultiCppCompileGo.mki will then *include* the generated makefile. That will have the effect of re-evaluating
+#                           ALL of your .cpp.obj rules again. Each will fire, because each depends on $(MultiCompileDepends). 
+#                           Note: RedoCppMakefile is an internal macro and $(o)$(_MakeFileName)_cpp$(MultiCompileNdx).mke is an internal file. You don't use them directly.
+#
+#  $(NeedsCompiledCppList)
+#  $(NeedsCompiledCppList) - If you don't change your makefile, then we add out-of-date objects to the NeedsCompiledCppList macro. MultiCppCompileGo.mki feeds
+#                           the contents of that macro to the compiler.
+#                           Note: These are internal macros. You don't use them directly.
+#
+#  $(IntermediatePdbFile)  - Either $(MultiCppSaveIntermediatePdbFile) or a reasonable default. MultiCppCompileGo.mki will
+#                            restore the pre-MultiCompileRule.mki value.
+#
+#  PostCondition - the suffix rules for C and C++ compilation are replaced.
+#
+__MultiCppCompileRule_MKI__=1
+
+%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED" || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "APPLE_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG" || $(BUILD_TOOLSET) == "EMCC"
+    %include MultiCppCompileRuleGCC.mki
+    %return
+%endif
+
+# Set up the PDB name for static libraries.  Wish I could think up a way to do this for all static compiles
+%if defined (CREATE_STATIC_LIBRARIES)
+    %if defined (appName)
+        CCompPDBName =% $(appname)
+    %else 
+        %warn Not setting CCompPDBName for the static library because appName is not defined; you probably want to define appName in your makefile
+        %warn Also if you are using a precompiled header, you will need to set CCompPDBName in your MKI file that is used with the precompiled header.  For example:
+        %warn    appName = MyCoolApp
+        %warn    CCompPDBName = $(appName)
+        %error
+    %endif
+%endif
+
+%if !defined (o)
+    %error $$(o) must be defined to a directory that belongs just to the including .mke file in order to include MultiCppCompile.mki
+%endif
+
+#
+# The default mdl.mki supplied value for IntermediatePdbFile uses the target macro in its definition: $(@D)$(CCompPDBName).pdb
+#
+# But when we actually pull the trigger on the multi-compile we'll be using an "always" target so that won't work. So we
+# provide a different value for IntermediatePdbFile and we neatly restore the original value in MultiCppCompileGo.mki.
+#
+# If MultiCompileIntermediatePdbFile is defined, we use its value. Otherwise we provide a reasonable default.
+#
+SaveMultiCompileIntermediatePdbFile=%$[IntermediatePdbFile]
+%if defined (MultiCompileIntermediatePdbFile)
+    IntermediatePdbFile = $(MultiCompileIntermediatePdbFile)
+%else
+    IntermediatePdbFile = $(o)$(CCompPDBName).pdb
+%endif
+
+%undef NeedsCompiledCppList
+%undef NeedsCompiledCList
+%undef MultiCompileCppList
+%undef MultiCompileCList
+%undef MultiCompileCObjectList
+%undef MultiCompileCppObjectList
+%undef MultiCompileObjectList
+
+# Tricky: must use temp macro to hold old value of MultiCompileNdx, since assignment will start by removing the existing value of MultiCompileNdx before evaluating the right hand side
+WasNdx =% $(MultiCompileNdx)
+MultiCompileNdx =% $[@strip $[@math_add $(WasNdx), "1"]]
+
+MultiCompileCppListFile=$(o)$(_MakeFileName)CppSources$(MultiCompileNdx).txt
+MultiCompileCListFile  =$(o)$(_MakeFileName)CSources$(MultiCompileNdx).txt
+
+#
+#  If the includer defines MultiCompileDepends, then we are able to try to detect when compilands have been removed from the section.
+#  If they choose not to define MultiCompileDepends then we will still work, but with the limitation that we cannot determine that
+#  compilands have been removed and thus we could end up presenting an .obj for a removed compiland to the linker.
+#
+# *** TRICKY: The %iffile $(o)$(_MakeFileName)MultiCompile$(MultiCompileNdx).time) preprocessor expression below is evaluated *BEFORE* 
+# *** TRICKY:  the rule is evaluated. So, the statements inside this expression are executed when the .time file is first created,
+# *** TRICKY:  but *NOT* in later builds when the .time file is rebuilt because its dependencies have changed.
+%if defined (MultiCompileDepends)
+    MultiCompileDependsIsDefined=1
+    SaveMultiCompileDepends =% $[MultiCompileDepends]
+
+    RedoCppMakefile=$(o)$(_MakeFileName)_cpp$(MultiCompileNdx).mke
+    RedoCMakefile=$(o)$(_MakeFileName)_c$(MultiCompileNdx).mke
+
+    $(o)$(_MakeFileName)MultiCompile$(MultiCompileNdx).time : ${MultiCompileDepends}
+        $(msg)
+        !> $@
+        This file assists in detection of the removal of multi-compiled dependency blocks from section $(MultiCompileNdx) in $(_MakeFileSpec).
+        <
+        !~set MultiCompileDependsChanged 1
+    %iffile $(o)$(_MakeFileName)MultiCompile$(MultiCompileNdx).time
+        !~set RebuildCompilandLists 1
+        %iffile $(RedoCppMakefile)
+            !$(deleteCmd) $(RedoCppMakefile)
+        %endif
+        %iffile $(RedoCMakefile)
+            !$(deleteCmd) $(RedoCMakefile)
+        %endif
+        %iffile $(MultiCompileCppListFile)
+            !$(deleteCmd) $(MultiCompileCppListFile)
+        %endif
+        %iffile $(MultiCompileCListFile)
+            !$(deleteCmd) $(MultiCompileCListFile)
+        %endif
+    %endif
+        ~time
+
+    %if defined (RebuildCompilandLists)
+        %undef RebuildCompilandLists
+        #
+        #  We need continuationChar to be backslash since we're actually creating make files with dependency lines below.
+        #  This means that in a makefile section that is bracketed by the multicompile .mki files, that there cannot be
+        #  any code that has any dependency upon the value of continuationChar whatsoever.
+        #
+        continuationChar=//
+    %else
+        %undef MultiCompileDepends
+    %endif
+%endif
+
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    %iffile $(RedoCppMakefile)
+        always:
+            !$(deleteCmd) $(RedoCppMakefile)
+    %endif
+    %iffile $(RedoCMakefile)
+        always:
+            !$(deleteCmd) $(RedoCMakefile)
+    %endif
+    %iffile $(MultiCompileCppListFile)
+        always:
+            !$(deleteCmd) $(MultiCompileCppListFile)
+    %endif
+    %iffile $(MultiCompileCListFile)
+        always:
+            !$(deleteCmd) $(MultiCompileCListFile)
+    %endif
+%endif
+
+.(cxx,cpp,cc).obj:
+    !|**> $@ <$=>
+    %if defined (MultiCompileDependsIsDefined)
+        ~assert ("$[@findstring $${MultiCompileDepends}, $!]" != " "), "All multi-compiled dependency lists must include the $${MultiCompileDepends} macro. Correct the dependency block for $<."
+        ~assert ("$(@D) " == "$(o) "), "Multi-compiled objects must go to $$(o) as their object directory. Failing on dependency $<"
+        ~assert ("$(@B) " == "$[@basename $<] "), "Multi-compiled files must compile to objects with the same name. Failing on dependency $<"
+    %endif
+    %if defined (MultiCompileDepends)
+        %if defined (DEBUG_MULTI_COMPILE)
+            |Must rebuild $@ ($=)
+            |Appending $@ to $(MultiCompileCppListFile)
+        %endif
+        !>> $(RedoCppMakefile)
+        ~flipBackSlashes $!
+        ~endl
+        <
+        !>>$(MultiCompileCppListFile)
+        $<
+        <
+    %else
+        !~set NeedsCompiledCppList $(NeedsCompiledCppList) $<
+    %endif
+    %if defined (DisableMultiCompile)
+        %warn DisableMultiCompile is defined - this may cause MultiCompileObjectList to be incorrect
+        $(RecipeCPPCompile) $<
+    %endif
+
+.c.obj:
+    !|**> $@ <$=>
+    %if defined (MultiCompileDepends)
+        !>> $(RedoCMakefile)
+        ~flipBackSlashes $!
+        ~endl
+        <
+        !>> $(MultiCompileCListFile) 
+        $<
+        <
+    %else
+        !~set NeedsCompiledCList $(NeedsCompiledCList) $<
+    %endif
+    %if defined (DisableMultiCompile)
+        %warn DisableMultiCompile is defined - this may cause MultiCompileObjectList to be incorrect
+        $(RecipeCCompile) $<
+    %endif
+
+%undef MultiCompileDependsChanged
+%undef MultiCompileDependsIsDefined

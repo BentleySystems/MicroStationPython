@@ -1,0 +1,183 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if defined (TOOLSET_DIAGNOSTICS)
+    %message Using toolset '$(BUILD_TOOLSET)' targetting '$(TARGET_PROCESSOR_ARCHITECTURE)'.
+%endif
+
+%if !defined (__apple)
+    %error Toolset '$(BUILD_TOOLSET)' not supported on this platform.
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Tool selection
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Use the global system selection. Xcode already has mechanisms for controlling this, let's not re-invent the wheel.
+
+CCCompCmd = xcrun clang
+CCompCmd = xcrun clang
+LinkCommand = xcrun clang
+LibCommand = xcrun libtool
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# SDK selection
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+%if $(TARGET_PLATFORM) == "iOS"
+
+    #................................................................................................................................................
+    # If not overridden by the user, use the latest.
+    # Note that this is independent of the deployment target (see below).
+    %if !defined (IOS_SDK_VER)
+        IOS_SDK_VER = $[@readstdout "$(BBPYTHONCMD) $(SrcRoot)bsicommon/build/DetectLatestAppleSdkVersion.py iphoneos"]
+        IOS_SDK_VER_AUTO_DETECTED = 1
+    %endif
+
+    # This is used by the simulator, but I can't imagine how it has a deep impact on iOS builds...
+    MACOS_SDK_VER = $[@readstdout "$(BBPYTHONCMD) $(SrcRoot)bsicommon/build/DetectLatestAppleSdkVersion.py macosx"]
+
+    #................................................................................................................................................
+    # Configure CLANG_SYSROOT
+    # You should not normally have to specify CLANG_SYSROOT; merely define IOS_SDK_VER and let xcodebuild figure it out.
+    %if !defined (CLANG_SYSROOT)
+        %if $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX86"
+            IPHONE_SDK_NAME = iphonesimulator$(IOS_SDK_VER)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX64"
+            IPHONE_SDK_NAME = iphonesimulator$(IOS_SDK_VER)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64Simulator"
+            IPHONE_SDK_NAME = iphonesimulator$(IOS_SDK_VER)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM"
+            IPHONE_SDK_NAME = iphoneos$(IOS_SDK_VER)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64"
+            IPHONE_SDK_NAME = iphoneos$(IOS_SDK_VER)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARMActive"
+            IPHONE_SDK_NAME = iphoneos$(IOS_SDK_VER)
+        %else
+            %error Unknown TARGET_PROCESSOR_ARCHITECTURE for Xcode.
+        %endif
+
+        CLANG_SYSROOT = $[@readstdout "xcodebuild -version -sdk $(IPHONE_SDK_NAME) Path"]
+    %endif
+
+    %ifnofile $(CLANG_SYSROOT)
+        allIosSdks = $[@readstdout "xcodebuild -showsdks | grep -i ios"]
+        
+        # Using @echo because the "|" messages aren't printed when %error is right below them.
+        always:
+            @echo Could not find the iOS SDK sysroot on your system.
+            @echo 
+            @echo Requested version: $(IOS_SDK_VER)
+            @echo Detected sysroot: $(CLANG_SYSROOT)
+            @echo Available versions:
+            @printf "$(allIosSdks)\\n"
+            @echo
+        %error
+    %endif
+
+    #................................................................................................................................................
+    # Deployment Target selection
+    # You can use an SDK that is equal to or newer than the deployment target.
+    # Allowing the SDK to silently move forward allows developers to use the latest tools, but still restrict API usage to the desired target.
+
+    %if !defined (IOS_DEPLOYMENT_TARGET)
+        IOS_DEPLOYMENT_TARGET = 10.0
+    %endif
+
+    #................................................................................................................................................
+    # Utility for make files that want to call xcodebuild; this can be used as the ARCHS build setting.
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX86"
+        XCODE_BUILD_ARCH = i386
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX64"
+        XCODE_BUILD_ARCH = x86_64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64Simulator"
+        XCODE_BUILD_ARCH = arm64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM"
+        XCODE_BUILD_ARCH = armv7
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64"
+        XCODE_BUILD_ARCH = arm64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARMActive"
+        XCODE_BUILD_ARCH = arm64
+    %else
+        %error Incompatible TARGET_PROCESSOR_ARCHITECTURE for Xcode.
+    %endif
+
+    #................................................................................................................................................
+    # Diagnostics
+    %if defined (TOOLSET_DIAGNOSTICS)
+        always:
+            |Using the following Xcode (with default toolchain). To change, use the 'xcode-select' command.
+            |$[@readstdout "xcode-select --print-path"]
+            |$[@readstdout "xcodebuild -version"]
+            %if defined (IOS_SDK_VER_AUTO_DETECTED)
+                |Using iOS SDK version $(IOS_SDK_VER). This was automatically detected to be the latest version available. To change, set IOS_SDK_VER.
+            %else
+                |Using iOS SDK version $(IOS_SDK_VER). This was manually set by IOS_SDK_VER.            
+            %endif
+            |Using sysroot $(CLANG_SYSROOT)
+            |Using deployment target $(IOS_DEPLOYMENT_TARGET). To change, set IOS_DEPLOYMENT_TARGET.
+    %endif
+    
+%elif $(TARGET_PLATFORM) == "MacOS"
+
+    #................................................................................................................................................
+    # If not overridden by the user, use the latest.
+    # Note that this is independent of the deployment target (see below).
+    %if !defined (MACOS_SDK_VER)
+        MACOS_SDK_VER = $[@readstdout "$(BBPYTHONCMD) $(SrcRoot)bsicommon/build/DetectLatestAppleSdkVersion.py macosx"]
+        MACOS_SDK_VER_AUTO_DETECTED = 1
+    %endif
+
+    #................................................................................................................................................
+    # Configure CLANG_SYSROOT
+    # You should not normally have to specify CLANG_SYSROOT; merely define MACOS_SDK_VER and let xcodebuild figure it out.
+    %if !defined (CLANG_SYSROOT)
+        MACOS_SDK_NAME = macosx$(MACOS_SDK_VER)
+        CLANG_SYSROOT = $[@readstdout "xcodebuild -version -sdk $(MACOS_SDK_NAME) Path"]
+    %endif
+
+    %ifnofile $(CLANG_SYSROOT)
+        allMacOSSdks = $[@readstdout "xcodebuild -showsdks | grep -i macosx"]
+        
+        # Using @echo because the "|" messages aren't printed when %error is right below them.
+        always:
+            @echo Could not find the MacOS SDK sysroot on your system.
+            @echo 
+            @echo Requested version: $(MACOS_SDK_VER)
+            @echo Detected sysroot: $(CLANG_SYSROOT)
+            @echo Available versions:
+            @printf "$(allMacOSSdks)\\n"
+            @echo
+        %error
+    %endif
+
+    #................................................................................................................................................
+    # Deployment Target selection
+    # You can use an SDK that is equal to or newer than the deployment target.
+    # Allowing the SDK to silently move forward allows developers to use the latest tools, but still restrict API usage to the desired target.
+    %if !defined (MACOS_DEPLOYMENT_TARGET)
+        MACOS_DEPLOYMENT_TARGET = 10.15
+    %endif
+
+    #................................................................................................................................................
+    # Diagnostics
+    %if defined (TOOLSET_DIAGNOSTICS)
+        always:
+            |Using the following Xcode (with default toolchain). To change, use the 'xcode-select' command.
+            |$[@readstdout "xcode-select --print-path"]
+            |$[@readstdout "xcodebuild -version"]
+            %if defined (MACOS_SDK_VER_AUTO_DETECTED)
+                |Using MacOS SDK version $(MACOS_SDK_VER). This was automatically detected to be the latest version available. To change, set MACOS_SDK_VER.
+            %else
+                |Using MacOS SDK version $(MACOS_SDK_VER). This was manually set by MACOS_SDK_VER.            
+            %endif
+            |Using sysroot $(CLANG_SYSROOT)
+            |Using deployment target $(MACOS_DEPLOYMENT_TARGET). To change, set MACOS_DEPLOYMENT_TARGET.
+    %endif
+    
+%else
+    %error CLang toolset could not determine an SDK based on TARGET_PLATFORM '$(TARGET_PLATFORM)'.
+
+%endif

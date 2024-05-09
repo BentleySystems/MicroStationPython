@@ -1,0 +1,35 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+# Inputs:
+#
+#    DLM_NAME          = the base filename of the output dlm. (example: xxxdlm)
+#    DLM_API_NUMBER    = A value appended to the filename before the extension.
+#    DLM_OUT_NAME      = a full file name for the dlm.(example: xxxsym)
+#    DLM_OBJECT_DEST   = the complete (slash-terminated) path to the object
+#                        directory (example: $(MSO)/xxxobj/ )
+#    DLM_OBJECT_FILES  = the list of object files to be linked. Static libraries go here.
+#    DLM_OBJECT_PCH    = the pre-compiled header object.
+#    LINKER_LIBRARIES  = Optional. the list of dynamic library files to be linked that should not be delayloaded.
+#    DLM_DEST          = destination for the finished DLM. If not defined, it
+#                        gets put into the mdlapps directory.
+#    DLM_NO_BENTLEY_LIB = If not set, will link with bentley.lib
+#
+# 4) Define the dependencies for .c to $(oext) dependencies.
+#
+# 5) Include dlmlink.mki. This makes the shared library and the link library.
+#
+__dlmlinkMKI__=1
+
+%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED" || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG"
+    %include gcclink.mki
+%elif $(BUILD_TOOLSET) == "APPLE_CLANG"
+    %include llvmlink.mki
+%elif $(BUILD_TOOLSET) == "EMCC"
+    %include emcclink.mki
+%else
+    %include winntlink.mki
+%endif
