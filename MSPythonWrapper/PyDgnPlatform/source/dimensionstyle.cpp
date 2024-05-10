@@ -54,36 +54,142 @@ static const char * __doc_Bentley_DgnPlatform_DimensionStyle_SetBooleanProp =R"d
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_SetAccuracyProp =R"doc(Change the value of an accuracy type property.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetTemplateFlagProp =R"doc(Get the value of a template flag.)doc";
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetTemplateFlagProp =R"doc(Get the value of a template flag.
+Returns (Tuple,0):
+	retVal.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetTextStyleProp =R"doc(Get the value of a text style type property.)doc";
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetTextStyleProp =R"doc(Get the value of a text style type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetOneUnitProp =R"doc(Get the value of a unit type property. To change a unit property use
-SetUnitsProp().)doc";
+SetUnitsProp()..
+Returns (Tuple,0):
+	retVal.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetLineStyleProp =R"doc(Get the value of a linestyle type property.)doc";
+Returns (Tuple,1):
+	valueOut.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetWeightProp =R"doc(Get the value of a weight type property.)doc";
+)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetColorProp =R"doc(Get the value of an accuracy type property.)doc";
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetLineStyleProp =R"doc(Get the value of a linestyle type property.
+Returns (Tuple,0):
+	retVal.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetFontProp =R"doc(Get the value of a font type property.)doc";
+Returns (Tuple,1):
+	valueOut.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetStringProp =R"doc(Get the value of a string type property.)doc";
+)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetLevelProp =R"doc(Get the value of a level type property.)doc";
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetWeightProp =R"doc(Get the value of a weight type property.
+Returns (Tuple,0):
+	retVal.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetIntegerProp =R"doc(Get the value of an integer type property.)doc";
+Returns (Tuple,1):
+	valueOut.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetDistanceProp =R"doc(Get the value of a distance type property.)doc";
+)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetDoubleProp =R"doc(Get the value of a double type property.)doc";
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetColorProp =R"doc(Get the value of an accuracy type property.
+Returns (Tuple,0):
+	retVal.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetCharProp =R"doc(Get the value of a char type property.)doc";
+Returns (Tuple,1):
+	valueOut.
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetBooleanProp =R"doc(Get the value of a boolean type property.)doc";
+)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetAccuracyProp =R"doc(Get the value of an accuracy type property.)doc";
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetFontProp =R"doc(Get the value of a font type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetStringProp =R"doc(Get the value of a string type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetLevelProp =R"doc(Get the value of a level type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetIntegerProp =R"doc(Get the value of an integer type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetDistanceProp =R"doc(Get the value of a distance type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetDoubleProp =R"doc(Get the value of a double type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetCharProp =R"doc(Get the value of a char type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetBooleanProp =R"doc(Get the value of a boolean type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetAccuracyProp =R"doc(Get the value of an accuracy type property.
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	valueOut.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetUorScale =R"doc(Obtain a scale factor needed to interpret style distance properties.
 

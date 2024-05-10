@@ -57,7 +57,7 @@ void def_NameSpaceManager (py::module_&);
 PYBIND11_MODULE(MSPyBentley, m)
     {
     // Document for module
-    m.doc() = "Pybind11 wrapper for Bentley.dll";
+    m.doc() = "The MSPyBentley library, is the lowest level Python API library for MicroStation, it provides basic services such as String, File, Date manipulation which are then used by child libraries";
 
     // class defines
     bind_container_PyBentley (m);

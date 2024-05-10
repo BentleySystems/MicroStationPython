@@ -26,12 +26,7 @@ DgnElementECInstance. one or the other must use a DgnModelRef that
 represents a DgnAttachment from one model to another. If you got the
 instances through
 
-Parameter ``createdRelationship``:
-    Smart pointer to ECN::IECRelationshipInstanceP created. For
-    example, you have two models A and B where A contains a reference
-    to B. Model A contains instanceA. You want to create instanceB in
-    model B and then create an ECRelationship between instanceA and
-    instanceB.
+
 
 Parameter ``relationshipEnabler``:
     The relationship enablerA pointer to a WipRelationshipInstance
@@ -82,7 +77,19 @@ Remark:
     See DgnECInstanceEnabler::CreateInstanceOnElement.
 
 See also:
-    DgnECManager::CreateInstanceOnElement.)doc";
+    DgnECManager::CreateInstanceOnElement.
+
+Returns (Tuple):
+	retVal.
+
+Returns (Tuple):
+	createdRelationship , ECN::IECRelationshipInstanceP created. For
+    example, you have two models A and B where A contains a reference
+    to B. Model A contains instanceA. You want to create instanceB in
+    model B and then create an ECRelationship between instanceA and
+    instanceB..
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ObtainDgnECRelationshipEnabler =R"doc(Return pointer to the DgnECRelationshipEnabler for the specified
 relationship class.
@@ -309,12 +316,12 @@ Parameter ``scope``:
 Parameter ``query``:
     Specifies what instances to return.
 
-Parameter ``count``:
-    If non-null, will contain the number of instances in the iterable.
-    Note that for non-trivial queries this may be expensive to obtain.
 
-Returns:
+Returns  (Tuple, 0):
     An iterable for iterating over the InstanceCountEntry results.
+
+Returns (Tuple, 1):
+	count.  will contain the number of instances in the iterable.
 
 Remark:
     s The DgnECManager does not find and " load " all of the ECInstances
@@ -367,9 +374,7 @@ Parameter ``dgnFile``:
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ReadSchemaFromXmlFile =R"doc(Load an ECSchema managed by the DgnECManager to be used with
 ImportSchema or returned by Bentley::ECN::IECSchemaLocater
 
-Parameter ``schemaHolder``:
-    maintains a reference to the ECSchema (as in reference-counting)
-    to keep it alive
+
 
 Parameter ``ecSchemaXmlFilename``:
     The full file path/name of the ECSchemaXML file to read
@@ -380,14 +385,18 @@ Parameter ``dgnFile``:
 
 Parameter ``searchPaths``:
     Additional paths to search for referenced ECSchemas. Searched
-    after the dgnFile, but before registered ExternalSchemaLocaters.)doc";
+    after the dgnFile, but before registered ExternalSchemaLocaters
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	schemaHolder. maintains a reference to the ECSchema 
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ReadSchemaFromXmlString =R"doc(Load an ECSchema managed by the DgnECManager to be used with
 ImportSchema or returned by Bentley::ECN::IECSchemaLocater
-
-Parameter ``schema``:
-    maintains a reference to the ECSchema (as in reference-counting)
-    to keep it alive
 
 Parameter ``schemaAsXml``:
     A string holding ECSchemaXML to be parsed
@@ -398,10 +407,26 @@ Parameter ``dgnFile``:
 
 Parameter ``searchPaths``:
     Additional paths to search for referenced ECSchemas. Searched
-    after the dgnFile, but before registered ExternalSchemaLocaters.)doc";
+    after the dgnFile, but before registered ExternalSchemaLocaters.
+    
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	schema. maintains a reference to the ECSchema
+
+)doc";       
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_CreateSchema =R"doc(Create an ECSchema managed by the DgnECManager to be used with
-ImportSchema or returned by Bentley::ECN::IECSchemaLocater)doc";
+ImportSchema or returned by Bentley::ECN::IECSchemaLocater
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	schemaHolder.
+
+)doc";   
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_RemoveECInstancesFromModel =R"doc(Remove ECInstances for the specified DGN model
 

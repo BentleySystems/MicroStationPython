@@ -471,7 +471,7 @@ void def_BeFileName(py::module_& m)
     c1.def_static("IsSymbolicLink", &BeFileName::IsSymbolicLink, "path"_a, DOC(Bentley, BeFileName, IsSymbolicLink));
     c1.def_static("GetTargetOfSymbolicLink", py::overload_cast<BeFileNameR, WCharCP>(&BeFileName::GetTargetOfSymbolicLink), "targetFileName"_a, "path"_a, DOC(Bentley, BeFileName, GetTargetOfSymbolicLink));
     c1.def_static("GetTargetOfSymbolicLink", py::overload_cast<BeFileNameR, WCharCP, bool>(&BeFileName::GetTargetOfSymbolicLink), "targetFileName"_a, "path"_a, "shouldRecurse"_a, DOC(Bentley, BeFileName, GetTargetOfSymbolicLink));
-    c1.def_static("AreSameFile", &BeFileName::AreSameFile, "fileName1"_a, "fileName2"_a, DOC(Bentley, BeFileName, AreSameFile));
+    c1.def_static("AreSameFile", &BeFileName::AreSameFile, "file1"_a, "file2"_a, DOC(Bentley, BeFileName, AreSameFile));
     c1.def_static("DoesPathExist", &BeFileName::DoesPathExist, "path"_a, DOC(Bentley, BeFileName, DoesPathExist));
     
     c1.def("IsAbsolutePath", &BeFileName::IsAbsolutePath, DOC(Bentley, BeFileName, IsAbsolutePath));    

@@ -17,13 +17,18 @@ replaced. The XAttribute are written immediately.
 Parameter ``elemRef``:
     The element to receive the Element Template reference.
 
-Parameter ``templateNode``:
-    The template node that defines the Element Template to reference.
 
 Parameter ``applyDefaultSymbology``:
     If true the element is updated to match the default symbology
     specifications in the template. @Return SUCCESS if the Element
-    Template reference was attached.)doc";
+    Template reference was attached.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	templateNode.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TemplateRefAttributes_GetReferencedTemplateIDFromHandle =R"doc(Get the ElementId of the element template referenced by an element.
 
@@ -57,13 +62,18 @@ replaced.
 Parameter ``eeh``:
     The element to receive the Element Template reference.
 
-Parameter ``templateNode``:
-    The template node that defines the Element Template to reference.
 
 Parameter ``applyDefaultSymbology``:
     If true the element is updated to match the default symbology
-    specifications in the template. @Return SUCCESS if the Element
-    Template reference was attached.)doc";
+    specifications in the template.
+    .
+Returns (Tuple, 0):
+	retVal. SUCCESS if the ElementTemplate reference was attached.
+
+Returns (Tuple, 1):
+	templateNode.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TemplateRefAttributes_Remove =R"doc(Remove reference to Element Template from specified element.
 

@@ -83,18 +83,21 @@ Parameter ``model``:
 static const char * __doc_Bentley_DgnPlatform_NamedView_IsViewMemberOfNamedGroup =R"doc(Check if a view element is member of a namedgroup. If it is, return
 the namedgroup.
 
-Parameter ``group``:
-    OUT Namedgroup pointer. Pass NULL if namedgroup is not needed.
 
 Parameter ``viewEH``:
     IN View element to check
 
-Returns:
-    true if view is member of a namedgroup
-
 Remark:
     s Caller is responsible for freeing group by calling
-    group->Release ().)doc";
+    group->Release ().
+
+Returns (Tuple, 0):
+    true if view is member of a namedgroup
+
+Returns (Tuple, 1):
+	group.  Namedgroup
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_HideAllAnnotationAttachments =R"doc(De-annotate (hide) all annotation attachments
 
@@ -156,9 +159,14 @@ Parameter ``dgnFile``:
 Parameter ``name``:
     The NamedView Name.
 
-Returns:
+Returns (Tuple, 0):
     Success, or one of the NamedViewStatus values if there is an
-    error.)doc";
+    error.
+
+Returns (Tuple, 1):
+	namedView.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_Apply =R"doc(Apply a named view to the specified viewport.
 

@@ -336,5 +336,7 @@ void def_DgnModel(py::module_& m)
     c10.def_property_readonly("GraphicElmStart", &DgnModel::GetGraphicElmStart);
     c10.def("GetGraphicElmStart", &DgnModel::GetGraphicElmStart, DOC(Bentley, DgnPlatform, DgnModel, GetGraphicElmStart));
     
+    c10.def("FindElementByID", &DgnModel::FindElementByID, py::return_value_policy::reference);
+
     py::class_< PersistentElementRef, ElementRefBase>(m, "PersistentElementRef");
     }

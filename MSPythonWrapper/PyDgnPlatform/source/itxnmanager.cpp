@@ -279,14 +279,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_ITxn_CreateNewModel =R"doc(Create a new model in the specified file and make it a root. The model
 is assigned the next available ModelId.
 
-Parameter ``error``:
-    if not NULL, *error* is set to a non-zero error status if the
-    return value is NULL. Possible values include:\li
-    DGNMODEL_STATUS_InvalidModelName if name is NULL or cannot be used
-    as a model name \li DGNMODEL_STATUS_DuplicateModelName if an
-    existing model in this file already uses the specified name \li
-    DGNMODEL_STATUS_NotFound if *seedModel* is NULL and if no default
-    seed model can be found
+
 
 Parameter ``file``:
     The file where the new model will be created.
@@ -308,12 +301,26 @@ Parameter ``modelId``:
     id for new model. Leave as INVALID_MODELID and it will be assigned
     a new valid id.
 
-Returns:
+Remark:
+    This function calls DgnFile::AddRootModel.
+
+Returns (Tuple, 0):
     A pointer to a new DgnModel for the new model, or NULL if the
     model could not be created. See *error* for error details.
 
-Remark:
-    s This function calls DgnFile::AddRootModel.)doc";
+
+Returns (Tuple, 1):
+	err.if not NULL, *error* is set to a non-zero error status if the
+    return value is NULL. Possible values include:\li
+    DGNMODEL_STATUS_InvalidModelName if name is NULL or cannot be used
+    as a model name \li DGNMODEL_STATUS_DuplicateModelName if an
+    existing model in this file already uses the specified name \li
+    DGNMODEL_STATUS_NotFound if *seedModel* is NULL and if no default
+    seed model can be found
+
+
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxn_ReplaceElement =R"doc(Replace an existing element in a model with a different one.
 
@@ -447,8 +454,13 @@ Parameter ``opts``:
     options Remarks Implementation must use
     DependencyMgrXAttributeChangeTracker
 
-Returns:
-    SUCCESS if the XAttribute was added to the ElementRefP.)doc";
+Returns (Tuple,0):
+    SUCCESS if the XAttribute was added to the ElementRefP.
+
+Returns (Tuple,1):
+	outXAttrId.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TxnElementWriteOptions_SetSaveInUndo =R"doc(Set the option to save in undo. Defaults to true.)doc";
 

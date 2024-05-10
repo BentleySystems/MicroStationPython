@@ -17,16 +17,45 @@ static const char * __doc_Bentley_DgnPlatform_ParametricCellHandler_GetDefinitio
 instance)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellHandler_GetDefinitionID =R"doc(Extracts the ElementId of the associated cell definition from a cell
-instance)doc";
+instance
+Returns (Tuple, 0):
+	retVal.
 
-static const char * __doc_Bentley_DgnPlatform_ParametricCellHandler_GetCellInfo =R"doc(Extracts the ParametricCellInfo from an element)doc";
+Returns (Tuple, 1):
+	definitionId.
+
+)doc";
+
+
+static const char * __doc_Bentley_DgnPlatform_ParametricCellHandler_GetCellInfo =R"doc(Extracts the ParametricCellInfo from an element
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	status.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellHandler_CreateCellElement =R"doc(Creates a new parametric cell element)doc";
 
-static const char * __doc_Bentley_DgnPlatform_ParametricCellInfo_Clone =R"doc(Clone)doc";
+static const char * __doc_Bentley_DgnPlatform_ParametricCellInfo_Clone =R"doc(Clone
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	status.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellInfo_Create =R"doc(Constructs a ParametricCellInfo object to initialize a new parametric
-cell element.)doc";
+cell element.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	status.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellInfo_Schedule =R"doc(Schedule ParametricCellInfo on a supplied element.)doc";
 

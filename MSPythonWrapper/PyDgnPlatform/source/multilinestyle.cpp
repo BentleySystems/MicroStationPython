@@ -625,7 +625,7 @@ void def_MultilineStyle(py::module_& m)
     py::class_< MultilineStyleCollection> c4(m, "MultilineStyleCollection");
 
     c4.def(py::init<DgnFileR>(), "dgnFile"_a);
-    //c4.def("__iter__", [] (MultilineStyleCollection& self) { return py::make_iterator(self.begin(), self.end()); }, py::keep_alive<0, 1>());
+    c4.def("__iter__", [] (MultilineStyleCollection& self) { return py::make_iterator(self.begin(), self.end()); }, py::keep_alive<0, 1>());
 
     //===================================================================================
     // struct MultilineSymbology

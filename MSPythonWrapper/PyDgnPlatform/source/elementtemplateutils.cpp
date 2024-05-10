@@ -78,16 +78,21 @@ Parameter ``owner``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_CreateByPath =R"doc(Create a new Element Template and return a pointer to the created
 node. If needed this method will create the parent template group(s).
 
-Parameter ``templateNode``:
-    The created element template node.
-
 Parameter ``fullPath``:
     The path of the element template to create.
 
 Parameter ``owner``:
     The XDataTreeOwner that is to hold the element template. The owner
     is used to determine the owning DgnFile. Returns ETSTATUS_Success
-    if the template can be created.)doc";
+    if the template can be created.
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	templateNode. The created element template node.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_DeleteTemplateNode =R"doc(Delete an Element Template. The method verifies the template is not
 referenced by any elements in any loaded models before deleting.
@@ -151,7 +156,16 @@ Parameter ``pTemplateID``:
 
 Parameter ``elemRef``:
     The element that contains a reference to an element template.
-    Returns ETSTATUS_Success if the template data can be extracted.)doc";
+    Returns ETSTATUS_Success if the template data can be extracted
+
+Returns (Tuple, 0):
+	Returns ETSTATUS_Success if the template data can be extracted
+
+Returns (Tuple, 1):
+	templateId.
+
+)doc";
+
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetReferencedTemplateData =R"doc(Return both the full path and the ElementId for the Element Template
 referenced by the specified element.
@@ -166,8 +180,17 @@ Parameter ``templateId``:
 
 Parameter ``elementRef``:
     The element that contains a reference to an element template.
-    Returns ETSTATUS_Success if the template data can be extracted.)doc";
+    
+Returns (Tuple, 0):
+	Returns ETSTATUS_Success if the template data can be extracted.
 
+Returns (Tuple, 1):
+	templatePath.
+
+Returns (Tuple, 2):
+	templateId.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetTemplateIDFromPath =R"doc(Return the ElementId of the host type 66 element that hold element
 template data.
 
@@ -180,8 +203,19 @@ Parameter ``wPath``:
 
 Parameter ``dgnFileP``:
     The file that contains the element template definition. Returns
-    ETSTATUS_Success if the ElementId of the element template can be
-    determined.)doc";
+    
+   
+Returns (Tuple, 0):
+	ETSTATUS_Success if the ElementId of the element template can be
+    determined
+
+Returns (Tuple, 1):
+	templatePath.
+
+Returns (Tuple, 2):
+	templateId.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetPathForTemplate =R"doc(Return the full path for the Element Template referenced by the
 specified element.

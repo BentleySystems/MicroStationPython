@@ -21,7 +21,14 @@ supplied boundary candidates must be persistent elements or an
 associative region can't be created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RegionGraphicsContext_GetRegion =R"doc(Return region result as a CurveVector that represents a closed path,
-parity region, or union region.)doc";
+parity region, or union region.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	region.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RegionGraphicsContext_InitRegionParams =R"doc(Initialize associative region element parameters from current context
 settings for use with GetAssociativeRegion.)doc";

@@ -607,6 +607,18 @@ void def_ECSchema(py::module_& m)
     c18.def(py::self < py::self);
     c18.def(py::self == py::self);
     c18.def("ToColonSeparatedString", &SchemaNameClassNamePair::ToColonSeparatedString);
+    c18.def("__hash__", [](SchemaNameClassNamePair const& self)
+            {
+            size_t h1 = std::hash<WCharCP>{}(self.m_schemaName.c_str ());
+            size_t h2 = std::hash<WCharCP>{}(self.m_className.c_str ());
+            return h1 ^ (h2 << 1);
+            }
+           );
+    c18.def("__eq__", [](SchemaNameClassNamePair const& self, SchemaNameClassNamePair const& other)
+        {
+        return self.m_schemaName == other.m_schemaName && self.m_className == other.m_className;
+        }
+    );
 
     //===================================================================================
     // struct QualifiedECAccessor

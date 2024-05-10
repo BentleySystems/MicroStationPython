@@ -39,17 +39,22 @@ Parameter ``size``:
 Parameter ``angles``:
     The rotation applied to the projection
 
-Parameter ``mode``:
-    The projection mode to be used
-
-Parameter ``variant``:
-    Any variation to the projection data
 
 Parameter ``group``:
     The named group representing the projection
 
-Returns:
-    SUCCESS if the projection group data was available)doc";
+Returns (Tuple, 0):
+    SUCCESS if the projection group data was available
+
+Returns (Tuple, 1):
+	mode.The projection mode to be used
+
+Returns (Tuple, 2):
+	variant.Any variation to the projection data
+
+
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_ModifyProjectionGroup =R"doc(Modify the projection data associated with a projection NamedGroup
 
@@ -431,8 +436,6 @@ Parameter ``renderModelRef``:
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterialsInPalette =R"doc(Find a list of materials in a palette
 
-Parameter ``searchStatus``:
-    Indicates the result of a search. OK to pass NULL.
 
 Parameter ``materials``:
     A list populated with the materials found
@@ -448,8 +451,13 @@ Parameter ``includeLibrary``:
     Also load the materials from the library if one is specified on
     the paletteInfo
 
-Returns:
-    SUCCESS if one or more materials were found)doc";
+Returns (Tuple, 0):
+    SUCCESS if one or more materials were found
+
+Returns (Tuple, 1):
+	status. Indicates the result of a search. 
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterialAttachment =R"doc(Find if a material is attached to the element handle passed in. Note
 should use the IMaterialProperties class for evaluating attachments as
@@ -507,8 +515,6 @@ Parameter ``context``:
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterialByNameFromAnySource =R"doc(Find a material or materials by its name from any material source
 
-Parameter ``searchStatus``:
-    Indicates the result of a search. OK to pass NULL.
 
 Parameter ``materials``:
     A list populated with the materials found
@@ -527,8 +533,13 @@ Parameter ``loadSourceIfNotCached``:
     materials in its associated MaterialTable. Specifying false for
     this argument improves performance.
 
-Returns:
-    SUCCESS if the search found one or more materials)doc";
+Returns (Tuple, 0):
+    SUCCESS if the search found one or more materials
+
+Returns (Tuple, 1):
+	status. Indicates the result of a search.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterial =R"doc(Find a material definition from the specified source. These results
 are cached after an initial search. The pointer returned is only valid

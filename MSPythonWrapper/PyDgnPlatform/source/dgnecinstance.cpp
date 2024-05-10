@@ -17,20 +17,46 @@ instances)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECRelationshipInstance_GetRelatedInstance =R"doc(Gets the associated instance data)doc";
 
-static const char * __doc_Bentley_DgnPlatform_IDgnECRelationshipInstance_GetTargetAssociatedString =R"doc(Gets the source property string)doc";
+static const char * __doc_Bentley_DgnPlatform_IDgnECRelationshipInstance_GetTargetAssociatedString =R"doc(Gets the source property string
 
-static const char * __doc_Bentley_DgnPlatform_IDgnECRelationshipInstance_GetSourceAssociatedString =R"doc(Gets the source property string)doc";
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	propString.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_IDgnECRelationshipInstance_GetSourceAssociatedString =R"doc(Gets the source property string
+
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	propString.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECRelationshipInstance_GetTargetOrderId =R"doc(Gets the target order id
 
-Parameter ``targetOrderId``:
-    Contains the orderId of the target instance)doc";
+
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	targetOrderId.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECRelationshipInstance_GetSourceOrderId =R"doc(Gets the source order id
 
-Parameter ``sourceOrderId``:
-    Contains the orderId of the source instance)doc";
+Returns (Tuple,0):
+	retVal.
 
+Returns (Tuple,1):
+	sourceOrderId.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_IDgnECRelationshipInstance_Delete =R"doc(Delete the XAttributes that hold the relationship data.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECRelationshipEnabler_SupportsRelationshipProperties =R"doc(Returns true if the enabler supports relationship properties.)doc";
@@ -39,10 +65,6 @@ static const char * __doc_Bentley_DgnPlatform_DgnECRelationshipEnabler_GetShared
 specify properties to be set in the relationship instance.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECRelationshipEnabler_CreateRelationship =R"doc(Method to create a relationship between two DgnElementECInstance.
-
-Parameter ``createdRelationship``:
-    Pointer to ECN::IECRelationshipInstanceP created, it is callers
-    responsibility to free.
 
 Parameter ``wipRelationship``:
     A reference to a StandaloneInstance that will contain properties
@@ -61,8 +83,17 @@ Parameter ``hostModelRef``:
 
 Parameter ``hostElementRef``:
     Optional element to receive relationship (may be different then
-    either source or target host element). For future use.)doc";
+    either source or target host element). For future use.
 
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple,1):
+	createdRelationship.
+
+
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_DgnElementECInstance_GetLocalId =R"doc(Get LocalId of the instance. For XAttribute-based instances this is an
 XAttribute ID.)doc";
 
@@ -162,8 +193,6 @@ static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanc
 SupportsCreateInstanceAsElement to determine if it is safe to call
 this on a given DgnECInstanceEnabler.
 
-Parameter ``dgnecInstance``:
-    DgnElementECInstance that is created.
 
 Parameter ``wipInstance``:
     A ECN::StandaloneECInstance that was probably obtained from
@@ -186,15 +215,19 @@ Parameter ``instanceOwnsElement``:
     as well.
 
 See also:
-    GetSharedWipInstance();)doc";
+    GetSharedWipInstance();
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	dgnecInstance.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnElement =R"doc(Creates an DgnElementECInstance on an persistent element. The instance
 will be written to the element immediately. You must call
 SupportsCreateInstanceOnElement to determine if it is safe to call
 this on a given DgnECInstanceEnabler.
-
-Parameter ``dgnecInstance``:
-    DgnElementECInstance that is created.
 
 Parameter ``wipInstance``:
     A ECN::StandaloneECInstance that was probably obtained from
@@ -217,14 +250,19 @@ Parameter ``instanceOwnsElement``:
     as well.
 
 See also:
-    GetSharedWipInstance();)doc";
+    GetSharedWipInstance();
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	dgnecInstance.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_ScheduleReplaceInstanceOnElement =R"doc(Schedules the replacement of an existing instance associated with an
 element that is identified by the localid. The element is identified
 by an EditElementHandle.
 
-Parameter ``dgnecInstance``:
-    DgnECInstance that is created.
 
 Parameter ``wipInstance``:
     A ECN::StandaloneECInstance that was probably a " shared " instance
@@ -244,15 +282,21 @@ Parameter ``eh``:
 
 Parameter ``localId``:
     Identifies the existing instance to replace. Typically the
-    xattribute id.)doc";
+    xattribute id.
+
+Returns (Tuple,0):
+	retVal.
+
+Returns (Tuple,1):
+	dgnecInstance.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_ScheduleInstanceOnElement =R"doc(Schedules the creation an DgnElementECInstance on an existing element.
 The instance will be persisted when the EditElementHandle is written.
 You must call SupportsCreateInstanceOnElement to determine if it is
 safe to call this on a given DgnECInstanceEnabler.
 
-Parameter ``dgnecInstance``:
-    DgnElementECInstance that is created.
 
 Parameter ``wipInstance``:
     An ECN::StandaloneECInstance that was probably obtained from
@@ -268,16 +312,20 @@ Parameter ``instanceOwnsElement``:
     as well.
 
 See also:
-    GetSharedWipInstance();)doc";
+    GetSharedWipInstance();
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	dgnecInstance.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_GetStandaloneECInstanceEnabler =R"doc(Used to create StandaloneECInstances that use the same enabler as the
 " WIP " ECInstances (and are thus may be used with
 CreateInstanceOnElement and similar methods))doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnHost =R"doc(Create an instance which is stored on the specified host.
-
-Parameter ``dgnecInstance``:
-    The created instance. Can be NULL on error.
 
 Parameter ``wipInstance``:
     A standalone instance from to get properties of the new instance.
@@ -294,42 +342,64 @@ Parameter ``createContext``:
 
 Parameter ``instanceOwnsHost``:
     (if supported) indicates that if the ECInstance is later deleted,
-    the host on which it resides will be deleted as well.)doc";
+    the host on which it resides will be deleted as well.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple,1):
+	dgnecInstance.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnLinkNode =R"doc(Create an instance which is stored on a DgnLinkTreeNode (ex:Folders
 and Links in a Link Set or Sheet Index)
-
-Parameter ``dgnecInstance``:
-    The created instance. Can be NULL on error.
 
 Parameter ``wipInstance``:
     A standalone instance from to get properties of the new instance.
 
 Parameter ``linknode``:
-    The linknode on which to store)doc";
+    The linknode on which to store
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple,1):
+	dgnecInstance.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnModel =R"doc(Create an instance which is stored on the model or attachment.
 
-Parameter ``dgnecInstance``:
-    The created instance. Can be NULL on error.
 
 Parameter ``wipInstance``:
     A standalone instance from to get properties of the new instance.
 
 Parameter ``model``:
-    The dgnmodel on which to store)doc";
+    The dgnmodel on which to store
+Returns (Tuple, 0):
+	retVal.
 
+Returns (Tuple,1):
+	dgnecInstance.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnFile =R"doc(Create an instance which is stored on the DgnFile.
 
-Parameter ``dgnecInstance``:
-    The created instance. Can be NULL on error.
 
 Parameter ``wipInstance``:
     A template instance from which to get properties of the new
     instance.
 
 Parameter ``dgnfile``:
-    The DgnFile on which to store the instance)doc";
+    The DgnFile on which to store the instance
+    
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple,1):
+	dgnecInstance.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_SupportsCreateInstanceAsElement =R"doc(Return true if the enabler supports creating an instance on a new
 element.)doc";

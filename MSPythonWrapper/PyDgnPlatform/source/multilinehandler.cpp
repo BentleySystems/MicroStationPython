@@ -286,15 +286,15 @@ Parameter ``source``:
 Parameter ``pXYZBuffer``:
     (optional) buffer for points.
 
-Parameter ``numPoints``:
-    number of points
 
-Parameter ``maxOut``:
-    buffer size. If numPoints is larger, the large number is returned
-    but only maxOut are copied.
 
-Returns:
-    SUCCESS if the element is a multiline.)doc";
+Returns (Tuple, 0):
+    SUCCESS if the element is a multiline.
+
+Returns (Tuple, 1):
+	numPoints. number of points
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_ExtractCapJointDefinition =R"doc(Extract a multiline cap joint definition for a given segment of the
 multiline.

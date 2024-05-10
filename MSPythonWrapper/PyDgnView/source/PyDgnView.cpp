@@ -38,7 +38,7 @@ void def_LocateSubEntityTool(py::module_&);
 PYBIND11_MODULE(MSPyDgnView, m)
     {
     // Document for module
-    m.doc() = "Pybind11 wrapper for DgnView.dll";
+    m.doc() = "The MSPyDgnView library, provides the framework for locating, selecting and manipulating geometry in a DesignFile using a the concept of a Tool.";
 
     // class defines
     bind_container_PyDgnView(m);

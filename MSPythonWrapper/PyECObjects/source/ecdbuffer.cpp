@@ -38,33 +38,37 @@ Remark:
 
 static const char * __doc_Bentley_ECObjects_SchemaLayout_FindAvailableClassIndex = R"doc(Finds the first available index for adding a class layout
 
-Parameter ``classIndex``:
-    The first available index in the layout. This is not necessarily
+
+Returns (Tuple, 0):
+    SUCCESS if the index is found, ERROR otherwise
+
+Returns (Tuple, 1):
+	classIndex.  The first available index in the layout. This is not necessarily
     the size of the layout because there can be gaps.
 
-Returns:
-    SUCCESS if the index is found, ERROR otherwise)doc";
+)doc";
 
 static const char * __doc_Bentley_ECObjects_SchemaLayout_FindClassIndex = R"doc(Given a classname, tries to find the index of the corresponding
 ClassLayout
 
-Parameter ``classIndex``:
-    The index of the corresponding ClassLayout, if found
 
 Parameter ``className``:
     The name of the class to find the ClassLayout index of
 
-Returns:
-    SUCCESS if the ClassLayout is found, ERROR otherwise)doc";
+Returns (Tuple, 0):
+    A pointer to the corresponding ClassLayout if found, NULL
+    otherwise
 
+Returns (Tuple, 1):
+	classIndex.  The index of the corresponding ClassLayout, if found
+)doc";
 static const char * __doc_Bentley_ECObjects_SchemaLayout_FindClassLayout = R"doc(Given a classname, tries to find the corresponding ClassLayout
 
 Parameter ``className``:
     The name of the class to find
 
-Returns:
-    A pointer to the corresponding ClassLayout if found, NULL
-    otherwise)doc";
+
+)doc";
 
 static const char * __doc_Bentley_ECObjects_SchemaLayout_GetClassLayout = R"doc(Returns the ClassLayout at the given index
 
@@ -139,30 +143,37 @@ Returns:
 static const char * __doc_Bentley_ECObjects_ClassLayout_GetPropertyIndex = R"doc(Given an access string, will return the property index within the
 ClassLayout
 
-Parameter ``propertyIndex``:
-    Will contain the index of the given property within the
-    ClassLayout, if found
 
 Parameter ``accessString``:
     The access string for the desired property
 
-Returns:
+Returns(Tuple, 0):
     ECOBJECTS_STATUS_PropertyNotFound if the property is not found,
-    ECOBJECTS_STATUS_Success otherwise)doc";
+    ECOBJECTS_STATUS_Success otherwise
+
+Returns (Tuple, 1):
+	propertyIndex.  Will contain the index of the given property within the
+    ClassLayout, if found
+
+
+)doc";
 
 static const char * __doc_Bentley_ECObjects_ClassLayout_GetPropertyLayoutIndex = R"doc(Given a property layout, will return the property index within the
 ClassLayout
 
-Parameter ``propertyIndex``:
-    Will contain the index of the given property within the
-    ClassLayout, if found
 
 Parameter ``propertyLayout``:
     The propertyLayout of the property that we want the index for
 
-Returns:
+Returns(Tuple, 0):
     ECOBJECTS_STATUS_PropertyNotFound if the property is not found,
-    ECOBJECTS_STATUS_Success otherwise)doc";
+    ECOBJECTS_STATUS_Success otherwise
+
+Returns (Tuple, 1):
+	propertyIndex.    Will contain the index of the given property within the
+    ClassLayout, if found
+
+)doc";
 
 static const char * __doc_Bentley_ECObjects_ClassLayout_GetPropertyLayoutByIndex = R"doc(Given a property index, will return the PropertyLayout
 

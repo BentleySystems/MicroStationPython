@@ -16,8 +16,7 @@ on the document manager, use MSDocumentManager::GetManager().Method
 Returns:
     The document manager *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_GetDocumentWorkspace =R"doc(Retrieves the workspace information for a document.
 
@@ -37,17 +36,12 @@ Parameter ``documentMoniker``:
 Parameter ``generatorArgs``:
     Arguments for worker process *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_CompareDocumentWorkspaces =R"doc(Compares workspace of two documents
 
-Returns:
-    SUCCESS if comparison is done successfully.
 
-Parameter ``profilesEqual``:
-    Reference to a bool. Its value will be true if workspaces are
-    equal.
+
 
 Parameter ``document1``:
     Moniker to first document of which workspace is to be compared
@@ -60,37 +54,42 @@ Parameter ``document2``:
 Parameter ``generatorArgs``:
     Arguments for worker process *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+Returns (Tuple, 0):
+    SUCCESS if comparison is done successfully.
+
+
+Returns (Tuple, 1):
+	profilesEqual. Reference to a bool. Its value will be true if workspaces are
+    equal.
+
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_OpenFolderDialog =R"doc(Parameter ``attributes``:
     MicroStation file list attribues (FILELISTATTR flagword) *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	status.
+
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_OpenDocumentListEditDialog =R"doc(*
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_PutDocumentList =R"doc(commit the local copies of this DgnDocumentList to the DMS *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
-static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_CreateMonikerList =R"doc(Document lists /////////////////)doc";
+static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_CreateMonikerList =R"doc()doc";
 
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_CreateNewDocumentDialog =R"doc(Create a new document, using a dialog to browse for the file name and
 location. Optionally, test for the existence of the file, and
 optionally prompt the user for whether to overwrite the file or not.
 
-Returns:
-    An DgnDocument that represents the file. On failure, NULL is
-    Returned.
 
-Parameter ``status``:
-    If NULL is returned, this gives an indication of why.
 
 Parameter ``params``:
     A structure containing file open parameters. The entire structure
@@ -99,19 +98,19 @@ Parameter ``params``:
 Parameter ``overwriteMode``:
     Sepcifies what to do if the document already exists *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+Returns(Tuple, 0):
+    An DgnDocument that represents the file. On failure, NULL is
+    Returned.
+
+Returns (Tuple, 1):
+	status.  this gives an indication of why.
+
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_OpenDocumentDialog =R"doc(Browse for a document. This will browse the current repository, if one
 is active, and the file system if the current session of MicroStation
 is not integrated with a document management system.
 
-Returns:
-    An DgnDocument that represents the file. If the file cannot be
-    found or cannot be accessed, NULL is returned.
-
-Parameter ``status``:
-    If NULL is returned, this gives an indication of why.
 
 Parameter ``params``:
     A structure containing file open parameters. The entire structure
@@ -125,8 +124,13 @@ Parameter ``openMode``:
     if integrated, or what file access is required of the local file,
     if not integrated.. *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+Returns (Tuple, 0):
+    An DgnDocument that represents the file. If the file cannot be
+    found or cannot be accessed, NULL is returned.
+
+Returns (Tuple, 1):
+	status. this gives an indication of why.
+)doc";
 
 typedef RefCountedPtr <struct PyDocumentOpenDialogParams> PyDocumentOpenDialogParamsPtr;
 struct PyDocumentOpenDialogParams : public RefCountedBase

@@ -12,31 +12,35 @@
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_FindFirstOpenView =R"doc(Return the index of the first open view in this viewgroup.
 
-Parameter ``viewNumber``:
-    The index of the first open view
 
-Returns:
+Returns (Tuple, 0):
     VG_Success if an open view was found and returned in viewNumber,
-    or VG_OpenViewNotFound if no open view could be found.)doc";
+    or VG_OpenViewNotFound if no open view could be found.
+
+Returns (Tuple, 1):
+	viewNumber. The index of the first open view
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_FindActiveViewGroup =R"doc(Find the active ViewGroup in *dgnFile.*
 
-Parameter ``activeViewGroup``:
-    The active viewgroup
 
 Parameter ``dgnFile``:
     The file to read
 
-Returns:
+Returns (Tuple, 0):
     VG_Success if a viewgroup was found, created, and returned in
     activeViewGroup, or VG_ViewGroupNotFound if no viewgroup could be
-    found)doc";
+    found
+
+Returns (Tuple,1):
+	activeViewGroup.  The active viewgroup
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_Copy =R"doc(Creates a new instance of ViewGroup by attempting to find an existing
 ViewGroup that references the designated source model.
 
-Parameter ``copiedViewGroup``:
-    The ViewGroup that was instantiated.
 
 Parameter ``rootModel``:
     The Root Model for every view in the new viewGroup.
@@ -46,10 +50,6 @@ Parameter ``sourceModel``:
 
 Parameter ``copyOptions``:
     Specifies certain copy behaviors. See ViewGroupCopyOptions
-
-Returns:
-    VG_Success, or one of the ViewGroupStatus values if there is an
-    error.
 
 Remark:
     s If there is no ViewGroup for which every view has rootModel as
@@ -62,12 +62,20 @@ Remark:
 Remark:
     s If there are multiple eligible ViewGroups in the DgnFile of
     sourceModel, uses the ViewGroup that was active at the last " Save Settings " if that ViewGroup matches, otherwise the most recently
-    modified matching ViewGroup.)doc";
+    modified matching ViewGroup.
+    
+Returns(Tuple, 0):
+    VG_Success, or one of the ViewGroupStatus values if there is an
+    error.
+
+Returns (Tuple, 1):
+	copiedViewGroup.   The ViewGroup that was instantiated.
+
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_Create =R"doc(Creates a new instance of ViewGroup
 
-Parameter ``createdViewGroup``:
-    The ViewGroup that was instantiated.
 
 Parameter ``rootModel``:
     The model that becomes the Root Model of all views in the
@@ -84,14 +92,21 @@ Parameter ``addToCollection``:
     If true, the ViewGroup is added to the ViewGroupCollection
     associated with the DgnFile.
 
-Returns:
-    VG_Success, or one of the ViewGroupStatus values if there is an
-    error.
-
 Remark:
     s If transient is false and AddToCollection is true, the ViewGroup
     will be persisted to the DgnFile when
-    ViewGroupCollection::SaveChanges is called.)doc";
+    ViewGroupCollection::SaveChanges is called.
+    
+Returns(Tuple, 0):
+    VG_Success, or one of the ViewGroupStatus values if there is an
+    error.
+
+Returns (Tuple, 1):
+	createdViewGroup.  The ViewGroup that was instantiated.
+
+
+)doc";
+
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_From =R"doc(Copies the contents of the source ViewGroup to this ViewGroup.
 
@@ -131,9 +146,16 @@ static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetActiveLevel =R"doc(Ge
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_AllViewsOneModel =R"doc(Returns true if all views reference the same Root Model
 
-Parameter ``onlyModel``:
-    If the method returns true, onlyModel is set to the modelID of the
-    Root Model shared by all views.)doc";
+
+    
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	onlyModel.  If the method returns true, onlyModel is set to the modelID of the
+    Root Model shared by all views.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_WriteImmediatelyToFile =R"doc(Write this ViewGroup immediately to the DgnFile.
 

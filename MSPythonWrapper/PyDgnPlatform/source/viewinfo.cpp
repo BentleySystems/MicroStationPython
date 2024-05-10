@@ -92,12 +92,7 @@ static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetEffectiveLevelDisplay 
 account the per-view level display bit (see #GetLevelDisplay) and the
 on/off and frozen state of the level.
 
-Parameter ``isDisplayed``:
-    The display state.
 
-Returns:
-    VI_Success or VI_BadModelRef if the model is not the rootModel or
-    a descendant of rootModel.
 
 Parameter ``model``:
     The model for which the display is desired. Must be rootModel or a
@@ -105,7 +100,16 @@ Parameter ``model``:
 
 Parameter ``levelID``:
     The level for which the display is desired. @See
-    EnsureLevelMaskCoverage, ViewInfoCodeSamples)doc";
+    EnsureLevelMaskCoverage, ViewInfoCodeSamples
+
+Returns (Tuple, 0):
+    VI_Success or VI_BadModelRef if the model is not the rootModel or
+    a descendant of rootModel.
+
+Returns (Tuple, 1):
+	isDisplayed.   The display state.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetLevelDisplayMask =R"doc(Sets the per-view level display mask for the the given model.
 
@@ -181,8 +185,6 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetLevelDisplay =R"doc(Returns true if the per-view level display bit is turned on for the
 given model and level.
 
-Parameter ``isOn``:
-    The state of the per-view level display bit.
 
 Parameter ``model``:
     The model for which the display is desired. Must be rootModel or a
@@ -191,14 +193,19 @@ Parameter ``model``:
 Parameter ``levelID``:
     The level for which the display is desired.
 
-Returns:
-    VI_Success or VI_BadModelRef if the model is not the rootModel or
-    a descendant of rootModel.
-
 Remark:
     s This method returns the state of the per-view level display bit.
     The level is not actually displayed if the level itself is turned
-    off or frozen. See #GetEffectiveLevelDisplay)doc";
+    off or frozen. See #GetEffectiveLevelDisplay
+
+Returns(Tuple, 0):
+    VI_Success or VI_BadModelRef if the model is not the rootModel or
+    a descendant of rootModel.
+
+Returns (Tuple, 1):
+	isOn.    The state of the per-view level display bit.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetTargetModelRef =R"doc(Sets the Target ModelRef for this ViewInfo.
 
@@ -232,10 +239,7 @@ static const char * __doc_Bentley_DgnPlatform_ViewInfo_IsEqual =R"doc(Tests this
 Parameter ``other``:
     The other ViewInfo
 
-Parameter ``changeType``:
-    A mask of the differences found.
-
-Parameter ``compareACS``:
+r ``compareACS``:
     True if the ACS of the two should be compared.
 
 Parameter ``compareDisplayStyleFlags``:
@@ -245,7 +249,15 @@ Parameter ``compareDisplayStyleFlags``:
 Remark:
     s The DisplayStyleFlags are the renderMode, renderDisplayEdges,
     renderDisplayHidden, hiddenLineStyle, silhouetteAndClips,
-    renderDisplayShadows, and overrideBackground flags.)doc";
+    renderDisplayShadows, and overrideBackground flags.
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	changeType.    A mask of the differences found.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetRootModel =R"doc(Sets the root model for this ViewInfo.
 

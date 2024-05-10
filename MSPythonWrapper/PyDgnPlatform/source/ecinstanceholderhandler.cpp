@@ -18,10 +18,13 @@ Parameter ``eeh``:
 Parameter ``modelRef``:
     Model to associate this element with.
 
-Returns:
-    SUCCESS if a valid element is created. Bentley Systems +----------
-    -----+---------------+---------------+---------------+------------
-    ---+------)doc";
+Returns (Tuple,0):
+    SUCCESS if a valid element is created
+
+Returns (Tuple,1):
+	eeh.
+
+)doc";    
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                    Chris.Wu                       6/2023

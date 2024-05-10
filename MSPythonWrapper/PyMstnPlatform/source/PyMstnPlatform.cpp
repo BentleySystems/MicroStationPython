@@ -67,7 +67,7 @@ void def_ImageLibAPI(py::module_&);
 PYBIND11_MODULE(MSPyMstnPlatform, m)
     {
     // Document for module
-    m.doc() = "Pybind11 wrapper for MstnPlatform";
+    m.doc() = "The MSPyMstnPlatform library, provides functionality which interacts with the execution of the MicroStation product itself, i.e interaction with the command queue, the active file being manipulated in the current session";
 
     // class defines
     bind_container_PyMstn(m);

@@ -46,9 +46,6 @@ static const char * __doc_Bentley_DgnPlatform_LsResourceFileMap_OpenFile =R"doc(
 be used to access the line styles and components that file
 contains.<p>
 
-Parameter ``status``:
-    Set to LINESTYLE_STATUS_Success if able to open the file;
-    otherwise set to an appropriate LineStyleStatus error status.
 
 Parameter ``fileName``:
     Name of the file to open.
@@ -56,13 +53,19 @@ Parameter ``fileName``:
 Parameter ``readonly``:
     Pass true to open the file readonly.
 
-Returns:
+See also:
+    OpenFile
+
+Returns (Tuple, 0):
     A LsResourceFileMapPtr. If unable to open the file,
-    LsResourceFileMapPtr.get() returns NULL and the status parameter
+    LsResourceFileMapPtr returns NULL and the status parameter
     is set to an appropriate LineStyleStatus error status.
 
-See also:
-    OpenFile)doc";
+Returns (Tuple, 1):
+	status. et to LINESTYLE_STATUS_Success if able to open the file;
+    otherwise set to an appropriate LineStyleStatus error status.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LsMap_GetLineStyleEntry =R"doc(Searches the set of names associated with the LsMap.
 

@@ -220,7 +220,16 @@ static const char * __doc_Bentley_DgnPlatform_DgnDocument_GetCommitTime =R"doc(G
 
 Remark:
     s If the DMS is the native file system, this method returns the
-    last time the file was modified.)doc";
+    last time the file was modified.
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	commitTime.
+
+)doc";
+
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_HasLocalChanges =R"doc(Has the document been changed locally since it was last put?
 
@@ -297,17 +306,21 @@ Parameter ``overwriteMode``:
     Specifies what to do if the document already exists.
 
 Parameter ``options``:
-    Create Options.)doc";
+    Create Options.
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	status.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_CreateForNewFile =R"doc(Create a new DgnDocument object to represent a new file in the native
 file system. Optionally, test for the existence of a local file by the
 same name, and optionally prompt the user for whether to overwrite the
 file or not. <p>*\b* NB:The caller should call
 DgnDocument::OnNewFileCreated after creating the new disk file.
-
-Returns:
-    a DgnDocument that represents the file. On failure, NULL is
-    Returned.
 
 Parameter ``status``:
     If NULL is returned, this gives an indication of why. The possible
@@ -345,7 +358,16 @@ Remark:
 
 Remark:
     s After writing out the disk file for the new document, the caller
-    must call DgnDocument::OnNewFileCreated.)doc";
+    must call DgnDocument::OnNewFileCreated.
+    
+Returns (Tuple, 0):
+    a DgnDocument that represents the file. On failure, NULL is
+    Returned.
+
+Returns (Tuple, 1):
+	status.
+
+    )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_CreateFromFileName =R"doc(Create a DgnDocument object that represents an existing file in the
 native file system. This is just a short cut for the following:
@@ -354,10 +376,6 @@ native file system. This is just a short cut for the following:
 DgnDocumentMonikerPtr  moniker = CreateMonikerFromFileName (fileName, NULL, envvar);
 DgnDocumentP openedDoc = CreateFromMoniker (status, *moniker, defFileId, fetchMode, fetchOptions);
 ``
-
-Returns:
-    A DgnDocument object that represents the file. If the file cannot
-    be found or cannot be accessed, NULL is returned.
 
 Parameter ``status``:
     If NULL is returned, this gives an indication of why:-
@@ -384,7 +402,16 @@ Parameter ``fetchOptions``:
 Remark:
     s This method does not open a disk file. It creates a DgnDocument
     object in memory that identifies and represents an existing disk
-    file that the caller can open if desired.)doc";
+    file that the caller can open if desired.
+
+Returns (Tuple, 0):
+    a DgnDocument that represents the file. On failure, NULL is
+    Returned.
+
+Returns (Tuple, 1):
+	status.
+    
+    )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_CreateFromMoniker =R"doc(@name Methods to create document objects Create a new DgnDocument
 object from a moniker object that refers to an existing file. This
@@ -392,9 +419,6 @@ method would typically be used by code that intends to read or write
 data from the document. The document manager will optionally fetch the
 document from the repository.
 
-Returns:
-    a DgnDocument that represents the existing document. On failure,
-    NULL is returned.
 
 Parameter ``status``:
     If NULL is returned, this gives an indication of why:-
@@ -419,13 +443,29 @@ Parameter ``fetchOptions``:
 Remark:
     s This method does not open a disk file. It creates a DgnDocument
     object in memory that identifies and represents an existing disk
-    file that the caller can open if desired.)doc";
+    file that the caller can open if desired.    
+
+Returns (Tuple, 0):
+    a DgnDocument that represents the file. On failure, NULL is
+    Returned.
+
+Returns (Tuple, 1):
+	status.
+    
+    )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_TransformTo =R"doc(Transform the moniker to new search path. If the moniker is not
 relative, then the same moniker is returned.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_ResolveParentFolderMoniker =R"doc(Resolve the parent folder moniker. Return NULL pointer for top level
-folders. This method can fail.)doc";
+static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_ResolveParentFolderMoniker =R"doc(Resolve the parent folder moniker. 
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1) :
+	status.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_ResolveFolderName =R"doc(Get the folder name appropriate for directory based APIs, usually a
 fully qualified folder path. Searches the file system. Can fail.
@@ -441,13 +481,18 @@ Parameter ``dontRetryIfFailed``:
     then this method will try again to resolve the directory path,
     even if that requires another search.
 
-Returns:
+Remark:
+    s If the search path includes network shares, this method may
+    spend a significant amount of time doing a search.
+
+Returns  (Tuple, 0):
     The full path of the local directory or the empty string if the
     directory path could not be resolved.
 
-Remark:
-    s If the search path includes network shares, this method may
-    spend a significant amount of time doing a search.)doc";
+ Returns (Tuple, 1):
+	status.
+   
+    )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_Clone =R"doc(Create a new DgnDocumentMoniker object that is a copy of the
 DgnDocumentMoniker passed in.
@@ -503,7 +548,14 @@ static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_CreateFromRawData
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_TransformTo =R"doc(Transform the moniker to new search path. If the moniker is not
 relative, then the same moniker is returned.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_ResolveParentFolderMoniker =R"doc(Resolve the parent folder moniker. This method can fail.)doc";
+static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_ResolveParentFolderMoniker =R"doc(Resolve the parent folder moniker. This method can fail.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1) :
+	status.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_GetSavedFileName =R"doc(Get the saved fully qualified file path.)doc";
 
@@ -523,13 +575,16 @@ Parameter ``dontRetryIfFailed``:
     method will try again to resolve the file, even if that requires
     another search.
 
-Returns:
-    The full path of the local file or the empty string if the file
-    could not be resolved.
-
 Remark:
     s If the search path includes network shares, this method may
-    spend a significant amount of time doing a search.)doc";
+    spend a significant amount of time doing a search.
+Returns (Tuple, 0):
+    The full path of the local file or the empty string if the file
+    could not be resolved.
+ Returns (Tuple, 1):
+	status.   
+    
+    )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_Clone =R"doc(Create a new DgnDocumentMoniker object that is a copy of the
 DgnDocumentMoniker passed in.
@@ -716,21 +771,35 @@ filesystem.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnBaseMoniker_ResolveURI =R"doc(Retrieves the provenance string (URI). Can fail.
 
-Returns:
+Returns (Tuple, 0):
     URI of the moniker. It can be empty if the object cannot be
     located.
 
-Parameter ``status``:
-    SUCCESS if URI is successfully retrieved.)doc";
+Returns (Tuple, 1):
+	status.
+    )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnBaseMoniker_ResolveDisplayName =R"doc(Get a displayable name. Will be fully qualified if possible. May
 search the filesystem.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnBaseMoniker_ResolveLocationDisplayName =R"doc(Get a friendly display name of the location. May search the
-filesystem. Can fail.)doc";
+filesystem. Can fail.
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	status.
+    )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnBaseMoniker_ResolveLocation =R"doc(Get a string describing the location. May search the filesystem. Can
-fail.)doc";
+fail.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	status.
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnBaseMoniker_Clone =R"doc(Create a new moniker object that is a copy of the given moniker
 object.)doc";
@@ -766,7 +835,15 @@ Parameter ``fullPathFirst``:
     back on *fullPath.*
 
 Parameter ``searchAsFolder``:
-    Search for a folder/directory rather than a file?)doc";
+    Search for a folder/directory rather than a file?
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	searchStatus.    
+    
+    )doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

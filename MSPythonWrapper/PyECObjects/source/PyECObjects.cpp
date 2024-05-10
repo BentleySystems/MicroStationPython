@@ -47,7 +47,12 @@ void def_ecimagekey(py::module_&);
 PYBIND11_MODULE(MSPyECObjects, m)
     {
     // Document for module
-    m.doc() = "Pybind11 wrapper for ECObjects.dll";
+    m.doc() = R"doc(The MSPyECObjects library, ECObjects is a set of abstractions for working with engineering/business data and metadata. EC stands for Engineering Content. 
+You can think of an ECClass as being like a Python,C++ or .NET class that only defines properties (ECClasses define no methods or behaviors.) In some ways, they are closer to .NET interfaces that hold only properties... or C++ pure virtual abstract base classes that only contain property getters and setters. They are also very analogous to a database table definition.
+ECClasses contain ECProperties. These are property definitions, not values.
+ECInstances represent instances of objects. Each belongs to an ECClass and holds ECPropertyValues. They are somewhat analogous to the rows of a database table.
+An ECSchema is just a collection of ECClasses.
+There are also ECRelationshipClasses that are ECClasses that also define RelationshipConstraints indicating what ECClasses they relate. ECRelationshipInstances represent the relationships between the ECInstances (defined/constrained by their ECRelationshipClass) ECRelationships work like a database foreign key constraint.)doc";
 
     // class defines
     bind_container_PyEC(m);

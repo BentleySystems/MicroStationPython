@@ -227,7 +227,7 @@ void def_DesignHistory(py::module_& m);
 PYBIND11_MODULE(MSPyDgnPlatform, m)
     {
     // Document for module
-    m.doc() = "Pybind11 wrapper for DgnPlatform.dll";
+    m.doc() = "The MSPyDgnPlatform library, is used to read and write DgnFiles. A design file is composed of Design Models. A model contains Elements. Use the Transaction Manager in order to persist changes";
 
     // class defines
     def_DgnPlatform(m);

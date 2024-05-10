@@ -110,7 +110,7 @@ void def_DisplayRules(py::module_& m)
     py::bind_vector< bvector<DisplayRuleSetPtr>>(m, "DisplayRuleSetPtrArray", py::module_local(false));
 
     c2.def(py::init(&DisplayRuleSet::Create), "name"_a, "dgnFile"_a);
-    c2.def("__eq__", [] (DisplayRuleSet const& self, DisplayRuleSet displayRuleSet) { return self.Equals(displayRuleSet); });
+    c2.def("__eq__", [] (DisplayRuleSet const& self, DisplayRuleSetCR displayRuleSet) { return self.Equals(displayRuleSet); });
     
     c2.def_property("Name", &DisplayRuleSet::GetName, &DisplayRuleSet::SetName);
     c2.def("GetName", &DisplayRuleSet::GetName, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, DisplayRuleSet, GetName));

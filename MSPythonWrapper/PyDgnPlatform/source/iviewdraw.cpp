@@ -302,9 +302,35 @@ static const char * __doc_Bentley_DgnPlatform_LineStyleParams_Init =R"doc(Initia
 +---------------+---------------+---------------+---------------+---------------+------*/
 void def_IViewDraw(py::module_& m)
     {
+    m.attr ("STYLEMOD_SCALE") = STYLEMOD_SCALE;
+    m.attr ("STYLEMOD_DSCALE") = STYLEMOD_DSCALE;
+    m.attr ("STYLEMOD_GSCALE") = STYLEMOD_GSCALE;
+    m.attr ("STYLEMOD_SWIDTH") = STYLEMOD_SWIDTH;
+    m.attr("STYLEMOD_EWIDTH") = STYLEMOD_EWIDTH;
+    m.attr("STYLEMOD_DISTPHASE") = STYLEMOD_DISTPHASE;
+    m.attr("STYLEMOD_FRACTPHASE") = STYLEMOD_FRACTPHASE;
+    m.attr("STYLEMOD_CENTERPHASE") = STYLEMOD_CENTERPHASE;
+
     //===================================================================================
+    //===================================================================================
+    // struct LineStyleParamsResource
+    py::class_< LineStyleParamsResource> c0(m, "LineStyleParamsResource");
+    c0.def_readwrite("modifiers", &LineStyleParamsResource::modifiers);
+    c0.def_readwrite("reserved", &LineStyleParamsResource::reserved);
+    c0.def_readwrite("scale", &LineStyleParamsResource::scale);
+    c0.def_readwrite("dashScale", &LineStyleParamsResource::dashScale);
+    c0.def_readwrite("gapScale", &LineStyleParamsResource::gapScale);
+    c0.def_readwrite("startWidth", &LineStyleParamsResource::startWidth);
+    c0.def_readwrite("endWidth", &LineStyleParamsResource::endWidth);
+    c0.def_readwrite("distPhase", &LineStyleParamsResource::distPhase);
+    c0.def_readwrite("fractPhase", &LineStyleParamsResource::fractPhase);
+    c0.def_readwrite("lineMask", &LineStyleParamsResource::lineMask);
+    c0.def_readwrite("mlineFlags", &LineStyleParamsResource::mlineFlags);
+    c0.def_readwrite("normal", &LineStyleParamsResource::normal);
+    c0.def_readwrite("rMatrix", &LineStyleParamsResource::rMatrix);
+
     // struct LineStyleParams
-    py::class_< LineStyleParams> c1(m, "LineStyleParams");
+    py::class_< LineStyleParams, LineStyleParamsResource> c1(m, "LineStyleParams");
     c1.def(py::init<>());
     c1.def("Init", &LineStyleParams::Init, DOC(Bentley, DgnPlatform, LineStyleParams, Init));    
 

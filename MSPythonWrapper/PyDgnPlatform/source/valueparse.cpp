@@ -16,12 +16,17 @@ static const char * __doc_Bentley_DgnPlatform_AreaParser_Clone =R"doc(Construct 
 
 static const char * __doc_Bentley_DgnPlatform_AreaOrVolumeParser_ToValue =R"doc(Parse a string into a distance value in uors.
 
-Parameter ``out``:
-    resulting distance in uors if successfully parsed.
 
 Parameter ``in``:
-    input string. @Return SUCCESS if parsed successfully. ERROR
-    otherwise.)doc";
+    input string.
+
+Returns (Tuple, 0):
+	retVal. SUCCESS if parsed successfully. ERROR otherwise..
+
+Returns (Tuple, 1) :
+	outVal. resulting distance in uors if successfully parsed.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AreaOrVolumeParser_SetScale =R"doc(The value will be scaled by the square of this factor after it is
 parsed.)doc";
@@ -44,12 +49,15 @@ the PointParser.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointParser_ToValue =R"doc(Parse a string into a point value in uors.
 
-Parameter ``out``:
-    resulting distance in uors if successfully parsed.
-
 Parameter ``in``:
-    input string. @Return SUCCESS if parsed successfully. ERROR
-    otherwise.)doc";
+    input string. 
+Returns (Tuple, 0):
+	retVal. SUCCESS if parsed successfully. ERROR otherwise..
+
+Returns (Tuple, 1) :
+	outVal.     resulting point if successfully parsed.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_PointParser_Clone =R"doc(Construct a parser which is a duplicate of an existing parser.)doc";
 
@@ -59,8 +67,15 @@ Parameter ``out``:
     resulting distance in uors if successfully parsed.
 
 Parameter ``in``:
-    input string. @Return SUCCESS if parsed successfully. ERROR
-    otherwise.)doc";
+    input string. 
+
+Returns (Tuple, 0):
+	retVal. SUCCESS if parsed successfully. ERROR otherwise..
+
+Returns (Tuple, 1) :
+	outVal.     resulting distance in uors if successfully parsed.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DistanceParser_SetScale =R"doc(The value will be scaled by this factor after it is parsed.)doc";
 
@@ -73,12 +88,17 @@ static const char * __doc_Bentley_DgnPlatform_DistanceParser_Clone =R"doc(Constr
 
 static const char * __doc_Bentley_DgnPlatform_DirectionParser_ToValue =R"doc(Parse a string into a direction value in degrees.
 
-Parameter ``out``:
-    resulting direction in degrees if successfully parsed.
 
 Parameter ``in``:
-    input string. @Return SUCCESS if parsed successfully. ERROR
-    otherwise.)doc";
+    input string. 
+
+Returns (Tuple, 0):
+	retVal. SUCCESS if parsed successfully. ERROR otherwise..
+
+Returns (Tuple, 1) :
+	outVal. resulting direction in degrees if successfully parsed.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DirectionParser_SetBaseDirection =R"doc(Directions can be interpretted with respect to the base direction.
 Used only if the direction mode is Azimuth.)doc";
@@ -114,12 +134,17 @@ static const char * __doc_Bentley_DgnPlatform_DirectionParser_Clone =R"doc(Const
 
 static const char * __doc_Bentley_DgnPlatform_AngleParser_ToValue =R"doc(Parse a string into an angle value in degrees.
 
-Parameter ``out``:
-    resulting angle in degrees if successfully parsed.
 
 Parameter ``in``:
-    input string. @Return SUCCESS if parsed successfully. ERROR
-    otherwise.)doc";
+    input string.
+
+Returns (Tuple, 0):
+	retVal. SUCCESS if parsed successfully. ERROR otherwise..
+
+Returns (Tuple, 1) :
+	outVal. resulting angle in degrees if successfully parsed.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_AngleParser_SetAngleMode =R"doc(Sets the angle mode for parsing the input string. AngleMode::Degrees,
 AngleMode::DegMin, and AngleMode::DegMinSec, are all treated the same.
@@ -134,12 +159,17 @@ static const char * __doc_Bentley_DgnPlatform_AngleParser_Clone =R"doc(Construct
 
 static const char * __doc_Bentley_DgnPlatform_DoubleParser_ToValue =R"doc(Parse a string into a numeric value.
 
-Parameter ``out``:
-    resulting value if successfully parsed.
 
 Parameter ``in``:
-    input string. @Return SUCCESS if parsed successfully. ERROR
-    otherwise.)doc";
+    input string.
+
+Returns (Tuple, 0):
+	retVal. SUCCESS if parsed successfully. ERROR otherwise..
+
+Returns (Tuple, 1) :
+	outVal.  resulting value if successfully parsed.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DoubleParser_Clone =R"doc(Construct a parser which is a duplicate of an existing parser.)doc";
 

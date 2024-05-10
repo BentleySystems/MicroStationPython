@@ -30,7 +30,14 @@ TransformClip at the top of the stack)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TransformClipStack_GetRayIntersection =R"doc(Test if the given ray intersects the clip boundary of the
 TransformClip at the top of the stack. If it intersects, get the
-distance to intersection.)doc";
+distance to intersection.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	intersectDistance.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TransformClipStack_ClassifyPoints =R"doc(Classify the given points for containment within the clip boundary of
 the TransformClip at the top of the stack)doc";

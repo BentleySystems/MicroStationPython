@@ -108,9 +108,6 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_FindFontByName =R"doc(Find a Font in this table by name, optionally limited by a filter.
 
-Parameter ``foundNum``:
-    The font's number in this table, if found. Not valid otherwise.
-
 Parameter ``fontName``:
     Search for the font with this name.
 
@@ -119,7 +116,15 @@ Parameter ``filter``:
 
 Returns:
     A pointer to the font with name ``fontName,`` or NULL if not
-    found.)doc";
+    found.
+
+Returns (Tuple, 0):
+	font.
+
+Returns (Tuple, 1):
+	fontNum.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_VisitFonts =R"doc(Visit all fonts in this table, optionally with a filter applied.
 
@@ -136,9 +141,6 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_GetFontNumber =R"doc(Search for a Font in this table and return it's font number if found.
 Optionally adds the Font to the table if it does not already exist.
 
-Parameter ``fontNum``:
-    The Font's number in this table, if SUCCESS is returned. Undefined
-    otherwise.
 
 Parameter ``font``:
     The Font whose number is to be determined.
@@ -147,9 +149,16 @@ Parameter ``addIfNotFound``:
     If true, and if ``font`` is not already in the table, add it and
     assign it a font number.
 
-Returns:
+Returns (Tuple, 0):
     SUCCESS if ``font`` was found (or added) and fontNum is valid.
-    ERROR if ``font`` does not exist in this table.)doc";
+    ERROR if ``font`` does not exist in this table.
+    
+
+Returns (Tuple, 1):
+	fontNum. The Font's number in this table, if SUCCESS is returned. Undefined
+    otherwise.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_ResolveFont =R"doc(Get a Font for a given font number. Returns a default Font if no font
 exists for that value.
@@ -191,18 +200,22 @@ is specified in the Font Configuration File.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFont_GetFractionFromCharCode =R"doc(Convert a fraction glyph code in this Font into the fraction values.
 
-Parameter ``numerator``:
-    The numerator of the fraction
-
-Parameter ``denominator``:
-    The denominator of the fraction
-
 Parameter ``glyphCode``:
     The glyph code of the fraction to be interpreted.
 
-Returns:
+Returns (Tuple,0):
     SUCCESS if the glyph code was a fraction character and
-    ``numerator`` and ``denominator`` are valid. ERROR otherwise.)doc";
+    ``numerator`` and ``denominator`` are valid. ERROR otherwise.
+    
+Returns (Tuple,1) :
+	numerator. The numerator of the fraction
+
+Returns (Tuple,2):
+	denominator. The denominator of the fraction
+
+)doc";
+
+
 
 static const char * __doc_Bentley_DgnPlatform_DgnFont_GetCharCodeFromFraction =R"doc(Convert a fraction into a glyph code in this Font, if possible.
 

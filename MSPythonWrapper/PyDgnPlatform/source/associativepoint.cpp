@@ -278,10 +278,6 @@ dependency.
 Parameter ``path``:
     IN OUT The seed DisplayPath that is to be populated.
 
-Parameter ``nRootsP``:
-    OUT The number of roots for this associative point, an
-    intersection association will return 2, all other types return 1.
-
 Parameter ``assocPoint``:
     IN The associative point to query.
 
@@ -292,9 +288,13 @@ Parameter ``modelRef``:
 Parameter ``rootIndex``:
     IN Which root to get, an intersection association has 2 roots.
 
-Returns:
+Returns (Tuple, 0):
     A DisplayPath to associative point root or NULL. Caller needs to
-    call Release on path.)doc";
+    call Release on path.
+Returns (Tuple, 1):
+	nRootsP.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AssociativePoint_SetRoot =R"doc(Complete setup of a new associative point by setting the target/root
 element for the dependency by a pair of element ids.

@@ -119,16 +119,26 @@ static const char * __doc_Bentley_DgnPlatform_UnitDefinition_GetBase =R"doc(Get 
 
 static const char * __doc_Bentley_DgnPlatform_UnitDefinition_ConvertDistanceFrom =R"doc(Convert a distance expressed in the input unit to this unit.
 
-Returns:
-    ERROR if the units are not comparable. See #AreComparable.)doc";
+Returns (Tuple, 0):
+    ERROR if the units are not comparable. See #AreComparable.
+
+Returns (Tuple, 1):
+	outputVal.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_UnitDefinition_GetConversionFactorFrom =R"doc(Compute the scale factor used to convert distance from the input unit
 to this unit. The factor is defined by the equation:distInA = distInB
 * factorFromBtoA. The method #ConvertDistanceFrom is preferable since
 that calculation is more direct.
 
-Returns:
-    ERROR if the units are not comparable. See #AreComparable.)doc";
+Returns (Tuple, 0):
+    ERROR if the units are not comparable. See #AreComparable.
+
+Returns (Tuple,1):
+	factor.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_UnitDefinition_CompareByScale =R"doc(Test if two units are the same size. See #IsEqual for a more strict
 equality test.

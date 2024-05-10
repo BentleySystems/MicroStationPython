@@ -18,40 +18,35 @@ Parameter ``commandId``:
 Parameter ``unparsedP``:
     Command parameters *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommandManager_FindXCommandByIconName =R"doc(Finds an IXCommand in the list by Icon Name.
 
 Parameter ``iconName``:
     The icon name of the IXCommand *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommandManager_GetAvailableXCommands =R"doc(Populates a bvector with all the IXCommands in the list.
 
 Parameter ``xCommands``:
     A bvector that is populated with a list of the IXCommands *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommandManager_FindXCommand =R"doc(Finds an IXCommand in the list.
 
 Parameter ``commandId``:
     The Id of the IXCommand *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommandManager_DeregisterXCommand =R"doc(Deregisters an IXCommand and removes it from the list.
 
 Parameter ``commandId``:
     The Id of the IXCommand *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommandManager_RegisterXCommand =R"doc(Registers an IXCommand and adds it to the list.
 
@@ -62,13 +57,11 @@ Parameter ``xCommand``:
     Pointer to an instance of an implementation of the IXCommand
     interface *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommandManager_GetManager =R"doc(Gets the singleton instance of the XCommandManager. *
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

@@ -15,8 +15,7 @@ static const char * __doc_Bentley_MstnPlatform_ISessionMgr_RemoveUIItemStateEntr
 Parameter ``key``:
     The key used to store UIItem state values.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetUIItemMenuMarkState =R"doc(Get the MenuMarkType defined by key.
 
@@ -30,8 +29,7 @@ Returns:
     MenuMarkType associated with key, or defaultIfKeyNotFound if no
     entry is found matching the key.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SetUIItemMenuMarkState =R"doc(Set the menu mark value for a menu item. This will trigger a
 SystemEvent.ApplicationSyncUIItem event.
@@ -46,8 +44,7 @@ Parameter ``sendImmediateMessage``:
     If true send immediate sync message, if false the sync message
     will be sent in the next UISync timer cycle.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetUIItemState =R"doc(Get the boolean value defined by key and itemState.
 
@@ -64,8 +61,7 @@ Returns:
     bool value associated with key, or defaultIfKeyNotFound if no
     entry is found matching the key.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SetUIItemState =R"doc(Set the boolean value that defines the state of a UI item. This will
 trigger a SystemEvent.ApplicationSyncUIItem event.
@@ -83,19 +79,16 @@ Parameter ``sendImmediateMessage``:
     If true send immediate sync message, if false the sync message
     will be sent in the next UISync timer cycle.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SaveDgnFileChanges =R"doc(Write all in-memory changes to the disk for each DgnFile in the list.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetWriteableFiles =R"doc(Returns the list of all writeable files, including any activated
 references.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_DropSessionMonitor =R"doc(Drop an existing SessionMonitor.
 
@@ -109,8 +102,7 @@ Remark:
 See also:
     AddSessionMonitor.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_AddSessionMonitor =R"doc(Add a new SessionMonitor.
 
@@ -124,8 +116,7 @@ Parameter ``mon``:
 See also:
     DropSessionMonitor.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_CreateNewDgnFile =R"doc(Prompts the user to create a new DGN file and then optionally makes it
 the Master DGN.
@@ -159,18 +150,10 @@ Remark:
 See also:
     SwitchToNewFile
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_OpenDgnFileDialog =R"doc(Prompts the user to select a file.
 
-Returns:
-    NULL, if the user hit Cancel; else, a pointer to a document object
-    that stores the path to the file that was chosen.
-
-Parameter ``status``:
-    SUCCESS if a file was chosen; otherwise, the error status returned
-    by the document manager.
 
 Remark:
     s This function works with MSDocumentManager to locate and manage
@@ -184,17 +167,19 @@ Remark:
 See also:
     SwitchToNewFile
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+
+
+Returns  (Tuple, 0):
+    NULL, if the user hit Cancel; else, a pointer to a document object
+    that stores the path to the file that was chosen.
+
+Returns (Tuple, 1) :
+	status.  SUCCESS if a file was chosen; otherwise, the error status returned
+    by the document manager.
+
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_FindDesignFile =R"doc(Opens a file from a specified file name or path.
-
-Returns:
-    A pointer to the newly opened file if successful, or NULL if the
-    file could not be found or opened. See *status.*
-
-Parameter ``status``:
-    SUCCESS if the file was opened
 
 Parameter ``inFileName``:
     The name or path of the file to be opened.
@@ -236,8 +221,16 @@ Remark:
 See also:
     SwitchToNewFile
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+
+
+Returns (Tuple, 0):
+    A pointer to the newly opened file if successful, or NULL if the
+    file could not be found or opened. See *status.*
+
+Returns (Tuple, 1):
+	status. 
+    SUCCESS if the file was opened
+    )doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SwitchToNewFile =R"doc(Makes the specified file the Master DGN, opening it if necessary.
 
@@ -303,96 +296,78 @@ Remark:
 See also:
     FindDesignFile
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
-static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SetActiveModelLocked =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SetActiveModelLocked =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_ISessionMgr_IsActiveModelLocked =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_ISessionMgr_IsActiveModelLocked =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SetAutoLockActiveModel =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SetAutoLockActiveModel =R"doc()doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_InTransactableFile =R"doc(Is this modelRef from a transactable file.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_InActiveFile =R"doc(Is this modelRef from the same file as the active model.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_InMasterFile =R"doc(Is this modelRef from the master file.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_IsActiveModel =R"doc(Is this modelRef the active model.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_IsActiveDgnFile =R"doc(Is this the file of the active model.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_IsMasterDgnFile =R"doc(Is this the master file.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_IsReadyForUIProcessing =R"doc(Return true if Session's active model has been initialized and is
 available to populate of model specific data in UI.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_IsDesignFileInitialized =R"doc(Return true if Session is active and design file has been initailized.
 Populating of model specific UI items should not happen until this
 method returns true.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_IsMasterFileClosing =R"doc(Return true if Session is closing, This allows UI items to ignore
 window close events.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetActiveDgnFile =R"doc(Get the DgnFileP for the current active model
 
 Returns:
     The DgnFileP for the current active model.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetMasterDgnFile =R"doc(Get the DgnFileP for the current Master DGN file
 
 Returns:
     The DgnFileP for the current Master DGN file.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetMaster =R"doc(Get the Document for the Master DGN
 
 Returns:
     The document for the current Master DGN file, or NULL.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
-static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetManager =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetManager =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetMicroStationDgnHost =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetMicroStationDgnHost =R"doc()doc";
 
 //=======================================================================================
 // Trampoline class for SessionMonitor

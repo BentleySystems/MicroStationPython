@@ -180,12 +180,15 @@ static const char * __doc_Bentley_DgnPlatform_LevelCache_IsReadOnly =R"doc(Query
 static const char * __doc_Bentley_DgnPlatform_LevelCache_GetLastModifiedTimeForLevelDefinitions =R"doc(Gets the time that file that defines the levels in this cache was last
 modified.
 
-Parameter ``timeStampOut``:
-    The file's last-modified timestamp in milliseconds since 1970
 
-Returns:
+Returns (Tuple, 0):
     non-zero error status if this level cache is new and has never
-    been written to file.)doc";
+    been written to file.
+
+Returns (Tuple, 1):
+	timeStampOut. The file's last-modified timestamp in milliseconds since 1970
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LevelCache_GetLowestAvailableLevelCode =R"doc(Get the lowest available LevelCode in this level cache)doc";
 

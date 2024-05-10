@@ -19,8 +19,6 @@ from MSPyDgnPlatform import *
 #   PYTHONPYCACHEPREFIX=c:\temp\
 #
 
-pytestmark = pytest.mark.debugTest
-
 DEGREE_PLACEHOLDER          = '^'
 eSPECIALCHAR_Degree_Unicode  = 0x00b0
 

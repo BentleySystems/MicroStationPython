@@ -1,0 +1,3 @@
+mdl load ustnpython
+python load RepopulateItemsFromExcel.py
+field update all

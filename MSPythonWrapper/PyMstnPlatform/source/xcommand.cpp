@@ -10,26 +10,19 @@
 
 
 
-static const char * __doc_Bentley_MstnPlatform_ApplicationRefXCommand_SetTreatAsPushButton =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_ApplicationRefXCommand_SetTreatAsPushButton =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_ApplicationRefXCommand_GetTreatAsPushButton =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_ApplicationRefXCommand_GetTreatAsPushButton =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_SetTreatAsPushButton =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_SetTreatAsPushButton =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_GetTreatAsPushButton =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_GetTreatAsPushButton =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_SetCommandId =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_SetCommandId =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_SetCmdString =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_SetCmdString =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_GetCmdString =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_GetCmdString =R"doc()doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommand_SetJournal =R"doc(Set property to journal the command for macro recording.
 
@@ -37,22 +30,19 @@ Parameter ``journal``:
     set to true if the command is to be recorded. The default is to
     journal.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommand_GetJournal =R"doc(Return the setting of the property that allows command to be saved for
 macro recording.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommand_SetIsUserDefined =R"doc(Marks the Command as being user created.
 
 Parameter ``isUserDefined``:
     set to true if the command is user defined.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommand_SetCmdNumber =R"doc(Sets the Command Number.
 
@@ -65,8 +55,7 @@ Parameter ``taskId``:
 Parameter ``unparsed``:
     The string parameter for this command
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

@@ -45,8 +45,19 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnTool_GetModifierKeyTransitionState =R"doc(Called to get the previous modifier transition state.
 
-Returns:
-    The id of the current command promnpt.)doc";
+Returns (Tuple, 0):
+    The id of the current command promnpt.
+
+Returns (Tuple, 1) :
+	modifierKey.
+
+Returns (Tuple, 2):
+	modifierKeyWentDown.
+
+Returns (Tuple, 3):
+	currentQualifierMask.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTool_ResetCurrentQualifierMask =R"doc(Internal method to reset the current qualifier mask.
 

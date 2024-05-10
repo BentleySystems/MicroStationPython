@@ -12,7 +12,14 @@
 
 
 static const char * __doc_Bentley_ECObjects_ECInstanceReadContext_CreateContext = R"doc(- For use when the caller knows the schema of the instance he is
-deserializing.)doc";
+deserializing.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	foundSchema.
+
+)doc";
 
 static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_GetCache = R"doc(Gets the schemas cached by this context.
 

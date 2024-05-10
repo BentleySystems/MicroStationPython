@@ -294,19 +294,42 @@ ScriptEngine* ScriptEngineManager::GetScriptEngineP(WCharCP scriptType)
 +---------------+---------------+---------------+---------------+---------------+------*/
 bool ScriptEngineManager::AddNotifier(ScriptNotifierP notifier)
     {
-    bool retVal = false;
-    if (nullptr != notifier)
-        {
-        retVal = true;
-        auto it = std::find(m_sinkList->begin(), m_sinkList->end(), notifier);
-        if (it == m_sinkList->end())
+    if (nullptr == notifier)
+        return false;
+
+    auto it = std::find(m_sinkList->begin(), m_sinkList->end(), notifier);
+    if (it != m_sinkList->end())
+        return true;
+
+    UstnScriptNotifier* beConsole = dynamic_cast<UstnScriptNotifier*> (notifier);
+    bool isBeConsole = (nullptr != beConsole) ? true : false;
+
+    bool isActiveExist(false);
+
+    for (auto& it0 : *m_sinkList)
+        if (it0->GetActive())
             {
-            notifier->AddRef();
-            m_sinkList->push_back(notifier);
+            isActiveExist = true;
+            break;
             }
+
+    if (isBeConsole)
+        {
+        if (!isActiveExist)
+            notifier->SetActive(true);
+        }
+    else
+        {
+        for (auto& it0 : *m_sinkList)
+            it0->SetActive(false);
+
+        notifier->SetActive(true);
         }
 
-    return retVal;
+    notifier->AddRef();
+    m_sinkList->push_back(notifier);
+
+    return true;
     }
 
 /*---------------------------------------------------------------------------------**//**
@@ -314,13 +337,30 @@ bool ScriptEngineManager::AddNotifier(ScriptNotifierP notifier)
 +---------------+---------------+---------------+---------------+---------------+------*/
 void ScriptEngineManager::DropNotifier(ScriptNotifierP notifier)
     {
-    if (nullptr != notifier)
+    if (nullptr == notifier)
+        return;
+
+    auto it = std::find(m_sinkList->begin(), m_sinkList->end(), notifier);
+    if (it == m_sinkList->end())
+        return;
+
+    UstnScriptNotifier* beConsole = dynamic_cast<UstnScriptNotifier*> (notifier);
+    bool isBeConsole = (nullptr != beConsole) ? true : false;
+    bool isActive = (*it)->GetActive();
+
+    notifier->Release();
+    m_sinkList->erase(it);
+
+    if (!isBeConsole && isActive)
         {
-        auto it = std::find(m_sinkList->begin(), m_sinkList->end(), notifier);
-        if (it != m_sinkList->end())
-            {            
-            notifier->Release();
-            m_sinkList->erase(it);            
+        for (ScriptNotifierP &it0 : *m_sinkList)
+            {
+            beConsole = dynamic_cast<UstnScriptNotifier*> (it0);
+            if (nullptr != beConsole)
+                {
+                it0->SetActive(true);
+                break;
+                }
             }
         }
     }
@@ -333,7 +373,8 @@ void ScriptEngineManager::InjectException(std::exception& ex)
     *m_lastException = ex;
     m_hasException = true;
     for (auto& it : *m_sinkList)
-        it->OnException(ex);
+        if (it->GetActive())
+            it->OnException(ex);
     }
 
 /*---------------------------------------------------------------------------------**//**
@@ -342,7 +383,8 @@ void ScriptEngineManager::InjectException(std::exception& ex)
 void ScriptEngineManager::InjectError(std::string const& msg)
     {
     for (auto& it : *m_sinkList)
-        it->OnError(msg);
+        if (it->GetActive())
+            it->OnError(msg);
     }
 
 /*---------------------------------------------------------------------------------**//**
@@ -351,7 +393,8 @@ void ScriptEngineManager::InjectError(std::string const& msg)
 void ScriptEngineManager::InjectOutput(std::string const& msg)
     {
     for (auto& it : *m_sinkList)
-        it->OnOutput(msg);
+        if (it->GetActive())
+            it->OnOutput(msg);
     }
 
 /*---------------------------------------------------------------------------------**//**

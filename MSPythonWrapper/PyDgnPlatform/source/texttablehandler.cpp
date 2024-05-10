@@ -515,9 +515,23 @@ static const char * __doc_Bentley_DgnPlatform_TableTextPartId_Create =R"doc(Crea
 
 static const char * __doc_Bentley_DgnPlatform_TableTextPartId_GetCellIndex =R"doc(Extract the cell index.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_TableCellIndex_ColumnIndexFromString =R"doc(Get the cell index value from a string.)doc";
+static const char * __doc_Bentley_DgnPlatform_TableCellIndex_ColumnIndexFromString =R"doc(Get the cell index value from a string.
+Returns (Tuple, 0):
+	retVal.
 
-static const char * __doc_Bentley_DgnPlatform_TableCellIndex_RowIndexFromString =R"doc(Get the row index value from a string.)doc";
+Returns (Tuple, 1):
+	colIndex.
+
+)doc";
+
+static const char * __doc_Bentley_DgnPlatform_TableCellIndex_RowIndexFromString =R"doc(Get the row index value from a string.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	rowIndex.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TableCellIndex_StringFromColumnIndex =R"doc(Create a string representation for a column index.)doc";
 
@@ -535,6 +549,7 @@ void def_TextTableHandler(py::module_& m)
     //===================================================================================
     // struct TableCellIndex
     py::class_< TableCellIndex> c1(m, "TableCellIndex");
+    py::bind_vector< bvector<TableCellIndex> >(m, "TableCellIndexArray", py::module_local(false));
 
     c1.def_readwrite("rowId", &TableCellIndex::row);
     c1.def_readwrite("colId", &TableCellIndex::col);
@@ -677,6 +692,7 @@ void def_TextTableHandler(py::module_& m)
     //===================================================================================
     // struct TableSymbologyValues
     py::class_< TableSymbologyValues, TableSymbologyValuesPtr> c4(m, "TableSymbologyValues");
+    py::bind_vector< bvector<TableSymbologyValuesPtr> >(m, "TableSymbologyValuesPtrArray", py::module_local(false));
 
     c4.def("HasLineVisible", &TableSymbologyValues::HasLineVisible, DOC(Bentley, DgnPlatform, TableSymbologyValues, HasLineVisible));
     c4.def("HasLineColor", &TableSymbologyValues::HasLineColor, DOC(Bentley, DgnPlatform, TableSymbologyValues, HasLineColor));
@@ -711,9 +727,11 @@ void def_TextTableHandler(py::module_& m)
 
     c4.def(py::init(&TableSymbologyValues::Create));
 
+    //py::class_< TextTableCellIterator, std::unique_ptr<TextTableCellIterator, py::nodelete>> c100(m, "TextTableCellIterator");
+
     //===================================================================================
     // struct TextTableCell
-    py::class_< TextTableCell> c5(m, "TextTableCell");
+    py::class_< TextTableCell, std::unique_ptr<TextTableCell, py::nodelete>> c5(m, "TextTableCell");
 
     c5.def_property_readonly("Index", &TextTableCell::GetIndex);
     c5.def("GetIndex", &TextTableCell::GetIndex, DOC(Bentley, DgnPlatform, TextTableCell, GetIndex));
@@ -743,7 +761,7 @@ void def_TextTableHandler(py::module_& m)
 
     c5.def("SetFillSymbology", &TextTableCell::SetFillSymbology, "symb"_a, DOC(Bentley, DgnPlatform, TextTableCell, SetFillSymbology));
     c5.def("ClearContents", &TextTableCell::ClearContents, DOC(Bentley, DgnPlatform, TextTableCell, ClearContents));
-    c5.def("SetTextBlock", &TextTableCell::SetTextBlock, "textBlock"_a, DOC(Bentley, DgnPlatform, TextTableCell, SetTextBlock));
+    c5.def("SetTextBlock", &TextTableCell::SetTextBlock, "textBlock"_a, "needResize"_a = true, DOC(Bentley, DgnPlatform, TextTableCell, SetTextBlock));
     c5.def("SetTextString", &TextTableCell::SetTextString, "textString"_a, DOC(Bentley, DgnPlatform, TextTableCell, SetTextString));
     c5.def("CreateEmptyTextBlock", &TextTableCell::CreateEmptyTextBlock, DOC(Bentley, DgnPlatform, TextTableCell, CreateEmptyTextBlock));
     
@@ -759,7 +777,7 @@ void def_TextTableHandler(py::module_& m)
 
     //===================================================================================
     // struct TextTableRow
-    py::class_< TextTableRow> c6(m, "TextTableRow");
+    py::class_< TextTableRow, std::unique_ptr<TextTableRow, py::nodelete>> c6(m, "TextTableRow");
 
     c6.def_property_readonly("Index", &TextTableRow::GetIndex);
     c6.def("GetIndex", &TextTableRow::GetIndex, DOC(Bentley, DgnPlatform, TextTableRow, GetIndex));
@@ -780,7 +798,7 @@ void def_TextTableHandler(py::module_& m)
 
     //===================================================================================
     // struct TextTableColumn
-    py::class_< TextTableColumn> c7(m, "TextTableColumn");
+    py::class_< TextTableColumn, std::unique_ptr<TextTableColumn, py::nodelete>> c7(m, "TextTableColumn");
 
     c7.def_property_readonly("Index", &TextTableColumn::GetIndex);
     c7.def("GetIndex", &TextTableColumn::GetIndex, DOC(Bentley, DgnPlatform, TextTableColumn, GetIndex));

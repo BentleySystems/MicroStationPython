@@ -65,8 +65,13 @@ displayed. When canUseCached is not NULL, it must be initialized. Set
 to false if element has been modified and no longer matches it's
 persistent state.
 
-Returns:
-    ERROR to prevent the element from being drawn.)doc";
+Returns (Tuple, 0):
+    ERROR to prevent the element from being drawn.
+
+Returns (Tuple, 1):
+	canUseCache.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRedrawOperation__OnRedrawInit =R"doc(Called before drawing any elements.)doc";
 

@@ -33,11 +33,13 @@ Parameter ``destinationDgnFile``:
 Parameter ``sourceIndex``:
     IN this must be more than -1
 
-Parameter ``destinationIndex``:
-    IN this will hold the destination index
+Returns (Tuple, 0):
+    SUCCESS if import is successful
 
-Returns:
-    SUCCESS if import is successful)doc";
+Returns (Tuple,1):
+	destinationIndex.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_DoesDisplayStyleExistInFile =R"doc(Determines if a display style, by-name, exists in a specific file.
 

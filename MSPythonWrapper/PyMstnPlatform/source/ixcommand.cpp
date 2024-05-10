@@ -17,8 +17,7 @@ Returns:
     true if this command is allowed to execute in the given product
     context; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetAcceleratorString =R"doc(Gets the string representation of the accelerator value associated
 with this command.
@@ -29,72 +28,63 @@ Parameter ``accelStr``:
 Returns:
     true if the command has an accelerator
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetAccelerator =R"doc(Sets the accelerator value associated with this command.
 
 Parameter ``accelerator``:
     the accelerator value associated with this command
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetAccelerator =R"doc(Gets the accelerator value associated with this command.
 
 Returns:
     the accelerator value associated with this command
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetAttributes =R"doc(Sets the attributes associated with this command.
 
 Parameter ``attributes``:
     the attributes associated with this command
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetAttributes =R"doc(Gets the attributes associated with this command.
 
 Returns:
     the attributes associated with this command
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetFeatureTrackingId =R"doc(Sets the Feature Tracking GUID associated with this command.
 
 Parameter ``featureTrackingId``:
     Feature Tracking GUID.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetFeatureTrackingId =R"doc(Gets the Feature Tracking GUID associated with this command.
 
 Parameter ``featureTrackingId``:
     Feature Tracking GUID.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetUISyncEvents =R"doc(Sets the UISyncEvent associated with this command.
 
 Parameter ``expression``:
     The UISyncEvent to be associated with this command.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetUISyncEvents =R"doc(Gets the UISyncEvent associated with this command.
 
 Parameter ``expression``:
     Receives the UISyncEvent.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_HasMarkExpression =R"doc(Determines if this command has a Named Expression controlling Menu
 Mark state for any UI associate with this command.
@@ -103,8 +93,7 @@ Returns:
     true if this command has a Named Expression controlling Menu Mark
     state; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_EvaluateMarkExpression =R"doc(Evaluates the Named Expression controlling Menu Mark state for any UI
 associated with this command.
@@ -112,8 +101,7 @@ associated with this command.
 Parameter ``defaultValue``:
     The default MenuMarkType
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetMarkExpression =R"doc(Sets the Named Expression controlling Menu Mark state for any UI
 associated with this command.
@@ -121,8 +109,7 @@ associated with this command.
 Parameter ``expression``:
     the Named Expression controlling Menu Mark state.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetMarkExpression =R"doc(Gets the Named Expression controlling Menu Mark state for any UI
 associated with this command.
@@ -130,8 +117,7 @@ associated with this command.
 Parameter ``expression``:
     Receives the Named Expression.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_HasToggleExpression =R"doc(Determines if this command has a Named Expression controlling Toggle
 state for any UI associate with this command.
@@ -140,8 +126,7 @@ Returns:
     true if this command has a Named Expression controlling Toggle
     state; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_EvaluateToggleExpression =R"doc(Evaluates the Named Expression controlling Toggle state for any UI
 associated with this command.
@@ -150,8 +135,7 @@ Parameter ``defaultValue``:
     true if the command's UI should be toggled by default; otherwise,
     false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetToggleExpression =R"doc(Sets the Named Expression controlling Toggle state for any UI
 associated with this command.
@@ -159,8 +143,7 @@ associated with this command.
 Parameter ``expression``:
     the Named Expression controlling Toggle state.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetToggleExpression =R"doc(Gets the Named Expression controlling Toggle state for any UI
 associated with this command.
@@ -168,8 +151,7 @@ associated with this command.
 Parameter ``expression``:
     Receives the Named Expression.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_HasEnableExpression =R"doc(Determines if this command has a Named Expression controlling
 Enable/Disable for any UI associate with this command.
@@ -178,8 +160,7 @@ Returns:
     true if this command has a Named Expression controlling
     Enable/Disable; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_EvaluateEnableExpression =R"doc(Evaluates the Named Expression controlling Enable/Disable for any UI
 associated with this command.
@@ -188,8 +169,7 @@ Parameter ``defaultValue``:
     true if the command's UI should be enabled by default; otherwise,
     false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetEnableExpression =R"doc(Sets the Named Expression controlling Enable/Disable for any UI
 associated with this command.
@@ -197,8 +177,7 @@ associated with this command.
 Parameter ``expression``:
     the Named Expression controlling Enable/Disable.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetEnableExpression =R"doc(Gets the Named Expression controlling Enable/Disable for any UI
 associated with this command.
@@ -206,8 +185,7 @@ associated with this command.
 Parameter ``expression``:
     Receives the Named Expression.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_HasShowExpression =R"doc(Determines if this command has a Named Expression controlling
 Show/Hide for any UI associate with this command.
@@ -216,8 +194,7 @@ Returns:
     true if this command has a Named Expression controlling Show/Hide;
     otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_EvaluateShowExpression =R"doc(Evaluates the Named Expression controlling Show/Hide for any UI
 associated with this command.
@@ -226,8 +203,7 @@ Parameter ``defaultValue``:
     true if the command's UI should be shown by default; otherwise,
     false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetShowExpression =R"doc(Sets the Named Expression controlling Show/Hide for any UI associated
 with this command.
@@ -235,8 +211,7 @@ with this command.
 Parameter ``expression``:
     the Named Expression controlling Show/Hide.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetShowExpression =R"doc(Gets the Named Expression controlling Show/Hide for any UI associated
 with this command.
@@ -244,70 +219,61 @@ with this command.
 Parameter ``expression``:
     Receives the Named Expression.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetIconName =R"doc(Gets the icon name for any UI associated with this command.
 
 Parameter ``iconName``:
     Receives the icon name.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_CanDisplayChanged =R"doc(Called when the CanDisplay status changes.
 
 Parameter ``newValue``:
     true if the command's UI can be displayed; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetCanDisplay =R"doc(Sets a flag for whether the command's UI can be displayed.
 
 Parameter ``value``:
     true if the command's UI can be displayed; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_IsUserDefined =R"doc(Return true if command was loaded via MS_NAMEDCOMMANDSLIST; otherwise,
 false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_CanDisplay =R"doc(Determines if any UI associated with this command can be displayed.
 
 Returns:
     true if the command's UI can be displayed; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_CanExecuteChanged =R"doc(Called when the CanExecute status changes.
 
 Parameter ``newValue``:
     true if the command can be executed; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetCanExecute =R"doc(Sets a flag for whether the command can be executed.
 
 Parameter ``value``:
     true if the command can be executed; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_CanExecute =R"doc(Determines if the command can be executed.
 
 Returns:
     true if the command can be executed; otherwise, false.
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_ExecuteCmd =R"doc(Executes the command for this IXCommand.
 
@@ -321,8 +287,7 @@ Returns:
     SUCCESS if the command was executed, or non-zero if an error
     occurred
 
-Remark:
-    Required Library:mdlbltin.lib)doc";
+)doc";
 
 
 

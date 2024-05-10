@@ -1244,8 +1244,6 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetDimensionStyle =R"doc(Get the dimension style stored within the template instance.
 
-Parameter ``dimStyle``:
-    OUT dimension style of the level retrieved from etInstance.
 
 Parameter ``file``:
     IN reference file used to get the dimension style from the
@@ -1258,9 +1256,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the dimension style to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if a dimension style at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	dimStyle. dimension style of the level retrieved from etInstance.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetDimensionStyleName =R"doc(Get the dimension style name stored within the template instance.
 
@@ -1294,9 +1297,15 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the multiline style to retrieve.
 
-Returns:
+
+Returns (Tuple, 0):
     ETSTATUS_Success if a multiline style at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	mlineStyle.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetMlineStyleName =R"doc(Get the multiline style name stored within the template instance.
 
@@ -1382,9 +1391,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the pattern angle to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if a pattern angle at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	angle.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetPatternScale =R"doc(Get the pattern scale stored within the template instance.
 
@@ -1398,9 +1412,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the pattern scale to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if a pattern scale at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	scale.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetPatternDeltaValues =R"doc(Get the pattern delta values stored within the template instance.
 
@@ -1452,9 +1471,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the pattern parameters to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if the pattern parameters at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	patternParams.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetPatternParams =R"doc(Get the pattern or hatch parameters stored within the template
 instance. Pattern params are returned if Pattern Cell is defined.
@@ -1472,9 +1496,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the pattern parameters to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if the pattern parameters at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	patternParams.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetTextParamsAndScale =R"doc(Get the text style parameters stored within the template instance.
 
@@ -1500,9 +1529,20 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the pattern parameters to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if the text parameters at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 0):
+	textParams.
+
+Returns (Tuple, 1):
+	textScale.
+
+Returns(Tuple, 2):
+	lineLength.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetTextStyleId =R"doc(Get the text style id stored within the template instance.
 
@@ -1519,9 +1559,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the text style id to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if a text style id at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	styleId.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetTextStyleName =R"doc(Get the text style name stored within the template instance.
 
@@ -1541,22 +1586,23 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetActivePointSpecification =R"doc(Get the point type and point information stored within the template
 instance.
 
-Parameter ``pointType``:
-    OUT priority value retrieved from etInstance.
-
-Parameter ``cellNameOrCharacter``:
-    OUT cell name or character retrieved from etInstance.
-
 Parameter ``etInstance``:
     IN the IECInstance that contains the properties used by
     MicroStation to get and set element symbology.
 
 Parameter ``index``:
     IN the index of the point type and point information to retrieve.
-
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if a priority at point type and point information
-    is found in etInstance.)doc";
+    is found in etInstance.
+
+Returns (Tuple, 1):
+	pointType.
+
+Returns (Tuple, 2):
+	cellNameOrCharacter.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetTerminatorScale =R"doc(Get the scale stored within the template instance.
 
@@ -1570,8 +1616,13 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the scale to retrieve.
 
-Returns:
-    ETSTATUS_Success if a scale at index is found in etInstance.)doc";
+Returns (Tuple, 0):
+    ETSTATUS_Success if a scale at index is found in etInstance.
+
+Returns  (Tuple, 1):
+	scale.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetTerminatorCellName =R"doc(Get the terminator cell name stored within the template instance.
 
@@ -1638,8 +1689,6 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetFillMode =R"doc(Get the fill mode stored within the template instance.
 
-Parameter ``fillMode``:
-    OUT fill mode value retrieved from etInstance.
 
 Parameter ``etInstance``:
     IN the IECInstance that contains the properties used by
@@ -1648,8 +1697,13 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the fill mode to retrieve.
 
-Returns:
-    ETSTATUS_Success if a fill mode at index is found in etInstance.)doc";
+Returns (Tuple, 0):
+    ETSTATUS_Success if a fill mode at index is found in etInstance.
+
+Returns (Tuple, 1):
+	fillMode.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetFillColorIdOrGradientSpecification =R"doc(Get the solid or gradient fill color stored within the template
 instance.
@@ -1671,14 +1725,19 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the solid or gradient fill to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if a solid or gradient fill at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	color.
+
+Returns (Tuple, 2):
+	gradientsymb.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetAreaMode =R"doc(Get the area mode stored within the template instance.
-
-Parameter ``isHole``:
-    OUT area mode retrieved from etInstance.
 
 Parameter ``etInstance``:
     IN the IECInstance that contains the properties used by
@@ -1687,13 +1746,15 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the area mode to retrieve.
 
-Returns:
-    ETSTATUS_Success if a area mode at index is found in etInstance.)doc";
+Returns (Tuple, 0):
+    ETSTATUS_Success if a area mode at index is found in etInstance.
+
+Returns(Tuple, 1):
+	isHole.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetPriority =R"doc(Get the priority stored within the template instance.
-
-Parameter ``priority``:
-    OUT priority value retrieved from etInstance.
 
 Parameter ``etInstance``:
     IN the IECInstance that contains the properties used by
@@ -1702,8 +1763,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the priority to retrieve.
 
-Returns:
-    ETSTATUS_Success if a priority at index is found in etInstance.)doc";
+
+Returns (Tuple, 0):
+    ETSTATUS_Success if a priority at index is found in etInstance.
+
+Returns (Tuple, 1):
+	priority.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetTransparency =R"doc(Get the transparency stored within the template instance.
 
@@ -1717,9 +1784,16 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the transparency to retrieve.
 
-Returns:
+
+
+Returns (Tuple, 0):
     ETSTATUS_Success if a transparency at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	transparency.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetElementClass =R"doc(Get the element class stored within the template instance.
 
@@ -1733,9 +1807,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the element class to retrieve.
 
-Returns:
-    ETSTATUS_Success if a element class at index is found in
-    etInstance.)doc";
+Returns (Tuple, 0):
+    ETSTATUS_Success if a transparency at index is found in
+    etInstance.
+
+Returns (Tuple, 1):
+		elementClass.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetLineStyleParams =R"doc(Get the line style parameters stored within the template instance.
 
@@ -1777,9 +1856,18 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the line style to retrieve.
 
-Returns:
+
+Returns (Tuple, 0):
     ETSTATUS_Success if a line style id at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple 1):
+	styleId.
+
+Returns (Tuple 2):
+	isNamedStyle.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetLineStyleName =R"doc(Get the line style name stored within the template instance. If the
 style is a named style in a DGNLIB file, isNamedStyle will be set to
@@ -1803,9 +1891,17 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the line style to retrieve.
 
-Returns:
-    ETSTATUS_Success if a line style name at index is found in
-    etInstance.)doc";
+Returns (Tuple, 0):
+    ETSTATUS_Success if a line style id at index is found in
+    etInstance.
+
+Returns (Tuple 1):
+	styleName.
+
+Returns (Tuple 2):
+	isNamedStyle.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetWeight =R"doc(Get the weight stored within the template instance.
 
@@ -1819,9 +1915,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the weight to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if a weight value at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	weight.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetElementColor =R"doc(Get the element color stored within the template instance.
 
@@ -1839,9 +1940,14 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the element color to retrieve.
 
-Returns:
+Returns (Tuple, 0):
     ETSTATUS_Success if an element color at index is found in
-    etInstance.)doc";
+    etInstance.
+
+Returns (Tuple, 1):
+	color.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetLevelId =R"doc(Get the ID of a level stored within the template instance.
 
@@ -1859,8 +1965,13 @@ Parameter ``etInstance``:
 Parameter ``index``:
     IN the index of the level id to retrieve.
 
-Returns:
-    ETSTATUS_Success if a level id at index is found in etInstance.)doc";
+Returns (Tuple, 0):
+    ETSTATUS_Success if a level id at index is found in etInstance.
+
+Returns (Tuple, 1):
+	levelId.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetLevelName =R"doc(Get the name of a level stored within the template instance.
 
@@ -1891,9 +2002,14 @@ Parameter ``modelRef``:
     IN used to get DgnFile to pass to
     LineStyleManager::GetStyleIDForDesignFile.
 
-Returns:
+Returns (Tuple, 0):
     line style Id. If isNamedStyle is true and 0 is returned then the
-    line style name could not be found.)doc";
+    line style name could not be found.
+
+Returns (Tuple, 1):
+	isNamedStyle.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateParamsHelper_GetEntryCount =R"doc(Get the number of property values of a specified type stored within
 the template instance. check if point at the given index is a
@@ -1911,8 +2027,13 @@ Parameter ``etInstance``:
 Parameter ``param``:
     IN defines the template property to process.
 
-Returns:
-    ETSTATUS_Success if parameter type is found in etInstance.)doc";
+Returns (Tuple, 0):
+    ETSTATUS_Success if parameter type is found in etInstance.
+
+Returns (Tuple, 1):
+	numEntries.
+
+)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023
@@ -1988,12 +2109,12 @@ void def_ElementTemplateParamsHelper(py::module_& m)
                   return py::make_tuple(retVal, color);
                   }, "modelRef"_a, "etInstance"_a, "index"_a = 0, DOC(Bentley, DgnPlatform, ElementTemplateParamsHelper, GetElementColor));
 
-    c1.def_static("GetWeight", [] (DgnModelRefP modelRef, ECN::IECInstanceCR etInstance, UInt index)
+    c1.def_static("GetWeight", [] (ECN::IECInstanceCR etInstance, UInt index)
                   {
                   int weight = 0;
                   auto retVal = ElementTemplateParamsHelper::GetWeight(weight, etInstance, index);
                   return py::make_tuple(retVal, weight);
-                  }, "modelRef"_a, "etInstance"_a, "index"_a = 0, DOC(Bentley, DgnPlatform, ElementTemplateParamsHelper, GetWeight));
+                  }, "etInstance"_a, "index"_a = 0, DOC(Bentley, DgnPlatform, ElementTemplateParamsHelper, GetWeight));
 
     c1.def_static("GetLineStyleName", [] (DgnModelRefP modelRef, ECN::IECInstanceCR etInstance, UInt index)
                   {

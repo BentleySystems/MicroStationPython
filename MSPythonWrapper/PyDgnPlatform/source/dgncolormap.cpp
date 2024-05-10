@@ -35,26 +35,7 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_ExtractElementColorInfo =R"doc(Get the color information from the supplied element color id.
 
-Parameter ``colorDef``:
-    IntColorDef for the supplied element color, can be used to get
-    TBGR or RGB color values.
 
-Parameter ``colorIndex``:
-    The 0 to INDEX_Background index into the file's DgnColorMap. For
-    rgb and book colors this is the closest match from when they were
-    created.
-
-Parameter ``isTrueColor``:
-    True if supplied element color is a rgb or book color, false for
-    color index.
-
-Parameter ``bookName``:
-    Color book name for the supplied element color (empty string for
-    rgb and indexed colors).
-
-Parameter ``colorName``:
-    Color name from color book for the supplied element color (empty
-    string for rgb and indexed colors).
 
 Parameter ``elementColor``:
     The element color to extract the information for.
@@ -62,9 +43,25 @@ Parameter ``elementColor``:
 Parameter ``dgnFile``:
     The file for the supplied element color.
 
-Returns:
+Returns (Tuple, 0):
     SUCCESS if element color is a valid rgb, book, or DgnColorMap
-    index. COLOR_BYLEVEL or COLOR_BYCELL will return ERROR.)doc";
+    index. COLOR_BYLEVEL or COLOR_BYCELL will return ERROR.
+
+Returns (Tuple, 1) :
+	colorDef.
+
+Returns (Tuple, 2):
+	colorIndex.
+
+Returns (Tuple. 3) :
+	isTrueColor.
+
+Returns (Tuple, 4):
+	bookName.
+
+Returns (Tuple, 5):
+	colorName.
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_GetColorTableDescription =R"doc(Called to get the name string associated with the files color table.
 

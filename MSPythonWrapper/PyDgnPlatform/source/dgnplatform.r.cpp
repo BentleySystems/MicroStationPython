@@ -300,6 +300,7 @@ void def_DgnPlatform_r(py::module_& m)
         .def_readwrite("green", &RgbColorDef::green)
         .def_readwrite("blue", &RgbColorDef::blue)
         .def("__repr__", [] (RgbColorDef& self) { return "(red:{}, green:{}, blue:{})"_s.format(self.red, self.green, self.blue); });
+    py::bind_vector< bvector<RgbColorDef> >(m, "RgbColorDefArray", py::module_local(false));
 
     //===================================================================================
     // enum class RefAttachNestMode

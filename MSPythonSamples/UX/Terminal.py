@@ -14,11 +14,13 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
 s_winDestroy = False
+s_root  = tk.Tk()
 
 def on_closing ():
-    root.destroy()
+    global s_winDestroy
+    global s_root
+    s_root.destroy()
     s_winDestroy = True
-
 
 class History(list):
     def __getitem__(self, index):
@@ -293,12 +295,17 @@ class TextConsole(tk.Text):
             self.prompt()
 
 
-if __name__ == '__main__':
-    root = tk.Tk()
-    console = TextConsole(root)
+def main ():
+    global s_winDestroy
+    global s_root
+    console = TextConsole(s_root)
     console.pack(fill='both', expand=True)
-    root.protocol("WM_DELETE_WINDOW", on_closing)
-    root.title('Microstation Python Shell')
+    s_root.protocol("WM_DELETE_WINDOW", on_closing)
+    s_root.title('Microstation Python Shell')
     while s_winDestroy == False :
-        root.update ()
+        s_root.update ()
         PyCadInputQueue.PythonMainLoop()
+
+if __name__ == '__main__':
+    main ()
+

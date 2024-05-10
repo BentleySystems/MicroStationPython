@@ -80,7 +80,25 @@ void def_GeoPoint(py::module_&);
 PYBIND11_MODULE(MSPyBentleyGeom, m)
     {
     // Document for module
-    m.doc() = "Pybind11 wrapper for BentleyGeom.dll";
+    m.doc() = "The MSPyBentleyGeom library, provides core geometry functionality for the construction and manipulation of all types of 2d and 3d geometry.";
+
+    m.attr("msGeomConst_piOver4") = msGeomConst_piOver4;
+    m.attr("msGeomConst_piOver2") = msGeomConst_piOver2;
+    m.attr("msGeomConst_pi") = msGeomConst_pi;
+    m.attr("msGeomConst_2pi") = msGeomConst_2pi;
+    m.attr("msGeomConst_degreesPerRadian") = msGeomConst_degreesPerRadian;
+
+    m.attr("msGeomConst_radiansPerDegree") = msGeomConst_radiansPerDegree;
+    m.attr("msGeomConst_piOver12") = msGeomConst_piOver12;
+    m.attr("PI") = PI;
+    m.attr("mgds_fc_iang_to_rad") = mgds_fc_iang_to_rad;
+    m.attr("mgds_fc_rad_to_iang") = mgds_fc_rad_to_iang;
+
+    m.attr("mgds_fc_miang_to_rad") = mgds_fc_miang_to_rad;
+    m.attr("mgds_fc_nearZero") = mgds_fc_nearZero;
+    m.attr("mgds_fc_condition") = mgds_fc_condition;
+    m.attr("mgds_fc_epsilon") = mgds_fc_epsilon;
+    m.attr("DISCONNECT") = DISCONNECT;
 
     // class defines
     bind_container_PyGeom(m);

@@ -198,7 +198,14 @@ static const char * __doc_Bentley_DgnPlatform_NamedBoundary_GetModelRef =R"doc(G
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_GetElement =R"doc(Gets the element type which is represented by the named boundary.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_GetDrawingScale =R"doc(Gets the drawing scale to which the boundary needs to be scaled on the
-drawing sheet.)doc";
+drawing sheet.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	scale.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_SetDrawingScale =R"doc(Sets the drawing scale to which the boundary needs to be scaled on the
 drawing sheet.)doc";

@@ -12,6 +12,7 @@
 #include <Bentley/RefCounted.h>
 #include <Bentley/bvector.h>
 #include <Bentley/bmap.h>
+#include <Bentley/BeConsole.h>
 
 #include <MsPythonCore\MSPython.h>
 
@@ -148,12 +149,18 @@ struct MSPYTHONDLL_EXPORT ScriptObject
 //=======================================================================================
 struct ScriptNotifier : public RefCountedBase
     {
+protected:
+    bool m_active = false;
+
  public:
      virtual void OnException(std::exception& ex) {}
 
      virtual void OnError(std::string const& msg) {}
 
      virtual void OnOutput(std::string const& msg) {}
+
+     void SetActive (bool active) { m_active = active;}
+     bool GetActive () { return m_active; }
     };
 
 //=======================================================================================
@@ -225,6 +232,25 @@ struct PyNameSpaceManager
         MSPYTHONDLL_EXPORT   static void ClearNameSpaceUsing();
         MSPYTHONDLL_EXPORT   static void SetDefaultNameSpaceList();
     };
+
+
+//=======================================================================================
+// @bsiclass                                                                   02/23
+//=======================================================================================
+typedef RefCountedPtr<struct UstnScriptNotifier> UstnScriptNotifierPtr;
+struct UstnScriptNotifier : public ScriptNotifier
+{
+private:
+    UstnScriptNotifier() {}
+public:
+    virtual void OnException(std::exception& ex) override { BeConsole::Printf("%s\n", ex.what()); }
+
+    virtual void OnError(std::string const& msg) override { BeConsole::Printf("%s\n", msg.c_str()); }
+
+    virtual void OnOutput(std::string const& msg) override { BeConsole::Printf("%s\n", msg.c_str()); }
+
+    static UstnScriptNotifierPtr Create() { return new UstnScriptNotifier(); }
+};
 
 END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE
 

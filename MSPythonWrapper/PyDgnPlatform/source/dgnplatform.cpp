@@ -802,4 +802,35 @@ void def_DgnPlatform(py::module_& m)
         .value("ePass", ScanTestResult::Pass)
         .value("eFail", ScanTestResult::Fail)
         .export_values();    
+
+    //===================================================================================
+    //Struct AssocPoint
+    py::class_< AssocPoint> c0(m, "AssocPoint");
+    c0.def(py::init<>());
+    c0.def("__getitem__", [](const AssocPoint& self, int index)
+        {
+        if (index < 0 || index >= 20)
+            {
+            PyErr_SetString (PyExc_IndexError, "Index out of range, the range is 0~19");
+            throw py::error_already_set();
+            }
+
+        return self.buf[index];
+        });
+
+    c0.def("__setitem__", [](AssocPoint& self, int index, unsigned short value)
+        {
+        if (index < 0 || index >= 20)
+            {
+                PyErr_SetString(PyExc_IndexError, "Index out of range, the range is 0~19");
+                throw py::error_already_set();
+            }
+
+        self.buf[index] = value;
+        });
+
+    c0.def("__len__", [](const AssocPoint& self)
+        {
+        return 20;  //const length in C++ side
+        });
     }

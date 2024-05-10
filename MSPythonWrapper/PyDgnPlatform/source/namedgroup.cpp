@@ -325,14 +325,19 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_Create =R"doc(Creates a new instance of NamedGroup from the element that persists
 it.
 
-Parameter ``createdNamedGroup``:
-    The NamedGroup that was instantiated.
-
 Parameter ``source``:
     ElementHandle referencing the persistent NamedGroup element.
 
 Parameter ``rootModelRef``:
-    The model containing the NamedGroup element.)doc";
+    The model containing the NamedGroup element.
+
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1)`:
+	newGroup.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_INamedGroupMemberVisitor_VisitMember =R"doc(The method called for each NamedGroup member that meets the traversal
 criteria.

@@ -12,25 +12,24 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_FindMatchingLink =R"doc(Find the matching link from given scenarios like for textfiled.
 
-Parameter ``linkTreeOut``:
-    is a DgnLinkTreePtr
-
 Parameter ``elemHandle``:
     an element handle object
 
 Parameter ``linkTrav``:
     a object of type IDgnLinkTraverser
 
-Returns:
-    MatchingLinkState::Found if it find the matching link Bentley
-    Systems +---------------+---------------+---------------+---------
-    ------+---------------+------)doc";
+Returns (Tuple, 0) :
+    MatchingLinkState::Found if it find the matching link 
+
+Returns (Tuple, 1):
+	linkTreeOut.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_GetManager =R"doc(Get DgnLinkManager.
 
 Returns:
-    the DgnLinkManager object Bentley Systems +---------------+-------
-    --------+---------------+---------------+---------------+------)doc";
+    the DgnLinkManager object )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_RemoveUserDataHandler =R"doc(Remove the specified link user data handler.
 
@@ -38,9 +37,7 @@ Parameter ``userDataHandler``:
     a inkUserData handler object
 
 Returns:
-    a false if not able to remove it Bentley Systems +---------------+
-    ---------------+---------------+---------------+---------------+--
-    ----)doc";
+    a false if not able to remove it)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_AddUserDataHandler =R"doc(Add the user data handler.
 
@@ -48,9 +45,7 @@ Parameter ``userDataHandler``:
     a linkUserData handler object
 
 Returns:
-    a false if not able to remove it Bentley Systems +---------------+
-    ---------------+---------------+---------------+---------------+--
-    ----)doc";
+    a false if not able to remove it)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_RemoveLinkSetHandler =R"doc(Remove the specified link set handler.
 
@@ -58,9 +53,7 @@ Parameter ``linkSetHandlerIn``:
     a linkset handler object
 
 Returns:
-    a false if not able to remove it Bentley Systems +---------------+
-    ---------------+---------------+---------------+---------------+--
-    ----)doc";
+    a false if not able to remove it )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_RemoveLinkHandler =R"doc(Remove the specified link handler.
 
@@ -68,9 +61,7 @@ Parameter ``linkHandlerIn``:
     a links handler object
 
 Returns:
-    a false if not able to remove it Bentley Systems +---------------+
-    ---------------+---------------+---------------+---------------+--
-    ----)doc";
+    a false if not able to remove it )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_AddLinkSetHandler =R"doc(Add a link set handler for handling a link set type.
 
@@ -78,9 +69,7 @@ Parameter ``linkHandlerIn``:
     a linkset handler object
 
 Returns:
-    a false if not able to add it Bentley Systems +---------------+---
-    ------------+---------------+---------------+---------------+-----
-    -)doc";
+    a false if not able to add it )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_AddLinkHandler =R"doc(Add link handler for handling a link type.
 
@@ -88,13 +77,9 @@ Parameter ``linkHandlerIn``:
     a link handler object
 
 Returns:
-    a false if not able to add it Bentley Systems +---------------+---
-    ------------+---------------+---------------+---------------+-----
-    -)doc";
+    a false if not able to add it)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_SetLeafPropertyString =R"doc(Add or replace an optional property string of a leaf node. Bentley
-Systems +---------------+---------------+---------------+-------------
---+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_SetLeafPropertyString =R"doc(Add or replace an optional property string of a leaf node)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_GetLeafPropertyString =R"doc(Get the value of the optional property string of a leaf node.
 
@@ -105,9 +90,7 @@ Parameter ``propertyID``:
     linktree leaf property ID
 
 Returns:
-    nullptr if the property is not found Bentley Systems +------------
-    ---+---------------+---------------+---------------+--------------
-    -+------)doc";
+    nullptr if the property is not found )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_ValidateLinkTarget =R"doc(Validate the link target
 
@@ -141,8 +124,13 @@ object. Otherwise use have call delete to delete this object
 Parameter ``key``:
     by which it will create a link set
 
-Returns:
-    the link tree branch where this link is attached)doc";
+Returns (Tuple, 0):
+    the link tree branch where this link is attached
+
+Returns (Tuple, 1):
+	status.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_CreateLinkSet =R"doc(Create a linkset from given key
 
@@ -163,8 +151,13 @@ Parameter ``moniker``:
 Parameter ``key``:
     link tree key. See DgnLinkTreeKey
 
-Returns:
-    the link tree spec pointer)doc";
+Returns(Tuple, 0):
+    the link tree spec pointer
+
+Returns (Tuple, 1):
+	status.
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_FindProjectTree =R"doc(Find the link tree from given name
 

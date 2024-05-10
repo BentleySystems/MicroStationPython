@@ -12,51 +12,59 @@
 
 static const char * __doc_Bentley_DgnPlatform_HitPath_GetDimensionParameters =R"doc(Get the parameters from a Hitpath, if it is a hit of a Dimension.
 
-Parameter ``partName``:
-    Complete part identifier for part of dimension located, use
+
+Returns (Tuple, 0):
+    SUCCESS or ERROR
+
+Returns (Tuple, 1):
+	partName. mplete part identifier for part of dimension located, use
     ADIM_GETTYPE, ADIM_GETSUB and ADIM_GETSEG to decompose.
 
-Parameter ``pointNo``:
-    Closest point on dimension element.
+Returns (Tuple, 2):
+	pointNo.  Closest point on dimension element.
 
-Parameter ``segment``:
-    Selected dimension segment.
+Returns (Tuple, 3):
+	segment.  Selected dimension segment.
 
-Parameter ``partType``:
-    Type of selected part of dim, one of ADTYPE_xxx defined in
-    mdldim.h.
+Returns (Tuple, 4):
+	partType. Type of selected part of dim, one of ADTYPE_xxx 
 
-Parameter ``partSubType``:
-    Sub Type of selected part of dim, one of ADSUB_xxx defined in
-    mdldim.h.
+Returns (Tuple, 5):
+	partSubType. Sub Type of selected part of dim, one of ADSUB_xxx 
 
-Returns:
-    SUCCESS or ERROR)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_HitPath_GetBSplineParameters =R"doc(Get the parameters from a Hitpath, if it is a hit of a Bspline
 
-Parameter ``u``:
-    U
 
-Parameter ``v``:
-    V
 
-Returns:
-    SUCCESS or ERROR)doc";
+Returns (Tuple, 0):
+    SUCCESS or ERROR
+
+Returns (Tuple, 1):
+	u.
+
+Returns (Tuple, 2):
+	v.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_HitPath_GetLinearParameters =R"doc(Get the parameters from a HitPath, if it is a hit of a linear element
 
-Parameter ``hitSeg``:
-    The coordinates of the segment on the element that caused the hit.
 
-Parameter ``vertex``:
-    The vertex number of the closest vertex to the test point.
+Returns (Tuple, 0):
+    SUCCESS or ERROR
 
-Parameter ``segmentNumber``:
-    The segment number of hitSeg.
+Returns (Tuple, 1):
+	seg. The coordinates of the segment on the element that caused the hit.
 
-Returns:
-    SUCCESS or ERROR)doc";
+Returns (Tuple, 2):
+	vertex. The vertex number of the closest vertex to the test point.
+
+Returns (Tuple, 3):
+	segmentNumber.  The segment number of hitSeg.
+
+)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

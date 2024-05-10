@@ -340,7 +340,7 @@ void def_MSBsplineSurface(py::module_& m)
         if (totalPoles <= 0)
             return;
 
-        totalPoles = totalPoles > arr.size() ? arr.size() : totalPoles;
+        totalPoles = (int)totalPoles > arr.size() ? (int)arr.size() : totalPoles;
         memcpy(self.poles, ptr, totalPoles * sizeof(DPoint3d));
         });
 
@@ -359,7 +359,7 @@ void def_MSBsplineSurface(py::module_& m)
         int  knotNum = self.uParams.NumberAllocatedKnots();
         if (knotNum <= 0) return;
 
-        knotNum = knotNum > arr.size() ? arr.size() : knotNum;
+        knotNum = knotNum > (int)arr.size() ? (int)arr.size() : knotNum;
         memcpy(self.uKnots, ptr, knotNum * sizeof(double));
         });
 
@@ -378,7 +378,7 @@ void def_MSBsplineSurface(py::module_& m)
         int  knotNum = self.vParams.NumberAllocatedKnots();
         if (knotNum <= 0) return;
 
-        knotNum = knotNum > arr.size() ? arr.size() : knotNum;
+        knotNum = knotNum > (int)arr.size() ? (int)arr.size() : knotNum;
         memcpy(self.vKnots, ptr, knotNum * sizeof(double));
         });
 
@@ -399,7 +399,7 @@ void def_MSBsplineSurface(py::module_& m)
 
         if (!self.rational || totalPoles <= 0) return;
 
-        totalPoles = totalPoles > arr.size() ?  arr.size() : totalPoles;
+        totalPoles = totalPoles > (int)arr.size() ? (int)arr.size() : totalPoles;
 
         memcpy(self.weights, ptr, totalPoles * sizeof(double));
         });

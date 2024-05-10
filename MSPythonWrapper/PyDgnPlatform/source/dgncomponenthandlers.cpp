@@ -54,8 +54,6 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_IDgnComponentDefinitionModelHandler_CreateParameterSet =R"doc(Creates a new parameter set
 
-Parameter ``parameterSet``:
-    Holds the created parameter set.
 
 Parameter ``name``:
     The name of the new parameter set. Must be non-empty and unique
@@ -69,8 +67,13 @@ Parameter ``values``:
     The initial values of all parameters for the new parameter set.
     The values must come from this handler's DgnModel.
 
-Returns:
-    Success if the parameter set was created, or else an error code.)doc";
+Returns (Tuple, 0):
+    Success if the parameter set was created, or else an error code.
+
+Returns (Tuple, 1):
+	parameterSet.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellRemapTable_Clear =R"doc(Clears all parameter set and parameter definition remappings.)doc";
 

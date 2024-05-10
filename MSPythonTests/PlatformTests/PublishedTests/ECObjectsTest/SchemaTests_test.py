@@ -13,27 +13,6 @@ from util import *
 
 UINT_MAX = 4294967295
 NPOS = -1
-
-def EXPECT_EQ (first, second):
-    assert first == second
-
-def ASSERT_EQ (first, second):
-    EXPECT_EQ (first, second)
-
-def EXPECT_TRUE (val):
-    assert True == val
-
-def EXPECT_STREQ (first, second):
-    EXPECT_EQ (first, second)
-
-def ASSERT_TRUE (val):
-    EXPECT_TRUE (val)
-
-def EXPECT_FALSE (val):
-    assert False == val
-
-def EXPECT_NE(first, second):
-    assert first != second
     
 def getTempDataPath (tempFileName):
     return WString (os.path.join (os.environ['TEMP'], tempFileName))

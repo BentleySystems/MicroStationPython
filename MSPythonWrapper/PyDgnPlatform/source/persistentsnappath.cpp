@@ -121,7 +121,17 @@ Remark:
     pointer.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_GetPaths =R"doc(Get the target element(s) identified by the snap Optionaly, get the
-assoc point data)doc";
+assoc point data
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	path1.
+
+Returns (Tuple, 2):
+	path2.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_DependsOnElementRef =R"doc(Does the moniker depend on this ElementRefP? If host and target are in
 same model and if target is not a shared cell instance, then this is

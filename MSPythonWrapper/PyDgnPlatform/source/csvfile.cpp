@@ -12,15 +12,16 @@
 
 static const char * __doc_Bentley_DgnPlatform_CsvFile_Open =R"doc(Open a CSV file for reading. Handle Locale, Utf8 or Utf16 encoding.
 
-Parameter ``status``:
-    BeFileStatus::Success on success or the file open error.
-
 Parameter ``fullFileSpec``:
     Name of the file to open.
 
-Returns:
+Returns (Tuple, 0):
     A pointer to the file. If status is not BeFileStatus::Success then
-    the pointer will fail the IsValid() check.)doc";
+    the pointer will fail the IsValid() check.
+
+Returns (Tuple, 1):
+	status. BeFileStatus::Success on success or the file open error.
+)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

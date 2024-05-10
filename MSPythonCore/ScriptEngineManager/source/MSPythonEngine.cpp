@@ -892,7 +892,7 @@ void PythonScriptEngine::InitSearchPath ()
         return;
         }
 
-    if (SUCCESS == ConfigurationManager::GetVariable(pyPath, L"MS_PYFILES") && !WString::IsNullOrEmpty(pyPath))
+    if (SUCCESS == ConfigurationManager::GetVariable(pyPath, L"MS_PYTHONSEARCHDIRECTORIES") && !WString::IsNullOrEmpty(pyPath))
         {
         bvector<WString> childPaths;
         BeStringUtilities::Split(pyPath.c_str(), L";", NULL, childPaths);

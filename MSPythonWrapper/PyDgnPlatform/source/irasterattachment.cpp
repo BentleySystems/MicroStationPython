@@ -881,9 +881,6 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_ColorIndexFromRgbInModel =R"doc(Query the raw color index of an RGB triplet from a DgnModelRef color
 table, add a color book entry if not found.
 
-Parameter ``index``:
-    The raw color index of an RGB triplet from a DgnModelRef color
-    table or color book entries.
 
 Parameter ``modelRef``:
     The DgnModelRef to look to for color table.
@@ -891,8 +888,14 @@ Parameter ``modelRef``:
 Parameter ``rgbColor``:
     The RGB triplet to find index in color table.
 
-Returns:
-    SUCCESS if Successful, ERROR otherwise.)doc";
+Returns (Tuple, 0):
+    SUCCESS if Successful, ERROR otherwise.
+
+Returns (Tuple, 1):
+	index. The raw color index of an RGB triplet from a DgnModelRef color
+    table or color book entries.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_IsTransform3D =R"doc(Check if the matrix contains 3D transformation.
 

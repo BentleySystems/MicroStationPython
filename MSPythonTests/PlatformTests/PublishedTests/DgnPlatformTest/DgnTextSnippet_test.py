@@ -78,18 +78,21 @@ def test_RemapTextSnippetTest(initDgnPlatformHost, loadDgnFile, createTempDgnFil
     targetDictModel = targetDgnFile.GetDictionaryModel()
     assert None != targetDictModel
 
-    # NEEDS WORK: Fix me
     #Copy a dictionary element from one dgn file to another dgn file
-    # copier = ElementCopyContext(targetDictModel)
-    # assert None != copier
+    copier = ElementCopyContext(targetDictModel)
+    assert None != copier
 
-    # status = copier.DoCopy(eeh)
+    status = copier.DoCopy(eeh)
+    assert BentleyStatus.eSUCCESS == status
+    
+    copier.SetDestinationModelRef(None)
+    if targetDgnFile.HasPendingChanges():
+       targetDgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
+ 
+    assert targetDictModel == eeh.GetDgnModel()
 
-    #assert BentleyStatus.eSUCCESS == status
-    # assert targetDictModel == eeh.GetDgnModel()
-
-    # destinationSnippet = DgnTextSnippet.GetByID (eeh.GetElementId (), targetDgnFile)
-    # assert None != destinationSnippet
+    destinationSnippet = DgnTextSnippet.GetByID (eeh.GetElementId (), targetDgnFile)
+    assert None != destinationSnippet
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_DgnTextSnippetCollectionAndIteratorTest(initDgnPlatformHost, loadDgnFile, createTempDgnFileWithSeed):

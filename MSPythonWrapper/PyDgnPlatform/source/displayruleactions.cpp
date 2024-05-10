@@ -117,7 +117,7 @@ void def_DisplayRuleActions(py::module_& m)
     py::class_< IDisplayRuleAction
         , IDisplayRuleActionPtr
     > c1(m, "IDisplayRuleAction");
-
+    py::bind_vector<bvector<IDisplayRuleActionPtr>>(m, "DisplayRuleActionVector", py::module_local(false));
 
     c1.def_property_readonly("ActionId", &IDisplayRuleAction::GetActionId);
     c1.def("GetActionId", &IDisplayRuleAction::GetActionId, DOC(Bentley, DgnPlatform, IDisplayRuleAction, GetActionId));
@@ -206,6 +206,15 @@ void def_DisplayRuleActions(py::module_& m)
                             }),
                             "distance1"_a, "angle1"_a, "distance2"_a = nullptr, "angle2"_a = nullptr,
                             "annotationScaleOn"_a = false, "color"_a = nullptr, "weight"_a = nullptr, "style"_a = nullptr);
+        c9_1.def_readwrite("m_distance1", &AreaHatchAction::HatchParams::m_distance1);
+        c9_1.def_readwrite("m_angle1", &AreaHatchAction::HatchParams::m_angle1);
+        c9_1.def_readwrite("m_distance2", &AreaHatchAction::HatchParams::m_distance2);
+        c9_1.def_readwrite("m_angle2", &AreaHatchAction::HatchParams::m_angle2);
+        c9_1.def_readwrite("m_annotationScaleOn", &AreaHatchAction::HatchParams::m_annotationScaleOn);
+        c9_1.def_readwrite("m_color", &AreaHatchAction::HatchParams::m_color);
+        c9_1.def_readwrite("m_style", &AreaHatchAction::HatchParams::m_style);
+        c9_1.def_readwrite("m_weight", &AreaHatchAction::HatchParams::m_weight);
+        c9_1.def_readwrite("m_modifiers", &AreaHatchAction::HatchParams::m_modifiers);
         }
     c9.def(py::init(py::overload_cast<AreaHatchAction::HatchParams const& , DgnFileR>(&AreaHatchAction::Create)), "params"_a, "dgnFile"_a);
     c9.def_property("Params",
@@ -231,6 +240,14 @@ void def_DisplayRuleActions(py::module_& m)
                            }), 
                            "cellId"_a, "scale"_a, "annotationScaleOn"_a = false, "angle"_a = nullptr,
                            "color"_a = nullptr, "weight"_a = nullptr, "style"_a = nullptr);
+        c10_1.def_readwrite("m_cellId", &AreaPatternAction::AreaPatternParams::m_cellId);
+        c10_1.def_readwrite("m_scale", &AreaPatternAction::AreaPatternParams::m_scale);
+        c10_1.def_readwrite("m_annotationScaleOn", &AreaPatternAction::AreaPatternParams::m_annotationScaleOn);
+        c10_1.def_readwrite("m_angle", &AreaPatternAction::AreaPatternParams::m_angle);
+        c10_1.def_readwrite("m_color", &AreaPatternAction::AreaPatternParams::m_color);
+        c10_1.def_readwrite("m_weight", &AreaPatternAction::AreaPatternParams::m_weight);
+        c10_1.def_readwrite("m_style", &AreaPatternAction::AreaPatternParams::m_style);
+        c10_1.def_readwrite("m_modifiers", &AreaPatternAction::AreaPatternParams::m_modifiers);
         }
     c10.def(py::init(py::overload_cast<AreaPatternAction::AreaPatternParams const&, DgnFileR>(&AreaPatternAction::Create)), "params"_a, "dgnFile"_a);
     c10.def_property("Params",

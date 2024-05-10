@@ -1,4 +1,4 @@
-import tkinter
+import tkinter as tk
 import time
 import os
 from MSPyBentley import *
@@ -20,23 +20,31 @@ from MSPyMstnPlatform import *
 # a Microstation function mdlInput_pythonMainLoop to process the main input loop of Microstation.
 #
 
+s_root  = None
+s_clock = None
 
 def on_closing ():
-	root.destroy()
+    global s_root
+    s_root.destroy()
 
 def update():
-    clock.config(text=time.strftime("%I:%M:%S"))
-    clock.after(1000,update)
+    s_clock.config(text=time.strftime("%I:%M:%S"))
+    s_clock.after(1000,update)
+
+def main ():
+    global s_root
+    global s_clock
+    s_root  = tk.Tk()
+    s_root.geometry("400x100")
+    s_root.config(bg='black')
+    s_root.protocol("WM_DELETE_WINDOW", on_closing)
+    s_clock = tk.Label(s_root, background = 'black',foreground = 'white', font = ('arial', 40, 'bold'))
+    s_clock.pack()
+    update()
+    s_root.title('clock')
+    while tk._default_root != None :
+        s_root.update ()
+        PyCadInputQueue.PythonMainLoop()    
 
 if __name__ == "__main__":
-    root= Tk()
-    root.geometry("400x100")
-    root.config(bg='black')
-    root.protocol("WM_DELETE_WINDOW", on_closing)
-    clock = Label(root, background = 'black',foreground = 'white', font = ('arial', 40, 'bold'))
-    clock.pack()
-    update()
-    root.title('clock')
-    while tkinter._default_root != None :
-        root.update ()
-        PyCadInputQueue.PythonMainLoop()
+    main ()

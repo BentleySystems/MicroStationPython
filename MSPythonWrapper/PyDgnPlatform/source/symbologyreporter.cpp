@@ -34,240 +34,308 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_IsStandardCell =
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetPatternOrigin =R"doc(Return the pattern origin of a patterned closed element.
 
-Parameter ``origin``:
-    The pattern origin to return.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
     element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.
+Returns (Tuple, 0):
+	retVal.
+
+Returns (Tuple, 1):
+	value. The pattern origin 
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetPatternParams =R"doc(Return the pattern parameter of a patterned closed element.
 
-Parameter ``params``:
-    The pattern parameters to return.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element. 
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
+
+Returns (Tuple, 1):
+	value.The pattern parameters to return.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetDetailingSymbolStylePath =R"doc(Return the path/name of the Detailing Symbol Style if the element is a
 Detailing Symbol.
 
-Parameter ``stylePath``:
-    If name of the detailing symbol style.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element. 
+    
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
+
+Returns (Tuple, 1):
+	value. If name of the detailing symbol style.
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetAreaMode =R"doc(Return the AreaMode for a closed element. The Area mode designates the
 element either as a solid or a hole.
 
-Parameter ``isHole``:
-    If true the element is considered a hole, if false the it is
-    considered solid.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
+
+Returns (Tuple, 1):
+	value.  If true the element is considered a hole, if false the it is
+    considered solid.
+
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetFillColorIdOrGradientSpecification =R"doc(Return the Color Fill specificate if defined for a closed element. If
 a fill color is specified it will be either a solid fill color ID or a
 Gradient color specification.
 
-Parameter ``color``:
-    Solid fill color ID to return.
-
-Parameter ``gradientsymbPtr``:
-    Gradient color specification return.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element. 
+
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
+
+Returns (Tuple, 1):
+	value. Solid fill color ID to return.
+Returns (Tuple, 2):
+	value. Gradient color specification return.
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetCellName =R"doc(Return the Cell Name if the element is a named cell.
 
-Parameter ``cellName``:
-    The cell name to return.
-
 Parameter ``index``:
     For future use. Pass 0 for index, or do not pass paramter and
-    allow the default of 0 to be used. @Return SUCCESS if the property
-    can be returned from the element.)doc";
+    allow the default of 0 to be used.    
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value. The cell name to return.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetAnnotationScale =R"doc(Return the Annotation Scale of the element if the element supports
 annotation scale.
 
-Parameter ``scale``:
-    The scale value to return.
-
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value.The scale value to return.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetScale =R"doc(Return the Scale of the element if the element supports scaling.
 
-Parameter ``scale``:
-    The scale value to return.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.    
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value. The scale value to return.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetElementTemplateID =R"doc(Return the ID of the element template associate with the element.
 
-Parameter ``elementTemplateID``:
-    The ID of the element template to return.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value. The ID of the element template to return.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetTransparency =R"doc(Return the transparency value of the element.
 
-Parameter ``transparency``:
-    The transparency value.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value.  The transparency value.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetDisplayPriority =R"doc(Return the display of the element. This is only applicable to elements
 in 2D models.
 
-Parameter ``displayPriority``:
-    The display priority of the element.
-
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.    
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value. The display priority of the element.
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetElementClass =R"doc(Return the class of the element.
 
-Parameter ``elClass``:
-    The element class to return. The possible values are defined in
+
+Parameter ``index``:
+    The index of the property. Pass 0 if the element is not a complex
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
+
+Returns (Tuple, 1):
+	value. The element class to return. The possible values are defined in
     the enum .
 
-Parameter ``index``:
-    The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
-
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetWeight =R"doc(Return the line weight.
 
-Parameter ``weight``:
-    The line weight to return
-
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value.  The line weight to return
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetMaterialId =R"doc(Return the Material ID if the element contains a material
 specification.
 
-Parameter ``materialID``:
-    The Material Id to return
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.    
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value. The Material Id to return
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetMlineStyleID =R"doc(Return the ID of the Multi-Line Style if the element is a Multi-line
 element.
 
-Parameter ``mlineStyleID``:
-    The Multi-Line Style Id to return
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value.  The Multi-Line Style Id to return
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetLineStyleParams =R"doc(Return the LineStyle Parameters if the element uses a named line
 style.
 
-Parameter ``lineStyleParams``:
-    The LineStyle Parameters to return.
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.    
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value.The LineStyle Parameters to return. 
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetDimStyleID =R"doc(Return the ID of the Dimension Style if the element is a dimension
 element.
 
-Parameter ``dimStyleID``:
-    The Dimension Style Id to return
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value.  The Dimension Style Id to return
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetLineStyleID =R"doc(Return the ID of the LineStyle.
 
-Parameter ``lineStyleID``:
-    The LineStyle Id to return
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.    
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value.  The LineStyle Id to return
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetTextStyleId =R"doc(Return the ID of the TextStyle if the element contains text.
 
-Parameter ``textStyleID``:
-    The TextStyle Id to return
-
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.    
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value. The TextStyle Id to return
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetColorID =R"doc(Return the ID of the element color. This value can be passed as the
 element color into DgnColorMap::ExtractElementColorInfo to get more
 specific color information.
 
-Parameter ``colorID``:
-    The FontId to return
-
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
 
+Returns (Tuple, 1):
+	value. The colorID to return
+
+)doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetFontID =R"doc(Return the ID of the font if the element contains text.
 
-Parameter ``fontID``:
-    The FontId to return
 
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
+
+Returns (Tuple, 1):
+	value.   The FontId to return
+
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetLevelId =R"doc(Return the level ID.
 
-Parameter ``levelID``:
-    The LevelId
-
 Parameter ``index``:
     The index of the property. Pass 0 if the element is not a complex
-    element. @Return SUCCESS if the property can be returned from the
-    element.)doc";
+    element.     
+Returns (Tuple, 0):
+	retVal. SUCCESS if the property can be returned from the  element.
+
+Returns (Tuple, 1):
+	value.   The LevelId
+
+)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

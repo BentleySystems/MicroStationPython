@@ -289,6 +289,7 @@ void def_TextParam(py::module_& m)
            "scaleFactor"_a, "isTextNode"_a, "allowSizeChange"_a, DOC(Bentley, DgnPlatform, TextParamWide, ApplyScaleFactor));
 
     c7.def("SetCodePage", &TextParamWide::SetCodePage, "codePage"_a, DOC(Bentley, DgnPlatform, TextParamWide, SetCodePage));
+    c7.def("__eq__", [](TextParamWideCR self, TextParamWideCR other) { return 0 == memcmp(&self, &other, sizeof(other)); });
 
     //===================================================================================
     // struct TextEDField
@@ -369,4 +370,193 @@ void def_TextParam(py::module_& m)
     c13.def_readwrite("dataSize", &TextFontInfo::dataSize);
     c13.def_readwrite("origin", &TextFontInfo::origin);
     c13.def_readwrite("scale", &TextFontInfo::scale);
+
+    //===================================================================================
+    // struct TextStyleOverrideFlags
+    py::class_< TextStyleOverrideFlags> c14(m, "TextStyleOverrideFlags");
+
+    c14.def_property("fontNo",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.fontNo; },
+        [](TextStyleOverrideFlags& self, bool value) { self.fontNo = value ? 1 : 0; });
+
+    c14.def_property("shxBigFont", 
+        [](TextStyleOverrideFlags const& self) { return (bool)self.shxBigFont; },
+        [](TextStyleOverrideFlags& self, bool value) { self.shxBigFont = value ? 1 : 0; });
+
+
+    c14.def_property("width",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.width; },
+        [](TextStyleOverrideFlags& self, bool value) { self.width = value ? 1 : 0; });
+
+    c14.def_property("height",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.height; },
+        [](TextStyleOverrideFlags& self, bool value) { self.height = value ? 1 : 0; });
+
+    c14.def_property("slant",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.slant; },
+        [](TextStyleOverrideFlags& self, bool value) { self.slant = value ? 1 : 0; });
+
+    c14.def_property("linespacing",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.linespacing; },
+        [](TextStyleOverrideFlags& self, bool value) { self.linespacing = value ? 1 : 0; });
+
+    c14.def_property("interCharSpacing",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.interCharSpacing; },
+        [](TextStyleOverrideFlags& self, bool value) { self.interCharSpacing = value ? 1 : 0; });
+
+    c14.def_property("underlineOffset",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.underlineOffset; },
+        [](TextStyleOverrideFlags& self, bool value) { self.underlineOffset = value ? 1 : 0; });
+
+    c14.def_property("overlineOffset",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.overlineOffset; },
+        [](TextStyleOverrideFlags& self, bool value) { self.overlineOffset = value ? 1 : 0; });
+
+    c14.def_property("just",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.just; },
+        [](TextStyleOverrideFlags& self, bool value) { self.just = value ? 1 : 0; });
+
+    c14.def_property("nodeJust",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.nodeJust; },
+        [](TextStyleOverrideFlags& self, bool value) { self.nodeJust = value ? 1 : 0; });
+
+    c14.def_property("lineLength",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.lineLength; },
+        [](TextStyleOverrideFlags& self, bool value) { self.lineLength = value ? 1 : 0; });
+
+    c14.def_property("direction",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.direction; },
+        [](TextStyleOverrideFlags& self, bool value) { self.direction = value ? 1 : 0; });
+
+    c14.def_property("underline",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.underline; },
+        [](TextStyleOverrideFlags& self, bool value) { self.underline = value ? 1 : 0; });
+
+    c14.def_property("overline",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.overline; },
+        [](TextStyleOverrideFlags& self, bool value) { self.overline = value ? 1 : 0; });
+
+    c14.def_property("italics",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.italics; },
+        [](TextStyleOverrideFlags& self, bool value) { self.italics = value ? 1 : 0; });
+
+    c14.def_property("bold",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.bold; },
+        [](TextStyleOverrideFlags& self, bool value) { self.bold = value ? 1 : 0; });
+
+    c14.def_property("superscript",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.superscript; },
+        [](TextStyleOverrideFlags& self, bool value) { self.superscript = value ? 1 : 0; });
+
+    c14.def_property("subscript",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.subscript; },
+        [](TextStyleOverrideFlags& self, bool value) { self.subscript = value ? 1 : 0; });
+
+    c14.def_property("fixedSpacing",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.fixedSpacing; },
+        [](TextStyleOverrideFlags& self, bool value) { self.fixedSpacing = value ? 1 : 0; });
+
+    c14.def_property("background",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.background; },
+        [](TextStyleOverrideFlags& self, bool value) { self.background = value ? 1 : 0; });
+
+    c14.def_property("backgroundstyle",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.backgroundstyle; },
+        [](TextStyleOverrideFlags& self, bool value) { self.backgroundstyle = value ? 1 : 0; });
+
+    c14.def_property("backgroundweight",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.backgroundweight; },
+        [](TextStyleOverrideFlags& self, bool value) { self.backgroundweight = value ? 1 : 0; });
+
+    c14.def_property("backgroundcolor",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.backgroundcolor; },
+        [](TextStyleOverrideFlags& self, bool value) { self.backgroundcolor = value ? 1 : 0; });
+
+    c14.def_property("backgroundfillcolor",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.backgroundfillcolor; },
+        [](TextStyleOverrideFlags& self, bool value) { self.backgroundfillcolor = value ? 1 : 0; });
+
+    c14.def_property("backgroundborder",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.backgroundborder; },
+        [](TextStyleOverrideFlags& self, bool value) { self.backgroundborder = value ? 1 : 0; });
+
+    c14.def_property("underlinestyle",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.underlinestyle; },
+        [](TextStyleOverrideFlags& self, bool value) { self.underlinestyle = value ? 1 : 0; });
+
+    c14.def_property("underlineweight",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.underlineweight; },
+        [](TextStyleOverrideFlags& self, bool value) { self.underlineweight = value ? 1 : 0; });
+
+    c14.def_property("underlinecolor",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.underlinecolor; },
+        [](TextStyleOverrideFlags& self, bool value) { self.underlinecolor = value ? 1 : 0; });
+
+    c14.def_property("overlinestyle",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.overlinestyle; },
+        [](TextStyleOverrideFlags& self, bool value) { self.overlinestyle = value ? 1 : 0; });
+
+    c14.def_property("overlineweight",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.overlineweight; },
+        [](TextStyleOverrideFlags& self, bool value) { self.overlineweight = value ? 1 : 0; });
+
+    c14.def_property("overlinecolor",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.overlinecolor; },
+        [](TextStyleOverrideFlags& self, bool value) { self.overlinecolor = value ? 1 : 0; });
+
+    c14.def_property("lineOffset",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.lineOffset; },
+        [](TextStyleOverrideFlags& self, bool value) { self.lineOffset = value ? 1 : 0; });
+
+    c14.def_property("fractions",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.fractions; },
+        [](TextStyleOverrideFlags& self, bool value) { self.fractions = value ? 1 : 0; });
+
+    c14.def_property("overlinestyleflag",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.overlinestyleflag; },
+        [](TextStyleOverrideFlags& self, bool value) { self.overlinestyleflag = value ? 1 : 0; });
+
+    c14.def_property("underlinestyleflag",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.underlinestyleflag; },
+        [](TextStyleOverrideFlags& self, bool value) { self.underlinestyleflag = value ? 1 : 0; });
+
+    c14.def_property("color",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.color; },
+        [](TextStyleOverrideFlags& self, bool value) { self.color = value ? 1 : 0; });
+
+    c14.def_property("widthFactor",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.widthFactor; },
+        [](TextStyleOverrideFlags& self, bool value) { self.widthFactor = value ? 1 : 0; });
+
+    c14.def_property("colorFlag",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.colorFlag; },
+        [](TextStyleOverrideFlags& self, bool value) { self.colorFlag = value ? 1 : 0; });
+
+    c14.def_property("fullJustification",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.fullJustification; },
+        [](TextStyleOverrideFlags& self, bool value) { self.fullJustification = value ? 1 : 0; });
+
+    c14.def_property("acadLineSpacingType",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.acadLineSpacingType; },
+        [](TextStyleOverrideFlags& self, bool value) { self.acadLineSpacingType = value ? 1 : 0; });
+
+    c14.def_property("backwards",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.backwards; },
+        [](TextStyleOverrideFlags& self, bool value) { self.backwards = value ? 1 : 0; });
+
+    c14.def_property("upsidedown",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.upsidedown; },
+        [](TextStyleOverrideFlags& self, bool value) { self.upsidedown = value ? 1 : 0; });
+
+    c14.def_property("acadInterCharSpacing",
+        [](TextStyleOverrideFlags const& self) { return (bool)self.acadInterCharSpacing; },
+        [](TextStyleOverrideFlags& self, bool value) { self.acadInterCharSpacing = value ? 1 : 0; });
+
+    c14.def_property("reserved",
+        [](TextStyleOverrideFlags const& self) { return self.reserved; },
+        [](TextStyleOverrideFlags& self, bool value) { self.reserved = value; });
+
+    c14.def_property("reserved2",
+        [](TextStyleOverrideFlags const& self) { return self.reserved2; },
+        [](TextStyleOverrideFlags& self, int value) { self.reserved2 = value; });
     }

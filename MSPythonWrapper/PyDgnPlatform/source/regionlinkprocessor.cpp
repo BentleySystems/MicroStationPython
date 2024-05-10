@@ -79,13 +79,6 @@ Parameter ``writeImmediate``:
 static const char * __doc_Bentley_DgnPlatform_RegionLinkProcessor_GetMatchingLinkIndexAndType =R"doc(Find a link that matches the given specifications in the DgnLinkTree
 held by RegionLinkProcessor
 
-Parameter ``linkIndex``:
-    OUT index of link
-
-Parameter ``linkType``:
-    OUT type of link (DGNLINK_REGIONTYPE_View,
-    DGNLINK_REGIONTYPE_Drawing, etc.)
-
 Parameter ``fileName``:
     IN file name of link's target
 
@@ -97,7 +90,18 @@ Parameter ``modelName``:
 
 Parameter ``targetName``:
     IN name of link's target (ex:name of view, name of drawing,
-    etc.). This is optional. @Returns SUCCESS if valid link was found)doc";
+    etc.). This is optional. @Returns SUCCESS if valid link was found
+
+Returns (Tuple):
+	retVal.
+
+Returns (Tuple) ``[out]``:
+	linkIndex index of link.
+
+Returns (Tuple) ``[out]``:
+	linkType. type of link (DGNLINK_REGIONTYPE_View, DGNLINK_REGIONTYPE_Drawing, etc.)
+
+)doc";    
 
 static const char * __doc_Bentley_DgnPlatform_RegionLinkProcessor_FindValidTargetInModel =R"doc(Find a valid link at a given index in the DgnLinkTree held by
 RegionLinkProcessor and return target information
