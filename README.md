@@ -14,7 +14,7 @@ Once you have these you will need to set some extra environment variables in you
     BB_DEFAULT_TOOLSET=VS2019
     SrcRoot=<Location of MicrostationPython source code>C:\src\MicroStationPython\
     OutRoot=<Location of the build artifacts>
-    PythonLibDir=<Location of Python installation>
+    PythonDir=<Location of Python installation>
     BoostInclude=<Location of boost headers>
 
 An example of this is :
@@ -23,7 +23,7 @@ An example of this is :
   set BB_DEFAULT_TOOLSET=VS2019  
   set SrcRoot=C:\src\MicroStationPython\
   set OutRoot=C:\out\MicroStationPython\
-  set PythonLibDir=C:\Python312\
+  set PythonDir=C:\Python312\
   set BoostInclude=c:\boost\boost_1_82_0\
 
 Once you have these set in your environment you can do :
