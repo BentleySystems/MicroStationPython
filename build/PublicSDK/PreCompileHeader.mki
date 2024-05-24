@@ -142,13 +142,22 @@ PchArgumentsMki = $(PchOutputDir)PchArgs$(PchTargetBasename).mki
         PchCompilandBasename=$(PchCompilandBasename)
         PchDependencySetDir=${PchDependencySetDir}\/
         PchDependencySetName=$(PchDependencySetName)
-    %if defined (CompileOptionsMki)
+		CCompFpOpts=$(CCompFpOpts)
+        cIncs=$(cIncs)
+     %if defined (ProductIncludes)
+        ProductIncludes=$(ProductIncludes)\/
+     %endif
+     %if defined (PublicApiIncludes)    
+        PublicApiIncludes=$(PublicApiIncludes)\/
+     %endif
+        PolicyFile=$(PolicyFile)
+        SolutionPolicyMki=$(SolutionPolicyMki)
+        SharedMki=$(SharedMki)
         CompileOptionsMki=$(CompileOptionsMki)
-    %endif
     %if defined (MSVC_VERSION)
         MSVC_VERSION=$(MSVC_VERSION)
-    %endif
         PchParentMke=$(PchParentMke)
+    %endif
     %if defined (CompilingForCLR) || defined (PchCompileForClr)
         PchCompileForClr=1
     %endif
@@ -174,42 +183,8 @@ PchArgumentsMki = $(PchOutputDir)PchArgs$(PchTargetBasename).mki
 # so skipping if cleaning and there is no arguments mki already
 %if !defined(BMAKE_DELETE_ALL_TARGETS) || (defined(BMAKE_DELETE_ALL_TARGETS) && exists($(PchArgumentsMki)))
 
-%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED"
-
-    %if defined(GCC_NO_PRE_COMPILED_HEADER)
-        GCC_GCH_Include= -I$(PchCompilandSrcDir)
-    %else
-        GCC_GCH_Include= -I$(PchOutputDir)
-
-        PreCompileHeader:
-            $(_bmake) $(bmopts) -dArgumentsMki=$(PchArgumentsMki) $(_CurrentFilePath)PreCompileHeaderGCC.mke
-    %endif
-
-%elif $(BUILD_TOOLSET) == "APPLE_CLANG" || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG"
-
-    %if defined(LLVMArch2Opts)
-        UsePrecompiledHeaderOptions =% -I$(PchCompilandSrcDir)
-    %else
-        UsePrecompiledHeaderOptions =% -include $(PchOutputDir)$(PchTargetBasename).h -I$(PchCompilandSrcDir)
-
-        PreCompileHeader:
-            $(_bmake) $(bmopts) -dArgumentsMki=$(PchArgumentsMki) $(_CurrentFilePath)PreCompileHeaderLLVM.mke
-    %endif
-
-%elif $(BUILD_TOOLSET) == "EMCC"
-    
-    UsePrecompiledHeaderOptions =% -include $(PchOutputDir)$(PchTargetBasename).h -I$(PchCompilandSrcDir)
-
-    PreCompileHeader:
-        $(_bmake) $(bmopts) -dArgumentsMki=$(PchArgumentsMki) $(_CurrentFilePath)PreCompileHeaderEMCC.mke
-
-%else
-    %if $(SharedMki) != $(_CurrentFilePath)
-        _CurrentFilePath=$(SharedMki)
-        %warn Mismatch for location of PreCompileHeader.mki
-    %endif
-    PreCompileHeader:
-        $(_bmake) $(bmopts) -dArgumentsMki=$(PchArgumentsMki) $(_CurrentFilePath)PreCompileHeader.mke
+PreCompileHeader:
+    $(_bmake) $(bmopts) -dArgumentsMki=$(PchArgumentsMki) $(_CurrentFilePath)Build/PublicSDK/PreCompileHeader.mke
 
     #
     #  We set this output macro for the convenience of the including makefile.
@@ -218,7 +193,7 @@ PchArgumentsMki = $(PchOutputDir)PchArgs$(PchTargetBasename).mki
 
 %endif
 
-%endif
+
 
 #
 #  We can only delete the $(PchArgumentsMki) file if the PchDependencySetName input was not provided.

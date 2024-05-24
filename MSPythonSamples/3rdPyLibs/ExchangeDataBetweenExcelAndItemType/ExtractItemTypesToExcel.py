@@ -14,6 +14,16 @@ from MSPyMstnPlatform import *
 import pandas as pd
 
 '''
+Running this sample needs to open ExchangeDataBetweenExcelAndItemType.dgn or other design
+file includes title block item.
+Command file 'Extract Item Types to Excel.txt' and 'Repopulate Items from Excel.txt' would
+be used within Batch Processor.
+'Extract Item Types to Excel.txt' would extract title block information to an Excel file.
+User can edit the title block information in Excel, then use 'Repopulate Items from Excel.txt'
+to re-populate the title block Item Types with the new information. 
+'''
+
+'''
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                              Bentley Systems
 +---------------+---------------+---------------+---------------+---------------+------*/

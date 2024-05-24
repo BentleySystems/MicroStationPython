@@ -1,0 +1,11 @@
+#----------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/OptimizerOptionsForCompiler.mki $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#----------------------------------------------------------------------------------------
+
+%if (MSVC_VERSION == 1700)
+    # VC11 compiler has a problem with optimizing for size/space
+    OPTIMIZE_FOR_SPEED=1
+%endif

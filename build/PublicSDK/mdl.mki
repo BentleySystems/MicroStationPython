@@ -1,7 +1,7 @@
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 %if defined (__mdlMKI__)
     %warn mdl.mki is being included redundantly in $(_MakeFileSpec)
     %if defined (DebugRedundantMkiIncludes)
@@ -9,64 +9,101 @@
     %endif
     %return
 %endif
-__mdlMKI__  = 1
-
-
-#============================================================================
-#   Define the default toolset for the platform according to target architecture
-#============================================================================
-%if defined (BSI)
-    %include $(SrcRoot)bsicommon/sharedmki/InternalPlatformSetup.mki
-%else
-    %include PlatformSetup.mki
-%endif
-
+__mdlMKI__=1
 
 #============================================================================
-#   common include and system-specific commands (e.g., copy) for the environment
+# The version of Microstation that this particular mdl.mki is from.
+#  Set this early in case the policy files need it.
 #============================================================================
-%include    common.mki
-
-
-#============================================================================
-#   If not already set to something else, set the compilation/link tool set.
-#============================================================================
-%include    DefaultToolSet.mki
-
-
-#============================================================================
-#   Use BUILD_TOOLSET to define the compile/link/library commands.
-#============================================================================
-%include    ApplyToolSet.mki
-
-
-#============================================================================
-#   basic build definitions
-#============================================================================
-msg = |[== Building $@, ($=) ==]
-
-
-#============================================================================
-#   Define tools commands and inference rules common to all platforms
-#============================================================================
-%if !defined (toolsPath)
-    toolsPath           = $(ContextSubpartsAssembliesDir)
-%endif
-
-%if !defined (RCompCmd)
-    RCompCmd            = $(toolsPath)rcomp
-%endif
-
-%if !defined (RTypeCmd)
-    RTypeCmd            = $(toolsPath)rsctype
-%endif
-
-%if !defined (RLibCmd)
-    RLibCmd             = $(toolsPath)rlib
+%if !defined(MSTN_VERSION)
+    MSTN_VERSION = 10000000
 %endif
 
 #----------------------------------------------------------
-#   Compiling resource source from type definition file
+#   Configure build policy
+#----------------------------------------------------------
+%include ConfigurePolicy.mki
+
+#----------------------------------------------------------
+#   Choose compiler version.
+#----------------------------------------------------------
+%if !defined (SharedShell) && defined (BSI)
+    %include compilers.mki
+%endif
+
+#------------------------------------------------------------------------
+#   common include file for development environment
+#------------------------------------------------------------------------
+%include common.mki
+
+#============================================================================
+#
+#    Define required macros, if they are not found from environment,
+#    policy or cmd line
+#
+#============================================================================
+
+#----------------------------------------------------------
+#   basic build definitions
+#----------------------------------------------------------
+msg = |[== Building $@, ($=) ==]
+
+%if !defined (language)
+    language    = english
+%endif
+
+%if !defined (langSpec)
+    langSpec    = $(baseDir)$(language)/
+%endif
+
+
+#----------------------------------------------------------
+#        Define native code tools that are platform dependent
+#----------------------------------------------------------
+%if defined (BUILD_USING_GCC)
+    %include gccmdl.mki
+%elif defined (BUILD_USING_LLVM)
+    %include llvmmdl.mki
+%else
+    %include winntmdl.mki
+%endif
+
+#----------------------------------------------------------
+#        Define tools commands common to all platforms
+#----------------------------------------------------------
+%ifndef MLibCmd
+    MLibCmd             = $(toolsPath)mlib
+%endif
+
+%ifndef RCompCmd
+    RCompCmd            = $(toolsPath)rcomp
+%endif
+
+%ifndef RTypeCmd
+    RTypeCmd            = $(toolsPath)rsctype
+%endif
+
+%ifndef RLibCmd
+    RLibCmd             = $(toolsPath)rlib
+%endif
+
+%ifndef dlmspecCmd
+    dlmspecCmd          = $(toolsPath)dlmspec
+%endif
+
+#----------------------------------------------------------
+#        Defaults for optional symbols
+#----------------------------------------------------------
+%if !defined (CCCompOpts)
+    CCCompOpts      = $(CCompOpts)
+%endif
+
+#----------------------------------------------------------------------------
+#        Inference Rules
+#----------------------------------------------------------------------------
+
+#----------------------------------------------------------
+#        Compiling resource source from type definition file
 #----------------------------------------------------------
     .mt.r:
         $(msg)
@@ -87,7 +124,7 @@ msg = |[== Building $@, ($=) ==]
         ~time
 
 #----------------------------------------------------------
-#   Compiling resource source files
+#        Compiling resource source files
 #----------------------------------------------------------
     .r.rsc:
          $(msg)
@@ -122,7 +159,7 @@ msg = |[== Building $@, ($=) ==]
         ~time
 
 #----------------------------------------------------------
-#   Creating include files from command table resources
+#        Creating include files from command table resources
 #----------------------------------------------------------
     .r.h:
          $(msg)
@@ -144,9 +181,31 @@ msg = |[== Building $@, ($=) ==]
         $(RCompCmd) @$(o)make.opt
         ~time
 
+#----------------------------------------------------------
+#        Creating include files from managed app command table xml files.
+#----------------------------------------------------------
+    .(xml,keyins).h:
+         $(msg)
+        > $(o)make.opt
+        -ho$@
+    %if privateInc
+        -i${privateInc}
+    %endif
+        $(rcompOpts)
+        $(rscCompIncs)
+        ${PublicApiRscIncludes}
+        $(altIncs)
+        $(ProductRcIncludes)
+        $(platformOpts)
+        $(moreRscCompileOpts)
+        $<
+        <
+        $(RCompCmd) @$(o)make.opt
+        ~time
+
 
 #----------------------------------------------------------
-#   Applying digital signature to resource file
+#       Applying digital signature to resource file
 #----------------------------------------------------------
 rsignmsg    =        |[== Digitally Signing $= ==]
 
@@ -236,3 +295,48 @@ mvbasignrc1msg=        |[== Digitally Signing Rights-Compliant $= ==]
     <
     ~time
 
+#----------------------------------------------------------
+#        Compiling DLM Specification files
+#
+#       Under Windows NT, if $(moduleDef) is defined in the
+#       make file, dlmspec will generate a windows Module
+#        definition file named $(moduleDef) from your .dls file.
+#
+#       Note: dlmlink.mki defines and uses its own rule for
+#              compiling dynamic load specification files.
+#----------------------------------------------------------
+.dls.dlo:
+    $(msg)
+    > $(o)make.opt
+    -o$@
+   -w$(moduleDef)
+    $<
+    <
+    $(dlmspecCmd) @$(o)make.opt
+    ~time
+
+.mc.c:
+    $(CopyFirstDepToFirstTarget)
+
+#----------------------------------------------------------
+#        Override paths and rules for BSI internal use.
+#----------------------------------------------------------
+%if defined (USE_PRODUCT_MODS) && !defined (NO_INTERNAL_MODS)
+
+    %if !defined (BsiMdlMki)
+        BsiMdlMki = bsimdl.mki
+    %endif
+
+    %include $(BsiMdlMki)
+%endif
+
+#----------------------------------------------------------
+#        Add DevStudio settings file
+#----------------------------------------------------------
+%if defined (DEV_STUDIO)
+    %include $(SrcRoot)bsicommon\sharedmki\DevStudioCompilerSettings.mki
+%endif
+
+#----------------------------------------------------------
+#       End
+#----------------------------------------------------------

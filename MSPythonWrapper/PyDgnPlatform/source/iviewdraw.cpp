@@ -395,7 +395,6 @@ void def_IViewDraw(py::module_& m)
     py::class_< GradientSymb, GradientSymbPtr> c2(m, "GradientSymb");
 
     c2.def(py::init(&GradientSymb::Create));
-    c2.def(py::self == py::self);
     c2.def("GetNKeys", &GradientSymb::GetNKeys, DOC(Bentley, DgnPlatform, GradientSymb, GetNKeys));
 
     c2.def_property("Mode", &GradientSymb::GetMode, &GradientSymb::SetMode);
@@ -483,8 +482,6 @@ void def_IViewDraw(py::module_& m)
     // struct ElemDisplayParams
     py::class_< ElemDisplayParams> c6(m, "ElemDisplayParams");
 
-    c6.def(py::self == py::self);
-    
     c6.def_property_readonly("LineColor", &ElemDisplayParams::GetLineColor);
     c6.def("GetLineColor", &ElemDisplayParams::GetLineColor, DOC(Bentley, DgnPlatform, ElemDisplayParams, GetLineColor));
     
@@ -544,7 +541,6 @@ void def_IViewDraw(py::module_& m)
     // struct LineStyleSymb
     py::class_< LineStyleSymb> c9(m, "LineStyleSymb");
 
-    c9.def(py::self == py::self);
     c9.def_property_readonly("Name", &LineStyleSymb::GetName);
     c9.def("GetName", &LineStyleSymb::GetName, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, LineStyleSymb, GetName));
 
@@ -576,7 +572,6 @@ void def_IViewDraw(py::module_& m)
     // struct ElemMatSymb
     py::class_< ElemMatSymb> c10(m, "ElemMatSymb");
 
-    c10.def(py::self == py::self);
     c10.def_property("LineColorTBGR", &ElemMatSymb::GetLineColorTBGR, &ElemMatSymb::SetLineColorTBGR);
     c10.def("GetLineColorTBGR", &ElemMatSymb::GetLineColorTBGR, DOC(Bentley, DgnPlatform, ElemMatSymb, GetLineColorTBGR));
     c10.def("SetLineColorTBGR", &ElemMatSymb::SetLineColorTBGR, "color"_a);
@@ -662,7 +657,6 @@ void def_IViewDraw(py::module_& m)
     // struct OvrMatSymb
     py::class_< OvrMatSymb> c11(m, "OvrMatSymb");
 
-    c11.def(py::self == py::self);
     
     c11.def_property("Flags", &OvrMatSymb::GetFlags, &OvrMatSymb::SetFlags);
     c11.def("GetFlags", &OvrMatSymb::GetFlags, DOC(Bentley, DgnPlatform, OvrMatSymb, GetFlags));

@@ -79,6 +79,11 @@ always:
 # For debugging
 # bmakeOptsToPass = -v
 
+%if defined (BSIBUILD)
+bmakeOptsToPass + +dBSIBUILD
+%endif
+
+
 outbase = $(OutRoot)$(DEFAULT_TARGET_PROCESSOR_DIRECTORY)/
 %if exists ($(outbase)product/MicroStationSDK)
     sdkdir = $(outbase)product/MicroStationSDK/
@@ -87,9 +92,10 @@ outbase = $(OutRoot)$(DEFAULT_TARGET_PROCESSOR_DIRECTORY)/
 %else
     %error Unable to find SDK dir in $(outbase)product 
 %endif
+
 builddir = $(outbase)product/SDKStation/SDKStation/
-publicEnvVarBat = $(SrcRoot)MSPython/mstnpythonvars.bat
-pythonMKIDir = $(SrcRoot)MSPython/build/publicSDK/
+publicEnvVarBat = $(_MakeFilePath)/mstnpythonvars.bat
+pythonMKIDir = $(_MakeFilePath)/build/publicSDK/
 
 always:
     ~@mkdir $(builddir)mdlapps/

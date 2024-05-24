@@ -70,6 +70,10 @@ def imprintSolidUsingProfile(solidId, profileId):
             assert (numVertices == 12)                   # Assert that the expected number of vertices is reached
 
             if (7 == numfaces and numEdges == 17 and numVertices == 12):  # Check if all assertions passed
+                newElement = EditElementHandle()
+                ret1 = SolidUtil.Convert.BodyToElement(newElement,solid[1],solidElement,dgnModel)
+                if(BentleyStatus.eSUCCESS == ret1):
+                    newElement.AddToModel()
                 return True                                 # Return True indicating successful imprinting
     return False                                        # If not, return False indicating unsuccessful imprinting
 '''
@@ -135,6 +139,10 @@ def sweepBody(profileId):
             assert (numVertices == 8)               # Assert that the expected number of vertices is reached
 
             if (6 == numfaces and numEdges == 12 and numVertices == 8):  # Check if all assertions passed
+                newElement = EditElementHandle()
+                ret1 = SolidUtil.Convert.BodyToElement(newElement,solid[1],profileElement,dgnModel)
+                if(BentleyStatus.eSUCCESS == ret1):
+                    newElement.AddToModel()
                 return True                         # Return True indicating successful sweeping
     return False                                     # If not, return False indicating unsuccessful sweeping
 def spinBody(profileId):
@@ -202,6 +210,10 @@ def spinBody(profileId):
             assert (numVertices == 8)                   # Assert that the number of vertices is 8
 
             if (6 == numfaces and numEdges == 12 and numVertices == 8):   # Check if the spun body has the expected properties
+                newElement = EditElementHandle()
+                ret1 = SolidUtil.Convert.BodyToElement(newElement,solid[1],profileElement,dgnModel)
+                if(BentleyStatus.eSUCCESS == ret1):
+                    newElement.AddToModel()
                 return True                                  # Return True if the spinning operation was successful
     return False                                       # Return False otherwise
 def thickenSheet(profileId, frontDistance, backDistance):
@@ -259,6 +271,10 @@ def thickenSheet(profileId, frontDistance, backDistance):
         assert (numVertices == 8)  # Assert that the number of vertices is 8
         
         if (6 == numFaces and numEdges == 12 and numVertices == 8):  # Check if the thinned body has the expected properties
+            newElement = EditElementHandle()
+            ret1 = SolidUtil.Convert.BodyToElement(newElement,solid[1],profileElement,dgnModel)
+            if(BentleyStatus.eSUCCESS == ret1):
+                newElement.AddToModel()
             return True  # Return True if the thickening operation was successful
     
     return False  # Return False otherwise
@@ -326,6 +342,10 @@ def blendEdges(solidId, blendRadius):
         assert (numVertices == 14)   # Assert that the number of vertices is 14
         
         if(9==numfaces and numEdges ==21 and numVertices ==14):  # Check if the blending operation was successful
+            newElement = EditElementHandle()
+            ret1 = SolidUtil.Convert.BodyToElement(newElement,solid[1],profileElement,dgnModel)
+            if(BentleyStatus.eSUCCESS == ret1):
+                newElement.AddToModel()
             return True  # Return True if the blending operation was successful
     return False  # Return False if the blending operation was not successful
 
@@ -405,6 +425,10 @@ def chamferEdgesWithMode(solidId, chamferLength, chamferLength1, mode):
         assert(numVertices == 14)  # Assert that the number of vertices is 14
         
         if(9==numfaces and numEdges ==21 and numVertices ==14):  # Check if the chamfering operation was successful
+            newElement = EditElementHandle()
+            ret1 = SolidUtil.Convert.BodyToElement(newElement,solid[1],profileElement,dgnModel)
+            if(BentleyStatus.eSUCCESS == ret1):
+                newElement.AddToModel()
             return True  # Return True if the operation was successful
     
     # If the chamfering operation was not successful, return False
@@ -476,6 +500,7 @@ def BooleanIntersect(solidId, toolId, toold2 ):
         ret1 = SolidUtil.Convert.BodyToElement(intersectElement, solid[1], targetId, dgnModel)
         if(BentleyStatus.eSUCCESS == ret1):
             # Extract information about the resulting solid
+            intersectElement.AddToModel()
             subEntArray = ISubEntityPtrArray()
             numEdges = SolidUtil.GetBodyEdges(subEntArray, solid[1])
             assert (numEdges == 15)
@@ -530,8 +555,8 @@ def BooleanSubstraction(solidId, toolId, toold2 ):  # Define a function for perf
         ret1 = SolidUtil.Convert.BodyToElement(intersectElement, solid[1], targetId, dgnModel)  # Convert the resulting solid to an element
 
         if(BentleyStatus.eSUCCESS == ret1):  # Check if the conversion was successful
-            # Add the resulting solid to the model (commented out for now)
-            # intersectElement.AddToModel()
+            # Add the resulting solid to the model  
+            intersectElement.AddToModel()
 
             ''' Get various properties of the resulting solid '''
             subEntArray = ISubEntityPtrArray()  # Initialize an array of sub-entities
@@ -612,8 +637,8 @@ def BooleanUnion(solidId, toolId, toold2, toolId3):
             
             :return: True if the conversion was successful, False otherwise.
             """
-            # Add the resulting solid to the model (commented out for now)
-            # intersectElement.AddToModel()
+            # Add the resulting solid to the model  
+            intersectElement.AddToModel()
 
             # Get various properties of the resulting solid
             subEntArray = ISubEntityPtrArray()
@@ -668,8 +693,8 @@ def BooleanCut(solidId, toolId):
         ret1 = SolidUtil.Convert.BodyToElement(intersectElement, solid[1], targetId, dgnModel)  # Convert the body object to an element
 
         if (BentleyStatus.eSUCCESS == ret1):
-            # Add the resulting solid to the model (commented out for now)
-            # intersectElement.AddToModel()
+            # Add the resulting solid to the model 
+            intersectElement.AddToModel()
 
             # Get various properties of the resulting solid
             subEntArray = ISubEntityPtrArray()  # Initialize a sub-entity array
@@ -733,7 +758,7 @@ def emboss(solidId, toolId):
             The resulting solid is added to the model (commented out for now).
 
             """
-            # intersectElement.AddToModel()  # Add the result to the model
+            intersectElement.AddToModel()  # Add the result to the model
             
             # Get various properties of the resulting solid
             subEntArray = ISubEntityPtrArray()  # Initialize a sub-entity array
@@ -821,6 +846,8 @@ def offsetFaces(solidId, offsetDistance):
             """
             Get the number of edges, faces, and vertices in the offset solid.
             """
+            intersectElement.AddToModel()
+
             subEntArray = ISubEntityPtrArray()  # Initialize a sub-entity array
             numEdges = SolidUtil.GetBodyEdges(subEntArray, solid[1])  # Get the number of edges in the offset solid
             assert(numEdges == 12)  # Check if the expected number of edges is correct
@@ -907,6 +934,8 @@ def TransformFaces(solidId, offsetDistance):
         ret1 = SolidUtil.Convert.BodyToElement(intersectElement, solid[1], profileElement, dgnModel)
         if (BentleyStatus.eSUCCESS == ret1):
             # Get the number of edges, faces, and vertices in the transformed solid
+            intersectElement.AddToModel()
+
             subEntArray = ISubEntityPtrArray()
             numEdges = SolidUtil.GetBodyEdges(subEntArray, solid[1])
             assert(numEdges == 12)
@@ -989,7 +1018,7 @@ def offsetThroughHole(solidId, offsetDistance):
 
         if BentleyStatus.eSUCCESS == ret1:
             # Add the offsetted element to the DGN model
-            #intersectElement.AddToModel()
+            intersectElement.AddToModel()
 
             subEntArray = ISubEntityPtrArray()
             numEdges = SolidUtil.GetBodyEdges(subEntArray, solid[1])
@@ -1058,6 +1087,8 @@ def BodyFromSweep(profileId, pathId):
 
         if BentleyStatus.eSUCCESS == ret1:
             # Get the number of edges in the solid body
+            intersectElement.AddToModel()
+
             subEntArray = ISubEntityPtrArray()
             numEdges = SolidUtil.GetBodyEdges(subEntArray, ret[1])
             assert(numEdges == 12)
@@ -1151,6 +1182,8 @@ def LoftBody(guideId, startProfile, endProfile):
         """
 
         if BentleyStatus.eSUCCESS == ret1:
+            intersectElement.AddToModel()
+
             # Get the number of edges in the solid body
             subEntArray = ISubEntityPtrArray()
             numEdges = SolidUtil.GetBodyEdges(subEntArray, ret[1])
@@ -1232,6 +1265,7 @@ def extrusionToBody(bodyId, startProfile):
             """
             Add the created solid body to the DGN model.
             """
+            intersectElement.AddToModel()
 
             # Get the number of edges in the new solid body
             subEntArray = ISubEntityPtrArray()
@@ -1301,7 +1335,7 @@ def bSplineSurfaceToBody(bodyId):
             """
             Add the created solid body to the DGN model.
             """
-
+            intersectElement.AddToModel()
             # Get the number of edges in the new solid body
             subEntArray = ISubEntityPtrArray()
             numEdges = SolidUtil.GetBodyEdges(subEntArray, surfaceToBody[1])
@@ -1380,7 +1414,7 @@ def primitiveToSmartSolid(bodyId):
 
     if BentleyStatus.eSUCCESS == ret:
         # Add the newly created smart solid to the DGN model
-        # intersectElement.AddToModel()
+        intersectElement.AddToModel()
         pass
         """
         If the conversion was successful, add the new smart solid to the DGN model.
@@ -1421,30 +1455,28 @@ def primitiveToSmartSolid(bodyId):
     return False
 
 '''
-Prerequisite: Open MSPythonSamples\data\CutToolSample.dgn  
+Prerequisite: Open MSPythonSamples\data\SolidModeling.dgn  
 '''
 #main
 if __name__ == "__main__":
     
-    debugpy.listen(('0.0.0.0',5678), in_process_debug_adapter=True)
-    print("Waiting for debugger attach")
-    debugpy.wait_for_client()
-    debugpy.breakpoint()
+    #debugpy.listen(('0.0.0.0',5678), in_process_debug_adapter=True)
+    #print("Waiting for debugger attach")
+    #debugpy.wait_for_client()
+    #debugpy.breakpoint()
 
     #highlight all the elements with type 
-    solidId = 1401
-    profileId = 1408
-    if(True != imprintSolidUsingProfile(solidId, profileId)):
+    if(True != imprintSolidUsingProfile(1401, 1408)):
         print("Imprint operation failed")
     if(True != sweepBody(1441)):
          print("Sweep operation failed")
     if(True != spinBody(1442)):
         print("Spin operation failed")
-    if(True != thickenSheet(1441,2.0,2.0)):
+    if(True != thickenSheet(2522,2.0,2.0)):
         print("thicken operation failed")
-    if(True != blendEdges(1401,0.5)):
+    if(True != blendEdges(2508,0.5)):
         print("blend operation failed")
-    if(True != chamferEdges(1401)):
+    if(True != chamferEdges(2515)):
         print("Chamfer operation failed")
     if(True != BooleanIntersect(1554,1556,1558)):
         print("Boolean intersection operation failed")
@@ -1452,25 +1484,23 @@ if __name__ == "__main__":
         print("Boolean Subtraction operation failed")
     if(True != BooleanUnion(1754,1758,1756,1760)):
         print("Boolean Union operation failed")
-    if(True != BooleanCut(solidId, profileId)):
+    if(True != BooleanCut(2471, 2478)):
         print("Cut operation failed")
-    if(True != emboss(solidId, profileId)):
+    if(True != emboss(2479, 2486)):
         print("Emboss operation failed")
-    if(True != offsetFaces(solidId,2.0)):
+    if(True != offsetFaces(2487,2.0)):
         print("Offset operation failed")
-    if(True != TransformFaces(solidId,2.0)):
+    if(True != TransformFaces(2494,2.0)):
        print("Offset operation failed")
-    if(True != offsetThroughHole(solidId,2.0)):
+    if(True != offsetThroughHole(2501,2.0)):
        print("Offset operation failed")
-    if(True != BodyfromSweep(1442,1443)):
+    if(True != BodyfromSweep(2523,2524)):
        print("Sweep operation failed")
     if(True != LoftBody(2031,2034,2033)):
        print("Loft operation failed")
-    if(True != extrusionToBody(2121,1442)):
+    if(True != extrusionToBody(2529,2527)):
        print("Extrusion to body operation failed")
     if(True != bSplineSurfaceToBody(2166)):
        print("Bspline surface to body operation failed")
     if(True != primitiveToSmartSolid(2190)):
        print("Primitive to smart body operation failed")
-
-

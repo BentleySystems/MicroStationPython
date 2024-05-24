@@ -1,0 +1,62 @@
+#--------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#  Base policy is defined in this file.
+#
+#--------------------------------------------------------------------------------------
+%if defined (__PublicSystemPolicy_mki__)
+    %return
+%endif
+
+__PublicSystemPolicy_mki__  = 1
+
+%if !defined (StrongNameSignature)
+    StrongNameSignature=NormalSignature
+%endif
+
+#
+#  Default the targeted processor architecture to x86 which is 32-bit intel.
+#  x64 is 64-bit (aka AMD64).
+#
+%if !defined (DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
+    DEFAULT_TARGET_PROCESSOR_ARCHITECTURE=x86
+%endif
+
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    TARGET_PROCESSOR_ARCHITECTURE=$(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
+%endif
+
+%if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+    slashAmd64=/amd64
+    slashx64=/x64
+    slashx86x64=/x64
+    %if $(PROCESSOR_ARCHITECTURE)=="x86"
+        slashXCompileDir=/x86_amd64
+    %else
+        slashXCompileDir=/amd64
+    %endif
+%endif
+
+%if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+    slashx86x64=/x86
+%endif
+
+%if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+    TARGET_PROCESSOR_DIRECTORY  = Winx86
+%elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+    TARGET_PROCESSOR_DIRECTORY  = Winx64
+%else
+    TARGET_PROCESSOR_DIRECTORY  = WinAnyCpu
+%endif
+
+
+%if $(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+    DEFAULT_TARGET_PROCESSOR_DIRECTORY  = Winx86
+%elif $(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+    DEFAULT_TARGET_PROCESSOR_DIRECTORY  = Winx64
+%else
+    DEFAULT_TARGET_PROCESSOR_DIRECTORY  = WinAnyCpu
+%endif
+
+TARGET_PLATFORM                         ="Windows"
+USE_UNIX_FILENAMES                      =0

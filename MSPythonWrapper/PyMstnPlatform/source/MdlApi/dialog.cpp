@@ -19,9 +19,9 @@ struct IPyModalDialogEventsWrapper : public IPyModalDialogEvents
 public:
     using IPyModalDialogEvents::IPyModalDialogEvents;
 
-    virtual PyMsdDialogBoxResult OnDialogOpened (WCharCP dialogBoxName) override
+    virtual int OnDialogOpened (WCharCP dialogBoxName) override
         {
-        PYBIND11_OVERRIDE_PURE_EXR (PyMsdDialogBoxResult, IPyModalDialogEvents, OnDialogOpened, PyMsdDialogBoxResult::PyMsdDialogBoxResultCancel, dialogBoxName);
+        PYBIND11_OVERRIDE_PURE_EXR (int, IPyModalDialogEvents, OnDialogOpened, PyMsdDialogBoxResult::PyMsdDialogBoxResultCancel, dialogBoxName);
         }
 
     virtual void OnDialogClosed (WCharCP dialogBoxName, PyMsdDialogBoxResult dialogResult) override

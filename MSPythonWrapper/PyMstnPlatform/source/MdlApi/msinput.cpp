@@ -8,6 +8,7 @@
 #include "MSPythonPCH.h"
 #include <Mstn/MdlApi/msinput.fdf>
 extern "C" __declspec(dllimport) void mdlDialog_AttachTkinterToolSetting(int hTkWin);
+extern "C" __declspec(dllimport) void mdlDialog_AttachQtToolSetting(int hQtWin);
 #include <Mstn/PythonMacro/PyCadInputQueue.h>
 
 
@@ -60,6 +61,7 @@ void def_msinput(py::module_& m)
     c1.def_static ("SequeueLastInput", &mdlInput_requeueLastInput, "position"_a);
     c1.def_static ("PythonMainLoop", &mdlInput_pythonMainLoop);
     c1.def_static ("AttachTkinterToolSetting", &mdlDialog_AttachTkinterToolSetting, "hTkWin"_a);
+    c1.def_static("AttachQtToolSetting", &mdlDialog_AttachQtToolSetting, "hQtWin"_a);
     c1.def_static ("SendKeyinToPython", &PyCadInputQueue::SendKeyinToPython, "keyinStr"_a);
 
     py::class_<PyCadInputMessage> c2 (m, "PyCadInputMessage");

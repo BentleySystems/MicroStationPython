@@ -1,26 +1,48 @@
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+#
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
-%if defined (BUILD_TOOLSET)
-    %return
+#--------------------------------------------------------------------------------------
+
+#
+# If a toolset is not already defined, then specify one by default.
+#
+%include SystemPolicy.mki
+
+%if !defined (BUILD_USING_GCC) && !defined (BUILD_USING_LLVM) && !defined (BUILD_USING_VS2002) && !defined (BUILD_USING_VS2003) && !defined (BUILD_USING_VS2005) && !defined (BUILD_USING_VS2008) && !defined (BUILD_USING_VS2010) && !defined (BUILD_USING_VS2012)  && !defined (BUILD_USING_VS2013)  && !defined (BUILD_USING_VS2015) && !defined (BUILD_USING_VS2017) && !defined (BUILD_USING_VS2019) && !defined (BUILD_USING_VS2022)
+
+	%if defined (DEBUG_POLICY)
+        %message BB_DEFAULT_TOOLSET = $(BB_DEFAULT_TOOLSET)
+    %endif
+    %if defined (BB_DEFAULT_TOOLSET) && !defined (WORKING_ON_PORT_TO_NEW_TOOLSET)
+        %if $(BB_DEFAULT_TOOLSET) == "VS2022"
+            BUILD_USING_VS2022 = 1
+        %elif $(BB_DEFAULT_TOOLSET) == "VS2019"
+            BUILD_USING_VS2019 = 1
+        %elif $(BB_DEFAULT_TOOLSET) == "VS2017"
+            BUILD_USING_VS2017 = 1
+        %else
+            %error BB_DEFAULT_TOOLSET set to unknown toolset '$(BB_DEFAULT_TOOLSET)'
+        %endif
+    %elif !defined (winNT)
+        %if defined (SrcBsiCommon)
+            # LLVM_WIP: Is there a better check? This ties LLVM to Apple systems, but there's no technical reason to do this.
+            %if defined (__apple)
+                %include $(SrcBsiCommon)sharedmki/PortToLLVM.mki
+            %else
+                %include $(SrcBsiCommon)sharedmki/PortToGCC.mki
+            %endif
+        %else
+            %error $$(SrcBsiCommon) is not defined or does not exist
+        %endif
+    %else
+        # Windows
+        %if defined(WORKING_ON_PORT_TO_NEW_TOOLSET) && defined (SrcBsiCommon)
+            %include $(SrcBsiCommon)sharedmki/PortToNewToolSet.mki
+        %else
+            BUILD_USING_VS2017=1
+        %endif
+    %endif
+
 %endif
 
-# This file is included from mdl.mki to set the default toolset, unless it is already set.
-%if defined (OVERRIDE_DEFAULT_TOOLSET)
-    %error OVERRIDE_DEFAULT_TOOLSET not supported. Set BUILD_TOOLSET before including mdl.mki
-%endif
-
-%if defined (OVERRIDE_DEFAULT_TOOLSET)
-    %error OVERRIDE_DEFAULT_VC_TOOLSET not supported.
-%endif
-
-%if defined (winNT)
-    BUILD_TOOLSET = VS2019
-%elif defined (__apple)
-    BUILD_TOOLSET = CLANG
-%elif defined (__linux)
-    BUILD_TOOLSET = LINUX_CLANG
-%else
-    %error Could not deduce a default toolset from your environment. Please manually set BUILD_TOOLSET instead.
-%endif

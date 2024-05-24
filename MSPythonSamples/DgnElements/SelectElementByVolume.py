@@ -12,9 +12,8 @@ from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 from MSPyDgnView import *
 import ctypes
-import pywin.debugger
 import sys
-pywin.debugger.set_trace()
+
 '''
 Function to select elements by its volume
     inputVolume : float      volume
@@ -59,7 +58,7 @@ def selectElementsbyVolume(inputVolume):
                      break
 
 '''
-Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '3D Data' model 
+Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with '3D Data' model 
 '''
 #main
 if __name__ == "__main__":

@@ -2,7 +2,7 @@
 #
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 #
 #   This bmake include file appends a C compiler 'include search'
 #   switch to the $(cIncs) macro.  The directory name added should be

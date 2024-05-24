@@ -1,24 +1,29 @@
-#---------------------------------------------------------------------------------------------
-#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-#  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
-
 #--------------------------------------------------------------------------------------
 #
-#   This .mki file appends a C compiler switch to the $(cDefs) macro, which 
-#   defines a C preprocessor variable specified by the macro $(nameToDefine).
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.#--------------------------------------------------------------------------------------
 #
-#   This limits the number of places that need to be edited when a new compiler/platform 
-#  with a different method of defining preprocessor variables is encountered.
+#   This bmake include file appends a C compiler switch to the $(cDefs)
+#   macro, which will define a C preprocessor variable specified by the
+#   macro $(nameToDefine).
+#
+#   This limits the number of places that need to be edited when
+#   a new compiler/platform with a different method of defining
+#   preprocessor variables is encountered.
 #
 #--------------------------------------------------------------------------------------
 %if nameToDefine
     cDefs +% -D$[nameToDefine]
 
-    %if !defined (CCXXPAIR)
+    %if !defined(CCXXPAIR)
         %undef nameToDefine
     %endif
 %else
-    %error You must define the 'nameToDefine' macro before including cdefapnd.mki.
-%endif
+    always:
+        |
+        | You must define the 'nameToDefine' macro before including cdefapnd.mki.
+        |
+
+    %error
+%endif # nameToDefine
 

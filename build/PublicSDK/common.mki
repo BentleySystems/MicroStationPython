@@ -2,7 +2,7 @@
 #
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 #
 #    Make Include File common to all development environments
 #
@@ -11,12 +11,18 @@
 #
 #--------------------------------------------------------------------------------------
 %if defined (__Common_MKI__)
+    %warn Common.mki is being included redundantly in $(_MakeFileSpec)
+    %if defined (DebugRedundantMkiIncludes)
+        %error DebugRedundantMkiIncludes is defined.
+    %endif
     %return
 %endif
 __Common_MKI__=1
 
-%include    msfilext.mki
-%include    createdir.mki
+%if !defined (BMAKE_CLEANER_ENVIRONEMNT)
+    %include    msfilext.mki
+    %include    createdir.mki
+%endif
 
 #----------------------------------------------------------
 #        Define Default Source Directories
@@ -26,11 +32,19 @@ __Common_MKI__=1
 %endif
 
 #----------------------------------------------------------
-#        Define native commands for copy/delete/mkdir/ etc.
+#        Define native code tools for BUILDING the software
 #----------------------------------------------------------
-%if !defined(winNT) || defined(__linux)
-    %include    unixcommon.mki
+%if !defined(winNT)
+    %include unixcommon.mki
 %else
+    %if !defined (singletonCmd)
+        singletonCmd = singleton
+    %endif
+
+    %if !defined (AddDelayLoadCmd)
+        AddDelayLoadCmd = AddDelayLoad
+    %endif
+
     %include    winntcommon.mki
 %endif
 
@@ -49,4 +63,153 @@ MakeProgram =% $(_bmake)
     Configuration = Release
 %endif
 
+#----------------------------------------------------------------------------
+#       ~task msbuild support.
+#----------------------------------------------------------------------------
+#----------------------------------------------------------------------------
+#       The universal targets are Build, Rebuild and Clean.
+#----------------------------------------------------------------------------
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    universalTarget=Clean
+%elif defined (BMAKE_BUILD_ALL_GLOBAL)
+    universalTarget=Rebuild
+%else
+    universalTarget=Build
+%endif
+
+%if defined (target)
+    pursuedTarget = $(target)
+%else
+    pursuedTarget = $(universalTarget)
+%endif
+
+%if $(pursuedTarget) == "Clean" || $(pursuedTarget) == "clean" || $(pursuedTarget) == "Build" || $(pursuedTarget) == "build" || $(pursuedTarget) == "Rebuild" || $(pursuedTarget) == "rebuild"
+    targetIsUniversal = 1
+%endif
+
+#
+# Normalize all lower case universal target name to standard pascal case.
+#
+%if defined (targetIsUniversal)
+    %if $(pursuedTarget) == "clean"
+        pursuedTarget = Clean
+    %elif $(pursuedTarget) == "build"
+        pursuedTarget = Build
+    %elif $(pursuedTarget) == "rebuild"
+        pursuedTarget = Rebuild
+    %endif
+%endif
+
+%if !defined (_notasks)
+
+    %if defined (DEBUG_MSBUILD)
+        %if !defined (MSBuildVerbosity)
+            MSBuildVerbosity = diagnostic
+        %endif
+        MSBuildVerbosityOpt = -i:MSBuildVerbosity=$(MSBuildVerbosity)
+    %endif
+
+    %if !defined (CommonMSBuildConfigOpt)
+        CommonMSBuildConfigOpt = -p:Configuration=$(Configuration)
+    %endif
+
+    %if !defined (MSBuildWarningLevel)
+        MSBuildWarningLevel = -p:WarningLevel=4
+    %endif
+    
+    #
+    #  We have found that Microsoft did an incomplete job of supporting platform and toolset targeting at the same time.
+    #  In particular, if you choose winx64 as the target platform and you choose the v3.5 toolset, you will not necessarily
+    #  be given the 64-bit C# compiler. If the msbuild host is 32-bit, you will be given the 32-bit C# compiler. Though the
+    #  32-bit compiler will cross-compile to x64 just fine, it results in archtecture mismatch warnings that we do not want
+    #  to ignore. Microsoft's only answer is to ignore these warnings. This requires us to work hard to solve the 
+    #  targeting equation. Our strategy is to make sure that important, relevant items/properties get derived from the
+    #  FrameworkDir property which we will make sure is right for the targeted processor architecture before invoking msbuild.
+    #
+    %if defined (FrameworkDir)
+        %if defined (IDE)
+            #
+            # For some reason when bmake -dide is used to launch the project into devenv.exe, the value of FrameworkDir
+            # gets cleared by the Visual Studio MSBuild host even though we migrate the value into the Global-<project>.properties
+            # which is successfully imported. Our solution is to get the value across under another name, and then in 
+            # Bentley.Common.BeforeMicrosoft.targets we set the FrameworkDir property from that one.
+            #
+            CommonMSBuildPlatformOpt + -p:BM-FrameworkDir=$(FrameworkDir)
+        %else
+            CommonMSBuildPlatformOpt + -p:FrameworkDir=$(FrameworkDir)
+        %endif
+    %endif
+
+    %if defined (MultiTargetingToolsVersion)
+        MultiTargetingOpt = -p:MultiTargetingToolsVersion=$(MultiTargetingToolsVersion)
+    %endif
+
+    %if !defined (CommonMSBuildOpts)
+        CommonMSBuildOpts = -i:Targets=$(PursuedTarget) $(MSBuildWarningLevel) $(MultiTargetingOpt) $(CommonMSBuildConfigOpt) $(CommonMSBuildPlatformOpt) $(MSBuildVerbosityOpt) $(MSBuildCustomizationChain)
+    %endif
+%if defined(MultiTargetingToolsVersion)
+    %if $(MultiTargetingToolsVersion)=="3.5"
+        # When compiling using MSBUILD under VS2008 on a machine that also has VS2012 installed, we need to make sure that it uses the correct
+        # version of resgen.  Our Bentley.System.Targets file will load the Microsoft.Common.OverrideTasks file that will set the proper task
+        # for resgen, but we need to make sure the proper variables are set.
+        # First check to see if .NET 4.5 is installed on the machine
+        ALWAYS:
+            !~@task MSBuild.Community.Tasks.RegistryRead \
+                    -i:KeyName="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" \
+                    -i:ValueName="Release"\
+                    -o:Is45Installed=Value
+    %endif
+%endif
+
+    %ifndef DOTNET_SDK_PROJECT_BUILD
+        %ifndef CustomBeforeMicrosoftCommonTargets
+            CustomBeforeMicrosoftCommonTargets=$(MSBuildCommon)Bentley.Common.BeforeMicrosoft.targets
+        %endif
+        %ifndef CustomAfterMicrosoftCommonTargets
+            CustomAfterMicrosoftCommonTargets=$(MSBuildCommon)Bentley.Common.AfterMicrosoft.targets
+        %endif
+    %else
+        %ifndef CustomBeforeMicrosoftCommonTargets
+            CustomBeforeMicrosoftCommonTargets=$(MSBuildCommon)dotnetsdk/Bentley.Common.BeforeMicrosoft.targets
+        %endif
+        %ifndef CustomAfterMicrosoftCommonTargets
+            CustomAfterMicrosoftCommonTargets=$(MSBuildCommon)dotnetsdk/Bentley.Common.AfterMicrosoft.targets
+        %endif
+    %endif
+
+    %ifndef DOTNET_SDK_PROJECT_BUILD
+        %ifndef MSB-BentleySystemProperties
+            %ifdef BSI
+                MSB-BentleySystemProperties = $(MSBuildCommon)Internal.System.properties
+            %else
+                MSB-BentleySystemProperties = $(MSBuildCommon)Bentley.System.properties
+            %endif
+        %endif
+        %ifndef MSB-BentleySystemTargets
+            %ifdef BSI
+                MSB-BentleySystemTargets    = $(MSBuildCommon)Internal.System.targets
+            %else
+                MSB-BentleySystemTargets    = $(MSBuildCommon)Bentley.System.targets
+            %endif
+        %endif
+
+        MSBuildCustomizationChain + -p:CustomBeforeMicrosoftCommonTargets=$(CustomBeforeMicrosoftCommonTargets) -p:CustomAfterMicrosoftCommonTargets=$(CustomAfterMicrosoftCommonTargets)
+    %else
+        %ifndef MSB-BentleySystemProperties
+            %ifdef BSI
+                MSB-BentleySystemProperties = $(MSBuildCommon)dotnetsdk/Internal.System.properties
+            %else
+                MSB-BentleySystemProperties = $(MSBuildCommon)dotnetsdk/Bentley.System.properties
+            %endif
+        %endif
+        %ifndef MSB-BentleySystemTargets
+            %ifdef BSI
+                MSB-BentleySystemTargets    = $(MSBuildCommon)dotnetsdk/Internal.System.targets
+            %else
+                MSB-BentleySystemTargets    = $(MSBuildCommon)dotnetsdk/Bentley.System.targets
+            %endif
+        %endif
+    %endif
+
+%endif #!defined (_notasks)
 

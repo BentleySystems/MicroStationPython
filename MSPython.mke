@@ -9,6 +9,7 @@
 # set SrcRoot=<location of MSPython source code>
 # set OutRoot=<location of build artifacts>
 # set PythonDir=<location of python installation>
+# set BoostInclude=<location of boost headers>
 #
 # i.e. 
 #
@@ -25,9 +26,9 @@ TARGET_PROCESSOR_ARCHITECTURE=x64
 %include createdir.mki
 %include common.mki
 
-always:
-    $(MakeProgram) $(SrcRoot)\MSPython\build\PublicSDK\BootstrapToolSet.mke
 
+always:
+    $(MakeProgram) $(_MakeFilePath)\build\PublicSDK\BootstrapToolSet.mke
 
 always:
 	!~@mkdir $(OutputRootDir)
@@ -61,13 +62,13 @@ always:
 #
 
 always:
-    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonCore.mke
-    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyBentley\PyBentley.mke
-    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyBentleyGeom\PyBentleyGeom.mke
-    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyDgnPlatform\PyDgnPlatform.mke
-    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyDgnView\PyDgnView.mke
-    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyECObjects\PyECObjects.mke
-    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonWrapper\PyMstnPlatform\PyMstnPlatform.mke
+    $(MakeProgram) $(_MakeFilePath)MSPythonCore.mke
+    $(MakeProgram) $(_MakeFilePath)MSPythonWrapper\PyBentley\PyBentley.mke 
+    $(MakeProgram) $(_MakeFilePath)MSPythonWrapper\PyBentleyGeom\PyBentleyGeom.mke
+    $(MakeProgram) $(_MakeFilePath)MSPythonWrapper\PyDgnPlatform\PyDgnPlatform.mke
+    $(MakeProgram) $(_MakeFilePath)MSPythonWrapper\PyDgnView\PyDgnView.mke
+    $(MakeProgram) $(_MakeFilePath)MSPythonWrapper\PyECObjects\PyECObjects.mke
+    $(MakeProgram) $(_MakeFilePath)MSPythonWrapper\PyMstnPlatform\PyMstnPlatform.mke
  
 
 #==================================================================================
@@ -77,4 +78,4 @@ always:
 #==================================================================================
 
 #always:
-#    $(MakeProgram) $(SrcRoot)\MSPython\MSPythonTests\PlatformTests\PlatformTests.mke
+#    $(MakeProgram) $(_MakeFilePath)MSPythonTests\PlatformTests\PlatformTests.mke

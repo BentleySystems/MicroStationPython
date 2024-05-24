@@ -1,7 +1,9 @@
-#---------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------
+#
+#     $Source: PublicSDK/MultiCppCompileRule.mki $
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------
 #
 #  The two files MultiCppCompileRule.mki and MultiCppCompileGo.mki should be used together in a single bmake context
 #  to bracket the dependency blocks of C/C++ compilands that are completely uniform. This will cause the compilands
@@ -71,11 +73,6 @@
 #
 __MultiCppCompileRule_MKI__=1
 
-%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED" || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "APPLE_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG" || $(BUILD_TOOLSET) == "EMCC"
-    %include MultiCppCompileRuleGCC.mki
-    %return
-%endif
-
 # Set up the PDB name for static libraries.  Wish I could think up a way to do this for all static compiles
 %if defined (CREATE_STATIC_LIBRARIES)
     %if defined (appName)
@@ -87,6 +84,11 @@ __MultiCppCompileRule_MKI__=1
         %warn    CCompPDBName = $(appName)
         %error
     %endif
+%endif
+
+%if defined (BUILD_USING_GCC) || defined (BUILD_USING_LLVM)
+    %include MultiCppCompileRuleGCC.mki
+    %return
 %endif
 
 %if !defined (o)
@@ -193,13 +195,11 @@ MultiCompileCListFile  =$(o)$(_MakeFileName)CSources$(MultiCompileNdx).txt
     %endif
 %endif
 
-.(cxx,cpp,cc).obj:
+.(cxx,cpp).obj:
     !|**> $@ <$=>
-    %if defined (MultiCompileDependsIsDefined)
-        ~assert ("$[@findstring $${MultiCompileDepends}, $!]" != " "), "All multi-compiled dependency lists must include the $${MultiCompileDepends} macro. Correct the dependency block for $<."
-        ~assert ("$(@D) " == "$(o) "), "Multi-compiled objects must go to $$(o) as their object directory. Failing on dependency $<"
-        ~assert ("$(@B) " == "$[@basename $<] "), "Multi-compiled files must compile to objects with the same name. Failing on dependency $<"
-    %endif
+    ~assert ("$[@findstring $${MultiCompileDepends}, $!]" != " "), "All multi-compiled dependency lists must include the $${MultiCompileDepends} macro. Correct the dependency block for $<."
+    ~assert ("$(@D) " == "$(o) "), "Multi-compiled objects must go to $$(o) as their object directory. Failing on dependency $<"
+    ~assert ("$(@B) " == "$[@basename $<] "), "Multi-compiled files must compile to objects with the same name. Failing on dependency $<"
     %if defined (MultiCompileDepends)
         %if defined (DEBUG_MULTI_COMPILE)
             |Must rebuild $@ ($=)

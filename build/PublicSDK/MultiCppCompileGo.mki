@@ -1,7 +1,9 @@
-#---------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------
+#
+#     $Source: PublicSDK/MultiCppCompileGo.mki $
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------
 #
 #  See the usage description in this file's sister-file called MultiCppCompileRule.mki
 #
@@ -23,7 +25,7 @@
    %error You must included MultiCppCompileRule.mki before including MultiCppCompileGo.mki.  See the usage description in MultiCppCompileRule.mki.
 %endif
 
-%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED"  || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "APPLE_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG" || $(BUILD_TOOLSET) == "EMCC"
+%if defined (BUILD_USING_GCC) || defined (BUILD_USING_LLVM)
     %include MultiCppCompileGoGCC.mki
     %return
 %endif
@@ -112,9 +114,6 @@ OutOfDateCOptFile  =$(o)$(_MakeFileName)OutOfDateCSources$(MultiCompileNdx).opt
                 > $@
                 $(RecipeCPPCompileArgs) $(NeedsCompiledCppList)
                 <
-                %if defined (ENABLE_COMPILER_ANALYZE) # so the AppSec team can see/verify the analysis compiler options in the logs.
-                    %message Multi-Compile Compiler Command and Options: $(CCCompCmd) $(RecipeCPPCompileArgs)
-                %endif
                 $(CCCompCmd) @$@
 
         %endif
@@ -126,15 +125,12 @@ OutOfDateCOptFile  =$(o)$(_MakeFileName)OutOfDateCSources$(MultiCompileNdx).opt
     %if defined (NeedsCompiledCList)
         SaveCTargetSpec =% $[CTargetSpec]
         %if !defined (DisableMultiCompile)
-            CTargetSpec = $(o)
-            $(OutOfDateCOptFile) :
-                > $@
-                $(NeedsCompiledCList)
-                <
-                %if defined (ENABLE_COMPILER_ANALYZE) # so the AppSec team can see/verify the analysis compiler options in the logs.
-                    %message Multi-Compile Compiler Command and Options: $(RecipeCCompile)
-                %endif
-                $(RecipeCCompile) @$@
+         CTargetSpec = $(o)
+         $(OutOfDateCOptFile) :
+             > $@
+             $(NeedsCompiledCList)
+             <
+             $(RecipeCCompile) @$@
 
         %endif
         CTargetSpec =% $[SaveCTargetSpec]
@@ -163,7 +159,7 @@ IntermediatePdbFile=%$[SaveMultiCompileIntermediatePdbFile]
         $(RecipeCCompile) $<
         ~time
 
-    .(cxx,cpp,cc).obj:
+    .(cxx,cpp).obj:
         $(msg)
         $(RecipeCPPCompile) $< $(CCompRedirect)
         ~time

@@ -2,7 +2,7 @@
 #
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 #
 # INSTRUCTIONS FOR USING creatlib.mki TO BUILD A LIBRARY:
 #
@@ -58,39 +58,25 @@ LIB_FULL_NAME   = $(stlibprefix)$(LIB_NAME)$(LIB_NAME_VERSION)$(LIB_EXTENSION)
 LIB_OUT_NAME    = $(LIB_DEST)$(LIB_FULL_NAME)
 
 %if !defined (LIB_TMP_DIR)
-    LIB_TMP_DIR = ${LIB_DEST}/
+    LIB_TMP_DIR = $(TEMP)/
 %endif
 
-creatlib_cmd = $(LIB_TMP_DIR)$(LIB_NAME)_creatlib.cmd
+creatlib_cmd = $(LIB_TMP_DIR)$(LIB_NAME)_$(TARGET_PROCESSOR_ARCHITECTURE)_creatlib.cmd
 
 #--------------------------------------------------------------------------------------
 #                Build/Link Commands
 #--------------------------------------------------------------------------------------
 
-%iffile $(BuildContext)ToolContextStaticLink.mki
-    %include $(BuildContext)ToolContextStaticLink.mki
-    LIB_PDB_SUBDIR=
-%elif $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED" || $(BUILD_TOOLSET) == "ANDROID_CLANG" || $(BUILD_TOOLSET) == "LINUX_CLANG"
-    %if "Android" == $(TARGET_PLATFORM)
-        %include gcclib.mki
-    %elif "Linux" == $(TARGET_PLATFORM)
-        %include linuxLlvmToolContextStaticLink.mki
-    %else
-        %error No link MKI available for using clang to build $(TARGET_PLATFORM).
-    %endif
+%if defined (BUILD_USING_GCC)
+
+    %include gcclib.mki
 
     LIB_PDB_SUBDIR=
 
-%elif $(BUILD_TOOLSET) == "APPLE_CLANG"
+%elif defined (BUILD_USING_LLVM)
 
     %include llvmlib.mki
     
-    LIB_PDB_SUBDIR=
-
-%elif $(BUILD_TOOLSET) == "EMCC"
-
-    %include emcclib.mki
-
     LIB_PDB_SUBDIR=
 
 %else
@@ -98,10 +84,9 @@ creatlib_cmd = $(LIB_TMP_DIR)$(LIB_NAME)_creatlib.cmd
     # In a multiple pass build, a library is built on each pass and the final pass
     # is used to "lib" the component libraries together into $(LIB_OUT_NAME).
 
-    LIB_OBJS + $(DLM_OBJECT_PCH)
-
     %if defined (LIB_MULTI_PASS_BUILD) && !defined (LIB_MULTI_PASS_FINAL)
         $(LIB_MULTI_NAME) <.lst>        $(LIB_OBJS)
+        _incrementalPass = 1
     %elif defined (LIB_LST_NAME)
 
         $(LIB_OUT_NAME) <$(LIB_LST_NAME)>   $(LIB_OBJS)
@@ -131,7 +116,7 @@ creatlib_cmd = $(LIB_TMP_DIR)$(LIB_NAME)_creatlib.cmd
     %if defined (BSI_SOURCEINDEX) && !defined (DLM_NO_SOURCEINDEX) && defined (LIB_PDB_NAME)
         %if !defined (_incrementalPass)
             always:
-                $(SrcToPdbCmd) $(LIB_PDB_SOURCE_DIR)$(LIB_PDB_NAME)
+                $(BBPYTHONCMD) $(SrcRoot)bsitools/winx86/pdbSrcIndex/AddSrcToPdb.py $(LIB_PDB_SOURCE_DIR)$(LIB_PDB_NAME)
         %endif
     %endif
 

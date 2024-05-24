@@ -12,9 +12,7 @@ from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 from MSPyDgnView import *
 import ctypes
-import pywin.debugger
 import sys
-pywin.debugger.set_trace()
 
 '''
 Function to select elements by its RGBColor
@@ -49,7 +47,7 @@ def selectElementsbyColor(userColorIndex):
                  selSetManager.AddElement(perElementRef,dgnModel) 
 
 '''
-Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with 'Color' model 
+Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with 'Color' model 
 '''
 #main
 if __name__ == "__main__":

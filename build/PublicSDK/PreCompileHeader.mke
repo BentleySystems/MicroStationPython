@@ -16,16 +16,14 @@
   %include $(CompileOptionsMki)
 %endif
 
-%if !defined (__mdlMKI__)
-  %include mdl.mki
-%endif
+%include mdl.mki
 
 %if defined (PchCompileForClr) && !defined (CompilingForCLR)
     %include compileForCLRStart.mki
 %endif
 
 # Tell RecipeCPPCompile to build PCH
-CCPchOpts = $(PchExtraOptions) -Yc"$(PchCompilandBasename).h" -Fp$(PchOutputDir)$(PchTargetBasename).pch
+CCPchOpts = $(PchExtraOptions) -fp:$(CCompFpOpts)  -Yc"$(PchCompilandBasename).h" -Fp$(PchOutputDir)$(PchTargetBasename).pch
 
 DependsItemsTxt = $(PchDependencySetDir)$(PchDependencySetName)DependsItems.txt
 ShowIncludesTxt = $(PchDependencySetDir)$(PchDependencySetName)ShowIncludes.txt
@@ -33,8 +31,8 @@ CompilerErrorTxt = $(PchDependencySetDir)$(PchDependencySetName)CompilerError.tx
 PchRspFile      = $(PchDependencySetDir)$(PchDependencySetName)Compile.rsp
 
 %iffile $(DependsItemsTxt)
-    AutoDependencies = $[@readfile $(DependsItemsTxt)]
-    
+    AutoDependencies = $[@realpath $[@readfile $(DependsItemsTxt)]]
+
     %if $(AutoDependencies) == " "
         always:
             !-@$(deleteCmd) $(DependsItemsTxt)
@@ -44,7 +42,9 @@ PchRspFile      = $(PchDependencySetDir)$(PchDependencySetName)Compile.rsp
 
 %endif
 
-$(PchOutputDir)$(PchTargetBasename).obj $(PchOutputDir)$(PchTargetBasename).pch $(DependsItemsTxt) $(ShowIncludesTxt) $(PchOutputDir)$(PchTargetBasename)Build.bat $(PchRspFile):                                 $(PchCompiland) $(PchExplicitDepends) $(ArgumentsMki) $(AutoDependencies)
+
+$(PchOutputDir)$(PchTargetBasename).obj $(PchOutputDir)$(PchTargetBasename).pch $(DependsItemsTxt) $(ShowIncludesTxt) $(PchOutputDir)$(PchTargetBasename)Build.bat $(PchRspFile): \
+                                $(PchCompiland) $(PchExplicitDepends) $(ArgumentsMki) $(AutoDependencies)
         !$(msg)
         !-@$(deleteCmd) $(DependsItemsTxt)
         >$(PchRspFile)
@@ -53,6 +53,6 @@ $(PchOutputDir)$(PchTargetBasename).obj $(PchOutputDir)$(PchTargetBasename).pch 
         >$(PchOutputDir)$(PchTargetBasename)Build.bat
             @set VS_UNICODE_OUTPUT=
             $(CCCompCmd) @$(PchRspFile) > $(ShowIncludesTxt)
-            python $(sharedMki)ParseClShowIncludes.py $(ShowIncludesTxt) $(DependsItemsTxt) %ERRORLEVEL% 
+            python.exe $(_MakeFilePath)ParseClShowIncludes.py $(ShowIncludesTxt) $(DependsItemsTxt) %ERRORLEVEL% 
         <
         @$(PchOutputDir)$(PchTargetBasename)Build.bat

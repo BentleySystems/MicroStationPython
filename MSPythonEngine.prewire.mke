@@ -6,7 +6,14 @@
 #
 #--------------------------------------------------------------------------------------
 
-PolicyFile      = $(SrcRoot)MSPython/MSPythonAssertPolicy.mki
+%if defined (BSIBUILD)
+MSPythonSrc         = $(SrcRoot)MSPython/
+%else
+MSPythonSrc         = $(SrcRoot)
+%endif
+
+
+PolicyFile      = $(MSPythonSrc)/MSPythonAssertPolicy.mki
 %include mdl.mki
 
 MSPythonEngineSrc = $(OutputRootDir)Build/PowerplatformPython/
@@ -18,4 +25,7 @@ MSPythonEngineOut = $(BuildContext)Delivery/
 
 always:
     ~linkdir "$(MSPythonEngineOut)python=$(MSPythonEngineSrc)PrewireCPythonFiles"
+
+
+    
 

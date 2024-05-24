@@ -558,7 +558,7 @@ void PythonScriptEngine::install()
         PFuncVoidPtr funcPtr = (PFuncVoidPtr) GetProcAddress (s_dllHandle, "mspython_createConsole");
         if (funcPtr)
             {
-            // Load embdded module to register types contained.
+            // Load embedded module to register types contained.
             auto m = py::module_::import("PyInternals");
 
             // Redirect sys.stdout & sys.stderr to PyRedirector
@@ -1006,3 +1006,40 @@ void PythonScriptEngine::InitSearchPath ()
     m_namespaceIDArray.clear();
     UsingNameSpace(PyNameSpaceManager::Bentley_DgnPlatform_Raster);
     }
+
+/*---------------------------------------------------------------------------------**//***
+    @bsimethod                                   Chris Wu                   05/24
++---------------+---------------+---------------+---------------+---------------+------*/
+PythonScopeMap* ScopeMapManager::m_scopeMap = nullptr;
+
+PythonScopeMap& ScopeMapManager::GetScopeMapInstance()
+    {
+    if (nullptr == m_scopeMap)
+        m_scopeMap = new PythonScopeMap();
+
+    return *m_scopeMap;
+    }
+
+/*---------------------------------------------------------------------------------**//**
+    @bsimethod                                   Chris Wu                   05/24
++---------------+---------------+---------------+---------------+---------------+------*/
+void ScopeMapManager::ReleaseScopeMapInstance()
+    {
+    if (nullptr == m_scopeMap)
+        return;
+
+    for (PythonScopeMap::iterator iter = m_scopeMap->begin(); iter != m_scopeMap->end();)
+        {
+        MdlDescP desc = nullptr;
+        if (nullptr != (desc = mdlSystem_findMdlDesc(iter->first.c_str())))
+            mdlSystem_unloadMdlProgram(iter->first.c_str());
+
+        iter = m_scopeMap->erase(iter);
+        }
+
+    m_scopeMap->clear();
+    delete m_scopeMap;
+    m_scopeMap = nullptr;
+    }
+
+

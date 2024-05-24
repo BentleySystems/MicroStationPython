@@ -1,13 +1,20 @@
 #--------------------------------------------------------------------------------------
 #
 #     $Source: MSPython\MSPythonWrapper\PyBentleyGeom\PyBentleyGeom.mke $
-#
-#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
 #--------------------------------------------------------------------------------------
 appName             = MSPyGeomTest
-PolicyFile          = $(SrcRoot)MSPython/MSPythonAssertPolicy.mki
-SolutionPolicyMki   = $(SrcRoot)MSPython/MSPythonSolutionPolicy.mki
+
+
+%if defined (BSIBUILD)
+MSPythonSrc         = $(SrcRoot)MSPython/
+%else
+MSPythonSrc         = $(SrcRoot)
+%endif
+
+PolicyFile          = $(MSPythonSrc)/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(MSPythonSrc)/MSPythonSolutionPolicy.mki
 
 %include mdl.mki
 
@@ -26,15 +33,15 @@ CCompOpts + -bigobj -MP
 
 MultiCompileDepends = $(_MakeFileSpec)
 
-PchCompiland        = $(SrcRoot)MSPython/MSPythonPCH.cpp
+PchCompiland        = $(MSPythonSrc)/MSPythonPCH.cpp
 PchOutputDir        = $(o)
 PchArgumentsDepends = $(MultiCompileDepends)
 PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302  -wd4471 -wd5205
-%include $(SharedMki)PreCompileHeader.mki
+%include $(MSPythonSrc)/build/publicSDK/PreCompileHeader.mki
 
 CCPchOpts = $(UsePrecompiledHeaderOptions)
 
-dependencies    =   $(SrcRoot)MSPython/MSPythonPCH.h
+dependencies    =   $(MSPythonSrc)/MSPythonPCH.h
 
 %include MultiCppCompileRule.mki
 

@@ -1,0 +1,580 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/mkcsharp.mki $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+#-----------------------------------------------------------
+# Required Macros:
+#    o                 - output directory where temporary files will be built.
+#    |-- Default application type is windows app to buid one of the following types you
+#        must set the respective macro.
+#      ASSEMBLY_DLL            - define to build a dll
+#      ASSEMBLY_CONSOLE        - define to build a console app (exe)
+#      ASSEMBLY_MODULE         - define to build a module that can be added to another assembly.
+#    |-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#    ASSEMBLY_NAME         - the name of the generated assembly (not including extension)
+#    ASSEMBLY_SOURCE_LIST  - contains '.cs' files to be built separated by spaces
+#    USERCONTROL_SOURCE_LIST  - contains names (.ascx) of user controls.
+#                               the '.asmx.cs' and the '.asmx.designer.cs' files will be appended to the ASSEMBLY_SOURCE_LIST.
+#    WEBFORM_SOURCE_LIST     - contains names (.aspx) of web form controls.
+#                              the '.aspx.cs' and the '.aspx.designer.cs' files will be appended to the ASSEMBLY_SOURCE_LIST.
+#    ASSEMBLY_SOURCE_LIST  - contains '.cs' files to be built separated by spaces
+#    ASSEMBLY_OTHER_DEPENDS - Other files who's last-mod-date should trigger a build.
+#                             .e.g. the %includer might do: ASSEMBLY_OTHER_DEPENDS =% $(_MakeFileSpec)
+#
+#    Macros for Assembly MetaData
+#    ============================
+#    ASSEMBLY_COPYRIGHT         - copyright information
+#    ASSEMBLY_COMPANY_NAME      - default 'Bentley Systems, Inc.'
+#    ASSEMBLY_FILE_VERSION      - the version number of the built file
+#    ASSEMBLY_VERSION           - the version number of the built assembly
+#    ASSEMBLY_PRODUCT_NAME      - the product name
+#    ASSEMBLY_DESCRIPTION       - the assembly description
+#    ASSEMBLY_TITLE             - the assembly title
+#
+# Optional Macros:
+#    ASSEMBLY_INFORMATIONAL_VERSION - Information version info. The BCL attaches "Product Version" semantics to this.
+#    ASSEMBLY_TARGET_DIRECTORY     - final directory to deliver assembly to.
+#    ASSEMBLY_SYMB_DIR       - directory to delivery symbols to.
+#    ASSEMBLY_MAKE_DOCS      - set true to generate an xml file containing the
+#                              source documentation
+#    ASSEMBLY_PLATFORM       - forces the compiler to target a specific platform; can be one of x86, Itanium, x64, or anycpu; defaults to x86
+#    ASSEMBLY_WARN_AS_ERROR  - 1 = treat warnings as errors [default]
+#                              0 = do not treat warnings as errors
+#    HAVE_PERMISSION_TO_COMPILE_AT_W3 - Drop the warning level to W3.  Only used in specific cases.
+#    ASSEMBLY_NO_WARN        - Disable specific warning messages
+#    ASSEMBLY_ICON_FILE      - Optional - path to icon file that will serve as the assembly icon.
+#    ASSEMBLY_CONFIG_FILE    - Optional - path to application config file.  If set this will be deployed
+#                              with the application and renamed to ASSEMBLY_NAME.config
+#    DEBUG                   - set to build in debug mode
+#    SYMLINK_PDB             - set to have .pdb files symlinked
+#    DOTNETFRAMEWORK_VERSION - specify specific dotnet version
+#                              default is v1.1.4322
+#    CSCOpt                  - additional command line parameters for the C# compiler
+#    ASSEMBLY_UNSAFE         - compile unsafe code
+#    ASSEMBLY_REGISTERCOM    - if this is set an existing copy of the assembly will be
+#                              unregistered for COM interop before it is built and
+#                              the assembly built will be registered for COM interop.
+#                              This will only apply to a non-PRG build
+#    ASSEMBLY_BASEADDRESS    - Specifies the preferred load address of the assembly.
+#                              This is only relevant to XP (Vista and later will honor ASLR instead).
+#                              Completely remove when XP support is officially dropped.
+#                              Additionally, only use for relatively large DLL's -- when in doubt, do NOT specify this.
+#    ASSEMBLY_NO_TRANSKIT    - If defined, then do no transkit related processing.
+#    ASSEMBLY_MANIFEST       - path of the manifest to embed into an .exe file
+#
+#    ASSEMBLY_TESTSIGN       - Set to 1 to use test signing when strong naming. Requires ASSEMBLY_STRONGNAME, ASSEMBLY_DELAYSIGN and ASSEMBLY_TESTKEYFILE
+#    ASSEMBLY_TESTKEYFILE    - Key pair file to use for test signing.
+#    ASSEMBLY_LARGE_ADDRESS_AWARE  - If defined, and ASSEMBLY_PLATFORM is x86, then set the assembly as large address space aware
+#
+#    ASSEMBLY_OBFUSCATE      - Set to 1 to obfuscate building assembly with Dotfuscator 4.9
+#    ASSEMBLY_OBFUSCATE_REF_DIRECTORY - Optional referenced assemblies directory (in addition to default $(ASSEMBLY_CONTEXT_LOCATION) and $(BuildContext)SubParts/Assemblies folders)
+#
+#    Macros for Assembly MetaData
+#    ============================
+#    ASSEMBLY_DELAYSIGN         - if set the assembly delaysign attribute will be set true
+#    ASSEMBLY_KEYFILE           - if set, should be the path to the keyfile that will be used
+#                                 to sign the assembly.
+#    ASSEMBLY_STRONGNAME        - must be set to 1 if you want to strong name the assembly
+#    ASSEMBLY_SKIPPABLE_VERIFICATION - if set, the public key is inserted but the assembly is not actually signed
+#
+#    mki files that can be used as setup for this one
+#    ================================================
+#    assemblyResourceAppend.mki  - use this to add a resource to be embedded in the final assembly.
+#                                  Do not use this for 'resx' or other files that must be built first,
+#                                  just resources that will be embedded as is.
+#    assemblyResxAppend.mki      - use this to add a 'resx' that should be built into a resource
+#                                  and embedded in the final assembly.
+#    csrefapnd.mki     - use this to add references that must be resolved to build the assembly.
+#
+#    Macros for COM Interop
+#    ============================
+#       COMINTEROP_GUIDATTR     -   GUID set in AssemblyInfo.cs to maintain COM Interop compatability with VB6
+#       CLASSINTERFACE_TYPE     -   Identifies the type of class interface that is generated for classes globally
+#-------------------------------------------------------------------------------------
+
+%if defined (BSI) && !defined (__mdlMKI__)
+  %error mdl.mki must be included before mkcsharp.mki
+%endif
+
+#-------------------------------------------------------------------------------------
+# common target versions & tool paths
+#-------------------------------------------------------------------------------------
+
+%ifndef o
+    %error 'o' is not defined
+%endif
+
+%ifndef ASSEMBLY_NAME
+    %error ASSEMBLY_NAME is not defined
+%endif
+
+%ifndef ASSEMBLY_TARGET_DIRECTORY
+    ASSEMBLY_TARGET_DIRECTORY = $(o)
+%endif
+
+%if !defined (ASSEMBLY_MODULE)
+    %ifndef ASSEMBLY_TITLE
+        %error ASSEMBLY_TITLE is a required input to mkcsharp.mki
+    %endif
+    %ifndef ASSEMBLY_DESCRIPTION
+        %error ASSEMBLY_DESCRIPTION is a required input to mkcsharp.mki
+    %endif
+    %ifndef ASSEMBLY_VERSION
+        %error ASSEMBLY_VERSION is a required input to mkcsharp.mki
+    %endif
+    %ifndef ASSEMBLY_FILE_VERSION
+        %error ASSEMBLY_FILE_VERSION is a required input to mkcsharp.mki
+    %endif
+    %ifndef ASSEMBLY_PRODUCT_NAME
+        %error ASSEMBLY_PRODUCT_NAME is a required input to mkcsharp.mki
+    %endif
+    %ifndef ASSEMBLY_COMPANY_NAME
+        %error ASSEMBLY_COMPANY_NAME is a required input to mkcsharp.mki
+    %endif
+    %ifndef ASSEMBLY_COPYRIGHT
+        %error ASSEMBLY_COPYRIGHT is a required input to mkcsharp.mki
+    %endif
+    %if !defined (ASSEMBLY_KEYFILE) && defined (ASSEMBLY_STRONGNAME)
+        %error ASSEMBLY_KEYFILE is a required input to mkcsharp.mki when ASSEMBLY_STRONGNAME is defined.
+    %endif
+    ASSEMBLY_INFO_SOURCE=$(o)AssemblyInfo.cs
+%endif
+
+%ifndef ASSEMBLY_PLATFORM
+    %if defined (TARGET_PROCESSOR_ARCHITECTURE)
+        ASSEMBLY_PLATFORM = $(TARGET_PROCESSOR_ARCHITECTURE)
+    %else
+        ASSEMBLY_PLATFORM = x86
+    %endif
+%endif
+
+%ifnofile $(o)
+always:
+    !~@mkdir $(o)
+%endif
+
+%ifnofile $(ASSEMBLY_TARGET_DIRECTORY)
+always:
+    !~@mkdir $(ASSEMBLY_TARGET_DIRECTORY)
+%endif
+
+#-------------------------------------------------------------------------------------
+# setup tools
+#-------------------------------------------------------------------------------------
+%ifndef CSC
+  CSC = csc.exe
+%endif
+%ifndef AL
+  AL = al.exe
+%endif
+
+embedResourceSwitch=-res:
+
+#-------------------------------------------------------------------------------------
+# Create transkit config file
+#-------------------------------------------------------------------------------------
+%include mkTranskit.mki
+
+#-------------------------------------------------------------------------------------
+# Determine the type of assembly we are building
+#-------------------------------------------------------------------------------------
+
+%ifdef ASSEMBLY_DLL
+    ASSEMBLY_EXT = .dll
+%elif ASSEMBLY_MODULE
+    ASSEMBLY_EXT = .netmodule
+%else
+    ASSEMBLY_EXT = .exe
+%endif
+
+ASSEMBLY_TEMP_NAME = $(ASSEMBLY_NAME)$(ASSEMBLY_EXT)
+
+
+#-------------------------------------------------------------------------------------
+# Determine where we will deliver symbols
+#-------------------------------------------------------------------------------------
+%if !defined(NOPDB) && defined(ASSEMBLY_SYMB_DIR)
+    _ASSEMBLY_PDB_TARGET_DIRECTORY = $(ASSEMBLY_SYMB_DIR)
+%else
+    _ASSEMBLY_PDB_TARGET_DIRECTORY = $(ASSEMBLY_TARGET_DIRECTORY)
+%endif
+
+#-------------------------------------------------------------------------------------
+# Configure versioning
+#-------------------------------------------------------------------------------------
+%if defined (BSI_VERSIONING)
+    %if !defined (ASSEMBLY_NO_VERSION_RESOURCE)
+        # set up for version injection
+        %include $(SrcBsiCommon)sharedmki/AssemblyVersion.mki
+
+        # Since we are going to inject a version resource, then we must do delay signing
+        %if defined (ASSEMBLY_STRONGNAME)
+            ASSEMBLY_DELAYSIGN = 1
+        %endif
+    %endif
+    #
+    #    With .NET 2 we set generatePublisherEvidence in the *.exe.config file to avoid checking hitting the server
+    #      which means that we should sign all assemblies.
+    #    With .NET 4 authenticode signatures are always fine.
+    #
+    ASSEMBLY_AUTHENTICODE_SIGN = 1
+    %include signrscsdefs.mki
+%endif
+
+%if (CSC_VERSION >= 800 && ASSEMBLY_STRONGNAME)          # if VS 2005 or better
+    %if defined (ASSEMBLY_DELAYSIGN)
+        CSCOpt + -delaysign+
+    %endif
+
+    %if defined (ASSEMBLY_KEYFILE)
+        CSCOpt + -keyfile:$(ASSEMBLY_KEYFILE)
+    %endif
+%endif
+
+
+#-------------------------------------------------------------------------------------
+# Configure obfuscation
+#-------------------------------------------------------------------------------------
+%ifdef ASSEMBLY_OBFUSCATE
+always:
+    ~@task Bentley.Build.Tasks.RegistryRead \
+        -i:KeyName="HKEY_CURRENT_USER/Software/PreEmptive/Dotfuscator/4.9" \
+        -i:ValueName="InstallDir" \
+        -i:DefaultValue="NotInstalled" \
+        -i:MSBuildVerbosity="Quiet" \
+        -o:DotfuscatorPath=Value
+
+%if $(DotfuscatorPath) == "NotInstalled"
+    DotfuscatorPath = C:\Program Files (x86)\PreEmptive Solutions\Dotfuscator Professional Edition 4.9/\
+    #DotfuscatorPath = C:\PROGRA~2\PREEMP~1\DOTFUS~1.9/\
+%endif
+%iffile $(DotfuscatorPath)dotfuscator.exe
+    Dotfuscator="$(DotfuscatorPath)dotfuscator.exe"
+%else
+    #%error Dotfuscator 4.9 was not found, $(ASSEMBLY_TEMP_NAME) could not be protected.
+    %message Dotfuscator 4.9 was not found, $(ASSEMBLY_TEMP_NAME) could not be protected.
+    %undef ASSEMBLY_OBFUSCATE
+%endif
+%endif
+
+
+#-------------------------------------------------------------------------------------
+# compile main assembly
+#-------------------------------------------------------------------------------------
+
+"$(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_TEMP_NAME)" "$(_ASSEMBLY_PDB_TARGET_DIRECTORY)$(ASSEMBLY_NAME).pdb" : $(ASSEMBLY_SOURCE_LIST) $(ASSEMBLY_REFERENCE_DEPENDS) $(ASSEMBLY_EMBEDDED_RESOURCES_DEPENDS) $(ASSEMBLY_RESX_RESOURCES_DEPENDS) $(ASSEMBLY_OTHER_DEPENDS)
+    %if defined(ASSEMBLY_REGISTERCOM) && !defined(DISABLE_REGISTERCOM)
+      %iffile $(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_TEMP_NAME)
+      | [== Unregistering $(@) for COM interop ==]
+      regasm \/u $(@) \/tlb:"$(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_NAME).tlb"
+      %endif
+    %endif
+    | [== Building $(@) ==]
+%if !defined (ASSEMBLY_MODULE)
+    >$(ASSEMBLY_INFO_SOURCE)
+    using System.Reflection;
+%if defined (CLASSINTERFACE_TYPE)
+    using System.Runtime.InteropServices;
+%endif
+%if ASSEMBLY_COPYRIGHT!=0
+    [assembly:AssemblyCopyrightAttribute( "$(ASSEMBLY_COPYRIGHT)" )]
+%endif
+%if ASSEMBLY_COMPANY_NAME!=0
+    [assembly:AssemblyCompanyAttribute( "$(ASSEMBLY_COMPANY_NAME)" )]
+%endif
+%if ASSEMBLY_FILE_VERSION!=0
+    [assembly:AssemblyFileVersionAttribute( "$(ASSEMBLY_FILE_VERSION)" )]
+%endif
+%if ASSEMBLY_INFORMATIONAL_VERSION!=0
+    [assembly:AssemblyInformationalVersionAttribute( "$(ASSEMBLY_INFORMATIONAL_VERSION)" )]
+%endif
+%if ASSEMBLY_PRODUCT_NAME!=0
+    [assembly:AssemblyProductAttribute( "$(ASSEMBLY_PRODUCT_NAME)" )]
+%endif
+%if ASSEMBLY_VERSION!=0
+    [assembly:AssemblyVersionAttribute( "$(ASSEMBLY_VERSION)" )]
+%endif
+%if ASSEMBLY_DESCRIPTION!=0
+    [assembly:AssemblyDescriptionAttribute( "$(ASSEMBLY_DESCRIPTION)" )]
+%endif
+%if ASSEMBLY_TITLE!=0
+    [assembly:AssemblyTitleAttribute( "$(ASSEMBLY_TITLE)" )]
+%endif
+%if defined(ASSEMBLY_TARGET_VERSION) && defined(ASSEMBLY_TARGET_DISPLAYNAME)
+    [assembly:System.Runtime.Versioning.TargetFrameworkAttribute(".NETFramework,Version=$(ASSEMBLY_TARGET_VERSION)", FrameworkDisplayName = "$(ASSEMBLY_TARGET_DISPLAYNAME)")]
+%endif
+%if (CSC_VERSION < 800)          # if .NET 1.x
+  %ifndef ASSEMBLY_DELAYSIGN
+    [assembly:AssemblyDelaySign(false)]
+  %else
+    [assembly:AssemblyDelaySign(true)]
+  %endif
+  %if defined (ASSEMBLY_KEYFILE) && defined (ASSEMBLY_STRONGNAME)
+    [assembly:AssemblyKeyFile(@"$(ASSEMBLY_KEYFILE)")]
+  %endif
+%endif
+%if defined (ASSEMBLY_COMVISIBLE)
+  %if $(ASSEMBLY_COMVISIBLE) != "noattr"
+    %if $(ASSEMBLY_COMVISIBLE) == "true" || $(ASSEMBLY_COMVISIBLE) == "1"
+      [assembly:System.Runtime.InteropServices.ComVisibleAttribute(true)]
+    %elif $(ASSEMBLY_COMVISIBLE) == "false" || ASSEMBLY_COMVISIBLE==0
+      [assembly:System.Runtime.InteropServices.ComVisibleAttribute(false)]
+    %else
+      %error ASSEMBLY_COMVISIBLE has invalid value: $(ASSEMBLY_COMVISIBLE)
+    %endif
+  %endif
+%endif
+%if defined (ASSEMBLY_CLSCOMPLIANT)
+  %if $(ASSEMBLY_CLSCOMPLIANT) != "noattr"
+    %if $(ASSEMBLY_CLSCOMPLIANT) == "true" || $(ASSEMBLY_CLSCOMPLIANT) == "1"
+      [assembly:System.CLSCompliant(true)]
+    %elif $(ASSEMBLY_CLSCOMPLIANT) == "false" || ASSEMBLY_CLSCOMPLIANT==0
+      [assembly:System.CLSCompliant(false)]
+    %else
+      %error ASSEMBLY_CLSCOMPLIANT has invalid value: $(ASSEMBLY_CLSCOMPLIANT)
+    %endif
+  %endif
+%endif
+%if defined (COMINTEROP_GUIDATTR)
+    [assembly:System.Runtime.InteropServices.GuidAttribute("$(COMINTEROP_GUIDATTR)")]
+%endif
+%if defined (CLASSINTERFACE_TYPE)
+    [assembly:ClassInterface(ClassInterfaceType.$(CLASSINTERFACE_TYPE))]
+%endif
+    <
+%endif
+    >$(o)cscparams.cmd
+    $(CSCOpt)
+    -fullpaths
+    -define:TRACE
+%if defined (CSC_VERSION_DEF)
+    -define:$(CSC_VERSION_DEF)
+%endif
+%if defined (PerformCodeAnalysis)
+    -define:CODE_ANALYSIS
+%endif
+%ifdef DEBUG
+    -debug:full -define:DEBUG \/optimize-
+%else
+    -debug:pdbonly \/optimize+
+%endif
+%if defined (ASSEMBLY_UNSAFE)
+    -unsafe
+%endif
+%ifdef ASSEMBLY_DLL
+    -t:library
+%elif ASSEMBLY_CONSOLE
+    -t:exe
+%elif ASSEMBLY_MODULE
+    -t:module
+%else
+    -t:winexe
+%endif
+%ifdef ASSEMBLY_MAKE_DOCS
+    -doc:$(o)/$(ASSEMBLY_NAME).xml
+%endif
+%ifdef HAVE_PERMISSION_TO_COMPILE_AT_W3
+    -warn:3
+%else
+    -warn:4
+%endif
+%if defined (DEV_STUDIO)
+    %if (MSVC_VERSION < 1700)
+        %error DEV_STUDIO requires at least MSVC 1700 (DEV_STUDIO_ADDITIONAL_CSHARP_FLAGS)
+    %endif
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+        $(DEV_STUDIO_ADDITIONAL_CSHARP_FLAGS_X64)
+    %else
+        $(DEV_STUDIO_ADDITIONAL_CSHARP_FLAGS_X86)
+    %endif
+%endif
+%if !defined (ASSEMBLY_WARN_AS_ERROR) || (ASSEMBLY_WARN_AS_ERROR == 1)
+    -warnaserror+
+%else
+    -warnaserror-
+%endif
+%ifdef ASSEMBLY_NO_WARN
+    -nowarn:$(ASSEMBLY_NO_WARN)
+%endif
+%ifdef ASSEMBLY_REFERENCE_LIST
+    -r:$(ASSEMBLY_REFERENCE_LIST)
+%endif
+%ifdef ASSEMBLY_EMBEDDED_RESOURCES
+    $(ASSEMBLY_EMBEDDED_RESOURCES)
+%endif
+%ifdef ASSEMBLY_ICON_FILE
+    -win32icon:$(ASSEMBLY_ICON_FILE)
+%endif
+%if defined(ASSEMBLY_BASEADDRESS)
+    -baseaddress:$(ASSEMBLY_BASEADDRESS)
+%endif
+    -out:$@
+%ifndef ASSEMBLY_MODULE
+    $(ASSEMBLY_SOURCE_LIST) $(ASSEMBLY_INFO_SOURCE)
+%else
+    $(ASSEMBLY_SOURCE_LIST)
+%endif
+%if (CSC_VERSION >= 800 && ASSEMBLY_PLATFORM)
+    -platform:$(ASSEMBLY_PLATFORM)
+%endif
+    <
+    $(CSC) $(cscOptDirect) @$(o)cscparams.cmd
+%if $(ASSEMBLY_EXT) == ".exe" && defined (manifestCmd) && defined (ASSEMBLY_MANIFEST)
+    $(manifestCmd) -manifest $(ASSEMBLY_MANIFEST) -outputresource:$@;\#1
+%endif
+%if (defined (BSI) || defined (BSI_VERSIONING)) && !defined (ASSEMBLY_NO_VERSION_RESOURCE)
+    $(InjectVersionCmd) $@ @$(versionArgsFile) $(ASSEMBLY_VERSION_OPTIONS)
+%endif
+%ifdef ASSEMBLY_OBFUSCATE
+    >$(o)obfuscate_opts.xml
+    \<?xml version="1.0" encoding="utf-8"?\>
+    \<!DOCTYPE dotfuscator SYSTEM "http:\/\/www.preemptive.com\/dotfuscator\/dtd\/dotfuscator_v2.3.dtd"\>
+    \<dotfuscator version="2.3"\>
+      \<global\>
+        \<option\>error\<\/option\>
+        \<option\>suppressildasm\<\/option>
+        \<option\>pdb\<\/option\>
+      \<\/global\>
+      \<input\>
+        \<loadpaths\>
+          \<option\>prepend\<\/option\>
+    %if defined (ASSEMBLY_CONTEXT_LOCATION)
+          \<file dir="$(ASSEMBLY_CONTEXT_LOCATION)" \/\>
+    %endif
+    %if defined (BuildContext)
+          \<file dir="$(BuildContext)SubParts\Assemblies" \/\>
+    %endif
+    %if defined (ASSEMBLY_OBFUSCATE_REF_DIRECTORY)
+          \<file dir="$(ASSEMBLY_OBFUSCATE_REF_DIRECTORY)" \/\>
+    %endif
+        \<\/loadpaths\>
+        \<asmlist\>
+          \<inputassembly\>
+            \<option\>honoroas\<\/option\>
+            \<option\>stripoa\<\/option\>
+            \<option\>library\<\/option\>
+            \<file dir="$(ASSEMBLY_TARGET_DIRECTORY)" name="$(ASSEMBLY_TEMP_NAME)" \/\>
+          \<\/inputassembly\>
+        \<\/asmlist\>
+      \<\/input\>
+      \<output\>
+        \<file dir="$(ASSEMBLY_TARGET_DIRECTORY)" \/\>
+      \<\/output\>
+      \<tempdir\>
+        \<file dir="$(o)Dotfuscator" \/\>
+      \<\/tempdir\>
+      \<renaming\>
+        \<option\>xmlserialization\<\/option\>
+        \<mapping\>
+          \<mapoutput overwrite="true"\>
+            \<file dir="$(o)" name="obfuscate_map.xml" \/\>
+            \<transform \/\>
+          \<\/mapoutput\>
+        \<\/mapping\>
+      \<\/renaming\>
+      \<controlflow level="high" \/\>
+      \<stringencrypt\>
+        \<includelist\>
+          \<assembly\>
+            \<file dir="$(ASSEMBLY_TARGET_DIRECTORY)" name="$(ASSEMBLY_TEMP_NAME)" \/\>
+          \<\/assembly\>
+        \<\/includelist\>
+      \<\/stringencrypt\>
+      \<removal\>
+        \<option\>constonly\<\/option\>
+        \<triggerlist\>
+          \<assembly\>
+            \<file dir="$(ASSEMBLY_TARGET_DIRECTORY)" name="$(ASSEMBLY_TEMP_NAME)" \/\>
+          \<\/assembly\>
+        \<\/triggerlist\>
+        \<referencerulelist \/\>
+      \<\/removal\>
+      \<linking \/\>
+      \<premark\>
+        \<option\>usepassphrase\<\/option\>
+        \<assemblylist\>
+          \<assembly\>
+            \<file dir="$(ASSEMBLY_TARGET_DIRECTORY)" name="$(ASSEMBLY_TEMP_NAME)" \/\>
+          \<\/assembly\>
+        \<\/assemblylist\>
+        \<passphrase\>bentleycprght\<\/passphrase\>
+        \<encoding name="6bit-a" \/\>
+        \<watermark\>(C)BENTLEY\<\/watermark\>
+      \<\/premark\>
+      \<sos mergeruntime="true"\>
+        \<option\>dontsendtamper\<\/option\>
+      \<\/sos\>
+      \<smartobfuscation\>
+        \<smartobfuscationreport verbosity="all" overwrite="false" \/\>
+      \<\/smartobfuscation>
+    \<\/dotfuscator\>
+    <
+    $(Dotfuscator) -nologo -q $(o)obfuscate_opts.xml
+%endif
+%if ($(ASSEMBLY_PLATFORM) == "x86" && defined (ASSEMBLY_LARGE_ADDRESS_AWARE))
+    EditBin.exe \/LargeAddressAware $@
+%endif
+%if defined (ASSEMBLY_STRONGNAME) && defined (ASSEMBLY_DELAYSIGN)
+  %if defined (ASSEMBLY_TESTSIGN)
+    sn -TS $@ $(ASSEMBLY_TESTKEYFILE)
+  %elif !defined (ASSEMBLY_SKIPPABLE_VERIFICATION)
+    sn -R $@ $(ASSEMBLY_KEYFILE)
+  %endif
+%endif
+%if defined (ASSEMBLY_AUTHENTICODE_SIGN)
+    $(signcodecmd) $@
+%endif
+%if !defined(NOPDB) && defined(ASSEMBLY_SYMB_DIR)
+    -move "$(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_NAME).pdb" "$(ASSEMBLY_SYMB_DIR)$(ASSEMBLY_NAME).pdb"
+%endif
+%if !defined (ASSEMBLY_MODULE)
+    ~time
+%endif
+%if defined(ASSEMBLY_REGISTERCOM) && !defined(DISABLE_REGISTERCOM)
+    | [== Registering $(@) for COM interop ==]
+    regasm $(@) \/tlb:"$(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_NAME).tlb" \/codebase
+%endif
+%ifdef ASSEMBLY_POSTLINK1
+    $(ASSEMBLY_POSTLINK1)
+%endif
+
+#-- Application Config file -----------------------------------------------------------------------------------
+
+%if ASSEMBLY_CONFIG_FILE
+
+"$(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_TEMP_NAME).config" : $(ASSEMBLY_CONFIG_FILE)
+    ~@task Microsoft.Build.Tasks.Copy  -i:SourceFiles=$< -i:DestinationFiles=$@
+
+%endif
+
+%if defined (SYMLINK_PDB)
+    %if defined (ASSEMBLY_CONTEXT_LOCATION) 
+        "$(ASSEMBLY_CONTEXT_LOCATION)$(ASSEMBLY_NAME).pdb" : "$(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_NAME).pdb"
+            $(LinkFirstDepToFirstTarget)
+    %else
+        %error Could not link .pdb because ASSEMBLY_CONTEXT_LOCATION not defined
+    %endif
+%endif    
+
+%if defined (ASSEMBLY_CONTEXT_LOCATION) && !defined (ASSEMBLY_NO_CONTEXT_LINK)
+"$(ASSEMBLY_CONTEXT_LOCATION)$(ASSEMBLY_TEMP_NAME)" : "$(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_TEMP_NAME)"
+    $(LinkFirstDepToFirstTarget)
+
+    %if ASSEMBLY_CONFIG_FILE
+    "$(ASSEMBLY_CONTEXT_LOCATION)$(ASSEMBLY_TEMP_NAME).config" : "$(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_TEMP_NAME).config"
+        $(LinkFirstDepToFirstTarget)
+    %endif
+%endif
+
+
+%if exists ($(SrcBsiCommon)sharedmki/fxcop.mki)
+
+FxCopAssembly = $(ASSEMBLY_TARGET_DIRECTORY)$(ASSEMBLY_TEMP_NAME)
+FxCopIntermediateOutput = $(o)
+%include $(SrcBsiCommon)sharedmki/fxcop.mki
+
+%endif
+
+%undef ASSEMBLY_BASEADDRESS

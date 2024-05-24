@@ -219,7 +219,7 @@ __PlatformSetup_mki__  = 1
 %endif
 
 
-sharedMki   = $(SrcRoot)/MSPython/build/PublicSDK/
+sharedMki   = $(_MakeFilePath)/build/PublicSDK/
 OutBuildDir = $(OutputRootDir)build/
 LinkFirstDepToFirstTarget            = ~linkfile "$@=$<"
 LinkFirstDepToFirstTargetAsDirectory = ~linkdir "$@=$<"
@@ -266,12 +266,12 @@ BuildContextPublicApiDir        = $(BuildContext)PublicAPI/
 #----------------------------------------------------------
 #  Standard windows version.
 #----------------------------------------------------------
-%if defined (winNT)
+#%if defined (winNT)
     # Set the default to Windows 7.
     _WIN32_WINNT    = 0x0601
     WINVER          = 0x0601
     _WIN32_IE       = 0x0600
-%endif
+#%endif
 
 MSJ_BUILD_PRIVATE_VERSION       = 1
 

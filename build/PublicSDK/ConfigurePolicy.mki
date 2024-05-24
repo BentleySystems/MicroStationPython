@@ -1,0 +1,161 @@
+#--------------------------------------------------------------------------------------
+#
+#
+#  $Copyright: (c) 2021 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+%if defined (__ConfigurePolicy_mki__)
+    %return
+%endif
+__ConfigurePolicy_mki__  = 1
+
+%if defined (_notasks)
+
+    %if !defined (PolicyFile)
+        %error You must define PolicyFile at the start of your mke file. BentleyBuildMake does not support the policy file map. 
+    %endif
+
+%else
+
+    %if defined (BSI)
+        #
+        # This must be set before any ~task statements are executed to work as intended due to optimizations
+        # with set up for task execution in bmake. For now, let's keep this simple and try to register the
+        # union of all tasks needed by all builds by this point.
+        #
+        %iffile $(SrcBsiCommon)build/msbuildcommon/FoundationBMakeTasks.proj
+            BentleyFoundationTasksProject=$(SrcBsiCommon)build/msbuildcommon/FoundationBMakeTasks.proj
+        %endif
+    %endif
+
+%endif
+
+
+%if !defined (USE_LAYERED_POLICY) && !defined (PolicyFile)
+    #
+    #  HOPEFULLY TEMPORARY!  We want all build shells to all set USE_LAYERED_POLICY and do stuff that way and
+    #  then, once we have everything, we can eliminate this.  The && !defined (PolicyFile) part of the
+    #  above makes spawn-transkit work.  It doesn't set USE_LAYERED_POLICY but it does set
+    #  PolicyFile which ought to be good enough.
+    #
+    %if defined (BSI)
+        %include InternalSystemPolicy.mki
+    %else
+        %include SystemPolicy.mki
+    %endif
+    #
+    #  The bsimdlpre.mki name is ugly but the various builds are already using it.
+    #
+    %if defined (USE_PRODUCT_MODS) && !defined (NO_INTERNAL_MODS)
+        %include bsimdlpre.mki
+    %endif
+
+    # %error In USE_LAYERED_POLICY + PolicyFile Define
+%else
+
+    #
+    # This provides the definitions of the macros that identify the policy file names.
+    # We want these defined even if PolicyFile is already determined.  That way it is possible
+    # to do conditionals such as %if $(PolicyFile)==$(PowerDraftPolicy) in ProgrammerPolicyMki.
+    #
+    %if defined (PolicyFileNamesMki) && !defined (BMAKE_CLEANER_ENVIRONMENT)
+        %include $(PolicyFileNamesMki)
+    %endif
+
+    %if !defined (PolicyFile)
+        %include DeterminePolicyFile.mki
+        # %error Determined Policy File = $(PolicyFile)
+    %endif
+
+    %include $(PolicyFile)
+
+    #
+    #  Typically the various XXXXPolicyMki macros are set as desired inside of $(PolicyFile).
+    #
+    %if defined (MachinePolicyMki)
+        %include $(MachinePolicyMki)
+    %endif
+
+    %if defined (SystemPolicyMki)
+        %include $(SystemPolicyMki)
+    %endif
+
+    %if defined (FoundationPolicyMki)
+        %include $(FoundationPolicyMki)
+    %endif
+
+
+    %if defined (DerivativePolicyMki)
+        %include $(DerivativePolicyMki)
+    %endif
+
+    %if defined (VerticalPolicyMki)
+        %include $(VerticalPolicyMki)
+    %endif
+
+    %if defined (SolutionPolicyMki)
+        %include $(SolutionPolicyMki)
+    %endif
+
+    %include AssignTokenValuesToUnusedPolicyLayers.mki
+
+    %if defined (ProgrammerPolicyMki)
+        %include $(ProgrammerPolicyMki)
+    %endif
+
+    #
+    # If any toolset has been requested by policy but not yet asserted, then assert it here.
+    #
+    %if !defined (BUILD_USING_NoToolset)
+        %if defined (CurrentToolSet)
+            %warn ToolSet $(CurrentToolSet) is already asserted. Consider selecting a toolset but allowing ConfigurePolicy.mki to assert it.
+        %endif
+        %if defined (BUILD_USING_GCC) || defined (BUILD_USING_LLVM) || defined (BUILD_USING_VS2022) || defined (BUILD_USING_VS2019) || defined (BUILD_USING_VS2017) || defined (BUILD_USING_VS2015) || defined (BUILD_USING_VS2013) || defined (BUILD_USING_VS2012) || defined (BUILD_USING_VS2010) || defined (BUILD_USING_VS2008) || defined (BUILD_USING_VS2005) || defined (BUILD_USING_VS2003) || defined (BUILD_USING_VS2002)
+            %include AssertToolSet.mki
+        %endif
+    %endif
+
+
+    #
+    # Now that a toolset is asserted in the bmake.exe environment, it is time to make sure
+    # that $(PolicyPaths) is injected into $(PATH). Any different previous value for $(PolicyPaths)
+    # that is already injected into $(PATH) is first removed.
+    #
+    %if defined (PolicyPaths)
+        %export PolicyPaths
+        %if !defined (PolicyPathsInjected)
+            SetDummyValue:
+                !~@putenv PolicyPathsInjected=dummyvalue
+
+        %endif
+        %if $(PolicyPaths)!=$(PolicyPathsInjected)
+            InjectPolicyPaths:
+                !~@task Bentley.Build.Tasks.StringRegexReplace \
+                            -i:Input="${PATH}" \
+                            -i:ExpressionIsLiteral=true \
+                            -i:Expression=";${PolicyPathsInjected}" \
+                            -i:Count=1 \
+                            -o:CleanedPath=Output
+                !~@putenv PolicyPathsInjected=$(PolicyPaths)
+                !~@putenv PATH=$(CleanedPath);$(PolicyPaths)
+
+        %endif
+    %else
+        %if defined (PolicyPathsInjected)
+            RemovePolicyPaths:
+                !~@task Bentley.Build.Tasks.StringRegexReplace \
+                            -i:Input="${PATH}" \
+                            -i:ExpressionIsLiteral=true \
+                            -i:Expression=";${PolicyPathsInjected}" \
+                            -i:Count=1 \
+                            -o:CleanedPath=Output
+                !~@putenv PolicyPathsInjected=
+                !~@putenv PATH=$(CleanedPath)
+
+        %endif
+    %endif
+
+%endif
+
+
+

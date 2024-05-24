@@ -1,0 +1,1981 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/AssertToolSet.mki $
+#
+#  $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+__AssertToolSet_mki__ = 1
+NO_COMPILERS_MKI = 1
+
+%if defined (WORKING_ON_PORT_TO_NEW_TOOLSET)
+    # There are some vcproj files that look for this value specifically, so for now the only valid value is
+    #  the year.  Setting it to 1 will cause subtle issues.
+
+
+    %if $(WORKING_ON_PORT_TO_NEW_TOOLSET) != "2017"
+        %error WORKING_ON_PORT_TO_NEW_TOOLSET is currently "$(WORKING_ON_PORT_TO_NEW_TOOLSET)".  At this time the only valid value is "2017".
+    %endif
+%endif
+
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    TARGET_PROCESSOR_ARCHITECTURE=x86
+%endif
+
+%if $(PROCESSOR_ARCHITECTURE)=="x86"
+   %if defined (PROCESSOR_ARCHITEW6432)
+        PROCESSOR_ARCHITECTURE =% $(PROCESSOR_ARCHITEW6432)
+   %endif
+%endif
+
+%if !defined (_notasks)
+
+    # Check for some bad conditions
+    %if defined (BUILD_USING_VS2002)
+        %if !defined (VS2002Dir)
+            GetVS2002Dir:
+                !~@task MSBuild.Community.Tasks.RegistryRead \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/7.0/Setup/VS" \
+                                                        -i:ValueName="ProductDir" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+                    ~@putenv VS2002Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2002Dir)
+                %error Attempting to build with VS 2002 but location is undefined!
+            %endif
+        %endif
+    %endif
+
+    %if defined (BUILD_USING_VS2003)
+        %if !defined (VS2003Dir)
+            GetVS2003Dir:
+                !~@task MSBuild.Community.Tasks.RegistryRead \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/7.1/Setup/VS" \
+                            -i:ValueName="ProductDir" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+                    ~@putenv VS2003Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2003Dir)
+                %error Attempting to build with VS 2003 but location is undefined!
+            %endif
+        %endif
+        %if defined (BUILD_USING_VS2002)
+            %error Conflicting compilers, attempting to build with VS 2003 and VS 2002
+        %endif
+    %endif
+
+    %if defined (BUILD_USING_VS2005)
+        %if !defined (VS2005Dir)
+            GetVS2005Dir:
+                !~@task MSBuild.Community.Tasks.RegistryRead \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/8.0/Setup/VS" \
+                            -i:ValueName="ProductDir" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+                    ~@putenv VS2005Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2005Dir)
+                %error Attempting to build with VS 2005 but location is undefined!
+            %endif
+        %endif
+        %if defined (BUILD_USING_VS2002)
+            %error Conflicting compilers, attempting to build with VS 2005 and VS 2002
+        %elif defined (BUILD_USING_VS2003)
+            %error Conflicting compilers, attempting to build with VS 2005 and VS 2003
+        %endif
+    %endif
+
+    %if defined (BUILD_USING_VS2008)
+        %if !defined (VS2008Dir)
+            GetVS2008Dir:
+                !~@task MSBuild.Community.Tasks.RegistryRead \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/9.0/Setup/VS" \
+                            -i:ValueName="ProductDir" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+                    ~@putenv VS2008Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2008Dir)
+                %error Attempting to build with VS 2008 but location is undefined!
+            %endif
+        %endif
+        %if defined (BUILD_USING_VS2002)
+            %error Conflicting compilers, attempting to build with VS 2008 and VS 2002
+        %elif defined (BUILD_USING_VS2003)
+            %error Conflicting compilers, attempting to build with VS 2008 and VS 2003
+        %elif defined (BUILD_USING_VS2005)
+            %error Conflicting compilers, attempting to build with VS 2008 and VS 2005
+        %elif defined (BUILD_USING_GCC)
+            %error Conflicting compilers, attempting to build with VS 2008 and GCC
+        %elif defined (BUILD_USING_LLVM)
+            %error Conflicting compilers, attempting to build with VS 2008 and LLVM
+        %endif
+    %endif
+
+    %if defined (BUILD_USING_VS2010)
+        %if !defined (VS2010Dir)
+            GetVS2010Dir:
+                !~@task Bentley.Build.Tasks.RegistryRead \
+                            -i:RegWow64Option=KEY_WOW64_32KEY \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7" \
+                            -i:ValueName="10.0" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+                    ~@putenv VS2010Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2010Dir)
+                %error Attempting to build with VS 2010 but location is undefined!
+            %endif
+        %endif
+        %if defined (BUILD_USING_VS2002)
+            %error Conflicting compilers, attempting to build with VS 2010 and VS 2002
+        %elif defined (BUILD_USING_VS2003)
+            %error Conflicting compilers, attempting to build with VS 2010 and VS 2003
+        %elif defined (BUILD_USING_VS2005)
+            %error Conflicting compilers, attempting to build with VS 2010 and VS 2005
+        %elif defined (BUILD_USING_VS2008)
+            %error Conflicting compilers, attempting to build with VS 2010 and VS 2008
+        %elif defined (BUILD_USING_GCC)
+            %error Conflicting compilers, attempting to build with VS 2010 and GCC
+        %elif defined (BUILD_USING_LLVM)
+            %error Conflicting compilers, attempting to build with VS 2010 and LLVM
+        %endif
+    %endif
+
+    %if defined (BUILD_USING_VS2012)
+        %if !defined (VS2012Dir)
+            GetVS2012Dir:
+                !~@task Bentley.Build.Tasks.RegistryRead \
+                            -i:RegWow64Option=KEY_WOW64_32KEY \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7" \
+                            -i:ValueName="11.0" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+                    ~@putenv VS2012Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2012Dir)
+                %error Attempting to build with VS 2012 but location is undefined!
+            %endif
+        %endif
+        %if defined (BUILD_USING_VS2002)
+            %error Conflicting compilers, attempting to build with VS 2012 and VS 2002
+        %elif defined (BUILD_USING_VS2003)
+            %error Conflicting compilers, attempting to build with VS 2012 and VS 2003
+        %elif defined (BUILD_USING_VS2005)
+            %error Conflicting compilers, attempting to build with VS 2012 and VS 2005
+        %elif defined (BUILD_USING_VS2008)
+            %error Conflicting compilers, attempting to build with VS 2012 and VS 2008
+        %elif defined (BUILD_USING_VS2010)
+            %error Conflicting compilers, attempting to build with VS 2012 and VS 2010
+        %elif defined (BUILD_USING_GCC)
+            %error Conflicting compilers, attempting to build with VS 2012 and GCC
+        %elif defined (BUILD_USING_LLVM)
+            %error Conflicting compilers, attempting to build with VS 2012 and LLVM
+        %endif
+
+        # Check for VS2012 Update 3 RC1
+        # HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/DevDiv/VC/Servicing/11.0/CompilerCore
+        # Version = 11.0.60430 or higher
+        CheckCompilerVersionNumber:
+            !~@task Bentley.Build.Tasks.RegistryRead \
+                        -i:RegWow64Option=KEY_WOW64_32KEY \
+                        -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/DevDiv/VC/Servicing/11.0/CompilerCore" \
+                        -i:ValueName="Version" \
+                        -i:DefaultValue="NotInstalled" \
+                        -i:MSBuildVerbosity="Quiet" \
+                        -o:VCCompilerVersion=Value
+
+        %undef VS2012VersionPassed
+        %if $(VCCompilerVersion)!="NotInstalled"
+            ParseVersionNumbers:
+                  ~@task Bentley.Build.Tasks.VersionQuad  \
+                              -i:Input="$(VCCompilerVersion)" \
+                              -o:VC_REL_V=Major \
+                              -o:VC_MAJ_V=Minor \
+                              -o:VC_MIN_V=Build \
+                              -o:VC_SUBMIN_V=Revision
+
+            %if defined (VC_REL_V) && defined (VC_MAJ_V) && defined (VC_MIN_V) && $(VC_REL_V) == 11 && $(VC_MAJ_V) >= 0
+                %if $(VC_MAJ_V) == 0 && $(VC_MIN_V) >= 60430
+                    VS2012VersionPassed = 1
+                %elif $(VC_MAJ_V) > 0
+                    VS2012VersionPassed = 1
+                %endif
+            %endif
+        %endif
+        %if !defined (VS2012VersionPassed)
+            %error Attempting to build with VS2012 but VS2012 Update 3 RC 1 (or later) is not installed!
+        %endif
+    %endif
+
+    %if defined (BUILD_USING_VS2013)
+        %if !defined (VS2013Dir)
+            GetVS2013Dir:
+                !~@task Bentley.Build.Tasks.RegistryRead \
+                            -i:RegWow64Option=KEY_WOW64_32KEY \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7" \
+                            -i:ValueName="12.0" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+                    ~@putenv VS2013Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2013Dir)
+                %error Attempting to build with VS 2013 but location is undefined!
+            %endif
+        %endif
+        %if !defined (VS2013_WindowsSdkDir)
+            VS2013_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots\", "KitsRoot81"]]
+            %if $(VS2013_WindowsSdkDir)==" "
+                %error VS2013_WindowsSdkDir is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+            %endif
+        %endif
+        %if defined (BUILD_USING_VS2002)
+            %error Conflicting compilers, attempting to build with VS 2013 and VS 2002
+        %elif defined (BUILD_USING_VS2003)
+            %error Conflicting compilers, attempting to build with VS 2013 and VS 2003
+        %elif defined (BUILD_USING_VS2005)
+            %error Conflicting compilers, attempting to build with VS 2013 and VS 2005
+        %elif defined (BUILD_USING_VS2008)
+            %error Conflicting compilers, attempting to build with VS 2013 and VS 2008
+        %elif defined (BUILD_USING_VS2010)
+            %error Conflicting compilers, attempting to build with VS 2013 and VS 2010
+        %elif defined (BUILD_USING_VS2012)
+            %error Conflicting compilers, attempting to build with VS 2013 and VS 2012
+        %elif defined (BUILD_USING_GCC)
+            %error Conflicting compilers, attempting to build with VS 2013 and GCC
+        %elif defined (BUILD_USING_LLVM)
+            %error Conflicting compilers, attempting to build with VS 2013 and LLVM
+        %endif
+    %endif
+
+    %if defined (BUILD_USING_VS2015)
+
+        %if !defined (VS2015Dir)
+            GetVS2013Dir:
+                !~@task Bentley.Build.Tasks.RegistryRead \
+                            -i:RegWow64Option=KEY_WOW64_32KEY \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7" \
+                            -i:ValueName="14.0" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+
+              %if !defined (VS2015_NO_SHORT_NAME)#short path causing problem with diagnostics hub
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+              %endif
+
+                SetTheVar:
+                    ~@putenv VS2015Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2015Dir)
+                %error Attempting to build with VS 2015 but location is undefined!
+            %endif
+        %endif
+        %if !defined (VS2015_WindowsSdkDir)
+            VS2015_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots\", "KitsRoot10"]]
+            %if $(VS2015_WindowsSdkDir)==" "
+                %error VS2015_WindowsSdkDir is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+            %endif
+        %endif
+        %if defined (BUILD_USING_VS2002)
+            %error Conflicting compilers, attempting to build with VS 2015 and VS 2002
+        %elif defined (BUILD_USING_VS2003)
+            %error Conflicting compilers, attempting to build with VS 2015 and VS 2003
+        %elif defined (BUILD_USING_VS2005)
+            %error Conflicting compilers, attempting to build with VS 2015 and VS 2005
+        %elif defined (BUILD_USING_VS2008)
+            %error Conflicting compilers, attempting to build with VS 2015 and VS 2008
+        %elif defined (BUILD_USING_VS2010)
+            %error Conflicting compilers, attempting to build with VS 2015 and VS 2010
+        %elif defined (BUILD_USING_VS2012)
+            %error Conflicting compilers, attempting to build with VS 2015 and VS 2012
+        %elif defined (BUILD_USING_VS2013)
+            %error Conflicting compilers, attempting to build with VS 2015 and VS 2013
+        %elif defined (BUILD_USING_GCC)
+            %error Conflicting compilers, attempting to build with VS 2015 and GCC
+        %elif defined (BUILD_USING_LLVM)
+            %error Conflicting compilers, attempting to build with VS 2015 and LLVM
+        %endif
+    %endif
+
+    %if defined (BUILD_USING_VS2017)
+
+        %if !defined (VS2017Dir)
+            GetVS2017Dir:
+                !~@task Bentley.Build.Tasks.RegistryRead \
+                            -i:RegWow64Option=KEY_WOW64_32KEY \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VS7" \
+                            -i:ValueName="15.0" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:VSProductDir=Value
+
+            %if $(VSProductDir)!="NotInstalled"
+
+              %if !defined (VS2017_NO_SHORT_NAME)#short path causing problem with diagnostics hub
+                ConvertToShortName:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${VSProductDir}" -o:VSProductDir=ShortNames
+              %endif
+
+                SetTheVar:
+                    ~@putenv VS2017Dir=$(VSProductDir)/
+
+            %endif
+            %undef VSProductDir
+            %if !defined (VS2017Dir)
+                %error Attempting to build with VS 2017 but location is undefined!
+            %endif
+        %endif
+        %if !defined (VS2017_WindowsSdkDir)
+            VS2017_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots\", "KitsRoot10"]]
+            %if $(VS2017_WindowsSdkDir)==" "
+                %error VS2017_WindowsSdkDir is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+            %endif
+        %endif
+        %if defined (BUILD_USING_VS2002)
+            %error Conflicting compilers, attempting to build with VS 2017 and VS 2002
+        %elif defined (BUILD_USING_VS2003)
+            %error Conflicting compilers, attempting to build with VS 2017 and VS 2003
+        %elif defined (BUILD_USING_VS2005)
+            %error Conflicting compilers, attempting to build with VS 2017 and VS 2005
+        %elif defined (BUILD_USING_VS2008)
+            %error Conflicting compilers, attempting to build with VS 2017 and VS 2008
+        %elif defined (BUILD_USING_VS2010)
+            %error Conflicting compilers, attempting to build with VS 2017 and VS 2010
+        %elif defined (BUILD_USING_VS2012)
+            %error Conflicting compilers, attempting to build with VS 2017 and VS 2012
+        %elif defined (BUILD_USING_VS2013)
+            %error Conflicting compilers, attempting to build with VS 2017 and VS 2013
+        %elif defined (BUILD_USING_VS2015)
+            %error Conflicting compilers, attempting to build with VS 2017 and VS 2015
+        %elif defined (BUILD_USING_GCC)
+            %error Conflicting compilers, attempting to build with VS 2017 and GCC
+        %elif defined (BUILD_USING_LLVM)
+            %error Conflicting compilers, attempting to build with VS 2017 and LLVM
+        %endif
+    %endif
+
+
+%else
+
+    %if !defined (BUILD_USING_GCC) && !defined (BUILD_USING_LLVM)
+
+        %if defined (BUILD_USING_VS2005) || defined (BUILD_USING_VS2003) || defined (BUILD_USING_VS2002)
+            %error Only VS2010 and VS2008 are supported.
+        %endif
+
+
+        %if defined (BUILD_USING_VS2010)
+
+            %if !defined (VS2010Dir)
+                VS2010Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7", "10.0"]]
+                %if $(VS2010Dir) == " "
+                    %error Attempting to build with VS 2010 but location is undefined!
+                %endif
+            %endif
+
+            VS2010_VCINSTALLDIR=$(VS2010Dir)VC/
+
+            %if !defined (VS2010_WindowsSdkDir)
+                VS2010_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Microsoft SDKs/Windows/v7.0A", "InstallationFolder"]]
+                %if $(VS2010_WindowsSdkDir)==" "
+                    %error VS2010_WindowsSdkDir is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+                %endif
+            %endif
+
+        %elif defined (BUILD_USING_VS2008)
+
+            %if !defined (VS2008Dir)
+                VS2008Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/9.0/Setup/VS", "ProductDir"]]
+                %if $(VS2008Dir) == " "
+                    %error Attempting to build with VS 2008 but location is undefined!
+                %endif
+            %endif
+
+            %if !defined (WinSDKFolder)
+                #
+                #  Note that this is the registry key created by the VS 2008 installer to point to the SDK that VS 2008 should use.
+                #  Windows SDK's now come with a "Windows SDK Configuration Tool" that will modify this value if you want to convince
+                #  Visual Studio to use a newer Windows SDK than the one that it shipped with. In this manner we get bmake to honor
+                #  the same Windows SDK integration as Visual Studio itself.
+                #
+                WinSDKFolder = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Microsoft SDKs/Windows", "CurrentInstallFolder" ]]
+                %if $(WinSDKFolder)==" "
+                    %error WinSDKFolder is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+                %endif
+            %endif
+
+            FrameworkDir = BentleyBuildMakeDoesNotSupportManagedCode
+            v30FrameworkAssemblies = BentleyBuildMakeDoesNotSupportManagedCode
+            v35FrameworkAssemblies = BentleyBuildMakeDoesNotSupportManagedCode
+        %elif defined (BUILD_USING_VS2012)
+
+            %if !defined (VS2012Dir)
+                VS2012Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7", "11.0"]]
+                %if $(VS2012Dir) == " "
+                    %error Attempting to build with VS 2012 but location is undefined!
+                %endif
+            %endif
+
+            VS2012_VCINSTALLDIR=$(VS2012Dir)VC/
+
+            %if !defined (VS2012_WindowsSdkDir)
+                VS2012_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots\", "KitsRoot"]]
+                %if $(VS2012_WindowsSdkDir)==" "
+                    %error VS2012_WindowsSdkDir is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+                %endif
+            %endif
+        %elif defined (BUILD_USING_VS2013)
+
+            %if !defined (VS2013Dir)
+                VS2013Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7", "12.0"]]
+                %if $(VS2013Dir) == " "
+                    %error Attempting to build with VS 2013 but location is undefined!
+                %endif
+            %endif
+
+            VS2013_VCINSTALLDIR=$(VS2013Dir)VC/
+
+            %if !defined (VS2013_WindowsSdkDir)
+                VS2013_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots\", "KitsRoot81"]]
+                %if $(VS2013_WindowsSdkDir)==" "
+                    %error VS2013_WindowsSdkDir is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+                %endif
+            %endif
+        %elif defined (BUILD_USING_VS2015)
+
+            %if !defined (VS2015Dir)
+                VS2015Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7", "14.0"]]
+                %if $(VS2015Dir) == " "
+                    %error Attempting to build with VS 2015 but location is undefined!
+                %endif
+            %endif
+
+            VS2015_VCINSTALLDIR=$(VS2015Dir)VC/
+
+            %if !defined (VS2015_WindowsSdkDir)
+                VS2015_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots\", "KitsRoot10"]]
+                %if $(VS2015_WindowsSdkDir)==" "
+                    %error VS2015_WindowsSdkDir is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+                %endif
+            %endif
+        %elif defined (BUILD_USING_VS2017)
+
+            %if !defined (VS2017Dir)
+                VS2017Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VS7", "15.0"]]
+                %if $(VS2017Dir) == " "
+                    %error Attempting to build with VS 2017 but location is undefined!
+                %endif
+            %endif
+
+            VS2017_VCINSTALLDIR=$(VS2017Dir)VC/
+
+            %if !defined (VS2017_WindowsSdkDir)
+                VS2017_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots\", "KitsRoot10"]]
+				%if $(VS2017_WindowsSdkDir)==" "
+                    %error VS2017_WindowsSdkDir is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+                %endif
+            %endif
+
+        %elif defined (BUILD_USING_VS2019)
+            # Nothing
+        %else
+
+        %elif defined (BUILD_USING_VS2022)
+            # Nothing
+        %else
+            %error For now, BentleyBuildMake supports only VS2010
+        %endif
+
+    %endif
+
+%endif # !defined (_notasks)
+
+%if defined (BUILD_USING_GCC)
+    %if defined (BUILD_USING_VS2002)
+        %error Conflicting compilers, attempting to build with VS GCC and VS 2002
+    %elif defined (BUILD_USING_VS2003)
+        %error Conflicting compilers, attempting to build with VS GCC and VS 2003
+    %elif defined (BUILD_USING_VS2005)
+        %error Conflicting compilers, attempting to build with VS GCC and VS 2005
+    %elif defined (BUILD_USING_VS2008)
+        %error Conflicting compilers, attempting to build with VS GCC and VS 2008
+    %elif defined (BUILD_USING_VS2010)
+        %error Conflicting compilers, attempting to build with VS GCC and VS 2010
+    %elif defined (BUILD_USING_VS2012)
+        %error Conflicting compilers, attempting to build with VS GCC and VS 2012
+    %elif defined (BUILD_USING_VS2013)
+        %error Conflicting compilers, attempting to build with VS GCC and VS 2013
+    %elif defined (BUILD_USING_VS2015)
+        %error Conflicting compilers, attempting to build with VS GCC and VS 2015
+    %elif defined (BUILD_USING_LLVM)
+        %error Conflicting compilers, attempting to build with VS GCC and LLVM
+    %endif
+%endif
+
+%if defined (BUILD_USING_LLVM)
+
+    %if !defined (__unix) && !defined (__apple)
+        %error Don't know how to build iOS on this platform
+    %endif
+
+    # I don't know of a way to detect these paths, like you can with the registry on Windows.
+    # Allow developer scripts to control via XCODE_DIR and IOS_SYSROOT, and take a couple guesses for recent versions otherwise.
+
+    %if !defined (XCODE_DIR)
+        XCODE_DIR=/Developer/
+
+        %if !exists ($(XCODE_DIR))
+            XCODE_DIR=/Applications/Xcode.app/Contents/Developer/
+        %endif
+    %endif
+
+    %if !defined (IOS_SYSROOT)
+        %if $(TARGET_PROCESSOR_ARCHITECTURE)=="iOSX86"
+            IOS_SYSROOT = $(XCODE_DIR)Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.0.sdk
+
+            %if !exists ($(IOS_SYSROOT))
+                IOS_SYSROOT = $(XCODE_DIR)Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator5.1.sdk
+            %endif
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="iOSARM"
+            IOS_SYSROOT = $(XCODE_DIR)Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk
+
+            %if !exists ($(IOS_SYSROOT))
+                IOS_SYSROOT = $(XCODE_DIR)Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk
+            %endif
+        %endif
+    %endif
+
+    XCODE_BIN_DIR = $(XCODE_DIR)Toolchains/XcodeDefault.xctoolchain/usr/bin/
+
+    %if defined (BUILD_USING_VS2002)
+        %error Conflicting compilers, attempting to build with LLVM and VS 2002
+    %elif defined (BUILD_USING_VS2003)
+        %error Conflicting compilers, attempting to build with LLVM and VS 2003
+    %elif defined (BUILD_USING_VS2005)
+        %error Conflicting compilers, attempting to build with LLVM and VS 2005
+    %elif defined (BUILD_USING_VS2008)
+        %error Conflicting compilers, attempting to build with LLVM and VS 2008
+    %elif defined (BUILD_USING_VS2010)
+        %error Conflicting compilers, attempting to build with LLVM and VS 2010
+    %elif defined (BUILD_USING_VS2012)
+        %error Conflicting compilers, attempting to build with LLVM and VS 2012
+    %elif defined (BUILD_USING_VS2013)
+        %error Conflicting compilers, attempting to build with LLVM and VS 2013
+    %elif defined (BUILD_USING_VS2015)
+        %error Conflicting compilers, attempting to build with LLVM and VS 2015
+    %elif defined (BUILD_USING_GCC)
+        %error Conflicting compilers, attempting to build with LLVM and GCC
+    %endif
+%endif
+
+
+%if defined (USING_VS2002) && defined (USING_VS6)
+    %error Conflicting compilers, attempting to build with VS 2002 and VS 6
+%endif
+
+%if defined (USING_VS2003) && defined (USING_VS6)
+    %error Conflicting compilers, attempting to build with VS 2003 and VS 6
+%elif defined (USING_VS2003) && defined (USING_VS2002)
+    %error Conflicting compilers, attempting to build with VS 2003 and VS 2002
+%endif
+
+%if defined (USING_VS2005) && defined (USING_VS6)
+    %error Conflicting compilers, attempting to build with VS 2005 and VS 6
+%elif defined (USING_VS2005) && defined (USING_VS2002)
+    %error Conflicting compilers, attempting to build with VS 2005 and VS 2002
+%elif defined (USING_VS2005) && defined (USING_VS2003)
+    %error Conflicting compilers, attempting to build with VS 2005 and VS 2003
+%endif
+
+%if defined (USING_VS2008) && defined (USING_VS6)
+    %error Conflicting compilers, attempting to build with VS 2008 and VS 6
+%elif defined (USING_VS2008) && defined (USING_VS2002)
+    %error Conflicting compilers, attempting to build with VS 2008 and VS 2002
+%elif defined (USING_VS2008) && defined (USING_VS2003)
+    %error Conflicting compilers, attempting to build with VS 2008 and VS 2003
+%elif defined (USING_VS2008) && defined (USING_VS2005)
+    %error Conflicting compilers, attempting to build with VS 2008 and VS 2005
+%elif defined (USING_VS2008) && defined (USING_GCC)
+    %error Conflicting compilers, attempting to build with VS 2008 and GCC
+%endif
+
+%if defined (USING_VS2010) && defined (USING_VS6)
+    %error Conflicting compilers, attempting to build with VS 2010 and VS 6
+%elif defined (USING_VS2010) && defined (USING_VS2002)
+    %error Conflicting compilers, attempting to build with VS 2010 and VS 2002
+%elif defined (USING_VS2010) && defined (USING_VS2003)
+    %error Conflicting compilers, attempting to build with VS 2010 and VS 2003
+%elif defined (USING_VS2010) && defined (USING_VS2005)
+    %error Conflicting compilers, attempting to build with VS 2010 and VS 2005
+%elif defined (USING_VS2010) && defined (USING_VS2008)
+    %error Conflicting compilers, attempting to build with VS 2010 and VS 2008
+%elif defined (USING_VS2010) && defined (USING_VS2012)
+    %error Conflicting compilers, attempting to build with VS 2010 and VS 2012
+%elif defined (USING_VS2010) && defined (USING_VS2013)
+    %error Conflicting compilers, attempting to build with VS 2010 and VS 2013
+%endif
+
+%if defined (USING_GCC) && defined (USING_VS6)
+    %error Conflicting compilers, attempting to build with GCC and VS 6
+%elif defined (USING_GCC) && defined (USING_VS2002)
+    %error Conflicting compilers, attempting to build with GCC and VS 2002
+%elif defined (USING_GCC) && defined (USING_VS2003)
+    %error Conflicting compilers, attempting to build with GCC and VS 2003
+%elif defined (USING_GCC) && defined (USING_VS2005)
+    %error Conflicting compilers, attempting to build with GCC and VS 2005
+%elif defined (USING_GCC) && defined (USING_VS2008)
+    %error Conflicting compilers, attempting to build with GCC and VS 2008
+%elif defined (USING_GCC) && defined (USING_VS2012)
+    %error Conflicting compilers, attempting to build with GCC and VS 2012
+%elif defined (USING_GCC) && defined (USING_LLVM)
+    %error Conflicting compilers, attempting to build with GCC and LLVM
+%endif
+
+%if defined (USING_LLVM) && defined (USING_VS6)
+    %error Conflicting compilers, attempting to build with LLVM and VS 6
+%elif defined (USING_LLVM) && defined (USING_VS2002)
+    %error Conflicting compilers, attempting to build with LLVM and VS 2002
+%elif defined (USING_LLVM) && defined (USING_VS2003)
+    %error Conflicting compilers, attempting to build with LLVM and VS 2003
+%elif defined (USING_LLVM) && defined (USING_VS2005)
+    %error Conflicting compilers, attempting to build with LLVM and VS 2005
+%elif defined (USING_LLVM) && defined (USING_VS2008)
+    %error Conflicting compilers, attempting to build with LLVM and VS 2008
+%elif defined (USING_LLVM) && defined (USING_VS2010)
+    %error Conflicting compilers, attempting to build with LLVM and VS 2010
+%elif defined (USING_LLVM) && defined (USING_VS2012)
+    %error Conflicting compilers, attempting to build with LLVM and VS 2012
+%elif defined (USING_LLVM) && defined (USING_GCC)
+    %error Conflicting compilers, attempting to build with LLVM and GCC
+%endif
+
+#
+# Delay loading is supported by VC 6 and on. So that is everything that we support here.
+#
+
+# Define the items that we define merely as bmake macros (as opposed to ~putenv) and,
+# if we don't have anything to change at the environment level, then just return.
+%if defined (BUILD_USING_GCC)
+    %undef MSVC_VERSION
+    %undef CSC_VERSION
+    %undef MSVCDir
+    CurrentToolSet=USING_GCC
+    CurrentCToolSetAbbr=GCC
+    %if defined (USING_GCC) && defined (USING_TARGET_ARCHITECTURE)
+        %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+            %return
+        %endif
+    %endif
+%elif defined (BUILD_USING_LLVM)
+    %undef MSVC_VERSION
+    %undef CSC_VERSION
+    %undef MSVCDir
+    CurrentToolSet=USING_LLVM
+    CurrentCToolSetAbbr=LLVM
+    %if defined (USING_LLVM) && defined (USING_TARGET_ARCHITECTURE)
+        %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+            %return
+        %endif
+    %endif
+%else
+    CSC_VERSION_DEF=CSC_VERSION_$(CSC_VERSION)
+    %if defined (BUILD_USING_VS2002)
+        MSVC_VERSION=1300
+        CSC_VERSION=700
+        CurrentToolSet=USING_VS2002
+        CurrentCToolSetAbbr=vc7
+        %if defined (USING_VS2002) && defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+                %return
+            %endif
+        %endif
+    %elif defined (BUILD_USING_VS2003)
+        MSVC_VERSION=1310
+        CSC_VERSION=710
+        CurrentToolSet=USING_VS2003
+        CurrentCToolSetAbbr=vc71
+        %if defined (USING_VS2003) && defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+                %return
+            %endif
+        %endif
+    %elif defined (BUILD_USING_VS2005)
+        MSVC_VERSION=1400
+        CSC_VERSION=800
+        CurrentToolSet=USING_VS2005
+        CurrentCToolSetAbbr=vc8
+        %if !defined (MultiTargetingToolsVersion)
+            MultiTargetingToolsVersion=2.0
+        %endif
+        %if defined (USING_VS2005) && defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+                %return
+            %endif
+        %endif
+    %elif defined (BUILD_USING_VS2008)
+        MSVC_VERSION=1500
+        CSC_VERSION=900
+        CurrentToolSet=USING_VS2008
+        CurrentCToolSetAbbr=vc9
+        %if !defined (MultiTargetingToolsVersion)
+            MultiTargetingToolsVersion=3.5
+        %endif
+        %if defined (USING_VS2008) && defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+                %return
+            %endif
+        %endif
+    %elif defined (BUILD_USING_VS2010)
+        MSVC_VERSION=1600
+        # Microsoft went from version v8 in 2005 to v9 in 2008 to v4 in 2010.  So much for lt/gt testing. Let's go with 4000 then.
+        CSC_VERSION=4000
+        CurrentToolSet=USING_VS2010
+        CurrentCToolSetAbbr=vc10
+        %if !defined (MultiTargetingToolsVersion)
+            MultiTargetingToolsVersion=4.0
+        %endif
+    %elif defined (BUILD_USING_VS2012)
+        MSVC_VERSION=1700
+        # Microsoft went from version v8 in 2005 to v9 in 2008 to v4 in 2010.  So much for lt/gt testing. Let's go with 4000 then.
+        CSC_VERSION=4000
+        CurrentToolSet=USING_VS2012
+        CurrentCToolSetAbbr=vc11
+        # I'm told we want to use 4.0 tools, 4.5 framework.
+        %if !defined (MultiTargetingToolsVersion)
+            MultiTargetingToolsVersion=4.0
+        %endif
+        %if !defined (TargetFrameworkVersion)
+            TargetFrameworkVersion=v4.5
+        %endif
+        %if defined (USING_VS2012) && defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+                %return
+            %endif
+        %endif
+    %elif defined (BUILD_USING_VS2013)
+        MSVC_VERSION=1800
+        # Microsoft went from version v8 in 2005 to v9 in 2008 to v4 in 2010.  So much for lt/gt testing. Let's go with 4000 then.
+        CSC_VERSION=4000
+        CurrentToolSet=USING_VS2013
+        CurrentCToolSetAbbr=vc11
+        # I'm told we want to use 4.0 tools, 4.5 framework.
+        %if !defined (MultiTargetingToolsVersion)
+            MultiTargetingToolsVersion=4.0
+        %endif
+        %if !defined (TargetFrameworkVersion)
+            TargetFrameworkVersion=v4.5.2
+        %endif
+        %if defined (USING_VS2013) && defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+                %return
+            %endif
+        %endif
+    %elif defined (BUILD_USING_VS2015)
+        MSVC_VERSION=1900
+        # Microsoft went from version v8 in 2005 to v9 in 2008 to v4 in 2010.  So much for lt/gt testing. Let's go with 4000 then.
+        # It gets worse, 2013 has 12, 2015 has 1.2. I think we should just track the .NET number, keeping it at 4000 until there
+        # is some break that we need to identify, and then change it to 4600 for 4.6 or whatever makes sense.
+        CSC_VERSION=4000
+        CurrentToolSet=USING_VS2015
+        CurrentCToolSetAbbr=vc11
+        # I'm told we want to use 4.0 tools, 4.5 framework.
+        %if !defined (MultiTargetingToolsVersion)
+            MultiTargetingToolsVersion=12.0
+            # not using Tools version 14 here, as there are changes to MSBuild which requires updates to Bentley Targets and Bentley Properties
+        %endif
+        %if !defined (TargetFrameworkVersion)
+            TargetFrameworkVersion=v4.6.1
+        %endif
+        %if defined (USING_VS2015) && defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+                %return
+            %endif
+        %endif
+    %elif defined (BUILD_USING_VS2017)
+        MSVC_VERSION=1910
+        # Microsoft went from version v8 in 2005 to v9 in 2008 to v4 in 2010.  So much for lt/gt testing. Let's go with 4000 then.
+        # It gets worse, 2013 has 12, 2015 has 1.2. I think we should just track the .NET number, keeping it at 4000 until there
+        # is some break that we need to identify, and then change it to 4600 for 4.6 or whatever makes sense.
+        CSC_VERSION=4000
+        CurrentToolSet=USING_VS2017
+        CurrentCToolSetAbbr=vc11
+        # I'm told we want to use 4.0 tools, 4.5 framework.
+        %if !defined (MultiTargetingToolsVersion)
+            MultiTargetingToolsVersion=15.0
+        %endif
+        %if !defined (TargetFrameworkVersion)
+            TargetFrameworkVersion=v4.6.2
+        %endif
+        %if defined (USING_VS2017) && defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) == $(TARGET_PROCESSOR_ARCHITECTURE)
+                %return
+            %endif
+        %endif
+    %elif defined (BUILD_USING_VS2019)
+        # Nothing
+    %else
+    %elif defined (BUILD_USING_VS2022)
+        # Nothing
+    %else
+        # For now, we make including this thing an error if you do not really take advantage of what it does.
+        %error BUILD_USING_GCC, BUILD_USING_LLVM, BUILD_USING_VS2002, BUILD_USING_VS2003, BUILD_USING_VS2005, BUILD_USING_VS2008, BUILD_USING_VS2010, BUILD_USING_VS2012, BUILD_USING_VS2013, or BUILD_USING_VS2015 must be defined
+    %endif
+%endif
+
+# See if we are already using a specific compiler
+%if defined (USING_VS6)
+    PreviousToolSet=USING_VS6
+%elif defined (USING_VS2002)
+    PreviousToolSet=USING_VS2002
+%elif defined (USING_VS2003)
+    PreviousToolSet=USING_VS2003
+%elif defined (USING_VS2005)
+    PreviousToolSet=USING_VS2005
+%elif defined (USING_VS2008)
+    PreviousToolSet=USING_VS2008
+%elif defined (USING_VS2010)
+    PreviousToolSet=USING_VS2010
+%elif defined (USING_VS2012)
+    PreviousToolSet=USING_VS2012
+%elif defined (USING_VS2013)
+    PreviousToolSet=USING_VS2013
+%elif defined (USING_VS2015)
+    PreviousToolSet=USING_VS2015
+%elif defined (USING_GCC)
+    PreviousToolSet=USING_GCC
+%elif defined (USING_LLVM)
+    PreviousToolSet=USING_LLVM
+%endif
+
+%if defined (USING_TARGET_ARCHITECTURE)
+    PreviousTargetProcessorArchitecture=%$(USING_TARGET_ARCHITECTURE)
+%endif
+
+# If so revert the env to the default
+%if defined (PreviousToolSet)
+
+revert:
+    %if !defined (_notasks)
+     !~@task Bentley.Build.Tasks.StringRegexReplace \
+                    -i:Input="${PATH}" \
+                    -i:ExpressionIsLiteral=true \
+                    -i:Expression="${ToolSetPathsInjected};" \
+                    -i:Count=1 \
+                    -o:CleansedPath=Output
+    ~@putenv PATH=$(CleansedPath)
+    %endif
+    ~@putenv INCLUDE=$(__SAVED_INCLUDE)
+    ~@putenv LIB=$(__SAVED_LIB)
+    ~@putenv MSVCDir=$(__SAVED_MSVCDir)
+    ~@putenv FrameworkDir=$(__SAVED_FrameworkDir)
+    ~@putenv FrameworkSDKDir=$(__SAVED_FrameworkSDKDir)
+    ~@putenv FrameworkVersion=$(__SAVED_FrameworkVersion)
+    ~@putenv Framework35Version=$(__SAVED_Framework35Version)
+    ~@putenv Framework45Version=$(__SAVED_Framework45Version)
+    ~@putenv MSVCDir=
+    ~@putenv USING_VS6=
+    ~@putenv USING_VS2002=
+    ~@putenv USING_VS2003=
+    ~@putenv USING_VS2005=
+    ~@putenv USING_VS2008=
+    ~@putenv USING_VS2010=
+    ~@putenv USING_VS2012=
+    ~@putenv USING_VS2013=
+    ~@putenv USING_VS2015=
+    ~@putenv USING_TARGET_ARCHITECTURE=
+    #undef GCC_LIB_PATH
+
+%else
+
+SAVE:
+    !~@putenv __SAVED_INCLUDE=$(INCLUDE)
+    ~@putenv __SAVED_LIB=$(LIB)
+    ~@putenv __SAVED_MSVCDir=$(MSVCDir)
+    ~@putenv __SAVED_FrameworkDir=$(FrameworkDir)
+    ~@putenv __SAVED_FrameworkSDKDir=$(FrameworkSDKDir)
+    ~@putenv __SAVED_FrameworkVersion=$(FrameworkVersion)
+    ~@putenv __SAVED_Framework35Version=$(Framework35Version)
+
+%endif
+
+# GCC compiler setup
+%if defined (BUILD_USING_GCC)
+    ALWAYS:
+        ~@putenv USING_GCC=1
+        ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+%elif defined (BUILD_USING_LLVM)
+    ALWAYS:
+        ~@putenv USING_LLVM=1
+        ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+%elif defined (BUILD_USING_VS2022)
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "x64"
+        VsDevCmdArch = amd64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "x86"
+        VsDevCmdArch = x86
+    %else
+        %error Could not map TARGET_PROCESSOR_ARCHITECTURE '$(TARGET_PROCESSOR_ARCHITECTURE)' to a known VsDevCmd argument.
+    %endif
+
+    %if defined (DEFAULT_TARGET_FRAMEWORK_VERSION)
+        TargetFrameworkVersion=$(DEFAULT_TARGET_FRAMEWORK_VERSION)
+    %endif
+
+    %if !defined (TargetFrameworkVersion)
+        TargetFrameworkVersion=v4.6.2
+    %endif
+
+    VS_VERSION=17
+    %if !defined(VSCMD_VER) || defined(FORCE_VS_DEV_CMD_IMPORT)
+        VS_DEV_CMD_DIR=$(OutputRootDir)Build/VSEnvironment/
+
+        %if defined(VS2022_NO_SHORT_NAME)
+            VS_DEV_CMD_FILE_NAME_NO_SHORT_NAME =_No_Short_Names
+        %endif
+        %if defined(VS2022_NO_BUILD_TOOLS)
+            VS_DEV_CMD_FILE_NAME_NO_BUILD_TOOLS =_No_Build_Tools
+        %endif
+        %if !defined(VS_DEV_CMD_WINDOWS_SDK_VERSION) && defined(DEFAULT_TARGET_WINDOWS_SDK_VERSION)
+            VS_DEV_CMD_WINDOWS_SDK_VERSION = $(DEFAULT_TARGET_WINDOWS_SDK_VERSION)
+        %endif
+        %if defined(VS_DEV_CMD_WINDOWS_SDK_VERSION)
+            VS_DEV_CMD_FILE_NAME_WINDOWS_SDK_VERSION =_WinSDK_$(VS_DEV_CMD_WINDOWS_SDK_VERSION)
+        %endif
+        %if defined(TOOL_VERSION)
+            VS_DEV_CMD_FILE_NAME_VCTOOLS_VERSION =_$(TOOL_VERSION)
+        %endif
+        VS_DEV_CMD_INCLUDE_MKI_FILE_NAME = $(VS_DEV_CMD_DIR)VsDevCmd$(VS_DEV_CMD_FILE_NAME_NO_SHORT_NAME)$(VS_DEV_CMD_FILE_NAME_NO_BUILD_TOOLS)_$(VS_VERSION)$(VS_DEV_CMD_FILE_NAME_WINDOWS_SDK_VERSION)$(VS_DEV_CMD_FILE_NAME_VCTOOLS_VERSION)_$(TargetFrameworkVersion)_$(VsDevCmdArch).mki
+
+        VS_DEV_CMD_ARGS_DEFAULT = --vsversion=2022 --targetarch=$(VsDevCmdArch) --targetframeworkversion=$(TargetFrameworkVersion) --hostarch=x86
+        %if defined(TOOL_VERSION)
+            VS_DEV_CMD_ARGS_TOOL_VERSION = --vctoolsversion=$(TOOL_VERSION)
+        %endif
+        %if defined(VS_DEV_CMD_WINDOWS_SDK_VERSION)
+            VS_DEV_CMD_ARGS_WINDOWS_SDK_VERSION = --winsdkversion=$(VS_DEV_CMD_WINDOWS_SDK_VERSION)
+        %endif
+        %if defined(VS2022_NO_SHORT_NAME)
+            VS_DEV_CMD_ARGS_NO_SHORT_NAME = --novsshortpaths
+        %endif
+        %if defined(VS2022_NO_BUILD_TOOLS)
+            VS_DEV_CMD_ARGS_NO_BUILD_TOOLS = --nobuildtools
+        %endif
+        VS_DEV_CMD_ARGS = $(VS_DEV_CMD_ARGS_DEFAULT) $(VS_DEV_CMD_ARGS_TOOL_VERSION) $(VS_DEV_CMD_ARGS_WINDOWS_SDK_VERSION) $(VS_DEV_CMD_ARGS_NO_SHORT_NAME) $(VS_DEV_CMD_ARGS_NO_BUILD_TOOLS) $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME)
+
+        VC_TOOLS_DIR_MARKER_FILE = $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME).vctoolsdir.txt
+
+        %if !defined (BMAKE_DELETE_ALL_TARGETS)
+            %iffile $(VC_TOOLS_DIR_MARKER_FILE)
+                VC_TOOLS_INSTALL_DIR = $[@realpath $[@strip $[@readfile $(VC_TOOLS_DIR_MARKER_FILE)]]]
+                %if !exists($(VC_TOOLS_INSTALL_DIR))
+                    %warn "MSVC toolset doesn't exist anymore at $(VC_TOOLS_INSTALL_DIR). Regenerating environment import again."
+                    always:
+                        del $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME)
+                %endif
+            %endif
+
+            $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME) : "$(_MakeFileSpec)"
+                ~mkdir $(VS_DEV_CMD_DIR)
+                $(BBPYTHONCMD) $(SrcRoot)bsicommon/PublicSDK/VsDevCmdImport.py $(VS_DEV_CMD_ARGS)
+        %endif
+
+        %include $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME)
+
+        $(VC_TOOLS_DIR_MARKER_FILE) : $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME)
+            > $(VC_TOOLS_DIR_MARKER_FILE)
+            $(VCToolsInstallDir)
+            <
+
+        # Force subsequent VS DEV CMD Imports so that bmake properties get persisted in child bmake processes
+        always:
+            ~@putenv FORCE_VS_DEV_CMD_IMPORT=1
+    %else
+        %message Running in environment which already has Visual Studio Developer Command Prompt initialized so not importing it.
+
+        # We need to identify the MSVC_VERSION for compiling later down the line. When we export the environment, we do that in our python scripts.
+        INVALID_VC_TOOLSET_VS2017=14.1
+        INVALID_VC_TOOLSET_VS2019=14.2
+        %if !defined(VCToolsVersion) || $[@findstring $(INVALID_VC_TOOLSET_VS2017), $(VCToolsVersion)] == $(INVALID_VC_TOOLSET_VS2017) || $[@findstring $(INVALID_VC_TOOLSET_VS2019), $(VCToolsVersion)] == $(INVALID_VC_TOOLSET_VS2019)
+            %error C++ 14.3X tools are required but not installed
+        %endif
+        MSVC_VERSION=1930
+    %endif
+
+    CSC_VERSION=4000
+    MSVCDir=$(VCToolsInstallDir)
+    FrameworkSDKDir=$(WindowsSdkDir)
+    # BMake logic to write a bunch of commands to file (used for linking in dlmlink.mki) has logic to split lines at next whitespace after maxOutputLen
+    # The (seemingly arbitrary) value of 2048 is unlucky enough to split the msvcrt.lib path in half, breaking the build... 
+    maxOutputLen=8192
+
+    always:
+        ~@putenv USING_VS2022=1
+        ~@putenv DIA_INCLUDE=$(VSINSTALLDIR)DIA SDK/include
+        ~@putenv FrameworkSDKDir=$(FrameworkSDKDir)
+
+    %if !defined (_notasks)
+        always:
+            !~@task Microsoft.Build.Tasks.GetReferenceAssemblyPaths \
+                -i:TargetFrameworkMoniker=".NETFramework,Version=$(TargetFrameworkVersion)" \
+                -o:ReferenceAssemblies=FullFrameworkReferenceAssemblyPaths \
+                -o:test=ReferenceAssemblyPaths \
+                -o:DisplayName=TargetFrameworkMonikerDisplayName
+            !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${ReferenceAssemblies}" -o:FrameworkReferenceAssembliesNoTrailingSlash=ShortNames
+            ~@putenv ASSEMBLY_TARGET_DISPLAYNAME=$(DisplayName)
+
+        FrameworkReferenceAssemblies=$(FrameworkReferenceAssembliesNoTrailingSlash)/
+        ReferenceAssemblies=$(FrameworkReferenceAssemblies)
+
+        always:
+            ~@putenv FrameworkReferenceAssemblies=$(FrameworkReferenceAssemblies)
+            ~@putenv TargetFrameworkVersion=$(TargetFrameworkVersion)
+            ~@putenv ASSEMBLY_TARGET_VERSION=$(TargetFrameworkVersion)
+    %endif
+
+
+%elif defined (BUILD_USING_VS2019)
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "x64"
+        VsDevCmdArch = amd64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "x86"
+        VsDevCmdArch = x86
+    %else
+        %error Could not map TARGET_PROCESSOR_ARCHITECTURE '$(TARGET_PROCESSOR_ARCHITECTURE)' to a known VsDevCmd argument.
+    %endif
+
+    %if defined (DEFAULT_TARGET_FRAMEWORK_VERSION)
+        TargetFrameworkVersion=$(DEFAULT_TARGET_FRAMEWORK_VERSION)
+    %endif
+
+    %if !defined (TargetFrameworkVersion)
+        TargetFrameworkVersion=v4.6.2
+    %endif
+
+    VS_VERSION=16
+    %if !defined(VSCMD_VER) || defined(FORCE_VS_DEV_CMD_IMPORT)
+        VS_DEV_CMD_DIR=$(OutputRootDir)Build/VSEnvironment/
+
+        %if defined(VS2019_NO_SHORT_NAME)
+            VS_DEV_CMD_FILE_NAME_NO_SHORT_NAME =_No_Short_Names
+        %endif
+        %if defined(VS2019_NO_BUILD_TOOLS)
+            VS_DEV_CMD_FILE_NAME_NO_BUILD_TOOLS =_No_Build_Tools
+        %endif
+        %if !defined(VS_DEV_CMD_WINDOWS_SDK_VERSION) && defined(DEFAULT_TARGET_WINDOWS_SDK_VERSION)
+            VS_DEV_CMD_WINDOWS_SDK_VERSION = $(DEFAULT_TARGET_WINDOWS_SDK_VERSION)
+        %endif
+        %if defined(VS_DEV_CMD_WINDOWS_SDK_VERSION)
+            VS_DEV_CMD_FILE_NAME_WINDOWS_SDK_VERSION =_WinSDK_$(VS_DEV_CMD_WINDOWS_SDK_VERSION)
+        %endif
+        VS_DEV_CMD_INCLUDE_MKI_FILE_NAME = $(VS_DEV_CMD_DIR)VsDevCmd$(VS_DEV_CMD_FILE_NAME_NO_SHORT_NAME)$(VS_DEV_CMD_FILE_NAME_NO_BUILD_TOOLS)_$(VS_VERSION)$(VS_DEV_CMD_FILE_NAME_WINDOWS_SDK_VERSION)_$(TargetFrameworkVersion)_$(VsDevCmdArch).mki
+
+        VS_DEV_CMD_ARGS_DEFAULT = --vsversion=2019 --targetarch=$(VsDevCmdArch) --targetframeworkversion=$(TargetFrameworkVersion) --hostarch=x86
+        %if defined(TOOL_VERSION)
+            VS_DEV_CMD_ARGS_TOOL_VERSION = --vctoolsversion=$(TOOL_VERSION)
+        %endif
+        %if defined(VS_DEV_CMD_WINDOWS_SDK_VERSION)
+            VS_DEV_CMD_ARGS_WINDOWS_SDK_VERSION = --winsdkversion=$(VS_DEV_CMD_WINDOWS_SDK_VERSION)
+        %endif
+        %if defined(VS2019_NO_SHORT_NAME)
+            VS_DEV_CMD_ARGS_NO_SHORT_NAME = --novsshortpaths
+        %endif
+        %if defined(VS2019_NO_BUILD_TOOLS)
+            VS_DEV_CMD_ARGS_NO_BUILD_TOOLS = --nobuildtools
+        %endif
+        VS_DEV_CMD_ARGS = $(VS_DEV_CMD_ARGS_DEFAULT) $(VS_DEV_CMD_ARGS_TOOL_VERSION) $(VS_DEV_CMD_ARGS_WINDOWS_SDK_VERSION) $(VS_DEV_CMD_ARGS_NO_SHORT_NAME) $(VS_DEV_CMD_ARGS_NO_BUILD_TOOLS) $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME)
+
+        VC_TOOLS_DIR_MARKER_FILE = $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME).vctoolsdir.txt
+
+        %if !defined (BMAKE_DELETE_ALL_TARGETS)
+            %iffile $(VC_TOOLS_DIR_MARKER_FILE)
+                VC_TOOLS_INSTALL_DIR = $[@realpath $[@strip $[@readfile $(VC_TOOLS_DIR_MARKER_FILE)]]]
+                %if !exists($(VC_TOOLS_INSTALL_DIR))
+                    %warn "MSVC toolset doesn't exist anymore at $(VC_TOOLS_INSTALL_DIR). Regenerating environment import again."
+                    always:
+                        del $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME)
+                %endif
+            %endif
+
+            $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME) : "$(_MakeFileSpec)"
+                ~mkdir $(VS_DEV_CMD_DIR)
+                $(BBPYTHONCMD) $(SrcRoot)bsicommon/PublicSDK/VsDevCmdImport.py $(VS_DEV_CMD_ARGS)
+        %endif
+
+        %include $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME)
+
+        $(VC_TOOLS_DIR_MARKER_FILE) : $(VS_DEV_CMD_INCLUDE_MKI_FILE_NAME)
+            > $(VC_TOOLS_DIR_MARKER_FILE)
+            $(VCToolsInstallDir)
+            <
+
+        # Force subsequent VS DEV CMD Imports so that bmake properties get persisted in child bmake processes
+        always:
+            ~@putenv FORCE_VS_DEV_CMD_IMPORT=1
+    %else
+        %message Running in environment which already has Visual Studio Developer Command Prompt initialized so not importing it.
+
+        # We need to identify the MSVC_VERSION for compiling later down the line. When we export the environment, we do that in our python scripts.
+        INVALID_VC_TOOLSET=14.1
+        %if !defined(VCToolsVersion) || $[@findstring $(INVALID_VC_TOOLSET), $(VCToolsVersion)] == $(INVALID_VC_TOOLSET)
+            %error C++ 14.2X tools are required but not installed
+        %endif
+        MSVC_VERSION=1920
+    %endif
+
+    CSC_VERSION=4000
+    MSVCDir=$(VCToolsInstallDir)
+    FrameworkSDKDir=$(WindowsSdkDir)
+    # BMake logic to write a bunch of commands to file (used for linking in dlmlink.mki) has logic to split lines at next whitespace after maxOutputLen
+    # The (seemingly arbitrary) value of 2048 is unlucky enough to split the msvcrt.lib path in half, breaking the build... 
+    maxOutputLen=8192
+
+    always:
+        ~@putenv USING_VS2019=1
+        ~@putenv DIA_INCLUDE=$(VSINSTALLDIR)DIA SDK/include
+        ~@putenv FrameworkSDKDir=$(FrameworkSDKDir)
+
+    %if !defined (_notasks)
+        always:
+            !~@task Microsoft.Build.Tasks.GetReferenceAssemblyPaths \
+                -i:TargetFrameworkMoniker=".NETFramework,Version=$(TargetFrameworkVersion)" \
+                -o:ReferenceAssemblies=FullFrameworkReferenceAssemblyPaths \
+                -o:test=ReferenceAssemblyPaths \
+                -o:DisplayName=TargetFrameworkMonikerDisplayName
+            !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${ReferenceAssemblies}" -o:FrameworkReferenceAssembliesNoTrailingSlash=ShortNames
+            ~@putenv ASSEMBLY_TARGET_DISPLAYNAME=$(DisplayName)
+
+        FrameworkReferenceAssemblies=$(FrameworkReferenceAssembliesNoTrailingSlash)/
+        ReferenceAssemblies=$(FrameworkReferenceAssemblies)
+
+        always:
+            ~@putenv FrameworkReferenceAssemblies=$(FrameworkReferenceAssemblies)
+            ~@putenv TargetFrameworkVersion=$(TargetFrameworkVersion)
+            ~@putenv ASSEMBLY_TARGET_VERSION=$(TargetFrameworkVersion)
+    %endif
+
+%elif defined (BUILD_USING_VS2017)
+
+    %include VCVarsQueryRegistry2017.mki
+
+	%if defined (TOOL_VERSION)
+		VCTOOLS_VERSION = $[@realpath $[@readfile $(VS2017Dir)VC/Auxiliary/Build/$(TOOL_VERSION)/Microsoft.VCToolsVersion.$(TOOL_VERSION).txt]]
+
+		%if $(VCTOOLS_VERSION) == " "
+			%undef VCTOOLS_VERSION
+		%endif
+	%endif
+
+	%if !defined (VCTOOLS_VERSION)
+		versionFile = $(VS2017Dir)VC/Auxiliary/Build/Microsoft.VCToolsVersion.default.txt
+		VCTOOLS_VERSION = $[@realpath $[@readfile $(versionFile)]]
+
+		%if !defined (TOOL_VERSION)
+			TOOL_VERSION = 14.16
+		%endif
+
+		%if !($[@findstring $(TOOL_VERSION), $(VCTOOLS_VERSION)] == $(TOOL_VERSION))
+			%error ToolSet version $(TOOL_VERSION).XXX is required (version found=$(VCTOOLS_VERSION))
+			%undef VCTOOLS_VERSION
+		%endif
+	%endif
+
+	CSC_Path = $(VS2017Dir)MSBuild\15.0\Bin\Roslyn
+
+    always:
+        %if defined (DEBUG_POLICY)
+            !|[== Setting up VC 15 (VS2017)  $(TARGET_PROCESSOR_ARCHITECTURE) development environment ==]
+        %endif
+        %if $(TARGET_PROCESSOR_ARCHITECTURE) == "x86" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"
+            ~@putenv ToolSetPathsInjected=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/bin/Hostx86/x86;$(VS2017_WindowsSdkDir)bin/$(WindowsSDKVersion)/x86;$(VS2017_WindowsSdkDir)bin/x86;$(VS2017_DotNetToolsDir)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "x64" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+            ~@putenv ToolSetPathsInjected=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/bin/Hostx64/x64;$(VS2017_WindowsSdkDir)bin/$(WindowsSDKVersion)/x64;$(VS2017_WindowsSdkDir)bin/x64;$(VS2017_DotNetToolsDir)x64;$(VS2017_DotNetToolsDir)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+            ~@putenv ToolSetPathsInjected=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/bin/Hostx86/x86;$(VS2017_WindowsSdkDir)bin/$(WindowsSDKVersion)/x86_arm;$(VS2017_WindowsSdkDir)bin/x86_arm;$(VS2017_DotNetToolsDir)
+        %endif
+        ~@putenv VS150COMNTOOLS=$(VS2017Dir)Common7/Tools/
+        ~@putenv FrameworkSDKDir=$(VS2017_WindowsSdkDir)
+        ~@putenv FrameworkVersion=$(VS2017_FrameworkVersion)
+        ~@putenv WindowsSDKVersion=$(WindowsSDKVersion)
+        ~@putenv FrameworkDir=$(VS2017_FrameworkDir)
+        ~@putenv DIA_INCLUDE=$(VS2017_DiaSdkDir)
+        ~@putenv ToolSetPathsInjected=$(ToolSetPathsInjected);$(VS2017Dir)Common7/IDE/VC/vcpackages;$(VS2017Dir)Common7/IDE;$(VS2017Dir)Common7/Tools;$(VS2017_MSBuildDir);$(CSC_Path);$(VS2017_FrameworkDir)$(VS2017_FrameworkVersion);$(VS2017_WindowsSdkDir)bin/$(WindowsSDKVersion)/x64
+        ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+        ~@putenv USING_VS2017=1
+        ~@putenv MSVCDir=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/
+        ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+
+    %if !defined (_notasks) && !defined(DONT_SET_NET_FRAMEWORK_FOR_VS2017)
+        # Find the .NET reference assemblies directory using the same MSBUILD task used by visual studio.  This allows you to use framework assemblies directly
+        ALWAYS:
+            !~@task Microsoft.Build.Tasks.GetReferenceAssemblyPaths \
+                -i:TargetFrameworkMoniker=".NETFramework,Version=$(TargetFrameworkVersion)" \
+                -o:ReferenceAssemblies=FullFrameworkReferenceAssemblyPaths \
+                -o:test=ReferenceAssemblyPaths \
+                -o:DisplayName=TargetFrameworkMonikerDisplayName
+            !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${ReferenceAssemblies}" -o:FrameworkReferenceAssembliesNoTrailingSlash=ShortNames
+            ~@putenv ASSEMBLY_TARGET_DISPLAYNAME=$(DisplayName)
+
+        %if $(TargetFrameworkVersion) == "v4.5" || $(TargetFrameworkVersion) == "v4.5.1" || $(TargetFrameworkVersion) == "v4.5.2"
+            v45FrameworkAssemblies=%$[FrameworkReferenceAssembliesNoTrailingSlash]/
+        %elif $(TargetFrameworkVersion) == "v4.6" || $(TargetFrameworkVersion) == "v4.6.1"
+            v46FrameworkAssemblies=%$[FrameworkReferenceAssembliesNoTrailingSlash]/
+        %endif
+
+        FrameworkReferenceAssemblies=$(FrameworkReferenceAssembliesNoTrailingSlash)/
+        ReferenceAssemblies=$(FrameworkReferenceAssemblies)
+        FxCopReferenceAssembliesPath=%$[FrameworkReferenceAssembliesNoTrailingSlash]
+        # /noconfig is ignored if specified in a response file
+        cscOptDirect + -noconfig
+        CSCOpt + -nostdlib
+        %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+            TargetProcessorArchitecture=AMD64
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+            TargetProcessorArchitecture=x86
+        %else
+            TargetProcessorArchitecture=msil
+        %endif
+
+        # TargetFrameworkVersion=v$(MultiTargetingToolsVersion)
+        TargetedRuntimeVersion = $(VS2017_FrameworkVersion)
+        TargetFrameworkMoniker=.NETFramework,Version=$(TargetFrameworkVersion)
+        AssemblySearchPath = $(ReferenceAssemblies);$(ReferenceAssemblies)Facades/;$(FrameworkDir)$(TargetedRuntimeVersion)/;$(FrameworkDir)$(TargetedRuntimeVersion)/WPF/
+        DEFAULT_ASSEMBLY_REFERENCE_LIST = mscorlib.dll;WindowsBase.dll;Accessibility.dll;Microsoft.CSharp.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Configuration.dll;System.Configuration.Install.dll;System.Core.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Data.dll;System.Data.DataSetExtensions.dll;System.Data.Linq.dll;System.Data.OracleClient.dll;System.Data.Entity.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Deployment.dll;System.Design.dll;System.DirectoryServices.dll;System.dll;System.Drawing.Design.dll;System.Drawing.dll;System.EnterpriseServices.dll;System.Management.dll;System.Messaging.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Runtime.Remoting.dll;System.Runtime.Serialization.dll;System.Runtime.Serialization.Formatters.Soap.dll;System.Security.dll;System.ServiceModel.dll;System.ServiceModel.Web.dll;System.ServiceProcess.dll;System.Transactions.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Web.dll;System.Web.Extensions.Design.dll;System.Web.Extensions.dll;System.Web.Mobile.dll;System.Web.RegularExpressions.dll;System.Web.Services.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Windows.Forms.Dll;System.Workflow.Activities.dll;System.Workflow.ComponentModel.dll;System.Workflow.Runtime.dll;System.Xml.dll;System.Xml.Linq.dll;System.Xaml.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.IdentityModel.dll;System.Data.Services.Client.dll;PresentationCore.dll;PresentationFramework.dll;System.ComponentModel.DataAnnotations.dll;
+
+        ALWAYS:
+            !~@task Microsoft.Build.Tasks.ResolveAssemblyReference \
+                -i:Assemblies="$(DEFAULT_ASSEMBLY_REFERENCE_LIST)" \
+                -i:SearchPaths="${AssemblySearchPath}" \
+                -i:TargetFrameworkVersion=$(TargetFrameworkVersion) \
+                -i:TargetFrameworkMoniker=$(TargetFrameworkMoniker) \
+                -i:TargetedRuntimeVersion=$(TargetedRuntimeVersion) \
+                -i:TargetProcessorArchitecture=$(TargetProcessorArchitecture) \
+                -o:ASSEMBLY_REFERENCE_LIST_LONG="ResolvedFiles"
+            !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="@(ASSEMBLY_REFERENCE_LIST_LONG)" -o:ASSEMBLY_REFERENCE_LIST=ShortNames
+            ~@putenv FrameworkDir=$(FrameworkDir)
+            ~@putenv FrameworkVersion=$(TargetFrameworkVersion)
+            ~@putenv TargetFrameworkVersion=$(TargetFrameworkVersion)
+            ~@putenv ASSEMBLY_TARGET_VERSION=$(TargetFrameworkVersion)
+            ~@putenv ASSEMBLY_SEARCH_PATH=$(AssemblySearchPath)
+
+        always:
+            !~@task Bentley.Build.Tasks.StringRegexReplace \
+                 -i:Input="${ASSEMBLY_REFERENCE_LIST}" \
+                 -i:Expression=";" \
+                 -i:ExpressionIsLiteral=true \
+                 -i:Replacement=" -FU" \
+                 -o:NewString=Output
+            ~@putenv USING_REF_ASSEMBLIES=-FU$(NewString)
+            ~@putenv FrameworkReferenceAssemblies=$(FrameworkReferenceAssemblies)
+
+        USING_REF_ASSEMBLIES=-FU$(NewString)
+    %else
+        ReferenceAssemblies=$(FrameworkDir)$(FrameworkVersion)
+    %endif
+
+    always:
+        %if $(TARGET_PLATFORM) == "WinRT"
+            ~@putenv LIBPATH=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/lib/x64;$(ReferenceAssemblies);$(VS2017_VCPACKAGESDIR);$(VS2017_WINDOWSMETADATADIR);${VS2017_WindowsSdkDir}/lib/${UCRTVersion}/um${slashx86x64};$(VS2017_WindowsSdkDir)References/CommonConfiguration/Neutral
+            ~@putenv LIB=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/lib/x64;${VS2017_WindowsSdkDir}/lib/${UCRTVersion}/um${slashx86x64}
+            ~@putenv INCLUDE=$(VS2017_INCLUDEUMDIR);$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/include;$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/atlmfc/include;${VS2017_WindowsSdkDir}/include/um;${VS2017_WindowsSdkDir}/include/winrt;${VS2017_WindowsSdkDir}/include/shared
+        %else
+            ~@putenv LIBPATH=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/lib/x64;$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/atlmfc/x64;$(ReferenceAssemblies);${VS2017_WindowsSdkDir}/lib/${UCRTVersion}/um${slashx86x64};$(VS2017_WindowsSdkDir)References/CommonConfiguration/Neutral;$(VS2017_DotNetWinSDKDir)Lib/um${slashx86x64}
+            ~@putenv LIB=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/lib/$(TARGET_PROCESSOR_ARCHITECTURE);$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/atlmfc/lib/$(TARGET_PROCESSOR_ARCHITECTURE);${VS2017_WindowsSdkDir}/lib/${UCRTVersion}/um${slashx86x64};${VS2017_WindowsSdkDir}/lib/${UCRTVersion}/ucrt${slashx86x64};$(VS2017_DotNetWinSDKDir)Lib/um${slashx86x64}
+            ~@putenv INCLUDE=$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/include;$(VS2017Dir)VC/Tools/MSVC/${VCTOOLS_VERSION}/atlmfc/include;${VS2017_WindowsSdkDir}/include/${UCRTVersion}/um;${VS2017_WindowsSdkDir}/include/${UCRTVersion}/ucrt;${VS2017_WindowsSdkDir}/include/${UCRTVersion}/winrt;${VS2017_WindowsSdkDir}/include/${UCRTVersion}/shared;$(VS2017_DotNetWinSDKDir)include/um
+        %endif
+
+%elif defined (BUILD_USING_VS2015)
+
+    %include VCVarsQueryRegistry14.mki
+
+    always:
+        %if defined (DEBUG_POLICY)
+            !|[== Setting up VC 14 (VS2015)  $(TARGET_PROCESSOR_ARCHITECTURE) development environment ==]
+        %endif
+        %if $(TARGET_PROCESSOR_ARCHITECTURE) == "x86" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"
+            ~@putenv ToolSetPathsInjected=$(VS2015Dir)VC/bin;$(VS2015_WindowsSdkDir)bin/x86;$(VS2015_DotNetToolsDir)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "x64" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+            ~@putenv ToolSetPathsInjected=$(VS2015Dir)VC/bin/amd64;$(VS2015_WindowsSdkDir)bin/x64;$(VS2015_DotNetToolsDir)x64;$(VS2015_DotNetToolsDir)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+            ~@putenv ToolSetPathsInjected=$(VS2015Dir)VC/bin/x86_arm;$(VS2015_WindowsSdkDir)bin/x86_arm;$(VS2015_DotNetToolsDir)
+        %endif
+        ~@putenv VS140COMNTOOLS=$(VS2015Dir)Common7/Tools/
+        ~@putenv FrameworkSDKDir=$(VS2015_WindowsSdkDir)
+        ~@putenv FrameworkVersion=$(VS2015_FrameworkVersion)
+        ~@putenv FrameworkDir=$(VS2015_FrameworkDir)
+        ~@putenv DIA_INCLUDE=$(VS2015_DiaSdkDir)
+        ~@putenv ToolSetPathsInjected=$(ToolSetPathsInjected);$(VS2015Dir)VCPackages;$(VS2015Dir)Common7/IDE;$(VS2015Dir)Common7/Tools;$(VS2015_MSBuildDir);$(VS2015_FrameworkDir)$(VS2015_FrameworkVersion)
+        ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+        ~@putenv USING_VS2015=1
+        ~@putenv MSVCDir=$(VS2015Dir)VC/
+        ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+
+    %if !defined (_notasks)
+        # Find the .NET reference assemblies directory using the same MSBUILD task used by visual studio.  This allows you to use framework assemblies directly
+        ALWAYS:
+            !~@task Microsoft.Build.Tasks.GetReferenceAssemblyPaths \
+                -i:TargetFrameworkMoniker=".NETFramework,Version=$(TargetFrameworkVersion)" \
+                -o:ReferenceAssemblies=FullFrameworkReferenceAssemblyPaths \
+                -o:test=ReferenceAssemblyPaths \
+                -o:DisplayName=TargetFrameworkMonikerDisplayName
+            !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${ReferenceAssemblies}" -o:FrameworkReferenceAssembliesNoTrailingSlash=ShortNames
+            ~@putenv ASSEMBLY_TARGET_DISPLAYNAME=$(DisplayName)
+
+        %if $(TargetFrameworkVersion) == "v4.5" || $(TargetFrameworkVersion) == "v4.5.1" || $(TargetFrameworkVersion) == "v4.5.2"
+            v45FrameworkAssemblies=%$[FrameworkReferenceAssembliesNoTrailingSlash]/
+        %elif $(TargetFrameworkVersion) == "v4.6" || $(TargetFrameworkVersion) == "v4.6.1"
+            v46FrameworkAssemblies=%$[FrameworkReferenceAssembliesNoTrailingSlash]/
+        %endif
+
+        FrameworkReferenceAssemblies=$(FrameworkReferenceAssembliesNoTrailingSlash)/
+        ReferenceAssemblies=$(FrameworkReferenceAssemblies)
+        FxCopReferenceAssembliesPath=%$[FrameworkReferenceAssembliesNoTrailingSlash]
+
+        # /noconfig is ignored if specified in a response file
+        cscOptDirect + -noconfig
+        CSCOpt + -nostdlib
+        %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+            TargetProcessorArchitecture=AMD64
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+            TargetProcessorArchitecture=x86
+        %else
+            TargetProcessorArchitecture=msil
+        %endif
+
+        # TargetFrameworkVersion=v$(MultiTargetingToolsVersion)
+        TargetedRuntimeVersion = $(VS2015_FrameworkVersion)
+        TargetFrameworkMoniker=.NETFramework,Version=$(TargetFrameworkVersion)
+
+        AssemblySearchPath = $(ReferenceAssemblies);$(ReferenceAssemblies)Facades/;$(FrameworkDir)$(TargetedRuntimeVersion)/;$(FrameworkDir)$(TargetedRuntimeVersion)/WPF/
+        DEFAULT_ASSEMBLY_REFERENCE_LIST = mscorlib.dll;WindowsBase.dll;Accessibility.dll;Microsoft.CSharp.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Configuration.dll;System.Configuration.Install.dll;System.Core.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Data.dll;System.Data.DataSetExtensions.dll;System.Data.Linq.dll;System.Data.OracleClient.dll;System.Data.Entity.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Deployment.dll;System.Design.dll;System.DirectoryServices.dll;System.dll;System.Drawing.Design.dll;System.Drawing.dll;System.EnterpriseServices.dll;System.Management.dll;System.Messaging.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Runtime.Remoting.dll;System.Runtime.Serialization.dll;System.Runtime.Serialization.Formatters.Soap.dll;System.Security.dll;System.ServiceModel.dll;System.ServiceModel.Web.dll;System.ServiceProcess.dll;System.Transactions.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Web.dll;System.Web.Extensions.Design.dll;System.Web.Extensions.dll;System.Web.Mobile.dll;System.Web.RegularExpressions.dll;System.Web.Services.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Windows.Forms.Dll;System.Workflow.Activities.dll;System.Workflow.ComponentModel.dll;System.Workflow.Runtime.dll;System.Xml.dll;System.Xml.Linq.dll;System.Xaml.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.IdentityModel.dll;System.Data.Services.Client.dll;PresentationCore.dll;PresentationFramework.dll;System.ComponentModel.DataAnnotations.dll;
+
+        ALWAYS:
+            !~@task Microsoft.Build.Tasks.ResolveAssemblyReference \
+                -i:Assemblies="$(DEFAULT_ASSEMBLY_REFERENCE_LIST)" \
+                -i:SearchPaths="${AssemblySearchPath}" \
+                -i:TargetFrameworkVersion=$(TargetFrameworkVersion) \
+                -i:TargetFrameworkMoniker=$(TargetFrameworkMoniker) \
+                -i:TargetedRuntimeVersion=$(TargetedRuntimeVersion) \
+                -i:TargetProcessorArchitecture=$(TargetProcessorArchitecture) \
+                -o:ASSEMBLY_REFERENCE_LIST_LONG="ResolvedFiles"
+            !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="@(ASSEMBLY_REFERENCE_LIST_LONG)" -o:ASSEMBLY_REFERENCE_LIST=ShortNames
+            ~@putenv FrameworkDir=$(FrameworkDir)
+            ~@putenv FrameworkVersion=$(TargetFrameworkVersion)
+            ~@putenv TargetFrameworkVersion=$(TargetFrameworkVersion)
+            ~@putenv ASSEMBLY_TARGET_VERSION=$(TargetFrameworkVersion)
+            ~@putenv ASSEMBLY_SEARCH_PATH=$(AssemblySearchPath)
+
+        always:
+            !~@task Bentley.Build.Tasks.StringRegexReplace \
+                 -i:Input="${ASSEMBLY_REFERENCE_LIST}" \
+                 -i:Expression=";" \
+                 -i:ExpressionIsLiteral=true \
+                 -i:Replacement=" -FU" \
+                 -o:NewString=Output
+            ~@putenv USING_REF_ASSEMBLIES=-FU$(NewString)
+            ~@putenv FrameworkReferenceAssemblies=$(FrameworkReferenceAssemblies)
+
+        USING_REF_ASSEMBLIES=-FU$(NewString)
+    %else
+        ReferenceAssemblies=$(FrameworkDir)$(FrameworkVersion)
+    %endif
+
+    always:
+        %if $(TARGET_PLATFORM) == "WinRT"
+            ~@putenv LIBPATH=$(VS2015Dir)VC/LIB/STORE${slashAmd64};$(ReferenceAssemblies);$(VS2015_VCPACKAGESDIR);$(VS2015_WINDOWSMETADATADIR);${VS2013_WindowsSdkDir}/lib/${UCRTVersion}/um${slashx86x64};$(VS2015_WindowsSdkDir)References/CommonConfiguration/Neutral
+            ~@putenv LIB=$(VS2015Dir)VC/LIB/STORE${slashAmd64};${VS2015_WindowsSdkDir}/lib/${UCRTVersion}/um${slashx86x64}
+            ~@putenv INCLUDE=$(VS2015_INCLUDEUMDIR);$(VS2015Dir)VC/INCLUDE;$(VS2015Dir)VC/ATLMFC/INCLUDE;${VS2015_WindowsSdkDir}/include/um;${VS2015_WindowsSdkDir}/include/winrt;${VS2015_WindowsSdkDir}/include/shared
+        %else
+            ~@putenv LIBPATH=$(VS2015Dir)VC/LIB${slashAmd64};$(VS2015Dir)VC/ATLMFC/LIB${slashAmd64};$(ReferenceAssemblies);${VS2015_WindowsSdkDir}/lib/${UCRTVersion}/um${slashx86x64};$(VS2015_WindowsSdkDir)References/CommonConfiguration/Neutral;$(VS2015_DotNetWinSDKDir)Lib/um${slashx86x64}
+            ~@putenv LIB=$(VS2015Dir)VC/LIB${slashAmd64};$(VS2015Dir)VC/ATLMFC/LIB${slashAmd64};${VS2015_WindowsSdkDir}/lib/${UCRTVersion}/um${slashx86x64};${VS2015_WindowsSdkDir}/lib/${UCRTVersion}/ucrt${slashx86x64};$(VS2015_DotNetWinSDKDir)Lib/um${slashx86x64}
+            ~@putenv INCLUDE=$(VS2015Dir)VC/INCLUDE;$(VS2015Dir)VC/ATLMFC/INCLUDE;${VS2015_WindowsSdkDir}/include/${UCRTVersion}/um;${VS2015_WindowsSdkDir}/include/${UCRTVersion}/ucrt;${VS2015_WindowsSdkDir}/include/${UCRTVersion}/winrt;${VS2015_WindowsSdkDir}/include/${UCRTVersion}/shared;$(VS2015_DotNetWinSDKDir)include/um
+        %endif
+
+%elif defined (BUILD_USING_VS2013)
+    %include VCVarsQueryRegistry12.mki
+
+    always:
+        %if defined (DEBUG_POLICY)
+            !|[== Setting up VC 12 (VS2013)  $(TARGET_PROCESSOR_ARCHITECTURE) development environment ==]
+        %endif
+        %if $(TARGET_PROCESSOR_ARCHITECTURE) == "x86" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"
+            ~@putenv ToolSetPathsInjected=$(VS2013Dir)VC/bin;$(VS2013_WindowsSdkDir)bin/x86
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "x64" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+            ~@putenv ToolSetPathsInjected=$(VS2013Dir)VC/bin/amd64;$(VS2013_WindowsSdkDir)bin/x64
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+            ~@putenv ToolSetPathsInjected=$(VS2013Dir)VC/bin/x86_arm;$(VS2013_WindowsSdkDir)bin/x86_arm
+        %endif
+        ~@putenv VS120COMNTOOLS=$(VS2013Dir)Common7/Tools/
+        ~@putenv FrameworkSDKDir=$(VS2013_WindowsSdkDir)
+        ~@putenv FrameworkVersion=$(VS2013_FrameworkVersion)
+        ~@putenv FrameworkDir=$(VS2013_FrameworkDir)
+        ~@putenv DIA_INCLUDE=$(VS2013_DiaSdkDir)
+        ~@putenv ToolSetPathsInjected=$(ToolSetPathsInjected);$(VS2013Dir)VCPackages;$(VS2013Dir)Common7/IDE;$(VS2013Dir)Common7/Tools;$(VS2013_MSBuildDir);$(VS2013_FrameworkDir)$(VS2013_FrameworkVersion);$(VS2013_DotNetToolsDir)
+        ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+        ~@putenv USING_VS2013=1
+        ~@putenv MSVCDir=$(VS2013Dir)VC/
+        ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+    %if !defined (_notasks)
+        # Find the .NET reference assemblies directory using the same MSBUILD task used by visual studio.  This allows you to use framework assemblies directly
+        ALWAYS:
+            !~@task Microsoft.Build.Tasks.GetReferenceAssemblyPaths \
+                -i:TargetFrameworkMoniker=".NETFramework,Version=$(TargetFrameworkVersion)" \
+                -o:ReferenceAssemblies=FullFrameworkReferenceAssemblyPaths \
+                -o:test=ReferenceAssemblyPaths \
+                -o:DisplayName=TargetFrameworkMonikerDisplayName
+            !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${ReferenceAssemblies}" -o:FrameworkReferenceAssembliesNoTrailingSlash=ShortNames
+            ~@putenv ASSEMBLY_TARGET_DISPLAYNAME=$(DisplayName)
+
+        %if $(TargetFrameworkVersion) == "v4.5" || $(TargetFrameworkVersion) == "v4.5.1" || $(TargetFrameworkVersion) == "v4.5.2"
+            v45FrameworkAssemblies=%$[FrameworkReferenceAssembliesNoTrailingSlash]/
+        %elif $(TargetFrameworkVersion) == "v4.6" || $(TargetFrameworkVersion) == "v4.6.1"
+            v46FrameworkAssemblies=%$[FrameworkReferenceAssembliesNoTrailingSlash]/
+        %endif
+
+        FrameworkReferenceAssemblies=$(FrameworkReferenceAssembliesNoTrailingSlash)/
+        ReferenceAssemblies=$(FrameworkReferenceAssemblies)
+        FxCopReferenceAssembliesPath=%$[FrameworkReferenceAssembliesNoTrailingSlash]
+
+        # /noconfig is ignored if specified in a response file
+        cscOptDirect + -noconfig
+        CSCOpt + -nostdlib
+        %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+            TargetProcessorArchitecture=AMD64
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+            TargetProcessorArchitecture=x86
+        %else
+            TargetProcessorArchitecture=msil
+        %endif
+
+        # TargetFrameworkVersion=v$(MultiTargetingToolsVersion)
+        TargetedRuntimeVersion = $(VS2013_FrameworkVersion)
+        TargetFrameworkMoniker=.NETFramework,Version=$(TargetFrameworkVersion)
+
+        AssemblySearchPath = $(ReferenceAssemblies);$(ReferenceAssemblies)Facades/;$(FrameworkDir)$(TargetedRuntimeVersion)/;$(FrameworkDir)$(TargetedRuntimeVersion)/WPF/
+        DEFAULT_ASSEMBLY_REFERENCE_LIST = mscorlib.dll;WindowsBase.dll;Accessibility.dll;Microsoft.CSharp.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Configuration.dll;System.Configuration.Install.dll;System.Core.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Data.dll;System.Data.DataSetExtensions.dll;System.Data.Linq.dll;System.Data.OracleClient.dll;System.Data.Entity.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Deployment.dll;System.Design.dll;System.DirectoryServices.dll;System.dll;System.Drawing.Design.dll;System.Drawing.dll;System.EnterpriseServices.dll;System.Management.dll;System.Messaging.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Runtime.Remoting.dll;System.Runtime.Serialization.dll;System.Runtime.Serialization.Formatters.Soap.dll;System.Security.dll;System.ServiceModel.dll;System.ServiceModel.Web.dll;System.ServiceProcess.dll;System.Transactions.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Web.dll;System.Web.Extensions.Design.dll;System.Web.Extensions.dll;System.Web.Mobile.dll;System.Web.RegularExpressions.dll;System.Web.Services.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Windows.Forms.Dll;System.Workflow.Activities.dll;System.Workflow.ComponentModel.dll;System.Workflow.Runtime.dll;System.Xml.dll;System.Xml.Linq.dll;System.Xaml.dll;
+        DEFAULT_ASSEMBLY_REFERENCE_LIST + System.IdentityModel.dll;System.Data.Services.Client.dll;PresentationCore.dll;PresentationFramework.dll;System.ComponentModel.DataAnnotations.dll;
+
+        ALWAYS:
+            !~@task Microsoft.Build.Tasks.ResolveAssemblyReference \
+                -i:Assemblies="$(DEFAULT_ASSEMBLY_REFERENCE_LIST)" \
+                -i:SearchPaths="${AssemblySearchPath}" \
+                -i:TargetFrameworkVersion=$(TargetFrameworkVersion) \
+                -i:TargetFrameworkMoniker=$(TargetFrameworkMoniker) \
+                -i:TargetedRuntimeVersion=$(TargetedRuntimeVersion) \
+                -i:TargetProcessorArchitecture=$(TargetProcessorArchitecture) \
+                -o:ASSEMBLY_REFERENCE_LIST_LONG="ResolvedFiles"
+            !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="@(ASSEMBLY_REFERENCE_LIST_LONG)" -o:ASSEMBLY_REFERENCE_LIST=ShortNames
+            ~@putenv FrameworkDir=$(FrameworkDir)
+            ~@putenv FrameworkVersion=$(TargetFrameworkVersion)
+            ~@putenv TargetFrameworkVersion=$(TargetFrameworkVersion)
+            ~@putenv ASSEMBLY_TARGET_VERSION=$(TargetFrameworkVersion)
+            ~@putenv ASSEMBLY_SEARCH_PATH=$(AssemblySearchPath)
+
+        always:
+            !~@task Bentley.Build.Tasks.StringRegexReplace \
+                 -i:Input="${ASSEMBLY_REFERENCE_LIST}" \
+                 -i:Expression=";" \
+                 -i:ExpressionIsLiteral=true \
+                 -i:Replacement=" -FU" \
+                 -o:NewString=Output
+            ~@putenv USING_REF_ASSEMBLIES=-FU$(NewString)
+            ~@putenv FrameworkReferenceAssemblies=$(FrameworkReferenceAssemblies)
+
+        USING_REF_ASSEMBLIES=-FU$(NewString)
+    %else
+        ReferenceAssemblies=$(FrameworkDir)$(FrameworkVersion)
+    %endif
+
+    always:
+        %if $(TARGET_PLATFORM) == "WinRT"
+            ~@putenv LIBPATH=$(VS2013Dir)VC/LIB/STORE${slashAmd64};$(ReferenceAssemblies);$(VS2013_VCPACKAGESDIR);$(VS2013_WINDOWSMETADATADIR);${VS2013_WindowsSdkDir}/lib/winv6.3/um${slashx86x64};$(VS2013_WindowsSdkDir)References/CommonConfiguration/Neutral
+            ~@putenv LIB=$(VS2013Dir)VC/LIB/STORE${slashAmd64};${VS2013_WindowsSdkDir}/lib/winv6.3/um${slashx86x64}
+            ~@putenv INCLUDE=$(VS2013_INCLUDEUMDIR);$(VS2013Dir)VC/INCLUDE;$(VS2013Dir)VC/ATLMFC/INCLUDE;${VS2013_WindowsSdkDir}/include/um;${VS2013_WindowsSdkDir}/include/winrt;${VS2013_WindowsSdkDir}/include/shared
+        %else
+            ~@putenv LIBPATH=$(VS2013Dir)VC/LIB${slashAmd64};$(VS2013Dir)VC/ATLMFC/LIB${slashAmd64};$(ReferenceAssemblies);${VS2013_WindowsSdkDir}/lib/winv6.3/um${slashx86x64};$(VS2013_WindowsSdkDir)References/CommonConfiguration/Neutral
+            ~@putenv LIB=$(VS2013Dir)VC/LIB${slashAmd64};$(VS2013Dir)VC/ATLMFC/LIB${slashAmd64};${VS2013_WindowsSdkDir}/lib/winv6.3/um${slashx86x64}
+            ~@putenv INCLUDE=$(VS2013Dir)VC/INCLUDE;$(VS2013Dir)VC/ATLMFC/INCLUDE;${VS2013_WindowsSdkDir}/include/um;${VS2013_WindowsSdkDir}/include/winrt;${VS2013_WindowsSdkDir}/include/shared
+        %endif
+
+%elif defined (BUILD_USING_VS2012)
+
+    %include VCVarsQueryRegistry11.mki
+
+    ALWAYS:
+        %if defined (DEBUG_POLICY)
+            !|[== Setting up VC 11 (VS2012)  $(TARGET_PROCESSOR_ARCHITECTURE) development environment ==]
+        %endif
+        ~@putenv FrameworkSDKDir=$(VS2012_WindowsSdkDir)
+        %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+            ~@putenv FrameworkDir=$(VS2012_FrameworkDir32)
+            %if !defined (FrameworkVersion)
+                ~@putenv FrameworkVersion=$(VS2012_FrameworkVer32)
+            %endif
+            ~@putenv ToolSetPathsInjected=$(VS2012Tools);$(VS2012_VCINSTALLDIR)bin\;$(VS2012Dir)VCPackages;$(VS2012Dir)Common7\IDE;$(VS2012Dir)Common7\Tools\;$(VS2012_WindowsSdkDir)bin\x86;$(VS2012_FrameworkDir32)$(VS2012_FrameworkVer32);$(VS2012_DotNetToolsDir)
+            ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+        %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+            ~@putenv FrameworkDir=$(VS2012_FrameworkDir64)
+            %if !defined (FrameworkVersion)
+                ~@putenv FrameworkVersion=$(VS2012_FrameworkVer64)
+            %endif
+            ~@putenv ToolSetPathsInjected=$(VS2012Tools);$(VS2012_VCINSTALLDIR)bin\amd64;$(VS2012Dir)VCPackages;$(VS2012Dir)Common7\IDE;$(VS2012Dir)Common7\Tools;$(VS2012_WindowsSdkDir)bin\x64;$(VS2012_FrameworkDir64)$(VS2012_FrameworkVer64);$(VS2012_DotNetToolsDir)x64;$(VS2012_DotNetToolsDir)
+            ~@putenv PATH=$(VS2012Tools);$(VS2012_VCINSTALLDIR)bin\amd64;$(VS2012Dir)VCPackages;$(VS2012Dir)Common7\IDE;$(VS2012Dir)Common7\Tools;$(VS2012_WindowsSdkDir)bin\x64;$(VS2012_FrameworkDir64)$(VS2012_FrameworkVer64);$(VS2012_DotNetToolsDir)x64;$(VS2012_DotNetToolsDir);$(PATH)
+        %endif
+        ~@putenv LIBPATH=$(VS2012_VCINSTALLDIR)LIB${slashAmd64};$(VS2012_VCINSTALLDIR)ATLMFC\LIB${slashAmd64};$(FrameworkDir)$(FrameworkVersion)
+        ~@putenv LIB=$(VS2012_VCINSTALLDIR)LIB${slashAmd64};$(VS2012_VCINSTALLDIR)ATLMFC\LIB${slashAmd64};${VS2012_WindowsSdkDir}/lib/win8/um${slashx86x64}
+        ~@putenv INCLUDE=$(VS2012_VCINSTALLDIR)INCLUDE;$(VS2012_VCINSTALLDIR)ATLMFC\INCLUDE;${VS2012_WindowsSdkDir}/include/um;${VS2012_WindowsSdkDir}/include/shared
+        ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+        ~@putenv USING_VS2012=1
+        ~@putenv MSVCDir=$(VS2012_VCINSTALLDIR)
+        ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+        %if defined(WIP_BENTLEYDESKTOPCLIENT)
+            %if $(MultiTargetingToolsVersion)=="4.0"
+                # When compiling under VS2012 but targeting .NET 4.0, add the proper macros for resolving .NET 4.0 assembly references and adjust the search path.
+                # First check to see if .NET 4.5 is installed on the machine.
+                ALWAYS:
+                    !~@task MSBuild.Community.Tasks.RegistryRead \
+                        -i:KeyName="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" \
+                        -i:ValueName="Release"\
+                        -o:Is45Installed=Value
+
+                # Find the .NET reference assemblies directory using the same MSBUILD task used by visual studio.  This allows you to use new framework assemblies
+                # that were included in .NET 4.0 directly such as System.Data.Entity.dll and is architecture independent.
+                ALWAYS:
+                    !~@task Microsoft.Build.Tasks.GetReferenceAssemblyPaths \
+                        -i:TargetFrameworkMoniker=".NETFramework,Version=v4.0" \
+                        -o:v40FrameworkAssemblies=FullFrameworkReferenceAssemblyPaths \
+                        -o:test=ReferenceAssemblyPaths \
+                        -o:DisplayName=TargetFrameworkMonikerDisplayName
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${v40FrameworkAssemblies}" -o:v40FrameworkAssembliesNoTrailingSlash=ShortNames
+
+                v40FrameworkAssemblies=%$[v40FrameworkAssembliesNoTrailingSlash]/
+                AssemblySearchPath = $(v40FrameworkAssemblies);$(FrameworkDir)$(TargetedRuntimeVersion)/;$(FrameworkDir)$(TargetedRuntimeVersion)/WPF/
+            %endif
+        %endif
+%else
+    %if !defined (_notasks)
+        %if defined (USING_TARGET_ARCHITECTURE)
+            %if $(USING_TARGET_ARCHITECTURE) != $(TARGET_PROCESSOR_ARCHITECTURE)
+                resetFrameworkDir=1
+            %endif
+        %endif
+        %if !defined (FrameworkDir) || defined (resetFrameworkDir)
+            %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+                DefaultFrameworkDir = $(SystemRoot)\Microsoft.NET\Framework64
+            %else
+                DefaultFrameworkDir = $(SystemRoot)\Microsoft.NET\Framework
+            %endif
+
+            ConvertToShortNameAndDoEnvPuts:
+                !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="$(DefaultFrameworkDir)" -o:FrameworkDir=ShortNames
+                ~@putenv FrameworkDir=$(FrameworkDir)/
+
+            %undef FrameworkDir
+            %undef DefaultFrameworkDir
+            %undef resetFrameworkDir
+        %endif
+    %endif
+
+    # If we want to use VS 2002, set it up
+    %if defined (BUILD_USING_VS2002)
+        ALWAYS:
+            !|[== Setting up VS 2002 development environment ==]
+            ~@putenv FrameworkVersion=v1.0.3705
+            ~@putenv FrameworkSDKDir=$(VS2002Dir)FrameworkSDK
+            ~@putenv ToolSetPathsInjected=$(VS2002Dir)Common7\IDE;$(VS2002Dir)VC7\BIN;$(VS2002Dir)Common7\Tools;$(VS2002Dir)Common7\Tools\bin\prerelease;$(VS2002Dir)Common7\Tools\bin;$(FrameworkSDKDir)\bin;$(FrameworkDir)\$(FrameworkVersion)
+            ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+            ~@putenv INCLUDE=$(VS2002Dir)VC7\ATLMFC\INCLUDE;$(VS2002Dir)VC7\INCLUDE;$(VS2002Dir)VC7\PlatformSDK\include\prerelease;$(VS2002Dir)VC7\PlatformSDK\include;$(FrameworkSDKDir)\include;$(INCLUDE)
+            ~@putenv LIB=$(VS2002Dir)VC7\ATLMFC\LIB;$(VS2002Dir)VC7\LIB;$(VS2002Dir)VC7\PlatformSDK\lib\prerelease;$(VS2002Dir)VC7\PlatformSDK\lib;$(FrameworkSDKDir)\lib;$(LIB)
+            ~@putenv USING_VS2002=1
+            ~@putenv MSVCDir=$(VS2002Dir)/VC7
+            ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+    # If we want to use VS 2003, set it up
+    %elif defined (BUILD_USING_VS2003)
+        ALWAYS:
+            %if defined (DEBUG_POLICY)
+            !|[== Setting up VS 2003 development environment ==]
+            %endif
+            !~@putenv FrameworkVersion=v1.1.4322
+            ~@putenv FrameworkSDKDir=$(VS2003Dir)SDK\v1.1
+            ~@putenv ToolSetPathsInjected=$(VS2003Dir)Common7\IDE;$(VS2003Dir)VC7\BIN;$(VS2003Dir)Common7\Tools;$(VS2003Dir)Common7\Tools\bin\prerelease;$(VS2003Dir)Common7\Tools\bin;$(FrameworkSDKDir)\bin;$(FrameworkDir)\$(FrameworkVersion)
+            ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+            ~@putenv INCLUDE=$(VS2003Dir)VC7\ATLMFC\INCLUDE;$(VS2003Dir)VC7\INCLUDE;$(VS2003Dir)VC7\PlatformSDK\include\prerelease;$(VS2003Dir)VC7\PlatformSDK\include;$(FrameworkSDKDir)\include;$(INCLUDE)
+            ~@putenv LIB=$(VS2003Dir)VC7\ATLMFC\LIB;$(VS2003Dir)VC7\LIB;$(VS2003Dir)VC7\PlatformSDK\lib\prerelease;$(VS2003Dir)VC7\PlatformSDK\lib;$(FrameworkSDKDir)\lib;$(LIB)
+            ~@putenv USING_VS2003=1
+            ~@putenv MSVCDir=$(VS2003Dir)/VC7
+            ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+    # There is some common logic for 2005, 2008 and 2010 (resolving .NET paths)
+    %elif defined (BUILD_USING_VS2005) || defined (BUILD_USING_VS2008) || defined (BUILD_USING_VS2010)
+
+        %if !defined (_notasks)
+            %if defined (BUILD_USING_VS2005) || defined (BUILD_USING_VS2008)
+                ALWAYS:
+                    !~@putenv FrameworkVersion=v2.0.50727
+            %endif
+
+            # If PROCESSOR_ARCHITEW6432 is defined then we are a 32bit process on a 64bit OS. If we are targeting x64
+            # then we have to opt-in to the 64-bit registry view (since we are a 32-bit process).
+            %if defined(PROCESSOR_ARCHITEW6432) && $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+                Wow64RegistryViewOfTarget = KEY_WOW64_64KEY
+            %else
+                Wow64RegistryViewOfTarget = None
+            %endif
+
+            %if !defined (v30FrameworkAssemblies)
+                GetV30ReferenceAssembliesLocation1:
+                    !~@task Bentley.Build.Tasks.RegistryRead \
+                            -i:RegWow64Option=$(Wow64RegistryViewOfTarget) \
+                            -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/.NETFramework/AssemblyFolders/Microsoft .NET Framework 3.0 Reference Assemblies for Visual Studio" \
+                            -i:DefaultValue="NotInstalled" \
+                            -i:MSBuildVerbosity="Quiet" \
+                            -o:v30FrameworkAssemblies=Value
+
+                %if $(v30FrameworkAssemblies)=="NotInstalled"
+                    GetV30ReferenceAssembliesLocation2:
+                        !~@task Bentley.Build.Tasks.RegistryRead \
+                                    -i:RegWow64Option=$(Wow64RegistryViewOfTarget) \
+                                    -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/NET Framework Setup/NDP/v3.0/Setup/Windows Communication Foundation" \
+                                    -i:ValueName="ReferenceInstallPath" \
+                                    -i:DefaultValue="NotInstalled" \
+                                    -i:MSBuildVerbosity="Quiet" \
+                                    -o:v30FrameworkAssemblies=Value
+
+                %endif
+                %if $(v30FrameworkAssemblies)=="NotInstalled"
+                    %if defined (DEBUG_POLICY)
+                        %warn v30FrameworkAssemblies is not defined because the reference .NET Framework 3.0 assemblies could not be located.
+                    %endif
+                    v30FrameworkAssemblies=/Thev30FrameworkAssembliesCouldNotBeLocated/
+                %else
+                    ConvertToShortName:
+                        !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${v30FrameworkAssemblies}" -o:v30FrameworkAssembliesNoTrailingSlash=ShortNames
+
+                v30FrameworkAssemblies=%$[v30FrameworkAssembliesNoTrailingSlash]/
+                %endif
+                always:
+                    !~@putenv v30FrameworkAssemblies=$(v30FrameworkAssemblies)
+            %endif
+
+            %if !defined (v35FrameworkAssemblies)
+                GetV35ReferenceAssembliesLocation:
+                    !~@task Bentley.Build.Tasks.RegistryRead \
+                                -i:RegWow64Option=$(Wow64RegistryViewOfTarget) \
+                                -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/.NETFramework/AssemblyFolders/Microsoft .NET Framework 3.5 Reference Assemblies" \
+                                -i:DefaultValue="NotInstalled" \
+                                -i:MSBuildVerbosity="Quiet" \
+                                -o:v35FrameworkAssemblies=Value
+
+                %if $(v35FrameworkAssemblies)=="NotInstalled"
+                    %if defined (DEBUG_POLICY)   Let's not do this warning until .NET 3.5 is actually released.
+                        %warn v35FrameworkAssemblies is not defined because the reference .NET Framework 3.5 assemblies could not be located.
+                    %endif
+                    v35FrameworkAssemblies=/Thev35FrameworkAssembliesCouldNotBeLocated/
+                %else
+                    ConvertToShortName:
+                        !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${v35FrameworkAssemblies}" -o:v35FrameworkAssembliesNoTrailingSlash=ShortNames
+
+                    v35FrameworkAssemblies=%$[v35FrameworkAssembliesNoTrailingSlash]/
+            %endif
+                always:
+                    !~@putenv v35FrameworkAssemblies=$(v35FrameworkAssemblies)
+            %endif
+        %endif # _notasks
+
+        # If we want to use VS 2005, set it up
+        %if defined (BUILD_USING_VS2005)
+
+            %if !defined (FrameworkSDKDir)
+                GetFrameworkSDKDir:
+                    !~@task Bentley.Build.Tasks.RegistryRead \
+                                -i:RegWow64Option=$(Wow64RegistryViewOfTarget) \
+                                -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Microsoft SDKs/.NETFramework/v2.0" \
+                                -i:ValueName="InstallationFolder" \
+                                -i:DefaultValue="NotInstalled" \
+                                -i:MSBuildVerbosity="Quiet" \
+                                -o:FrameworkSDKDir=Value
+
+                %if $(FrameworkSDKDir)=="NotInstalled"
+                    %error FrameworkSDKDir is not defined and the .NET Framework required by BUILD_$(CurrentToolSet) does not appear to be installed.
+                %endif
+
+                ConvertToShortNameAndDoEnvPuts:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${FrameworkSDKDir}" -o:FrameworkSDKDir=ShortNames
+                    ~@putenv FrameworkSDKDir=$(FrameworkSDKDir)/
+
+                %undef FrameworkSDKDir
+            %endif
+
+            ALWAYS:
+                %if defined (DEBUG_POLICY)
+                !|[== Setting up VS 2005 $(TARGET_PROCESSOR_ARCHITECTURE) development environment ==]
+                %endif
+                %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64" && $(PROCESSOR_ARCHITECTURE)=="AMD64"
+                !~@putenv ToolSetPathsInjected=$(VS2005Dir)VC\BIN\AMD64;$(VS2005Dir)VC\PlatformSDK\bin\win64\amd64;$(VS2005Dir)VC\PlatformSDK\bin;$(FrameworkDir)\$(FrameworkVersion);$(VS2005Dir)VC\VCPackages;$(VS2005Dir)Common7\IDE;$(VS2005Dir)Common7\Tools;$(VS2005Dir)Common7\Tools\bin;$(VS2005Dir)SDK\v2.0\bin;$(FrameworkSDKDir)bin
+                %else
+                !~@putenv ToolSetPathsInjected=$(VS2005Dir)Common7\IDE;$(VS2005Dir)VC\BIN${slashXCompileDir};$(VS2005Dir)VC\BIN;$(VS2005Dir)Common7\Tools;$(VS2005Dir)Common7\Tools\bin;$(FrameworkSDKDir)bin;$(FrameworkDir)\$(FrameworkVersion)
+                %endif
+                ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+                ~@putenv INCLUDE=$(VS2005Dir)VC\ATLMFC\INCLUDE;$(VS2005Dir)VC\INCLUDE;$(VS2005Dir)VC\PlatformSDK\include;$(FrameworkSDKDir)include;$(INCLUDE)
+                ~@putenv LIB=$(VS2005Dir)VC\ATLMFC\LIB${slashAmd64};$(VS2005Dir)VC\LIB${slashAmd64};$(VS2005Dir)VC\PlatformSDK\lib${slashAmd64};$(FrameworkSDKDir)lib;$(LIB)
+                ~@putenv USING_VS2005=1
+                ~@putenv MSVCDir=$(VS2005Dir)VC
+                ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+        # If we want to use VS 2008, set it up
+        %elif defined (BUILD_USING_VS2008)
+
+            %if !defined (WinSDKFolder)
+                #
+                #  Note that this is the registry key created by the VS 2008 installer to point to the SDK that VS 2008 should use.
+                #  Windows SDK's now come with a "Windows SDK Configuration Tool" that will modify this value if you want to convince
+                #  Visual Studio to use a newer Windows SDK than the one that it shipped with. In this manner we get bmake to honor
+                #  the same Windows SDK integration as Visual Studio itself.
+                #
+                GetCurrentWinSDKFolder:
+                    !~@task MSBuild.Community.Tasks.RegistryRead \
+                                -i:KeyName="HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Microsoft SDKs/Windows" \
+                                -i:ValueName="CurrentInstallFolder" \
+                                -i:DefaultValue="NotInstalled" \
+                                -i:MSBuildVerbosity="Quiet" \
+                                -o:WinSDKFolder=Value
+
+                %if $(WinSDKFolder)=="NotInstalled"
+                    %error WinSDKFolder is not defined and the Windows SDK location for BUILD_$(CurrentToolSet) is not indicated by your registry. Is it installed?
+                %endif
+
+                ConvertToShortNameAndDoEnvPuts:
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${WinSDKFolder}" -o:WinSDKFolder=ShortNames
+                    ~@putenv WinSDKFolder=$(WinSDKFolder)/
+
+                %undef WinSDKFolder
+            %endif
+
+        ALWAYS:
+            %if defined (DEBUG_POLICY)
+            !|[== Setting up VS 2008  $(TARGET_PROCESSOR_ARCHITECTURE) development environment ==]
+            %endif
+            !~@putenv Framework35Version=v3.5
+            %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64" && $(PROCESSOR_ARCHITECTURE)=="AMD64"
+            ~@putenv ToolSetPathsInjected=$(VS2008Dir)VC\BIN\amd64;$(FrameworkDir)\$(Framework35Version);$(FrameworkDir)\$(FrameworkVersion);$(VS2008Dir)VC\VCPackages;$(VS2008Dir)Common7\IDE;$(VS2008Dir)Common7\Tools;$(VS2008Dir)Common7\Tools\bin;$(WinSDKFolder)bin\x64;$(WinSDKFolder)bin\win64\x64;$(WinSDKFolder)bin
+            %else
+            ~@putenv ToolSetPathsInjected=$(VS2008Dir)Common7\IDE;$(VS2008Dir)VC\BIN${slashXCompileDir};$(VS2008Dir)Common7\Tools;$(VS2008Dir)Common7\Tools\bin;$(FrameworkDir)\$(Framework35Version);$(FrameworkDir)\$(FrameworkVersion);$(VS2008Dir)VC\VCPackages;$(WinSDKFolder)bin;
+            %endif
+            ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+            ~@putenv INCLUDE=$(VS2008Dir)VC\ATLMFC\INCLUDE;$(VS2008Dir)VC\INCLUDE;$(WinSDKFolder)include;
+            ~@putenv LIB=$(VS2008Dir)VC\ATLMFC\LIB${slashAmd64};$(VS2008Dir)VC\LIB${slashAmd64};$(WinSDKFolder)lib${slashx64}
+            ~@putenv USING_VS2008=1
+            ~@putenv MSVCDir=$(VS2008Dir)/VC
+            ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+
+        %elif defined (BUILD_USING_VS2010)
+
+            %include VCVarsQueryRegistry2010.mki
+
+            %if defined (DEBUG_POLICY)
+                ALWAYS:
+                    !|[== Setting up VS 2010  $(TARGET_PROCESSOR_ARCHITECTURE) development environment ==]
+            %endif
+
+            # Resolve .NET stuff only when tasks are supported
+            %if !defined (_notasks)
+                ALWAYS:
+                    %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+                        !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="$(VS2010_WindowsSdkDir)bin\NETFX 4.0 Tools\x64" -o:Vs2010Tools=ShortNames
+                    %else
+                        !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="$(VS2010_WindowsSdkDir)bin\NETFX 4.0 Tools" -o:Vs2010Tools=ShortNames
+                    %endif
+
+                # /noconfig is ignored if specified in a response file
+                cscOptDirect + -noconfig
+                CSCOpt + -nostdlib
+
+                %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+                    FrameworkDir=$(VS2010_FrameworkDir64)
+                    FrameworkVersion=$(VS2010_FrameworkVer64)
+                    TargetProcessorArchitecture=AMD64
+                %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+                    FrameworkDir=$(VS2010_FrameworkDir32)
+                    FrameworkVersion=$(VS2010_FrameworkVer32)
+                    TargetProcessorArchitecture=x86
+                %else
+                    FrameworkDir=$(VS2010_FrameworkDir32)
+                    FrameworkVersion=$(VS2010_FrameworkVer32)
+                    TargetProcessorArchitecture=msil
+                %endif
+
+                # See $(FrameworkDir)$(FrameworkVersion)csc.rsp for a default list of included assemblies
+                %if $(MultiTargetingToolsVersion)=="4.0"
+                    # When compiling under VS2010 on a machine that also has VS2012 installed, we need to let FxCop know where to find the correct
+                    # reference assemblies.  First check to see if .NET 4.5 is installed on the machine
+                    ALWAYS:
+                            !~@task MSBuild.Community.Tasks.RegistryRead \
+                                    -i:KeyName="HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" \
+                                    -i:ValueName="Release"\
+                                    -o:Is45Installed=Value
+
+                    # Find the .NET reference assemblies directory using the same MSBUILD task used by visual studio.  This allows you to use new framework assemblies
+                    # that were included in .NET 4.0 directly such as System.Data.Entity.dll and is architecture independent.
+                    ALWAYS:
+                        !~@task Microsoft.Build.Tasks.GetReferenceAssemblyPaths \
+                                -i:TargetFrameworkMoniker=".NETFramework,Version=v4.0" \
+                                -o:v40FrameworkAssemblies=FullFrameworkReferenceAssemblyPaths \
+                                -o:test=ReferenceAssemblyPaths \
+                                -o:DisplayName=TargetFrameworkMonikerDisplayName
+                        !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="${v40FrameworkAssemblies}" -o:v40FrameworkAssembliesNoTrailingSlash=ShortNames
+
+                        FxCopReferenceAssembliesPath=%$[v40FrameworkAssembliesNoTrailingSlash]
+
+                    TargetedRuntimeVersion = $(VS2010_FrameworkVer32)
+                    v40FrameworkAssemblies=%$[v40FrameworkAssembliesNoTrailingSlash]/
+                    AssemblySearchPath = $(v40FrameworkAssemblies);$(FrameworkDir)$(TargetedRuntimeVersion)/;$(FrameworkDir)$(TargetedRuntimeVersion)/WPF/
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST = mscorlib.dll;WindowsBase.dll;Accessibility.dll;Microsoft.CSharp.dll;
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Configuration.dll;System.Configuration.Install.dll;System.Core.dll;
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Data.dll;System.Data.DataSetExtensions.dll;System.Data.Linq.dll;System.Data.OracleClient.dll;System.Data.Entity.dll;
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Deployment.dll;System.Design.dll;System.DirectoryServices.dll;System.dll;System.Drawing.Design.dll;System.Drawing.dll;System.EnterpriseServices.dll;System.Management.dll;System.Messaging.dll;
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Runtime.Remoting.dll;System.Runtime.Serialization.dll;System.Runtime.Serialization.Formatters.Soap.dll;System.Security.dll;System.ServiceModel.dll;System.ServiceModel.Web.dll;System.ServiceProcess.dll;System.Transactions.dll;
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Web.dll;System.Web.Extensions.Design.dll;System.Web.Extensions.dll;System.Web.Mobile.dll;System.Web.RegularExpressions.dll;System.Web.Services.dll;
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST + System.Windows.Forms.Dll;System.Workflow.Activities.dll;System.Workflow.ComponentModel.dll;System.Workflow.Runtime.dll;System.Xml.dll;System.Xml.Linq.dll;System.Xaml.dll;
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST + System.IdentityModel.dll;System.Data.Services.Client.dll;PresentationCore.dll;PresentationFramework.dll;System.ComponentModel.DataAnnotations.dll;
+
+                %elif $(MultiTargetingToolsVersion)=="3.5"
+                    # Can't use GetReferenceAssemblyPaths for anything else than .NET4.0 because bmake is always 32 bit, and MSBuild returns paths depending on its process image architecture
+                    # So try to mimic what's being returned from GetReferenceAssemblyPaths for .NET3.5 and earlier
+                    TargetedRuntimeVersion = v2.0.50727
+                    AssemblySearchPath = $(v35FrameworkAssemblies);$(FrameworkDir)v3.5/;$(v30FrameworkAssemblies);$(FrameworkDir)v3.0/;$(FrameworkDir)$(TargetedRuntimeVersion)/
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST = mscorlib.dll;Accessibility.dll;Microsoft.Vsa.dll;System.Configuration.dll;System.Configuration.Install.dll;System.Core.dll;System.Data.dll;System.Data.DataSetExtensions.dll;System.Data.Linq.dll;System.Data.OracleClient.dll;System.Deployment.dll;System.Design.dll;System.DirectoryServices.dll;System.dll;System.Drawing.Design.dll;System.Drawing.dll;System.EnterpriseServices.dll;System.Management.dll;System.Messaging.dll;System.Runtime.Remoting.dll;System.Runtime.Serialization.dll;System.Runtime.Serialization.Formatters.Soap.dll;System.Security.dll;System.ServiceModel.dll;System.ServiceModel.Web.dll;System.ServiceProcess.dll;System.Transactions.dll;System.Web.dll;System.Web.Extensions.Design.dll;System.Web.Extensions.dll;System.Web.Mobile.dll;System.Web.RegularExpressions.dll;System.Web.Services.dll;System.Windows.Forms.Dll;System.Workflow.Activities.dll;System.Workflow.ComponentModel.dll;System.Workflow.Runtime.dll;System.Xml.dll;System.Xml.Linq.dll
+                %else
+                    TargetedRuntimeVersion = v2.0.50727
+                    AssemblySearchPath = $(FrameworkDir)$(TargetedRuntimeVersion)/
+                    DEFAULT_ASSEMBLY_REFERENCE_LIST = mscorlib.dll;Accessibility.dll;Microsoft.Vsa.dll;System.Configuration.dll;System.Configuration.Install.dll;System.Data.dll;System.Data.OracleClient.dll;System.Data.SqlXml.dll;System.Deployment.dll;System.Design.dll;System.DirectoryServices.dll;System.dll;System.Drawing.Design.dll;System.Drawing.dll;System.EnterpriseServices.dll;System.Management.dll;System.Messaging.dll;System.Runtime.Remoting.dll;System.Runtime.Serialization.Formatters.Soap.dll;System.Security.dll;System.ServiceProcess.dll;System.Transactions.dll;System.Web.dll;System.Web.Mobile.dll;System.Web.RegularExpressions.dll;System.Web.Services.dll;System.Windows.Forms.Dll;System.Xml.dll
+                %endif
+
+                TargetFrameworkVersion=v$(MultiTargetingToolsVersion)
+                TargetFrameworkMoniker=.NETFramework,Version=$(TargetFrameworkVersion)
+                #FxCopReferenceAssembliesPath=%$[AssemblySearchPath]
+
+                ALWAYS:
+                    !~@task Microsoft.Build.Tasks.ResolveAssemblyReference \
+                        -i:Assemblies="$(DEFAULT_ASSEMBLY_REFERENCE_LIST)" \
+                        -i:TargetFrameworkVersion=$(TargetFrameworkVersion) \
+                        -i:TargetFrameworkMoniker=$(TargetFrameworkMoniker) \
+                        -i:TargetedRuntimeVersion=$(TargetedRuntimeVersion) \
+                        -i:TargetProcessorArchitecture=$(TargetProcessorArchitecture) \
+                        -i:SearchPaths="${AssemblySearchPath}" \
+                        -o:ASSEMBLY_REFERENCE_LIST_LONG="ResolvedFiles"
+                    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths="@(ASSEMBLY_REFERENCE_LIST_LONG)" -o:ASSEMBLY_REFERENCE_LIST=ShortNames
+                    ~@putenv FrameworkDir=$(FrameworkDir)
+                    ~@putenv FrameworkVersion=$(FrameworkVersion)
+            %endif # _notasks
+
+            ALWAYS:
+                ~@putenv FrameworkSDKDir=$(VS2010_WindowsSdkDir)
+            %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+                ~@putenv ToolSetPathsInjected=$(Vs2010Tools);$(VS2010_VCINSTALLDIR)bin/amd64;$(FrameworkDir)$(FrameworkVersion);$(VS2010Dir)VCPackages;$(VS2010Dir)Common7\IDE;$(VS2010Dir)Common7\Tools;$(VS2010_WindowsSdkDir)bin\x64;$(VS2010_WindowsSdkDir)bin
+            %else
+                ~@putenv ToolSetPathsInjected=$(Vs2010Tools);$(VS2010_FSHARPINSTALLDIR);$(VS2010Dir)Common7\IDE\;$(VS2010_VCINSTALLDIR)bin;$(VS2010Dir)Common7\Tools;$(FrameworkDir)$(FrameworkVersion);$(VS2010Dir)VCPackages;$(VS2010_WindowsSdkDir)bin;
+            %endif
+                ~@putenv LIBPATH=$(FrameworkDir)$(FrameworkVersion);$(VS2010_VCINSTALLDIR)LIB${slashAmd64};$(VS2010_VCINSTALLDIR)ATLMFC\LIB${slashAmd64}
+                ~@putenv LIB=$(VS2010_VCINSTALLDIR)LIB${slashAmd64};$(VS2010_VCINSTALLDIR)ATLMFC\LIB${slashAmd64};$(VS2010_WindowsSdkDir)lib${slashx64}
+                ~@putenv INCLUDE=$(VS2010_VCINSTALLDIR)INCLUDE;$(VS2010_VCINSTALLDIR)ATLMFC\INCLUDE;$(VS2010_WindowsSdkDir)include
+                ~@putenv PATH=$(ToolSetPathsInjected);$(PATH)
+                ~@putenv USING_VS2010=1
+                ~@putenv MSVCDir=$(VS2010_VCINSTALLDIR)
+                ~@putenv USING_TARGET_ARCHITECTURE=$(TARGET_PROCESSOR_ARCHITECTURE)
+                ~@putenv v40FrameworkAssemblies=$(v40FrameworkAssemblies)
+            #
+            # I think we might want a new strategy here. We should figure out how to delegate-to, interface-with, or mimic
+            # the GetReferenceAssemblyPaths target in Microsoft.Common.targets somehow. The below hardwired values might
+            # be OK, but only when using the v4.0 toolset and, stricrtly speaking, you shouldn't use the runtime dlls at build time.
+            #
+            %if !defined (v30FrameworkAssemblies)
+                v30FrameworkAssemblies=$(v40FrameworkAssemblies)
+            %endif
+            v35FrameworkAssemblies=$(v40FrameworkAssemblies)
+
+        %endif
+    %endif
+%endif
+
+

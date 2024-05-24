@@ -1,12 +1,19 @@
 #--------------------------------------------------------------------------------------
 #
 #     $Source: $
-#
-#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
 #--------------------------------------------------------------------------------------
-PolicyFile          = $(SrcRoot)MSPython/MSPythonAssertPolicy.mki
-SolutionPolicyMki   = $(SrcRoot)MSPython/MSPythonSolutionPolicy.mki
+
+%if defined (BSIBUILD)
+MSPythonSrc         = $(SrcRoot)MSPython/
+%else
+MSPythonSrc         = $(SrcRoot)
+%endif
+
+
+PolicyFile          = $(MSPythonSrc)/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(MSPythonSrc)/MSPythonSolutionPolicy.mki
 
 %include mdl.mki
 
@@ -41,21 +48,71 @@ always:
     MSPythonDir=$(MS)
 %endif
 
+%if defined (BSIBUILD)
+    PythonExeDir = $(SrcRoot)/adobuildartifact/pythonfiles/
+%else
+    PythonExeDir = $(PythonDir)
+%endif
+
 always:
     ~putenv PATH=%PATH%;$(OutRoot)Winx64/Product/Mstn/MicroStation/;$(OutRoot)Winx64/Product/Mstn/MicroStation/Assemblies;$(OutRoot)Winx64/Product/Mstn/MicroStation/$(OutRoot)Winx64/Product/Mstn/MicroStation/FileHandler;
     ~putenv PYTHONPATH=$(MSPythonDir)
     ~putenv MS=$(MSPythonDir)
     ~putenv PYTHONPYCACHEPREFIX=$(o)
-    ~putenv MSPYTESTDATA=$(SrcRoot)MSPython/MSPythonTests/PlatformTests/data/
+    ~putenv MSPYTESTDATA=$(MSPythonSrc)/MSPythonTests/PlatformTests/data/
     ~chdir $(MSPythonDir)
 # ^^^^ need to execute in the same directory as Microstation to run PYTHONPATH doesnt seem to work
 
 always:
-    $(PythonDir)/python.exe $(SrcRoot)MSPython/MSPythonTests/PlatformTests/pytestFileCreate.py
-
-# create symlinks to correct location of the files for pytest run
+    $(PythonExeDir)/python.exe $(MSPythonSrc)/MSPythonTests/PlatformTests/pytestFileCreate.py
+#
+# In order for the tests to run the .pyd files have to be located in the MicroStation delivery in the correct place so the dependent dlls can be loaded
+# The below code will move the original .pyd file to the same name with _Original appended such that the symlinks can be correctly placed
+#
 
 %if !defined (BSI)
+    %if !exists (($(MSPythonDir)MSPyBentley_Original.pyd))
+always:	
+        !$(copyCmd) "$(MSPythonDir)MSPyBentley.pyd" "$(MSPythonDir)MSPyBentley_Original.pyd"
+        !$(deleteCmd) "$(MSPythonDir)MSPyBentley.pyd"
+    %endif
+
+    %if !exists ($(MSPythonDir)MSPyBentleyGeom_Original.pyd)
+always:	
+        !$(copyCmd) "$(MSPythonDir)MSPyBentleyGeom.pyd" "$(MSPythonDir)MSPyBentleyGeom_Original.pyd"
+        !$(deleteCmd) "$(MSPythonDir)MSPyBentleyGeom.pyd"
+    %endif
+
+    %if !exists ($(MSPythonDir)MSPyDgnPlatform_Original.pyd)
+always:	
+        -@$(copyCmd) "$(MSPythonDir)MSPyDgnPlatform.pyd" "$(MSPythonDir)MSPyDgnPlatform_Original.pyd"
+        -@$(deleteCmd) "$(MSPythonDir)MSPyDgnPlatform.pyd"
+    %endif
+
+    %if !exists ($(MSPythonDir)MSPyDgnView_Original.pyd)
+always:	
+        -@$(copyCmd) "$(MSPythonDir)MSPyDgnView.pyd" "$(MSPythonDir)MSPyDgnView_Original.pyd"
+        -@$(deleteCmd) "$(MSPythonDir)MSPyDgnView.pyd"
+    %endif
+
+    %if !exists ($(MSPythonDir)MSPyECObjects_Original.pyd)
+always:	
+        -@$(copyCmd) "$(MSPythonDir)MSPyECObjects.pyd" "$(MSPythonDir)MSPyECObjects_Original.pyd"
+        -@$(deleteCmd) "$(MSPythonDir)MSPyECObjects.pyd"
+    %endif
+
+    %if !exists ($(MSPythonDir)MSPyMstnPlatform_Original.pyd)
+always:	
+        -@$(copyCmd) "$(MSPythonDir)MSPyMstnPlatform.pyd" "$(MSPythonDir)MSPyMstnPlatform_Original.pyd"
+        -@$(deleteCmd) "$(MSPythonDir)MSPyMstnPlatform.pyd"
+    %endif
+
+    %if !exists ($(MSPythonDir)MSPythonCore_Original.pyd)
+always:	
+        -@$(copyCmd) "$(MSPythonDir)MSPythonCore.dll" "$(MSPythonDir)MSPythonCore_Original.dll"
+        -@$(deleteCmd) "$(MSPythonDir)MSPythonCore.dll"
+    %endif
+
 always:
     ~linkfile "$(MSPythonDir)MSPyBentley.pyd=$(BuildContext)Delivery/MSPyBentley.pyd"
     ~linkfile "$(MSPythonDir)MSPyBentleyGeom.pyd=$(BuildContext)Delivery/MSPyBentleyGeom.pyd"
@@ -63,15 +120,14 @@ always:
     ~linkfile "$(MSPythonDir)MSPyDgnView.pyd=$(BuildContext)Delivery/MSPyDgnView.pyd"
     ~linkfile "$(MSPythonDir)MSPyECObjects.pyd=$(BuildContext)Delivery/MSPyECObjects.pyd"
     ~linkfile "$(MSPythonDir)MSPyMstnPlatform.pyd=$(BuildContext)Delivery/MSPyMstnPlatform.pyd"
-    ~linkfile "$(MSPythonDir)UstnPython.dll=$(BuildContext)Delivery/UstnPython.dll"
-    ~linkfile "$(MSPythonDir)MSPythonCore.dll=$(BuildContext)Delivery/MSPythonCore.dll"
+    ~linkfile "$(MSPythonDir)MSPythonCore=$(BuildContext)Delivery/MSPythonCore.dll"
 
 %endif
 
 always:
-    $(PythonDir)/python.exe  -m pytest $(SrcRoot)MSPython/MSPythonTests/PlatformTests/PublishedTests/ -o cache_dir=$(o)
+    $(PythonExeDir)/python.exe  -m pytest $(_MakeFilePath)/PublishedTests/ -o cache_dir=$(o)
 
 %if defined (BSI)
 always:
-     $(PythonDir)/python.exe  -m pytest  $(SrcRoot)MSPython/MSPythonTests/PlatformTests/InternalTests/ -o cache_dir=$(o)
+     $(PythonExeDir)/python.exe  -m pytest  $(_MakeFilePath)/InternalTests/ -o cache_dir=$(o)
 %endif

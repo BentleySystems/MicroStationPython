@@ -1,0 +1,180 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/VCVarsQueryRegistry14.mki $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+
+# If PROCESSOR_ARCHITEW6432 is defined then we are a 32bit process on a 64bit OS. If we are targeting x64
+# then we have to opt-in to the 64-bit registry view (since we are a 32-bit process).
+%if defined(PROCESSOR_ARCHITEW6432) && $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+    Wow64RegistryViewOfTarget = KEY_WOW64_64KEY
+%else
+    Wow64RegistryViewOfTarget = None
+%endif
+
+%if !defined (VS2015Dir)
+    VS2015Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7", "14.0"]]
+    %if $(VS2015Dir) == " "
+        %error Cannot find compiler location for this toolset. VS2015Dir was not defined, and registry lookup failed.
+    %endif
+%endif
+
+%if !defined (VS2015_WindowsSdkDir)
+    VS2015_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Windows Kits/Installed Roots", "KitsRoot10"]]
+    %if $(VS2015_WindowsSdkDir) == " "
+        %error Cannot find the Windows SDK location for this toolset. VS2015_WindowsSdkDir was not defined, and registry lookup failed.
+    %endif
+%endif
+
+%if !defined (UCRTVersion)
+    # Look for the highest subdirectory that beings with 10.
+
+%if defined (VCVarsQueryRegistry14File)
+    %iffile $(VCVarsQueryRegistry14File)
+        VCVarsQueryRegistry14MkiFile = $(VCVarsQueryRegistry14File)
+    %else
+        VCVarsQueryRegistry14MkiFile = $(SrcRoot)bsicommon/PublicSDK/VCVarsQueryRegistry14.mki
+    %endif
+%endif
+
+%if !defined (VCVarsQueryRegistry14MkiFile)
+	VCVarsQueryRegistry14MkiFile = $(SrcRoot)bsicommon/PublicSDK/VCVarsQueryRegistry14.mki
+%endif
+
+%iffile $(VCVarsQueryRegistry14MkiFile)
+    ucrtBatFile = ${TEMP}/getucrtversion14_$(TARGET_PROCESSOR_ARCHITECTURE).bat
+    ucrtTextFile = ${TEMP}/ucrtversion14_$(TARGET_PROCESSOR_ARCHITECTURE).txt
+
+    $(ucrtTextFile) : $(VCVarsQueryRegistry14MkiFile)
+        @if not exist ${TEMP} mkdir ${TEMP}
+        > $(ucrtBatFile)
+        @echo OFF
+        @REM -----------------------------------------------------------------------
+        :GetUniversalCRTSdkDirHelper
+        @setlocal enableDelayedExpansion
+        @for \/f %%i IN ('dir "$(VS2015_WindowsSdkDir)include\" \/b \/ad-h \/on') DO (
+        @set result=%%i
+        @if "!result:~0,3!"=="10." set CRT=!result!
+        @if "!result!"=="%user_inputversion%" set match=1
+        )
+        @if not "%match%"=="" set CRT=%user_inputversion%
+        @endlocal  & echo %CRT% > $(ucrtTextFile)
+        <
+        $(ucrtBatFile)
+
+    executeUCRTGet:
+        ~set UCRTVersion $[@strip $[@readfile $(ucrtTextFile)]]
+
+WindowsSDKVersion = $(UCRTVersion)/
+%endif
+%else
+    WindowsSDKVersion = ${UCRTVersion}/
+%endif
+        
+%if !defined (VS2015_MSBuildDir)
+    VS2015_MSBuildRootDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/MSBuild/ToolsVersions/14.0", "MSBuildToolsRoot"]]
+    %if $(VS2015_MSBuildRootDir) == " "
+        %error Cannot find the Windows SDK location for this toolset. VS2015_MSBuildDir was not defined, and registry lookup failed.
+    %endif
+    
+    # I could not find unique registry keys for 32- vs. 64-bit; it relies on the registry redirect.
+    # Since BentleyBuildMake is 32-bit, it cannot easily view the 64-bit registry without modifying it to support KEY_WOW64_64KEY when querying.
+    # I think this is sufficient for our purposes.
+    %if (" " != $[@findstring x86, $(TARGET_PROCESSOR_ARCHITECTURE)])
+        VS2015_MSBuildDir = $(VS2015_MSBuildRootDir)14.0/bin/
+    %elif (" " != $[@findstring x64, $(TARGET_PROCESSOR_ARCHITECTURE)])
+        VS2015_MSBuildDir = $(VS2015_MSBuildRootDir)14.0/bin/amd64/
+    %else
+        %error Unknown value for TARGET_PROCESSOR_ARCHITECTURE ('$(TARGET_PROCESSOR_ARCHITECTURE)').
+    %endif
+%endif
+
+%if !defined (DEFAULT_DOT_NET_FRAMEWORK_VERSION)
+    DEFAULT_DOT_NET_FRAMEWORK_VERSION = 4.6.2
+%endif
+
+%if !defined (VS2015_DotNetToolsDir)
+    VS2015_DotNetToolsDir= $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\NETFXSDK\$(DEFAULT_DOT_NET_FRAMEWORK_VERSION)/WinSDK-NetFx40Tools", "InstallationFolder"]]
+    %if $(VS2015_DotNetToolsDir) == " "
+        %error Cannot find the .Net tools location for this toolset. VS2015_DotNetToolsDir was not defined, and registry lookup failed.
+    %endif
+%endif
+#introducing new variable as with 2015, microsoft further subdivided include folder with bin folder vs winsdk dir
+%if !defined (VS2015_DotNetWinSDKDir)
+    VS2015_DotNetWinSDKDir= $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\NETFXSDK\$(DEFAULT_DOT_NET_FRAMEWORK_VERSION)", "KitsInstallationFolder"]]
+    %if $(VS2015_DotNetWinSDKDir) == " "
+        %error Cannot find the .Net tools location for this toolset. VS2015_DotNetWinSDKDir was not defined, and registry lookup failed.
+    %endif
+%endif
+
+%if (" " != $[@findstring x86, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    %if !defined (VS2015_FrameworkVersion32)
+        VS2015_FrameworkVersion32=$[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VC7", "FrameworkVer32"]]
+        %if $(VS2015_FrameworkVersion32) == " "
+            %error Cannot find the .Net framework 32-bit version for this toolset. VS2015_FrameworkVersion32 was not defined, and registry lookup failed.
+        %endif
+    %endif
+    
+    %if !defined (VS2015_FrameworkDir32)
+        VS2015_FrameworkDir32Raw=$[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VC7", "FrameworkDir32"]]
+        %if $(VS2015_FrameworkDir32Raw) == " "
+            %error Cannot find the .Net framework 32-bit location for this toolset. VS2015_FrameworkDir32 was not defined, and registry lookup failed.
+        %endif
+
+        # Registry does not always have a trailing slash; ensure there is one.
+        VS2015_FrameworkDir32 =% ${VS2015_FrameworkDir32Raw}/
+    %endif
+
+    VS2015_FrameworkVersion = $(VS2015_FrameworkVersion32)
+    VS2015_FrameworkDir = $(VS2015_FrameworkDir32)
+    
+%elif (" " != $[@findstring x64, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    %if !defined (VS2015_FrameworkVersion64)
+        VS2015_FrameworkVersion64=$[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VC7", "FrameworkVer64"]]
+        %if $(VS2015_FrameworkVersion64) == " "
+            %error Cannot find the .Net framework 64-bit version for this toolset. VS2015_FrameworkVersion64 was not defined, and registry lookup failed.
+        %endif
+    %endif
+    
+    %if !defined (VS2015_FrameworkDir64)
+        VS2015_FrameworkDir64Raw=$[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VC7", "FrameworkDir64"]]
+        %if $(VS2015_FrameworkDir64Raw) == " "
+            %error Cannot find the .Net framework 64-bit location for this toolset. VS2015_FrameworkDir64 was not defined, and registry lookup failed.
+        %endif
+        
+        # Registry does not always have a trailing slash; ensure there is one.
+        VS2015_FrameworkDir64 =% ${VS2015_FrameworkDir64Raw}/
+    %endif
+
+    VS2015_FrameworkVersion = $(VS2015_FrameworkVersion64)
+    VS2015_FrameworkDir = $(VS2015_FrameworkDir64)
+
+%else
+    %error Unknown value for TARGET_PROCESSOR_ARCHITECTURE ('$(TARGET_PROCESSOR_ARCHITECTURE)').
+
+%endif
+
+# If you had VS2012 installed prior to installing VS2015, VS2015 apparently does not install its own copy of the DIA SDK.
+# http://social.msdn.microsoft.com/Forums/en-US/d75aafb5-3be0-4f4f-a463-00ccd5b03ddd/dia-sdk-for-visual-studio-2015
+VS2015_DiaSdkDir = $[@realpath "${VS2015Dir}/DIA SDK/include"]
+%ifnofile $(VS2015_DiaSdkDir)
+    %if !defined (VS2012Dir)
+        VS2012Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/VisualStudio/SxS/VS7", "11.0"]]
+        %if $(VS2012Dir) == " "
+            %error Cannot find fallback location for DIA SDK. VS2012Dir was not defined, and registry lookup failed.
+        %endif
+    %endif
+    
+    VS2015_DiaSdkDir = $[@realpath "${VS2012Dir}/DIA SDK/include"]
+%endif
+
+%if $(TARGET_PLATFORM) == "WinRT"
+    VS2015_VCPACKAGESDIR = $(VS2015Dir)VC/vcpackages/
+    VS2015_WINDOWSMETADATADIR = $[@realpath "$(VS2015_WindowsSdkDir)/Windows Metadata"]
+    VS2015_INCLUDEUMDIR = $[@realpath "$(VS2015_WindowsSdkDir)/include/um"]
+%endif
+
+

@@ -1,0 +1,49 @@
+#--------------------------------------------------------------------------------------
+#
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+%if defined (__MicroStationPolicy_mki__)
+    %return
+%endif
+
+__MicroStationPolicy_mki__  = 1
+
+#
+# Set up the target platform and such
+#
+%include PublicSystemPolicy.mki
+
+#
+# Including DefaultToolSet.mki is a noop if a toolset is already selected but, if not, it provides a default.
+#
+%include DefaultToolSet.mki
+
+#
+#  In our makefiles, we will always use $(mstation) to refer to the directory containing ustation.dll.
+#  MS is defined in the MicroStation SDK command-line shell.
+#
+mstation=$(MS)
+
+#rscDir - stick with the definition that comes from mstnDirs
+publishIdsInc       = $(publishIdsSrc)
+
+# Allow objects to be put in an alternate output tree
+%if !defined (MSMDE_OUTPUT)
+    MSMDE_OUTPUT = $(MSMDE)
+%endif
+
+#----------------------------------------------------------
+#       Define Output Directories
+#----------------------------------------------------------
+mdlapps         = $(mstation)mdlapps/
+o               = $(MSMDE_OUTPUT)objects/
+rscObjects      = $(MSMDE_OUTPUT)rscobj/
+reqdObjs        = $(MSMDE_OUTPUT)reqdobjs/
+
+PublicApiIncludes    = -I${MSMDE}/include/
+PublicApiRscIncludes = -i${MSMDE}/include/
+
+VCVarsQueryRegistry14File=$(MSMDE)mki/VCVarsQueryRegistry14.mki
+VCVarsQueryRegistry2017File=$(MSMDE)mki/VCVarsQueryRegistry2017.mki

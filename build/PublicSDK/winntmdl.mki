@@ -1,7 +1,10 @@
-#---------------------------------------------------------------------------------------------
-#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-#  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/winntmdl.mki $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
 #
 #    Note: Must be included from mdl.mki. Do not use this file directly.
 #
@@ -10,471 +13,1068 @@
     %error  winntmdl.mki cannot be used by itself. It must be included from mdl.mki
 %endif
 
-%if $(TARGET_PLATFORM) != "Windows" && $(TARGET_PLATFORM) != "WinRT"
-    %error  winntmdl.mki can only build binaries that are to run under Windows (including WinRT).
+%if $(TARGET_PLATFORM) != "Windows"
+    %error  winntmdl.mki can only build binaries that are to run under Windows.
 %endif
 
-%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
-    %error TARGET_PROCESSOR_ARCHITECTURE not defined
+%if defined (NTSDK)
+    %warn NTSDK option no longer supported.
 %endif
 
-# PRG means optimized build
-%if defined (PRG)
-    NDEBUG = 1
-%endif
-# Can't be both debug and optimized build
-%if defined (DEBUG) && defined (NDEBUG)
-    %error Can not set both DEBUG and NDEBUG options
-%endif
-# Default to DEBUG
-%if !defined (DEBUG) && !defined (NDEBUG) && !defined(DONT_DEFINE_DEBUG)
-    %warn Neither DEBUG nor NDEBUG options are set. Choosing the default DEBUG option.
-    DEBUG = 1
-%endif
-
-%if !defined (CTargetSpec)
-    CTargetSpec = $@
-%endif
-
-%if defined (CCCompOpts)
-    %warn VC IGNORES CCCompOpts=$(CCCompOpts)
-%endif
-
-# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-# _/_/_/_/_/_/_ Compiler command-line options  /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-# Common compiler options which will be appended to c, c++ and clr compiler command
-_commonCompOpts     =
-
-# Preserve previous compiler options
-_prevCCompOpts      =% $(CCompOpts)
-_prevCCCompOpts     =% $(CCCompOpts)
-_prevCCompOptsCLR   =% $(CCompOptsCLR)
-
-# Need to be able to control warnings-as-errors on a per-part basis, so it must be done here, and not the shared tool context file.
-WarningsAsErrorsArg =
-%if !defined(NOSTRICT) && !defined(IS_THIRD_PARTY_LIBRARY)
-    WarningsAsErrorsArg = -WX
-%endif
-
-%if defined(IS_THIRD_PARTY_LIBRARY)
-    # don't even print/generate the warnings because CodeWright iterates all warnings when stepping through compiler output
-    warnLevel = -w
-%endif
-
-# Common options
-CCompOpts       =% $(BENTLEY_WIN32_COMPILE_CommonOptions) $(WarningsAsErrorsArg) $(_prevCCompOpts)
-CCCompOpts      =% $(BENTLEY_WIN32_COMPILE_CppOptions) $(WarningsAsErrorsArg) $(_prevCCCompOpts)
-CCompOptsCLR    =% $(BENTLEY_WIN32_COMPILE_CommonOptionsCLR) $(WarningsAsErrorsArg) $(_prevCCompOptsCLR)
-
-%undef _prevCCompOpts
-%undef _prevCCCompOpts
-%undef _prevCCompOptsCLR
-
-# Optimized or release build
-%if defined (NDEBUG)
-    CConfigurationOptions = $(BENTLEY_WIN32_COMPILE_OptimizeOptions)
-%else
-    CConfigurationOptions = $(BENTLEY_WIN32_COMPILE_DebugOptions)
-%endif
-
-# Want code analysis
-%if defined (ENABLE_COMPILER_ANALYZE) && defined(DISABLE_COMPILER_ANALYZE_FOR_UNIT_TESTS)
-    %message Skipping static analysis for $(_MakeFileSpec)
-    SKIP_COMPILER_ANALYZE=1
-%endif
-
-%if defined (ENABLE_COMPILER_ANALYZE) && !defined (SKIP_COMPILER_ANALYZE) && !defined (IS_THIRD_PARTY_LIBRARY)
+# Define ENABLE_COMPILER_ANALYZE if you want your c/c++ code analyzed with prefast
+# It is available in Professional edition starting VS2012. Earlier it was available in Ultimate.
+# You may try it for free in VS2010 https://randomascii.wordpress.com/2011/10/15/try-analyze-for-free/
+%if defined (ENABLE_COMPILER_ANALYZE) && !defined (SKIP_COMPILER_ANALYZE)
     %if defined (ANALYZE_WARNINGS_TO_ERRORS)
         CCompAnalyze = -analyze
     %else
         CCompAnalyze = -analyze:WX-
     %endif
 
+    CCompOpts + $(CCompAnalyze)
+
     %if defined (SECURITY_ONLY_COMPILER_ANALYZE)
-        CCompAnalyze + -wd6001 -wd6011 -wd6014 -wd6031 -wd6059 -wd6063 -wd6064 -wd6066 -wd6067 -wd6101 -wd6102 -wd6103 -wd6211 -wd6214 -wd6215 -wd6216 -wd6217 -wd6219 -wd6220 -wd6221 -wd6225 -wd6226 -wd6230 -wd6235 -wd6236 -wd6237 -wd6239 -wd6240 -wd6242 -wd6244 -wd6246 -wd6250 -wd6255 -wd6258 -wd6259 -wd6260 -wd6262 -wd6263 -wd6268 -wd6269 -wd6270 -wd6271 -wd6272 -wd6273 -wd6274 -wd6276 -wd6278 -wd6279 -wd6280 -wd6281 -wd6282 -wd6283 -wd6284 -wd6285 -wd6286 -wd6287 -wd6288 -wd6289 -wd6290 -wd6291 -wd6292 -wd6293 -wd6294 -wd6295 -wd6296 -wd6297 -wd6298 -wd6299 -wd6302 -wd6303 -wd6306 -wd6308 -wd6310 -wd6312 -wd6313 -wd6314 -wd6315 -wd6316 -wd6317 -wd6318 -wd6319 -wd6320 -wd6322 -wd6323 -wd6324 -wd6326 -wd6328 -wd6329 -wd6330 -wd6331 -wd6332 -wd6333 -wd6334 -wd6335 -wd6336 -wd6340 -wd6381 -wd6384 -wd6387 -wd6388 -wd6400 -wd6401 -wd6500 -wd6501 -wd6503 -wd6504 -wd6505 -wd6506 -wd6508 -wd6509 -wd6510 -wd6511 -wd6513 -wd6514 -wd6515 -wd6516 -wd6517 -wd6518 -wd6522 -wd6525 -wd6527 -wd6530 -wd6540 -wd6551 -wd6552 -wd6701 -wd6702 -wd6703 -wd6704 -wd6705 -wd6706 -wd6707 -wd6993 -wd26100 -wd26101 -wd26105 -wd26110 -wd26111 -wd26112 -wd26115 -wd26116 -wd26117 -wd26130 -wd26135 -wd26140 -wd26160 -wd26165 -wd26166 -wd26167 -wd28020 -wd28021 -wd28022 -wd28023 -wd28024 -wd28039 -wd28101 -wd28103 -wd28104 -wd28105 -wd28106 -wd28107 -wd28108 -wd28109 -wd28110 -wd28111 -wd28112 -wd28113 -wd28114 -wd28120 -wd28121 -wd28122 -wd28123 -wd28124 -wd28125 -wd28126 -wd28127 -wd28128 -wd28129 -wd28131 -wd28132 -wd28133 -wd28134 -wd28135 -wd28137 -wd28138 -wd28141 -wd28143 -wd28144 -wd28145 -wd28146 -wd28147 -wd28150 -wd28151 -wd28152 -wd28153 -wd28156 -wd28157 -wd28158 -wd28159 -wd28160 -wd28161 -wd28162 -wd28163 -wd28164 -wd28165 -wd28166 -wd28167 -wd28168 -wd28169 -wd28170 -wd28171 -wd28172 -wd28173 -wd28175 -wd28176 -wd28182 -wd28183 -wd28193 -wd28194 -wd28195 -wd28196 -wd28197 -wd28198 -wd28199 -wd28202 -wd28203 -wd28204 -wd28205 -wd28206 -wd28207 -wd28208 -wd28209 -wd28210 -wd28211 -wd28212 -wd28213 -wd28214 -wd28215 -wd28216 -wd28217 -wd28218 -wd28219 -wd28220 -wd28221 -wd28222 -wd28223 -wd28224 -wd28225 -wd28226 -wd28227 -wd28228 -wd28229 -wd28230 -wd28231 -wd28232 -wd28233 -wd28234 -wd28235 -wd28236 -wd28237 -wd28238 -wd28239 -wd28240 -wd28241 -wd28243 -wd28244 -wd28245 -wd28246 -wd28250 -wd28251 -wd28252 -wd28253 -wd28254 -wd28260 -wd28262 -wd28263 -wd28266 -wd28267 -wd28272 -wd28273 -wd28275 -wd28278 -wd28279 -wd28280 -wd28282 -wd28283 -wd28284 -wd28285 -wd28286 -wd28287 -wd28288 -wd28289 -wd28290 -wd28291 -wd28300 -wd28301 -wd28302 -wd28303 -wd28304 -wd28305 -wd28306 -wd28307 -wd28308 -wd28309 -wd28310 -wd28311 -wd28312 -wd28350 -wd28351 -wd28601 -wd28602 -wd28604 -wd28615 -wd28616 -wd28617 -wd28623 -wd28624 -wd28636 -wd28637 -wd28638 -wd28639 -wd28640 -wd28645 -wd28648 -wd28649 -wd28650 -wd28714 -wd28715 -wd28716 -wd28717 -wd28721 -wd28730 -wd28735 -wd28736 -wd28750 -wd28751
+        CCompOpts + "@$(SrcBsiCommon)PublicSDK/security_only_compiler_analyze.resp"
     %endif
-    
-    %if !defined(COMPILER_ANALYZE_STACK_SIZE)
-        COMPILER_ANALYZE_STACK_SIZE = 1048576
+%endif
+
+BufferOverrunCheckOff = -GS-
+BufferOverrunCheckOn  = -GS
+
+#
+# Default to fp:precise
+#
+%if !defined (CCompFpOpts)
+    CCompFpOpts = precise
+    CCompOpts       + -fp:precise
+%endif
+
+
+%if (MSVC_VERSION >= 1400)        # if VS2005 or better
+    %if !defined (BufferOverrunCheckOption)
+        %if defined (DEBUG)
+            BufferOverrunCheckOption = $(BufferOverrunCheckOn)
+        %else
+            BufferOverrunCheckOption = $(BufferOverrunCheckOff)
+        %endif
+    %endif
+    %if defined (NO_CPP_SCOPING)
+        # Temporary hack until we can fix our scoping
+        CCompOpts       + -Zc:forScope-
+    %endif
+    %if defined (NO_NATIVE_WCHAR_T) && !defined (ENABLE_WCHAR_TYPE)
+        # Temporary hack until we can fix our native wchar_t problems
+        CCompOpts       + -Zc:wchar_t-
     %endif
 
-    CCompAnalyze + -analyze:stacksize $(COMPILER_ANALYZE_STACK_SIZE)
+    %if defined (DEV_STUDIO)
+        %if (MSVC_VERSION < 1700)
+            %error DEV_STUDIO requires at least MSVC 1700 (DEV_STUDIO_ADDITIONAL_CPP_FLAGS)
+        %endif
+        CCompOpts + $(DEV_STUDIO_ADDITIONAL_CPP_FLAGS)
+    %endif
 
-    %if !defined (ENABLE_COMPILER_ANALYZE_STRICT)
-        # TODO: make all of our code check return values.
-        # https://docs.microsoft.com/en-us/cpp/code-quality/c6031?view=msvc-170
-        CCompAnalyze + -wd6031
+%elif (MSVC_VERSION >= 1310) # if VS 2003 or better
+    %if !defined (NO_CPP_SCOPING) && defined (FORCE_CPP_SCOPING)
+        CCompOpts       + -Zc:forScope
+    %endif
+    %if !defined (NO_NATIVE_WCHAR_T) && defined (ENABLE_WCHAR_TYPE)
+        CCompOpts   +   -Zc:wchar_t
+    %endif
+%endif
 
-        # TODO: remove all uses of _alloca from the code (use ScopedArray or std::vector instead).
-        # https://docs.microsoft.com/en-us/cpp/code-quality/c6255?view=msvc-170
-        CCompAnalyze + -wd6255
+CCompOpts + $(BufferOverrunCheckOption)
 
-        # Our memory-allocation policy is to crash. Therefore, we don't get any value from 
-        # warning C6308: 'realloc' might return null pointer: assigning null pointer to 'm_data', which is passed as an argument to 'realloc', will cause the original memory block to be leaked.
-        CCompAnalyze + -wd6308
+%if !defined (CPP_EXCEPTION_USE_ASYNC) && !defined (CPP_EXCEPTION_USE_SYNC)
+    CPP_EXCEPTION_USE_SYNC=1
+%endif
 
-        %if defined (DISABLE_COMPILER_ANALYZE_CHECK_UNINITIALIZED_MEMORY)
-            # Allow a mke file to opt out of the uninitialized memory use check. That is needed by DLLs that make
-            # heavy use of the geometry structs, such as DPoint3d, DVec3d, Transform, and RotMatrix.
-            # These structs, by design, do not have constructors. Instead, they have a number of functions that function as constructors in that
-            # they set all of the properties of `this` using various recipes. DPoint3d::Zero and Transform::InitIdentity are examples.
-            # Static analysis has trouble with this � it warns that the initialization method is being called on an uninitialized object.
-            # Ditto for arrays of such objects. That�s a false positive. We do not want to pay the cost of zero-initializing the structs
-            # or arrays first, just to silence this warning.
-            CCompAnalyze + -wd6001
+%if !defined (NO_CPP_EXCEPTION_HANDLERS)
+    CppExceptSynchHandler       = -EHs
+    CppExceptAsynchHandler      = -EHa
+    CppExceptTreatCAsNothrow    = -EHc
 
-            %message Skipping static analysis checking for use of uninitialized memory (6001) for $(_MakeFilePath)
+    %if (MSVC_VERSION >= 1400)          # if VS 2005 or better
+        # Setting the exception handler in CCompOpts is deferred so it
+        # doesn't get copied into CCompOptsCLR
+        ClrExceptionHandler     = $(CppExceptAsynchHandler)
+        %if !defined (NO_CPP_EXCEPTIONS_EXTERN_C)
+            CCompOpts       + $(CppExceptTreatCAsNothrow)
+        %endif
+        %if defined (CPP_EXCEPTION_USE_ASYNC)
+            NativeCppExceptHandler           = $(CppExceptAsynchHandler)
+            DefaultNativeCppExceptHandler    = $(CppExceptAsynchHandler)
+        %else
+            NativeCppExceptHandler           = $(CppExceptSynchHandler)
+            DefaultNativeCppExceptHandler    = $(CppExceptSynchHandler)
+        %endif
+    %elif (MSVC_VERSION >= 1300)        # if VS 2002 or VS 2003
+        %if defined (CPP_EXCEPTION_USE_ASYNC)
+            CCompOpts       + $(CppExceptAsynchHandler)
+            %if !defined (NO_CPP_EXCEPTIONS_EXTERN_C)
+                CCompOpts       + $(CppExceptTreatCAsNothrow)
+            %endif
+        %else
+            CCompOpts       + -GX
+        %endif
 
+    %else
+        # For VC6 and prior
+        CCompOpts           + -GX
+    %endif
+%endif
+
+%if !defined (NO_CPP_RTTI)
+    CCompOpts           + -GR
+%endif
+
+#-----------------------------------------------------------------------
+# Allow the override of the compiler and linker, Needed to use tools
+# such and BoundsChecker. Same macros are used by nmake.exe
+#-----------------------------------------------------------------------
+%if !defined(CPP)
+    CPP                 = cl
+%endif
+    CCompCmd            = $(CPP)
+    CCCompCmd           = $(CPP)
+
+    CPreprocCmd         = $(CCompCmd) -EP -C
+
+%if !defined(LINK32)
+    LINK32              = link
+%endif
+    CLinkCmd            = $(LINK32) -out:$@ $(CLinkOpts)
+    CLibCmd             = lib
+
+%if defined (MSVCDir) && exists ($(MSVCDir)\vcpackages\vcbuild.exe)
+    VCBuildCmd          = $(MSVCDir)\vcpackages\vcbuild -logcommands
+
+    %ifdef DEBUG
+        VCBuildCfg          = Debug
+    %else
+        VCBuildCfg          = Release
+    %endif
+%endif
+
+    socket_lib          = $(ntPlatformLib)ws2_32.lib
+
+    mdlbltinLib         = $(mdlLibs)mdlbltin.lib
+
+    #-----------------------------------------------------------------------
+    #   Common 'C' compiler optimizer switches
+    #-----------------------------------------------------------------------
+    OptimizerOff     = -Od
+
+    %if defined (PENTIUM)
+        OptimizerOn  + -Oy-
+        commonCOpts  + -G5
+    %else
+
+        OptimizeForSpeed=-Ox -Oy-
+        OptimizeForSpace=-Ox -Oy- -Os
+
+        %include OptimizerOptionsForCompiler.mki
+
+        %if defined (OPTIMIZE_FOR_SPEED)
+            OptimizerOn + $(OptimizeForSpeed)
+        %else
+            OptimizerOn + $(OptimizeForSpace)
+        %endif
+
+        %if (MSVC_VERSION == 1310)
+            commonCOpts  + -G7
+        %elif (MSVC_VERSION <= 1300)
+            # VS2002 and prior only have the G6 flag
+            commonCOpts  + -G6
+        %endif
+    %endif
+
+    %if defined (USE_SSE2)
+        commonCOpts + -arch:SSE2
+    %endif
+
+    BUGGY_MSVC50_OPTIMIZER = 1
+    OptimizerDefault = $(OptimizerOn)
+    OptimizerFlag    = $(OptimizerDefault)
+
+    #-----------------------------------------------------------------------
+    # set OptimizerNoGlobal flag for fine tuning
+    #-----------------------------------------------------------------------
+    %if defined (DEBUG) || defined (DEBUG_G)
+        OptimizerOn       = $(OptimizerOff)
+        OptimizerNoGlobal = $(OptimizerOff)
+    %endif
+
+    %if defined (OPTIMIZE)
+        OptimizerOn       = -Ox -Oy-
+        OptimizerNoGlobal = -Oitb1 -Gs -Oy-
+    %endif
+
+    %if defined (OPTIMIZER_SETTING)
+        OptimizerOn       = $(OPTIMIZER_SETTING)
+    %endif
+
+    # Use the single threaded static version of the C runtime
+    %if defined (static_link_exe)
+        %if MSVC_VERSION >= 1400
+            cRuntimeLib     =       libcmt.lib
+            cRuntime        =       $(ntLib)$(cRuntimeLib)
+            crt_opt         =       -MT
+        %else
+            cRuntimeLib     =       libc.lib
+            cRuntime        =       $(ntLib)$(cRuntimeLib)
+            crt_opt         =       -ML
+        %endif
+    # Use the static version of the C runtime
+    %elif defined (STATIC_C_RUNTIME)
+        %if defined (DEBUG) && defined (DEBUG_HEAP)
+            crt_opt         =       -MTd -D_CRTDBG_MAP_ALLOC -DINCLUDE_CRTDBG=1 -D_DEBUG
+            cRuntimeLib     =       libcmtd.lib
+            cRuntime        =       $(ntLib)$(cRuntimeLib)
+        %elif defined (DEBUG) && defined (DEBUG_RUNTIME)
+            crt_opt         =       -MTd -D_DEBUG
+            cRuntimeLib     =       libcmtd.lib
+            cRuntime        =       $(ntLib)$(cRuntimeLib)
+        %else
+            crt_opt         =       -MT
+            cRuntimeLib     =       libcmt.lib
+            cRuntime        =       $(ntLib)$(cRuntimeLib)
+        %endif
+     # Use the dll version of the C runtime
+    %else
+        %if defined (DEBUG) && defined (DEBUG_HEAP)
+            crt_opt         =       -MDd -D_CRTDBG_MAP_ALLOC -DINCLUDE_CRTDBG=1
+            cRuntimeLib     =       msvcrtd.lib
+            cRuntime        =       $(ntLib)$(cRuntimeLib)
+        %elif defined (DEBUG) && defined (DEBUG_RUNTIME)
+            crt_opt         =       -MDd
+            cRuntimeLib     =       msvcrtd.lib
+            cRuntime        =       $(ntLib)$(cRuntimeLib)
+        %else
+            crt_opt         =       -MD
+            cRuntimeLib     =       msvcrt.lib
+            cRuntime        =       $(ntLib)$(cRuntimeLib)
+        %endif
+    %endif
+
+    crt_opt+ -D__EXCEPTIONS
+
+    # Use the static version of the C++ runtime
+    %if defined (STATIC_CPP_RUNTIME)
+        %if defined (DEBUG) && defined (DEBUG_RUNTIME)
+            cppRuntime      =       $(ntLib)libcpmtd.lib
+        %else
+            cppRuntime      =       $(ntLib)libcpmt.lib
+        %endif
+    # Use the dll version of the C++ runtime
+    %else
+        %if defined (DEBUG) && defined (DEBUG_RUNTIME)
+            cppRuntime      =       $(ntLib)msvcprtd.lib
+        %else
+            cppRuntime      =       $(ntLib)msvcprt.lib
+        %endif
+    %endif
+
+    %if !defined (warnLevel)
+        %if defined (HAVE_PERMISSION_TO_COMPILE_AT_W3)
+            warnLevel = -W3
+        %elif defined (DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS)
+            %warn DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS=$(DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS)
+            warnLevel = -W3
+        %elif defined (DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS_USING_1800)
+            %if  MSVC_VERSION >= 1900
+                %warn DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS_USING_1800=$(DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS_USING_1800)
+                warnLevel = -Wv:18
+            %endif
+        %elif defined (WE_NEED_TO_FIX_OUR_COMPILER_WARNINGS)
+            %error WE_NEED_TO_FIX_OUR_COMPILER_WARNINGS needs to be fixed. To force compile at -W3 use DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS or HAVE_PERMISSION_TO_COMPILE_AT_W3
+        %else
+            warnLevel = -W4 -DBENTLEY_WARNINGS_HIGHEST_LEVEL
+
+            %if defined (NDEBUG)
+                # Disable warning "local variable is initialized but not referenced" when NDEBUG is set. This is required to make the compiler warn on patterns of code such as:
+                #   bool stat = currSys->GetFrustumToLocal(frustumToLocal); BeAssert (stat);
+                # In the above code snippet, if "stat" is used only by the BeAssert, then with NDEBUG set, the use of "stat" is pre-processed out - causing the compiler to raise an error.
+                commonCOpts + -wd4189
+            %endif
+
+            #
+            # Disable the following warnings for now.
+            #
+            %if !defined (FIXED_COMPILER_WARNINGS_4701_4244)
+            # potentially uninitialized local variable
+            commonCOpts + -wd4701
+            # possible loss of data
+            commonCOpts + -wd4244
+			%endif
+            #Bug in visual studio with .net 4.0 . Fixed in vNext See https://connect.microsoft.com/VisualStudio/feedback/details/732012/path-combine-generates-a-warning-in-net-4-0-c-projects
+            #WIP_VS2012
+            commonCOpts + -wd4564
+	    commonCOpts + -wd4840
+            %if (MSVC_VERSION >= 1700)
+                # Unreachable code
+                commonCOpts + -wd4702
+            %endif
+        %endif
+
+        %if defined (HAVE_PERMISSION_TO_COMPILE_USING_1900) && (MSVC_VERSION >= 1900)
+            warnLevel + -Wv:19
         %endif
 
     %endif
 
-    %if !defined (ENABLE_COMPILER_ANALYZE_EXTERNAL)
-        CCompAnalyze + -external:env:INCLUDE
-        CCompAnalyze + -external:W4
-        CCompAnalyze + -analyze:external-
+    #  /Gy separate functions for linker so that linker's OPT:REF can throw away functions that aren't called
+    commonCOpts + -c $(warnLevel) -DWIN32 -DwinNT $(crt_opt) -D_VISCXX -Gy
+    %if (MSVC_VERSION >= 1400) && !defined (WARN_INSECURE)
+        commonCOpts + -wd4996
     %endif
 
-    _commonCompOpts + $(CCompAnalyze)
-    
-    BSI_MSVC_ANALYZE = 1
-    _commonCompOpts + -DBSI_MSVC_ANALYZE
-	
-    %if defined (SECURITY_ONLY_COMPILER_ANALYZE)
-        _commonCompOpts + -wd6001 -wd6011 -wd6014 -wd6031 -wd6059 -wd6063 -wd6064 -wd6066 -wd6067 -wd6101 -wd6211 -wd6214 -wd6215 -wd6216 -wd6217 -wd6219 -wd6220 -wd6221 -wd6225 -wd6226 -wd6230 -wd6235 -wd6236 -wd6237 -wd6239 -wd6240 -wd6242 -wd6244 -wd6246 -wd6250 -wd6255 -wd6258 -wd6259 -wd6260 -wd6262 -wd6263 -wd6268 -wd6269 -wd6270 -wd6271 -wd6272 -wd6273 -wd6274 -wd6276 -wd6278 -wd6279 -wd6280 -wd6281 -wd6282 -wd6283 -wd6284 -wd6285 -wd6286 -wd6287 -wd6288 -wd6289 -wd6290 -wd6291 -wd6292 -wd6293 -wd6294 -wd6295 -wd6296 -wd6297 -wd6298 -wd6299 -wd6302 -wd6303 -wd6306 -wd6308 -wd6310 -wd6312 -wd6313 -wd6314 -wd6315 -wd6316 -wd6317 -wd6318 -wd6319 -wd6320 -wd6322 -wd6323 -wd6324 -wd6326 -wd6328 -wd6329 -wd6330 -wd6331 -wd6332 -wd6333 -wd6334 -wd6335 -wd6336 -wd6340 -wd6381 -wd6384 -wd6387 -wd6388 -wd6400 -wd6401 -wd6500 -wd6501 -wd6503 -wd6504 -wd6505 -wd6506 -wd6508 -wd6509 -wd6510 -wd6511 -wd6513 -wd6514 -wd6515 -wd6516 -wd6517 -wd6518 -wd6522 -wd6525 -wd6527 -wd6530 -wd6540 -wd6551 -wd6552 -wd6701 -wd6702 -wd6703 -wd6704 -wd6705 -wd6706 -wd6707 -wd6995 -wd26100 -wd26101 -wd26105 -wd26110 -wd26111 -wd26112 -wd26115 -wd26116 -wd26117 -wd26130 -wd26135 -wd26140 -wd26160 -wd26165 -wd26166 -wd26167 -wd28020 -wd28021 -wd28022 -wd28023 -wd28024 -wd28039 -wd28103 -wd28104 -wd28105 -wd28106 -wd28107 -wd28108 -wd28109 -wd28112 -wd28113 -wd28125 -wd28137 -wd28138 -wd28159 -wd28160 -wd28163 -wd28164 -wd28182 -wd28183 -wd28193 -wd28194 -wd28195 -wd28196 -wd28197 -wd28198 -wd28199 -wd28202 -wd28203 -wd28204 -wd28205 -wd28206 -wd28207 -wd28208 -wd28209 -wd28210 -wd28211 -wd28212 -wd28213 -wd28214 -wd28215 -wd28216 -wd28217 -wd28218 -wd28219 -wd28220 -wd28221 -wd28222 -wd28223 -wd28224 -wd28225 -wd28226 -wd28227 -wd28228 -wd28229 -wd28230 -wd28231 -wd28232 -wd28233 -wd28234 -wd28235 -wd28236 -wd28237 -wd28238 -wd28239 -wd28240 -wd28241 -wd28243 -wd28244 -wd28245 -wd28246 -wd28250 -wd28251 -wd28252 -wd28253 -wd28254 -wd28262 -wd28263 -wd28267 -wd28272 -wd28273 -wd28275 -wd28278 -wd28279 -wd28280 -wd28282 -wd28283 -wd28284 -wd28285 -wd28286 -wd28287 -wd28288 -wd28289 -wd28290 -wd28291 -wd28300 -wd28301 -wd28302 -wd28303 -wd28304 -wd28305 -wd28306 -wd28307 -wd28308 -wd28309 -wd28350 -wd28351 -wd28715
+    %if defined (WARNINGS_HIGHEST_LEVEL)
+        %error WARNINGS_HIGHEST_LEVEL is not required. Its on by default
     %endif
-%endif
 
-# A few modules such as ImagePP and ACISCore stipulate asynchronous exception model so that they can catch FP exceptions in the midst of C++ code.
-%if defined (CPP_EXCEPTION_USE_ASYNC)
-    %warn "********************CPP_EXCEPTION_USE_ASYNC****************************"
-    %warn "Use of asynchronous C++ exception model imposes a performance penalty."
-    %warn "This is a Windows-only feature and should not be required by portable code."
-    %warn "***********************************************************************"
-    Winntmdl_mki_CCompOpts =% $[@subst EHsc, EHa, $(CCompOpts)]
-    CCompOpts =% $(Winntmdl_mki_CCompOpts)
-    %undef Winntmdl_mki_CCompOpts
-%endif
+    %if (defined (WARNINGS_UP) && !defined (HAVE_PERMISSION_TO_COMPILE_AT_W3))
+        #---------------------------------
+        #  These are turned off by default
+        #  http://msdn.microsoft.com/en-us/library/23k5d385.aspx
+        #---------------------------------
 
-# ***
-# *** WIP_STATIC_CRT: Do we really need this option?
-# ***
-# Use the static version of the C runtime
-%if defined (STATIC_LINK_EXE) || defined (STATIC_C_RUNTIME)
-    cRuntime        = libcmt.lib
-
-    # VERACODE - Set Runtime Library to Multi-threaded Debug or Multi-threaded Debug DLL (/MTd, /MDd, or /LDd).
-    %if defined(IS_VERACODE_BUILD)
-        _commonCompOpts + -MTd
-    %else
-        _commonCompOpts + -MT
-    %endif
-# Use the dll version of the C runtime
-%else
-    # VERACODE - Set Runtime Library to Multi-threaded Debug or Multi-threaded Debug DLL (/MTd, /MDd, or /LDd).
-    %if defined(IS_VERACODE_BUILD)
-        cRuntime = msvcrtd.lib
-        _commonCompOpts + -MDd
-    %else
-        cRuntime = msvcrt.lib
-        _commonCompOpts + -MD
-    %endif
-%endif
-
-# ***
-# *** WIP_STATIC_CRT: Do we really need this option?
-# ***
-# Use the static version of the C++ runtime
-%if defined (STATIC_CPP_RUNTIME)
-    cppRuntime  = libcpmt.lib
-# Use the dll version of the C++ runtime
-%else
-    cppRuntime  = msvcprt.lib
-%endif
-
-# Warnings level
-%if !defined (warnLevel)
-    %if defined (HAVE_PERMISSION_TO_COMPILE_AT_W3)
-        warnLevel = -W3
-    %elif defined (DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS)
-        %message DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS=$(DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS)
-        warnLevel = -W3
-    %else
-        warnLevel = -W4 -DBENTLEY_WARNINGS_HIGHEST_LEVEL
-    %endif
-%endif
-_commonCompOpts + $(warnLevel)
-
-# Want more warnings
-%if (defined (WARNINGS_UP) && !defined (HAVE_PERMISSION_TO_COMPILE_AT_W3))
-    # conversion from 'type1' to 'type2', possible loss of data
-    _commonCompOpts + -we4242
-    # WIP_WINRT - We get error 4263 in C:\PROGRA~2\MICROS~2.0\VC\INCLUDE\vccorlib.h when compiling "private ref class Array { ... T& get(unsigned int index) const;"
-    %if $(TARGET_PLATFORM) != "WinRT"
+        # conversion from 'type1' to 'type2', possible loss of data
+        commonCOpts + -we4242
         # member function does not override any base class virtual member function
-        _commonCompOpts + -we4263
+        commonCOpts + -we4263
         # no override available for virtual member function from base 'class'; function is hidden
-        _commonCompOpts + -we4264
-    %endif
-    # class has virtual functions, but destructor is not virtual
-    # CCompOpts + -we4265
-    # no override available for virtual member function from base 'type'; function is hidden
-    _commonCompOpts + -we4266
-    # truncation from 'type 1' to 'type 2'
-    _commonCompOpts + -we4302
-    # wide string literal cast to 'LPSTR'
-    _commonCompOpts + -we4905
-    # string literal cast to 'LPWSTR'
-    _commonCompOpts + -we4906
-
-    %ifndef DEVELOPER_NEEDS_TO_FIX_COMPILER_WARNINGS
-    _commonCompOpts + -Zc:strictStrings
-    %endif
-
-    # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
-    _commonCompOpts + -we4928
+        commonCOpts + -we4264
+        # class has virtual functions, but destructor is not virtual
+        commonCOpts + -we4265
+        # no override available for virtual member function from base 'type'; function is hidden
+        commonCOpts + -we4266
+        # truncation from 'type 1' to 'type 2'
+        commonCOpts + -we4302
+        # wide string literal cast to 'LPSTR'
+        commonCOpts + -we4905
+        # string literal cast to 'LPWSTR'
+        commonCOpts + -we4906
+        # illegal copy-initialization; more than one user-defined conversion has been implicitly applied
+        commonCOpts + -we4928
 
     %if !defined (NDEBUG) # May be used in an assert
         # local variable is initialized but not referenced
-        _commonCompOpts + -we4189
+        commonCOpts + -we4189
     %endif
-%endif
-
-# Opt-in to Visual C++ conformance mode (a mode much closer to ISO C++
-# standards conformance). Microsoft says this will someday be the default, and
-# they are encouraging developers to pro-actively enable it and prepare. Auto-
-# generated WinRT/WRL code violates conformance mode, so need to opt-out for
-# WinRT archtectures.
-%if (("VS2017" == $(BUILD_TOOLSET)) || ("VS2019" == $(BUILD_TOOLSET))) && !defined(IS_THIRD_PARTY_LIBRARY) && !defined(ALLOW_MSVC_PERMISSIVE) && ("WinRT" != $(TARGET_PLATFORM))
-    _commonCompOpts + -permissive-
-%endif
-
-#  Without this, ATL macros that cause calls to WideCharToMultiByte or MultiByteToWideChar
-#  use CP_THREAD_ACP instead of CP_ACP.  Prior to VC7, these macros used CP_ACP. All of
-#  MicroStation's explicit calls to these functions specify CP_ACP as the code page arg.
-#  Consequently, if D_CONVERSION_DONT_USE_THREAD_LOCALE is not defined strings converted
-#  via the ATL macros cannot be converted back in MicroStation.
-_commonCompOpts + -D_CONVERSION_DONT_USE_THREAD_LOCALE
-
-%if defined (_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES)
-    _commonCompOpts + -D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=$(_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES)
-%endif
-%if defined (_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT)
-    _commonCompOpts + -D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT=$(_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT)
-%endif
-%if !defined (NO_LEAN_AND_MEAN)
-    _commonCompOpts + -DWIN32_LEAN_AND_MEAN
-%endif
-%if !defined (LOGO)
-    _commonCompOpts + -nologo
-%endif
-%if defined (NDEBUG)
-    _commonCompOpts + -DNDEBUG=1
-%endif
-
-# Windows version defs
-%if $(TARGET_PLATFORM) == "WinRT"
-    _WIN32_WINNT=0x0602
-%endif
-%if defined (WINVER)
-    _commonCompOpts + -DWINVER=$(WINVER)
-%endif
-%if defined (_WIN32_WINNT)
-    _commonCompOpts + -D_WIN32_WINNT=$(_WIN32_WINNT)
-%endif
-%if defined (_WIN32_IE)
-    _commonCompOpts + -D_WIN32_IE=$(_WIN32_IE)
-%endif
-%if defined (NTDDI_VERSION)
-    _commonCompOpts + -DNTDDI_VERSION=$(NTDDI_VERSION)
-%endif
-%if (MSVC_VERSION >= 1700)
-    _commonCompOpts + -DNTDDI_WIN7SP1=0x06010100
-%endif
-
-# Debugging information (.pdb file)
-%if !defined (NO_DEBUG_INFO)
-    # Directory of the PDB file
-    %if !defined(CCompPDBDir)
-        CCompPDBDir = $(@D)
     %endif
 
-    # Name of the PDB file
-    %if !defined (CCompPDBName)
-        %if defined (CREATE_STATIC_LIBRARIES) && defined (appName)
-            CCompPDBName =% $(appName)
+    commonCOpts + $(OptimizerFlag)
+
+    %if (MSVC_VERSION >= 1500) && (MSVC_VERSION < 1600)
+            #  Starting with VS 2008 the default behavior is for the linker to generate a manifest
+            #  that binds to the original VS 2008 CRT. We specify D_BIND_TO_CURRENT_CRT_VERSION to bind to a
+            #  newer version.  This is not necessary for VS2010 because VS2010 does not use WinSxS to deploy the CRT.
+            CCompOpts   +   -D_BIND_TO_CURRENT_CRT_VERSION=1
+    %endif
+
+    #  Without this, ATL macros that cause calls to WideCharToMultiByte or MultiByteToWideChar
+    #  use CP_THREAD_ACP instead of CP_ACP.  Prior to VC7, these macros used CP_ACP. All of
+    #  MicroStation's explicit calls to these functions specify CP_ACP as the code page arg.
+    #  Consequently, if D_CONVERSION_DONT_USE_THREAD_LOCALE is not defined strings converted
+    #  via the ATL macros cannot be converted back in MicroStation.
+    commonCOpts + -D_CONVERSION_DONT_USE_THREAD_LOCALE
+
+    %if defined (_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES)
+        commonCOpts + -D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=$(_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES)
+    %endif
+    %if defined (_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT)
+        commonCOpts + -D_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT=$(_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT)
+    %endif
+
+    # If _SECURE_SCL is not defined as 0, every iterator is 8 bytes instead of 4, and every iterator
+    # operation involves a method call.
+    %if !defined (SECURE_SCL_VALUE)
+        %if defined (DEBUG)
+            # Current roadblock to setting this on is the regex calls.  Apparently a known bug fixed in VC10
+            # http://connect.microsoft.com/VisualStudio/feedback/details/355599/-xran-identifier-not-found-error-when-performing-release-build-using-tr1-regex-functions-and-secure-scl-throws-1
+            SECURE_SCL_VALUE    =   0
         %else
-            CCompPDBName = objects
+            SECURE_SCL_VALUE    =   0
         %endif
     %endif
 
-    # Path of the PDB file
-    %if !defined (IntermediatePdbFile)
-        IntermediatePdbFile = $(CCompPDBDir)$(CCompPDBName).pdb
+    # Without this, a checked iterator that detects an error calls TerminateProcess and the program
+    # just disappears.  This value is ignored when _SECURE_SCL is 0
+    %if (MSVC_VERSION < 1600)
+        commonCOpts + -D_SECURE_SCL_THROWS=1
     %endif
 
-    %if defined (DEBUG_INFO_IN_OBJ)
-        # Produces an .obj file containing full symbolic debugging information and does not produce a .pdb file.
-        # For distributors of third-party libraries, there is an advantage to not having a .pdb file.
-        _commonCompOpts + -Z7
-    %elif defined (BUILD_DEBUG_LINE_NUMBERS_ONLY)
-        # For 3rd party Developers: Line numbers, no symbols, Normal call stacks (disable FPO)
-        _commonCompOpts + -Zd -Fd$(IntermediatePdbFile)
+    commonCOpts + -D_SECURE_SCL=$(SECURE_SCL_VALUE)
+
+    %if !defined (NO_LEAN_AND_MEAN)
+        commonCOpts     + -DWIN32_LEAN_AND_MEAN
+    %endif
+
+    %if defined (BSI_FINDLEAKS)
+        commonCOpts     + -DBSI_FINDLEAKS
+    %endif
+
+    # With VC10 you get this warning when trying to compile the delivered header file valarray via xmemory.
+    # It's a big hammer and I don't like it, but I'm not sure how to fix the callers right now.
+    # warning C4345: behavior change: an object of POD type constructed with an initializer of the form () will be default-initialized
+    %if (MSVC_VERSION > 1500)
+        CCompOpts+-wd4345
+    %endif
+
+    #
+    # If they are defined, pass WINVER and _WIN32_WINNT values through to the compiler
+    #
+    %if defined (WINVER)
+        winVerDefs + -DWINVER=$(WINVER)
+    %endif
+
+    %if defined (_WIN32_WINNT)
+        winVerDefs + -D_WIN32_WINNT=$(_WIN32_WINNT)
+    %endif
+
+    %if defined (_WIN32_IE)
+        winVerDefs + -D_WIN32_IE=$(_WIN32_IE)
+    %endif
+
+    %if defined (NTDDI_VERSION)
+        winVerDefs + -DNTDDI_VERSION=$(NTDDI_VERSION)
+    %endif
+
+    # Should you want to "undo" these compiler defs you could temporarily clear the winVerDefs macro
+    # and then reset it via =% $[winVerDefsPreserved] to conveniently reinstantiate it.
+    winVerDefsPreserved =% $[winVerDefs]
+    commonCOpts + $(winVerDefs)
+
+    # VS2012
+    %if (MSVC_VERSION>=1700)
+        # Workaround for Microsoft bug in VS2012/8.0 SDK - missing definition of NTDDI_WIN7SP1 from sdkddkver.h
+        commonCOpts + -DNTDDI_WIN7SP1=0x06010100
+
+        # Enable - 'function': signature of non-private member contains assembly private native type 'native_type'
+        commonCOpts + -we4692
+    %endif
+
+    FileTypeControl =
+    FileTypeControlC = \/TC
+    FileTypeControlCPP = \/TP
+    MCFileTypeControl = $(FileTypeControlC)
+
+    commonCOpts + $(FileTypeControl)
+
+    %if !defined (LOGO)
+        commonCOpts + -nologo
+    %endif
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+        %if (MSVC_VERSION >= 1300 )   # VS 2002
+            AsmCmd = ${ntTools}\bin\ml
+        %else
+            AsmCmd          =  ml
+        %endif
+        winNTx86        =  1
+
+        x86COpts        =  -GdF -D_X86_=1 -Di386=1
+
+        CCompOpts       +   $(x86COpts)
+        dllEntry        =   @12
+        ntCPU           =   X86
+        resCPU          =   x86
+        rcCPU           =   _X86_
+        winnthCPU       =   _X86_
+        # Options for the ML assembler:
+        #   Warning & strict    -W3 -WX
+        #   Debug               -Zd -Zi
+        #   Listings            -Sa -Sc -Sx -c -Fl
+        AsmOpts         =   -Di386=1 -D_X86_=1 -DwinNT=1 -DWINNT=1 -DFPTOS=1 -c -Cp -Cx -coff  -Zd -Zi
+        %if !defined (NOSTRICT)
+            # Trying just locking this at W3.  The compiler uses W4, but ML only goes up to 3. It has been at 3 for a while, so maybe that is ok for all.
+            AsmOpts         +   -W3 -WX
+        %endif
+        %if defined (ASM_LISTING)
+            AsmOpts         +   -Sa -Sc -Sx -c -Fl$@.lst
+        %endif
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+        CCompOpts + -GF -favor:blend -D_X64_
+
+        AsmCmd = ${ntTools}\bin\ml -c
+        winNTx64        =  1
+
+        ntCPU           =   X64
+        resCPU          =   x64
+        rcCPU           =   _X64_
+        winnthCPU       =   _AMD64_  # No idea why it is this in winnt.h but something has to be set.
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="ARMV4I"
+        ntCPU           =   ARMV4I
+        resCPU          =   ARMV4I
+        rcCPU           =   _ARMV4I_
+        winnthCPU       =   _ARM64_
+        CCompOpts       +   -DUNDER_CE -DWINCE -DARM -D_ARM_ -D_WIN32_WCE=0x500
+        # Not sure how to automatically extract this version number.
+        TargetLinkOpts  +   -subsystem:windowsce,5.00
+        NoExeManifest   =   1
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="ARMV4"
+        ntCPU           =   ARMV4
+        resCPU          =   ARMV4
+        rcCPU           =   _ARMV4_
+        CCompOpts       +   -DUNDER_CE -DWINCE -DARM -D_ARM_ -D_WIN32_WCE=0x420
+        # Not sure how to automatically extract this version number.
+        TargetLinkOpts  +   -subsystem:windowsce,4.20
+        NoExeManifest   =   1
+    %endif
+
+
+
+    CCompOpts + $(commonCOpts)
+
+    %if !defined (NOSTRICT) && !defined (Wp64)
+        CCompOpts       +   -WX
+    %endif
+
+    %if defined (NDEBUG)
+        CCompOpts + -DNDEBUG=1
+    %endif
+
+    #-----------------------------------------------------------------------
+    # compiler supplied libraries and include file setup
+    #-----------------------------------------------------------------------
+    %if !defined(NO_NTTOOLS)
+        %if !defined (ntDrive)
+            ntDrive         =   c:
+        %endif
+
+        %if !defined (ntTools)
+            %if defined (MSVCDir)
+                ntTools  = $(MSVCDir)/
+            %else
+                ntTools = ntTools-path_undefined
+            %endif
+        %endif
+
+
+
+    %if (MSVC_VERSION >= 1910)  # VC15, VC16, VC17
+		%if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+			ntLib           =       ${ntTools}/lib/x86/
+			AsmCmd          =       ${nttools}bin\HostX86\x86\ml
+		%else
+			ntLib           =       ${ntTools}/lib/x64/
+		%endif
+	%else
+		ntLib           =       ${ntTools}/lib${slashAmd64}/
+	%endif
+
+        %if defined(BUILD_USING_VS2019) || defined(BUILD_USING_VS2022)
+            WinSDKFolder = $(WindowsSdkDir)
+        %else
+            %if (MSVC_VERSION >= 1930)  # VC17
+                WinSDKFolder = $(WindowsSdkDir)
+            %elif (MSVC_VERSION >= 1920)  # VC16
+                WinSDKFolder = $(WindowsSdkDir)
+            %elif (MSVC_VERSION >= 1910)  # VC15
+                WinSDKFolder = $(VS2017_WindowsSdkDir)
+            %elif (MSVC_VERSION >= 1900)  # VC14
+                WinSDKFolder = $(VS2015_WindowsSdkDir)
+            %elif (MSVC_VERSION >= 1800)  # VC12
+                WinSDKFolder = $(VS2013_WindowsSdkDir)
+            %elif (MSVC_VERSION >= 1700)  # VC11
+                WinSDKFolder = $(VS2012_WindowsSdkDir)
+            %elif (MSVC_VERSION >= 1600)  # 1600 == VC 10/VS 2010
+                WinSDKFolder = $(VS2010_WindowsSdkDir)
+            %endif
+        %endif
+
+        %if defined (WinSDKFolder)
+            %if (MSVC_VERSION >= 1930) # VC17
+                ntPlatformLib       =   ${WinSDKFolder}/lib/${WindowsSDKVersion}/um${slashx86x64}/
+                ntPlatformInc       =   ${WinSDKFolder}/include/${WindowsSDKVersion}/um/
+                ntPlatformSharedInc =   ${WinSDKFolder}/include/${WindowsSDKVersion}/shared/
+            %elif (MSVC_VERSION >= 1920) # VC16
+                ntPlatformLib       =   ${WinSDKFolder}/lib/${WindowsSDKVersion}/um${slashx86x64}/
+                ntPlatformInc       =   ${WinSDKFolder}/include/${WindowsSDKVersion}/um/
+                ntPlatformSharedInc =   ${WinSDKFolder}/include/${WindowsSDKVersion}/shared/
+            %elif (MSVC_VERSION >= 1910) # VC15
+                ntPlatformLib       =   ${WinSDKFolder}/lib/${WindowsSDKVersion}/um${slashx86x64}/
+                ntPlatformInc       =   ${WinSDKFolder}/include/${WindowsSDKVersion}/um/
+                ntPlatformSharedInc =   ${WinSDKFolder}/include/${WindowsSDKVersion}/shared/
+            %elif (MSVC_VERSION >= 1900)  # VC14
+                ntPlatformLib       =   ${WinSDKFolder}/lib/${WindowsSDKVersion}/um${slashx86x64}/
+                ntPlatformInc       =   ${WinSDKFolder}/include/${WindowsSDKVersion}/um/
+                ntPlatformSharedInc =   ${WinSDKFolder}/include/${WindowsSDKVersion}/shared/
+            %elif (MSVC_VERSION >= 1800)  # VC12
+                ntPlatformLib       =   ${WinSDKFolder}/lib/winv6.3/um${slashx86x64}/
+                ntPlatformInc       =   ${WinSDKFolder}/include/um/
+                ntPlatformSharedInc =   ${WinSDKFolder}/include/shared/
+            %elif (MSVC_VERSION >= 1700)  # VC11
+                ntPlatformLib       =   ${WinSDKFolder}/lib/win8/um${slashx86x64}/
+                ntPlatformInc       =   ${WinSDKFolder}/include/um/
+                ntPlatformSharedInc =   ${WinSDKFolder}/include/shared/
+            %else
+                ntPlatformLib       =   ${WinSDKFolder}/lib${slashx64}/
+                ntPlatformInc       =   ${WinSDKFolder}/include/
+                ntPlatformSharedInc =   $(ntPlatformInc)
+            %endif
+        %endif
+        ntInc           =       ${ntTools}/include/
+        mfcLib          =       ${ntTools}/atlmfc/lib/
+        mfcInc          =       ${ntTools}/atlmfc/include/
+    %endif
+
+    CDllOpts            = -entry:LibMain$(dllEntry)
+    CLibsNoRuntime      = gdi32.lib user32.lib kernel32.lib
+    CLibs               = $(CLibsNoRuntime) "$(cRuntime)"
+
+    %if !defined(guiEntry)
+        %if defined (guiAppUnicode)
+            guiEntry         = wWinMainCRTStartup
+        %else
+            guiEntry         = WinMainCRTStartup
+        %endif
+    %endif
+
+    guiOpts         = -subsystem:windows -entry:$(guiEntry)
+
+    guiOptsDll          = -subsystem:windows
+    guiLibs             = gdi32.lib user32.lib kernel32.lib \
+                            "$(cruntime)" advapi32.lib shell32.lib msimg32.lib
+
+    gdiPlusLib          = gdiplus.lib
+
+    wtsApiLib           = wtsapi32.lib
+
+    clrstartlib         = mscoree.lib
+
+    uxThemeLib          = uxtheme.lib
+
+    DwmapiLib           = Dwmapi.lib
+
+    %if !defined(consoleEntry)
+        %if defined (consoleAppUnicode)
+            consoleEntry         = wmainCRTStartup
+        %else
+            consoleEntry         = mainCRTStartup
+        %endif
+    %endif
+
+    consoleOpts         = -subsystem:console -entry:$(consoleEntry)
+
+    consoleLibs         = $(cruntime) kernel32.lib
+
+    %if defined(LINK_TOOL_NEED_OLE)
+        consoleLibs + ole32.lib
+    %endif
+
+    oleLibs             = ole32.lib oleaut32.lib uuid.lib
+
+    mfcLibs             = $(mfcLib)nafxcw.lib
+
+    %if defined (guiApp)
+        %if defined (MFC_WIN_APP)
+            CLinkOpts   + $(guiOptsDll)
+        %else
+            CLinkOpts   + $(guiOpts)
+        %endif
     %else
-        _commonCompOpts + -Zi -Fd$(IntermediatePdbFile)
-        # As of VS2013, this option will allow better debugging of optimized DLLs.
-        %if (MSVC_VERSION >= 1800) && !defined (DEBUG)
-            _commonCompOpts + -Zo
+        CLinkOpts       + $(consolOpts)
+    %endif
+
+    %if defined (DEV_STUDIO)
+        %if (MSVC_VERSION < 1700)
+            %error DEV_STUDIO requires at least MSVC 1700 (DEV_STUDIO_ADDITIONAL_CPP_LINKER_FLAGS)
+        %endif
+        %if $(TARGET_PROCESSOR_ARCHITECTURE)=="X64"
+            CLinkOpts + $(DEV_STUDIO_ADDITIONAL_CPP_LINKER_FLAGS_X64)
+        %else
+            CLinkOpts + $(DEV_STUDIO_ADDITIONAL_CPP_LINKER_FLAGS_X86)
         %endif
     %endif
-%endif
 
-# Runtime checks
-# VERACODE - requires default runtime checks (e.g. cannot explicitly set any -RTC options).
-%if !defined (BUILD_NO_STACK_CHECK) && ($[@findstring WinRT, $(TARGET_PROCESSOR_ARCHITECTURE)] == " ") && !defined(IS_VERACODE_BUILD)
-    %if defined (DEBUG) || defined (DEBUG_G)
-        # /RTCs Stack Frame runtime checking
-        # /RTCu Uninitialized local usage checks
-        # In VS2015 Update 2, if you enable RTCc, you must define _ALLOW_RTCc_IN_STL in order to include STL headers. Microsoft claims that RTCc flags valid code, so you must either disable, or acknowledge that you realize this.
-        %if !defined (VCRuntimeCheckOption)
-            VCRuntimeCheckOption + -RTCsuc -D_ALLOW_RTCc_IN_STL
+    LinkWarningsToErrorsOnSwitch = -WX
+    CLinkOpts       + $(LinkWarningsToErrorsOptions)
+    CLibOpts         + $(LinkWarningsToErrorsOptions)
+
+    %if !defined (NOSTRICT)
+        %if !defined (LinkWarningsToErrorsDefault)
+            LinkWarningsToErrorsDefault = $(LinkWarningsToErrorsOnSwitch)
         %endif
-        CCompOpts + $(VCRuntimeCheckOption)
+        LinkWarningsToErrorsOptions = $(LinkWarningsToErrorsDefault)
     %endif
-%endif
 
-# Whole program optimization
-%if !defined (DEBUG) && defined (WholeProgramOptimization)
-    _commonCompOpts + -GL
-%endif
+    %if MSVC_VERSION >= 1500
+        CCompOpts + $(CCompMultiProcessingOpt)
+        %if !defined (CCompMultiProcessingOpt)
+            CCompMultiProcessingOpt = -MP$(CCompMultiProcessingCount)
+        %endif
+    %else
+        #
+        # -OPT:NoWin98 is no longer supported as of VS 2008. It is ignored but generates a warning when specified.
+        #
+        CLinkOpts   + -OPT:NoWin98      # Smaller dlls et al; slower to load on Win98
+    %endif
 
-# Enable WinRT extensions
-%if $(TARGET_PLATFORM) == "WinRT" && defined (ENABLE_CPP_CX_EXTENSIONS)
-    _commonCompOpts + -ZW -D_WINRT_DLL
-%endif
+    # Configure the linker option -OPT:REF|NOREF
+    %if defined (ENABLE_LINK_OPTREF)
+        LinkOptRef  =% -OPT:REF
+    %elif defined (DISABLE_LINK_OPTREF)
+        LinkOptRef  =% -OPT:NOREF
+    %endif
 
-# Force compile all source files as C or C++
-FileTypeControl     =
-FileTypeControlC    = -TC
-FileTypeControlCPP  = -TP
-_commonCompOpts + $(FileTypeControl)
+    CLinkOpts   + $(LinkOptRef)
 
-# Specify some platform-specific options
-%if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86" || $(TARGET_PROCESSOR_ARCHITECTURE)=="WinRTx86"
-    winNTx86        =  1
-    dllEntry        =   @12
-    ntCPU           =   X86
-    resCPU          =   x86
-    rcCPU           =   _X86_
-%elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x64" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
-    winNTx64        =  1
-    ntCPU           =   X64
-    resCPU          =   x64
-    rcCPU           =   _X64_
-%endif
+    # Configure the linker option -OPT:ICF|NOICF
+    LinkOptIcfIterationDefault = 2 # Default number of iterations according to the linker docs
 
-# Want code analysis
-%if defined (PerformCodeAnalysis)
-    nameToDefine=CODE_ANALYSIS
-    %include cdefapnd.mki
-%endif
+    %if !defined (LinkOptIcfIteration)
+        LinkOptIcfIteration   = $(LinkOptIcfIterationDefault)
+    %endif
 
-# Set this when creating static libraries to make sure there is no __declspec(import) or __declspec(export)
-%if defined (CREATE_STATIC_LIBRARIES)
-    nameToDefine = CREATE_STATIC_LIBRARIES
-    %include cdefapnd.mki
-%endif
+    %if defined (ENABLE_LINK_OPTICF)
+        LinkOptIcfDefault   =% -OPT:ICF,$(LinkOptIcfIteration)
+    %elif defined (DISABLE_LINK_OPTICF)
+        LinkOptIcfDefault   =% -OPT:NOICF
+    %endif
 
-# MFC app?
-%if defined (MFC_WIN_APP)
-    # Use MFC's dll
-    nameToDefine=_AFXDLL
-    %include cdefapnd.mki
+    LinkOptIcf  =% $(LinkOptIcfDefault)
 
-    # Then the C runtime
-    nameToDefine=_DLL
-    %include cdefapnd.mki
-%endif
+    CLinkOpts   + $(LinkOptIcf)
 
-# Resource compiler options
-rcOpt +  -d$(targetProduct) -dVARIETY=$(VARIETY)
-%if PRG
-    rcOpt +  -dPRG
-%else
-    rcOpt +  -dUSER="\"$(USERNAME) on $(COMPUTERNAME)\""
-%endif
+    # Ignore some errors: 4087: "CONSTANT keyword is obsolete use DATA" message. "CONSTANT" is not the same as "DATA"
+    # Ignore some errors: 4089,  "all references to "dynamic-link library" discarded by /OPT:REF"
+    # Ignore some errors: 4198: "base key "keyname" not found - using default" - THIS SHOULD NOT BE IGNORED!
+    # Ignore some errors: warning LNK4199: /DELAYLOAD:Psapi.dll ignored; no imports found from Psapi.dll
+    # NEVER IGNORE 4013, which is "LINK : warning LNK4013: image size 0xD000 exceeds specified maximum 0xB000"
 
-# Append common options
-CCompOpts       +% $[_commonCompOpts]
-CCompOptsCLR    +% $[_commonCompOpts]
-%undef _commonCompOpts
+    CLinkOpts + -Ignore:4087 -Ignore:4089 -Ignore:4199 -Ignore:4281
+    %if defined (ignore_baseaddress)
+        # !!! Ignoring this is bad; you really want everything to load at the correct base address.
+        CLinkOpts + -Ignore:4198
+    %endif
+    CLibOpts  + -Ignore:4087    # Stop outputting "CONSTANT keyword is obsolete use DATA" message. "CONSTANT" is not the same as "DATA"
 
-# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-# _/_/_/_/_/_/_ Linker command-line options  /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-# Common options
-CLibOpts     = $(BENTLEY_WIN32_LIB_Options) $(WarningsAsErrorsArg)
+    %if defined (profiling)
+        CCompOpts + -Gh
+        %if defined (profiling_stub)
+            CLinkOpts + $(utilsObj)$(profiling_stub)$(oext)
+        %else
+            CLinkOpts + $(ntTools)lib/cap.lib
+        %endif
+        debugType = both
+    %endif
 
-# Optimized or release build
-%if !defined (DEBUG) || defined (PRG)
-    LConfigurationOptions = $(BENTLEY_WIN32_LINK_OptimizeOptions)
-    CLinkOptsCLR          + -assemblydebug
-%else
-    LConfigurationOptions = $(BENTLEY_WIN32_LINK_DebugOptions)
-%endif
+    %if defined (PerformCodeAnalysis)
+        nameToDefine=CODE_ANALYSIS
+        %include cdefapnd.mki
+    %endif
 
-# Libraries
-CLibsNoRuntime      = $(BENTLEY_WIN32_LINK_CLibraries)
-CLibs               = $(BENTLEY_WIN32_LINK_CLibraries) $(cRuntime)
-guiLibs             = $(BENTLEY_WIN32_LINK_GuiLibraries) $(cRuntime)
-consoleLibs         = $(BENTLEY_WIN32_LINK_ConsoleLibraries) $(cRuntime)
-oleLibs             = $(BENTLEY_WIN32_LINK_OleLibraries)
-mfcLibs             = $(BENTLEY_WIN32_LINK_MfcLibraries)
-winntmdl_mfculib    = $(BENTLEY_WIN32_LINK_MfcLibraries)
+    # Set this when creating static libraries to make sure there is no __declspec(import) or __declspec(export)
+    %if defined (CREATE_STATIC_LIBRARIES)
+        nameToDefine = CREATE_STATIC_LIBRARIES
+        %include cdefapnd.mki
+    %endif
 
-# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-# _/_/_/_/_/_/_ Compiler recipes  /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
-# /_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_
-# These macros are used below and by the precompiledheader and multicppcompile mki files
-RecipeCCompileArgs      = $(cIncs) $(cDefs) $(ProductIncludes) $(PublicApiIncludes) $(CConfigurationOptions) $(CCompOpts) $(CPchOpts) $[@addprefix -fp:, $(CCompFpOpts)] $(cUser) -Fo$(CTargetSpec)
-RecipeCppCompileArgs    = $(RecipeCCompileArgs) $(CCCompOpts) $(CCPchOpts)
-RecipeCppPreprocessArgs = $(RecipeCppCompileArgs) $(CPPPreprocessOpts) -EP
-RecipeRCCompileArgs     = $(rcOpt) -d$(rcCPU) -dwinNT $(ProductRcIncludes) $(rcExtraOpts)
+    %if defined (MFC_WIN_APP)
+        # Use MFC's dll
+        nameToDefine=_AFXDLL
+        %include cdefapnd.mki
 
-RecipeCCompile          = $(BENTLEY_WIN32_TOOLCHAIN_compile) $(RecipeCCompileArgs)
-RecipeCppCompile        = $(BENTLEY_WIN32_TOOLCHAIN_compile) $(RecipeCppCompileArgs)
-RecipeCPPreprocess      = $(BENTLEY_WIN32_TOOLCHAIN_preprocess) $(RecipeCppPreprocessArgs)
+        # Then the C runtime
+        nameToDefine=_DLL
+        %include cdefapnd.mki
+    %endif
 
-# These macros are used by MultiCppCompileRule/Go.mki.
-CCompCmd    = $(BENTLEY_WIN32_TOOLCHAIN_compile)
-CCCompCmd   = $(BENTLEY_WIN32_TOOLCHAIN_compile)
-CLinkCmd    = $(BENTLEY_WIN32_TOOLCHAIN_link)
-CLibCmd     = $(BENTLEY_WIN32_TOOLCHAIN_lib)
-CPreprocCmd = $(BENTLEY_WIN32_TOOLCHAIN_preprocess)
+    #----------------------------------------------------------------------------------------------------------
+    # When using "-Oy-" the following are valid:
+    #   Frame pointers (BP) is always valid
+    #   There can be holes in call stack:  BP points to stack frame for function several levels up
+    #     (intermidiate levels having none, or optimized away, local variables / arguments don't use BP at all).
+    #
+    # The -GZ option does the following:
+    #   Auto-initialization of local variables
+    #   Function pointer call stack validation
+    #   Call stack validation
+    #
+    %undef CCompDebugOffSwitch
+    CCompDebugLowSwitch = -Zd
+    CCompDebugFullSwitch  = -Zi
 
-.c.obj:
-    $(msg)
-    $(RecipeCCompile) $< $(CCompRedirect)
-    ~time
+    # As of VS2013 this option will allow better debugging of optimized DLLS
+    %if (MSVC_VERSION >= 1800)
+        %if !defined (DEBUG)
+            CCompDebugFullSwitch + -Zo
+        %endif
+    %endif
 
-.(cxx,cpp,cc).obj:
-    $(msg)
-    $(RecipeCppCompile) $< $(CCompRedirect)
-    ~time
+    # -Fd$(@D)objects.pdb creates a PDB in the output tree, rather than vc80.pdb.
+    %if !defined (IntermediatePdbFile)
+        IntermediatePdbFile = $(@D)$(CCompPDBName).pdb
+    %endif
+    FdSwitchDefault = -Fd$(IntermediatePdbFile)
 
-.rc.res:
-    $(msg)
-    $(BENTLEY_WIN32_TOOLCHAIN_rccompile) $(RecipeRCCompileArgs) -Fo$(CTargetSpec) $%$*.rc
-    ~time
+    CCompDebugFullSwitch + $(FdSwitchDefault)
+    CCompDebugLowSwitch + $(FdSwitchDefault)
 
-.def.lib:
-    $(msg)
-    $(CLibCmd) $(CLibOpts) -out:$@ -def:$%$*.def -machine:$(ntCPU)
-    ~time
+    %ifndef CCompPDBName
+        %if defined (CREATE_STATIC_LIBRARIES) && defined (appName)
+            CCompPDBName         =% $(appName)
+        %elif (MSVC_VERSION == 1310)
+            CCompPDBName         = objectsVC71
+        %else
+            CCompPDBName         = objects
+        %endif
+    %endif
 
-# Assembly files (notably for compiling ICU's data into the assembly).
-.s.obj:
-    $(msg)
-    $(BENTLEY_WIN32_TOOLCHAIN_compileAsm) -Fo $@ -c $<
-    ~time
+    %if !defined (NO_DEBUG_INFO)
+        %if defined (DEBUG_INFO_IN_OBJ)
+            # Produces an .obj file containing full symbolic debugging information and does not produce a .pdb file.
+            # For distributors of third-party libraries, there is an advantage to not having a .pdb file.
+            CCompDebugOptions = -Z7
+        %elif defined (build_debug_line_numbers_only)
+            # For 3rd party Developers: Line numbers, no symbols, Normal call stacks (disable FPO)
+            CCompDebugOptions = $(CCompDebugLowSwitch)
+        %else
+            CCompDebugOptions = $(CCompDebugFullSwitch)
+        %endif
+    %endif
+
+    CCompDebugDefault =% $[CCompDebugOptions]
+
+    CCompOpts       + $(CCompDebugOptions)
+
+    # We normally won't set CCompMixinEnv to anything.  It's for quickly adding something from the environment like,
+    # for example, -P to preprocess a C file.
+    CCompOpts + $(CCompMixInEnv)
+
+    # We normally won't set CCompMixin to anything.  It's for selectively adding compiler options to just a couple of files.
+    # When you want to remove the options you've added, then you can just clear it.  It should only be non-empty in a small
+    # and well defined scope within a single make file.
+    CCompOpts + $(CCompMixIn)
+
+
+    #--------------------------------------------------------------------
+    # Generate compiler warnings for 64-bit version of Windows
+    #
+    WP64OnSwitch = \/Wp64
+    %if defined (Wp64)
+        WP64Option      = $(WP64OnSwitch)
+    %endif
+
+    CCompOpts       + $(WP64Option)
+
+    # avoid specifying MANIFESTUAC:NO and MANIFEST:NO at the same time
+    # warning LNK4075: ignoring '/MANIFESTUAC' due to '/MANIFEST:NO' specification
+    %if (MSVC_VERSION >= 1500) && !defined(OWN_UAC_MANIFEST) # if VS 2008 or better
+        #
+        # We opt out of having the linker embed UAC stuff because we have it in our manifest boiler plate anyway.
+        # This allows us to use the same boiler-plate for VS 2005 and VS 2008.
+        #
+        CLinkOpts + -MANIFESTUAC:NO
+    %endif
+
+    %if (MSVC_VERSION >= 1400) # if VS 2005 or better
+        WholeProgramOptimizationOnSwitch  = -GL
+
+        %if !defined(DEBUG) && defined(WholeProgramOptimization)
+            WholeProgramOptimizationOptions = $(WholeProgramOptimizationOnSwitch)
+            WholeProgramOptimizationDefault =% $[WholeProgramOptimizationOnSwitch]
+            CCompOpts + $(WholeProgramOptimizationOptions)
+            %if defined (PRG)
+                CLinkOpts + -LTCG
+                CLibOpts  + -LTCG
+            %else
+                CLinkOpts + -LTCG:STATUS
+                CLibOpts  + -LTCG:STATUS
+            %endif
+        %endif
+    %endif
+    %if !defined (ClrOption)
+    ClrOption               = -CLR
+    %endif
+    CCompOptsCLR            + $(ClrOption)
+    CCompOptsCLR            +% $[CCompOpts]
+    %if defined(USING_REF_ASSEMBLIES)
+        CCompOptsCLR        + -clr:nostdlib $(USING_REF_ASSEMBLIES)
+    %endif
+    %if (MSVC_VERSION >= 1400) # if VS 2005 or better
+        CCompOptsCLR        + $(ClrExceptionHandler)
+    %endif
+
+    %if (MSVC_VERSION == 1310) # if VS 2003 - WPO didn't work with /clr in VS 2003 but was otherwise available
+        WholeProgramOptimizationOnSwitch  = -GL
+
+        %if !defined(DEBUG) && defined(WholeProgramOptimization)
+            WholeProgramOptimizationOptions = $(WholeProgramOptimizationOnSwitch)
+            WholeProgramOptimizationDefault =% $[WholeProgramOptimizationOnSwitch]
+            CCompOpts + $(WholeProgramOptimizationOptions)
+            %if defined (PRG)
+                CLinkOpts + -LTCG
+                CLibOpts  + -LTCG
+            %else
+                CLinkOpts + -LTCG:STATUS
+                CLibOpts  + -LTCG:STATUS
+            %endif
+        %endif
+    %endif
+
+    %if (MSVC_VERSION >= 1400) # if VS 2005 or better
+        # Deferred until now so it doesn't get copied into CCompOptsCLR
+        #
+        # The CLR require asynch handlers, but for native code we default
+        # to synchronous handlers
+        %if !defined (NO_CPP_EXCEPTION_HANDLERS)
+            CCompOpts           + $(NativeCppExceptHandler)
+        %endif
+
+        # Enable minimal rebuild is incompatible with /CLR, thus we do it after CCompOptsCLR is captured above.
+        EnableMinimalRebuildOnSwitch = -Gm
+        CCompOpts       + $(EnableMinimalRebuildOption)
+    %endif
+
+    %if !defined (BUILD_NO_STACK_CHECK) && (MSVC_VERSION>=1310)    # if VS 2003 or better
+        %if defined (DEBUG) || defined (DEBUG_G)
+            #--------------------------------------------------------------------
+            # /RTCs Stack Frame runtime checking
+            # /RTCu Uninitialized local usage checks
+            #
+            # In VS2015 Update 2, if you enable RTCc, you must define _ALLOW_RTCc_IN_STL in order to include STL headers. Microsoft claims that RTCc flags valid code, so you must either disable, or acknowledge that you realize this.
+            %if !defined (VCRuntimeCheckOption)
+                VCRuntimeCheckOption + \/RTCsuc \/D_ALLOW_RTCc_IN_STL
+            %endif
+            CCompOpts       + $(VCRuntimeCheckOption)
+        %endif
+    %endif
+
+    %if !defined (NO_DEBUG_INFO)
+        LINKDebugArgs = -debug
+    %endif
+
+    IncrementalLinkOnSwitch=-incremental:yes
+    IncrementalLinkOffSwitch=-incremental:no
+
+    %if !defined (IncrementalLinkDefault)
+        %if defined (debug)  && !defined (ENABLE_LINK_OPTREF) && !defined (WholeProgramOptimization) && !defined (BSI_VERSIONING) #&& (defined (MSJ_SKIP_SIGNRSCS) || defined (DLM_NO_SIGN))
+            IncrementalLinkDefault=$(IncrementalLinkOnSwitch)
+        %else
+            IncrementalLinkDefault=$(IncrementalLinkOffSwitch)
+        %endif
+    %endif
+
+    %if !defined (IncrementalLinkOption)
+        IncrementalLinkOption=$(IncrementalLinkDefault)
+    %endif
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86" && (MSVC_VERSION>=1310)
+        %if !defined (SafeSEHOption)
+            SafeSEHOption = \/SafeSEH
+        %endif
+        CLinkOpts + $(SafeSEHOption)
+    %endif
+
+    %if $(IncrementalLinkOption)==$(IncrementalLinkOffSwitch)
+        CLinkOpts   + -Release          # Set the checksum in the header.
+    %endif
+
+    CLinkOpts       + $(DLM_PDB_LINKOPT) $(LINKDebugArgs) $(IncrementalLinkOption)
+    CDllOpts        + $(DLM_PDB_LINKOPT) $(LINKDebugArgs) $(IncrementalLinkOption)
+    DLM_SPECIAL_LINKOPT + $(DLM_PDB_LINKOPT) $(LINKDebugArgs) $(IncrementalLinkOption)
+
+    CLinkOpts + -fixed:no
+    DLM_SPECIAL_LINKOPT + -fixed:no
+
+    %if defined (debug)
+            AssemblyDebugOpt    = -assemblydebug
+            CLinkOptsCLR       = $(AssemblyDebugOpt)
+            CLinkOptsCLR      +%  $[CLinkOpts]
+            CDllOptsCLR       =  $(AssemblyDebugOpt)
+            CDllOptsCLR       +% $[CDllOpts]
+    %else
+            CLinkOptsCLR      =% $[CLinkOpts]
+            CDllOptsCLR       =% $[CDllOpts]
+    %endif
+
+    rcOpt        +  -d$(targetProduct) -dVARIETY=$(VARIETY)
+    %if PRG
+        rcOpt        +  -dPRG
+    %else
+        rcOpt        +  -dUSER="\"$(USERNAME) on $(COMPUTERNAME)\""
+    %endif
+
+    %if defined (MAKE_BSC)
+                %if defined (SBR_DIR)
+                    CCompOpts + -Fr$(SBR_DIR)
+                    CCompOptsCLR + -Fr$(SBR_DIR)
+                %else
+                    CCompOpts + -Fr$(@D)
+                    CCompOptsCLR + -Fr$(@D)
+                %endif
+
+        bscmake_exe = bscmake.exe
+        %else
+            bscmake_exe = @echo Not generating VC source browser files for
+    %endif
+
+#----------------------------------------------------------
+#       Compiling C sources for external programs
+#----------------------------------------------------------
+    %if !defined (CTargetSpec)
+        CTargetSpec = $@
+    %endif
+
+    RecipeCCompile = $(CCompCmd) $(PublicApiIncludes) $(cIncs) $(cDefs) $(cuser) $(ProductIncludes) $(CPchOpts) -fp:$(CCompFpOpts) $(CCompOpts) -Fo$(CTargetSpec)
+    .c.obj:
+        $(msg)
+        $(RecipeCCompile) $< $(CCompRedirect)
+        ~time
+
+    .mc.obj:
+        $(msg)
+        $(CCompCmd) $(PublicApiIncludes) $(cIncs) $(cDefs) $(cuser) $(ProductIncludes) $(CCompOpts)  $(MCPchOpts) $(MCFileTypeControl) -Fo$@ $<
+        ~time
+
+    RecipeCPPCompileArgs = $(PublicApiIncludes) $(cIncs) $(cDefs) $(cuser) $(ProductIncludes) $(CCCompOpts) $(CCPchOpts) -fp:$(CCompFpOpts) -Fo$(CTargetSpec)
+
+    RecipeCPPCompile = $(CCCompCmd) $(RecipeCPPCompileArgs)
+
+    RecipeCPPPreprocessArgs = $(PublicApiIncludes) $(cIncs) $(cDefs) $(cuser) $(ProductIncludes) $(CCCompOpts) $(CPPPreprocessOpts) -EP
+    RecipeCPPreprocess = $(CCCompCmd) $(RecipeCPPPreprocessArgs)
+
+    CPP_PREPROCESS_TO_STDOUT =
+
+    .(cxx,cpp,cc).obj:
+        $(msg)
+        $(RecipeCPPCompile) $< $(CCompRedirect)
+        ~time
+
+    .asm.obj:
+        $(msg)
+        $(AsmCmd) $(AsmOpts) $(AsmIncs) $(ProductAsmIncludes) -Fo$@   $%$*.asm
+        ~time
+
+    .s.obj:
+        $(msg)
+        $(AsmCmd) $(AsmOpts) $(AsmIncs) -o $@ $%$*.s
+        ~time
+
+    # Compile WinNT Icons  (ico + rc) ==> res ==> rbj
+    .res.rbj:
+        $(msg)
+        cvtres -machine:$(resCPU) -out:$@ $%$*.res
+        ~time
+
+    .rc.res:
+        $(msg)
+        rc $(rcOpt) -d$(rcCPU) -d$(winnthCPU) -dwinNT $(ProductRcIncludes) $(rcExtraOpts) -r -fo$@ $%$*.rc
+        ~time
+
+    .res.mui:
+        $(msg)
+        $(LINK32) -noentry -dll -out:$@ $<
+        ~time
+
+#----------------------------------------------------------------------
+#       Creating DLM .lib and .exp file from Module Def file (Windows NT only)
+#----------------------------------------------------------------------
+    .def.lib:
+        $(msg)
+        $(CLibCmd) $(CLibOpts) -out:$@ -def:$%$*.def -machine:$(ntCPU)
+        ~time
+

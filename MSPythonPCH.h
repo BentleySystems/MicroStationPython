@@ -37,6 +37,7 @@
 #include <Bentley/RefCounted.h>
 #include <Geom/GeomApi.h>
 #include <Geom/msgeomstructs_typedefs.h>
+#include <DgnPlatform/DgnPlatformLib.h>
 #include <DgnPlatform/DgnPlatformAPI.h>
 #include <Mstn/MstnPlatformAPI.h>
 #include <ECObjects/ECObjectsAPI.h>

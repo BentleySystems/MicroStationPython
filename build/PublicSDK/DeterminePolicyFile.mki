@@ -1,0 +1,280 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/DeterminePolicyFile.mki $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+#
+#   This file is not to be shipped to customers.
+#
+#----------------------------------------------------------------------------
+
+ShellPolicyMkiFile = $(SharedShellTmp)SuggestedBuildPolicy.mki
+
+%if !defined(PolicyPrompt)
+    PolicyPrompt=$$L$(PolicyName)$$G$$_$$P$$G
+%endif
+
+#
+#  Allow the user to clear policy in their shell by doing bmake -dclearpolicy on just about any
+#  makefile.  We will clear policy in their shell and fail the build. A good makefile to use to do
+#  this is sharedmki\SuggestPolicy.mke, but just about any makefile would work.
+#
+#  If the user uses the mke.bat wrapper to launch bmake then ShellBuildPolicyBatchFile is defined.
+#  Then the wrapper enables us to alter the shell prompt to indicate the policy that is currently
+#  suggested by the shell instance.
+#
+%if defined (ClearPolicy)
+    %if defined (ShellBuildPolicyBatchFile)
+        CreatePolicyClearingBatchFile:
+            !~@mkdir $(SharedShellTmp)
+            > $(ShellBuildPolicyBatchFile)
+            prompt=$(DefaultPrompt)
+            if defined SharedShellDefaultTitle title $(SharedShellDefaultTitle)
+            <
+
+    %endif
+    %iffile $(ShellPolicyMkiFile)
+        always:
+            !-del $(ShellPolicyMkiFile)
+    %endif
+
+    %error We're clearing policy from the shell and failing the build on purpose.
+%endif
+
+
+%if !defined (PolicyFileMapMki)
+    %error PolicyFileMapMki must be defined when using mdl.mki with USE_LAYERED_POLICY=1.
+%endif
+
+#
+# This provides the definitions of MkeToPolicyFileListMap and PolicyFileToPolicyNameMap
+#
+%include $(PolicyFileMapMki)
+
+
+#
+#  The point of this entire file is just to arrive at a value for PolicyFile.
+#  If it already has a value then we can return early.
+#
+%if defined (PolicyFile)
+    # The suggested policy checked out OK so we can just return.
+    %if defined (DEBUG_POLICY)
+       always:
+          !| Using suggested policy file: $(PolicyFile)
+    %endif
+    #
+    #  Before we return, look up and set PolicyName to be sure it is up-to-date.
+    #
+    always:
+        !~@task Bentley.Build.Tasks.SetBMakeMacro \
+                    -i:Dictionary="$(PolicyFileToPolicyNameMap)" \
+                    -i:Key=$(PolicyFile) \
+                    -i:MatchMode=Contains \
+                    -i:MacroName=PolicyName
+
+    %return
+%endif
+
+
+#
+#  The AllPolicyFiles macro contains a comma separated list of all of the policy files that we have.
+#  It is used by sharedmki\SuggestPolicy.mke which can be run merely to see what policy is asserted
+#  in a shell, to clear the policy asserted in a shell with "bmake -dclearpolicy SuggestPolicy.mke"
+#  or to set a particular policy as the suggested policy for a shell.
+#
+#  We transform the value of PolicyFileToPolicyNameMap into what we need with SelectEveryNthItem.
+#  Note that the IndexOfFirstItemToSelect is indeed a 0 based index. We give it a 1 because we maintain
+#  $(PolicyFileToPolicyNameMap) in such a way that the first item in the list is null.
+#
+%if "SuggestPolicy"==$(_MakeFileName)
+    SetAllPolicyFilesMacro:
+        !~@task Bentley.Build.Tasks.SelectEveryNthItem \
+                        -i:IndexOfFirstItemToSelect=1 -i:N=2 \
+                        -i:Input="$(PolicyFileToPolicyNameMap)" \
+                        -i:OutputSeparator="," \
+                        -o:AllPolicyFiles=Output
+
+%endif
+
+
+#
+#   Look up the set of policy files that map to the current bmake context. This might be a single
+#   .mki file or a list of .mki files any one of which can be used depending upon what you
+#   want to build.
+#
+
+GetListOfRelevantPolicyFiles:
+    !~@task Bentley.Build.Tasks.SetBMakeMacro \
+                -i:Dictionary="$(MkeToPolicyFileListMap)" \
+                -i:Key=$[_MakeFileSpec] \
+                -i:IgnoreCase=true \
+                -i:MatchMode=PerEntry \
+                -i:RegexOptions="CultureInvariant" \
+                -i:Expression="," \
+                -i:Replacement=";" \
+                -i:MacroName=PolicyFileList
+
+%if !defined (PolicyFileList)
+     %error PolicyFile not defined for $[_MakeFileSpec]. Add a value for PolicyFile to your makefile.
+%endif
+
+#
+#  If the mke.bat wrapper for launching bmake is not used, then the way that we associate a SuggestedPolicyFile
+#  with the shell instance is through a ShellPolicyMkiFile.
+#
+%if !defined (SuggestedPolicyFile)
+    %iffile $(ShellPolicyMkiFile)
+        %include $(ShellPolicyMkiFile)
+    %endif
+%endif
+
+
+#
+#  When a policy is asserted in the shared shell, it is done in an env var named
+#  SuggestedPolicyFile. We do not just take it on faith and use it. If we did that it would be
+#  too easy to accidentally build something with a policy that wasn't intended for it. So we
+#  verify that the suggested policy applies to what is being built before we use it.
+#
+#  Below we're cleverly using MSBuild batching to arrive at the intersection of two lists. We know that
+#  SuggestedPolicyFile is a list of one, so if there is any intersection at all, it means that SuggestedPolicyFile
+#  is indeed in PolicyFileList which is what we want to know.
+#
+%if defined (SuggestedPolicyFile)
+    VerifyThatSuggestedPolicyApplies:
+        !~@task WhatGoesInComesOut \
+                        -i:Accumulate=true \
+                        -i:Input="@(SuggestedPolicyFile)" \
+                        -i:Input2="@(PolicyFileList)" \
+                        -i:Condition="'%(Identity)' != '' and '@(SuggestedPolicyFile)' != '' and '@(PolicyFileList)' != ''" \
+                        -o:PolicyFile=AllBatchesOutput
+
+    %if defined (PolicyFile)
+        # The suggested policy checked out OK so we can return early.
+        %if defined (DEBUG_POLICY)
+           always:
+              !| Using suggested policy file: $(PolicyFile)
+        %endif
+
+        #
+        #  Before we return, look up and set PolicyName to be sure it is up-to-date.
+        #
+        always:
+            !~@task Bentley.Build.Tasks.SetBMakeMacro \
+                        -i:Dictionary="$(PolicyFileToPolicyNameMap)" \
+                        -i:Key=$(PolicyFile) \
+                        -i:MatchMode=Contains \
+                        -i:MacroName=PolicyName
+
+        %return
+    %endif
+%endif
+
+
+#
+#  Use MSBuild batching to eliminate files that do not exist from the list.
+#
+RemoveNonExistentFilesFromList:
+    !~@task WhatGoesInComesOut \
+                -i:Accumulate=true \
+                -i:Input="@(PolicyFileList)" \
+                -i:Condition="Exists('%(PolicyFileList.Identity)')" \
+                -o:ExtantPolicyMkis=AllBatchesOutput \
+                -o:NumberOfRelevantExtantPolicies=AllBatchesOutputCount
+
+%if !defined (ExtantPolicyMkis)
+     always:
+        | You don't have the source for any of the relevant policy files which are:
+        |
+        ~@task Bentley.Build.Tasks.EchoItemList -i:ItemList="$(PolicyFileList)" -i:Indent=8
+        |
+
+     %error PolicyFile not defined for $[_MakeFileSpec].
+%endif
+
+#
+#  Unless EnableUserQuery is defined we are not allowed to query the user for input. If we cannot
+#  query the user and there are multiple relevant, extant policy files, then we have no choice but
+#  to fail the build.
+#
+%if (NumberOfRelevantExtantPolicies > 1) && !defined (EnableUserQuery)
+    always:
+        ~@task Bentley.Build.Tasks.EchoItemList -i:ItemList="$(PolicyFileList)" -i:Indent=8
+        |
+
+     %error Build policy is ambiguous for $[_MakeFileName]$[_MakeFileExt] and EnableUserQuery is not defined. Failing build. Relevant policy files are shown above.
+%endif
+
+#
+#  Present a modal dialog box to allow the user to choose a particular policy file. We use
+#  the default behavior of ShowListBox which is that if there is only a single item in the list,
+#  then it just returns that item as the selected one without bothering to show the dialog.
+#
+QueryUserForDesiredPolicy:
+    !~@task Bentley.Build.Tasks.ShowListBox \
+                -i:Title="Choose Build Policy for $(_MakeFileName)." \
+                -i:AcceptButtonText="Accept" \
+                -i:CancelButtonText="Break Build" \
+                -i:ThirdButtonText="Set In Shell" \
+                -i:ChoicesColumn1=$(ExtantPolicyMkis) \
+                -o:PolicyFile=SelectedItemText \
+                -o:ChosenButton=ChosenButton
+    | PolicyFile = $(PolicyFile)
+
+#
+#  If the user hit the "Break Build" button during an "ignore errors" build then we really have to fail anyway
+#  because we simply cannot build something without knowing what file to use to vector policy. To do so might
+#  just make a mess of the builder's output. The %error preproc command seems to always fail even in an ignore
+#  errors build. That is why this is here.
+#
+%if !defined (PolicyFile)
+    %error PolicyFile not defined for $[_MakeFileSpec]. PolicyFile must have a value in order to build anything when using layered policy.
+%endif
+
+#
+#  The most that we can do here to help to get the policy set at the shell level is to generate a batch file
+#  that will do the job when run. Another batch file will have to be used to launch bmake and it will have to
+#  look for this generated batch file and, if it exists, run it after bmake has exited.
+#
+
+%if "Set In Shell"==$(ChosenButton)
+
+    %if !defined (ShellPID)
+        %error ShellPID must be set in the shell in order to assert a Suggested policy in the shell. Run SetShellPid.bat.
+    %endif
+
+    always:
+        !~@task Bentley.Build.Tasks.SetBMakeMacro \
+                    -i:Dictionary="$(PolicyFileToPolicyNameMap)" \
+                    -i:Key=$(PolicyFile) \
+                    -i:MatchMode=Contains \
+                    -i:MacroName=PolicyName
+        ~@mkdir $(SharedShellTmp)
+    %if defined (ShellBuildPolicyBatchFile)
+        > $(ShellBuildPolicyBatchFile)
+        prompt=$(PolicyPrompt)
+        if defined SharedShellStickyTitle title $(PolicyName) - $(SharedShellStickyTitle)
+        <
+    %endif
+        > $(ShellPolicyMkiFile)
+        SuggestedPolicyFile=$(PolicyFile)
+        PolicyName=$(PolicyName)
+        <
+
+%elif "Accept"==$(ChosenButton)
+
+    %if defined (DEBUG_POLICY)
+       always:
+          !| Using Accepted policy file: $(PolicyFile)
+    %endif
+    #
+    #  Before we return, look up and set PolicyName to be sure it is up-to-date.
+    #
+    always:
+        !~@task Bentley.Build.Tasks.SetBMakeMacro \
+                    -i:Dictionary="$(PolicyFileToPolicyNameMap)" \
+                    -i:Key=$(PolicyFile) \
+                    -i:MatchMode=Contains \
+                    -i:MacroName=PolicyName
+%endif
+

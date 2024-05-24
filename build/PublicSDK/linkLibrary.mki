@@ -1,7 +1,9 @@
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/linkLibrary.mki $
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
 
 # The purpose of this file is to allow MKE files to produce shared or static libraries without
 # each one having the same branch for dlmlink vs. creatlib. Linking a static library needs a subset
@@ -27,6 +29,5 @@ LIB_TMP_DIR             = $(DLM_DEST)
 LIB_OBJS                = $(DLM_OBJECT_FILES)
 LIB_LST_NAME            = $(LIB_TMP_DIR)$(LIB_NAME).lst
 LIB_CONTEXT_LOCATION    = $(DLM_CONTEXT_LOCATION)
-LIB_OBJECT_DEST         = $(DLM_OBJECT_DEST)
 
 %include creatlib.mki

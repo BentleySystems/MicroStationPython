@@ -136,4 +136,30 @@ private:
     void                        InitSearchPath();
     };
 
+
+//=======================================================================================
+// @bsiclass                                                                   02/23
+//=======================================================================================
+struct PythonScopeHolder
+    {
+    ScriptContextPtr m_global;
+    ScriptContextPtr m_local;
+    };
+
+typedef bmap<WString, PythonScopeHolder>  PythonScopeMap;
+
+//=======================================================================================
+// @bsiclass                                                                   02/23
+//=======================================================================================
+struct ScopeMapManager
+{
+private:
+    static PythonScopeMap *m_scopeMap;
+
+public:
+
+    MSPYTHONDLL_EXPORT static PythonScopeMap& GetScopeMapInstance();
+    MSPYTHONDLL_EXPORT static void ReleaseScopeMapInstance();
+};
+
 END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE

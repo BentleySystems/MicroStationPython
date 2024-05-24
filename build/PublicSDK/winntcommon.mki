@@ -1,8 +1,9 @@
-#---------------------------------------------------------------------------------------------
-#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
-#  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
-
+#--------------------------------------------------------------------------------------
+#
+#
+#  $Copyright: (c) 2019 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
 %if !defined (__Common_MKI__)
     %error      winntcommon.mki cannot be used by itself. It must be included from common.mki
 %endif
@@ -18,28 +19,37 @@
 #
 deleteCmd           = del
 dirCmd              = dir
-copyCmd             = echo f | xcopy \/Y \/Z \/F
+copyCmd             = copy
 mkdirCmd            = mkdir
-rmdirCmd            = rd
-rmdirRecursiveCmd   = rd\/S\/Q
+rmdirCmd            = rmdir
+rmdirForceCmd       = echo y | rmdir
 makeFileWritable    = attrib -r
 typeFileCmd         = type
+shellCmd            = cmd.exe \/c
 nativeMakeCmd       = nmake.exe
-maxOutputLen        = 2048
-toolchainExeext     = .exe
-bsicommon_ospathsep = ;
+%ifndef maxOutputLen
+    maxOutputLen        = 2048
+%endif
+LinkDirCmd          = $(shellCmd) mklink \/d
+LinkFileCmd         = $(shellCmd) mklink
+
 scriptExt           = .bat
-pytestCmd           = pytest.exe
 
-%if !defined (singletonCmd)
-    singletonCmd = singleton
+%if $(TARGET_PLATFORM) == "Android"
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidX86"
+        CLinkCmd  = $(ANDROID_NDK_ROOT)toolchains/x86-4.4.3/prebuilt/windows/bin/i686-android-linux-g++.exe
+        NmCmd     = $(ANDROID_NDK_ROOT)toolchains/x86-4.4.3/prebuilt/windows/bin/i686-android-linux-nm.exe
+        CppFiltCmd =$(ANDROID_NDK_ROOT)toolchains/x86-4.4.3/prebuilt/windows/bin/i686-android-linux-c++filt.exe
+        StripCmd   =$(ANDROID_NDK_ROOT)toolchains/x86-4.4.3/prebuilt/windows/bin/i686-android-linux-strip.exe    
+    %else
+        CLinkCmd  = $(ANDROID_NDK_ROOT)toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-g++.exe
+        NmCmd     = $(ANDROID_NDK_ROOT)toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-nm.exe
+        CppFiltCmd =$(ANDROID_NDK_ROOT)toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-c++filt.exe
+        StripCmd   =$(ANDROID_NDK_ROOT)toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-strip.exe
+    %endif
 %endif
 
-%if !defined (AddDelayLoadCmd)
-    AddDelayLoadCmd = AddDelayLoad
-%endif
-
-CopyFirstDepToFirstTarget   = $(copyCmd) $< $@
+CopyFirstDepToFirstTarget=~@task Microsoft.Build.Tasks.Copy -i:SourceFiles="$<" -i:DestinationFiles="$@"
 
 #----------------------------------------------------------
 #  Set up the mt.exe manifest command

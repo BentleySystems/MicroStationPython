@@ -48,7 +48,7 @@ ShellVersionString = $[@readstdout ver]
         # Try Professional first, but also try Enterprise.
         # The tool doesn't seem to detect VS 2019 Build Tools, so presume those were detected from the registry lookup.
 
-        vswhere = $(SrcRoot)MSPython/build/PublicSDK/vswhere.exe
+        vswhere = $(_MakeFilePath)/vswhere.exe
         
         %if defined (TOOLSET_DIAGNOSTICS)
         %if "full" == $(TOOLSET_DIAGNOSTICS)

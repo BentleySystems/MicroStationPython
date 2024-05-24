@@ -1,0 +1,111 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/mkTranskit.mki $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------
+# Required Macros:
+#    o                 - output directory where temporary files will be built.
+#    ASSEMBLY_NAME         - the name of the generated assembly (not including extension)
+
+#    ASSEMBLY_SOURCE_LIST  - contains '.cs' files to be built separated by spaces
+#    USERCONTROL_SOURCE_LIST  - contains names (.ascx) of user controls.
+#                               the '.asmx.cs' and the '.asmx.designer.cs' files will be appended to the ASSEMBLY_SOURCE_LIST.
+#    WEBFORM_SOURCE_LIST     - contains names (.aspx) of web form controls.
+#                              the '.aspx.cs' and the '.aspx.designer.cs' files will be appended to the ASSEMBLY_SOURCE_LIST.
+#    ASSEMBLY_SOURCE_LIST  - contains '.cs' files to be built separated by spaces
+#    ASSEMBLY_OTHER_DEPENDS - Other files who's last-mod-date should trigger a build.
+#                             .e.g. the %includer might do: ASSEMBLY_OTHER_DEPENDS =% $(_MakeFileSpec)
+#
+#    Macros for Assembly MetaData
+#    ============================
+#    ASSEMBLY_COPYRIGHT         - copyright information
+#    ASSEMBLY_COMPANY_NAME      - default 'Bentley Systems, Inc.'
+#    ASSEMBLY_FILE_VERSION      - the version number of the built file
+#    ASSEMBLY_VERSION           - the version number of the built assembly
+#    ASSEMBLY_PRODUCT_NAME      - the product name
+#    ASSEMBLY_DESCRIPTION       - the assembly description
+#    ASSEMBLY_TITLE             - the assembly title
+#
+# Optional Macros:
+#    ASSEMBLY_NO_TRANSKIT    - If defined, then do no transkit related processing.
+#
+#    Macros for Assembly MetaData
+#    ============================
+#    ASSEMBLY_KEYFILE           - if set, should be the path to the keyfile that will be used
+#                                 to sign the assembly.
+#    ASSEMBLY_STRONGNAME        - must be set to 1 if you want to strong name the assembly
+#
+#    mki files that can be used as setup for this one
+#    ================================================
+#    assemblyResourceAppend.mki  - use this to add a resource to be embedded in the final assembly.
+#                                  Do not use this for 'resx' or other files that must be built first,
+#                                  just resources that will be embedded as is.
+#    assemblyResxAppend.mki      - use this to add a 'resx' that should be built into a resource
+#                                  and embedded in the final assembly.
+#
+#-------------------------------------------------------------------------------------
+
+
+#-------------------------------------------------------------------------------------
+# Create transkit config file
+#-------------------------------------------------------------------------------------
+%if !defined (ASSEMBLY_NO_TRANSKIT)
+    %if defined (ASSEMBLY_NAME)
+        nameToUse = $(ASSEMBLY_NAME)
+    %elif defined (DLM_NAME)
+        nameToUse = $(DLM_NAME)
+    %else
+        %error no Assembly or DLL name for transkit generation
+    %endif
+    transkitFileName = $(nameToUse).transkit
+    outputTkFileName = $(o)$(transkitFileName)
+
+    $(outputTkFileName) : $(ASSEMBLY_RESX_RESOURCES_DEPENDS) $(_MakeFileSpec) $(ASSEMBLY_KEYFILE)
+        | [== Generating transkit config file $(@) ==]
+        >$(@)
+        name=$(nameToUse)
+        resx=$(ASSEMBLY_RESX_LIST)
+        version=$(ASSEMBLY_VERSION)
+        %ifdef ASSEMBLY_STRONGNAME
+        pubkeyfile=$(ASSEMBLY_KEYFILE)
+        %endif
+        %ifdef ASSEMBLY_FILE_VERSION
+        fileversion=$(ASSEMBLY_FILE_VERSION)
+        %endif
+        MSVC_VERSION=$(MSVC_VERSION)
+        CSC_VERSION=$(CSC_VERSION)
+        <
+        ~time
+
+    %if defined (TranskitConfigListDirectory) && defined (ASSEMBLY_RESX_LIST)
+      %ifndef TRANSKIT_NAME
+        %error If TranskitConfigListDirectory is defined then TRANSKIT_NAME must be defined.
+      %endif
+      # Read in list of .transkit files that were written to disk in past builds with the same $(TranskitConfigListFileName) value
+      always:
+        ~@task Microsoft.Build.Tasks.ReadLinesFromFile -i:File=$(TranskitConfigListDirectory)$(TRANSKIT_NAME).TranskitList.txt -o:PriorTransKitConfigFiles=Lines
+
+      # Merge list of files from prior builds with the current build and then remove duplicates in case it is there already.
+      always:
+        ~@task Microsoft.Build.Tasks.RemoveDuplicates -i:Inputs=$(PriorTransKitConfigFiles);$(outputTkFileName) -o:UniqueTranskitConfigFiles=Filtered
+
+      # Write merged file list back to disk, replacing existing contents.
+      always:
+        ~@task Microsoft.Build.Tasks.WriteLinesToFile -i:File=$(TranskitConfigListDirectory)$(TRANSKIT_NAME).TranskitList.txt -i:Lines=$(UniqueTranskitConfigFiles) -i:Overwrite=true
+
+    %endif
+
+    # Some builds use DLM_NAME instead of ASSEMBLY_NAME and there are issues with whitespace also. Fixing later. 
+    %if defined (FIX_SYMLINK_COLLISION) && defined (ASSEMBLY_CONTEXT_LOCATION)
+        # We need to put the *.transkit file into the buildcontext so it is picked up for the Transkit.zip process. 
+        # This is specifically so we pass down the version of the .net and which compiler was used.   
+        #$(ASSEMBLY_CONTEXT_LOCATION)$(ASSEMBLY_NAME).transkit:
+        always:
+            ~linkfile "$(ASSEMBLY_CONTEXT_LOCATION)$(transkitFileName)=$(outputTkFileName)"
+
+    %endif
+%endif
+

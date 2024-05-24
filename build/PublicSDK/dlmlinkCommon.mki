@@ -1,7 +1,160 @@
 #--------------------------------------------------------------------------------------
+#
 #  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
 #  See LICENSE.md in the repository root for full copyright notice.
-#---------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------
+
+%if defined (DLM_USE_LIBPREFIX)
+    %warn DLM_USE_LIBPREFIX is no longer supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_USES_CXX)
+    %warn DLM_USES_CXX is no longer supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_NOMAP)
+    %warn DLM_NOMAP is no longer supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_MAP_OPTS)
+    %warn DLM_MAP_OPTS is no longer supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_USES_CPP)
+    %warn DLM_USES_CPP is not supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_TMP_DIR)
+    %warn DLM_TMP_DIR is not supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_RESL_NAME)
+    %warn DLM_RESL_NAME is not supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_SYM_NAME)
+    %warn DLM_SYM_NAME is not supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_NO_NTBSADDR)
+    %warn DLM_NO_NTBSADDR is no longer supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if defined (DLM_NO_DLS)
+    %if defined (DLS_NAME)
+        %warn DLS_NAME is defined even though DLM_NO_DLS is set.  Please remove DLS_NAME from your makefile.
+        _dlmError = 1
+    %endif
+    %if defined (DLM_DLO_DEST)
+        %warn DLM_DLO_DEST is defined even though DLM_NO_DLS is set.  Please remove DLM_DLO_DEST from your makefile.
+        _dlmError = 1
+    %endif
+%endif
+
+%if defined (DLM_NO_DEF)
+    %if defined (DLM_EXP_DEST)
+        %warn DLM_EXP_DEST is defined even though DLM_NO_DEF is set.  Please remove DLM_EXP_DEST from your makefile.
+        _dlmError = 1
+    %endif
+%endif
+
+%if defined (DLM_NOENTRY)
+# defined in policy file.  Dang.
+#    %if defined (DLM_ENTRY_SRC)
+#        %warn DLM_ENTRY_SRC is defined even though DLM_NOENTRY is set.  Please remove DLM_ENTRY_SRC from your makefile.
+#        _dlmError = 1
+#    %endif
+    %if defined (DLM_ENTRY_NAME)
+        %warn DLM_ENTRY_NAME is defined even though DLM_NOENTRY is set.  Please remove DLM_ENTRY_NAME from your makefile.
+        _dlmError = 1
+    %endif
+%endif
+
+%if defined (DLM_LINK_MDLLIB_LAST)
+    %warn DLM_LINK_MDLLIB_LAST is no longer supported.  It does nothing.  Please remove it from your makefile.
+    _dlmError = 1
+%endif
+
+%if !defined (DLM_DEST)
+    %warn DLM_DEST must be defined.  Previously it defaulted to $$(mdlapps) or $$(mdlAsNeeded)
+    _dlmError = 1
+%endif
+
+%if defined (DLM_NO_DELAYLOAD)
+    %warn DLM_NO_DELAYLOAD is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (FORCE_DELAYLOAD)
+    %warn FORCE_DELAYLOAD is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+#%if defined (DelayLoadByDefault)
+#    %warn DelayLoadByDefault is no longer supported.  Please update your makefile.
+#    _oldDelayload=1
+#%endif
+
+%if defined (DLM_DELAYLOAD_SYSFILES)
+    %warn DLM_DELAYLOAD_SYSFILES is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (DLM_DELAYLOAD_EXCLUDES)
+    %warn DLM_DELAYLOAD_EXCLUDES is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (DLM_LIBRARY_FILES)
+    %warn DLM_LIBRARY_FILES is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (DLM_NT_LIBS)
+    %warn DLM_NT_LIBS is no longer supported.  Please update your makefile.
+    _oldDelayload=1
+%endif
+
+%if defined (_oldDelayload)
+    _dlmError = 1
+    %warn =====================================================================================================================
+    %warn Use LINKER_LIBRARIES_DELAYLOADED for all libraries that should be delayloaded.
+    %warn Use LINKER_LIBRARIES  for all libraries that will not be delayloaded. This should include libraries you know you'll always
+    %warn     need and most system libraries. 
+    %warn If you have DLM_NO_DELAYLOAD set but are not using DLM_LIBRARY_FILES or DLM_NT_LIBS you should just remove it.
+    %warn ====
+    %warn *** If you are not yet using these variables, everything will be arbitrarily delayloaded or not based on DLM_NO_DELAYLOAD.
+    %warn ***   All excludes are ignored.  You should update to use these new variables as soon as possible.
+    %warn =====================================================================================================================
+
+    %if defined (DLM_NO_DELAYLOAD) && !defined(FORCE_DELAYLOAD)
+        LINKER_LIBRARIES  = $(DLM_LIBRARY_FILES) $(DLM_NT_LIBS)
+    %else
+        LINKER_LIBRARIES_DELAYLOADED = $(DLM_LIBRARY_FILES) $(DLM_NT_LIBS)
+    %endif
+
+%endif
+
+%if defined (_dlmError)
+    %if defined (DLMLINK_WARNINGS_AS_ERRORS)
+        %error stopping dlmlink because DLMLINK_WARNINGS_AS_ERRORS is set
+    %endif
+    %warn You can set DLMLINK_WARNINGS_AS_ERRORS=1 to stop in the build when these errors were found.
+%endif
+
+
+%if !defined (DLM_BASENAME)
+    DLM_BASENAME   = $(DLM_OBJECT_DEST)$(DLM_NAME)
+%endif
 
 %if !defined (DLM_EXTENSION)
     DLM_EXTENSION   = $(shlibext)
@@ -16,6 +169,10 @@
 %endif
 
 
+%if !defined (DLM_DLO_DEST)
+    DLM_DLO_DEST = $(DLM_OBJECT_DEST)
+%endif
+
 %if !defined (DLM_DEST)
     %if !defined (BSI)
         DLM_DEST = $(mdlapps)
@@ -27,7 +184,11 @@
 
 %if !defined (DLM_NOENTRY)
     %if !defined (DLM_ENTRY_SRC)
-        %error define DLM_ENTRY_SRC
+        %if defined (DLM_ENTRY_NAME)
+            DLM_ENTRY_SRC = $(DLM_LIBDEF_SRC)
+        %else
+            %error define DLM_ENTRY_SRC
+        %endif
     %endif
 
     %if !defined (DLM_ENTRY_NAME)
@@ -39,7 +200,7 @@
 #  Set up to inject a version
 #----------------------------------------------------------
 %if defined (BSI_VERSIONING) && !defined (DLM_NO_VERSION)
-    %include $(SrcRoot)bsicommon/sharedmki/dlmversion.mki
+    %include $(SrcBsiCommon)sharedmki/dlmversion.mki
 %endif
 
 #---------------------------------------------------------
