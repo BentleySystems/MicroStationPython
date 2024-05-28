@@ -344,7 +344,15 @@ void def_DSegment3d(py::module_& m)
     c1.def_property("point",
         [](DSegment3dR self)
         {
-        return py::array_t<DPoint3d>{ 2, self.point, py::cast(self)};
+        DPoint3d ptSt;
+        self.GetStartPoint(ptSt);
+
+        DPoint3d ptEnd;
+        self.GetEndPoint (ptEnd);
+
+        return py::make_tuple (ptSt, ptEnd);
+
+        //return points; //py::array_t<DPoint3d>{ 2, self.point, py::cast(self)};
         },
         [](DSegment3dR self, py::array_t<DPoint3d> const& arr)
         {
