@@ -84,9 +84,9 @@ DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
 
 %if defined (BSI)
 DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/
+DLM_CREATE_LIB_CONTEXT_LINK = 1
 %else
 DLM_LIB_CONTEXT_LOCATION    = $(ContextSubpartsLibs)
 %endif
-DLM_CREATE_LIB_CONTEXT_LINK = 1
 
 %include dlmlink.mki
