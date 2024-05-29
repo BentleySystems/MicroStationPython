@@ -70,6 +70,13 @@ always:
     $(MakeProgram) $(_MakeFilePath)MSPythonWrapper\PyECObjects\PyECObjects.mke
     $(MakeProgram) $(_MakeFilePath)MSPythonWrapper\PyMstnPlatform\PyMstnPlatform.mke
  
+# delete the MSPythonCore.lib which got symlinked into SDKLIB for .pyd build
+%if ! defined (BSI)
+	%if exists ($(SDKLIB)MSPythonCore.lib)
+	always:	
+			-@$(deleteCmd) "$(SDKLIB)MSPythonCore.lib"
+	%endif		
+%endif	
 
 #==================================================================================
 # Disable running the tests, particularly for SDK as only examples are build and
