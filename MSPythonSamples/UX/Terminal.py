@@ -295,16 +295,16 @@ class TextConsole(tk.Text):
             self.prompt()
 
 
-def main ():
-    global s_winDestroy
+def main ():  # Define a function called "main"
+    global s_winDestroy  # Declare two global variables
     global s_root
-    console = TextConsole(s_root)
-    console.pack(fill='both', expand=True)
-    s_root.protocol("WM_DELETE_WINDOW", on_closing)
-    s_root.title('Microstation Python Shell')
-    while s_winDestroy == False :
-        s_root.update ()
-        PyCadInputQueue.PythonMainLoop()
+    console = TextConsole(s_root)  # Create an instance of TextConsole class
+    console.pack(fill='both', expand=True)  # Set the packing options for the text console
+    s_root.protocol("WM_DELETE_WINDOW", on_closing)  # Register a callback function for window close event
+    s_root.title('Microstation Python Shell')  # Set the title of the root window
+    while s_winDestroy == False :  # Start an infinite loop as long as s_winDestroy is False
+        s_root.update ()  # Update the root window to reflect any changes
+        PyCadInputQueue.PythonMainLoop()  # Run the main event loop for Python
 
 if __name__ == '__main__':
     main ()

@@ -32,19 +32,39 @@ def update():
     s_clock.after(1000,update)
 
 def main ():
+    # Declare two global variables
     global s_root
     global s_clock
+    
+    # Create a Tkinter root window and set its geometry
     s_root  = tk.Tk()
     s_root.geometry("400x100")
+    
+    # Set the background color of the root window to black
     s_root.config(bg='black')
+    
+    # Define a function for handling window close events
     s_root.protocol("WM_DELETE_WINDOW", on_closing)
+    
+    # Create a Tkinter Label widget for displaying the clock time
     s_clock = tk.Label(s_root, background = 'black',foreground = 'white', font = ('arial', 40, 'bold'))
+    
+    # Pack the label widget into the root window
     s_clock.pack()
+    
+    # Call the update function to initialize the clock
     update()
+    
+    # Set the title of the root window to "clock"
     s_root.title('clock')
+    
+    # Run an infinite loop for updating the clock and handling user input
     while tk._default_root != None :
+        # Update the root window to reflect any changes (e.g., clock time updates)
         s_root.update ()
-        PyCadInputQueue.PythonMainLoop()    
+        
+        # Run the Python main event loop to handle user input and perform other tasks
+        PyCadInputQueue.PythonMainLoop()
 
 if __name__ == "__main__":
     main ()

@@ -43,63 +43,77 @@ class LineToolSetting:
         self.angle = 0.0
 
 def bind(objectName, propertyName, type):
-
+  # Define a function that takes an object name, property name, and type as arguments
+    
     def getter(self):
-        child = self.findChild(QObject, objectName);
+      # Find the child widget with the given object name
+        child = self.findChild(QObject, objectName)
+        # Get the property value from the child widget
         p = child.property(propertyName)
+        # Convert the property value to the specified type
         r = type(p)
-        return r #type(self.findChild(QObject, objectName).property(propertyName).toPyObject())
+        # Return the converted value
+        return r 
+      # Define a getter function that retrieves the property value
     
     def setter(self, value):
-        self.findChild(QObject, objectName).setProperty(propertyName, QVariant(value))
+      # Find the child widget with the given object name
+      self.findChild(QObject, objectName)
+      # Set the property value on the child widget
+      self.findChild(QObject, objectName).setProperty(propertyName, QVariant(value))
+      
+      # Define a setter function that sets the property value
     
     return property(getter, setter)
+  # Return a property object with the getter and setter functions
 
 class LineToolSettingDlg(MsQtWidgiet):
     def __init__(self):
+        # Initialize the dialog with the superclass constructor call
         super().__init__()
-        self.tool_setting = LineToolSetting ()
-        self.populate_tool_setting()
+        self.tool_setting = LineToolSetting()  # Create an instance of LineToolSetting
+        self.populate_tool_setting()  # Populate the tool setting
 
-    def populate_tool_setting(self): # all are Qt codes without Microstation logic involved
+    def populate_tool_setting(self):  # all are Qt codes without Microstation logic involved
+        # Create a QGridLayout and set it as the layout for this dialog
         self.grid = QGridLayout()
         self.setLayout(self.grid)
 
-        self.checkBoxUseL = QCheckBox ("")
-        self.checkBoxUseL.setObjectName("checkBoxUseL")
-        self.grid.addWidget(self.checkBoxUseL, 0, 0)
+        self.checkBoxUseL = QCheckBox("")  # Create a check box with no initial text
+        self.checkBoxUseL.setObjectName("checkBoxUseL")  # Set the object name to "checkBoxUseL"
+        self.grid.addWidget(self.checkBoxUseL, 0, 0)  # Add the checkbox to the grid at row 0, column 0
 
-        self.grid.addWidget(QLabel("Length"), 0, 1)
+        self.grid.addWidget(QLabel("Length"), 0, 1)  # Add a label with text "Length" to the grid at row 0, column 1
 
-        self.editBoxLength = QLineEdit()
-        self.editBoxLength.setObjectName("editBoxLength")
-        self.grid.addWidget(self.editBoxLength, 0, 2)
+        self.editBoxLength = QLineEdit()  # Create an edit box
+        self.editBoxLength.setObjectName("editBoxLength")  # Set the object name to "editBoxLength"
+        self.grid.addWidget(self.editBoxLength, 0, 2)  # Add the edit box to the grid at row 0, column 2
 
-        self.checkBoxUseA = QCheckBox ("")
-        self.checkBoxUseA.setObjectName("checkBoxUseA")
-        self.grid.addWidget(self.checkBoxUseA, 1, 0) 
+        self.checkBoxUseA = QCheckBox("")  # Create a checkbox with no initial text
+        self.checkBoxUseA.setObjectName("checkBoxUseA")  # Set the object name to "checkBoxUseA"
+        self.grid.addWidget(self.checkBoxUseA, 1, 0)  # Add the checkbox to the grid at row 1, column 0
 
-        self.grid.addWidget(QLabel("Angle"), 1, 1)
+        self.grid.addWidget(QLabel("Angle"), 1, 1)  # Add a label with text "Angle" to the grid at row 1, column 1
 
-        self.editBoxAngle = QLineEdit()
-        self.editBoxAngle.setObjectName("editBoxAngle")
-        self.grid.addWidget(self.editBoxAngle, 1, 2)
+        self.editBoxAngle = QLineEdit()  # Create an edit box
+        self.editBoxAngle.setObjectName("editBoxAngle")  # Set the object name to "editBoxAngle"
+        self.grid.addWidget(self.editBoxAngle, 1, 2)  # Add the edit box to the grid at row 1, column 2
 
-        self.grid.setSpacing(5)
-        self.grid.setColumnStretch(0, 100)
+        self.grid.setSpacing(5)  # Set the spacing between widgets in the grid
+        self.grid.setColumnStretch(0, 100)  # Stretch the first column of the grid to take up most of the space
 
-        self.setFixedHeight(80)
-        self.setFixedWidth(280)
+        self.setFixedHeight(80)  # Set the fixed height of this dialog
+        self.setFixedWidth(280)  # Set the fixed width of this dialog
 
-        self.length = self.tool_setting.length
-        self.angle = self.tool_setting.angle
-        self.use_length = False
-        self.use_angle = False
+        self.length = self.tool_setting.length  # Get the length property from the tool setting
+        self.angle = self.tool_setting.angle  # Get the angle property from the tool setting
+        self.use_length = False  # Initialize use_length to false
+        self.use_angle = False  # Initialize use_angle to false
 
-    length = bind("editBoxLength", "text", str)
-    angle = bind("editBoxAngle", "text", str)
-    use_length = bind("checkBoxUseL", "checked", bool)
-    use_angle = bind("checkBoxUseA", "checked", bool)
+    length = bind("editBoxLength", "text", str)  # Bind the text property of editBoxLength to a string type
+    angle = bind("editBoxAngle", "text", str)  # Bind the text property of editBoxAngle to a string type
+    use_length = bind("checkBoxUseL", "checked", bool)  # Bind the checked state of checkBoxUseL to a boolean type
+    use_angle = bind("checkBoxUseA", "checked", bool)  # Bind the checked state of checkBoxUseA to a boolean type
 
 
 '''
