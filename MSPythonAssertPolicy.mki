@@ -1,0 +1,32 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonAssertPolicy.mki $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+#
+#   This is included at the begining of mdl.mki to change things for internal
+#   use.  It is not to be shipped to customers.
+#
+#----------------------------------------------------------------------------
+
+%if defined (BSIBUILD)
+    MSPythonSrc         = $(SrcRoot)MSPython/
+%else
+    MSPythonSrc         = $(SrcRoot)
+%endif
+
+%if defined (BSI)
+    SystemPolicyMki=$(SrcBsiCommon)sharedmki/InternalSystemPolicy.mki
+    FoundationPolicyMki=$(SrcRoot)MSPython/MSPythonSolutionPolicy.mki
+    DerivativePolicyMki=$(SrcRoot)MSPython/MSPythonSolutionPolicy.mki
+%else
+    SystemPolicyMki=$(MSPythonSrc)build/PublicSDK/SystemPolicy.mki
+    FoundationPolicyMki=$(MSPythonSrc)MSPythonSolutionPolicy.mki
+    DerivativePolicyMki=$(MSPythonSrc)MSPythonSolutionPolicy.mki
+%endif
+
+
+
+ProductRcIncludes + -i$(OutPowerPlatform)gensrc/

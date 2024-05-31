@@ -1,0 +1,122 @@
+#--------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+
+# This file is included by signrscs.mke and EC make files to define the
+# code signing commands to apply to the MAs and EXEs that the caller wants to sign.
+
+# If this is running in the PRG room, then this is an official build
+%if defined (SUBNET_PRG)
+    %if !defined (PRG_RSIGN_ARGS)
+        %error PRG Must set PRG_RSIGN_ARGS in order to digitally sign applications and resource files
+    %endif
+    rsignargs    = $(PRG_RSIGN_ARGS)
+    signcodeargs = $(PRG_SIGNCODE_ARGS)
+%else
+    rsignargs    = --iKN -v $(certDir)developer.pvk -spc $(certDir)developer.cer
+
+    %if (MSVC_VERSION>=1910)
+        signcodeargs = sign \/fd SHA256 \/f $(certDir)developer.pfx \/p bsidev
+    %elif (MSVC_VERSION>=1400)
+        signcodeargs = sign \/f $(certDir)developer.pfx \/p bsidev
+    %else
+        signcodeargs = -v $(certDir)developer.pvk -spc $(certDir)developer.cer
+    %endif
+%endif
+
+# Projectwise has to build against multiple versions of MicroStation,
+# so it needs to use the RC signing command from the correct version
+%ifndef RSIGN_PROGRAM
+    RSIGN_PROGRAM = $(mstnToolsPath)rsign
+%endif
+
+%if defined (PRG_WANT_MULTISIGN)
+    rsigncmd = for %I in ($(PRG_THUMBPRINTS)) do $(singletonCmd) $(RSIGN_PROGRAM) $(PRG_MULTISIGNCMD) %I
+%else
+    rsigncmd = $(singletonCmd) $(RSIGN_PROGRAM) $(rsignargs)
+%endif
+
+
+%if $(TARGET_PLATFORM)=="Windows"
+    %if !defined (signtoolExe)
+        %if (MSVC_VERSION>=1910) || defined (USING_VS2017)
+            # Windows SDK started versioning the installation paths starting with 10.0.15063.0 upwards.
+            signtoolExe = $(FrameworkSDKDir)Bin/$(WindowsSDKVersion)/x64/signtool.exe
+        %elif (MSVC_VERSION>=1700) || defined (USING_VS2012)
+            signtoolExe = $(FrameworkSDKDir)/Bin/x64/signtool.exe
+        %elif (MSVC_VERSION>=1600) || defined (USING_VS2010)
+            signtoolExe = $(FrameworkSDKDir)/Bin/signtool.exe
+        %elif (MSVC_VERSION>=1500) || defined (USING_VS2008)
+            signtoolExe = $(WinSDKFolder)/Bin/signtool.exe
+        %elif (MSVC_VERSION>=1400) || defined (USING_VS2005)
+            signtoolExe = $(FrameworkSDKDir)/Bin/signtool.exe
+        %elif (MSVC_VERSION==1310) || defined (USING_VS2003)
+            signtoolExe = $(FrameworkSDKDir)/Bin/signcode.exe
+        %elif (MSVC_VERSION==1300) || defined (USING_VS2002)
+            signtoolExe = $(FrameworkSDKDir)/Bin/signcode.exe
+        %elif (MSVC_VERSION==1200) || defined (USING_VS6)
+            signtoolExe = ${MSVCDir}/../Common/IDE/IDE98/signcode.exe
+        %endif
+
+        %ifnofile $(signtoolExe)
+            signtoolExe = ${nttools}/../Common/IDE/IDE98/signcode.exe
+            %ifnofile $(signtoolExe)
+                signtoolExe = $(FrameworkSDKDir)/Bin/signcode.exe
+            %endif
+
+            %ifnofile $(signtoolExe)
+                %warn signcode.exe / signtool.exe can not be located
+                %warn signtoolExe = $(signtoolExe)
+                %if defined (PRG)
+                    %error signcode.exe / signtool.exe can not be located
+                %endif
+
+                %undef signtoolExe
+            %endif
+        %endif
+    
+        %if defined (signtoolExe)
+            MSB-signtoolExe = $(signtoolExe)
+        %endif
+
+    %endif
+
+    %iffile $(signtoolExe)
+        %iffile $(SrcBsiCommon)sharedmki/signFile.cmd
+            %if defined (BSI_SIGNING_TOKEN)  # Use signing server
+                signcodecmd = $(SrcRoot)bsitools/signingclient/SignToolClient.exe sign --service-url https:\/\/signingservice.bentley.com
+            %elif defined (PRG_USE_OLD_SIGNFILE)
+                signcodecmd = $(SrcBsiCommon)sharedmki/signFile.cmd $(singletonCmd) "$(signtoolExe)" $(signcodeargs)
+            %else
+                signcodecmd = $(BBPYTHONCMD) $(SrcBsiCommon)sharedmki/signfile.py "$(signtoolExe)"
+            %endif
+        %else
+            %iffile $(TranskitSharedShell)signFile.cmd
+                signcodecmd = $(TranskitSharedShell)signFile.cmd $(singletonCmd) "$(signtoolExe)" $(signcodeargs)
+            %else
+                signcodecmd = $(singletonCmd) "$(signtoolExe)" $(signcodeargs)
+            %endif
+        %endif
+    %else
+        signcodecmd = echo Warning missing signcode.exe "$(signtoolExe)" -- not signed for authenticity:
+    %endif
+
+    dllsignTool = $(bsiX86Tools)dllsign.exe
+
+    %if defined (PRG_WANT_MULTISIGN)
+    dllsignAuthenticCmd = for %I in ($(PRG_THUMBPRINTS)) do $(singletonCmd) $(dllsignTool) $(PRG_MULTISIGNCMD) %I
+    %else
+    dllsignAuthenticCmd = $(singletonCmd) $(dllsignTool) $(rsignargs)
+    %endif
+
+    #
+    #   In PRG build, we want signcode to put a secure timestamp on the file
+    #
+    %if (defined (SUBNET_PRG) || defined (SIGNCODE_DO_TIMESTAMP)) && !defined (SIGNCODE_NO_TIMESTAMP) && !defined (BSI_SIGNING_TOKEN) && defined(PRG_USE_OLD_SIGNFILE)
+        signcodecmd + -t http:\/\/timestamp.digicert.com
+    %endif
+
+%endif
+
+# End

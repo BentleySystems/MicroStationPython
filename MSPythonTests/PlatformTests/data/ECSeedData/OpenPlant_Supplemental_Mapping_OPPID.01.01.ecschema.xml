@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="OpenPlant_Supplemental_Mapping_OPPID" nameSpacePrefix="oppid_supplement" version="1.01" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.01" prefix="bsca" />
+    <ECSchemaReference name="OpenPlant_PID" version="01.01" prefix="oppid" />
+    <ECCustomAttributes>
+        <SupplementalSchemaMetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+            <PrimarySchemaName>OpenPlant</PrimarySchemaName>
+            <PrimarySchemaMajorVersion>1</PrimarySchemaMajorVersion>
+            <PrimarySchemaMinorVersion>1</PrimarySchemaMinorVersion>
+            <Precedence>1</Precedence>
+            <Purpose>Mapping</Purpose>
+            <IsUserSpecific>False</IsUserSpecific>
+        </SupplementalSchemaMetaData>
+    </ECCustomAttributes>
+    <ECRelationshipClass typeName="Assembled_Object_Has_Assembled_Object" displayLabel="Assembled Object Has Assembled Object" isDomainClass="False" strength="referencing" strengthDirection="forward">
+        <ECCustomAttributes>
+            <ReferenceTypeRelationship xmlns="Bentley_Standard_CustomAttributes.01.01" />
+        </ECCustomAttributes>
+        <Source cardinality="(0,1)" polymorphic="True" />
+        <Target cardinality="(0,1)" polymorphic="True" />
+    </ECRelationshipClass>
+    <ECClass typeName="AutoPlantDocumentSpecification" description="Indicates whether the document class is an AutoPlant Document" displayLabel="Auto Plant Document Specification" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="FilePathProperty" typeName="string" displayLabel="File Path Property" />
+        <ECProperty propertyName="FileNameProperty" typeName="string" displayLabel="File Name Property" />
+    </ECClass>
+    <ECRelationshipClass typeName="UNIT_HAS_NAMED_ITEM" displayLabel="Unit Has Named Item" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <ECCustomAttributes>
+            <ReferenceTypeRelationship xmlns="Bentley_Standard_CustomAttributes.01.01" />
+        </ECCustomAttributes>
+        <Source cardinality="(0,1)" polymorphic="True">
+            <Class class="oppid:UNIT" />
+        </Source>
+        <Target cardinality="(0,1)" polymorphic="True">
+            <Class class="oppid:NAMED_ITEM" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="UNIT" displayLabel="Unit" isDomainClass="True">
+    </ECClass>        
+</ECSchema>

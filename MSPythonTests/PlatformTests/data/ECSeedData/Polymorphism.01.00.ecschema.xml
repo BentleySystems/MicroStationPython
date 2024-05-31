@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="Polymorphism" nameSpacePrefix="polymorph" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECClass typeName="BaseClass" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="InBaseClass" typeName="int" />
+    </ECClass>
+    <ECClass typeName="RootClass" isDomainClass="True">
+        <ECArrayProperty propertyName="PolymorphArray" typeName="BaseClass" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+        <ECProperty propertyName="InRootClass" typeName="int" />
+    </ECClass>
+    <ECClass typeName="SubClass1" isStruct="True" isDomainClass="True">
+        <BaseClass>BaseClass</BaseClass>
+        <ECProperty propertyName="InSubClass1" typeName="int" />
+    </ECClass>
+    <ECClass typeName="SubClass2" isStruct="True" isDomainClass="True">
+        <BaseClass>SubClass1</BaseClass>
+        <ECProperty propertyName="InSubClass2" typeName="int" />
+    </ECClass>
+</ECSchema>

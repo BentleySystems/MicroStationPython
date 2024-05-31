@@ -1,0 +1,173 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonWrapper\PyBentleyGeom\PyBentleyGeom.mke $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+appName             = MSPyBentleyGeom
+
+%if defined (BSIBUILD)
+MSPythonSrc         = $(SrcRoot)MSPython/
+%else
+MSPythonSrc         = $(SrcRoot)
+%endif
+
+PolicyFile          = $(MSPythonSrc)/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(MSPythonSrc)/MSPythonSolutionPolicy.mki
+
+%include mdl.mki
+
+
+#----------------------------------------------------------------------
+#       Create output directories
+#----------------------------------------------------------------------
+o = $(out)PyBentleyGeom/
+
+always:
+    !~@mkdir $(o)
+
+#---------------------------------------------
+#       Compile the source files 
+#---------------------------------------------
+CCompOpts + -bigobj -MP
+
+MultiCompileDepends = $(_MakeFileSpec)
+
+PchCompiland        = $(MSPythonSrc)/MSPythonPCH.cpp
+PchOutputDir        = $(o)
+PchArgumentsDepends = $(MultiCompileDepends)
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302  -wd4471 -wd5205
+%include $(MSPythonSrc)/build/publicSDK/PreCompileHeader.mki
+
+
+CCPchOpts = $(UsePrecompiledHeaderOptions)
+
+dependencies    =   $(MSPythonSrc)/MSPythonPCH.h
+
+%include MultiCppCompileRule.mki
+
+PyBentleyGeomSource        = $(PyhonWrapper)PyBentleyGeom/source/
+PyBentleyGeomDependencies  = $(dependencies) \
+                             $(PythonInternalHeaders)OpqueTypes_Bentley.h \
+                             $(PythonInternalHeaders)OpqueTypes_Geom.h
+
+$(o)angle$(oext)                       : $(PyBentleyGeomSource)angle.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)bsiquadrature$(oext)               : $(PyBentleyGeomSource)bsiquadrature.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)bsplinestructs$(oext)              : $(PyBentleyGeomSource)bsplinestructs.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)clipplane$(oext)                   : $(PyBentleyGeomSource)clipplane.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)clipplaneset$(oext)                : $(PyBentleyGeomSource)clipplaneset.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)compounddrawstate$(oext)           : $(PyBentleyGeomSource)compounddrawstate.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)curvedetails$(oext)                : $(PyBentleyGeomSource)curvedetails.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)curveprimitive$(oext)              : $(PyBentleyGeomSource)curveprimitive.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)curveprimitiveId$(oext)            : $(PyBentleyGeomSource)curveprimitiveId.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)curvetopologyId$(oext)             : $(PyBentleyGeomSource)curvetopologyId.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)curvevector$(oext)                 : $(PyBentleyGeomSource)curvevector.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dbilinearpatch3d$(oext)            : $(PyBentleyGeomSource)dbilinearpatch3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dellipse3d$(oext)                  : $(PyBentleyGeomSource)dellipse3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dmap4d$(oext)                      : $(PyBentleyGeomSource)dmap4d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dmatrix4d$(oext)                   : $(PyBentleyGeomSource)dmatrix4d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dplane3d$(oext)                    : $(PyBentleyGeomSource)dplane3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dpoint2d$(oext)                    : $(PyBentleyGeomSource)dpoint2d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dpoint3d$(oext)                    : $(PyBentleyGeomSource)dpoint3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dpoint4d$(oext)                    : $(PyBentleyGeomSource)dpoint4d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)drange1d$(oext)                    : $(PyBentleyGeomSource)drange1d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)drange2d$(oext)                    : $(PyBentleyGeomSource)drange2d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)drange3d$(oext)                    : $(PyBentleyGeomSource)drange3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dray3d$(oext)                      : $(PyBentleyGeomSource)dray3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dsegment1d$(oext)                  : $(PyBentleyGeomSource)dsegment1d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dsegment3d$(oext)                  : $(PyBentleyGeomSource)dsegment3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dspiral2dbase$(oext)               : $(PyBentleyGeomSource)dspiral2dbase.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dtriangle3d$(oext)                 : $(PyBentleyGeomSource)dtriangle3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dvec2d$(oext)                      : $(PyBentleyGeomSource)dvec2d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)dvec3d$(oext)                      : $(PyBentleyGeomSource)dvec3d.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)facetoptions$(oext)                : $(PyBentleyGeomSource)facetoptions.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)geomapi$(oext)                     : $(PyBentleyGeomSource)geomapi.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)geomapi.r$(oext)                   : $(PyBentleyGeomSource)geomapi.r.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)graphicspoint$(oext)               : $(PyBentleyGeomSource)graphicspoint.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)msbsplinecurve$(oext)              : $(PyBentleyGeomSource)msbsplinecurve.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)msbsplinesurface$(oext)            : $(PyBentleyGeomSource)msbsplinesurface.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)msinterpolationcurve$(oext)        : $(PyBentleyGeomSource)msinterpolationcurve.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)polyface$(oext)                    : $(PyBentleyGeomSource)polyface.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)PyBentleyGeom$(oext)               : $(PyBentleyGeomSource)PyBentleyGeom.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)rotmatrix$(oext)                   : $(PyBentleyGeomSource)rotmatrix.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)solidprimitive$(oext)              : $(PyBentleyGeomSource)solidprimitive.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)transform$(oext)                   : $(PyBentleyGeomSource)transform.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)point$(oext)                       : $(PyBentleyGeomSource)point.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)geopoint$(oext)                    : $(PyBentleyGeomSource)geopoint.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+%include MultiCppCompileGo.mki
+
+CCPchOpts =
+
+#----------------------------------------------------------------------
+#   Set up to use dlmlink.mki
+#----------------------------------------------------------------------
+DLM_NAME                    = $(appName)
+DLM_DEST                    = $(o)
+DLM_EXPORT_DEST             = $(o)
+DLM_OBJECT_DEST             = $(o)
+DLM_LIBDEF_SRC              = $(_MakeFilePath)
+DLM_OBJECT_FILES            = $(MultiCompileObjectList) \
+                              $(o)MSPythonPCH$(oext)
+
+DLM_EXTENSION               = .pyd
+DLM_NOENTRY                 = 1
+DLM_NO_INITIALIZE_FUNCTION  = 1
+DLM_NO_DLS                  = 1
+DLM_NO_DEF                  = 1
+LINKER_LIBRARIES            = $(PythonLibName) \
+                              $(ContextSubpartsLibs)BentleyGeom.lib \
+                              $(ContextSubpartsLibs)bentley.lib \
+                              $(ContextSubpartsLibs)BentleyAllocator.lib \
+                              $(ContextSubpartsLibs)MSPythonCore.lib
+
+
+DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
+DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/
+
+# No lib needed for this project
+%undef DLM_CREATE_LIB_CONTEXT_LINK
+
+%include dlmlink.mki

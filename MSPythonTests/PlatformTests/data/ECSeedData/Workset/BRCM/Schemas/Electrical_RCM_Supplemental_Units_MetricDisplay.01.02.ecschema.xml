@@ -1,0 +1,679 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="Electrical_RCM_Supplemental_Units_MetricDisplay" nameSpacePrefix="brcm_sumd" version="1.2" displayLabel="Electrical RCM Supplemental Mapping Units Metric Display" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.00" prefix="bsca" />
+    <ECSchemaReference name="Unit_Attributes" version="01.00" prefix="units_attribs" />
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECCustomAttributes>
+        <SupplementalSchemaMetaData xmlns="Bentley_Standard_CustomAttributes.01.00">
+            <PrimarySchemaName>Electrical_RCM</PrimarySchemaName>
+            <PrimarySchemaMajorVersion>1</PrimarySchemaMajorVersion>
+            <PrimarySchemaMinorVersion>2</PrimarySchemaMinorVersion>
+            <Precedence>104</Precedence>
+            <Purpose>Units</Purpose>
+            <IsUserSpecific>False</IsUserSpecific>
+        </SupplementalSchemaMetaData>
+        <SchemaChangeTrackingState xmlns="Bentley_Standard_CustomAttributes.01.00">
+            <FinalizationHistory />
+            <SchemaFullNameAtEditingStart>Electrical_RCM_Supplemental_Units_MetricDisplay.01.02</SchemaFullNameAtEditingStart>
+        </SchemaChangeTrackingState>
+    </ECCustomAttributes>
+    <ECClass typeName="CABLE_BASKET_BEND" isDomainClass="True">
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ANGLE" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_CROSS" isDomainClass="True">
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_REDUCER" isDomainClass="True">
+        <ECProperty propertyName="RUN_WIDTH_REDUCED" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RUN_WIDTH_ORIG" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_RISER" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_STRAIGHT" isDomainClass="True">
+        <ECProperty propertyName="LENGTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_TEE" isDomainClass="True">
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_BEND" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_CROSS" isDomainClass="True">
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_REDUCER" isDomainClass="True">
+        <ECProperty propertyName="RUN_WIDTH_ORIG" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RUN_WIDTH_REDUCED" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_RISER" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_STRAIGHT" isDomainClass="True">
+        <ECProperty propertyName="LENGTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_TEE" isDomainClass="True">
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_BEND" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_CROSS" isDomainClass="True">
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_REDUCER" isDomainClass="True">
+        <ECProperty propertyName="RUN_WIDTH_ORIG" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RUN_WIDTH_REDUCED" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_RISER" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_STRAIGHT" isDomainClass="True">
+        <ECProperty propertyName="LENGTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_TEE" isDomainClass="True">
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_BEND" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_CROSS" isDomainClass="True">
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_REDUCER" isDomainClass="True">
+        <ECProperty propertyName="RUN_WIDTH_ORIG" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RUN_WIDTH_REDUCED" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_RISER" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_STRAIGHT" isDomainClass="True">
+        <ECProperty propertyName="LENGTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_TEE" isDomainClass="True">
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRENCH" isDomainClass="True">
+        <ECProperty propertyName="BASE_HEIGHT" typeName="double" description="Height of the floor component" displayLabel="Base Height">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BASE_WIDTH" typeName="double" description="Width of the floor component" displayLabel="Base Width">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="COVER_HEIGHT" typeName="double" description="Height of the cover" displayLabel="Cover Height">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="COVER_WIDTH" typeName="double" description="Width of the cover" displayLabel="Cover Width">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="INTERIOR_WIDTH" typeName="double" description="Width of the interior space between walls" displayLabel="Interior Width">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="WALL_HEIGHT" typeName="double" description="Height of the walls" displayLabel="Wall height">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="WALL_THICKNESS" typeName="double" description="Thickness of the walls" displayLabel="Wall thickness">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRENCH_BEND" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double" displayLabel="Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRENCH_RISER" isDomainClass="True">
+        <ECProperty propertyName="ANGLE" typeName="double" displayLabel="Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>DEGREE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TROUGH" isDomainClass="True">
+        <ECProperty propertyName="HEIGHT" typeName="double" readOnly="True">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LENGTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MATERIAL_VOLUME" typeName="double" readOnly="True">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE_CUBED</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="WIDTH" typeName="double" readOnly="True">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ELEVATION" typeName="double" readOnly="True">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DUCTBANK_ENVELOPE" isDomainClass="True">
+        <ECProperty propertyName="ENCASEMENT_BOTTOM" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ENCASEMENT_LEFT" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ENCASEMENT_RIGHT" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ENCASEMENT_TOP" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>METRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="RACEWAY_ITEM" isDomainClass="True">
+        <ECProperty propertyName="HEIGHT" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TRADE_HEIGHT" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TRADE_WIDTH" typeName="double">
+            <ECCustomAttributes>
+                <DisplayUnitSpecification xmlns="Unit_Attributes.01.00">
+                    <DisplayFormatString>N4</DisplayFormatString>
+                    <DisplayFormatKey xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <DisplayUnitName>MILLIMETRE</DisplayUnitName>
+                </DisplayUnitSpecification>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+</ECSchema>

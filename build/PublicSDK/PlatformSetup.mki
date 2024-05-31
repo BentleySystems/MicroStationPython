@@ -1,0 +1,299 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#  Base policy is defined in this file.
+#
+#--------------------------------------------------------------------------------------
+%if defined (__PlatformSetup_mki__)
+    %return
+%endif
+
+__PlatformSetup_mki__  = 1
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Verify required input variables.
+
+# Graphite originally relied on TARGET_PROCESSOR_ARCHITECTURE and TARGET_PROCESSOR_DIRECTORY being controlled by BB, as the authority for what you're building.
+# However, to be able to share BentleyBuild with other streams, we must fall back to assuming that DEFAULT_TARGET_PROCESSOR_ARCHITECTURE is the real target architecture,
+# and that TARGET_PROCESSOR_DIRECTORY is not defined, but instead inferred by DEFAULT_TARGET_PROCESSOR_ARCHITECTURE.
+
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    TARGET_PROCESSOR_ARCHITECTURE = $(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
+%endif
+
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    %error TARGET_PROCESSOR_ARCHITECTURE must be defined.
+%endif
+
+# Note that "directory" is different from "architecture" for some platforms, such as "WinX64" vs. "x64".
+%if !defined (TARGET_PROCESSOR_DIRECTORY)
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "x86"
+        TARGET_PROCESSOR_DIRECTORY = Winx86
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "x64"
+        TARGET_PROCESSOR_DIRECTORY = Winx64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"
+        TARGET_PROCESSOR_DIRECTORY = WinRTx86
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+        TARGET_PROCESSOR_DIRECTORY = WinRTx64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+        TARGET_PROCESSOR_DIRECTORY = WinRTARM
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidARM"
+        TARGET_PROCESSOR_DIRECTORY = AndroidARM
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidARM7A"
+        TARGET_PROCESSOR_DIRECTORY = AndroidARM7A
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidARM64"
+        TARGET_PROCESSOR_DIRECTORY = AndroidARM64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidX86"
+        TARGET_PROCESSOR_DIRECTORY = AndroidX86
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidX64"
+        TARGET_PROCESSOR_DIRECTORY = AndroidX64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "LinuxX86"
+        TARGET_PROCESSOR_DIRECTORY = LinuxX86
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "LinuxX64"
+        TARGET_PROCESSOR_DIRECTORY = LinuxX64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX86"
+        TARGET_PROCESSOR_DIRECTORY = iOSX86
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSX64"
+        TARGET_PROCESSOR_DIRECTORY = iOSX64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64Simulator"
+        TARGET_PROCESSOR_DIRECTORY = iOSARM64Simulator
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM"
+        TARGET_PROCESSOR_DIRECTORY = iOSARM
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARM64"
+        TARGET_PROCESSOR_DIRECTORY = iOSARM64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "iOSARMActive"
+        TARGET_PROCESSOR_DIRECTORY = iOSARMActive
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSX64"
+        TARGET_PROCESSOR_DIRECTORY = MacOSX64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "MacOSARM64"
+        TARGET_PROCESSOR_DIRECTORY = MacOSARM64
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "Javascript"
+        TARGET_PROCESSOR_DIRECTORY = Javascript
+    %else
+        %error TARGET_PROCESSOR_DIRECTORY was not defined and could not be inferred from TARGET_PROCESSOR_ARCHITECTURE ($(TARGET_PROCESSOR_ARCHITECTURE)).
+    %endif
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Configure some broad variables based on the target architecture.
+
+%if (" " != $[@findstring Android, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    TARGET_PLATFORM = "Android"
+    USE_UNIX_FILENAMES = 1
+    BETHREAD_USE_PTHREAD = 1
+
+%elif (" " != $[@findstring Linux, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    TARGET_PLATFORM = "Linux"
+    USE_UNIX_FILENAMES = 1
+    BETHREAD_USE_PTHREAD = 1
+
+    nameToDefine = TEST_LINUX_GUI
+    %include cdefapnd.mki
+
+%elif (" " != $[@findstring iOS, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    TARGET_PLATFORM = "iOS"
+    USE_UNIX_FILENAMES = 1
+    CREATE_STATIC_LIBRARIES = 1
+    BETHREAD_USE_PTHREAD = 1
+
+    nameToDefine = __unix__
+    %include cdefapnd.mki
+    
+    # We used to only do this for iOSArm 32-bit builds.
+    # arm64 seemingly does not have alignment rules, and has survived without it so far.
+    # However, to support the multi-architecture iOSArmActive builds, we have to set it so the 32-bit half uses it.
+    # I am thus always setting it, because having iOSArm64 and iOSArmActive for arm64 differ in this regard would cause debugging headaches.
+    nameToDefine = TARGET_PROCESSOR_ARCHITECTURE_MEMORY_ALIGNMENT_REQUIRED=1
+    %include cdefapnd.mki
+
+    %if (("iOSArm" == $(TARGET_PROCESSOR_ARCHITECTURE) || "iOSX86" == $(TARGET_PROCESSOR_ARCHITECTURE)) && !defined(ALLOW_DEPRECATED_IOS_32BIT))
+        always:
+            %error 32-bit iOS is no longer supported, and fixes will not be made. You can define ALLOW_DEPRECATED_IOS_32BIT to silence this and continue at your own risk.
+    %endif
+
+%elif (" " != $[@findstring MacOS, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    TARGET_PLATFORM = "MacOS"
+    USE_UNIX_FILENAMES = 1
+    BETHREAD_USE_PTHREAD = 1
+
+    nameToDefine = __unix__
+    %include cdefapnd.mki
+
+%elif (" " != $[@findstring WinRT, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    TARGET_PLATFORM = "WinRT"
+    
+    %if defined (OVERRIDE_DEFAULT_VC_TOOLSET)
+        %warn Overriding default VC-based BUILD_TOOLSET because OVERRIDE_DEFAULT_VC_TOOLSET='$(OVERRIDE_DEFAULT_VC_TOOLSET)'
+        DEFAULT_TOOLSET = $(OVERRIDE_DEFAULT_VC_TOOLSET)
+    %endif
+
+    USE_UNIX_FILENAMES = 0
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+        slashAmd64=/amd64
+        slashx64=/x64
+        slashx86x64=/x64
+        %if $(PROCESSOR_ARCHITECTURE)=="x86"
+            slashXCompileDir=/x86_amd64
+        %else
+            slashXCompileDir=/amd64
+        %endif
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"
+        slashx86x64=/x86
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+        # *** TBD
+    %endif
+
+%elif ("x64" == $(TARGET_PROCESSOR_ARCHITECTURE) || "x86" == $(TARGET_PROCESSOR_ARCHITECTURE))
+    TARGET_PLATFORM = "Windows"
+    
+    %if defined (OVERRIDE_DEFAULT_VC_TOOLSET)
+        %warn Overriding default VC-based BUILD_TOOLSET because OVERRIDE_DEFAULT_VC_TOOLSET='$(OVERRIDE_DEFAULT_VC_TOOLSET)'
+        DEFAULT_TOOLSET = $(OVERRIDE_DEFAULT_VC_TOOLSET)
+    %endif
+
+    USE_UNIX_FILENAMES = 0
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "x64"
+        slashAmd64 = /amd64
+        slashx64 = /x64
+        slashx86x64 = /x64
+        %if $(PROCESSOR_ARCHITECTURE) == "x86"
+            slashXCompileDir = /x86_amd64
+        %else
+            slashXCompileDir = /amd64
+        %endif
+    %endif
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "x86"
+        slashx86x64 = /x86
+    %endif
+
+%elif (" " != $[@findstring Javascript, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    TARGET_PLATFORM = "Javascript"
+    BETHREAD_USE_PTHREAD = 1
+
+    BENTLEY_CPP_MISSING_WCHAR_SUPPORT = 1
+
+    # Want both unix and javascript because there is a big overlap between what emscripten and unix support
+    nameToDefine = __unix__
+    %include cdefapnd.mki
+
+    nameToDefine = __javascript__
+    %include cdefapnd.mki
+
+%else
+    %error Unknown value for TARGET_PROCESSOR_ARCHITECTURE='$(TARGET_PROCESSOR_ARCHITECTURE)'.
+
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+%if defined (OVERRIDE_DEFAULT_TOOLSET)
+    %warn Overriding default BUILD_TOOLSET because OVERRIDE_DEFAULT_TOOLSET='$(OVERRIDE_DEFAULT_TOOLSET)'
+    BUILD_TOOLSET = $(OVERRIDE_DEFAULT_TOOLSET)
+%elif defined (DEFAULT_TOOLSET)  # Defined in this file based on an override in a makefile
+    BUILD_TOOLSET = $(DEFAULT_TOOLSET)
+%else
+    BUILD_TOOLSET = $(BB_DEFAULT_TOOLSET)
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+%if !defined (StrongNameSignature)
+    StrongNameSignature=NormalSignature
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# This high-level variable controls what we call to create libraries (bmake-time), as well as how we export symbols (compiler-time); the two are tightly coupled.
+%if defined (CREATE_STATIC_LIBRARIES)
+    nameToDefine = CREATE_STATIC_LIBRARIES
+    %include cdefapnd.mki
+%endif
+
+# Set by BentleyBuild if coming from that way.
+%if !defined (OutBuildContexts)
+    OutBuildContexts = $(OutRootDir)BuildContexts/
+%endif
+
+%if !defined (OutputRootDir)
+    OutputRootDir = $(OutRoot)$(TARGET_PROCESSOR_DIRECTORY)/
+%endif
+
+
+sharedMki   = $(_MakeFilePath)/build/PublicSDK/
+OutBuildDir = $(OutputRootDir)build/
+LinkFirstDepToFirstTarget            = ~linkfile "$@=$<"
+LinkFirstDepToFirstTargetAsDirectory = ~linkdir "$@=$<"
+
+bsiScripts                      =% $(_CurrentFilePath)
+AddDelayLoadCmd                 = $(BBPYTHONCMD) $(bsiScripts)AddDelayLoad.py
+
+bsiX86Tools                     =% $(_CurrentFilePath)
+singletonCmd                    = $(bsiX86Tools)singleton.exe
+unzipCmd                        = $(bsiX86Tools)unzip.exe
+
+
+%if !defined (_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES)
+    _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1
+%endif
+
+#----------------------------------------------------------
+#  Standard Symlink Settings for dlmlink.mki
+#----------------------------------------------------------
+# Tell dlmlink.mki where to point symbolic links
+
+BuildContext                    =$(OutputRootDir)BuildContexts/
+ContextDeliveryDir              =$(BuildContext)Delivery/
+ContextSubPartsLibs             =$(BuildContext)Libs/
+
+always:
+	!~@mkdir $(BuildContext)
+	!~@mkdir $(ContextDeliveryDir)
+	!~@mkdir $(ContextSubPartsLibs)
+
+ContextSubPartsAssembliesDir    = $(BuildContext)SubParts/Assemblies/
+DLM_CONTEXT_LOCATION            = $(ContextDeliveryDir)
+DLM_LIB_CONTEXT_LOCATION        = $(ContextDeliveryDir)
+EXE_CONTEXT_LOCATION            = $(ContextDeliveryDir)
+ASSEMBLY_CONTEXT_LOCATION       = $(ContextDeliveryDir)
+BuildContextPublicApiDir        = $(BuildContext)PublicAPI/
+
+%if defined (CREATE_STATIC_LIBRARIES)
+    ContextSubPartsStaticLibs = $(BuildContext)SubParts/Libs/
+%else
+    ContextSubPartsStaticLibs = $(BuildContext)SubParts/StaticLibs/
+%endif
+
+#----------------------------------------------------------
+#  Standard windows version.
+#----------------------------------------------------------
+#%if defined (winNT)
+    # Set the default to Windows 7.
+    _WIN32_WINNT    = 0x0601
+    WINVER          = 0x0601
+    _WIN32_IE       = 0x0600
+#%endif
+
+MSJ_BUILD_PRIVATE_VERSION       = 1
+
+#----------------------------------------------------------
+# For BentleyBuild directed makes, set PublicApiIncludes.
+#----------------------------------------------------------
+PublicApiIncludes    = -I${BuildContext}/PublicAPI/ -I${BuildContext}/VendorAPI/
+
+#### Start PYTHON Change
+%if defined (SDKINC)
+    PublicApiIncludes    + -I$(SDKINC)
+%endif
+### End PYTHON Change
+
+
+%if !defined (BSI)
+    DLM_NO_SIGN = 1
+    DLM_NO_VERSION = 1
+    EXE_NO_SIGN = 1
+    EXE_NO_VERSION = 1
+%else
+    %error BSI is defined...
+%endif
+
+BENTLEYCONFIG_NO_VISUALIZATION = 1

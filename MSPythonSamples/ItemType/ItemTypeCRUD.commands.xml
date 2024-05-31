@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="ItemTypeCrud" CommandClass="MacroCommand" CommandWord="PYITEMCRUD">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="ItemTypeCrud">
+            <Keyword CommandWord="CREATE" />
+            <Keyword CommandWord="READ" />
+            <Keyword CommandWord="UPDATE" />
+            <Keyword CommandWord="DELETE" />
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="PYITEMCRUD CREATE"                     Function="CreateItemTypeLibraryItemTypeAndProperty" />
+        <KeyinHandler Keyin="PYITEMCRUD READ"                       Function="ReadItemTypePropertyDefaultValue" />
+        <KeyinHandler Keyin="PYITEMCRUD UPDATE"                     Function="UpdateTypePropertyDefaultValue" />
+        <KeyinHandler Keyin="PYITEMCRUD DELETE"                     Function="DeleteItemTypeLibraryItemAndProperty" />
+    </KeyinHandlers>
+</KeyinTree>

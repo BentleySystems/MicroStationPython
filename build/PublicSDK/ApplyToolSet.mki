@@ -1,0 +1,72 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+#============================================================================
+# Currently supported BUILD_TOOLSET values:
+# VC9, VS2012, VS2013, CLANG, GCC, EMCC
+# Note that VC9 support is being retained to support parts that use .Net and must run in 08.11-based products, such as Bentley Map (targetting the .Net 2.0 runtime).
+#============================================================================
+
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    %error TARGET_PROCESSOR_ARCHITECTURE has not been defined.
+%endif
+
+%if !defined (BUILD_TOOLSET)
+    %error BUILD_TOOLSET has not been defined. See ApplyToolSet.mki for possible values.
+%endif
+
+# TOOLSET_DIAGNOSTICS is a very helpful debugging aid when builds fail due to missing tools or otherwise strange build errors.
+# Some developers don't want to see this in their output, but I feel it will always be harmless if not useful for PRG builds.
+%if defined (PRG)
+    TOOLSET_DIAGNOSTICS = 1
+%endif
+
+%if $(BUILD_TOOLSET) == "LINUX_GCC"
+    BUILD_TOOLSET = "LINUX_CLANG"
+%endif
+
+#============================================================================
+#   include platform dependent mki
+#============================================================================
+%if $(BUILD_TOOLSET) == "VS2017"
+    %include ApplyToolSet_VS2017.mki
+%elif $(BUILD_TOOLSET) == "VS2019"
+    %include ApplyToolSet_VS2019.mki
+%elif $(BUILD_TOOLSET) == "VS2022"
+    %include ApplyToolSet_VS2022.mki
+%elif $(BUILD_TOOLSET) == "APPLE_CLANG"
+    %include ApplyToolSet_CLang.mki
+%elif $(BUILD_TOOLSET) == "LINUX_CLANG"
+    %include ApplyToolSet_LinuxClang.mki
+%elif $(BUILD_TOOLSET) == "ANDROID_CLANG"
+    %include ApplyToolSet_AndroidClang.mki
+%else
+    %error BUILD_TOOLSET set to unsupported value '$(BUILD_TOOLSET)'. See ApplyToolSet.mki for possible values.
+%endif
+
+#============================================================================
+#   Including the platform dependent .mki file is the last step of setting up native code tools.
+#============================================================================
+%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED"
+    %if "Android" == $(TARGET_PLATFORM)
+        %include gccmdl.mki
+    %elif "Linux" == $(TARGET_PLATFORM)
+        %include linuxGccToolContextCompile.mki
+    %else
+        %error No compile MKI available for using GCC to build $(TARGET_PLATFORM).
+    %endif
+%elif $(BUILD_TOOLSET) == "LINUX_CLANG"
+    %include linuxllvmmdl.mki
+%elif $(BUILD_TOOLSET) == "ANDROID_CLANG"
+    %include androidllvmmdl.mki
+%elif $(BUILD_TOOLSET) == "APPLE_CLANG"
+    %include llvmmdl.mki
+%elif $(BUILD_TOOLSET) == "EMCC"
+    %include emccmdl.mki
+%else
+    %include winntmdl.mki
+%endif
+
+

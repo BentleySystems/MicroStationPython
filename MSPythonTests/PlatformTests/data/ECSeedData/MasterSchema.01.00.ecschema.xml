@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ECSchema schemaName="MasterSchema" version="01.00" displayLabel="Master schema" description="Master schema" nameSpacePrefix="base" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ec="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ods="Bentley_ODS.01.02">
+
+   <ECClass typeName="ellipse" description="Ellipse" displayLabel="Ellipse" isDomainClass="True">
+      <ECProperty propertyName="Name" typeName="string" displayLabel="Name" />
+   </ECClass>
+
+</ECSchema>

@@ -1,0 +1,365 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+#
+# INSTRUCTIONS FOR USING dlmlink.mki AND dlmcomp.mki TO BUILD A DLM:
+#
+# 1) Include mdl.mki.
+#
+# 2) Define the following macro names:
+#
+#    DLM_NAME          = the base filename of the output dlm. (example: xxxdlm)
+#    DLM_API_NUMBER    = A value appended to the filename before the extension.
+#    DLM_OUT_NAME      = a full file name for the dlm.(example: xxxsym)
+#    DLM_OBJECT_DEST   = the complete (slash-terminated) path to the object
+#                        directory (example: $(MSO)/xxxobj/ )
+#    DLM_OBJECT_FILES  = the list of object files to be linked. Static libraries go here.
+#    DLM_OBJECT_PCH    = the pre-compiled header object.
+#    LINKER_LIBRARIES  = the list of dynamic library files to be linked that should not be delayloaded.
+#    DLM_DEST          = destination for the finished DLM. If not defined, it
+#                        gets put into the mdlapps directory.
+#    DLM_NO_BENTLEY_LIB = If not set, will link with bentley.lib
+#
+# 4) Define the dependencies for .c to $(oext) dependencies.
+#
+# 5) Include dlmlink.mki. This makes the ".dlo" file for you and links
+#    the DLM.
+#
+# 6) Continue by making the MDL components of the application that use
+#    the DLM.
+#
+
+__dlmlinkMKI__=1
+
+%if defined (BUILD_USING_GCC)
+    %include gcclink.mki
+    %return
+%endif
+
+%if defined (BUILD_USING_LLVM)
+    %include llvmlink.mki
+    %return
+%endif
+
+%include dlmlinkCommon.mki
+
+ALL_DLM_OBJS = $(DLM_OBJECT_FILES) $(LINKER_LIBRARIES) $(LINKER_LIBRARIES_DELAYLOADED)
+
+%if !defined (DLM_EXPORT_NAME)
+    DLM_EXPORT_NAME    = $(DLM_EXPORT_DEST)$(DLM_NAME).lib
+%endif
+
+%if defined (DLM_NO_INITIALIZE_FUNCTION)
+dlmspecCmd  + -n
+%endif
+
+DLM_MODULE_DEF  = $(DLM_OBJECT_DEST)$(DLM_NAME).def
+    %if !defined (MFC_WIN_APP)
+        LINKER_LIBRARIES      + $(CLibs)
+    %else
+        LINKER_LIBRARIES      + $(CLibsNoRuntime)
+    %endif
+
+%if !defined (DLS_NAME)
+    DLS_NAME = $(DLM_NAME)
+%endif
+
+%if !defined (DLM_NO_SYMB) && !defined (DLM_SYMB_OPTS)
+    %if !defined (DLM_SYMB_NAME)
+        %if defined (DLM_SYMB_DEST)
+            DLM_SYMB_NAME = $(DLM_SYMB_DEST)$(DLM_NAME)$(DLM_API_NUMBER).pdb
+        %else
+            DLM_SYMB_NAME = $(DLM_DEST)$(DLM_NAME)$(DLM_API_NUMBER).pdb
+        %endif
+    %endif
+    DLM_SYMB_OPTS = -pdb:"$(DLM_SYMB_NAME)"
+    %if (MSVC_VERSION<1300)
+        DLM_SYMB_OPTS + -PDBTYPE:CON
+    %endif
+
+always:
+    !~@mkdir $(DLM_SYMB_DEST)
+
+%endif
+
+%if defined (DLM_NO_DLS) && defined (DLM_NO_DEF)
+    DLM_NO_IMPLIB = 1
+%endif
+
+#---------------------------------------------------------
+#  Compile the Dynamic Load Specification
+#  This rule is used rather than the one defined in mdl.mki.
+#----------------------------------------------------------
+%if ! defined(DLM_NO_DLS)
+
+ $(DLM_DLO_DEST)$(DLS_NAME).dlo $(DLM_MODULE_DEF):  $(DLM_LIBDEF_SRC)$(DLS_NAME).dls $(DLM_DLS_DEPENDENCIES)
+    $(msg)
+    > $(DLM_OBJECT_DEST)temp.cmd
+    -o$(DLM_DLO_DEST)$(DLS_NAME).dlo
+ %if defined (winNT)
+    -dMSVC_VERSION=$(MSVC_VERSION)
+    -w$(DLM_MODULE_DEF)
+  %if defined (DLM_NOINITFUNC)
+    -n
+  %endif
+ %endif
+  %if defined (debug_heap)
+   -dINCLUDE_CRTDBG=
+  %endif
+  %if defined (DLM_SpecMixIn)
+    $(DLM_SpecMixIn)
+  %endif
+    $(dlsOpts)
+    $(DLM_LIBDEF_SRC)$(DLS_NAME).dls
+    <
+    $(dlmspecCmd) @$(DLM_OBJECT_DEST)temp.cmd
+    ~time
+%endif
+
+#--------------------------------------------------------------
+#
+#  Create the DLL to use as the DLM.
+#
+#  Note: The base address of the DLL is set to DLM_BASE_ADDRESS.
+#        If DLM_BASE_ADDRESS is not defined before including
+#        dlmlink.mki, it is set to a default.
+
+%if !defined (DLM_EXPORT_DEST)
+    DLM_EXPORT_DEST = $(DLM_OBJECT_DEST)
+%endif
+
+#  DLL Entry point source file
+
+# Clear some compilation mixins for vanilla compilation of DelayLoadHook.cpp/DllEntry.cpp
+dlmLinkSaveCCPchOpts =% $[CCPchOpts]
+dlmLinkSaveFileTypeControl =% $[FileTypeControl]
+%undef CCPchOpts
+%undef FileTypeControl
+    %if ! defined (DLM_NOENTRY)
+        $(DLM_OBJECT_DEST)$(DLM_ENTRY_NAME).obj:  $(DLM_ENTRY_SRC)$(DLM_ENTRY_NAME).cpp $(DLM_ENTRY_DEPENDENCY)
+            $(msg)
+            $(RecipeCCompile) $(BufferOverrunCheckOff) $<
+            ~time
+    
+        ALL_DLM_OBJS    + $(DLM_OBJECT_DEST)$(DLM_ENTRY_NAME)$(oext)
+    %endif
+    
+    %if defined (DLM_DELAYLOADHOOK) && !defined (COMPILE_FOR_CLR) && !defined (DLM_NO_DELAYLOADHOOK_FOR_RC)
+        # To save time and to make incremental compiles work better, just compile this once into a stock
+        #   directory.  Per compiler.  The one implication of this is that everyone can't call their files
+        #   delayloadhook.cpp if they want them to be independent.
+        delayloadOutputDir = $(OutputRootDir)build/delayloadhook/$(MSVC_VERSION)/
+        
+        always:
+            !~@mkdir $(delayloadOutputDir)
+             ~@set DLM_DELAYLOADHOOKBASE $[@basename $(DLM_DELAYLOADHOOK)]
+             
+        # Store and change the PDB name so that we can make it match the OBJ file.
+        %if defined (IntermediatePdbFile)
+            oldIntermediatePdbFile =% $[IntermediatePdbFile]
+        %endif
+        IntermediatePdbFile = $(delayloadOutputDir)$(DLM_DELAYLOADHOOKBASE).pdb
+        
+        # For the initial build of the delayload hook, create a semaphore directory. If the dir already
+        #  exists, wait 15 seconds before proceeding to avoid access violations in parallel builds.
+        %if !exists ($(delayloadOutputDir)$(DLM_DELAYLOADHOOKBASE)$(oext))
+        wait_if_lock_dir_exists:
+            mkdir $(delayloadOutputDir)initial_build_lock || (ping -n 15 localhost >:NUL) || exit 0
+        %endif
+
+        # Compile the delayload hook and add it to the list of objects
+        $(delayloadOutputDir)$(DLM_DELAYLOADHOOKBASE)$(oext):         $(DLM_DELAYLOADHOOK)
+
+        ALL_DLM_OBJS    + $(delayloadOutputDir)$(DLM_DELAYLOADHOOKBASE)$(oext)
+
+        # Reset PDB name back
+        %if defined (oldIntermediatePdbFile)
+            IntermediatePdbFile =% $[oldIntermediatePdbFile]
+        %else
+            %undef IntermediatePdbFile
+        %endif
+    %endif
+CCPchOpts =% $[dlmLinkSaveCCPchOpts]
+FileTypeControl =% $[dlmLinkSaveFileTypeControl]
+
+# The EXP destination may be different than the LIB destination when we build the LIBs into the output tree.
+%if !defined (DLM_EXP_DEST)
+    DLM_EXP_DEST = $(DLM_EXPORT_DEST)
+%endif
+
+DLM_REQD_LIBS  = $(mdlLibs)
+
+%ifnofile $(DLM_REQD_LIBS)mdlbltin.lib
+    DLM_NOMSBUILTINS = 1
+%endif
+
+# Response file names for consistant usage.
+_libResponseFile = $(DLM_OBJECT_DEST)$(DLM_NAME)lib.rsp
+_linkResponseFile = $(DLM_OBJECT_DEST)$(DLM_NAME)link.rsp
+
+#---------------------------------------------------------
+#  Compile the Dynamic Load Specification
+#  This rule is used rather than the one defined in mdl.mki.
+#----------------------------------------------------------
+%if ! defined(DLM_NO_DLS)
+
+ $(DLM_DLO_DEST)$(DLS_NAME).dlo $(DLM_MODULE_DEF):  $(DLM_LIBDEF_SRC)$(DLS_NAME).dls $(DLM_DLS_DEPENDENCIES)
+    $(msg)
+    > $(DLM_OBJECT_DEST)temp.cmd
+    -o$(DLM_DLO_DEST)$(DLS_NAME).dlo
+ %if defined (winNT)
+    -dMSVC_VERSION=$(MSVC_VERSION)
+    -w$(DLM_MODULE_DEF)
+  %if defined (DLM_NOINITFUNC)
+    -n
+  %endif
+ %endif
+  %if defined (debug_heap)
+   -dINCLUDE_CRTDBG=
+  %endif
+  %if defined (DLM_SpecMixIn)
+    $(DLM_SpecMixIn)
+  %endif
+    $(dlsOpts)
+    $(DLM_LIBDEF_SRC)$(DLS_NAME).dls
+    <
+    $(dlmspecCmd) @$(DLM_OBJECT_DEST)temp.cmd
+    ~time
+%endif
+
+#  DLL Export definition file
+#  Include object files to find the __declspec (dllexport) functions as well as those in the .def file
+%undef _DLM_LIB_TARGET
+%if !defined (DLM_NO_DEF)
+$(DLM_EXPORT_NAME) $(DLM_EXP_DEST)$(DLM_NAME).exp:    $(DLM_MODULE_DEF) $(DLM_EXPORT_OBJS)
+        $(msg)
+        >$(_libResponseFile)
+        -out:$(DLM_EXPORT_NAME)
+        -def:$(DLM_MODULE_DEF)
+        $(DLM_EXPORT_OBJS)
+        -machine:$(ntCPU)
+        <
+        $(CLibCmd) @$(_libResponseFile)
+    %if $(DLM_EXPORT_DEST) != $(DLM_EXP_DEST)
+        -move $(DLM_EXPORT_DEST)$(DLM_NAME).exp $(DLM_EXP_DEST)$(DLM_NAME).exp
+    %endif
+        ~time
+
+%if !defined (DLM_INLINE_DEF)
+    ALL_DLM_OBJS        +  $(DLM_EXP_DEST)$(DLM_NAME).exp
+%endif
+
+%else
+    %if !defined (DLM_NO_IMPLIB)
+        _DLM_LIB_TARGET = "$(DLM_EXPORT_NAME)"
+    %endif
+%endif
+
+#  Create the Windows NT DLL/.netmodule
+
+ALL_DLM_OBJS+ $(DLM_OBJECT_PCH)
+
+%if !defined (DLM_NO_DLL)
+    "$(DLM_OUT_NAME)" $(_DLM_LIB_TARGET) "$(DLM_SYMB_NAME)": $(DLM_OBJECT_FILES) $(DLM_OBJECT_PCH) $(ASSEMBLY_RESOURCE_FILELIST) $(ASSEMBLY_REFERENCE_DEPENDS) $(ASSEMBLY_EMBEDDED_RESOURCES_DEPENDS) $(ASSEMBLY_OTHER_DEPENDS)
+            $(msg)
+            >$(_linkResponseFile)
+    %if defined (DLM_BASE_ADDRESS)
+            -base:$(DLM_BASE_ADDRESS)
+    %endif
+    %if !defined(DLM_NO_DYNAMIC_BASE)
+            -dynamicbase
+    %endif
+            -dll
+            -out:"$(DLM_OUT_NAME)"
+            -implib:"$(DLM_EXPORT_NAME)"
+    %if defined (DLM_NOENTRY)
+        %if (DLM_NOENTRY > 1)
+            -noentry
+        %endif
+    %else
+            -entry:LibMain$(dllEntry)
+    %endif
+    %if defined (DEV_STUDIO)
+        %if (MSVC_VERSION < 1700)
+            %error DEV_STUDIO requires at least MSVC 1700 (DEV_STUDIO_ADDITIONAL_CPP_LINKER_FLAGS)
+        %endif
+        %if $(TARGET_PROCESSOR_ARCHITECTURE)=="X64"
+            $(DEV_STUDIO_ADDITIONAL_CPP_LINKER_FLAGS_X64)
+        %else
+            $(DEV_STUDIO_ADDITIONAL_CPP_LINKER_FLAGS_X86)
+        %endif
+    %endif
+    %if defined (DLM_PROFILE)
+            -profile
+    %endif
+            $(DLM_SYMB_OPTS)
+            $(DLM_SPECIAL_LINKOPT)
+    %if (MSVC_VERSION>=1400) && !defined (DLM_NO_MANIFEST)
+        %if (MSVC_VERSION>=1600)
+            -MANIFEST
+        %endif
+            -MANIFESTFILE:$(DLM_OBJECT_DEST)$(DLM_NAME)$(DLM_API_NUMBER)$(DLM_EXTENSION).Manifest
+    %endif
+            $(ALL_DLM_OBJS)
+    %if !DLM_NO_BENTLEY_LIB
+        %iffile $(BuildContext)SubParts/Libs/Bentley.lib
+                $(BuildContext)SubParts/Libs/Bentley.lib
+                $(BuildContext)SubParts/Libs/BentleyAllocator.lib
+        %endif
+    %endif
+    %if !DLM_NOMSBUILTINS 
+        $(DLM_DEFAULT_MSTN_LIBS) $(mdlLibs)mdlbltin.lib
+    %endif
+    %if defined(CAP_PROFILE)
+            cap.lib
+    %endif
+            <
+    %if defined (LINKER_LIBRARIES_DELAYLOADED)
+            >$(DLM_OBJECT_DEST)AddDelayLoad.rsp
+            $(LINKER_LIBRARIES_DELAYLOADED)
+            <
+            $(AddDelayLoadCmd) $(DLM_DELAYLOAD_EXCLUDES) < $(DLM_OBJECT_DEST)AddDelayLoad.rsp >> $(_linkResponseFile)
+    %endif
+            $(DlmLinkCmd) @$(_linkResponseFile)
+    %if (MSVC_VERSION>=1400) && !defined (DLM_NO_MANIFEST)
+      %if defined (DLM_USER_MANIFEST)
+            mt.exe -manifest $(DLM_OBJECT_DEST)$(DLM_NAME)$(DLM_API_NUMBER)$(DLM_EXTENSION).Manifest $(DLM_USER_MANIFEST) -out:$(DLM_OBJECT_DEST)$(DLM_NAME)$(DLM_EXTENSION).Manifest
+      %endif
+            mt.exe -manifest $(DLM_OBJECT_DEST)$(DLM_NAME)$(DLM_API_NUMBER)$(DLM_EXTENSION).Manifest -outputresource:$@;2
+    %endif
+    %if defined (BSI_VERSIONING) && !defined (DLM_NO_VERSION)
+            $(InjectVersionCmd) "$(DLM_OUT_NAME)" @$(versionArgsFile) $(DLM_VERSION_OPTIONS)
+    %endif
+    %if ASSEMBLY_STRONGNAME == 2
+            sn -R "$(DLM_OUT_NAME)" $(ASSEMBLY_KEYFILE)
+    %elif ASSEMBLY_STRONGNAME == 3
+            sn -TS "$(DLM_OUT_NAME)" $(ASSEMBLY_TESTKEYFILE)
+    %endif
+    %if !defined (MSJ_SKIP_SIGNRSCS) && !defined (DLM_NO_SIGN)
+         %if !defined (DLM_NO_AUTHENTICODE_SIGN)
+            $(signcodecmd) "$(DLM_OUT_NAME)"
+         %endif
+    %endif
+            !-@$(deleteCmd) $(DLM_EXPORT_DEST)$(DLM_NAME).exp
+    %ifdef ASSEMBLY_POSTLINK1
+        $(ASSEMBLY_POSTLINK1)
+    %endif
+    %if defined (BSI_SOURCEINDEX) && !defined (DLM_NO_SOURCEINDEX) && defined (DLM_SYMB_NAME)
+        $(BBPYTHONCMD) $(SrcRoot)bsitools/winx86/pdbSrcIndex/AddSrcToPdb.py "$(DLM_SYMB_NAME)"
+    %endif
+    %if !defined (DLM_NO_TWIDDLETIME)
+            ~time
+    %endif
+
+    %if defined (DLM_CONTEXT_LOCATION) && !defined (DLM_NO_CONTEXT_LINK)
+    "$(DLM_CONTEXT_LOCATION)$(DLM_NAME)$(DLM_API_NUMBER)$(DLM_EXTENSION)" : "$(DLM_OUT_NAME)"
+        $(LinkFirstDepToFirstTarget)
+    %endif
+
+    %if defined (DLM_LIB_CONTEXT_LOCATION) && defined (DLM_CREATE_LIB_CONTEXT_LINK) && defined (DLM_EXPORT_NAME)
+    "$(DLM_LIB_CONTEXT_LOCATION)$(DLM_NAME).lib" : "$(DLM_EXPORT_NAME)"
+        $(LinkFirstDepToFirstTarget)
+    %endif
+%endif

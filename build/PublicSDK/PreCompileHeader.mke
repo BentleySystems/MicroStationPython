@@ -1,0 +1,58 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if !defined (ArgumentsMki)
+    %error PreCompileHeader.mke is designed to be launched only from PreCompileHeader.mki. Did you mean to include PreCompileHeader.mki instead?
+%endif
+
+# ArgumentsMki is defined on the command line of $(_bmake) statement that builds PreCompileHeader.mke from within PreCompileHeader.mki
+# CompileOptionsMki is defined in the .mke file that %includes PreCompileHeader.mki. It defines compiler options that need to be the same when the .pch and .cpp files are compiled.
+
+%include $(ArgumentsMki)
+%if !defined (CompileOptionsMki)
+  %warn You probably should define CompileOptionsMki to a file that contains the compiler options in common for creating you .pch file and compiling the source files.
+%else
+  %include $(CompileOptionsMki)
+%endif
+
+%include mdl.mki
+
+%if defined (PchCompileForClr) && !defined (CompilingForCLR)
+    %include compileForCLRStart.mki
+%endif
+
+# Tell RecipeCPPCompile to build PCH
+CCPchOpts = $(PchExtraOptions) -fp:$(CCompFpOpts)  -Yc"$(PchCompilandBasename).h" -Fp$(PchOutputDir)$(PchTargetBasename).pch
+
+DependsItemsTxt = $(PchDependencySetDir)$(PchDependencySetName)DependsItems.txt
+ShowIncludesTxt = $(PchDependencySetDir)$(PchDependencySetName)ShowIncludes.txt
+CompilerErrorTxt = $(PchDependencySetDir)$(PchDependencySetName)CompilerError.txt
+PchRspFile      = $(PchDependencySetDir)$(PchDependencySetName)Compile.rsp
+
+%iffile $(DependsItemsTxt)
+    AutoDependencies = $[@realpath $[@readfile $(DependsItemsTxt)]]
+
+    %if $(AutoDependencies) == " "
+        always:
+            !-@$(deleteCmd) $(DependsItemsTxt)
+            !-@$(deleteCmd) $(PchOutputDir)$(PchTargetBasename).obj
+            !-@$(deleteCmd) $(PchOutputDir)$(PchTargetBasename).pch
+    %endif
+
+%endif
+
+
+$(PchOutputDir)$(PchTargetBasename).obj $(PchOutputDir)$(PchTargetBasename).pch $(DependsItemsTxt) $(ShowIncludesTxt) $(PchOutputDir)$(PchTargetBasename)Build.bat $(PchRspFile): \
+                                $(PchCompiland) $(PchExplicitDepends) $(ArgumentsMki) $(AutoDependencies)
+        !$(msg)
+        !-@$(deleteCmd) $(DependsItemsTxt)
+        >$(PchRspFile)
+            $(RecipeCPPCompileArgs) -showIncludes $<
+        <
+        >$(PchOutputDir)$(PchTargetBasename)Build.bat
+            @set VS_UNICODE_OUTPUT=
+            $(CCCompCmd) @$(PchRspFile) > $(ShowIncludesTxt)
+            python.exe $(_MakeFilePath)ParseClShowIncludes.py $(ShowIncludesTxt) $(DependsItemsTxt) %ERRORLEVEL% 
+        <
+        @$(PchOutputDir)$(PchTargetBasename)Build.bat

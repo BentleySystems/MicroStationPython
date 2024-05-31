@@ -1,0 +1,76 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+#
+# This will generate and cincapnd a build version header file (prg.h) so that the build version can be embedded in code and easily retrieved at runtime.
+# This is somtimes embedded in created files for diagnostic purposes to know what PRG build generated a file.
+#
+# Input:
+#   BuildVersionHeaderLocation -    Directory to place the generated file. Defaults to $(o)gensrc/
+#                                   If the build environment otherwise sets BSI_PRG_H_DIR, it will instead be directly cincapnd'ed, assuming there is already a prg.h in it.
+#
+# Output
+#   $(BuildVersionHeaderLocation)prg.h -    Build version header
+#
+
+%if !defined(BuildVersionHeaderLocation)
+    BuildVersionHeaderLocation = $(o)gensrc/
+%endif
+
+%if defined (BSI_PRG_H_DIR)
+    dirToSearch = $(BSI_PRG_H_DIR)
+    %include cincapnd.mki
+%else
+    %if !defined (BMAKE_DELETE_ALL_TARGETS)
+        always:
+            !~@mkdir $(BuildVersionHeaderLocation)
+    %endif
+    
+    %if !defined (REL_V)
+        REL_V=02
+    %endif
+    %if !defined (MAJ_V)
+        MAJ_V=01
+    %endif
+    %if !defined (MIN_V)
+        MIN_V=00
+    %endif
+    %if !defined (SUBMIN_V)
+        SUBMIN_V=999
+    %endif
+
+    $(BuildVersionHeaderLocation)prg.h : $(_MakeFileSpec)
+        > $(o)gensrc/prg.h
+        \/*__BENTLEY_INTERNAL_ONLY__*\/
+        \/* String representations of version information. *\/
+        \#define RELEASE_DATE __DATE__
+        \#define V_CERTIFIED 1
+        \#define REL_V "$(REL_V)"
+        \#define MAJ_V "$(MAJ_V)"
+        \#define MIN_V "$(MIN_V)"
+        \#define SUBMIN_V "$(SUBMIN_V)"
+        \#define VERSION_STRING "$(VERSION_STRING)"
+        \#define V_COMMENT ""
+        \#define REL_VW L"$(REL_V)"
+        \#define MAJ_VW L"$(MAJ_V)"
+        \#define MIN_VW L"$(MIN_V)"
+        \#define SUBMIN_VW L"$(SUBMIN_V)"
+        \#define VERSION_STRING_WIDE L"$(VERSION_STRING)"
+        \#define V_COMMENTW L""
+        \#if !defined (VERSION_COMPTOOLS)
+        \#  define VERSION_COMPTOOLS REL_V "." MAJ_V "." MIN_V "." SUBMIN_V " " V_COMMENT
+        \#endif
+        %if defined (SUBNET_PRG) || defined (FAKE_PRG)
+            \#define PRG_BUILD 1
+        %else
+            \#define DEV_BUILD 1
+        %endif
+        \#define DEVELOPMENT_NUMBER 0
+        <
+        ~time
+
+    dirToSearch = $(BuildVersionHeaderLocation)
+    %include cincapnd.mki
+%endif

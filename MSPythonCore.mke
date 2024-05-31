@@ -1,0 +1,92 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonCore.mke $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+appName             = MSPythonCore
+
+%if defined (BSIBUILD)
+MSPythonSrc         = $(SrcRoot)MSPython/
+%else
+MSPythonSrc         = $(SrcRoot)
+%endif
+
+PolicyFile          = $(MSPythonSrc)/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(MSPythonSrc)/MSPythonSolutionPolicy.mki
+
+%include mdl.mki
+#----------------------------------------------------------------------
+# Define macros specific to this program
+#----------------------------------------------------------------------
+baseDir     = $(_MakeFilePath)
+
+#----------------------------------------------------------------------
+#       Create output directories
+#----------------------------------------------------------------------
+o = $(out)MSPythonCore/
+
+always:
+    !~@mkdir $(o)
+
+always:
+    ~linkdir  "$(BuildContext)PublicAPI/MsPythonCore=$(_MakeFilePath)/PublicAPI/MSPythonCore/"
+
+#---------------------------------------------
+#       Compile the source files 
+#---------------------------------------------
+MultiCompileDepends = $(_MakeFileSpec)
+
+PchCompiland        = $(baseDir)MSPythonPCH.cpp
+PchOutputDir        = $(o)
+PchArgumentsDepends = $(MultiCompileDepends)
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302 -wd4471
+
+%include $(MSPythonSrc)/build/publicSDK/PreCompileHeader.mki
+
+
+CCPchOpts = $(UsePrecompiledHeaderOptions)
+
+dependencies    =   $(baseDir)MSPythonPCH.h
+
+%include MultiCppCompileRule.mki
+
+%include $(_MakeFilePath)MSPythonCore/ScriptEngineManager/ScriptEngineManager.mki
+
+%include MultiCppCompileGo.mki
+
+CCPchOpts =
+
+#----------------------------------------------------------------------
+#   Set up to use dlmlink.mki
+#----------------------------------------------------------------------
+DLM_NAME                    = $(appName)
+DLM_DEST                    = $(o)
+DLM_EXPORT_DEST             = $(o)
+DLM_OBJECT_DEST             = $(o)
+DLM_LIBDEF_SRC              = $(baseDir)
+DLM_OBJECT_FILES            = $(MultiCompileObjectList) \
+                              $(o)MSPythonPCH$(oext)
+                              
+DLM_NOENTRY                 = 1
+DLM_NO_INITIALIZE_FUNCTION  = 1
+DLM_NO_DLS                  = 1
+DLM_NO_DEF                  = 1
+LINKER_LIBRARIES            = $(PythonLibName) \
+                              $(ContextSubpartsLibs)Bentley.lib \
+                              $(ContextSubpartsLibs)BentleyAllocator.lib \
+                              $(ContextSubpartsLibs)DgnPlatform.lib \
+                              $(ContextSubpartsLibs)RmgrTools.lib \
+                              $(ContextSubpartsLibs)mdlbltin.lib
+
+DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
+
+%if defined (BSI)
+DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/
+DLM_CREATE_LIB_CONTEXT_LINK = 1
+%else
+DLM_LIB_CONTEXT_LOCATION    = $(ContextSubpartsLibs)
+%endif
+
+%include dlmlink.mki

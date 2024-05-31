@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="DictionaryMetaData" nameSpacePrefix="dmd" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECClass typeName="PredefinedPropertyMetaData" isCustomAttributeClass="True">
+        <ECProperty propertyName="DataType" typeName="string" />
+        <ECProperty propertyName="UnitOfMeasure" typeName="string" />
+        <ECArrayProperty propertyName="Units" typeName="string" minOccurs="0" maxOccurs="unbounded"/>
+    </ECClass>
+    <ECClass typeName="PropertyUnitsMetaData" isCustomAttributeClass="True">
+        <ECProperty propertyName="UnitOfMeasure" typeName="string" />
+        <ECArrayProperty propertyName="Units" typeName="string" minOccurs="0" maxOccurs="unbounded"/>
+    </ECClass>
+    <ECClass typeName="PropertyDefinitionMetaData" isCustomAttributeClass="True">
+        <ECProperty propertyName="Definition" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PredefinedUnitMetaData" isCustomAttributeClass="True">
+        <ECProperty propertyName="isUnitofMeasure" typeName="bool" />
+    </ECClass>
+</ECSchema>

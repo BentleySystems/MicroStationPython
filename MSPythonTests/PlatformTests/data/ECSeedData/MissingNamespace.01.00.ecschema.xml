@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ECSchema schemaName="Widgets" version="01.00" nameSpacePrefix="wid" xmlns:ec="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ods="Bentley_ODS.01.02">
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+
+   <ECClass typeName="ecProject" description="Project Class" displayLabel="Project" isDomainClass="True">
+      <ECProperty propertyName="Name" typeName="string" displayLabel="Project Name" />
+   </ECClass>
+
+   <ECClass typeName="ecWidget" description="Widget" displayLabel="Widget" isDomainClass="True">
+      <ECCustomAttributes>
+      </ECCustomAttributes>
+      <ECProperty propertyName="EC_InstanceID" typeName="int" description="Unique identifier for instances of your business class">
+         <ECCustomAttributes>
+         </ECCustomAttributes>
+      </ECProperty>
+      <ECProperty propertyName="ecstringattr" typeName="string" displayLabel="stringattr">
+         <ECCustomAttributes>
+         </ECCustomAttributes>
+      </ECProperty>
+      <ECProperty propertyName="eclongattr" typeName="int" displayLabel="longattr">
+         <ECCustomAttributes>
+         </ECCustomAttributes>
+      </ECProperty>
+   </ECClass>
+
+</ECSchema>

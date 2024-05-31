@@ -1,0 +1,59 @@
+#--------------------------------------------------------------------------------------
+#
+#
+#  $Copyright: (c) 2019 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+%if !defined (__Common_MKI__)
+    %error      winntcommon.mki cannot be used by itself. It must be included from common.mki
+%endif
+
+%if !defined (winNT)
+    %error      winntcommon.mki can only be used on a Win32 platform.
+%endif
+
+#--------- winNT Macros -------------------------------
+#
+# Note: These identify tools that are used to BUILD the software.
+#       This has nothing to do with the target platform where the software that we build is expected to run.
+#
+deleteCmd           = del
+dirCmd              = dir
+copyCmd             = copy
+mkdirCmd            = mkdir
+rmdirCmd            = rmdir
+rmdirForceCmd       = echo y | rmdir
+makeFileWritable    = attrib -r
+typeFileCmd         = type
+shellCmd            = cmd.exe \/c
+nativeMakeCmd       = nmake.exe
+%ifndef maxOutputLen
+    maxOutputLen        = 2048
+%endif
+LinkDirCmd          = $(shellCmd) mklink \/d
+LinkFileCmd         = $(shellCmd) mklink
+
+scriptExt           = .bat
+
+%if $(TARGET_PLATFORM) == "Android"
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "AndroidX86"
+        CLinkCmd  = $(ANDROID_NDK_ROOT)toolchains/x86-4.4.3/prebuilt/windows/bin/i686-android-linux-g++.exe
+        NmCmd     = $(ANDROID_NDK_ROOT)toolchains/x86-4.4.3/prebuilt/windows/bin/i686-android-linux-nm.exe
+        CppFiltCmd =$(ANDROID_NDK_ROOT)toolchains/x86-4.4.3/prebuilt/windows/bin/i686-android-linux-c++filt.exe
+        StripCmd   =$(ANDROID_NDK_ROOT)toolchains/x86-4.4.3/prebuilt/windows/bin/i686-android-linux-strip.exe    
+    %else
+        CLinkCmd  = $(ANDROID_NDK_ROOT)toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-g++.exe
+        NmCmd     = $(ANDROID_NDK_ROOT)toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-nm.exe
+        CppFiltCmd =$(ANDROID_NDK_ROOT)toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-c++filt.exe
+        StripCmd   =$(ANDROID_NDK_ROOT)toolchains/arm-linux-androideabi-4.4.3/prebuilt/windows/bin/arm-linux-androideabi-strip.exe
+    %endif
+%endif
+
+CopyFirstDepToFirstTarget=~@task Microsoft.Build.Tasks.Copy -i:SourceFiles="$<" -i:DestinationFiles="$@"
+
+#----------------------------------------------------------
+#  Set up the mt.exe manifest command
+#  Should rely on path, like cl or link.
+#----------------------------------------------------------
+manifestCmd = mt.exe
+

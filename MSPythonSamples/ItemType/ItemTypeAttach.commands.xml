@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="ItemTypeAttach" CommandClass="MacroCommand" CommandWord="PYITEMATTACH">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="ItemTypeAttach">
+            <Keyword CommandWord="ATTACH" />
+            <Keyword CommandWord="DETACH" />
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="PYITEMATTACH ATTACH"                     Function="AttachItemType" />
+        <KeyinHandler Keyin="PYITEMATTACH DETACH"                     Function="DetachItemType" />
+    </KeyinHandlers>
+</KeyinTree>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="MissingNamespaceOnCustomAttribute" nameSpacePrefix="bp" version="1.0" description="Bentley.Plant" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECClass typeName="JS_ClassProperties" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="ID" typeName="int" />
+    </ECClass>
+    <ECClass typeName="ACTIVITY" isDomainClass="True">
+        <ECCustomAttributes>
+            <JS_ClassProperties>
+                <Relationship />
+                <ID>505</ID>
+            </JS_ClassProperties>
+        </ECCustomAttributes>
+    </ECClass>
+</ECSchema>

@@ -1,0 +1,74 @@
+#*--------------------------------------------------------------------------------------+
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------*/
+
+#--------------------------------------------------------------------------------------
+#
+#   This bmake include file appends a reference to the C# compiler's list of references.
+#   The dll that is to be references should be specified by the macro $(REFERENCE).
+#
+#--------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------
+#
+# Required Macros:
+#   none - if nothing is set the reference list will be cleared out
+#
+# Optional Macros:
+#   ASSEMBLY_REFERENCE - adds the specified reference to the reference list
+#   ASSEMBLY_COPY_LOCAL - if set the reference will be copied into the output directory.
+#                Either 'o' or 'TARGET_DIRECTORY' macros must be set if COPY_LOCAL is set.
+#                TARGET_DIRECTORY has precedence over 'o'
+#
+#-------------------------------------------------------------------------------------
+
+%if defined (ShowDebugMsg)
+%message Adding Assemby Reference for $(ASSEMBLY_REFERENCE)
+%endif
+
+%if !defined(ASSEMBLY_REFERENCE)
+    %undef ASSEMBLY_REFERENCE_DEPENDS
+    %undef ASSEMBLY_REFERENCE_LIST
+%else
+    # FxCop often can't load assemblies that are scattered around the project, so let's direct him.
+    # Don't use /reference, otherwise FxCop fails with "all files must be on the same drive so that they can be referenced by relative paths"
+    FxCopOpts +% -directory:"$(ASSEMBLY_REFERENCE)"
+
+    # New versions of CSC no longer require reference assembly full paths. If only a filename was provided,
+    # do not add it to ASSEMBLY_REFERENCE_DEPENDS, since BMake will fail to find the dependency otherwise.
+    %if ($[@nondir $(ASSEMBLY_REFERENCE)] != $(ASSEMBLY_REFERENCE))
+        ASSEMBLY_REFERENCE_DEPENDS +% $(ASSEMBLY_REFERENCE)
+    %endif
+
+#-- Change full paths to 8.3 file format in order to avoid path to long errors on the -r parameter in csparams.cmd -mpk
+# For non-absolute-paths this would fail, hence the condition.
+%if ($[@nondir $(ASSEMBLY_REFERENCE)] != $(ASSEMBLY_REFERENCE))
+MakeShortName:    
+    !~@task Bentley.Build.Tasks.ConvertPaths -i:Paths=${ASSEMBLY_REFERENCE} -o:ASSEMBLY_REFERENCE=ShortNames    
+%endif
+    
+%ifdef ASSEMBLY_REFERENCE_LIST
+    # TODO: I'm sure there's a better way to do this but I can't figure it out right now.
+    ASSEMBLY_REF_FOO =% $(ASSEMBLY_REFERENCE_LIST)
+    ASSEMBLY_REFERENCE_LIST =% $(ASSEMBLY_REF_FOO);$(ASSEMBLY_REFERENCE)
+%else
+    ASSEMBLY_REFERENCE_LIST +% $(ASSEMBLY_REFERENCE)
+%endif # REFERENCE_LIST
+
+%ifdef ASSEMBLY_COPY_LOCAL
+  %ifndef ASSEMBLY_TARGET_DIRECTORY
+    %ifndef o
+       %error 'o' or 'ASSEMBLY_TARGET_DIRECTORY' must be defined when COPY_LOCAL is defined
+    %else
+       ASSEMBLY_TARGET_DIRECTORY = $(o)
+    %endif
+  %endif
+
+  always : $(ASSEMBLY_REFERENCE)
+     $(bcopyCmd) $(stdBcopyOpts) $(<) $(ASSEMBLY_TARGET_DIRECTORY)$(<F)
+%endif # COPY_LOCAL
+
+%endif # REFERENCE
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="ItemTypeCustom" CommandClass="MacroCommand" CommandWord="PYITEMCUSTOM">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="ItemTypeCustom">
+            <Keyword CommandWord="CREATE" />
+            <Keyword CommandWord="READ" />
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="PYITEMCUSTOM CREATE"                       Function="CreateLibWithArrayStructAndArrayofStruct" />
+        <KeyinHandler Keyin="PYITEMCUSTOM READ"                         Function="ReadAndUpdateProperty" />
+    </KeyinHandlers>
+</KeyinTree>

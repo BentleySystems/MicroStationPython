@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="OpenPlant_ProjectProperties" nameSpacePrefix="opproj" version="1.2" description="Project schema to extend the OpenPlant schema class properties" displayLabel="OpenPlant Project Properties Extension Schema" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECClass typeName="ANNOTATION_ITEM" displayLabel="Annotation Item" isDomainClass="True" />
+    <ECClass typeName="AREA_CLASS" displayLabel="Area" isDomainClass="True" />
+    <ECClass typeName="CABLE_CORE" displayLabel="Cable Core" isDomainClass="True" />
+    <ECClass typeName="CABLE_RACK" displayLabel="Cable Rack" isDomainClass="True" />
+    <ECClass typeName="CABLETRAY_COMPONENT" displayLabel="CableTray Component" isDomainClass="True" />
+    <ECClass typeName="DEVICE" description="Device" displayLabel="Device" isDomainClass="True" />
+    <ECClass typeName="DOCUMENT" displayLabel="Document" isDomainClass="True" />
+    <ECClass typeName="EQUIPMENT" displayLabel="Equipment" isDomainClass="True" />
+    <ECClass typeName="FLUID_REGULATOR" displayLabel="Fluid Regulator" isDomainClass="True" />
+    <ECClass typeName="INSTRUMENT" displayLabel="Instrument" isDomainClass="True" />
+    <ECClass typeName="IO_CHANNEL" displayLabel="IO Channel" isDomainClass="True" />
+    <ECClass typeName="LOOP" displayLabel="Loop" isDomainClass="True" />
+    <ECClass typeName="NAMED_ITEM" description="Named Item" displayLabel="Named Item" isDomainClass="True" />
+    <ECClass typeName="NOZZLE" displayLabel="Nozzle" isDomainClass="True" />
+    <ECClass typeName="PIPING_COMPONENT" displayLabel="Piping Component" isDomainClass="True" />
+    <ECClass typeName="PIPING_NETWORK_SEGMENT" description="Piping Network Segment" displayLabel="Piping Network Segment" isDomainClass="True" />
+    <ECClass typeName="PIPING_NETWORK_SYSTEM" description="Piping Network System" displayLabel="Piping Network System" isDomainClass="True" />
+    <ECClass typeName="PLANT" displayLabel="Plant" isDomainClass="True" />
+    <ECClass typeName="PLANT_BASE_OBJECT" description="Plant Base Object" displayLabel="Plant Base Object" isDomainClass="True" />
+    <ECClass typeName="SERVICE" displayLabel="Service" isDomainClass="True" />
+    <ECClass typeName="SIGNAL" displayLabel="Signal" isDomainClass="True" />
+    <ECClass typeName="SYSTEM" displayLabel="System" isDomainClass="True" />
+    <ECClass typeName="TERMINAL" displayLabel="Terminal" isDomainClass="True" />
+    <ECClass typeName="TRAY" displayLabel="Tray" isDomainClass="True" />
+    <ECClass typeName="TRAY_NETWORK_SEGMENT" displayLabel="Tray Network Segment" isDomainClass="True" />
+    <ECClass typeName="TRAY_NETWORK_SYSTEM" displayLabel="Tray Network System" isDomainClass="True" />
+    <ECClass typeName="UNIT" displayLabel="Unit" isDomainClass="True" />
+    <ECClass typeName="VALVE" displayLabel="Valve" isDomainClass="True" />
+</ECSchema>

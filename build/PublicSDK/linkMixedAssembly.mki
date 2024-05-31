@@ -1,0 +1,124 @@
+#/*--------------------------------------------------------------------------------------+
+#|
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#+--------------------------------------------------------------------------------------*/
+
+#--------------------------------------------------------------------------------------
+# Optional Macros:
+#    SYMLINK_PDB          = Set to have .pdbs symlinked
+#
+#--------------------------------------------------------------------------------------
+
+%if (MSVC_VERSION < 1400)      # if prior to VS 2005
+    S = S
+%else
+    S = L
+%endif
+
+
+%if defined (ASSEMBLY_NO_VERSION_RESOURCE)
+    DLM_NO_VERSION = 1
+%else
+    %undef DLM_NO_VERSION
+    # Since we are going to inject a version resource we must delay the strong naming signature
+    %if defined (ASSEMBLY_STRONGNAME)
+        ASSEMBLY_DELAYSIGN = 1
+    %endif
+%endif
+
+#-------------------------------------------------------------------------------------
+# Create transkit config file
+#-------------------------------------------------------------------------------------
+%include mkTranskit.mki
+
+%if !defined (ASSEMBLY_NO_ATTRIBUTES) && !defined (DLM_NO_DLL)
+
+    %include generateAssemblyInfocpp.mki
+
+    %if defined (ASSEMBLY_CONTEXT_LOCATION) 
+        DLM_CONTEXT_LOCATION = $(ASSEMBLY_CONTEXT_LOCATION)
+    %endif
+    %if defined (ASSEMBLY_NO_CONTEXT_LINK)
+        DLM_NO_CONTEXT_LINK = $(ASSEMBLY_NO_CONTEXT_LINK)
+    %endif
+
+%endif
+
+%if (MSVC_VERSION < 1400)      # if prior to VS 2005
+    # Setting DLM_NOENTRY = 2 makes dlmlink.mki really specify -noentry to the linker (no entry point at all)
+    DLM_NOENTRY                  = 2
+    DLM_SPECIAL_LINKOPT          + -NODEFAULTLIB:nochkclr.obj -INCLUDE:__DllMainCRTStartup$(dllEntry)
+%else
+    DLM_NOENTRY                 = 1
+%endif
+
+DLM_NO_INITIALIZE_FUNCTION   = 1
+
+%if ASSEMBLY_STRONGNAME == 1
+    DLM_SPECIAL_LINKOPT + -ALLOWBIND:NO
+    %if ASSEMBLY_NO_ATTRIBUTES
+        DLM_SPECIAL_LINKOPT + -KEYFILE:$(ASSEMBLY_KEYFILE)
+    %endif
+    %if defined (ASSEMBLY_DELAYSIGN)
+        %if ASSEMBLY_NO_ATTRIBUTES
+            DLM_SPECIAL_LINKOPT     + -DELAYSIGN
+        %endif
+        %if defined (ASSEMBLY_TESTSIGN)
+            ASSEMBLY_STRONGNAME = 3
+        %elif !defined (ASSEMBLY_SKIPPABLE_VERIFICATION)
+            ASSEMBLY_STRONGNAME = 2
+        %endif
+    %endif
+%endif
+
+%ifdef ASSEMBLY_EMBEDDED_RESOURCES
+    embedResourceSwitch=-ASSEMBLYRESOURCE:
+    DLM_SPECIAL_LINKOPT + $(ASSEMBLY_EMBEDDED_RESOURCES)
+%endif
+
+%ifnofile $(DLM_OBJECT_DEST)
+  always:
+    ~mkdir $(DLM_OBJECT_DEST)
+%endif
+
+%ifnofile $(DLM_DEST)
+  always:
+    ~mkdir $(DLM_DEST)
+%endif
+
+%include linkForCLRStart.mki
+%include dlmLink.mki
+%include linkForCLRStop.mki
+
+
+
+%if defined (ASSEMBLY_STRONGNAME)
+    ASSEMBLY_STRONGNAME = 1
+%endif
+
+%if defined (linkAssemblyClearKEYFILE)
+    %undef ASSEMBLY_KEYFILE
+    %undef linkAssemblyClearKEYFILE
+%endif
+
+%if defined (SYMLINK_PDB)
+    %if defined (ASSEMBLY_CONTEXT_LOCATION) 
+        "$(ASSEMBLY_CONTEXT_LOCATION)$(ASSEMBLY_NAME)$(DLM_API_NUMBER).pdb" : "$(DLM_DEST)$(ASSEMBLY_NAME)$(DLM_API_NUMBER).pdb"
+            $(LinkFirstDepToFirstTarget)
+    %else
+        %error Can't symlink $(DLM_DEST)$(ASSEMBLY_NAME)$(DLM_API_NUMBER).pdb. ASSEMBLY_CONTEXT_LOCATION not defined
+    %endif
+%endif
+
+%if exists ($(SrcBsiCommon)sharedmki/fxcop.mki)
+
+FxCopAssembly = $(DLM_OUT_NAME)
+FxCopIntermediateOutput = $(o)
+%include $(SrcBsiCommon)sharedmki/fxcop.mki
+
+%endif
+
+%undef S
+
+

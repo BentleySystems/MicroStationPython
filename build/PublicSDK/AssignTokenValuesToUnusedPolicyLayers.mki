@@ -1,0 +1,39 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+#
+#  The reason for the below dummy definitions of the unused policy layers is that
+#  from the progammer's policy layer we want to be able to use bmake conditionals like this:
+#
+#      %if $(FoundationPolicyMki)==$(SrcMstnPlatform)privmki/PowerDraftPolicy.mki
+#
+#  For some reason bmake will simply not allow you to use an undefined macro
+#  in a conditional such as the above. It will error out every time.
+#
+#  I think that it would be very poor form to test and branch on the value of $(PolicyFile)
+#  or one of the specific layer macro values in any layer other than the programmer layer,
+#  so that is why ConfigurePolicy.mki includes this file immediately prior to programmer
+#  policy, but after all of the other policy layers.
+#
+%if !defined (SystemPolicyMki)
+    SystemPolicyMki=dummyvalue
+%endif
+
+%if !defined (FoundationPolicyMki)
+    FoundationPolicyMki=dummyvalue
+%endif
+
+%if !defined (DerivativePolicyMki)
+    DerivativePolicyMki=dummyvalue
+%endif
+
+%if !defined (VerticalPolicyMki)
+    VerticalPolicyMki=dummyvalue
+%endif
+
+%if !defined (SolutionPolicyMki)
+    SolutionPolicyMki=dummyvalue
+%endif
+

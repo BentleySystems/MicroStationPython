@@ -1,0 +1,10 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%include mdl.mki
+
+# This mke file is run by the special, unique "ToolsetPart". It's only job is to let mdl.mki include DefaultToolSet.mki and ApplyToolSet.mki, 
+# which do some one-time bootstrapping work (e.g., by calling vcvars.bat and then capturing the result in $(OutRoot)$(TARGET_PROCESSOR_DIRECTORY)/ToolSetEnv.mki
+# the first time they are called. This setup work must be done only once and before any part the uses the compiler can run. It is done by the 
+# special ToolsetPart, to make that happen.

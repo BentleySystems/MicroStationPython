@@ -1,0 +1,105 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%include common.mki
+
+%if !defined (BENTLEY_WIN32_TOOLCHAIN_link)
+    %error You must include $(BuildContext)ToolContext.mki before including this file.
+%endif
+
+# Links a shared library (dll) for the Windows platform.
+%if !defined (BENTLEY_TOOLCONTEXT_EXE_OBJECT_FILES) || !defined (BENTLEY_TOOLCONTEXT_EXE_NAME) || !defined (BENTLEY_TOOLCONTEXT_EXE_DEST)
+    %warn Inputs:
+    %warn -------
+    %warn BENTLEY_TOOLCONTEXT_EXE_NAME              - the name of the executable to be created, not including the ".exe" suffix.
+    %warn BENTLEY_TOOLCONTEXT_EXE_DEST              - the directory where the executable is to be created (with trailing /).
+    %warn BENTLEY_TOOLCONTEXT_EXE_OUT_NAME          - optional. Fully qualified output name. Defaults to $$(BENTLEY_TOOLCONTEXT_EXE_DEST)$$(BENTLEY_TOOLCONTEXT_EXE_NAME).exe
+    %warn BENTLEY_TOOLCONTEXT_EXE_OBJECT_FILES      - the .obj files to be linked in.
+    %warn BENTLEY_TOOLCONTEXT_EXE_OBJECT_DEST       - optional. Where to write temporary files. Defaults to $$(BENTLEY_TOOLCONTEXT_EXE_DEST)
+    %warn BENTLEY_TOOLCONTEXT_EXE_LIBRARIES         - optional. Additional .lib files to link with. If supplied, these libraries will appear after $$(BENTLEY_TOOLCONTEXT_EXE_OBJECT_FILES) and before the system libraries in the link statement.
+    %warn BENTLEY_TOOLCONTEXT_EXE_OPTIONS_PRE       - optional. Link options that are inserted before $$(BENTLEY_TOOLCONTEXT_EXE_OBJECT_FILES).
+    %warn BENTLEY_TOOLCONTEXT_EXE_OPTIONS_POST      - optional. Link options that are inserted after $$(BENTLEY_TOOLCONTEXT_EXE_OBJECT_FILES).
+    %warn BENTLEY_TOOLCONTEXT_EXE_CREATE_SYMB       - Should linker also create a symbol (.pdb) file.
+    %warn BENTLEY_TOOLCONTEXT_EXE_SYMB_PATH         - optional. The .pdb file path. Defaults to $$(BENTLEY_TOOLCONTEXT_EXE_DEST)$$(BENTLEY_TOOLCONTEXT_EXE_NAME).pdb
+    %warn BENTLEY_TOOLCONTEXT_EXE_POST_LINK         - optional. Script to be executed after the executable has been linked.
+    %warn -------
+    %warn Outputs:
+    %warn -------
+    %warn BENTLEY_TOOLCONTEXT_EXE_OUT_NAME          - The full filename of the executable that was created: $(BENTLEY_TOOLCONTEXT_EXE_DEST)$(BENTLEY_TOOLCONTEXT_EXE_NAME).exe
+    %warn -------
+
+    %error A required macro is not defined.
+%endif
+
+%ifndef BENTLEY_TOOLCONTEXT_EXE_OBJECT_DEST
+    BENTLEY_TOOLCONTEXT_EXE_OBJECT_DEST = $(BENTLEY_TOOLCONTEXT_EXE_DEST)
+%endif
+
+BENTLEY_TOOLCONTEXT_EXE_FULLNAME = $(BENTLEY_TOOLCONTEXT_EXE_NAME).exe
+
+%ifndef BENTLEY_TOOLCONTEXT_EXE_SYMB_PATH
+    BENTLEY_TOOLCONTEXT_EXE_SYMB_PATH = $(BENTLEY_TOOLCONTEXT_EXE_DEST)$(BENTLEY_TOOLCONTEXT_EXE_NAME).pdb
+%endif
+
+BENTLEY_TOOLCONTEXT_EXE_OUT_NAME = $(BENTLEY_TOOLCONTEXT_EXE_DEST)$(BENTLEY_TOOLCONTEXT_EXE_FULLNAME)
+
+BENTLEY_TOOLCONTEXT_INCREMENTAL_EXE_OUT_NAME = $(BENTLEY_TOOLCONTEXT_EXE_OUT_NAME).incr
+
+BENTLEY_TOOLCONTEXT_EXE__CMD = $(BENTLEY_TOOLCONTEXT_EXE_OBJECT_DEST)$(BENTLEY_TOOLCONTEXT_EXE_NAME)_linktool.cmd
+
+# Optimized or release build
+%if !defined (DEBUG) || defined (PRG)
+    BENTLEY_WIN32_LINK_CommonOptions + $(BENTLEY_WIN32_LINK_OptimizeOptions)
+%else
+    BENTLEY_WIN32_LINK_CommonOptions + $(BENTLEY_WIN32_LINK_DebugOptions)
+
+    # Microsoft Incremental Linker always performs a full link if the incrementally linked .dll is modified.
+    # Any attempts at manipulating file modification timestamps did not help, resorting to file copying.
+    BENTLEY_TOOLCONTEXT_LINK_EXE_INCREMENTALLY = 1
+%endif
+
+# Need to be able to control warnings-as-errors on a per-part basis, so it must be done here, and not the shared tool context file.
+WarningsAsErrorsArg =
+%if !defined(NOSTRICT)
+    WarningsAsErrorsArg = -WX
+%endif
+
+"$(BENTLEY_TOOLCONTEXT_EXE_OUT_NAME)": $(BENTLEY_TOOLCONTEXT_EXE_OBJECT_FILES) $(_MakeFileSpec)
+    %ifdef BENTLEY_TOOLCONTEXT_LINK_EXE_INCREMENTALLY
+        -@$(copyCmd) "$(BENTLEY_TOOLCONTEXT_INCREMENTAL_EXE_OUT_NAME)" "$(BENTLEY_TOOLCONTEXT_EXE_OUT_NAME)"
+    %endif
+    $(msg)
+    >  $(BENTLEY_TOOLCONTEXT_EXE__CMD)
+    -out:"$(BENTLEY_TOOLCONTEXT_EXE_OUT_NAME)"
+    -manifest
+    %if defined (BENTLEY_TOOLCONTEXT_EXE_CREATE_SYMB)
+        -pdb:"$(BENTLEY_TOOLCONTEXT_EXE_SYMB_PATH)"
+        %if defined(CREATE_STRIPPED_PDBS)
+            -PDBSTRIPPED:"$[@dir $(BENTLEY_TOOLCONTEXT_EXE_SYMB_PATH)]/$[@basename $(BENTLEY_TOOLCONTEXT_EXE_SYMB_PATH)]-stripped.pdb"
+        %endif
+    %endif
+    $(BENTLEY_WIN32_LINK_CommonOptions) $(CLinkOpts)
+    $(WarningsAsErrorsArg)
+    $(BENTLEY_TOOLCONTEXT_EXE_OPTIONS_PRE)
+    $(BENTLEY_TOOLCONTEXT_EXE_OBJECT_FILES)
+    $(BENTLEY_TOOLCONTEXT_EXE_OPTIONS_POST)
+    $(BENTLEY_TOOLCONTEXT_EXE_LIBRARIES)
+    <
+    $(BENTLEY_WIN32_TOOLCHAIN_link) @$(BENTLEY_TOOLCONTEXT_EXE__CMD)
+    %ifdef BENTLEY_TOOLCONTEXT_LINK_EXE_INCREMENTALLY
+        -@$(copyCmd) "$(BENTLEY_TOOLCONTEXT_EXE_OUT_NAME)" "$(BENTLEY_TOOLCONTEXT_INCREMENTAL_EXE_OUT_NAME)"
+    %endif
+    %if defined (BENTLEY_TOOLCONTEXT_EXE_POST_LINK)
+        $(BENTLEY_TOOLCONTEXT_EXE_POST_LINK)
+    %endif
+    ~time
+
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    always:
+        -@$(BENTLEY_WIN32_TOOLCHAIN_deleteFile) $(BENTLEY_TOOLCONTEXT_EXE__CMD)
+        -@$(BENTLEY_WIN32_TOOLCHAIN_deleteFile) "$(BENTLEY_TOOLCONTEXT_INCREMENTAL_EXE_OUT_NAME)"
+        -@$(BENTLEY_WIN32_TOOLCHAIN_deleteFile) "$(BENTLEY_TOOLCONTEXT_EXE_OUT_NAME).ilk"    
+%endif
+
+%undef BENTLEY_TOOLCONTEXT_EXE__CMD

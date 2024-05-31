@@ -1,0 +1,110 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonWrapper\PyDgnView\PyDgnView.mke $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+appName             = MSPyDgnView
+
+%if defined (BSIBUILD)
+MSPythonSrc         = $(SrcRoot)MSPython/
+%else
+MSPythonSrc         = $(SrcRoot)
+%endif
+
+PolicyFile          = $(MSPythonSrc)/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(MSPythonSrc)/MSPythonSolutionPolicy.mki
+
+%include mdl.mki
+
+#----------------------------------------------------------------------
+#       Create output directories
+#----------------------------------------------------------------------
+o = $(out)PyDgnView/
+
+always:
+    !~@mkdir $(o)
+
+#---------------------------------------------
+#       Compile the source files 
+#---------------------------------------------
+CCompOpts + -bigobj -MP
+
+MultiCompileDepends = $(_MakeFileSpec)
+
+PchCompiland        = $(MSPythonSrc)/MSPythonPCH.cpp
+PchOutputDir        = $(o)
+PchArgumentsDepends = $(MultiCompileDepends)
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302  -wd4471 -wd5205
+%include $(MSPythonSrc)/build/publicSDK/PreCompileHeader.mki
+
+
+CCPchOpts = $(UsePrecompiledHeaderOptions)
+
+dependencies    =   $(MSPythonSrc)/MSPythonPCH.h
+
+%include MultiCppCompileRule.mki
+
+PyDgnViewSource        = $(PyhonWrapper)PyDgnView/source/
+PyDgnViewDependencies  = $(dependencies)
+
+$(o)accudraw$(oext)                              : $(PyDgnViewSource)accudraw.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)accusnap$(oext)                              : $(PyDgnViewSource)accusnap.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)dgnelementsettool$(oext)                     : $(PyDgnViewSource)dgnelementsettool.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)dgnregionelementtool$(oext)                  : $(PyDgnViewSource)dgnregionelementtool.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)dgntool$(oext)                               : $(PyDgnViewSource)dgntool.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)fencemanager$(oext)                          : $(PyDgnViewSource)fencemanager.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)iredraw$(oext)                               : $(PyDgnViewSource)iredraw.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)iviewmanager$(oext)                          : $(PyDgnViewSource)iviewmanager.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)PyDgnView$(oext)                             : $(PyDgnViewSource)PyDgnView.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)selectionsetmanager$(oext)                   : $(PyDgnViewSource)selectionsetmanager.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)locatesubentitytool$(oext)                   : $(PyDgnViewSource)locatesubentitytool.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+%include MultiCppCompileGo.mki
+
+CCPchOpts =
+
+#----------------------------------------------------------------------
+#   Set up to use dlmlink.mki
+#----------------------------------------------------------------------
+DLM_NAME                    = $(appName)
+DLM_DEST                    = $(o)
+DLM_EXPORT_DEST             = $(o)
+DLM_OBJECT_DEST             = $(o)
+DLM_LIBDEF_SRC              = $(_MakeFilePath)
+DLM_OBJECT_FILES            = $(MultiCompileObjectList) \
+                              $(o)MSPythonPCH$(oext)
+
+DLM_EXTENSION               = .pyd
+DLM_NOENTRY                 = 1
+DLM_NO_INITIALIZE_FUNCTION  = 1
+DLM_NO_DLS                  = 1
+DLM_NO_DEF                  = 1
+LINKER_LIBRARIES            = $(PythonLibName) \
+                              $(ContextSubpartsLibs)bentley.lib \
+                              $(ContextSubpartsLibs)BentleyAllocator.lib \
+                              $(ContextSubpartsLibs)ECObjects.lib \
+                              $(ContextSubpartsLibs)BentleyGeom.lib \
+                              $(ContextSubpartsLibs)BentleyGeomSerialization.lib \
+                              $(ContextSubpartsLibs)DgnPlatform.lib \
+                              $(ContextSubpartsLibs)DgnView.lib \
+                              $(ContextSubpartsLibs)mdlbltin.lib \
+                              $(ContextSubpartsLibs)MSPythonCore.lib
+
+DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
+DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/
+
+# No lib needed for this project
+%undef DLM_CREATE_LIB_CONTEXT_LINK
+
+%include dlmlink.mki

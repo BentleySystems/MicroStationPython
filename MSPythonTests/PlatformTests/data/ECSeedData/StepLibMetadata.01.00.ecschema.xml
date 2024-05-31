@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="StepLibMetadata" nameSpacePrefix="stepmd" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="DictionaryMetaData" version="01.00" prefix="dmd" />
+    <ECClass typeName="StepLibMetadata" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="StepLibClassName" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="StepLibClassID" typeName="string">
+            <ECCustomAttributes>
+                <PropertyDefinitionMetaData xmlns="DictionaryMetaData.01.00" />
+                <PropertyUnitsMetaData xmlns="DictionaryMetaData.01.00">
+                    <Units />
+                </PropertyUnitsMetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+</ECSchema>

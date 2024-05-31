@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="EmptyCustomAttribute" nameSpacePrefix="bp" version="1.0" description="Bentley.Plant" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECClass typeName="JS_Relationship" isStruct="True" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="Name" typeName="string" />
+        <ECProperty propertyName="InverseName" typeName="string" />
+        <ECProperty propertyName="InheritValue" typeName="boolean" />
+        <ECProperty propertyName="Constraint" typeName="string" />
+        <ECProperty propertyName="ConstraintOverride" typeName="boolean" />
+        <ECProperty propertyName="InheritancePriority" typeName="int" />
+        <ECProperty propertyName="InstancePriority" typeName="int" />
+        <ECArrayProperty propertyName="Daemons" typeName="string" minOccurs="0" maxOccurs="unbounded" />
+    </ECClass>
+    <ECClass typeName="JS_ClassProperties" isDomainClass="True" isCustomAttributeClass="True">
+        <ECStructProperty propertyName="Relationship" typeName="JS_Relationship" />
+        <ECProperty propertyName="ID" typeName="int" />
+    </ECClass>
+    <ECClass typeName="ACTIVITY" isDomainClass="True">
+        <ECCustomAttributes>
+            <JS_ClassProperties xmlns="EmptyCustomAttribute.01.00">
+                <Relationship />
+                <ID>505</ID>
+            </JS_ClassProperties>
+        </ECCustomAttributes>
+    </ECClass>
+</ECSchema>

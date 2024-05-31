@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="OpenPlant_Catalogue" nameSpacePrefix="opc" version="1.2" description="Catalog schema contains only the Catalog specific Classes and Properties" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECClass typeName="CATALOGUE_TABLE" description="Catalog Schema Specific Class" displayLabel="Catalogue Table" isDomainClass="True" />
+    <ECClass typeName="AP_3D_CATALOGUE_TABLE" displayLabel="AP 3D Catalogue Table" isDomainClass="True">
+        <BaseClass>CATALOGUE_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_COMPONENT_TABLE" displayLabel="AP 3D Component Table" isDomainClass="True">
+        <BaseClass>AP_3D_CATALOGUE_TABLE</BaseClass>
+        <ECProperty propertyName="ALT_P_MARK" typeName="string" />
+        <ECProperty propertyName="CATALOG" typeName="string" />
+        <ECProperty propertyName="CLASS_NAME" typeName="string" />
+        <ECProperty propertyName="COMP_INDX" typeName="string" />
+        <ECProperty propertyName="FACING_1" typeName="string" />
+        <ECProperty propertyName="GTYPE" typeName="string" />
+        <ECProperty propertyName="MANU_FACT" typeName="string" />
+        <ECProperty propertyName="MATERIAL" typeName="string" />
+        <ECProperty propertyName="MEAS_UNITS" typeName="string" />
+        <ECProperty propertyName="MODULE_NAME" typeName="string" />
+        <ECProperty propertyName="OPTIONCODE" typeName="string" />
+        <ECProperty propertyName="PIECE_MARK" typeName="string" />
+        <ECProperty propertyName="RATING" typeName="string" />
+        <ECProperty propertyName="REV" typeName="double" />
+        <ECProperty propertyName="SCHEDULE" typeName="string" />
+        <ECProperty propertyName="SHOP_FLD" typeName="double" />
+        <ECProperty propertyName="SORT_CODE" typeName="double" />
+        <ECProperty propertyName="STYPE" typeName="string" />
+        <ECProperty propertyName="SYMBOL_3D" typeName="string" />
+        <ECProperty propertyName="SYS_ID" typeName="string" />
+        <ECProperty propertyName="TAG" typeName="string" />
+        <ECProperty propertyName="USER_1" typeName="double" />
+        <ECProperty propertyName="USER_2" typeName="double" />
+        <ECProperty propertyName="USER_3" typeName="double" />
+        <ECProperty propertyName="WEIGHT_DRY" typeName="double" />
+        <ECProperty propertyName="AUDIT" typeName="int" />
+        <ECProperty propertyName="NOTES" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_BOLT" displayLabel="BOLT" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="QTY_PERSET" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_CROSSES" displayLabel="CROSSES" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="CTR_END_M" typeName="double" />
+        <ECProperty propertyName="CTR_END_R" typeName="double" />
+        <ECProperty propertyName="CTR_END_B" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_ELBOW" displayLabel="ELBOW" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="CTR_END_M" typeName="double" />
+        <ECProperty propertyName="CTR_END_R" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_FAB_FIT" displayLabel="FAB_FIT" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_FLANGE" displayLabel="FLANGE" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="PIPE_OD_M" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_FLGJOINT" displayLabel="FLGJOINT" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="COMP_LEN" typeName="string" description="Component Length" />
+        <ECProperty propertyName="PIPE_OD_M" typeName="string" description="Pipe outside diameter" />
+    </ECClass>
+    <ECClass typeName="AP_3D_GASKET" displayLabel="GASKET" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_LIGHTING" displayLabel="LIGHTING" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_MISC_FIT" displayLabel="MISC_FIT" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="CTR_END_M" typeName="double" />
+        <ECProperty propertyName="CTR_END_R" typeName="double" />
+        <ECProperty propertyName="CTR_END_B" typeName="double" />
+        <ECProperty propertyName="TRIM_1" typeName="string" />
+        <ECProperty propertyName="COMP_LEN" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_NOZZLE" displayLabel="NOZZLE" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_OLET" displayLabel="OLET" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_ORIFICE" displayLabel="ORIFICE" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_PIPE" displayLabel="PIPE" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_RECEPTACLE" displayLabel="RECEPTACLE" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_REDUCER" displayLabel="REDUCER" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="OFF_SET" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_SPACER" displayLabel="SPACER" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="COMP_ID" typeName="double" />
+        <ECProperty propertyName="PIPE_OD_M" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_STRAINER" displayLabel="STRAINER" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_SWAGE" displayLabel="SWAGE" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="OFF_SET" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_TEE" displayLabel="TEE" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="CTR_END_M" typeName="double" />
+        <ECProperty propertyName="CTR_END_R" typeName="double" />
+        <ECProperty propertyName="CTR_END_B" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_TOPWORKS" displayLabel="TOPWORKS" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VALVE" displayLabel="VALVE" isDomainClass="True">
+        <BaseClass>AP_3D_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="CTR_END_M" typeName="double" />
+        <ECProperty propertyName="CTR_END_R" typeName="double" />
+        <ECProperty propertyName="COMP_LEN" typeName="double" />
+        <ECProperty propertyName="CTR_END_B" typeName="double" />
+    </ECClass>
+    <ECClass typeName="AP_3D_VALVBW" displayLabel="VALVBW" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VALVFL" displayLabel="VALVFL" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VALVSCSW" displayLabel="VALVSCSW" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VLVBW" displayLabel="VLVBW" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VLVCNTBW" displayLabel="VLVCNTBW" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VLVCNTFL" displayLabel="VLVCNTFL" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VLVCNTSC" displayLabel="VLVCNTSC" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VLVFL" displayLabel="VLVFL" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VLVRELFL" displayLabel="VLVRELFL" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VLVRELSC" displayLabel="VLVRELSC" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VLVSCSW" displayLabel="VLVSCSW" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="AP_3D_VOLET" displayLabel="VOLET" isDomainClass="True">
+        <BaseClass>AP_3D_VALVE</BaseClass>
+    </ECClass>
+    <ECClass typeName="PSDS_CATALOGUE_TABLE" displayLabel="PSDS Catalogue Table" isDomainClass="True">
+        <BaseClass>CATALOGUE_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="PSDS_ALLIED_TABLE" displayLabel="PSDS Allied Table" isDomainClass="True">
+        <BaseClass>PSDS_CATALOGUE_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="BOLT_MATERIAL" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="BOLT_MATERIAL" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PSDS_COMPONENT_TABLE" displayLabel="PSDS Component Table" isDomainClass="True">
+        <BaseClass>PSDS_CATALOGUE_TABLE</BaseClass>
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="COG_X_PAR" typeName="double" />
+        <ECProperty propertyName="COG_Y_PAR" typeName="double" />
+        <ECProperty propertyName="COG_Z_PAR" typeName="double" />
+        <ECProperty propertyName="LONG_DESCR" typeName="string" />
+        <ECProperty propertyName="MANU_FACT" typeName="string" />
+        <ECProperty propertyName="MAT_NAME" typeName="string" />
+        <ECProperty propertyName="ORDER_INFO" typeName="string" />
+        <ECProperty propertyName="PAR_UNITS" typeName="string" />
+        <ECProperty propertyName="RATING" typeName="double" />
+        <ECProperty propertyName="REIHE" typeName="string" />
+        <ECProperty propertyName="SCHEDULE" typeName="string" />
+        <ECProperty propertyName="SHORT_DESCR" typeName="string" />
+        <ECProperty propertyName="SIZE_1" typeName="double" />
+        <ECProperty propertyName="SPARE" typeName="string" />
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="SURF_AREA" typeName="double" />
+        <ECProperty propertyName="SYSID" typeName="string" />
+        <ECProperty propertyName="WEIGHT_DRY" typeName="double" />
+    </ECClass>
+    <ECClass typeName="BOLTS" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="BOLT_CODE" typeName="string" />
+        <ECProperty propertyName="BOLT_COUNT" typeName="double" />
+        <ECProperty propertyName="BOLT_DIA_PAR" typeName="double" />
+        <ECProperty propertyName="BOLT_LEN_PAR" typeName="double" />
+        <ECProperty propertyName="BOLT_MATERIAL" typeName="string" />
+        <ECProperty propertyName="BOLT_STNDRD" typeName="string" />
+        <ECProperty propertyName="BOLT_TYPE" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="FL_TYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="BRANCH_TABLE" displayLabel="Branch Table" isDomainClass="True">
+        <ECProperty propertyName="CLASS_NAME" typeName="string" displayLabel="Class Name" />
+        <ECProperty propertyName="PRIORITY" typeName="double" displayLabel="Priority" />
+        <ECProperty propertyName="NOMINAL_DIAMETER_BRANCH" typeName="double" displayLabel="Nominal Diameter Branch" />
+        <ECProperty propertyName="NOMINAL_DIAMETER" typeName="double" displayLabel="Nominal Diameter" />
+    </ECClass>
+    <ECClass typeName="DOCUMENT" displayLabel="Document" isDomainClass="True">
+        <ECProperty propertyName="AUTHOR" typeName="string" displayLabel="Author" />
+        <ECProperty propertyName="CREATE_DATE" typeName="dateTime" displayLabel="Create Date" />
+        <ECProperty propertyName="MODIFIED_DATE" typeName="dateTime" displayLabel="Modified Date" />
+        <ECProperty propertyName="NAME" typeName="string" displayLabel="Name" />
+        <ECProperty propertyName="REVISION" typeName="string" displayLabel="Revision" />
+    </ECClass>
+    <ECClass typeName="CATALOGUE" description="For now this class has not been drawn from ISO 15926 but eventually that will be inherited from there" displayLabel="Catalogue" isDomainClass="True">
+        <BaseClass>DOCUMENT</BaseClass>
+    </ECClass>
+    <ECClass typeName="CATALOGUE_COMPONENT" description="This will be Bentley Specific class, it allows to define a single relationship between Catalogue and Piping, Electrical and Equipment type of components" displayLabel="Catalogue Component" isDomainClass="True">
+        <ECProperty propertyName="OPTION_CODE" typeName="string" displayLabel="Option Code" />
+        <ECProperty propertyName="UNIT_OF_MEASURE" typeName="string" displayLabel="Unit of Measure" />
+    </ECClass>
+    <ECRelationshipClass typeName="CATALOGUE_HAS_CATALOGUE_COMPONENT" displayLabel="Catalogue Has Catalogue Component" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,N)" roleLabel="Catalogue Has Catalogue Component" polymorphic="True">
+            <Class class="CATALOGUE" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Catalogue Has Catalogue Component (reversed)" polymorphic="True">
+            <Class class="CATALOGUE_COMPONENT" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="DIAMETER_TABLES" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="TBL_NAME" typeName="string" />
+        <ECProperty propertyName="COL_NAME" typeName="string" />
+    </ECClass>
+    <ECClass typeName="ELECTRICAL_COMPONENT" description="Will be derived from ISO 15926 Dictionary, contains catalogue specific Electrical Component properites" displayLabel="Electrical Component" isDomainClass="True">
+        <BaseClass>CATALOGUE_COMPONENT</BaseClass>
+    </ECClass>
+    <ECClass typeName="EQUIPMENT" description="Will be derived from ISO 15926 Dictionary, contains catalogue specific equipment properites" displayLabel="Equipment" isDomainClass="True">
+        <BaseClass>CATALOGUE_COMPONENT</BaseClass>
+    </ECClass>
+    <ECClass typeName="FACING_VALUE_MAP" description="This class indicates the type of facing" displayLabel="Facing Value Map" isDomainClass="True">
+        <ECProperty propertyName="FLAT_FACE" typeName="string" displayLabel="Flat Face" />
+        <ECProperty propertyName="RAISED_FACE" typeName="string" displayLabel="Raised Face" />
+        <ECProperty propertyName="RING_JOINT_FACE" typeName="string" displayLabel="Ring Joint Face" />
+        <ECProperty propertyName="A" typeName="string" displayLabel="A" />
+        <ECProperty propertyName="B" typeName="string" displayLabel="B1" />
+        <ECProperty propertyName="C" typeName="string" displayLabel="C" />
+        <ECProperty propertyName="C_DIN" typeName="string" displayLabel="C_DIN" />
+        <ECProperty propertyName="D" typeName="string" displayLabel="D" />
+        <ECProperty propertyName="E" typeName="string" displayLabel="E" />
+        <ECProperty propertyName="F" typeName="string" displayLabel="F" />
+        <ECProperty propertyName="F_DIN" typeName="string" displayLabel="F_DIN" />
+        <ECProperty propertyName="N_DIN" typeName="string" displayLabel="N_DIN" />		
+    </ECClass>
+    <ECClass typeName="FASTENER" displayLabel="Fastener" isDomainClass="True">
+        <BaseClass>CATALOGUE_COMPONENT</BaseClass>
+        <ECProperty propertyName="CATALOG_NAME" typeName="string" displayLabel="Catalog Name" />
+        <ECProperty propertyName="EC_CLASS_NAME" typeName="string" displayLabel="EC Class Name" />
+        <ECProperty propertyName="NOTES" typeName="string" displayLabel="Notes" />
+        <ECProperty propertyName="UNIT_OF_MEASURE" typeName="string" description="A designation for the measuring units in which a numerical value is expressed" displayLabel="Unit Of Measure" />
+    </ECClass>
+    <ECClass typeName="GASKET_THICKNESS" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="THICKNESS_IN" typeName="double" />
+        <ECProperty propertyName="THICKNESS_MM" typeName="double" />
+    </ECClass>
+    <ECClass typeName="MANUFACTURERS" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="MANUFACTURER" typeName="string" />
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="COMPTYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="MATERIAL_DESC" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="DESCRIPTION" typeName="string" />
+    </ECClass>
+    <ECClass typeName="MATERIAL_VALUE_MAP" description="This class indicates the type of material" displayLabel="Material Value Map" isDomainClass="True">
+        <ECProperty propertyName="ALLOY_STEEL" typeName="string" displayLabel="Alloy Steel" />
+        <ECProperty propertyName="ALUMINUM" typeName="string" displayLabel="Aluminum" />
+        <ECProperty propertyName="CARBON_STEEL" typeName="string" displayLabel="Carbon Steel" />
+        <ECProperty propertyName="CARBON_STEEL_COATED" typeName="string" displayLabel="Carbon Steel Coated" />
+        <ECProperty propertyName="CAST_IRON" typeName="string" displayLabel="Cast Iron" />
+        <ECProperty propertyName="CHLORINATED_POLYVINYL_CHLORIDE" typeName="string" displayLabel="Chlorinated Polyvinyl Chloride" />
+        <ECProperty propertyName="COPPER" typeName="string" displayLabel="Copper" />
+        <ECProperty propertyName="DUCTILE_IRON" typeName="string" displayLabel="Ductile Iron" />
+        <ECProperty propertyName="ETHYLENE_PROPYLENE_DIENE_MONOMER" typeName="string" displayLabel="Ethylene Propylene Diene Monomer" />
+        <ECProperty propertyName="ETHYLENE_TETRAFLUOROETHYLENE" typeName="string" displayLabel="Ethylene Tetrafluoroethylene" />
+        <ECProperty propertyName="FLUOROCARBON_ELASTOMER" typeName="string" displayLabel="Fluorocarbon Elastomer" />
+        <ECProperty propertyName="HIGH_DENSITY_POLYETHYLENE" typeName="string" displayLabel="High Density Polyethylene" />
+        <ECProperty propertyName="HIGH_PURITY_POLYVINYLDIFLUORIDE" typeName="string" displayLabel="High Purity Polyvinyldifluoride" />
+        <ECProperty propertyName="NEOPRENE" typeName="string" displayLabel="Neoprene" />
+        <ECProperty propertyName="POLYETHYLENE" typeName="string" displayLabel="Polyethylene" />
+        <ECProperty propertyName="POLYPROPYLENE" typeName="string" displayLabel="Polypropylene" />
+        <ECProperty propertyName="POLYTETRAFLUOROETHYLENE" typeName="string" displayLabel="Polytetrafluoroethylene" />
+        <ECProperty propertyName="POLYVINYLDIFLUORIDE" typeName="string" displayLabel="Polyvinyldifluoride" />
+        <ECProperty propertyName="POLYVINYL_CHLORIDE" typeName="string" displayLabel="Polyvinyl Chloride" />
+        <ECProperty propertyName="STAINLESS_STEEL" typeName="string" displayLabel="Stainless Steel" />
+        <ECProperty propertyName="STAINLESS_STEEL_COATED" typeName="string" displayLabel="Stainless Steel Coated" />
+    </ECClass>
+    <ECClass typeName="NOZZLE" displayLabel="Nozzle" isDomainClass="True">
+        <BaseClass>CATALOGUE_COMPONENT</BaseClass>
+    </ECClass>
+    <ECClass typeName="PDS_3D_CATALOGUE_TABLE" displayLabel="PDS 3D Catalogue Table" isDomainClass="True">
+        <BaseClass>CATALOGUE_TABLE</BaseClass>
+        <ECProperty propertyName="CenterEnd2" typeName="double" />
+        <ECProperty propertyName="CenterEnd1" typeName="double" />
+        <ECProperty propertyName="compLen" typeName="double" />
+        <ECProperty propertyName="MODIFIER" typeName="double" />
+        <ECProperty propertyName="FlangeThickness1" typeName="double" />
+        <ECProperty propertyName="PipeOD1" typeName="string" />
+        <ECProperty propertyName="SocketDepth2" typeName="double" />
+        <ECProperty propertyName="Dim4" typeName="string" />
+        <ECProperty propertyName="Dim9" typeName="string" />
+        <ECProperty propertyName="FlangeThickness2" typeName="double" />
+        <ECProperty propertyName="ThreadedLength2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_APLT" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_ATEE" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="BR_TYPE" typeName="string" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="EPREP3" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="P6_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SCH_RAT3" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="SIZE_3" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_BLLW" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="ARCHES" typeName="double" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="GEOMTYPE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_CLMP" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="CLMPTYPE" typeName="string" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_DADP" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="STYLE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_DBLK" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="STYLE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_DIAMETER" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="SIZE_1" typeName="double" />
+        <ECProperty propertyName="METRIC_ND" typeName="double" />
+        <ECProperty propertyName="PIPEDIA_IN" typeName="double" />
+        <ECProperty propertyName="TUBEDIA_IN" typeName="double" />
+        <ECProperty propertyName="COM_GRP" typeName="string" />
+        <ECProperty propertyName="PAR_UNITS" typeName="string" />
+        <ECProperty propertyName="PIPEWALLSTD_IN" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_FERR" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FERRTYPE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_FLEX" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="LENGTH" typeName="double" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_ITEE" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="BR_TYPE" typeName="string" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="EPREP3" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="P6_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SCH_RAT3" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="SIZE_3" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_MGLN" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="TYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_MRNG" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_ORNG" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="THICK_IN" typeName="double" />
+        <ECProperty propertyName="THICK_MM" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PADP" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="STYLE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PBAS" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="BASE_DIA_PAR" typeName="double" />
+        <ECProperty propertyName="BASE_LEN_PAR" typeName="double" />
+        <ECProperty propertyName="BASE_THK_PAR" typeName="double" />
+        <ECProperty propertyName="BASE_WEB_PAR" typeName="double" />
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="PAR_UNITS" typeName="string" />
+        <ECProperty propertyName="SIZE_1" typeName="double" />
+        <ECProperty propertyName="STNDRD" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PBRN" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="BR_TYPE" typeName="string" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="EPREP3" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="P6_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SCH_RAT3" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="SIZE_3" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PBSO" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="BR_TYPE" typeName="string" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="EPREP3" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="P6_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SCH_RAT3" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="SIZE_3" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PBUS" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="STYLE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PCAP" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PCPL" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="STYLE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PELB" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="ANGLE" typeName="double" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="GEOMTYPE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="RADIUS" typeName="string" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PEND" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" description="EPREP1" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" description="SCH_RAT1" />
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="SIZE_1" typeName="double" />
+        <ECProperty propertyName="STYLE" typeName="string" description="STYLE" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="PAR_UNITS" typeName="string" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PERD" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PESO" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="ANGLE" typeName="double" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="GEOMTYPE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="RADIUS" typeName="string" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PFLG" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="BOLTD_PAR" typeName="double" />
+        <ECProperty propertyName="BOLTL_PAR" typeName="double" />
+        <ECProperty propertyName="BOLT_NUM" typeName="double" />
+        <ECProperty propertyName="BOLT_TYP" typeName="string" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="GEOMTYPE" typeName="string" />
+        <ECProperty propertyName="GKT_TYPE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="SERIES" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="TYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PGKT" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="TYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PINS" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="INS_TYPE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PIPE" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PNPL" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="NOM_LNTH" typeName="string" />
+        <ECProperty propertyName="NPLTYPE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_POPL" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+    </ECClass>
+    <ECClass typeName="PIPE_PPLG" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="STYLE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PRED" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PSPL" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="FL_SPEC" typeName="string" />
+        <ECProperty propertyName="FL_TYPE" typeName="string" />
+        <ECProperty propertyName="NOM_LNTH" typeName="string" />
+        <ECProperty propertyName="SPLTYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PSTR" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="STR_TYPE" typeName="string" />
+        <ECProperty propertyName="STYLE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PSWE" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="SWGTYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PSWG" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="SWGTYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PTRP" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="TRP_TYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PUNI" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_PVLV" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="P6_PAR" typeName="double" />
+        <ECProperty propertyName="PATTERN" typeName="string" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SCH_RAT2" typeName="string" />
+        <ECProperty propertyName="SIZE_2" typeName="double" />
+        <ECProperty propertyName="TYPE" typeName="string" />
+        <ECProperty propertyName="VFL_TYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_PVOP" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="COG_X_PAR" typeName="double" />
+        <ECProperty propertyName="COG_Y_PAR" typeName="double" />
+        <ECProperty propertyName="COG_Z_PAR" typeName="double" />
+        <ECProperty propertyName="DATA_FMT" typeName="double" />
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="LONG_DESCR" typeName="string" />
+        <ECProperty propertyName="MANU_FACT" typeName="string" />
+        <ECProperty propertyName="MAT_NAME" typeName="string" />
+        <ECProperty propertyName="OPERATOR" typeName="string" />
+        <ECProperty propertyName="OP_ANG" typeName="double" />
+        <ECProperty propertyName="ORDER_INFO" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="P4_PAR" typeName="double" />
+        <ECProperty propertyName="P5_PAR" typeName="double" />
+        <ECProperty propertyName="P6_PAR" typeName="double" />
+        <ECProperty propertyName="P7_PAR" typeName="double" />
+        <ECProperty propertyName="P8_PAR" typeName="double" />
+        <ECProperty propertyName="PAR_UNITS" typeName="string" />
+        <ECProperty propertyName="RATING" typeName="double" />
+        <ECProperty propertyName="SCHEDULE" typeName="string" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+        <ECProperty propertyName="SHORT_DESCR" typeName="string" />
+        <ECProperty propertyName="SIZE_1" typeName="double" />
+        <ECProperty propertyName="SPARE" typeName="string" />
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="SURF_AREA" typeName="double" />
+        <ECProperty propertyName="SYSID" typeName="string" />
+        <ECProperty propertyName="TYPE" typeName="string" />
+        <ECProperty propertyName="WEIGHT_DRY" typeName="double" />
+    </ECClass>
+    <ECClass typeName="PIPE_RBND" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="RADIUS" typeName="string" />
+        <ECProperty propertyName="SCH_RAT1" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_STUBLEN" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3_PAR" typeName="double" />
+        <ECProperty propertyName="SCHED" typeName="string" />
+        <ECProperty propertyName="STB_TYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPE_WPIP" isDomainClass="True">
+        <BaseClass>PSDS_COMPONENT_TABLE</BaseClass>
+        <ECProperty propertyName="EPREP1" typeName="string" />
+        <ECProperty propertyName="EPREP2" typeName="string" />
+        <ECProperty propertyName="FACE" typeName="string" />
+        <ECProperty propertyName="NOM_LNTH" typeName="string" />
+        <ECProperty propertyName="P1_PAR" typeName="double" />
+        <ECProperty propertyName="P2_PAR" typeName="double" />
+        <ECProperty propertyName="P3" typeName="double" />
+        <ECProperty propertyName="SPLTYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="PIPING_COMP" description="Will be derived from ISO 15926 Dictionary, contains catalogue specific Piping properites" displayLabel="Piping Component" isDomainClass="True">
+        <BaseClass>CATALOGUE_COMPONENT</BaseClass>
+        <ECProperty propertyName="NOTES" typeName="string" displayLabel="Notes" />
+        <ECProperty propertyName="CATALOG_NAME" typeName="string" displayLabel="Catalog Name" />
+        <ECProperty propertyName="EC_CLASS_NAME" typeName="string" displayLabel="EC Class Name" />
+        <ECProperty propertyName="UNIT_OF_MEASURE" typeName="string" description="A designation for the measuring units in which a numerical value is expressed" displayLabel="Unit Of Measure" />
+    </ECClass>
+    <ECClass typeName="SEAL" displayLabel="Seal" isDomainClass="True">
+        <BaseClass>CATALOGUE_COMPONENT</BaseClass>
+        <ECProperty propertyName="EC_CLASS_NAME" typeName="string" displayLabel="EC Class Name" />
+        <ECProperty propertyName="UNIT_OF_MEASURE" typeName="string" description="A designation for the measuring units in which a numerical value is expressed" displayLabel="Unit Of Measure" />
+    </ECClass>
+    <ECClass typeName="SPECIFICATION" displayLabel="Specification" isDomainClass="True">
+        <BaseClass>DOCUMENT</BaseClass>
+        <ECProperty propertyName="MATERIAL" typeName="string" displayLabel="Material" />
+        <ECProperty propertyName="UNIT_OF_MEASURE" typeName="string" description="A designation for the measuring units in which a numerical value is expressed" displayLabel="Unit Of Measure" />
+    </ECClass>
+    <ECClass typeName="SPECIFICATION_ENTRY" displayLabel="Specification Entry" isDomainClass="True">
+        <ECProperty propertyName="GRADE" typeName="string" displayLabel="Grade" />
+        <ECProperty propertyName="MANUFACTURER" typeName="string" description="device manufacturer" displayLabel="Manufacturer" />
+        <ECProperty propertyName="RATING" typeName="string" displayLabel="Rating" />
+        <ECProperty propertyName="SCHEDULE" typeName="string" displayLabel="Schedule" />
+        <ECProperty propertyName="STANDARD" typeName="string" displayLabel="Standard" />
+        <ECProperty propertyName="FACING" typeName="string" description="type of facing of a flanged end" displayLabel="Facing" />
+        <ECProperty propertyName="OPERATING_PRESSURE" typeName="double" description="a pressure under which an object is expected to operate" displayLabel="Operating Pressure" />
+        <ECProperty propertyName="OPERATING_TEMPERATURE" typeName="double" description="a temperature under which an object is expected to operate." displayLabel="Operating Temperature" />
+        <ECProperty propertyName="COMPONENT_NAME" typeName="string" displayLabel="Component Name" />
+        <ECProperty propertyName="BRANCH_PORT_END_PREPARATION" typeName="string" displayLabel="Branch Port End Preparation" />
+        <ECProperty propertyName="MAIN_PORT_END_PREPARATION" typeName="string" displayLabel="Main Port End Preparation" />
+        <ECProperty propertyName="RUN_PORT_END_PREPARATION" typeName="string" displayLabel="Run Port End Preparation" />
+        <ECProperty propertyName="MIN_SIZE" typeName="double" displayLabel="Min Size" />
+        <ECProperty propertyName="MAX_SIZE" typeName="double" displayLabel="Max Size" />
+    </ECClass>
+    <ECRelationshipClass typeName="SPECIFICATION_HAS_SPECIFICATION_ENTRY" displayLabel="Specification Has Specification Entry" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,1)" roleLabel="Specification Has Specification Entry" polymorphic="False">
+            <Class class="SPECIFICATION" />
+        </Source>
+        <Target cardinality="(0,N)" roleLabel="Specification Has Specification Entry (reversed)" polymorphic="True">
+            <Class class="SPECIFICATION_ENTRY" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="STANDARD_DESC" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="DESCRIPTION" typeName="string" />
+        <ECProperty propertyName="OVERLAY_SUFFIX" typeName="string" />
+    </ECClass>
+    <ECClass typeName="VALVE_OPERATING_DEVICE" displayLabel="Valve Operating Device" isDomainClass="True">
+        <BaseClass>CATALOGUE_COMPONENT</BaseClass>
+    </ECClass>
+    <ECClass typeName="VLV_MATERIAL_DESC" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="DESCRIPTION" typeName="string" />
+    </ECClass>
+    <ECClass typeName="VLV_NO_OPER" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="TYPE" typeName="string" />
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="OP_TYPE" typeName="string" />
+    </ECClass>
+    <ECClass typeName="VLV_VALID_OPER" isDomainClass="True">
+        <BaseClass>PSDS_ALLIED_TABLE</BaseClass>
+        <ECProperty propertyName="TYPE" typeName="string" />
+        <ECProperty propertyName="STNDRD" typeName="string" />
+        <ECProperty propertyName="CODE" typeName="string" />
+        <ECProperty propertyName="OP_TYPE" typeName="string" />
+    </ECClass>
+</ECSchema>

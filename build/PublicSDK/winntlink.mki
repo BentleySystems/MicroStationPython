@@ -1,0 +1,242 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if $(BUILD_TOOLSET) == "LINUX_GCC_DEPRECATED" || $(BUILD_TOOLSET) == "LINUX_CLANG" || $(BUILD_TOOLSET) == "APPLE_CLANG" || $(BUILD_TOOLSET) == "ANDROID_CLANG"
+    %error winntlink.mki should only be used when the toolset is MSC
+%endif
+
+# Inputs:
+
+#    DLM_EXTENSION     = the file extension of the dlm. (example: .dll, .netmodule)
+#
+#    DLM_SYMB_NAME     = a file name for the symbol file.(example: xxxsym)
+#
+#    DLM_ENTRY_NAME    = a file name for the entry file. (example: xxxentry ).
+#                        If not set, it defaults to "dllentry".
+#
+#    LINKER_LIBRARIES_DELAYLOADED = the list of dynamic library files to be linked and delayloaded.
+#
+#    DLM_EXPORT_NAME   = the full file name for the export lib
+#
+#    DLM_EXPORT_DEST   = destination for the ".lib" file that a program links with
+#                        to use the created DLM as a load time module.  Also the dlo file.
+#
+#    DLM_ENTRY_SRC     = source directory for the DLM_ENTRY_NAME file. 
+#
+#    DLM_NOENTRY       = defined, if no entry function should be included
+#                        (presumably, it comes from the CRT)
+#
+#    DLM_LINK_MDLLIB_LAST  If defined will put mdlbltin.lib et al. last in the link command to avoid
+#                           conflicts between msvcrt20 and msvcrt40 (FILE*'s for example)
+#
+#    DLM_NO_DLL         = Set this to create only the .lib and .dls file for your DLL, and not the .dll itself.
+#
+#    DLM_MODULE_DEF     = If you are using a .def file for Windows builds, then you need to have a .def file in your 
+#                         source directory and identify it as DLM_MODULE_DEF.
+#
+#    DLM_NO_INITIALIZE_FUNCTION
+#                       = Set this variable if you don't have an "initialize" function in your DLM.
+#                         Most code does not need an "initialize" function.
+#
+#    DLM_DELAYLOADHOOK    = If this is set, then the file $(DLM_DELAYLOADHOOK) will be compiled and added to
+#                           the list of objects.
+#
+#    DLM_NO_TWIDDLETIME   = Set if you do NOT want to ~time the link targets. This was added
+#                           for .NET .netmodules.
+#
+#    DLM_NO_MANIFEST      = For VC8 (VC2005), set to prevent passing -MANIFEST to the linker for those targets
+#                           that do not require a manifest.
+#
+#    DLM_USER_MANIFEST      = For VC8 (VC2005), set to override linker generated manifest and provide an dll defined
+#                           manifest.  If defined, the linker generated manifest is disabled and the user defined
+#                           manifest should be used.
+#
+#    DLM_INLINE_DEF       = Don't make the .exp file part of the objects.  Use this when you need to
+#                           explicitly define the -DEF: line (via DLM_SPECIAL_LINKOPT).
+#
+#    DLM_PROFILE          = link with -Profile flag
+
+%if !DLM_NO_BENTLEY_LIB
+    %if !defined (BentleyLib)
+        BentleyLib=Bentley.lib
+    %endif
+    BentleyLibFullPath=$(BuildContext)SubParts/Libs/$(BentleyLib)
+    %ifnofile $(BentleyLibFullPath)
+        %undef BentleyLibFullPath
+    %endif
+%endif
+
+BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE=
+
+%include dlmlinkCommon.mki
+
+BENTLEY_TOOLCONTEXT_LINK_NAME           = $(DLM_NAME)
+BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER = $(DLM_API_NUMBER)
+BENTLEY_TOOLCONTEXT_LINK_DEST           = $(DLM_DEST)
+BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST    = $(DLM_OBJECT_DEST)
+BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES   = $(DLM_OBJECT_FILES)
+BENTLEY_TOOLCONTEXT_LINK_LIBRARIES      = $(LINKER_LIBRARIES) $(LINKER_LIBRARIES_DELAYLOADED) $(DLM_OBJECT_PCH) $(BentleyLibFullPath)
+
+# .lib file path
+%if !defined (DLM_EXPORT_DEST)
+    DLM_EXPORT_DEST = $(DLM_OBJECT_DEST)
+%endif
+%if !defined (DLM_EXPORT_NAME)
+    DLM_EXPORT_NAME = $(DLM_EXPORT_DEST)$(DLM_NAME).lib
+%endif
+BENTLEY_TOOLCONTEXT_LINK_LIB_PATH = $(DLM_EXPORT_NAME)
+
+# .pdb file path
+%undef BENTLEY_TOOLCONTEXT_LINK_CREATE_SYMB
+%ifndef DLM_NO_SYMB
+    BENTLEY_TOOLCONTEXT_LINK_CREATE_SYMB = 1
+    BENTLEY_TOOLCONTEXT_LINK_SYMB_PATH = $(DLM_SYMB_NAME)
+    %if !defined (DLM_SYMB_NAME)
+        %if defined (DLM_SYMB_DEST)
+            DLM_SYMB_NAME = $(DLM_SYMB_DEST)$(DLM_NAME).pdb
+        %else
+            DLM_SYMB_NAME = $(DLM_DEST)$(DLM_NAME).pdb
+        %endif
+    %endif
+
+    always:
+        !~@mkdir $(DLM_SYMB_DEST)
+%endif
+
+# .manifest
+%undef BENTLEY_TOOLCONTEXT_LINK_CREATE_MANIFEST
+%ifndef DLM_NO_MANIFEST
+    BENTLEY_TOOLCONTEXT_LINK_CREATE_MANIFEST = 1
+%endif
+
+# profile
+%if defined (DLM_PROFILE)
+    BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE + -profile
+%endif
+
+# entry
+%if defined (DLM_NOENTRY)
+    %if (DLM_NOENTRY > 1)
+        BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE + -noentry
+    %endif
+%else
+    BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE + -entry:LibMain$(dllEntry)
+%endif
+
+# add C runtime libraries
+%if !defined (MFC_WIN_APP)
+    BENTLEY_TOOLCONTEXT_LINK_LIBRARIES + $(BENTLEY_WIN32_LINK_CLibraries) $(BENTLEY_WIN32_LINK_CRuntime)
+%else
+    BENTLEY_TOOLCONTEXT_LINK_LIBRARIES + $(BENTLEY_WIN32_LINK_CLibraries)
+%endif
+
+# delay-loaded libraries
+%if $(TARGET_PLATFORM) != "WinRT"
+%if defined (LINKER_LIBRARIES_DELAYLOADED)
+    always:
+        >$(DLM_OBJECT_DEST)AddDelayLoad.rsp
+        $(LINKER_LIBRARIES_DELAYLOADED)
+        <
+        $(AddDelayLoadCmd) $(DLM_DELAYLOAD_EXCLUDES) < $(DLM_OBJECT_DEST)AddDelayLoad.rsp > $(DLM_OBJECT_DEST)AddDelayLoadOpts.rsp
+
+    BENTLEY_TOOLCONTEXT_LINK_OPTIONS_POST + $[@readfile $(DLM_OBJECT_DEST)AddDelayLoadOpts.rsp]
+%endif
+%else
+    %message Delay-loading not supported on WinRT. These DLLS will be linked normally: $(LINKER_LIBRARIES_DELAYLOADED)
+%endif
+
+# additional options
+BENTLEY_TOOLCONTEXT_LINK_OPTIONS_POST + $(DLM_SPECIAL_LINKOPT)
+
+# DLL Entry point source file
+dlmLinkSaveCCPchOpts =% $[CCPchOpts]
+dlmLinkSaveFileTypeControl =% $[FileTypeControl]
+%undef CCPchOpts
+%undef FileTypeControl
+%if !defined (DLM_NOENTRY)
+    $(DLM_OBJECT_DEST)$(DLM_ENTRY_NAME)$(oext):  $(DLM_ENTRY_SRC)$(DLM_ENTRY_NAME).cpp
+        $(msg)
+        $(RecipeCCompile) -GS- $<
+        ~time
+
+    BENTLEY_TOOLCONTEXT_LINK_LIBRARIES + $(DLM_OBJECT_DEST)$(DLM_ENTRY_NAME)$(oext)
+%endif
+%if defined (DLM_DELAYLOADHOOK) && !defined (COMPILE_FOR_CLR)
+    DLM_DELAYLOADHOOKBASE = $[@basename $(DLM_DELAYLOADHOOK)]
+
+    $(DLM_OBJECT_DEST)$(DLM_DELAYLOADHOOKBASE)$(oext):  $(DLM_DELAYLOADHOOK)
+
+    BENTLEY_TOOLCONTEXT_LINK_LIBRARIES + $(DLM_OBJECT_DEST)$(DLM_DELAYLOADHOOKBASE)$(oext)
+%endif
+CCPchOpts =% $[dlmLinkSaveCCPchOpts]
+FileTypeControl =% $[dlmLinkSaveFileTypeControl]
+
+# DLL Export definition file
+# Include object files to find the __declspec (dllexport) functions as well as those in the .def file
+%if defined (DLM_MODULE_DEF)
+    $(DLM_EXPORT_NAME) $(DLM_EXPORT_DEST)$(DLM_NAME).exp: $(DLM_MODULE_DEF) $(DLM_EXPORT_OBJS)
+            $(msg)
+            >$(DLM_OBJECT_DEST)$(DLM_NAME)lib.rsp
+            -out:$(DLM_EXPORT_NAME)
+            -def:$(DLM_MODULE_DEF)
+            $(DLM_EXPORT_OBJS)
+            $(DLM_EXPORT_OPTS)
+            -machine:$(ntCPU)
+            <
+            $(CLibCmd) @$(DLM_OBJECT_DEST)$(DLM_NAME)lib.rsp
+            ~time
+
+    %if !defined (DLM_INLINE_DEF)
+        BENTLEY_TOOLCONTEXT_LINK_LIBRARIES + $(DLM_EXPORT_DEST)$(DLM_NAME).exp
+    %endif
+%endif
+
+# Create a post-link script to create manifest, sign the executable, etc.
+BENTLEY_TOOLCONTEXT_LINK_POST_LINK = $(DLM_OBJECT_DEST)PostLinkScript.bat
+
+$(BENTLEY_TOOLCONTEXT_LINK_POST_LINK) : $(_MakeFileSpec)
+    > $@
+    %if defined (BSI_SOURCEINDEX) && !defined (DLM_NO_SOURCEINDEX) && defined (DLM_SYMB_NAME)
+        $(SrcToPdbCmd) $(DLM_SYMB_NAME)
+    %endif
+    %if !defined (DLM_NO_VERSION)
+        $(BBPYTHONCMD) $(SrcRoot)bsicommon/build/RetryCommand.py $(InjectVersionCmd) "$(DLM_OUT_NAME)" @$(versionArgsFile) $(DLM_VERSION_OPTIONS)
+        IF %ERRORLEVEL% NEQ 0 (
+            EXIT /B 1
+        )
+    %endif
+    %if ASSEMBLY_STRONGNAME == 2
+        sn -R "$(DLM_OUT_NAME)" $(ASSEMBLY_KEYFILE)
+    %elif ASSEMBLY_STRONGNAME == 3
+        sn -TS "$(DLM_OUT_NAME)" $(ASSEMBLY_TESTKEYFILE)
+    %endif
+    %if !defined (DLM_NO_SIGN)
+        %if defined (SingingUseBatFile)
+            call $(SignCodeCmd) "$(DLM_OUT_NAME)"
+        %else
+            $(SignCodeCmd) "$(DLM_OUT_NAME)"
+        %endif
+    %endif
+    <
+
+# link the library
+%include windowsToolContextLinkDll.mki
+
+# create the necessary symbolic links
+%if defined (DLM_CONTEXT_LOCATION) && !defined (DLM_NO_CONTEXT_LINK)
+    "$(DLM_CONTEXT_LOCATION)$(DLM_NAME)$(DLM_API_NUMBER)$(DLM_EXTENSION)" : "$(DLM_OUT_NAME)"
+        $(LinkFirstDepToFirstTarget)
+
+    %if defined (BENTLEY_TOOLCONTEXT_LINK_CREATE_WINMD)
+        "$(DLM_CONTEXT_LOCATION)$(DLM_NAME).winmd" : "$(DLM_OBJECT_DEST)$(DLM_NAME).winmd"
+            $(LinkFirstDepToFirstTarget)
+    %endif
+%endif
+
+%if defined (DLM_LIB_CONTEXT_LOCATION) && defined (DLM_CREATE_LIB_CONTEXT_LINK) && !defined (DLM_NO_IMPLIB)
+    "$(DLM_LIB_CONTEXT_LOCATION)$[@nondir $(DLM_EXPORT_NAME)]" : "$(DLM_EXPORT_NAME)"
+        $(LinkFirstDepToFirstTarget)
+%endif
+

@@ -1,0 +1,15 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonCore\ScriptEngineManager\ScriptEngineManager.mki $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+PyhonCoreSource    = $(PyhonCore)ScriptEngineManager/source/
+PythonCoreDependencies = $(dependencies) \
+                         $(PythonInternalHeaders)MSPythonEngine.h \
+                         $(PythonPublicHeaders)ScriptEngineManager.h
+
+$(o)ScriptEngineManager$(oext)                  : $(PyhonCoreSource)ScriptEngineManager.cpp  $(PythonCoreDependencies) ${MultiCompileDepends}
+
+$(o)MSPythonEngine$(oext)                       : $(PyhonCoreSource)MSPythonEngine.cpp $(PythonCoreDependencies) ${MultiCompileDepends}

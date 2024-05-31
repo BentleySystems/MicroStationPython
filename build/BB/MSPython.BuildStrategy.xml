@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BuildStrategy  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xsi:noNamespaceSchemaLocation="../../../BentleyBuild/BuildStrategy.xsd">
+
+    <ImportStrategy Name="Base" />
+    <ImportStrategy Name="MSPython.Definitions" />
+
+    <DefaultTarget Repository="MSPython" PartFile="MSPython" PartName="MSPython" OutputRootDir="${OutRoot}" Platform="x64" />
+
+</BuildStrategy>

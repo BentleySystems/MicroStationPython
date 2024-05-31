@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ECSchema schemaName="SchemaThatReferences" version="01.00" displayLabel="Schema That References" description="Schema that references another schema" nameSpacePrefix="str" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ec="http://www.bentley.com/schemas/Bentley.ECXML.2.0" xmlns:ods="Bentley_ODS.01.02">
+    <ECSchemaReference name="BaseSchema" version="01.00" prefix="base" />
+
+   <ECClass typeName="circle" description="Circle" displayLabel="Circle" isDomainClass="True">
+       <BaseClass>base:ellipse</BaseClass>
+      <ECProperty propertyName="Radius" typeName="double" displayLabel="radius" />
+   </ECClass>
+
+</ECSchema>

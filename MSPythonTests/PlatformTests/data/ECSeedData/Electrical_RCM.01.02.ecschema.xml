@@ -1,0 +1,1807 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="Electrical_RCM" nameSpacePrefix="elec" version="1.2" description="Bentley Electrical Schema RCM" displayLabel="Bentley Electrical Schema RCM" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="Bentley_Standard_CustomAttributes" version="01.01" prefix="bsca" />
+    <!-- <ECSchemaReference name="Electrical_RCM_ProjectProperties" version="01.02" prefix="elecrcmprop" /> -->
+    <ECSchemaReference name="BentleyBase" version="01.00" prefix="bentley" />
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECCustomAttributes>
+        <SchemaChangeTrackingState xmlns="Bentley_Standard_CustomAttributes.01.01">
+            <FinalizationHistory />
+            <TrackingEnabled>True</TrackingEnabled>
+            <SchemaFullNameAtEditingStart>Electrical_RCM.01.02</SchemaFullNameAtEditingStart>
+        </SchemaChangeTrackingState>
+    </ECCustomAttributes>
+    <ECClass typeName="ELECTRICAL_ITEM" description="This class defines instances of electrical items such as devices, cables, raceway, etc." displayLabel="Electrical Item" isDomainClass="True" readOnly="True">
+        <!-- <BaseClass>elecrcmprop:ELECTRICAL_ITEM</BaseClass> -->
+        <BaseClass>bentley:BENTLEY_BASE_OBJECT</BaseClass>
+        <ECProperty propertyName="ID" typeName="string" description="Business ID of the electrical item" >
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MANUFACTURER" typeName="string" description="Manufacturer of electrical item" displayLabel="Manufacturer" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>94</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MATERIAL" typeName="string" displayLabel="Material" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>89</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="STATUS" typeName="string" description="Status" displayLabel="Status" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>93</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="EquipmentUDA2" typeName="string" description="EquipmentUDA2" displayLabel="equipmentUda2" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>83</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="EquipmentUDA1" typeName="string" description="EquipmentUDA1" displayLabel="equipmentUda1" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>83</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE" description="This class defines an instance of a cable." displayLabel="Cable" isDomainClass="True">
+        <BaseClass>ELECTRICAL_ITEM</BaseClass>
+        <!-- <BaseClass>elecrcmprop:CABLE</BaseClass> -->
+        <ECCustomAttributes>
+            <InstanceLabelSpecification xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <PropertyName>ID</PropertyName>
+            </InstanceLabelSpecification>
+        </ECCustomAttributes>
+      <ECProperty propertyName="NAME" typeName="string" description="Name of the cable." displayLabel="Name">
+        <ECCustomAttributes>
+          <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+            <Priority>98</Priority>
+          </PropertyPriority>
+        </ECCustomAttributes>
+      </ECProperty>
+        <ECProperty propertyName="INFO" typeName="string" description="Cable Routing Information" displayLabel="Info" />
+        <ECProperty propertyName="TYPE" typeName="string" description="Trade-size, isolation type, and configuration of the cable (full description of cable)" displayLabel="Type">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SOURCE_ID" typeName="string" description="Business ID of source end of the cable." displayLabel="Source ID">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TARGET_ID" typeName="string" description="Business ID of the target end of the cable." displayLabel="Target ID">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>96</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CABLE_LAYING_METHOD" typeName="string" description="Method of routing cable thorugh a raceway." displayLabel="Cable Laying Method">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>90</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ROUTING_FILTER" typeName="string" description="Voltage level" displayLabel="Routing Filter">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>95</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CABLE_LENGTH" typeName="double" displayLabel="Length">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>91</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ESTIMATED_LENGTH" typeName="double" displayLabel="Estimated Length">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>92</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LOAD" typeName="string" description="Load of equipment attached to cable." displayLabel="Load">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>88</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ROUTING_PRIORITY" typeName="int" description="Routing Priority" displayLabel="Routing Priority">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CIRCUIT_NUMBER" typeName="string" description="Circuit Number" displayLabel="Circuit Number">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>86</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="GROUP_NUMBER" typeName="string" description="Group Number" displayLabel="Group Number">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SOURCE_ADDITIONAL_LENGTH" typeName="string" description="Additional length for cable routing that should be added to the source end of the cable." displayLabel="Additional Length (Source)">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>82</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TARGET_ADDITIONAL_LENGTH" typeName="string" description="Additional length for cable routing that should be added to the target end of the cable." displayLabel="Additional Length (Target)">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>81</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CABLE_CLASS" typeName="string" description="Cable class (from OpenPlant)" displayLabel="Cable Class">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>75</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="VOLTAGE" typeName="string" description="Voltage rating of the cable." displayLabel="Voltage" />
+        <!--3D Cable-->
+        <ECStructProperty propertyName="TRANSFORMATION_MATRIX" typeName="bentley:TRANSFORM3D" description="Description of position and orientation of the cable in the model" displayLabel="Transformation Matrix" />
+        <ECProperty propertyName="CABLE_DIAMETER" typeName="string" displayLabel="Diamter" />
+        <ECProperty propertyName="CABLE_WEIGHT" typeName="string" displayLabel="Weight" />
+        <ECProperty propertyName="CABLE_STATUS" typeName="string" description="Cable status" displayLabel="Status" />
+        <ECProperty propertyName="CABLE_MINBENDRADIUS" typeName="string" description="Cable minimum bend radius" displayLabel="Cable min bend radius" />
+        <ECArrayProperty propertyName="INFLECTIONRADIUS" typeName="double" displayLabel="Inflection Radius" minOccurs="1" maxOccurs="1">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>51</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECArrayProperty propertyName="INFLECTIONCOORD" typeName="point3d" displayLabel="Inflection Coord" minOccurs="1" maxOccurs="1">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>52</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+        <ECProperty propertyName="ENDCOORD" typeName="point3d" displayLabel="End Coord">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>53</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="STARTCOORD" typeName="point3d" displayLabel="Start Coord">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>54</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PanelName" typeName="string" readOnly="True">
+            <ECCustomAttributes>
+                <HideProperty xmlns="EditorCustomAttributes.01.00">
+                    <If2D>True</If2D>
+                    <If3D>True</If3D>
+                </HideProperty>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Weight" description="This class gives weight nfo" isStruct="True" isDomainClass="False" isCustomAttributeClass="True" readOnly="True">
+        <ECProperty propertyName="WeightMethod" typeName="string" displayLabel="Method" />
+        <ECProperty propertyName="WeightTotal" typeName="string" displayLabel="Total" />
+        <ECProperty propertyName="WeightCapacity" typeName="string" displayLabel="Capacity" />
+        <ECProperty propertyName="WeightSystem" typeName="string" displayLabel="System" />
+        <ECProperty propertyName="WeightSpare" typeName="string" displayLabel="Spare" />
+    </ECClass>
+    <ECClass typeName="CableInfo" description="This class gives cable nfo" displayLabel="Cable Info" isStruct="True" isDomainClass="False" isCustomAttributeClass="True">
+        <ECProperty propertyName="CableName" typeName="string" displayLabel="Name" />
+        <ECProperty propertyName="CableSize" typeName="string" displayLabel="Size" />
+        <ECProperty propertyName="CableType" typeName="string" displayLabel="Type" />
+        <ECProperty propertyName="CableWeight" typeName="string" displayLabel="Weight" />
+    </ECClass>
+    <ECClass typeName="DetailFillInfo" description="This class gives divider fill info" displayLabel="Divider Detail Info" isStruct="True" isDomainClass="False" isCustomAttributeClass="True" readOnly="True">
+        <ECProperty propertyName="Divider" typeName="string" />
+        <ECProperty propertyName="LayingMethod" typeName="string" displayLabel="Cable Laying Method" />
+        <ECArrayProperty propertyName="Cables" typeName="CableInfo" displayLabel="Cables" minOccurs="0" maxOccurs="unbounded" isStruct="True">
+            <ECCustomAttributes>
+                <ArrayBehaviorAttributes xmlns="EditorCustomAttributes.01.00">
+                    <OneElementAsArray>True</OneElementAsArray>
+                    <ShowEmpty>True</ShowEmpty>
+                    <SupportsAddAndRemove>False</SupportsAddAndRemove>
+                </ArrayBehaviorAttributes>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+
+    <ECClass typeName="SectionFillInfo" description="This class gives section fill info" displayLabel="Section Detail Info" isStruct="True" isDomainClass="False" isCustomAttributeClass="True" readOnly="True">
+        <ECProperty propertyName="MaxCapacity" typeName="string" displayLabel="MaxCapacity(%)" />
+        <ECProperty propertyName="LoadingArea" typeName="string" displayLabel="Loading Area Dimensions" />
+        <ECProperty propertyName="Total" typeName="string" />
+    </ECClass>
+
+    <ECClass typeName="DividerFillInfo" description="This class gives divider fill info" displayLabel="Divider Fill Info" isStruct="True" isDomainClass="False" isCustomAttributeClass="True" readOnly="False">
+        <ECStructProperty propertyName="RacewayDivider" typeName="DetailFillInfo" displayLabel="Divider" />
+        <ECStructProperty propertyName="RacewaySection" typeName="SectionFillInfo" displayLabel="Section" />
+        <ECProperty propertyName="CableTotal" typeName="string" displayLabel="Cable Total" />
+        <ECProperty propertyName="RacewayFill" typeName="string" displayLabel="Fill" />
+        <ECProperty propertyName="RacewaySpare" typeName="string" displayLabel="Spare" />
+        <ECProperty propertyName="AbsoluteFill" typeName="string" displayLabel="Absolute Fill" />
+        <ECProperty propertyName="AbsoluteSpare" typeName="string" displayLabel="Absolute Spare" />
+        <ECProperty propertyName="PhysicalFill" typeName="string" displayLabel="Fill" />
+        <ECProperty propertyName="PhysicalSpare" typeName="string" displayLabel="Spare" />
+    </ECClass>
+
+    <ECClass typeName="RACEWAY_ITEM" description="A channel for receiving and protecting electric wires." displayLabel="Raceway Item" isDomainClass="True">
+        <!-- <BaseClass>elecrcmprop:RACEWAY_ITEM</BaseClass> -->
+        <BaseClass>bentley:BENTLEY_BASE_OBJECT</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS1049223121</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS1049223121</IdPCA>
+                <Designation>ELECTRICAL CABLE CONDUIT</Designation>
+                <CreationDate>633718080000000000</CreationDate>
+                <Creator>mvsen</Creator>
+                <Status>Recorded</Status>
+                <Note>Derived from Oxford English Dicitionary|May be open or closed|A length or stretch of this.</Note>
+            </ISO15926MetaData>
+            <InstanceLabelSpecification xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <PropertyName>ID</PropertyName>
+            </InstanceLabelSpecification>
+        </ECCustomAttributes>
+        <ECProperty propertyName="WIDTH" typeName="double" description="Width of the raceway." displayLabel="Width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>89</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="HEIGHT" typeName="double" description="Height of the raceway." displayLabel="Height" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>88</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DIVIDERS" typeName="string" description="Quantity of dividers in the raceway used to separate cables of different voltage levels" displayLabel="Raceway Dividers" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>79</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECStructProperty propertyName="TRANSFORMATION_MATRIX" typeName="bentley:TRANSFORM3D" description="Description of position and orientation of the raceway in the model" displayLabel="Transformation Matrix" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECStructProperty>
+        <ECProperty propertyName="VOLTAGELEVEL" typeName="string" description="Voltage level" displayLabel="Voltage Level" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>78</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="CABLE_LAYING_METHOD" typeName="string" description="Method of laying cables in the raceway system." displayLabel="Cable Laying Method" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>77</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PRODUCT_CODE" typeName="string" description="Raceway product code per manufacturer’s catalog" displayLabel="Product Code" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>92</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MAX_CAPACITY" typeName="string" description="Maximum allowable raceway capacity for cable fill (shown in percentage)" displayLabel="Maximum Raceway Capacity" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>76</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+
+        <ECProperty propertyName="STATUS" typeName="string" description="Current design state of the raceway." displayLabel="Raceway Status" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>93</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="COVER" typeName="string" description="Type of raceway cover used to protect cables " displayLabel="Raceway Cover" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>91</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LAYER" typeName="string" displayLabel="Layer" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>74</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="REDUNDANCY" typeName="string" displayLabel="Redundancy" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>73</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ID" typeName="string" description="unique raceway identified-ID">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DESCRIPTION" typeName="string" displayLabel="Description" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MANUFACTURER" typeName="string" description="Manufacturer" displayLabel="Manufacturer" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MATERIAL" typeName="string" description="Material" displayLabel="Material" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>96</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TRADE_WIDTH" typeName="double" description="Trade width" displayLabel="Trade Width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>95</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="TRADE_HEIGHT" typeName="double" description="Trade Height" displayLabel="Trade Height" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>94</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECStructProperty propertyName="Weight" typeName="Weight" displayLabel="Weight " readOnly="True"/>
+        <ECArrayProperty propertyName="dividerFillInfo" typeName="DividerFillInfo" description="Percentage of raceway volume currently occupied by cables" displayLabel="Current raceway fill info" minOccurs="0" maxOccurs="unbounded" isStruct="True"  readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>95</Priority>
+                </PropertyPriority>
+                <ArrayBehaviorAttributes xmlns="EditorCustomAttributes.01.00">
+                    <OneElementAsArray>True</OneElementAsArray>
+                    <SupportsAddAndRemove>False</SupportsAddAndRemove>
+                    <ShowEmpty>True</ShowEmpty>
+                </ArrayBehaviorAttributes>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_SECTION" description="An artefact and electrical cable conduit consisting of a mesh base and two sides" displayLabel="Cable Basket Section" isDomainClass="True">
+        <BaseClass>RACEWAY_ITEM</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_BEND" description="A cable basket section that is a bend" displayLabel="Cable Basket Bend" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484604</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484604</IdPCA>
+                <Designation>CABLE BASKET BEND</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ANGLE" typeName="double" description="raceway bend angle" displayLabel="Bend Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" description="raceway bend radius" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_FIXED_BEND" description="A cable basket bend that is fixed." displayLabel="Cable Basket Fixed Bend" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS879704</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS879704</IdPCA>
+                <Designation>CABLE BASKET FIXED BEND</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_BEND_30_DEG" description="A cable basket fixed bend where the angle between the vectors normal to the end planes is 30 degrees." displayLabel="Cable Basket Bend 30 Deg" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484064</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484064</IdPCA>
+                <Designation>CABLE BASKET BEND 30 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_BEND_45_DEG" description="A cable basket fixed bend where the angle between the vectors normal to the end planes is 45 degrees." displayLabel="Cable Basket Bend 45 Deg" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484019</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484019</IdPCA>
+                <Designation>CABLE BASKET BEND 45 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_BEND_60_DEG" description="A cable basket fixed bend where the angle between the vectors normal to the end planes is 60 degrees." displayLabel="Cable Basket Bend 60 Deg" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484109</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484109</IdPCA>
+                <Designation>CABLE BASKET BEND 60 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_BEND_90_DEG" description="A cable basket fixed bend where the angle between the vectors normal to the end planes is 90 degrees." displayLabel="Cable Basket Bend 90 Deg" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS483974</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS483974</IdPCA>
+                <Designation>CABLE BASKET BEND 90 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_CROSS" description="A cable basket section that is a cross" displayLabel="Cable Basket Cross" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484334</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484334</IdPCA>
+                <Designation>CABLE BASKET CROSS</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RADIUS" typeName="double" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double" displayLabel="Branch width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_FLEXI_BEND" description="A cable basket bend that is adjustable." displayLabel="Cable Basket Flexi-Bend" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS879749</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS879749</IdPCA>
+                <Designation>CABLE BASKET FLEXI-BEND</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_RISER" description="A 'cable basket section' and an 'elbow'  that changes the direction of cables between horizontal and vertical" displayLabel="Cable Basket Riser" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484154</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484154</IdPCA>
+                <Designation>CABLE BASKET RISER</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Bend Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" description="Bend Radius" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_HINGE" description="A cable basket riser that changes the elevation of cables at non-standard bend angles." displayLabel="Cable Basket Hinge" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_RISER</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_INSIDE_RISER" description="A cable basket riser that changes the elevation of cables running inside the bend" displayLabel="Cable Basket Inside Riser" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_RISER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484199</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484199</IdPCA>
+                <Designation>CABLE BASKET INSIDE RISER</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_OUTSIDE_RISER" description="A cable basket riser that changes the elevation of cables running outside the bend" displayLabel="Cable Basket Outside Riser" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_RISER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484244</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484244</IdPCA>
+                <Designation>CABLE BASKET OUTSIDE RISER</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_REDUCER" description="A cable basket section intended to join cable baskets having different width" displayLabel="Cable Basket Reducer" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484379</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484379</IdPCA>
+                <Designation>CABLE BASKET REDUCER</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RUN_WIDTH_ORIG" typeName="double" displayLabel="Run width before reduction" readOnly="True" />
+        <ECProperty propertyName="RUN_WIDTH_REDUCED" typeName="double" displayLabel="Run width after reduction" readOnly="True" />
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_REDUCER_CENTER" description="A cable basket reducer that is reduced in the center." displayLabel="Cable Basket Reducer Center" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_REDUCER</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_REDUCER_LEFT" description="A cable basket reducer that is reduced on the left hand side." displayLabel="Cable Basket Reducer Left" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_REDUCER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS900449</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS900449</IdPCA>
+                <Designation>CABLE BASKET REDUCER LEFT</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_REDUCER_RIGHT" description="A cable basket reducer that is reduced on the right hand side." displayLabel="Cable Basket Reducer Right" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_REDUCER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS900494</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS900494</IdPCA>
+                <Designation>CABLE BASKET REDUCER RIGHT</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_TEE" description="A cable basket section that is joint between 3 other cable basket sections" displayLabel="Cable Basket Tee" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484289</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484289</IdPCA>
+                <Designation>CABLE BASKET TEE</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RADIUS" typeName="double" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double" displayLabel="Branch width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_REDUCING_OR_EXPANDING_TEE" description="A cable basket tee that changes the size of the cable basket connecting to the leg of the tee." isDomainClass="True">
+        <BaseClass>CABLE_BASKET_TEE</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_BASKET_STRAIGHT" description="A cable basket section that is a straight length" displayLabel="Cable Basket Straight" isDomainClass="True">
+        <BaseClass>CABLE_BASKET_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS865394</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS865394</IdPCA>
+                <Designation>CABLE BASKET STRAIGHT</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="LENGTH" typeName="double" description="Straight section length" displayLabel="Raceway Length" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>90</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="STRUCTURAL_COMPONENT" description="A component of structural significance" displayLabel="Structural Component" isDomainClass="True">
+        <BaseClass>bentley:BENTLEY_BASE_OBJECT</BaseClass>
+    </ECClass>
+    <ECClass typeName="SUPPORT" description="A physical object that is capable of keeping some other thing from falling, sinking or failing." displayLabel="Support" isDomainClass="True">
+        <BaseClass>STRUCTURAL_COMPONENT</BaseClass>
+        <ECProperty propertyName="STATIC_LOAD" typeName="double" description="A force that is constant over time" displayLabel="Static Load">
+            <ECCustomAttributes>
+                <Category instanceID="SUPPORT:STATIC_LOAD:||-:Category" xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>DESIGN_CONDITIONS</Name>
+                    <DisplayLabel>Design Conditions</DisplayLabel>
+                    <Description>Design Condition Properties</Description>
+                    <Priority>100</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="SUPPORT_LOAD" typeName="double" description="A force that is acting on a physical object that acts as a support of another physical object." displayLabel="Support Load">
+            <ECCustomAttributes>
+                <Category instanceID="SUPPORT:SUPPORT_LOAD:||-:Category" xmlns="EditorCustomAttributes.01.00">
+                    <Standard>0</Standard>
+                    <Name>OPERATING_CONDITIONS</Name>
+                    <DisplayLabel>Operating Conditions</DisplayLabel>
+                    <Description>Operating Conditions Properties</Description>
+                    <Priority>101</Priority>
+                </Category>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECStructProperty propertyName="TRANSFORMATION_MATRIX" typeName="bentley:TRANSFORM3D" displayLabel="Transformation Matrix" />
+        <ECProperty propertyName="LENGTH" typeName="double" description="Distance from pipe center line to the base of the support" displayLabel="Length" />
+        <ECProperty propertyName="SUPPORT_POINT_X" typeName="double" description="Support Point on which the stress analysis is to be performed" />
+        <ECProperty propertyName="SUPPORT_POINT_Y" typeName="double" description="Support Point on which the stress analysis is to be performed" />
+        <ECProperty propertyName="SUPPORT_POINT_Z" typeName="double" description="Support Point on which the stress analysis is to be performed" />
+        <ECProperty propertyName="SPECIFICATION" typeName="string" displayLabel="Specification" />
+    </ECClass>
+    <ECClass typeName="CABLE_BRACKET" description="A support that is horizontally fixed at one end only, spaced at intervals, and on which cables rest" displayLabel="Cable Bracket" isDomainClass="True">
+        <BaseClass>SUPPORT</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6570425</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6570425</IdPCA>
+                <Designation>CABLE BRACKET</Designation>
+                <CreationDate>632930112000000000</CreationDate>
+                <Creator>u82237</Creator>
+                <Status>Qualified</Status>
+                <Note>IEV 826-15-10</Note>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_SECTION" description="An artefact and electrical cable conduit that is a part of a closed wiring system of generally circular cross section for insulated conductors and/or cables in electrical or communication installations, allowing them to be drawn in and/or replaced." displayLabel="Cable Conduit Section" isDomainClass="True">
+        <BaseClass>RACEWAY_ITEM</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6570635</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6570635</IdPCA>
+                <Designation>CABLE CONDUIT SECTION</Designation>
+                <CreationDate>632930112000000000</CreationDate>
+                <Creator>u82237</Creator>
+                <Status>Qualified</Status>
+                <Note>IEV 442-02-03</Note>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="SPACER" typeName="string" description="Type of the spacer used to support conduit runs inside the duct bank" displayLabel="Conduit Spacer" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>93</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_BEND" description="A cable conduit section where the angle between the vectors normal to the end planes differs from 180 degrees" displayLabel="Cable Conduit Bend" isDomainClass="True">
+        <BaseClass>CABLE_CONDUIT_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6570740</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6570740</IdPCA>
+                <Designation>CABLE CONDUIT BEND</Designation>
+                <CreationDate>630734688000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ANGLE" typeName="double" description="raceway bend angle" displayLabel="Bend Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" description="raceway bend radius" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_CROSS" description="A cable conduit section that is cross formed" displayLabel="Cable Conduit Cross" isDomainClass="True">
+        <BaseClass>CABLE_CONDUIT_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6569915</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6569915</IdPCA>
+                <Designation>CABLE CONDUIT CROSS</Designation>
+                <CreationDate>630734688000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double" displayLabel="Branch width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_REDUCER" description="A cable conduit section intended to join cable conduit sections of different diameters" displayLabel="Cable Conduit Reducer" isDomainClass="True">
+        <BaseClass>CABLE_CONDUIT_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6570095</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6570095</IdPCA>
+                <Designation>CABLE CONDUIT REDUCER</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RUN_WIDTH_ORIG" typeName="double" displayLabel="Run width before reduction" readOnly="True" />
+        <ECProperty propertyName="RUN_WIDTH_REDUCED" typeName="double" displayLabel="Run width after reduction" readOnly="True" />
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_STRAIGHT" description="A cable conduit section that is a straight line" displayLabel="Cable Conduit Straight" isDomainClass="True">
+        <BaseClass>CABLE_CONDUIT_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6570170</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6570170</IdPCA>
+                <Designation>CABLE CONDUIT STRAIGHT</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="LENGTH" typeName="double" description="Straight section length" displayLabel="Raceway Length" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>90</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_CONDUIT_TEE" description="A cable conduit section intended to connect a cable conduit section perpendicular to another" displayLabel="Cable Conduit Tee" isDomainClass="True">
+        <BaseClass>CABLE_CONDUIT_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6570245</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6570245</IdPCA>
+                <Designation>CABLE CONDUIT TEE</Designation>
+                <CreationDate>630734688000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RADIUS" typeName="double" displayLabel="Bend Radius">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double" displayLabel="Branch width">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECRelationshipClass typeName="CABLE_HAS_CABLE" description="A cable can be comprised of multiple cables." displayLabel="Cable Has Cable" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,1)" polymorphic="True">
+            <Class class="CABLE" />
+        </Source>
+        <Target cardinality="(0,1)" polymorphic="True">
+            <Class class="CABLE" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="DEVICE" description="This class defines an instance of a device." displayLabel="Device" isDomainClass="True">
+        <BaseClass>ELECTRICAL_ITEM</BaseClass>
+        <!-- <BaseClass>elecrcmprop:DEVICE</BaseClass> -->
+        <ECCustomAttributes>
+            <InstanceLabelSpecification xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <PropertyName>ID</PropertyName>
+            </InstanceLabelSpecification>
+        </ECCustomAttributes>
+        <ECProperty propertyName="DESCRIPTION" typeName="string" description="description of unit.device" displayLabel="Description" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98</Priority>
+                </PropertyPriority>
+                <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                    <DefinitionBackReference>http://rdl.rdlfacade.org/data#R56508447506</DefinitionBackReference>
+                    <EntityType>http://dm.rdlfacade.org/data#Role</EntityType>
+                    <IdPCA>RDS4037656140</IdPCA>
+                    <Designation>DESCRIPTION</Designation>
+                    <CreationDate>633083904000000000</CreationDate>
+                    <SubmitterOrg xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <Creator>tchr</Creator>
+                    <Status>Incomplete</Status>
+                    <Note xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                    <Example xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true" />
+                </ISO15926MetaData>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="PCODE" typeName="string" displayLabel="Product Code" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECStructProperty propertyName="TRANSFORMATION_MATRIX" typeName="bentley:TRANSFORM3D" displayLabel="Transformation matrix" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>82</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECStructProperty>
+        <ECProperty propertyName="DEVICE_CLASS" typeName="string" description="Device class (from OpenPlant)" displayLabel="Device Class" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>75</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ID" typeName="string" description="Business ID of the electrical item" >
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECRelationshipClass typeName="CABLE_IS_CONNECTED_FROM_SOURCE_DEVICE" description="A cable can be connected from a source device." displayLabel="Cable is Connected From Source Device" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <ECCustomAttributes>
+            <DgnECRelationshipOptions xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <PointerPersistence>1</PointerPersistence>
+                <BidirectionallyTraversable>True</BidirectionallyTraversable>
+            </DgnECRelationshipOptions>
+        </ECCustomAttributes>
+        <Source cardinality="(0,N)" polymorphic="True">
+            <Class class="CABLE" />
+        </Source>
+        <Target cardinality="(0,1)" polymorphic="True">
+            <Class class="DEVICE" />
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="CABLE_IS_CONNECTED_TO_TARGET_DEVICE" description="A cable can be connected to a target device." displayLabel="Cable is Connected To Target Device" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <ECCustomAttributes>
+            <DgnECRelationshipOptions xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <PointerPersistence>1</PointerPersistence>
+                <BidirectionallyTraversable>True</BidirectionallyTraversable>
+            </DgnECRelationshipOptions>
+        </ECCustomAttributes>
+        <Source cardinality="(0,N)" roleLabel="Cable Is Connected To Target Device" polymorphic="True">
+            <Class class="CABLE" />
+        </Source>
+        <Target cardinality="(0,1)" roleLabel="Cable Is Connected To Target Device (reversed)" polymorphic="True">
+            <Class class="DEVICE" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="CABLE_LADDER_SECTION" description="An artefact and electrical cable conduit consisting of a series of transverse supporting elements rigidly fixed to main longitudinal supporting members" displayLabel="Cable Ladder Section" isDomainClass="True">
+        <BaseClass>RACEWAY_ITEM</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6232222</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6232222</IdPCA>
+                <Designation>CABLE LADDER SECTION</Designation>
+                <CreationDate>632930112000000000</CreationDate>
+                <Creator>u82237</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_BEND" description="A cable ladder section that is a bend" displayLabel="Cable Ladder Bend" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484604</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484604</IdPCA>
+                <Designation>CABLE LADDER BEND</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ANGLE" typeName="double" description="raceway bend angle" displayLabel="Bend Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" description="raceway bend radius" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_FIXED_BEND" description="A cable ladder bend that is fixed." displayLabel="Cable Ladder Fixed Bend" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS879704</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS879704</IdPCA>
+                <Designation>CABLE LADDER FIXED BEND</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_BEND_30_DEG" description="A cable ladder fixed bend where the angle between the vectors normal to the end planes is 30 degrees." displayLabel="Cable Ladder Bend 30 Deg" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484064</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484064</IdPCA>
+                <Designation>CABLE LADDER BEND 30 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_BEND_45_DEG" description="A cable ladder fixed bend where the angle between the vectors normal to the end planes is 45 degrees." displayLabel="Cable Ladder Bend 45 Deg" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484019</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484019</IdPCA>
+                <Designation>CABLE LADDER BEND 45 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_BEND_60_DEG" description="A cable ladder fixed bend where the angle between the vectors normal to the end planes is 60 degrees." displayLabel="Cable Ladder Bend 60 Deg" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484109</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484109</IdPCA>
+                <Designation>CABLE LADDER BEND 60 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_BEND_90_DEG" description="A cable ladder fixed bend where the angle between the vectors normal to the end planes is 90 degrees." displayLabel="Cable Ladder Bend 90 Deg" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS483974</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS483974</IdPCA>
+                <Designation>CABLE LADDER BEND 90 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_CROSS" description="A cable ladder section that is a cross" displayLabel="Cable Ladder Cross" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484334</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484334</IdPCA>
+                <Designation>CABLE LADDER CROSS</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RADIUS" typeName="double" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double" displayLabel="Branch width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_FLEXI_BEND" description="A cable ladder bend that is adjustable." displayLabel="Cable Ladder Flexi-Bend" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS879749</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS879749</IdPCA>
+                <Designation>CABLE LADDER FLEXI-BEND</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_RISER" description="A 'cable ladder section' and an 'elbow'  that changes the direction of cables between horizontal and vertical" displayLabel="Cable Ladder Riser" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484154</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484154</IdPCA>
+                <Designation>CABLE LADDER RISER</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Bend Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" description="Bend Radius" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_HINGE" description="A cable ladder riser that changes the elevation of cables at non-standard bend angles." displayLabel="Cable Ladder Hinge" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_RISER</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_INSIDE_RISER" description="A cable ladder riser that changes the elevation of cables running inside the bend" displayLabel="Cable Ladder Inside Riser" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_RISER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484199</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484199</IdPCA>
+                <Designation>CABLE LADDER INSIDE RISER</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_OUTSIDE_RISER" description="A cable ladder riser that changes the elevation of cables running outside the bend" displayLabel="Cable Ladder Outside Riser" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_RISER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484244</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484244</IdPCA>
+                <Designation>CABLE LADDER OUTSIDE RISER</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_REDUCER" description="A cable ladder section intended to join cable ladders having different width" displayLabel="Cable Ladder Reducer" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484379</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484379</IdPCA>
+                <Designation>CABLE LADDER REDUCER</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RUN_WIDTH_ORIG" typeName="double" displayLabel="Run width before reduction" readOnly="True" />
+        <ECProperty propertyName="RUN_WIDTH_REDUCED" typeName="double" displayLabel="Run width after reduction" readOnly="True" />
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_REDUCER_CENTER" description="A cable ladder reducer that is reduced in the center." displayLabel="Cable Ladder Reducer Center" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_REDUCER</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_REDUCER_LEFT" description="A cable ladder reducer that is reduced on the left hand side." displayLabel="Cable Ladder Reducer Left" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_REDUCER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS900449</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS900449</IdPCA>
+                <Designation>CABLE LADDER REDUCER LEFT</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_REDUCER_RIGHT" description="A cable ladder reducer that is reduced on the right hand side." displayLabel="Cable Ladder Reducer Right" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_REDUCER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS900494</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS900494</IdPCA>
+                <Designation>CABLE LADDER REDUCER RIGHT</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_TEE" description="A cable ladder section that is joint between 3 other cable ladder sections" displayLabel="Cable Ladder Tee" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484289</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484289</IdPCA>
+                <Designation>CABLE LADDER TEE</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RADIUS" typeName="double" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double" displayLabel="Branch width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_REDUCING_OR_EXPANDING_TEE" description="A cable ladder tee that changes the size of the cable ladder connecting to the leg of the tee." displayLabel="Cable Ladder Reducing or Expanding Tee" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_TEE</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_LADDER_STRAIGHT" description="A cable ladder section that is a straight length" displayLabel="Cable Ladder Straight" isDomainClass="True">
+        <BaseClass>CABLE_LADDER_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS865394</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS865394</IdPCA>
+                <Designation>CABLE LADDER STRAIGHT</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="LENGTH" typeName="double" description="Straight section length" displayLabel="Raceway Length" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>90</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_ROUTE" description="A path for cables through the air, ground, or water." displayLabel="Cable Route" isDomainClass="True">
+        <BaseClass>RACEWAY_ITEM</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_SECTION" description="An artefact and electrical cable conduit consisting of a continuous base, raised edges and no covering" displayLabel="Cable Tray Section" isDomainClass="True">
+        <BaseClass>RACEWAY_ITEM</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS6232284</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS6232284</IdPCA>
+                <Designation>CABLE TRAY SECTION</Designation>
+                <CreationDate>632930112000000000</CreationDate>
+                <Creator>u82237</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_BEND" description="A cable tray section that turns the direction of the cable tray run through an angle in the plane of the cable tray" displayLabel="Cable Tray Bend" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS878939</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS878939</IdPCA>
+                <Designation>CABLE TRAY BEND</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ANGLE" typeName="double" description="raceway bend angle" displayLabel="Bend Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" description="raceway bend radius" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_FIXED_BEND" description="A cable tray bend which is fixed." displayLabel="Cable Tray Fixed Bend" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS879614</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS879614</IdPCA>
+                <Designation>CABLE TRAY FIXED BEND</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_BEND_30_DEG" description="A cable tray fixed bend where the angle between the vectors normal to the end planes is 30 degrees." displayLabel="Cable Tray Bend 30 Deg" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_FIXED_BEND</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_BEND_45_DEG" description="A cable tray fixed bend where the angle between the vectors normal to the end planes is 45 degrees." displayLabel="Cable Tray Bend 45 Deg" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS901889</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS901889</IdPCA>
+                <Designation>CABLE TRAY BEND 45 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_BEND_60_DEG" description="A cable tray fixed bend where the angle between the vectors normal to the end planes is 60 degrees." displayLabel="Cable Tray Bend 60 Deg" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_FIXED_BEND</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_BEND_90_DEG" description="A cable tray fixed bend where the angle between the vectors normal to the end planes is 90 degrees." displayLabel="Cable Tray Bend 90 Deg" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_FIXED_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS901844</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS901844</IdPCA>
+                <Designation>CABLE TRAY BEND 90 DEG</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_CROSS" description="A cable tray section that provides a cross between two cable tray runs" displayLabel="Cable Tray Cross" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS878984</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS878984</IdPCA>
+                <Designation>CABLE TRAY CROSS</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double" displayLabel="Branch width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_FLEXI_BEND" description="A cable tray bend which is adjustable." displayLabel="Cable Tray Flexi-Bend" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_BEND</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS879389</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS879389</IdPCA>
+                <Designation>CABLE TRAY FLEXI-BEND</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_RISER" description="A 'cable tray section' and an 'elbow' that changes the direction of a cable tray between horizontal and vertical." displayLabel="Cable Tray Riser" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS485099</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS485099</IdPCA>
+                <Designation>CABLE TRAY RISER</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Bend Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="RADIUS" typeName="double" description="Bend Radius" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_HINGE" description="A cable tray riser that changes the elevation of cables at non-standard bend angles." displayLabel="Cable Tray Hinge" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_RISER</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_INSIDE_RISER" description="A cable tray riser intended to change the elevation of cables running inside the bend" displayLabel="Cable Tray Inside Riser" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_RISER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484874</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484874</IdPCA>
+                <Designation>CABLE TRAY INSIDE RISER</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_OUTSIDE_RISER" description="A cable tray riser intended to change the elevation of cables running outside the bend." displayLabel="Cable Tray Outside Riser" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_RISER</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS484919</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS484919</IdPCA>
+                <Designation>CABLE TRAY OUTSIDE RISER</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_REDUCER" description="A cable tray section intended to join cable trays with different width" displayLabel="Cable Tray Reducer" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS485009</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS485009</IdPCA>
+                <Designation>CABLE TRAY REDUCER</Designation>
+                <CreationDate>632858400000000000</CreationDate>
+                <Creator>u20683</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RUN_WIDTH_ORIG" typeName="double" displayLabel="Run width before reduction" readOnly="True" />
+        <ECProperty propertyName="RUN_WIDTH_REDUCED" typeName="double" displayLabel="Run width after reduction" readOnly="True" />
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_REDUCER_CENTER" description="A cable tray reducer that is reduced in the center." displayLabel="Cable Tray Reducer Center" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_REDUCER</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_REDUCER_LEFT" description="A cable tray reducer that is reduced on the left hand side." displayLabel="Cable Tray Reducer Left" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_REDUCER</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_REDUCER_RIGHT" description="A cable tray reducer that is reduced on the right hand side." displayLabel="Cable Tray Reducer Right" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_REDUCER</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_TEE" description="A cable tray section that is a tee for joining one cable tray run to the side of another run" displayLabel="Cable Tray Tee" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS879119</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS879119</IdPCA>
+                <Designation>CABLE TRAY TEE</Designation>
+                <CreationDate>630704448000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="RADIUS" typeName="double" displayLabel="Bend Radius" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>84</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="BRANCH_WIDTH" typeName="double" displayLabel="Branch width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>87</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_REDUCING_OR_EXPANDING_TEE" description="A cable tray tee that changes the size of the cable tray connecting to the leg of the tee." displayLabel="Cable Tray Reducing or Expanding Tee" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_TEE</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRAY_STRAIGHT" description="A cable tray section that is straight" displayLabel="Cable Tray Straight" isDomainClass="True">
+        <BaseClass>CABLE_TRAY_SECTION</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS866069</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS866069</IdPCA>
+                <Designation>CABLE TRAY STRAIGHT</Designation>
+                <CreationDate>630669888000000000</CreationDate>
+                <Creator>u82234</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+        </ECCustomAttributes>
+        <ECProperty propertyName="LENGTH" typeName="double" description="Straight section length" displayLabel="Raceway Length" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>90</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TROUGH" description="A physical object that is a channel intended to enable cables to be laid underground, inside or outside a building" displayLabel="Cable Trough" isDomainClass="True">
+        <BaseClass>STRUCTURAL_COMPONENT</BaseClass>
+        <ECCustomAttributes>
+            <ISO15926MetaData xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <DefinitionBackReference>http://posccaesar.org/rdl/RDS959579</DefinitionBackReference>
+                <EntityType>http://www.w3.org/1999/02/22-rdf-syntax-ns#Description</EntityType>
+                <IdPCA>RDS959579</IdPCA>
+                <Designation>CABLE TROUGH</Designation>
+                <CreationDate>632930112000000000</CreationDate>
+                <Creator>u82237</Creator>
+                <Status>Qualified</Status>
+            </ISO15926MetaData>
+            <InstanceLabelSpecification xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <PropertyName>ID</PropertyName>
+            </InstanceLabelSpecification>
+        </ECCustomAttributes>
+        <ECProperty propertyName="ID" typeName="string" description="ID/Name of the cable trough.  Not unique.  Cable trough objects with the same ID are part of the same cable trough." >
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>100</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="HEIGHT" typeName="double" description="Height of the cable trough element (bounding box)" displayLabel="Height" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>99</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="WIDTH" typeName="double" description="Width of the cable trough element (bounding box)" displayLabel="Width" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>98</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="LENGTH" typeName="double" description="Length of the cable trough element (bounding box)" displayLabel="Length" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>97</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ELEVATION" typeName="double" description="Measured as positive upwards. it is either the distance above the earth' surface or above a reference plane subparallel to the earth' surface.  Relative to the point specified by the TRANSFORMATION_MATRIX" displayLabel="Elevation" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>96</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="MATERIAL_VOLUME" typeName="double" description="Volume of material (e.g. concrete) used to form the solid.  May be less than the geometric volume of the element in case this component contains other objects." displayLabel="Material Volume" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>95</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECStructProperty propertyName="TRANSFORMATION_MATRIX" typeName="bentley:TRANSFORM3D" description="Gives the position (of the starting point) and rotation of the cable trough" displayLabel="Transformation Matrix" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECStructProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRENCH" description="Underground space for hanging cables of considerable length, usually having two walls, a floor, and an optional cover." displayLabel="Cable Trench" isDomainClass="True">
+        <BaseClass>CABLE_TROUGH</BaseClass>
+        <ECProperty propertyName="BASE_HEIGHT" typeName="double" description="Height of the floor component" displayLabel="Base Height" readOnly="True" />
+        <ECProperty propertyName="WALL_THICKNESS" typeName="double" description="Thickness of the walls" displayLabel="Wall thickness" readOnly="True" />
+        <ECProperty propertyName="WALL_HEIGHT" typeName="double" description="Height of the walls" displayLabel="Wall height" readOnly="True" />
+        <ECProperty propertyName="BASE_WIDTH" typeName="double" description="Width of the floor component" displayLabel="Base Width" readOnly="True" />
+        <ECProperty propertyName="INTERIOR_WIDTH" typeName="double" description="Width of the interior space between walls" displayLabel="Interior Width" readOnly="True" />
+        <ECProperty propertyName="COVER_HEIGHT" typeName="double" description="Height of the cover" displayLabel="Cover Height" readOnly="True" />
+        <ECProperty propertyName="COVER_WIDTH" typeName="double" description="Width of the cover" displayLabel="Cover Width" readOnly="True" />
+        <ECProperty propertyName="HAS_COVER" typeName="boolean" description="Indicates whether this trench has a cover" displayLabel="Has Cover?" readOnly="True" />
+    </ECClass>
+    <ECClass typeName="CABLE_TRENCH_BEND" description="A cable trench section that is a bend" displayLabel="Cable Trench Bend" isDomainClass="True">
+        <BaseClass>CABLE_TRENCH</BaseClass>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRENCH_CROSS" description="A cable trench section that is a joint between 4 straight sections that cross at 90 degree angles" displayLabel="Cable Trench Cross" isDomainClass="True">
+        <BaseClass>CABLE_TRENCH</BaseClass>
+    </ECClass>
+    <ECRelationshipClass typeName="CABLE_TRENCH_HAS_CABLE_BRACKET" description="Cable Trench Has Cable Bracket" displayLabel="Cable Trench Has Cable Bracket" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,1)" polymorphic="True">
+            <Class class="CABLE_TRENCH" />
+        </Source>
+        <Target cardinality="(0,N)" polymorphic="True">
+            <Class class="CABLE_BRACKET" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="CABLE_TRENCH_RISER" description="A cable trench section that changes elevation at an angle" displayLabel="Cable Trench Riser" isDomainClass="True">
+        <BaseClass>CABLE_TRENCH</BaseClass>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Angle" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>85</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="CABLE_TRENCH_STRAIGHT" description="A cable trench section that is straight." displayLabel="Cable Trench Straight" isDomainClass="True">
+        <BaseClass>CABLE_TRENCH</BaseClass>
+    </ECClass>
+    <ECClass typeName="CABLE_TRENCH_TEE" description="A cable trench section that is joint between 3 cable trench straight sections." displayLabel="Cable Trench Tee" isStruct="True" isDomainClass="True">
+        <BaseClass>CABLE_TRENCH</BaseClass>
+    </ECClass>
+    <ECRelationshipClass typeName="CABLE_TROUGH_HAS_RACEWAY_ITEM" description="Cable Trough Has Raceway Item" displayLabel="Cable Trough Has Raceway Item" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,1)" polymorphic="True">
+            <Class class="CABLE_TROUGH" />
+        </Source>
+        <Target cardinality="(0,N)" polymorphic="True">
+            <Class class="RACEWAY_ITEM" />
+        </Target>
+    </ECRelationshipClass>
+    <ECRelationshipClass typeName="DEVICE_HAS_DEVICE" description="A device can be comprised of other devices." displayLabel="Device Has Device" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,N)" polymorphic="True">
+            <Class class="DEVICE" />
+        </Source>
+        <Target cardinality="(0,N)" polymorphic="True">
+            <Class class="DEVICE" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="DUCTBANK_ENVELOPE" description="Concrete envelope around ductbank conduits" displayLabel="Duct Bank Envelope" isDomainClass="True">
+        <BaseClass>CABLE_TROUGH</BaseClass>
+        <ECProperty propertyName="ENCASEMENT_TOP" typeName="double" description="Thickness of encasement material required on the top of the conduit." displayLabel="Encasement Top" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>94</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ENCASEMENT_BOTTOM" typeName="double" description="Thickness of encasement material required on the bottom of the conduit." displayLabel="Encasement Bottom" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>93</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ENCASEMENT_LEFT" typeName="double" description="Thickness of encasement material required on the left side of the conduit." displayLabel="Encasement Left" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>92</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="ENCASEMENT_RIGHT" typeName="double" description="Thickness of encasement material required on the right side of the conduit." displayLabel="Encasement Right" readOnly="True">
+            <ECCustomAttributes>
+                <PropertyPriority xmlns="EditorCustomAttributes.01.00">
+                    <Priority>91</Priority>
+                </PropertyPriority>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="DUCTBANK_ENVELOPE_BEND" description="Section of duct bank envelope that bends." displayLabel="Duct Bank Envelope Bend" isDomainClass="True">
+        <BaseClass>DUCTBANK_ENVELOPE</BaseClass>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Angle" readOnly="True" />
+    </ECClass>
+    <ECClass typeName="DUCTBANK_ENVELOPE_RISER" description="Section of duct bank envelope that changes evelation at an angle." displayLabel="Duct Bank Envelope Riser" isDomainClass="True">
+        <BaseClass>DUCTBANK_ENVELOPE</BaseClass>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Angle" />
+    </ECClass>
+    <ECClass typeName="DUCTBANK_ENVELOPE_STRAIGHT" description="Section of duct bank envelope that is straight." displayLabel="Duct Bank Envelope Straight" isDomainClass="True">
+        <BaseClass>DUCTBANK_ENVELOPE</BaseClass>
+    </ECClass>
+    <ECClass typeName="DUCTBANK_RESERVATION" description="Space reserved for future duct bank." displayLabel="Duct Bank Resevation" isDomainClass="True">
+        <BaseClass>CABLE_TROUGH</BaseClass>
+    </ECClass>
+    <ECClass typeName="DUCTBANK_RESERVATION_BEND" description="Section of duct bank envelope that bends." displayLabel="Duct Bank Reservation Bend" isDomainClass="True">
+        <BaseClass>DUCTBANK_RESERVATION</BaseClass>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Angle" readOnly="True" />
+    </ECClass>
+    <ECClass typeName="DUCTBANK_RESERVATION_RISER" description="Section of duct bank envelope that changes evelation at an angle." displayLabel="Duct Bank Reservation Riser" isDomainClass="True">
+        <BaseClass>DUCTBANK_RESERVATION</BaseClass>
+        <ECProperty propertyName="ANGLE" typeName="double" description="Bend Angle" displayLabel="Angle" />
+    </ECClass>
+    <ECClass typeName="DUCTBANK_RESERVATION_STRAIGHT" description="Section of duct bank envelope that is straight." displayLabel="Duct Bank Reservation Straight" isDomainClass="True">
+        <BaseClass>DUCTBANK_RESERVATION</BaseClass>
+    </ECClass>
+    <ECClass typeName="MANHOLE" description="An underground open space adjacent to a ductbank and of sufficient size to allow a person to enter" displayLabel="Manhole" isDomainClass="True">
+        <BaseClass>CABLE_TROUGH</BaseClass>
+        <ECProperty propertyName="WALL_THICKNESS" typeName="string" description="Thickness of the walls" displayLabel="Wall Thickness" readOnly="True" />
+    </ECClass>
+    <ECClass typeName="PROPERTY_VALUES" description="Defines a property/value pair used for property collections." displayLabel="Property Values" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="PROPERTY_NAME" typeName="string" description="Name of a property." displayLabel="Property Name" />
+        <ECProperty propertyName="PROPERTY_VALUE" typeName="string" description="Value of a property." displayLabel="Property Value" />
+    </ECClass>
+    <ECRelationshipClass typeName="RACEWAY_ITEM_HAS_ROUTED_CABLE" description="A raceway item can have routed cables." displayLabel="Raceway Item has routed cable" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <!--<ECCustomAttributes>
+            <DgnECRelationshipOptions xmlns="Bentley_Standard_CustomAttributes.01.01">
+                <PointerPersistence>2</PointerPersistence>
+                <BidirectionallyTraversable>True</BidirectionallyTraversable>
+            </DgnECRelationshipOptions>
+        </ECCustomAttributes>-->
+        <Source cardinality="(0,N)" polymorphic="True">
+            <Class class="CABLE" />
+        </Source>
+        <Target cardinality="(0,N)" polymorphic="True">
+            <Class class="RACEWAY_ITEM" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="VALUE_MAP" description="Value Map" displayLabel="Value Map" isDomainClass="True" />
+    <ECClass typeName="RACEWAY_SYSTEM_VALUE_MAP" displayLabel="Raceway System Value Map" isDomainClass="True">
+        <BaseClass>VALUE_MAP</BaseClass>
+        <ECProperty propertyName="CABLE_TRAY" typeName="string" displayLabel="Cable Tray" />
+        <ECProperty propertyName="CABLE_LADDER" typeName="string" displayLabel="Cable Ladder" />
+        <ECProperty propertyName="CONDUIT" typeName="string" displayLabel="Conduit" />
+        <ECProperty propertyName="CABLE_BASKET" typeName="string" displayLabel="Cable Basket" />
+        <ECProperty propertyName="CABLE_ROUTE" typeName="string" displayLabel="Cable Route" />
+    </ECClass>
+</ECSchema>

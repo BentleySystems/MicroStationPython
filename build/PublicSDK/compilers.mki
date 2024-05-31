@@ -1,0 +1,65 @@
+#--------------------------------------------------------------------------------------
+#
+#
+#  $Copyright: (c) 2009 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+
+#----------------------------------------------------------------------
+#   Compiler version determination
+#
+#   We compile compenv.c with the preprocessor, pipe it to a .mki
+#   file, which is included in the msj build process.
+#
+#   This technique is nice for a single toolset product, but we don't
+#   use it for products that use AssertToolSet.mki to assert different
+#   toolsets for different portions of a build.
+#
+#----------------------------------------------------------------------
+%if !defined (NO_COMPILERS_MKI)
+
+    # Since this creates output, try to find a reasonable place for it.
+    %if !defined (COMPENVMKI_DIR)
+        %if defined (gensrc)
+            COMPENVMKI_DIR = $(gensrc)
+        %else
+            COMPENVMKI_DIR = ./
+        %endif
+    %endif
+
+    # Figure out where compenv.c lives.
+    %if !defined (COMPENVSRC_DIR)
+        %if defined (SrcBsiCommon)
+            COMPENVSRC_DIR = $(SrcBsiCommon)sharedmki/
+        %else
+            COMPENVSRC_DIR = $(MSMDE)mdl/include/
+        %endif
+    %endif
+
+    # On the first time, create the mki by precompiling a c file.
+    %ifnofile $(COMPENVMKI_DIR)
+        always:
+            ~mkdir $(COMPENVMKI_DIR)
+    %endif
+
+    %if !defined (compenvMKI)
+        compenvMKI = compenv.mki
+    %endif
+
+    %iffile $(COMPENVSRC_DIR)compenv.c
+        $(COMPENVMKI_DIR)$(compenvMKI): $(COMPENVSRC_DIR)compenv.c
+            |[== Generating compiler environment file $@, ($=) ==]
+            cl -nologo $= -EP > $@
+    %endif
+
+    # Include the mki to set compiler versions.
+    %iffile $(COMPENVMKI_DIR)$(compenvMKI)
+        %include $(COMPENVMKI_DIR)$(compenvMKI)
+
+        # "MSVC_VERSION" should be defined if compenv.c was actually processed
+        %if !defined (MSVC_VERSION)
+            %error Generated file $(COMPENVMKI_DIR)$(compenvMKI) invalid - delete this file and restart build.
+        %endif
+    %endif
+
+%endif

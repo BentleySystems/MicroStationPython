@@ -1,0 +1,10 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonTests\PythonInterop\PythonInterop.mki $
+#
+#  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
+#
+#--------------------------------------------------------------------------------------
+dependencies    =   $(TestDir)PythonInterop/PythonApi.h
+
+$(o)PythonApi$(oext) :       $(TestDir)PythonInterop/PythonApi.cpp  $(dependencies)  ${MultiCompileDepends}

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="MismatchedSchema" nameSpacePrefix="test" version="1.0" description="Schema with minor errors." xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="beca" />
+    <ECClass typeName="AccessCustomAttributes" isCustomAttributeClass="True">
+        <ECProperty propertyName="AccessLevel" typeName="int" />
+        <ECProperty propertyName="Writeable" typeName="boolean" />
+    </ECClass>
+
+    <ECClass typeName="BadStruct" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="BinaryMember" typeName="binary" />
+        <ECProperty propertyName="BooleanMember" typeName="boolean" />
+        <ECProperty propertyName="DateTimeMember" typeName="dateTime" />
+        <ECProperty propertyName="DoubleMember" typeName="double" />
+        <ECProperty propertyName="IntMember" typeName="int" />
+        <ECProperty propertyName="LongMember" typeName="long" />
+        <ECProperty propertyName="Point2DMember" typeName="point2d" />
+        <ECProperty propertyName="Point3DMember" typeName="point3d" />
+        <ECProperty propertyName="StringMember" typeName="string" /> <!-- <- not possible?-->
+    </ECClass>
+        
+    <ECClass typeName="StructWithArrays" isStruct="true" isDomainClass="true">
+        <ECArrayProperty propertyName="BinaryArray" typeName="binary"  minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="BooleanArray" typeName="boolean"  minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="DateTimeArray" typeName="dateTime"  minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="DoubleArray" typeName="double"  minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="IntArray" typeName="int"  minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="LongArray" typeName="long"  minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="Point2DArray" typeName="point2d"  minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="Point3DArray" typeName="point3d"  minOccurs="0" maxOccurs="unbounded"/>
+        <ECArrayProperty propertyName="StringArray" typeName="string"  minOccurs="0" maxOccurs="unbounded"/> 
+    </ECClass>
+    
+    <ECClass typeName="TestClass" isDomainClass="True">
+        <ECCustomAttributes>
+            <AccessCustomAttributes xmlns="MismatchedSchema.01.00">
+                <AccessLevel>4</AccessLevel>
+                <Writeable>False</Writeable>
+            </AccessCustomAttributes>
+        </ECCustomAttributes>
+
+        <ECProperty propertyName="DoesNotExistInInstance0" typeName="binary" />
+
+        <ECProperty propertyName="DoesNotExistInInstance1" typeName="boolean" />
+
+        <ECProperty propertyName="DoesNotExistInInstance2" typeName="dateTime" />
+
+        <ECProperty propertyName="DoesNotExistInInstance3" typeName="double" />
+        <ECProperty propertyName="DoesNotExistInInstance4" typeName="int" />
+ 
+        <ECProperty propertyName="DoesNotExistInInstance5" typeName="long" />
+ 
+        <ECProperty propertyName="DoesNotExistInInstance6" typeName="point2d" />
+ 
+        <ECProperty propertyName="DoesNotExistInInstance7" typeName="point3d" />
+ 
+        <ECProperty propertyName="DoesNotExistInInstance8" typeName="string" />
+        
+        <ECArrayProperty propertyName="ArrayOfBadStructs" typeName="BadStruct" minOccurs="0" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <MemberExtendedType xmlns="EditorCustomAttributes.01.00">
+                    <Name>StructType</Name>
+                </MemberExtendedType>
+            </ECCustomAttributes>
+        </ECArrayProperty>
+
+        <ECStructProperty propertyName="FormattedBadStruct" typeName="BadStruct">
+            <ECCustomAttributes>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>FormattedBadStruct</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECStructProperty>        
+
+        <ECStructProperty propertyName="FormattedStructWithArrays0" typeName="StructWithArrays">
+            <ECCustomAttributes>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>FormattedStructWithArrays0</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECStructProperty>
+                
+        <ECStructProperty propertyName="FormattedStructWithArrays1" typeName="StructWithArrays">
+            <ECCustomAttributes>
+                <ExtendType xmlns="EditorCustomAttributes.01.00">
+                    <Name>FormattedStructWithArrays1</Name>
+                </ExtendType>
+            </ECCustomAttributes>
+        </ECStructProperty>
+
+
+        <ECProperty propertyName="AnotherBinaryMember" typeName="binary" />
+        <ECProperty propertyName="AnotherBooleanMember" typeName="boolean" />
+        <ECProperty propertyName="AnotherDateTimeMember" typeName="dateTime" />
+        <ECProperty propertyName="AnotherDoubleMember" typeName="double" />
+        <ECProperty propertyName="AnotherIntMember" typeName="int" />
+        <ECProperty propertyName="AnotherLongMember" typeName="long" />
+        <ECProperty propertyName="AnotherPoint2DMember" typeName="point2d" />
+        <ECProperty propertyName="AnotherPoint3DMember" typeName="point3d" />
+        <ECProperty propertyName="AnotherStringMember" typeName="string" />
+    </ECClass>
+</ECSchema>

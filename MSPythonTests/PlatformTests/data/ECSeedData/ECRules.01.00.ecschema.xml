@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="ECRules" nameSpacePrefix="ecr" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECClass typeName="RuleSet" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="Name" typeName="string" />
+        <ECProperty propertyName="Description" typeName="string" />
+        <ECProperty propertyName="BaseQuery" typeName="string" description="The starting point for building a query during the execution of a rule set." />
+        <ECProperty propertyName="ReadOnly" typeName="boolean" description="If true the rule set cannot be edited and all the rules it contains are also considered to be readonly" />
+        <ECArrayProperty propertyName="Rules" typeName="Rule" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+        <ECProperty propertyName="Chaining" typeName="int" description="0 for No Chaining (Sequential), 1 for Explicit Chaining (Explicit Update Only), 2 for Full Chaining" />
+        <ECArrayProperty propertyName="Context" typeName="string" minOccurs="0" maxOccurs="unbounded" description="An array containing relevant context for the rule set." />
+    </ECClass>
+    <ECClass typeName="Rule" isDomainClass="True" isCustomAttributeClass="True" isStruct="True">
+        <ECProperty propertyName="Name" typeName="string" />
+        <ECProperty propertyName="Description" typeName="string" description="A string containing a plain text description of the rule including the find and replace points." />
+        <ECProperty propertyName="ReadOnly" typeName="boolean" description="If true the rule cannot be edited"/>
+        <ECStructProperty propertyName="Conditions" typeName="RuleConditionGroup" isStruct="True" />
+        <ECStructProperty propertyName="ThenActions" typeName="RuleActionGroup" isStruct="True" />
+        <ECStructProperty propertyName="ElseActions" typeName="RuleActionGroup" isStruct="True" />
+        <ECArrayProperty propertyName="CodeReplacements" typeName="CodeReplacementStatement" description="As conditions and actions are added to the rule their code replacements should be renumbered and added here." minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+        <ECProperty propertyName="Priority" typeName="int" description="Higher priorities are exectued first" />
+        <ECProperty propertyName="Reevaluate" typeName="boolean" description="If false this rule will only be executed once regardless of chaining" />
+        <ECProperty propertyName="Active" typeName="boolean" description="Only active rules are executed" />
+        <ECProperty propertyName="Validated" typeName="boolean" description="True if the rule is fully replaced and it has been validated." />
+    </ECClass>
+    <ECClass typeName="RuleConditionGroup" isDomainClass="True" isStruct="True">
+        <ECProperty propertyName="Name" typeName="string" description="The name that will be shown in the UI" />
+        <ECProperty propertyName="Description" typeName="string" />
+        <ECArrayProperty propertyName="Conditions" typeName="RuleConditionStatement" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+    </ECClass>
+    <ECClass typeName="RuleConditionStatement" isDomainClass="True" isStruct="True">
+        <BaseClass>CodeStatement</BaseClass>
+        <ECProperty propertyName="CombinationOperator" typeName="string" description="Accepted values are 'And' 'Or' and 'None'.  'None' indicates that this is the beginning of the list, may also be left empty if it's at the beginning of the list"/>
+    </ECClass>
+    <ECClass typeName="RuleActionGroup" isDomainClass="True" isStruct="True">
+        <ECProperty propertyName="Name" typeName="string" />
+        <ECProperty propertyName="Description" typeName="string" />
+        <ECArrayProperty propertyName="Actions" typeName="RuleActionStatement" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+    </ECClass>
+    <ECClass typeName="RuleActionStatement" isDomainClass="True" isStruct="True">
+        <ECProperty propertyName="LeftCodeSnippet" typeName="string" />
+        <ECProperty propertyName="RightCodeSnippet" typeName="string" />
+        <ECArrayProperty propertyName="CodeReplacements" typeName="CodeReplacementStatement" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+        <ECProperty propertyName="Name" typeName="string" />
+        <ECProperty propertyName="Description" typeName="string" />
+        <ECArrayProperty propertyName="TypeReferences" typeName="string" minOccurs="0" maxOccurs="unbounded" isStruct="True" description="An array containing the full type names of all identifiers used." />
+        <ECArrayProperty propertyName="EnumReferences" typeName="string" minOccurs="0" maxOccurs="unbounded" description="An array containing the full type names of all enumerations used." />
+        <ECProperty propertyName="IsAssignment" typeName="boolean" description="If true the variable in the LeftCodeSnippet is set to the value of the RightCodeSnippet"/>
+    </ECClass>
+    <ECClass typeName="CodeReplacementStatement" isDomainClass="True" isStruct="True">
+        <BaseClass>CodeStatement</BaseClass>
+        <ECProperty propertyName="ReplacementName" typeName="string" />
+        <ECProperty propertyName="ReplacementId" typeName="int" />
+        <ECArrayProperty propertyName="RelatedReplacementIds" typeName="int" minOccurs="0" maxOccurs="unbounded" description="An array containing the ids for replacements that rely on this replacement for their type information" />
+        <ECProperty propertyName="SupportsAssignment" typeName="boolean" />
+        <ECProperty propertyName="ReplacementType" typeName="string" description="The full type name of the type required for the replacement"/>
+        <ECStructProperty propertyName="ReplacementLocatorContext" typeName="ReplacementLocatorContext" />
+    </ECClass>
+    <ECClass typeName="ReplacementLocatorContext" isDomainClass="True" isStruct="True">
+        <ECProperty propertyName="ContextType" typeName="string" />
+        <ECProperty propertyName="Context" typeName="string" />
+    </ECClass>
+    <ECClass typeName="CodeStatement" isDomainClass="True" isStruct="True">
+        <ECProperty propertyName="CodeSnippet" typeName="string" description="C# code snippet that evaluates to true" />
+        <ECProperty propertyName="Name" typeName="string" />
+        <ECProperty propertyName="Description" typeName="string" />
+        <ECArrayProperty propertyName="CodeReplacements" typeName="CodeReplacementStatement" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+        <ECArrayProperty propertyName="TypeReferences" typeName="string" minOccurs="0" maxOccurs="unbounded" description="An array containing the full type names of all identifiers used." />
+        <ECArrayProperty propertyName="EnumReferences" typeName="string" minOccurs="0" maxOccurs="unbounded" description="An array containing the full type names of all enumerations used." />
+    </ECClass>
+</ECSchema>
+

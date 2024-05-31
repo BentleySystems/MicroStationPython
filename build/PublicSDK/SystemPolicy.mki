@@ -1,0 +1,112 @@
+#--------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#  Base policy is defined in this file.
+#
+#--------------------------------------------------------------------------------------
+%if defined (__SystemPolicy_mki__)
+    %return
+%endif
+
+__SystemPolicy_mki__  = 1
+
+%if !defined (StrongNameSignature)
+    StrongNameSignature=NormalSignature
+%endif
+
+
+# The following pre-defined macros identify the machine that is building the software:
+#   winNT, __linux, __apple
+
+#  Identify the kind of machine that is intended to run the software
+#
+
+%if !defined (DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
+    %if defined (winNT)
+        DEFAULT_TARGET_PROCESSOR_ARCHITECTURE=x86
+    %elif defined (unix)
+        DEFAULT_TARGET_PROCESSOR_ARCHITECTURE=LinuxX86
+    %endif
+%endif
+
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    TARGET_PROCESSOR_ARCHITECTURE=$(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
+%endif
+
+TARGET_PROCESSOR_DIRECTORY              = $(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
+DEFAULT_TARGET_PROCESSOR_DIRECTORY      = $(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
+
+# Infer target platform, processor architecture, build directory name, and toolset all from TARGET_PROCESSOR_ARCHITECTURE (which corresponds to bb -x argument) 
+#
+%if $(TARGET_PROCESSOR_ARCHITECTURE)=="AndroidARM" || $(TARGET_PROCESSOR_ARCHITECTURE)=="AndroidARM7A" || $(TARGET_PROCESSOR_ARCHITECTURE)=="AndroidX86"
+    TARGET_PLATFORM                         ="Android"
+    BUILD_USING_GCC                         =1
+    USE_UNIX_FILENAMES                      =1
+    BETHREAD_USE_PTHREAD                    =1
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)!="AndroidX86"
+        nameToDefine=TARGET_PROCESSOR_ARCHITECTURE_MEMORY_ALIGNMENT_REQUIRED=1
+        %include cdefapnd.mki
+    %endif
+%elif $(TARGET_PROCESSOR_ARCHITECTURE)=="LinuxX86"
+    TARGET_PLATFORM                         ="Linux"
+    BUILD_USING_GCC                         =1
+    USE_UNIX_FILENAMES                      =1
+    BETHREAD_USE_PTHREAD                    =1
+    nameToDefine=TEST_LINUX_GUI
+    %include cdefapnd.mki
+%elif $(TARGET_PROCESSOR_ARCHITECTURE)=="iOSX86" || $(TARGET_PROCESSOR_ARCHITECTURE)=="iOSARM"
+    TARGET_PLATFORM                         = "iOS"
+    BUILD_USING_LLVM                        = 1
+    USE_UNIX_FILENAMES                      = 1
+    CREATE_STATIC_LIBRARIES                 = 1
+    BETHREAD_USE_PTHREAD                    = 1
+
+    nameToDefine = __unix__
+    %include cdefapnd.mki
+    
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)!="iOSX86"
+        nameToDefine=TARGET_PROCESSOR_ARCHITECTURE_MEMORY_ALIGNMENT_REQUIRED=1
+        %include cdefapnd.mki
+    %endif
+%else
+    TARGET_PLATFORM                         ="Windows"
+    USE_UNIX_FILENAMES                      =0
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+        slashAmd64=/amd64
+        slashx64=/x64
+        slashx86x64=/x64
+        %if $(PROCESSOR_ARCHITECTURE)=="x86"
+            slashXCompileDir=/x86_amd64
+        %else
+            slashXCompileDir=/amd64
+        %endif
+    %endif
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+        slashx86x64=/x86
+    %endif
+
+    %if $(TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+        TARGET_PROCESSOR_DIRECTORY  = Winx86
+    %elif $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+        TARGET_PROCESSOR_DIRECTORY  = Winx64
+    %else
+        TARGET_PROCESSOR_DIRECTORY  = WinAnyCpu
+    %endif
+
+    %if $(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)=="x86"
+        DEFAULT_TARGET_PROCESSOR_DIRECTORY  = Winx86
+    %elif $(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+        DEFAULT_TARGET_PROCESSOR_DIRECTORY  = Winx64
+    %else
+        DEFAULT_TARGET_PROCESSOR_DIRECTORY  = WinAnyCpu
+    %endif
+
+%endif
+
+# This high-level variable controls what we call to create libraries (bmake-time), as well as how we export symbols (compiler-time); the two are tightly coupled.
+%if defined (CREATE_STATIC_LIBRARIES)
+    nameToDefine = CREATE_STATIC_LIBRARIES
+    %include cdefapnd.mki
+%endif

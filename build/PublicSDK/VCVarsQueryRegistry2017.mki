@@ -1,0 +1,177 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: PublicSDK/VCVarsQueryRegistry2017.mki $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# If PROCESSOR_ARCHITEW6432 is defined then we are a 32bit process on a 64bit OS. If we are targeting x64
+# then we have to opt-in to the 64-bit registry view (since we are a 32-bit process).
+
+
+%if defined(PROCESSOR_ARCHITEW6432) && $(TARGET_PROCESSOR_ARCHITECTURE)=="x64"
+    Wow64RegistryViewOfTarget = KEY_WOW64_64KEY
+%else
+    Wow64RegistryViewOfTarget = None
+%endif
+%if !defined (VS2017Dir)
+    VS2017Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VS7", "15.0"]]
+    %if $(VS2017Dir) == " "
+        %error Cannot find compiler location for this toolset. VS2017Dir was not defined, and registry lookup failed.
+    %endif
+%endif
+
+%if !defined (VS2017_WindowsSdkDir)
+    VS2017_WindowsSdkDir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/Microsoft/Windows Kits/Installed Roots", "KitsRoot10"]]
+    %if $(VS2017_WindowsSdkDir) == " "
+        %error Cannot find the Windows SDK location for this toolset. VS2017_WindowsSdkDir was not defined, and registry lookup failed.
+    %endif
+%endif
+%if !defined (UCRTVersion)
+    # Look for the highest subdirectory that beings with 10.
+
+%if defined (VCVarsQueryRegistry2017File)
+    %iffile $(VCVarsQueryRegistry2017File)
+        VCVarsQueryRegistry2017MkiFile = $(VCVarsQueryRegistry2017File)
+    %else
+        VCVarsQueryRegistry2017MkiFile = $(SrcRoot)bsicommon/PublicSDK/VCVarsQueryRegistry2017.mki
+    %endif
+%endif
+
+%if !defined (VCVarsQueryRegistry2017MkiFile)
+	VCVarsQueryRegistry2017MkiFile = $(SrcRoot)bsicommon/PublicSDK/VCVarsQueryRegistry2017.mki
+%endif
+
+%iffile $(VCVarsQueryRegistry2017MkiFile)
+    ucrtBatFile = ${TEMP}/getucrtversion2017.bat
+    ucrtTextFile = ${TEMP}/ucrtversion2017.txt
+    $(ucrtTextFile) : $(VCVarsQueryRegistry2017MkiFile)
+        @if not exist ${TEMP} mkdir ${TEMP}
+        > $(ucrtBatFile)
+        @echo OFF
+        @REM -----------------------------------------------------------------------
+        :GetUniversalCRTSdkDirHelper
+        @setlocal enableDelayedExpansion
+        @for \/f %%i IN ('dir "$(VS2017_WindowsSdkDir)include\" \/b \/ad-h \/on') DO (
+        @set result=%%i
+        @if "!result:~0,3!"=="10." set CRT=!result!
+        @if "!result!"=="%user_inputversion%" set match=1
+        )
+        @if not "%match%"=="" set CRT=%user_inputversion%
+        @endlocal  & echo %CRT% > $(ucrtTextFile)
+        <
+        $(ucrtBatFile)
+
+    executeUCRTGet:
+        ~set UCRTVersion $[@strip $[@readfile $(ucrtTextFile)]]
+
+WindowsSDKVersion = $(UCRTVersion)
+%endif
+%else
+    WindowsSDKVersion = ${UCRTVersion}
+%endif   
+%if !defined (VS2017_MSBuildDir)
+    VS2017_MSBuildRootDir = $(VS2017Dir)MSBuild
+    %if $(VS2017_MSBuildRootDir) == " "
+        %error Cannot find the Windows SDK location for this toolset. VS2017_MSBuildDir was not defined, and registry lookup failed.
+    %endif	
+    
+    # I could not find unique registry keys for 32- vs. 64-bit; it relies on the registry redirect.
+    # Since BentleyBuildMake is 32-bit, it cannot easily view the 64-bit registry without modifying it to support KEY_WOW64_64KEY when querying.
+    # I think this is sufficient for our purposes.
+    %if (" " != $[@findstring x86, $(TARGET_PROCESSOR_ARCHITECTURE)])
+        VS2017_MSBuildDir = $(VS2017_MSBuildRootDir)/15.0/bin/
+    %elif (" " != $[@findstring x64, $(TARGET_PROCESSOR_ARCHITECTURE)])
+        VS2017_MSBuildDir = $(VS2017_MSBuildRootDir)/15.0/bin/amd64/
+    %else
+        %error Unknown value for TARGET_PROCESSOR_ARCHITECTURE ('$(TARGET_PROCESSOR_ARCHITECTURE)').
+    %endif
+%endif
+
+%if !defined (DEFAULT_DOT_NET_FRAMEWORK_VERSION)
+    DEFAULT_DOT_NET_FRAMEWORK_VERSION = 4.6.2
+%endif
+
+%if !defined (VS2017_DotNetToolsDir)
+    VS2017_DotNetToolsDir= $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\NETFXSDK\$(DEFAULT_DOT_NET_FRAMEWORK_VERSION)/WinSDK-NetFx40Tools", "InstallationFolder"]]
+    %if $(VS2017_DotNetToolsDir) == " "
+        %error Cannot find the .Net tools location for this toolset. VS2017_DotNetToolsDir was not defined, and registry lookup failed.
+    %endif
+%endif
+#introducing new variable as with 2017, microsoft further subdivided include folder with bin folder vs winsdk dir
+%if !defined (VS2017_DotNetWinSDKDir)
+    VS2017_DotNetWinSDKDir= $[@realpath $[@registryread "HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Microsoft SDKs\NETFXSDK\$(DEFAULT_DOT_NET_FRAMEWORK_VERSION)", "KitsInstallationFolder"]]
+    %if $(VS2017_DotNetWinSDKDir) == " "
+        %error Cannot find the .Net tools location for this toolset. VS2017_DotNetWinSDKDir was not defined, and registry lookup failed.
+    %endif
+%endif
+
+%if (" " != $[@findstring x86, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    %if !defined (VS2017_FrameworkVersion32)
+        VS2017_FrameworkVersion32=$[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VC7", "FrameworkVer32"]]
+        %if $(VS2017_FrameworkVersion32) == " "
+            VS2017_FrameworkVersion32 = v4.0.30319
+            %message Cannot find the .NET framework 32-bit version for this toolset - using default: $(VS2017_FrameworkVersion32)
+        %endif
+    %endif
+    
+    %if !defined (VS2017FrameworkDir32)
+        VS2017_FrameworkDir32Raw=$[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VC7", "FrameworkDir32"]]
+        %if $(VS2017_FrameworkDir32Raw) == " "
+            VS2017_FrameworkDir32Raw = C:/Windows/Microsoft.NET/Framework
+            %message Cannot find the .NET framework 32-bit location for this toolset - using default: $(VS2017_FrameworkDir32Raw)
+        %endif
+        # Registry does not always have a trailing slash; ensure there is one.
+        VS2017FrameworkDir32 = ${VS2017_FrameworkDir32Raw}/
+    %endif
+
+    VS2017_FrameworkVersion = $(VS2017_FrameworkVersion32)
+    VS2017_FrameworkDir = $(VS2017_FrameworkDir32Raw)/
+   
+%elif (" " != $[@findstring x64, $(TARGET_PROCESSOR_ARCHITECTURE)])
+    %if !defined (VS2017_FrameworkVersion64)
+        VS2017_FrameworkVersion64=$[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VC7", "FrameworkVer64"]]
+        %if $(VS2017_FrameworkVersion64) == " "
+            VS2017_FrameworkVersion64 = v4.0.30319
+            %message Cannot find the .NET framework 64-bit version for this toolset - using default: $(VS2017_FrameworkVersion64)
+        %endif
+    %endif
+    
+    %if !defined (VS2017_FrameworkDir64)
+        VS2017_FrameworkDir64Raw=$[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VC7", "FrameworkDir64"]]
+        %if $(VS2017_FrameworkDir64Raw) == " "
+            VS2017_FrameworkDir64Raw = C:/Windows/Microsoft.NET/Framework64
+            %message Cannot find the .NET framework 64-bit location for this toolset - using default: $(VS2017_FrameworkDir64Raw)
+        %endif
+        # Registry does not always have a trailing slash; ensure there is one.
+        VS2017_FrameworkDir64 =% ${VS2017_FrameworkDir64Raw}/
+    %endif
+
+    VS2017_FrameworkVersion = $(VS2017_FrameworkVersion64)
+    VS2017_FrameworkDir = $(VS2017_FrameworkDir64Raw)/
+
+%else
+    %error Unknown value for TARGET_PROCESSOR_ARCHITECTURE ('$(TARGET_PROCESSOR_ARCHITECTURE)').
+
+%endif
+# If you had VS2012 installed prior to installing VS2017, VS2017 apparently does not install its own copy of the DIA SDK.
+# http://social.msdn.microsoft.com/Forums/en-US/d75aafb5-3be0-4f4f-a463-00ccd5b03ddd/dia-sdk-for-visual-studio-2017
+VS2017_DiaSdkDir = $[@realpath "${VS2017Dir}/DIA SDK/include"]
+%ifnofile $(VS2017_DiaSdkDir)
+    %if !defined (VS2012Dir)
+        VS2012Dir = $[@realpath $[@registryread "HKEY_LOCAL_MACHINE/SOFTWARE/WOW6432Node/Microsoft/VisualStudio/SxS/VS7", "11.0"]]
+        %if $(VS2012Dir) == " "
+            %error Cannot find fallback location for DIA SDK. VS2012Dir was not defined, and registry lookup failed.
+        %endif
+    %endif
+    
+    VS2017_DiaSdkDir = $[@realpath "${VS2012Dir}/DIA SDK/include"]
+%endif
+
+%if $(TARGET_PLATFORM) == "WinRT"
+    VS2017_VCPACKAGESDIR = $(VS2017Dir)Common7/IDE/VC/vcpackages/
+    VS2017_WINDOWSMETADATADIR = $[@realpath "$(VS2017_WindowsSdkDir)Windows Metadata"]
+    VS2017_INCLUDEUMDIR = $[@realpath "$(VS2017_WindowsSdkDir)include/um"]
+%endif
+

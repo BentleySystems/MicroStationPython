@@ -1,0 +1,141 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+
+%if !defined (BENTLEY_WIN32_TOOLCHAIN_link)
+    %error You must include $(BuildContext)ToolContext.mki before including this file.
+%endif
+
+# Links a shared library (dll) for the Windows platform.
+%if !defined (BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES) || !defined (BENTLEY_TOOLCONTEXT_LINK_NAME) || !defined (BENTLEY_TOOLCONTEXT_LINK_DEST) 
+    %warn Inputs:
+    %warn -------
+    %warn BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES     - the .obj files to be linked in
+    %warn BENTLEY_TOOLCONTEXT_LINK_NAME             - the name of the shared object to be created, not including the ".dll" suffix.
+    %warn BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER   - optional. A version number to be appended to $$(BENTLEY_TOOLCONTEXT_LINK_NAME) in order to define the DLL name and the output library file name. Defaults to the empty string.
+    %warn BENTLEY_TOOLCONTEXT_LINK_DLLNAME          - optional. The DLL name. Defaults to $$(BENTLEY_TOOLCONTEXT_LINK_NAME)$$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).dll
+    %warn BENTLEY_TOOLCONTEXT_LINK_DEST             - the directory where the .dll is to be created (with trailing /). The output file is $$(BENTLEY_TOOLCONTEXT_LINK_DEST)$$(BENTLEY_TOOLCONTEXT_LINK_NAME)$$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).dll
+    %warn BENTLEY_TOOLCONTEXT_LINK_LIB_PATH         - optional. The .lib path. Defaults to $$(BENTLEY_TOOLCONTEXT_LINK_DEST)$$(BENTLEY_TOOLCONTEXT_LINK_NAME).lib
+    %warn BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST      - optional. Where to write temporary files. Defaults to $$(BENTLEY_TOOLCONTEXT_LINK_DEST)
+    %warn BENTLEY_TOOLCONTEXT_LINK_LIBRARIES        - optional. Additional .lib files to link with. If supplied, these libraries will appear after $$(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES) and before the system libraries in the link statement.
+    %warn BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE      - optional. Link options that are inserted before $$(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES).
+    %warn BENTLEY_TOOLCONTEXT_LINK_OPTIONS_POST     - optional. Link options that are inserted after $$(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES).
+    %warn BENTLEY_TOOLCONTEXT_LINK_CREATE_SYMB      - Should linker also create a symbol (.pdb) file.
+    %warn BENTLEY_TOOLCONTEXT_LINK_SYMB_PATH        - optional. The .pdb file path. Defaults to $$(BENTLEY_TOOLCONTEXT_LINK_DEST)$$(BENTLEY_TOOLCONTEXT_LINK_NAME).pdb
+    %warn BENTLEY_TOOLCONTEXT_LINK_CREATE_WINMD     - Should linker also create a .winmd file.
+    %warn BENTLEY_TOOLCONTEXT_LINK_CREATE_MANIFEST  - Should linker also create a manifest.
+    %warn BENTLEY_TOOLCONTEXT_LINK_POST_LINK        - optional. Script to be executed after the library has been linked.
+    %warn -------
+    %warn Outputs:
+    %warn -------
+    %warn BENTLEY_TOOLCONTEXT_LINK_OUT_NAME         - The full filename of the shared library file that was created: $(BENTLEY_TOOLCONTEXT_LINK_DEST)$(BENTLEY_TOOLCONTEXT_LINK_NAME)$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER).dll
+    %warn -------
+
+    %error A required macro is not defined.
+%endif
+
+%if !defined (DLM_EXTENSION)
+    $(DLM_EXTENSION) =.dll
+%endif
+
+%ifndef BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST
+    BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST = $(BENTLEY_TOOLCONTEXT_LINK_DEST)
+%endif
+
+%ifndef BENTLEY_TOOLCONTEXT_LINK_DLLNAME
+    BENTLEY_TOOLCONTEXT_LINK_DLLNAME = $(BENTLEY_TOOLCONTEXT_LINK_NAME)$(BENTLEY_TOOLCONTEXT_LINK_VERSION_NUMBER)$(DLM_EXTENSION)
+%endif
+
+%ifndef BENTLEY_TOOLCONTEXT_LINK_LIB_PATH
+    BENTLEY_TOOLCONTEXT_LINK_LIB_PATH = $(BENTLEY_TOOLCONTEXT_LINK_DEST)$(BENTLEY_TOOLCONTEXT_LINK_NAME).lib
+%endif
+
+%ifndef BENTLEY_TOOLCONTEXT_LINK_SYMB_PATH
+    BENTLEY_TOOLCONTEXT_LINK_SYMB_PATH = $(BENTLEY_TOOLCONTEXT_LINK_DEST)$(BENTLEY_TOOLCONTEXT_LINK_NAME).pdb
+%endif
+
+# With -debug:fastlink (see windowstoolcontext.mki), the compiler and linker PDB files must be different for incremental builds, lest you get C1052.
+%if defined(DEBUG)
+    EffectiveSymbPath = $[@nonsuffix $(BENTLEY_TOOLCONTEXT_LINK_SYMB_PATH)]-lnkr.pdb
+%else
+    EffectiveSymbPath = $(BENTLEY_TOOLCONTEXT_LINK_SYMB_PATH)
+%endif
+
+BENTLEY_TOOLCONTEXT_LINK_OUT_NAME = $(BENTLEY_TOOLCONTEXT_LINK_DEST)$(BENTLEY_TOOLCONTEXT_LINK_DLLNAME)
+
+BENTLEY_TOOLCONTEXT_INCREMENTAL_LINK_OUT_NAME = $(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME).incr
+
+BENTLEY_TOOLCONTEXT_LINK__RSP = $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST)$(BENTLEY_TOOLCONTEXT_LINK_NAME)link.rsp
+
+# Optimized or release build
+%if !defined (DEBUG) || defined (PRG)
+    BENTLEY_WIN32_LINK_CommonOptions + $(BENTLEY_WIN32_LINK_OptimizeOptions)
+%else
+    BENTLEY_WIN32_LINK_CommonOptions + $(BENTLEY_WIN32_LINK_DebugOptions)
+
+    # Microsoft Incremental Linker always performs a full link if the incrementally linked .dll is modified.
+    # Any attempts at manipulating file modification timestamps did not help, resorting to file copying.
+    # Start PYTHON Change
+    #BENTLEY_TOOLCONTEXT_LINK_DLL_INCREMENTALLY = 1
+%endif
+
+# Need to be able to control warnings-as-errors on a per-part basis, so it must be done here, and not the shared tool context file.
+WarningsAsErrorsArg =
+%if !defined(NOSTRICT) && !defined(IS_THIRD_PARTY_LIBRARY)
+    WarningsAsErrorsArg = -WX
+%endif
+
+#  Create the Windows NT DLL/.netmodule
+$(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME) : $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES) $(_MakeFileSpec)
+    %ifdef BENTLEY_TOOLCONTEXT_LINK_DLL_INCREMENTALLY
+        -@$(copyCmd) "$(BENTLEY_TOOLCONTEXT_INCREMENTAL_LINK_OUT_NAME)" "$(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME)"
+    %endif
+    |[== Building $@, ($=) ==]
+    >$(BENTLEY_TOOLCONTEXT_LINK__RSP)
+    -out:"$(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME)"
+    -dll
+    -implib:"$(BENTLEY_TOOLCONTEXT_LINK_LIB_PATH)"
+    %if defined (BENTLEY_TOOLCONTEXT_LINK_CREATE_SYMB)
+        -pdb:"$(EffectiveSymbPath)"
+        %if defined(CREATE_STRIPPED_PDBS)
+            -PDBSTRIPPED:"$[@dir $(EffectiveSymbPath)]/$[@basename $(EffectiveSymbPath)]-stripped.pdb"
+        %endif
+    %endif
+    %if $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+        %if defined (BENTLEY_TOOLCONTEXT_LINK_CREATE_WINMD)
+            -winmd -winmdfile:"$(BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST)$(BENTLEY_TOOLCONTEXT_LINK_NAME).winmd"
+        %endif
+    %endif
+    %if defined (BENTLEY_TOOLCONTEXT_LINK_CREATE_MANIFEST)
+        -manifest
+        -manifestfile:"$(BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST)$(BENTLEY_TOOLCONTEXT_LINK_DLLNAME).Manifest"
+    %endif
+    $(BENTLEY_WIN32_LINK_CommonOptions) $(CLinkOpts)
+    $(WarningsAsErrorsArg)
+    $(BENTLEY_TOOLCONTEXT_LINK_OPTIONS_PRE)
+    $(BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES)
+    $(BENTLEY_TOOLCONTEXT_LINK_OPTIONS_POST)
+    $(BENTLEY_TOOLCONTEXT_LINK_LIBRARIES)
+    <
+    $(BENTLEY_WIN32_TOOLCHAIN_link) @$(BENTLEY_TOOLCONTEXT_LINK__RSP)
+    %ifdef BENTLEY_TOOLCONTEXT_LINK_DLL_INCREMENTALLY
+        -@$(copyCmd) "$(BENTLEY_TOOLCONTEXT_LINK_OUT_NAME)" "$(BENTLEY_TOOLCONTEXT_INCREMENTAL_LINK_OUT_NAME)"
+    %endif
+    %if defined (BENTLEY_TOOLCONTEXT_LINK_CREATE_MANIFEST)
+        $(BENTLEY_WIN32_TOOLCHAIN_manifest) "$(BENTLEY_TOOLCONTEXT_LINK_OBJECT_DEST)$(BENTLEY_TOOLCONTEXT_LINK_DLLNAME).Manifest" -outputresource:$@;2
+    %endif
+    %if defined (BENTLEY_TOOLCONTEXT_LINK_POST_LINK)
+        $(BENTLEY_TOOLCONTEXT_LINK_POST_LINK)
+    %endif
+    !-@$(BENTLEY_WIN32_TOOLCHAIN_deleteFile) "$[@subst .lib, .exp, $(BENTLEY_TOOLCONTEXT_LINK_LIB_PATH)]"
+    ~time
+
+%if defined (BMAKE_DELETE_ALL_TARGETS)
+    always:
+        -@$(BENTLEY_WIN32_TOOLCHAIN_deleteFile) $(BENTLEY_TOOLCONTEXT_LINK__RSP)
+        -@$(BENTLEY_WIN32_TOOLCHAIN_deleteFile) "$(BENTLEY_TOOLCONTEXT_INCREMENTAL_LINK_OUT_NAME)"
+        -@$(BENTLEY_WIN32_TOOLCHAIN_deleteFile) "$(BENTLEY_TOOLCONTEXT_LINK_DEST)$(BENTLEY_TOOLCONTEXT_LINK_NAME).ilk"
+%endif
+
+%undef BENTLEY_TOOLCONTEXT_LINK__RSP

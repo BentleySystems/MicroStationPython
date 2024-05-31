@@ -1,0 +1,327 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+%if defined (WINDOWSTOOLCONTEXT_MKI)
+    %return
+%endif
+WINDOWSTOOLCONTEXT_MKI = 1
+
+WIN32 = 1
+
+%if !defined (TARGET_PROCESSOR_ARCHITECTURE)
+    TARGET_PROCESSOR_ARCHITECTURE = x64
+    %message Setting TARGET_PROCESSOR_ARCHITECTURE to default value of $(TARGET_PROCESSOR_ARCHITECTURE)
+%endif
+
+%if !defined (MSVC_VERSION)
+    MSVC_VERSION = 1700
+    %message Setting MSVC_VERSION to default value of $(MSVC_VERSION)
+%endif
+
+%if (MSVC_VERSION < 1500)
+    %warn Current MSVC_VERSION: $(MSVC_VERSION)
+    %error This tool context requires at least VS 2008 tool set.
+%endif
+
+
+# Outputs:
+#   This mke file defines the following macros for use in compiling and linking native code for Windows platforms:
+#
+# ----------
+#  Compiler
+# ----------
+# Use these macros to set up the VC compiler command line in your mke file:
+# BENTLEY_WIN32_COMPILE_CommonOptions           - Compiler options (C++ and C)
+# BENTLEY_WIN32_COMPILE_CommonOptionsCLR        - Compiler options (CLR)
+# BENTLEY_WIN32_COMPILE_CppOptions              - Compiler options (C++-specific)
+# BENTLEY_WIN32_COMPILE_OptimizeOptions         - Add to command line to get an optimized build
+# BENTLEY_WIN32_COMPILE_DebugOptions            - Add to command line to get a debug build
+#
+# Example:
+#       buildTmp = your temporary build directory ...
+#
+#       # Identify DgnClientFx include files
+#       DgnClientFxIncludes = -I....
+#
+#       # Define a rule
+#       .cpp.o:
+#          $(BENTLEY_WIN32_TOOLCHAIN_compile) $(BENTLEY_WIN32_COMPILE_CommonOptions) $(BENTLEY_WIN32_COMPILE_CppOptions) $(DgnClientFxIncludes) -o$@  $<
+#          ~time
+#       
+#       # List the files to be compiled.
+#
+#       $(buildTmp)file1.o : file1.cpp
+#       
+#       $(buildTmp)file2.o : file2.cpp 
+#
+# ----------
+#  Linker
+# ----------
+# BENTLEY_WIN32_LINK_CommonOptions      - Command-line options that you should use when linking a library
+# BENTLEY_WIN32_LINK_CommonOptionsCLR   - Command-line options that you should use when linking a library (CLR)
+# BENTLEY_WIN32_LINK_OptimizeOptions    - Add to command-line to get an optimized library
+# BENTLEY_WIN32_LINK_DebugOptions       - Add to command-line to get a debug library
+# BENTLEY_WIN32_LINK_CLibraries         - C libraries. These must come *last* in the link statement.
+#
+# Example:
+#       workspace = the location of the project ...
+#
+#       # Create the .dll (with symbols) in "bin" directory
+#       BENTLEY_TOOLCONTEXT_LINK_NAME = $(appName)
+#       BENTLEY_TOOLCONTEXT_LINK_OBJECT_FILES = $(buildTmp)file1.o $(buildTmp)file2.o
+#       BENTLEY_TOOLCONTEXT_LINK_DEST = $(workspace)bin/$(BENTLEY_WIN32_Win32ABI)/
+#       BENTLEY_TOOLCONTEXT_LINK_LIBRARIES = ... bentley libraries ...
+#       %include %(BuildContext)ToolContextLink.mki
+#
+# -----------
+#  Toolchain 
+# -----------
+# BENTLEY_WIN32_TOOLCHAIN_compile           - VC compiler for .cpp files
+# BENTLEY_WIN32_TOOLCHAIN_ccompile          - VC compiler for .c files
+# BENTLEY_WIN32_TOOLCHAIN_preprocess        - VC compiler preprocessor
+# BENTLEY_WIN32_TOOLCHAIN_link              - VC linker
+# BENTLEY_WIN32_TOOLCHAIN_manifest          - create manifest
+# BENTLEY_WIN32_TOOLCHAIN_lib               - VC static linker
+# BENTLEY_WIN32_TOOLCHAIN_type              - output file content to stdout
+# BENTLEY_WIN32_TOOLCHAIN_dir               - list directory content
+# BENTLEY_WIN32_TOOLCHAIN_copyFile          - copy a file
+# BENTLEY_WIN32_TOOLCHAIN_deleteFile        - delete a file
+# BENTLEY_WIN32_TOOLCHAIN_copyDirectory     - copy directory structure
+# BENTLEY_WIN32_TOOLCHAIN_createDirectory   - create a directory
+# BENTLEY_WIN32_TOOLCHAIN_removeDirectory   - remove an entire directory
+#
+# -----------
+#  Misc
+# -----------
+# BENTLEY_WIN32_Win32ABI    - The target ABI: x86, x64, WinRT*
+#
+
+#============================================================================
+#  Toolchain programs
+#============================================================================
+BENTLEY_WIN32_TOOLCHAIN_compile           = cl
+BENTLEY_WIN32_TOOLCHAIN_ccompile          = cl
+BENTLEY_WIN32_TOOLCHAIN_rccompile         = rc -R
+BENTLEY_WIN32_TOOLCHAIN_preprocess        = cl -EP -C
+BENTLEY_WIN32_TOOLCHAIN_link              = link -out:$@
+BENTLEY_WIN32_TOOLCHAIN_manifest          = mt.exe -manifest
+BENTLEY_WIN32_TOOLCHAIN_lib               = lib
+BENTLEY_WIN32_TOOLCHAIN_type              = type
+BENTLEY_WIN32_TOOLCHAIN_dir               = dir
+BENTLEY_WIN32_TOOLCHAIN_copyFile          = echo f | xcopy \/F \/Y
+BENTLEY_WIN32_TOOLCHAIN_deleteFile        = del
+BENTLEY_WIN32_TOOLCHAIN_copyDirectory     = echo d | xcopy \/F \/E \/Y
+BENTLEY_WIN32_TOOLCHAIN_createDirectory   = mkdir
+BENTLEY_WIN32_TOOLCHAIN_removeDirectory   = rd \/S \/Q
+
+%if ($[@findstring x64, $(TARGET_PROCESSOR_ARCHITECTURE)] != " ")
+    BENTLEY_WIN32_TOOLCHAIN_MLCmd = ml64.exe
+%else
+    BENTLEY_WIN32_TOOLCHAIN_MLCmd = ml.exe
+%endif
+
+#============================================================================
+# Compiler command-line options
+#============================================================================
+
+# Need to be able to control warnings-as-errors on a per-part basis, so it must be done in later MKI files, and not this shared tool context file.
+# DO NOT ADD -WX here, or it will prevent third-party libraries from building
+# To set fp option from environment -- use one of
+#       set WIN32_COMPILE_FP_OPTION=-fp:fast   -- Bentley default for decades, but problematic due to significant revision of microsoft optimizations
+#       set WIN32_COMPILE_FP_OPTION=-fp:precise   -- prefered for the future when we've tested more.
+%if !defined (WIN32_COMPILE_FP_OPTION)
+       WIN32_COMPILE_FP_OPTION = -fp:precise
+%endif
+%message fp options $(WIN32_COMPILE_FP_OPTION)
+BENTLEY_WIN32_COMPILE_CommonOptions = $(WIN32_COMPILE_FP_OPTION)  -GR -Gy -c -MP
+
+%if defined(MSVC_VERSION)
+%if $(MSVC_VERSION) >= 1900
+    # http://blogs.msdn.com/b/vcblog/archive/2015/08/06/new-in-vs-2015-zc-throwingnew.aspx
+    # By-default, the compiler emits code to check every new'ed object for NULL, just in case you opted into a non-conforming impementation of new.
+    # VS2015 allows you to specify this flag, indicating all your new operators are conforming (throw on error, not return NULL), thus eliminating needless NULL checks.
+    BENTLEY_WIN32_COMPILE_CommonOptions + -Zc:throwingNew
+%endif
+%endif
+
+# Defs
+BENTLEY_WIN32_COMPILE_CommonOptions + -D__EXCEPTIONS 
+BENTLEY_WIN32_COMPILE_CommonOptions + -DWIN32 
+BENTLEY_WIN32_COMPILE_CommonOptions + -DwinNT 
+BENTLEY_WIN32_COMPILE_CommonOptions + -D_VISCXX
+BENTLEY_WIN32_COMPILE_CommonOptions + -D_CONVERSION_DONT_USE_THREAD_LOCALE
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+    BENTLEY_WIN32_COMPILE_CommonOptions + -DBENTLEY_WINRT -DWINAPI_FAMILY=WINAPI_FAMILY_APP
+%else
+    BENTLEY_WIN32_COMPILE_CommonOptions + -DBENTLEY_WIN32
+%endif
+
+# Disabled warnings:
+# These started with VS2015
+%if !defined (ENABLE_VARIABLE_HIDING_WARNINGS)
+    # C4456: declaration of '...' hides previous local declaration
+    BENTLEY_WIN32_COMPILE_CommonOptions + -wd4456
+
+    # C4457: declaration of '...' hides function parameter
+    BENTLEY_WIN32_COMPILE_CommonOptions + -wd4457
+
+    # C4458: declaration of '...' hides class member
+    BENTLEY_WIN32_COMPILE_CommonOptions + -wd4458
+
+    # C4459: declaration of '...' hides global declaration
+    BENTLEY_WIN32_COMPILE_CommonOptions + -wd4459
+    
+%endif
+
+# Enabled warnings:
+# 'function': signature of non-private member contains assembly private native type 'native_type'
+BENTLEY_WIN32_COMPILE_CommonOptions + -we4692    
+
+# Architecture-specific definitions
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "x86" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"
+    BENTLEY_WIN32_COMPILE_CommonOptions + -GdF -D_X86_=1 -Di386=1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "x64"
+    BENTLEY_WIN32_COMPILE_CommonOptions + -GF -favor:blend -D_X64_=1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64"
+    # Why _AMD64_ vs. _X64_? I don't know, but um\winnt.h seems to use _AMD64_, which is required for WinRTx64, lest you reach an #error "No Target Architecture".
+    BENTLEY_WIN32_COMPILE_CommonOptions + -GF -favor:blend -D_AMD64_=1
+%elif $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+    BENTLEY_WIN32_COMPILE_CommonOptions + -D_ARM_=1
+%endif
+
+# Copy the options for CLR version
+# Note: this must be done before setting the below definitions to BENTLEY_WIN32_COMPILE_CommonOptions
+BENTLEY_WIN32_COMPILE_CommonOptionsCLR =% $(BENTLEY_WIN32_COMPILE_CommonOptions)
+BENTLEY_WIN32_COMPILE_CommonOptionsCLR + -EHa
+BENTLEY_WIN32_COMPILE_CommonOptionsCLR + -clr
+
+%if defined (USING_REF_ASSEMBLIES)
+    BENTLEY_WIN32_COMPILE_CommonOptionsCLR + -clr:nostdlib $(USING_REF_ASSEMBLIES)
+%endif
+
+%if (MSVC_VERSION >= 1700)
+    BENTLEY_WIN32_COMPILE_CppOptions + -D_VARIADIC_MAX=10
+%endif
+
+# C++17 is first available in VS2019
+%if (MSVC_VERSION >= 1920) && defined (BUILD_WITH_C17)
+    BENTLEY_WIN32_COMPILE_CppOptions + -std:c++17
+%endif
+
+# They added C++20 20 to vs2019 recently but possibly not available on all platforms.
+%if (MSVC_VERSION >= 1920) && defined (BUILD_WITH_C20)
+    BENTLEY_WIN32_COMPILE_CppOptions + -std:c++20
+%endif
+
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+# Detect the version of the Javascript runtime that we should use. 
+# NB: This must be defined here, in one place, so that all that include BeJavaScript.h will see the same value!
+#----------------------------------------------------------------------------------------------------------------------------------------------------
+%if defined (BEJAVASCRIPT_FORCE_JSRT_EDGE_MODE) && (" " != $[@findstring "[Version 10.", $[@readstdout ver]])
+    BENTLEY_WIN32_COMPILE_CppOptions + -DBEJAVASCRIPT_FORCE_JSRT_EDGE_MODE
+%endif
+
+%if defined (WipPartEnable_chakracore)
+    BENTLEY_WIN32_COMPILE_CppOptions + -DWipPartEnable_chakracore
+%endif
+
+#============================================================================
+# Exception handling 
+#============================================================================
+# For native C++ compilands, we specify the "synchronous" exception model. That imposes the least overhead. http://msdn.microsoft.com/en-us/library/vstudio/1deeycx5.aspx
+# Also, that is the exception model that is implemented on other platforms. So, portable code should assume that native runtime exceptions such as floating point exceptions are *not* caught.
+# We assume that extern "C" functions will not throw C++ exceptions.
+BENTLEY_WIN32_COMPILE_CommonOptions + -EHsc
+
+#============================================================================
+# Debugging / Optimization
+# wd4189 - local variable is initialized but not referenced - common for stuff used in asserts
+#============================================================================
+BENTLEY_WIN32_COMPILE_OptimizeOptions   = -Ox -Oy- -wd4189 -DNDEBUG=1
+BENTLEY_WIN32_COMPILE_DebugOptions      = -Od
+
+# VERACODE - Set Buffer Security Check to No (/GS-).
+%if defined(IS_VERACODE_BUILD)
+    BENTLEY_WIN32_COMPILE_OptimizeOptions   + -GS-
+    BENTLEY_WIN32_COMPILE_DebugOptions      + -GS-
+%endif
+
+#============================================================================
+# Linker command-line options
+#============================================================================
+# Need to be able to control warnings-as-errors on a per-part basis, so it must be done in later MKI files, and not this shared tool context file.
+# DO NOT ADD -WX here, or it will prevent third-party libraries from building
+BENTLEY_WIN32_LINK_CommonOptions = -debug
+
+# avoid specifying MANIFESTUAC:NO and MANIFEST:NO at the same time, or you get warning LNK4075: ignoring '/MANIFESTUAC' due to '/MANIFEST:NO' specification
+%if !defined(OWN_UAC_MANIFEST)
+    # We opt out of having the linker embed UAC stuff because we have it in our manifest boiler plate anyway.
+    # This allows us to use the same boiler-plate for VS 2005 and VS 2008.
+    BENTLEY_WIN32_LINK_CommonOptions + -MANIFESTUAC:NO
+%endif
+
+# Whole program optimization options
+%if !defined (DEBUG) && defined (WholeProgramOptimization)
+    %if defined (PRG)
+        BENTLEY_WIN32_LINK_CommonOptions + -LTCG
+        CLibOpts  + -LTCG
+    %else
+        BENTLEY_WIN32_LINK_CommonOptions + -LTCG:STATUS
+        CLibOpts  + -LTCG:STATUS
+    %endif
+%endif
+
+# Note: /safeseh not support on WinRTARM
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "x86" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"
+    BENTLEY_WIN32_LINK_CommonOptions + -SafeSEH
+%endif
+
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86"  || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+    BENTLEY_WIN32_LINK_CommonOptions + -appcontainer
+%endif
+
+#============================================================================
+# Debugging / Optimization
+#============================================================================
+BENTLEY_WIN32_LINK_OptimizeOptions  = -incremental:no -release -OPT:REF -OPT:ICF,2
+BENTLEY_WIN32_LINK_DebugOptions     = -incremental:no -OPT:NOREF -OPT:NOICF
+
+#%if !defined(CREATE_STRIPPED_PDBS)
+#    BENTLEY_WIN32_LINK_DebugOptions + -debug:fastlink
+#%endif
+
+#============================================================================
+# Linker libraries  
+#============================================================================
+%if $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx86" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTx64" || $(TARGET_PROCESSOR_ARCHITECTURE) == "WinRTARM"
+    BENTLEY_WIN32_LINK_CLibraries       = windowsapp.lib
+%else
+    BENTLEY_WIN32_LINK_CLibraries       = user32.lib kernel32.lib advapi32.lib ole32.lib UUID.lib gdi32.lib shlwapi.lib shell32.lib wininet.lib
+    BENTLEY_WIN32_LINK_GuiLibraries     = gdi32.lib user32.lib kernel32.lib advapi32.lib shell32.lib msimg32.lib 
+%endif
+BENTLEY_WIN32_LINK_ConsoleLibraries = kernel32.lib
+BENTLEY_WIN32_LINK_OleLibraries     = ole32.lib oleaut32.lib Oleacc.lib uuid.lib
+%if (MSVC_VERSION >= 1900) # VS2015
+    BENTLEY_WIN32_LINK_MfcLibraries = mfc140u.lib
+%elif (MSVC_VERSION >= 1800)
+    BENTLEY_WIN32_LINK_MfcLibraries = mfc120u.lib
+%elif (MSVC_VERSION >= 1700)
+    BENTLEY_WIN32_LINK_MfcLibraries = mfc110u.lib
+%elif (MSVC_VERSION >= 1500)
+    BENTLEY_WIN32_LINK_MfcLibraries = mfc90u.lib
+%else
+    %error Unsupported MSVC_VERSION to define MFC LIB name.
+%endif
+
+#============================================================================
+# Miscellaneous
+#============================================================================
+BENTLEY_WIN32_Win32ABI = $(TARGET_PROCESSOR_ARCHITECTURE)
+
+# set up the ToolContextDll/Exe mkifiles.
+
+ToolContextLinkDllMki =% $(_CurrentFilePath)windowsToolContextLinkDll.mki
+
+ToolContextLinkExeMki =% $(_CurrentFilePath)windowsToolContextLinkExe.mki
+

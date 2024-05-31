@@ -1,0 +1,141 @@
+#--------------------------------------------------------------------------------------+
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------*/
+
+%if defined (DLM_NAME)
+    %if !defined (DLM_OBJECT_DEST)
+        %error DLM_OBJECT_DEST needs to be defined if DLM_NAME is defined.
+    %endif
+%endif
+
+%if defined (EXE_NAME)
+    %if !defined (EXE_DEST)
+        %error EXE_DEST needs to be defined if EXE_NAME is defined.
+    %endif
+%endif
+
+%if defined (ASSEMBLY_NO_ATTRIBUTES) || defined (DLM_NO_DLL)
+    %return
+%endif
+
+%if !defined (DLM_NAME) && ! defined (EXE_NAME)
+    %warn Either DLM_NAME or EXE_NAME needs to be defined for assembly info generation
+%endif
+
+%if defined (EXE_NAME)
+    CPPAssemblyInfoFileName = $(EXE_DEST)$(EXE_NAME).AssemblyInfo
+%else
+    CPPAssemblyInfoFileName = $(DLM_OBJECT_DEST)$(DLM_NAME).AssemblyInfo
+%endif
+
+%ifndef ASSEMBLY_TITLE
+    %error ASSEMBLY_TITLE is a required input to generateAssemblyInfocpp.mki
+%endif
+%ifndef ASSEMBLY_DESCRIPTION
+    %error ASSEMBLY_DESCRIPTION is a required input to generateAssemblyInfocpp.mki
+%endif
+%ifndef ASSEMBLY_VERSION
+    %error ASSEMBLY_VERSION is a required input to generateAssemblyInfocpp.mki
+%endif
+%ifndef ASSEMBLY_FILE_VERSION
+    %error ASSEMBLY_FILE_VERSION is a required input to generateAssemblyInfocpp.mki
+%endif
+%ifndef ASSEMBLY_PRODUCT_NAME
+    %error ASSEMBLY_PRODUCT_NAME is a required input to generateAssemblyInfocpp.mki
+%endif
+%ifndef ASSEMBLY_COMPANY_NAME
+    %error ASSEMBLY_COMPANY_NAME is a required input to generateAssemblyInfocpp.mki
+%endif
+%ifndef ASSEMBLY_COPYRIGHT
+    %error ASSEMBLY_COPYRIGHT is a required input to generateAssemblyInfocpp.mki
+%endif
+%if !defined (ASSEMBLY_KEYFILE) && defined (ASSEMBLY_STRONGNAME)
+    %error ASSEMBLY_KEYFILE is a required input to generateAssemblyInfocpp.mki when ASSEMBLY_STRONGNAME = 1
+%endif
+
+$(CPPAssemblyInfoFileName).cpp : $(_MakeFileSpec)
+    | [== Generating AssemblyInfo : $(@) ==]
+%if defined (ASSEMBLY_STRONGNAME)
+    !~@task Bentley.Build.Tasks.StringRegexReplace \
+                            -i:Input="@(ASSEMBLY_KEYFILE)" \
+                            -i:Expression="\\\\" \
+                            -i:Replacement="\\\\" \
+                            -o:ASSEMBLY_KEYFILE_ESCAPED=Output
+%endif
+    >$(CPPAssemblyInfoFileName).cpp
+    \#using \<mscorlib.dll>
+    using namespace System;
+    using namespace System::Reflection;
+    using namespace System::Runtime::CompilerServices;
+    using namespace System::Runtime::InteropServices;
+%if ASSEMBLY_COPYRIGHT!=0
+    [assembly:AssemblyCopyrightAttribute( $(S)"$(ASSEMBLY_COPYRIGHT)" )];
+%endif
+%if ASSEMBLY_COMPANY_NAME!=0
+    [assembly:AssemblyCompanyAttribute( $(S)"$(ASSEMBLY_COMPANY_NAME)" )];
+%endif
+%if ASSEMBLY_FILE_VERSION!=0
+    [assembly:AssemblyFileVersionAttribute( $(S)"$(ASSEMBLY_FILE_VERSION)" )];
+%endif
+%if ASSEMBLY_INFORMATIONAL_VERSION!=0
+    [assembly:AssemblyInformationalVersionAttribute( $(S)"$(ASSEMBLY_INFORMATIONAL_VERSION)" )]
+%endif
+%if ASSEMBLY_PRODUCT_NAME!=0
+    [assembly:AssemblyProductAttribute( $(S)"$(ASSEMBLY_PRODUCT_NAME)" )];
+%endif
+    [assembly:AssemblyVersionAttribute( $(S)"$(ASSEMBLY_VERSION)" )];
+%if ASSEMBLY_DESCRIPTION!=0
+    [assembly:AssemblyDescriptionAttribute( $(S)"$(ASSEMBLY_DESCRIPTION)" )];
+%endif
+%if ASSEMBLY_TITLE!=0
+    [assembly:AssemblyTitleAttribute( $(S)"$(ASSEMBLY_TITLE)" )];
+%endif
+%if defined (ASSEMBLY_STRONGNAME)
+    %if defined (ASSEMBLY_DELAYSIGN)
+    [assembly:AssemblyDelaySign(true)];
+    [assembly:AssemblyKeyFile($(S)"$(ASSEMBLY_KEYFILE_ESCAPED)")];
+    %else
+    [assembly:AssemblyKeyFile($(S)"$(ASSEMBLY_KEYFILE_ESCAPED)")];
+    %endif
+%endif
+%if defined (ASSEMBLY_COMVISIBLE)
+    %if $(ASSEMBLY_COMVISIBLE) != "noattr"
+    %if $(ASSEMBLY_COMVISIBLE) == "true" || $(ASSEMBLY_COMVISIBLE) == "1"
+        [assembly:ComVisibleAttribute(true)];
+    %elif $(ASSEMBLY_COMVISIBLE) == "false" || ASSEMBLY_COMVISIBLE==0
+        [assembly:ComVisibleAttribute(false)];
+    %else
+        %error ASSEMBLY_COMVISIBLE has invalid value: $(ASSEMBLY_COMVISIBLE)
+    %endif
+    %endif
+%endif
+%if defined (ASSEMBLY_CLSCOMPLIANT)
+    %if $(ASSEMBLY_CLSCOMPLIANT) != "noattr"
+    %if $(ASSEMBLY_CLSCOMPLIANT) == "true" || $(ASSEMBLY_CLSCOMPLIANT) == "1"
+        [assembly:CLSCompliant(true)];
+    %elif $(ASSEMBLY_CLSCOMPLIANT) == "false" || ASSEMBLY_CLSCOMPLIANT==0
+        [assembly:CLSCompliant(false)];
+    %else
+        %error ASSEMBLY_CLSCOMPLIANT has invalid value: $(ASSEMBLY_CLSCOMPLIANT)
+    %endif
+    %endif
+%endif
+%if defined(ASSEMBLY_TARGET_VERSION) && defined(ASSEMBLY_TARGET_DISPLAYNAME)
+    [assembly: System::Runtime::Versioning::TargetFrameworkAttribute(".NETFramework,Version=$(ASSEMBLY_TARGET_VERSION)", FrameworkDisplayName = "$(ASSEMBLY_TARGET_DISPLAYNAME)")];
+%endif
+    <
+    ~time
+
+%include compileForCLRStart.mki
+$(CPPAssemblyInfoFileName)$(oext) : $(CPPAssemblyInfoFileName).cpp
+%include compileForCLRStop.mki
+
+%if defined (EXE_OBJS)
+    EXE_OBJS + $(CPPAssemblyInfoFileName)$(oext)
+%endif
+
+%if defined (DLM_OBJECT_FILES)
+    DLM_OBJECT_FILES + $(CPPAssemblyInfoFileName)$(oext)
+%endif

@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="House" description="A house schema" nameSpacePrefix="hs" version="1.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECSchemaReference name="EditorCustomAttributes" version="01.00" prefix="bsca" />
+    <ECCustomAttributes>
+        <ExtendedInfo xmlns="House.01.00">
+            <Purpose>A whole House</Purpose>
+        </ExtendedInfo>
+    </ECCustomAttributes>
+    <ECClass typeName="Item" isStruct="True" isDomainClass="True" description="An Item" >
+        <ECProperty propertyName="Description" typeName="string" description="Description of an item" >
+            <ECCustomAttributes>
+                <Localizable xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="DisplayName" typeName="string" displayLabel="Display Name" description="Display label for an item" >
+            <ECCustomAttributes>
+                <Localizable xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Index" typeName="int" />
+    </ECClass>
+    <ECClass typeName="Content" isDomainClass="True">
+        <ECArrayProperty propertyName="Items" typeName="Item" minOccurs="1" maxOccurs="unbounded" isStruct="True" />
+    </ECClass>
+    <ECClass typeName="ExtendedInfo" displayLabel="Extended Information" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="Purpose" typeName="string">
+            <ECCustomAttributes>
+                <Localizable xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECArrayProperty propertyName="ContentInfo" typeName="Item" minOccurs="1" maxOccurs="unbounded" isStruct="True" />
+        <ECArrayProperty propertyName="ExtraInfo" typeName="string" minOccurs="1" maxOccurs="unbounded">
+            <ECCustomAttributes>
+                <Localizable xmlns="EditorCustomAttributes.01.00" />
+            </ECCustomAttributes>
+        </ECArrayProperty>
+    </ECClass>
+    <ECClass typeName="Door" displayLabel="This is a door" isDomainClass="True">
+        <ECCustomAttributes>
+            <ExtendedInfo xmlns="House.01.00">
+                <Purpose>To enter and leave house</Purpose>
+                <ContentInfo>
+                    <Item>
+                        <Description>Should have wood</Description>
+                        <DisplayName>wood</DisplayName>
+                        <Index>0</Index>
+                    </Item>
+                    <Item>
+                        <Description>Should be painted brown</Description>
+                        <DisplayName>brown</DisplayName>
+                        <Index>1</Index>
+                    </Item>
+                </ContentInfo>
+                <ExtraInfo>
+                    <string>box</string>
+                    <string>squar</string>
+                </ExtraInfo>
+            </ExtendedInfo>
+        </ECCustomAttributes>
+        <ECProperty propertyName="Length" typeName="string">
+            <ECCustomAttributes>
+                <ExtendedInfo xmlns="House.01.00">
+                    <Purpose>Length of door</Purpose>
+                </ExtendedInfo>
+                <StandardValues xmlns="EditorCustomAttributes.01.00">
+                    <ValueMap>
+                        <ValueMap>
+                            <Value>0</Value>
+                            <DisplayString>None</DisplayString>
+                        </ValueMap>
+                        <ValueMap>
+                            <Value>1</Value>
+                            <DisplayString>Constant</DisplayString>
+                        </ValueMap>
+                        <ValueMap>
+                            <Value>2</Value>
+                            <DisplayString>Tapered</DisplayString>
+                        </ValueMap>
+                    </ValueMap>
+                </StandardValues>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Width" typeName="string">
+            <ECCustomAttributes>
+                <ExtendedInfo xmlns="House.01.00">
+                    <Purpose>Width of door</Purpose>
+                </ExtendedInfo>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Height" typeName="string">
+            <ECCustomAttributes>
+                <ExtendedInfo xmlns="House.01.00">
+                    <Purpose>Height of door</Purpose>
+                    <ContentInfo>
+                        <Item>
+                            <DisplayName>Door Item 1</DisplayName>
+                            <Description>Door has item 1</Description>
+                            <Index>0</Index>
+                        </Item>
+                        <Item>
+                            <Description>Door has item 2</Description>
+                            <DisplayName>Door Item 2</DisplayName>
+                            <Index>1</Index>
+                        </Item>
+                    </ContentInfo>
+                    <ExtraInfo>
+                        <string>Asif</string>
+                        <string>Kamran</string>
+                        <string>Jamil</string>
+                    </ExtraInfo>
+                </ExtendedInfo>
+            </ECCustomAttributes>
+        </ECProperty>
+        <ECProperty propertyName="Thickness" typeName="string">
+            <ECCustomAttributes>
+                <ExtendedInfo xmlns="House.01.00">
+                    <Purpose>Thickness of door</Purpose>
+                </ExtendedInfo>
+            </ECCustomAttributes>
+        </ECProperty>
+    </ECClass>
+    <ECClass typeName="Room" displayLabel="This is a room" isDomainClass="True">
+        <ECProperty propertyName="Length" typeName="string" />
+        <ECProperty propertyName="Width" typeName="string" />
+    </ECClass>
+    <ECRelationshipClass typeName="RoomHasDoor" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,1)" polymorphic="True" roleLabel="Door to room" >
+            <ECCustomAttributes>
+                <ExtendedInfo xmlns="House.01.00">
+                    <Purpose>This is a room</Purpose>
+                </ExtendedInfo>
+            </ECCustomAttributes>
+            <Class class="Room" />
+        </Source>
+        <Target cardinality="(0,1)" polymorphic="True" roleLabel="Door for room" >
+            <ECCustomAttributes>
+                <ExtendedInfo xmlns="House.01.00">
+                    <Purpose>This is a door</Purpose>
+                </ExtendedInfo>
+            </ECCustomAttributes>
+            <Class class="Door" />
+        </Target>
+    </ECRelationshipClass>
+    <ECClass typeName="Window" isDomainClass="True" />
+    <ECRelationshipClass typeName="RoomHasWindow" isDomainClass="True" strength="referencing" strengthDirection="forward">
+        <Source cardinality="(0,1)" polymorphic="True">
+            <Class class="Room" />
+        </Source>
+        <Target cardinality="(0,1)" polymorphic="True">
+            <Class class="Window" />
+        </Target>
+    </ECRelationshipClass>
+</ECSchema>

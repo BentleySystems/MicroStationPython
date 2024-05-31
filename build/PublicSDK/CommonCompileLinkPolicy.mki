@@ -1,0 +1,78 @@
+#----------------------------------------------------------------------------------------
+#
+#  $Source: sharedmki/CommonCompileLinkPolicy.mki $
+#
+#  $Copyright: (c) 2014 Bentley Systems, Incorporated. All rights reserved. $
+#
+#----------------------------------------------------------------------------------------
+%if defined (__CommonCompileLinkPolicy_mki__)
+    %return
+%endif
+
+__CommonCompileLinkPolicy_mki__  = 1
+
+#-----------------------------------------------------------
+# Compiler settings
+#-----------------------------------------------------------
+%include DefaultToolSet.mki
+
+ENABLE_WCHAR_TYPE=1
+
+# ** Vancouver era products require Windows 7 or later **
+# ** These will be passed through as #defines to the compiler by winntmdl.mki **
+WINVER=0x0601
+_WIN32_WINNT=0x0601
+_WIN32_IE=0x0700
+
+%if BUILD_USING_VS2010
+    nameToDefine=GTEST_USE_OWN_TR1_TUPLE=0
+    %include cdefapnd.mki
+%endif
+
+#----------------------------------------------------------------------
+# Include path
+#----------------------------------------------------------------------
+%if defined (BSI)
+    %include $(SharedMki)DefinePublicApiIncludes.mki
+%endif
+#----------------------------------------------------------
+#  Link Settings (See dlmlink.mki)
+#----------------------------------------------------------
+# The benefit of splitting the symbols is that it is much easier for PRG to pick them out and put them on symbolserver.
+#   We are not getting that benefit here because the build is split up into so many little pieces, and each would have a symbols dir.
+#   A more workable approach will be to link all the PDB's into a single location the build context for harvesting.
+#   Or maybe a single Symbols directory under WinX64 and WinX32 that all products use.
+#%if !defined (symbolsDir)
+#    # *** NEEDS WORK: MSJO is NOT set here!!
+#    symbolsDir          =       $(MSJO)symbols/
+#        symbolsDllDir   =       $(symbolsDir)dll/
+#        symbolsExeDir   =       $(symbolsDir)exe/
+#%endif
+#%if defined (SPLITSYM) && !defined (NO_SPLITSYM)
+#    ASSEMBLY_SYMB_DIR = $(symbolsDllDir)
+#    DLM_SYMB_DEST   = $(symbolsDllDir)
+#    EXE_SYMB_DEST   = $(symbolsExeDir)
+#%endif
+
+#----------------------------------------------------------
+#  Signing Settings (See dlmlink.mki, isrightscompliant.mki)
+#----------------------------------------------------------
+%if !defined (certDir)
+    # bsiCerts is defined by InternalSystemPolicy
+    # *** NEEDS WORK: A short, camelCase name like 'certDir' is too hard to pick out. We should use a longer name that befits a widely used macro ... or get rid of this macro.
+    # NB: This macro is currently set differently in the transkit
+    certDir = $(bsiCerts)
+%endif
+
+#----------------------------------------------------------
+#  Symlink Settings (See dlmlink.mki)
+#----------------------------------------------------------
+# Tell dlmlink.mki where to point symbolic links
+ContextDeliveryDir  = $(BuildContext)Delivery/
+ContextSubpartsLibs = $(BuildContext)SubParts/Libs/
+ContextSubpartsAssembliesDir = $(BuildContext)SubParts/Assemblies/
+DLM_CONTEXT_LOCATION = $(ContextDeliveryDir)
+DLM_LIB_CONTEXT_LOCATION = $(ContextDeliveryDir)
+DLM_CREATE_LIB_CONTEXT_LINK = 1
+EXE_CONTEXT_LOCATION = $(ContextDeliveryDir)
+ASSEMBLY_CONTEXT_LOCATION = $(ContextDeliveryDir)

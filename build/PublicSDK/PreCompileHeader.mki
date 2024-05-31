@@ -1,0 +1,217 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
+#
+#    Incremental build errors caused by incomplete dependencies for a PCH are common.
+#    By using this .mki file to precompile your header, your makefile dependencies will
+#    be 100% complete and accurate, thus eliminating those kinds of errors. The dependency
+#    information is captured from the /showIncludes output of the Visual C++ compiler. This
+#    eliminates the need for the programmer to expend any effort maintaining .PCH dependency
+#    information in a makefile.
+#
+#    It is assumed that it is OK to use base filename provided in the PchCompiland input as the
+#    base filename for both the generated .pch and .obj files, and that it is OK to generate all
+#    output in $(PchOutputDir).
+#
+#    OUTPUTS:
+#
+#    UsePrecompiledHeaderOptions - This output macro is for the caller's convenience. Its value is suitable for assignment
+#                                  to CCPchOpts in order to consume the generated .pch file from other compilands.
+#
+#    INPUTS:
+#
+#    PchCompiland        - Required. The fully qualified filename of the .cpp/.c file that
+#                          hosts the precompilation.
+#
+#    PchOutputDir        - Required. The fully qualified directory name to which the .obj, .pch and
+#                          other intermediate output is to be generated.
+#
+#    PchArgumentsDepends - Optional. This macro should contain a space separated list of the .mki/.mke files
+#                          that, when changed, should trigger a rebuild of your .pch. Here you only want to
+#                          include the .mke/.mki files that define the inputs to this .mki so that, if you change them,
+#                          we rebuild. Typically you do not need to provide this input since we give it a value of
+#                          $(_MakeFileSpec) by default and that is usually what you want.
+#
+#    PchExplicitDepends  - Optional. Any other explicit dependencies that you might want to trigger a re-precompilation.
+#                          You will probably never need this. Perhaps it has some application with COM or .NET code that
+#                          does #using statements to reference binaries from a compiland.
+#
+#    CompileOptionsMki   - Optional, but you'll probably want to use it. A separate makefile context is used for the
+#                          actual precompilation. As such, any alterations that your including .mke file makes to the
+#                          compiler command, such as appending the compiler include search path, predefining macros, etc.,
+#                          will not appear automatically in the spawned bmake context. Almost always the right thing to
+#                          do is to move your compiler command alterations into an .mki file. Then you cause the child
+#                          bmake context that is created by this .mki file to include it by specifying your .mki file as
+#                          CompileOptionsMki. That file (if set) is %included by PreCompileHeader.mke
+#
+#    PchExtraOptions     - Optional. Any additional compiler options that you'd like to be used for the precompilation.
+#                          The intent is that these be .pch related compiler options such as -Zm<number>, but you could
+#                          attempt to inject all other needed compiler options into PchExtraOptions instead of using the
+#                          CompileOptionsMki method described above.
+#
+#    PchDependencySetDir  - Optional. Defaults to PchOutputDir if not provided. This input allows advanced scenarios such
+#                           as part-time PCH sharing with full-time dependency management sharing.
+#
+#    PchDependencySetName - Optional. This allows multiple precompilations of the same header information to share the same
+#                           automatically generated dependency information. In other words, it just makes an optimization
+#                           possible, nothing more. For example, you might use this if you compile the exact same header
+#                           information both with and without the /CLR compiler switch. In such a case, both compilands can
+#                           share the same dependencies and thus save the effort required to generate that same information
+#                           twice.
+#
+#    PchTargetBasename   - Optional. If you do precompile the same headers in more than one way, then you will need to specify
+#                          this input to give the .pch/.obj output files unique names for each precompilation.
+#
+#    PchCompileForClr    - Optional. If this is defined, then the /CLR switch will be used in the precompilation. You probably
+#                          never need to provide this input since it is provided automatically as long as PreCompileHeader.mki
+#                          has been included in a /CLR section of your makefile (i.e. a section where compileForCLRStart.mki
+#                          has been included already).
+#
+%if !defined (PchCompiland)
+    %error You must define PchCompiland to be the fully qualified name of the .cpp or .c file to host the header precompilation.
+%endif
+
+%if !defined (PchOutputDir)
+    %error You must define PchOutputDir to indicate the desired output directory for the .pch and .obj output files as well as other dependency management related output files.
+%endif
+
+%if !defined (PchArgumentsDepends)
+    PchArgumentsDepends = $(_MakeFileSpec)
+%endif
+
+%if !defined (PchTargetBasename)
+    PchTargetBasename = $(PchCompilandBasename)
+    undefPchTargetBasename=1
+%endif
+
+%if !defined (PchDependencySetDir)
+    PchDependencySetDir = $(PchOutputDir)
+%endif
+
+%if !defined (PchDependencySetName)
+    PchDependencySetName=$(PchTargetBasename)
+    undefPchDependencySetName=1
+%endif
+
+%if !defined (PchCompilandBasename)
+    PchCompilandBasename=$[@basename $(PchCompiland)]
+    PchCompilandSrcDir  =$[@dir      $(PchCompiland)]
+%endif
+
+%if !defined (PchParentMke)
+    PchParentMke=$(_MakeFileSpec)
+%endif
+
+### Start PYTHON Change
+%if defined (SolutionPolicyMki)
+    %include $(SolutionPolicyMki)
+%endif
+
+%if defined (SolutionPolicyMki)
+    %if $(SolutionPolicyMki)!="dummyvalue"
+        CompileOptionsMki=$(SolutionPolicyMki)
+    %endif
+%endif
+### PYTHON change End
+
+PchArgumentsMki = $(PchOutputDir)PchArgs$(PchTargetBasename).mki
+
+#
+#  Provided that the optional $(PchArgumentsDepends) input contains all of the files that
+#  contain these other macro inputs then we'll regen the arguments file every time any
+#  of them changes. Thus we avoid writing out PchArgs$(_MakeFileName).mki with every run.
+#
+#  We guard this with BMAKE_DELETE_ALL_TARGETS because we need this file for the
+#  subordinate PreCompileHeader.mke to clean well.  Then we explicitly delete
+#  $(PchOutputDir)PchArgs$(_MakeFileName).mki after that.
+#
+%if !defined (BMAKE_DELETE_ALL_TARGETS)
+
+    pchSaveContinuationChar =% $[continuationChar]
+    continuationChar = \\
+
+    $(PchArgumentsMki) : $(PchArgumentsDepends) $(_CurrentFileSpec)
+        !$(msg)
+        !~@mkdir $(PchOutputDir)
+        > $@
+        PchCompiland=$(PchCompiland)
+        PchOutputDir=${PchOutputDir}\/
+        PchTargetBasename=$(PchTargetBasename)
+        PchCompilandSrcDir=${PchCompilandSrcDir}\/
+        PchCompilandBasename=$(PchCompilandBasename)
+        PchDependencySetDir=${PchDependencySetDir}\/
+        PchDependencySetName=$(PchDependencySetName)
+		CCompFpOpts=$(CCompFpOpts)
+        cIncs=$(cIncs)
+     %if defined (ProductIncludes)
+        ProductIncludes=$(ProductIncludes)\/
+     %endif
+     %if defined (PublicApiIncludes)    
+        PublicApiIncludes=$(PublicApiIncludes)\/
+     %endif
+        PolicyFile=$(PolicyFile)
+        SolutionPolicyMki=$(SolutionPolicyMki)
+        SharedMki=$(SharedMki)
+        CompileOptionsMki=$(CompileOptionsMki)
+    %if defined (MSVC_VERSION)
+        MSVC_VERSION=$(MSVC_VERSION)
+        PchParentMke=$(PchParentMke)
+    %endif
+    %if defined (CompilingForCLR) || defined (PchCompileForClr)
+        PchCompileForClr=1
+    %endif
+    %if defined (ALLOW_MSVC_PERMISSIVE)
+        ALLOW_MSVC_PERMISSIVE=1
+    %endif
+    %if defined (PchExtraOptions)
+        PchExtraOptions=$(PchExtraOptions)
+    %endif
+    %if defined (PchExplicitDepends)
+        PchExplicitDepends=$(PchExplicitDepends)
+    %endif
+        <
+        ~time
+
+    continuationChar =% $[pchSaveContinuationChar]
+    %undef pchSaveContinuationChar
+
+%endif
+
+
+# Running clean multiple times would cause error on missing PchArgumentsMki
+# so skipping if cleaning and there is no arguments mki already
+%if !defined(BMAKE_DELETE_ALL_TARGETS) || (defined(BMAKE_DELETE_ALL_TARGETS) && exists($(PchArgumentsMki)))
+
+PreCompileHeader:
+    $(_bmake) $(bmopts) -dArgumentsMki=$(PchArgumentsMki) $(_CurrentFilePath)Build/PublicSDK/PreCompileHeader.mke
+
+    #
+    #  We set this output macro for the convenience of the including makefile.
+    #
+    UsePrecompiledHeaderOptions =% $[PchExtraOptions] -Yu"$[PchCompilandBasename].h" -Fp$[PchOutputDir]$[PchTargetBasename].pch
+
+%endif
+
+
+
+#
+#  We can only delete the $(PchArgumentsMki) file if the PchDependencySetName input was not provided.
+#  Otherwise $(PchArgumentsMki) is shared between more than one precompilation and, to make sure that
+#  the other one will clean well also, we have to retain this shared .mki file.
+#
+%if defined (BMAKE_DELETE_ALL_TARGETS) && defined (undefPchDependencySetName)
+    always:
+        !$(deleteCmd) $(PchArgumentsMki)
+
+%endif
+
+%if defined (undefPchTargetBasename)
+    %undef undefPchTargetBasename
+    %undef PchTargetBasename
+%endif
+%if defined (undefPchDependencySetName)
+    %undef undefPchDependencySetName
+    %undef PchDependencySetName
+%endif
+%undef PchArgumentsMki

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="Bentley_JSpace_CustomAttributes" nameSpacePrefix="bjca" version="2.0" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+    <ECClass typeName="JDRange3d" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="xMin" typeName="double" />
+        <ECProperty propertyName="yMin" typeName="double" />
+        <ECProperty propertyName="zMin" typeName="double" />
+        <ECProperty propertyName="xMax" typeName="double" />
+        <ECProperty propertyName="yMax" typeName="double" />
+        <ECProperty propertyName="zMax" typeName="double" />
+    </ECClass>
+    <ECClass typeName="JDTransform3d" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="M00" typeName="double" />
+        <ECProperty propertyName="M01" typeName="double" />
+        <ECProperty propertyName="M02" typeName="double" />
+        <ECProperty propertyName="M03" typeName="double" />
+        <ECProperty propertyName="M04" typeName="double" />
+        <ECProperty propertyName="M05" typeName="double" />
+        <ECProperty propertyName="M06" typeName="double" />
+        <ECProperty propertyName="M07" typeName="double" />
+        <ECProperty propertyName="M08" typeName="double" />
+        <ECProperty propertyName="M09" typeName="double" />
+        <ECProperty propertyName="M10" typeName="double" />
+        <ECProperty propertyName="M11" typeName="double" />
+        <ECProperty propertyName="M12" typeName="double" />
+        <ECProperty propertyName="M13" typeName="double" />
+        <ECProperty propertyName="M14" typeName="double" />
+        <ECProperty propertyName="M15" typeName="double" />
+    </ECClass>
+    <ECClass typeName="JDVector3d" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="X" typeName="double" />
+        <ECProperty propertyName="Y" typeName="double" />
+        <ECProperty propertyName="Z" typeName="double" />
+    </ECClass>
+    <ECClass typeName="JS_AddCoreBaseClass" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="ClassName" typeName="string" />
+    </ECClass>
+    <ECClass typeName="JS_Source" isStruct="True" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="Type" typeName="int" />
+        <ECArrayProperty propertyName="Expressions" typeName="string" minOccurs="0" maxOccurs="unbounded" />
+        <ECProperty propertyName="InheritanceType" typeName="int" />
+        <ECProperty propertyName="PromptMessage" typeName="string" />
+        <ECProperty propertyName="PromptDefaultExpression" typeName="int" />
+        <ECProperty propertyName="PromptAllowOnlySpecifiedExpressions" typeName="boolean" />
+    </ECClass>
+    <ECClass typeName="JS_AttributeProperties" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="IncludeWithObject" typeName="boolean" />
+        <ECProperty propertyName="InheritProperty" typeName="boolean" />
+        <ECProperty propertyName="InheritValue" typeName="boolean" />
+        <ECProperty propertyName="Constraint" typeName="string" />
+        <ECProperty propertyName="ConstraintOverride" typeName="boolean" />
+        <ECProperty propertyName="ValueOverride" typeName="boolean" />
+        <ECProperty propertyName="InheritancePriority" typeName="int" />
+        <ECProperty propertyName="InstancePriority" typeName="int" />
+        <ECArrayProperty propertyName="Sources" typeName="JS_Source" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+        <ECArrayProperty propertyName="Daemons" typeName="string" minOccurs="0" maxOccurs="unbounded" />
+        <ECProperty propertyName="NativeJSpaceType" typeName="string" />
+    </ECClass>
+    <ECClass typeName="JS_Relationship" isStruct="True" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="Name" typeName="string" />
+        <ECProperty propertyName="InverseName" typeName="string" />
+        <ECProperty propertyName="InheritValue" typeName="boolean" />
+        <ECProperty propertyName="Constraint" typeName="string" />
+        <ECProperty propertyName="ConstraintOverride" typeName="boolean" />
+        <ECProperty propertyName="InheritancePriority" typeName="int" />
+        <ECProperty propertyName="InstancePriority" typeName="int" />
+        <ECArrayProperty propertyName="Daemons" typeName="string" minOccurs="0" maxOccurs="unbounded" />
+    </ECClass>
+    <ECClass typeName="JS_Method" isStruct="True" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="Name" typeName="string" />
+        <ECProperty propertyName="InheritMethod" typeName="boolean" />
+        <ECProperty propertyName="InheritValue" typeName="boolean" />
+        <ECProperty propertyName="ValueOverride" typeName="boolean" />
+        <ECProperty propertyName="Constraint" typeName="string" />
+        <ECProperty propertyName="ConstraintOverride" typeName="boolean" />
+        <ECProperty propertyName="InheritancePriority" typeName="int" />
+        <ECProperty propertyName="InstancePriority" typeName="int" />
+        <ECArrayProperty propertyName="Sources" typeName="JS_Source" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+    </ECClass>
+    <ECClass typeName="JS_Rule" isStruct="True" isDomainClass="True">
+        <ECProperty propertyName="Title" typeName="string" />
+        <ECProperty propertyName="Description" typeName="string" />
+        <ECProperty propertyName="RuleID" typeName="int" />
+        <ECProperty propertyName="InheritRule" typeName="boolean" />
+        <ECProperty propertyName="Expression" typeName="string" />
+    </ECClass>
+    <ECClass typeName="JS_ClassProperties" isDomainClass="True" isCustomAttributeClass="True">
+        <ECStructProperty propertyName="Relationship" typeName="JS_Relationship" />
+        <ECArrayProperty propertyName="Methods" typeName="JS_Method" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+        <ECArrayProperty propertyName="Rules" typeName="JS_Rule" minOccurs="0" maxOccurs="unbounded" isStruct="True" />
+        <ECProperty propertyName="ID" typeName="int" />
+    </ECClass>
+    <ECClass typeName="JS_Ignore" isDomainClass="True" isCustomAttributeClass="True" />
+    <ECClass typeName="JS_SchemaProperties" isDomainClass="True" isCustomAttributeClass="True">
+        <ECProperty propertyName="ID" typeName="int" />
+    </ECClass>
+</ECSchema>

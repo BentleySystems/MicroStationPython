@@ -1,0 +1,30 @@
+#--------------------------------------------------------------------------------------
+#
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+#
+#  This file is obsolete and should not be used.  Only here for backward compatibility.
+#
+#--------------------------------------------------------------------------------------
+
+%warn dlmcomp.mki is obsolete.  Please update your makefile.
+
+%if defined (DLMLINK_WARNINGS_AS_ERRORS)
+    %error stopping dlmcomp because DLMLINK_WARNINGS_AS_ERRORS is set
+%endif
+%warn You can set DLMLINK_WARNINGS_AS_ERRORS=1 to stop in the build when these errors were found.
+
+%if defined (GNUC) || defined (LinuxX86)
+    CCompOpts   + -fPIC
+%endif
+
+%if !defined (DLL_ONLY)
+    #----------------------------------------------------------
+    #   To allow a module to know it is going to a dlm
+    #----------------------------------------------------------
+    nameToDefine = target_is_dlm
+    %include cdefapnd.mki
+
+%endif
+

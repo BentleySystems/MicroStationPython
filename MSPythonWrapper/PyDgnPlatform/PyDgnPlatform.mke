@@ -1,0 +1,501 @@
+#--------------------------------------------------------------------------------------
+#
+#     $Source: MSPython\MSPythonWrapper\PyDgnPlatform\PyDgnPlatform.mke $
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#--------------------------------------------------------------------------------------
+appName             = MSPyDgnPlatform
+
+%if defined (BSIBUILD)
+MSPythonSrc         = $(SrcRoot)MSPython/
+%else
+MSPythonSrc         = $(SrcRoot)
+%endif
+
+
+PolicyFile          = $(MSPythonSrc)/MSPythonAssertPolicy.mki
+SolutionPolicyMki   = $(MSPythonSrc)/MSPythonSolutionPolicy.mki
+
+%include mdl.mki
+
+#----------------------------------------------------------------------
+#       Create output directories
+#----------------------------------------------------------------------
+o = $(out)PyDgnPlatform/
+
+always:
+    !~@mkdir $(o)
+
+#---------------------------------------------
+#       Compile the source files 
+#---------------------------------------------
+CCompOpts + -bigobj -MP
+
+MultiCompileDepends = $(_MakeFileSpec)
+
+PchCompiland        = $(MSPythonSrc)/MSPythonPCH.cpp
+PchOutputDir        = $(o)
+PchArgumentsDepends = $(MultiCompileDepends)
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302   -wd4471 -wd5205
+%include $(MSPythonSrc)/build/publicSDK/PreCompileHeader.mki
+
+
+CCPchOpts = $(UsePrecompiledHeaderOptions)
+
+dependencies    =   $(MSPythonSrc)/MSPythonPCH.h
+
+%include MultiCppCompileRule.mki
+
+PyDgnPlatformSource        = $(PyhonWrapper)PyDgnPlatform/source/
+PyDgnPlatformDependencies  = $(dependencies) \
+                             $(PythonInternalHeaders)OpqueTypes_Bentley.h \
+                             $(PythonInternalHeaders)OpqueTypes_Geom.h \
+                             $(PythonInternalHeaders)OpqueTypes_DgnPlatform.h
+
+$(o)archandlers$(oext)                  : $(PyDgnPlatformSource)archandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)areapattern$(oext)                  : $(PyDgnPlatformSource)areapattern.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)associativepoint$(oext)             : $(PyDgnPlatformSource)associativepoint.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)assoregionhandler$(oext)            : $(PyDgnPlatformSource)assoregionhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)bentleydgn$(oext)                   : $(PyDgnPlatformSource)bentleydgn.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)bitmask$(oext)                      : $(PyDgnPlatformSource)bitmask.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)brepcellhandler$(oext)              : $(PyDgnPlatformSource)brepcellhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)bsplinecurvehandler$(oext)          : $(PyDgnPlatformSource)bsplinecurvehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)bsplinesurfacehandler$(oext)        : $(PyDgnPlatformSource)bsplinesurfacehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)caret$(oext)                        : $(PyDgnPlatformSource)caret.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)cellheaderhandler$(oext)            : $(PyDgnPlatformSource)cellheaderhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)chainheaderhandlers$(oext)          : $(PyDgnPlatformSource)chainheaderhandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)charstream$(oext)                   : $(PyDgnPlatformSource)charstream.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)clipprimitive$(oext)                : $(PyDgnPlatformSource)clipprimitive.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)clipvector$(oext)                   : $(PyDgnPlatformSource)clipvector.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)colorbook$(oext)                    : $(PyDgnPlatformSource)colorbook.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)complexheaderhandler$(oext)         : $(PyDgnPlatformSource)complexheaderhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)conehandler$(oext)                  : $(PyDgnPlatformSource)conehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)configurationmanager$(oext)         : $(PyDgnPlatformSource)configurationmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)csvfile$(oext)                      : $(PyDgnPlatformSource)csvfile.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)curvehandler$(oext)                 : $(PyDgnPlatformSource)curvehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)customitemtype$(oext)               : $(PyDgnPlatformSource)customitemtype.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)picklist$(oext)                     : $(PyDgnPlatformSource)picklist.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dependencymanager$(oext)            : $(PyDgnPlatformSource)dependencymanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dependencymanagerlinkage$(oext)     : $(PyDgnPlatformSource)dependencymanagerlinkage.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnappdata$(oext)                   : $(PyDgnPlatformSource)dgnappdata.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnattachment$(oext)                : $(PyDgnPlatformSource)dgnattachment.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgncolormap$(oext)                  : $(PyDgnPlatformSource)dgncolormap.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgncomponenthandlers$(oext)         : $(PyDgnPlatformSource)dgncomponenthandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgncore$(oext)                      : $(PyDgnPlatformSource)dgncore.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgndocumentmanager$(oext)           : $(PyDgnPlatformSource)dgndocumentmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnecfinders$(oext)                 : $(PyDgnPlatformSource)dgnecfinders.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnecinstance$(oext)                : $(PyDgnPlatformSource)dgnecinstance.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnecmanager$(oext)                 : $(PyDgnPlatformSource)dgnecmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnecproviders$(oext)               : $(PyDgnPlatformSource)dgnecproviders.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnectypes$(oext)                   : $(PyDgnPlatformSource)dgnectypes.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnelements$(oext)                  : $(PyDgnPlatformSource)dgnelements.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnfile$(oext)                      : $(PyDgnPlatformSource)dgnfile.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnfontmanager$(oext)               : $(PyDgnPlatformSource)dgnfontmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnhistory$(oext)                   : $(PyDgnPlatformSource)dgnhistory.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnhost$(oext)                      : $(PyDgnPlatformSource)dgnhost.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnitemindex$(oext)                 : $(PyDgnPlatformSource)dgnitemindex.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnlinkhandler$(oext)               : $(PyDgnPlatformSource)dgnlinkhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnlinkmanager$(oext)               : $(PyDgnPlatformSource)dgnlinkmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnlinks$(oext)                     : $(PyDgnPlatformSource)dgnlinks.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnlinktree$(oext)                  : $(PyDgnPlatformSource)dgnlinktree.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnmodel$(oext)                     : $(PyDgnPlatformSource)dgnmodel.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnmodelref$(oext)                  : $(PyDgnPlatformSource)dgnmodelref.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnmodelrefcollections$(oext)       : $(PyDgnPlatformSource)dgnmodelrefcollections.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnplatform$(oext)                  : $(PyDgnPlatformSource)dgnplatform.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnplatform.r$(oext)                : $(PyDgnPlatformSource)dgnplatform.r.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnplatformbasetype.r$(oext)        : $(PyDgnPlatformSource)dgnplatformbasetype.r.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnplatformerrors.r$(oext)          : $(PyDgnPlatformSource)dgnplatformerrors.r.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnplatformlib$(oext)               : $(PyDgnPlatformSource)dgnplatformlib.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnstorehandlers$(oext)             : $(PyDgnPlatformSource)dgnstorehandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgntextsnippet$(oext)               : $(PyDgnPlatformSource)dgntextsnippet.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgntextstyle$(oext)                 : $(PyDgnPlatformSource)dgntextstyle.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgntextstyleproperties.r$(oext)     : $(PyDgnPlatformSource)dgntextstyleproperties.r.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnviewport$(oext)                  : $(PyDgnPlatformSource)dgnviewport.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)digitalsignaturecellheaderhandler$(oext) : $(PyDgnPlatformSource)digitalsignaturecellheaderhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dimensionhandler$(oext)             : $(PyDgnPlatformSource)dimensionhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dimensionstyle$(oext)               : $(PyDgnPlatformSource)dimensionstyle.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dimensionstyleprops.r$(oext)        : $(PyDgnPlatformSource)dimensionstyleprops.r.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)displayfilter$(oext)                : $(PyDgnPlatformSource)displayfilter.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)displayfiltermanager$(oext)         : $(PyDgnPlatformSource)displayfiltermanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)displayhandler$(oext)               : $(PyDgnPlatformSource)displayhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)displaypath$(oext)                  : $(PyDgnPlatformSource)displaypath.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)displayruleactions$(oext)           : $(PyDgnPlatformSource)displayruleactions.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)displayrules$(oext)                 : $(PyDgnPlatformSource)displayrules.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)displayrulesmanager$(oext)          : $(PyDgnPlatformSource)displayrulesmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)displaystylemanager$(oext)          : $(PyDgnPlatformSource)displaystylemanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dropgraphics$(oext)                 : $(PyDgnPlatformSource)dropgraphics.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)ecquery$(oext)                      : $(PyDgnPlatformSource)ecquery.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)ecreportnode$(oext)                 : $(PyDgnPlatformSource)ecreportnode.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementagenda$(oext)                : $(PyDgnPlatformSource)elementagenda.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementcopycontext$(oext)           : $(PyDgnPlatformSource)elementcopycontext.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementgeometry$(oext)              : $(PyDgnPlatformSource)elementgeometry.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementgraphics$(oext)              : $(PyDgnPlatformSource)elementgraphics.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementhandle$(oext)                : $(PyDgnPlatformSource)elementhandle.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementproperties$(oext)            : $(PyDgnPlatformSource)elementproperties.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementrefbase$(oext)               : $(PyDgnPlatformSource)elementrefbase.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementtemplatenode$(oext)          : $(PyDgnPlatformSource)elementtemplatenode.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementtemplateparamshelper$(oext)  : $(PyDgnPlatformSource)elementtemplateparamshelper.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)elementtemplateutils$(oext)         : $(PyDgnPlatformSource)elementtemplateutils.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)extendedelementhandler$(oext)       : $(PyDgnPlatformSource)extendedelementhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)fenceparams$(oext)                  : $(PyDgnPlatformSource)fenceparams.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)fraction$(oext)                     : $(PyDgnPlatformSource)fraction.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)gparray$(oext)                      : $(PyDgnPlatformSource)gparray.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)groupedholehandler$(oext)           : $(PyDgnPlatformSource)groupedholehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)handler$(oext)                      : $(PyDgnPlatformSource)handler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)hitpath$(oext)                      : $(PyDgnPlatformSource)hitpath.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)httphandler$(oext)                  : $(PyDgnPlatformSource)httphandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)hudmarker$(oext)                    : $(PyDgnPlatformSource)hudmarker.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)iannotationhandler$(oext)           : $(PyDgnPlatformSource)iannotationhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)iareafillproperties$(oext)          : $(PyDgnPlatformSource)iareafillproperties.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)iauxcoordsys$(oext)                 : $(PyDgnPlatformSource)iauxcoordsys.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)iconelementhandler$(oext)           : $(PyDgnPlatformSource)iconelementhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)idgntextstyleapplyable$(oext)       : $(PyDgnPlatformSource)idgntextstyleapplyable.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)ieditactionsource$(oext)            : $(PyDgnPlatformSource)ieditactionsource.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)image$(oext)                        : $(PyDgnPlatformSource)image.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)imaterialproperties$(oext)          : $(PyDgnPlatformSource)imaterialproperties.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)imodifyelement$(oext)               : $(PyDgnPlatformSource)imodifyelement.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)inamedviewelementhandler$(oext)     : $(PyDgnPlatformSource)inamedviewelementhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)indentation$(oext)                  : $(PyDgnPlatformSource)indentation.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)ipointcloud$(oext)                  : $(PyDgnPlatformSource)ipointcloud.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)irasterattachment$(oext)            : $(PyDgnPlatformSource)irasterattachment.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)irastersourcefilequery$(oext)       : $(PyDgnPlatformSource)irastersourcefilequery.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)isettings$(oext)                    : $(PyDgnPlatformSource)isettings.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)isprite$(oext)                      : $(PyDgnPlatformSource)isprite.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)itextedit$(oext)                    : $(PyDgnPlatformSource)itextedit.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)itransactionhandler$(oext)          : $(PyDgnPlatformSource)itransactionhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)itxnmanager$(oext)                  : $(PyDgnPlatformSource)itxnmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)iviewdraw$(oext)                    : $(PyDgnPlatformSource)iviewdraw.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)iviewoutput$(oext)                  : $(PyDgnPlatformSource)iviewoutput.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)iviewtransients$(oext)              : $(PyDgnPlatformSource)iviewtransients.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)ixdatanodehandler$(oext)            : $(PyDgnPlatformSource)ixdatanodehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)levelcache$(oext)                   : $(PyDgnPlatformSource)levelcache.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)leveltypes$(oext)                   : $(PyDgnPlatformSource)leveltypes.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)light$(oext)                        : $(PyDgnPlatformSource)light.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)linearhandlers$(oext)               : $(PyDgnPlatformSource)linearhandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)linestyle$(oext)                    : $(PyDgnPlatformSource)linestyle.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)linestylemanager$(oext)             : $(PyDgnPlatformSource)linestylemanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)lstyle$(oext)                       : $(PyDgnPlatformSource)lstyle.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)material$(oext)                     : $(PyDgnPlatformSource)material.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)materialsettings$(oext)             : $(PyDgnPlatformSource)materialsettings.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)meshheaderhandler$(oext)            : $(PyDgnPlatformSource)meshheaderhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)modelaccess$(oext)                  : $(PyDgnPlatformSource)modelaccess.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)modelinfo$(oext)                    : $(PyDgnPlatformSource)modelinfo.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)mselementdescr$(oext)               : $(PyDgnPlatformSource)mselementdescr.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)multilinehandler$(oext)             : $(PyDgnPlatformSource)multilinehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)multilinestyle$(oext)               : $(PyDgnPlatformSource)multilinestyle.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)namedboundary$(oext)                : $(PyDgnPlatformSource)namedboundary.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)namedgroup$(oext)                   : $(PyDgnPlatformSource)namedgroup.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)namedview$(oext)                    : $(PyDgnPlatformSource)namedview.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)notehandler$(oext)                  : $(PyDgnPlatformSource)notehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)notificationmanager$(oext)          : $(PyDgnPlatformSource)notificationmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)olecellheaderhandler$(oext)         : $(PyDgnPlatformSource)olecellheaderhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)paragraph$(oext)                    : $(PyDgnPlatformSource)paragraph.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)parametriccellhandlers$(oext)       : $(PyDgnPlatformSource)parametriccellhandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)parametricmodeling$(oext)           : $(PyDgnPlatformSource)parametricmodeling.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)persistentelementpath$(oext)        : $(PyDgnPlatformSource)persistentelementpath.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)persistentsnappath$(oext)           : $(PyDgnPlatformSource)persistentsnappath.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)pointcloudcliphandler$(oext)        : $(PyDgnPlatformSource)pointcloudcliphandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)pointcloudedit$(oext)               : $(PyDgnPlatformSource)pointcloudedit.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)pointcloudhandler$(oext)            : $(PyDgnPlatformSource)pointcloudhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)propertycontext$(oext)              : $(PyDgnPlatformSource)propertycontext.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)PyDgnPlatform$(oext)                : $(PyDgnPlatformSource)PyDgnPlatform.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)qvviewport$(oext)                   : $(PyDgnPlatformSource)qvviewport.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)rasterattachmentoverride$(oext)     : $(PyDgnPlatformSource)rasterattachmentoverride.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)rasterhandlers$(oext)               : $(PyDgnPlatformSource)rasterhandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)regionlinkprocessor$(oext)          : $(PyDgnPlatformSource)regionlinkprocessor.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)regionutil$(oext)                   : $(PyDgnPlatformSource)regionutil.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)registeredapp$(oext)                : $(PyDgnPlatformSource)registeredapp.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)run$(oext)                          : $(PyDgnPlatformSource)run.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)runproperties$(oext)                : $(PyDgnPlatformSource)runproperties.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)runpropertiesbase$(oext)            : $(PyDgnPlatformSource)runpropertiesbase.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)scaledefinition$(oext)              : $(PyDgnPlatformSource)scaledefinition.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)sectionclip$(oext)                  : $(PyDgnPlatformSource)sectionclip.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)sharedcellhandler$(oext)            : $(PyDgnPlatformSource)sharedcellhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)sheetdef$(oext)                     : $(PyDgnPlatformSource)sheetdef.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)sheetsizedefinition$(oext)          : $(PyDgnPlatformSource)sheetsizedefinition.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)solidkernel$(oext)                  : $(PyDgnPlatformSource)solidkernel.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)storedexpression$(oext)             : $(PyDgnPlatformSource)storedexpression.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)surfaceandsolidhandlers$(oext)      : $(PyDgnPlatformSource)surfaceandsolidhandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)symbologyreporter$(oext)            : $(PyDgnPlatformSource)symbologyreporter.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)tagelementdata$(oext)               : $(PyDgnPlatformSource)tagelementdata.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)tagelementhandler$(oext)            : $(PyDgnPlatformSource)tagelementhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)templaterefhandler$(oext)           : $(PyDgnPlatformSource)templaterefhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)templatesymbologyremapper$(oext)    : $(PyDgnPlatformSource)templatesymbologyremapper.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)textapicommon$(oext)                : $(PyDgnPlatformSource)textapicommon.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)textblock$(oext)                    : $(PyDgnPlatformSource)textblock.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)textblockiterators$(oext)           : $(PyDgnPlatformSource)textblockiterators.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)textblockserialization$(oext)       : $(PyDgnPlatformSource)textblockserialization.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)textfield$(oext)                    : $(PyDgnPlatformSource)textfield.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)texthandlers$(oext)                 : $(PyDgnPlatformSource)texthandlers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)textparam$(oext)                    : $(PyDgnPlatformSource)textparam.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)textstring$(oext)                   : $(PyDgnPlatformSource)textstring.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)textstringproperties$(oext)         : $(PyDgnPlatformSource)textstringproperties.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)texttablehandler$(oext)             : $(PyDgnPlatformSource)texttablehandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)transformclipstack$(oext)           : $(PyDgnPlatformSource)transformclipstack.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)unitdefinition$(oext)               : $(PyDgnPlatformSource)unitdefinition.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)userinterfacenode$(oext)            : $(PyDgnPlatformSource)userinterfacenode.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)valueformat$(oext)                  : $(PyDgnPlatformSource)valueformat.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)valueparse$(oext)                   : $(PyDgnPlatformSource)valueparse.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)viewcontext$(oext)                  : $(PyDgnPlatformSource)viewcontext.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)viewgroup$(oext)                    : $(PyDgnPlatformSource)viewgroup.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)viewinfo$(oext)                     : $(PyDgnPlatformSource)viewinfo.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)wherecriterion$(oext)               : $(PyDgnPlatformSource)wherecriterion.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)whitespace$(oext)                   : $(PyDgnPlatformSource)whitespace.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)workset$(oext)                      : $(PyDgnPlatformSource)workset.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)xattributechange$(oext)             : $(PyDgnPlatformSource)xattributechange.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)xattributeiter$(oext)               : $(PyDgnPlatformSource)xattributeiter.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)xdatanodecollection$(oext)          : $(PyDgnPlatformSource)xdatanodecollection.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)xdatatreemanager$(oext)             : $(PyDgnPlatformSource)xdatatreemanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)xdatatreenode$(oext)                : $(PyDgnPlatformSource)xdatatreenode.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)xdatatreeowner$(oext)               : $(PyDgnPlatformSource)xdatatreeowner.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)ecinstanceholderhandler$(oext)      : $(PyDgnPlatformSource)ecinstanceholderhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)xmlfragment$(oext)                  : $(PyDgnPlatformSource)xmlfragment.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnraster$(oext)                    : $(PyDgnPlatformSource)dgnraster.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)basegeocoord$(oext)                 : $(PyDgnPlatformSource)basegeocoord.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgngeocoord$(oext)                  : $(PyDgnPlatformSource)dgngeocoord.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)designhistory$(oext)                : $(PyDgnPlatformSource)designhistory.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)rastercollection$(oext)             : $(PyDgnPlatformSource)rastercollection.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+%include MultiCppCompileGo.mki
+
+CCPchOpts =
+
+#----------------------------------------------------------------------
+#   Set up to use dlmlink.mki
+#----------------------------------------------------------------------
+DLM_NAME                    = $(appName)
+DLM_DEST                    = $(o)
+DLM_EXPORT_DEST             = $(o)
+DLM_OBJECT_DEST             = $(o)
+DLM_LIBDEF_SRC              = $(_MakeFilePath)
+DLM_OBJECT_FILES            = $(MultiCompileObjectList) \
+                              $(o)MSPythonPCH$(oext)
+
+DLM_EXTENSION               = .pyd
+DLM_NOENTRY                 = 1
+DLM_NO_INITIALIZE_FUNCTION  = 1
+DLM_NO_DLS                  = 1
+DLM_NO_DEF                  = 1
+LINKER_LIBRARIES            = $(PythonLibName) \
+                              $(ContextSubpartsLibs)bentley.lib \
+                              $(ContextSubpartsLibs)BentleyAllocator.lib \
+                              $(ContextSubpartsLibs)BentleyGeom.lib \
+                              $(ContextSubpartsLibs)DgnPlatform.lib \
+                              $(ContextSubpartsLibs)RmgrTools.lib \
+                              $(ContextSubpartsLibs)ECObjects.lib \
+                              $(ContextSubpartsLibs)MSPythonCore.lib \
+                              $(ContextSubpartsLibs)RasterCore.lib \
+                              $(ContextSubpartsLibs)BaseGeoCoord.lib \
+                              $(ContextSubpartsLibs)PointCloud.lib \
+                              $(ContextSubpartsLibs)DgnGeoCoord.lib
+
+
+DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
+DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/
+
+# No lib needed for this project
+%undef DLM_CREATE_LIB_CONTEXT_LINK
+
+%include dlmlink.mki
