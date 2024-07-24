@@ -1,3 +1,7 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
 import win32com.client as win32
 
 # Example of how to use the Microstation COM API to create a Line. 

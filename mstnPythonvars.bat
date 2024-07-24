@@ -1,3 +1,7 @@
+REM ---------------------------------------------------------------------------------------------
+REM  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+REM See LICENSE.md in the repository root for full copyright notice.
+REM ---------------------------------------------------------------------------------------------
 @ECHO ON
 @IF NOT "%ECHO%." == "." ECHO %ECHO%
 REM To not see this information echo to the screen

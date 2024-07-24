@@ -18,8 +18,7 @@ import pandas as pd
 * @bsimethod                                                              Bentley Systems
 +---------------+---------------+---------------+---------------+---------------+------*/
 '''
-def RepopulateItemsFromExcel():
-
+def RepopulateItemsFromExcel(file_path=''):
     # Get the active DGN file from the session manager
     dgnFile = ISessionMgr.ActiveDgnFile
 
@@ -38,22 +37,32 @@ def RepopulateItemsFromExcel():
     # Create an EC query to find instances of the 'Title Block' item type
     query = ECQuery.CreateQuery(itemTypeLib.GetInternalName(), itemType.GetInternalName())
 
+    if os.path.isfile(file_path):
+        file = file_path
+    else:
+        file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'TitleBlock.xlsx')
+
     # Load data from the Excel file using Pandas
-    file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ItemTypes.xlsx')
     df = pd.read_excel(file, dtype=str)
+    df = df[df['Design File'] == str(dgnFile.FileName)]
+    if df.empty:
+        return
 
     # Set the 'Element ID' column as the index for easier lookup later
     df.set_index(keys='Element ID', inplace=True)
+    df.fillna('', inplace=True)
 
     # Iterate through each instance of the 'Title Block' item type found in the DGN file
     for item in DgnECManager.GetManager().FindInstances(scope, query)[0]:
+        ElementId = str(item.GetAsElementInstance().ElementHandle.ElementId)
+        if ElementId not in df.index:
+            continue
 
         # Get the row from the Pandas DataFrame corresponding to this instance
-        row = df.loc[str(item.GetAsElementInstance().ElementHandle.ElementId)]
+        row = df.loc[ElementId]
 
         # Iterate through each property of the 'Title Block' item type
         for i in range(size):
-
             # Get the current property
             typeProperty = itemType[i]
 
@@ -65,3 +74,6 @@ def RepopulateItemsFromExcel():
 
         # Write any changes made to the instance back to the DGN file
         item.WriteChanges()
+
+if __name__ == "__main__":  # check if this script is being run directly (not imported as a module)
+    RepopulateItemsFromExcel()

@@ -900,7 +900,13 @@ def TransformFaces(solidId, offsetDistance):
     subEdgeArray = ISubEntityPtrArray()
     numEdges = SolidUtil.GetBodyFaces(subEdgeArray, solid[1])
     assert(numEdges == 6)
-
+ 
+    """
+    Create a sub-blend edge array.
+    """
+    subblendEdge = ISubEntityPtrArray()  # Initialize a sub-blend edge array
+    subblendEdge.append(subEdgeArray[0])  # Add the first edge to the sub-blend edge array
+    
     # Define a vector representing the y-axis
     yVec = DVec3d(0.0, -1.0, 0.0)
 
@@ -1037,7 +1043,7 @@ def offsetThroughHole(solidId, offsetDistance):
     # If the offset failed, return False
     return False
 '''
-BodyfromSweep   of profile
+BodyFromSweep   of profile
     solidId  : Profile element
     path id  : Path element
 '''
@@ -1491,10 +1497,10 @@ if __name__ == "__main__":
     if(True != offsetFaces(2487,2.0)):
         print("Offset operation failed")
     if(True != TransformFaces(2494,2.0)):
-       print("Offset operation failed")
+       print("Transform operation failed")
     if(True != offsetThroughHole(2501,2.0)):
-       print("Offset operation failed")
-    if(True != BodyfromSweep(2523,2524)):
+       print("Offset through hole operation failed")
+    if(True != BodyFromSweep(2523,2524)):
        print("Sweep operation failed")
     if(True != LoftBody(2031,2034,2033)):
        print("Loft operation failed")
