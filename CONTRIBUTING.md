@@ -1,4 +1,4 @@
-# Contributing to iTwin.js
+# Contributing to MicroStation Python
 
 Welcome, and thank you for your interest in contributing to the MicroStation Python repository!
 
