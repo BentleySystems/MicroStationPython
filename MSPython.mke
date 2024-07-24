@@ -1,3 +1,7 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
 #
 # To successfully run this make file you will need to have python installed and pytest (pip install pytest)
 # In the case where you will need to debug python tests pytest-env (pip install pytest-env) and modify the pytest.ini file with the location of the ..../PlatformTests/data directory

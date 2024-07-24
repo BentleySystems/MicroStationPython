@@ -1,3 +1,7 @@
+#---------------------------------------------------------------------------------------------
+#  Copyright (c) Bentley Systems, Incorporated. All rights reserved.
+#  See LICENSE.md in the repository root for full copyright notice.
+#---------------------------------------------------------------------------------------------
 import sys
 import PyQt5
 from PyQt5.QtWidgets import *
