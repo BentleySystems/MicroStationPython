@@ -1,0 +1,40 @@
+# This CODEOWNERS file follows the format of Github's CODEOWNERS
+#   Documentation for reference, https://help.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners
+
+# This is a comment.
+# Each line is a file pattern followed by one or more owners.
+
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence,
+# @global-owner1 and @global-owner2 will be requested for
+# review when someone opens a pull request.
+
+* @chaterpaul
+
+.github/CODEOWNERS.* @chaterpaul
+
+.gitignore      @chaterpaul
+
+# The syntax used below tries to cover both files and folders in the common folder that operate per=package
+# Due to syntax requirements, both can't be covered in a single line
+#
+# The three main folder patterns that covered are:
+#   1. /common/api/{packageName}.api.md
+#   1. /common/api/summary/{packageName}.exports.csv
+#   1. /common/changes/@itwin/{packageName}/*.json
+
+
+/build/                                       @chaterpaul
+/InternalAPI/                                 @ChrisWu2024
+/MSPythonCore/                                @ChrisWu2024
+/MSPythonSamples/                             @ChrisWu2024
+/MSPythonTests/                               @chaterpaul
+/MSPythonWrapper/                             @chaterpaul
+/PublicAPI/                                   @ChrisWu2024
+
+
+# These are at the end to override all previous reviews
+
+## Updates to the package.json should avoid requesting review by everyone
+## If the version updates or
+/**/LICENSE.md       @chaterpaul
