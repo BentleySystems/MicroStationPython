@@ -189,4 +189,5 @@ def doModal():
         win32gui.EnableWindow(hwnd, True)  # re-enable the window
     win32gui.SetForegroundWindow(MShwnd)  # set the foreground window to the original one
 
-doModal()
+if __name__ == "__main__":  # check if this script is being run directly (not imported as a module)
+    doModal()
