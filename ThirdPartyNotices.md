@@ -2,7 +2,7 @@
 
 This library potentially incorporates work from the following third-party code:
 
-## [PyBind11](https://github.com/pybind/pybind11/blob/master/.github/CONTRIBUTING.md)
+## [PyBind11](https://github.com/pybind/pybind11/)
 
 Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>, All rights reserved.
 
