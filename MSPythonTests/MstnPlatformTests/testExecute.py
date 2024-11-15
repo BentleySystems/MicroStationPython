@@ -32,4 +32,4 @@ if __name__ == "__main__":
     fileLocation = "MSPython/MSPythonTests/MstnPlatformTests/Tests/"
     fileDir = getRoot(fileLocation)    
     # See https://stackoverflow.com/questions/57523762/pytest-windows-fatal-exception-code-0x8001010d for -p option.
-    pytest.main(["-vv", "-x", fileDir])
+    pytest.main(["-s", "-vv", "-x", fileDir])

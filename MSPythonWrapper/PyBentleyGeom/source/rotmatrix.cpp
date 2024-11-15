@@ -1169,6 +1169,7 @@ void def_RotMatrix(py::module_& m)
     c1.def("InitFromQuaternion", py::overload_cast<DPoint4dCR>(&RotMatrix::InitFromQuaternion), "quat"_a, DOC(Bentley, Geom, RotMatrix, InitFromQuaternion));
     c1.def("InitFromQuaternion", [] (RotMatrixR self, std::array<double, 4> const& wxyzQuat) { self.InitFromQuaternion(wxyzQuat.data()); }, "wxyzQuat"_a);
 
+    c1.def("Zero", &RotMatrix::Zero);
     c1.def("ScaleRows", &RotMatrix::ScaleRows, "inMatrix"_a, "xScale"_a, "yScale"_a, "zScale"_a, DOC(Bentley, Geom, RotMatrix, ScaleRows));
     c1.def("ScaleColumns", py::overload_cast<RotMatrixCR, double, double, double>(&RotMatrix::ScaleColumns), "inMatrix"_a, "xScale"_a, "yScale"_a, "zScale"_a, DOC(Bentley, Geom, RotMatrix, ScaleColumns));
     c1.def("ScaleColumns", py::overload_cast<double, double, double>(&RotMatrix::ScaleColumns), "xScale"_a, "yScale"_a, "zScale"_a, DOC(Bentley, Geom, RotMatrix, ScaleColumns));

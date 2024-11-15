@@ -1,0 +1,8 @@
+mdl load ustnpython
+python load Reference.py
+pyreference attach
+fit view extended
+mdl keyin pselect choose element
+pause 2
+pyreference rotate
+pause 2

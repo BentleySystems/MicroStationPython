@@ -6,7 +6,6 @@
 #
 #--------------------------------------------------------------------------------------##
 import os
-#import sys
 import pytest
 import ctypes
 
@@ -15,12 +14,10 @@ from MSPyBentleyGeom import *
 from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from util import *
+from conftest import *
 
 from typing import Dict
 from enum import Enum
-
-#import ctypes
-# python_dll = ctypes.PyDLL("python3.dll")
 
 # These need to match the equivalent strings in DgnPlatform
 TEXTTABLE_ECSchemaName = "TextTableElementPrivateSchema"
@@ -150,7 +147,8 @@ class TestTextTableTestTestFixture:
         return dgnFile
 
     def GetDgnModel (self):
-        self.dgnFile = self.loadDgnFileByFileName (dgnFileName)
+        seedFile = self.loadDgnFileByFileName (dgnFileName)
+        self.dgnFile = createTempDgnFileFromSeedFile (seedFile)
         self.model, retVal = self.dgnFile.LoadRootModelById (self.dgnFile.DefaultModelId, True)
         return self.model
 

@@ -6,6 +6,7 @@
 |
 +--------------------------------------------------------------------------------------*/
 #include "MSPythonPCH.h"
+#include <Pybind11/numpy.h>
 
 
 
@@ -676,6 +677,20 @@ void def_DMatrix4d(py::module_& m)
     py::class_<DMatrix4d> c1(m, "DMatrix4d");
 
     c1.def(py::init<>());
+
+    c1.def_property("coff",
+        [](DMatrix4d& self) {return py::array_t<T_Adouble>{ {4, 4}, self.coff[0], py::cast(self)}; },
+        [](DMatrix4d& self, py::array_t<T_Adouble> const& arr)
+        {
+        py::buffer_info buf = arr.request();
+        auto* ptr = static_cast<T_Adouble*>(buf.ptr);
+
+        if (16 != arr.size())
+            return;
+
+        memcpy(self.coff[0], ptr, 16 * sizeof(T_Adouble));
+        });
+
     c1.def_static("FromRowValues", &DMatrix4d::FromRowValues,
                   "x00"_a, "x01"_a, "x02"_a, "x03"_a, "x10"_a, "x11"_a, "x12"_a, "x13"_a, "x20"_a, "x21"_a, "x22"_a, "x23"_a, "x30"_a, "x31"_a, "x32"_a, "x33"_a, DOC(Bentley, Geom, DMatrix4d, FromRowValues));
     c1.def_static("FromScaleAndTranslation", &DMatrix4d::FromScaleAndTranslation, "scale"_a, "translation"_a, DOC(Bentley, Geom, DMatrix4d, FromScaleAndTranslation));
@@ -932,7 +947,8 @@ void def_DMatrix4d(py::module_& m)
         return py::make_tuple(products, row, column, scalar);
         }, DOC(Bentley, Geom, DMatrix4d, GetBlocks));
 
-    c1.def("MaxAbs", py::overload_cast<>(&DMatrix4d::MaxAbs, py::const_), DOC(Bentley, Geom, DMatrix4d, MaxAbs));
+    //Change the method name to MaxAbsValue to avoid duplication of name.
+    c1.def("MaxAbsValue", py::overload_cast<>(&DMatrix4d::MaxAbs, py::const_), DOC(Bentley, Geom, DMatrix4d, MaxAbs));
 
     c1.def("MaxAbsDiff", [] (DMatrix4dCR self, DMatrix4dCR other)
         {

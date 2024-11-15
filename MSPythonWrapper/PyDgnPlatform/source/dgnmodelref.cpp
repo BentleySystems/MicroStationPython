@@ -270,4 +270,8 @@ void def_DgnModelRef(py::module_& m)
     //===================================================================================
     // struct DgnModelRefList
     py::class_< DgnModelRefList, bvector< DgnModelRefP> > c5(m, "DgnModelRefList");
+
+    //===================================================================================
+    // struct UpdateSequenceList
+    py::class_< UpdateSequenceList, bvector< ElementId> > c6(m, "UpdateSequenceList");
     }

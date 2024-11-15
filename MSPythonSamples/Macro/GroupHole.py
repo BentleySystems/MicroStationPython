@@ -21,7 +21,8 @@ def AddShape (points):
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     eeh = EditElementHandle()
     ShapeHandler.CreateShapeElement (eeh, None, points, ACTIVEMODEL.Is3d(), ACTIVEMODEL)
-    eeh.AddToModel()
+    if eeh.AddToModel() != 0:
+        return None
     return eeh
 
 # Create outer boundary shape.
@@ -44,11 +45,12 @@ points.append (DPoint3d (1.0, 1.0, 0.0))
 
 inner = AddShape (points)
 
-# Invoke "Group Hole" Command and select the outer and inner boundary.
-PyCadInputQueue.SendCommand ("GROUP HOLES")
-PyCadInputQueue.SendDataPointForLocate (outer.GetElementRef(), DPoint3d (0.0,0.0,0.0))
-PyCadInputQueue.SendDataPointForLocate (inner.GetElementRef(), DPoint3d (1.0,1.0,0.0))
-PyCadInputQueue.SendDataPoint (DPoint3d (1.0,1.0,0.0), 1)
+if inner != None and outer != None:
+    # Invoke "Group Hole" Command and select the outer and inner boundary.
+    PyCadInputQueue.SendCommand ("GROUP HOLES")
+    PyCadInputQueue.SendDataPointForLocate (outer.GetElementRef(), DPoint3d (0.0,0.0,0.0))
+    PyCadInputQueue.SendDataPointForLocate (inner.GetElementRef(), DPoint3d (1.0,1.0,0.0))
+    PyCadInputQueue.SendDataPoint (DPoint3d (1.0,1.0,0.0), 1)
 
 
 

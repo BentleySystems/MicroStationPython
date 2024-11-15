@@ -31,9 +31,9 @@ def GeneratePoints(points , sz):
 def InitPoints(points,size):
     SCALE = 100.0
     for i in range(0,size):
-        points[i][0] = i*SCALE
-        points[i][1] = i*SCALE
-        points[i][2] = i*SCALE
+        points[i].x = i*SCALE
+        points[i].y = i*SCALE
+        points[i].z = i*SCALE
 
     
 
@@ -69,8 +69,8 @@ def test_GetSource(initDgnPlatformHost):
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_InsertElemRef(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, True)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, True)
     agenda = ElementAgenda ()
     CreateElement("LineString", m_eeh, ret[0], ret[0].Is3d())
     assert BentleyStatus.eSUCCESS == m_eeh.AddToModel()
@@ -91,8 +91,8 @@ def test_InsertElemRef(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSe
  
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])     
 def test_InsertElemRef_NullRef(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     agenda = ElementAgenda ()
     elm  = None
     actual = EditElementHandle()
@@ -101,8 +101,8 @@ def test_InsertElemRef_NullRef(initDgnPlatformHost, loadDgnFile, createTempDgnFi
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_Find(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed): 
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, True)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, True)
     agenda = ElementAgenda ()
     CreateElement("LineString", m_eeh, ret[0], ret[0].Is3d())
     assert BentleyStatus.eSUCCESS == m_eeh.AddToModel()
@@ -123,8 +123,8 @@ def test_Find(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])     
 def test_Find_InvalidIndex(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     agenda = ElementAgenda ()
     CreateElement("LineString", m_eeh, ret[0], False)
     assert BentleyStatus.eSUCCESS == m_eeh.AddToModel()
@@ -136,8 +136,8 @@ def test_Find_InvalidIndex(initDgnPlatformHost, loadDgnFile, createTempDgnFileFr
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])     
 def test_Find_WrongElement(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     agenda = ElementAgenda ()
     CreateElement("LineString", m_eeh, ret[0], False)
     assert BentleyStatus.eSUCCESS == m_eeh.AddToModel()
@@ -154,8 +154,8 @@ def test_Find_WrongElement(initDgnPlatformHost, loadDgnFile, createTempDgnFileFr
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
 def test_Find_EmptyAgenda(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     agenda = ElementAgenda ()
     line = EditElementHandle()
     CreateElement("Line", m_eeh, ret[0], False) 

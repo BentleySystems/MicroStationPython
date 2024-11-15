@@ -34,9 +34,9 @@ def InitPoints_Complex(points , size):
     SCALE = 100.0
 
     for i in range(0,size):
-        points[i][0] = SCALE * i
-        points[i][1] = SCALE * i
-        points[i][2] = SCALE * i
+        points[i].x = SCALE * i
+        points[i].y = SCALE * i
+        points[i].z = SCALE * i
 
 def CreateElement(type, eeh , model , is3d):
     if(type == "LineString"):
@@ -96,8 +96,8 @@ def CreateElement(type, eeh , model , is3d):
 m_eeh = EditElementHandle ()
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
 def test_CreateGroupeHoleElement_NoHoles(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     solid = EditElementHandle ()
     shapeEeh = EditElementHandle ()
     holeEeh = EditElementHandle ()
@@ -126,8 +126,8 @@ def test_CreateGroupeHoleElement_NoHoles(initDgnPlatformHost, loadDgnFile, creat
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
 def test_CreateGroupeHoleElement_InValidSolid(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     solid = EditElementHandle ()
     shapeEeh = EditElementHandle ()
     holeEeh = EditElementHandle ()
@@ -156,8 +156,8 @@ def test_CreateGroupeHoleElement_InValidSolid(initDgnPlatformHost, loadDgnFile, 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
 def test_IsGroupedHole_true(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     solid = EditElementHandle ()
     shapeEeh = EditElementHandle ()
     holeEeh = EditElementHandle ()
@@ -183,8 +183,8 @@ def test_IsGroupedHole_true(initDgnPlatformHost, loadDgnFile, createTempDgnFileF
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
 def test_IsGroupedHole_false(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     shapeEeh = EditElementHandle ()
 
     NUM_POINTS = 20
@@ -199,38 +199,38 @@ def test_IsGroupedHole_false(initDgnPlatformHost, loadDgnFile, createTempDgnFile
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
 def test_IsValidGroupedHoleComponentType_Shape(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement("nShape", m_eeh, ret[0], False)
     assert True == GroupedHoleHandler.IsValidGroupedHoleComponentType (m_eeh)
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
 def test_IsValidGroupedHoleComponentType_Ellipse(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement("nEllipse", m_eeh, ret[0], False)
     assert True == GroupedHoleHandler.IsValidGroupedHoleComponentType (m_eeh)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_IsValidGroupedHoleComponentType_ComplexShape(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement("Complex", m_eeh, ret[0], False)
     assert True == GroupedHoleHandler.IsValidGroupedHoleComponentType (m_eeh)
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
 def test_IsValidGroupedHoleComponentType_BSpline(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement("BSpline", m_eeh, ret[0], False)
     assert False == GroupedHoleHandler.IsValidGroupedHoleComponentType (m_eeh)
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
 def test_IsValidGroupedHoleComponentType_false(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     line = EditElementHandle()
     NUM_POINTS = 20
     points = DPoint3dArray()

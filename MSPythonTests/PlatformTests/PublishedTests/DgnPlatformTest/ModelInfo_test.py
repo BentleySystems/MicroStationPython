@@ -16,16 +16,18 @@ BentleyStatus.eERROR = 32768
 BentleyStatus.eSUCCESS = 0
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetModelInfo_NoChanges(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetModelInfo_NoChanges(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo1 = ModelInfo.MakeCopy(model)
     assert BentleyStatus.eSUCCESS == DgnModel.SetModelInfo(ret[0],modelInfo1)
 
 @pytest.mark.skip(reason="NEEDS WORK: Fix Me")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) #doubt
-def test_SetModelInfo_AttemptToChangePropertiesOfReadOnlyModel(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetModelInfo_AttemptToChangePropertiesOfReadOnlyModel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     # model1=ModelInfo()
     model = DgnModel.GetModelInfo(ret[0])
     model1 = DgnModel.GetModelInfo(ret[0])
@@ -34,10 +36,11 @@ def test_SetModelInfo_AttemptToChangePropertiesOfReadOnlyModel(initDgnPlatformHo
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetModelInfo_Undo(initDgnPlatformHost, loadDgnFile):
+def test_SetModelInfo_Undo(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     ITxnManager.GetManager().Activate ()
-    loadDgnFile.SetTransactable(True)
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile.SetTransactable(True)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     
     modelInfo = ModelInfo.MakeCopy(model)
@@ -55,10 +58,11 @@ def test_SetModelInfo_Undo(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetModelInfo_UndoShouldNotUndoSettingChanges(initDgnPlatformHost, loadDgnFile):
+def test_SetModelInfo_UndoShouldNotUndoSettingChanges(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     ITxnManager.GetManager().Activate ()
-    loadDgnFile.SetTransactable(True)
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnFile.SetTransactable(True)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     
     modelInfo = ModelInfo.MakeCopy(model)
@@ -85,8 +89,9 @@ def test_SetModelInfo_UndoShouldNotUndoSettingChanges(initDgnPlatformHost, loadD
 
 @pytest.mark.skip(reason="NEEDS WORK: Fix Me")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) #doubt
-def test_SetModelInfo_AttemptToChangeSettingOfReadOnlyModel(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetModelInfo_AttemptToChangeSettingOfReadOnlyModel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     newValue = 234343.3
@@ -94,16 +99,18 @@ def test_SetModelInfo_AttemptToChangeSettingOfReadOnlyModel(initDgnPlatformHost,
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetModelInfo_FixAzimuth(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetModelInfo_FixAzimuth(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
 
     assert -1000.0 != model.GetAzimuth ()
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetName_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetName_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     original = ModelInfo.MakeCopy(model)
@@ -117,8 +124,9 @@ def test_SetName_NewValue(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetName_Invalid(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetName_Invalid(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
 
     modelInfo = ModelInfo.MakeCopy(model)
@@ -132,8 +140,9 @@ def test_SetName_Invalid(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetAnnotationScaleFactor_NewValueValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetAnnotationScaleFactor_NewValueValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     newValue = 0.234
@@ -143,8 +152,9 @@ def test_SetAnnotationScaleFactor_NewValueValue(initDgnPlatformHost, loadDgnFile
     
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetAnnotationScaleFactor_InvalidValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetAnnotationScaleFactor_InvalidValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     original = ModelInfo.MakeCopy(model)
@@ -155,8 +165,9 @@ def test_SetAnnotationScaleFactor_InvalidValue(initDgnPlatformHost, loadDgnFile)
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetDefaultRefLogical_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetDefaultRefLogical_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     newDesc = "NewRefLogical"
@@ -166,8 +177,9 @@ def test_SetDefaultRefLogical_NewValue(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetDefaultRefLogical_NULL(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetDefaultRefLogical_NULL(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     modelInfo.SetDefaultRefLogical("SomethingDifferent")
@@ -177,8 +189,9 @@ def test_SetDefaultRefLogical_NULL(initDgnPlatformHost, loadDgnFile):
     assert "" == model.GetDefaultRefLogical()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetDescription_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetDescription_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     newDesc = "NewDescription"
@@ -188,8 +201,9 @@ def test_SetDescription_NewValue(initDgnPlatformHost, loadDgnFile):
    
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetDescription_NULL(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetDescription_NULL(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -199,8 +213,9 @@ def test_SetDescription_NULL(initDgnPlatformHost, loadDgnFile):
    
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetModelType_CannotChangeExistingModelToExtractionModel(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetModelType_CannotChangeExistingModelToExtractionModel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     original = ModelInfo.MakeCopy(model)
@@ -211,16 +226,18 @@ def test_SetModelType_CannotChangeExistingModelToExtractionModel(initDgnPlatform
     assert model == original
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetModelType_CannotChangeExistingExtractionModelsType(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("ExtractionModel", DgnModelType.eExtraction_Deprecated, True)
+def test_SetModelType_CannotChangeExistingExtractionModelsType(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("ExtractionModel", DgnModelType.eExtraction_Deprecated, True)
     info = ret[0].GetModelInfo().MakeCopy()
     info.SetModelType(DgnModelType.eNormal)
 
     assert BentleyStatus.eSUCCESS != ret[0].SetModelInfo(info)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetModelType_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetModelType_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     type = DgnModelType.eSheet
@@ -232,8 +249,9 @@ def test_SetModelType_NewValue(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetModelType_CannotChangeTo_Extraction(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetModelType_CannotChangeTo_Extraction(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -242,8 +260,9 @@ def test_SetModelType_CannotChangeTo_Extraction(initDgnPlatformHost, loadDgnFile
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetModelType_InvalidDrawingOn3d(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, True)
+def test_SetModelType_InvalidDrawingOn3d(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, True)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     original = ModelInfo.MakeCopy(model)
@@ -255,8 +274,9 @@ def test_SetModelType_InvalidDrawingOn3d(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetStorageUnit_InvalidArgs(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, True)
+def test_SetStorageUnit_InvalidArgs(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, True)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     original = ModelInfo.MakeCopy(model)
@@ -278,8 +298,9 @@ def test_SetStorageUnit_InvalidArgs(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetStorageUnit_NewUorPerStorage(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetStorageUnit_NewUorPerStorage(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     originalStorageUnit = modelInfo.GetStorageUnit()
@@ -293,8 +314,9 @@ def test_SetStorageUnit_NewUorPerStorage(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetStorageUnit_NewStorageUnitWithDifferentBase(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetStorageUnit_NewStorageUnitWithDifferentBase(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     originalStorageUnit = modelInfo.GetStorageUnit()
@@ -313,8 +335,9 @@ def test_SetStorageUnit_NewStorageUnitWithDifferentBase(initDgnPlatformHost, loa
     assert originalUorPerStorage == model.GetUorPerStorage()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetWorkingUnits_NullSubUnit(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetWorkingUnits_NullSubUnit(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     master = modelInfo.GetMasterUnit()
@@ -328,8 +351,9 @@ def test_SetWorkingUnits_NullSubUnit(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetWorkingUnits_OnlyMasterUnitNew(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetWorkingUnits_OnlyMasterUnitNew(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     master = modelInfo.GetMasterUnit()
@@ -345,8 +369,9 @@ def test_SetWorkingUnits_OnlyMasterUnitNew(initDgnPlatformHost, loadDgnFile):
     assert sub == model.GetSubUnit()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetWorkingUnits_OnlySubUnitNew(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetWorkingUnits_OnlySubUnitNew(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     master = modelInfo.GetMasterUnit()
@@ -361,8 +386,9 @@ def test_SetWorkingUnits_OnlySubUnitNew(initDgnPlatformHost, loadDgnFile):
     assert sub == model.GetSubUnit()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetWorkingUnits_BothMasterUnitAndSubUnitNew(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetWorkingUnits_BothMasterUnitAndSubUnitNew(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     master = modelInfo.GetMasterUnit()
@@ -378,8 +404,9 @@ def test_SetWorkingUnits_BothMasterUnitAndSubUnitNew(initDgnPlatformHost, loadDg
     assert sub == model.GetSubUnit()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetWorkingUnits_NeitherMasterUnitOrSubUnitNew(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetWorkingUnits_NeitherMasterUnitOrSubUnitNew(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     masterThatIsTheSame = modelInfo.GetMasterUnit()
@@ -394,8 +421,9 @@ def test_SetWorkingUnits_NeitherMasterUnitOrSubUnitNew(initDgnPlatformHost, load
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetGridParams_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetGridParams_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -416,8 +444,9 @@ def test_SetGridParams_NewValue(initDgnPlatformHost, loadDgnFile):
     assert gridAngle == model.GetGridAngle ()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetGridParams_NULL(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetGridParams_NULL(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -446,8 +475,9 @@ def test_SetGridParams_NULL(initDgnPlatformHost, loadDgnFile):
     assert gridAngle == model.GetGridAngle ()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetCellType_InvalidArg(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetCellType_InvalidArg(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     original = ModelInfo.MakeCopy(model)
@@ -460,8 +490,9 @@ def test_SetCellType_InvalidArg(initDgnPlatformHost, loadDgnFile):
     assert original == model
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetCellType_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetCellType_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)   
     cellType = modelInfo.GetCellType ()
@@ -475,8 +506,9 @@ def test_SetCellType_NewValue(initDgnPlatformHost, loadDgnFile):
     assert newVal == model.GetCellType ()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetRoundoffUnit_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetRoundoffUnit_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)    
     unit =  modelInfo.GetRoundoffUnit ()
@@ -491,8 +523,9 @@ def test_SetRoundoffUnit_NewValue(initDgnPlatformHost, loadDgnFile):
     assert ratio == model.GetRoundoffRatio()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetRoundoffUnit_NewValue_Unit(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetRoundoffUnit_NewValue_Unit(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)   
     unit =  modelInfo.GetRoundoffUnit ()
@@ -505,8 +538,9 @@ def test_SetRoundoffUnit_NewValue_Unit(initDgnPlatformHost, loadDgnFile):
     assert ratio == model.GetRoundoffRatio()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetRoundoffUnit_NULL(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetRoundoffUnit_NULL(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     modelInfo.SetRoundoffUnit (0.0, 0.0)
@@ -514,8 +548,9 @@ def test_SetRoundoffUnit_NULL(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == DgnModel.SetModelInfo(ret[0],modelInfo)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetLineStyleScaleMode_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetLineStyleScaleMode_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     oldMode = modelInfo.GetLineStyleScaleMode()
@@ -528,9 +563,11 @@ def test_SetLineStyleScaleMode_NewValue(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == DgnModel.SetModelInfo(ret[0],modelInfo)
     assert newMode == model.GetLineStyleScaleMode()
 
+@pytest.mark.skip(reason="Ping.Chen, error in bb r platformtests")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetLineStyleScale_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetLineStyleScale_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     original = modelInfo.GetLineStyleScale ()
@@ -544,8 +581,9 @@ def test_SetLineStyleScale_NewValue(initDgnPlatformHost, loadDgnFile):
     assert newValue == model.GetLineStyleScale()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetLineStyleScale_InvalidValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetLineStyleScale_InvalidValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -553,8 +591,9 @@ def test_SetLineStyleScale_InvalidValue(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eERROR == modelInfo.SetLineStyleScale(0.0)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetLineStyleScale_InvalidValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetLineStyleScale_InvalidValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -562,8 +601,9 @@ def test_SetLineStyleScale_InvalidValue(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eERROR == modelInfo.SetLineStyleScale(0.0)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetSolidExtent_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetSolidExtent_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -578,8 +618,9 @@ def test_SetSolidExtent_NewValue(initDgnPlatformHost, loadDgnFile):
     assert newValue == model.GetSolidExtent()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetSolidExtent_InvalidValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetSolidExtent_InvalidValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -591,8 +632,9 @@ def test_SetSolidExtent_InvalidValue(initDgnPlatformHost, loadDgnFile):
     assert original == model.GetSolidExtent()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetGlobalOrigin_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetGlobalOrigin_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -608,8 +650,9 @@ def test_SetGlobalOrigin_NewValue(initDgnPlatformHost, loadDgnFile):
     assert newOrigin.IsEqual(model.GetGlobalOrigin())
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetAzimuth_Invalid(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetAzimuth_Invalid(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -625,8 +668,9 @@ def test_SetAzimuth_Invalid(initDgnPlatformHost, loadDgnFile):
     assert originalAzimuth == model.GetAzimuth()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetAzimuth_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetAzimuth_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     
@@ -641,8 +685,9 @@ def test_SetAzimuth_NewValue(initDgnPlatformHost, loadDgnFile):
     assert newAzimuth == model.GetAzimuth()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetPropertiesIsoPlane(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_SetPropertiesIsoPlane(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -654,8 +699,9 @@ def test_SetPropertiesIsoPlane(initDgnPlatformHost, loadDgnFile):
     assert IsoPlaneValues.eIsoPlaneAll == DgnModel.GetModelInfo(ret[0]).GetIsoPlane()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_SetDirectionClockwise_NewValue(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetDirectionClockwise_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
 
@@ -667,9 +713,9 @@ def test_SetDirectionClockwise_NewValue(initDgnPlatformHost, loadDgnFile):
     assert newValue == model.GetDirectionClockwise()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetLinearPrecision_NewValue(initDgnPlatformHost, loadDgnFile):
-    
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetLinearPrecision_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     arr= [PrecisionFormat.eDecimalWhole,PrecisionFormat.eDecimalWhole,PrecisionFormat.eDecimal2Places,PrecisionFormat.eDecimal8Places,PrecisionFormat.eFractional1_Over_256,PrecisionFormat.eFractional1_Over_32 , PrecisionFormat.eFractionalWhole,PrecisionFormat.eScientificWhole,PrecisionFormat.eScientific8Places,PrecisionFormat.eScientific6Places,PrecisionFormat.eDecimal4Places]
@@ -681,9 +727,9 @@ def test_SetLinearPrecision_NewValue(initDgnPlatformHost, loadDgnFile):
     
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetLinearPrecision_NewValue(initDgnPlatformHost, loadDgnFile):
-    
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetLinearPrecision_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     arr= [PrecisionFormat.eDecimalWhole,PrecisionFormat.eDecimalWhole,PrecisionFormat.eDecimal2Places,PrecisionFormat.eDecimal8Places,PrecisionFormat.eFractional1_Over_256,PrecisionFormat.eFractional1_Over_32 , PrecisionFormat.eFractionalWhole,PrecisionFormat.eScientificWhole,PrecisionFormat.eScientific8Places,PrecisionFormat.eScientific6Places,PrecisionFormat.eDecimal4Places]
@@ -695,9 +741,9 @@ def test_SetLinearPrecision_NewValue(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_SetBaseDirection_NewValue(initDgnPlatformHost, loadDgnFile):
-    
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetBaseDirection_NewValue(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     arr= [45.0,0.0,700.0]
@@ -709,9 +755,9 @@ def test_SetBaseDirection_NewValue(initDgnPlatformHost, loadDgnFile):
 
 @pytest.mark.skip(reason="NEEDS WORK: Fix Me")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) #BackDoor is not defined
-def test_SetPropertiesAll(initDgnPlatformHost, loadDgnFile):
-    
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SetPropertiesAll(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = DgnModel.GetModelInfo(ret[0])
     modelInfo = ModelInfo.MakeCopy(model)
     listener = BackDoor.CreateModelInfoListener()

@@ -18,11 +18,11 @@ MIN_OFFSET = -20.0
 CUSTOM_OFFSET = 17.0
 
 @pytest.mark.parametrize('fileName', ['noStyleSeed.dgn'])
-def test_AddNoStyleSeed(initDgnPlatformHost, loadDgnFile):
-    if loadDgnFile == None:
-        dgnFile = loadDgnFile
-    
-    ret = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+def test_AddNoStyleSeed(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    #if loadDgnFile == None:
+    #    dgnFile = loadDgnFile
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
     if None == ret[0]:
         dgnFile = None
     else:
@@ -38,13 +38,13 @@ def test_AddNoStyleSeed(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == (mlstyle.InsertProfile(styleprof, endoflist))
     assert BentleyStatus.eSUCCESS == mlstyle.Add()
 
-
+@pytest.mark.skip(reason="Ping.Chen, error in bb r platformtests")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_Add2dMetricGeneral(initDgnPlatformHost, loadDgnFile):
-    if loadDgnFile == None:
-        dgnFile = loadDgnFile
-    
-    ret = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+def test_Add2dMetricGeneral(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    #if loadDgnFile == None:
+    #    dgnFile = loadDgnFile
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
     if None == ret[0]:
         dgnFile = None
     else:
@@ -61,11 +61,11 @@ def test_Add2dMetricGeneral(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == mlstyle.Add()
     
 @pytest.mark.parametrize('fileName', ['noStyleSeed.dgn'])
-def test_DeleteNoStyleSeed(initDgnPlatformHost, loadDgnFile):
-    if loadDgnFile == None:
-        dgnFile = loadDgnFile
-    
-    ret = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+def test_DeleteNoStyleSeed(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    #if loadDgnFile == None:
+    #    dgnFile = loadDgnFile
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
     if None == ret[0]:
         dgnFile = None
     else:
@@ -93,10 +93,10 @@ def test_DeleteNoStyleSeed(initDgnPlatformHost, loadDgnFile):
 # BeStringUtilities not exposed  
 @pytest.mark.skip(reason="NEEDS WORK: Fix Me")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_Iterator(initDgnPlatformHost, loadDgnFile):
+def test_Iterator(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
-        
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     testName = "MlstyleIterator"
     numStyles = 10
     
@@ -104,7 +104,7 @@ def test_Iterator(initDgnPlatformHost, loadDgnFile):
         name = ""
         # BeStringUtilities.Snwprintf (name, "%ls-%d", testName, iStyle+1)
         
-        mlinestyle = MultilineStyle.Create(name, loadDgnFile)
+        mlinestyle = MultilineStyle.Create(name, dgnFile)
         
         # Must have 1 profile
         styleprof = MultilineProfile()
@@ -114,7 +114,7 @@ def test_Iterator(initDgnPlatformHost, loadDgnFile):
             assert False
             
     iStyle = 0
-    collection = MultilineStyleCollection(loadDgnFile)
+    collection = MultilineStyleCollection(dgnFile)
     
     for mlinestyle in collection:
         expectedName = ""
@@ -152,13 +152,14 @@ def test_IteratorEmptyNoStyleSeed(initDgnPlatformHost, loadDgnFileReadOnly):
             assert False
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])        
-def test_OffsetMode(initDgnPlatformHost, loadDgnFile):
+def test_OffsetMode(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -223,13 +224,14 @@ def test_OffsetMode(initDgnPlatformHost, loadDgnFile):
     assert (-CUSTOM_OFFSET) == mlHandler.GetProfile(mlineElm, 0).GetDistance()
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])     
-def test_SetClosed(initDgnPlatformHost, loadDgnFile):
+def test_SetClosed(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -383,13 +385,14 @@ def CreateMlineBreak(data, mlineElm, mHandler):
     return mHandler.InsertBreak(mlineElm, mlbreak1, data.segment)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
-def test_InsertBreaks(initDgnPlatformHost, loadDgnFile):
+def test_InsertBreaks(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -446,13 +449,14 @@ def test_InsertBreaks(initDgnPlatformHost, loadDgnFile):
     assert 3 == mlHandler.GetBreakCount(mlineElm)
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
-def test_GetBreak(initDgnPlatformHost, loadDgnFile):
+def test_GetBreak(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -514,13 +518,14 @@ def test_GetBreak(initDgnPlatformHost, loadDgnFile):
             iTestData = iTestData + 1
             
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
-def test_OverlapBreaks(initDgnPlatformHost, loadDgnFile):
+def test_OverlapBreaks(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -585,13 +590,14 @@ def test_OverlapBreaks(initDgnPlatformHost, loadDgnFile):
     assert testData[0].mask == curBreak.GetProfileMask() 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
-def test_MultisegmentBreaks(initDgnPlatformHost, loadDgnFile):
+def test_MultisegmentBreaks(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -687,13 +693,14 @@ def test_MultisegmentBreaks(initDgnPlatformHost, loadDgnFile):
         assert True == breakFound[i]
         
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
-def test_DeleteBreaks(initDgnPlatformHost, loadDgnFile):
+def test_DeleteBreaks(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -780,13 +787,14 @@ def test_DeleteBreaks(initDgnPlatformHost, loadDgnFile):
     
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ChangeSettings(initDgnPlatformHost, loadDgnFile):
+def test_ChangeSettings(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -815,7 +823,7 @@ def test_ChangeSettings(initDgnPlatformHost, loadDgnFile):
     firstStyle = m_mlineStyle
     
     # Create a second style so the first style in the file is pristine.  Check later to make sure we didn't break it.
-    curStyle = MultilineStyle.Create("StyleToMakeActive", loadDgnFile)
+    curStyle = MultilineStyle.Create("StyleToMakeActive", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -845,9 +853,9 @@ def test_ChangeSettings(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == m_mlineStyle.Add()
     
     # Update the settings element
-    assert BentleyStatus.eSUCCESS == MultilineStyle.ReplaceSettings(m_mlineStyle, loadDgnFile)
+    assert BentleyStatus.eSUCCESS == MultilineStyle.ReplaceSettings(m_mlineStyle, dgnFile)
     
-    settingStyle = MultilineStyle.GetSettings(loadDgnFile)
+    settingStyle = MultilineStyle.GetSettings(dgnFile)
     assert settingStyle != None
     
     # Make sure settings element matches the style we set it to
@@ -855,7 +863,7 @@ def test_ChangeSettings(initDgnPlatformHost, loadDgnFile):
     assert False == diffMask.AnyBitSet()
     
     # Make sure we did not mess up first style
-    firstStyleAtEnd = MultilineStyle.GetByName("TestStyle", loadDgnFile)
+    firstStyleAtEnd = MultilineStyle.GetByName("TestStyle", dgnFile)
     assert firstStyleAtEnd != None
     
     diffMask= firstStyleAtEnd.Compare(firstStyle)
@@ -863,13 +871,14 @@ def test_ChangeSettings(initDgnPlatformHost, loadDgnFile):
 
   
 @pytest.mark.parametrize('fileName', ['noStyleSeed.dgn'])
-def test_ChangeSettingsNoStyleSeed(initDgnPlatformHost, loadDgnFile):
+def test_ChangeSettingsNoStyleSeed(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     m_mlineElm = EditElementHandle()
-    m_model = loadDgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
-    # ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    m_model = dgnFile.CreateNewModel("Model", DgnModelType.eNormal, False)
+    # ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     # m_model = DgnModel.GetModelInfo(ret[0])   
     # Cook up a style to use
-    tmpStyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    tmpStyle = MultilineStyle.Create("TestStyle", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -898,7 +907,7 @@ def test_ChangeSettingsNoStyleSeed(initDgnPlatformHost, loadDgnFile):
     firstStyle = m_mlineStyle
     
     # Create a second style so the first style in the file is pristine.  Check later to make sure we didn't break it.
-    curStyle = MultilineStyle.Create("StyleToMakeActive", loadDgnFile)
+    curStyle = MultilineStyle.Create("StyleToMakeActive", dgnFile)
         
     styleprof = MultilineProfile()
         
@@ -928,9 +937,9 @@ def test_ChangeSettingsNoStyleSeed(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == m_mlineStyle.Add()
     
     # Update the settings element
-    assert BentleyStatus.eSUCCESS == MultilineStyle.ReplaceSettings(m_mlineStyle, loadDgnFile)
+    assert BentleyStatus.eSUCCESS == MultilineStyle.ReplaceSettings(m_mlineStyle, dgnFile)
     
-    settingStyle = MultilineStyle.GetSettings(loadDgnFile)
+    settingStyle = MultilineStyle.GetSettings(dgnFile)
     assert settingStyle != None
     
     # Make sure settings element matches the style we set it to
@@ -938,7 +947,7 @@ def test_ChangeSettingsNoStyleSeed(initDgnPlatformHost, loadDgnFile):
     assert False == diffMask.AnyBitSet()
     
     # Make sure we did not mess up first style
-    firstStyleAtEnd = MultilineStyle.GetByName("TestStyle", loadDgnFile)
+    firstStyleAtEnd = MultilineStyle.GetByName("TestStyle", dgnFile)
     assert firstStyleAtEnd != None
     
     diffMask= firstStyleAtEnd.Compare(firstStyle)

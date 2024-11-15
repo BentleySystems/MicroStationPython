@@ -37,20 +37,20 @@ def CreateHostElement(eeh, addToModel, ret):
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_FindECInstances(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global mgr
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     schema = Create_schema()
     mgr = DgnECManager.GetManager()
-    mgr.ImportSchema (schema[1], srcDgnFile)
+    mgr.ImportSchema (schema[1], dgnFile)
     widgetHost = EditElementHandle()
     gadgetHost = EditElementHandle()
     gadgetHost2 = EditElementHandle()
     CreateHostElement (widgetHost, True, ret)
     CreateHostElement (gadgetHost, True, ret)
     CreateHostElement (gadgetHost2, True, ret)
-    widgetEnabler = mgr.ObtainInstanceEnablerByName ("ECXAttributesTest", "Widget", srcDgnFile)
-    gadgetEnabler = mgr.ObtainInstanceEnablerByName ("ECXAttributesTest", "Gadget", srcDgnFile)
+    widgetEnabler = mgr.ObtainInstanceEnablerByName ("ECXAttributesTest", "Widget", dgnFile)
+    gadgetEnabler = mgr.ObtainInstanceEnablerByName ("ECXAttributesTest", "Gadget", dgnFile)
     widgetWip = widgetEnabler.GetSharedWipInstance()
     widgetWip.SetValue ("SerialNumber", ECValue (1))
     widget = widgetEnabler.CreateInstanceOnElement (widgetWip, widgetHost)[1]
@@ -75,7 +75,7 @@ def test_FindECInstances(initDgnPlatformHost, loadDgnFile, createTempDgnFileFrom
     serialNumberQuery.SetWhereCriterion (serialNotEqualTo2)
     scopeOption = FindInstancesScopeOption()
     modelScope = FindInstancesScope.CreateScope (ret[0], scopeOption)
-    fileScope = FindInstancesScope.CreateScope (srcDgnFile, scopeOption)
+    fileScope = FindInstancesScope.CreateScope (dgnFile, scopeOption)
     widgetHostScope = FindInstancesScope.CreateScope (widgetHost, scopeOption)
     gadgetHostScope = FindInstancesScope.CreateScope (gadgetHost, scopeOption)
     elements = ElementAgenda()
@@ -124,13 +124,13 @@ def test_FindECInstances(initDgnPlatformHost, loadDgnFile, createTempDgnFileFrom
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_CreateECInstances(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global mgr
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     schema = Create_schema()
     mgr = DgnECManager.GetManager()
-    mgr.ImportSchema (schema[1], srcDgnFile)
-    enabler = mgr.ObtainInstanceEnablerByName ("ECXAttributesTest", "Gadget", srcDgnFile)
+    mgr.ImportSchema (schema[1], dgnFile)
+    enabler = mgr.ObtainInstanceEnablerByName ("ECXAttributesTest", "Gadget", dgnFile)
     assert enabler != None
    
     wip = enabler.GetSharedWipInstance()
@@ -158,15 +158,15 @@ def test_CreateECInstances(initDgnPlatformHost, loadDgnFile, createTempDgnFileFr
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_Persistence(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global mgr
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     schema = Create_schema()
     mgr = DgnECManager.GetManager()
-    mgr.ImportSchema (schema[1], srcDgnFile)
+    mgr.ImportSchema (schema[1], dgnFile)
     eeh = EditElementHandle()
     CreateHostElement (eeh, True, ret)
-    enabler = mgr.ObtainInstanceEnablerByName ("ECXAttributesTest", "Widget", srcDgnFile)
+    enabler = mgr.ObtainInstanceEnablerByName ("ECXAttributesTest", "Widget", dgnFile)
     wip = enabler.GetSharedWipInstance()
     wip.SetValue ("Description", ECValue (WString("Initial Value")))
 

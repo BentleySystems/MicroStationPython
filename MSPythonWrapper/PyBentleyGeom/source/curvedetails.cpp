@@ -169,6 +169,7 @@ void def_CurveDetails(py::module_& m)
     //===================================================================================
     // struct PartialCurveDetail
     py::class_<PartialCurveDetail> c1(m, "PartialCurveDetail");
+    py::bind_vector<bvector<PartialCurveDetail>>(m, "PartialCurveDetailArray", py::module_local(false));
     
     c1.def_readwrite("parentCurve", &PartialCurveDetail::parentCurve);
     c1.def_readwrite("fraction0", &PartialCurveDetail::fraction0);

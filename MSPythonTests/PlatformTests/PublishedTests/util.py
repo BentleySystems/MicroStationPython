@@ -6,6 +6,8 @@ import os
 import pytest
 from MSPyBentley import *
 from MSPyBentleyGeom import *
+from MSPyDgnPlatform import *
+from conftest import *
 
 EPSILON = 0.000000001
 
@@ -20,6 +22,9 @@ def EXPECT_TRUE (val):
 
 def EXPECT_STREQ (first, second):
     EXPECT_EQ (first, second)
+
+def EXPECT_STRNE (first, second):
+    EXPECT_NE (first, second)
 
 def ASSERT_TRUE (val):
     EXPECT_TRUE (val)

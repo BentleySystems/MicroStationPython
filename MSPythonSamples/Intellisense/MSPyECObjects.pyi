@@ -7,22 +7,13 @@ class ArrayECProperty:
     None
     """
 
-    def AsArrayProperty(*args, **kwargs):
-        """
-        AsArrayProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ArrayECProperty
-        """
+    def AsArrayProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ArrayECProperty:
         ...
     
-    def AsPrimitiveProperty(*args, **kwargs):
-        """
-        AsPrimitiveProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.PrimitiveECProperty
-        """
+    def AsPrimitiveProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.PrimitiveECProperty:
         ...
     
-    def AsStructProperty(*args, **kwargs):
-        """
-        AsStructProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.StructECProperty
-        """
+    def AsStructProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.StructECProperty:
         ...
     
     @property
@@ -50,21 +41,14 @@ class ArrayECProperty:
     def DisplayLabel(arg0: MSPyECObjects.ECProperty, arg1: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetBaseProperty(*args, **kwargs):
-        """
-        GetBaseProperty(self: MSPyECObjects.ECProperty) -> MSPyECObjects.ECProperty
-        """
+    def GetBaseProperty(self: MSPyECObjects.ECProperty) -> MSPyECObjects.ECProperty:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ECClass
-        """
+    def GetClass(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ECClass:
         ...
     
     def GetCustomAttribute(*args, **kwargs):
         """
-        GetCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -75,7 +59,6 @@ class ArrayECProperty:
     
     def GetCustomAttributeLocal(*args, **kwargs):
         """
-        GetCustomAttributeLocal(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttributeLocal(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -84,99 +67,53 @@ class ArrayECProperty:
         """
         ...
     
-    def GetCustomAttributes(*args, **kwargs):
-        """
-        GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetDescription(*args, **kwargs):
-        """
-        GetDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetId(*args, **kwargs):
-        """
-        GetId(self: MSPyECObjects.ECProperty) -> int
-        """
+    def GetId(self: MSPyECObjects.ECProperty) -> int:
         ...
     
-    def GetInvariantDescription(*args, **kwargs):
-        """
-        GetInvariantDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetInvariantDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetInvariantDisplayLabel(*args, **kwargs):
-        """
-        GetInvariantDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetInvariantDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetIsArray(*args, **kwargs):
-        """
-        GetIsArray(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsArray(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsDisplayLabelDefined(*args, **kwargs):
-        """
-        GetIsDisplayLabelDefined(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsDisplayLabelDefined(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsPrimitive(*args, **kwargs):
-        """
-        GetIsPrimitive(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsPrimitive(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsReadOnly(*args, **kwargs):
-        """
-        GetIsReadOnly(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsReadOnly(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsStruct(*args, **kwargs):
-        """
-        GetIsStruct(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsStruct(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetKind(*args, **kwargs):
-        """
-        GetKind(self: MSPyECObjects.ArrayECProperty) -> MSPyECObjects.ArrayKind
-        """
+    def GetKind(self: MSPyECObjects.ArrayECProperty) -> MSPyECObjects.ArrayKind:
         ...
     
-    def GetMaxOccurs(*args, **kwargs):
-        """
-        GetMaxOccurs(self: MSPyECObjects.ArrayECProperty) -> int
-        """
+    def GetMaxOccurs(self: MSPyECObjects.ArrayECProperty) -> int:
         ...
     
-    def GetMinOccurs(*args, **kwargs):
-        """
-        GetMinOccurs(self: MSPyECObjects.ArrayECProperty) -> int
-        """
+    def GetMinOccurs(self: MSPyECObjects.ArrayECProperty) -> int:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
     def GetPrimaryCustomAttribute(*args, **kwargs):
         """
-        GetPrimaryCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetPrimaryCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -185,28 +122,16 @@ class ArrayECProperty:
         """
         ...
     
-    def GetPrimaryCustomAttributes(*args, **kwargs):
-        """
-        GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetPrimitiveElementType(*args, **kwargs):
-        """
-        GetPrimitiveElementType(self: MSPyECObjects.ArrayECProperty) -> MSPyECObjects.PrimitiveType
-        """
+    def GetPrimitiveElementType(self: MSPyECObjects.ArrayECProperty) -> MSPyECObjects.PrimitiveType:
         ...
     
-    def GetStructElementType(*args, **kwargs):
-        """
-        GetStructElementType(self: MSPyECObjects.ArrayECProperty) -> Bentley.ECN.ECClass
-        """
+    def GetStructElementType(self: MSPyECObjects.ArrayECProperty) -> Bentley.ECN.ECClass:
         ...
     
-    def GetTypeName(*args, **kwargs):
-        """
-        GetTypeName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetTypeName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
     @property
@@ -225,15 +150,11 @@ class ArrayECProperty:
     def IsArray(arg0: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def IsCalculated(*args, **kwargs):
-        """
-        IsCalculated(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def IsCalculated(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
     def IsDefined(*args, **kwargs):
         """
-        IsDefined(*args, **kwargs)
         Overloaded function.
         
         1. IsDefined(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -292,7 +213,6 @@ class ArrayECProperty:
     
     def RemoveCustomAttribute(*args, **kwargs):
         """
-        RemoveCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. RemoveCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -301,39 +221,23 @@ class ArrayECProperty:
         """
         ...
     
-    def SetBaseProperty(*args, **kwargs):
-        """
-        SetBaseProperty(self: MSPyECObjects.ECProperty, prop: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetBaseProperty(self: MSPyECObjects.ECProperty, prop: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetCalculatedPropertySpecification(*args, **kwargs):
-        """
-        SetCalculatedPropertySpecification(self: MSPyECObjects.ECProperty, expressionAttribute: Bentley.ECN.IECInstance) -> bool
-        """
+    def SetCalculatedPropertySpecification(self: MSPyECObjects.ECProperty, expressionAttribute: Bentley.ECN.IECInstance) -> bool:
         ...
     
-    def SetCustomAttribute(*args, **kwargs):
-        """
-        SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDescription(*args, **kwargs):
-        """
-        SetDescription(self: MSPyECObjects.ECProperty, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDescription(self: MSPyECObjects.ECProperty, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.ECProperty, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.ECProperty, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetIsReadOnly(*args, **kwargs):
         """
-        SetIsReadOnly(*args, **kwargs)
         Overloaded function.
         
         1. SetIsReadOnly(self: MSPyECObjects.ECProperty, readOnly: bool) -> MSPyECObjects.ECObjectsStatus
@@ -342,34 +246,19 @@ class ArrayECProperty:
         """
         ...
     
-    def SetMaxOccurs(*args, **kwargs):
-        """
-        SetMaxOccurs(self: MSPyECObjects.ArrayECProperty, maxOccurs: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetMaxOccurs(self: MSPyECObjects.ArrayECProperty, maxOccurs: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetMinOccurs(*args, **kwargs):
-        """
-        SetMinOccurs(self: MSPyECObjects.ArrayECProperty, minOccurs: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetMinOccurs(self: MSPyECObjects.ArrayECProperty, minOccurs: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetPrimitiveElementType(*args, **kwargs):
-        """
-        SetPrimitiveElementType(self: MSPyECObjects.ArrayECProperty, type: MSPyECObjects.PrimitiveType) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetPrimitiveElementType(self: MSPyECObjects.ArrayECProperty, type: MSPyECObjects.PrimitiveType) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetStructElementType(*args, **kwargs):
-        """
-        SetStructElementType(self: MSPyECObjects.ArrayECProperty, type: Bentley.ECN.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetStructElementType(self: MSPyECObjects.ArrayECProperty, type: Bentley.ECN.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetTypeName(*args, **kwargs):
-        """
-        SetTypeName(self: MSPyECObjects.ECProperty, typeName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetTypeName(self: MSPyECObjects.ECProperty, typeName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -405,40 +294,22 @@ class ArrayInfo:
     def ElementPrimitiveType(arg0: MSPyECObjects.ArrayInfo) -> MSPyECObjects.PrimitiveType:
         ...
     
-    def GetCount(*args, **kwargs):
-        """
-        GetCount(self: MSPyECObjects.ArrayInfo) -> int
-        """
+    def GetCount(self: MSPyECObjects.ArrayInfo) -> int:
         ...
     
-    def GetElementPrimitiveType(*args, **kwargs):
-        """
-        GetElementPrimitiveType(self: MSPyECObjects.ArrayInfo) -> MSPyECObjects.PrimitiveType
-        """
+    def GetElementPrimitiveType(self: MSPyECObjects.ArrayInfo) -> MSPyECObjects.PrimitiveType:
         ...
     
-    def GetKind(*args, **kwargs):
-        """
-        GetKind(self: MSPyECObjects.ArrayInfo) -> MSPyECObjects.ValueKind
-        """
+    def GetKind(self: MSPyECObjects.ArrayInfo) -> MSPyECObjects.ValueKind:
         ...
     
-    def IsFixedCount(*args, **kwargs):
-        """
-        IsFixedCount(self: MSPyECObjects.ArrayInfo) -> bool
-        """
+    def IsFixedCount(self: MSPyECObjects.ArrayInfo) -> bool:
         ...
     
-    def IsPrimitiveArray(*args, **kwargs):
-        """
-        IsPrimitiveArray(self: MSPyECObjects.ArrayInfo) -> bool
-        """
+    def IsPrimitiveArray(self: MSPyECObjects.ArrayInfo) -> bool:
         ...
     
-    def IsStructArray(*args, **kwargs):
-        """
-        IsStructArray(self: MSPyECObjects.ArrayInfo) -> bool
-        """
+    def IsStructArray(self: MSPyECObjects.ArrayInfo) -> bool:
         ...
     
     @property
@@ -548,10 +419,9 @@ class ClassLayout:
     None
     """
 
-    def BuildFromClass(*args, **kwargs):
+    @staticmethod
+    def BuildFromClass(ecClass: Bentley.ECN.ECClass) -> MSPyECObjects.ClassLayout:
         """
-        BuildFromClass(ecClass: Bentley.ECN.ECClass) -> MSPyECObjects.ClassLayout
-        
         Given a class, will create the ClassLayout that manages that class
         
         Parameter ``ecClass``:
@@ -562,10 +432,8 @@ class ClassLayout:
         """
         ...
     
-    def CalculateBytesUsed(*args, **kwargs):
+    def CalculateBytesUsed(self: MSPyECObjects.ClassLayout, propertyData: bytes) -> int:
         """
-        CalculateBytesUsed(self: MSPyECObjects.ClassLayout, propertyData: bytes) -> int
-        
         Determines the number of bytes used for property data, so far
         """
         ...
@@ -574,10 +442,9 @@ class ClassLayout:
     def Checksum(arg0: MSPyECObjects.ClassLayout) -> int:
         ...
     
-    def CreateEmpty(*args, **kwargs):
+    @staticmethod
+    def CreateEmpty(className: str) -> MSPyECObjects.ClassLayout:
         """
-        CreateEmpty(className: str) -> MSPyECObjects.ClassLayout
-        
         Creates an empty ClassLayout for a class with the given name
         
         Parameter ``className``:
@@ -589,26 +456,20 @@ class ClassLayout:
     def ECClassName(arg0: MSPyECObjects.ClassLayout) -> MSPyBentley.WString:
         ...
     
-    def GetChecksum(*args, **kwargs):
+    def GetChecksum(self: MSPyECObjects.ClassLayout) -> int:
         """
-        GetChecksum(self: MSPyECObjects.ClassLayout) -> int
-        
         Returns the checksum for this ClassLayout
         """
         ...
     
-    def GetECClassName(*args, **kwargs):
+    def GetECClassName(self: MSPyECObjects.ClassLayout) -> MSPyBentley.WString:
         """
-        GetECClassName(self: MSPyECObjects.ClassLayout) -> MSPyBentley.WString
-        
         Returns the name of the ECClass that this ClassLayout manages
         """
         ...
     
-    def GetECPointerIndex(*args, **kwargs):
+    def GetECPointerIndex(self: MSPyECObjects.ClassLayout, end: Bentley.ECN.ECRelationshipEnd) -> int:
         """
-        GetECPointerIndex(self: MSPyECObjects.ClassLayout, end: Bentley.ECN.ECRelationshipEnd) -> int
-        
         Returns the property index of the given relationship end
         
         Parameter ``end``:
@@ -619,27 +480,21 @@ class ClassLayout:
         """
         ...
     
-    def GetPropertyCount(*args, **kwargs):
+    def GetPropertyCount(self: MSPyECObjects.ClassLayout) -> int:
         """
-        GetPropertyCount(self: MSPyECObjects.ClassLayout) -> int
-        
         Returns the number of properties this ClassLayout manages
         """
         ...
     
-    def GetPropertyCountExcludingEmbeddedStructs(*args, **kwargs):
+    def GetPropertyCountExcludingEmbeddedStructs(self: MSPyECObjects.ClassLayout) -> int:
         """
-        GetPropertyCountExcludingEmbeddedStructs(self: MSPyECObjects.ClassLayout) -> int
-        
         Returns the number of properties this ClassLayout manages, not
         counting embedded structs
         """
         ...
     
-    def GetPropertyIndex(*args, **kwargs):
+    def GetPropertyIndex(self: MSPyECObjects.ClassLayout, accessString: str) -> tuple:
         """
-        GetPropertyIndex(self: MSPyECObjects.ClassLayout, accessString: str) -> tuple
-        
         Given an access string, will return the property index within the
         ClassLayout
         
@@ -657,10 +512,8 @@ class ClassLayout:
         """
         ...
     
-    def GetPropertyLayout(*args, **kwargs):
+    def GetPropertyLayout(self: MSPyECObjects.ClassLayout, accessString: str) -> tuple:
         """
-        GetPropertyLayout(self: MSPyECObjects.ClassLayout, accessString: str) -> tuple
-        
         Given a property access string, will return the PropertyLayout
         
         Parameter ``propertyLayout``:
@@ -675,10 +528,8 @@ class ClassLayout:
         """
         ...
     
-    def GetPropertyLayoutByIndex(*args, **kwargs):
+    def GetPropertyLayoutByIndex(self: MSPyECObjects.ClassLayout, propertyIndex: int) -> tuple:
         """
-        GetPropertyLayoutByIndex(self: MSPyECObjects.ClassLayout, propertyIndex: int) -> tuple
-        
         Given a property index, will return the PropertyLayout
         
         Parameter ``propertyLayout``:
@@ -693,10 +544,8 @@ class ClassLayout:
         """
         ...
     
-    def GetPropertyLayoutIndex(*args, **kwargs):
+    def GetPropertyLayoutIndex(self: MSPyECObjects.ClassLayout, propertyLayout: MSPyECObjects.PropertyLayout) -> tuple:
         """
-        GetPropertyLayoutIndex(self: MSPyECObjects.ClassLayout, propertyLayout: MSPyECObjects.PropertyLayout) -> tuple
-        
         Given a property layout, will return the property index within the
         ClassLayout
         
@@ -714,10 +563,8 @@ class ClassLayout:
         """
         ...
     
-    def IsCompatible(*args, **kwargs):
+    def IsCompatible(self: MSPyECObjects.ClassLayout, layout: MSPyECObjects.ClassLayout) -> bool:
         """
-        IsCompatible(self: MSPyECObjects.ClassLayout, layout: MSPyECObjects.ClassLayout) -> bool
-        
         Checks the given classLayout to see if it is equal to, or a subset of,
         this layout
         
@@ -730,10 +577,8 @@ class ClassLayout:
         """
         ...
     
-    def IsPropertyReadOnly(*args, **kwargs):
+    def IsPropertyReadOnly(self: MSPyECObjects.ClassLayout, propertyIndex: int) -> bool:
         """
-        IsPropertyReadOnly(self: MSPyECObjects.ClassLayout, propertyIndex: int) -> bool
-        
         Given a propertyIndex, will return whether the property is read-only
         or not
         
@@ -753,10 +598,8 @@ class ClassLayout:
     def PropertyCountExcludingEmbeddedStructs(arg0: MSPyECObjects.ClassLayout) -> int:
         ...
     
-    def SetPropertyReadOnly(*args, **kwargs):
+    def SetPropertyReadOnly(self: MSPyECObjects.ClassLayout, propertyIndex: int, readOnly: bool) -> bool:
         """
-        SetPropertyReadOnly(self: MSPyECObjects.ClassLayout, propertyIndex: int, readOnly: bool) -> bool
-        
         Sets the read-only status of a property, given its index within the
         ClassLayout
         
@@ -772,10 +615,8 @@ class ClassLayout:
         """
         ...
     
-    def ToString(*args, **kwargs):
+    def ToString(self: MSPyECObjects.ClassLayout) -> MSPyBentley.WString:
         """
-        ToString(self: MSPyECObjects.ClassLayout) -> MSPyBentley.WString
-        
         Returns a string containing a description of the class and its
         properties
         """
@@ -800,22 +641,14 @@ class CustomStructSerializerManager:
     None
     """
 
-    def AddCustomSerializer(*args, **kwargs):
-        """
-        AddCustomSerializer(self: MSPyECObjects.CustomStructSerializerManager, serializerName: str, serializer: MSPyECObjects.ICustomECStructSerializer) -> Bentley.BentleyStatus
-        """
+    def AddCustomSerializer(self: MSPyECObjects.CustomStructSerializerManager, serializerName: str, serializer: MSPyECObjects.ICustomECStructSerializer) -> Bentley.BentleyStatus:
         ...
     
-    def GetCustomSerializer(*args, **kwargs):
-        """
-        GetCustomSerializer(self: MSPyECObjects.CustomStructSerializerManager, structProperty: MSPyECObjects.StructECProperty, ecInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ICustomECStructSerializer
-        """
+    def GetCustomSerializer(self: MSPyECObjects.CustomStructSerializerManager, structProperty: MSPyECObjects.StructECProperty, ecInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ICustomECStructSerializer:
         ...
     
-    def GetManager(*args, **kwargs):
-        """
-        GetManager() -> MSPyECObjects.CustomStructSerializerManager
-        """
+    @staticmethod
+    def GetManager() -> MSPyECObjects.CustomStructSerializerManager:
         ...
     
     def __init__(*args, **kwargs):
@@ -831,42 +664,26 @@ class DateTimeInfo:
 
     Default: BeDateTimeInfo
     
-    def GetDefault(*args, **kwargs):
-        """
-        GetDefault() -> MSPyBentley.BeDateTimeInfo
-        """
+    @staticmethod
+    def GetDefault() -> MSPyBentley.BeDateTimeInfo:
         ...
     
-    def GetInfo(*args, **kwargs):
-        """
-        GetInfo(self: MSPyECObjects.DateTimeInfo, useDefaultIfUnset: bool) -> MSPyBentley.BeDateTimeInfo
-        """
+    def GetInfo(self: MSPyECObjects.DateTimeInfo, useDefaultIfUnset: bool) -> MSPyBentley.BeDateTimeInfo:
         ...
     
-    def IsComponentNull(*args, **kwargs):
-        """
-        IsComponentNull(self: MSPyECObjects.DateTimeInfo) -> bool
-        """
+    def IsComponentNull(self: MSPyECObjects.DateTimeInfo) -> bool:
         ...
     
-    def IsKindNull(*args, **kwargs):
-        """
-        IsKindNull(self: MSPyECObjects.DateTimeInfo) -> bool
-        """
+    def IsKindNull(self: MSPyECObjects.DateTimeInfo) -> bool:
         ...
     
-    def IsMatchedBy(*args, **kwargs):
+    def IsMatchedBy(self: MSPyECObjects.DateTimeInfo, arg0: MSPyBentley.BeDateTimeInfo) -> bool:
         """
-        IsMatchedBy(self: MSPyECObjects.DateTimeInfo, arg0: MSPyBentley.BeDateTimeInfo) -> bool
-        
         rhs
         """
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.DateTimeInfo) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.DateTimeInfo) -> MSPyBentley.WString:
         ...
     
     def __init__(*args, **kwargs):
@@ -884,25 +701,19 @@ class ECClass:
     None
     """
 
-    def AddBaseClass(*args, **kwargs):
-        """
-        AddBaseClass(self: MSPyECObjects.ECClass, baseClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def AddBaseClass(self: MSPyECObjects.ECClass, baseClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
     def BaseClasses(arg0: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray:
         ...
     
-    def ClassesAreEqualByName(*args, **kwargs):
-        """
-        ClassesAreEqualByName(currentBaseClass: MSPyECObjects.ECClass, arg: capsule) -> bool
-        """
+    @staticmethod
+    def ClassesAreEqualByName(currentBaseClass: MSPyECObjects.ECClass, arg: capsule) -> bool:
         ...
     
     def CreateArrayProperty(*args, **kwargs):
         """
-        CreateArrayProperty(*args, **kwargs)
         Overloaded function.
         
         1. CreateArrayProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> tuple
@@ -915,7 +726,6 @@ class ECClass:
     
     def CreatePrimitiveProperty(*args, **kwargs):
         """
-        CreatePrimitiveProperty(*args, **kwargs)
         Overloaded function.
         
         1. CreatePrimitiveProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> tuple
@@ -926,7 +736,6 @@ class ECClass:
     
     def CreateStructProperty(*args, **kwargs):
         """
-        CreateStructProperty(*args, **kwargs)
         Overloaded function.
         
         1. CreateStructProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> tuple
@@ -961,15 +770,11 @@ class ECClass:
     def FullName(arg0: MSPyECObjects.ECClass) -> str:
         ...
     
-    def GetBaseClasses(*args, **kwargs):
-        """
-        GetBaseClasses(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray
-        """
+    def GetBaseClasses(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray:
         ...
     
     def GetCustomAttribute(*args, **kwargs):
         """
-        GetCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -980,7 +785,6 @@ class ECClass:
     
     def GetCustomAttributeLocal(*args, **kwargs):
         """
-        GetCustomAttributeLocal(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttributeLocal(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -989,99 +793,53 @@ class ECClass:
         """
         ...
     
-    def GetCustomAttributes(*args, **kwargs):
-        """
-        GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetDefaultStandaloneEnabler(*args, **kwargs):
-        """
-        GetDefaultStandaloneEnabler(self: MSPyECObjects.ECClass) -> Bentley.ECN.StandaloneECEnabler
-        """
+    def GetDefaultStandaloneEnabler(self: MSPyECObjects.ECClass) -> Bentley.ECN.StandaloneECEnabler:
         ...
     
-    def GetDerivedClasses(*args, **kwargs):
-        """
-        GetDerivedClasses(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray
-        """
+    def GetDerivedClasses(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray:
         ...
     
-    def GetDescription(*args, **kwargs):
-        """
-        GetDescription(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetDescription(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetDisplayLabel(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetFullName(*args, **kwargs):
-        """
-        GetFullName(self: MSPyECObjects.ECClass) -> str
-        """
+    def GetFullName(self: MSPyECObjects.ECClass) -> str:
         ...
     
-    def GetId(*args, **kwargs):
-        """
-        GetId(self: MSPyECObjects.ECClass) -> int
-        """
+    def GetId(self: MSPyECObjects.ECClass) -> int:
         ...
     
-    def GetInvariantDescription(*args, **kwargs):
-        """
-        GetInvariantDescription(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetInvariantDescription(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetInvariantDisplayLabel(*args, **kwargs):
-        """
-        GetInvariantDisplayLabel(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetInvariantDisplayLabel(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetIsCustomAttributeClass(*args, **kwargs):
-        """
-        GetIsCustomAttributeClass(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsCustomAttributeClass(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetIsDisplayLabelDefined(*args, **kwargs):
-        """
-        GetIsDisplayLabelDefined(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsDisplayLabelDefined(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetIsDomainClass(*args, **kwargs):
-        """
-        GetIsDomainClass(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsDomainClass(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetIsFinal(*args, **kwargs):
-        """
-        GetIsFinal(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsFinal(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetIsStruct(*args, **kwargs):
-        """
-        GetIsStruct(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsStruct(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetName(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
     def GetPrimaryCustomAttribute(*args, **kwargs):
         """
-        GetPrimaryCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetPrimaryCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -1090,15 +848,11 @@ class ECClass:
         """
         ...
     
-    def GetPrimaryCustomAttributes(*args, **kwargs):
-        """
-        GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
     def GetProperties(*args, **kwargs):
         """
-        GetProperties(*args, **kwargs)
         Overloaded function.
         
         1. GetProperties(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECPropertyIterable
@@ -1109,7 +863,6 @@ class ECClass:
     
     def GetProperty(*args, **kwargs):
         """
-        GetProperty(*args, **kwargs)
         Overloaded function.
         
         1. GetProperty(self: MSPyECObjects.ECClass, name: str, inludeBaseClasses: bool = True) -> MSPyECObjects.ECProperty
@@ -1120,34 +873,20 @@ class ECClass:
         """
         ...
     
-    def GetPropertyCount(*args, **kwargs):
-        """
-        GetPropertyCount(self: MSPyECObjects.ECClass, includeBaseProperties: bool = True) -> int
-        """
+    def GetPropertyCount(self: MSPyECObjects.ECClass, includeBaseProperties: bool = True) -> int:
         ...
     
-    def GetQualifiedClassName(*args, **kwargs):
-        """
-        GetQualifiedClassName(primarySchema: Bentley.ECN.ECSchema, ecClass: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    @staticmethod
+    def GetQualifiedClassName(primarySchema: Bentley.ECN.ECSchema, ecClass: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetRelationshipClass(*args, **kwargs):
-        """
-        GetRelationshipClass(self: MSPyECObjects.ECClass) -> Bentley.ECN.ECRelationshipClass
-        """
+    def GetRelationshipClass(self: MSPyECObjects.ECClass) -> Bentley.ECN.ECRelationshipClass:
         ...
     
-    def GetSchema(*args, **kwargs):
-        """
-        GetSchema(self: MSPyECObjects.ECClass) -> Bentley.ECN.ECSchema
-        """
+    def GetSchema(self: MSPyECObjects.ECClass) -> Bentley.ECN.ECSchema:
         ...
     
-    def HasBaseClasses(*args, **kwargs):
-        """
-        HasBaseClasses(self: MSPyECObjects.ECClass) -> bool
-        """
+    def HasBaseClasses(self: MSPyECObjects.ECClass) -> bool:
         ...
     
     @property
@@ -1164,7 +903,6 @@ class ECClass:
     
     def Is(*args, **kwargs):
         """
-        Is(*args, **kwargs)
         Overloaded function.
         
         1. Is(self: MSPyECObjects.ECClass, targetClass: MSPyECObjects.ECClass) -> bool
@@ -1184,7 +922,6 @@ class ECClass:
     
     def IsDefined(*args, **kwargs):
         """
-        IsDefined(*args, **kwargs)
         Overloaded function.
         
         1. IsDefined(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -1222,10 +959,8 @@ class ECClass:
     def Name(arg0: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def ParseClassName(*args, **kwargs):
-        """
-        ParseClassName(prefix: MSPyBentley.WString, className: MSPyBentley.WString, qualifiedClassName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    @staticmethod
+    def ParseClassName(prefix: MSPyBentley.WString, className: MSPyBentley.WString, qualifiedClassName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -1236,15 +971,11 @@ class ECClass:
     def RelationshipClass(arg0: MSPyECObjects.ECClass) -> Bentley.ECN.ECRelationshipClass:
         ...
     
-    def RemoveBaseClass(*args, **kwargs):
-        """
-        RemoveBaseClass(self: MSPyECObjects.ECClass, baseClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def RemoveBaseClass(self: MSPyECObjects.ECClass, baseClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def RemoveCustomAttribute(*args, **kwargs):
         """
-        RemoveCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. RemoveCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -1253,37 +984,24 @@ class ECClass:
         """
         ...
     
-    def RemoveProperty(*args, **kwargs):
-        """
-        RemoveProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def RemoveProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
     def Schema(arg0: MSPyECObjects.ECClass) -> Bentley.ECN.ECSchema:
         ...
     
-    def SetCustomAttribute(*args, **kwargs):
-        """
-        SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDescription(*args, **kwargs):
-        """
-        SetDescription(self: MSPyECObjects.ECClass, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDescription(self: MSPyECObjects.ECClass, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.ECClass, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.ECClass, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetIsCustomAttributeClass(*args, **kwargs):
         """
-        SetIsCustomAttributeClass(*args, **kwargs)
         Overloaded function.
         
         1. SetIsCustomAttributeClass(self: MSPyECObjects.ECClass, isCustomAttribute: str) -> MSPyECObjects.ECObjectsStatus
@@ -1294,7 +1012,6 @@ class ECClass:
     
     def SetIsDomainClass(*args, **kwargs):
         """
-        SetIsDomainClass(*args, **kwargs)
         Overloaded function.
         
         1. SetIsDomainClass(self: MSPyECObjects.ECClass, isDomainClass: str) -> MSPyECObjects.ECObjectsStatus
@@ -1305,7 +1022,6 @@ class ECClass:
     
     def SetIsFinal(*args, **kwargs):
         """
-        SetIsFinal(*args, **kwargs)
         Overloaded function.
         
         1. SetIsFinal(self: MSPyECObjects.ECClass, isFinal: str) -> MSPyECObjects.ECObjectsStatus
@@ -1316,7 +1032,6 @@ class ECClass:
     
     def SetIsStruct(*args, **kwargs):
         """
-        SetIsStruct(*args, **kwargs)
         Overloaded function.
         
         1. SetIsStruct(self: MSPyECObjects.ECClass, isStruct: str) -> MSPyECObjects.ECObjectsStatus
@@ -1346,28 +1061,16 @@ class ECClassCPArray:
         """
         ...
     
-    def clear(*args, **kwargs):
-        """
-        clear(self: MSPyECObjects.ECClassCPArray) -> None
-        """
+    def clear(self: MSPyECObjects.ECClassCPArray) -> None:
         ...
     
-    def push_back(*args, **kwargs):
-        """
-        push_back(self: MSPyECObjects.ECClassCPArray, newItem: MSPyECObjects.ECClass) -> None
-        """
+    def push_back(self: MSPyECObjects.ECClassCPArray, newItem: MSPyECObjects.ECClass) -> None:
         ...
     
-    def remove(*args, **kwargs):
-        """
-        remove(self: MSPyECObjects.ECClassCPArray, arg0: MSPyECObjects.ECClass) -> None
-        """
+    def remove(self: MSPyECObjects.ECClassCPArray, arg0: MSPyECObjects.ECClass) -> None:
         ...
     
-    def resize(*args, **kwargs):
-        """
-        resize(self: MSPyECObjects.ECClassCPArray, newSize: int) -> None
-        """
+    def resize(self: MSPyECObjects.ECClassCPArray, newSize: int) -> None:
         ...
     
 class ECClassContainer:
@@ -1396,28 +1099,16 @@ class ECClassPArray:
         """
         ...
     
-    def clear(*args, **kwargs):
-        """
-        clear(self: MSPyECObjects.ECClassPArray) -> None
-        """
+    def clear(self: MSPyECObjects.ECClassPArray) -> None:
         ...
     
-    def push_back(*args, **kwargs):
-        """
-        push_back(self: MSPyECObjects.ECClassPArray, newItem: MSPyECObjects.ECClass) -> None
-        """
+    def push_back(self: MSPyECObjects.ECClassPArray, newItem: MSPyECObjects.ECClass) -> None:
         ...
     
-    def remove(*args, **kwargs):
-        """
-        remove(self: MSPyECObjects.ECClassPArray, arg0: MSPyECObjects.ECClass) -> None
-        """
+    def remove(self: MSPyECObjects.ECClassPArray, arg0: MSPyECObjects.ECClass) -> None:
         ...
     
-    def resize(*args, **kwargs):
-        """
-        resize(self: MSPyECObjects.ECClassPArray, newSize: int) -> None
-        """
+    def resize(self: MSPyECObjects.ECClassPArray, newSize: int) -> None:
         ...
     
 class ECCustomAttributeInstanceIterable:
@@ -1436,18 +1127,14 @@ class ECDBuffer:
     None
     """
 
-    def ClearValues(*args, **kwargs):
+    def ClearValues(self: MSPyECObjects.ECDBuffer) -> None:
         """
-        ClearValues(self: MSPyECObjects.ECDBuffer) -> None
-        
         Sets all values to null
         """
         ...
     
-    def CopyFromBuffer(*args, **kwargs):
+    def CopyFromBuffer(self: MSPyECObjects.ECDBuffer, source: MSPyECObjects.ECDBuffer) -> MSPyECObjects.ECObjectsStatus:
         """
-        CopyFromBuffer(self: MSPyECObjects.ECDBuffer, source: MSPyECObjects.ECDBuffer) -> MSPyECObjects.ECObjectsStatus
-        
         Attempts to copy property values from source buffer. Expects source to
         have a compatible class layout.
         
@@ -1456,10 +1143,8 @@ class ECDBuffer:
         """
         ...
     
-    def IsEmpty(*args, **kwargs):
+    def IsEmpty(self: MSPyECObjects.ECDBuffer) -> bool:
         """
-        IsEmpty(self: MSPyECObjects.ECDBuffer) -> bool
-        
         Returns true if the buffer is empty (all values are null and all
         arrays are empty)
         """
@@ -1480,70 +1165,37 @@ class ECEnabler:
     def Class(arg0: MSPyECObjects.ECEnabler) -> MSPyECObjects.ECClass:
         ...
     
-    def GetAccessString(*args, **kwargs):
-        """
-        GetAccessString(self: MSPyECObjects.ECEnabler, propertyIndex: int) -> tuple
-        """
+    def GetAccessString(self: MSPyECObjects.ECEnabler, propertyIndex: int) -> tuple:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.ECClass
-        """
+    def GetClass(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.ECClass:
         ...
     
-    def GetEnablerForStructArrayMember(*args, **kwargs):
-        """
-        GetEnablerForStructArrayMember(self: MSPyECObjects.ECEnabler, schemaKey: MSPyECObjects.SchemaKey, className: str) -> Bentley.ECN.StandaloneECEnabler
-        """
+    def GetEnablerForStructArrayMember(self: MSPyECObjects.ECEnabler, schemaKey: MSPyECObjects.SchemaKey, className: str) -> Bentley.ECN.StandaloneECEnabler:
         ...
     
-    def GetFirstPropertyIndex(*args, **kwargs):
-        """
-        GetFirstPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int) -> int
-        """
+    def GetFirstPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int) -> int:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECEnabler) -> str
-        """
+    def GetName(self: MSPyECObjects.ECEnabler) -> str:
         ...
     
-    def GetNextPropertyIndex(*args, **kwargs):
-        """
-        GetNextPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int, inputIndex: int) -> int
-        """
+    def GetNextPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int, inputIndex: int) -> int:
         ...
     
-    def GetParentPropertyIndex(*args, **kwargs):
-        """
-        GetParentPropertyIndex(self: MSPyECObjects.ECEnabler, childIndex: int) -> int
-        """
+    def GetParentPropertyIndex(self: MSPyECObjects.ECEnabler, childIndex: int) -> int:
         ...
     
-    def GetPropertyIndex(*args, **kwargs):
-        """
-        GetPropertyIndex(self: MSPyECObjects.ECEnabler, accessString: str) -> tuple
-        """
+    def GetPropertyIndex(self: MSPyECObjects.ECEnabler, accessString: str) -> tuple:
         ...
     
-    def GetPropertyIndices(*args, **kwargs):
-        """
-        GetPropertyIndices(self: MSPyECObjects.ECEnabler, indices: MSPyBentley.UInt32Array, parentIndex: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetPropertyIndices(self: MSPyECObjects.ECEnabler, indices: MSPyBentley.UInt32Array, parentIndex: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetStandaloneEnablerLocater(*args, **kwargs):
-        """
-        GetStandaloneEnablerLocater(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.IStandaloneEnablerLocater
-        """
+    def GetStandaloneEnablerLocater(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.IStandaloneEnablerLocater:
         ...
     
-    def HasChildProperties(*args, **kwargs):
-        """
-        HasChildProperties(self: MSPyECObjects.ECEnabler, parentIndex: int) -> bool
-        """
+    def HasChildProperties(self: MSPyECObjects.ECEnabler, parentIndex: int) -> bool:
         ...
     
     @property
@@ -1605,28 +1257,16 @@ class ECImageKey:
     None
     """
 
-    def GetIconId(*args, **kwargs):
-        """
-        GetIconId(self: MSPyECObjects.ECImageKey) -> int
-        """
+    def GetIconId(self: MSPyECObjects.ECImageKey) -> int:
         ...
     
-    def GetIconType(*args, **kwargs):
-        """
-        GetIconType(self: MSPyECObjects.ECImageKey) -> int
-        """
+    def GetIconType(self: MSPyECObjects.ECImageKey) -> int:
         ...
     
-    def GetImageName(*args, **kwargs):
-        """
-        GetImageName(self: MSPyECObjects.ECImageKey) -> MSPyBentley.WString
-        """
+    def GetImageName(self: MSPyECObjects.ECImageKey) -> MSPyBentley.WString:
         ...
     
-    def GetImageType(*args, **kwargs):
-        """
-        GetImageType(self: MSPyECObjects.ECImageKey) -> MSPyECObjects.ECImageKey.ImageType
-        """
+    def GetImageType(self: MSPyECObjects.ECImageKey) -> MSPyECObjects.ECImageKey.ImageType:
         ...
     
     @property
@@ -1657,28 +1297,16 @@ class ECImageKey:
     def ImageType(arg0: MSPyECObjects.ECImageKey, arg1: MSPyECObjects.ECImageKey.ImageType) -> None:
         ...
     
-    def SetIconId(*args, **kwargs):
-        """
-        SetIconId(self: MSPyECObjects.ECImageKey, rscId: int) -> None
-        """
+    def SetIconId(self: MSPyECObjects.ECImageKey, rscId: int) -> None:
         ...
     
-    def SetIconType(*args, **kwargs):
-        """
-        SetIconType(self: MSPyECObjects.ECImageKey, iconType: int) -> None
-        """
+    def SetIconType(self: MSPyECObjects.ECImageKey, iconType: int) -> None:
         ...
     
-    def SetImageName(*args, **kwargs):
-        """
-        SetImageName(self: MSPyECObjects.ECImageKey, name: MSPyBentley.WString) -> None
-        """
+    def SetImageName(self: MSPyECObjects.ECImageKey, name: MSPyBentley.WString) -> None:
         ...
     
-    def SetImageType(*args, **kwargs):
-        """
-        SetImageType(self: MSPyECObjects.ECImageKey, type: MSPyECObjects.ECImageKey.ImageType) -> None
-        """
+    def SetImageType(self: MSPyECObjects.ECImageKey, type: MSPyECObjects.ECImageKey.ImageType) -> None:
         ...
     
     def __init__(self: MSPyECObjects.ECImageKey, name: MSPyBentley.WString, type: MSPyECObjects.ECImageKey.ImageType) -> None:
@@ -1705,9 +1333,9 @@ class ECInstanceReadContext:
     None
     """
 
+    @staticmethod
     def CreateContext(*args, **kwargs):
         """
-        CreateContext(*args, **kwargs)
         Overloaded function.
         
         1. CreateContext(ecSchema: Bentley.ECN.ECSchema, locator: Bentley.ECN.IStandaloneEnablerLocater = None, typeResolver: MSPyECObjects.IPrimitiveTypeResolver = None) -> MSPyECObjects.ECInstanceReadContext
@@ -1745,34 +1373,24 @@ class ECNameValidation:
     None
     """
 
-    def DecodeFromValidName(*args, **kwargs):
-        """
-        DecodeFromValidName(decoded: MSPyBentley.WString, name: MSPyBentley.WString) -> bool
-        """
+    @staticmethod
+    def DecodeFromValidName(decoded: MSPyBentley.WString, name: MSPyBentley.WString) -> bool:
         ...
     
-    def EncodeToValidName(*args, **kwargs):
-        """
-        EncodeToValidName(encoded: MSPyBentley.WString, name: MSPyBentley.WString) -> bool
-        """
+    @staticmethod
+    def EncodeToValidName(encoded: MSPyBentley.WString, name: MSPyBentley.WString) -> bool:
         ...
     
-    def IsValidAlphaNumericCharacter(*args, **kwargs):
-        """
-        IsValidAlphaNumericCharacter(char: str) -> bool
-        """
+    @staticmethod
+    def IsValidAlphaNumericCharacter(char: str) -> bool:
         ...
     
-    def IsValidName(*args, **kwargs):
-        """
-        IsValidName(name: str) -> bool
-        """
+    @staticmethod
+    def IsValidName(name: str) -> bool:
         ...
     
-    def Validate(*args, **kwargs):
-        """
-        Validate(name: str) -> MSPyECObjects.ECNameValidation.ValidationResult
-        """
+    @staticmethod
+    def Validate(name: str) -> MSPyECObjects.ECNameValidation.ValidationResult:
         ...
     
     class ValidationResult:
@@ -2010,22 +1628,13 @@ class ECProperty:
     None
     """
 
-    def AsArrayProperty(*args, **kwargs):
-        """
-        AsArrayProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ArrayECProperty
-        """
+    def AsArrayProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ArrayECProperty:
         ...
     
-    def AsPrimitiveProperty(*args, **kwargs):
-        """
-        AsPrimitiveProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.PrimitiveECProperty
-        """
+    def AsPrimitiveProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.PrimitiveECProperty:
         ...
     
-    def AsStructProperty(*args, **kwargs):
-        """
-        AsStructProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.StructECProperty
-        """
+    def AsStructProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.StructECProperty:
         ...
     
     @property
@@ -2053,21 +1662,14 @@ class ECProperty:
     def DisplayLabel(arg0: MSPyECObjects.ECProperty, arg1: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetBaseProperty(*args, **kwargs):
-        """
-        GetBaseProperty(self: MSPyECObjects.ECProperty) -> MSPyECObjects.ECProperty
-        """
+    def GetBaseProperty(self: MSPyECObjects.ECProperty) -> MSPyECObjects.ECProperty:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ECClass
-        """
+    def GetClass(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ECClass:
         ...
     
     def GetCustomAttribute(*args, **kwargs):
         """
-        GetCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -2078,7 +1680,6 @@ class ECProperty:
     
     def GetCustomAttributeLocal(*args, **kwargs):
         """
-        GetCustomAttributeLocal(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttributeLocal(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -2087,81 +1688,44 @@ class ECProperty:
         """
         ...
     
-    def GetCustomAttributes(*args, **kwargs):
-        """
-        GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetDescription(*args, **kwargs):
-        """
-        GetDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetId(*args, **kwargs):
-        """
-        GetId(self: MSPyECObjects.ECProperty) -> int
-        """
+    def GetId(self: MSPyECObjects.ECProperty) -> int:
         ...
     
-    def GetInvariantDescription(*args, **kwargs):
-        """
-        GetInvariantDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetInvariantDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetInvariantDisplayLabel(*args, **kwargs):
-        """
-        GetInvariantDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetInvariantDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetIsArray(*args, **kwargs):
-        """
-        GetIsArray(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsArray(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsDisplayLabelDefined(*args, **kwargs):
-        """
-        GetIsDisplayLabelDefined(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsDisplayLabelDefined(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsPrimitive(*args, **kwargs):
-        """
-        GetIsPrimitive(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsPrimitive(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsReadOnly(*args, **kwargs):
-        """
-        GetIsReadOnly(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsReadOnly(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsStruct(*args, **kwargs):
-        """
-        GetIsStruct(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsStruct(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
     def GetPrimaryCustomAttribute(*args, **kwargs):
         """
-        GetPrimaryCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetPrimaryCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -2170,16 +1734,10 @@ class ECProperty:
         """
         ...
     
-    def GetPrimaryCustomAttributes(*args, **kwargs):
-        """
-        GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetTypeName(*args, **kwargs):
-        """
-        GetTypeName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetTypeName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
     @property
@@ -2198,15 +1756,11 @@ class ECProperty:
     def IsArray(arg0: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def IsCalculated(*args, **kwargs):
-        """
-        IsCalculated(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def IsCalculated(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
     def IsDefined(*args, **kwargs):
         """
-        IsDefined(*args, **kwargs)
         Overloaded function.
         
         1. IsDefined(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -2240,7 +1794,6 @@ class ECProperty:
     
     def RemoveCustomAttribute(*args, **kwargs):
         """
-        RemoveCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. RemoveCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -2249,39 +1802,23 @@ class ECProperty:
         """
         ...
     
-    def SetBaseProperty(*args, **kwargs):
-        """
-        SetBaseProperty(self: MSPyECObjects.ECProperty, prop: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetBaseProperty(self: MSPyECObjects.ECProperty, prop: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetCalculatedPropertySpecification(*args, **kwargs):
-        """
-        SetCalculatedPropertySpecification(self: MSPyECObjects.ECProperty, expressionAttribute: Bentley.ECN.IECInstance) -> bool
-        """
+    def SetCalculatedPropertySpecification(self: MSPyECObjects.ECProperty, expressionAttribute: Bentley.ECN.IECInstance) -> bool:
         ...
     
-    def SetCustomAttribute(*args, **kwargs):
-        """
-        SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDescription(*args, **kwargs):
-        """
-        SetDescription(self: MSPyECObjects.ECProperty, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDescription(self: MSPyECObjects.ECProperty, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.ECProperty, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.ECProperty, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetIsReadOnly(*args, **kwargs):
         """
-        SetIsReadOnly(*args, **kwargs)
         Overloaded function.
         
         1. SetIsReadOnly(self: MSPyECObjects.ECProperty, readOnly: bool) -> MSPyECObjects.ECObjectsStatus
@@ -2290,10 +1827,7 @@ class ECProperty:
         """
         ...
     
-    def SetTypeName(*args, **kwargs):
-        """
-        SetTypeName(self: MSPyECObjects.ECProperty, typeName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetTypeName(self: MSPyECObjects.ECProperty, typeName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -2314,10 +1848,7 @@ class ECPropertyIterable:
     None
     """
 
-    def FindByDisplayLabel(*args, **kwargs):
-        """
-        FindByDisplayLabel(self: MSPyECObjects.ECPropertyIterable, label: str) -> MSPyECObjects.ECProperty
-        """
+    def FindByDisplayLabel(self: MSPyECObjects.ECPropertyIterable, label: str) -> MSPyECObjects.ECProperty:
         ...
     
     def __init__(*args, **kwargs):
@@ -2335,40 +1866,23 @@ class ECPropertyValue:
     def ChildValues(arg0: MSPyECObjects.ECPropertyValue) -> Bentley.ECN.ECValuesCollection:
         ...
     
-    def GetChildValues(*args, **kwargs):
-        """
-        GetChildValues(self: MSPyECObjects.ECPropertyValue) -> Bentley.ECN.ECValuesCollection
-        """
+    def GetChildValues(self: MSPyECObjects.ECPropertyValue) -> Bentley.ECN.ECValuesCollection:
         ...
     
-    def GetInstance(*args, **kwargs):
-        """
-        GetInstance(self: MSPyECObjects.ECPropertyValue) -> MSPyECObjects.IECInstance
-        """
+    def GetInstance(self: MSPyECObjects.ECPropertyValue) -> MSPyECObjects.IECInstance:
         ...
     
-    def GetPropertyValue(*args, **kwargs):
-        """
-        GetPropertyValue(instance: MSPyECObjects.IECInstance, propertyAccessor: str) -> MSPyECObjects.ECPropertyValue
-        """
+    @staticmethod
+    def GetPropertyValue(instance: MSPyECObjects.IECInstance, propertyAccessor: str) -> MSPyECObjects.ECPropertyValue:
         ...
     
-    def GetValue(*args, **kwargs):
-        """
-        GetValue(self: MSPyECObjects.ECPropertyValue) -> MSPyECObjects.ECValue
-        """
+    def GetValue(self: MSPyECObjects.ECPropertyValue) -> MSPyECObjects.ECValue:
         ...
     
-    def GetValueAccessor(*args, **kwargs):
-        """
-        GetValueAccessor(self: MSPyECObjects.ECPropertyValue) -> MSPyECObjects.ECValueAccessor
-        """
+    def GetValueAccessor(self: MSPyECObjects.ECPropertyValue) -> MSPyECObjects.ECValueAccessor:
         ...
     
-    def HasChildValues(*args, **kwargs):
-        """
-        HasChildValues(self: MSPyECObjects.ECPropertyValue) -> bool
-        """
+    def HasChildValues(self: MSPyECObjects.ECPropertyValue) -> bool:
         ...
     
     @property
@@ -2418,25 +1932,18 @@ class ECRelationshipClass:
     None
     """
 
-    def AddBaseClass(*args, **kwargs):
-        """
-        AddBaseClass(self: MSPyECObjects.ECClass, baseClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def AddBaseClass(self: MSPyECObjects.ECClass, baseClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
     def BaseClasses(arg0: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray:
         ...
     
-    def ClassesAreEqualByName(*args, **kwargs):
-        """
-        ClassesAreEqualByName(currentBaseClass: MSPyECObjects.ECClass, arg: capsule) -> bool
-        """
+    def ClassesAreEqualByName(currentBaseClass: MSPyECObjects.ECClass, arg: capsule) -> bool:
         ...
     
     def CreateArrayProperty(*args, **kwargs):
         """
-        CreateArrayProperty(*args, **kwargs)
         Overloaded function.
         
         1. CreateArrayProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> tuple
@@ -2449,7 +1956,6 @@ class ECRelationshipClass:
     
     def CreatePrimitiveProperty(*args, **kwargs):
         """
-        CreatePrimitiveProperty(*args, **kwargs)
         Overloaded function.
         
         1. CreatePrimitiveProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> tuple
@@ -2460,7 +1966,6 @@ class ECRelationshipClass:
     
     def CreateStructProperty(*args, **kwargs):
         """
-        CreateStructProperty(*args, **kwargs)
         Overloaded function.
         
         1. CreateStructProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> tuple
@@ -2495,15 +2000,11 @@ class ECRelationshipClass:
     def FullName(arg0: MSPyECObjects.ECClass) -> str:
         ...
     
-    def GetBaseClasses(*args, **kwargs):
-        """
-        GetBaseClasses(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray
-        """
+    def GetBaseClasses(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray:
         ...
     
     def GetCustomAttribute(*args, **kwargs):
         """
-        GetCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -2514,7 +2015,6 @@ class ECRelationshipClass:
     
     def GetCustomAttributeLocal(*args, **kwargs):
         """
-        GetCustomAttributeLocal(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttributeLocal(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -2523,111 +2023,59 @@ class ECRelationshipClass:
         """
         ...
     
-    def GetCustomAttributes(*args, **kwargs):
-        """
-        GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetDefaultStandaloneEnabler(*args, **kwargs):
-        """
-        GetDefaultStandaloneEnabler(self: MSPyECObjects.ECClass) -> Bentley.ECN.StandaloneECEnabler
-        """
+    def GetDefaultStandaloneEnabler(self: MSPyECObjects.ECClass) -> Bentley.ECN.StandaloneECEnabler:
         ...
     
-    def GetDerivedClasses(*args, **kwargs):
-        """
-        GetDerivedClasses(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray
-        """
+    def GetDerivedClasses(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECClassPArray:
         ...
     
-    def GetDescription(*args, **kwargs):
-        """
-        GetDescription(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetDescription(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetDisplayLabel(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetFullName(*args, **kwargs):
-        """
-        GetFullName(self: MSPyECObjects.ECClass) -> str
-        """
+    def GetFullName(self: MSPyECObjects.ECClass) -> str:
         ...
     
-    def GetId(*args, **kwargs):
-        """
-        GetId(self: MSPyECObjects.ECClass) -> int
-        """
+    def GetId(self: MSPyECObjects.ECClass) -> int:
         ...
     
-    def GetInvariantDescription(*args, **kwargs):
-        """
-        GetInvariantDescription(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetInvariantDescription(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetInvariantDisplayLabel(*args, **kwargs):
-        """
-        GetInvariantDisplayLabel(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetInvariantDisplayLabel(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetIsCustomAttributeClass(*args, **kwargs):
-        """
-        GetIsCustomAttributeClass(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsCustomAttributeClass(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetIsDisplayLabelDefined(*args, **kwargs):
-        """
-        GetIsDisplayLabelDefined(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsDisplayLabelDefined(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetIsDomainClass(*args, **kwargs):
-        """
-        GetIsDomainClass(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsDomainClass(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetIsFinal(*args, **kwargs):
-        """
-        GetIsFinal(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsFinal(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetIsOrdered(*args, **kwargs):
-        """
-        GetIsOrdered(self: MSPyECObjects.ECRelationshipClass) -> bool
-        """
+    def GetIsOrdered(self: MSPyECObjects.ECRelationshipClass) -> bool:
         ...
     
-    def GetIsStruct(*args, **kwargs):
-        """
-        GetIsStruct(self: MSPyECObjects.ECClass) -> bool
-        """
+    def GetIsStruct(self: MSPyECObjects.ECClass) -> bool:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetName(self: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetOrderedRelationshipPropertyName(*args, **kwargs):
-        """
-        GetOrderedRelationshipPropertyName(self: MSPyECObjects.ECRelationshipClass, propertyName: MSPyBentley.WString, end: MSPyECObjects.ECRelationshipEnd) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetOrderedRelationshipPropertyName(self: MSPyECObjects.ECRelationshipClass, propertyName: MSPyBentley.WString, end: MSPyECObjects.ECRelationshipEnd) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def GetPrimaryCustomAttribute(*args, **kwargs):
         """
-        GetPrimaryCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetPrimaryCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -2636,15 +2084,11 @@ class ECRelationshipClass:
         """
         ...
     
-    def GetPrimaryCustomAttributes(*args, **kwargs):
-        """
-        GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
     def GetProperties(*args, **kwargs):
         """
-        GetProperties(*args, **kwargs)
         Overloaded function.
         
         1. GetProperties(self: MSPyECObjects.ECClass) -> MSPyECObjects.ECPropertyIterable
@@ -2655,7 +2099,6 @@ class ECRelationshipClass:
     
     def GetProperty(*args, **kwargs):
         """
-        GetProperty(*args, **kwargs)
         Overloaded function.
         
         1. GetProperty(self: MSPyECObjects.ECClass, name: str, inludeBaseClasses: bool = True) -> MSPyECObjects.ECProperty
@@ -2666,58 +2109,31 @@ class ECRelationshipClass:
         """
         ...
     
-    def GetPropertyCount(*args, **kwargs):
-        """
-        GetPropertyCount(self: MSPyECObjects.ECClass, includeBaseProperties: bool = True) -> int
-        """
+    def GetPropertyCount(self: MSPyECObjects.ECClass, includeBaseProperties: bool = True) -> int:
         ...
     
-    def GetQualifiedClassName(*args, **kwargs):
-        """
-        GetQualifiedClassName(primarySchema: Bentley.ECN.ECSchema, ecClass: MSPyECObjects.ECClass) -> MSPyBentley.WString
-        """
+    def GetQualifiedClassName(primarySchema: Bentley.ECN.ECSchema, ecClass: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def GetRelationshipClass(*args, **kwargs):
-        """
-        GetRelationshipClass(self: MSPyECObjects.ECClass) -> Bentley.ECN.ECRelationshipClass
-        """
+    def GetRelationshipClass(self: MSPyECObjects.ECClass) -> Bentley.ECN.ECRelationshipClass:
         ...
     
-    def GetSchema(*args, **kwargs):
-        """
-        GetSchema(self: MSPyECObjects.ECClass) -> Bentley.ECN.ECSchema
-        """
+    def GetSchema(self: MSPyECObjects.ECClass) -> Bentley.ECN.ECSchema:
         ...
     
-    def GetSource(*args, **kwargs):
-        """
-        GetSource(self: MSPyECObjects.ECRelationshipClass) -> MSPyECObjects.ECRelationshipConstraint
-        """
+    def GetSource(self: MSPyECObjects.ECRelationshipClass) -> MSPyECObjects.ECRelationshipConstraint:
         ...
     
-    def GetStrength(*args, **kwargs):
-        """
-        GetStrength(self: MSPyECObjects.ECRelationshipClass) -> MSPyECObjects.StrengthType
-        """
+    def GetStrength(self: MSPyECObjects.ECRelationshipClass) -> MSPyECObjects.StrengthType:
         ...
     
-    def GetStrengthDirection(*args, **kwargs):
-        """
-        GetStrengthDirection(self: MSPyECObjects.ECRelationshipClass) -> MSPyECObjects.ECRelatedInstanceDirection
-        """
+    def GetStrengthDirection(self: MSPyECObjects.ECRelationshipClass) -> MSPyECObjects.ECRelatedInstanceDirection:
         ...
     
-    def GetTarget(*args, **kwargs):
-        """
-        GetTarget(self: MSPyECObjects.ECRelationshipClass) -> MSPyECObjects.ECRelationshipConstraint
-        """
+    def GetTarget(self: MSPyECObjects.ECRelationshipClass) -> MSPyECObjects.ECRelationshipConstraint:
         ...
     
-    def HasBaseClasses(*args, **kwargs):
-        """
-        HasBaseClasses(self: MSPyECObjects.ECClass) -> bool
-        """
+    def HasBaseClasses(self: MSPyECObjects.ECClass) -> bool:
         ...
     
     @property
@@ -2734,7 +2150,6 @@ class ECRelationshipClass:
     
     def Is(*args, **kwargs):
         """
-        Is(*args, **kwargs)
         Overloaded function.
         
         1. Is(self: MSPyECObjects.ECClass, targetClass: MSPyECObjects.ECClass) -> bool
@@ -2754,7 +2169,6 @@ class ECRelationshipClass:
     
     def IsDefined(*args, **kwargs):
         """
-        IsDefined(*args, **kwargs)
         Overloaded function.
         
         1. IsDefined(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -2796,10 +2210,7 @@ class ECRelationshipClass:
     def Name(arg0: MSPyECObjects.ECClass) -> MSPyBentley.WString:
         ...
     
-    def ParseClassName(*args, **kwargs):
-        """
-        ParseClassName(prefix: MSPyBentley.WString, className: MSPyBentley.WString, qualifiedClassName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def ParseClassName(prefix: MSPyBentley.WString, className: MSPyBentley.WString, qualifiedClassName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -2810,15 +2221,11 @@ class ECRelationshipClass:
     def RelationshipClass(arg0: MSPyECObjects.ECClass) -> Bentley.ECN.ECRelationshipClass:
         ...
     
-    def RemoveBaseClass(*args, **kwargs):
-        """
-        RemoveBaseClass(self: MSPyECObjects.ECClass, baseClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def RemoveBaseClass(self: MSPyECObjects.ECClass, baseClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def RemoveCustomAttribute(*args, **kwargs):
         """
-        RemoveCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. RemoveCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -2827,37 +2234,24 @@ class ECRelationshipClass:
         """
         ...
     
-    def RemoveProperty(*args, **kwargs):
-        """
-        RemoveProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def RemoveProperty(self: MSPyECObjects.ECClass, name: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
     def Schema(arg0: MSPyECObjects.ECClass) -> Bentley.ECN.ECSchema:
         ...
     
-    def SetCustomAttribute(*args, **kwargs):
-        """
-        SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDescription(*args, **kwargs):
-        """
-        SetDescription(self: MSPyECObjects.ECClass, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDescription(self: MSPyECObjects.ECClass, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.ECClass, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.ECClass, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetIsCustomAttributeClass(*args, **kwargs):
         """
-        SetIsCustomAttributeClass(*args, **kwargs)
         Overloaded function.
         
         1. SetIsCustomAttributeClass(self: MSPyECObjects.ECClass, isCustomAttribute: str) -> MSPyECObjects.ECObjectsStatus
@@ -2868,7 +2262,6 @@ class ECRelationshipClass:
     
     def SetIsDomainClass(*args, **kwargs):
         """
-        SetIsDomainClass(*args, **kwargs)
         Overloaded function.
         
         1. SetIsDomainClass(self: MSPyECObjects.ECClass, isDomainClass: str) -> MSPyECObjects.ECObjectsStatus
@@ -2879,7 +2272,6 @@ class ECRelationshipClass:
     
     def SetIsFinal(*args, **kwargs):
         """
-        SetIsFinal(*args, **kwargs)
         Overloaded function.
         
         1. SetIsFinal(self: MSPyECObjects.ECClass, isFinal: str) -> MSPyECObjects.ECObjectsStatus
@@ -2890,7 +2282,6 @@ class ECRelationshipClass:
     
     def SetIsStruct(*args, **kwargs):
         """
-        SetIsStruct(*args, **kwargs)
         Overloaded function.
         
         1. SetIsStruct(self: MSPyECObjects.ECClass, isStruct: str) -> MSPyECObjects.ECObjectsStatus
@@ -2899,16 +2290,10 @@ class ECRelationshipClass:
         """
         ...
     
-    def SetStrength(*args, **kwargs):
-        """
-        SetStrength(self: MSPyECObjects.ECRelationshipClass, strength: MSPyECObjects.StrengthType) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetStrength(self: MSPyECObjects.ECRelationshipClass, strength: MSPyECObjects.StrengthType) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetStrengthDirection(*args, **kwargs):
-        """
-        SetStrengthDirection(self: MSPyECObjects.ECRelationshipClass, dir: MSPyECObjects.ECRelatedInstanceDirection) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetStrengthDirection(self: MSPyECObjects.ECRelationshipClass, dir: MSPyECObjects.ECRelatedInstanceDirection) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -2944,10 +2329,7 @@ class ECRelationshipConstraint:
     None
     """
 
-    def AddClass(*args, **kwargs):
-        """
-        AddClass(self: MSPyECObjects.ECRelationshipConstraint, classConstraint: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def AddClass(self: MSPyECObjects.ECRelationshipConstraint, classConstraint: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -2961,33 +2343,20 @@ class ECRelationshipConstraint:
     def Classes(arg0: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.ECClassPArray:
         ...
     
-    def CopyTo(*args, **kwargs):
-        """
-        CopyTo(self: MSPyECObjects.ECRelationshipConstraint, toRelationshipConstraint: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.ECObjectsStatus
-        """
+    def CopyTo(self: MSPyECObjects.ECRelationshipConstraint, toRelationshipConstraint: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetCardinality(*args, **kwargs):
-        """
-        GetCardinality(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.RelationshipCardinality
-        """
+    def GetCardinality(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.RelationshipCardinality:
         ...
     
-    def GetClasses(*args, **kwargs):
-        """
-        GetClasses(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.ECClassPArray
-        """
+    def GetClasses(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.ECClassPArray:
         ...
     
-    def GetCustomAttribute(*args, **kwargs):
-        """
-        GetCustomAttribute(self: MSPyECObjects.ECRelationshipConstraint, classDefiniton: MSPyECObjects.ECClass) -> Bentley.ECN.IECInstance
-        """
+    def GetCustomAttribute(self: MSPyECObjects.ECRelationshipConstraint, classDefiniton: MSPyECObjects.ECClass) -> Bentley.ECN.IECInstance:
         ...
     
     def GetCustomAttributeLocal(*args, **kwargs):
         """
-        GetCustomAttributeLocal(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttributeLocal(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -2996,51 +2365,29 @@ class ECRelationshipConstraint:
         """
         ...
     
-    def GetCustomAttributes(*args, **kwargs):
-        """
-        GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetInvariantRoleLabel(*args, **kwargs):
-        """
-        GetInvariantRoleLabel(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyBentley.WString
-        """
+    def GetInvariantRoleLabel(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyBentley.WString:
         ...
     
-    def GetIsMultiple(*args, **kwargs):
-        """
-        GetIsMultiple(self: MSPyECObjects.ECRelationshipConstraint) -> bool
-        """
+    def GetIsMultiple(self: MSPyECObjects.ECRelationshipConstraint) -> bool:
         ...
     
-    def GetIsOrdered(*args, **kwargs):
-        """
-        GetIsOrdered(self: MSPyECObjects.ECRelationshipConstraint) -> bool
-        """
+    def GetIsOrdered(self: MSPyECObjects.ECRelationshipConstraint) -> bool:
         ...
     
-    def GetIsPolymorphic(*args, **kwargs):
-        """
-        GetIsPolymorphic(self: MSPyECObjects.ECRelationshipConstraint) -> bool
-        """
+    def GetIsPolymorphic(self: MSPyECObjects.ECRelationshipConstraint) -> bool:
         ...
     
-    def GetOrderIdStorageMode(*args, **kwargs):
-        """
-        GetOrderIdStorageMode(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.OrderIdStorageMode
-        """
+    def GetOrderIdStorageMode(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.OrderIdStorageMode:
         ...
     
-    def GetOrderedRelationshipPropertyName(*args, **kwargs):
-        """
-        GetOrderedRelationshipPropertyName(self: MSPyECObjects.ECRelationshipConstraint, propertyName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetOrderedRelationshipPropertyName(self: MSPyECObjects.ECRelationshipConstraint, propertyName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def GetPrimaryCustomAttribute(*args, **kwargs):
         """
-        GetPrimaryCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetPrimaryCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -3049,16 +2396,10 @@ class ECRelationshipConstraint:
         """
         ...
     
-    def GetPrimaryCustomAttributes(*args, **kwargs):
-        """
-        GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetRoleLabel(*args, **kwargs):
-        """
-        GetRoleLabel(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyBentley.WString
-        """
+    def GetRoleLabel(self: MSPyECObjects.ECRelationshipConstraint) -> MSPyBentley.WString:
         ...
     
     @property
@@ -3067,7 +2408,6 @@ class ECRelationshipConstraint:
     
     def IsDefined(*args, **kwargs):
         """
-        IsDefined(*args, **kwargs)
         Overloaded function.
         
         1. IsDefined(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -3091,25 +2431,18 @@ class ECRelationshipConstraint:
     def IsPolymorphic(arg0: MSPyECObjects.ECRelationshipConstraint, arg1: bool) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def IsRoleLabelDefined(*args, **kwargs):
-        """
-        IsRoleLabelDefined(self: MSPyECObjects.ECRelationshipConstraint) -> bool
-        """
+    def IsRoleLabelDefined(self: MSPyECObjects.ECRelationshipConstraint) -> bool:
         ...
     
     @property
     def OrderIdStorageMode(arg0: MSPyECObjects.ECRelationshipConstraint) -> MSPyECObjects.OrderIdStorageMode:
         ...
     
-    def RemoveClass(*args, **kwargs):
-        """
-        RemoveClass(self: MSPyECObjects.ECRelationshipConstraint, classConstraint: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def RemoveClass(self: MSPyECObjects.ECRelationshipConstraint, classConstraint: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def RemoveCustomAttribute(*args, **kwargs):
         """
-        RemoveCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. RemoveCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -3127,7 +2460,6 @@ class ECRelationshipConstraint:
     
     def SetCardinality(*args, **kwargs):
         """
-        SetCardinality(*args, **kwargs)
         Overloaded function.
         
         1. SetCardinality(self: MSPyECObjects.ECRelationshipConstraint, val: MSPyECObjects.RelationshipCardinality) -> MSPyECObjects.ECObjectsStatus
@@ -3136,15 +2468,11 @@ class ECRelationshipConstraint:
         """
         ...
     
-    def SetCustomAttribute(*args, **kwargs):
-        """
-        SetCustomAttribute(self: MSPyECObjects.ECRelationshipConstraint, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomAttribute(self: MSPyECObjects.ECRelationshipConstraint, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetIsPolymorphic(*args, **kwargs):
         """
-        SetIsPolymorphic(*args, **kwargs)
         Overloaded function.
         
         1. SetIsPolymorphic(self: MSPyECObjects.ECRelationshipConstraint, val: bool) -> MSPyECObjects.ECObjectsStatus
@@ -3153,10 +2481,7 @@ class ECRelationshipConstraint:
         """
         ...
     
-    def SetRoleLabel(*args, **kwargs):
-        """
-        SetRoleLabel(self: MSPyECObjects.ECRelationshipConstraint, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetRoleLabel(self: MSPyECObjects.ECRelationshipConstraint, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def __init__(*args, **kwargs):
@@ -3204,7 +2529,6 @@ class ECSchema:
 
     def AddReferencedSchema(*args, **kwargs):
         """
-        AddReferencedSchema(*args, **kwargs)
         Overloaded function.
         
         1. AddReferencedSchema(self: MSPyECObjects.ECSchema, refSchema: MSPyECObjects.ECSchema) -> MSPyECObjects.ECObjectsStatus
@@ -3221,40 +2545,24 @@ class ECSchema:
     def Classes(arg0: MSPyECObjects.ECSchema) -> MSPyECObjects.ECClassContainer:
         ...
     
-    def ComputeSchemaXmlStringCheckSum(*args, **kwargs):
-        """
-        ComputeSchemaXmlStringCheckSum(str: str, len: int) -> int
-        """
+    @staticmethod
+    def ComputeSchemaXmlStringCheckSum(str: str, len: int) -> int:
         ...
     
-    def CopyClass(*args, **kwargs):
-        """
-        CopyClass(self: MSPyECObjects.ECSchema, sourceClass: MSPyECObjects.ECClass) -> tuple
-        """
+    def CopyClass(self: MSPyECObjects.ECSchema, sourceClass: MSPyECObjects.ECClass) -> tuple:
         ...
     
-    def CopySchema(*args, **kwargs):
-        """
-        CopySchema(self: MSPyECObjects.ECSchema) -> tuple
-        """
+    def CopySchema(self: MSPyECObjects.ECSchema) -> tuple:
         ...
     
-    def CreateClass(*args, **kwargs):
-        """
-        CreateClass(self: MSPyECObjects.ECSchema, name: MSPyBentley.WString) -> tuple
-        """
+    def CreateClass(self: MSPyECObjects.ECSchema, name: MSPyBentley.WString) -> tuple:
         ...
     
-    def CreateRelationshipClass(*args, **kwargs):
-        """
-        CreateRelationshipClass(self: MSPyECObjects.ECSchema, name: MSPyBentley.WString) -> tuple
-        """
+    def CreateRelationshipClass(self: MSPyECObjects.ECSchema, name: MSPyBentley.WString) -> tuple:
         ...
     
-    def CreateSchema(*args, **kwargs):
-        """
-        CreateSchema(schemaName: MSPyBentley.WString, versionMajor: int, versionMinor: int) -> tuple
-        """
+    @staticmethod
+    def CreateSchema(schemaName: MSPyBentley.WString, versionMajor: int, versionMinor: int) -> tuple:
         ...
     
     @property
@@ -3275,140 +2583,75 @@ class ECSchema:
     def DisplayLabel(arg0: MSPyECObjects.ECSchema, arg1: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def FindAllSchemasInGraph(*args, **kwargs):
-        """
-        FindAllSchemasInGraph(self: MSPyECObjects.ECSchema, allSchemas: MSPyECObjects.ECSchemaPArray, includeRootSchema: bool = True) -> None
-        """
+    def FindAllSchemasInGraph(self: MSPyECObjects.ECSchema, allSchemas: MSPyECObjects.ECSchemaPArray, includeRootSchema: bool = True) -> None:
         ...
     
-    def FindSchema(*args, **kwargs):
-        """
-        FindSchema(self: MSPyECObjects.ECSchema, schemaKey: MSPyECObjects.SchemaKey, matchType: MSPyECObjects.SchemaMatchType) -> MSPyECObjects.ECSchema
-        """
+    def FindSchema(self: MSPyECObjects.ECSchema, schemaKey: MSPyECObjects.SchemaKey, matchType: MSPyECObjects.SchemaMatchType) -> MSPyECObjects.ECSchema:
         ...
     
-    def FormatSchemaVersion(*args, **kwargs):
-        """
-        FormatSchemaVersion(versionMajor: int, versionMinor: int) -> MSPyBentley.WString
-        """
+    @staticmethod
+    def FormatSchemaVersion(versionMajor: int, versionMinor: int) -> MSPyBentley.WString:
         ...
     
     @property
     def FullSchemaName(arg0: MSPyECObjects.ECSchema) -> MSPyBentley.WString:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.ECSchema, name: str) -> MSPyECObjects.ECClass
-        """
+    def GetClass(self: MSPyECObjects.ECSchema, name: str) -> MSPyECObjects.ECClass:
         ...
     
-    def GetClassCount(*args, **kwargs):
-        """
-        GetClassCount(self: MSPyECObjects.ECSchema) -> int
-        """
+    def GetClassCount(self: MSPyECObjects.ECSchema) -> int:
         ...
     
-    def GetClasses(*args, **kwargs):
-        """
-        GetClasses(self: MSPyECObjects.ECSchema) -> MSPyECObjects.ECClassContainer
-        """
+    def GetClasses(self: MSPyECObjects.ECSchema) -> MSPyECObjects.ECClassContainer:
         ...
     
-    def GetCustomAttributeContainer(*args, **kwargs):
-        """
-        GetCustomAttributeContainer(self: MSPyECObjects.ECSchema) -> MSPyECObjects.IECCustomAttributeContainer
-        """
+    def GetCustomAttributeContainer(self: MSPyECObjects.ECSchema) -> MSPyECObjects.IECCustomAttributeContainer:
         ...
     
-    def GetDescription(*args, **kwargs):
-        """
-        GetDescription(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString
-        """
+    def GetDescription(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString
-        """
+    def GetDisplayLabel(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString:
         ...
     
-    def GetFullSchemaName(*args, **kwargs):
-        """
-        GetFullSchemaName(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString
-        """
+    def GetFullSchemaName(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString:
         ...
     
-    def GetId(*args, **kwargs):
-        """
-        GetId(self: MSPyECObjects.ECSchema) -> int
-        """
+    def GetId(self: MSPyECObjects.ECSchema) -> int:
         ...
     
-    def GetInvariantDescription(*args, **kwargs):
-        """
-        GetInvariantDescription(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString
-        """
+    def GetInvariantDescription(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString:
         ...
     
-    def GetInvariantDisplayLabel(*args, **kwargs):
-        """
-        GetInvariantDisplayLabel(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString
-        """
+    def GetInvariantDisplayLabel(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString:
         ...
     
-    def GetIsDisplayLabelDefined(*args, **kwargs):
-        """
-        GetIsDisplayLabelDefined(self: MSPyECObjects.ECSchema) -> bool
-        """
+    def GetIsDisplayLabelDefined(self: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString
-        """
+    def GetName(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString:
         ...
     
-    def GetNamespacePrefix(*args, **kwargs):
-        """
-        GetNamespacePrefix(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString
-        """
+    def GetNamespacePrefix(self: MSPyECObjects.ECSchema) -> MSPyBentley.WString:
         ...
     
-    def GetReferencedSchemas(*args, **kwargs):
-        """
-        GetReferencedSchemas(self: MSPyECObjects.ECSchema) -> Bentley.ECN.SchemaMapExact
-        """
+    def GetReferencedSchemas(self: MSPyECObjects.ECSchema) -> Bentley.ECN.SchemaMapExact:
         ...
     
-    def GetSchemaByNamespacePrefix(*args, **kwargs):
-        """
-        GetSchemaByNamespacePrefix(self: MSPyECObjects.ECSchema, namespacePrefix: MSPyBentley.WString) -> MSPyECObjects.ECSchema
-        """
+    def GetSchemaByNamespacePrefix(self: MSPyECObjects.ECSchema, namespacePrefix: MSPyBentley.WString) -> MSPyECObjects.ECSchema:
         ...
     
-    def GetSchemaKey(*args, **kwargs):
-        """
-        GetSchemaKey(self: MSPyECObjects.ECSchema) -> MSPyECObjects.SchemaKey
-        """
+    def GetSchemaKey(self: MSPyECObjects.ECSchema) -> MSPyECObjects.SchemaKey:
         ...
     
-    def GetSupplementalInfo(*args, **kwargs):
-        """
-        GetSupplementalInfo(self: MSPyECObjects.ECSchema) -> Bentley.ECN.SupplementalSchemaInfo
-        """
+    def GetSupplementalInfo(self: MSPyECObjects.ECSchema) -> Bentley.ECN.SupplementalSchemaInfo:
         ...
     
-    def GetVersionMajor(*args, **kwargs):
-        """
-        GetVersionMajor(self: MSPyECObjects.ECSchema) -> int
-        """
+    def GetVersionMajor(self: MSPyECObjects.ECSchema) -> int:
         ...
     
-    def GetVersionMinor(*args, **kwargs):
-        """
-        GetVersionMinor(self: MSPyECObjects.ECSchema) -> int
-        """
+    def GetVersionMinor(self: MSPyECObjects.ECSchema) -> int:
         ...
     
     @property
@@ -3427,40 +2670,24 @@ class ECSchema:
     def IsDisplayLabelDefined(arg0: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def IsSamePrimarySchema(*args, **kwargs):
-        """
-        IsSamePrimarySchema(self: MSPyECObjects.ECSchema, primarySchema: MSPyECObjects.ECSchema) -> bool
-        """
+    def IsSamePrimarySchema(self: MSPyECObjects.ECSchema, primarySchema: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def IsSchemaReferenced(*args, **kwargs):
-        """
-        IsSchemaReferenced(thisSchema: MSPyECObjects.ECSchema, potentiallyReferencedSchema: MSPyECObjects.ECSchema) -> bool
-        """
+    @staticmethod
+    def IsSchemaReferenced(thisSchema: MSPyECObjects.ECSchema, potentiallyReferencedSchema: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def IsStandardSchema(*args, **kwargs):
-        """
-        IsStandardSchema(self: MSPyECObjects.ECSchema) -> bool
-        """
+    def IsStandardSchema(self: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def IsSupplementalSchema(*args, **kwargs):
-        """
-        IsSupplementalSchema(self: MSPyECObjects.ECSchema) -> bool
-        """
+    def IsSupplementalSchema(self: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def IsSupplemented(*args, **kwargs):
-        """
-        IsSupplemented(self: MSPyECObjects.ECSchema) -> bool
-        """
+    def IsSupplemented(self: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def LocateSchema(*args, **kwargs):
-        """
-        LocateSchema(schema: MSPyECObjects.SchemaKey, schemaContext: MSPyECObjects.ECSchemaReadContext) -> MSPyECObjects.ECSchema
-        """
+    @staticmethod
+    def LocateSchema(schema: MSPyECObjects.SchemaKey, schemaContext: MSPyECObjects.ECSchemaReadContext) -> MSPyECObjects.ECSchema:
         ...
     
     @property
@@ -3477,27 +2704,21 @@ class ECSchema:
     def NamespacePrefix(arg0: MSPyECObjects.ECSchema, arg1: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def ParseSchemaFullName(*args, **kwargs):
-        """
-        ParseSchemaFullName(fullName: str) -> tuple
-        """
+    @staticmethod
+    def ParseSchemaFullName(fullName: str) -> tuple:
         ...
     
-    def ParseVersionString(*args, **kwargs):
-        """
-        ParseVersionString(versionString: str) -> tuple
-        """
+    @staticmethod
+    def ParseVersionString(versionString: str) -> tuple:
         ...
     
-    def ReadFromXmlFile(*args, **kwargs):
-        """
-        ReadFromXmlFile(ecSchemaXmlFile: str, schemaContext: MSPyECObjects.ECSchemaReadContext) -> tuple
-        """
+    @staticmethod
+    def ReadFromXmlFile(ecSchemaXmlFile: str, schemaContext: MSPyECObjects.ECSchemaReadContext) -> tuple:
         ...
     
+    @staticmethod
     def ReadFromXmlString(*args, **kwargs):
         """
-        ReadFromXmlString(*args, **kwargs)
         Overloaded function.
         
         1. ReadFromXmlString(ecSchemaXml: str, schemaContext: MSPyECObjects.ECSchemaReadContext) -> tuple
@@ -3510,74 +2731,42 @@ class ECSchema:
     def ReferencedSchemas(arg0: MSPyECObjects.ECSchema) -> Bentley.ECN.SchemaMapExact:
         ...
     
-    def RemoveReferencedSchema(*args, **kwargs):
-        """
-        RemoveReferencedSchema(self: MSPyECObjects.ECSchema, refSchema: MSPyECObjects.ECSchema) -> MSPyECObjects.ECObjectsStatus
-        """
+    def RemoveReferencedSchema(self: MSPyECObjects.ECSchema, refSchema: MSPyECObjects.ECSchema) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def ResolveNamespacePrefix(*args, **kwargs):
-        """
-        ResolveNamespacePrefix(self: MSPyECObjects.ECSchema, schema: MSPyECObjects.ECSchema, namespacePrefix: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def ResolveNamespacePrefix(self: MSPyECObjects.ECSchema, schema: MSPyECObjects.ECSchema, namespacePrefix: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
     def SchemaKey(arg0: MSPyECObjects.ECSchema) -> MSPyECObjects.SchemaKey:
         ...
     
-    def SetDescription(*args, **kwargs):
-        """
-        SetDescription(self: MSPyECObjects.ECSchema, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDescription(self: MSPyECObjects.ECSchema, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.ECSchema, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.ECSchema, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetErrorHandling(*args, **kwargs):
-        """
-        SetErrorHandling(arg0: bool, arg1: bool) -> None
-        """
+    @staticmethod
+    def SetErrorHandling(arg0: bool, arg1: bool) -> None:
         ...
     
-    def SetImmutable(*args, **kwargs):
-        """
-        SetImmutable(self: MSPyECObjects.ECSchema) -> None
-        """
+    def SetImmutable(self: MSPyECObjects.ECSchema) -> None:
         ...
     
-    def SetName(*args, **kwargs):
-        """
-        SetName(self: MSPyECObjects.ECSchema, name: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetName(self: MSPyECObjects.ECSchema, name: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetNamespacePrefix(*args, **kwargs):
-        """
-        SetNamespacePrefix(self: MSPyECObjects.ECSchema, prefix: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetNamespacePrefix(self: MSPyECObjects.ECSchema, prefix: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetVersionMajor(*args, **kwargs):
-        """
-        SetVersionMajor(self: MSPyECObjects.ECSchema, major: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetVersionMajor(self: MSPyECObjects.ECSchema, major: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetVersionMinor(*args, **kwargs):
-        """
-        SetVersionMinor(self: MSPyECObjects.ECSchema, minor: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetVersionMinor(self: MSPyECObjects.ECSchema, minor: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def ShouldNotBeStored(*args, **kwargs):
-        """
-        ShouldNotBeStored(self: MSPyECObjects.ECSchema) -> bool
-        """
+    def ShouldNotBeStored(self: MSPyECObjects.ECSchema) -> bool:
         ...
     
     @property
@@ -3598,15 +2787,11 @@ class ECSchema:
     def VersionMinor(arg0: MSPyECObjects.ECSchema, arg1: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def WriteToXmlFile(*args, **kwargs):
-        """
-        WriteToXmlFile(self: MSPyECObjects.ECSchema, ecSchemaXmlFile: str, utf16: bool = False) -> MSPyECObjects.SchemaWriteStatus
-        """
+    def WriteToXmlFile(self: MSPyECObjects.ECSchema, ecSchemaXmlFile: str, utf16: bool = False) -> MSPyECObjects.SchemaWriteStatus:
         ...
     
     def WriteToXmlString(*args, **kwargs):
         """
-        WriteToXmlString(*args, **kwargs)
         Overloaded function.
         
         1. WriteToXmlString(self: MSPyECObjects.ECSchema, ecSchemaXml: MSPyBentley.WString) -> MSPyECObjects.SchemaWriteStatus
@@ -3640,33 +2825,26 @@ class ECSchemaCPArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyECObjects.ECSchemaCPArray, x: MSPyECObjects.ECSchema) -> None:
         """
-        append(self: MSPyECObjects.ECSchemaCPArray, x: MSPyECObjects.ECSchema) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyECObjects.ECSchemaCPArray) -> None:
         """
-        clear(self: MSPyECObjects.ECSchemaCPArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyECObjects.ECSchemaCPArray, x: MSPyECObjects.ECSchema) -> int:
         """
-        count(self: MSPyECObjects.ECSchemaCPArray, x: MSPyECObjects.ECSchema) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyECObjects.ECSchemaCPArray, L: MSPyECObjects.ECSchemaCPArray) -> None
@@ -3679,17 +2857,14 @@ class ECSchemaCPArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyECObjects.ECSchemaCPArray, i: int, x: MSPyECObjects.ECSchema) -> None:
         """
-        insert(self: MSPyECObjects.ECSchemaCPArray, i: int, x: MSPyECObjects.ECSchema) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyECObjects.ECSchemaCPArray) -> MSPyECObjects.ECSchema
@@ -3702,10 +2877,8 @@ class ECSchemaCPArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyECObjects.ECSchemaCPArray, x: MSPyECObjects.ECSchema) -> None:
         """
-        remove(self: MSPyECObjects.ECSchemaCPArray, x: MSPyECObjects.ECSchema) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3715,37 +2888,24 @@ class ECSchemaCache:
     None
     """
 
-    def AddSchema(*args, **kwargs):
-        """
-        AddSchema(self: MSPyECObjects.ECSchemaCache, schema: Bentley.ECN.ECSchema) -> MSPyECObjects.ECObjectsStatus
-        """
+    def AddSchema(self: MSPyECObjects.ECSchemaCache, schema: Bentley.ECN.ECSchema) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def Clear(*args, **kwargs):
-        """
-        Clear(self: MSPyECObjects.ECSchemaCache) -> None
-        """
+    def Clear(self: MSPyECObjects.ECSchemaCache) -> None:
         ...
     
     @property
     def Count(arg0: MSPyECObjects.ECSchemaCache) -> int:
         ...
     
-    def DropSchema(*args, **kwargs):
-        """
-        DropSchema(self: MSPyECObjects.ECSchemaCache, key: MSPyECObjects.SchemaKey) -> MSPyECObjects.ECObjectsStatus
-        """
+    def DropSchema(self: MSPyECObjects.ECSchemaCache, key: MSPyECObjects.SchemaKey) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetCount(*args, **kwargs):
-        """
-        GetCount(self: MSPyECObjects.ECSchemaCache) -> int
-        """
+    def GetCount(self: MSPyECObjects.ECSchemaCache) -> int:
         ...
     
     def GetSchema(*args, **kwargs):
         """
-        GetSchema(*args, **kwargs)
         Overloaded function.
         
         1. GetSchema(self: MSPyECObjects.ECSchemaCache, key: MSPyECObjects.SchemaKey) -> Bentley.ECN.ECSchema
@@ -3754,10 +2914,7 @@ class ECSchemaCache:
         """
         ...
     
-    def GetSchemaLocater(*args, **kwargs):
-        """
-        GetSchemaLocater(self: MSPyECObjects.ECSchemaCache) -> MSPyECObjects.IECSchemaLocater
-        """
+    def GetSchemaLocater(self: MSPyECObjects.ECSchemaCache) -> MSPyECObjects.IECSchemaLocater:
         ...
     
     def GetSchemas(*args, **kwargs):
@@ -3792,33 +2949,26 @@ class ECSchemaPArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyECObjects.ECSchemaPArray, x: MSPyECObjects.ECSchema) -> None:
         """
-        append(self: MSPyECObjects.ECSchemaPArray, x: MSPyECObjects.ECSchema) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyECObjects.ECSchemaPArray) -> None:
         """
-        clear(self: MSPyECObjects.ECSchemaPArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyECObjects.ECSchemaPArray, x: MSPyECObjects.ECSchema) -> int:
         """
-        count(self: MSPyECObjects.ECSchemaPArray, x: MSPyECObjects.ECSchema) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyECObjects.ECSchemaPArray, L: MSPyECObjects.ECSchemaPArray) -> None
@@ -3831,17 +2981,14 @@ class ECSchemaPArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyECObjects.ECSchemaPArray, i: int, x: MSPyECObjects.ECSchema) -> None:
         """
-        insert(self: MSPyECObjects.ECSchemaPArray, i: int, x: MSPyECObjects.ECSchema) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyECObjects.ECSchemaPArray) -> MSPyECObjects.ECSchema
@@ -3854,10 +3001,8 @@ class ECSchemaPArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyECObjects.ECSchemaPArray, x: MSPyECObjects.ECSchema) -> None:
         """
-        remove(self: MSPyECObjects.ECSchemaPArray, x: MSPyECObjects.ECSchema) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3881,33 +3026,26 @@ class ECSchemaPtrArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyECObjects.ECSchemaPtrArray, x: MSPyECObjects.ECSchema) -> None:
         """
-        append(self: MSPyECObjects.ECSchemaPtrArray, x: MSPyECObjects.ECSchema) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyECObjects.ECSchemaPtrArray) -> None:
         """
-        clear(self: MSPyECObjects.ECSchemaPtrArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyECObjects.ECSchemaPtrArray, x: MSPyECObjects.ECSchema) -> int:
         """
-        count(self: MSPyECObjects.ECSchemaPtrArray, x: MSPyECObjects.ECSchema) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyECObjects.ECSchemaPtrArray, L: MSPyECObjects.ECSchemaPtrArray) -> None
@@ -3920,17 +3058,14 @@ class ECSchemaPtrArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyECObjects.ECSchemaPtrArray, i: int, x: MSPyECObjects.ECSchema) -> None:
         """
-        insert(self: MSPyECObjects.ECSchemaPtrArray, i: int, x: MSPyECObjects.ECSchema) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyECObjects.ECSchemaPtrArray) -> MSPyECObjects.ECSchema
@@ -3943,10 +3078,8 @@ class ECSchemaPtrArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyECObjects.ECSchemaPtrArray, x: MSPyECObjects.ECSchema) -> None:
         """
-        remove(self: MSPyECObjects.ECSchemaPtrArray, x: MSPyECObjects.ECSchema) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3956,10 +3089,8 @@ class ECSchemaReadContext:
     None
     """
 
-    def AddCulture(*args, **kwargs):
+    def AddCulture(self: MSPyECObjects.ECSchemaReadContext, culture: str) -> None:
         """
-        AddCulture(self: MSPyECObjects.ECSchemaReadContext, culture: str) -> None
-        
         Adds a culture string that will be appended to the existing search
         paths when looking for localization supplemental schemas.
         
@@ -3968,10 +3099,8 @@ class ECSchemaReadContext:
         """
         ...
     
-    def AddSchemaLocater(*args, **kwargs):
+    def AddSchemaLocater(self: MSPyECObjects.ECSchemaReadContext, locator: Bentley.ECN.IECSchemaLocater, priority: int = 0) -> None:
         """
-        AddSchemaLocater(self: MSPyECObjects.ECSchemaReadContext, locator: Bentley.ECN.IECSchemaLocater, priority: int = 0) -> None
-        
         Adds a schema locater to the current context
         
         Parameter ``locater``:
@@ -3983,10 +3112,8 @@ class ECSchemaReadContext:
         """
         ...
     
-    def AddSchemaPath(*args, **kwargs):
+    def AddSchemaPath(self: MSPyECObjects.ECSchemaReadContext, path: str) -> None:
         """
-        AddSchemaPath(self: MSPyECObjects.ECSchemaReadContext, path: str) -> None
-        
         Adds a file path that should be used to search for a matching schema
         name
         
@@ -3999,9 +3126,9 @@ class ECSchemaReadContext:
     def Cache(arg0: MSPyECObjects.ECSchemaReadContext) -> Bentley.ECN.ECSchemaCache:
         ...
     
+    @staticmethod
     def CreateContext(*args, **kwargs):
         """
-        CreateContext(*args, **kwargs)
         Overloaded function.
         
         1. CreateContext(standaloneEnablerLocator: Bentley.ECN.IStandaloneEnablerLocater, acceptLegacyImperfectLatestCompatibleMatch: bool = False) -> MSPyECObjects.ECSchemaReadContext
@@ -4042,10 +3169,8 @@ class ECSchemaReadContext:
     def Cultures(arg0: MSPyECObjects.ECSchemaReadContext) -> MSPyBentley.WStringArray:
         ...
     
-    def GetCache(*args, **kwargs):
+    def GetCache(self: MSPyECObjects.ECSchemaReadContext) -> Bentley.ECN.ECSchemaCache:
         """
-        GetCache(self: MSPyECObjects.ECSchemaReadContext) -> Bentley.ECN.ECSchemaCache
-        
         Gets the schemas cached by this context.
         
         Returns:
@@ -4053,18 +3178,14 @@ class ECSchemaReadContext:
         """
         ...
     
-    def GetCultures(*args, **kwargs):
+    def GetCultures(self: MSPyECObjects.ECSchemaReadContext) -> MSPyBentley.WStringArray:
         """
-        GetCultures(self: MSPyECObjects.ECSchemaReadContext) -> MSPyBentley.WStringArray
-        
         Gets culture strings
         """
         ...
     
-    def LocateSchema(*args, **kwargs):
+    def LocateSchema(self: MSPyECObjects.ECSchemaReadContext, key: Bentley.ECN.SchemaKey, matchType: Bentley.ECN.SchemaMatchType) -> Bentley.ECN.ECSchema:
         """
-        LocateSchema(self: MSPyECObjects.ECSchemaReadContext, key: Bentley.ECN.SchemaKey, matchType: Bentley.ECN.SchemaMatchType) -> Bentley.ECN.ECSchema
-        
         Find the schema matching the schema key and using matchType as the
         match criteria. This uses the prioritized list of locators to find the
         schema.
@@ -4118,10 +3239,8 @@ class ECSchemaReadContext:
         def value(arg0: MSPyECObjects.ECSchemaReadContext.PriorityPartiion) -> int:
             ...
         
-    def RemoveSchemaLocater(*args, **kwargs):
+    def RemoveSchemaLocater(self: MSPyECObjects.ECSchemaReadContext, locator: Bentley.ECN.IECSchemaLocater) -> None:
         """
-        RemoveSchemaLocater(self: MSPyECObjects.ECSchemaReadContext, locator: Bentley.ECN.IECSchemaLocater) -> None
-        
         Removes a schema locater from the current context
         
         Parameter ``locater``:
@@ -4129,10 +3248,8 @@ class ECSchemaReadContext:
         """
         ...
     
-    def SetFinalSchemaLocater(*args, **kwargs):
+    def SetFinalSchemaLocater(self: MSPyECObjects.ECSchemaReadContext, locator: Bentley.ECN.IECSchemaLocater) -> None:
         """
-        SetFinalSchemaLocater(self: MSPyECObjects.ECSchemaReadContext, locator: Bentley.ECN.IECSchemaLocater) -> None
-        
         Set the last locater to be used when trying to find a schema
         
         Parameter ``locater``:
@@ -4166,76 +3283,44 @@ class ECTypeDescriptor:
     def ArrayKind(arg0: MSPyECObjects.ECTypeDescriptor) -> MSPyECObjects.ArrayKind:
         ...
     
-    def CreatePrimitiveArrayTypeDescriptor(*args, **kwargs):
-        """
-        CreatePrimitiveArrayTypeDescriptor(primitiveType: MSPyECObjects.PrimitiveType) -> MSPyECObjects.ECTypeDescriptor
-        """
+    @staticmethod
+    def CreatePrimitiveArrayTypeDescriptor(primitiveType: MSPyECObjects.PrimitiveType) -> MSPyECObjects.ECTypeDescriptor:
         ...
     
-    def CreatePrimitiveTypeDescriptor(*args, **kwargs):
-        """
-        CreatePrimitiveTypeDescriptor(primitiveType: MSPyECObjects.PrimitiveType) -> MSPyECObjects.ECTypeDescriptor
-        """
+    @staticmethod
+    def CreatePrimitiveTypeDescriptor(primitiveType: MSPyECObjects.PrimitiveType) -> MSPyECObjects.ECTypeDescriptor:
         ...
     
-    def CreateStructArrayTypeDescriptor(*args, **kwargs):
-        """
-        CreateStructArrayTypeDescriptor() -> MSPyECObjects.ECTypeDescriptor
-        """
+    @staticmethod
+    def CreateStructArrayTypeDescriptor() -> MSPyECObjects.ECTypeDescriptor:
         ...
     
-    def CreateStructTypeDescriptor(*args, **kwargs):
-        """
-        CreateStructTypeDescriptor() -> MSPyECObjects.ECTypeDescriptor
-        """
+    @staticmethod
+    def CreateStructTypeDescriptor() -> MSPyECObjects.ECTypeDescriptor:
         ...
     
-    def GetArrayKind(*args, **kwargs):
-        """
-        GetArrayKind(self: MSPyECObjects.ECTypeDescriptor) -> MSPyECObjects.ArrayKind
-        """
+    def GetArrayKind(self: MSPyECObjects.ECTypeDescriptor) -> MSPyECObjects.ArrayKind:
         ...
     
-    def GetPrimitiveType(*args, **kwargs):
-        """
-        GetPrimitiveType(self: MSPyECObjects.ECTypeDescriptor) -> MSPyECObjects.PrimitiveType
-        """
+    def GetPrimitiveType(self: MSPyECObjects.ECTypeDescriptor) -> MSPyECObjects.PrimitiveType:
         ...
     
-    def GetTypeKind(*args, **kwargs):
-        """
-        GetTypeKind(self: MSPyECObjects.ECTypeDescriptor) -> MSPyECObjects.ValueKind
-        """
+    def GetTypeKind(self: MSPyECObjects.ECTypeDescriptor) -> MSPyECObjects.ValueKind:
         ...
     
-    def IsArray(*args, **kwargs):
-        """
-        IsArray(self: MSPyECObjects.ECTypeDescriptor) -> bool
-        """
+    def IsArray(self: MSPyECObjects.ECTypeDescriptor) -> bool:
         ...
     
-    def IsPrimitive(*args, **kwargs):
-        """
-        IsPrimitive(self: MSPyECObjects.ECTypeDescriptor) -> bool
-        """
+    def IsPrimitive(self: MSPyECObjects.ECTypeDescriptor) -> bool:
         ...
     
-    def IsPrimitiveArray(*args, **kwargs):
-        """
-        IsPrimitiveArray(self: MSPyECObjects.ECTypeDescriptor) -> bool
-        """
+    def IsPrimitiveArray(self: MSPyECObjects.ECTypeDescriptor) -> bool:
         ...
     
-    def IsStruct(*args, **kwargs):
-        """
-        IsStruct(self: MSPyECObjects.ECTypeDescriptor) -> bool
-        """
+    def IsStruct(self: MSPyECObjects.ECTypeDescriptor) -> bool:
         ...
     
-    def IsStructArray(*args, **kwargs):
-        """
-        IsStructArray(self: MSPyECObjects.ECTypeDescriptor) -> bool
-        """
+    def IsStructArray(self: MSPyECObjects.ECTypeDescriptor) -> bool:
         ...
     
     @property
@@ -4275,16 +3360,10 @@ class ECValue:
     def Boolean(arg0: MSPyECObjects.ECValue, arg1: bool) -> Bentley.BentleyStatus:
         ...
     
-    def CanConvertToPrimitiveType(*args, **kwargs):
-        """
-        CanConvertToPrimitiveType(self: MSPyECObjects.ECValue, type: MSPyECObjects.PrimitiveType) -> bool
-        """
+    def CanConvertToPrimitiveType(self: MSPyECObjects.ECValue, type: MSPyECObjects.PrimitiveType) -> bool:
         ...
     
-    def Clear(*args, **kwargs):
-        """
-        Clear(self: MSPyECObjects.ECValue) -> None
-        """
+    def Clear(self: MSPyECObjects.ECValue) -> None:
         ...
     
     @property
@@ -4312,118 +3391,61 @@ class ECValue:
     def Double(arg0: MSPyECObjects.ECValue, arg1: float) -> Bentley.BentleyStatus:
         ...
     
-    def From(*args, **kwargs):
-        """
-        From(self: MSPyECObjects.ECValue, value: MSPyECObjects.ECValue) -> None
-        """
+    def From(self: MSPyECObjects.ECValue, value: MSPyECObjects.ECValue) -> None:
         ...
     
-    def GetArrayInfo(*args, **kwargs):
-        """
-        GetArrayInfo(self: MSPyECObjects.ECValue) -> MSPyECObjects.ArrayInfo
-        """
+    def GetArrayInfo(self: MSPyECObjects.ECValue) -> MSPyECObjects.ArrayInfo:
         ...
     
-    def GetBinary(*args, **kwargs):
-        """
-        GetBinary(self: MSPyECObjects.ECValue) -> bytes
-        """
+    def GetBinary(self: MSPyECObjects.ECValue) -> bytes:
         ...
     
-    def GetBoolean(*args, **kwargs):
-        """
-        GetBoolean(self: MSPyECObjects.ECValue) -> bool
-        """
+    def GetBoolean(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def GetDateTime(*args, **kwargs):
-        """
-        GetDateTime(self: MSPyECObjects.ECValue) -> MSPyBentley.BeDateTime
-        """
+    def GetDateTime(self: MSPyECObjects.ECValue) -> MSPyBentley.BeDateTime:
         ...
     
-    def GetDateTimeTicks(*args, **kwargs):
-        """
-        GetDateTimeTicks(self: MSPyECObjects.ECValue) -> int
-        """
+    def GetDateTimeTicks(self: MSPyECObjects.ECValue) -> int:
         ...
     
-    def GetDateTimeTicksEx(*args, **kwargs):
-        """
-        GetDateTimeTicksEx(self: MSPyECObjects.ECValue) -> tuple
-        """
+    def GetDateTimeTicksEx(self: MSPyECObjects.ECValue) -> tuple:
         ...
     
-    def GetDateTimeUnixMillis(*args, **kwargs):
-        """
-        GetDateTimeUnixMillis(self: MSPyECObjects.ECValue) -> int
-        """
+    def GetDateTimeUnixMillis(self: MSPyECObjects.ECValue) -> int:
         ...
     
-    def GetDouble(*args, **kwargs):
-        """
-        GetDouble(self: MSPyECObjects.ECValue) -> float
-        """
+    def GetDouble(self: MSPyECObjects.ECValue) -> float:
         ...
     
-    def GetIGeometry(*args, **kwargs):
-        """
-        GetIGeometry(self: MSPyECObjects.ECValue) -> MSPyBentleyGeom.IGeometry
-        """
+    def GetIGeometry(self: MSPyECObjects.ECValue) -> MSPyBentleyGeom.IGeometry:
         ...
     
-    def GetInteger(*args, **kwargs):
-        """
-        GetInteger(self: MSPyECObjects.ECValue) -> int
-        """
+    def GetInteger(self: MSPyECObjects.ECValue) -> int:
         ...
     
-    def GetKind(*args, **kwargs):
-        """
-        GetKind(self: MSPyECObjects.ECValue) -> MSPyECObjects.ValueKind
-        """
+    def GetKind(self: MSPyECObjects.ECValue) -> MSPyECObjects.ValueKind:
         ...
     
-    def GetLong(*args, **kwargs):
-        """
-        GetLong(self: MSPyECObjects.ECValue) -> int
-        """
+    def GetLong(self: MSPyECObjects.ECValue) -> int:
         ...
     
-    def GetPoint2D(*args, **kwargs):
-        """
-        GetPoint2D(self: MSPyECObjects.ECValue) -> MSPyBentleyGeom.DPoint2d
-        """
+    def GetPoint2D(self: MSPyECObjects.ECValue) -> MSPyBentleyGeom.DPoint2d:
         ...
     
-    def GetPoint3D(*args, **kwargs):
-        """
-        GetPoint3D(self: MSPyECObjects.ECValue) -> MSPyBentleyGeom.DPoint3d
-        """
+    def GetPoint3D(self: MSPyECObjects.ECValue) -> MSPyBentleyGeom.DPoint3d:
         ...
     
-    def GetPrimitiveType(*args, **kwargs):
-        """
-        GetPrimitiveType(self: MSPyECObjects.ECValue) -> MSPyECObjects.PrimitiveType
-        """
+    def GetPrimitiveType(self: MSPyECObjects.ECValue) -> MSPyECObjects.PrimitiveType:
         ...
     
-    def GetString(*args, **kwargs):
-        """
-        GetString(self: MSPyECObjects.ECValue) -> str
-        """
+    def GetString(self: MSPyECObjects.ECValue) -> str:
         ...
     
-    def GetStruct(*args, **kwargs):
-        """
-        GetStruct(self: MSPyECObjects.ECValue) -> MSPyECObjects.IECInstance
-        """
+    def GetStruct(self: MSPyECObjects.ECValue) -> MSPyECObjects.IECInstance:
         ...
     
-    def GetUtf8CP(*args, **kwargs):
-        """
-        GetUtf8CP(self: MSPyECObjects.ECValue) -> str
-        """
+    def GetUtf8CP(self: MSPyECObjects.ECValue) -> str:
         ...
     
     @property
@@ -4440,112 +3462,58 @@ class ECValue:
     def Integer(arg0: MSPyECObjects.ECValue, arg1: int) -> Bentley.BentleyStatus:
         ...
     
-    def IsArray(*args, **kwargs):
-        """
-        IsArray(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsArray(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsBinary(*args, **kwargs):
-        """
-        IsBinary(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsBinary(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsBoolean(*args, **kwargs):
-        """
-        IsBoolean(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsBoolean(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsDateTime(*args, **kwargs):
-        """
-        IsDateTime(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsDateTime(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsDouble(*args, **kwargs):
-        """
-        IsDouble(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsDouble(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsIGeometry(*args, **kwargs):
-        """
-        IsIGeometry(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsIGeometry(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsInteger(*args, **kwargs):
-        """
-        IsInteger(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsInteger(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsLoaded(*args, **kwargs):
-        """
-        IsLoaded(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsLoaded(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsLong(*args, **kwargs):
-        """
-        IsLong(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsLong(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsNull(*args, **kwargs):
-        """
-        IsNull(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsNull(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsPoint2D(*args, **kwargs):
-        """
-        IsPoint2D(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsPoint2D(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsPoint3D(*args, **kwargs):
-        """
-        IsPoint3D(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsPoint3D(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsPrimitive(*args, **kwargs):
-        """
-        IsPrimitive(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsPrimitive(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsReadOnly(*args, **kwargs):
-        """
-        IsReadOnly(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsReadOnly(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsString(*args, **kwargs):
-        """
-        IsString(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsString(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsStruct(*args, **kwargs):
-        """
-        IsStruct(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsStruct(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsUninitialized(*args, **kwargs):
-        """
-        IsUninitialized(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsUninitialized(self: MSPyECObjects.ECValue) -> bool:
         ...
     
-    def IsUtf8(*args, **kwargs):
-        """
-        IsUtf8(self: MSPyECObjects.ECValue) -> bool
-        """
+    def IsUtf8(self: MSPyECObjects.ECValue) -> bool:
         ...
     
     @property
@@ -4601,27 +3569,17 @@ class ECValue:
     def ReadOnly(arg0: MSPyECObjects.ECValue, arg1: bool) -> None:
         ...
     
-    def SetBinary(*args, **kwargs):
-        """
-        SetBinary(self: MSPyECObjects.ECValue, arg0: bytes) -> None
-        """
+    def SetBinary(self: MSPyECObjects.ECValue, arg0: bytes) -> None:
         ...
     
-    def SetBoolean(*args, **kwargs):
-        """
-        SetBoolean(self: MSPyECObjects.ECValue, boolean: bool) -> Bentley.BentleyStatus
-        """
+    def SetBoolean(self: MSPyECObjects.ECValue, boolean: bool) -> Bentley.BentleyStatus:
         ...
     
-    def SetDateTime(*args, **kwargs):
-        """
-        SetDateTime(self: MSPyECObjects.ECValue, dateTime: MSPyBentley.BeDateTime) -> Bentley.BentleyStatus
-        """
+    def SetDateTime(self: MSPyECObjects.ECValue, dateTime: MSPyBentley.BeDateTime) -> Bentley.BentleyStatus:
         ...
     
     def SetDateTimeTicks(*args, **kwargs):
         """
-        SetDateTimeTicks(*args, **kwargs)
         Overloaded function.
         
         1. SetDateTimeTicks(self: MSPyECObjects.ECValue, ceTicks: int) -> Bentley.BentleyStatus
@@ -4630,75 +3588,41 @@ class ECValue:
         """
         ...
     
-    def SetDouble(*args, **kwargs):
-        """
-        SetDouble(self: MSPyECObjects.ECValue, dblVal: float) -> Bentley.BentleyStatus
-        """
+    def SetDouble(self: MSPyECObjects.ECValue, dblVal: float) -> Bentley.BentleyStatus:
         ...
     
-    def SetIGeometry(*args, **kwargs):
-        """
-        SetIGeometry(self: MSPyECObjects.ECValue, geometry: MSPyBentleyGeom.IGeometry) -> Bentley.BentleyStatus
-        """
+    def SetIGeometry(self: MSPyECObjects.ECValue, geometry: MSPyBentleyGeom.IGeometry) -> Bentley.BentleyStatus:
         ...
     
-    def SetInteger(*args, **kwargs):
-        """
-        SetInteger(self: MSPyECObjects.ECValue, integer: int) -> Bentley.BentleyStatus
-        """
+    def SetInteger(self: MSPyECObjects.ECValue, integer: int) -> Bentley.BentleyStatus:
         ...
     
-    def SetIsLoaded(*args, **kwargs):
-        """
-        SetIsLoaded(self: MSPyECObjects.ECValue, loaded: bool) -> None
-        """
+    def SetIsLoaded(self: MSPyECObjects.ECValue, loaded: bool) -> None:
         ...
     
-    def SetIsNull(*args, **kwargs):
-        """
-        SetIsNull(self: MSPyECObjects.ECValue, null: bool) -> None
-        """
+    def SetIsNull(self: MSPyECObjects.ECValue, null: bool) -> None:
         ...
     
-    def SetIsReadOnly(*args, **kwargs):
-        """
-        SetIsReadOnly(self: MSPyECObjects.ECValue, readOnly: bool) -> None
-        """
+    def SetIsReadOnly(self: MSPyECObjects.ECValue, readOnly: bool) -> None:
         ...
     
-    def SetLong(*args, **kwargs):
-        """
-        SetLong(self: MSPyECObjects.ECValue, long64: int) -> Bentley.BentleyStatus
-        """
+    def SetLong(self: MSPyECObjects.ECValue, long64: int) -> Bentley.BentleyStatus:
         ...
     
-    def SetPoint2D(*args, **kwargs):
-        """
-        SetPoint2D(self: MSPyECObjects.ECValue, value: MSPyBentleyGeom.DPoint2d) -> Bentley.BentleyStatus
-        """
+    def SetPoint2D(self: MSPyECObjects.ECValue, value: MSPyBentleyGeom.DPoint2d) -> Bentley.BentleyStatus:
         ...
     
-    def SetPoint3D(*args, **kwargs):
-        """
-        SetPoint3D(self: MSPyECObjects.ECValue, value: MSPyBentleyGeom.DPoint3d) -> Bentley.BentleyStatus
-        """
+    def SetPoint3D(self: MSPyECObjects.ECValue, value: MSPyBentleyGeom.DPoint3d) -> Bentley.BentleyStatus:
         ...
     
-    def SetPrimitiveArrayInfo(*args, **kwargs):
-        """
-        SetPrimitiveArrayInfo(self: MSPyECObjects.ECValue, primitiveElementType: MSPyECObjects.PrimitiveType, count: int, isFixedSize: bool) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetPrimitiveArrayInfo(self: MSPyECObjects.ECValue, primitiveElementType: MSPyECObjects.PrimitiveType, count: int, isFixedSize: bool) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetPrimitiveType(*args, **kwargs):
-        """
-        SetPrimitiveType(self: MSPyECObjects.ECValue, type: MSPyECObjects.PrimitiveType) -> Bentley.BentleyStatus
-        """
+    def SetPrimitiveType(self: MSPyECObjects.ECValue, type: MSPyECObjects.PrimitiveType) -> Bentley.BentleyStatus:
         ...
     
     def SetString(*args, **kwargs):
         """
-        SetString(*args, **kwargs)
         Overloaded function.
         
         1. SetString(self: MSPyECObjects.ECValue, string: MSPyBentley.WString, bool: bool = True) -> None
@@ -4709,21 +3633,14 @@ class ECValue:
         """
         ...
     
-    def SetStruct(*args, **kwargs):
-        """
-        SetStruct(self: MSPyECObjects.ECValue, instance: MSPyECObjects.IECInstance) -> Bentley.BentleyStatus
-        """
+    def SetStruct(self: MSPyECObjects.ECValue, instance: MSPyECObjects.IECInstance) -> Bentley.BentleyStatus:
         ...
     
-    def SetStructArrayInfo(*args, **kwargs):
-        """
-        SetStructArrayInfo(self: MSPyECObjects.ECValue, count: int, isFixedSize: bool) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetStructArrayInfo(self: MSPyECObjects.ECValue, count: int, isFixedSize: bool) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetToNull(*args, **kwargs):
         """
-        SetToNull(*args, **kwargs)
         Overloaded function.
         
         1. SetToNull(self: MSPyECObjects.ECValue) -> None
@@ -4743,10 +3660,7 @@ class ECValue:
     def Struct(arg0: MSPyECObjects.ECValue, arg1: MSPyECObjects.IECInstance) -> Bentley.BentleyStatus:
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.ECValue) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.ECValue) -> MSPyBentley.WString:
         ...
     
     @property
@@ -4792,16 +3706,10 @@ class ECValueAccessor:
     None
     """
 
-    def Clear(*args, **kwargs):
-        """
-        Clear(self: MSPyECObjects.ECValueAccessor) -> None
-        """
+    def Clear(self: MSPyECObjects.ECValueAccessor) -> None:
         ...
     
-    def DeepestLocation(*args, **kwargs):
-        """
-        DeepestLocation(self: MSPyECObjects.ECValueAccessor) -> MSPyECObjects.ECValueAccessor.Location
-        """
+    def DeepestLocation(self: MSPyECObjects.ECValueAccessor) -> MSPyECObjects.ECValueAccessor.Location:
         ...
     
     @property
@@ -4810,7 +3718,6 @@ class ECValueAccessor:
     
     def GetAccessString(*args, **kwargs):
         """
-        GetAccessString(*args, **kwargs)
         Overloaded function.
         
         1. GetAccessString(self: MSPyECObjects.ECValueAccessor) -> str
@@ -4819,22 +3726,13 @@ class ECValueAccessor:
         """
         ...
     
-    def GetDepth(*args, **kwargs):
-        """
-        GetDepth(self: MSPyECObjects.ECValueAccessor) -> int
-        """
+    def GetDepth(self: MSPyECObjects.ECValueAccessor) -> int:
         ...
     
-    def GetManagedAccessString(*args, **kwargs):
-        """
-        GetManagedAccessString(self: MSPyECObjects.ECValueAccessor) -> MSPyBentley.WString
-        """
+    def GetManagedAccessString(self: MSPyECObjects.ECValueAccessor) -> MSPyBentley.WString:
         ...
     
-    def GetPropertyName(*args, **kwargs):
-        """
-        GetPropertyName(self: MSPyECObjects.ECValueAccessor) -> MSPyBentley.WString
-        """
+    def GetPropertyName(self: MSPyECObjects.ECValueAccessor) -> MSPyBentley.WString:
         ...
     
     class Location:
@@ -4850,16 +3748,10 @@ class ECValueAccessor:
         def Enabler(arg0: MSPyECObjects.ECValueAccessor.Location) -> MSPyECObjects.ECEnabler:
             ...
         
-        def GetECProperty(*args, **kwargs):
-            """
-            GetECProperty(self: MSPyECObjects.ECValueAccessor.Location) -> MSPyECObjects.ECProperty
-            """
+        def GetECProperty(self: MSPyECObjects.ECValueAccessor.Location) -> MSPyECObjects.ECProperty:
             ...
         
-        def GetEnabler(*args, **kwargs):
-            """
-            GetEnabler(self: MSPyECObjects.ECValueAccessor.Location) -> MSPyECObjects.ECEnabler
-            """
+        def GetEnabler(self: MSPyECObjects.ECValueAccessor.Location) -> MSPyECObjects.ECEnabler:
             ...
         
         def __init__(*args, **kwargs):
@@ -4876,15 +3768,12 @@ class ECValueAccessor:
     def ManagedAccessString(arg0: MSPyECObjects.ECValueAccessor) -> MSPyBentley.WString:
         ...
     
-    def PopLocation(*args, **kwargs):
-        """
-        PopLocation(self: MSPyECObjects.ECValueAccessor) -> None
-        """
+    def PopLocation(self: MSPyECObjects.ECValueAccessor) -> None:
         ...
     
+    @staticmethod
     def PopulateValueAccessor(*args, **kwargs):
         """
-        PopulateValueAccessor(*args, **kwargs)
         Overloaded function.
         
         1. PopulateValueAccessor(va: MSPyECObjects.ECValueAccessor, instance: MSPyECObjects.IECInstance, managedAccessor: str) -> MSPyECObjects.ECObjectsStatus
@@ -4899,7 +3788,6 @@ class ECValueAccessor:
     
     def PushLocation(*args, **kwargs):
         """
-        PushLocation(*args, **kwargs)
         Overloaded function.
         
         1. PushLocation(self: MSPyECObjects.ECValueAccessor, enabler: MSPyECObjects.ECEnabler, propertyIndex: int, arrayIndex: int = -1) -> None
@@ -4920,9 +3808,9 @@ class ECValuesCollection:
     None
     """
 
+    @staticmethod
     def Create(*args, **kwargs):
         """
-        Create(*args, **kwargs)
         Overloaded function.
         
         1. Create(instance: MSPyECObjects.IECInstance) -> MSPyECObjects.ECValuesCollection
@@ -4931,10 +3819,7 @@ class ECValuesCollection:
         """
         ...
     
-    def GetParentProperty(*args, **kwargs):
-        """
-        GetParentProperty(self: MSPyECObjects.ECValuesCollection) -> MSPyECObjects.ECPropertyValue
-        """
+    def GetParentProperty(self: MSPyECObjects.ECValuesCollection) -> MSPyECObjects.ECPropertyValue:
         ...
     
     @property
@@ -4984,20 +3869,14 @@ class EvaluationResult:
     None
     """
 
-    def Clear(*args, **kwargs):
-        """
-        Clear(self: MSPyECObjects.EvaluationResult) -> None
-        """
+    def Clear(self: MSPyECObjects.EvaluationResult) -> None:
         ...
     
     @property
     def ECValue(arg0: MSPyECObjects.EvaluationResult) -> Bentley.ECN.ECValue:
         ...
     
-    def GetECValue(*args, **kwargs):
-        """
-        GetECValue(self: MSPyECObjects.EvaluationResult) -> Bentley.ECN.ECValue
-        """
+    def GetECValue(self: MSPyECObjects.EvaluationResult) -> Bentley.ECN.ECValue:
         ...
     
     def GetInstanceList(*args, **kwargs):
@@ -5006,50 +3885,29 @@ class EvaluationResult:
         """
         ...
     
-    def GetUnits(*args, **kwargs):
-        """
-        GetUnits(self: MSPyECObjects.EvaluationResult) -> Bentley.ECN.UnitSpec
-        """
+    def GetUnits(self: MSPyECObjects.EvaluationResult) -> Bentley.ECN.UnitSpec:
         ...
     
-    def GetValueType(*args, **kwargs):
-        """
-        GetValueType(self: MSPyECObjects.EvaluationResult) -> MSPyECObjects.ValueType
-        """
+    def GetValueType(self: MSPyECObjects.EvaluationResult) -> MSPyECObjects.ValueType:
         ...
     
     @property
     def InstanceList(arg0: MSPyECObjects.EvaluationResult) -> Bentley.Bstdcxx.bvector<Bentley.RefCountedPtr<Bentley.ECN.IECInstance>,Bentley.BentleyAllocator<Bentley.RefCountedPtr<Bentley.ECN.IECInstance> > >:
         ...
     
-    def IsECValue(*args, **kwargs):
-        """
-        IsECValue(self: MSPyECObjects.EvaluationResult) -> bool
-        """
+    def IsECValue(self: MSPyECObjects.EvaluationResult) -> bool:
         ...
     
-    def IsInstanceList(*args, **kwargs):
-        """
-        IsInstanceList(self: MSPyECObjects.EvaluationResult) -> bool
-        """
+    def IsInstanceList(self: MSPyECObjects.EvaluationResult) -> bool:
         ...
     
-    def IsLambda(*args, **kwargs):
-        """
-        IsLambda(self: MSPyECObjects.EvaluationResult) -> bool
-        """
+    def IsLambda(self: MSPyECObjects.EvaluationResult) -> bool:
         ...
     
-    def IsValueList(*args, **kwargs):
-        """
-        IsValueList(self: MSPyECObjects.EvaluationResult) -> bool
-        """
+    def IsValueList(self: MSPyECObjects.EvaluationResult) -> bool:
         ...
     
-    def SetInstance(*args, **kwargs):
-        """
-        SetInstance(self: MSPyECObjects.EvaluationResult, instance: Bentley.ECN.IECInstance) -> None
-        """
+    def SetInstance(self: MSPyECObjects.EvaluationResult, instance: Bentley.ECN.IECInstance) -> None:
         ...
     
     def SetInstanceList(*args, **kwargs):
@@ -5058,10 +3916,7 @@ class EvaluationResult:
         """
         ...
     
-    def SetUnits(*args, **kwargs):
-        """
-        SetUnits(self: MSPyECObjects.EvaluationResult, units: Bentley.ECN.UnitSpec) -> None
-        """
+    def SetUnits(self: MSPyECObjects.EvaluationResult, units: Bentley.ECN.UnitSpec) -> None:
         ...
     
     @property
@@ -5083,22 +3938,13 @@ class ExpressionContext:
     None
     """
 
-    def AllowsTypeConversion(*args, **kwargs):
-        """
-        AllowsTypeConversion(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def AllowsTypeConversion(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
-    def EnforceGlobalRepresentation(*args, **kwargs):
-        """
-        EnforceGlobalRepresentation(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def EnforceGlobalRepresentation(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
-    def EnforcesUnits(*args, **kwargs):
-        """
-        EnforcesUnits(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def EnforcesUnits(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
     @property
@@ -5108,16 +3954,10 @@ class ExpressionContext:
     def EvaluationOptions(arg0: MSPyECObjects.ExpressionContext, arg1: MSPyECObjects.EvaluationOptions) -> None:
         ...
     
-    def GetEvaluationOptions(*args, **kwargs):
-        """
-        GetEvaluationOptions(self: MSPyECObjects.ExpressionContext) -> MSPyECObjects.EvaluationOptions
-        """
+    def GetEvaluationOptions(self: MSPyECObjects.ExpressionContext) -> MSPyECObjects.EvaluationOptions:
         ...
     
-    def SetEvaluationOptions(*args, **kwargs):
-        """
-        SetEvaluationOptions(self: MSPyECObjects.ExpressionContext, options: MSPyECObjects.EvaluationOptions) -> None
-        """
+    def SetEvaluationOptions(self: MSPyECObjects.ExpressionContext, options: MSPyECObjects.EvaluationOptions) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -5135,10 +3975,7 @@ class ExpressionResolver:
     def ExpressionContext(arg0: MSPyECObjects.ExpressionResolver) -> MSPyECObjects.ExpressionContext:
         ...
     
-    def GetExpressionContext(*args, **kwargs):
-        """
-        GetExpressionContext(self: MSPyECObjects.ExpressionResolver) -> MSPyECObjects.ExpressionContext
-        """
+    def GetExpressionContext(self: MSPyECObjects.ExpressionResolver) -> MSPyECObjects.ExpressionContext:
         ...
     
     def __init__(*args, **kwargs):
@@ -5592,28 +4429,16 @@ class IAUIDataContext:
         def value(arg0: MSPyECObjects.IAUIDataContext.ContextType) -> int:
             ...
         
-    def GetContextType(*args, **kwargs):
-        """
-        GetContextType(self: MSPyECObjects.IAUIDataContext) -> MSPyECObjects.IAUIDataContext.ContextType
-        """
+    def GetContextType(self: MSPyECObjects.IAUIDataContext) -> MSPyECObjects.IAUIDataContext.ContextType:
         ...
     
-    def GetCustomData(*args, **kwargs):
-        """
-        GetCustomData(self: MSPyECObjects.IAUIDataContext) -> capsule
-        """
+    def GetCustomData(self: MSPyECObjects.IAUIDataContext) -> capsule:
         ...
     
-    def GetInstanceIterable(*args, **kwargs):
-        """
-        GetInstanceIterable(self: MSPyECObjects.IAUIDataContext) -> MSPyECObjects.ECInstanceIterable
-        """
+    def GetInstanceIterable(self: MSPyECObjects.IAUIDataContext) -> MSPyECObjects.ECInstanceIterable:
         ...
     
-    def GetMoniker(*args, **kwargs):
-        """
-        GetMoniker(self: MSPyECObjects.IAUIDataContext) -> MSPyBentley.WString
-        """
+    def GetMoniker(self: MSPyECObjects.IAUIDataContext) -> MSPyBentley.WString:
         ...
     
     def __init__(*args, **kwargs):
@@ -5645,22 +4470,13 @@ class ICustomECStructSerializer:
     None
     """
 
-    def GenerateXmlString(*args, **kwargs):
-        """
-        GenerateXmlString(self: MSPyECObjects.ICustomECStructSerializer, xmlString: MSPyBentley.WString, structProperty: MSPyECObjects.StructECProperty, ecInstance: Bentley.ECN.IECInstance, baseAccessString: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GenerateXmlString(self: MSPyECObjects.ICustomECStructSerializer, xmlString: MSPyBentley.WString, structProperty: MSPyECObjects.StructECProperty, ecInstance: Bentley.ECN.IECInstance, baseAccessString: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def LoadStructureFromString(*args, **kwargs):
-        """
-        LoadStructureFromString(self: MSPyECObjects.ICustomECStructSerializer, structProperty: MSPyECObjects.StructECProperty, ecInstance: Bentley.ECN.IECInstance, baseAccessString: str, valueString: str) -> None
-        """
+    def LoadStructureFromString(self: MSPyECObjects.ICustomECStructSerializer, structProperty: MSPyECObjects.StructECProperty, ecInstance: Bentley.ECN.IECInstance, baseAccessString: str, valueString: str) -> None:
         ...
     
-    def UsesCustomStructXmlString(*args, **kwargs):
-        """
-        UsesCustomStructXmlString(self: MSPyECObjects.ICustomECStructSerializer, structProperty: MSPyECObjects.StructECProperty, ecInstance: Bentley.ECN.IECInstance) -> bool
-        """
+    def UsesCustomStructXmlString(self: MSPyECObjects.ICustomECStructSerializer, structProperty: MSPyECObjects.StructECProperty, ecInstance: Bentley.ECN.IECInstance) -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -5676,7 +4492,6 @@ class IECCustomAttributeContainer:
 
     def GetCustomAttribute(*args, **kwargs):
         """
-        GetCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -5687,7 +4502,6 @@ class IECCustomAttributeContainer:
     
     def GetCustomAttributeLocal(*args, **kwargs):
         """
-        GetCustomAttributeLocal(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttributeLocal(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -5696,15 +4510,11 @@ class IECCustomAttributeContainer:
         """
         ...
     
-    def GetCustomAttributes(*args, **kwargs):
-        """
-        GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
     def GetPrimaryCustomAttribute(*args, **kwargs):
         """
-        GetPrimaryCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetPrimaryCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -5713,15 +4523,11 @@ class IECCustomAttributeContainer:
         """
         ...
     
-    def GetPrimaryCustomAttributes(*args, **kwargs):
-        """
-        GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
     def IsDefined(*args, **kwargs):
         """
-        IsDefined(*args, **kwargs)
         Overloaded function.
         
         1. IsDefined(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -5732,7 +4538,6 @@ class IECCustomAttributeContainer:
     
     def RemoveCustomAttribute(*args, **kwargs):
         """
-        RemoveCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. RemoveCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -5741,10 +4546,7 @@ class IECCustomAttributeContainer:
         """
         ...
     
-    def SetCustomAttribute(*args, **kwargs):
-        """
-        SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def __init__(*args, **kwargs):
@@ -5760,7 +4562,6 @@ class IECInstance:
 
     def AddArrayElements(*args, **kwargs):
         """
-        AddArrayElements(*args, **kwargs)
         Overloaded function.
         
         1. AddArrayElements(self: MSPyECObjects.IECInstance, accessString: str, index: int) -> MSPyECObjects.ECObjectsStatus
@@ -5769,15 +4570,11 @@ class IECInstance:
         """
         ...
     
-    def AsMemoryECInstance(*args, **kwargs):
-        """
-        AsMemoryECInstance(self: MSPyECObjects.IECInstance) -> Bentley.ECN.MemoryECInstanceBase
-        """
+    def AsMemoryECInstance(self: MSPyECObjects.IECInstance) -> Bentley.ECN.MemoryECInstanceBase:
         ...
     
     def ChangeValue(*args, **kwargs):
         """
-        ChangeValue(*args, **kwargs)
         Overloaded function.
         
         1. ChangeValue(self: MSPyECObjects.IECInstance, accessString: str, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
@@ -5790,10 +4587,7 @@ class IECInstance:
         """
         ...
     
-    def ChangeValuesAllowed(*args, **kwargs):
-        """
-        ChangeValuesAllowed(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def ChangeValuesAllowed(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
     @property
@@ -5802,7 +4596,6 @@ class IECInstance:
     
     def ClearArray(*args, **kwargs):
         """
-        ClearArray(*args, **kwargs)
         Overloaded function.
         
         1. ClearArray(self: MSPyECObjects.IECInstance, accessString: str) -> MSPyECObjects.ECObjectsStatus
@@ -5811,15 +4604,11 @@ class IECInstance:
         """
         ...
     
-    def CopyValues(*args, **kwargs):
-        """
-        CopyValues(self: MSPyECObjects.IECInstance, source: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def CopyValues(self: MSPyECObjects.IECInstance, source: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def CreateCopyThroughSerialization(*args, **kwargs):
         """
-        CreateCopyThroughSerialization(*args, **kwargs)
         Overloaded function.
         
         1. CreateCopyThroughSerialization(self: MSPyECObjects.IECInstance) -> MSPyECObjects.IECInstance
@@ -5836,51 +4625,29 @@ class IECInstance:
     def Enabler(arg0: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECClass
-        """
+    def GetClass(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECClass:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetECDBuffer(*args, **kwargs):
-        """
-        GetECDBuffer(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECDBuffer
-        """
+    def GetECDBuffer(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECDBuffer:
         ...
     
-    def GetEnabler(*args, **kwargs):
-        """
-        GetEnabler(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler
-        """
+    def GetEnabler(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetInstanceId(*args, **kwargs):
-        """
-        GetInstanceId(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString
-        """
+    def GetInstanceId(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def GetInstanceIdForSerialization(*args, **kwargs):
-        """
-        GetInstanceIdForSerialization(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString
-        """
+    def GetInstanceIdForSerialization(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def GetOffsetToIECInstance(*args, **kwargs):
-        """
-        GetOffsetToIECInstance(self: MSPyECObjects.IECInstance) -> int
-        """
+    def GetOffsetToIECInstance(self: MSPyECObjects.IECInstance) -> int:
         ...
     
     def GetValue(*args, **kwargs):
         """
-        GetValue(*args, **kwargs)
         Overloaded function.
         
         1. GetValue(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessString: str) -> MSPyECObjects.ECObjectsStatus
@@ -5893,15 +4660,11 @@ class IECInstance:
         """
         ...
     
-    def GetValueUsingAccessor(*args, **kwargs):
-        """
-        GetValueUsingAccessor(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessor: Bentley.ECN.ECValueAccessor) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetValueUsingAccessor(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessor: Bentley.ECN.ECValueAccessor) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def InsertArrayElements(*args, **kwargs):
         """
-        InsertArrayElements(*args, **kwargs)
         Overloaded function.
         
         1. InsertArrayElements(self: MSPyECObjects.IECInstance, accessString: str, index: int, size: int) -> MSPyECObjects.ECObjectsStatus
@@ -5921,15 +4684,12 @@ class IECInstance:
     def InstanceIdForSerialization(arg0: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def IsFixedArrayProperty(*args, **kwargs):
-        """
-        IsFixedArrayProperty(instance: MSPyECObjects.IECInstance, accessString: str) -> tuple
-        """
+    @staticmethod
+    def IsFixedArrayProperty(instance: MSPyECObjects.IECInstance, accessString: str) -> tuple:
         ...
     
     def IsPropertyNull(*args, **kwargs):
         """
-        IsPropertyNull(*args, **kwargs)
         Overloaded function.
         
         1. IsPropertyNull(self: MSPyECObjects.IECInstance, accessString: str) -> tuple
@@ -5944,7 +4704,6 @@ class IECInstance:
     
     def IsPropertyReadOnly(*args, **kwargs):
         """
-        IsPropertyReadOnly(*args, **kwargs)
         Overloaded function.
         
         1. IsPropertyReadOnly(self: MSPyECObjects.IECInstance, accessString: str) -> bool
@@ -5953,31 +4712,23 @@ class IECInstance:
         """
         ...
     
-    def IsReadOnly(*args, **kwargs):
-        """
-        IsReadOnly(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def IsReadOnly(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
     @property
     def OffsetToIECInstance(arg0: MSPyECObjects.IECInstance) -> int:
         ...
     
-    def ReadFromXmlFile(*args, **kwargs):
-        """
-        ReadFromXmlFile(fileName: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple
-        """
+    @staticmethod
+    def ReadFromXmlFile(fileName: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple:
         ...
     
-    def ReadFromXmlString(*args, **kwargs):
-        """
-        ReadFromXmlString(xmlString: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple
-        """
+    @staticmethod
+    def ReadFromXmlString(xmlString: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple:
         ...
     
     def RemoveArrayElement(*args, **kwargs):
         """
-        RemoveArrayElement(*args, **kwargs)
         Overloaded function.
         
         1. RemoveArrayElement(self: MSPyECObjects.IECInstance, accessString: str, index: int) -> MSPyECObjects.ECObjectsStatus
@@ -5986,27 +4737,17 @@ class IECInstance:
         """
         ...
     
-    def SaveOnlyLoadedPropertiesToXml(*args, **kwargs):
-        """
-        SaveOnlyLoadedPropertiesToXml(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def SaveOnlyLoadedPropertiesToXml(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetInstanceId(*args, **kwargs):
-        """
-        SetInstanceId(self: MSPyECObjects.IECInstance, instanceId: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetInstanceId(self: MSPyECObjects.IECInstance, instanceId: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetValue(*args, **kwargs):
         """
-        SetValue(*args, **kwargs)
         Overloaded function.
         
         1. SetValue(self: MSPyECObjects.IECInstance, accessString: str, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
@@ -6019,27 +4760,17 @@ class IECInstance:
         """
         ...
     
-    def SetValueUsingAccessor(*args, **kwargs):
-        """
-        SetValueUsingAccessor(self: MSPyECObjects.IECInstance, accessor: Bentley.ECN.ECValueAccessor, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetValueUsingAccessor(self: MSPyECObjects.IECInstance, accessor: Bentley.ECN.ECValueAccessor, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.IECInstance, indent: str) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.IECInstance, indent: str) -> MSPyBentley.WString:
         ...
     
-    def WriteToXmlFile(*args, **kwargs):
-        """
-        WriteToXmlFile(self: MSPyECObjects.IECInstance, fileName: str, writeInstanceId: bool, utf16: bool) -> MSPyECObjects.InstanceWriteStatus
-        """
+    def WriteToXmlFile(self: MSPyECObjects.IECInstance, fileName: str, writeInstanceId: bool, utf16: bool) -> MSPyECObjects.InstanceWriteStatus:
         ...
     
     def WriteToXmlString(*args, **kwargs):
         """
-        WriteToXmlString(*args, **kwargs)
         Overloaded function.
         
         1. WriteToXmlString(self: MSPyECObjects.IECInstance, ecInstanceXml: MSPyBentley.Utf8String, isStandAlone: bool, writeInsanceId: bool) -> MSPyECObjects.InstanceWriteStatus
@@ -6073,33 +4804,26 @@ class IECInstancePtrArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyECObjects.IECInstancePtrArray, x: MSPyECObjects.IECInstance) -> None:
         """
-        append(self: MSPyECObjects.IECInstancePtrArray, x: MSPyECObjects.IECInstance) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyECObjects.IECInstancePtrArray) -> None:
         """
-        clear(self: MSPyECObjects.IECInstancePtrArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyECObjects.IECInstancePtrArray, x: MSPyECObjects.IECInstance) -> int:
         """
-        count(self: MSPyECObjects.IECInstancePtrArray, x: MSPyECObjects.IECInstance) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyECObjects.IECInstancePtrArray, L: MSPyECObjects.IECInstancePtrArray) -> None
@@ -6112,17 +4836,14 @@ class IECInstancePtrArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyECObjects.IECInstancePtrArray, i: int, x: MSPyECObjects.IECInstance) -> None:
         """
-        insert(self: MSPyECObjects.IECInstancePtrArray, i: int, x: MSPyECObjects.IECInstance) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyECObjects.IECInstancePtrArray) -> MSPyECObjects.IECInstance
@@ -6135,10 +4856,8 @@ class IECInstancePtrArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyECObjects.IECInstancePtrArray, x: MSPyECObjects.IECInstance) -> None:
         """
-        remove(self: MSPyECObjects.IECInstancePtrArray, x: MSPyECObjects.IECInstance) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -6148,22 +4867,13 @@ class IECPresentationProvider:
     None
     """
 
-    def GetProviderId(*args, **kwargs):
-        """
-        GetProviderId(self: MSPyECObjects.IECPresentationProvider) -> int
-        """
+    def GetProviderId(self: MSPyECObjects.IECPresentationProvider) -> int:
         ...
     
-    def GetProviderName(*args, **kwargs):
-        """
-        GetProviderName(self: MSPyECObjects.IECPresentationProvider) -> str
-        """
+    def GetProviderName(self: MSPyECObjects.IECPresentationProvider) -> str:
         ...
     
-    def GetProviderType(*args, **kwargs):
-        """
-        GetProviderType(self: MSPyECObjects.IECPresentationProvider) -> MSPyECObjects.IECPresentationProvider.ProviderType
-        """
+    def GetProviderType(self: MSPyECObjects.IECPresentationProvider) -> MSPyECObjects.IECPresentationProvider.ProviderType:
         ...
     
     @property
@@ -6200,16 +4910,10 @@ class IECProvider:
     None
     """
 
-    def GetProviderId(*args, **kwargs):
-        """
-        GetProviderId(self: MSPyECObjects.IECProvider) -> int
-        """
+    def GetProviderId(self: MSPyECObjects.IECProvider) -> int:
         ...
     
-    def GetProviderName(*args, **kwargs):
-        """
-        GetProviderName(self: MSPyECObjects.IECProvider) -> str
-        """
+    def GetProviderName(self: MSPyECObjects.IECProvider) -> str:
         ...
     
     @property
@@ -6228,16 +4932,10 @@ class IECRelationshipEnabler:
     None
     """
 
-    def CreateWipRelationshipInstance(*args, **kwargs):
-        """
-        CreateWipRelationshipInstance(self: MSPyECObjects.IECRelationshipEnabler) -> Bentley.ECN.StandaloneECRelationshipInstance
-        """
+    def CreateWipRelationshipInstance(self: MSPyECObjects.IECRelationshipEnabler) -> Bentley.ECN.StandaloneECRelationshipInstance:
         ...
     
-    def GetRelationshipClass(*args, **kwargs):
-        """
-        GetRelationshipClass(self: MSPyECObjects.IECRelationshipEnabler) -> MSPyECObjects.ECRelationshipClass
-        """
+    def GetRelationshipClass(self: MSPyECObjects.IECRelationshipEnabler) -> MSPyECObjects.ECRelationshipClass:
         ...
     
     def __init__(self: MSPyECObjects.IECRelationshipEnabler) -> None:
@@ -6250,7 +4948,6 @@ class IECRelationshipInstance:
 
     def AddArrayElements(*args, **kwargs):
         """
-        AddArrayElements(*args, **kwargs)
         Overloaded function.
         
         1. AddArrayElements(self: MSPyECObjects.IECInstance, accessString: str, index: int) -> MSPyECObjects.ECObjectsStatus
@@ -6259,15 +4956,11 @@ class IECRelationshipInstance:
         """
         ...
     
-    def AsMemoryECInstance(*args, **kwargs):
-        """
-        AsMemoryECInstance(self: MSPyECObjects.IECInstance) -> Bentley.ECN.MemoryECInstanceBase
-        """
+    def AsMemoryECInstance(self: MSPyECObjects.IECInstance) -> Bentley.ECN.MemoryECInstanceBase:
         ...
     
     def ChangeValue(*args, **kwargs):
         """
-        ChangeValue(*args, **kwargs)
         Overloaded function.
         
         1. ChangeValue(self: MSPyECObjects.IECInstance, accessString: str, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
@@ -6280,10 +4973,7 @@ class IECRelationshipInstance:
         """
         ...
     
-    def ChangeValuesAllowed(*args, **kwargs):
-        """
-        ChangeValuesAllowed(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def ChangeValuesAllowed(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
     @property
@@ -6292,7 +4982,6 @@ class IECRelationshipInstance:
     
     def ClearArray(*args, **kwargs):
         """
-        ClearArray(*args, **kwargs)
         Overloaded function.
         
         1. ClearArray(self: MSPyECObjects.IECInstance, accessString: str) -> MSPyECObjects.ECObjectsStatus
@@ -6301,15 +4990,11 @@ class IECRelationshipInstance:
         """
         ...
     
-    def CopyValues(*args, **kwargs):
-        """
-        CopyValues(self: MSPyECObjects.IECInstance, source: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def CopyValues(self: MSPyECObjects.IECInstance, source: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def CreateCopyThroughSerialization(*args, **kwargs):
         """
-        CreateCopyThroughSerialization(*args, **kwargs)
         Overloaded function.
         
         1. CreateCopyThroughSerialization(self: MSPyECObjects.IECInstance) -> MSPyECObjects.IECInstance
@@ -6326,75 +5011,41 @@ class IECRelationshipInstance:
     def Enabler(arg0: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECClass
-        """
+    def GetClass(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECClass:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetECDBuffer(*args, **kwargs):
-        """
-        GetECDBuffer(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECDBuffer
-        """
+    def GetECDBuffer(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECDBuffer:
         ...
     
-    def GetEnabler(*args, **kwargs):
-        """
-        GetEnabler(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler
-        """
+    def GetEnabler(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetInstanceId(*args, **kwargs):
-        """
-        GetInstanceId(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString
-        """
+    def GetInstanceId(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def GetInstanceIdForSerialization(*args, **kwargs):
-        """
-        GetInstanceIdForSerialization(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString
-        """
+    def GetInstanceIdForSerialization(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def GetOffsetToIECInstance(*args, **kwargs):
-        """
-        GetOffsetToIECInstance(self: MSPyECObjects.IECInstance) -> int
-        """
+    def GetOffsetToIECInstance(self: MSPyECObjects.IECInstance) -> int:
         ...
     
-    def GetSource(*args, **kwargs):
-        """
-        GetSource(self: MSPyECObjects.IECRelationshipInstance) -> MSPyECObjects.IECInstance
-        """
+    def GetSource(self: MSPyECObjects.IECRelationshipInstance) -> MSPyECObjects.IECInstance:
         ...
     
-    def GetSourceOrderId(*args, **kwargs):
-        """
-        GetSourceOrderId(self: MSPyECObjects.IECRelationshipInstance) -> tuple
-        """
+    def GetSourceOrderId(self: MSPyECObjects.IECRelationshipInstance) -> tuple:
         ...
     
-    def GetTarget(*args, **kwargs):
-        """
-        GetTarget(self: MSPyECObjects.IECRelationshipInstance) -> MSPyECObjects.IECInstance
-        """
+    def GetTarget(self: MSPyECObjects.IECRelationshipInstance) -> MSPyECObjects.IECInstance:
         ...
     
-    def GetTargetOrderId(*args, **kwargs):
-        """
-        GetTargetOrderId(self: MSPyECObjects.IECRelationshipInstance) -> tuple
-        """
+    def GetTargetOrderId(self: MSPyECObjects.IECRelationshipInstance) -> tuple:
         ...
     
     def GetValue(*args, **kwargs):
         """
-        GetValue(*args, **kwargs)
         Overloaded function.
         
         1. GetValue(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessString: str) -> MSPyECObjects.ECObjectsStatus
@@ -6407,15 +5058,11 @@ class IECRelationshipInstance:
         """
         ...
     
-    def GetValueUsingAccessor(*args, **kwargs):
-        """
-        GetValueUsingAccessor(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessor: Bentley.ECN.ECValueAccessor) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetValueUsingAccessor(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessor: Bentley.ECN.ECValueAccessor) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def InsertArrayElements(*args, **kwargs):
         """
-        InsertArrayElements(*args, **kwargs)
         Overloaded function.
         
         1. InsertArrayElements(self: MSPyECObjects.IECInstance, accessString: str, index: int, size: int) -> MSPyECObjects.ECObjectsStatus
@@ -6435,15 +5082,11 @@ class IECRelationshipInstance:
     def InstanceIdForSerialization(arg0: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def IsFixedArrayProperty(*args, **kwargs):
-        """
-        IsFixedArrayProperty(instance: MSPyECObjects.IECInstance, accessString: str) -> tuple
-        """
+    def IsFixedArrayProperty(instance: MSPyECObjects.IECInstance, accessString: str) -> tuple:
         ...
     
     def IsPropertyNull(*args, **kwargs):
         """
-        IsPropertyNull(*args, **kwargs)
         Overloaded function.
         
         1. IsPropertyNull(self: MSPyECObjects.IECInstance, accessString: str) -> tuple
@@ -6458,7 +5101,6 @@ class IECRelationshipInstance:
     
     def IsPropertyReadOnly(*args, **kwargs):
         """
-        IsPropertyReadOnly(*args, **kwargs)
         Overloaded function.
         
         1. IsPropertyReadOnly(self: MSPyECObjects.IECInstance, accessString: str) -> bool
@@ -6467,31 +5109,21 @@ class IECRelationshipInstance:
         """
         ...
     
-    def IsReadOnly(*args, **kwargs):
-        """
-        IsReadOnly(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def IsReadOnly(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
     @property
     def OffsetToIECInstance(arg0: MSPyECObjects.IECInstance) -> int:
         ...
     
-    def ReadFromXmlFile(*args, **kwargs):
-        """
-        ReadFromXmlFile(fileName: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple
-        """
+    def ReadFromXmlFile(fileName: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple:
         ...
     
-    def ReadFromXmlString(*args, **kwargs):
-        """
-        ReadFromXmlString(xmlString: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple
-        """
+    def ReadFromXmlString(xmlString: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple:
         ...
     
     def RemoveArrayElement(*args, **kwargs):
         """
-        RemoveArrayElement(*args, **kwargs)
         Overloaded function.
         
         1. RemoveArrayElement(self: MSPyECObjects.IECInstance, accessString: str, index: int) -> MSPyECObjects.ECObjectsStatus
@@ -6500,39 +5132,23 @@ class IECRelationshipInstance:
         """
         ...
     
-    def SaveOnlyLoadedPropertiesToXml(*args, **kwargs):
-        """
-        SaveOnlyLoadedPropertiesToXml(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def SaveOnlyLoadedPropertiesToXml(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetInstanceId(*args, **kwargs):
-        """
-        SetInstanceId(self: MSPyECObjects.IECInstance, instanceId: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetInstanceId(self: MSPyECObjects.IECInstance, instanceId: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetSource(*args, **kwargs):
-        """
-        SetSource(self: MSPyECObjects.IECRelationshipInstance, instance: MSPyECObjects.IECInstance) -> None
-        """
+    def SetSource(self: MSPyECObjects.IECRelationshipInstance, instance: MSPyECObjects.IECInstance) -> None:
         ...
     
-    def SetTarget(*args, **kwargs):
-        """
-        SetTarget(self: MSPyECObjects.IECRelationshipInstance, instance: MSPyECObjects.IECInstance) -> None
-        """
+    def SetTarget(self: MSPyECObjects.IECRelationshipInstance, instance: MSPyECObjects.IECInstance) -> None:
         ...
     
     def SetValue(*args, **kwargs):
         """
-        SetValue(*args, **kwargs)
         Overloaded function.
         
         1. SetValue(self: MSPyECObjects.IECInstance, accessString: str, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
@@ -6545,10 +5161,7 @@ class IECRelationshipInstance:
         """
         ...
     
-    def SetValueUsingAccessor(*args, **kwargs):
-        """
-        SetValueUsingAccessor(self: MSPyECObjects.IECInstance, accessor: Bentley.ECN.ECValueAccessor, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetValueUsingAccessor(self: MSPyECObjects.IECInstance, accessor: Bentley.ECN.ECValueAccessor, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -6565,21 +5178,14 @@ class IECRelationshipInstance:
     def Target(arg0: MSPyECObjects.IECRelationshipInstance, arg1: MSPyECObjects.IECInstance) -> None:
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.IECInstance, indent: str) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.IECInstance, indent: str) -> MSPyBentley.WString:
         ...
     
-    def WriteToXmlFile(*args, **kwargs):
-        """
-        WriteToXmlFile(self: MSPyECObjects.IECInstance, fileName: str, writeInstanceId: bool, utf16: bool) -> MSPyECObjects.InstanceWriteStatus
-        """
+    def WriteToXmlFile(self: MSPyECObjects.IECInstance, fileName: str, writeInstanceId: bool, utf16: bool) -> MSPyECObjects.InstanceWriteStatus:
         ...
     
     def WriteToXmlString(*args, **kwargs):
         """
-        WriteToXmlString(*args, **kwargs)
         Overloaded function.
         
         1. WriteToXmlString(self: MSPyECObjects.IECInstance, ecInstanceXml: MSPyBentley.Utf8String, isStandAlone: bool, writeInsanceId: bool) -> MSPyECObjects.InstanceWriteStatus
@@ -6599,10 +5205,7 @@ class IECSchemaLocater:
     None
     """
 
-    def LocateSchema(*args, **kwargs):
-        """
-        LocateSchema(self: MSPyECObjects.IECSchemaLocater, key: MSPyECObjects.SchemaKey, matchType: MSPyECObjects.SchemaMatchType, schemaContext: MSPyECObjects.ECSchemaReadContext) -> Bentley.ECN.ECSchema
-        """
+    def LocateSchema(self: MSPyECObjects.IECSchemaLocater, key: MSPyECObjects.SchemaKey, matchType: MSPyECObjects.SchemaMatchType, schemaContext: MSPyECObjects.ECSchemaReadContext) -> Bentley.ECN.ECSchema:
         ...
     
     def __init__(self: MSPyECObjects.IECSchemaLocater) -> None:
@@ -6613,22 +5216,17 @@ class IECSymbolProvider:
     None
     """
 
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.IECSymbolProvider) -> str
-        """
+    def GetName(self: MSPyECObjects.IECSymbolProvider) -> str:
         ...
     
     @property
     def Name(arg0: MSPyECObjects.IECSymbolProvider) -> str:
         ...
     
-    def PublishSymbols(*args, **kwargs):
-        """
-        PublishSymbols(self: MSPyECObjects.IECSymbolProvider, context: MSPyECObjects.SymbolExpressionContext, requestedSymbolSets: MSPyBentley.WStringArray) -> None
-        """
+    def PublishSymbols(self: MSPyECObjects.IECSymbolProvider, context: MSPyECObjects.SymbolExpressionContext, requestedSymbolSets: MSPyBentley.WStringArray) -> None:
         ...
     
+    @staticmethod
     def RegisterExternalSymbolPublisher(*args, **kwargs):
         """
         RegisterExternalSymbolPublisher(externalPublisher: std.function<void __cdecl(Bentley.ECN.SymbolExpressionContext & __ptr64,Bentley.Bstdcxx.bvector<Bentley.WString,Bentley.BentleyAllocator<Bentley.WString> > const & __ptr64)>) -> None
@@ -6643,82 +5241,43 @@ class IECTypeAdapter:
     None
     """
 
-    def CanConvertFromString(*args, **kwargs):
-        """
-        CanConvertFromString(self: MSPyECObjects.IECTypeAdapter, context: MSPyECObjects.IECTypeAdapterContext) -> bool
-        """
+    def CanConvertFromString(self: MSPyECObjects.IECTypeAdapter, context: MSPyECObjects.IECTypeAdapterContext) -> bool:
         ...
     
-    def CanConvertToString(*args, **kwargs):
-        """
-        CanConvertToString(self: MSPyECObjects.IECTypeAdapter, context: MSPyECObjects.IECTypeAdapterContext) -> bool
-        """
+    def CanConvertToString(self: MSPyECObjects.IECTypeAdapter, context: MSPyECObjects.IECTypeAdapterContext) -> bool:
         ...
     
-    def CondenseFormatterForSerialization(*args, **kwargs):
-        """
-        CondenseFormatterForSerialization(self: MSPyECObjects.IECTypeAdapter, formatter: Bentley.ECN.IECInstance) -> Bentley.ECN.IECInstance
-        """
+    def CondenseFormatterForSerialization(self: MSPyECObjects.IECTypeAdapter, formatter: Bentley.ECN.IECInstance) -> Bentley.ECN.IECInstance:
         ...
     
-    def ConvertFromExpressionType(*args, **kwargs):
-        """
-        ConvertFromExpressionType(self: MSPyECObjects.IECTypeAdapter, value: Bentley.ECN.ECValue, context: MSPyECObjects.IECTypeAdapterContext) -> bool
-        """
+    def ConvertFromExpressionType(self: MSPyECObjects.IECTypeAdapter, value: Bentley.ECN.ECValue, context: MSPyECObjects.IECTypeAdapterContext) -> bool:
         ...
     
-    def ConvertFromString(*args, **kwargs):
-        """
-        ConvertFromString(self: MSPyECObjects.IECTypeAdapter, value: Bentley.ECN.ECValue, str: str, context: MSPyECObjects.IECTypeAdapterContext) -> bool
-        """
+    def ConvertFromString(self: MSPyECObjects.IECTypeAdapter, value: Bentley.ECN.ECValue, str: str, context: MSPyECObjects.IECTypeAdapterContext) -> bool:
         ...
     
-    def ConvertToExpressionType(*args, **kwargs):
-        """
-        ConvertToExpressionType(self: MSPyECObjects.IECTypeAdapter, value: Bentley.ECN.ECValue, context: MSPyECObjects.IECTypeAdapterContext) -> bool
-        """
+    def ConvertToExpressionType(self: MSPyECObjects.IECTypeAdapter, value: Bentley.ECN.ECValue, context: MSPyECObjects.IECTypeAdapterContext) -> bool:
         ...
     
-    def ConvertToString(*args, **kwargs):
-        """
-        ConvertToString(self: MSPyECObjects.IECTypeAdapter, str: MSPyBentley.WString, value: Bentley.ECN.ECValue, context: MSPyECObjects.IECTypeAdapterContext, formatter: Bentley.ECN.IECInstance = None) -> bool
-        """
+    def ConvertToString(self: MSPyECObjects.IECTypeAdapter, str: MSPyBentley.WString, value: Bentley.ECN.ECValue, context: MSPyECObjects.IECTypeAdapterContext, formatter: Bentley.ECN.IECInstance = None) -> bool:
         ...
     
-    def CreateDefaultFormatter(*args, **kwargs):
-        """
-        CreateDefaultFormatter(self: MSPyECObjects.IECTypeAdapter, includeAllValues: bool, forDwg: bool = False) -> Bentley.ECN.IECInstance
-        """
+    def CreateDefaultFormatter(self: MSPyECObjects.IECTypeAdapter, includeAllValues: bool, forDwg: bool = False) -> Bentley.ECN.IECInstance:
         ...
     
-    def GetUnits(*args, **kwargs):
-        """
-        GetUnits(self: MSPyECObjects.IECTypeAdapter, unit: Bentley.ECN.UnitSpec, context: MSPyECObjects.IECTypeAdapterContext) -> bool
-        """
+    def GetUnits(self: MSPyECObjects.IECTypeAdapter, unit: Bentley.ECN.UnitSpec, context: MSPyECObjects.IECTypeAdapterContext) -> bool:
         ...
     
-    def HasStandardValues(*args, **kwargs):
-        """
-        HasStandardValues(self: MSPyECObjects.IECTypeAdapter) -> bool
-        """
+    def HasStandardValues(self: MSPyECObjects.IECTypeAdapter) -> bool:
         ...
     
-    def IsStruct(*args, **kwargs):
-        """
-        IsStruct(self: MSPyECObjects.IECTypeAdapter) -> bool
-        """
+    def IsStruct(self: MSPyECObjects.IECTypeAdapter) -> bool:
         ...
     
-    def IsTreatedAsString(*args, **kwargs):
-        """
-        IsTreatedAsString(self: MSPyECObjects.IECTypeAdapter) -> bool
-        """
+    def IsTreatedAsString(self: MSPyECObjects.IECTypeAdapter) -> bool:
         ...
     
-    def PopulateDefaultFormatterProperties(*args, **kwargs):
-        """
-        PopulateDefaultFormatterProperties(self: MSPyECObjects.IECTypeAdapter, formatter: Bentley.ECN.IECInstance) -> Bentley.ECN.IECInstance
-        """
+    def PopulateDefaultFormatterProperties(self: MSPyECObjects.IECTypeAdapter, formatter: Bentley.ECN.IECInstance) -> Bentley.ECN.IECInstance:
         ...
     
     def RequiresExpressionTypeConversion(*args, **kwargs):
@@ -6727,10 +5286,7 @@ class IECTypeAdapter:
         """
         ...
     
-    def SupportsUnits(*args, **kwargs):
-        """
-        SupportsUnits(self: MSPyECObjects.IECTypeAdapter) -> bool
-        """
+    def SupportsUnits(self: MSPyECObjects.IECTypeAdapter) -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -6766,10 +5322,7 @@ class IStandaloneEnablerLocater:
     None
     """
 
-    def LocateStandaloneEnabler(*args, **kwargs):
-        """
-        LocateStandaloneEnabler(self: MSPyECObjects.IStandaloneEnablerLocater, schemaKey: MSPyECObjects.SchemaKey, className: str) -> Bentley.ECN.StandaloneECEnabler
-        """
+    def LocateStandaloneEnabler(self: MSPyECObjects.IStandaloneEnablerLocater, schemaKey: MSPyECObjects.SchemaKey, className: str) -> Bentley.ECN.StandaloneECEnabler:
         ...
     
     def __init__(*args, **kwargs):
@@ -6783,22 +5336,13 @@ class InstanceExpressionContext:
     None
     """
 
-    def AllowsTypeConversion(*args, **kwargs):
-        """
-        AllowsTypeConversion(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def AllowsTypeConversion(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
-    def EnforceGlobalRepresentation(*args, **kwargs):
-        """
-        EnforceGlobalRepresentation(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def EnforceGlobalRepresentation(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
-    def EnforcesUnits(*args, **kwargs):
-        """
-        EnforcesUnits(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def EnforcesUnits(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
     @property
@@ -6808,22 +5352,13 @@ class InstanceExpressionContext:
     def EvaluationOptions(arg0: MSPyECObjects.ExpressionContext, arg1: MSPyECObjects.EvaluationOptions) -> None:
         ...
     
-    def GetEvaluationOptions(*args, **kwargs):
-        """
-        GetEvaluationOptions(self: MSPyECObjects.ExpressionContext) -> MSPyECObjects.EvaluationOptions
-        """
+    def GetEvaluationOptions(self: MSPyECObjects.ExpressionContext) -> MSPyECObjects.EvaluationOptions:
         ...
     
-    def SetEvaluationOptions(*args, **kwargs):
-        """
-        SetEvaluationOptions(self: MSPyECObjects.ExpressionContext, options: MSPyECObjects.EvaluationOptions) -> None
-        """
+    def SetEvaluationOptions(self: MSPyECObjects.ExpressionContext, options: MSPyECObjects.EvaluationOptions) -> None:
         ...
     
-    def SetInstance(*args, **kwargs):
-        """
-        SetInstance(self: MSPyECObjects.InstanceExpressionContext, instance: Bentley.ECN.IECInstance) -> None
-        """
+    def SetInstance(self: MSPyECObjects.InstanceExpressionContext, instance: Bentley.ECN.IECInstance) -> None:
         ...
     
     def SetInstances(*args, **kwargs):
@@ -6840,22 +5375,13 @@ class InstanceListExpressionContext:
     None
     """
 
-    def AllowsTypeConversion(*args, **kwargs):
-        """
-        AllowsTypeConversion(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def AllowsTypeConversion(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
-    def EnforceGlobalRepresentation(*args, **kwargs):
-        """
-        EnforceGlobalRepresentation(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def EnforceGlobalRepresentation(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
-    def EnforcesUnits(*args, **kwargs):
-        """
-        EnforcesUnits(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def EnforcesUnits(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
     @property
@@ -6865,16 +5391,10 @@ class InstanceListExpressionContext:
     def EvaluationOptions(arg0: MSPyECObjects.ExpressionContext, arg1: MSPyECObjects.EvaluationOptions) -> None:
         ...
     
-    def GetEvaluationOptions(*args, **kwargs):
-        """
-        GetEvaluationOptions(self: MSPyECObjects.ExpressionContext) -> MSPyECObjects.EvaluationOptions
-        """
+    def GetEvaluationOptions(self: MSPyECObjects.ExpressionContext) -> MSPyECObjects.EvaluationOptions:
         ...
     
-    def SetEvaluationOptions(*args, **kwargs):
-        """
-        SetEvaluationOptions(self: MSPyECObjects.ExpressionContext, options: MSPyECObjects.EvaluationOptions) -> None
-        """
+    def SetEvaluationOptions(self: MSPyECObjects.ExpressionContext, options: MSPyECObjects.EvaluationOptions) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -7090,16 +5610,11 @@ class MemoryECInstanceBase:
     None
     """
 
-    def ClearValues(*args, **kwargs):
-        """
-        ClearValues(self: MSPyECObjects.MemoryECInstanceBase) -> None
-        """
+    def ClearValues(self: MSPyECObjects.MemoryECInstanceBase) -> None:
         ...
     
-    def CopyFromBuffer(*args, **kwargs):
+    def CopyFromBuffer(self: MSPyECObjects.ECDBuffer, source: MSPyECObjects.ECDBuffer) -> MSPyECObjects.ECObjectsStatus:
         """
-        CopyFromBuffer(self: MSPyECObjects.ECDBuffer, source: MSPyECObjects.ECDBuffer) -> MSPyECObjects.ECObjectsStatus
-        
         Attempts to copy property values from source buffer. Expects source to
         have a compatible class layout.
         
@@ -7108,31 +5623,20 @@ class MemoryECInstanceBase:
         """
         ...
     
-    def GetData(*args, **kwargs):
-        """
-        GetData(self: MSPyECObjects.MemoryECInstanceBase) -> bytes
-        """
+    def GetData(self: MSPyECObjects.MemoryECInstanceBase) -> bytes:
         ...
     
-    def IsEmpty(*args, **kwargs):
+    def IsEmpty(self: MSPyECObjects.ECDBuffer) -> bool:
         """
-        IsEmpty(self: MSPyECObjects.ECDBuffer) -> bool
-        
         Returns true if the buffer is empty (all values are null and all
         arrays are empty)
         """
         ...
     
-    def MergePropertiesFromInstance(*args, **kwargs):
-        """
-        MergePropertiesFromInstance(self: MSPyECObjects.MemoryECInstanceBase, fromNativeInstance: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def MergePropertiesFromInstance(self: MSPyECObjects.MemoryECInstanceBase, fromNativeInstance: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetData(*args, **kwargs):
-        """
-        SetData(self: MSPyECObjects.MemoryECInstanceBase, data: bytes) -> None
-        """
+    def SetData(self: MSPyECObjects.MemoryECInstanceBase, data: bytes) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -7174,6 +5678,7 @@ class MethodSymbol:
     None
     """
 
+    @staticmethod
     def Create(*args, **kwargs):
         """
         Create(name: str, staticMethod: std.function<Bentley.ECN.ExpressionStatus __cdecl(Bentley.ECN.EvaluationResult & __ptr64,Bentley.Bstdcxx.bvector<Bentley.ECN.EvaluationResult,Bentley.BentleyAllocator<Bentley.ECN.EvaluationResult> > & __ptr64)>, instanceMethod: std.function<Bentley.ECN.ExpressionStatus __cdecl(Bentley.ECN.EvaluationResult & __ptr64,Bentley.Bstdcxx.bvector<Bentley.RefCountedPtr<Bentley.ECN.IECInstance>,Bentley.BentleyAllocator<Bentley.RefCountedPtr<Bentley.ECN.IECInstance> > > const & __ptr64,Bentley.Bstdcxx.bvector<Bentley.ECN.EvaluationResult,Bentley.BentleyAllocator<Bentley.ECN.EvaluationResult> > & __ptr64)>) -> MSPyECObjects.MethodSymbol
@@ -7191,28 +5696,16 @@ class Node:
     None
     """
 
-    def GetValue(*args, **kwargs):
-        """
-        GetValue(self: MSPyECObjects.Node, context: MSPyECObjects.ExpressionContext) -> tuple
-        """
+    def GetValue(self: MSPyECObjects.Node, context: MSPyECObjects.ExpressionContext) -> tuple:
         ...
     
-    def ToExpressionString(*args, **kwargs):
-        """
-        ToExpressionString(self: MSPyECObjects.Node) -> MSPyBentley.WString
-        """
+    def ToExpressionString(self: MSPyECObjects.Node) -> MSPyBentley.WString:
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.Node) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.Node) -> MSPyBentley.WString:
         ...
     
-    def Traverse(*args, **kwargs):
-        """
-        Traverse(self: MSPyECObjects.Node, visitor: MSPyECObjects.NodeVisitor) -> bool
-        """
+    def Traverse(self: MSPyECObjects.Node, visitor: MSPyECObjects.NodeVisitor) -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -7226,58 +5719,31 @@ class NodeVisitor:
     None
     """
 
-    def CloseParens(*args, **kwargs):
-        """
-        CloseParens(self: MSPyECObjects.NodeVisitor) -> bool
-        """
+    def CloseParens(self: MSPyECObjects.NodeVisitor) -> bool:
         ...
     
-    def Comma(*args, **kwargs):
-        """
-        Comma(self: MSPyECObjects.NodeVisitor) -> bool
-        """
+    def Comma(self: MSPyECObjects.NodeVisitor) -> bool:
         ...
     
-    def EndArguments(*args, **kwargs):
-        """
-        EndArguments(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool
-        """
+    def EndArguments(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool:
         ...
     
-    def EndArrayIndex(*args, **kwargs):
-        """
-        EndArrayIndex(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool
-        """
+    def EndArrayIndex(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool:
         ...
     
-    def OpenParens(*args, **kwargs):
-        """
-        OpenParens(self: MSPyECObjects.NodeVisitor) -> bool
-        """
+    def OpenParens(self: MSPyECObjects.NodeVisitor) -> bool:
         ...
     
-    def ProcessNode(*args, **kwargs):
-        """
-        ProcessNode(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool
-        """
+    def ProcessNode(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool:
         ...
     
-    def ProcessUnits(*args, **kwargs):
-        """
-        ProcessUnits(self: MSPyECObjects.NodeVisitor, units: Bentley.ECN.UnitSpec) -> bool
-        """
+    def ProcessUnits(self: MSPyECObjects.NodeVisitor, units: Bentley.ECN.UnitSpec) -> bool:
         ...
     
-    def StartArguments(*args, **kwargs):
-        """
-        StartArguments(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool
-        """
+    def StartArguments(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool:
         ...
     
-    def StartArrayIndex(*args, **kwargs):
-        """
-        StartArrayIndex(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool
-        """
+    def StartArrayIndex(self: MSPyECObjects.NodeVisitor, node: Bentley.ECN.Node) -> bool:
         ...
     
     def __init__(self: MSPyECObjects.NodeVisitor) -> None:
@@ -7288,58 +5754,31 @@ class OrderIdEntries:
     None
     """
 
-    def Clear(*args, **kwargs):
-        """
-        Clear(self: MSPyECObjects.OrderIdEntries) -> MSPyECObjects.ECObjectsStatus
-        """
+    def Clear(self: MSPyECObjects.OrderIdEntries) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetSourceNextOrderId(*args, **kwargs):
-        """
-        SetSourceNextOrderId(self: MSPyECObjects.OrderIdEntries, orderId: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetSourceNextOrderId(self: MSPyECObjects.OrderIdEntries, orderId: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetSourceOrderId(*args, **kwargs):
-        """
-        SetSourceOrderId(self: MSPyECObjects.OrderIdEntries, orderId: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetSourceOrderId(self: MSPyECObjects.OrderIdEntries, orderId: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetTargetNextOrderId(*args, **kwargs):
-        """
-        SetTargetNextOrderId(self: MSPyECObjects.OrderIdEntries, orderId: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetTargetNextOrderId(self: MSPyECObjects.OrderIdEntries, orderId: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetTargetOrderId(*args, **kwargs):
-        """
-        SetTargetOrderId(self: MSPyECObjects.OrderIdEntries, orderId: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetTargetOrderId(self: MSPyECObjects.OrderIdEntries, orderId: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def TryGetSourceNextOrderId(*args, **kwargs):
-        """
-        TryGetSourceNextOrderId(self: MSPyECObjects.OrderIdEntries) -> tuple
-        """
+    def TryGetSourceNextOrderId(self: MSPyECObjects.OrderIdEntries) -> tuple:
         ...
     
-    def TryGetSourceOrderId(*args, **kwargs):
-        """
-        TryGetSourceOrderId(self: MSPyECObjects.OrderIdEntries) -> tuple
-        """
+    def TryGetSourceOrderId(self: MSPyECObjects.OrderIdEntries) -> tuple:
         ...
     
-    def TryGetTargetNextOrderId(*args, **kwargs):
-        """
-        TryGetTargetNextOrderId(self: MSPyECObjects.OrderIdEntries) -> tuple
-        """
+    def TryGetTargetNextOrderId(self: MSPyECObjects.OrderIdEntries) -> tuple:
         ...
     
-    def TryGetTargetOrderId(*args, **kwargs):
-        """
-        TryGetTargetOrderId(self: MSPyECObjects.OrderIdEntries) -> tuple
-        """
+    def TryGetTargetOrderId(self: MSPyECObjects.OrderIdEntries) -> tuple:
         ...
     
     def __init__(*args, **kwargs):
@@ -7383,7 +5822,6 @@ class PresentationMetadataHelper:
 
     def HideProperty(*args, **kwargs):
         """
-        HideProperty(*args, **kwargs)
         Overloaded function.
         
         1. HideProperty(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus
@@ -7392,21 +5830,14 @@ class PresentationMetadataHelper:
         """
         ...
     
-    def SetAlwaysExpand(*args, **kwargs):
-        """
-        SetAlwaysExpand(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, andArrayMembers: bool = False) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetAlwaysExpand(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, andArrayMembers: bool = False) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetCustomCategory(*args, **kwargs):
-        """
-        SetCustomCategory(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, uniqueName: str, displayLabel: str, priority: int, expand: bool = False, description: str = None) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomCategory(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, uniqueName: str, displayLabel: str, priority: int, expand: bool = False, description: str = None) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetExtendedType(*args, **kwargs):
         """
-        SetExtendedType(*args, **kwargs)
         Overloaded function.
         
         1. SetExtendedType(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, standardTypeId: int) -> MSPyECObjects.ECObjectsStatus
@@ -7415,21 +5846,14 @@ class PresentationMetadataHelper:
         """
         ...
     
-    def SetHideNullProperties(*args, **kwargs):
-        """
-        SetHideNullProperties(self: MSPyECObjects.PresentationMetadataHelper, ecClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetHideNullProperties(self: MSPyECObjects.PresentationMetadataHelper, ecClass: MSPyECObjects.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetIgnoreZ(*args, **kwargs):
-        """
-        SetIgnoreZ(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetIgnoreZ(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetMemberExtendedType(*args, **kwargs):
         """
-        SetMemberExtendedType(*args, **kwargs)
         Overloaded function.
         
         1. SetMemberExtendedType(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ArrayECProperty, standardTypeId: int) -> MSPyECObjects.ECObjectsStatus
@@ -7438,34 +5862,19 @@ class PresentationMetadataHelper:
         """
         ...
     
-    def SetMembersIndependent(*args, **kwargs):
-        """
-        SetMembersIndependent(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetMembersIndependent(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetPriority(*args, **kwargs):
-        """
-        SetPriority(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, priority: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetPriority(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, priority: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetRequiresReload(*args, **kwargs):
-        """
-        SetRequiresReload(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetRequiresReload(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetStandardCategory(*args, **kwargs):
-        """
-        SetStandardCategory(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, standardCategoryId: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetStandardCategory(self: MSPyECObjects.PresentationMetadataHelper, ecProperty: MSPyECObjects.ECProperty, standardCategoryId: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetStoresUnitsAsUORs(*args, **kwargs):
-        """
-        SetStoresUnitsAsUORs(self: MSPyECObjects.PresentationMetadataHelper, ecSchema: MSPyECObjects.ECSchema) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetStoresUnitsAsUORs(self: MSPyECObjects.PresentationMetadataHelper, ecSchema: MSPyECObjects.ECSchema) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def __init__(self: MSPyECObjects.PresentationMetadataHelper, schemaContext: MSPyECObjects.ECSchemaReadContext) -> None:
@@ -7476,22 +5885,13 @@ class PrimitiveECProperty:
     None
     """
 
-    def AsArrayProperty(*args, **kwargs):
-        """
-        AsArrayProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ArrayECProperty
-        """
+    def AsArrayProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ArrayECProperty:
         ...
     
-    def AsPrimitiveProperty(*args, **kwargs):
-        """
-        AsPrimitiveProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.PrimitiveECProperty
-        """
+    def AsPrimitiveProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.PrimitiveECProperty:
         ...
     
-    def AsStructProperty(*args, **kwargs):
-        """
-        AsStructProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.StructECProperty
-        """
+    def AsStructProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.StructECProperty:
         ...
     
     @property
@@ -7519,21 +5919,14 @@ class PrimitiveECProperty:
     def DisplayLabel(arg0: MSPyECObjects.ECProperty, arg1: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetBaseProperty(*args, **kwargs):
-        """
-        GetBaseProperty(self: MSPyECObjects.ECProperty) -> MSPyECObjects.ECProperty
-        """
+    def GetBaseProperty(self: MSPyECObjects.ECProperty) -> MSPyECObjects.ECProperty:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ECClass
-        """
+    def GetClass(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ECClass:
         ...
     
     def GetCustomAttribute(*args, **kwargs):
         """
-        GetCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -7544,7 +5937,6 @@ class PrimitiveECProperty:
     
     def GetCustomAttributeLocal(*args, **kwargs):
         """
-        GetCustomAttributeLocal(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttributeLocal(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -7553,81 +5945,44 @@ class PrimitiveECProperty:
         """
         ...
     
-    def GetCustomAttributes(*args, **kwargs):
-        """
-        GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetDescription(*args, **kwargs):
-        """
-        GetDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetId(*args, **kwargs):
-        """
-        GetId(self: MSPyECObjects.ECProperty) -> int
-        """
+    def GetId(self: MSPyECObjects.ECProperty) -> int:
         ...
     
-    def GetInvariantDescription(*args, **kwargs):
-        """
-        GetInvariantDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetInvariantDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetInvariantDisplayLabel(*args, **kwargs):
-        """
-        GetInvariantDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetInvariantDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetIsArray(*args, **kwargs):
-        """
-        GetIsArray(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsArray(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsDisplayLabelDefined(*args, **kwargs):
-        """
-        GetIsDisplayLabelDefined(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsDisplayLabelDefined(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsPrimitive(*args, **kwargs):
-        """
-        GetIsPrimitive(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsPrimitive(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsReadOnly(*args, **kwargs):
-        """
-        GetIsReadOnly(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsReadOnly(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsStruct(*args, **kwargs):
-        """
-        GetIsStruct(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsStruct(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
     def GetPrimaryCustomAttribute(*args, **kwargs):
         """
-        GetPrimaryCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetPrimaryCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -7636,22 +5991,13 @@ class PrimitiveECProperty:
         """
         ...
     
-    def GetPrimaryCustomAttributes(*args, **kwargs):
-        """
-        GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyECObjects.PrimitiveECProperty) -> MSPyECObjects.PrimitiveType
-        """
+    def GetType(self: MSPyECObjects.PrimitiveECProperty) -> MSPyECObjects.PrimitiveType:
         ...
     
-    def GetTypeName(*args, **kwargs):
-        """
-        GetTypeName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetTypeName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
     @property
@@ -7670,15 +6016,11 @@ class PrimitiveECProperty:
     def IsArray(arg0: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def IsCalculated(*args, **kwargs):
-        """
-        IsCalculated(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def IsCalculated(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
     def IsDefined(*args, **kwargs):
         """
-        IsDefined(*args, **kwargs)
         Overloaded function.
         
         1. IsDefined(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -7712,7 +6054,6 @@ class PrimitiveECProperty:
     
     def RemoveCustomAttribute(*args, **kwargs):
         """
-        RemoveCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. RemoveCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -7721,39 +6062,23 @@ class PrimitiveECProperty:
         """
         ...
     
-    def SetBaseProperty(*args, **kwargs):
-        """
-        SetBaseProperty(self: MSPyECObjects.ECProperty, prop: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetBaseProperty(self: MSPyECObjects.ECProperty, prop: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetCalculatedPropertySpecification(*args, **kwargs):
-        """
-        SetCalculatedPropertySpecification(self: MSPyECObjects.ECProperty, expressionAttribute: Bentley.ECN.IECInstance) -> bool
-        """
+    def SetCalculatedPropertySpecification(self: MSPyECObjects.ECProperty, expressionAttribute: Bentley.ECN.IECInstance) -> bool:
         ...
     
-    def SetCustomAttribute(*args, **kwargs):
-        """
-        SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDescription(*args, **kwargs):
-        """
-        SetDescription(self: MSPyECObjects.ECProperty, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDescription(self: MSPyECObjects.ECProperty, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.ECProperty, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.ECProperty, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetIsReadOnly(*args, **kwargs):
         """
-        SetIsReadOnly(*args, **kwargs)
         Overloaded function.
         
         1. SetIsReadOnly(self: MSPyECObjects.ECProperty, readOnly: bool) -> MSPyECObjects.ECObjectsStatus
@@ -7762,16 +6087,10 @@ class PrimitiveECProperty:
         """
         ...
     
-    def SetType(*args, **kwargs):
-        """
-        SetType(self: MSPyECObjects.PrimitiveECProperty, type: MSPyECObjects.PrimitiveType) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetType(self: MSPyECObjects.PrimitiveECProperty, type: MSPyECObjects.PrimitiveType) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetTypeName(*args, **kwargs):
-        """
-        SetTypeName(self: MSPyECObjects.ECProperty, typeName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetTypeName(self: MSPyECObjects.ECProperty, typeName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -7883,27 +6202,21 @@ class PropertyLayout:
     def AccessString(arg0: MSPyECObjects.PropertyLayout) -> str:
         ...
     
-    def GetAccessString(*args, **kwargs):
+    def GetAccessString(self: MSPyECObjects.PropertyLayout) -> str:
         """
-        GetAccessString(self: MSPyECObjects.PropertyLayout) -> str
-        
         Returns the access string for retrieving this property
         """
         ...
     
-    def GetModifierData(*args, **kwargs):
+    def GetModifierData(self: MSPyECObjects.PropertyLayout) -> int:
         """
-        GetModifierData(self: MSPyECObjects.PropertyLayout) -> int
-        
         Returns the data used with the modifier flag, like the length of a
         fixed-sized string.
         """
         ...
     
-    def GetModifierFlags(*args, **kwargs):
+    def GetModifierFlags(self: MSPyECObjects.PropertyLayout) -> int:
         """
-        GetModifierFlags(self: MSPyECObjects.PropertyLayout) -> int
-        
         Returns the modifier flags that describe this property, which can
         indicate @li that a string should be treated as fixed size @li that a
         string should have a max length @li that a longer fixed size type
@@ -7913,81 +6226,63 @@ class PropertyLayout:
         """
         ...
     
-    def GetNullflagsBitmask(*args, **kwargs):
+    def GetNullflagsBitmask(self: MSPyECObjects.PropertyLayout) -> int:
         """
-        GetNullflagsBitmask(self: MSPyECObjects.PropertyLayout) -> int
-        
         Returns a bit mask that has the a single bit set. It can be used to
         AND with the bitmask at the offset returned by GetNullflagsOffset() to
         determine if the property is NULL.
         """
         ...
     
-    def GetNullflagsOffset(*args, **kwargs):
+    def GetNullflagsOffset(self: MSPyECObjects.PropertyLayout) -> int:
         """
-        GetNullflagsOffset(self: MSPyECObjects.PropertyLayout) -> int
-        
         Returns the offset to Null flags bit mask.
         """
         ...
     
-    def GetOffset(*args, **kwargs):
+    def GetOffset(self: MSPyECObjects.PropertyLayout) -> int:
         """
-        GetOffset(self: MSPyECObjects.PropertyLayout) -> int
-        
         Returns the offset to either the data holding this property's value
         (for fixed-size values) or to the offset at which the property's value
         can be found
         """
         ...
     
-    def GetParentStructIndex(*args, **kwargs):
+    def GetParentStructIndex(self: MSPyECObjects.PropertyLayout) -> int:
         """
-        GetParentStructIndex(self: MSPyECObjects.PropertyLayout) -> int
-        
         Returns the property index of the struct parent of this property. If
         this is a root property an index of zero is returned.
         """
         ...
     
-    def GetSizeInFixedSection(*args, **kwargs):
+    def GetSizeInFixedSection(self: MSPyECObjects.PropertyLayout) -> int:
         """
-        GetSizeInFixedSection(self: MSPyECObjects.PropertyLayout) -> int
-        
         Gets the size required for this PropertyValue in the fixed Section of
         the IECInstance's memory Variable-sized types will have 4 byte
         SecondaryOffset stored in the fixed Section.
         """
         ...
     
-    def GetTypeDescriptor(*args, **kwargs):
+    def GetTypeDescriptor(self: MSPyECObjects.PropertyLayout) -> Bentley.ECN.ECTypeDescriptor:
         """
-        GetTypeDescriptor(self: MSPyECObjects.PropertyLayout) -> Bentley.ECN.ECTypeDescriptor
-        
         Returns an ECTypeDescriptor that defines this property
         """
         ...
     
-    def HoldsCalculatedProperty(*args, **kwargs):
+    def HoldsCalculatedProperty(self: MSPyECObjects.PropertyLayout) -> bool:
         """
-        HoldsCalculatedProperty(self: MSPyECObjects.PropertyLayout) -> bool
-        
         Returns whether this property is actually a Calculated Property
         """
         ...
     
-    def IsFixedSized(*args, **kwargs):
+    def IsFixedSized(self: MSPyECObjects.PropertyLayout) -> bool:
         """
-        IsFixedSized(self: MSPyECObjects.PropertyLayout) -> bool
-        
         Returns whether this is a fixed-size property
         """
         ...
     
-    def IsReadOnlyProperty(*args, **kwargs):
+    def IsReadOnlyProperty(self: MSPyECObjects.PropertyLayout) -> bool:
         """
-        IsReadOnlyProperty(self: MSPyECObjects.PropertyLayout) -> bool
-        
         Returns whether this is a read-only property
         """
         ...
@@ -8023,20 +6318,15 @@ class PropertyLayout:
     def ReadOnlyProperty(arg0: MSPyECObjects.PropertyLayout, arg1: bool) -> bool:
         ...
     
-    def SetReadOnlyProperty(*args, **kwargs):
-        """
-        SetReadOnlyProperty(self: MSPyECObjects.PropertyLayout, mask: bool) -> bool
-        """
+    def SetReadOnlyProperty(self: MSPyECObjects.PropertyLayout, mask: bool) -> bool:
         ...
     
     @property
     def SizeInFixedSection(arg0: MSPyECObjects.PropertyLayout) -> int:
         ...
     
-    def ToString(*args, **kwargs):
+    def ToString(self: MSPyECObjects.PropertyLayout) -> MSPyBentley.WString:
         """
-        ToString(self: MSPyECObjects.PropertyLayout) -> MSPyBentley.WString
-        
         Returns a string containing detailed information about this property's
         characteristics (including access string, type name, offset,
         nullflagsOffset, nullflagsBitmask
@@ -8108,34 +6398,19 @@ class QualifiedECAccessor:
     def ClassName(arg0: MSPyECObjects.QualifiedECAccessor, arg1: str) -> None:
         ...
     
-    def FromAccessString(*args, **kwargs):
-        """
-        FromAccessString(self: MSPyECObjects.QualifiedECAccessor, rootEnabler: Bentley.ECN.ECEnabler, accessString: str) -> bool
-        """
+    def FromAccessString(self: MSPyECObjects.QualifiedECAccessor, rootEnabler: Bentley.ECN.ECEnabler, accessString: str) -> bool:
         ...
     
-    def FromString(*args, **kwargs):
-        """
-        FromString(self: MSPyECObjects.QualifiedECAccessor, str: str) -> bool
-        """
+    def FromString(self: MSPyECObjects.QualifiedECAccessor, str: str) -> bool:
         ...
     
-    def GetAccessString(*args, **kwargs):
-        """
-        GetAccessString(self: MSPyECObjects.QualifiedECAccessor) -> str
-        """
+    def GetAccessString(self: MSPyECObjects.QualifiedECAccessor) -> str:
         ...
     
-    def GetClassName(*args, **kwargs):
-        """
-        GetClassName(self: MSPyECObjects.QualifiedECAccessor) -> str
-        """
+    def GetClassName(self: MSPyECObjects.QualifiedECAccessor) -> str:
         ...
     
-    def GetSchemaName(*args, **kwargs):
-        """
-        GetSchemaName(self: MSPyECObjects.QualifiedECAccessor) -> str
-        """
+    def GetSchemaName(self: MSPyECObjects.QualifiedECAccessor) -> str:
         ...
     
     @property
@@ -8145,28 +6420,16 @@ class QualifiedECAccessor:
     def SchemaName(arg0: MSPyECObjects.QualifiedECAccessor, arg1: str) -> None:
         ...
     
-    def SetAccessString(*args, **kwargs):
-        """
-        SetAccessString(self: MSPyECObjects.QualifiedECAccessor, accessString: str) -> None
-        """
+    def SetAccessString(self: MSPyECObjects.QualifiedECAccessor, accessString: str) -> None:
         ...
     
-    def SetClassName(*args, **kwargs):
-        """
-        SetClassName(self: MSPyECObjects.QualifiedECAccessor, name: str) -> None
-        """
+    def SetClassName(self: MSPyECObjects.QualifiedECAccessor, name: str) -> None:
         ...
     
-    def SetSchemaName(*args, **kwargs):
-        """
-        SetSchemaName(self: MSPyECObjects.QualifiedECAccessor, name: str) -> None
-        """
+    def SetSchemaName(self: MSPyECObjects.QualifiedECAccessor, name: str) -> None:
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.QualifiedECAccessor) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.QualifiedECAccessor) -> MSPyBentley.WString:
         ...
     
     def __init__(*args, **kwargs):
@@ -8184,60 +6447,40 @@ class RelationshipCardinality:
     None
     """
 
-    def GetLowerLimit(*args, **kwargs):
-        """
-        GetLowerLimit(self: MSPyECObjects.RelationshipCardinality) -> int
-        """
+    def GetLowerLimit(self: MSPyECObjects.RelationshipCardinality) -> int:
         ...
     
-    def GetUpperLimit(*args, **kwargs):
-        """
-        GetUpperLimit(self: MSPyECObjects.RelationshipCardinality) -> int
-        """
+    def GetUpperLimit(self: MSPyECObjects.RelationshipCardinality) -> int:
         ...
     
-    def IsUpperLimitUnbounded(*args, **kwargs):
-        """
-        IsUpperLimitUnbounded(self: MSPyECObjects.RelationshipCardinality) -> bool
-        """
+    def IsUpperLimitUnbounded(self: MSPyECObjects.RelationshipCardinality) -> bool:
         ...
     
     @property
     def LowerLimit(arg0: MSPyECObjects.RelationshipCardinality) -> int:
         ...
     
-    def OneMany(*args, **kwargs):
-        """
-        OneMany() -> MSPyECObjects.RelationshipCardinality
-        """
+    @staticmethod
+    def OneMany() -> MSPyECObjects.RelationshipCardinality:
         ...
     
-    def OneOne(*args, **kwargs):
-        """
-        OneOne() -> MSPyECObjects.RelationshipCardinality
-        """
+    @staticmethod
+    def OneOne() -> MSPyECObjects.RelationshipCardinality:
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.RelationshipCardinality) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.RelationshipCardinality) -> MSPyBentley.WString:
         ...
     
     @property
     def UpperLimit(arg0: MSPyECObjects.RelationshipCardinality) -> int:
         ...
     
-    def ZeroMany(*args, **kwargs):
-        """
-        ZeroMany() -> MSPyECObjects.RelationshipCardinality
-        """
+    @staticmethod
+    def ZeroMany() -> MSPyECObjects.RelationshipCardinality:
         ...
     
-    def ZeroOne(*args, **kwargs):
-        """
-        ZeroOne() -> MSPyECObjects.RelationshipCardinality
-        """
+    @staticmethod
+    def ZeroOne() -> MSPyECObjects.RelationshipCardinality:
         ...
     
     def __init__(*args, **kwargs):
@@ -8255,10 +6498,8 @@ class SchemaKey:
     None
     """
 
-    def ParseSchemaFullName(*args, **kwargs):
-        """
-        ParseSchemaFullName(key: MSPyECObjects.SchemaKey, schemaFullName: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    @staticmethod
+    def ParseSchemaFullName(key: MSPyECObjects.SchemaKey, schemaFullName: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def __init__(*args, **kwargs):
@@ -8304,16 +6545,10 @@ class SchemaKeyToSchemaBPair:
     None
     """
 
-    def GetFirst(*args, **kwargs):
-        """
-        GetFirst(self: MSPyECObjects.SchemaKeyToSchemaBPair) -> MSPyECObjects.SchemaKey
-        """
+    def GetFirst(self: MSPyECObjects.SchemaKeyToSchemaBPair) -> MSPyECObjects.SchemaKey:
         ...
     
-    def GetSecond(*args, **kwargs):
-        """
-        GetSecond(self: MSPyECObjects.SchemaKeyToSchemaBPair) -> MSPyECObjects.ECSchema
-        """
+    def GetSecond(self: MSPyECObjects.SchemaKeyToSchemaBPair) -> MSPyECObjects.ECSchema:
         ...
     
     def __init__(*args, **kwargs):
@@ -8331,10 +6566,8 @@ class SchemaLayout:
     None
     """
 
-    def AddClassLayout(*args, **kwargs):
+    def AddClassLayout(self: MSPyECObjects.SchemaLayout, classLayout: MSPyECObjects.ClassLayout, classIndex: int) -> Bentley.BentleyStatus:
         """
-        AddClassLayout(self: MSPyECObjects.SchemaLayout, classLayout: MSPyECObjects.ClassLayout, classIndex: int) -> Bentley.BentleyStatus
-        
         Adds the ClassLayout at the given index
         
         Parameter ``classLayout``:
@@ -8348,10 +6581,8 @@ class SchemaLayout:
         """
         ...
     
-    def FindAvailableClassIndex(*args, **kwargs):
+    def FindAvailableClassIndex(self: MSPyECObjects.SchemaLayout) -> tuple:
         """
-        FindAvailableClassIndex(self: MSPyECObjects.SchemaLayout) -> tuple
-        
         Finds the first available index for adding a class layout
         
         
@@ -8364,10 +6595,8 @@ class SchemaLayout:
         """
         ...
     
-    def FindClassIndex(*args, **kwargs):
+    def FindClassIndex(self: MSPyECObjects.SchemaLayout, className: str) -> tuple:
         """
-        FindClassIndex(self: MSPyECObjects.SchemaLayout, className: str) -> tuple
-        
         Given a classname, tries to find the index of the corresponding
         ClassLayout
         
@@ -8384,10 +6613,8 @@ class SchemaLayout:
         """
         ...
     
-    def FindClassLayout(*args, **kwargs):
+    def FindClassLayout(self: MSPyECObjects.SchemaLayout, className: str) -> MSPyECObjects.ClassLayout:
         """
-        FindClassLayout(self: MSPyECObjects.SchemaLayout, className: str) -> MSPyECObjects.ClassLayout
-        
         Given a classname, tries to find the corresponding ClassLayout
         
         Parameter ``className``:
@@ -8395,10 +6622,8 @@ class SchemaLayout:
         """
         ...
     
-    def GetClassLayout(*args, **kwargs):
+    def GetClassLayout(self: MSPyECObjects.SchemaLayout, classIndex: int) -> MSPyECObjects.ClassLayout:
         """
-        GetClassLayout(self: MSPyECObjects.SchemaLayout, classIndex: int) -> MSPyECObjects.ClassLayout
-        
         Returns the ClassLayout at the given index
         
         Parameter ``classIndex``:
@@ -8410,10 +6635,8 @@ class SchemaLayout:
         """
         ...
     
-    def GetMaxIndex(*args, **kwargs):
+    def GetMaxIndex(self: MSPyECObjects.SchemaLayout) -> int:
         """
-        GetMaxIndex(self: MSPyECObjects.SchemaLayout) -> int
-        
         Returns the max index in the ClassLayout
         
         Remark:
@@ -8429,18 +6652,14 @@ class SchemaLayout:
         """
         ...
     
-    def GetSchemaIndex(*args, **kwargs):
+    def GetSchemaIndex(self: MSPyECObjects.SchemaLayout) -> int:
         """
-        GetSchemaIndex(self: MSPyECObjects.SchemaLayout) -> int
-        
         Gets the SchemaIndex of this particular SchemaLayout.
         """
         ...
     
-    def IsEmpty(*args, **kwargs):
+    def IsEmpty(self: MSPyECObjects.SchemaLayout) -> bool:
         """
-        IsEmpty(self: MSPyECObjects.SchemaLayout) -> bool
-        
         Returns whether or not this SchemaLayout has any ClassLayouts defined.
         """
         ...
@@ -8449,10 +6668,8 @@ class SchemaLayout:
     def MaxIndex(arg0: MSPyECObjects.SchemaLayout) -> int:
         ...
     
-    def ReplaceClassLayout(*args, **kwargs):
+    def ReplaceClassLayout(self: MSPyECObjects.SchemaLayout, classLayout: MSPyECObjects.ClassLayout, classIndex: int) -> Bentley.BentleyStatus:
         """
-        ReplaceClassLayout(self: MSPyECObjects.SchemaLayout, classLayout: MSPyECObjects.ClassLayout, classIndex: int) -> Bentley.BentleyStatus
-        
         Replaces the ClassLayout at the given index
         
         Parameter ``classLayout``:
@@ -8481,22 +6698,13 @@ class SchemaMapExact:
     def __init__(self: MSPyECObjects.SchemaMapExact) -> None:
         ...
     
-    def items(*args, **kwargs):
-        """
-        items(self: MSPyECObjects.SchemaMapExact) -> MSPyECObjects.ItemsView[SchemaMapExact]
-        """
+    def items(self: MSPyECObjects.SchemaMapExact) -> MSPyECObjects.ItemsView[SchemaMapExact]:
         ...
     
-    def keys(*args, **kwargs):
-        """
-        keys(self: MSPyECObjects.SchemaMapExact) -> MSPyECObjects.KeysView[SchemaMapExact]
-        """
+    def keys(self: MSPyECObjects.SchemaMapExact) -> MSPyECObjects.KeysView[SchemaMapExact]:
         ...
     
-    def values(*args, **kwargs):
-        """
-        values(self: MSPyECObjects.SchemaMapExact) -> MSPyECObjects.ValuesView[SchemaMapExact]
-        """
+    def values(self: MSPyECObjects.SchemaMapExact) -> MSPyECObjects.ValuesView[SchemaMapExact]:
         ...
     
 class SchemaMatchType:
@@ -8536,16 +6744,10 @@ class SchemaNameClassNamePair:
     None
     """
 
-    def Parse(*args, **kwargs):
-        """
-        Parse(self: MSPyECObjects.SchemaNameClassNamePair, schemaAndClassNameSeparatedByColon: MSPyBentley.WString) -> bool
-        """
+    def Parse(self: MSPyECObjects.SchemaNameClassNamePair, schemaAndClassNameSeparatedByColon: MSPyBentley.WString) -> bool:
         ...
     
-    def ToColonSeparatedString(*args, **kwargs):
-        """
-        ToColonSeparatedString(self: MSPyECObjects.SchemaNameClassNamePair) -> MSPyBentley.WString
-        """
+    def ToColonSeparatedString(self: MSPyECObjects.SchemaNameClassNamePair) -> MSPyBentley.WString:
         ...
     
     def __init__(*args, **kwargs):
@@ -8593,33 +6795,26 @@ class SchemaNameClassNamePairArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyECObjects.SchemaNameClassNamePairArray, x: MSPyECObjects.SchemaNameClassNamePair) -> None:
         """
-        append(self: MSPyECObjects.SchemaNameClassNamePairArray, x: MSPyECObjects.SchemaNameClassNamePair) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyECObjects.SchemaNameClassNamePairArray) -> None:
         """
-        clear(self: MSPyECObjects.SchemaNameClassNamePairArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyECObjects.SchemaNameClassNamePairArray, x: MSPyECObjects.SchemaNameClassNamePair) -> int:
         """
-        count(self: MSPyECObjects.SchemaNameClassNamePairArray, x: MSPyECObjects.SchemaNameClassNamePair) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyECObjects.SchemaNameClassNamePairArray, L: MSPyECObjects.SchemaNameClassNamePairArray) -> None
@@ -8632,17 +6827,14 @@ class SchemaNameClassNamePairArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyECObjects.SchemaNameClassNamePairArray, i: int, x: MSPyECObjects.SchemaNameClassNamePair) -> None:
         """
-        insert(self: MSPyECObjects.SchemaNameClassNamePairArray, i: int, x: MSPyECObjects.SchemaNameClassNamePair) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyECObjects.SchemaNameClassNamePairArray) -> MSPyECObjects.SchemaNameClassNamePair
@@ -8655,10 +6847,8 @@ class SchemaNameClassNamePairArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyECObjects.SchemaNameClassNamePairArray, x: MSPyECObjects.SchemaNameClassNamePair) -> None:
         """
-        remove(self: MSPyECObjects.SchemaNameClassNamePairArray, x: MSPyECObjects.SchemaNameClassNamePair) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -8752,82 +6942,43 @@ class StandaloneECEnabler:
     def ClassLayout(arg0: MSPyECObjects.StandaloneECEnabler) -> MSPyECObjects.ClassLayout:
         ...
     
-    def CreateInstance(*args, **kwargs):
-        """
-        CreateInstance(self: MSPyECObjects.StandaloneECEnabler, minimumInitialSize: int = 0) -> MSPyECObjects.StandaloneECInstance
-        """
+    def CreateInstance(self: MSPyECObjects.StandaloneECEnabler, minimumInitialSize: int = 0) -> MSPyECObjects.StandaloneECInstance:
         ...
     
-    def GetAccessString(*args, **kwargs):
-        """
-        GetAccessString(self: MSPyECObjects.ECEnabler, propertyIndex: int) -> tuple
-        """
+    def GetAccessString(self: MSPyECObjects.ECEnabler, propertyIndex: int) -> tuple:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.ECClass
-        """
+    def GetClass(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.ECClass:
         ...
     
-    def GetClassLayout(*args, **kwargs):
-        """
-        GetClassLayout(self: MSPyECObjects.StandaloneECEnabler) -> MSPyECObjects.ClassLayout
-        """
+    def GetClassLayout(self: MSPyECObjects.StandaloneECEnabler) -> MSPyECObjects.ClassLayout:
         ...
     
-    def GetEnablerForStructArrayMember(*args, **kwargs):
-        """
-        GetEnablerForStructArrayMember(self: MSPyECObjects.ECEnabler, schemaKey: MSPyECObjects.SchemaKey, className: str) -> Bentley.ECN.StandaloneECEnabler
-        """
+    def GetEnablerForStructArrayMember(self: MSPyECObjects.ECEnabler, schemaKey: MSPyECObjects.SchemaKey, className: str) -> Bentley.ECN.StandaloneECEnabler:
         ...
     
-    def GetFirstPropertyIndex(*args, **kwargs):
-        """
-        GetFirstPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int) -> int
-        """
+    def GetFirstPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int) -> int:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECEnabler) -> str
-        """
+    def GetName(self: MSPyECObjects.ECEnabler) -> str:
         ...
     
-    def GetNextPropertyIndex(*args, **kwargs):
-        """
-        GetNextPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int, inputIndex: int) -> int
-        """
+    def GetNextPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int, inputIndex: int) -> int:
         ...
     
-    def GetParentPropertyIndex(*args, **kwargs):
-        """
-        GetParentPropertyIndex(self: MSPyECObjects.ECEnabler, childIndex: int) -> int
-        """
+    def GetParentPropertyIndex(self: MSPyECObjects.ECEnabler, childIndex: int) -> int:
         ...
     
-    def GetPropertyIndex(*args, **kwargs):
-        """
-        GetPropertyIndex(self: MSPyECObjects.ECEnabler, accessString: str) -> tuple
-        """
+    def GetPropertyIndex(self: MSPyECObjects.ECEnabler, accessString: str) -> tuple:
         ...
     
-    def GetPropertyIndices(*args, **kwargs):
-        """
-        GetPropertyIndices(self: MSPyECObjects.ECEnabler, indices: MSPyBentley.UInt32Array, parentIndex: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetPropertyIndices(self: MSPyECObjects.ECEnabler, indices: MSPyBentley.UInt32Array, parentIndex: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetStandaloneEnablerLocater(*args, **kwargs):
-        """
-        GetStandaloneEnablerLocater(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.IStandaloneEnablerLocater
-        """
+    def GetStandaloneEnablerLocater(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.IStandaloneEnablerLocater:
         ...
     
-    def HasChildProperties(*args, **kwargs):
-        """
-        HasChildProperties(self: MSPyECObjects.ECEnabler, parentIndex: int) -> bool
-        """
+    def HasChildProperties(self: MSPyECObjects.ECEnabler, parentIndex: int) -> bool:
         ...
     
     @property
@@ -8848,7 +6999,6 @@ class StandaloneECInstance:
 
     def AddArrayElements(*args, **kwargs):
         """
-        AddArrayElements(*args, **kwargs)
         Overloaded function.
         
         1. AddArrayElements(self: MSPyECObjects.IECInstance, accessString: str, index: int) -> MSPyECObjects.ECObjectsStatus
@@ -8857,15 +7007,11 @@ class StandaloneECInstance:
         """
         ...
     
-    def AsMemoryECInstance(*args, **kwargs):
-        """
-        AsMemoryECInstance(self: MSPyECObjects.IECInstance) -> Bentley.ECN.MemoryECInstanceBase
-        """
+    def AsMemoryECInstance(self: MSPyECObjects.IECInstance) -> Bentley.ECN.MemoryECInstanceBase:
         ...
     
     def ChangeValue(*args, **kwargs):
         """
-        ChangeValue(*args, **kwargs)
         Overloaded function.
         
         1. ChangeValue(self: MSPyECObjects.IECInstance, accessString: str, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
@@ -8878,10 +7024,7 @@ class StandaloneECInstance:
         """
         ...
     
-    def ChangeValuesAllowed(*args, **kwargs):
-        """
-        ChangeValuesAllowed(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def ChangeValuesAllowed(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
     @property
@@ -8890,7 +7033,6 @@ class StandaloneECInstance:
     
     def ClearArray(*args, **kwargs):
         """
-        ClearArray(*args, **kwargs)
         Overloaded function.
         
         1. ClearArray(self: MSPyECObjects.IECInstance, accessString: str) -> MSPyECObjects.ECObjectsStatus
@@ -8899,15 +7041,11 @@ class StandaloneECInstance:
         """
         ...
     
-    def CopyValues(*args, **kwargs):
-        """
-        CopyValues(self: MSPyECObjects.IECInstance, source: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def CopyValues(self: MSPyECObjects.IECInstance, source: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def CreateCopyThroughSerialization(*args, **kwargs):
         """
-        CreateCopyThroughSerialization(*args, **kwargs)
         Overloaded function.
         
         1. CreateCopyThroughSerialization(self: MSPyECObjects.IECInstance) -> MSPyECObjects.IECInstance
@@ -8916,10 +7054,8 @@ class StandaloneECInstance:
         """
         ...
     
-    def Duplicate(*args, **kwargs):
-        """
-        Duplicate(instance: MSPyECObjects.IECInstance) -> MSPyECObjects.StandaloneECInstance
-        """
+    @staticmethod
+    def Duplicate(instance: MSPyECObjects.IECInstance) -> MSPyECObjects.StandaloneECInstance:
         ...
     
     @property
@@ -8930,51 +7066,29 @@ class StandaloneECInstance:
     def Enabler(arg0: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECClass
-        """
+    def GetClass(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECClass:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetECDBuffer(*args, **kwargs):
-        """
-        GetECDBuffer(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECDBuffer
-        """
+    def GetECDBuffer(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECDBuffer:
         ...
     
-    def GetEnabler(*args, **kwargs):
-        """
-        GetEnabler(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler
-        """
+    def GetEnabler(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetInstanceId(*args, **kwargs):
-        """
-        GetInstanceId(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString
-        """
+    def GetInstanceId(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def GetInstanceIdForSerialization(*args, **kwargs):
-        """
-        GetInstanceIdForSerialization(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString
-        """
+    def GetInstanceIdForSerialization(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def GetOffsetToIECInstance(*args, **kwargs):
-        """
-        GetOffsetToIECInstance(self: MSPyECObjects.IECInstance) -> int
-        """
+    def GetOffsetToIECInstance(self: MSPyECObjects.IECInstance) -> int:
         ...
     
     def GetValue(*args, **kwargs):
         """
-        GetValue(*args, **kwargs)
         Overloaded function.
         
         1. GetValue(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessString: str) -> MSPyECObjects.ECObjectsStatus
@@ -8987,15 +7101,11 @@ class StandaloneECInstance:
         """
         ...
     
-    def GetValueUsingAccessor(*args, **kwargs):
-        """
-        GetValueUsingAccessor(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessor: Bentley.ECN.ECValueAccessor) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetValueUsingAccessor(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessor: Bentley.ECN.ECValueAccessor) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def InsertArrayElements(*args, **kwargs):
         """
-        InsertArrayElements(*args, **kwargs)
         Overloaded function.
         
         1. InsertArrayElements(self: MSPyECObjects.IECInstance, accessString: str, index: int, size: int) -> MSPyECObjects.ECObjectsStatus
@@ -9015,15 +7125,11 @@ class StandaloneECInstance:
     def InstanceIdForSerialization(arg0: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def IsFixedArrayProperty(*args, **kwargs):
-        """
-        IsFixedArrayProperty(instance: MSPyECObjects.IECInstance, accessString: str) -> tuple
-        """
+    def IsFixedArrayProperty(instance: MSPyECObjects.IECInstance, accessString: str) -> tuple:
         ...
     
     def IsPropertyNull(*args, **kwargs):
         """
-        IsPropertyNull(*args, **kwargs)
         Overloaded function.
         
         1. IsPropertyNull(self: MSPyECObjects.IECInstance, accessString: str) -> tuple
@@ -9038,7 +7144,6 @@ class StandaloneECInstance:
     
     def IsPropertyReadOnly(*args, **kwargs):
         """
-        IsPropertyReadOnly(*args, **kwargs)
         Overloaded function.
         
         1. IsPropertyReadOnly(self: MSPyECObjects.IECInstance, accessString: str) -> bool
@@ -9047,31 +7152,21 @@ class StandaloneECInstance:
         """
         ...
     
-    def IsReadOnly(*args, **kwargs):
-        """
-        IsReadOnly(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def IsReadOnly(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
     @property
     def OffsetToIECInstance(arg0: MSPyECObjects.IECInstance) -> int:
         ...
     
-    def ReadFromXmlFile(*args, **kwargs):
-        """
-        ReadFromXmlFile(fileName: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple
-        """
+    def ReadFromXmlFile(fileName: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple:
         ...
     
-    def ReadFromXmlString(*args, **kwargs):
-        """
-        ReadFromXmlString(xmlString: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple
-        """
+    def ReadFromXmlString(xmlString: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple:
         ...
     
     def RemoveArrayElement(*args, **kwargs):
         """
-        RemoveArrayElement(*args, **kwargs)
         Overloaded function.
         
         1. RemoveArrayElement(self: MSPyECObjects.IECInstance, accessString: str, index: int) -> MSPyECObjects.ECObjectsStatus
@@ -9080,27 +7175,17 @@ class StandaloneECInstance:
         """
         ...
     
-    def SaveOnlyLoadedPropertiesToXml(*args, **kwargs):
-        """
-        SaveOnlyLoadedPropertiesToXml(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def SaveOnlyLoadedPropertiesToXml(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetInstanceId(*args, **kwargs):
-        """
-        SetInstanceId(self: MSPyECObjects.IECInstance, instanceId: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetInstanceId(self: MSPyECObjects.IECInstance, instanceId: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetValue(*args, **kwargs):
         """
-        SetValue(*args, **kwargs)
         Overloaded function.
         
         1. SetValue(self: MSPyECObjects.IECInstance, accessString: str, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
@@ -9113,27 +7198,17 @@ class StandaloneECInstance:
         """
         ...
     
-    def SetValueUsingAccessor(*args, **kwargs):
-        """
-        SetValueUsingAccessor(self: MSPyECObjects.IECInstance, accessor: Bentley.ECN.ECValueAccessor, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetValueUsingAccessor(self: MSPyECObjects.IECInstance, accessor: Bentley.ECN.ECValueAccessor, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.IECInstance, indent: str) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.IECInstance, indent: str) -> MSPyBentley.WString:
         ...
     
-    def WriteToXmlFile(*args, **kwargs):
-        """
-        WriteToXmlFile(self: MSPyECObjects.IECInstance, fileName: str, writeInstanceId: bool, utf16: bool) -> MSPyECObjects.InstanceWriteStatus
-        """
+    def WriteToXmlFile(self: MSPyECObjects.IECInstance, fileName: str, writeInstanceId: bool, utf16: bool) -> MSPyECObjects.InstanceWriteStatus:
         ...
     
     def WriteToXmlString(*args, **kwargs):
         """
-        WriteToXmlString(*args, **kwargs)
         Overloaded function.
         
         1. WriteToXmlString(self: MSPyECObjects.IECInstance, ecInstanceXml: MSPyBentley.Utf8String, isStandAlone: bool, writeInsanceId: bool) -> MSPyECObjects.InstanceWriteStatus
@@ -9167,33 +7242,26 @@ class StandaloneECInstancePtrArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyECObjects.StandaloneECInstancePtrArray, x: MSPyECObjects.StandaloneECInstance) -> None:
         """
-        append(self: MSPyECObjects.StandaloneECInstancePtrArray, x: MSPyECObjects.StandaloneECInstance) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyECObjects.StandaloneECInstancePtrArray) -> None:
         """
-        clear(self: MSPyECObjects.StandaloneECInstancePtrArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyECObjects.StandaloneECInstancePtrArray, x: MSPyECObjects.StandaloneECInstance) -> int:
         """
-        count(self: MSPyECObjects.StandaloneECInstancePtrArray, x: MSPyECObjects.StandaloneECInstance) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyECObjects.StandaloneECInstancePtrArray, L: MSPyECObjects.StandaloneECInstancePtrArray) -> None
@@ -9206,17 +7274,14 @@ class StandaloneECInstancePtrArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyECObjects.StandaloneECInstancePtrArray, i: int, x: MSPyECObjects.StandaloneECInstance) -> None:
         """
-        insert(self: MSPyECObjects.StandaloneECInstancePtrArray, i: int, x: MSPyECObjects.StandaloneECInstance) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyECObjects.StandaloneECInstancePtrArray) -> MSPyECObjects.StandaloneECInstance
@@ -9229,10 +7294,8 @@ class StandaloneECInstancePtrArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyECObjects.StandaloneECInstancePtrArray, x: MSPyECObjects.StandaloneECInstance) -> None:
         """
-        remove(self: MSPyECObjects.StandaloneECInstancePtrArray, x: MSPyECObjects.StandaloneECInstance) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -9250,98 +7313,53 @@ class StandaloneECRelationshipEnabler:
     def ClassLayout(arg0: MSPyECObjects.StandaloneECEnabler) -> MSPyECObjects.ClassLayout:
         ...
     
-    def CreateInstance(*args, **kwargs):
-        """
-        CreateInstance(self: MSPyECObjects.StandaloneECEnabler, minimumInitialSize: int = 0) -> MSPyECObjects.StandaloneECInstance
-        """
+    def CreateInstance(self: MSPyECObjects.StandaloneECEnabler, minimumInitialSize: int = 0) -> MSPyECObjects.StandaloneECInstance:
         ...
     
-    def CreateRelationshipInstance(*args, **kwargs):
-        """
-        CreateRelationshipInstance(self: MSPyECObjects.StandaloneECRelationshipEnabler) -> MSPyECObjects.StandaloneECRelationshipInstance
-        """
+    def CreateRelationshipInstance(self: MSPyECObjects.StandaloneECRelationshipEnabler) -> MSPyECObjects.StandaloneECRelationshipInstance:
         ...
     
     @property
     def ECEnabler(arg0: MSPyECObjects.StandaloneECRelationshipEnabler) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetAccessString(*args, **kwargs):
-        """
-        GetAccessString(self: MSPyECObjects.ECEnabler, propertyIndex: int) -> tuple
-        """
+    def GetAccessString(self: MSPyECObjects.ECEnabler, propertyIndex: int) -> tuple:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.ECClass
-        """
+    def GetClass(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.ECClass:
         ...
     
-    def GetClassLayout(*args, **kwargs):
-        """
-        GetClassLayout(self: MSPyECObjects.StandaloneECEnabler) -> MSPyECObjects.ClassLayout
-        """
+    def GetClassLayout(self: MSPyECObjects.StandaloneECEnabler) -> MSPyECObjects.ClassLayout:
         ...
     
-    def GetECEnabler(*args, **kwargs):
-        """
-        GetECEnabler(self: MSPyECObjects.StandaloneECRelationshipEnabler) -> MSPyECObjects.ECEnabler
-        """
+    def GetECEnabler(self: MSPyECObjects.StandaloneECRelationshipEnabler) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetEnablerForStructArrayMember(*args, **kwargs):
-        """
-        GetEnablerForStructArrayMember(self: MSPyECObjects.ECEnabler, schemaKey: MSPyECObjects.SchemaKey, className: str) -> Bentley.ECN.StandaloneECEnabler
-        """
+    def GetEnablerForStructArrayMember(self: MSPyECObjects.ECEnabler, schemaKey: MSPyECObjects.SchemaKey, className: str) -> Bentley.ECN.StandaloneECEnabler:
         ...
     
-    def GetFirstPropertyIndex(*args, **kwargs):
-        """
-        GetFirstPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int) -> int
-        """
+    def GetFirstPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int) -> int:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECEnabler) -> str
-        """
+    def GetName(self: MSPyECObjects.ECEnabler) -> str:
         ...
     
-    def GetNextPropertyIndex(*args, **kwargs):
-        """
-        GetNextPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int, inputIndex: int) -> int
-        """
+    def GetNextPropertyIndex(self: MSPyECObjects.ECEnabler, parentIndex: int, inputIndex: int) -> int:
         ...
     
-    def GetParentPropertyIndex(*args, **kwargs):
-        """
-        GetParentPropertyIndex(self: MSPyECObjects.ECEnabler, childIndex: int) -> int
-        """
+    def GetParentPropertyIndex(self: MSPyECObjects.ECEnabler, childIndex: int) -> int:
         ...
     
-    def GetPropertyIndex(*args, **kwargs):
-        """
-        GetPropertyIndex(self: MSPyECObjects.ECEnabler, accessString: str) -> tuple
-        """
+    def GetPropertyIndex(self: MSPyECObjects.ECEnabler, accessString: str) -> tuple:
         ...
     
-    def GetPropertyIndices(*args, **kwargs):
-        """
-        GetPropertyIndices(self: MSPyECObjects.ECEnabler, indices: MSPyBentley.UInt32Array, parentIndex: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetPropertyIndices(self: MSPyECObjects.ECEnabler, indices: MSPyBentley.UInt32Array, parentIndex: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetStandaloneEnablerLocater(*args, **kwargs):
-        """
-        GetStandaloneEnablerLocater(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.IStandaloneEnablerLocater
-        """
+    def GetStandaloneEnablerLocater(self: MSPyECObjects.ECEnabler) -> MSPyECObjects.IStandaloneEnablerLocater:
         ...
     
-    def HasChildProperties(*args, **kwargs):
-        """
-        HasChildProperties(self: MSPyECObjects.ECEnabler, parentIndex: int) -> bool
-        """
+    def HasChildProperties(self: MSPyECObjects.ECEnabler, parentIndex: int) -> bool:
         ...
     
     @property
@@ -9369,7 +7387,6 @@ class StandaloneECRelationshipInstance:
 
     def AddArrayElements(*args, **kwargs):
         """
-        AddArrayElements(*args, **kwargs)
         Overloaded function.
         
         1. AddArrayElements(self: MSPyECObjects.IECInstance, accessString: str, index: int) -> MSPyECObjects.ECObjectsStatus
@@ -9378,15 +7395,11 @@ class StandaloneECRelationshipInstance:
         """
         ...
     
-    def AsMemoryECInstance(*args, **kwargs):
-        """
-        AsMemoryECInstance(self: MSPyECObjects.IECInstance) -> Bentley.ECN.MemoryECInstanceBase
-        """
+    def AsMemoryECInstance(self: MSPyECObjects.IECInstance) -> Bentley.ECN.MemoryECInstanceBase:
         ...
     
     def ChangeValue(*args, **kwargs):
         """
-        ChangeValue(*args, **kwargs)
         Overloaded function.
         
         1. ChangeValue(self: MSPyECObjects.IECInstance, accessString: str, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
@@ -9399,10 +7412,7 @@ class StandaloneECRelationshipInstance:
         """
         ...
     
-    def ChangeValuesAllowed(*args, **kwargs):
-        """
-        ChangeValuesAllowed(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def ChangeValuesAllowed(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
     @property
@@ -9411,7 +7421,6 @@ class StandaloneECRelationshipInstance:
     
     def ClearArray(*args, **kwargs):
         """
-        ClearArray(*args, **kwargs)
         Overloaded function.
         
         1. ClearArray(self: MSPyECObjects.IECInstance, accessString: str) -> MSPyECObjects.ECObjectsStatus
@@ -9420,15 +7429,11 @@ class StandaloneECRelationshipInstance:
         """
         ...
     
-    def CopyValues(*args, **kwargs):
-        """
-        CopyValues(self: MSPyECObjects.IECInstance, source: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def CopyValues(self: MSPyECObjects.IECInstance, source: MSPyECObjects.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def CreateCopyThroughSerialization(*args, **kwargs):
         """
-        CreateCopyThroughSerialization(*args, **kwargs)
         Overloaded function.
         
         1. CreateCopyThroughSerialization(self: MSPyECObjects.IECInstance) -> MSPyECObjects.IECInstance
@@ -9445,99 +7450,53 @@ class StandaloneECRelationshipInstance:
     def Enabler(arg0: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECClass
-        """
+    def GetClass(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECClass:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetECDBuffer(*args, **kwargs):
-        """
-        GetECDBuffer(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECDBuffer
-        """
+    def GetECDBuffer(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECDBuffer:
         ...
     
-    def GetEnabler(*args, **kwargs):
-        """
-        GetEnabler(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler
-        """
+    def GetEnabler(self: MSPyECObjects.IECInstance) -> MSPyECObjects.ECEnabler:
         ...
     
-    def GetInstanceId(*args, **kwargs):
-        """
-        GetInstanceId(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString
-        """
+    def GetInstanceId(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def GetInstanceIdForSerialization(*args, **kwargs):
-        """
-        GetInstanceIdForSerialization(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString
-        """
+    def GetInstanceIdForSerialization(self: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def GetOffsetToIECInstance(*args, **kwargs):
-        """
-        GetOffsetToIECInstance(self: MSPyECObjects.IECInstance) -> int
-        """
+    def GetOffsetToIECInstance(self: MSPyECObjects.IECInstance) -> int:
         ...
     
-    def GetRelationshipClass(*args, **kwargs):
-        """
-        GetRelationshipClass(self: MSPyECObjects.StandaloneECRelationshipInstance) -> MSPyECObjects.ECRelationshipClass
-        """
+    def GetRelationshipClass(self: MSPyECObjects.StandaloneECRelationshipInstance) -> MSPyECObjects.ECRelationshipClass:
         ...
     
-    def GetRelationshipEnabler(*args, **kwargs):
-        """
-        GetRelationshipEnabler(self: MSPyECObjects.StandaloneECRelationshipInstance) -> Bentley.ECN.StandaloneECRelationshipEnabler
-        """
+    def GetRelationshipEnabler(self: MSPyECObjects.StandaloneECRelationshipInstance) -> Bentley.ECN.StandaloneECRelationshipEnabler:
         ...
     
-    def GetSource(*args, **kwargs):
-        """
-        GetSource(self: MSPyECObjects.IECRelationshipInstance) -> MSPyECObjects.IECInstance
-        """
+    def GetSource(self: MSPyECObjects.IECRelationshipInstance) -> MSPyECObjects.IECInstance:
         ...
     
-    def GetSourceAssociatedString(*args, **kwargs):
-        """
-        GetSourceAssociatedString(self: MSPyECObjects.StandaloneECRelationshipInstance) -> str
-        """
+    def GetSourceAssociatedString(self: MSPyECObjects.StandaloneECRelationshipInstance) -> str:
         ...
     
-    def GetSourceOrderId(*args, **kwargs):
-        """
-        GetSourceOrderId(self: MSPyECObjects.IECRelationshipInstance) -> tuple
-        """
+    def GetSourceOrderId(self: MSPyECObjects.IECRelationshipInstance) -> tuple:
         ...
     
-    def GetTarget(*args, **kwargs):
-        """
-        GetTarget(self: MSPyECObjects.IECRelationshipInstance) -> MSPyECObjects.IECInstance
-        """
+    def GetTarget(self: MSPyECObjects.IECRelationshipInstance) -> MSPyECObjects.IECInstance:
         ...
     
-    def GetTargetAssociatedString(*args, **kwargs):
-        """
-        GetTargetAssociatedString(self: MSPyECObjects.StandaloneECRelationshipInstance) -> str
-        """
+    def GetTargetAssociatedString(self: MSPyECObjects.StandaloneECRelationshipInstance) -> str:
         ...
     
-    def GetTargetOrderId(*args, **kwargs):
-        """
-        GetTargetOrderId(self: MSPyECObjects.IECRelationshipInstance) -> tuple
-        """
+    def GetTargetOrderId(self: MSPyECObjects.IECRelationshipInstance) -> tuple:
         ...
     
     def GetValue(*args, **kwargs):
         """
-        GetValue(*args, **kwargs)
         Overloaded function.
         
         1. GetValue(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessString: str) -> MSPyECObjects.ECObjectsStatus
@@ -9550,15 +7509,11 @@ class StandaloneECRelationshipInstance:
         """
         ...
     
-    def GetValueUsingAccessor(*args, **kwargs):
-        """
-        GetValueUsingAccessor(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessor: Bentley.ECN.ECValueAccessor) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetValueUsingAccessor(self: MSPyECObjects.IECInstance, value: Bentley.ECN.ECValue, accessor: Bentley.ECN.ECValueAccessor) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def InsertArrayElements(*args, **kwargs):
         """
-        InsertArrayElements(*args, **kwargs)
         Overloaded function.
         
         1. InsertArrayElements(self: MSPyECObjects.IECInstance, accessString: str, index: int, size: int) -> MSPyECObjects.ECObjectsStatus
@@ -9578,15 +7533,11 @@ class StandaloneECRelationshipInstance:
     def InstanceIdForSerialization(arg0: MSPyECObjects.IECInstance) -> MSPyBentley.WString:
         ...
     
-    def IsFixedArrayProperty(*args, **kwargs):
-        """
-        IsFixedArrayProperty(instance: MSPyECObjects.IECInstance, accessString: str) -> tuple
-        """
+    def IsFixedArrayProperty(instance: MSPyECObjects.IECInstance, accessString: str) -> tuple:
         ...
     
     def IsPropertyNull(*args, **kwargs):
         """
-        IsPropertyNull(*args, **kwargs)
         Overloaded function.
         
         1. IsPropertyNull(self: MSPyECObjects.IECInstance, accessString: str) -> tuple
@@ -9601,7 +7552,6 @@ class StandaloneECRelationshipInstance:
     
     def IsPropertyReadOnly(*args, **kwargs):
         """
-        IsPropertyReadOnly(*args, **kwargs)
         Overloaded function.
         
         1. IsPropertyReadOnly(self: MSPyECObjects.IECInstance, accessString: str) -> bool
@@ -9610,32 +7560,20 @@ class StandaloneECRelationshipInstance:
         """
         ...
     
-    def IsReadOnly(*args, **kwargs):
-        """
-        IsReadOnly(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def IsReadOnly(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
     @property
     def OffsetToIECInstance(arg0: MSPyECObjects.IECInstance) -> int:
         ...
     
-    def OrderIdEntries(*args, **kwargs):
-        """
-        OrderIdEntries(self: MSPyECObjects.StandaloneECRelationshipInstance) -> MSPyECObjects.OrderIdEntries
-        """
+    def OrderIdEntries(self: MSPyECObjects.StandaloneECRelationshipInstance) -> MSPyECObjects.OrderIdEntries:
         ...
     
-    def ReadFromXmlFile(*args, **kwargs):
-        """
-        ReadFromXmlFile(fileName: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple
-        """
+    def ReadFromXmlFile(fileName: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple:
         ...
     
-    def ReadFromXmlString(*args, **kwargs):
-        """
-        ReadFromXmlString(xmlString: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple
-        """
+    def ReadFromXmlString(xmlString: str, context: MSPyECObjects.ECInstanceReadContext) -> tuple:
         ...
     
     @property
@@ -9648,7 +7586,6 @@ class StandaloneECRelationshipInstance:
     
     def RemoveArrayElement(*args, **kwargs):
         """
-        RemoveArrayElement(*args, **kwargs)
         Overloaded function.
         
         1. RemoveArrayElement(self: MSPyECObjects.IECInstance, accessString: str, index: int) -> MSPyECObjects.ECObjectsStatus
@@ -9657,63 +7594,35 @@ class StandaloneECRelationshipInstance:
         """
         ...
     
-    def SaveOnlyLoadedPropertiesToXml(*args, **kwargs):
-        """
-        SaveOnlyLoadedPropertiesToXml(self: MSPyECObjects.IECInstance) -> bool
-        """
+    def SaveOnlyLoadedPropertiesToXml(self: MSPyECObjects.IECInstance) -> bool:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.IECInstance, displayLabel: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetInstanceId(*args, **kwargs):
-        """
-        SetInstanceId(self: MSPyECObjects.IECInstance, instanceId: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetInstanceId(self: MSPyECObjects.IECInstance, instanceId: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetSource(*args, **kwargs):
-        """
-        SetSource(self: MSPyECObjects.IECRelationshipInstance, instance: MSPyECObjects.IECInstance) -> None
-        """
+    def SetSource(self: MSPyECObjects.IECRelationshipInstance, instance: MSPyECObjects.IECInstance) -> None:
         ...
     
-    def SetSourceAssociatedString(*args, **kwargs):
-        """
-        SetSourceAssociatedString(self: MSPyECObjects.StandaloneECRelationshipInstance, string: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetSourceAssociatedString(self: MSPyECObjects.StandaloneECRelationshipInstance, string: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetSourceOrderId(*args, **kwargs):
-        """
-        SetSourceOrderId(self: MSPyECObjects.StandaloneECRelationshipInstance, orderId: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetSourceOrderId(self: MSPyECObjects.StandaloneECRelationshipInstance, orderId: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetTarget(*args, **kwargs):
-        """
-        SetTarget(self: MSPyECObjects.IECRelationshipInstance, instance: MSPyECObjects.IECInstance) -> None
-        """
+    def SetTarget(self: MSPyECObjects.IECRelationshipInstance, instance: MSPyECObjects.IECInstance) -> None:
         ...
     
-    def SetTargetAssociatedString(*args, **kwargs):
-        """
-        SetTargetAssociatedString(self: MSPyECObjects.StandaloneECRelationshipInstance, string: str) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetTargetAssociatedString(self: MSPyECObjects.StandaloneECRelationshipInstance, string: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetTargetOrderId(*args, **kwargs):
-        """
-        SetTargetOrderId(self: MSPyECObjects.StandaloneECRelationshipInstance, orderId: int) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetTargetOrderId(self: MSPyECObjects.StandaloneECRelationshipInstance, orderId: int) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetValue(*args, **kwargs):
         """
-        SetValue(*args, **kwargs)
         Overloaded function.
         
         1. SetValue(self: MSPyECObjects.IECInstance, accessString: str, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
@@ -9726,10 +7635,7 @@ class StandaloneECRelationshipInstance:
         """
         ...
     
-    def SetValueUsingAccessor(*args, **kwargs):
-        """
-        SetValueUsingAccessor(self: MSPyECObjects.IECInstance, accessor: Bentley.ECN.ECValueAccessor, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetValueUsingAccessor(self: MSPyECObjects.IECInstance, accessor: Bentley.ECN.ECValueAccessor, value: Bentley.ECN.ECValue) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -9760,21 +7666,14 @@ class StandaloneECRelationshipInstance:
     def TargetAssociatedString(arg0: MSPyECObjects.StandaloneECRelationshipInstance, arg1: str) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def ToString(*args, **kwargs):
-        """
-        ToString(self: MSPyECObjects.IECInstance, indent: str) -> MSPyBentley.WString
-        """
+    def ToString(self: MSPyECObjects.IECInstance, indent: str) -> MSPyBentley.WString:
         ...
     
-    def WriteToXmlFile(*args, **kwargs):
-        """
-        WriteToXmlFile(self: MSPyECObjects.IECInstance, fileName: str, writeInstanceId: bool, utf16: bool) -> MSPyECObjects.InstanceWriteStatus
-        """
+    def WriteToXmlFile(self: MSPyECObjects.IECInstance, fileName: str, writeInstanceId: bool, utf16: bool) -> MSPyECObjects.InstanceWriteStatus:
         ...
     
     def WriteToXmlString(*args, **kwargs):
         """
-        WriteToXmlString(*args, **kwargs)
         Overloaded function.
         
         1. WriteToXmlString(self: MSPyECObjects.IECInstance, ecInstanceXml: MSPyBentley.Utf8String, isStandAlone: bool, writeInsanceId: bool) -> MSPyECObjects.InstanceWriteStatus
@@ -9794,40 +7693,28 @@ class StandardCustomAttributeHelper:
     None
     """
 
-    def CreateCustomAttributeInstance(*args, **kwargs):
-        """
-        CreateCustomAttributeInstance(atributeName: str) -> MSPyECObjects.IECInstance
-        """
+    @staticmethod
+    def CreateCustomAttributeInstance(atributeName: str) -> MSPyECObjects.IECInstance:
         ...
     
-    def GetCustomAttributeClass(*args, **kwargs):
-        """
-        GetCustomAttributeClass(attributeName: str) -> MSPyECObjects.ECClass
-        """
+    @staticmethod
+    def GetCustomAttributeClass(attributeName: str) -> MSPyECObjects.ECClass:
         ...
     
-    def IsDynamicSchema(*args, **kwargs):
-        """
-        IsDynamicSchema(schema: MSPyECObjects.ECSchema) -> bool
-        """
+    @staticmethod
+    def IsDynamicSchema(schema: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def IsSystemSchema(*args, **kwargs):
-        """
-        IsSystemSchema(schema: MSPyECObjects.ECSchema) -> bool
-        """
+    @staticmethod
+    def IsSystemSchema(schema: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def SetIsDynamicSchema(*args, **kwargs):
-        """
-        SetIsDynamicSchema(schema: MSPyECObjects.ECSchema, isDynamicSchema: bool) -> MSPyECObjects.ECObjectsStatus
-        """
+    @staticmethod
+    def SetIsDynamicSchema(schema: MSPyECObjects.ECSchema, isDynamicSchema: bool) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def TryGetDateTimeInfo(*args, **kwargs):
-        """
-        TryGetDateTimeInfo(dateTimeInfo: MSPyECObjects.DateTimeInfo, dateTimeProperty: MSPyECObjects.ECProperty) -> bool
-        """
+    @staticmethod
+    def TryGetDateTimeInfo(dateTimeInfo: MSPyECObjects.DateTimeInfo, dateTimeProperty: MSPyECObjects.ECProperty) -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -9869,22 +7756,13 @@ class StructECProperty:
     None
     """
 
-    def AsArrayProperty(*args, **kwargs):
-        """
-        AsArrayProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ArrayECProperty
-        """
+    def AsArrayProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ArrayECProperty:
         ...
     
-    def AsPrimitiveProperty(*args, **kwargs):
-        """
-        AsPrimitiveProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.PrimitiveECProperty
-        """
+    def AsPrimitiveProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.PrimitiveECProperty:
         ...
     
-    def AsStructProperty(*args, **kwargs):
-        """
-        AsStructProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.StructECProperty
-        """
+    def AsStructProperty(self: MSPyECObjects.ECProperty) -> Bentley.ECN.StructECProperty:
         ...
     
     @property
@@ -9912,21 +7790,14 @@ class StructECProperty:
     def DisplayLabel(arg0: MSPyECObjects.ECProperty, arg1: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetBaseProperty(*args, **kwargs):
-        """
-        GetBaseProperty(self: MSPyECObjects.ECProperty) -> MSPyECObjects.ECProperty
-        """
+    def GetBaseProperty(self: MSPyECObjects.ECProperty) -> MSPyECObjects.ECProperty:
         ...
     
-    def GetClass(*args, **kwargs):
-        """
-        GetClass(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ECClass
-        """
+    def GetClass(self: MSPyECObjects.ECProperty) -> Bentley.ECN.ECClass:
         ...
     
     def GetCustomAttribute(*args, **kwargs):
         """
-        GetCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -9937,7 +7808,6 @@ class StructECProperty:
     
     def GetCustomAttributeLocal(*args, **kwargs):
         """
-        GetCustomAttributeLocal(*args, **kwargs)
         Overloaded function.
         
         1. GetCustomAttributeLocal(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -9946,81 +7816,44 @@ class StructECProperty:
         """
         ...
     
-    def GetCustomAttributes(*args, **kwargs):
-        """
-        GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetDescription(*args, **kwargs):
-        """
-        GetDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetDisplayLabel(*args, **kwargs):
-        """
-        GetDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetId(*args, **kwargs):
-        """
-        GetId(self: MSPyECObjects.ECProperty) -> int
-        """
+    def GetId(self: MSPyECObjects.ECProperty) -> int:
         ...
     
-    def GetInvariantDescription(*args, **kwargs):
-        """
-        GetInvariantDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetInvariantDescription(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetInvariantDisplayLabel(*args, **kwargs):
-        """
-        GetInvariantDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetInvariantDisplayLabel(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
-    def GetIsArray(*args, **kwargs):
-        """
-        GetIsArray(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsArray(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsDisplayLabelDefined(*args, **kwargs):
-        """
-        GetIsDisplayLabelDefined(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsDisplayLabelDefined(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsPrimitive(*args, **kwargs):
-        """
-        GetIsPrimitive(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsPrimitive(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsReadOnly(*args, **kwargs):
-        """
-        GetIsReadOnly(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsReadOnly(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetIsStruct(*args, **kwargs):
-        """
-        GetIsStruct(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def GetIsStruct(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def GetName(*args, **kwargs):
-        """
-        GetName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
     def GetPrimaryCustomAttribute(*args, **kwargs):
         """
-        GetPrimaryCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. GetPrimaryCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> Bentley.ECN.IECInstance
@@ -10029,22 +7862,13 @@ class StructECProperty:
         """
         ...
     
-    def GetPrimaryCustomAttributes(*args, **kwargs):
-        """
-        GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable
-        """
+    def GetPrimaryCustomAttributes(self: MSPyECObjects.IECCustomAttributeContainer, includeBase: bool) -> Bentley.ECN.ECCustomAttributeInstanceIterable:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyECObjects.StructECProperty) -> Bentley.ECN.ECClass
-        """
+    def GetType(self: MSPyECObjects.StructECProperty) -> Bentley.ECN.ECClass:
         ...
     
-    def GetTypeName(*args, **kwargs):
-        """
-        GetTypeName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString
-        """
+    def GetTypeName(self: MSPyECObjects.ECProperty) -> MSPyBentley.WString:
         ...
     
     @property
@@ -10063,15 +7887,11 @@ class StructECProperty:
     def IsArray(arg0: MSPyECObjects.ECProperty) -> bool:
         ...
     
-    def IsCalculated(*args, **kwargs):
-        """
-        IsCalculated(self: MSPyECObjects.ECProperty) -> bool
-        """
+    def IsCalculated(self: MSPyECObjects.ECProperty) -> bool:
         ...
     
     def IsDefined(*args, **kwargs):
         """
-        IsDefined(*args, **kwargs)
         Overloaded function.
         
         1. IsDefined(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -10105,7 +7925,6 @@ class StructECProperty:
     
     def RemoveCustomAttribute(*args, **kwargs):
         """
-        RemoveCustomAttribute(*args, **kwargs)
         Overloaded function.
         
         1. RemoveCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, schemaName: MSPyBentley.WString, className: MSPyBentley.WString) -> bool
@@ -10114,39 +7933,23 @@ class StructECProperty:
         """
         ...
     
-    def SetBaseProperty(*args, **kwargs):
-        """
-        SetBaseProperty(self: MSPyECObjects.ECProperty, prop: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetBaseProperty(self: MSPyECObjects.ECProperty, prop: MSPyECObjects.ECProperty) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetCalculatedPropertySpecification(*args, **kwargs):
-        """
-        SetCalculatedPropertySpecification(self: MSPyECObjects.ECProperty, expressionAttribute: Bentley.ECN.IECInstance) -> bool
-        """
+    def SetCalculatedPropertySpecification(self: MSPyECObjects.ECProperty, expressionAttribute: Bentley.ECN.IECInstance) -> bool:
         ...
     
-    def SetCustomAttribute(*args, **kwargs):
-        """
-        SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetCustomAttribute(self: MSPyECObjects.IECCustomAttributeContainer, customAtributeInstance: Bentley.ECN.IECInstance) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDescription(*args, **kwargs):
-        """
-        SetDescription(self: MSPyECObjects.ECProperty, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDescription(self: MSPyECObjects.ECProperty, description: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetDisplayLabel(*args, **kwargs):
-        """
-        SetDisplayLabel(self: MSPyECObjects.ECProperty, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetDisplayLabel(self: MSPyECObjects.ECProperty, label: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     def SetIsReadOnly(*args, **kwargs):
         """
-        SetIsReadOnly(*args, **kwargs)
         Overloaded function.
         
         1. SetIsReadOnly(self: MSPyECObjects.ECProperty, readOnly: bool) -> MSPyECObjects.ECObjectsStatus
@@ -10155,16 +7958,10 @@ class StructECProperty:
         """
         ...
     
-    def SetType(*args, **kwargs):
-        """
-        SetType(self: MSPyECObjects.StructECProperty, type: Bentley.ECN.ECClass) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetType(self: MSPyECObjects.StructECProperty, type: Bentley.ECN.ECClass) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def SetTypeName(*args, **kwargs):
-        """
-        SetTypeName(self: MSPyECObjects.ECProperty, typeName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def SetTypeName(self: MSPyECObjects.ECProperty, typeName: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
     @property
@@ -10192,34 +7989,19 @@ class SupplementalSchemaInfo:
     None
     """
 
-    def GetPrimarySchemaFullName(*args, **kwargs):
-        """
-        GetPrimarySchemaFullName(self: MSPyECObjects.SupplementalSchemaInfo) -> MSPyBentley.WString
-        """
+    def GetPrimarySchemaFullName(self: MSPyECObjects.SupplementalSchemaInfo) -> MSPyBentley.WString:
         ...
     
-    def GetPurposeOfSupplementalSchema(*args, **kwargs):
-        """
-        GetPurposeOfSupplementalSchema(self: MSPyECObjects.SupplementalSchemaInfo, fullSchemaName: MSPyBentley.WString) -> MSPyBentley.WString
-        """
+    def GetPurposeOfSupplementalSchema(self: MSPyECObjects.SupplementalSchemaInfo, fullSchemaName: MSPyBentley.WString) -> MSPyBentley.WString:
         ...
     
-    def GetSupplementalSchemaNames(*args, **kwargs):
-        """
-        GetSupplementalSchemaNames(self: MSPyECObjects.SupplementalSchemaInfo, supplementalSchemaNames: MSPyBentley.WStringArray) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetSupplementalSchemaNames(self: MSPyECObjects.SupplementalSchemaInfo, supplementalSchemaNames: MSPyBentley.WStringArray) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def GetSupplementalSchemasWithPurpose(*args, **kwargs):
-        """
-        GetSupplementalSchemasWithPurpose(self: MSPyECObjects.SupplementalSchemaInfo, supplementalSchemaNames: MSPyBentley.WStringArray, purpose: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus
-        """
+    def GetSupplementalSchemasWithPurpose(self: MSPyECObjects.SupplementalSchemaInfo, supplementalSchemaNames: MSPyBentley.WStringArray, purpose: MSPyBentley.WString) -> MSPyECObjects.ECObjectsStatus:
         ...
     
-    def HasSameSupplementalSchemasForPurpose(*args, **kwargs):
-        """
-        HasSameSupplementalSchemasForPurpose(self: MSPyECObjects.SupplementalSchemaInfo, secondSchema: MSPyECObjects.ECSchema, purpose: MSPyBentley.WString) -> bool
-        """
+    def HasSameSupplementalSchemasForPurpose(self: MSPyECObjects.SupplementalSchemaInfo, secondSchema: MSPyECObjects.ECSchema, purpose: MSPyBentley.WString) -> bool:
         ...
     
     @property
@@ -10234,110 +8016,67 @@ class SupplementalSchemaMetaData:
     None
     """
 
-    def CreateCustomAttribute(*args, **kwargs):
-        """
-        CreateCustomAttribute(self: MSPyECObjects.SupplementalSchemaMetaData) -> MSPyECObjects.IECInstance
-        """
+    def CreateCustomAttribute(self: MSPyECObjects.SupplementalSchemaMetaData) -> MSPyECObjects.IECInstance:
         ...
     
     CustomAttributeAccessor: str
     
     CustomAttributeSchemaName: str
     
-    def GetCustomAttributeAccessor(*args, **kwargs):
-        """
-        GetCustomAttributeAccessor() -> str
-        """
+    @staticmethod
+    def GetCustomAttributeAccessor() -> str:
         ...
     
-    def GetCustomAttributeSchemaName(*args, **kwargs):
-        """
-        GetCustomAttributeSchemaName() -> str
-        """
+    @staticmethod
+    def GetCustomAttributeSchemaName() -> str:
         ...
     
-    def GetIsUserSpecificPropertyAccessor(*args, **kwargs):
-        """
-        GetIsUserSpecificPropertyAccessor() -> str
-        """
+    @staticmethod
+    def GetIsUserSpecificPropertyAccessor() -> str:
         ...
     
-    def GetPrecedencePropertyAccessor(*args, **kwargs):
-        """
-        GetPrecedencePropertyAccessor() -> str
-        """
+    @staticmethod
+    def GetPrecedencePropertyAccessor() -> str:
         ...
     
-    def GetPrimarySchemaMajorVersion(*args, **kwargs):
-        """
-        GetPrimarySchemaMajorVersion(self: MSPyECObjects.SupplementalSchemaMetaData) -> int
-        """
+    def GetPrimarySchemaMajorVersion(self: MSPyECObjects.SupplementalSchemaMetaData) -> int:
         ...
     
-    def GetPrimarySchemaMajorVersionPropertyAccessor(*args, **kwargs):
-        """
-        GetPrimarySchemaMajorVersionPropertyAccessor() -> str
-        """
+    @staticmethod
+    def GetPrimarySchemaMajorVersionPropertyAccessor() -> str:
         ...
     
-    def GetPrimarySchemaMinorVersion(*args, **kwargs):
-        """
-        GetPrimarySchemaMinorVersion(self: MSPyECObjects.SupplementalSchemaMetaData) -> int
-        """
+    def GetPrimarySchemaMinorVersion(self: MSPyECObjects.SupplementalSchemaMetaData) -> int:
         ...
     
-    def GetPrimarySchemaMinorVersionPropertyAccessor(*args, **kwargs):
-        """
-        GetPrimarySchemaMinorVersionPropertyAccessor() -> str
-        """
+    @staticmethod
+    def GetPrimarySchemaMinorVersionPropertyAccessor() -> str:
         ...
     
-    def GetPrimarySchemaName(*args, **kwargs):
-        """
-        GetPrimarySchemaName(self: MSPyECObjects.SupplementalSchemaMetaData) -> MSPyBentley.WString
-        """
+    def GetPrimarySchemaName(self: MSPyECObjects.SupplementalSchemaMetaData) -> MSPyBentley.WString:
         ...
     
-    def GetPrimarySchemaNamePropertyAccessor(*args, **kwargs):
-        """
-        GetPrimarySchemaNamePropertyAccessor() -> str
-        """
+    @staticmethod
+    def GetPrimarySchemaNamePropertyAccessor() -> str:
         ...
     
-    def GetPurposePropertyAccessor(*args, **kwargs):
-        """
-        GetPurposePropertyAccessor() -> str
-        """
+    @staticmethod
+    def GetPurposePropertyAccessor() -> str:
         ...
     
-    def GetSupplementalSchemaPrecedence(*args, **kwargs):
-        """
-        GetSupplementalSchemaPrecedence(self: MSPyECObjects.SupplementalSchemaMetaData) -> int
-        """
+    def GetSupplementalSchemaPrecedence(self: MSPyECObjects.SupplementalSchemaMetaData) -> int:
         ...
     
-    def GetSupplementalSchemaPurpose(*args, **kwargs):
-        """
-        GetSupplementalSchemaPurpose(self: MSPyECObjects.SupplementalSchemaMetaData) -> MSPyBentley.WString
-        """
+    def GetSupplementalSchemaPurpose(self: MSPyECObjects.SupplementalSchemaMetaData) -> MSPyBentley.WString:
         ...
     
-    def IsForPrimarySchema(*args, **kwargs):
-        """
-        IsForPrimarySchema(self: MSPyECObjects.SupplementalSchemaMetaData, schemaName: MSPyBentley.WString, majorVersion: int, minorVersion: int, matchType: MSPyECObjects.SchemaMatchType) -> bool
-        """
+    def IsForPrimarySchema(self: MSPyECObjects.SupplementalSchemaMetaData, schemaName: MSPyBentley.WString, majorVersion: int, minorVersion: int, matchType: MSPyECObjects.SchemaMatchType) -> bool:
         ...
     
-    def IsSupplemental(*args, **kwargs):
-        """
-        IsSupplemental(self: MSPyECObjects.SupplementalSchemaMetaData, schema: MSPyECObjects.ECSchema) -> bool
-        """
+    def IsSupplemental(self: MSPyECObjects.SupplementalSchemaMetaData, schema: MSPyECObjects.ECSchema) -> bool:
         ...
     
-    def IsUserSpecific(*args, **kwargs):
-        """
-        IsUserSpecific(self: MSPyECObjects.SupplementalSchemaMetaData) -> bool
-        """
+    def IsUserSpecific(self: MSPyECObjects.SupplementalSchemaMetaData) -> bool:
         ...
     
     IsUserSpecificPropertyAccessor: str
@@ -10373,46 +8112,26 @@ class SupplementalSchemaMetaData:
     
     PurposePropertyAccessor: str
     
-    def SetMetadata(*args, **kwargs):
-        """
-        SetMetadata(supplementalSchema: MSPyECObjects.ECSchema, supplementalSchemaMetadata: MSPyECObjects.SupplementalSchemaMetaData) -> None
-        """
+    @staticmethod
+    def SetMetadata(supplementalSchema: MSPyECObjects.ECSchema, supplementalSchemaMetadata: MSPyECObjects.SupplementalSchemaMetaData) -> None:
         ...
     
-    def SetPrimarySchemaMajorVersion(*args, **kwargs):
-        """
-        SetPrimarySchemaMajorVersion(self: MSPyECObjects.SupplementalSchemaMetaData, major: int) -> None
-        """
+    def SetPrimarySchemaMajorVersion(self: MSPyECObjects.SupplementalSchemaMetaData, major: int) -> None:
         ...
     
-    def SetPrimarySchemaMinorVersion(*args, **kwargs):
-        """
-        SetPrimarySchemaMinorVersion(self: MSPyECObjects.SupplementalSchemaMetaData, minor: int) -> None
-        """
+    def SetPrimarySchemaMinorVersion(self: MSPyECObjects.SupplementalSchemaMetaData, minor: int) -> None:
         ...
     
-    def SetPrimarySchemaName(*args, **kwargs):
-        """
-        SetPrimarySchemaName(self: MSPyECObjects.SupplementalSchemaMetaData, name: MSPyBentley.WString) -> None
-        """
+    def SetPrimarySchemaName(self: MSPyECObjects.SupplementalSchemaMetaData, name: MSPyBentley.WString) -> None:
         ...
     
-    def SetSupplementalSchemaPrecedence(*args, **kwargs):
-        """
-        SetSupplementalSchemaPrecedence(self: MSPyECObjects.SupplementalSchemaMetaData, precedence: int) -> None
-        """
+    def SetSupplementalSchemaPrecedence(self: MSPyECObjects.SupplementalSchemaMetaData, precedence: int) -> None:
         ...
     
-    def SetSupplementalSchemaPurpose(*args, **kwargs):
-        """
-        SetSupplementalSchemaPurpose(self: MSPyECObjects.SupplementalSchemaMetaData, purpose: MSPyBentley.WString) -> None
-        """
+    def SetSupplementalSchemaPurpose(self: MSPyECObjects.SupplementalSchemaMetaData, purpose: MSPyBentley.WString) -> None:
         ...
     
-    def SetUserSpecific(*args, **kwargs):
-        """
-        SetUserSpecific(self: MSPyECObjects.SupplementalSchemaMetaData, userSpecific: bool) -> None
-        """
+    def SetUserSpecific(self: MSPyECObjects.SupplementalSchemaMetaData, userSpecific: bool) -> None:
         ...
     
     @property
@@ -10429,10 +8148,8 @@ class SupplementalSchemaMetaData:
     def SupplementalSchemaPurpose(arg0: MSPyECObjects.SupplementalSchemaMetaData, arg1: MSPyBentley.WString) -> None:
         ...
     
-    def TryGetFromSchema(*args, **kwargs):
-        """
-        TryGetFromSchema(supplementalSchema: MSPyECObjects.ECSchema) -> tuple
-        """
+    @staticmethod
+    def TryGetFromSchema(supplementalSchema: MSPyECObjects.ECSchema) -> tuple:
         ...
     
     @property
@@ -10487,7 +8204,6 @@ class SupplementedSchemaBuilder:
         
     def UpdateSchema(*args, **kwargs):
         """
-        UpdateSchema(*args, **kwargs)
         Overloaded function.
         
         1. UpdateSchema(self: MSPyECObjects.SupplementedSchemaBuilder, primarySchema: MSPyECObjects.ECSchema, supplementalSchemaList: MSPyECObjects.ECSchemaPArray) -> MSPyECObjects.SupplementedSchemaStatus
@@ -10561,28 +8277,16 @@ class SymbolExpressionContext:
     None
     """
 
-    def AddSymbol(*args, **kwargs):
-        """
-        AddSymbol(self: MSPyECObjects.SymbolExpressionContext, symbol: Bentley.ECN.Symbol) -> Bentley.BentleyStatus
-        """
+    def AddSymbol(self: MSPyECObjects.SymbolExpressionContext, symbol: Bentley.ECN.Symbol) -> Bentley.BentleyStatus:
         ...
     
-    def AllowsTypeConversion(*args, **kwargs):
-        """
-        AllowsTypeConversion(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def AllowsTypeConversion(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
-    def EnforceGlobalRepresentation(*args, **kwargs):
-        """
-        EnforceGlobalRepresentation(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def EnforceGlobalRepresentation(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
-    def EnforcesUnits(*args, **kwargs):
-        """
-        EnforcesUnits(self: MSPyECObjects.ExpressionContext) -> bool
-        """
+    def EnforcesUnits(self: MSPyECObjects.ExpressionContext) -> bool:
         ...
     
     @property
@@ -10592,16 +8296,10 @@ class SymbolExpressionContext:
     def EvaluationOptions(arg0: MSPyECObjects.ExpressionContext, arg1: MSPyECObjects.EvaluationOptions) -> None:
         ...
     
-    def GetEvaluationOptions(*args, **kwargs):
-        """
-        GetEvaluationOptions(self: MSPyECObjects.ExpressionContext) -> MSPyECObjects.EvaluationOptions
-        """
+    def GetEvaluationOptions(self: MSPyECObjects.ExpressionContext) -> MSPyECObjects.EvaluationOptions:
         ...
     
-    def SetEvaluationOptions(*args, **kwargs):
-        """
-        SetEvaluationOptions(self: MSPyECObjects.ExpressionContext, options: MSPyECObjects.EvaluationOptions) -> None
-        """
+    def SetEvaluationOptions(self: MSPyECObjects.ExpressionContext, options: MSPyECObjects.EvaluationOptions) -> None:
         ...
     
     def __init__(self: MSPyECObjects.SymbolExpressionContext, outer: MSPyECObjects.ExpressionContext) -> None:
@@ -10644,10 +8342,7 @@ class ValueResult:
     None
     """
 
-    def GetECValue(*args, **kwargs):
-        """
-        GetECValue(self: MSPyECObjects.ValueResult, ecValue: Bentley.ECN.ECValue) -> MSPyECObjects.ExpressionStatus
-        """
+    def GetECValue(self: MSPyECObjects.ValueResult, ecValue: Bentley.ECN.ECValue) -> MSPyECObjects.ExpressionStatus:
         ...
     
     def __init__(*args, **kwargs):
@@ -10720,10 +8415,7 @@ class WStringKey:
     None
     """
 
-    def GetKey(*args, **kwargs):
-        """
-        GetKey(self: MSPyECObjects.WStringKey) -> str
-        """
+    def GetKey(self: MSPyECObjects.WStringKey) -> str:
         ...
     
     @property
@@ -10761,33 +8453,26 @@ class WStringKeyArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyECObjects.WStringKeyArray, x: MSPyECObjects.WStringKey) -> None:
         """
-        append(self: MSPyECObjects.WStringKeyArray, x: MSPyECObjects.WStringKey) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyECObjects.WStringKeyArray) -> None:
         """
-        clear(self: MSPyECObjects.WStringKeyArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyECObjects.WStringKeyArray, x: MSPyECObjects.WStringKey) -> int:
         """
-        count(self: MSPyECObjects.WStringKeyArray, x: MSPyECObjects.WStringKey) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyECObjects.WStringKeyArray, L: MSPyECObjects.WStringKeyArray) -> None
@@ -10800,17 +8485,14 @@ class WStringKeyArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyECObjects.WStringKeyArray, i: int, x: MSPyECObjects.WStringKey) -> None:
         """
-        insert(self: MSPyECObjects.WStringKeyArray, i: int, x: MSPyECObjects.WStringKey) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyECObjects.WStringKeyArray) -> MSPyECObjects.WStringKey
@@ -10823,10 +8505,8 @@ class WStringKeyArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyECObjects.WStringKeyArray, x: MSPyECObjects.WStringKey) -> None:
         """
-        remove(self: MSPyECObjects.WStringKeyArray, x: MSPyECObjects.WStringKey) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...

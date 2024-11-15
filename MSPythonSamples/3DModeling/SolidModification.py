@@ -41,13 +41,19 @@ def imprintSolidUsingProfile(solidId, profileId):
 
     # Retrieve the solid element and profile element from the DGN model
     solidElement = EditElementHandle(solidId, dgnModel)  # Handle for the solid element
+    if False == solidElement.IsValid():
+        return False
     profileElement = EditElementHandle(profileId, dgnModel)  # Handle for the profile element
-
+    if False == profileElement.IsValid():
+        return False
     # Convert the profile element to a curve vector
     curve = ICurvePathQuery.ElementToCurveVector(profileElement)  # Convert the profile element to a curve vector
-
+    if None == curve:
+        return False
     # Imprint the solid using the curve vector and normal
     solid = SolidUtil.Convert.ElementToBody(solidElement, True, True, False)  # Convert the solid element to a body
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     if curve.IsClosedPath():  # Check if the curve is closed (i.e., it forms a loop)
         centerNormalArea = curve.CentroidNormalArea()  # Calculate the centroid normal area of the curve
         normal = centerNormalArea[2]                    # Get the normal vector from the centroid normal area
@@ -99,13 +105,16 @@ def sweepBody(profileId):
 
     # Retrieve the profile element from the DGN model
     profileElement = EditElementHandle(profileId, dgnModel)   # Convert the profile ID to an edit element handle
-
+    if False == profileElement.IsValid():
+        return False
     # Convert the profile element to a curve vector
     curve = ICurvePathQuery.ElementToCurveVector(profileElement)  # Convert the profile element to a curve vector
-
+    if None == curve:
+        return False
     # Convert the profile element to a body using SolidUtil
     solid = SolidUtil.Convert.ElementToBody(profileElement, True, True, False)   # Convert the profile element to a body
-
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     # Get model information from the DGN model
     modelInfo = dgnModel.GetModelInfo()               # Get model information from the DGN model
 
@@ -145,6 +154,7 @@ def sweepBody(profileId):
                     newElement.AddToModel()
                 return True                         # Return True indicating successful sweeping
     return False                                     # If not, return False indicating unsuccessful sweeping
+
 def spinBody(profileId):
     """
     Spin Profile around the axis.
@@ -164,12 +174,20 @@ def spinBody(profileId):
 
     # Convert the profile ID to an edit element handle
     profileElement = EditElementHandle(profileId, dgnModel)   # Convert the profile ID to an edit element handle
-
+    if False == profileElement.IsValid():
+        return False
     # Convert the profile element to a curve vector
     curve = ICurvePathQuery.ElementToCurveVector(profileElement)  # Convert the profile element to a curve vector
-
+    if None == curve:
+        return False
+    if False == profileElement.IsValid():
+        return False
     # Convert the profile element to a body using SolidUtil
     solid = SolidUtil.Convert.ElementToBody(profileElement, True, True, False)   # Convert the profile element to a body
+    
+  
+    if BentleyStatus.eERROR == solid[0]:
+        return False
 
     # Get model information from the DGN model
     modelInfo = dgnModel.GetModelInfo()                # Get model information from the DGN model
@@ -237,10 +255,13 @@ def thickenSheet(profileId, frontDistance, backDistance):
     
     # Convert the profile ID to an edit element handle
     profileElement = EditElementHandle(profileId, dgnModel)  # Convert the profile ID to an edit element handle
-    
+    if False == profileElement.IsValid():
+        return False
     # Convert the profile element to a body using SolidUtil
     solid = SolidUtil.Convert.ElementToBody(profileElement, True, True, False)  # Convert the profile element to a body
-    
+
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     # Get model information from the DGN model
     modelInfo = dgnModel.GetModelInfo()             # Get model information from the DGN model
     
@@ -297,10 +318,13 @@ def blendEdges(solidId, blendRadius):
     
     # Convert the solid ID to an edit element handle
     profileElement = EditElementHandle(solidId, dgnModel)   # Convert the solid ID to an edit element handle
-    
+    if False == profileElement.IsValid():
+        return False
     # Convert the profile element to a body using SolidUtil
     solid = SolidUtil.Convert.ElementToBody(profileElement, True, True, False)   # Convert the profile element to a body
-    
+
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     # Get the number of edges in the body
     subEdgeArray = ISubEntityPtrArray()  # Create an empty array for storing edges
     numEdges = SolidUtil.GetBodyEdges(subEdgeArray, solid[1])  # Get the number of edges
@@ -371,8 +395,12 @@ def chamferEdgesWithMode(solidId, chamferLength, chamferLength1, mode):
     
     # Convert the profile element to a body
     profileElement = EditElementHandle(solidId, dgnModel)
+    if False == profileElement.IsValid():
+        return False
     solid = SolidUtil.Convert.ElementToBody(profileElement, True, True, False)
-    
+
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     # Get the array of edges from the solid
     subEdgeArray = ISubEntityPtrArray()
     numEdges = SolidUtil.GetBodyEdges(subEdgeArray, solid[1])
@@ -476,14 +504,23 @@ def BooleanIntersect(solidId, toolId, toold2 ):
 
     # Convert the target solid id to a body object
     targetId = EditElementHandle(solidId, dgnModel)
+    if False == targetId.IsValid():
+        return False
     solid = SolidUtil.Convert.ElementToBody(targetId, True, True, False)
 
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     # Convert the tool solid id to a body object
     toolElement = EditElementHandle(toolId, dgnModel)
+    if False == toolElement.IsValid():
+        return False
     tool = SolidUtil.Convert.ElementToBody(toolElement, True, True, False)
-
+    if BentleyStatus.eERROR == tool[0]:
+        return False
     # Convert the second tool solid id to a body object
     toolElement2 = EditElementHandle(toold2, dgnModel)
+    if False == toolElement2.IsValid():
+        return False
     tool2 = SolidUtil.Convert.ElementToBody(toolElement2, True, True, False)
 
     # Create an array of solids for the boolean operation
@@ -531,16 +568,26 @@ def BooleanSubstraction(solidId, toolId, toold2 ):  # Define a function for perf
 
     ''' Convert the target solid id to a body object '''
     targetId = EditElementHandle(solidId, dgnModel)  # Create an edit element handle for the target solid
+    if False == targetId.IsValid():
+        return False
     solid = SolidUtil.Convert.ElementToBody(targetId, True, True, False)  # Convert the target solid to a body object
 
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     ''' Convert the tool solid id to a body object '''
     toolElement = EditElementHandle(toolId, dgnModel)  # Create an edit element handle for the tool solid
+    if False == toolElement.IsValid():
+        return False
     tool = SolidUtil.Convert.ElementToBody(toolElement, True, True, False)  # Convert the tool solid to a body object
-
+    if BentleyStatus.eERROR == tool[0]:
+        return False
     ''' Convert the second tool solid id to a body object '''
     toolElement2 = EditElementHandle(toold2, dgnModel)  # Create an edit element handle for the second tool solid
+    if False == toolElement2.IsValid():
+        return False
     tool2 = SolidUtil.Convert.ElementToBody(toolElement2, True, True, False)  # Convert the second tool solid to a body object
-
+    if BentleyStatus.eERROR == tool2[0]:
+        return False
     ''' Create an array of solids for the boolean operation '''
     tools = ISolidKernelEntityPtrArray()  # Initialize an array of solids for the boolean operation
     tools.append(tool[1])  # Add the first tool solid to the array
@@ -599,16 +646,25 @@ def BooleanUnion(solidId, toolId, toold2, toolId3):
     
     # Convert the target solid id to a body object
     targetId = EditElementHandle(solidId, dgnModel)
+    if False == targetId.IsValid():
+        return False
     solid = SolidUtil.Convert.ElementToBody(targetId, True, True, False)
-
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     # Convert the tool solid id to a body object
     toolElement = EditElementHandle(toolId, dgnModel)
+    if False == toolElement.IsValid():
+        return False
     tool = SolidUtil.Convert.ElementToBody(toolElement, True, True, False)
-
+    if BentleyStatus.eERROR == tool[0]:
+        return False
     # Convert the second tool solid id to a body object
     toolElement2 = EditElementHandle(toold2, dgnModel)
+    if False == toolElement2.IsValid():
+        return False
     tool2 = SolidUtil.Convert.ElementToBody(toolElement2, True, True, False)
-
+    if BentleyStatus.eERROR == tool2[0]:
+        return False
     # Convert the third tool solid id to a body object
     toolElement3 = EditElementHandle(toolId3, dgnModel)
     tool3 = SolidUtil.Convert.ElementToBody(toolElement3, True, True, False)
@@ -674,12 +730,18 @@ def BooleanCut(solidId, toolId):
 
     # Convert the target solid id to a body object
     targetId = EditElementHandle(solidId, dgnModel)  # Convert the solid ID to an element handle
+    if False == targetId.IsValid():
+        return False   
     solid = SolidUtil.Convert.ElementToBody(targetId, True, True, False)  # Convert the element handle to a body object
-
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     # Convert the tool curve id to a curve vector
     profileElement = EditElementHandle(toolId, dgnModel)  # Convert the tool ID to an element handle
+    if False == profileElement.IsValid():
+        return False
     curve = ICurvePathQuery.ElementToCurveVector(profileElement)  # Convert the element handle to a curve vector
-
+    if None == curve:
+        return False
     # Initialize a node ID (not used in this example)
     nodeId = int()  # Initialize a node ID variable
 
@@ -733,15 +795,20 @@ def emboss(solidId, toolId):
     
     # Convert the target solid ID to an element handle
     targetId = EditElementHandle(solidId, dgnModel)  # Convert the solid ID to an element handle
-    
+    if False == targetId.IsValid():
+        return False
     solid = SolidUtil.Convert.ElementToBody(targetId, True, True, False)  # Convert the element handle to a body object
-    
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     """
     The tool curve is converted from an element handle to a body object.
     """
     profileElement = EditElementHandle(toolId, dgnModel)  # Convert the tool ID to an element handle
+    if False == profileElement.IsValid():
+        return False    
     curve = SolidUtil.Convert.ElementToBody(profileElement, True, True, True)  # Convert the element handle to a body object
-    
+    if None == curve:
+        return False
     # Perform the embossing operation
     ret = SolidUtil.Modify.Emboss(solid[1], curve[1], True)  # Emboss the solid using the tool
     
@@ -798,9 +865,11 @@ def offsetFaces(solidId, offsetDistance):
     
     # Convert the solid ID to an element handle
     profileElement = EditElementHandle(solidId, dgnModel)  # Convert the solid ID to an element handle
-    
+    if False == profileElement.IsValid():
+        return False       
     solid = SolidUtil.Convert.ElementToBody(profileElement, True, True, False)  # Convert the element handle to a body object
-    
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     """
     Get the number of faces in the solid.
     """
@@ -888,10 +957,12 @@ def TransformFaces(solidId, offsetDistance):
     """
 
     profileElement = EditElementHandle(solidId, dgnModel)
-
+    if False == profileElement.IsValid():
+        return False    
     # Convert the EditElementHandle to a Solid body
     solid = SolidUtil.Convert.ElementToBody(profileElement, True, True, False)
-
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     """
     Get the number of faces in the solid.
     This is used to verify that the transformation was successful.
@@ -983,9 +1054,12 @@ def offsetThroughHole(solidId, offsetDistance):
     """
 
     profileElement = EditElementHandle(solidId, dgnModel)
+    if False == profileElement.IsValid():
+        return False    
     # Convert the EditElementHandle to a Solid body
     solid = SolidUtil.Convert.ElementToBody(profileElement, True, True, False)
-
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     # Get the number of faces in the solid
     subEdgeArray = ISubEntityPtrArray()
     numEdges = SolidUtil.GetBodyFaces(subEdgeArray, solid[1])
@@ -1065,9 +1139,12 @@ def BodyFromSweep(profileId, pathId):
     """
 
     targetId = EditElementHandle(profileId, dgnModel)
-
+    if False == targetId.IsValid():
+        return False    
     # Get the profile curve as a vector of curves
     profile = ICurvePathQuery.ElementToCurveVector(targetId)
+    if None == profile:
+       return False
     """
     Convert the path ID to an EditElementHandle object.
     This is used to interact with the path curve.
@@ -1077,6 +1154,8 @@ def BodyFromSweep(profileId, pathId):
 
     # Get the path curve as a vector of curves
     path = ICurvePathQuery.ElementToCurveVector(pathElement)
+    if None == path:
+       return False
     """
     Create a solid body from the sweep operation between the profile and path curves.
     """
@@ -1139,9 +1218,12 @@ def LoftBody(guideId, startProfile, endProfile):
     """
 
     targetId = EditElementHandle(guideId, dgnModel)
-
+    if False == targetId.IsValid():
+        return False    
     # Get the guide curve as a vector of curves
     guide = ICurvePathQuery.ElementToCurveVector(targetId)
+    if None == guide:
+        return False
     """
     Create a list of guides from the guide curve.
     This will be used in the loft operation.
@@ -1152,22 +1234,28 @@ def LoftBody(guideId, startProfile, endProfile):
 
     # Convert the start profile ID to an EditElementHandle object
     stProfile = EditElementHandle(startProfile, dgnModel)
+    if False == stProfile.IsValid():
+        return False    
     """
     Get the start profile curve as a vector of curves.
     This will be used in the loft operation.
     """
 
     stProf = ICurvePathQuery.ElementToCurveVector(stProfile)
-
+    if None == stProf:
+        return False
     # Convert the end profile ID to an EditElementHandle object
     edProfile = EditElementHandle(endProfile, dgnModel)
+    if False == edProfile.IsValid():
+        return False  
     """
     Get the end profile curve as a vector of curves.
     This will be used in the loft operation.
     """
 
     edProf = ICurvePathQuery.ElementToCurveVector(edProfile)
-
+    if None == edProf:
+        return False
     # Create a list of profiles from the start and end profiles
     profiles = CurveVectorPtrArray()
     profiles.append(stProf)
@@ -1239,19 +1327,24 @@ def extrusionToBody(bodyId, startProfile):
     """
 
     targetId = EditElementHandle(bodyId, dgnModel)
-
+    if False == targetId.IsValid():
+        return False  
     # Convert the extruded element to a solid body
     solid = SolidUtil.Convert.ElementToBody(targetId, True, True, True)
+    if BentleyStatus.eERROR == solid[0]:
+        return False
     """
     Get the start profile curve as an EditElementHandle object.
     This is used to interact with the start profile curve.
     """
 
     stProfile = EditElementHandle(startProfile, dgnModel)
-
+    if False == stProfile.IsValid():
+        return False  
     # Convert the start profile curve to a solid body
     stProf = SolidUtil.Convert.ElementToBody(stProfile, True, True, True)
-
+    if BentleyStatus.eERROR == stProf[0]:
+        return False
     """
     Perform the extrusion operation to create a new solid body from the given bodies.
     """
@@ -1317,6 +1410,8 @@ def bSplineSurfaceToBody(bodyId):
     """
 
     targetId = EditElementHandle(bodyId, dgnModel)
+    if False == targetId.IsValid():
+        return False 
     editor = targetId.GetHandler()
     """
     Use the editor to get the BSpline surface from the given body ID.
@@ -1390,6 +1485,8 @@ def primitiveToSmartSolid(bodyId):
 
     # Get the EditElementHandle for the given body ID
     targetId = EditElementHandle(bodyId, dgnModel)
+    if False == targetId.IsValid():
+        return False 
     """
     Create an EditElementHandle object for the given body ID.
     This will be used to interact with the primitive solid.
@@ -1465,11 +1562,12 @@ Prerequisite: Open MSPythonSamples\data\SolidModeling.dgn
 '''
 #main
 if __name__ == "__main__":
-    
+    #import debugpy
     #debugpy.listen(('0.0.0.0',5678), in_process_debug_adapter=True)
     #print("Waiting for debugger attach")
     #debugpy.wait_for_client()
     #debugpy.breakpoint()
+    #print('break on this line')
 
     #highlight all the elements with type 
     if(True != imprintSolidUsingProfile(1401, 1408)):

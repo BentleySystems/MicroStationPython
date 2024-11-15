@@ -13,73 +13,75 @@ from MSPyDgnPlatform import *
 m_eeh = EditElementHandle()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_IBsplineSurfaceEdit(initDgnPlatformHost,loadDgnFile):
-       ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_IBsplineSurfaceEdit(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
 
-       #SETUP: Create a upward paraboloid-shaped BsplineSurface with a square base and pass to m_eeh
-       points = DPoint3dArray()
-       points.append(DPoint3d(1000.0, 3000.0, 500.0))
-       points.append(DPoint3d(2000.0, 3000.0, 0.0))
-       points.append(DPoint3d(3000.0, 3000.0, 500.0))
-       points.append(DPoint3d(1000.0, 2000.0, 0.0))
-       points.append(DPoint3d(2000.0, 2000.0, -5000.0))
-       points.append(DPoint3d(3000.0, 2000.0, 0.0))
-       points.append(DPoint3d(1000.0, 1000.0, 500.0))
-       points.append(DPoint3d(2000.0, 1000.0, 0.0))
-       points.append(DPoint3d(3000.0, 1000.0, 500.0))
+    #SETUP: Create a upward paraboloid-shaped BsplineSurface with a square base and pass to m_eeh
+    points = DPoint3dArray()
+    points.append(DPoint3d(1000.0, 3000.0, 500.0))
+    points.append(DPoint3d(2000.0, 3000.0, 0.0))
+    points.append(DPoint3d(3000.0, 3000.0, 500.0))
+    points.append(DPoint3d(1000.0, 2000.0, 0.0))
+    points.append(DPoint3d(2000.0, 2000.0, -5000.0))
+    points.append(DPoint3d(3000.0, 2000.0, 0.0))
+    points.append(DPoint3d(1000.0, 1000.0, 500.0))
+    points.append(DPoint3d(2000.0, 1000.0, 0.0))
+    points.append(DPoint3d(3000.0, 1000.0, 500.0))
 
-       surfPoints = DPoint3dArray()
+    surfPoints = DPoint3dArray()
 
-       for i in range(0,len(points)):
-              surfPoints.append(points[i])
+    for i in range(0,len(points)):
+        surfPoints.append(points[i])
 
-       surface = MSBsplineSurface()
-       surface.Populate(surfPoints, None, None, 3, 3, False, None, 3, 3, False, False)
+    surface = MSBsplineSurface()
+    surface.Populate(surfPoints, None, None, 3, 3, False, None, 3, 3, False, False)
 
-       assert 0 == BSplineSurfaceHandler.CreateBSplineSurfaceElement(m_eeh, None, surface, ret[0])
+    assert 0 == BSplineSurfaceHandler.CreateBSplineSurfaceElement(m_eeh, None, surface, ret[0])
 
-       #EDIT: Flip the original surface so that it is opening downward and elongate it to extend to z=10000.0
-       editPoints = DPoint3dArray()
-       editPoints.append(DPoint3d(1000.0, 3000.0, -500.0))
-       editPoints.append(DPoint3d(2000.0, 3000.0, 0.0))
-       editPoints.append(DPoint3d(3000.0, 3000.0, -500.0))
-       editPoints.append(DPoint3d(1000.0, 2000.0, 0.0))
-       editPoints.append(DPoint3d(2000.0, 2000.0, 10000.0))
-       editPoints.append(DPoint3d(3000.0, 2000.0, 0.0))
-       editPoints.append(DPoint3d(1000.0, 1000.0, -500.0))
-       editPoints.append(DPoint3d(2000.0, 1000.0, 0.0))
-       editPoints.append(DPoint3d(3000.0, 1000.0, -500.0))
+    #EDIT: Flip the original surface so that it is opening downward and elongate it to extend to z=10000.0
+    editPoints = DPoint3dArray()
+    editPoints.append(DPoint3d(1000.0, 3000.0, -500.0))
+    editPoints.append(DPoint3d(2000.0, 3000.0, 0.0))
+    editPoints.append(DPoint3d(3000.0, 3000.0, -500.0))
+    editPoints.append(DPoint3d(1000.0, 2000.0, 0.0))
+    editPoints.append(DPoint3d(2000.0, 2000.0, 10000.0))
+    editPoints.append(DPoint3d(3000.0, 2000.0, 0.0))
+    editPoints.append(DPoint3d(1000.0, 1000.0, -500.0))
+    editPoints.append(DPoint3d(2000.0, 1000.0, 0.0))
+    editPoints.append(DPoint3d(3000.0, 1000.0, -500.0))
 
-       editSurfPoints = DPoint3dArray()
+    editSurfPoints = DPoint3dArray()
 
-       for i in range(0,len(editPoints)):
-              editSurfPoints.append(editPoints[i])
+    for i in range(0,len(editPoints)):
+        editSurfPoints.append(editPoints[i])
 
-       editSurface = MSBsplineSurface()
-       editSurface.Populate(editSurfPoints, None, None, 3, 3, False, None, 3, 3, False, False)
+    editSurface = MSBsplineSurface()
+    editSurface.Populate(editSurfPoints, None, None, 3, 3, False, None, 3, 3, False, False)
 
-       editor = m_eeh.GetHandler()
-       editor.SetBsplineSurface(m_eeh, editSurface)
+    editor = m_eeh.GetHandler()
+    editor.SetBsplineSurface(m_eeh, editSurface)
 
-       #CHECK: Make sure the changes specified in the editor carried over by cross-checking the poles
-       retVal, checkSurface = editor.GetBsplineSurface(m_eeh)
+    #CHECK: Make sure the changes specified in the editor carried over by cross-checking the poles
+    retVal, checkSurface = editor.GetBsplineSurface(m_eeh)
 
-       editPoles = DPoint3dArray()
-       checkPoles = DPoint3dArray()
-       editSurface.GetPoles(editPoles)
-       checkSurface.GetPoles(checkPoles)
-       for i in range(len(editPoints)):
-              assert checkPoles[i].x == editPoles[i].x
-              assert checkPoles[i].y == editPoles[i].y
-              assert checkPoles[i].z == editPoles[i].z
+    editPoles = DPoint3dArray()
+    checkPoles = DPoint3dArray()
+    editSurface.GetPoles(editPoles)
+    checkSurface.GetPoles(checkPoles)
+    for i in range(len(editPoints)):
+        assert checkPoles[i].x == editPoles[i].x
+        assert checkPoles[i].y == editPoles[i].y
+        assert checkPoles[i].z == editPoles[i].z
 
-       surface.ReleaseMem()
-       editSurface.ReleaseMem()
+    surface.ReleaseMem()
+    editSurface.ReleaseMem()
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  #Not fully completed as it gives crash and also multiple methods are not exposed
-def test_IMeshEdit(initDgnPlatformHost,loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_IMeshEdit(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     #SETUP: Create a basic square mesh and pass to m_eeh
     header = PolyfaceHeader.CreateVariableSizeIndexed ()
     header.SetMeshStyle (1)

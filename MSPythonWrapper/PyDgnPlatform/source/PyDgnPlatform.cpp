@@ -118,6 +118,7 @@ void def_Light(py::module_&);
 void def_LinearHandlers(py::module_&);
 void def_LineStyle(py::module_&);
 void def_LineStyleManager(py::module_&);
+void def_Locate(py::module_&);
 void def_lstyle(py::module_&);
 void def_Material(py::module_&);
 void def_MaterialSettings(py::module_&);
@@ -346,6 +347,7 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
     def_Light(m);
     def_LinearHandlers(m);    
     def_LineStyleManager(m);
+    def_Locate(m);
     def_lstyle(m);
     def_Material(m);
     def_MaterialSettings(m);

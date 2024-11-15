@@ -18,3 +18,4 @@ DEFINE_BVECTOR_TYPE(DgnRasterP, DgnRasterVector);
 DEFINE_BVECTOR_TYPE(DgnPlatform::GeoreferencePriority, GeoreferencePriorityVector);
 
 DEFINE_BVECTOR_TYPE(DgnECInstancePtr, DgnECInstanceVector);
+DEFINE_BVECTOR_TYPE(DgnTagDefinition, DgnTagDefinitionArray);

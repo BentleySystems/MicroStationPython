@@ -74,11 +74,11 @@ def test_FitAndDisplayRaster(initDgnPlatformHost):
 # Test to locate interior (not complete)
 @pytest.mark.skip(reason="NEEDS WORK: Fix me")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_Locate_Interior(initDgnPlatformHost, loadDgnFile):
+def test_Locate_Interior(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
        assert False
-    
-    ret = getModel(loadDgnFile, "Default")
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = getModel(dgnFile, "Default")
     assert ret[0] != None
 
     fileLoc = "DgnPlatformTestData\\data\\"

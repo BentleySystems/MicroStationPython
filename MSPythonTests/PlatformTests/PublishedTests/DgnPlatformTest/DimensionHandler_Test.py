@@ -7,13 +7,13 @@
 #--------------------------------------------------------------------------------------#
 import os
 import pytest
-import ctypes
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
 from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from util import *
+from conftest import *
 
 dgnFileName = '2dMetricGeneral.dgn'
 dimensionStyleName = "DimensionTestStyle"
@@ -216,8 +216,9 @@ def dimHandlerTest_createLinearDimensionWithPoints (dimStyle, dgnCache):
 # @bsimethod                                                    Ping.Chen    04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DimensionHandler_CreateDimension (initDgnPlatformHost, loadDgnFileReadOnly):
-    dgnCache, retVal = loadDgnFileReadOnly.LoadRootModelById (loadDgnFileReadOnly.DefaultModelId, True)
+def test_DimensionHandler_CreateDimension (initDgnPlatformHost, loadDgnFileReadOnly, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFileReadOnly)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -231,8 +232,9 @@ def test_DimensionHandler_CreateDimension (initDgnPlatformHost, loadDgnFileReadO
 # @bsimethod                                                    Ping.Chen    04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DimensionHandler_InsertPoints (initDgnPlatformHost, loadDgnFileReadOnly):
-    dgnCache, retVal = loadDgnFileReadOnly.LoadRootModelById (loadDgnFileReadOnly.DefaultModelId, True)
+def test_DimensionHandler_InsertPoints (initDgnPlatformHost, loadDgnFileReadOnly, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFileReadOnly)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -247,8 +249,9 @@ def test_DimensionHandler_InsertPoints (initDgnPlatformHost, loadDgnFileReadOnly
 # @bsimethod                                                    Ping.Chen    04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DimensionHandler_CreateWithNoStyle_ExpectNoShields (initDgnPlatformHost, loadDgnFileReadOnly):
-    dgnCache, retVal = loadDgnFileReadOnly.LoadRootModelById (loadDgnFileReadOnly.DefaultModelId, True)
+def test_DimensionHandler_CreateWithNoStyle_ExpectNoShields (initDgnPlatformHost, loadDgnFileReadOnly, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFileReadOnly)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -268,8 +271,9 @@ def test_DimensionHandler_CreateWithNoStyle_ExpectNoShields (initDgnPlatformHost
 # @bsimethod                                                    Ping.Chen    04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DimensionHandler_CreateWithStyle_ExpectNoShields (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_CreateWithStyle_ExpectNoShields (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -288,16 +292,17 @@ def test_DimensionHandler_CreateWithStyle_ExpectNoShields (initDgnPlatformHost, 
     # Since the dimension was created with a 'pure' style, it should not have any shields
     expectNoShields (eeh)
 
-    DimensionStyle.Delete (testName, loadDgnFile)
-    #loadDgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
-    #loadDgnFile.Release ()
+    DimensionStyle.Delete (testName, dgnFile)
+    #dgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
+    #dgnFile.Release ()
 
 #---------------------------------------------------------------------------------#
 # @bsimethod                                                    Ping.Chen    04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DimensionHandler_CreateWithModifiedStyle_ExpectShields (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_CreateWithModifiedStyle_ExpectShields (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -321,16 +326,17 @@ def test_DimensionHandler_CreateWithModifiedStyle_ExpectShields (initDgnPlatform
     # The property value should match the modified style.
     expectPropertyValue (eeh, eDIMSTYLE_PROP_General_DimensionScale_DOUBLE, 2.0)
 
-    DimensionStyle.Delete (testName, loadDgnFile)
-    #loadDgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
-    #loadDgnFile.Release ()
+    DimensionStyle.Delete (testName, dgnFile)
+    #dgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
+    #dgnFile.Release ()
 
 #---------------------------------------------------------------------------------#
 # @bsimethod                                                    Ping.Chen    04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DimensionHandler_ModifyDimension_ExpectShields (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_ModifyDimension_ExpectShields (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -375,16 +381,17 @@ def test_DimensionHandler_ModifyDimension_ExpectShields (initDgnPlatformHost, lo
     # The property value should match the modified style.
     expectPropertyValue (eeh, propToEdit, 2.0*value)
 
-    DimensionStyle.Delete (testName, loadDgnFile)
-    #loadDgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
-    #loadDgnFile.Release ()
+    DimensionStyle.Delete (testName, dgnFile)
+    #dgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
+    #dgnFile.Release ()
 
 #---------------------------------------------------------------------------------#
 # @bsimethod                                                    Ping.Chen    04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DimensionHandler_ModifyDimension_WithExistingShields(initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_ModifyDimension_WithExistingShields(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -442,17 +449,18 @@ def test_DimensionHandler_ModifyDimension_WithExistingShields(initDgnPlatformHos
     # There should still only be one shield
     expectExactlyOneShield (eeh, propToEdit)
 
-    DimensionStyle.Delete (testName, loadDgnFile)
-    #loadDgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
-    #loadDgnFile.Release ()
+    DimensionStyle.Delete (testName, dgnFile)
+    #dgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
+    #dgnFile.Release ()
     
 
 #---------------------------------------------------------------------------------#
 # @bsimethod                                                    Ping.Chen    04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['3dMetricGeneral.dgn'])
-def test_DimensionHandler_SaveStyleUpdateDimension (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_SaveStyleUpdateDimension (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -520,17 +528,18 @@ def test_DimensionHandler_SaveStyleUpdateDimension (initDgnPlatformHost, loadDgn
     #NEEDSWORK_CR disabling this because it fails on RELEASE x86 builds (only)
     #expectNoShields (updatedDimInFile)
 
-    DimensionStyle.Delete (testName, loadDgnFile)
-    #loadDgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
-    #loadDgnFile.Release ()
+    DimensionStyle.Delete (testName, dgnFile)
+    #dgnFile.ProcessChanges (DgnSaveReason.eApplInitiated)
+    #dgnFile.Release ()
 
 
 #---------------------------------------------------------------------------------#
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['dim_cust_text.dgn'])
-def test_DimensionHandler_DimensionTextPoints (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_DimensionTextPoints (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -550,8 +559,9 @@ def test_DimensionHandler_DimensionTextPoints (initDgnPlatformHost, loadDgnFile)
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['dim_radial_note.dgn'])
-def test_DimensionHandler_DimensionRadialNoteTest (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_DimensionRadialNoteTest (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -576,8 +586,9 @@ def test_DimensionHandler_DimensionRadialNoteTest (initDgnPlatformHost, loadDgnF
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['dim_radial_center.dgn'])
-def test_DimensionHandler_DimensionCenterlineTest (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_DimensionCenterlineTest (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -597,8 +608,9 @@ def test_DimensionHandler_DimensionCenterlineTest (initDgnPlatformHost, loadDgnF
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['problem_dims.dgn'])
-def test_DimensionHandler_GetViewRotation (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_GetViewRotation (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -632,8 +644,9 @@ def test_DimensionHandler_GetViewRotation (initDgnPlatformHost, loadDgnFile):
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['dim_center.dgn'])
-def test_DimensionHandler_DimensionGetCenterMark(initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_DimensionGetCenterMark(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -652,8 +665,9 @@ def test_DimensionHandler_DimensionGetCenterMark(initDgnPlatformHost, loadDgnFil
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['dim_with_dflt_txt_and_zero_style_size.dgn'])
-def test_DimensionHandler_DimensionGetTextHeight(initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_DimensionGetTextHeight(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -677,9 +691,10 @@ def test_DimensionHandler_DimensionGetTextHeight(initDgnPlatformHost, loadDgnFil
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['leader.dgn'])
-def test_DimensionHandler_DimensionGetNoteTextHeight (initDgnPlatformHost, loadDgnFile):
-    model = loadDgnFile.FindModelIdByName ("D")
-    dgnCache, error= loadDgnFile.LoadRootModelById (model, True)
+def test_DimensionHandler_DimensionGetNoteTextHeight (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    model = dgnFile.FindModelIdByName ("D")
+    dgnCache, error= dgnFile.LoadRootModelById (model, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -709,8 +724,9 @@ def test_DimensionHandler_DimensionGetNoteTextHeight (initDgnPlatformHost, loadD
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['dim_ord_from_export.dgn'])
-def test_DimensionHandler_OrdinateDimensionTextBlock (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_OrdinateDimensionTextBlock (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -737,8 +753,9 @@ def test_DimensionHandler_OrdinateDimensionTextBlock (initDgnPlatformHost, loadD
 # @bsimethod                                    Ping.Chen                  04/2024
 #---------------#---------------#---------------#---------------#---------------#------#
 @pytest.mark.parametrize('fileName', ['leader_only.dgn'])
-def test_DimensionHandler_DimensionVisibleBit (initDgnPlatformHost, loadDgnFile):
-    dgnCache, retVal = loadDgnFile.LoadRootModelById (loadDgnFile.DefaultModelId, True)
+def test_DimensionHandler_DimensionVisibleBit (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    dgnCache, retVal = dgnFile.LoadRootModelById (dgnFile.DefaultModelId, True)
     if (None == dgnCache):
         ASSERT_TRUE (False)
 
@@ -773,7 +790,8 @@ class TestDimensionTestFixture :
     # @bsimethod                                    Ping.Chen                   04/2024
     #---------------#---------------#---------------#---------------#---------------#------#
     def loadDgnModel (self):
-        self.dgnFile = self.loadDgnFileByFileName (dgnFileName)
+        seedFile = self.loadDgnFileByFileName (dgnFileName)
+        self.dgnFile = createTempDgnFileFromSeedFile (seedFile)
         self.model, retVal = self.dgnFile.LoadRootModelById (self.dgnFile.DefaultModelId, True)
 
     #---------------------------------------------------------------------------------#
@@ -814,7 +832,7 @@ class TestDimensionTestFixture :
         DgnTextStyle.Delete (dimensionStyleName, self.dgnFile)
         DimensionStyle.Delete (dimensionStyleName, self.dgnFile)
         #self.dgnFile.ProcessChanges(DgnSaveReason.eFileClose)
-        self.dgnFile.Release ()
+        #self.dgnFile.Release ()
 
     #---------------------------------------------------------------------------------#
     # @bsimethod                                    Ping.Chen                  04/2024
@@ -974,7 +992,7 @@ class TestDimensionTestFixture :
         origin.Init (baseValue*count*increment, baseValue*count*increment, baseValue*count*increment)
         self.CreateLinearDimension (element, DimensionType.eCustomLinear, origin)
 
-        self.GetDgnFile().ProcessChanges(DgnSaveReason.eApplInitiated)
+        #self.GetDgnFile().ProcessChanges(DgnSaveReason.eApplInitiated)
 
 
     #---------------------------------------------------------------------------------#
@@ -1015,7 +1033,7 @@ class TestDimensionTestFixture :
         origin.Init (baseValue*count*increment, baseValue*count*increment, baseValue*count*increment)
         self.CreateAngularDimension (DimensionType.eAngleAxisY, origin)
 
-        self.GetDgnFile().ProcessChanges(DgnSaveReason.eApplInitiated)
+        #self.GetDgnFile().ProcessChanges(DgnSaveReason.eApplInitiated)
 
 
     #---------------------------------------------------------------------------------#

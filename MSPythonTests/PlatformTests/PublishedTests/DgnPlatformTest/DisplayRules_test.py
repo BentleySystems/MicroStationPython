@@ -9,6 +9,7 @@ from MSPyBentley import *
 from MSPyBentleyGeom import *
 from MSPyECObjects import *
 from MSPyDgnPlatform import *
+from conftest import *
 
 m_displayRuleSet0 = DisplayRuleSet
 m_displayRuleSet1 = DisplayRuleSet
@@ -60,19 +61,19 @@ def CompareDisplayRuleSetsProperties(ruleSet0, ruleSet1):
         CheckAllActions(ruleIter0, 10)
         CheckAllActions(ruleIter1, 10)
 
-def SetStartingActions(loadDgnFile):
+def SetStartingActions(dgnFile):
     global m_actionElementDisplay, m_actionColorOverride, m_actionFillColorOverride, m_actionStyleOverride, m_actionWeightOverride
     global m_actionTransparencyOverride, m_actionElementPriorityOverride, m_actionDisplayStyleOverride, m_actionAreaHatch, m_actionAreaPattern
     m_actionElementDisplay = ElementDisplayAction(False)
-    m_actionColorOverride = ColorOverrideAction(3, loadDgnFile)
-    m_actionFillColorOverride = FillColorOverrideAction(3, loadDgnFile)
-    m_actionStyleOverride = StyleOverrideAction(3, loadDgnFile)
+    m_actionColorOverride = ColorOverrideAction(3, dgnFile)
+    m_actionFillColorOverride = FillColorOverrideAction(3, dgnFile)
+    m_actionStyleOverride = StyleOverrideAction(3, dgnFile)
     m_actionWeightOverride = WeightOverrideAction(5)
     m_actionTransparencyOverride = TransparencyOverrideAction(0.8)
     m_actionElementPriorityOverride = ElementPriorityAction(1)
-    m_actionDisplayStyleOverride = DisplayStyleOverrideAction(1, loadDgnFile)
-    m_actionAreaHatch = AreaHatchAction(AreaHatchAction.HatchParams(1, 1, None, None, False, None, None, None), loadDgnFile)
-    m_actionAreaPattern = AreaPatternAction(AreaPatternAction.AreaPatternParams(0, 0.8, False, None, None, None, None), loadDgnFile)
+    m_actionDisplayStyleOverride = DisplayStyleOverrideAction(1, dgnFile)
+    m_actionAreaHatch = AreaHatchAction(AreaHatchAction.HatchParams(1, 1, None, None, False, None, None, None), dgnFile)
+    m_actionAreaPattern = AreaPatternAction(AreaPatternAction.AreaPatternParams(0, 0.8, False, None, None, None, None), dgnFile)
 
 def SetNewActionsValues():
     global m_actionElementDisplay, m_actionColorOverride, m_actionFillColorOverride, m_actionStyleOverride, m_actionWeightOverride
@@ -224,19 +225,22 @@ def SaveCloseAndReopenFile(dgnFile):
     return dgnFileRet
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_GetSetDisplayRuleSetTests(initDgnPlatformHost, loadDgnFile):
+def test_GetSetDisplayRuleSetTests(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global m_displayRuleSet0, m_displayRuleSet1
-    SetUp(loadDgnFile)
-    m_displayRuleSet0 = DisplayRuleSet((WString)("Test0"), loadDgnFile)
-    m_displayRuleSet1 = DisplayRuleSet((WString)("Test1"), loadDgnFile)
+    SetUp(dgnFile)
+    m_displayRuleSet0 = DisplayRuleSet(WString ("Test0"), dgnFile)
+    m_displayRuleSet1 = DisplayRuleSet(WString ("Test1"), dgnFile)
     assert str(m_displayRuleSet0.GetName()) == "Test0"
     assert str(m_displayRuleSet1.GetName()) == "Test1"
 
-    m_displayRuleSet0.SetName((WString)("Changed0"))
+    m_displayRuleSet0.SetName(WString("Changed0"))
     assert str(m_displayRuleSet0.GetName()) == "Changed0"
-    assert loadDgnFile == m_displayRuleSet0.GetDgnFile()
+    if dgnFile != m_displayRuleSet0.GetDgnFile():
+        print ("dgnFile != m_displayRuleSet0.GetDgnFile(), Strange@!!!!!!!!")
+    assert dgnFile == m_displayRuleSet0.GetDgnFile()
 
-    dStyle1 = DisplayStyle(loadDgnFile, "TestStyle")
+    dStyle1 = DisplayStyle(dgnFile, "TestStyle")
     assert True != m_displayRuleSet0.IsUsedByDisplayStyle(dStyle1)
 
     DisplayRulesManager.SetDisplayRuleSetToDisplayStyle(m_displayRuleSet0, dStyle1)
@@ -244,14 +248,15 @@ def test_GetSetDisplayRuleSetTests(initDgnPlatformHost, loadDgnFile):
     TearDown()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayRuleSetCloneAndEquals(initDgnPlatformHost, loadDgnFile):
+def test_DisplayRuleSetCloneAndEquals(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global m_displayRule0, m_displayRule1, m_displayRuleSet0
-    SetUp(loadDgnFile)
-    SetStartingActions(loadDgnFile)
+    SetUp(dgnFile)
+    SetStartingActions(dgnFile)
     SetActions(m_displayRule0)
 
     m_displayRuleSet0.GetDisplayRules().append(m_displayRule0)
-    displayRuleSet0Clone = m_displayRuleSet0.Clone(loadDgnFile)
+    displayRuleSet0Clone = m_displayRuleSet0.Clone(dgnFile)
 
     assert displayRuleSet0Clone.GetName() == m_displayRuleSet0.GetName()
     assert displayRuleSet0Clone.GetDgnFile() == m_displayRuleSet0.GetDgnFile()
@@ -278,11 +283,12 @@ def test_DisplayRuleSetCloneAndEquals(initDgnPlatformHost, loadDgnFile):
     TearDown()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_GetSetDisplayRuleTests(initDgnPlatformHost, loadDgnFile):
+def test_GetSetDisplayRuleTests(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global m_displayRule0, m_displayRule1
-    SetUp(loadDgnFile)
-    m_displayRule0 = DisplayRule(WString("element.DgnElementSchema::ShapeElement::EnclosedArea>2000000000"), True, loadDgnFile)
-    m_displayRule1 = DisplayRule(WString("element.DgnElementSchema::ShapeElement::EnclosedArea>1000000000"), False, loadDgnFile)
+    SetUp(dgnFile)
+    m_displayRule0 = DisplayRule(WString("element.DgnElementSchema::ShapeElement::EnclosedArea>2000000000"), True, dgnFile)
+    m_displayRule1 = DisplayRule(WString("element.DgnElementSchema::ShapeElement::EnclosedArea>1000000000"), False, dgnFile)
 
     assert WString("element.DgnElementSchema::ShapeElement::EnclosedArea>2000000000") == m_displayRule0.GetCondition()
     assert WString("element.DgnElementSchema::ShapeElement::EnclosedArea>1000000000") == m_displayRule1.GetCondition()
@@ -306,10 +312,11 @@ def test_GetSetDisplayRuleTests(initDgnPlatformHost, loadDgnFile):
     TearDown()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_GetSetDisplayRuleActionTests(initDgnPlatformHost, loadDgnFile):
+def test_GetSetDisplayRuleActionTests(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global m_displayRule0
-    SetUp(loadDgnFile)
-    SetStartingActions(loadDgnFile)
+    SetUp(dgnFile)
+    SetStartingActions(dgnFile)
     SetActions(m_displayRule0)
     CheckAllActions(m_displayRule0, 10)
 
@@ -318,12 +325,13 @@ def test_GetSetDisplayRuleActionTests(initDgnPlatformHost, loadDgnFile):
     TearDown()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayRuleCloneAndEquals(initDgnPlatformHost, loadDgnFile):
+def test_DisplayRuleCloneAndEquals(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global m_displayRule0
-    SetUp(loadDgnFile)
-    SetStartingActions(loadDgnFile)
+    SetUp(dgnFile)
+    SetStartingActions(dgnFile)
     SetActions(m_displayRule0)
-    displayRule0Clone = m_displayRule0.Clone(loadDgnFile)
+    displayRule0Clone = m_displayRule0.Clone(dgnFile)
 
     assert m_displayRule0.IsEnabled() == displayRule0Clone.IsEnabled()
     assert m_displayRule0.StopIfTrue() == displayRule0Clone.StopIfTrue()
@@ -356,20 +364,21 @@ def test_DisplayRuleCloneAndEquals(initDgnPlatformHost, loadDgnFile):
     assert m_displayRule0 != displayRule0Clone
     SetStartingActionsBack()
 
-    actionColorOverrideAdd = ColorOverrideAction(5, loadDgnFile)
+    actionColorOverrideAdd = ColorOverrideAction(5, dgnFile)
     m_displayRule0.GetActions().append(actionColorOverrideAdd)
     assert m_displayRule0 != displayRule0Clone
     TearDown()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
+def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global m_actionElementDisplay, m_actionColorOverride, m_actionFillColorOverride, m_actionStyleOverride, m_actionWeightOverride
     global m_actionTransparencyOverride, m_actionElementPriorityOverride, m_actionDisplayStyleOverride, m_actionAreaHatch, m_actionAreaPattern
-    SetUp(loadDgnFile)
-    SetStartingActions(loadDgnFile)
+    SetUp(dgnFile)
+    SetStartingActions(dgnFile)
 
     #ElementDisplayActionP 
-    actionElementDisplayCloneTemp = m_actionElementDisplay.Clone(loadDgnFile)
+    actionElementDisplayCloneTemp = m_actionElementDisplay.Clone(dgnFile)
     actionElementDisplayClone = actionElementDisplayCloneTemp
     assert m_actionElementDisplay.IsElementDisplayOff() == actionElementDisplayClone.IsElementDisplayOff()
     assert m_actionElementDisplay == actionElementDisplayClone
@@ -377,7 +386,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionElementDisplay != actionElementDisplayClone
 
     #ColorOverrideActionP
-    actionColorOverrideCloneTemp = m_actionColorOverride.Clone(loadDgnFile)
+    actionColorOverrideCloneTemp = m_actionColorOverride.Clone(dgnFile)
     actionColorOverrideClone = actionColorOverrideCloneTemp
     assert m_actionColorOverride.GetElementColor() == actionColorOverrideClone.GetElementColor()
     assert m_actionColorOverride == actionColorOverrideClone
@@ -385,7 +394,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionColorOverride != actionElementDisplayClone
 
     #FillColorOverrideActionP
-    actionFillColorOverrideCloneTemp = m_actionFillColorOverride.Clone(loadDgnFile)
+    actionFillColorOverrideCloneTemp = m_actionFillColorOverride.Clone(dgnFile)
     actionFillColorOverrideClone = actionFillColorOverrideCloneTemp
     assert m_actionFillColorOverride.GetElementFillColor() == actionFillColorOverrideClone.GetElementFillColor()
     assert m_actionFillColorOverride == actionFillColorOverrideClone
@@ -393,7 +402,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionFillColorOverride != actionFillColorOverrideClone
 
     #StyleOverrideActionP
-    actionStyleOverrideCloneTemp = m_actionStyleOverride.Clone(loadDgnFile)
+    actionStyleOverrideCloneTemp = m_actionStyleOverride.Clone(dgnFile)
     actionStyleOverrideClone = actionStyleOverrideCloneTemp
     assert m_actionStyleOverride.GetLineStyle() == actionStyleOverrideClone.GetLineStyle()
     assert m_actionStyleOverride == actionStyleOverrideClone
@@ -401,7 +410,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionStyleOverride != actionStyleOverrideClone
 
     #WeightOverrideActionP
-    actionWeightOverrideCloneTemp = m_actionWeightOverride.Clone(loadDgnFile)
+    actionWeightOverrideCloneTemp = m_actionWeightOverride.Clone(dgnFile)
     actionWeightOverrideClone = actionWeightOverrideCloneTemp
     assert m_actionWeightOverride.GetLineWeight() == actionWeightOverrideClone.GetLineWeight()
     assert m_actionWeightOverride == actionWeightOverrideClone
@@ -409,7 +418,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionWeightOverride != actionWeightOverrideClone
 
     #TransparencyOverrideActionP
-    actionTransparencyOverrideCloneTemp = m_actionTransparencyOverride.Clone(loadDgnFile)
+    actionTransparencyOverrideCloneTemp = m_actionTransparencyOverride.Clone(dgnFile)
     actionTransparencyOverrideClone = actionTransparencyOverrideCloneTemp
     assert m_actionTransparencyOverride.GetTransparency() == actionTransparencyOverrideClone.GetTransparency()
     assert m_actionTransparencyOverride == actionTransparencyOverrideClone
@@ -417,7 +426,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionTransparencyOverride != actionTransparencyOverrideClone
 
     #ElementPriorityActionP
-    actionElementPriorityOverrideCloneTemp = m_actionElementPriorityOverride.Clone(loadDgnFile)
+    actionElementPriorityOverrideCloneTemp = m_actionElementPriorityOverride.Clone(dgnFile)
     actionElementPriorityOverrideClone = actionElementPriorityOverrideCloneTemp
     assert m_actionElementPriorityOverride.GetElementPriority() == actionElementPriorityOverrideClone.GetElementPriority()
     assert m_actionElementPriorityOverride == actionElementPriorityOverrideClone
@@ -425,7 +434,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionElementPriorityOverride != actionElementPriorityOverrideClone
 
     #DisplayStyleOverrideActionP
-    actionDisplayStyleOverrideCloneTemp = m_actionDisplayStyleOverride.Clone(loadDgnFile)
+    actionDisplayStyleOverrideCloneTemp = m_actionDisplayStyleOverride.Clone(dgnFile)
     actionDisplayStyleOverrideClone = actionDisplayStyleOverrideCloneTemp
     assert m_actionDisplayStyleOverride.GetDisplayStyleIndex() == actionDisplayStyleOverrideClone.GetDisplayStyleIndex()
     assert m_actionDisplayStyleOverride == actionDisplayStyleOverrideClone
@@ -433,7 +442,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionDisplayStyleOverride != actionDisplayStyleOverrideClone
 
     #AreaHatchActionP
-    actionAreaHatchCloneTemp = m_actionAreaHatch.Clone(loadDgnFile)
+    actionAreaHatchCloneTemp = m_actionAreaHatch.Clone(dgnFile)
     actionAreaHatchClone = actionAreaHatchCloneTemp
     assert m_actionAreaHatch.Params.m_distance1 == actionAreaHatchClone.Params.m_distance1
     assert m_actionAreaHatch.Params.m_angle1 == actionAreaHatchClone.Params.m_angle1
@@ -449,7 +458,7 @@ def test_DisplayRuleActionCloneEquals(initDgnPlatformHost, loadDgnFile):
     assert m_actionAreaHatch != actionAreaHatchClone
 
     #AreaPatternActionP
-    actionAreaPatternCloneTemp = m_actionAreaPattern.Clone(loadDgnFile)
+    actionAreaPatternCloneTemp = m_actionAreaPattern.Clone(dgnFile)
     actionAreaPatternClone = actionAreaPatternCloneTemp
     assert m_actionAreaPattern.Params.m_cellId == actionAreaPatternClone.Params.m_cellId
     assert m_actionAreaPattern.Params.m_scale == actionAreaPatternClone.Params.m_scale

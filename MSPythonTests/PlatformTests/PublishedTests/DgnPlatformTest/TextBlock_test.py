@@ -12,6 +12,7 @@ from MSPyBentleyGeom import *
 from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from util import *
+from conftest import *
 
 dgnFileName = '2dMetricGeneral.dgn'
 
@@ -33,7 +34,8 @@ class TestTextBlockTestFixture:
         return dgnFile
 
     def loadDgnModel (self):
-        self.dgnFile = self.loadDgnFileByFileName (dgnFileName)
+        seedFile = self.loadDgnFileByFileName (dgnFileName)
+        self.dgnFile = createTempDgnFileFromSeedFile (seedFile)
         self.model, retVal = self.dgnFile.LoadRootModelById (self.dgnFile.DefaultModelId, True)
 
     def GetDgnModel (self):

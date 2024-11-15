@@ -7,7 +7,7 @@
 +--------------------------------------------------------------------------------------*/
 #include "MSPythonPCH.h"
 #include <Geom/OperatorOverload.h>
-
+#include <Pybind11/numpy.h>
 
 
 static const char * __doc_Bentley_Geom_Transform_OffsetPointByColumn =R"doc(Adds column i of the matrix part of this instance to point in and
@@ -1185,6 +1185,19 @@ void def_Transform(py::module_& m)
     c1.def(py::self * DPoint3d());
     c1.def(py::self * py::self);
     c1.def(py::self * RotMatrix());
+
+    c1.def_property("form3d",
+        [](Transform& self) {return py::array_t<T_Adouble>{ {3, 4}, self.form3d[0], py::cast(self)}; },
+        [](RotMatrix& self, py::array_t<T_Adouble> const& arr)
+        {
+        py::buffer_info buf = arr.request();
+        auto* ptr = static_cast<T_Adouble*>(buf.ptr);
+
+        if (9 != arr.size())
+            return;
+
+        memcpy(self.form3d[0], ptr, 12 * sizeof(T_Adouble));
+        });
 
     c1.def("InitFrom", &Transform::InitFromRowValues,
            "x00"_a, "x01"_a, "x02"_a, "tx"_a,

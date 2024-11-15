@@ -14,13 +14,16 @@ from MSPyBentleyGeom import *
 from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from util import *
+import time
 
 #---------------------------------------------------------------------------------##//##
 # Specify the ECSchema that contains all the class/struct definitions
-# @bsimethod                                                    BillSteinbock   02/12
+# @bsimethod                                                    Ping.Chen   02/2024
 #---------------+---------------+---------------+---------------+---------------+------#/
 def CreateTestSchema ():
-
+    #time.sleep(45)
+    #schemaXML = WString ()
+    #test = WString ("Test")
     schemaXML = WString ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
                     "<ECSchema schemaName=\"TestSchema\" nameSpacePrefix=\"test\" version=\"01.00\" xmlns=\"http://www.bentley.com/schemas/Bentley.ECXML.2.0\">"
                     "    <ECClass typeName=\"SampleDataClass\" isStruct=\"True\" isDomainClass=\"True\">"
@@ -57,22 +60,22 @@ class SampleData:
         else:
             self.m_readings = None
 
-        self.m_length = id # 3.75
+        self.m_length = id * 3.75
 
         self.m_startPoint = DPoint3d ()
 
-        self.m_startPoint.x = id # 1.0
-        self.m_startPoint.y = id # 1.0
-        self.m_startPoint.z = id # 1.0
+        self.m_startPoint.x = id * 1.0
+        self.m_startPoint.y = id * 1.0
+        self.m_startPoint.z = id * 1.0
 
         self.m_endPoint = DPoint3d ()
-        self.m_endPoint.x = id # 1.0 + 100.0
-        self.m_endPoint.y = id # 1.0 + 100.0
-        self.m_endPoint.z = id # 1.0 + 100.0
+        self.m_endPoint.x = id * 1.0 + 100.0
+        self.m_endPoint.y = id * 1.0 + 100.0
+        self.m_endPoint.z = id * 1.0 + 100.0
 
         self.m_xySize = DPoint2d ()
-        self.m_xySize.x = id # 0.5
-        self.m_xySize.y = id # 1.0 + 0.5
+        self.m_xySize.x = id * 0.5
+        self.m_xySize.y = id * 1.0 + 0.5
 
         self.m_tested = (0 == id%2)
 
@@ -122,7 +125,7 @@ class  SampleDataInstanceManager:
 
 class TestBasicTest :
     #----------------------------------------------------------------------------------#//##
-    # @bsimethod                                                    BillSteinbock   02/12
+    # @bsimethod                                                    Ping.Chen   02/2024
     #---------------+---------------+---------------+---------------+---------------+------#/
     def test_BuildInstanceAndSerializeToXML (self):
         ret = pythoncom.CoInitialize ()

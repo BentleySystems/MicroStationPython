@@ -7,6 +7,36 @@
 +--------------------------------------------------------------------------------------*/
 #pragma once
 
+template <typename T>
+struct TypeWrapper
+{
+public:
+    T value;
+    TypeWrapper()
+    {
+    }
+    TypeWrapper(T val)
+    {
+        value = val;
+    }
+};
+
+template <typename T>
+py::class_<TypeWrapper<T>> bind_TypeWrapper(py::handle scope, std::string const& name)
+{
+    py::class_<TypeWrapper<T>> cl(scope, name.c_str());
+
+    cl.def(py::init<>());
+    cl.def(py::init<T>());
+    cl.def_readwrite("value", &TypeWrapper<T>::value);
+
+    return cl;
+};
+
+typedef TypeWrapper<int> IntWrapper;
+typedef TypeWrapper<double> DoubleWrapper;
+typedef TypeWrapper<bool> BoolWrapper;
+
 // template<typename T> struct ValueSizeSize
 template <typename ValueType, typename holder_type = std::unique_ptr< ValueSizeSize<ValueType> >, typename... Args>
 py::class_<ValueSizeSize<ValueType>, holder_type> bind_ValueSizeSize(py::handle scope, std::string const& name, Args &&...args)

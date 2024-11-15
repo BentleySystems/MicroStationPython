@@ -413,6 +413,7 @@ void def_DPoint4d(py::module_& m)
 
     c1.def(py::init(py::overload_cast<double, double, double, double>(&DPoint4d::From)), "x"_a, "y"_a, "z"_a, "w"_a);
     c1.def(py::init(py::overload_cast<DPoint3dCR, double>(&DPoint4d::From)), "xyz"_a, "w"_a);
+    c1.def(py::init([]() { DPoint4d v; v.Zero(); return v; }));
 
     c1.def_static("From", py::overload_cast<double, double, double, double>(&DPoint4d::From), "x"_a, "y"_a, "z"_a, "w"_a, DOC(Bentley, Geom, DPoint4d, From));
     c1.def_static("From", py::overload_cast<DPoint3dCR, double>(&DPoint4d::From), "xyz"_a, "w"_a, DOC(Bentley, Geom, DPoint4d, From));        

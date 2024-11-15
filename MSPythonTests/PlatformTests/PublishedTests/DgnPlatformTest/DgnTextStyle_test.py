@@ -21,22 +21,23 @@ def AddStyleToFile (name, loadDgnFile, style1=None):
     return style.Add()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateStyle(initDgnPlatformHost, loadDgnFile):
+def test_CreateStyle(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     name = "49"
-    style1 =  DgnTextStyle(name, loadDgnFile)
-    style2 =  DimensionStyle(name, loadDgnFile)
-    style3 =  DgnTextSnippet.Create(name, loadDgnFile)
+    style1 =  DgnTextStyle(name, dgnFile)
+    style2 =  DimensionStyle(name, dgnFile)
+    style3 =  DgnTextSnippet.Create(name, dgnFile)
     assert style1 != None
     assert style2 != None
     assert style3 != None
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_AddToSameFile(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     name = "59"
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    style1 =  DgnTextStyle(name, srcDgnFile)
-    style2 =  DimensionStyle(name, srcDgnFile)
-    style3 =  DgnTextSnippet.Create(name, srcDgnFile)
+    style1 =  DgnTextStyle(name, dgnFile)
+    style2 =  DimensionStyle(name, dgnFile)
+    style3 =  DgnTextSnippet.Create(name, dgnFile)
     assert style1 != None
     assert style2 != None
     assert style3 != None
@@ -46,14 +47,14 @@ def test_AddToSameFile(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSe
     assert status1 == BentleyStatus.eSUCCESS
     assert status2 == BentleyStatus.eSUCCESS
     assert status3 == BentleyStatus.eSUCCESS
-    AddStyleToFile (name, srcDgnFile)
-    fileStyle1 = DgnTextStyle.GetByName (name, srcDgnFile)
-    fileStyle2 = DimensionStyle.GetByName (name, srcDgnFile)
-    fileStyle3 = DgnTextSnippet.GetByName (name, srcDgnFile)
+    AddStyleToFile (name, dgnFile)
+    fileStyle1 = DgnTextStyle.GetByName (name, dgnFile)
+    fileStyle2 = DimensionStyle.GetByName (name, dgnFile)
+    fileStyle3 = DgnTextSnippet.GetByName (name, dgnFile)
     assert fileStyle1 != None
     assert fileStyle2 != None
     assert fileStyle3 != None
-    status1 = AddStyleToFile (name, srcDgnFile, style1)
+    status1 = AddStyleToFile (name, dgnFile, style1)
     assert status1 != BentleyStatus.eSUCCESS
     newName = "74"
     style1.SetName (newName)
@@ -64,25 +65,25 @@ def test_AddToSameFile(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSe
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_Delete(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     name = "85"
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    AddStyleToFile (name, srcDgnFile)
-    status1 = DgnTextStyle.Delete (name, srcDgnFile)
+    AddStyleToFile (name, dgnFile)
+    status1 = DgnTextStyle.Delete (name, dgnFile)
     assert status1 == BentleyStatus.eSUCCESS
-    fileStyle1 = DgnTextStyle.GetByName (name, srcDgnFile)
-    fileStyle2 = DimensionStyle.GetByName (name, srcDgnFile)
-    fileStyle3 = DgnTextSnippet.GetByName (name, srcDgnFile)
+    fileStyle1 = DgnTextStyle.GetByName (name, dgnFile)
+    fileStyle2 = DimensionStyle.GetByName (name, dgnFile)
+    fileStyle3 = DgnTextSnippet.GetByName (name, dgnFile)
     assert fileStyle1 == None
     assert fileStyle2 == None
     assert fileStyle3 == None
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_Replace(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     name = "100"
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    status0 = AddStyleToFile (name, srcDgnFile)
+    status0 = AddStyleToFile (name, dgnFile)
     assert status0 == BentleyStatus.eSUCCESS
-    fileStyle1 = DgnTextStyle.GetByName (name, srcDgnFile)
+    fileStyle1 = DgnTextStyle.GetByName (name, dgnFile)
     assert fileStyle1 != None
     status1 = fileStyle1.Replace()
     assert status1 == BentleyStatus.eSUCCESS
@@ -90,60 +91,63 @@ def test_Replace(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     fileStyle1.SetName (newName)
     status1 = fileStyle1.Replace()              #Actually do nothing here
     assert status1 == BentleyStatus.eERROR      #ERROR expected
-    newfileStyle1 = DgnTextStyle.GetByName (newName, srcDgnFile)
+    newfileStyle1 = DgnTextStyle.GetByName (newName, dgnFile)
     assert newfileStyle1 == None
     status1 = fileStyle1.Replace(name)          #Passing old name will do the real replacment
     assert status1 == BentleyStatus.eSUCCESS
-    newfileStyle1 = DgnTextStyle.GetByName (newName, srcDgnFile)
+    newfileStyle1 = DgnTextStyle.GetByName (newName, dgnFile)
     assert newfileStyle1 != None
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_GetById(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     name = "129"
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    status1 =  AddStyleToFile (name, srcDgnFile)
+    status1 =  AddStyleToFile (name, dgnFile)
     assert status1 == BentleyStatus.eSUCCESS
-    fileStyle1 = DgnTextStyle.GetByName (name, srcDgnFile)
+    fileStyle1 = DgnTextStyle.GetByName (name, dgnFile)
     assert fileStyle1 != None
-    idStyle = DgnTextStyle.GetByID (fileStyle1.GetID(), srcDgnFile)
+    idStyle = DgnTextStyle.GetByID (fileStyle1.GetID(), dgnFile)
     assert idStyle != None
     assert name == repr(idStyle.GetName())
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_Copy(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     name = "147"
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
-    status1 =  AddStyleToFile (name, srcDgnFile)
+    status1 =  AddStyleToFile (name, dgnFile)
     assert status1 == BentleyStatus.eSUCCESS
-    fileStyle1 = DgnTextStyle.GetByName (name, srcDgnFile)
+    fileStyle1 = DgnTextStyle.GetByName (name, dgnFile)
     assert fileStyle1 != None
     newName = "154"
-    newStyle1 =  DgnTextStyle(name, srcDgnFile)
+    newStyle1 =  DgnTextStyle(name, dgnFile)
     newStyle1.CopyValues (fileStyle1)
     diff = fileStyle1.Compare (newStyle1)
     assert not diff.AnyBitSet()
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_GetName(initDgnPlatformHost, loadDgnFile):
+def test_GetName(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     name = "167"
-    newStyle1 =  DgnTextStyle (name, loadDgnFile)
+    newStyle1 =  DgnTextStyle (name, dgnFile)
     assert name == repr(newStyle1.GetName())
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_GetID(initDgnPlatformHost, loadDgnFile):
+def test_GetID(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     name = "177"
-    newStyle1 =  DgnTextStyle (name, loadDgnFile)
+    newStyle1 =  DgnTextStyle (name, dgnFile)
     assert name == repr(newStyle1.GetName())
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_TextStyleComparisonTest(initDgnPlatformHost, loadDgnFile):
-    myStyle1 = DgnTextStyle("MyTextStyle1", loadDgnFile)
-    myStyle2 = DgnTextStyle("MyTextStyle2", loadDgnFile)
+def test_TextStyleComparisonTest(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    myStyle1 = DgnTextStyle("MyTextStyle1", dgnFile)
+    myStyle2 = DgnTextStyle("MyTextStyle2", dgnFile)
     mask1 = myStyle1.Compare (myStyle2)
     assert not mask1.AnyBitSet()
     assert not mask1.GetPropertyFlag(eTextStyle_Color)

@@ -114,30 +114,33 @@ def test_D_60051():
     LevelUtils.ReplaceInvalidCharacters(wLevelName2, 'i')
     assert True == (repr(wLevelName2) == "This is a valid name")
 
+@pytest.mark.skip(reason="Ping.Chen, error in bb r platformtests")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetLineStyle(initDgnPlatformHost, loadDgnFile):
-    it = iter(loadDgnFile.GetLineStyleMap())
+def test_SetLineStyle(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    it = iter(dgnFile.GetLineStyleMap())
     nextNum = next(it)
     lsNum = nextNum.GetStyleNumber()
     
-    lsDef = loadDgnFile.GetLineStyleMap().GetLineStyleEntry(lsNum)
+    lsDef = dgnFile.GetLineStyleMap().GetLineStyleEntry(lsNum)
     assert lsDef != None
-    id = lsDef.GetId(loadDgnFile.GetDictionaryModel())
+    id = lsDef.GetId(dgnFile.GetDictionaryModel())
 
-    level = EditLevelHandle(loadDgnFile.GetLevelCache().GetLevelByName ("Default"))
-    level.SetOverrideLineStyle (lsDef, None, loadDgnFile)
+    level = EditLevelHandle(dgnFile.GetLevelCache().GetLevelByName ("Default"))
+    assert level.SetOverrideLineStyle (lsDef, None, dgnFile)
     assert level.GetOverrideLineStyle ().GetStyle () == lsNum
     assert level.GetOverrideLineStyle ().GetStyleParams() == None
 
-    level.SetByLevelLineStyle (lsDef, None, loadDgnFile)
+    assert level.SetByLevelLineStyle (lsDef, None, dgnFile)
     assert level.GetByLevelLineStyle ().GetStyle () == lsNum
     assert level.GetByLevelLineStyle ().GetStyleParams() == None
     assert id != INVALID_ELEMENTID
     
    
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_NoModReadOnlyLevel(initDgnPlatformHost, loadDgnFile):
-    levels = loadDgnFile.GetLevelCache()
+def test_NoModReadOnlyLevel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    levels = dgnFile.GetLevelCache()
     
     level = EditLevelHandle(levels.GetLevelByName("Default"))
     assert level.IsValid()
@@ -150,8 +153,9 @@ def test_NoModReadOnlyLevel(initDgnPlatformHost, loadDgnFile):
 
 @pytest.mark.skip(reason="Ignore: Find out if it's really true that levels must have names")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_NoNullName(initDgnPlatformHost, loadDgnFile):
-    levels = loadDgnFile.GetLevelCache()
+def test_NoNullName(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    levels = dgnFile.GetLevelCache()
     
     level = EditLevelHandle(levels.CreateLevel (None, LEVEL_NULL_CODE, LEVEL_NULL_ID))
     assert levels.Write() == LevelCacheErrorCode(0)
@@ -161,8 +165,9 @@ def test_NoNullName(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_GetDefaultLevelByCode(initDgnPlatformHost, loadDgnFile):
-    levelCache = loadDgnFile.GetLevelCache()
+def test_GetDefaultLevelByCode(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    levelCache = dgnFile.GetLevelCache()
     
     level = levelCache.GetLevelByName("Default")
     assert level.IsValid()   

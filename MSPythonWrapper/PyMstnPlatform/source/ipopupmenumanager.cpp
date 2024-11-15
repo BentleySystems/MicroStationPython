@@ -10,20 +10,15 @@
 
 
 
-static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_DropTentativePopUpMenuProvider =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_DropTentativePopUpMenuProvider =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_AddTentativePopUpMenuProvider =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_AddTentativePopUpMenuProvider =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_DropViewPopUpMenuProvider =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_DropViewPopUpMenuProvider =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_AddViewPopUpMenuProvider =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_AddViewPopUpMenuProvider =R"doc()doc";
 
-static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_GetManager =R"doc(Remark:
-    Required Library:mdlbltin.lib)doc";
+static const char * __doc_Bentley_MstnPlatform_IPopupMenuManager_GetManager =R"doc()doc";
 
 //=======================================================================================
 // Trampoline class for IPopupMenuProvider

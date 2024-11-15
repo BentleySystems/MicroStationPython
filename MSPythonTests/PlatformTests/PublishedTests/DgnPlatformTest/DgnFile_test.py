@@ -17,20 +17,22 @@ MAX_MODEL_NAME_LENGTH = 512
 INVALID_MODELID = -2
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_createModel (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_createModel (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
 
     if (ret[1] != DgnModelStatus.eDGNMODEL_STATUS_Success):
         assert False
     model = ret[0]
     assert ret[0] != None
-    assert model.GetDgnFile() == loadDgnFile
+    assert model.GetDgnFile() == dgnFile
     assert model.GetModelName() == "Test"
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_LoadDgnFileWriteAccess(initDgnPlatformHost, loadDgnFile):
-    assert loadDgnFile.IsOpen() == True
-    assert loadDgnFile.IsLoaded() == True
+def test_LoadDgnFileWriteAccess(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    assert dgnFile.IsOpen() == True
+    assert dgnFile.IsLoaded() == True
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_LoadDgnFileReadOnly(initDgnPlatformHost, loadDgnFileReadOnly):
@@ -38,17 +40,17 @@ def test_LoadDgnFileReadOnly(initDgnPlatformHost, loadDgnFileReadOnly):
     assert loadDgnFileReadOnly.IsLoaded() == True
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_FillDictionaryModel(initDgnPlatformHost, loadDgnFile):
-
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_FillDictionaryModel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     name= "Model-1"
 
     assert ret != None
-    assert loadDgnFile.FillDictionaryModel() == BentleyStatus.eSUCCESS
+    assert dgnFile.FillDictionaryModel() == BentleyStatus.eSUCCESS
 
     temp_dir = tempfile.TemporaryDirectory()
 
-    fileName = loadDgnFile.GetFileName()
+    fileName = dgnFile.GetFileName()
     original = r'%s' %fileName
 
     target =  temp_dir.name+'/DgnFile_GetLoadedModelsCollectionTest1.dgn'
@@ -118,7 +120,11 @@ def test_GetLoadedModelsCollection(initDgnPlatformHost, loadDgnFile, createTempD
     #should be 4 because there is a default model as well as the created caches
     assert 4 == loaded
 
-    fileTarget = os.environ['MSPYTEMPDATA'] + os.path.basename(__file__).split('.')[0] + str(sys._getframe().f_lineno)+'.dgn'
+    emptyDir = WString ()
+    ConfigurationManager.GetLocalTempDirectory (emptyDir,"")
+    tempFileName = next(tempfile._get_candidate_names()) + ".dgn"
+    fileTarget = str (emptyDir) + str (tempFileName)
+
     BeFileName.BeDeleteFile (fileTarget)
     srcDgnFile.DoSaveTo(fileTarget)
 
@@ -176,76 +182,83 @@ def test_DeleteModel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CannotDeleteDefaultModel(initDgnPlatformHost, loadDgnFile): 
-    defaultModel = loadDgnFile.LoadRootModelById(loadDgnFile.GetDefaultModelId())  
+def test_CannotDeleteDefaultModel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed): 
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    defaultModel = dgnFile.LoadRootModelById(dgnFile.GetDefaultModelId())  
 
-    assert 0!= loadDgnFile.DeleteModel(defaultModel[0])
+    assert 0!= dgnFile.DeleteModel(defaultModel[0])
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateNewRootModel(initDgnPlatformHost, loadDgnFile): 
+def test_CreateNewRootModel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed): 
     name= "Test Model"
-    model1 = loadDgnFile.CreateNewModel (name, DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    model1 = dgnFile.CreateNewModel (name, DgnModelType.eNormal, False)
     assert None != model1
 
-    mid = loadDgnFile.FindModelIdByName(name)
-    assert loadDgnFile.LoadRootModelById(mid,True) == model1
+    mid = dgnFile.FindModelIdByName(name)
+    assert dgnFile.LoadRootModelById(mid,True) == model1
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) #BackDoor is not defined
-def test_CreateNewDrawingModel(initDgnPlatformHost, loadDgnFile): 
+def test_CreateNewDrawingModel(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed): 
     name= "New Drawing Model"
-    model1 = loadDgnFile.CreateNewModel (name, DgnModelType.eDrawing, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    model1 = dgnFile.CreateNewModel (name, DgnModelType.eDrawing, False)
     assert None != model1
-    #assert loadDgnFile.GetModelType (model1[0]) == DgnModelType.eDrawing
+    #assert dgnFile.GetModelType (model1[0]) == DgnModelType.eDrawing
 
-    mid = loadDgnFile.FindModelIdByName(name)
-    assert loadDgnFile.LoadRootModelById(mid,True) == model1
+    mid = dgnFile.FindModelIdByName(name)
+    assert dgnFile.LoadRootModelById(mid,True) == model1
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_FindModelIdByName(initDgnPlatformHost, loadDgnFile): 
+def test_FindModelIdByName(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed): 
     name= "New Model"
-    model1 = loadDgnFile.CreateNewModel (name, DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    model1 = dgnFile.CreateNewModel (name, DgnModelType.eNormal, False)
     assert None != model1
 
     nonexistant = "I don't exist"
     
-    assert INVALID_MODELID != loadDgnFile.FindModelIdByName(name)
-    assert INVALID_MODELID == loadDgnFile.FindModelIdByName(nonexistant)
+    assert INVALID_MODELID != dgnFile.FindModelIdByName(name)
+    assert INVALID_MODELID == dgnFile.FindModelIdByName(nonexistant)
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_LoadModelById(initDgnPlatformHost, loadDgnFile): 
+def test_LoadModelById(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed): 
     name= "New Model 1"
-    model1 = loadDgnFile.CreateNewModel (name, DgnModelType.eNormal, False)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    model1 = dgnFile.CreateNewModel (name, DgnModelType.eNormal, False)
     assert None != model1
-    mid = loadDgnFile.FindModelIdByName(name)
+    mid = dgnFile.FindModelIdByName(name)
 
-    assert loadDgnFile.LoadRootModelById(mid) == model1
+    assert dgnFile.LoadRootModelById(mid) == model1
 
 @pytest.mark.skip(reason = "PlatformTest Fail. Writing into the source tree")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DoSaveAs(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile): 
+def test_DoSaveAs(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed): 
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     emptyDir = WString ()
     ConfigurationManager.GetLocalTempDirectory (emptyDir,"")       
     filenamesave = WString((str(emptyDir))+"DgnFile_DoSaveAsTest.dgn")
     BeFileName.BeDeleteFile (repr(filenamesave))
     doc = DgnDocument.CreateForLocalFile(repr(filenamesave))
     assert doc != None
-    loadDgnFile.DoSaveAs(doc)
+    dgnFile.DoSaveAs(doc)
 
-    assert repr(filenamesave) == repr(loadDgnFile.GetFileName())
+    assert repr(filenamesave) == repr(dgnFile.GetFileName())
 
     removeTempCreatedFile('test_DoSaveAs', filenamesave)
 
 @pytest.mark.skip(reason = "PlatformTest Fail. Writing into the source tree")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DoSaveTo(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile): 
+def test_DoSaveTo(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed): 
+    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)
     emptyDir = WString ()
     ConfigurationManager.GetLocalTempDirectory (emptyDir,"")   
     filenamesave = WString(str(emptyDir)+"DgnFile_DoSaveToTest.dgn")
-    loadDgnFile.DoSaveTo(repr(filenamesave))
+    srcDgnFile.DoSaveTo(repr(filenamesave))
 
-    assert repr(filenamesave) != repr(loadDgnFile.GetFileName())
+    assert repr(filenamesave) != repr(srcDgnFile.GetFileName())
     dataDir = os.environ['MSPYTESTDATA']
     ret = DgnDocument.CreateFromFileName ("DgnFile_DoSaveToTest.dgn", dataDir, -101, DgnDocument.FetchMode.eWrite)
     if (ret[1] != DgnFileStatus.eDGNFILE_STATUS_Success):
@@ -253,17 +266,18 @@ def test_DoSaveTo(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile):
     dgnFile = DgnFile (ret[0], DgnFileOpenMode.eReadWrite)
     dgnFile.LoadDgnFile ()
 
-    assert loadDgnFile != dgnFile
+    assert srcDgnFile != dgnFile
 
     removeTempCreatedFile('test_DoSaveTo', filenamesave)
 
 
 @pytest.mark.parametrize('fileName',['2dMetricGeneral.dgn'])
-def test_IsReadOnlyReadWrite(initDgnPlatformHost,loadDgnFile):
-    if(loadDgnFile == None):
+def test_IsReadOnlyReadWrite(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    if(dgnFile == None):
         assert False
         
-    assert False == loadDgnFile.IsReadOnly()
+    assert False == dgnFile.IsReadOnly()
 
 
 @pytest.mark.parametrize('fileName',['2dMetricGeneral.dgn'])
@@ -274,23 +288,30 @@ def test_IsReadOnlyReadOnly(initDgnPlatformHost,loadDgnFileReadOnly):
     assert True == loadDgnFileReadOnly.IsReadOnly()
 
 @pytest.mark.parametrize('fileName',['2dMetricGeneral.dgn'])
-def test_CannotCreateNewModelWithBadName(initDgnPlatformHost,loadDgnFile):
-    assert True == (None == loadDgnFile.CreateNewModel("",DgnModelType.eNormal,True)[0])
-    assert True == (None == loadDgnFile.CreateNewModel("???",DgnModelType.eNormal,True)[0])
+def test_CannotCreateNewModelWithBadName(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    assert True == (None == dgnFile.CreateNewModel("",DgnModelType.eNormal,True)[0])
+    assert True == (None == dgnFile.CreateNewModel("???",DgnModelType.eNormal,True)[0])
     
     tooLong = "x" * ( MAX_MODEL_NAME_LENGTH + 2 )
 
     assert True == ( len(tooLong) > MAX_MODEL_NAME_LENGTH )
-    assert True == (None == loadDgnFile.CreateNewModel(tooLong,DgnModelType.eNormal,True)[0])
-    assert True != (None == loadDgnFile.CreateNewModel("NormalName",DgnModelType.eNormal,True)[0])
-    assert True != (None == loadDgnFile.CreateNewModel("Normal Name With Spaces",DgnModelType.eNormal,True)[0])
+    assert True == (None == dgnFile.CreateNewModel(tooLong,DgnModelType.eNormal,True)[0])
+    assert True != (None == dgnFile.CreateNewModel("NormalName",DgnModelType.eNormal,True)[0])
+    assert True != (None == dgnFile.CreateNewModel("Normal Name With Spaces",DgnModelType.eNormal,True)[0])
 
 @pytest.mark.skip(reason = "PlatformTest Fail. Writing into the source tree")
 @pytest.mark.parametrize('fileName',['2dMetricGeneral.dgn'])
-def test_LoadFileTwice(initDgnPlatformHost,loadDgnFile):
-    fileSrc = os.environ['MSPYTEMPDATA']+ os.path.basename(__file__).split('.')[0] + str(sys._getframe().f_lineno)+'.dgn'
+def test_LoadFileTwice(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+
+    emptyDir = WString ()
+    ConfigurationManager.GetLocalTempDirectory (emptyDir,"")
+    tempFileName = next(tempfile._get_candidate_names()) + ".dgn"
+    fileSrc = str (emptyDir) + str (tempFileName)
+
     BeFileName.BeDeleteFile (fileSrc)
-    loadDgnFile.DoSaveTo(fileSrc)
+    dgnFile.DoSaveTo(fileSrc)
 
     doc = DgnDocument.CreateForLocalFile(fileSrc)
     assert doc != None

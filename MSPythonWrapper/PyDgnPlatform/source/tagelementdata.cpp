@@ -36,7 +36,7 @@ void def_TagElementData(py::module_& m)
     //===================================================================================
     // struct DgnTagSpec
     py::class_< DgnTagSpec> c2(m, "DgnTagSpec");
-
+    c2.def(py::init<>());
     c2.def_property("TagSetSpec",
                     [] (DgnTagSpec const& self) { return self.set; },
                     [] (DgnTagSpec& self, DgnTagSetSpec const& newVal) { memcpy((void*) &self.set, (const void*) &newVal, sizeof(DgnTagSetSpec)); });

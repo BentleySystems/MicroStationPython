@@ -2,7 +2,7 @@
 
 This library potentially incorporates work from the following third-party code:
 
-## [PyBind11](https://github.com/pybind/pybind11/)
+## [PyBind11](https://github.com/pybind/pybind11/blob/master/.github/CONTRIBUTING.md)
 
 Copyright (c) 2016 Wenzel Jakob <wenzel.jakob@epfl.ch>, All rights reserved.
 
@@ -31,5 +31,5 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-Please also refer to the file [CONTRIBUTING.md](https://github.com/pybind/pybind11/blob/master/.github/CONTRIBUTING.md), which clarifies licensing of
+Please also refer to the file .github/CONTRIBUTING.md, which clarifies licensing of
 external contributions to this project including patches, pull requests, etc.

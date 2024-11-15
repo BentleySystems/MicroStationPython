@@ -35,14 +35,15 @@ def CreateNote(leader, noteElem, File, model):
 
 @pytest.mark.skip(reason="NEEDS WORK: Fix me")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateNote(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile):
+def test_CreateNote(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     emptyDir = WString ()
     ConfigurationManager.GetLocalTempDirectory (emptyDir,"")         
     filenamesave = str(str (emptyDir)+"DgnFile_DoSaveToTest.dgn")
-    loadDgnFile.LoadDgnFile ()
-    loadDgnFile.FillDictionaryModel ()
+    dgnFile.LoadDgnFile ()
+    dgnFile.FillDictionaryModel ()
     doc = DgnDocument.CreateForLocalFile(filenamesave)
-    loadDgnFile.DoSaveAs(doc)
+    dgnFile.DoSaveAs(doc)
     dgnFile = DgnFile (doc, DgnFileOpenMode.eReadWrite)
     dgnFile.LoadDgnFile ()
     dgnFile.LoadRootModelById (seedDgnFile.GetDefaultModelId (), True, False, False)   
@@ -63,14 +64,15 @@ def test_CreateNote(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile):
 
 @pytest.mark.skip(reason="NEEDS WORK: Fix me")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ApplyDimensionStyle(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile):
+def test_ApplyDimensionStyle(removeTempCreatedFile, initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     emptyDir = WString ()
     ConfigurationManager.GetLocalTempDirectory (emptyDir,"")   
     filenamesave = str(str (emptyDir)+"DgnFile_DoSaveToTest.dgn")
-    loadDgnFile.LoadDgnFile ()
-    loadDgnFile.FillDictionaryModel () 
+    dgnFile.LoadDgnFile ()
+    dgnFile.FillDictionaryModel () 
     doc = DgnDocument.CreateForLocalFile(filenamesave)
-    loadDgnFile.DoSaveAs(doc)
+    dgnFile.DoSaveAs(doc)
     dgnFile = DgnFile (doc, DgnFileOpenMode.eReadWrite)
     dgnFile.LoadDgnFile ()
     dgnFile.LoadRootModelById (seedDgnFile.GetDefaultModelId (), True, False, False)   

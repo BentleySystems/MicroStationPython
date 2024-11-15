@@ -121,11 +121,47 @@ $(o)mscommandstate$(oext)                   : $(PyMstnSource)MdlApi/mscommandsta
 
 $(o)mselmdsc$(oext)                         : $(PyMstnSource)MdlApi/mselmdsc.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
-$(o)dialog$(oext)                          : $(PyMstnSource)MdlApi/dialog.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+$(o)mssystem$(oext)                         : $(PyMstnSource)MdlApi/mssystem.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
-$(o)expression$(oext)                        : $(PyMstnSource)MdlApi/expression.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+$(o)msmodel$(oext)                          : $(PyMstnSource)MdlApi/msmodel.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
-$(o)strutil$(oext)                           : $(PyMstnSource)MdlApi/strutil.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+$(o)mslocate$(oext)                         : $(PyMstnSource)MdlApi/mslocate.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)userfnc$(oext)                          : $(PyMstnSource)MdlApi/userfnc.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)auxsystm.r$(oext)                       : $(PyMstnSource)MdlApi/auxsystm.r.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)viewgroup$(oext)                        : $(PyMstnSource)MdlApi/viewgroup.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)filtertable$(oext)                      : $(PyMstnSource)MdlApi/filtertable.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)dgnlib$(oext)                           : $(PyMstnSource)MdlApi/dgnlib.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)changetrack$(oext)                      : $(PyMstnSource)MdlApi/changetrack.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)dialog$(oext)                           : $(PyMstnSource)MdlApi/dialog.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)expression$(oext)                       : $(PyMstnSource)MdlApi/expression.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)strutil$(oext)                          : $(PyMstnSource)MdlApi/strutil.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)MstnDefs$(oext)                         : $(PyMstnSource)MstnDefs.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)msplot$(oext)                           : $(PyMstnSource)Plot/msplot.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)IPrintDescription$(oext)                : $(PyMstnSource)Plot/IPrintDescription.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)IPlotter$(oext)                         : $(PyMstnSource)Plot/IPlotter.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)IPrintEngine$(oext)                     : $(PyMstnSource)Plot/IPrintEngine.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)IPlotHook$(oext)                        : $(PyMstnSource)Plot/IPlotHook.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)IPlotElemDisplayParams$(oext)           : $(PyMstnSource)Plot/IPlotElemDisplayParams.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)IPrinterDriver$(oext)                   : $(PyMstnSource)Plot/IPrinterDriver.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)guiview$(oext)                          : $(PyMstnSource)GUI/guiview.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
 %include MultiCppCompileGo.mki
 
@@ -164,7 +200,9 @@ LINKER_LIBRARIES            = $(PythonLibName) \
                               $(ContextSubpartsLibs)PSolidCore.lib \
                               $(ContextSubpartsLibs)SmartFeature.lib \
                               $(ContextSubpartsLibs)MSPythonCore.lib \
-                              $(ContextSubpartsLibs)ImageLib.lib
+                              $(ContextSubpartsLibs)ImageLib.lib \
+                              $(ContextSubpartsLibs)Bentley.PrintFoundation.lib \
+                              $(ContextSubpartsLibs)Bentley.PrintDefinitions.lib
 
 DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
 DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/

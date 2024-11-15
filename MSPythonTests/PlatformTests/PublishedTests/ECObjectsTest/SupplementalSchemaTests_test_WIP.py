@@ -47,7 +47,7 @@ class TestSchemaHolderTestFixture :
 
 class TestSupplementalSchemaMetaDataTests (TestSchemaHolderTestFixture):
     #---------------------------------------------------------------------------------**/#*
-    # @bsimethod                                    Carole.MacDonald                04/2012
+    # @bsimethod                                    Ping.Chen                01/2024
     #---------------+---------------+---------------+---------------+---------------+------*/
     def test_CanRetrieveFromSchema (self):
         supplemental = super ().CreateSupplementalSchema("TestSchema", "OverrideWidgets", 200, 1, 0, 4, 2)
@@ -71,7 +71,7 @@ class TestSupplementalSchemaMetaDataTests (TestSchemaHolderTestFixture):
 
 class TestSupplementalSchemaInfoTests (TestSchemaHolderTestFixture):
     #---------------------------------------------------------------------------------**/#*
-    # @bsimethod                                    Carole.MacDonald                05/2012
+    # @bsimethod                                    Ping.Chen                01/2024
     #---------------+---------------+---------------+---------------+---------------+------*
     def test_CanSetAndRetrieveInfo (self):
         schemaNamesAndPurposes1 = {}
@@ -751,7 +751,7 @@ class TestSupplementedSchemaBuilderTests (TestSchemaHolderTestFixture):
     #---------------------------------------------------------------------------------**/#*
     # Test that tries to build a consolidated schema but there are two supplemental schemas that have
     # conflicting custom attributes
-    # @bsimethod                                    Carole.MacDonald                05/2012
+    # @bsimethod                                    Ping.Chen                01/2024
     #---------------+---------------+---------------+---------------+---------------+------*/
     def test_BuildAConflictingConsolidatedSchema (self):
         supplementalSchemas = ECSchemaPArray ()
@@ -770,7 +770,7 @@ class TestSupplementedSchemaBuilderTests (TestSchemaHolderTestFixture):
     # Test that builds a consolidated schema that consists of a primary and 3 consolidated schemas.
     # One of the schemas has lower precedence than the primary, two have greater than the primary.
     # The two schemas that are greater have equal precedence
-    # @bsimethod                                    Carole.MacDonald                05/2012
+    # @bsimethod                                    Ping.Chen                01/2024
     #---------------+---------------+---------------+---------------+---------------+------*/
     def test_BuildANonConflictingConsolidatedSchema (self):
         supplementalSchemas = ECSchemaPArray ()
@@ -837,7 +837,7 @@ class TestSupplementedSchemaBuilderTests (TestSchemaHolderTestFixture):
 
     #---------------------------------------------------------------------------------**/#*
     # Test the GetCustomAttributes method on a derived class
-    # @bsimethod                                    Carole.MacDonald                05/2012
+    # @bsimethod                                    Ping.Chen                01/2024
     #---------------+---------------+---------------+---------------+---------------+------*/
     def test_GetCustomAttributesOnDerivedClass (self):
         classA, classB, schema = self.BuildSupplementedSchemaForCustomAttributeTests()
@@ -846,7 +846,7 @@ class TestSupplementedSchemaBuilderTests (TestSchemaHolderTestFixture):
 
     #---------------------------------------------------------------------------------**/#*
     # Test the GetPrimaryCustomAttributes method on a derived class
-    # @bsimethod                                    Carole.MacDonald                05/2012
+    # @bsimethod                                    Ping.Chen                01/2024
     #---------------+---------------+---------------+---------------+---------------+------*/
     def test_GetPrimaryCustomAttributesOnDerivedClass (self):
         classA, classB, schema = self.BuildSupplementedSchemaForCustomAttributeTests()
@@ -855,7 +855,7 @@ class TestSupplementedSchemaBuilderTests (TestSchemaHolderTestFixture):
 
     #---------------------------------------------------------------------------------**/#*
     # Tests supplementing relationship classes
-    # @bsimethod                                    Carole.MacDonald                05/2012
+    # @bsimethod                                    Ping.Chen                01/2024
     #---------------+---------------+---------------+---------------+---------------+------*/
     def test_SupplementCustomAttributesOnRelationshipClasses (self):
         schema = self.CreatePrimarySchemaForRelationshipTests()
@@ -909,7 +909,7 @@ class TestSupplementedSchemaBuilderTests (TestSchemaHolderTestFixture):
 
 
     #---------------------------------------------------------------------------------**/#*
-    # @bsimethod                                    Carole.MacDonald                05/2012
+    # @bsimethod                                    Ping.Chen                01/2024
     #---------------+---------------+---------------+---------------+---------------+------*/
     def test_SupplementingWithInheritance (self):
         inheritPrimarySchema = self.CreatePrimarySchemaForInheritTests()

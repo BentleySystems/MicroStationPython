@@ -34,10 +34,7 @@ Returns:
     generally undesirable.) If you're unsure whether the entry you're
     adding may already be in the agenda, call #Find. Also, see
     #Insert(ElemModelPairSet&) for more efficient technique to enforce
-    uniqueness for large sets.
-
-Remark:
-    Required library:DgnPlatform<ApiNumber>.lib i.e. DgnPlatform5.lib)doc";
+    uniqueness for large sets.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementAgenda_Find =R"doc(Attempt to find an ElementRefP/DgnModelRef pair in this ElementAgenda.
 
@@ -57,10 +54,7 @@ Parameter ``endIndex``:
 
 Returns:
     A pointer to the EditElementHandle holding the pair, or NULL if
-    not found.
-
-Remark:
-    Required library:DgnPlatform<ApiNumber>.lib i.e. DgnPlatform5.lib)doc";
+    not found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementAgenda_SetSource =R"doc(Set the source for this ElementAgenda.
 
@@ -97,17 +91,13 @@ static const char * __doc_Bentley_DgnPlatform_IElementAgendaEvents__DoModifyAgen
 entries before applying tool operation. Return true if entries added
 or invalidated.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_RedrawGroupInfo_GetModifiedElement =R"doc(Remark:
-    Required library:DgnPlatform<ApiNumber>.lib i.e. DgnPlatform5.lib)doc";
+static const char * __doc_Bentley_DgnPlatform_RedrawGroupInfo_GetModifiedElement =R"doc()doc";
 
-static const char * __doc_Bentley_DgnPlatform_RedrawGroupInfo_GetOriginalElement =R"doc(Remark:
-    Required library:DgnPlatform<ApiNumber>.lib i.e. DgnPlatform5.lib)doc";
+static const char * __doc_Bentley_DgnPlatform_RedrawGroupInfo_GetOriginalElement =R"doc()doc";
 
-static const char * __doc_Bentley_DgnPlatform_RedrawGroupInfo_GetViewContext =R"doc(Remark:
-    Required library:DgnPlatform<ApiNumber>.lib i.e. DgnPlatform5.lib)doc";
+static const char * __doc_Bentley_DgnPlatform_RedrawGroupInfo_GetViewContext =R"doc()doc";
 
-static const char * __doc_Bentley_DgnPlatform_RedrawGroupInfo_GetEventType =R"doc(Remark:
-    Required library:DgnPlatform<ApiNumber>.lib i.e. DgnPlatform5.lib)doc";
+static const char * __doc_Bentley_DgnPlatform_RedrawGroupInfo_GetEventType =R"doc()doc";
 
 //=======================================================================================
 // Trampoline class for IElementAgendaEvents.

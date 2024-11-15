@@ -6,9 +6,6 @@ import os
 import pytest
 import ctypes
 
-import win32com.client  
-import pythoncom  
-
 from MSPyBentley import *
 from MSPyBentleyGeom import *
 from MSPyECObjects import *
@@ -639,38 +636,6 @@ def test_ExpectSuccessWhenSerializingToFile ():
 
     status2 = schema.WriteToXmlFile (getTempDataPath ("test.xml").GetWCharCP ())
     EXPECT_EQ (SchemaWriteStatus.eSCHEMA_WRITE_STATUS_Success, status2)
-
-NEEDSWORK_LIBXML = False
-# In this test, it uses Windows API CreateStreamOnHGlobal get a IStream. How to get it and how to use it in python code?
-# For the corresponding C++ test in schenatests.cpp in \PPBase\ECObjects\test\Published\SchemaTests.cpp, it uses NEEDSWORK_LIBXML
-# on it
-if NEEDSWORK_LIBXML:
-    def test_ExpectSuccessWhenRoundtripUsingStream ():
-        schemaContext = ECSchemaReadContext.CreateContext()
-
-        schemaXMLFile = getTestDataPath ("ECSeedData/Widgets.01.00.ecschema.xml")
-        status, schema = ECSchema.ReadFromXmlFile (schemaXMLFile.GetWCharCP (), schemaContext)
-
-        verifyWidgetsSchema(schema)
-
-        EXPECT_EQ (eSCHEMA_READ_STATUS_Success, status)
-
-        pyIStream = pythoncom.CreateStreamOnHGlobal (None, True)
-
-        #Following python code, they need more work
-        #status2 = schema.WriteToXmlStream(pyIStream, False)
-        #EXPECT_EQ(SchemaWriteStatus.eSCHEMA_WRITE_STATUS_Success, status2)
-        
-        #LARGE_INTEGER liPos = {0};
-        #pyIStream.Seek(0, 0)
-
-        #ECSchemaP deserializedSchema;
-        #schemaOwner = ECSchemaCache::Create() # We need a new cache... we don't want to read the ECSchema into the cache that already has a copy of this ECSchema
-        #schemaContext = ECSchemaReadContext.CreateContext(schemaOwner)
-        #status = ECSchema.ReadFromXmlStream(deserializedSchema, stream, schemaContext)
-        #EXPECT_EQ (eSCHEMA_READ_STATUS_Success, status) 
-
-        #verifyWidgetsSchema(deserializedSchema)
 
 
 def ExpectSuccessWithSerializingBaseClasses ():

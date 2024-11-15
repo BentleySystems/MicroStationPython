@@ -8,7 +8,10 @@
 #include "MSPythonPCH.h"
 #include <DgnPlatform/ViewInfo.h>
 
+static const char* __doc_Bentley_DgnPlatform_ViewPortInfo_From = R"doc(Copies the contents of the source ViewPortInfo to this ViewPortInfo.
 
+Parameter ``source``:
+    The source ViewPortInfo.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewPortInfo_CopyFrom =R"doc(Parameter ``source``:
     The source ViewPortInfo.)doc";
@@ -585,6 +588,7 @@ void def_ViewInfo(py::module_& m)
     // struct ViewPortInfo
     py::class_< ViewPortInfo, ViewPortInfoPtr> c3(m, "ViewPortInfo", py::multiple_inheritance());
 
+    c3.def("From", py::overload_cast<ViewPortInfoCR>(&ViewPortInfo::From), "source"_a, DOC(Bentley, DgnPlatform, ViewPortInfo, From));
     c3.def("Clear", &ViewPortInfo::Clear, DOC(Bentley, DgnPlatform, ViewPortInfo, Clear));
     c3.def("__eq__", [] (ViewPortInfoCP self, ViewPortInfoCP other) { return self->IsEqual(other); });
     

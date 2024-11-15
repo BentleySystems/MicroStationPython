@@ -131,7 +131,6 @@ public:
     virtual ScriptValuePtr      eval(WCharCP expr, ScriptContext* global = nullptr, ScriptContext* locals = nullptr);
     virtual void                exec(WCharCP stms, WCharCP funcName, ScriptContext* global = nullptr, ScriptContext* locals = nullptr);
     virtual void                eval_file(WCharCP fileName, WCharCP funcName, ScriptContext* global = nullptr, ScriptContext* locals = nullptr);
-
 private:
     void                        InitSearchPath();
     };
@@ -160,6 +159,7 @@ public:
 
     MSPYTHONDLL_EXPORT static PythonScopeMap& GetScopeMapInstance();
     MSPYTHONDLL_EXPORT static void ReleaseScopeMapInstance();
+
 };
 
 END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE

@@ -746,12 +746,17 @@ void def_CurvePrimitive(py::module_& m)
     c1.def_static("CreatePointString", py::overload_cast<DPoint3dArray&>(&ICurvePrimitive::CreatePointString), "points"_a, DOC(Bentley, Geom, ICurvePrimitive, CreatePointString));
     c1.def_static("CreateRectangle", &ICurvePrimitive::CreateRectangle, "x0"_a, "y0"_a, "x1"_a, "y1"_a, "z"_a, "areaSignPreference"_a = 0, DOC(Bentley, Geom, ICurvePrimitive, CreateRectangle));
     c1.def_static("CreateSpiral", &ICurvePrimitive::CreateSpiral, "spiral"_a, "frame"_a, "fractionA"_a, "fractionB"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiral));
+    c1.def_static("CreateXYCatenaryVertexCoefficientSignedDistanceLimits", &ICurvePrimitive::CreateXYCatenaryVertexCoefficientSignedDistanceLimits, "a"_a, "basis"_a, "s0"_a, "s1"_a);
     c1.def_static("CreateSpiralBearingCurvatureBearingCurvature",
                   &ICurvePrimitive::CreateSpiralBearingCurvatureBearingCurvature,
                   "transitionType"_a, "startRadians"_a, "startCurvature"_a, "endRadians"_a, "endCurvature"_a, "frame"_a, "fractionA"_a, "fractionB"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingCurvatureBearingCurvature));
     c1.def_static("CreateSpiralBearingRadiusBearingRadius",
                   py::overload_cast<int, double, double, double, double, TransformCR, double, double, DoubleArray const&>(&ICurvePrimitive::CreateSpiralBearingRadiusBearingRadius),
                   "transitionType"_a, "startRadians"_a, "startRadius"_a, "endRadians"_a, "endRadius"_a, "frame"_a, "fractionA"_a, "fractionB"_a, "extraData"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingRadiusBearingRadius));
+
+    c1.def_static("CreateSpiralBearingRadiusBearingRadius",
+                  py::overload_cast<int, double, double, double, double, TransformCR, double, double>(&ICurvePrimitive::CreateSpiralBearingRadiusBearingRadius),
+                  "transitionType"_a, "startRadians"_a, "startRadius"_a, "endRadians"_a, "endRadius"_a, "frame"_a, "fractionA"_a, "fractionB"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingRadiusBearingRadius));
 
     c1.def_static("CreateSpiralBearingRadiusLengthRadius",
                   py::overload_cast<int, double, double, double, double, TransformCR, double, double, DoubleArray const&>(&ICurvePrimitive::CreateSpiralBearingRadiusLengthRadius),
@@ -867,7 +872,7 @@ void def_CurvePrimitive(py::module_& m)
            return py::make_tuple(bOk, breakIndex, adjustedFraction);
            }, DOC(Bentley, Geom, ICurvePrimitive, AdjustFractionToBreakFraction));
 
-    c1.def("GetMSBspineCurvePtr", &ICurvePrimitive::GetMSBsplineCurvePtr, "fraction0"_a = 0.0, "fraction1"_a = 1.0);
+    c1.def("GetMSBsplineCurvePtr", &ICurvePrimitive::GetMSBsplineCurvePtr, "fraction0"_a = 0.0, "fraction1"_a = 1.0);
 
     c1.def("SignedDistanceBetweenFractions", [] (ICurvePrimitiveCR self, double startFraction, double endFraction)
            {

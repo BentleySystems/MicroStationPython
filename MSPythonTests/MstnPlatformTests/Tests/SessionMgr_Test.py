@@ -26,6 +26,12 @@ def getFileFromDirectory(fileName, fileDir):
     ret = DgnDocument.CreateFromFileName (fileName, fileDir, -101, DgnDocument.FetchMode.eWrite)
     return ret
 
+def printGlobals (context : str):
+    print (context)
+    for k,v in list (globals().items()):
+        print(f" key {str(k)} \t {str(v)}")
+
+
 class MyIgnoreAllModalEventHandler(IPyModalDialogEvents):
 
     ''' Callback when a modal Microstation dialog is opened ''' 
@@ -88,10 +94,12 @@ class MySessionMonitor(SessionMonitor):
 
     ''' Callback called after opening a dgnFile  ''' 
     def _OnMasterFileStart (self, dgnFile):
+        assert 'SESSIONMGR_TEST.PY' == globals()["__mdlDescr__"]
         assert repr(self.fileName) == repr(dgnFile.GetFileName ())
 
     ''' Callback called before closing a dgnFile  ''' 
     def _OnMasterFileStop (self, dgnFile, changingFiles):
+        assert 'SESSIONMGR_TEST.PY' == globals()["__mdlDescr__"]
         assert repr(self.oldFileName) == repr(dgnFile.GetFileName ())
 
     ''' Callback called before a modelref is activated  ''' 
@@ -104,6 +112,7 @@ class MySessionMonitor(SessionMonitor):
 
     ''' Callback called after activating a model to make it active  ''' 
     def _OnModelRefActivated (self, newModelRef, oldModelRef):
+        assert 'SESSIONMGR_TEST.PY' == globals()["__mdlDescr__"]
         assert False == ISessionMgr.GetManager ().IsDesignFileInitialized ()
 
     def _OnReleaseWriteLock (self, dgnFileVector):
@@ -117,11 +126,14 @@ class MySessionMonitor(SessionMonitor):
 
 
 ''' Switch Microstation to a new dgn file  ''' 
-def test_SessionMonitor ():
+@pytest.mark.parametrize('testFileName', ['SESSIONMGR_TEST.PY']) #ensure the process/mdl descriptor for the test is initialized and switched into
+def test_SessionMonitor (initProcessDescrForTest):
+    globals()["__mdlDescr__"] = 'SESSIONMGR_TEST.PY' # Pytest must be setting/clearing globals() before the test, this has to be done here with a test which needs to run with a process descriptor
+#    print(f"__mdlDescr__ {globals()["__mdlDescr__"]}")
+
     fileLocation = "MSPython\\MSPythonTests\\PlatformTests\\data\\"
     fileDir = getRoot(fileLocation)
     doc = getFileFromDirectory ('Blank.dgn', fileDir)
-
     if (doc[1] != DgnFileStatus.eDGNFILE_STATUS_Success):
         assert False
 
@@ -248,7 +260,8 @@ def test_GetWriteableFiles ():
     assert repr(files[0].GetFileName ()) == repr(ISessionMgr.GetMasterDgnFile ().GetFileName ()) 
 
 
-#if __name__ == "__main__":
+    
+if __name__ == "__main__":
 #    debugpy.listen(('0.0.0.0',5678), in_process_debug_adapter=True)
 #    print("Waiting for debugger attach")
 #    debugpy.wait_for_client()
@@ -256,6 +269,7 @@ def test_GetWriteableFiles ():
 #    test_InMasterFile ()
 #    test_IsActiveModel()
 #    test_SwitchToFile()
+#    print (f"test_SessionMonitor __mdlDescr__ {globals()["__mdlDescr__"]}")
 #    test_SessionMonitor()
 #    test_GetMaster()
 #    test_GetActiveDgnFile()

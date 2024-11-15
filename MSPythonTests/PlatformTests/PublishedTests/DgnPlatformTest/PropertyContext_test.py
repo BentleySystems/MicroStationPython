@@ -33,19 +33,20 @@ class ElementPropertyQuery(IQueryProperties):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SetModelInfo_FixAzimuth(initDgnPlatformHost, loadDgnFile):
-    cache = loadDgnFile.CreateNewModel ("Model", DgnModelType.eNormal, True)
+def test_SetModelInfo_FixAzimuth(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    cache = dgnFile.CreateNewModel ("Model", DgnModelType.eNormal, True)
     eeh = EditElementHandle()
     points = DPoint3dArray()
     points.append(DPoint3d(0.0,0.0,0.0))
     points.append(DPoint3d(1000.0,1000.0,1000.0))
     normal = DVec3d(0.0,0.0,1.0)
 
-    mlineStyle = MultilineStyle.GetSettings (loadDgnFile)
+    mlineStyle = MultilineStyle.GetSettings (dgnFile)
     MultilineHandler.CreateMultilineElement(eeh,None, mlineStyle, 1.0, normal, points, True, cache[0])
     eeh.AddToModel() 
 
-    mlstyle = MultilineStyle.Create("TestStyle", loadDgnFile)
+    mlstyle = MultilineStyle.Create("TestStyle", dgnFile)
 
     styleprofA = MultilineProfile()
     styleprofB = MultilineProfile()
@@ -84,7 +85,7 @@ def test_SetModelInfo_FixAzimuth(initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == mlstyle.InsertProfile(styleprofB, int(1))
     assert BentleyStatus.eSUCCESS == mlstyle.InsertProfile(styleprofC, int(1))
 
-    assert BentleyStatus.eSUCCESS ==  mlstyle.Add(loadDgnFile)
+    assert BentleyStatus.eSUCCESS ==  mlstyle.Add(dgnFile)
     
     eid = mlstyle.GetID()
     

@@ -12,13 +12,13 @@ from MSPyDgnPlatform import *
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_Create(initDgnPlatformHost, loadDgnFile):
+def test_Create(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
-        
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     eeh = EditElementHandle()
     
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     
     assert BentleyStatus.eSUCCESS == ECInstanceHolderHandler.CreateECInstanceHolderElement(eeh, ret[0])[1]
     

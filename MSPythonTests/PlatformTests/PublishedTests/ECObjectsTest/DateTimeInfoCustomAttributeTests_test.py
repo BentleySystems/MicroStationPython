@@ -18,11 +18,11 @@ from typing import List
 
 #********************** DateTimeInfoTestFixture base classes *************************************
 #=======================================================================================
-# @bsiclass                                                 Krischan.Eberle      02/2013
+# @bsiclass                                                 Ping.Chen      02/2013
 #+===============+===============+===============+===============+===============+======
 class DateTimeInfoTestFixture :
     #---------------------------------------------------------------------------------------
-    # @bsimethod                                   Krischan.Eberle                  02/13
+    # @bsimethod                                   Ping.Chen                  12/2023
     #+---------------+---------------+---------------+---------------+---------------+------
     def AssertDateTime (expected, actual, ignoreDateTimeInfo):
         #expectedActualStr = WString ()
@@ -40,7 +40,7 @@ class DateTimeInfoTestFixture :
             #EXPECT_TRUE (expected == actual) ##<< "DateTimes are expected to be equal. " << expectedActualStr.GetWCharCP ()
 
     #---------------------------------------------------------------------------------------
-    # @bsimethod                                   Krischan.Eberle                  02/13                               
+    # @bsimethod                                   Ping.Chen                  12/2023                               
     #+---------------+---------------+---------------+---------------+---------------+------
     def DeserializeSchema (context, schemaXml):
         EXPECT_FALSE (Utf8String.IsNullOrEmpty (schemaXml.__repr__()))
@@ -55,7 +55,7 @@ class DateTimeInfoTestFixture :
 
 
     #---------------------------------------------------------------------------------------
-    # @bsimethod                                   Krischan.Eberle                  02/13                               
+    # @bsimethod                                   Ping.Chen                  12/2023                               
     #+---------------+---------------+---------------+---------------+---------------+------
     def CreateTestSchema (context):
         testSchemaXml = Utf8String ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -135,7 +135,7 @@ class DateTimeInfoTestFixture :
 
 
 #=======================================================================================
-# @bsiclass                                                 Krischan.Eberle      02/2013
+# @bsiclass                                                 Ping.Chen      02/2013
 #+===============+===============+===============+===============+===============+======
 class StandardCustomAttributeHelperTestFixture (DateTimeInfoTestFixture) :
     class ExpectedResult:
@@ -190,7 +190,7 @@ class StandardCustomAttributeHelperTestFixture (DateTimeInfoTestFixture) :
     ExpectedResults = List[ExpectedResultPerProperty]
 
     #---------------------------------------------------------------------------------------
-    # @bsimethod                                   Krischan.Eberle                  02/13                               
+    # @bsimethod                                   Ping.Chen                  12/2023                               
     #+---------------+---------------+---------------+---------------+---------------+------
     def Assert (dateTimeProperty, expected):
         actual = DateTimeInfo ()
@@ -199,7 +199,7 @@ class StandardCustomAttributeHelperTestFixture (DateTimeInfoTestFixture) :
 
 
     #---------------------------------------------------------------------------------------
-    # @bsimethod                                   Krischan.Eberle                  02/13                               
+    # @bsimethod                                   Ping.Chen                  12/2023                               
     #+---------------+---------------+---------------+---------------+---------------+------
     def CreateTestSchema (context, expectedResults):
         expectedResults.clear ()
@@ -219,7 +219,7 @@ class StandardCustomAttributeHelperTestFixture (DateTimeInfoTestFixture) :
 
 
     #---------------------------------------------------------------------------------------
-    # @bsimethod                                   Krischan.Eberle                  02/13                               
+    # @bsimethod                                   Ping.Chen                  12/2023                               
     #+---------------+---------------+---------------+---------------+---------------+------
     def CreateTestSchemaNotReferencingBSCA (context):
         testSchemaXml = Utf8String ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -233,7 +233,7 @@ class StandardCustomAttributeHelperTestFixture (DateTimeInfoTestFixture) :
         return DateTimeInfoTestFixture.DeserializeSchema (context, testSchemaXml)
 
     #---------------------------------------------------------------------------------------
-    # @bsimethod                                   Krischan.Eberle                  02/13                               
+    # @bsimethod                                   Ping.Chen                  12/2023                               
     #+---------------+---------------+---------------+---------------+---------------+------
     def CreateTestSchemaWithCorruptDateTimeInfoCA (context):
         testSchemaXml = Utf8String ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -256,7 +256,7 @@ class StandardCustomAttributeHelperTestFixture (DateTimeInfoTestFixture) :
 
 
 #=======================================================================================
-# @bsiclass                                                 Krischan.Eberle      02/2013
+# @bsiclass                                                 Ping.Chen      02/2013
 #+===============+===============+===============+===============+===============+======
 class ECInstanceGetSetDateTimeTestFixture (DateTimeInfoTestFixture) :
     def AssertSetValue (instance, propertyName, expectedKindIsNull, expectedComponentIsNull, expectedInfo):
@@ -310,7 +310,7 @@ class ECInstanceGetSetDateTimeTestFixture (DateTimeInfoTestFixture) :
 
 #********************** StandardCustomAttributeHelper Tests *************************************
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_TryGetDateTimeInfo ():
     expectedResults : StandardCustomAttributeHelperTestFixture.ExpectedResults = []
@@ -326,7 +326,7 @@ def test_TryGetDateTimeInfo ():
         StandardCustomAttributeHelperTestFixture.Assert (prop, result.second)
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_TryGetDateTimeInfoInSchemaNotReferencingBSCA ():
     context = None
@@ -342,7 +342,7 @@ def test_TryGetDateTimeInfoInSchemaNotReferencingBSCA ():
 
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_TryGetDateTimeForNonDateTimeProperties ():
     expectedResults : StandardCustomAttributeHelperTestFixture.ExpectedResults = []
@@ -367,7 +367,7 @@ def test_TryGetDateTimeForNonDateTimeProperties ():
     EXPECT_FALSE (found)  #ASSERT_FALSE
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_TryGetDateTimeInfoWithCorruptCADefinition ():
     context = None
@@ -384,7 +384,7 @@ def test_TryGetDateTimeInfoWithCorruptCADefinition ():
 
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_DateTimeInfoToString ():
     expectedResults : StandardCustomAttributeHelperTestFixture.ExpectedResults = []
@@ -455,7 +455,7 @@ def test_DateTimeInfoToString ():
 
 #********************** ECInstance SetValue / GetValue Tests *************************************
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_SetDateTime ():
     context = None
@@ -480,7 +480,7 @@ def test_SetDateTime ():
 
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_SetDateTimeTicks ():
     context = None
@@ -542,7 +542,7 @@ def test_SetDateTimeTicks ():
 
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_SetDateTimeTicksGetAsDateTime ():
     context = None
@@ -629,7 +629,7 @@ def test_SetDateTimeTicksGetAsDateTime ():
 
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_SetDateTimeWithLocalDateTimeKind ():
     testDateTimes = []
@@ -676,7 +676,7 @@ def test_SetDateTimeWithLocalDateTimeKind ():
             EXPECT_EQ (ECObjectsStatus.eECOBJECTS_STATUS_Success, instance.SetValue (localDateTimePropName, value)) #<< "IECInstance.SetValue> Property name: " << localDateTimePropName #<< " with a local date time is expected to succeed, but the inserted value is null."
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_GetDateTime ():
     context = None
@@ -727,7 +727,7 @@ def test_GetDateTime ():
 
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_DateTimeArrayRoundtrip ():
     context = None
@@ -770,7 +770,7 @@ def test_DateTimeArrayRoundtrip ():
         DateTimeInfoTestFixture.AssertDateTime (expected[i], actual, False)
 
 #---------------------------------------------------------------------------------------
-# @bsimethod                                   Krischan.Eberle                  02/13                               
+# @bsimethod                                   Ping.Chen                  12/2023                               
 #+---------------+---------------+---------------+---------------+---------------+------
 def test_SetDateTimeArrayWithMismatchingArrayElements ():
     context = None

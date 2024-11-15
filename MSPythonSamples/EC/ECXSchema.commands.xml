@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+  <RootKeyinTable ID="root">
+    <Keyword SubtableRef="ECSCHEMA" CommandClass="MacroCommand" CommandWord="PYECSCHEMA">
+      <Options Required="true" />
+    </Keyword>
+  </RootKeyinTable>
+
+  <SubKeyinTables>
+    <KeyinTable ID="ECSCHEMA">
+      <Keyword CommandWord="LIST" />
+      <Keyword CommandWord="EXPORT" />
+    </KeyinTable>
+  </SubKeyinTables>
+
+  <KeyinHandlers>
+    <KeyinHandler Keyin="PYECSCHEMA LIST"                     Function="ListSchema" />
+    <KeyinHandler Keyin="PYECSCHEMA EXPORT"                   Function="ExportSchema" />
+  </KeyinHandlers>
+</KeyinTree>

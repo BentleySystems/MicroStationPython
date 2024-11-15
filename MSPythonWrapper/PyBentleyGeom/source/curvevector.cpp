@@ -976,6 +976,7 @@ void def_CurveVector(py::module_& m)
         }, "points"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Open, "forceXYOrientation"_a = false, DOC(Bentley, Geom, CurveVector, CreateLinear));
             
     c1.def_static("CreateRectangle", &CurveVector::CreateRectangle, "x0"_a, "y0"_a, "x1"_a, "y1"_a, "z"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer);
+    c1.def_static("CreateRegularPolygonXY", &CurveVector::CreateRegularPolygonXY, "center"_a, "xDistance"_a, "numEdge"_a, "isOuterRadius"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer);
     c1.def_static("CreateDisk", &CurveVector::CreateDisk, "arc"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer, "forceXYOrientation"_a = false);
     c1.def("CloneAsBsplines", &CurveVector::CloneAsBsplines);
 
@@ -1050,6 +1051,9 @@ void def_CurveVector(py::module_& m)
     c1.def("FixupXYOuterInner", &CurveVector::FixupXYOuterInner, "fullGeometryCheck"_a = false);
     c1.def("ReorderForSmallGaps", &CurveVector::ReorderForSmallGaps);
     c1.def("AssembleChains", &CurveVector::AssembleChains);
+
+    c1.def("FlattenNestedUnionRegions", &CurveVector::FlattenNestedUnionRegions);
+    c1.def("HasNestedUnionRegion", &CurveVector::HasNestedUnionRegion);
 
     c1.def_static("AreaUnion", &CurveVector::AreaUnion, "regionA"_a, "regionB"_a, "newToOld"_a = nullptr);
     c1.def_static("AreaDifference", &CurveVector::AreaDifference, "regionA"_a, "regionB"_a, "newToOld"_a = nullptr);
@@ -1195,6 +1199,10 @@ void def_CurveVector(py::module_& m)
     c2.def_static("IntersectionsXY",
                   py::overload_cast<CurveVectorR, CurveVectorR, ICurvePrimitiveR, CurveVectorR, DMatrix4dCP>(&CurveCurve::IntersectionsXY),
                   "intersectionA"_a, "intersectionB"_a, "curveA"_a, "curveB"_a, "pWorldToLocal"_a);
+
+    c2.def_static("IntersectionsXY",
+        py::overload_cast<CurveVectorR, CurveVectorR, ICurvePrimitiveP, ICurvePrimitiveP, DMatrix4dCP, bool, bool, bool, bool>(&CurveCurve::IntersectionsXY),
+        "intersectionA"_a, "intersectionB"_a, "curveA"_a, "curveB"_a, "pWorldToLocal"_a, "extendA0"_a, "extendA1"_a, "extendB0"_a, "extendB1"_a);
 
     c2.def_static("CloseApproach", 
                   py::overload_cast<CurveVectorR, CurveVectorR, ICurvePrimitiveP, ICurvePrimitiveP, double>(&CurveCurve::CloseApproach),

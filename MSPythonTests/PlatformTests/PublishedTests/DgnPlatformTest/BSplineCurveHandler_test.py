@@ -111,8 +111,9 @@ def test_IsValidCurve(initDgnPlatformHost):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ElementFromCurve_CurveElm(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ElementFromCurve_CurveElm(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     m_eeh = EditElementHandle()
     spline = MSBsplineCurve.Create()
     elm = MSElement()
@@ -124,8 +125,9 @@ def test_ElementFromCurve_CurveElm(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ElementFromCurve_ChainElm(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ElementFromCurve_ChainElm(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     spline = MSBsplineCurve.Create()
     points = DPoint3dArray()
     GeneratePoints (points, 5000+1)
@@ -162,8 +164,9 @@ def test_IsValidInterpolationCurve_errors(initDgnPlatformHost):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_Handler_GetTypeName(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_Handler_GetTypeName(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     curve = MSBsplineCurve.Create()
     name = WString()
     MSBsplineCurve.InitFromPoints (curve, m_points)
@@ -174,8 +177,9 @@ def test_Handler_GetTypeName(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetEndPoints(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetEndPoints(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     curve = MSBsplineCurve.Create()
     getStart = DPoint3d()
     getEnd = DPoint3d()
@@ -188,8 +192,9 @@ def test_ICurveQuery_GetEndPoints(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetEndTangents(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetEndTangents(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     curve = MSBsplineCurve.Create()
     getStart = DVec3d()
     getEnd = DVec3d()
@@ -211,8 +216,9 @@ def test_ICurveQuery_GetEndTangents(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetClosestCurvePoint(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetClosestCurvePoint(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     NUM_POINTS = 4
     toworld = Transform()
     # cparam = CurveParameter()     #'CurveParameter' is not exposed
@@ -247,8 +253,9 @@ def test_ICurveQuery_GetClosestCurvePoint(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetClosestCurvePointXY(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetClosestCurvePointXY(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     NUM_POINTS = 4
     toworld = Transform()
     # cparam = CurveParameter.Create()      #'CurveParameter' is not exposed
@@ -282,8 +289,9 @@ def test_ICurveQuery_GetClosestCurvePointXY(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetPointAtParameter(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetPointAtParameter(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     getPoint = DPoint3d()
     compPoint = DPoint3d()
     # cparam = CurveParameter()          #'CurveParameter' is not exposed
@@ -299,8 +307,9 @@ def test_ICurveQuery_GetPointAtParameter(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetDerivativesAtParameter(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetDerivativesAtParameter(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     TOL = 0.0001
     getPoint = DPoint3d()
     points = DPoint3dArray(DPoint3d() for _ in range(10))
@@ -343,8 +352,9 @@ def test_ICurveQuery_GetDerivativesAtParameter(initDgnPlatformHost, loadDgnFile)
 
 # CurveParameter is not exposed in python
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetParameterRange(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetParameterRange(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     # cparamStart = CurveParameter()
     # cparamEnd = CurveParameter()
     # cparamDelta = CurveParameter()
@@ -359,8 +369,9 @@ def test_ICurveQuery_GetParameterRange(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetComponentCount(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetComponentCount(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     curve = MSBsplineCurve.Create()
     MSBsplineCurve.InitFromPoints (curve, m_points)
     assert BSplineCurveHandler.CreateBSplineCurveElement (m_eeh, None, curve, ret[0].Is3d(), ret[0]) == BentleyStatus.eSUCCESS
@@ -372,8 +383,9 @@ def test_ICurveQuery_GetComponentCount(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetLength(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetLength(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     getLength = 0.0
     getLengthB = 0.0
     predictedLength = 0.0
@@ -402,8 +414,9 @@ def test_ICurveQuery_GetLength(initDgnPlatformHost, loadDgnFile):
 
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetLengthExtended(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetLengthExtended(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     points = DPoint3dArray(DPoint3d() for _ in range(10))
     getLength = 0.0
     predictedLength = 0.0
@@ -429,8 +442,9 @@ def test_ICurveQuery_GetLengthExtended(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurveQuery_GetParameterAtDistanceAlongCurve(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurveQuery_GetParameterAtDistanceAlongCurve(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     TEST_NUMFRAC = 6
     distance = 0.0
     curfrac = 0.0
@@ -458,8 +472,9 @@ def test_ICurveQuery_GetParameterAtDistanceAlongCurve(initDgnPlatformHost, loadD
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurvePathQuery_GetPathCurves(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurvePathQuery_GetPathCurves(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     curve = MSBsplineCurve.Create()
     # getPathCurves = GPArraySmart()     #GPArraySmart is not exposed
     MSBsplineCurve.InitFromPoints (curve, m_points)
@@ -472,8 +487,9 @@ def test_ICurvePathQuery_GetPathCurves(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurvePathQuery_IsClosedPath_Open(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurvePathQuery_IsClosedPath_Open(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     curve = MSBsplineCurve.Create()
     MSBsplineCurve.InitFromPoints (curve, m_points)
     assert BSplineCurveHandler.CreateBSplineCurveElement
@@ -482,8 +498,9 @@ def test_ICurvePathQuery_IsClosedPath_Open(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ICurvePathQuery_IsClosedPath_Closed(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ICurvePathQuery_IsClosedPath_Closed(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     points = DPoint3dArray(DPoint3d() for _ in range(4))
     # GenerateCircle (points, 4)    # redius parameter is missing
     curve = MSBsplineCurve.Create()

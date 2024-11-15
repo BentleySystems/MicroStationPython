@@ -253,11 +253,54 @@ void def_IEvent(py::module_& m)
     // struct MstnEventManager
     py::class_< MstnEventManager> c6(m, "MstnEventManager");
 
-    c6.def("AddEditActionSource", &MstnEventManager::AddEditActionSource, "source"_a, py::keep_alive<1, 2>(), DOC(Bentley, MstnPlatform, MstnEventManager, AddEditActionSource));
-    c6.def("DropEditActionSource", &MstnEventManager::DropEditActionSource, "source"_a, DOC(Bentley, MstnPlatform, MstnEventManager, DropEditActionSource));
-    c6.def("AddMouseWheelHandler", &MstnEventManager::AddMouseWheelHandler, "handler"_a, py::keep_alive<1, 2>(), DOC(Bentley, MstnPlatform, MstnEventManager, AddMouseWheelHandler));
-    c6.def("DropMouseWheelHandler", &MstnEventManager::DropMouseWheelHandler, "handler"_a, DOC(Bentley, MstnPlatform, MstnEventManager, DropMouseWheelHandler));
-    c6.def("AddPrintEventHandler", &MstnEventManager::AddPrintEventHandler, "handler"_a, py::keep_alive<1, 2>(), DOC(Bentley, MstnPlatform, MstnEventManager, AddPrintEventHandler));
-    c6.def("DropPrintEventHandler", &MstnEventManager::DropPrintEventHandler, "handler"_a, DOC(Bentley, MstnPlatform, MstnEventManager, DropPrintEventHandler));
+    c6.def("AddEditActionSource", [] (MstnEventManager &self, IEditActionSourceP source)
+        {
+        py::str str = py::globals()["__mdlDescr__"];
+        WString wstr (std::string (str).c_str ());
+        SaveAndSwitchMdlDesc saver (wstr.c_str ());
+        self.AddEditActionSource (source);
+        }, "source"_a, py::keep_alive<1, 2>(), DOC(Bentley, MstnPlatform, MstnEventManager, AddEditActionSource));
+
+
+    c6.def("DropEditActionSource", [] (MstnEventManager &self, IEditActionSourceP source)
+        {
+        py::str str = py::globals()["__mdlDescr__"];
+        WString wstr (std::string (str).c_str ());
+        SaveAndSwitchMdlDesc saver (wstr.c_str ());
+        self.DropEditActionSource (source);
+        }, "source"_a, DOC(Bentley, MstnPlatform, MstnEventManager, DropEditActionSource));
+    
+    c6.def("AddMouseWheelHandler", [] (MstnEventManager &self, IMouseWheelHandler* handler)
+        {
+        py::str str = py::globals()["__mdlDescr__"];
+        WString wstr (std::string (str).c_str ());
+        SaveAndSwitchMdlDesc saver (wstr.c_str ());
+        self.AddMouseWheelHandler (handler);
+        }, "handler"_a, py::keep_alive<1, 2>(), DOC(Bentley, MstnPlatform, MstnEventManager, AddMouseWheelHandler));
+
+    c6.def("DropMouseWheelHandler", [] (MstnEventManager &self, IMouseWheelHandler* handler)
+        {
+        py::str str = py::globals()["__mdlDescr__"];
+        WString wstr (std::string (str).c_str ());
+        SaveAndSwitchMdlDesc saver (wstr.c_str ());
+        self.DropMouseWheelHandler (handler);
+        }, "handler"_a, DOC(Bentley, MstnPlatform, MstnEventManager, DropMouseWheelHandler));
+
+    c6.def("AddPrintEventHandler", [] (MstnEventManager &self, IPrintEventHandler* handler)
+        {
+        py::str str = py::globals()["__mdlDescr__"];
+        WString wstr (std::string (str).c_str ());
+        SaveAndSwitchMdlDesc saver (wstr.c_str ());
+        self.AddPrintEventHandler (handler);
+        }, "handler"_a, py::keep_alive<1, 2>(), DOC(Bentley, MstnPlatform, MstnEventManager, AddPrintEventHandler));
+
+    c6.def("DropPrintEventHandler", [] (MstnEventManager &self, IPrintEventHandler* handler)
+        {
+        py::str str = py::globals()["__mdlDescr__"];
+        WString wstr (std::string (str).c_str ());
+        SaveAndSwitchMdlDesc saver (wstr.c_str ());
+        self.DropPrintEventHandler (handler);
+        }, "handler"_a, DOC(Bentley, MstnPlatform, MstnEventManager, DropPrintEventHandler));
+
     c6.def_static("GetManager", &MstnEventManager::GetManager, py::return_value_policy::reference, DOC(Bentley, MstnPlatform, MstnEventManager, GetManager));
     }
