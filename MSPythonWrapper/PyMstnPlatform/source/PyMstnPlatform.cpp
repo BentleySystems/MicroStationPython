@@ -57,8 +57,21 @@ void def_mscommandstate(py::module_&);
 void def_msdialog(py::module_&);
 void def_msexpression(py::module_&);
 void def_msstring(py::module_& m);
+void def_mssystem(py::module_&);
+void def_msmodel(py::module_&);
+void def_mslocate(py::module_&);
+void def_userfnc(py::module_&);
+void def_auxsystm_r(py::module_&);
+void def_viewgroup(py::module_&);
+void def_filtertable(py::module_&);
+void def_dgnlib(py::module_&);
+void def_changetrack(py::module_&);
 
 void def_ImageLibAPI(py::module_&);
+void def_msplot(py::module_&);
+void def_MstnDefs(py::module_& m);
+
+void def_GuiView(py::module_& m);
 
 /*---------------------------------------------------------------------------------**//**
 * Module definition.
@@ -107,9 +120,22 @@ PYBIND11_MODULE(MSPyMstnPlatform, m)
     def_msdialog(m);
     def_msexpression(m);
     def_msstring(m);
+    def_mssystem(m);
+    def_msmodel(m);
+    def_mslocate(m);
+    def_userfnc(m);
+    def_auxsystm_r(m);
+    def_viewgroup(m);
+    def_filtertable(m);
+    def_dgnlib(m);
     //def_mselmdsc(m);
+    def_changetrack(m);
 
     def_ImageLibAPI(m);
+    def_msplot(m);
+    def_MstnDefs(m);
+
+    def_GuiView(m);
     }
 
 

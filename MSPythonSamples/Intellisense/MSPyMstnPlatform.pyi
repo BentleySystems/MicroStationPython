@@ -7,10 +7,9 @@ class ACS:
     None
     """
 
-    def AttachNamed(*args, **kwargs):
+    @staticmethod
+    def AttachNamed(acsName: str, useRot: bool, useOrg: bool) -> int:
         """
-        AttachNamed(acsName: str, useRot: bool, useOrg: bool) -> int
-        
         @description Attaches the named auxiliary coordinate system (ACS) to
         the active model.
         
@@ -37,10 +36,9 @@ class ACS:
         """
         ...
     
-    def CreateElmdscrFromParams(*args, **kwargs):
+    @staticmethod
+    def CreateElmdscrFromParams(type: int, origin: MSPyBentleyGeom.DPoint3d, rotation: MSPyBentleyGeom.RotMatrix, name: str, description: str) -> tuple:
         """
-        CreateElmdscrFromParams(type: int, origin: MSPyBentleyGeom.DPoint3d, rotation: MSPyBentleyGeom.RotMatrix, name: str, description: str) -> tuple
-        
         @description Creates an ACS element descriptor from the given
         parameters.
         
@@ -73,10 +71,9 @@ class ACS:
         """
         ...
     
-    def DeleteNamed(*args, **kwargs):
+    @staticmethod
+    def DeleteNamed(acsName: str) -> int:
         """
-        DeleteNamed(acsName: str) -> int
-        
         @description Deletes the named coordinate system specified.
         
         Parameter ``acsName``:
@@ -94,10 +91,9 @@ class ACS:
         """
         ...
     
-    def GetCanonicalDescription(*args, **kwargs):
+    @staticmethod
+    def GetCanonicalDescription(descr: str) -> tuple:
         """
-        GetCanonicalDescription(descr: str) -> tuple
-        
         @description Canonize the specified ACS description string. The result
         is the name string stripped of leading and trailing whitespace
         characters, whose length and content has been validated.
@@ -121,10 +117,9 @@ class ACS:
         """
         ...
     
-    def GetCanonicalName(*args, **kwargs):
+    @staticmethod
+    def GetCanonicalName(name: str) -> tuple:
         """
-        GetCanonicalName(name: str) -> tuple
-        
         @description Canonizes the specified ACS name string. The result is
         the name string stripped of leading and trailing whitespace
         characters, whose length and content has been validated.
@@ -147,10 +142,9 @@ class ACS:
         """
         ...
     
-    def GetCurrent(*args, **kwargs):
+    @staticmethod
+    def GetCurrent() -> tuple:
         """
-        GetCurrent() -> tuple
-        
         @description Returns the current ACS's origin, rotation matrix, and
         type. @Remarks The coordinate system type is specified by one of the
         following types from msdefs.h:<UL> <LI>ACS_RECTANGULAR
@@ -184,10 +178,9 @@ class ACS:
         """
         ...
     
-    def GetDescriptionOfElmdscr(*args, **kwargs):
+    @staticmethod
+    def GetDescriptionOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr) -> tuple:
         """
-        GetDescriptionOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr) -> tuple
-        
         @description Gets the description from the specified ACS element.
         
         Parameter ``acsDescriptionP``:
@@ -208,10 +201,9 @@ class ACS:
         """
         ...
     
-    def GetNameOfElmdscr(*args, **kwargs):
+    @staticmethod
+    def GetNameOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr) -> tuple:
         """
-        GetNameOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr) -> tuple
-        
         @description Gets the name from the specified ACS element descriptor.
         
         Parameter ``acsNameP``:
@@ -232,10 +224,9 @@ class ACS:
         """
         ...
     
-    def GetTypeOfElmdscr(*args, **kwargs):
+    @staticmethod
+    def GetTypeOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr) -> tuple:
         """
-        GetTypeOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr) -> tuple
-        
         @description Get the ACS type of the ACS element descriptor.
         
         Parameter ``acsTypeP``:
@@ -257,16 +248,13 @@ class ACS:
         """
         ...
     
-    def IsDefined(*args, **kwargs):
-        """
-        IsDefined() -> bool
-        """
+    @staticmethod
+    def IsDefined() -> bool:
         ...
     
-    def Locate(*args, **kwargs):
+    @staticmethod
+    def Locate(name: str, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
         """
-        Locate(name: str, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-        
         @description Searches for an ACS using its assigned name.
         
         Parameter ``edPP``:
@@ -291,10 +279,9 @@ class ACS:
         """
         ...
     
-    def SaveNamed(*args, **kwargs):
+    @staticmethod
+    def SaveNamed(name: str, description: str) -> int:
         """
-        SaveNamed(name: str, description: str) -> int
-        
         @description Saves the current coordinate system with the specified
         name and description. The name must consist of one to
         MAX_ACS_NAME_LENGTH MSWChars, and the description can contain up to
@@ -319,10 +306,9 @@ class ACS:
         """
         ...
     
-    def SetCurrent(*args, **kwargs):
+    @staticmethod
+    def SetCurrent(origin: MSPyBentleyGeom.DPoint3d, rotMatrix: MSPyBentleyGeom.RotMatrix, type: MSPyDgnPlatform.ACSType) -> int:
         """
-        SetCurrent(origin: MSPyBentleyGeom.DPoint3d, rotMatrix: MSPyBentleyGeom.RotMatrix, type: MSPyDgnPlatform.ACSType) -> int
-        
         @description Defines the ACS of the active model. <UL>
         <LI>ACS_RECTANGULAR <LI>ACS_CYLINDRICAL <LI>ACS_SPHERICAL </UL>
         
@@ -345,10 +331,9 @@ class ACS:
         """
         ...
     
-    def SetDescriptionOfElmdscr(*args, **kwargs):
+    @staticmethod
+    def SetDescriptionOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr, description: str) -> tuple:
         """
-        SetDescriptionOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr, description: str) -> tuple
-        
         @description Sets the description on the specified ACS element.
         
         Parameter ``edPP``:
@@ -368,10 +353,9 @@ class ACS:
         """
         ...
     
-    def SetNameOfElmdscr(*args, **kwargs):
+    @staticmethod
+    def SetNameOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr, name: str) -> tuple:
         """
-        SetNameOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr, name: str) -> tuple
-        
         @description Sets the name on the specified ACS element.
         
         Parameter ``edPP``:
@@ -391,10 +375,9 @@ class ACS:
         """
         ...
     
-    def SetTypeOfElmdscr(*args, **kwargs):
+    @staticmethod
+    def SetTypeOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr, acsType: int) -> int:
         """
-        SetTypeOfElmdscr(edP: MSPyDgnPlatform.MSElementDescr, acsType: int) -> int
-        
         @description Sets the ACS type of the ACS element descriptor.
         
         Parameter ``edP``:
@@ -495,16 +478,12 @@ class ActiveModel:
     None
     """
 
-    def Is3d(*args, **kwargs):
-        """
-        Is3d() -> bool
-        """
+    @staticmethod
+    def Is3d() -> bool:
         ...
     
-    def IsReadonly(*args, **kwargs):
-        """
-        IsReadonly() -> bool
-        """
+    @staticmethod
+    def IsReadonly() -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -542,10 +521,8 @@ class Angle3dConstraint:
         def value(arg0: MSPyMstnPlatform.Angle3dConstraint.AngleSettings) -> int:
             ...
         
-    def Create(*args, **kwargs):
-        """
-        Create(geometryIds: MSPyMstnPlatform.GeometryIdPtrArray, axis: MSPyBentleyGeom.DRay3d, flags: int, value: float, variableAccess: MSPyBentley.WString, settings: int) -> MSPyMstnPlatform.Constraint3dBase
-        """
+    @staticmethod
+    def Create(geometryIds: MSPyMstnPlatform.GeometryIdPtrArray, axis: MSPyBentleyGeom.DRay3d, flags: int, value: float, variableAccess: MSPyBentley.WString, settings: int) -> MSPyMstnPlatform.Constraint3dBase:
         ...
     
     class FlagMasks:
@@ -593,52 +570,28 @@ class Angle3dConstraint:
         """
         ...
     
-    def GetFlags(*args, **kwargs):
-        """
-        GetFlags(self: MSPyMstnPlatform.Constraint3dBase) -> int
-        """
+    def GetFlags(self: MSPyMstnPlatform.Constraint3dBase) -> int:
         ...
     
-    def GetGroupLock(*args, **kwargs):
-        """
-        GetGroupLock(self: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def GetGroupLock(self: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def GetHalfSpace1(*args, **kwargs):
-        """
-        GetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace
-        """
+    def GetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace:
         ...
     
-    def GetHalfSpace2(*args, **kwargs):
-        """
-        GetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace
-        """
+    def GetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.Constraint3dBase, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.Constraint3dBase, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dBase.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dBase.Status:
         ...
     
-    def GetSurfaceOrientation(*args, **kwargs):
-        """
-        GetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.SurfaceOrientation
-        """
+    def GetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.SurfaceOrientation:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dType
-        """
+    def GetType(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dType:
         ...
     
     @property
@@ -662,64 +615,34 @@ class Angle3dConstraint:
     def HalfSpace2(arg0: MSPyMstnPlatform.Constraint3dBase, arg1: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def HasBoundVariable(*args, **kwargs):
-        """
-        HasBoundVariable(self: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def HasBoundVariable(self: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def HasElementRef(*args, **kwargs):
-        """
-        HasElementRef(self: MSPyMstnPlatform.Constraint3dBase, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool
-        """
+    def HasElementRef(self: MSPyMstnPlatform.Constraint3dBase, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool:
         ...
     
-    def IsRedundant(*args, **kwargs):
-        """
-        IsRedundant(self: MSPyMstnPlatform.Constraint3dBase, other: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def IsRedundant(self: MSPyMstnPlatform.Constraint3dBase, other: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def SetFlags(*args, **kwargs):
-        """
-        SetFlags(self: MSPyMstnPlatform.Constraint3dBase, flags: int) -> None
-        """
+    def SetFlags(self: MSPyMstnPlatform.Constraint3dBase, flags: int) -> None:
         ...
     
-    def SetGeometryIds(*args, **kwargs):
-        """
-        SetGeometryIds(self: MSPyMstnPlatform.Constraint3dBase, geometryIds: MSPyMstnPlatform.GeometryIdPtrArray) -> None
-        """
+    def SetGeometryIds(self: MSPyMstnPlatform.Constraint3dBase, geometryIds: MSPyMstnPlatform.GeometryIdPtrArray) -> None:
         ...
     
-    def SetGroupLock(*args, **kwargs):
-        """
-        SetGroupLock(self: MSPyMstnPlatform.Constraint3dBase, groupLock: bool) -> None
-        """
+    def SetGroupLock(self: MSPyMstnPlatform.Constraint3dBase, groupLock: bool) -> None:
         ...
     
-    def SetHalfSpace1(*args, **kwargs):
-        """
-        SetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None
-        """
+    def SetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def SetHalfSpace2(*args, **kwargs):
-        """
-        SetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None
-        """
+    def SetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.Constraint3dBase, status: MSPyMstnPlatform.Constraint3dBase.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.Constraint3dBase, status: MSPyMstnPlatform.Constraint3dBase.Status) -> None:
         ...
     
-    def SetSurfaceOrientation(*args, **kwargs):
-        """
-        SetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase, orientation: MSPyMstnPlatform.SurfaceOrientation) -> None
-        """
+    def SetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase, orientation: MSPyMstnPlatform.SurfaceOrientation) -> None:
         ...
     
     @property
@@ -787,10 +710,9 @@ class Assoc:
     None
     """
 
-    def CreateArc(*args, **kwargs):
+    @staticmethod
+    def CreateArc(assoc: MSPyDgnPlatform.AssocPoint, angle: float, keyPoint: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int:
         """
-        CreateArc(assoc: MSPyDgnPlatform.AssocPoint, angle: float, keyPoint: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int
-        
         @Description Creates an association that represents a point on an arc
         or ellipse element.
         
@@ -823,10 +745,9 @@ class Assoc:
         """
         ...
     
-    def CreateBCurve(*args, **kwargs):
+    @staticmethod
+    def CreateBCurve(assoc: MSPyDgnPlatform.AssocPoint, u: float, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int:
         """
-        CreateBCurve(assoc: MSPyDgnPlatform.AssocPoint, u: float, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int
-        
         @Description Creates an association that represents a point along a
         B-spline curve.
         
@@ -845,10 +766,9 @@ class Assoc:
         """
         ...
     
-    def CreateIntersection(*args, **kwargs):
+    @staticmethod
+    def CreateIntersection(assoc: MSPyDgnPlatform.AssocPoint, index: int, seg1: int, seg2: int, nSeg1: int, nSeg2: int, path1: MSPyDgnPlatform.DisplayPath, path2: MSPyDgnPlatform.DisplayPath, elemId1: int, elemId2: int) -> int:
         """
-        CreateIntersection(assoc: MSPyDgnPlatform.AssocPoint, index: int, seg1: int, seg2: int, nSeg1: int, nSeg2: int, path1: MSPyDgnPlatform.DisplayPath, path2: MSPyDgnPlatform.DisplayPath, elemId1: int, elemId2: int) -> int
-        
         @Description Create an intersection association between the two
         elements identified by the elemId1 and elemId2 parameters.
         
@@ -881,10 +801,9 @@ class Assoc:
         """
         ...
     
-    def CreateKeypoint(*args, **kwargs):
+    @staticmethod
+    def CreateKeypoint(assoc: MSPyDgnPlatform.AssocPoint, vertex: int, nVertex: int, numerator: int, divisor: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int:
         """
-        CreateKeypoint(assoc: MSPyDgnPlatform.AssocPoint, vertex: int, nVertex: int, numerator: int, divisor: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int
-        
         @Description Creates an association that represents a point on a
         linear element.
         
@@ -915,10 +834,9 @@ class Assoc:
         """
         ...
     
-    def CreateLinear(*args, **kwargs):
+    @staticmethod
+    def CreateLinear(assoc: MSPyDgnPlatform.AssocPoint, inPoint: MSPyBentleyGeom.DPoint3d, vertex: int, nVertex: int, lineNo: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int:
         """
-        CreateLinear(assoc: MSPyDgnPlatform.AssocPoint, inPoint: MSPyBentleyGeom.DPoint3d, vertex: int, nVertex: int, lineNo: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int
-        
         @Description Creates an association that represents a point on a
         linear element. This function is similar to Assoc.CreateKeypoint
         but has the advantage that it creates associations to multi-line
@@ -950,10 +868,9 @@ class Assoc:
         """
         ...
     
-    def CreateMline(*args, **kwargs):
+    @staticmethod
+    def CreateMline(assoc: MSPyDgnPlatform.AssocPoint, vertex: int, nVertex: int, lineNo: int, offset: float, joint: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int:
         """
-        CreateMline(assoc: MSPyDgnPlatform.AssocPoint, vertex: int, nVertex: int, lineNo: int, offset: float, joint: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int
-        
         @Description Creates an association that represents a point on a
         multi-line element.
         
@@ -986,10 +903,9 @@ class Assoc:
         """
         ...
     
-    def CreateOrigin(*args, **kwargs):
+    @staticmethod
+    def CreateOrigin(assoc: MSPyDgnPlatform.AssocPoint, option: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int:
         """
-        CreateOrigin(assoc: MSPyDgnPlatform.AssocPoint, option: int, path: MSPyDgnPlatform.DisplayPath, elemId: int) -> int
-        
         @Description Creates an association that represents the origin of the
         base element. Origin associations can currently be created for cell
         headers, shared cells, text nodes and text elements. For elements
@@ -1010,10 +926,9 @@ class Assoc:
         """
         ...
     
-    def ExtractPoint(*args, **kwargs):
+    @staticmethod
+    def ExtractPoint(assoc: MSPyDgnPlatform.AssocPoint, elem: MSPyDgnPlatform.MSElement, pointNum: int, maxPoints: int) -> int:
         """
-        ExtractPoint(assoc: MSPyDgnPlatform.AssocPoint, elem: MSPyDgnPlatform.MSElement, pointNum: int, maxPoints: int) -> int
-        
         @Description Extracts the association information from the specified
         point on the given element
         
@@ -1029,10 +944,9 @@ class Assoc:
         """
         ...
     
-    def GetCurrent(*args, **kwargs):
+    @staticmethod
+    def GetCurrent(assoc: MSPyDgnPlatform.AssocPoint, point: MSPyBentleyGeom.DPoint3d, option: int, createMask: int) -> bool:
         """
-        GetCurrent(assoc: MSPyDgnPlatform.AssocPoint, point: MSPyBentleyGeom.DPoint3d, option: int, createMask: int) -> bool
-        
         @Description Gets the current associative point.
         
         @Param[out] assoc the current association point @Param[out] pointP
@@ -1051,10 +965,9 @@ class Assoc:
         """
         ...
     
-    def GetElement(*args, **kwargs):
+    @staticmethod
+    def GetElement(outElem: MSPyDgnPlatform.MSElement, tagValue: int, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
         """
-        GetElement(outElem: MSPyDgnPlatform.MSElement, tagValue: int, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-        
         @Description Attempts to locate the element with the unique ID elemID
         in the model specified by modelRef.
         
@@ -1072,10 +985,9 @@ class Assoc:
         """
         ...
     
-    def GetElementDescr(*args, **kwargs):
+    @staticmethod
+    def GetElementDescr(tagValue: int, modelRef: MSPyDgnPlatform.DgnModelRef, expandShared: bool) -> tuple:
         """
-        GetElementDescr(tagValue: int, modelRef: MSPyDgnPlatform.DgnModelRef, expandShared: bool) -> tuple
-        
         @Description Search for the element with the unique ID specified by
         elemID and, if found, return an element descriptor that contains the
         element and any child elements it might have if it is a complex
@@ -1096,10 +1008,9 @@ class Assoc:
         """
         ...
     
-    def GetPoint(*args, **kwargs):
+    @staticmethod
+    def GetPoint(outPoint: MSPyBentleyGeom.DPoint3d, assocPoint: MSPyDgnPlatform.AssocPoint, modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        GetPoint(outPoint: MSPyBentleyGeom.DPoint3d, assocPoint: MSPyDgnPlatform.AssocPoint, modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Uses the information in assocPoint to create a 3D data
         point that is returned in outPoint. An Assoc.Create... function
         must create the information in assocPoint.
@@ -1119,10 +1030,9 @@ class Assoc:
         """
         ...
     
-    def GetPointFromElement(*args, **kwargs):
+    @staticmethod
+    def GetPointFromElement(outPoint: MSPyBentleyGeom.DPoint3d, elem: MSPyDgnPlatform.MSElement, pointNum: int, maxPoints: int, modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        GetPointFromElement(outPoint: MSPyBentleyGeom.DPoint3d, elem: MSPyDgnPlatform.MSElement, pointNum: int, maxPoints: int, modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Uses the element and point number to create a 3D data
         point that is returned in outPoint. An Assoc.Create... function
         must create the information in assocPoint.
@@ -1142,16 +1052,13 @@ class Assoc:
         """
         ...
     
-    def GetRoot(*args, **kwargs):
-        """
-        GetRoot(assocPoint: MSPyDgnPlatform.AssocPoint, modelRef: MSPyDgnPlatform.DgnModelRef, rootIndex: int) -> tuple
-        """
+    @staticmethod
+    def GetRoot(assocPoint: MSPyDgnPlatform.AssocPoint, modelRef: MSPyDgnPlatform.DgnModelRef, rootIndex: int) -> tuple:
         ...
     
-    def InsertPoint(*args, **kwargs):
+    @staticmethod
+    def InsertPoint(elem: MSPyDgnPlatform.MSElement, assocPoint: MSPyDgnPlatform.AssocPoint, pointNum: int, maxPoints: int) -> int:
         """
-        InsertPoint(elem: MSPyDgnPlatform.MSElement, assocPoint: MSPyDgnPlatform.AssocPoint, pointNum: int, maxPoints: int) -> int
-        
         @Description Insert an association point to the specified element.
         
         @Param[in] elemP element to add association information to @Param[in]
@@ -1168,10 +1075,9 @@ class Assoc:
         """
         ...
     
-    def RemovePoint(*args, **kwargs):
+    @staticmethod
+    def RemovePoint(elem: MSPyDgnPlatform.MSElement, pointNum: int, maxPoints: int) -> int:
         """
-        RemovePoint(elem: MSPyDgnPlatform.MSElement, pointNum: int, maxPoints: int) -> int
-        
         @Description Removes from element. An Assoc.Create... function must
         create the information in assocPoint.
         
@@ -1188,10 +1094,9 @@ class Assoc:
         """
         ...
     
-    def ResolveAssociations(*args, **kwargs):
+    @staticmethod
+    def ResolveAssociations(elem: MSPyDgnPlatform.MSElement, modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        ResolveAssociations(elem: MSPyDgnPlatform.MSElement, modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Removes all association points from an element.
         
         @Param[in] elemP element to remove assoc point from. @Param[in]
@@ -1211,10 +1116,9 @@ class Assoc:
         """
         ...
     
-    def StripTag(*args, **kwargs):
+    @staticmethod
+    def StripTag(elem: MSPyDgnPlatform.MSElement) -> int:
         """
-        StripTag(elem: MSPyDgnPlatform.MSElement) -> int
-        
         @Description Remove an association tag from a single element
         
         @Param[in] elemP element to strip tag from @Return SUCCESS if the
@@ -1227,10 +1131,9 @@ class Assoc:
         """
         ...
     
-    def TagElementDescr(*args, **kwargs):
+    @staticmethod
+    def TagElementDescr(elDescr: MSPyDgnPlatform.MSElementDescr, mnodelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
         """
-        TagElementDescr(elDescr: MSPyDgnPlatform.MSElementDescr, mnodelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-        
         @Description Get the tag value from an element at the specified offset
         within the specified element descriptor. If the specified element does
         not have a tag, then it is assigned a tag and the new tag value is
@@ -1250,10 +1153,9 @@ class Assoc:
         """
         ...
     
-    def TagElementValue(*args, **kwargs):
+    @staticmethod
+    def TagElementValue(elem: MSPyDgnPlatform.MSElement, modelRef: MSPyDgnPlatform.DgnModelRef, tag: int) -> tuple:
         """
-        TagElementValue(elem: MSPyDgnPlatform.MSElement, modelRef: MSPyDgnPlatform.DgnModelRef, tag: int) -> tuple
-        
         @Description Assign a new tag value to the specified element if it
         doesn't already have one.
         
@@ -1270,10 +1172,9 @@ class Assoc:
         """
         ...
     
-    def VertexAddedOrRemoved(*args, **kwargs):
+    @staticmethod
+    def VertexAddedOrRemoved(elem: MSPyDgnPlatform.MSElement, pointNum: int, maxPoints: int, inserted: bool) -> int:
         """
-        VertexAddedOrRemoved(elem: MSPyDgnPlatform.MSElement, pointNum: int, maxPoints: int, inserted: bool) -> int
-        
         @Description Adjust association point indices for the specified
         element.
         
@@ -1464,10 +1365,8 @@ class BRepVertexGeometryId:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eh: MSPyDgnPlatform.ElementHandle, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyMstnPlatform.GeometryId
-        """
+    @staticmethod
+    def Create(eh: MSPyDgnPlatform.ElementHandle, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyMstnPlatform.GeometryId:
         ...
     
     class DimensionToComponent:
@@ -1560,27 +1459,17 @@ class BRepVertexGeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -1589,28 +1478,16 @@ class BRepVertexGeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -1620,21 +1497,14 @@ class BRepVertexGeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -1643,16 +1513,10 @@ class BRepVertexGeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -1743,10 +1607,9 @@ class BitMask:
     None
     """
 
-    def AnyBitSet(*args, **kwargs):
+    @staticmethod
+    def AnyBitSet(bitMask: MSPyDgnPlatform.BitMask) -> bool:
         """
-        AnyBitSet(bitMask: MSPyDgnPlatform.BitMask) -> bool
-        
         @Description Check if specified bit-mask has any bit set to true
         
         Parameter ``pBitMaskIn``:
@@ -1759,10 +1622,9 @@ class BitMask:
         """
         ...
     
-    def Clone(*args, **kwargs):
+    @staticmethod
+    def Clone(bitMask: MSPyDgnPlatform.BitMask) -> MSPyDgnPlatform.BitMask:
         """
-        Clone(bitMask: MSPyDgnPlatform.BitMask) -> MSPyDgnPlatform.BitMask
-        
         @Description Clone the specified BitMask.
         
         Parameter ``pBitMask``:
@@ -1775,18 +1637,16 @@ class BitMask:
         """
         ...
     
-    def Create(*args, **kwargs):
+    @staticmethod
+    def Create(arg0: bool) -> tuple:
         """
-        Create(arg0: bool) -> tuple
-        
         defaultBitValue
         """
         ...
     
-    def CreateFromBitArray(*args, **kwargs):
+    @staticmethod
+    def CreateFromBitArray(bitArray: MSPyBentley.UInt16Array, defaultBitValue: bool) -> tuple:
         """
-        CreateFromBitArray(bitArray: MSPyBentley.UInt16Array, defaultBitValue: bool) -> tuple
-        
         @Description Create a new bit-mask structure - initializes itself from
         input bit-array. Note:This function copies the input bit-array.
         
@@ -1809,10 +1669,9 @@ class BitMask:
         """
         ...
     
-    def Dump(*args, **kwargs):
+    @staticmethod
+    def Dump(fileName: str, bitMask: MSPyDgnPlatform.BitMask) -> int:
         """
-        Dump(fileName: str, bitMask: MSPyDgnPlatform.BitMask) -> int
-        
         @Description Dump specified bit-mask data into specified file
         
         Parameter ``pFileNameIn``:
@@ -1828,10 +1687,9 @@ class BitMask:
         """
         ...
     
-    def EnsureCapacity(*args, **kwargs):
+    @staticmethod
+    def EnsureCapacity(bitMask: MSPyDgnPlatform.BitMask, numBit: int) -> int:
         """
-        EnsureCapacity(bitMask: MSPyDgnPlatform.BitMask, numBit: int) -> int
-        
         @Description Ensure that if the specified bit-mask can carry the
         specified number of bits. This function will only expand the specified
         the bit-mask to specified number of bits (conversely, will never
@@ -1850,10 +1708,9 @@ class BitMask:
         """
         ...
     
-    def Equal(*args, **kwargs):
+    @staticmethod
+    def Equal(bitMask1: MSPyDgnPlatform.BitMask, bitMask2: MSPyDgnPlatform.BitMask) -> bool:
         """
-        Equal(bitMask1: MSPyDgnPlatform.BitMask, bitMask2: MSPyDgnPlatform.BitMask) -> bool
-        
         @Description Check if two specified bit-masks are equal
         
         Parameter ``pBitMask1In``:
@@ -1869,10 +1726,9 @@ class BitMask:
         """
         ...
     
-    def Free(*args, **kwargs):
+    @staticmethod
+    def Free(bitMask: MSPyDgnPlatform.BitMask) -> int:
         """
-        Free(bitMask: MSPyDgnPlatform.BitMask) -> int
-        
         @Description Free specified bit-mask & all its internal memory
         
         Parameter ``ppBitMaskIn``:
@@ -1885,10 +1741,9 @@ class BitMask:
         """
         ...
     
-    def GetAsString(*args, **kwargs):
+    @staticmethod
+    def GetAsString(stringOut: MSPyBentley.WString, bitMask: MSPyDgnPlatform.BitMask, indexOrigin: int) -> int:
         """
-        GetAsString(stringOut: MSPyBentley.WString, bitMask: MSPyDgnPlatform.BitMask, indexOrigin: int) -> int
-        
         @Description Get a string which represents the bit-mask. The string
         will a ", " delimited set of bit indices which are set to ON. Ranges of
         ON bit-indices will be returned in a range form (such as n1-n2). An
@@ -1910,10 +1765,9 @@ class BitMask:
         """
         ...
     
-    def GetBit(*args, **kwargs):
+    @staticmethod
+    def GetBit(bitMask: MSPyDgnPlatform.BitMask, bitIndex: int) -> tuple:
         """
-        GetBit(bitMask: MSPyDgnPlatform.BitMask, bitIndex: int) -> tuple
-        
         @Description Get value at specified bit-position in bit-mask.
         
         Parameter ``pBitFlagOut``:
@@ -1932,10 +1786,9 @@ class BitMask:
         """
         ...
     
-    def GetDefaultBitValue(*args, **kwargs):
+    @staticmethod
+    def GetDefaultBitValue(bitMask: MSPyDgnPlatform.BitMask) -> bool:
         """
-        GetDefaultBitValue(bitMask: MSPyDgnPlatform.BitMask) -> bool
-        
         @Description Get the default value for bits beyond the allocated
         number of bits in the bit mask.
         
@@ -1949,10 +1802,9 @@ class BitMask:
         """
         ...
     
-    def GetHighestBit(*args, **kwargs):
+    @staticmethod
+    def GetHighestBit(bitMask: MSPyDgnPlatform.BitMask) -> tuple:
         """
-        GetHighestBit(bitMask: MSPyDgnPlatform.BitMask) -> tuple
-        
         @Description Get the position of the highest possible bit in specified
         bit-mask that can be set without expanding the bit-mask
         
@@ -1969,10 +1821,9 @@ class BitMask:
         """
         ...
     
-    def GetNumBitsSet(*args, **kwargs):
+    @staticmethod
+    def GetNumBitsSet(bitMask: MSPyDgnPlatform.BitMask) -> int:
         """
-        GetNumBitsSet(bitMask: MSPyDgnPlatform.BitMask) -> int
-        
         @Description Get the number of bits set to 1 in the bit mask.
         
         Parameter ``pBitMaskIn``:
@@ -1985,10 +1836,9 @@ class BitMask:
         """
         ...
     
-    def GetNumValidBits(*args, **kwargs):
+    @staticmethod
+    def GetNumValidBits(bitMask: MSPyDgnPlatform.BitMask) -> int:
         """
-        GetNumValidBits(bitMask: MSPyDgnPlatform.BitMask) -> int
-        
         @Description Get the number of valid bits in the bit mask.
         
         Parameter ``pBitMaskIn``:
@@ -2001,10 +1851,9 @@ class BitMask:
         """
         ...
     
-    def InvertAll(*args, **kwargs):
+    @staticmethod
+    def InvertAll(bitMask: MSPyDgnPlatform.BitMask) -> int:
         """
-        InvertAll(bitMask: MSPyDgnPlatform.BitMask) -> int
-        
         @Description Invert value of all bits in specified bit-mask
         
         Parameter ``pBitMaskIn``:
@@ -2017,10 +1866,9 @@ class BitMask:
         """
         ...
     
-    def InvertBit(*args, **kwargs):
+    @staticmethod
+    def InvertBit(bitMask: MSPyDgnPlatform.BitMask, bitIndex: int) -> int:
         """
-        InvertBit(bitMask: MSPyDgnPlatform.BitMask, bitIndex: int) -> int
-        
         @Description Invert value of specified bit in specified bit-mask
         
         Parameter ``pBitMaskIn``:
@@ -2036,10 +1884,9 @@ class BitMask:
         """
         ...
     
-    def LogicalOperation(*args, **kwargs):
+    @staticmethod
+    def LogicalOperation(bitMaskOut: MSPyDgnPlatform.BitMask, bitMaskIn: MSPyDgnPlatform.BitMask, operation: MSPyDgnPlatform.BitMaskOperation) -> int:
         """
-        LogicalOperation(bitMaskOut: MSPyDgnPlatform.BitMask, bitMaskIn: MSPyDgnPlatform.BitMask, operation: MSPyDgnPlatform.BitMaskOperation) -> int
-        
         @Description Apply " pBitMask " on " pBitMaskOut " using specified logical
         operation. The logical operation may be BitMaskOperation.And,
         BitMaskOperation.Or, BitMaskOperation.Xor, BitMaskOperation.OrNot,
@@ -2061,10 +1908,9 @@ class BitMask:
         """
         ...
     
-    def SetAll(*args, **kwargs):
+    @staticmethod
+    def SetAll(bitMask: MSPyDgnPlatform.BitMask, bitFlag: bool) -> int:
         """
-        SetAll(bitMask: MSPyDgnPlatform.BitMask, bitFlag: bool) -> int
-        
         @Description Set all bits in specified bit-mask to either true or
         false
         
@@ -2081,10 +1927,9 @@ class BitMask:
         """
         ...
     
-    def SetBit(*args, **kwargs):
+    @staticmethod
+    def SetBit(bitMask: MSPyDgnPlatform.BitMask, bitIndex: int, bitFlag: bool) -> int:
         """
-        SetBit(bitMask: MSPyDgnPlatform.BitMask, bitIndex: int, bitFlag: bool) -> int
-        
         @Description Set value at specified bit-position in bit-mask. If the
         specified bit-position is outside the size of the bit-mask, then this
         function will expand the size of the input bit-mask to fit in the bit-
@@ -2106,10 +1951,9 @@ class BitMask:
         """
         ...
     
-    def SetBitAtPositions(*args, **kwargs):
+    @staticmethod
+    def SetBitAtPositions(bitMask: MSPyDgnPlatform.BitMask, arrayPosition: int, bitPosition: int, bitFlag: bool) -> int:
         """
-        SetBitAtPositions(bitMask: MSPyDgnPlatform.BitMask, arrayPosition: int, bitPosition: int, bitFlag: bool) -> int
-        
         @Description Set bit at specified array-position (bitIndexIn / 16) &
         bit-position in array (bitIndexIn % 16)
         
@@ -2132,10 +1976,9 @@ class BitMask:
         """
         ...
     
-    def SetBits(*args, **kwargs):
+    @staticmethod
+    def SetBits(bitMask: MSPyDgnPlatform.BitMask, bitIndexArray: MSPyBentley.UInt32Array, bitFlag: bool) -> int:
         """
-        SetBits(bitMask: MSPyDgnPlatform.BitMask, bitIndexArray: MSPyBentley.UInt32Array, bitFlag: bool) -> int
-        
         @Description Set the value of an array of specified bit-positions in
         bit-mask. If any of the specified bit-positions are outside the size
         of the bit-mask, then this function will expand the size of the input
@@ -2160,10 +2003,9 @@ class BitMask:
         """
         ...
     
-    def SetDefaultBitValue(*args, **kwargs):
+    @staticmethod
+    def SetDefaultBitValue(bitMask: MSPyDgnPlatform.BitMask, defaultBitValue: bool) -> int:
         """
-        SetDefaultBitValue(bitMask: MSPyDgnPlatform.BitMask, defaultBitValue: bool) -> int
-        
         @Description Set the default value for bits beyond the allocated
         number of bits in the bit mask.
         
@@ -2180,10 +2022,9 @@ class BitMask:
         """
         ...
     
-    def SetFromBitArray(*args, **kwargs):
+    @staticmethod
+    def SetFromBitArray(bitMask: MSPyDgnPlatform.BitMask, bitArray: MSPyBentley.UInt16Array) -> int:
         """
-        SetFromBitArray(bitMask: MSPyDgnPlatform.BitMask, bitArray: MSPyBentley.UInt16Array) -> int
-        
         @Description Set bit-mask from specified bit-array. The resultant bit-
         mask will be of the same size as the specified bit-array.
         
@@ -2203,10 +2044,9 @@ class BitMask:
         """
         ...
     
-    def SetFromBitMask(*args, **kwargs):
+    @staticmethod
+    def SetFromBitMask(bitMask: MSPyDgnPlatform.BitMask, sourceBitMask: MSPyDgnPlatform.BitMask) -> int:
         """
-        SetFromBitMask(bitMask: MSPyDgnPlatform.BitMask, sourceBitMask: MSPyDgnPlatform.BitMask) -> int
-        
         @Description Set bit-mask from specified source bit-mask. The
         resultant bit-mask will be of the same size as the specified source
         bit-mask. The default value of the resultant bit-mask will be set to
@@ -2225,10 +2065,9 @@ class BitMask:
         """
         ...
     
-    def SetFromString(*args, **kwargs):
+    @staticmethod
+    def SetFromString(bitMask: MSPyDgnPlatform.BitMask, sourceString: str, indexOrigin: int, maxIndex: int) -> int:
         """
-        SetFromString(bitMask: MSPyDgnPlatform.BitMask, sourceString: str, indexOrigin: int, maxIndex: int) -> int
-        
         @Description Set bit-mask from specified string. Set bit-mask from a
         set of " " or ", " delimited in a string. The string may contain ranges
         too. e.g. string:1,10-15,3,20,25-28,31-35 If the largest bit-position
@@ -2257,10 +2096,9 @@ class BitMask:
         """
         ...
     
-    def TestBit(*args, **kwargs):
+    @staticmethod
+    def TestBit(bitMask: MSPyDgnPlatform.BitMask, bitPosition: int) -> bool:
         """
-        TestBit(bitMask: MSPyDgnPlatform.BitMask, bitPosition: int) -> bool
-        
         @Description Check if specified bit of bit-mask is set to true
         
         Parameter ``pBitMaskIn``:
@@ -2276,10 +2114,9 @@ class BitMask:
         """
         ...
     
-    def TestBitMask(*args, **kwargs):
+    @staticmethod
+    def TestBitMask(bitMask1: MSPyDgnPlatform.BitMask, bitMask2: MSPyDgnPlatform.BitMask) -> bool:
         """
-        TestBitMask(bitMask1: MSPyDgnPlatform.BitMask, bitMask2: MSPyDgnPlatform.BitMask) -> bool
-        
         @Description Check if two specified bit-masks have any bits which have
         the same value
         
@@ -2347,10 +2184,9 @@ class Cell:
     None
     """
 
-    def AddLibDescr(*args, **kwargs):
+    @staticmethod
+    def AddLibDescr(cellEdP: MSPyDgnPlatform.MSElementDescr, cellType: MSPyMstnPlatform.CellAddType, convertNestedCellsToRefs: bool) -> int:
         """
-        AddLibDescr(cellEdP: MSPyDgnPlatform.MSElementDescr, cellType: MSPyMstnPlatform.CellAddType, convertNestedCellsToRefs: bool) -> int
-        
         @Description Create a new cell in the currently attached cell library.
         This function also handles copying styles, dependencies, etc. into the
         library. @Param[in] cellEdP a cell element descriptor (type 2) to add
@@ -2379,10 +2215,9 @@ class Cell:
         """
         ...
     
-    def AttachLibrary(*args, **kwargs):
+    @staticmethod
+    def AttachLibrary(fileName: MSPyBentley.BeFileName, inputName: MSPyBentley.BeFileName, defaultDir: str, fromKeyin: int) -> int:
         """
-        AttachLibrary(fileName: MSPyBentley.BeFileName, inputName: MSPyBentley.BeFileName, defaultDir: str, fromKeyin: int) -> int
-        
         @Description Attaches a new cell library to the current design file.
         If a library is successfully attached, filename is set to the cell
         library's full file specification. If the library is a V7 cell library
@@ -2411,10 +2246,9 @@ class Cell:
         """
         ...
     
-    def AttachLibraryEx(*args, **kwargs):
+    @staticmethod
+    def AttachLibraryEx(fileName: MSPyBentley.BeFileName, inputName: MSPyBentley.BeFileName, defaultDir: str, fromKeyin: int, libraryFlag: int) -> int:
         """
-        AttachLibraryEx(fileName: MSPyBentley.BeFileName, inputName: MSPyBentley.BeFileName, defaultDir: str, fromKeyin: int, libraryFlag: int) -> int
-        
         @Description Attach a new cell library to the current design file. If
         a library is successfully attached, filename is set to the cell
         library's full file specification. @Param[out] filename name of cell
@@ -2443,10 +2277,9 @@ class Cell:
         """
         ...
     
-    def CopyCellDefinition(*args, **kwargs):
+    @staticmethod
+    def CopyCellDefinition(destLibrary: MSPyDgnPlatform.DgnFile, cellName: str, sourceLibrary: MSPyDgnPlatform.DgnFile) -> int:
         """
-        CopyCellDefinition(destLibrary: MSPyDgnPlatform.DgnFile, cellName: str, sourceLibrary: MSPyDgnPlatform.DgnFile) -> int
-        
         @Description Duplicate a cell definition from one cell library to
         another.
         
@@ -2465,10 +2298,9 @@ class Cell:
         """
         ...
     
-    def Create(*args, **kwargs):
+    @staticmethod
+    def Create(cellElm: MSPyDgnPlatform.MSElement, cellName: str, origin: MSPyBentleyGeom.DPoint3d, pointCell: bool) -> int:
         """
-        Create(cellElm: MSPyDgnPlatform.MSElement, cellName: str, origin: MSPyBentleyGeom.DPoint3d, pointCell: bool) -> int
-        
         @Description Creates a new cell element based on the data provided.
         This can be used as an orphan cell, or later added to a cell library
         using Cell.AddLibDescr. Typically this function is used to create a
@@ -2488,10 +2320,9 @@ class Cell:
         """
         ...
     
-    def CreateFromFence(*args, **kwargs):
+    @staticmethod
+    def CreateFromFence(cellName: str, description: str, origin: MSPyBentleyGeom.DPoint3d, pointCell: bool) -> int:
         """
-        CreateFromFence(cellName: str, description: str, origin: MSPyBentleyGeom.DPoint3d, pointCell: bool) -> int
-        
         @Description Create a new cell in the current cell library that
         contains the elements in the fence. It creates the new cell from the
         current selection set if no fence is defined. @Param[in] cellName the
@@ -2515,10 +2346,9 @@ class Cell:
         """
         ...
     
-    def CreateFromFenceByType(*args, **kwargs):
+    @staticmethod
+    def CreateFromFenceByType(cellName: str, description: str, origin: MSPyBentleyGeom.DPoint3d, cellType: int) -> int:
         """
-        CreateFromFenceByType(cellName: str, description: str, origin: MSPyBentleyGeom.DPoint3d, cellType: int) -> int
-        
         @Description Create a new cell in the current cell library that
         contains the elements in the fence. It creates the new cell from the
         current selection set if no fence is defined. @Param[in] cellName the
@@ -2542,10 +2372,9 @@ class Cell:
         """
         ...
     
-    def DeleteInLibrary(*args, **kwargs):
+    @staticmethod
+    def DeleteInLibrary(cellName: str) -> int:
         """
-        DeleteInLibrary(cellName: str) -> int
-        
         @Description Remove a cell from the current active cell library by
         name. @Param[in] cellName name of cell to be deleted. @Return SUCCESS
         if the specified cell was deleted or one of the following error
@@ -2556,10 +2385,9 @@ class Cell:
         """
         ...
     
-    def ExistsInLibrary(*args, **kwargs):
+    @staticmethod
+    def ExistsInLibrary(cellName: str) -> bool:
         """
-        ExistsInLibrary(cellName: str) -> bool
-        
         @Description Indicates whether a cell with the specified name exists
         in the current cell library. @Param[in] cellName name of the cell to
         search for. @Return true if the cell name exists in the library;
@@ -2572,10 +2400,9 @@ class Cell:
         """
         ...
     
-    def Extract(*args, **kwargs):
+    @staticmethod
+    def Extract(origin: MSPyBentleyGeom.DPoint3d, shape: MSPyBentleyGeom.DPoint3d, rMatrix: MSPyBentleyGeom.RotMatrix, scale: MSPyBentleyGeom.DPoint3d, cellName: MSPyBentley.WString, cell: MSPyDgnPlatform.MSElement) -> int:
         """
-        Extract(origin: MSPyBentleyGeom.DPoint3d, shape: MSPyBentleyGeom.DPoint3d, rMatrix: MSPyBentleyGeom.RotMatrix, scale: MSPyBentleyGeom.DPoint3d, cellName: MSPyBentley.WString, cell: MSPyDgnPlatform.MSElement) -> int
-        
         @Description Extracts the information from a cell header element. If
         any parameters are NULL, this function does not attempt to fill them
         in. All parameters are returned in the current (design file)
@@ -2605,10 +2432,9 @@ class Cell:
         """
         ...
     
-    def ExtractDescription(*args, **kwargs):
+    @staticmethod
+    def ExtractDescription(cellDescr: MSPyBentley.WString, elem: MSPyDgnPlatform.MSElement) -> int:
         """
-        ExtractDescription(cellDescr: MSPyBentley.WString, elem: MSPyDgnPlatform.MSElement) -> int
-        
         @Description Retrieve the description from a cell element and copy it
         to the provided buffer. Note that graphic cells and shared cell
         instances as placed by MicroStation do not keep their descriptions.
@@ -2628,10 +2454,9 @@ class Cell:
         """
         ...
     
-    def ExtractName(*args, **kwargs):
+    @staticmethod
+    def ExtractName(cellName: MSPyBentley.WString, elem: MSPyDgnPlatform.MSElement) -> int:
         """
-        ExtractName(cellName: MSPyBentley.WString, elem: MSPyDgnPlatform.MSElement) -> int
-        
         @Description Retrieve the name string from a non-shared or shared cell
         element and copy it to the provided buffer. @Param[out] cellNameP the
         buffer where the extracted cell name will be placed. @Param[in]
@@ -2647,10 +2472,9 @@ class Cell:
         """
         ...
     
-    def FindCell(*args, **kwargs):
+    @staticmethod
+    def FindCell(preferredLib: MSPyDgnPlatform.DgnFile, cellName: str, searchAll: int) -> tuple:
         """
-        FindCell(preferredLib: MSPyDgnPlatform.DgnFile, cellName: str, searchAll: int) -> tuple
-        
         @Description Search for a cell with the specified cell name. The
         search order is first the library passed in as preferredLib; then the
         current active cell library; and then sequentially though the files
@@ -2678,10 +2502,9 @@ class Cell:
         """
         ...
     
-    def FindCellEx(*args, **kwargs):
+    @staticmethod
+    def FindCellEx(preferredLib: MSPyDgnPlatform.DgnFile, cellName: str, searchAll: int, rights: int) -> tuple:
         """
-        FindCellEx(preferredLib: MSPyDgnPlatform.DgnFile, cellName: str, searchAll: int, rights: int) -> tuple
-        
         @Description Search for a cell with the specified cell name. The
         search order is first the library passed in as preferredLib; then the
         current active cell library; and then sequentially though the files
@@ -2709,10 +2532,9 @@ class Cell:
         """
         ...
     
-    def FixLevels(*args, **kwargs):
+    @staticmethod
+    def FixLevels(elemDescr: MSPyDgnPlatform.MSElementDescr, relativeMode: int, baseLevel: int, library: MSPyDgnPlatform.DgnFile) -> int:
         """
-        FixLevels(elemDescr: MSPyDgnPlatform.MSElementDescr, relativeMode: int, baseLevel: int, library: MSPyDgnPlatform.DgnFile) -> int
-        
         @Description This function is just a direct call to
         Cell.FixLevelsByCode, so that function should be called instead. It
         will adjust element levels in a cell element descriptor, elemDscr.
@@ -2751,10 +2573,9 @@ class Cell:
         """
         ...
     
-    def FixLevelsByCode(*args, **kwargs):
+    @staticmethod
+    def FixLevelsByCode(elemDescr: MSPyDgnPlatform.MSElementDescr, modelRef: MSPyDgnPlatform.DgnModelRef, relativeMode: int, baseLevel: int) -> int:
         """
-        FixLevelsByCode(elemDescr: MSPyDgnPlatform.MSElementDescr, modelRef: MSPyDgnPlatform.DgnModelRef, relativeMode: int, baseLevel: int) -> int
-        
         @Description Adjust element levels in a cell element descriptor,
         elemDscr. This adjustment is based on the cell type and the values of
         relativeMode and baseLevelId. It uses the following logic:
@@ -2790,10 +2611,9 @@ class Cell:
         """
         ...
     
-    def GetElmDscr(*args, **kwargs):
+    @staticmethod
+    def GetElmDscr(origin: MSPyBentleyGeom.DPoint3d, scale: MSPyBentleyGeom.DPoint3d, trueScale: bool, rotMatrix: MSPyBentleyGeom.RotMatrix, attributes: int, ggroup: int, sharedFlag: int, updateMasterFile: bool, cellName: str, library: MSPyDgnPlatform.DgnFile) -> tuple:
         """
-        GetElmDscr(origin: MSPyBentleyGeom.DPoint3d, scale: MSPyBentleyGeom.DPoint3d, trueScale: bool, rotMatrix: MSPyBentleyGeom.RotMatrix, attributes: int, ggroup: int, sharedFlag: int, updateMasterFile: bool, cellName: str, library: MSPyDgnPlatform.DgnFile) -> tuple
-        
         @Description Read the specified cell from the cell library and returns
         the cell's element descriptor. The address of the element descriptor
         for the cell's graphic elements is returned in cellDscrPP. @Remarks If
@@ -2846,22 +2666,17 @@ class Cell:
         """
         ...
     
-    def GetElmDscrExtended(*args, **kwargs):
-        """
-        GetElmDscrExtended(origin: MSPyBentleyGeom.DPoint3d, scale: MSPyBentleyGeom.DPoint3d, trueScale: bool, destModelRef: MSPyDgnPlatform.DgnModelRef, rotMatrix: MSPyBentleyGeom.RotMatrix, attributes: int, ggroup: int, sharedFlag: int, keepCellDimensionality: bool, updateDestFile: bool, cellName: str, library: MSPyDgnPlatform.DgnFile) -> tuple
-        """
+    @staticmethod
+    def GetElmDscrExtended(origin: MSPyBentleyGeom.DPoint3d, scale: MSPyBentleyGeom.DPoint3d, trueScale: bool, destModelRef: MSPyDgnPlatform.DgnModelRef, rotMatrix: MSPyBentleyGeom.RotMatrix, attributes: int, ggroup: int, sharedFlag: int, keepCellDimensionality: bool, updateDestFile: bool, cellName: str, library: MSPyDgnPlatform.DgnFile) -> tuple:
         ...
     
-    def GetLibraryName(*args, **kwargs):
-        """
-        GetLibraryName(fileName: MSPyBentley.BeFileName) -> None
-        """
+    @staticmethod
+    def GetLibraryName(fileName: MSPyBentley.BeFileName) -> None:
         ...
     
-    def GetLibraryObject(*args, **kwargs):
+    @staticmethod
+    def GetLibraryObject(libName: str, unused: bool) -> tuple:
         """
-        GetLibraryObject(libName: str, unused: bool) -> tuple
-        
         @Description Returns a pointer to the cell library object of the given
         name. This is used by Cell.GetElmDscr, Cell.PlaceCell, and other
         functions that require a cell library handle. @Param[out] ppLibraryObj
@@ -2876,10 +2691,9 @@ class Cell:
         """
         ...
     
-    def IsPointCell(*args, **kwargs):
+    @staticmethod
+    def IsPointCell(hdr: MSPyDgnPlatform.MSElement) -> bool:
         """
-        IsPointCell(hdr: MSPyDgnPlatform.MSElement) -> bool
-        
         @Description Determine whether the cell cellHeader is a point cell.
         @Param[in] hdr cell header element @Return true if cellHeader is a
         point cell, false for any other type.
@@ -2888,10 +2702,9 @@ class Cell:
         """
         ...
     
-    def ModifyInfo(*args, **kwargs):
+    @staticmethod
+    def ModifyInfo(newName: str, newDescr: str, cellName: str, library: MSPyDgnPlatform.DgnFile) -> int:
         """
-        ModifyInfo(newName: str, newDescr: str, cellName: str, library: MSPyDgnPlatform.DgnFile) -> int
-        
         @Description Replace the name and description of a cell in a library.
         @Param[in] newName is the new cell name. Pass NULL to use the old
         name. @Param[in] newdescr is the new cell description. Pass NULL to
@@ -2912,10 +2725,9 @@ class Cell:
         """
         ...
     
-    def PlaceCell(*args, **kwargs):
+    @staticmethod
+    def PlaceCell(origin: MSPyBentleyGeom.DPoint3d, scale: MSPyBentleyGeom.DPoint3d, trueScale: bool, rotMatrix: MSPyBentleyGeom.RotMatrix, attributes: int, ggroup: int, relativeMode: bool, baseLevel: int, sharedFlag: int, cellName: str, library: MSPyDgnPlatform.DgnFile) -> int:
         """
-        PlaceCell(origin: MSPyBentleyGeom.DPoint3d, scale: MSPyBentleyGeom.DPoint3d, trueScale: bool, rotMatrix: MSPyBentleyGeom.RotMatrix, attributes: int, ggroup: int, relativeMode: bool, baseLevel: int, sharedFlag: int, cellName: str, library: MSPyDgnPlatform.DgnFile) -> int
-        
         @Description Place a cell in the active model of the current design
         file.
         
@@ -2990,10 +2802,9 @@ class Cell:
         """
         ...
     
-    def ReadLibraryElements(*args, **kwargs):
+    @staticmethod
+    def ReadLibraryElements(celName: str, library: MSPyDgnPlatform.DgnFile, justHeader: bool) -> tuple:
         """
-        ReadLibraryElements(celName: str, library: MSPyDgnPlatform.DgnFile, justHeader: bool) -> tuple
-        
         @Description Get the component elements of the specified cell from the
         cell library. Calling this function with justHeader false is the same
         as calling Cell.GetElmDscr with no transformations. @Param[out]
@@ -3008,10 +2819,9 @@ class Cell:
         """
         ...
     
-    def Rename(*args, **kwargs):
+    @staticmethod
+    def Rename(newName: str, oldName: str) -> int:
         """
-        Rename(newName: str, oldName: str) -> int
-        
         @Description Changes the name of cell in the current cell library.
         @Param[in] newName is the new name of the cell in the library. This
         must be less than DgnPlatform.MAX_CELLNAME_LENGTH characters, and
@@ -3025,10 +2835,9 @@ class Cell:
         """
         ...
     
-    def ReplaceLibraryHeaderElement(*args, **kwargs):
+    @staticmethod
+    def ReplaceLibraryHeaderElement(library: MSPyDgnPlatform.DgnFile, cellEdP: MSPyDgnPlatform.MSElementDescr, cellType: MSPyMstnPlatform.CellAddType) -> int:
         """
-        ReplaceLibraryHeaderElement(library: MSPyDgnPlatform.DgnFile, cellEdP: MSPyDgnPlatform.MSElementDescr, cellType: MSPyMstnPlatform.CellAddType) -> int
-        
         @Description Replace the data for a cell header in a library. Since
         this will replace all linkages on the element except name and
         description, care must be taken to avoid removing linkages that should
@@ -3047,10 +2856,9 @@ class Cell:
         """
         ...
     
-    def SetDescription(*args, **kwargs):
+    @staticmethod
+    def SetDescription(elem: MSPyDgnPlatform.MSElement, cellDescr: str) -> int:
         """
-        SetDescription(elem: MSPyDgnPlatform.MSElement, cellDescr: str) -> int
-        
         @Description Set the description of the specified cell element. When
         setting the description of a cell using an element descriptor you need
         to be careful about changing the length of the cell description as the
@@ -3076,10 +2884,9 @@ class Cell:
         """
         ...
     
-    def SetName(*args, **kwargs):
+    @staticmethod
+    def SetName(elem: MSPyDgnPlatform.MSElement, cellName: str) -> int:
         """
-        SetName(elem: MSPyDgnPlatform.MSElement, cellName: str) -> int
-        
         @Description Set the name of the specified cell. When setting the name
         of a cell using an element descriptor you need to be careful about
         changing the length of the cell name as the element descriptor has
@@ -3104,10 +2911,9 @@ class Cell:
         """
         ...
     
-    def SetOriginAndRange(*args, **kwargs):
+    @staticmethod
+    def SetOriginAndRange(cellDP: MSPyDgnPlatform.MSElementDescr) -> None:
         """
-        SetOriginAndRange(cellDP: MSPyDgnPlatform.MSElementDescr) -> None
-        
         @Description Set the cell's range, range diagonal, and origin. The
         origin is set to the middle of the range. This function only validates
         the range of the cell against the ACTIVEMODEL. If you are working with
@@ -3121,10 +2927,9 @@ class Cell:
         """
         ...
     
-    def SetRange(*args, **kwargs):
+    @staticmethod
+    def SetRange(cellDP: MSPyDgnPlatform.MSElementDescr, modelRef: MSPyDgnPlatform.DgnModelRef) -> None:
         """
-        SetRange(cellDP: MSPyDgnPlatform.MSElementDescr, modelRef: MSPyDgnPlatform.DgnModelRef) -> None
-        
         @Description The Cell.Create and Cell.SetRange functions are
         generally used to create library cells in memory for subsequent
         addition to a cell library using Cell.AddLibDescr. The programmer
@@ -3148,6 +2953,7 @@ class Cell:
         """
         ...
     
+    @staticmethod
     def UpgradeLibrary(*args, **kwargs):
         """
         UpgradeLibrary(libraryFileName: MSPyBentley.WString, backupFileName: str, haveUnits: bool, uorPerStorage: float, unitNumerator: float, unitDenominator: float, unitLabel: str, unitFlags: MSPyDgnPlatform.UnitFlags, libraryFlag: int, feedbackFunc: std.function<void __cdecl(wchar_t const * __ptr64,int)>) -> int
@@ -3320,15 +3126,11 @@ class ClashDetector:
     None
     """
 
-    def Clear(*args, **kwargs):
-        """
-        Clear(self: MSPyMstnPlatform.ClashDetector) -> None
-        """
+    def Clear(self: MSPyMstnPlatform.ClashDetector) -> None:
         ...
     
     def CollectGeometry(*args, **kwargs):
         """
-        CollectGeometry(*args, **kwargs)
         Overloaded function.
         
         1. CollectGeometry(self: MSPyMstnPlatform.ClashDetector, displayPath: MSPyDgnPlatform.DisplayPath, offset: float = 0) -> tuple
@@ -3337,28 +3139,18 @@ class ClashDetector:
         """
         ...
     
-    def ComputeClosestApproach(*args, **kwargs):
-        """
-        ComputeClosestApproach(self: MSPyMstnPlatform.ClashDetector, object1: MSPyMstnPlatform.IClashData, object2: MSPyMstnPlatform.IClashData, maxClearance: float) -> tuple
-        """
+    def ComputeClosestApproach(self: MSPyMstnPlatform.ClashDetector, object1: MSPyMstnPlatform.IClashData, object2: MSPyMstnPlatform.IClashData, maxClearance: float) -> tuple:
         ...
     
-    def ComputeClosestApproachToPosition(*args, **kwargs):
-        """
-        ComputeClosestApproachToPosition(self: MSPyMstnPlatform.ClashDetector, object1: MSPyMstnPlatform.IClashData, positionUOR: MSPyBentleyGeom.DPoint3d, maxClearance: float) -> tuple
-        """
+    def ComputeClosestApproachToPosition(self: MSPyMstnPlatform.ClashDetector, object1: MSPyMstnPlatform.IClashData, positionUOR: MSPyBentleyGeom.DPoint3d, maxClearance: float) -> tuple:
         ...
     
-    def CreateClashDetector(*args, **kwargs):
-        """
-        CreateClashDetector(viewport: MSPyDgnPlatform.Viewport) -> MSPyMstnPlatform.ClashDetector
-        """
+    @staticmethod
+    def CreateClashDetector(viewport: MSPyDgnPlatform.Viewport) -> MSPyMstnPlatform.ClashDetector:
         ...
     
-    def NoClearance(*args, **kwargs):
-        """
-        NoClearance() -> float
-        """
+    @staticmethod
+    def NoClearance() -> float:
         ...
     
     def __init__(*args, **kwargs):
@@ -3404,10 +3196,8 @@ class Constraint2dData:
     None
     """
 
-    def AddCurveIdentifier(*args, **kwargs):
+    def AddCurveIdentifier(self: MSPyMstnPlatform.Constraint2dData, id: MSPyMstnPlatform.CurveEntityIdentifier) -> None:
         """
-        AddCurveIdentifier(self: MSPyMstnPlatform.Constraint2dData, id: MSPyMstnPlatform.CurveEntityIdentifier) -> None
-        
         @description Add curve identifier
         
         Parameter ``id``:
@@ -3429,10 +3219,8 @@ class Constraint2dData:
     def ConstraintType(arg0: MSPyMstnPlatform.Constraint2dData, arg1: MSPyMstnPlatform.Constraint2dType) -> None:
         ...
     
-    def GetConstraintStatus(*args, **kwargs):
+    def GetConstraintStatus(self: MSPyMstnPlatform.Constraint2dData) -> MSPyMstnPlatform.Constraint2dStatus:
         """
-        GetConstraintStatus(self: MSPyMstnPlatform.Constraint2dData) -> MSPyMstnPlatform.Constraint2dStatus
-        
         @description Get the constraint status
         
         Returns:
@@ -3440,10 +3228,8 @@ class Constraint2dData:
         """
         ...
     
-    def GetConstraintType(*args, **kwargs):
+    def GetConstraintType(self: MSPyMstnPlatform.Constraint2dData) -> MSPyMstnPlatform.Constraint2dType:
         """
-        GetConstraintType(self: MSPyMstnPlatform.Constraint2dData) -> MSPyMstnPlatform.Constraint2dType
-        
         @description Get the constraint type
         
         Returns:
@@ -3451,10 +3237,8 @@ class Constraint2dData:
         """
         ...
     
-    def SetConstraintStatus(*args, **kwargs):
+    def SetConstraintStatus(self: MSPyMstnPlatform.Constraint2dData, status: MSPyMstnPlatform.Constraint2dStatus) -> None:
         """
-        SetConstraintStatus(self: MSPyMstnPlatform.Constraint2dData, status: MSPyMstnPlatform.Constraint2dStatus) -> None
-        
         @description Set the constraint status
         
         Parameter ``status``:
@@ -3462,10 +3246,8 @@ class Constraint2dData:
         """
         ...
     
-    def SetConstraintType(*args, **kwargs):
+    def SetConstraintType(self: MSPyMstnPlatform.Constraint2dData, type: MSPyMstnPlatform.Constraint2dType) -> None:
         """
-        SetConstraintType(self: MSPyMstnPlatform.Constraint2dData, type: MSPyMstnPlatform.Constraint2dType) -> None
-        
         @description Set the constraint type
         
         Parameter ``type``:
@@ -3502,33 +3284,26 @@ class Constraint2dDataArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyMstnPlatform.Constraint2dDataArray, x: MSPyMstnPlatform.Constraint2dData) -> None:
         """
-        append(self: MSPyMstnPlatform.Constraint2dDataArray, x: MSPyMstnPlatform.Constraint2dData) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyMstnPlatform.Constraint2dDataArray) -> None:
         """
-        clear(self: MSPyMstnPlatform.Constraint2dDataArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyMstnPlatform.Constraint2dDataArray, x: MSPyMstnPlatform.Constraint2dData) -> int:
         """
-        count(self: MSPyMstnPlatform.Constraint2dDataArray, x: MSPyMstnPlatform.Constraint2dData) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyMstnPlatform.Constraint2dDataArray, L: MSPyMstnPlatform.Constraint2dDataArray) -> None
@@ -3541,17 +3316,14 @@ class Constraint2dDataArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyMstnPlatform.Constraint2dDataArray, i: int, x: MSPyMstnPlatform.Constraint2dData) -> None:
         """
-        insert(self: MSPyMstnPlatform.Constraint2dDataArray, i: int, x: MSPyMstnPlatform.Constraint2dData) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyMstnPlatform.Constraint2dDataArray) -> MSPyMstnPlatform.Constraint2dData
@@ -3564,10 +3336,8 @@ class Constraint2dDataArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyMstnPlatform.Constraint2dDataArray, x: MSPyMstnPlatform.Constraint2dData) -> None:
         """
-        remove(self: MSPyMstnPlatform.Constraint2dDataArray, x: MSPyMstnPlatform.Constraint2dData) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3577,16 +3347,13 @@ class Constraint2dManager:
     None
     """
 
-    def AddConstraint(*args, **kwargs):
-        """
-        AddConstraint(constraintedElements: MSPyDgnPlatform.ElementAgenda, constraintType: MSPyMstnPlatform.Constraint2dType, primitiveId1: int = 0, defaultSubIndex1: int = 0, primitiveId2: int = 0, defaultSubIndex2: int = 0, dimValue: float = 0.0, varName: MSPyBentley.WString = '') -> bool
-        """
+    @staticmethod
+    def AddConstraint(constraintedElements: MSPyDgnPlatform.ElementAgenda, constraintType: MSPyMstnPlatform.Constraint2dType, primitiveId1: int = 0, defaultSubIndex1: int = 0, primitiveId2: int = 0, defaultSubIndex2: int = 0, dimValue: float = 0.0, varName: MSPyBentley.WString = '') -> bool:
         ...
     
-    def AddSolverData(*args, **kwargs):
+    @staticmethod
+    def AddSolverData(eh: MSPyDgnPlatform.ElementHandle, solverData: MSPyMstnPlatform.Constraint2dSolverData) -> int:
         """
-        AddSolverData(eh: MSPyDgnPlatform.ElementHandle, solverData: MSPyMstnPlatform.Constraint2dSolverData) -> int
-        
         @description Store constraints data.
         
         Parameter ``[in]``:
@@ -3613,16 +3380,13 @@ class Constraint2dManager:
         """
         ...
     
-    def EvaluateAndUpdate(*args, **kwargs):
-        """
-        EvaluateAndUpdate(solverData: MSPyMstnPlatform.Constraint2dSolverData, dgnModel: MSPyDgnPlatform.DgnModel, directChanges: MSPyDgnPlatform.ElementRefPArray, isDynamic: bool = False, results: MSPyDgnPlatform.ElementAgenda = None, inconsistentConstraints: MSPyMstnPlatform.Constraint2dDataArray = None) -> bool
-        """
+    @staticmethod
+    def EvaluateAndUpdate(solverData: MSPyMstnPlatform.Constraint2dSolverData, dgnModel: MSPyDgnPlatform.DgnModel, directChanges: MSPyDgnPlatform.ElementRefPArray, isDynamic: bool = False, results: MSPyDgnPlatform.ElementAgenda = None, inconsistentConstraints: MSPyMstnPlatform.Constraint2dDataArray = None) -> bool:
         ...
     
-    def GetSolverData(*args, **kwargs):
+    @staticmethod
+    def GetSolverData(solverData: MSPyMstnPlatform.Constraint2dSolverData, eh: MSPyDgnPlatform.ElementHandle, includingDeleted: bool = False) -> int:
         """
-        GetSolverData(solverData: MSPyMstnPlatform.Constraint2dSolverData, eh: MSPyDgnPlatform.ElementHandle, includingDeleted: bool = False) -> int
-        
         @description Get constraint data of the specified profile.
         
         Parameter ``[out]``:
@@ -3680,10 +3444,8 @@ class Constraint2dSolver:
         """
         ...
     
-    def GetData(*args, **kwargs):
+    def GetData(self: MSPyMstnPlatform.Constraint2dSolver, data: Bentley.DgnPlatform.Constraint2d.Constraint2dSolverData) -> None:
         """
-        GetData(self: MSPyMstnPlatform.Constraint2dSolver, data: Bentley.DgnPlatform.Constraint2d.Constraint2dSolverData) -> None
-        
         @description Initialize model
         
         Parameter ``[in]``:
@@ -3696,10 +3458,8 @@ class Constraint2dSolver:
         """
         ...
     
-    def GetResultCurveVector(*args, **kwargs):
+    def GetResultCurveVector(self: MSPyMstnPlatform.Constraint2dSolver, elemRef: MSPyDgnPlatform.ElementRefBase) -> tuple:
         """
-        GetResultCurveVector(self: MSPyMstnPlatform.Constraint2dSolver, elemRef: MSPyDgnPlatform.ElementRefBase) -> tuple
-        
         @description Get results for the given element
         
         Parameter ``[out]``:
@@ -3711,10 +3471,8 @@ class Constraint2dSolver:
         """
         ...
     
-    def SetData(*args, **kwargs):
+    def SetData(self: MSPyMstnPlatform.Constraint2dSolver, data: Bentley.DgnPlatform.Constraint2d.Constraint2dSolverData, uorPerMaster: float = 1.0) -> bool:
         """
-        SetData(self: MSPyMstnPlatform.Constraint2dSolver, data: Bentley.DgnPlatform.Constraint2d.Constraint2dSolverData, uorPerMaster: float = 1.0) -> bool
-        
         @description Initialize model
         
         Parameter ``[in]``:
@@ -3739,18 +3497,14 @@ class Constraint2dSolverData:
     None
     """
 
-    def Clear(*args, **kwargs):
+    def Clear(self: MSPyMstnPlatform.Constraint2dSolverData) -> None:
         """
-        Clear(self: MSPyMstnPlatform.Constraint2dSolverData) -> None
-        
         @description Clear all data and set to empty
         """
         ...
     
-    def CollateByElement(*args, **kwargs):
+    def CollateByElement(self: MSPyMstnPlatform.Constraint2dSolverData, childGroups: MSPyMstnPlatform.Constraint2dSolverDataArray) -> int:
         """
-        CollateByElement(self: MSPyMstnPlatform.Constraint2dSolverData, childGroups: MSPyMstnPlatform.Constraint2dSolverDataArray) -> int
-        
         @description Check and divide this constraint model into child per
         links among elements.
         
@@ -3777,10 +3531,8 @@ class Constraint2dSolverData:
         """
         ...
     
-    def IsComplete(*args, **kwargs):
+    def IsComplete(self: MSPyMstnPlatform.Constraint2dSolverData) -> bool:
         """
-        IsComplete(self: MSPyMstnPlatform.Constraint2dSolverData) -> bool
-        
         @description Determine if it is complete, i.e., its actual topology is
         identical to the datum description used.
         
@@ -3789,27 +3541,21 @@ class Constraint2dSolverData:
         """
         ...
     
-    def IsCurvePlaneConstrained(*args, **kwargs):
+    def IsCurvePlaneConstrained(self: MSPyMstnPlatform.Constraint2dSolverData, curveId: MSPyMstnPlatform.CurveEntityIdentifier) -> bool:
         """
-        IsCurvePlaneConstrained(self: MSPyMstnPlatform.Constraint2dSolverData, curveId: MSPyMstnPlatform.CurveEntityIdentifier) -> bool
-        
         A curve plane is constrained if is by a plane distance dimension.
         """
         ...
     
-    def IsCurvePlaneFixed(*args, **kwargs):
+    def IsCurvePlaneFixed(self: MSPyMstnPlatform.Constraint2dSolverData, curveId: MSPyMstnPlatform.CurveEntityIdentifier) -> bool:
         """
-        IsCurvePlaneFixed(self: MSPyMstnPlatform.Constraint2dSolverData, curveId: MSPyMstnPlatform.CurveEntityIdentifier) -> bool
-        
         A curve plane is considered to be fixed if any portion of the curve is
         fixed.
         """
         ...
     
-    def IsEmpty(*args, **kwargs):
+    def IsEmpty(self: MSPyMstnPlatform.Constraint2dSolverData) -> bool:
         """
-        IsEmpty(self: MSPyMstnPlatform.Constraint2dSolverData) -> bool
-        
         @description Determine if it is empty.
         
         Returns:
@@ -3817,10 +3563,8 @@ class Constraint2dSolverData:
         """
         ...
     
-    def IsResolved(*args, **kwargs):
+    def IsResolved(self: MSPyMstnPlatform.Constraint2dSolverData) -> bool:
         """
-        IsResolved(self: MSPyMstnPlatform.Constraint2dSolverData) -> bool
-        
         @description Determine if it is resolved, i.e., all member elements
         are available
         
@@ -3829,10 +3573,8 @@ class Constraint2dSolverData:
         """
         ...
     
-    def Merge(*args, **kwargs):
+    def Merge(self: MSPyMstnPlatform.Constraint2dSolverData, rhs: MSPyMstnPlatform.Constraint2dSolverData) -> bool:
         """
-        Merge(self: MSPyMstnPlatform.Constraint2dSolverData, rhs: MSPyMstnPlatform.Constraint2dSolverData) -> bool
-        
         @description Merge another constraint model into this one. Identital
         data items will be excluded while merging.
         
@@ -3845,10 +3587,8 @@ class Constraint2dSolverData:
         """
         ...
     
-    def RemoveElementRef(*args, **kwargs):
+    def RemoveElementRef(self: MSPyMstnPlatform.Constraint2dSolverData, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool:
         """
-        RemoveElementRef(self: MSPyMstnPlatform.Constraint2dSolverData, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool
-        
         @description Remove all constraint data which are correlated to the
         the given element.
         
@@ -3861,10 +3601,8 @@ class Constraint2dSolverData:
         """
         ...
     
-    def RemoveInvalidConstraints(*args, **kwargs):
+    def RemoveInvalidConstraints(self: MSPyMstnPlatform.Constraint2dSolverData, elemRef: MSPyDgnPlatform.ElementRefBase) -> int:
         """
-        RemoveInvalidConstraints(self: MSPyMstnPlatform.Constraint2dSolverData, elemRef: MSPyDgnPlatform.ElementRefBase) -> int
-        
         @description Remove all invalid constraint data which are correlated
         to the the given element.
         
@@ -3878,25 +3616,18 @@ class Constraint2dSolverData:
         """
         ...
     
-    def RemoveUnresolvedElementRefs(*args, **kwargs):
+    def RemoveUnresolvedElementRefs(self: MSPyMstnPlatform.Constraint2dSolverData) -> None:
         """
-        RemoveUnresolvedElementRefs(self: MSPyMstnPlatform.Constraint2dSolverData) -> None
-        
         @description Remove all constraint data whose target elements are not
         resolved.
         """
         ...
     
-    def Replace(*args, **kwargs):
-        """
-        Replace(self: MSPyMstnPlatform.Constraint2dSolverData, oldElemRef: MSPyDgnPlatform.ElementRefBase, newElemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def Replace(self: MSPyMstnPlatform.Constraint2dSolverData, oldElemRef: MSPyDgnPlatform.ElementRefBase, newElemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def Reverse(*args, **kwargs):
+    def Reverse(self: MSPyMstnPlatform.Constraint2dSolverData, elemRef: MSPyDgnPlatform.ElementRefBase, curveVector: MSPyBentleyGeom.CurveVector = None) -> bool:
         """
-        Reverse(self: MSPyMstnPlatform.Constraint2dSolverData, elemRef: MSPyDgnPlatform.ElementRefBase, curveVector: MSPyBentleyGeom.CurveVector = None) -> bool
-        
         @description Update constraint data assuming the curve's direction was
         reversed.
         
@@ -3935,25 +3666,20 @@ class Constraint2dSolverDataArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyMstnPlatform.Constraint2dSolverDataArray, x: MSPyMstnPlatform.Constraint2dSolverData) -> None:
         """
-        append(self: MSPyMstnPlatform.Constraint2dSolverDataArray, x: MSPyMstnPlatform.Constraint2dSolverData) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyMstnPlatform.Constraint2dSolverDataArray) -> None:
         """
-        clear(self: MSPyMstnPlatform.Constraint2dSolverDataArray) -> None
-        
         Clear the contents
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyMstnPlatform.Constraint2dSolverDataArray, L: MSPyMstnPlatform.Constraint2dSolverDataArray) -> None
@@ -3966,17 +3692,14 @@ class Constraint2dSolverDataArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyMstnPlatform.Constraint2dSolverDataArray, i: int, x: MSPyMstnPlatform.Constraint2dSolverData) -> None:
         """
-        insert(self: MSPyMstnPlatform.Constraint2dSolverDataArray, i: int, x: MSPyMstnPlatform.Constraint2dSolverData) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyMstnPlatform.Constraint2dSolverDataArray) -> MSPyMstnPlatform.Constraint2dSolverData
@@ -4262,9 +3985,9 @@ class Constraint3dBase:
     None
     """
 
+    @staticmethod
     def Create(*args, **kwargs):
         """
-        Create(*args, **kwargs)
         Overloaded function.
         
         1. Create(type: MSPyMstnPlatform.Constraint3dType) -> MSPyMstnPlatform.Constraint3dBase
@@ -4318,52 +4041,28 @@ class Constraint3dBase:
         """
         ...
     
-    def GetFlags(*args, **kwargs):
-        """
-        GetFlags(self: MSPyMstnPlatform.Constraint3dBase) -> int
-        """
+    def GetFlags(self: MSPyMstnPlatform.Constraint3dBase) -> int:
         ...
     
-    def GetGroupLock(*args, **kwargs):
-        """
-        GetGroupLock(self: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def GetGroupLock(self: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def GetHalfSpace1(*args, **kwargs):
-        """
-        GetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace
-        """
+    def GetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace:
         ...
     
-    def GetHalfSpace2(*args, **kwargs):
-        """
-        GetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace
-        """
+    def GetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.Constraint3dBase, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.Constraint3dBase, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dBase.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dBase.Status:
         ...
     
-    def GetSurfaceOrientation(*args, **kwargs):
-        """
-        GetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.SurfaceOrientation
-        """
+    def GetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.SurfaceOrientation:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dType
-        """
+    def GetType(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dType:
         ...
     
     @property
@@ -4387,64 +4086,34 @@ class Constraint3dBase:
     def HalfSpace2(arg0: MSPyMstnPlatform.Constraint3dBase, arg1: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def HasBoundVariable(*args, **kwargs):
-        """
-        HasBoundVariable(self: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def HasBoundVariable(self: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def HasElementRef(*args, **kwargs):
-        """
-        HasElementRef(self: MSPyMstnPlatform.Constraint3dBase, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool
-        """
+    def HasElementRef(self: MSPyMstnPlatform.Constraint3dBase, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool:
         ...
     
-    def IsRedundant(*args, **kwargs):
-        """
-        IsRedundant(self: MSPyMstnPlatform.Constraint3dBase, other: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def IsRedundant(self: MSPyMstnPlatform.Constraint3dBase, other: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def SetFlags(*args, **kwargs):
-        """
-        SetFlags(self: MSPyMstnPlatform.Constraint3dBase, flags: int) -> None
-        """
+    def SetFlags(self: MSPyMstnPlatform.Constraint3dBase, flags: int) -> None:
         ...
     
-    def SetGeometryIds(*args, **kwargs):
-        """
-        SetGeometryIds(self: MSPyMstnPlatform.Constraint3dBase, geometryIds: MSPyMstnPlatform.GeometryIdPtrArray) -> None
-        """
+    def SetGeometryIds(self: MSPyMstnPlatform.Constraint3dBase, geometryIds: MSPyMstnPlatform.GeometryIdPtrArray) -> None:
         ...
     
-    def SetGroupLock(*args, **kwargs):
-        """
-        SetGroupLock(self: MSPyMstnPlatform.Constraint3dBase, groupLock: bool) -> None
-        """
+    def SetGroupLock(self: MSPyMstnPlatform.Constraint3dBase, groupLock: bool) -> None:
         ...
     
-    def SetHalfSpace1(*args, **kwargs):
-        """
-        SetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None
-        """
+    def SetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def SetHalfSpace2(*args, **kwargs):
-        """
-        SetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None
-        """
+    def SetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.Constraint3dBase, status: MSPyMstnPlatform.Constraint3dBase.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.Constraint3dBase, status: MSPyMstnPlatform.Constraint3dBase.Status) -> None:
         ...
     
-    def SetSurfaceOrientation(*args, **kwargs):
-        """
-        SetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase, orientation: MSPyMstnPlatform.SurfaceOrientation) -> None
-        """
+    def SetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase, orientation: MSPyMstnPlatform.SurfaceOrientation) -> None:
         ...
     
     @property
@@ -4508,16 +4177,12 @@ class Constraint3dDisplay:
     None
     """
 
-    def DrawConstraints(*args, **kwargs):
-        """
-        DrawConstraints(eh: MSPyDgnPlatform.ElementHandle, viewContext: MSPyDgnPlatform.ViewContext, drawConstraintMarkers: bool, drawDimensions: bool) -> None
-        """
+    @staticmethod
+    def DrawConstraints(eh: MSPyDgnPlatform.ElementHandle, viewContext: MSPyDgnPlatform.ViewContext, drawConstraintMarkers: bool, drawDimensions: bool) -> None:
         ...
     
-    def DrawPath(*args, **kwargs):
-        """
-        DrawPath(path: MSPyDgnPlatform.DisplayPath, viewContext: MSPyDgnPlatform.ViewContext) -> None
-        """
+    @staticmethod
+    def DrawPath(path: MSPyDgnPlatform.DisplayPath, viewContext: MSPyDgnPlatform.ViewContext) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -4531,76 +4196,55 @@ class Constraint3dElement:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eeh: MSPyDgnPlatform.EditElementHandle, destinationModelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BentleyStatus
-        """
+    @staticmethod
+    def Create(eeh: MSPyDgnPlatform.EditElementHandle, destinationModelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetConstraintDescription(*args, **kwargs):
-        """
-        GetConstraintDescription(description: MSPyBentley.WString, type: MSPyMstnPlatform.Constraint3dType, geometryStatus: MSPyMstnPlatform.GeometryId.Status) -> MSPyDgnPlatform.BentleyStatus
-        """
+    @staticmethod
+    def GetConstraintDescription(description: MSPyBentley.WString, type: MSPyMstnPlatform.Constraint3dType, geometryStatus: MSPyMstnPlatform.GeometryId.Status) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetConstraints(*args, **kwargs):
-        """
-        GetConstraints(constraints: MSPyMstnPlatform.Constraint3dPtrArray, hostEh: MSPyDgnPlatform.ElementHandle) -> MSPyDgnPlatform.BentleyStatus
-        """
+    @staticmethod
+    def GetConstraints(constraints: MSPyMstnPlatform.Constraint3dPtrArray, hostEh: MSPyDgnPlatform.ElementHandle) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetDegreesOfFreedom(*args, **kwargs):
-        """
-        GetDegreesOfFreedom(constraints: MSPyMstnPlatform.Constraint3dPtrArray, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-        """
+    @staticmethod
+    def GetDegreesOfFreedom(constraints: MSPyMstnPlatform.Constraint3dPtrArray, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
         ...
     
+    @staticmethod
     def GetExistingConstraints(*args, **kwargs):
         """
         GetExistingConstraints(hosts: Bentley.bset<Bentley.DgnPlatform.ElementRefBase * __ptr64,std.less<Bentley.DgnPlatform.ElementRefBase * __ptr64>,32,Bentley.BentleyAllocator<Bentley.DgnPlatform.ElementRefBase * __ptr64> >, constraints: MSPyMstnPlatform.Constraint3dPtrArray, elemRefs: Bentley.bset<Bentley.DgnPlatform.ElementRefBase * __ptr64,std.less<Bentley.DgnPlatform.ElementRefBase * __ptr64>,32,Bentley.BentleyAllocator<Bentley.DgnPlatform.ElementRefBase * __ptr64> >, modelRef: MSPyDgnPlatform.DgnModelRef, doGroups: bool) -> MSPyDgnPlatform.BentleyStatus
         """
         ...
     
-    def GetHostElement(*args, **kwargs):
-        """
-        GetHostElement(hostEeh: MSPyDgnPlatform.EditElementHandle, eh: MSPyDgnPlatform.ElementHandle, searchGroup: bool = False) -> MSPyDgnPlatform.BentleyStatus
-        """
+    @staticmethod
+    def GetHostElement(hostEeh: MSPyDgnPlatform.EditElementHandle, eh: MSPyDgnPlatform.ElementHandle, searchGroup: bool = False) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def HasConstraints(*args, **kwargs):
-        """
-        HasConstraints(eh: MSPyDgnPlatform.ElementHandle) -> bool
-        """
+    @staticmethod
+    def HasConstraints(eh: MSPyDgnPlatform.ElementHandle) -> bool:
         ...
     
-    def IsConstraintElement(*args, **kwargs):
-        """
-        IsConstraintElement(eh: MSPyDgnPlatform.ElementHandle) -> bool
-        """
+    @staticmethod
+    def IsConstraintElement(eh: MSPyDgnPlatform.ElementHandle) -> bool:
         ...
     
-    def IsGroupedToConstraint(*args, **kwargs):
-        """
-        IsGroupedToConstraint(eh: MSPyDgnPlatform.ElementHandle) -> bool
-        """
+    @staticmethod
+    def IsGroupedToConstraint(eh: MSPyDgnPlatform.ElementHandle) -> bool:
         ...
     
-    def ReevaluateAndUpdate(*args, **kwargs):
-        """
-        ReevaluateAndUpdate(dependentEh: MSPyDgnPlatform.ElementHandle, constraints: MSPyMstnPlatform.Constraint3dPtrArray, constraintsModified: bool, rootSet: MSPyDgnPlatform.ElementRefPArray) -> tuple
-        """
+    @staticmethod
+    def ReevaluateAndUpdate(dependentEh: MSPyDgnPlatform.ElementHandle, constraints: MSPyMstnPlatform.Constraint3dPtrArray, constraintsModified: bool, rootSet: MSPyDgnPlatform.ElementRefPArray) -> tuple:
         ...
     
-    def RemoveElementConstraints(*args, **kwargs):
-        """
-        RemoveElementConstraints(eh: MSPyDgnPlatform.ElementHandle) -> MSPyDgnPlatform.BentleyStatus
-        """
+    @staticmethod
+    def RemoveElementConstraints(eh: MSPyDgnPlatform.ElementHandle) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def SaveConstraints(*args, **kwargs):
-        """
-        SaveConstraints(eeh: MSPyDgnPlatform.EditElementHandle, constraints: MSPyMstnPlatform.Constraint3dPtrArray) -> MSPyDgnPlatform.BentleyStatus
-        """
+    @staticmethod
+    def SaveConstraints(eeh: MSPyDgnPlatform.EditElementHandle, constraints: MSPyMstnPlatform.Constraint3dPtrArray) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
     def __init__(*args, **kwargs):
@@ -4614,22 +4258,16 @@ class Constraint3dGUI:
     None
     """
 
-    def CloseDimensionDialog(*args, **kwargs):
-        """
-        CloseDimensionDialog() -> None
-        """
+    @staticmethod
+    def CloseDimensionDialog() -> None:
         ...
     
-    def OpenAngleDialog(*args, **kwargs):
-        """
-        OpenAngleDialog(dimensionValue: float, variableAccess: MSPyBentley.WString, modelRef: MSPyDgnPlatform.DgnModelRef, viewport: MSPyDgnPlatform.Viewport, origin: MSPyBentleyGeom.DPoint3d) -> float
-        """
+    @staticmethod
+    def OpenAngleDialog(dimensionValue: float, variableAccess: MSPyBentley.WString, modelRef: MSPyDgnPlatform.DgnModelRef, viewport: MSPyDgnPlatform.Viewport, origin: MSPyBentleyGeom.DPoint3d) -> float:
         ...
     
-    def OpenDimensionDialog(*args, **kwargs):
-        """
-        OpenDimensionDialog(dimensionValue: float, variableAccess: MSPyBentley.WString, modelRef: MSPyDgnPlatform.DgnModelRef, viewport: MSPyDgnPlatform.Viewport, origin: MSPyBentleyGeom.DPoint3d) -> float
-        """
+    @staticmethod
+    def OpenDimensionDialog(dimensionValue: float, variableAccess: MSPyBentley.WString, modelRef: MSPyDgnPlatform.DgnModelRef, viewport: MSPyDgnPlatform.Viewport, origin: MSPyBentleyGeom.DPoint3d) -> float:
         ...
     
     def __init__(*args, **kwargs):
@@ -4685,33 +4323,26 @@ class Constraint3dPtrArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyMstnPlatform.Constraint3dPtrArray, x: MSPyMstnPlatform.Constraint3dBase) -> None:
         """
-        append(self: MSPyMstnPlatform.Constraint3dPtrArray, x: MSPyMstnPlatform.Constraint3dBase) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyMstnPlatform.Constraint3dPtrArray) -> None:
         """
-        clear(self: MSPyMstnPlatform.Constraint3dPtrArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyMstnPlatform.Constraint3dPtrArray, x: MSPyMstnPlatform.Constraint3dBase) -> int:
         """
-        count(self: MSPyMstnPlatform.Constraint3dPtrArray, x: MSPyMstnPlatform.Constraint3dBase) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyMstnPlatform.Constraint3dPtrArray, L: MSPyMstnPlatform.Constraint3dPtrArray) -> None
@@ -4724,17 +4355,14 @@ class Constraint3dPtrArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyMstnPlatform.Constraint3dPtrArray, i: int, x: MSPyMstnPlatform.Constraint3dBase) -> None:
         """
-        insert(self: MSPyMstnPlatform.Constraint3dPtrArray, i: int, x: MSPyMstnPlatform.Constraint3dBase) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyMstnPlatform.Constraint3dPtrArray) -> MSPyMstnPlatform.Constraint3dBase
@@ -4747,10 +4375,8 @@ class Constraint3dPtrArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyMstnPlatform.Constraint3dPtrArray, x: MSPyMstnPlatform.Constraint3dBase) -> None:
         """
-        remove(self: MSPyMstnPlatform.Constraint3dPtrArray, x: MSPyMstnPlatform.Constraint3dBase) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -4762,7 +4388,6 @@ class Constraint3dSolver:
 
     def DynamicEvaluate(*args, **kwargs):
         """
-        DynamicEvaluate(*args, **kwargs)
         Overloaded function.
         
         1. DynamicEvaluate(self: MSPyMstnPlatform.Constraint3dSolver, elemRefs: MSPyDgnPlatform.ElementRefPArray, transform: MSPyBentleyGeom.Transform) -> tuple
@@ -4773,7 +4398,6 @@ class Constraint3dSolver:
     
     def Evaluate(*args, **kwargs):
         """
-        Evaluate(*args, **kwargs)
         Overloaded function.
         
         1. Evaluate(self: MSPyMstnPlatform.Constraint3dSolver) -> tuple
@@ -4784,16 +4408,10 @@ class Constraint3dSolver:
         """
         ...
     
-    def GetDegreesOfFreedom(*args, **kwargs):
-        """
-        GetDegreesOfFreedom(self: MSPyMstnPlatform.Constraint3dSolver) -> tuple
-        """
+    def GetDegreesOfFreedom(self: MSPyMstnPlatform.Constraint3dSolver) -> tuple:
         ...
     
-    def Initialize(*args, **kwargs):
-        """
-        Initialize(self: MSPyMstnPlatform.Constraint3dSolver, constraints: MSPyMstnPlatform.Constraint3dPtrArray, modelRef: MSPyDgnPlatform.DgnModelRef, modifiedElements: dict = None, debugJournal: str = None) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def Initialize(self: MSPyMstnPlatform.Constraint3dSolver, constraints: MSPyMstnPlatform.Constraint3dPtrArray, modelRef: MSPyDgnPlatform.DgnModelRef, modifiedElements: dict = None, debugJournal: str = None) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
     def __init__(self: MSPyMstnPlatform.Constraint3dSolver) -> None:
@@ -4952,27 +4570,24 @@ class Constraint3dUtil:
     None
     """
 
+    @staticmethod
     def GetConstrainedElements(*args, **kwargs):
         """
         GetConstrainedElements(elements: Bentley.bset<Bentley.DgnPlatform.ElementRefBase * __ptr64,std.less<Bentley.DgnPlatform.ElementRefBase * __ptr64>,32,Bentley.BentleyAllocator<Bentley.DgnPlatform.ElementRefBase * __ptr64> >, constraints: MSPyMstnPlatform.Constraint3dPtrArray, modelRef: MSPyDgnPlatform.DgnModelRef) -> None
         """
         ...
     
-    def GetEdgeArcAxis(*args, **kwargs):
-        """
-        GetEdgeArcAxis(axis: MSPyBentleyGeom.DRay3d, edge: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
-        """
+    @staticmethod
+    def GetEdgeArcAxis(axis: MSPyBentleyGeom.DRay3d, edge: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetFaceAxis(*args, **kwargs):
-        """
-        GetFaceAxis(face: MSPyDgnPlatform.ISubEntity) -> tuple
-        """
+    @staticmethod
+    def GetFaceAxis(face: MSPyDgnPlatform.ISubEntity) -> tuple:
         ...
     
+    @staticmethod
     def GetNamedGroupMembers(*args, **kwargs):
         """
-        GetNamedGroupMembers(*args, **kwargs)
         Overloaded function.
         
         1. GetNamedGroupMembers(members: Bentley.bset<Bentley.DgnPlatform.ElementRefBase * __ptr64,std.less<Bentley.DgnPlatform.ElementRefBase * __ptr64>,32,Bentley.BentleyAllocator<Bentley.DgnPlatform.ElementRefBase * __ptr64> >, namedGroup: MSPyDgnPlatform.NamedGroup) -> MSPyDgnPlatform.BentleyStatus
@@ -4981,10 +4596,8 @@ class Constraint3dUtil:
         """
         ...
     
-    def RemoveInvalidConstraints(*args, **kwargs):
-        """
-        RemoveInvalidConstraints(constraints: MSPyMstnPlatform.Constraint3dPtrArray, changed: MSPyDgnPlatform.ElementRefBase, hostEh: MSPyDgnPlatform.ElementHandle) -> int
-        """
+    @staticmethod
+    def RemoveInvalidConstraints(constraints: MSPyMstnPlatform.Constraint3dPtrArray, changed: MSPyDgnPlatform.ElementRefBase, hostEh: MSPyDgnPlatform.ElementHandle) -> int:
         ...
     
     def __init__(*args, **kwargs):
@@ -5022,10 +4635,8 @@ class CurveArcAxisGeometryId:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eh: MSPyDgnPlatform.ElementHandle, curvePrimitiveId: MSPyBentleyGeom.CurvePrimitiveId) -> MSPyMstnPlatform.GeometryId
-        """
+    @staticmethod
+    def Create(eh: MSPyDgnPlatform.ElementHandle, curvePrimitiveId: MSPyBentleyGeom.CurvePrimitiveId) -> MSPyMstnPlatform.GeometryId:
         ...
     
     class DimensionToComponent:
@@ -5118,27 +4729,17 @@ class CurveArcAxisGeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -5147,28 +4748,16 @@ class CurveArcAxisGeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -5178,21 +4767,14 @@ class CurveArcAxisGeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -5201,16 +4783,10 @@ class CurveArcAxisGeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -5308,10 +4884,9 @@ class CurveEntityIdentifier:
     def EdgeId(arg0: MSPyMstnPlatform.CurveEntityIdentifier, arg1: MSPyBentleyGeom.CurvePrimitiveId) -> None:
         ...
     
-    def ElementToCurveVector(*args, **kwargs):
+    @staticmethod
+    def ElementToCurveVector(eh: MSPyDgnPlatform.ElementHandle) -> tuple:
         """
-        ElementToCurveVector(eh: MSPyDgnPlatform.ElementHandle) -> tuple
-        
         @cond DONTINCLUDEINDOC @endcond @description Get an editable curve
         vector of a given element
         
@@ -5323,18 +4898,14 @@ class CurveEntityIdentifier:
         """
         ...
     
-    def GetEdgeId(*args, **kwargs):
+    def GetEdgeId(self: MSPyMstnPlatform.CurveEntityIdentifier) -> MSPyBentleyGeom.CurvePrimitiveId:
         """
-        GetEdgeId(self: MSPyMstnPlatform.CurveEntityIdentifier) -> MSPyBentleyGeom.CurvePrimitiveId
-        
         @description Get the edge id @retval NULL if failing to get
         """
         ...
     
-    def GetPointIndex(*args, **kwargs):
+    def GetPointIndex(self: MSPyMstnPlatform.CurveEntityIdentifier) -> int:
         """
-        GetPointIndex(self: MSPyMstnPlatform.CurveEntityIdentifier) -> int
-        
         @description Get the point index
         
         Returns:
@@ -5342,10 +4913,8 @@ class CurveEntityIdentifier:
         """
         ...
     
-    def GetSubEdgeIndex(*args, **kwargs):
+    def GetSubEdgeIndex(self: MSPyMstnPlatform.CurveEntityIdentifier) -> int:
         """
-        GetSubEdgeIndex(self: MSPyMstnPlatform.CurveEntityIdentifier) -> int
-        
         @description Get the sub edge index
         
         Returns:
@@ -5353,10 +4922,8 @@ class CurveEntityIdentifier:
         """
         ...
     
-    def GetVertexType(*args, **kwargs):
+    def GetVertexType(self: MSPyMstnPlatform.CurveEntityIdentifier) -> MSPyMstnPlatform.VertexType:
         """
-        GetVertexType(self: MSPyMstnPlatform.CurveEntityIdentifier) -> MSPyMstnPlatform.VertexType
-        
         @description Get the vertex type
         
         Returns:
@@ -5364,10 +4931,8 @@ class CurveEntityIdentifier:
         """
         ...
     
-    def IsValid(*args, **kwargs):
+    def IsValid(self: MSPyMstnPlatform.CurveEntityIdentifier) -> bool:
         """
-        IsValid(self: MSPyMstnPlatform.CurveEntityIdentifier) -> bool
-        
         @description Test the CurveEntityIdentifier is valid or not
         
         Returns:
@@ -5382,10 +4947,8 @@ class CurveEntityIdentifier:
     def PointIndex(arg0: MSPyMstnPlatform.CurveEntityIdentifier, arg1: int) -> None:
         ...
     
-    def SetEdgeId(*args, **kwargs):
+    def SetEdgeId(self: MSPyMstnPlatform.CurveEntityIdentifier, edgeId: MSPyBentleyGeom.CurvePrimitiveId) -> None:
         """
-        SetEdgeId(self: MSPyMstnPlatform.CurveEntityIdentifier, edgeId: MSPyBentleyGeom.CurvePrimitiveId) -> None
-        
         @description Set the edge id
         
         Parameter ``edgeId``:
@@ -5393,10 +4956,8 @@ class CurveEntityIdentifier:
         """
         ...
     
-    def SetPointIndex(*args, **kwargs):
+    def SetPointIndex(self: MSPyMstnPlatform.CurveEntityIdentifier, pointIndex: int) -> None:
         """
-        SetPointIndex(self: MSPyMstnPlatform.CurveEntityIdentifier, pointIndex: int) -> None
-        
         @description Set the point index in linestring
         
         Parameter ``pointIndex``:
@@ -5404,10 +4965,8 @@ class CurveEntityIdentifier:
         """
         ...
     
-    def SetSubEdgeIndex(*args, **kwargs):
+    def SetSubEdgeIndex(self: MSPyMstnPlatform.CurveEntityIdentifier, subEdgeIndex: int) -> None:
         """
-        SetSubEdgeIndex(self: MSPyMstnPlatform.CurveEntityIdentifier, subEdgeIndex: int) -> None
-        
         @description Set the sub edge index
         
         Parameter ``subEdgeIndex``:
@@ -5415,10 +4974,8 @@ class CurveEntityIdentifier:
         """
         ...
     
-    def SetVertexType(*args, **kwargs):
+    def SetVertexType(self: MSPyMstnPlatform.CurveEntityIdentifier, vertexType: MSPyMstnPlatform.VertexType) -> None:
         """
-        SetVertexType(self: MSPyMstnPlatform.CurveEntityIdentifier, vertexType: MSPyMstnPlatform.VertexType) -> None
-        
         @description Set new vertex type
         
         Parameter ``vertexType``:
@@ -5471,33 +5028,26 @@ class CurveEntityIdentifierArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyMstnPlatform.CurveEntityIdentifierArray, x: MSPyMstnPlatform.CurveEntityIdentifier) -> None:
         """
-        append(self: MSPyMstnPlatform.CurveEntityIdentifierArray, x: MSPyMstnPlatform.CurveEntityIdentifier) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyMstnPlatform.CurveEntityIdentifierArray) -> None:
         """
-        clear(self: MSPyMstnPlatform.CurveEntityIdentifierArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyMstnPlatform.CurveEntityIdentifierArray, x: MSPyMstnPlatform.CurveEntityIdentifier) -> int:
         """
-        count(self: MSPyMstnPlatform.CurveEntityIdentifierArray, x: MSPyMstnPlatform.CurveEntityIdentifier) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyMstnPlatform.CurveEntityIdentifierArray, L: MSPyMstnPlatform.CurveEntityIdentifierArray) -> None
@@ -5510,17 +5060,14 @@ class CurveEntityIdentifierArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyMstnPlatform.CurveEntityIdentifierArray, i: int, x: MSPyMstnPlatform.CurveEntityIdentifier) -> None:
         """
-        insert(self: MSPyMstnPlatform.CurveEntityIdentifierArray, i: int, x: MSPyMstnPlatform.CurveEntityIdentifier) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyMstnPlatform.CurveEntityIdentifierArray) -> MSPyMstnPlatform.CurveEntityIdentifier
@@ -5533,10 +5080,8 @@ class CurveEntityIdentifierArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyMstnPlatform.CurveEntityIdentifierArray, x: MSPyMstnPlatform.CurveEntityIdentifier) -> None:
         """
-        remove(self: MSPyMstnPlatform.CurveEntityIdentifierArray, x: MSPyMstnPlatform.CurveEntityIdentifier) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -5546,10 +5091,8 @@ class CurveGeometryId:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eh: MSPyDgnPlatform.ElementHandle, curveLocationDetail: MSPyBentleyGeom.CurveLocationDetail) -> MSPyMstnPlatform.GeometryId
-        """
+    @staticmethod
+    def Create(eh: MSPyDgnPlatform.ElementHandle, curveLocationDetail: MSPyBentleyGeom.CurveLocationDetail) -> MSPyMstnPlatform.GeometryId:
         ...
     
     class DimensionToComponent:
@@ -5642,27 +5185,17 @@ class CurveGeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -5671,28 +5204,16 @@ class CurveGeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -5702,21 +5223,14 @@ class CurveGeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -5725,16 +5239,10 @@ class CurveGeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -5825,10 +5333,8 @@ class CurvePointGeometryId:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eh: MSPyDgnPlatform.ElementHandle, curveLocationDetail: MSPyBentleyGeom.CurveLocationDetail) -> MSPyMstnPlatform.GeometryId
-        """
+    @staticmethod
+    def Create(eh: MSPyDgnPlatform.ElementHandle, curveLocationDetail: MSPyBentleyGeom.CurveLocationDetail) -> MSPyMstnPlatform.GeometryId:
         ...
     
     class DimensionToComponent:
@@ -5921,27 +5427,17 @@ class CurvePointGeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -5950,28 +5446,16 @@ class CurvePointGeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -5981,21 +5465,14 @@ class CurvePointGeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -6004,16 +5481,10 @@ class CurvePointGeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -6104,10 +5575,9 @@ class DgnFile:
     None
     """
 
-    def CheckRights(*args, **kwargs):
+    @staticmethod
+    def CheckRights(dgnFileObj: MSPyDgnPlatform.DgnFile, rights: int, displayError: MSPyMstnPlatform.MessageDestination) -> int:
         """
-        CheckRights(dgnFileObj: MSPyDgnPlatform.DgnFile, rights: int, displayError: MSPyMstnPlatform.MessageDestination) -> int
-        
         @Description Check if the specified rights are granted to the current
         user for the specified file.
         
@@ -6137,28 +5607,21 @@ class DgnFile:
         """
         ...
     
-    def CreateModel(*args, **kwargs):
-        """
-        CreateModel(dgnFileObj: MSPyDgnPlatform.DgnFile, seedModelRef: MSPyDgnPlatform.DgnModelRef, modelName: str, modelDescr: str, FromSeedForModelAndIs3d: bool, modelType: MSPyDgnPlatform.DgnModelType, Is3d: bool) -> tuple
-        """
+    @staticmethod
+    def CreateModel(dgnFileObj: MSPyDgnPlatform.DgnFile, seedModelRef: MSPyDgnPlatform.DgnModelRef, modelName: str, modelDescr: str, FromSeedForModelAndIs3d: bool, modelType: MSPyDgnPlatform.DgnModelType, Is3d: bool) -> tuple:
         ...
     
-    def FindElemByID(*args, **kwargs):
-        """
-        FindElemByID(dgnFile: MSPyDgnPlatform.DgnFile, elemId: int, dictionaryOnly: bool) -> MSPyDgnPlatform.ElementRefBase
-        """
+    @staticmethod
+    def FindElemByID(dgnFile: MSPyDgnPlatform.DgnFile, elemId: int, dictionaryOnly: bool) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def FindModelIDByName(*args, **kwargs):
-        """
-        FindModelIDByName(dgnFileObj: MSPyDgnPlatform.DgnFile, name: str) -> tuple
-        """
+    @staticmethod
+    def FindModelIDByName(dgnFileObj: MSPyDgnPlatform.DgnFile, name: str) -> tuple:
         ...
     
-    def GetMasterFile(*args, **kwargs):
+    @staticmethod
+    def GetMasterFile() -> MSPyDgnPlatform.DgnFile:
         """
-        GetMasterFile() -> MSPyDgnPlatform.DgnFile
-        
         @Description Get the DgnFile for the current master file. @Return
         The DgnFileP for the current master file.
         
@@ -6166,18 +5629,16 @@ class DgnFile:
         """
         ...
     
-    def GetModelCount(*args, **kwargs):
+    @staticmethod
+    def GetModelCount(dgnFileObj: MSPyDgnPlatform.DgnFile) -> int:
         """
-        GetModelCount(dgnFileObj: MSPyDgnPlatform.DgnFile) -> int
-        
         Remark:
         """
         ...
     
-    def GetModelItemById(*args, **kwargs):
+    @staticmethod
+    def GetModelItemById(dgnFileObj: MSPyDgnPlatform.DgnFile, modelId: int) -> MSPyDgnPlatform.ModelIndexItem:
         """
-        GetModelItemById(dgnFileObj: MSPyDgnPlatform.DgnFile, modelId: int) -> MSPyDgnPlatform.ModelIndexItem
-        
         Retrieve the model index item using a model ID.
         
         Parameter ``pDgnFile``:
@@ -6196,10 +5657,9 @@ class DgnFile:
         """
         ...
     
-    def GetModelItemByName(*args, **kwargs):
+    @staticmethod
+    def GetModelItemByName(dgnFileObj: MSPyDgnPlatform.DgnFile, modelName: str) -> MSPyDgnPlatform.ModelIndexItem:
         """
-        GetModelItemByName(dgnFileObj: MSPyDgnPlatform.DgnFile, modelName: str) -> MSPyDgnPlatform.ModelIndexItem
-        
         Retrieve the model index item using a model name.
         
         Parameter ``pDgnFile``:
@@ -6218,10 +5678,9 @@ class DgnFile:
         """
         ...
     
-    def GetModelRefList(*args, **kwargs):
+    @staticmethod
+    def GetModelRefList(dgnFileObj: MSPyDgnPlatform.DgnFile) -> MSPyDgnPlatform.DgnModelRefList:
         """
-        GetModelRefList(dgnFileObj: MSPyDgnPlatform.DgnFile) -> MSPyDgnPlatform.DgnModelRefList
-        
         Create a DgnModelRefList containing an entry for each of the loaded
         models in the specified design file. Note, any DgnModelRefList created
         with this function must be freed by calling <a
@@ -6240,16 +5699,13 @@ class DgnFile:
         """
         ...
     
-    def GetVersion(*args, **kwargs):
-        """
-        GetVersion(dgnFilebj: MSPyDgnPlatform.DgnFile) -> tuple
-        """
+    @staticmethod
+    def GetVersion(dgnFilebj: MSPyDgnPlatform.DgnFile) -> tuple:
         ...
     
-    def HasPendingChanges(*args, **kwargs):
+    @staticmethod
+    def HasPendingChanges(DgnFile: MSPyDgnPlatform.DgnFile) -> bool:
         """
-        HasPendingChanges(DgnFile: MSPyDgnPlatform.DgnFile) -> bool
-        
         @Description Determines if a design file has pending chages.
         @Param[in] DgnFile is a reference to the design file of interest
         @Return true if the design file has changes that have not been saved;
@@ -6259,10 +5715,9 @@ class DgnFile:
         """
         ...
     
-    def IsProtected(*args, **kwargs):
+    @staticmethod
+    def IsProtected(dgnFileObj: MSPyDgnPlatform.DgnFile) -> bool:
         """
-        IsProtected(dgnFileObj: MSPyDgnPlatform.DgnFile) -> bool
-        
         @Description Check if the specified file is encrypted (e.g., for
         digital rights management)
         
@@ -7032,10 +6487,8 @@ class Dimension2dData:
     None
     """
 
-    def AddCurveIdentifier(*args, **kwargs):
+    def AddCurveIdentifier(self: MSPyMstnPlatform.Constraint2dData, id: MSPyMstnPlatform.CurveEntityIdentifier) -> None:
         """
-        AddCurveIdentifier(self: MSPyMstnPlatform.Constraint2dData, id: MSPyMstnPlatform.CurveEntityIdentifier) -> None
-        
         @description Add curve identifier
         
         Parameter ``id``:
@@ -7106,16 +6559,11 @@ class Dimension2dData:
     def DimensionXOffset(arg0: MSPyMstnPlatform.Dimension2dData, arg1: float) -> None:
         ...
     
-    def GetAngleSectorIndex(*args, **kwargs):
-        """
-        GetAngleSectorIndex(self: MSPyMstnPlatform.Dimension2dData) -> int
-        """
+    def GetAngleSectorIndex(self: MSPyMstnPlatform.Dimension2dData) -> int:
         ...
     
-    def GetConstraintStatus(*args, **kwargs):
+    def GetConstraintStatus(self: MSPyMstnPlatform.Constraint2dData) -> MSPyMstnPlatform.Constraint2dStatus:
         """
-        GetConstraintStatus(self: MSPyMstnPlatform.Constraint2dData) -> MSPyMstnPlatform.Constraint2dStatus
-        
         @description Get the constraint status
         
         Returns:
@@ -7123,10 +6571,8 @@ class Dimension2dData:
         """
         ...
     
-    def GetConstraintType(*args, **kwargs):
+    def GetConstraintType(self: MSPyMstnPlatform.Constraint2dData) -> MSPyMstnPlatform.Constraint2dType:
         """
-        GetConstraintType(self: MSPyMstnPlatform.Constraint2dData) -> MSPyMstnPlatform.Constraint2dType
-        
         @description Get the constraint type
         
         Returns:
@@ -7134,34 +6580,20 @@ class Dimension2dData:
         """
         ...
     
-    def GetDiaType(*args, **kwargs):
-        """
-        GetDiaType(self: MSPyMstnPlatform.Dimension2dData) -> int
-        """
+    def GetDiaType(self: MSPyMstnPlatform.Dimension2dData) -> int:
         ...
     
-    def GetDimensionAlignmentType(*args, **kwargs):
-        """
-        GetDimensionAlignmentType(self: MSPyMstnPlatform.Dimension2dData) -> MSPyMstnPlatform.DimensionAlignmentType
-        """
+    def GetDimensionAlignmentType(self: MSPyMstnPlatform.Dimension2dData) -> MSPyMstnPlatform.DimensionAlignmentType:
         ...
     
-    def GetDimensionFraction(*args, **kwargs):
-        """
-        GetDimensionFraction(self: MSPyMstnPlatform.Dimension2dData) -> float
-        """
+    def GetDimensionFraction(self: MSPyMstnPlatform.Dimension2dData) -> float:
         ...
     
-    def GetDimensionHeight(*args, **kwargs):
-        """
-        GetDimensionHeight(self: MSPyMstnPlatform.Dimension2dData) -> float
-        """
+    def GetDimensionHeight(self: MSPyMstnPlatform.Dimension2dData) -> float:
         ...
     
-    def GetDimensionValue(*args, **kwargs):
+    def GetDimensionValue(self: MSPyMstnPlatform.Dimension2dData) -> float:
         """
-        GetDimensionValue(self: MSPyMstnPlatform.Dimension2dData) -> float
-        
         @description Get dimension value
         
         Returns:
@@ -7169,34 +6601,20 @@ class Dimension2dData:
         """
         ...
     
-    def GetDimensionXOffset(*args, **kwargs):
-        """
-        GetDimensionXOffset(self: MSPyMstnPlatform.Dimension2dData) -> float
-        """
+    def GetDimensionXOffset(self: MSPyMstnPlatform.Dimension2dData) -> float:
         ...
     
-    def GetHalfSpace1(*args, **kwargs):
-        """
-        GetHalfSpace1(self: MSPyMstnPlatform.Dimension2dData) -> MSPyMstnPlatform.DimensionHalfSpace
-        """
+    def GetHalfSpace1(self: MSPyMstnPlatform.Dimension2dData) -> MSPyMstnPlatform.DimensionHalfSpace:
         ...
     
-    def GetHalfSpace2(*args, **kwargs):
-        """
-        GetHalfSpace2(self: MSPyMstnPlatform.Dimension2dData) -> MSPyMstnPlatform.DimensionHalfSpace
-        """
+    def GetHalfSpace2(self: MSPyMstnPlatform.Dimension2dData) -> MSPyMstnPlatform.DimensionHalfSpace:
         ...
     
-    def GetSectorAngleType(*args, **kwargs):
-        """
-        GetSectorAngleType(self: MSPyMstnPlatform.Dimension2dData) -> MSPyMstnPlatform.SectorAngleType
-        """
+    def GetSectorAngleType(self: MSPyMstnPlatform.Dimension2dData) -> MSPyMstnPlatform.SectorAngleType:
         ...
     
-    def GetVariableName(*args, **kwargs):
+    def GetVariableName(self: MSPyMstnPlatform.Dimension2dData) -> MSPyBentley.WString:
         """
-        GetVariableName(self: MSPyMstnPlatform.Dimension2dData) -> MSPyBentley.WString
-        
         @description Get variable name
         
         Returns:
@@ -7225,16 +6643,11 @@ class Dimension2dData:
     def SectorAngleType(arg0: MSPyMstnPlatform.Dimension2dData, arg1: MSPyMstnPlatform.SectorAngleType) -> None:
         ...
     
-    def SetAngleSectorIndex(*args, **kwargs):
-        """
-        SetAngleSectorIndex(self: MSPyMstnPlatform.Dimension2dData, sectorIndex: int) -> None
-        """
+    def SetAngleSectorIndex(self: MSPyMstnPlatform.Dimension2dData, sectorIndex: int) -> None:
         ...
     
-    def SetConstraintStatus(*args, **kwargs):
+    def SetConstraintStatus(self: MSPyMstnPlatform.Constraint2dData, status: MSPyMstnPlatform.Constraint2dStatus) -> None:
         """
-        SetConstraintStatus(self: MSPyMstnPlatform.Constraint2dData, status: MSPyMstnPlatform.Constraint2dStatus) -> None
-        
         @description Set the constraint status
         
         Parameter ``status``:
@@ -7242,10 +6655,8 @@ class Dimension2dData:
         """
         ...
     
-    def SetConstraintType(*args, **kwargs):
+    def SetConstraintType(self: MSPyMstnPlatform.Constraint2dData, type: MSPyMstnPlatform.Constraint2dType) -> None:
         """
-        SetConstraintType(self: MSPyMstnPlatform.Constraint2dData, type: MSPyMstnPlatform.Constraint2dType) -> None
-        
         @description Set the constraint type
         
         Parameter ``type``:
@@ -7253,34 +6664,20 @@ class Dimension2dData:
         """
         ...
     
-    def SetDiaType(*args, **kwargs):
-        """
-        SetDiaType(self: MSPyMstnPlatform.Dimension2dData, value: int) -> None
-        """
+    def SetDiaType(self: MSPyMstnPlatform.Dimension2dData, value: int) -> None:
         ...
     
-    def SetDimensionAlignmentType(*args, **kwargs):
-        """
-        SetDimensionAlignmentType(self: MSPyMstnPlatform.Dimension2dData, type: MSPyMstnPlatform.DimensionAlignmentType) -> None
-        """
+    def SetDimensionAlignmentType(self: MSPyMstnPlatform.Dimension2dData, type: MSPyMstnPlatform.DimensionAlignmentType) -> None:
         ...
     
-    def SetDimensionFraction(*args, **kwargs):
-        """
-        SetDimensionFraction(self: MSPyMstnPlatform.Dimension2dData, value: float) -> None
-        """
+    def SetDimensionFraction(self: MSPyMstnPlatform.Dimension2dData, value: float) -> None:
         ...
     
-    def SetDimensionHeight(*args, **kwargs):
-        """
-        SetDimensionHeight(self: MSPyMstnPlatform.Dimension2dData, value: float) -> None
-        """
+    def SetDimensionHeight(self: MSPyMstnPlatform.Dimension2dData, value: float) -> None:
         ...
     
-    def SetDimensionValue(*args, **kwargs):
+    def SetDimensionValue(self: MSPyMstnPlatform.Dimension2dData, value: float) -> None:
         """
-        SetDimensionValue(self: MSPyMstnPlatform.Dimension2dData, value: float) -> None
-        
         @description Set a new dimension value
         
         Parameter ``value``:
@@ -7288,34 +6685,20 @@ class Dimension2dData:
         """
         ...
     
-    def SetDimensionXOffset(*args, **kwargs):
-        """
-        SetDimensionXOffset(self: MSPyMstnPlatform.Dimension2dData, value: float) -> None
-        """
+    def SetDimensionXOffset(self: MSPyMstnPlatform.Dimension2dData, value: float) -> None:
         ...
     
-    def SetHalfSpace1(*args, **kwargs):
-        """
-        SetHalfSpace1(self: MSPyMstnPlatform.Dimension2dData, halfSpace: MSPyMstnPlatform.DimensionHalfSpace) -> None
-        """
+    def SetHalfSpace1(self: MSPyMstnPlatform.Dimension2dData, halfSpace: MSPyMstnPlatform.DimensionHalfSpace) -> None:
         ...
     
-    def SetHalfSpace2(*args, **kwargs):
-        """
-        SetHalfSpace2(self: MSPyMstnPlatform.Dimension2dData, halfSpace: MSPyMstnPlatform.DimensionHalfSpace) -> None
-        """
+    def SetHalfSpace2(self: MSPyMstnPlatform.Dimension2dData, halfSpace: MSPyMstnPlatform.DimensionHalfSpace) -> None:
         ...
     
-    def SetSectorAngleType(*args, **kwargs):
-        """
-        SetSectorAngleType(self: MSPyMstnPlatform.Dimension2dData, type: MSPyMstnPlatform.SectorAngleType) -> None
-        """
+    def SetSectorAngleType(self: MSPyMstnPlatform.Dimension2dData, type: MSPyMstnPlatform.SectorAngleType) -> None:
         ...
     
-    def SetVariableName(*args, **kwargs):
+    def SetVariableName(self: MSPyMstnPlatform.Dimension2dData, name: MSPyBentley.WString) -> None:
         """
-        SetVariableName(self: MSPyMstnPlatform.Dimension2dData, name: MSPyBentley.WString) -> None
-        
         @description Set variable name
         
         Parameter ``name``:
@@ -7347,7 +6730,6 @@ class Dimension3dBase:
 
     def Create(*args, **kwargs):
         """
-        Create(*args, **kwargs)
         Overloaded function.
         
         1. Create(type: MSPyMstnPlatform.Constraint3dType) -> MSPyMstnPlatform.Constraint3dBase
@@ -7401,52 +6783,28 @@ class Dimension3dBase:
         """
         ...
     
-    def GetFlags(*args, **kwargs):
-        """
-        GetFlags(self: MSPyMstnPlatform.Constraint3dBase) -> int
-        """
+    def GetFlags(self: MSPyMstnPlatform.Constraint3dBase) -> int:
         ...
     
-    def GetGroupLock(*args, **kwargs):
-        """
-        GetGroupLock(self: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def GetGroupLock(self: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def GetHalfSpace1(*args, **kwargs):
-        """
-        GetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace
-        """
+    def GetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace:
         ...
     
-    def GetHalfSpace2(*args, **kwargs):
-        """
-        GetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace
-        """
+    def GetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.Constraint3dBase, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.Constraint3dBase, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dBase.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dBase.Status:
         ...
     
-    def GetSurfaceOrientation(*args, **kwargs):
-        """
-        GetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.SurfaceOrientation
-        """
+    def GetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.SurfaceOrientation:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dType
-        """
+    def GetType(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dType:
         ...
     
     @property
@@ -7470,64 +6828,34 @@ class Dimension3dBase:
     def HalfSpace2(arg0: MSPyMstnPlatform.Constraint3dBase, arg1: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def HasBoundVariable(*args, **kwargs):
-        """
-        HasBoundVariable(self: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def HasBoundVariable(self: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def HasElementRef(*args, **kwargs):
-        """
-        HasElementRef(self: MSPyMstnPlatform.Constraint3dBase, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool
-        """
+    def HasElementRef(self: MSPyMstnPlatform.Constraint3dBase, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool:
         ...
     
-    def IsRedundant(*args, **kwargs):
-        """
-        IsRedundant(self: MSPyMstnPlatform.Constraint3dBase, other: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def IsRedundant(self: MSPyMstnPlatform.Constraint3dBase, other: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def SetFlags(*args, **kwargs):
-        """
-        SetFlags(self: MSPyMstnPlatform.Constraint3dBase, flags: int) -> None
-        """
+    def SetFlags(self: MSPyMstnPlatform.Constraint3dBase, flags: int) -> None:
         ...
     
-    def SetGeometryIds(*args, **kwargs):
-        """
-        SetGeometryIds(self: MSPyMstnPlatform.Constraint3dBase, geometryIds: MSPyMstnPlatform.GeometryIdPtrArray) -> None
-        """
+    def SetGeometryIds(self: MSPyMstnPlatform.Constraint3dBase, geometryIds: MSPyMstnPlatform.GeometryIdPtrArray) -> None:
         ...
     
-    def SetGroupLock(*args, **kwargs):
-        """
-        SetGroupLock(self: MSPyMstnPlatform.Constraint3dBase, groupLock: bool) -> None
-        """
+    def SetGroupLock(self: MSPyMstnPlatform.Constraint3dBase, groupLock: bool) -> None:
         ...
     
-    def SetHalfSpace1(*args, **kwargs):
-        """
-        SetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None
-        """
+    def SetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def SetHalfSpace2(*args, **kwargs):
-        """
-        SetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None
-        """
+    def SetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.Constraint3dBase, status: MSPyMstnPlatform.Constraint3dBase.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.Constraint3dBase, status: MSPyMstnPlatform.Constraint3dBase.Status) -> None:
         ...
     
-    def SetSurfaceOrientation(*args, **kwargs):
-        """
-        SetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase, orientation: MSPyMstnPlatform.SurfaceOrientation) -> None
-        """
+    def SetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase, orientation: MSPyMstnPlatform.SurfaceOrientation) -> None:
         ...
     
     @property
@@ -7655,10 +6983,8 @@ class DistanceDimension3d:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(geometryIds: MSPyMstnPlatform.GeometryIdPtrArray, flags: int, value: float, variableAccess: MSPyBentley.WString) -> MSPyMstnPlatform.Constraint3dBase
-        """
+    @staticmethod
+    def Create(geometryIds: MSPyMstnPlatform.GeometryIdPtrArray, flags: int, value: float, variableAccess: MSPyBentley.WString) -> MSPyMstnPlatform.Constraint3dBase:
         ...
     
     class FlagMasks:
@@ -7706,52 +7032,28 @@ class DistanceDimension3d:
         """
         ...
     
-    def GetFlags(*args, **kwargs):
-        """
-        GetFlags(self: MSPyMstnPlatform.Constraint3dBase) -> int
-        """
+    def GetFlags(self: MSPyMstnPlatform.Constraint3dBase) -> int:
         ...
     
-    def GetGroupLock(*args, **kwargs):
-        """
-        GetGroupLock(self: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def GetGroupLock(self: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def GetHalfSpace1(*args, **kwargs):
-        """
-        GetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace
-        """
+    def GetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace:
         ...
     
-    def GetHalfSpace2(*args, **kwargs):
-        """
-        GetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace
-        """
+    def GetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dHalfSpace:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.Constraint3dBase, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.Constraint3dBase, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dBase.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dBase.Status:
         ...
     
-    def GetSurfaceOrientation(*args, **kwargs):
-        """
-        GetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.SurfaceOrientation
-        """
+    def GetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.SurfaceOrientation:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dType
-        """
+    def GetType(self: MSPyMstnPlatform.Constraint3dBase) -> MSPyMstnPlatform.Constraint3dType:
         ...
     
     @property
@@ -7775,64 +7077,34 @@ class DistanceDimension3d:
     def HalfSpace2(arg0: MSPyMstnPlatform.Constraint3dBase, arg1: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def HasBoundVariable(*args, **kwargs):
-        """
-        HasBoundVariable(self: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def HasBoundVariable(self: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def HasElementRef(*args, **kwargs):
-        """
-        HasElementRef(self: MSPyMstnPlatform.Constraint3dBase, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool
-        """
+    def HasElementRef(self: MSPyMstnPlatform.Constraint3dBase, elemRef: MSPyDgnPlatform.ElementRefBase) -> bool:
         ...
     
-    def IsRedundant(*args, **kwargs):
-        """
-        IsRedundant(self: MSPyMstnPlatform.Constraint3dBase, other: MSPyMstnPlatform.Constraint3dBase) -> bool
-        """
+    def IsRedundant(self: MSPyMstnPlatform.Constraint3dBase, other: MSPyMstnPlatform.Constraint3dBase) -> bool:
         ...
     
-    def SetFlags(*args, **kwargs):
-        """
-        SetFlags(self: MSPyMstnPlatform.Constraint3dBase, flags: int) -> None
-        """
+    def SetFlags(self: MSPyMstnPlatform.Constraint3dBase, flags: int) -> None:
         ...
     
-    def SetGeometryIds(*args, **kwargs):
-        """
-        SetGeometryIds(self: MSPyMstnPlatform.Constraint3dBase, geometryIds: MSPyMstnPlatform.GeometryIdPtrArray) -> None
-        """
+    def SetGeometryIds(self: MSPyMstnPlatform.Constraint3dBase, geometryIds: MSPyMstnPlatform.GeometryIdPtrArray) -> None:
         ...
     
-    def SetGroupLock(*args, **kwargs):
-        """
-        SetGroupLock(self: MSPyMstnPlatform.Constraint3dBase, groupLock: bool) -> None
-        """
+    def SetGroupLock(self: MSPyMstnPlatform.Constraint3dBase, groupLock: bool) -> None:
         ...
     
-    def SetHalfSpace1(*args, **kwargs):
-        """
-        SetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None
-        """
+    def SetHalfSpace1(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def SetHalfSpace2(*args, **kwargs):
-        """
-        SetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None
-        """
+    def SetHalfSpace2(self: MSPyMstnPlatform.Constraint3dBase, halfSpace: MSPyMstnPlatform.Constraint3dHalfSpace) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.Constraint3dBase, status: MSPyMstnPlatform.Constraint3dBase.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.Constraint3dBase, status: MSPyMstnPlatform.Constraint3dBase.Status) -> None:
         ...
     
-    def SetSurfaceOrientation(*args, **kwargs):
-        """
-        SetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase, orientation: MSPyMstnPlatform.SurfaceOrientation) -> None
-        """
+    def SetSurfaceOrientation(self: MSPyMstnPlatform.Constraint3dBase, orientation: MSPyMstnPlatform.SurfaceOrientation) -> None:
         ...
     
     @property
@@ -7896,10 +7168,7 @@ class Drag2dInfo:
     None
     """
 
-    def Clear(*args, **kwargs):
-        """
-        Clear(self: MSPyMstnPlatform.Drag2dInfo) -> None
-        """
+    def Clear(self: MSPyMstnPlatform.Drag2dInfo) -> None:
         ...
     
     @property
@@ -7916,10 +7185,8 @@ class Drag2dInfo:
     def DraggingTransform(arg0: MSPyMstnPlatform.Drag2dInfo, arg1: MSPyMstnPlatform.DragTransformType) -> None:
         ...
     
-    def GetCurveEntityIdentifier(*args, **kwargs):
+    def GetCurveEntityIdentifier(self: MSPyMstnPlatform.Drag2dInfo) -> MSPyMstnPlatform.CurveEntityIdentifier:
         """
-        GetCurveEntityIdentifier(self: MSPyMstnPlatform.Drag2dInfo) -> MSPyMstnPlatform.CurveEntityIdentifier
-        
         @description Get curve identifier
         
         Returns:
@@ -7927,10 +7194,8 @@ class Drag2dInfo:
         """
         ...
     
-    def GetDraggingTransform(*args, **kwargs):
+    def GetDraggingTransform(self: MSPyMstnPlatform.Drag2dInfo) -> MSPyMstnPlatform.DragTransformType:
         """
-        GetDraggingTransform(self: MSPyMstnPlatform.Drag2dInfo) -> MSPyMstnPlatform.DragTransformType
-        
         @description Get dragging transform type
         
         Returns:
@@ -7938,10 +7203,8 @@ class Drag2dInfo:
         """
         ...
     
-    def GetMoveValue(*args, **kwargs):
+    def GetMoveValue(self: MSPyMstnPlatform.Drag2dInfo) -> MSPyBentleyGeom.DVec3d:
         """
-        GetMoveValue(self: MSPyMstnPlatform.Drag2dInfo) -> MSPyBentleyGeom.DVec3d
-        
         @description Get moving value
         
         Returns:
@@ -7949,10 +7212,8 @@ class Drag2dInfo:
         """
         ...
     
-    def GetRadius(*args, **kwargs):
+    def GetRadius(self: MSPyMstnPlatform.Drag2dInfo) -> float:
         """
-        GetRadius(self: MSPyMstnPlatform.Drag2dInfo) -> float
-        
         @description Get radius
         
         Returns:
@@ -7974,10 +7235,8 @@ class Drag2dInfo:
     def Radius(arg0: MSPyMstnPlatform.Drag2dInfo, arg1: float) -> None:
         ...
     
-    def SetCurveEntityIdentifier(*args, **kwargs):
+    def SetCurveEntityIdentifier(self: MSPyMstnPlatform.Drag2dInfo, identifier: MSPyMstnPlatform.CurveEntityIdentifier) -> None:
         """
-        SetCurveEntityIdentifier(self: MSPyMstnPlatform.Drag2dInfo, identifier: MSPyMstnPlatform.CurveEntityIdentifier) -> None
-        
         @description Set curve identifier
         
         Parameter ``identifer``:
@@ -7985,10 +7244,8 @@ class Drag2dInfo:
         """
         ...
     
-    def SetDraggingTransform(*args, **kwargs):
+    def SetDraggingTransform(self: MSPyMstnPlatform.Drag2dInfo, transformType: MSPyMstnPlatform.DragTransformType) -> None:
         """
-        SetDraggingTransform(self: MSPyMstnPlatform.Drag2dInfo, transformType: MSPyMstnPlatform.DragTransformType) -> None
-        
         @description Set dragging transform type
         
         Parameter ``transformType``:
@@ -7996,10 +7253,8 @@ class Drag2dInfo:
         """
         ...
     
-    def SetMoveValue(*args, **kwargs):
+    def SetMoveValue(self: MSPyMstnPlatform.Drag2dInfo, value: MSPyBentleyGeom.DVec3d) -> None:
         """
-        SetMoveValue(self: MSPyMstnPlatform.Drag2dInfo, value: MSPyBentleyGeom.DVec3d) -> None
-        
         @description Set moving value
         
         Parameter ``value``:
@@ -8007,10 +7262,8 @@ class Drag2dInfo:
         """
         ...
     
-    def SetRadius(*args, **kwargs):
+    def SetRadius(self: MSPyMstnPlatform.Drag2dInfo, radius: float) -> None:
         """
-        SetRadius(self: MSPyMstnPlatform.Drag2dInfo, radius: float) -> None
-        
         @description Set radius
         
         Parameter ``radius``:
@@ -8073,10 +7326,8 @@ class EdgeArcAxisGeometryId:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eh: MSPyDgnPlatform.ElementHandle, edgeId: MSPyBentleyGeom.EdgeId) -> MSPyMstnPlatform.GeometryId
-        """
+    @staticmethod
+    def Create(eh: MSPyDgnPlatform.ElementHandle, edgeId: MSPyBentleyGeom.EdgeId) -> MSPyMstnPlatform.GeometryId:
         ...
     
     class DimensionToComponent:
@@ -8169,27 +7420,17 @@ class EdgeArcAxisGeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -8198,28 +7439,16 @@ class EdgeArcAxisGeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -8229,21 +7458,14 @@ class EdgeArcAxisGeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -8252,16 +7474,10 @@ class EdgeArcAxisGeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -8352,10 +7568,8 @@ class EdgeGeometryId:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eh: MSPyDgnPlatform.ElementHandle, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyMstnPlatform.GeometryId
-        """
+    @staticmethod
+    def Create(eh: MSPyDgnPlatform.ElementHandle, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyMstnPlatform.GeometryId:
         ...
     
     class DimensionToComponent:
@@ -8448,27 +7662,17 @@ class EdgeGeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -8477,28 +7681,16 @@ class EdgeGeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -8508,21 +7700,14 @@ class EdgeGeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -8531,16 +7716,10 @@ class EdgeGeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -8631,10 +7810,9 @@ class ElementPropertyUtils:
     None
     """
 
-    def ApplyActiveAreaFill(*args, **kwargs):
+    @staticmethod
+    def ApplyActiveAreaFill(eeh: MSPyDgnPlatform.EditElementHandle, fillMode: int) -> bool:
         """
-        ApplyActiveAreaFill(eeh: MSPyDgnPlatform.EditElementHandle, fillMode: int) -> bool
-        
         Apply the active solid or gradient fill to the supplied element.
         
         Parameter ``eeh``:
@@ -8653,10 +7831,9 @@ class ElementPropertyUtils:
         """
         ...
     
-    def ApplyActiveAreaSettings(*args, **kwargs):
+    @staticmethod
+    def ApplyActiveAreaSettings(eeh: MSPyDgnPlatform.EditElementHandle, fillMode: int) -> None:
         """
-        ApplyActiveAreaSettings(eeh: MSPyDgnPlatform.EditElementHandle, fillMode: int) -> None
-        
         Update the supplied element to the current active fill and area
         settings using IAreaFillPropertiesEdit. @note:Does nothing if model
         of EditElementHandle is not ACTIVEMODEL. *
@@ -8665,10 +7842,9 @@ class ElementPropertyUtils:
         """
         ...
     
-    def ApplyActiveGradientFill(*args, **kwargs):
+    @staticmethod
+    def ApplyActiveGradientFill(eeh: MSPyDgnPlatform.EditElementHandle) -> bool:
         """
-        ApplyActiveGradientFill(eeh: MSPyDgnPlatform.EditElementHandle) -> bool
-        
         Apply the active gradient fill to the supplied element.
         
         Parameter ``eeh``:
@@ -8684,10 +7860,9 @@ class ElementPropertyUtils:
         """
         ...
     
-    def ApplyActivePattern(*args, **kwargs):
+    @staticmethod
+    def ApplyActivePattern(eeh: MSPyDgnPlatform.EditElementHandle, params: MSPyDgnPlatform.PatternParams, hatchDefLines: MSPyDgnPlatform.DwgHatchDefLine, option: int, origin: MSPyBentleyGeom.DPoint3d, rMatrix: MSPyBentleyGeom.RotMatrix, line1: int, line2: int, index: int = 0) -> bool:
         """
-        ApplyActivePattern(eeh: MSPyDgnPlatform.EditElementHandle, params: MSPyDgnPlatform.PatternParams, hatchDefLines: MSPyDgnPlatform.DwgHatchDefLine, option: int, origin: MSPyBentleyGeom.DPoint3d, rMatrix: MSPyBentleyGeom.RotMatrix, line1: int, line2: int, index: int = 0) -> bool
-        
         Apply the active pattern type and settings to the supplied element.
         
         Parameter ``eeh``:
@@ -8730,10 +7905,9 @@ class ElementPropertyUtils:
         """
         ...
     
-    def ApplyActiveSettings(*args, **kwargs):
+    @staticmethod
+    def ApplyActiveSettings(eeh: MSPyDgnPlatform.EditElementHandle) -> None:
         """
-        ApplyActiveSettings(eeh: MSPyDgnPlatform.EditElementHandle) -> None
-        
         Update the supplied element to the current active settings. Sets
         level, color, style, weight, class, transparency, and display priority
         (2d only). @note:Does nothing if model of EditElementHandle is not
@@ -8743,10 +7917,9 @@ class ElementPropertyUtils:
         """
         ...
     
-    def ApplyActiveSolidFill(*args, **kwargs):
+    @staticmethod
+    def ApplyActiveSolidFill(eeh: MSPyDgnPlatform.EditElementHandle) -> bool:
         """
-        ApplyActiveSolidFill(eeh: MSPyDgnPlatform.EditElementHandle) -> bool
-        
         Apply the active solid fill to the supplied element.
         
         Parameter ``eeh``:
@@ -8788,40 +7961,22 @@ class ExtrudeSettings:
     None
     """
 
-    def SetDistance(*args, **kwargs):
-        """
-        SetDistance(self: MSPyMstnPlatform.ExtrudeSettings, distance: float) -> None
-        """
+    def SetDistance(self: MSPyMstnPlatform.ExtrudeSettings, distance: float) -> None:
         ...
     
-    def SetSpinAngle(*args, **kwargs):
-        """
-        SetSpinAngle(self: MSPyMstnPlatform.ExtrudeSettings, spinAngle: float) -> None
-        """
+    def SetSpinAngle(self: MSPyMstnPlatform.ExtrudeSettings, spinAngle: float) -> None:
         ...
     
-    def SetThickness(*args, **kwargs):
-        """
-        SetThickness(self: MSPyMstnPlatform.ExtrudeSettings, thickness: float) -> None
-        """
+    def SetThickness(self: MSPyMstnPlatform.ExtrudeSettings, thickness: float) -> None:
         ...
     
-    def SetXScale(*args, **kwargs):
-        """
-        SetXScale(self: MSPyMstnPlatform.ExtrudeSettings, scale: float) -> None
-        """
+    def SetXScale(self: MSPyMstnPlatform.ExtrudeSettings, scale: float) -> None:
         ...
     
-    def SetYScale(*args, **kwargs):
-        """
-        SetYScale(self: MSPyMstnPlatform.ExtrudeSettings, scale: float) -> None
-        """
+    def SetYScale(self: MSPyMstnPlatform.ExtrudeSettings, scale: float) -> None:
         ...
     
-    def Validate(*args, **kwargs):
-        """
-        Validate(self: MSPyMstnPlatform.ExtrudeSettings) -> bool
-        """
+    def Validate(self: MSPyMstnPlatform.ExtrudeSettings) -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -8946,10 +8101,8 @@ class FaceAxisGeometryId:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eh: MSPyDgnPlatform.ElementHandle, faceId: MSPyBentleyGeom.FaceId) -> MSPyMstnPlatform.GeometryId
-        """
+    @staticmethod
+    def Create(eh: MSPyDgnPlatform.ElementHandle, faceId: MSPyBentleyGeom.FaceId) -> MSPyMstnPlatform.GeometryId:
         ...
     
     class DimensionToComponent:
@@ -9042,27 +8195,17 @@ class FaceAxisGeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -9071,28 +8214,16 @@ class FaceAxisGeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -9102,21 +8233,14 @@ class FaceAxisGeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -9125,16 +8249,10 @@ class FaceAxisGeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -9225,10 +8343,8 @@ class FaceGeometryId:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create(eh: MSPyDgnPlatform.ElementHandle, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyMstnPlatform.GeometryId
-        """
+    @staticmethod
+    def Create(eh: MSPyDgnPlatform.ElementHandle, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyMstnPlatform.GeometryId:
         ...
     
     class DimensionToComponent:
@@ -9321,27 +8437,17 @@ class FaceGeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -9350,28 +8456,16 @@ class FaceGeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -9381,21 +8475,14 @@ class FaceGeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -9404,16 +8491,10 @@ class FaceGeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -9504,9 +8585,9 @@ class FeatureCreate:
     None
     """
 
+    @staticmethod
     def CreateBlendFeature(*args, **kwargs):
         """
-        CreateBlendFeature(*args, **kwargs)
         Overloaded function.
         
         1. CreateBlendFeature(edges: MSPyBentleyGeom.EdgeIdArray, radius: float, isSmooth: bool) -> MSPyMstnPlatform.SmartFeatureNode
@@ -9521,18 +8602,17 @@ class FeatureCreate:
         """
         ...
     
-    def CreateChamferFeature(*args, **kwargs):
+    @staticmethod
+    def CreateChamferFeature(edges: MSPyDgnPlatform.ISubEntityPtrArray, settings: MSPyMstnPlatform.ChamferEdgeSettings) -> tuple:
         """
-        CreateChamferFeature(edges: MSPyDgnPlatform.ISubEntityPtrArray, settings: MSPyMstnPlatform.ChamferEdgeSettings) -> tuple
-        
         Obsoleted! Please use the another API named as CreateChamferFeature()
         from this class itself.
         """
         ...
     
+    @staticmethod
     def CreateCutFeature(*args, **kwargs):
         """
-        CreateCutFeature(*args, **kwargs)
         Overloaded function.
         
         1. CreateCutFeature(depthMode: MSPyMstnPlatform.SolidUtil.Modify.CutDepthMode, directionMode: MSPyMstnPlatform.SolidUtil.Modify.CutDirectionMode, outsideProfile: bool, depth: float, defaultNormal: MSPyBentleyGeom.DVec3d) -> tuple
@@ -9587,10 +8667,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateDifferenceFeature(*args, **kwargs):
+    @staticmethod
+    def CreateDifferenceFeature(subtractionPoint: MSPyBentleyGeom.DPoint3d = None) -> tuple:
         """
-        CreateDifferenceFeature(subtractionPoint: MSPyBentleyGeom.DPoint3d = None) -> tuple
-        
         Create Boolean-Difference Smart Feature node
         
         Parameter ``booleanNode``:
@@ -9604,10 +8683,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateExtrudeAlongFeature(*args, **kwargs):
+    @staticmethod
+    def CreateExtrudeAlongFeature(lockDirection: MSPyBentleyGeom.DVec3d, scalePoint: MSPyBentleyGeom.DPoint3d, settings: Bentley.DgnPlatform.SmartFeature.ExtrudeAlongSettings, createSheet: bool) -> MSPyMstnPlatform.SmartFeatureNode:
         """
-        CreateExtrudeAlongFeature(lockDirection: MSPyBentleyGeom.DVec3d, scalePoint: MSPyBentleyGeom.DPoint3d, settings: Bentley.DgnPlatform.SmartFeature.ExtrudeAlongSettings, createSheet: bool) -> MSPyMstnPlatform.SmartFeatureNode
-        
         Create Extrude Along Smart Feature node
         
         Parameter ``lockDirection``:
@@ -9630,10 +8708,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateExtrudeFeature(*args, **kwargs):
+    @staticmethod
+    def CreateExtrudeFeature(settings: MSPyMstnPlatform.ExtrudeSettings) -> MSPyMstnPlatform.SmartFeatureNode:
         """
-        CreateExtrudeFeature(settings: MSPyMstnPlatform.ExtrudeSettings) -> MSPyMstnPlatform.SmartFeatureNode
-        
         Create Extrude parametric Feature.
         
         Parameter ``settings``:
@@ -9644,10 +8721,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateIntersectionFeature(*args, **kwargs):
+    @staticmethod
+    def CreateIntersectionFeature() -> tuple:
         """
-        CreateIntersectionFeature() -> tuple
-        
         Create Boolean-Intersection Smart Feature node
         
         Parameter ``booleanNode``:
@@ -9658,10 +8734,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateRevolveFeature(*args, **kwargs):
+    @staticmethod
+    def CreateRevolveFeature(settings: MSPyMstnPlatform.RevolveSettings) -> MSPyMstnPlatform.SmartFeatureNode:
         """
-        CreateRevolveFeature(settings: MSPyMstnPlatform.RevolveSettings) -> MSPyMstnPlatform.SmartFeatureNode
-        
         Create Revolve parametric Feature.
         
         Parameter ``settings``:
@@ -9672,10 +8747,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateSizeFilter(*args, **kwargs):
+    @staticmethod
+    def CreateSizeFilter(settings: Bentley.DgnPlatform.SmartFeature.SizeFilterSettings) -> MSPyMstnPlatform.SmartFeatureNode:
         """
-        CreateSizeFilter(settings: Bentley.DgnPlatform.SmartFeature.SizeFilterSettings) -> MSPyMstnPlatform.SmartFeatureNode
-        
         Create Size Filter Smart Feature Node.
         
         Parameter ``settings``:
@@ -9686,10 +8760,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateSolidNode(*args, **kwargs):
+    @staticmethod
+    def CreateSolidNode(eh: MSPyDgnPlatform.ElementHandle) -> MSPyMstnPlatform.SmartFeatureNode:
         """
-        CreateSolidNode(eh: MSPyDgnPlatform.ElementHandle) -> MSPyMstnPlatform.SmartFeatureNode
-        
         Create Parametric Solid Node
         
         Parameter ``Input``:
@@ -9701,10 +8774,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateTrimFeature(*args, **kwargs):
+    @staticmethod
+    def CreateTrimFeature(face: MSPyDgnPlatform.ISubEntity) -> tuple:
         """
-        CreateTrimFeature(face: MSPyDgnPlatform.ISubEntity) -> tuple
-        
         Create Trim Smart Feature node
         
         Parameter ``trimNode``:
@@ -9718,10 +8790,9 @@ class FeatureCreate:
         """
         ...
     
-    def CreateUnionFeature(*args, **kwargs):
+    @staticmethod
+    def CreateUnionFeature() -> tuple:
         """
-        CreateUnionFeature() -> tuple
-        
         Create Boolean-Union Smart Feature node
         
         Parameter ``booleanNode``:
@@ -9897,27 +8968,17 @@ class GeometryId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -9926,28 +8987,16 @@ class GeometryId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -9957,21 +9006,14 @@ class GeometryId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -9980,16 +9022,10 @@ class GeometryId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -10094,33 +9130,26 @@ class GeometryIdPtrArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyMstnPlatform.GeometryIdPtrArray, x: MSPyMstnPlatform.GeometryId) -> None:
         """
-        append(self: MSPyMstnPlatform.GeometryIdPtrArray, x: MSPyMstnPlatform.GeometryId) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyMstnPlatform.GeometryIdPtrArray) -> None:
         """
-        clear(self: MSPyMstnPlatform.GeometryIdPtrArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyMstnPlatform.GeometryIdPtrArray, x: MSPyMstnPlatform.GeometryId) -> int:
         """
-        count(self: MSPyMstnPlatform.GeometryIdPtrArray, x: MSPyMstnPlatform.GeometryId) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyMstnPlatform.GeometryIdPtrArray, L: MSPyMstnPlatform.GeometryIdPtrArray) -> None
@@ -10133,17 +9162,14 @@ class GeometryIdPtrArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyMstnPlatform.GeometryIdPtrArray, i: int, x: MSPyMstnPlatform.GeometryId) -> None:
         """
-        insert(self: MSPyMstnPlatform.GeometryIdPtrArray, i: int, x: MSPyMstnPlatform.GeometryId) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyMstnPlatform.GeometryIdPtrArray) -> MSPyMstnPlatform.GeometryId
@@ -10156,10 +9182,8 @@ class GeometryIdPtrArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyMstnPlatform.GeometryIdPtrArray, x: MSPyMstnPlatform.GeometryId) -> None:
         """
-        remove(self: MSPyMstnPlatform.GeometryIdPtrArray, x: MSPyMstnPlatform.GeometryId) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -10335,28 +9359,16 @@ class IBeginPrintPageParam:
     None
     """
 
-    def GetIsPartOfPrintSet(*args, **kwargs):
-        """
-        GetIsPartOfPrintSet(self: MSPyMstnPlatform.IBeginPrintPageParam) -> bool
-        """
+    def GetIsPartOfPrintSet(self: MSPyMstnPlatform.IBeginPrintPageParam) -> bool:
         ...
     
-    def GetIsPreview(*args, **kwargs):
-        """
-        GetIsPreview(self: MSPyMstnPlatform.IBeginPrintPageParam) -> bool
-        """
+    def GetIsPreview(self: MSPyMstnPlatform.IBeginPrintPageParam) -> bool:
         ...
     
-    def GetPrintEngine(*args, **kwargs):
-        """
-        GetPrintEngine(self: MSPyMstnPlatform.IBeginPrintPageParam) -> Bentley.MstnPlatform.Print.IPrintEngine
-        """
+    def GetPrintEngine(self: MSPyMstnPlatform.IBeginPrintPageParam) -> Bentley.MstnPlatform.Print.IPrintEngine:
         ...
     
-    def GetPrintEnginePlotter(*args, **kwargs):
-        """
-        GetPrintEnginePlotter(self: MSPyMstnPlatform.IBeginPrintPageParam) -> Bentley.MstnPlatform.Print.IPlotter
-        """
+    def GetPrintEnginePlotter(self: MSPyMstnPlatform.IBeginPrintPageParam) -> Bentley.MstnPlatform.Print.IPlotter:
         ...
     
     def __init__(self: MSPyMstnPlatform.IBeginPrintPageParam) -> None:
@@ -10378,34 +9390,19 @@ class IEndPrintPageParam:
     None
     """
 
-    def GetIsPartOfPrintSet(*args, **kwargs):
-        """
-        GetIsPartOfPrintSet(self: MSPyMstnPlatform.IEndPrintPageParam) -> bool
-        """
+    def GetIsPartOfPrintSet(self: MSPyMstnPlatform.IEndPrintPageParam) -> bool:
         ...
     
-    def GetIsPreview(*args, **kwargs):
-        """
-        GetIsPreview(self: MSPyMstnPlatform.IEndPrintPageParam) -> bool
-        """
+    def GetIsPreview(self: MSPyMstnPlatform.IEndPrintPageParam) -> bool:
         ...
     
-    def GetIsSuccess(*args, **kwargs):
-        """
-        GetIsSuccess(self: MSPyMstnPlatform.IEndPrintPageParam) -> bool
-        """
+    def GetIsSuccess(self: MSPyMstnPlatform.IEndPrintPageParam) -> bool:
         ...
     
-    def GetPrintEngine(*args, **kwargs):
-        """
-        GetPrintEngine(self: MSPyMstnPlatform.IEndPrintPageParam) -> Bentley.MstnPlatform.Print.IPrintEngine
-        """
+    def GetPrintEngine(self: MSPyMstnPlatform.IEndPrintPageParam) -> Bentley.MstnPlatform.Print.IPrintEngine:
         ...
     
-    def GetPrintEnginePlotter(*args, **kwargs):
-        """
-        GetPrintEnginePlotter(self: MSPyMstnPlatform.IEndPrintPageParam) -> Bentley.MstnPlatform.Print.IPlotter
-        """
+    def GetPrintEnginePlotter(self: MSPyMstnPlatform.IEndPrintPageParam) -> Bentley.MstnPlatform.Print.IPlotter:
         ...
     
     def __init__(self: MSPyMstnPlatform.IEndPrintPageParam) -> None:
@@ -10424,22 +9421,14 @@ class IGlobalPositionSource:
     None
     """
 
-    def GPSAvailable(*args, **kwargs):
-        """
-        GPSAvailable(self: MSPyMstnPlatform.IGlobalPositionSource) -> bool
-        """
+    def GPSAvailable(self: MSPyMstnPlatform.IGlobalPositionSource) -> bool:
         ...
     
-    def GetGlobalPositionSource(*args, **kwargs):
-        """
-        GetGlobalPositionSource() -> MSPyMstnPlatform.IGlobalPositionSource
-        """
+    @staticmethod
+    def GetGlobalPositionSource() -> MSPyMstnPlatform.IGlobalPositionSource:
         ...
     
-    def GetLatestPositionData(*args, **kwargs):
-        """
-        GetLatestPositionData(self: MSPyMstnPlatform.IGlobalPositionSource, data: MSPyMstnPlatform.GlobalPositionData) -> int
-        """
+    def GetLatestPositionData(self: MSPyMstnPlatform.IGlobalPositionSource, data: MSPyMstnPlatform.GlobalPositionData) -> int:
         ...
     
     def __init__(self: MSPyMstnPlatform.IGlobalPositionSource) -> None:
@@ -10458,46 +9447,37 @@ class IPopupMenuManager:
     None
     """
 
-    def AddTentativePopUpMenuProvider(*args, **kwargs):
+    def AddTentativePopUpMenuProvider(self: MSPyMstnPlatform.IPopupMenuManager, provider: MSPyMstnPlatform.IPopupMenuProvider) -> None:
         """
-        AddTentativePopUpMenuProvider(self: MSPyMstnPlatform.IPopupMenuManager, provider: MSPyMstnPlatform.IPopupMenuProvider) -> None
-        
         Remark:
         Required Library:mdlbltin.lib
         """
         ...
     
-    def AddViewPopUpMenuProvider(*args, **kwargs):
+    def AddViewPopUpMenuProvider(self: MSPyMstnPlatform.IPopupMenuManager, provider: MSPyMstnPlatform.IPopupMenuProvider) -> None:
         """
-        AddViewPopUpMenuProvider(self: MSPyMstnPlatform.IPopupMenuManager, provider: MSPyMstnPlatform.IPopupMenuProvider) -> None
-        
         Remark:
         Required Library:mdlbltin.lib
         """
         ...
     
-    def DropTentativePopUpMenuProvider(*args, **kwargs):
+    def DropTentativePopUpMenuProvider(self: MSPyMstnPlatform.IPopupMenuManager, provider: MSPyMstnPlatform.IPopupMenuProvider) -> None:
         """
-        DropTentativePopUpMenuProvider(self: MSPyMstnPlatform.IPopupMenuManager, provider: MSPyMstnPlatform.IPopupMenuProvider) -> None
-        
         Remark:
         Required Library:mdlbltin.lib
         """
         ...
     
-    def DropViewPopUpMenuProvider(*args, **kwargs):
+    def DropViewPopUpMenuProvider(self: MSPyMstnPlatform.IPopupMenuManager, provider: MSPyMstnPlatform.IPopupMenuProvider) -> None:
         """
-        DropViewPopUpMenuProvider(self: MSPyMstnPlatform.IPopupMenuManager, provider: MSPyMstnPlatform.IPopupMenuProvider) -> None
-        
         Remark:
         Required Library:mdlbltin.lib
         """
         ...
     
-    def GetManager(*args, **kwargs):
+    @staticmethod
+    def GetManager() -> MSPyMstnPlatform.IPopupMenuManager:
         """
-        GetManager() -> MSPyMstnPlatform.IPopupMenuManager
-        
         Remark:
         Required Library:mdlbltin.lib
         """
@@ -10524,16 +9504,10 @@ class IPrintEventHandler:
     None
     """
 
-    def BeginPrintPage(*args, **kwargs):
-        """
-        BeginPrintPage(self: MSPyMstnPlatform.IPrintEventHandler, param: MSPyMstnPlatform.IBeginPrintPageParam) -> None
-        """
+    def BeginPrintPage(self: MSPyMstnPlatform.IPrintEventHandler, param: MSPyMstnPlatform.IBeginPrintPageParam) -> None:
         ...
     
-    def EndPrintPage(*args, **kwargs):
-        """
-        EndPrintPage(self: MSPyMstnPlatform.IPrintEventHandler, param: MSPyMstnPlatform.IEndPrintPageParam) -> None
-        """
+    def EndPrintPage(self: MSPyMstnPlatform.IPrintEventHandler, param: MSPyMstnPlatform.IEndPrintPageParam) -> None:
         ...
     
     def __init__(self: MSPyMstnPlatform.IPrintEventHandler) -> None:
@@ -10544,16 +9518,10 @@ class IPyModalDialogEvents:
     None
     """
 
-    def OnDialogClosed(*args, **kwargs):
-        """
-        OnDialogClosed(self: MSPyMstnPlatform.IPyModalDialogEvents, arg0: str, arg1: MSPyMstnPlatform.PyMsdDialogBoxResult) -> None
-        """
+    def OnDialogClosed(self: MSPyMstnPlatform.IPyModalDialogEvents, arg0: str, arg1: MSPyMstnPlatform.PyMsdDialogBoxResult) -> None:
         ...
     
-    def OnDialogOpened(*args, **kwargs):
-        """
-        OnDialogOpened(self: MSPyMstnPlatform.IPyModalDialogEvents, arg0: str) -> int
-        """
+    def OnDialogOpened(self: MSPyMstnPlatform.IPyModalDialogEvents, arg0: str) -> int:
         ...
     
     def __init__(self: MSPyMstnPlatform.IPyModalDialogEvents) -> None:
@@ -10570,10 +9538,9 @@ class ISessionMgr:
     
     ActiveDgnModelRef: DgnModelRef
     
-    def AddSessionMonitor(*args, **kwargs):
+    @staticmethod
+    def AddSessionMonitor(monitor: MSPyMstnPlatform.SessionMonitor) -> None:
         """
-        AddSessionMonitor(monitor: MSPyMstnPlatform.SessionMonitor) -> None
-        
         Add a new SessionMonitor.
         
         Parameter ``mon``:
@@ -10588,10 +9555,8 @@ class ISessionMgr:
         """
         ...
     
-    def CreateNewDgnFile(*args, **kwargs):
+    def CreateNewDgnFile(self: MSPyMstnPlatform.ISessionMgr, newName: MSPyBentley.WString, defaultDir: str, switchToNewFile: bool) -> int:
         """
-        CreateNewDgnFile(self: MSPyMstnPlatform.ISessionMgr, newName: MSPyBentley.WString, defaultDir: str, switchToNewFile: bool) -> int
-        
         Prompts the user to create a new DGN file and then optionally makes it
         the Master DGN.
         
@@ -10626,10 +9591,9 @@ class ISessionMgr:
         """
         ...
     
-    def DropSessionMonitor(*args, **kwargs):
+    @staticmethod
+    def DropSessionMonitor(monitor: MSPyMstnPlatform.SessionMonitor) -> None:
         """
-        DropSessionMonitor(monitor: MSPyMstnPlatform.SessionMonitor) -> None
-        
         Drop an existing SessionMonitor.
         
         Parameter ``mon``:
@@ -10644,10 +9608,8 @@ class ISessionMgr:
         """
         ...
     
-    def FindDesignFile(*args, **kwargs):
+    def FindDesignFile(self: MSPyMstnPlatform.ISessionMgr, inFileName: str, inModelName: str, fileType: int, allowCancel: bool) -> tuple:
         """
-        FindDesignFile(self: MSPyMstnPlatform.ISessionMgr, inFileName: str, inModelName: str, fileType: int, allowCancel: bool) -> tuple
-        
         Opens a file from a specified file name or path.
         
         Parameter ``inFileName``:
@@ -10702,10 +9664,9 @@ class ISessionMgr:
         """
         ...
     
-    def GetActiveDgnFile(*args, **kwargs):
+    @staticmethod
+    def GetActiveDgnFile() -> MSPyDgnPlatform.DgnFile:
         """
-        GetActiveDgnFile() -> MSPyDgnPlatform.DgnFile
-        
         Get the DgnFileP for the current active model
         
         Returns:
@@ -10713,28 +9674,20 @@ class ISessionMgr:
         """
         ...
     
-    def GetActiveDgnModel(*args, **kwargs):
-        """
-        GetActiveDgnModel() -> MSPyDgnPlatform.DgnModel
-        """
+    @staticmethod
+    def GetActiveDgnModel() -> MSPyDgnPlatform.DgnModel:
         ...
     
-    def GetActiveDgnModelRef(*args, **kwargs):
-        """
-        GetActiveDgnModelRef() -> MSPyDgnPlatform.DgnModelRef
-        """
+    @staticmethod
+    def GetActiveDgnModelRef() -> MSPyDgnPlatform.DgnModelRef:
         ...
     
-    def GetManager(*args, **kwargs):
-        """
-        GetManager() -> MSPyMstnPlatform.ISessionMgr
-        """
+    @staticmethod
+    def GetManager() -> MSPyMstnPlatform.ISessionMgr:
         ...
     
-    def GetMaster(*args, **kwargs):
+    def GetMaster(self: MSPyMstnPlatform.ISessionMgr) -> MSPyDgnPlatform.DgnDocument:
         """
-        GetMaster(self: MSPyMstnPlatform.ISessionMgr) -> MSPyDgnPlatform.DgnDocument
-        
         Get the Document for the Master DGN
         
         Returns:
@@ -10742,10 +9695,9 @@ class ISessionMgr:
         """
         ...
     
-    def GetMasterDgnFile(*args, **kwargs):
+    @staticmethod
+    def GetMasterDgnFile() -> MSPyDgnPlatform.DgnFile:
         """
-        GetMasterDgnFile() -> MSPyDgnPlatform.DgnFile
-        
         Get the DgnFileP for the current Master DGN file
         
         Returns:
@@ -10771,10 +9723,8 @@ class ISessionMgr:
         """
         ...
     
-    def GetUIItemState(*args, **kwargs):
+    def GetUIItemState(self: MSPyMstnPlatform.ISessionMgr, key: str, itemState: MSPyMstnPlatform.UIItemStateType, defaultIfKeyNotFound: bool) -> bool:
         """
-        GetUIItemState(self: MSPyMstnPlatform.ISessionMgr, key: str, itemState: MSPyMstnPlatform.UIItemStateType, defaultIfKeyNotFound: bool) -> bool
-        
         Get the boolean value defined by key and itemState.
         
         Parameter ``key``:
@@ -10792,110 +9742,87 @@ class ISessionMgr:
         """
         ...
     
-    def GetWriteableFiles(*args, **kwargs):
+    def GetWriteableFiles(self: MSPyMstnPlatform.ISessionMgr) -> MSPyDgnPlatform.DgnFilePtrArray:
         """
-        GetWriteableFiles(self: MSPyMstnPlatform.ISessionMgr) -> MSPyDgnPlatform.DgnFilePtrArray
-        
         Returns the list of all writeable files, including any activated
         references.
         """
         ...
     
-    def InActiveFile(*args, **kwargs):
+    @staticmethod
+    def InActiveFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        InActiveFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Is this modelRef from the same file as the active model.
         """
         ...
     
-    def InMasterFile(*args, **kwargs):
+    @staticmethod
+    def InMasterFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        InMasterFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Is this modelRef from the master file.
         """
         ...
     
-    def InTransactableFile(*args, **kwargs):
+    @staticmethod
+    def InTransactableFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        InTransactableFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Is this modelRef from a transactable file.
         """
         ...
     
-    def IsActiveDgnFile(*args, **kwargs):
+    @staticmethod
+    def IsActiveDgnFile(dgnFile: MSPyDgnPlatform.DgnFile) -> bool:
         """
-        IsActiveDgnFile(dgnFile: MSPyDgnPlatform.DgnFile) -> bool
-        
         Is this the file of the active model.
         """
         ...
     
-    def IsActiveModel(*args, **kwargs):
+    @staticmethod
+    def IsActiveModel(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsActiveModel(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Is this modelRef the active model.
         """
         ...
     
-    def IsActiveModelLocked(*args, **kwargs):
-        """
-        IsActiveModelLocked() -> bool
-        """
+    @staticmethod
+    def IsActiveModelLocked() -> bool:
         ...
     
-    def IsActiveWorkSetAssociatedToCONNECTProject(*args, **kwargs):
-        """
-        IsActiveWorkSetAssociatedToCONNECTProject(self: MSPyMstnPlatform.ISessionMgr) -> bool
-        """
+    def IsActiveWorkSetAssociatedToCONNECTProject(self: MSPyMstnPlatform.ISessionMgr) -> bool:
         ...
     
-    def IsActiveWorkSetAssociatedToCONNECTProjectAndDGNMode(*args, **kwargs):
-        """
-        IsActiveWorkSetAssociatedToCONNECTProjectAndDGNMode(self: MSPyMstnPlatform.ISessionMgr) -> bool
-        """
+    def IsActiveWorkSetAssociatedToCONNECTProjectAndDGNMode(self: MSPyMstnPlatform.ISessionMgr) -> bool:
         ...
     
-    def IsActiveWorkSetNoWorkSet(*args, **kwargs):
-        """
-        IsActiveWorkSetNoWorkSet(self: MSPyMstnPlatform.ISessionMgr) -> bool
-        """
+    def IsActiveWorkSetNoWorkSet(self: MSPyMstnPlatform.ISessionMgr) -> bool:
         ...
     
-    def IsDesignFileInitialized(*args, **kwargs):
+    @staticmethod
+    def IsDesignFileInitialized() -> bool:
         """
-        IsDesignFileInitialized() -> bool
-        
         Return true if Session is active and design file has been initailized.
         Populating of model specific UI items should not happen until this
         method returns true.
         """
         ...
     
-    def IsMasterDgnFile(*args, **kwargs):
+    @staticmethod
+    def IsMasterDgnFile(dgnFile: MSPyDgnPlatform.DgnFile) -> bool:
         """
-        IsMasterDgnFile(dgnFile: MSPyDgnPlatform.DgnFile) -> bool
-        
         Is this the master file.
         """
         ...
     
-    def IsMasterFileClosing(*args, **kwargs):
+    @staticmethod
+    def IsMasterFileClosing() -> bool:
         """
-        IsMasterFileClosing() -> bool
-        
         Return true if Session is closing, This allows UI items to ignore
         window close events.
         """
         ...
     
-    def IsReadyForUIProcessing(*args, **kwargs):
+    def IsReadyForUIProcessing(self: MSPyMstnPlatform.ISessionMgr) -> bool:
         """
-        IsReadyForUIProcessing(self: MSPyMstnPlatform.ISessionMgr) -> bool
-        
         Return true if Session's active model has been initialized and is
         available to populate of model specific data in UI.
         """
@@ -10909,10 +9836,8 @@ class ISessionMgr:
     
     MasterDgnFile: DgnFile
     
-    def OpenDgnFileDialog(*args, **kwargs):
+    def OpenDgnFileDialog(self: MSPyMstnPlatform.ISessionMgr) -> tuple:
         """
-        OpenDgnFileDialog(self: MSPyMstnPlatform.ISessionMgr) -> tuple
-        
         Prompts the user to select a file.
         
         
@@ -10940,10 +9865,8 @@ class ISessionMgr:
         """
         ...
     
-    def RemoveUIItemStateEntry(*args, **kwargs):
+    def RemoveUIItemStateEntry(self: MSPyMstnPlatform.ISessionMgr, key: str) -> None:
         """
-        RemoveUIItemStateEntry(self: MSPyMstnPlatform.ISessionMgr, key: str) -> None
-        
         Remove UIItemState entry that matches specified key if one exist.
         
         Parameter ``key``:
@@ -10951,24 +9874,18 @@ class ISessionMgr:
         """
         ...
     
-    def SaveDgnFileChanges(*args, **kwargs):
+    def SaveDgnFileChanges(self: MSPyMstnPlatform.ISessionMgr, dgnFileVector: MSPyDgnPlatform.DgnFilePtrArray) -> bool:
         """
-        SaveDgnFileChanges(self: MSPyMstnPlatform.ISessionMgr, dgnFileVector: MSPyDgnPlatform.DgnFilePtrArray) -> bool
-        
         Write all in-memory changes to the disk for each DgnFile in the list.
         """
         ...
     
-    def SetActiveModelLocked(*args, **kwargs):
-        """
-        SetActiveModelLocked(locked: bool) -> None
-        """
+    @staticmethod
+    def SetActiveModelLocked(locked: bool) -> None:
         ...
     
-    def SetAutoLockActiveModel(*args, **kwargs):
-        """
-        SetAutoLockActiveModel(value: bool) -> None
-        """
+    @staticmethod
+    def SetAutoLockActiveModel(value: bool) -> None:
         ...
     
     def SetUIItemMenuMarkState(*args, **kwargs):
@@ -10990,10 +9907,8 @@ class ISessionMgr:
         """
         ...
     
-    def SetUIItemState(*args, **kwargs):
+    def SetUIItemState(self: MSPyMstnPlatform.ISessionMgr, key: str, itemState: MSPyMstnPlatform.UIItemStateType, value: bool, sendImmediateMessage: bool = False) -> None:
         """
-        SetUIItemState(self: MSPyMstnPlatform.ISessionMgr, key: str, itemState: MSPyMstnPlatform.UIItemStateType, value: bool, sendImmediateMessage: bool = False) -> None
-        
         Set the boolean value that defines the state of a UI item. This will
         trigger a SystemEvent.ApplicationSyncUIItem event.
         
@@ -11012,10 +9927,8 @@ class ISessionMgr:
         """
         ...
     
-    def SwitchToNewFile(*args, **kwargs):
+    def SwitchToNewFile(self: MSPyMstnPlatform.ISessionMgr, doc: MSPyDgnPlatform.DgnDocument, inoutModelName: str, fileType: int, doUpdate: bool, releaseReferences: bool, reopeningAfterSave: bool = False, runInitUCM: bool = False) -> MSPyDgnPlatform.DgnFileStatus:
         """
-        SwitchToNewFile(self: MSPyMstnPlatform.ISessionMgr, doc: MSPyDgnPlatform.DgnDocument, inoutModelName: str, fileType: int, doUpdate: bool, releaseReferences: bool, reopeningAfterSave: bool = False, runInitUCM: bool = False) -> MSPyDgnPlatform.DgnFileStatus
-        
         Makes the specified file the Master DGN, opening it if necessary.
         
         Returns:
@@ -11197,10 +10110,9 @@ class Level:
     None
     """
 
-    def CompareLevelData(*args, **kwargs):
+    @staticmethod
+    def CompareLevelData(compareAttributesOut: MSPyDgnPlatform.BitMask, modelRef1: MSPyDgnPlatform.DgnModelRef, levelId1: int, modelRef2: MSPyDgnPlatform.DgnModelRef, levelId2: int, compareAttributesIn: MSPyDgnPlatform.BitMask) -> bool:
         """
-        CompareLevelData(compareAttributesOut: MSPyDgnPlatform.BitMask, modelRef1: MSPyDgnPlatform.DgnModelRef, levelId1: int, modelRef2: MSPyDgnPlatform.DgnModelRef, levelId2: int, compareAttributesIn: MSPyDgnPlatform.BitMask) -> bool
-        
         @Description Compare level related data between level1 and level2. The
         function will compare only those attributes as specified in
         pCompareAttributesMaskIn. If pCompareAttributesMaskIn is NULL, then
@@ -11235,10 +10147,9 @@ class Level:
         """
         ...
     
-    def CopyElement(*args, **kwargs):
+    @staticmethod
+    def CopyElement(destModelRef: MSPyDgnPlatform.DgnModelRef, destLevelId: int, sourceModelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int, inEntireFile: bool) -> tuple:
         """
-        CopyElement(destModelRef: MSPyDgnPlatform.DgnModelRef, destLevelId: int, sourceModelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int, inEntireFile: bool) -> tuple
-        
         @Description Copy elements in source level to destination level.
         
         Parameter ``numElementCopiedOut``:
@@ -11269,10 +10180,9 @@ class Level:
         """
         ...
     
-    def CopyLevel(*args, **kwargs):
+    @staticmethod
+    def CopyLevel(destModelRef: MSPyDgnPlatform.DgnModelRef, sourceModelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int, newLevelNameIn: str, setExternal: bool) -> tuple:
         """
-        CopyLevel(destModelRef: MSPyDgnPlatform.DgnModelRef, sourceModelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int, newLevelNameIn: str, setExternal: bool) -> tuple
-        
         @Description Copy a level from source model into destination model.
         Creates a new level in the destination model with the same level-name
         & level-code as the source level.
@@ -11320,10 +10230,9 @@ class Level:
         """
         ...
     
-    def CopyLevelData(*args, **kwargs):
+    @staticmethod
+    def CopyLevelData(destModelRef: MSPyDgnPlatform.DgnModelRef, destLevelId: int, sourceModelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int) -> int:
         """
-        CopyLevelData(destModelRef: MSPyDgnPlatform.DgnModelRef, destLevelId: int, sourceModelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int) -> int
-        
         @Description Copy all level related data from source level into
         destination level. This function does not copy the level-name & level-
         code.
@@ -11365,10 +10274,9 @@ class Level:
         """
         ...
     
-    def CopyLevelDataByAttributeMask(*args, **kwargs):
+    @staticmethod
+    def CopyLevelDataByAttributeMask(destModelRef: MSPyDgnPlatform.DgnModelRef, destLevelId: int, sourceModelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int, copyAttributesMask: MSPyDgnPlatform.BitMask) -> int:
         """
-        CopyLevelDataByAttributeMask(destModelRef: MSPyDgnPlatform.DgnModelRef, destLevelId: int, sourceModelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int, copyAttributesMask: MSPyDgnPlatform.BitMask) -> int
-        
         @Description Copy level related data as specified by the level-
         attributes mask from source level into destination level. This
         function does not copy the level-name & level-code.
@@ -11413,10 +10321,9 @@ class Level:
         """
         ...
     
-    def Create(*args, **kwargs):
+    @staticmethod
+    def Create(modelRef: MSPyDgnPlatform.DgnModelRef, levelName: str, levelCode: int) -> tuple:
         """
-        Create(modelRef: MSPyDgnPlatform.DgnModelRef, levelName: str, levelCode: int) -> tuple
-        
         @Description Create a new level.
         
         Remark:
@@ -11479,10 +10386,9 @@ class Level:
         """
         ...
     
-    def CreateFromSeed(*args, **kwargs):
+    @staticmethod
+    def CreateFromSeed(modelRef: MSPyDgnPlatform.DgnModelRef, levelName: str, levelCode: int, seedLevelId: int, copyAttributeMask: MSPyDgnPlatform.BitMask) -> tuple:
         """
-        CreateFromSeed(modelRef: MSPyDgnPlatform.DgnModelRef, levelName: str, levelCode: int, seedLevelId: int, copyAttributeMask: MSPyDgnPlatform.BitMask) -> tuple
-        
         @Description Create a new level. The new level takes its attributes as
         specified " copyAttributeMaskIn " from the " seed " level. Typically,
         " copyAttributeMaskIn " is got by calling function
@@ -11526,10 +10432,9 @@ class Level:
         """
         ...
     
-    def Delete(*args, **kwargs):
+    @staticmethod
+    def Delete(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> int:
         """
-        Delete(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> int
-        
         @Description Delete a level.
         
         Remark:
@@ -11577,10 +10482,9 @@ class Level:
         """
         ...
     
-    def DeleteElement(*args, **kwargs):
+    @staticmethod
+    def DeleteElement(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, inEntireFile: bool, updateView: bool) -> tuple:
         """
-        DeleteElement(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, inEntireFile: bool, updateView: bool) -> tuple
-        
         @Description Delete elements on specified level.
         
         Parameter ``numElementDeletedOut``:
@@ -11608,10 +10512,9 @@ class Level:
         """
         ...
     
-    def Draw(*args, **kwargs):
+    @staticmethod
+    def Draw(viewDraw: List[bool[8]], incremental: bool, drawMode: MSPyDgnPlatform.DgnDrawMode, modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, startEndMsg: bool, drawShared: bool) -> int:
         """
-        Draw(viewDraw: List[bool[8]], incremental: bool, drawMode: MSPyDgnPlatform.DgnDrawMode, modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, startEndMsg: bool, drawShared: bool) -> int
-        
         @Description Draw all elements on specified level
         
         @Param[in] viewDrawIn views to update. Should point to an array
@@ -11646,10 +10549,9 @@ class Level:
         """
         ...
     
-    def GetActive(*args, **kwargs):
+    @staticmethod
+    def GetActive() -> tuple:
         """
-        GetActive() -> tuple
-        
         @Description Get the current active level.
         
         Parameter ``levelIdOut``:
@@ -11666,10 +10568,9 @@ class Level:
         """
         ...
     
-    def GetAttributesDifferFromSource(*args, **kwargs):
+    @staticmethod
+    def GetAttributesDifferFromSource(differencesMask: MSPyDgnPlatform.BitMask, modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetAttributesDifferFromSource(differencesMask: MSPyDgnPlatform.BitMask, modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the 'level's attributes differ from source' flag.
         
         Parameter ``levelDifferOut``:
@@ -11693,10 +10594,9 @@ class Level:
         """
         ...
     
-    def GetCode(*args, **kwargs):
+    @staticmethod
+    def GetCode(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetCode(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get level code.
         
         Parameter ``levelCodeOut``:
@@ -11718,10 +10618,9 @@ class Level:
         """
         ...
     
-    def GetColor(*args, **kwargs):
+    @staticmethod
+    def GetColor(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetColor(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get level color and color-override flag. An element is
         displayed with this color in a view when the color-override flag is
         true and when level-symbology for the view is turned ON.
@@ -11751,10 +10650,9 @@ class Level:
         """
         ...
     
-    def GetCreateTimeStamp(*args, **kwargs):
+    @staticmethod
+    def GetCreateTimeStamp(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetCreateTimeStamp(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get level create time stamp
         
         Parameter ``createTimeStampOut``:
@@ -11776,10 +10674,9 @@ class Level:
         """
         ...
     
-    def GetDescription(*args, **kwargs):
+    @staticmethod
+    def GetDescription(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetDescription(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get level description.
         
         Parameter ``descriptionOut``:
@@ -11804,10 +10701,9 @@ class Level:
         """
         ...
     
-    def GetDisplay(*args, **kwargs):
+    @staticmethod
+    def GetDisplay(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetDisplay(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the display flag.
         
         Parameter ``levelDisplayOut``:
@@ -11830,10 +10726,9 @@ class Level:
         """
         ...
     
-    def GetDisplayPriority(*args, **kwargs):
+    @staticmethod
+    def GetDisplayPriority(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetDisplayPriority(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get level display priority
         
         Parameter ``priorityOut``:
@@ -11855,10 +10750,9 @@ class Level:
         """
         ...
     
-    def GetElementAccess(*args, **kwargs):
+    @staticmethod
+    def GetElementAccess(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetElementAccess(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the element access mode.
         
         Parameter ``elementAccessOut``:
@@ -11883,10 +10777,9 @@ class Level:
         """
         ...
     
-    def GetElementColor(*args, **kwargs):
+    @staticmethod
+    def GetElementColor(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetElementColor(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the level element color. This color value is applied
         on an element when the element's color is set to BYLEVEL.
         
@@ -11914,10 +10807,9 @@ class Level:
         """
         ...
     
-    def GetElementCount(*args, **kwargs):
+    @staticmethod
+    def GetElementCount(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetElementCount(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the the number of elements of specified model-ref
         that use specified level.
         
@@ -11941,10 +10833,9 @@ class Level:
         """
         ...
     
-    def GetElementMaterialId(*args, **kwargs):
+    @staticmethod
+    def GetElementMaterialId(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetElementMaterialId(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get level element material id associated with the level.
         
         Parameter ``materialIdOut``:
@@ -11966,10 +10857,9 @@ class Level:
         """
         ...
     
-    def GetElementStyle(*args, **kwargs):
+    @staticmethod
+    def GetElementStyle(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetElementStyle(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the level element style and custom-line style
         override info. This style value is applied on an element when the
         element's style is set to BYLEVEL.
@@ -12001,10 +10891,9 @@ class Level:
         """
         ...
     
-    def GetElementSymbology(*args, **kwargs):
+    @staticmethod
+    def GetElementSymbology(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetElementSymbology(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the element symbology.
         
         Parameter ``elementColorOut``:
@@ -12035,10 +10924,9 @@ class Level:
         """
         ...
     
-    def GetElementWeight(*args, **kwargs):
+    @staticmethod
+    def GetElementWeight(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetElementWeight(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the level element weight. This weight value is
         applied on an element when the the element's weight is set to BYLEVEL.
         
@@ -12066,10 +10954,9 @@ class Level:
         """
         ...
     
-    def GetFrozen(*args, **kwargs):
+    @staticmethod
+    def GetFrozen(modelRef: MSPyDgnPlatform.DgnModelRef, levelIdIn: int, frozenTypeIn: MSPyMstnPlatform.LevelFrozenType) -> tuple:
         """
-        GetFrozen(modelRef: MSPyDgnPlatform.DgnModelRef, levelIdIn: int, frozenTypeIn: MSPyMstnPlatform.LevelFrozenType) -> tuple
-        
         @Description Get the frozen flag
         
         Parameter ``levelFrozenOut``:
@@ -12096,10 +10983,9 @@ class Level:
         """
         ...
     
-    def GetHidden(*args, **kwargs):
+    @staticmethod
+    def GetHidden(modelRef: MSPyDgnPlatform.DgnModelRef, levelIdIn: int) -> tuple:
         """
-        GetHidden(modelRef: MSPyDgnPlatform.DgnModelRef, levelIdIn: int) -> tuple
-        
         @Description Get the hidden flag.
         
         Parameter ``levelHiddenOut``:
@@ -12122,10 +11008,9 @@ class Level:
         """
         ...
     
-    def GetIdFromCode(*args, **kwargs):
+    @staticmethod
+    def GetIdFromCode(modelRef: MSPyDgnPlatform.DgnModelRef, levelCode: int) -> tuple:
         """
-        GetIdFromCode(modelRef: MSPyDgnPlatform.DgnModelRef, levelCode: int) -> tuple
-        
         @Description Given a level-code, get its level-id.
         
         Parameter ``levelIdOut``:
@@ -12160,10 +11045,9 @@ class Level:
         """
         ...
     
-    def GetIdFromCodeIncludingLibraries(*args, **kwargs):
+    @staticmethod
+    def GetIdFromCodeIncludingLibraries(modelRef: MSPyDgnPlatform.DgnModelRef, levelCode: int) -> tuple:
         """
-        GetIdFromCodeIncludingLibraries(modelRef: MSPyDgnPlatform.DgnModelRef, levelCode: int) -> tuple
-        
         @Description Given a level-code, get its level-id, including levels
         that are in level libraries.
         
@@ -12196,10 +11080,9 @@ class Level:
         """
         ...
     
-    def GetIdFromName(*args, **kwargs):
+    @staticmethod
+    def GetIdFromName(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, levelName: str) -> tuple:
         """
-        GetIdFromName(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, levelName: str) -> tuple
-        
         @Description Given a level-name, get its level-id.
         
         Parameter ``levelIdOut``:
@@ -12234,10 +11117,9 @@ class Level:
         """
         ...
     
-    def GetIdFromNameIncludingLibraries(*args, **kwargs):
+    @staticmethod
+    def GetIdFromNameIncludingLibraries(modelRef: MSPyDgnPlatform.DgnModelRef, levelName: str) -> tuple:
         """
-        GetIdFromNameIncludingLibraries(modelRef: MSPyDgnPlatform.DgnModelRef, levelName: str) -> tuple
-        
         @Description Given a level-name, get its level-id, including levels
         that are in level libraries.
         
@@ -12270,10 +11152,9 @@ class Level:
         """
         ...
     
-    def GetMaterialId(*args, **kwargs):
+    @staticmethod
+    def GetMaterialId(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetMaterialId(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get material id associated with the level.
         
         Parameter ``materialIdOut``:
@@ -12298,10 +11179,9 @@ class Level:
         """
         ...
     
-    def GetName(*args, **kwargs):
+    @staticmethod
+    def GetName(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetName(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get level name.
         
         Parameter ``levelNameOut``:
@@ -12326,10 +11206,9 @@ class Level:
         """
         ...
     
-    def GetPlot(*args, **kwargs):
+    @staticmethod
+    def GetPlot(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetPlot(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the plot flag.
         
         Parameter ``levelPlotOut``:
@@ -12351,10 +11230,9 @@ class Level:
         """
         ...
     
-    def GetSeedLevel(*args, **kwargs):
+    @staticmethod
+    def GetSeedLevel(modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        GetSeedLevel(modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Get level-id of seed level. When a new level is created,
         then the user designated seed level whose attributes need to be
         applied on the newly created level.
@@ -12379,10 +11257,9 @@ class Level:
         """
         ...
     
-    def GetStyle(*args, **kwargs):
+    @staticmethod
+    def GetStyle(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetStyle(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the level style, custom-line style override info and
         style-override flag. An element is displayed with this style in a view
         when the style-override flag is true and when level-symbology for the
@@ -12416,10 +11293,9 @@ class Level:
         """
         ...
     
-    def GetSymbology(*args, **kwargs):
+    @staticmethod
+    def GetSymbology(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetSymbology(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the level symbology and symbology-override flags.
         
         Parameter ``colorOut``:
@@ -12459,10 +11335,9 @@ class Level:
         """
         ...
     
-    def GetTransparency(*args, **kwargs):
+    @staticmethod
+    def GetTransparency(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetTransparency(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get level display transparency
         
         Parameter ``transparencyOut``:
@@ -12484,10 +11359,9 @@ class Level:
         """
         ...
     
-    def GetUniqueID(*args, **kwargs):
+    @staticmethod
+    def GetUniqueID(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetUniqueID(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the level element's unique ID. The level element's
         unique id is assigned by the system and cannot be modified. This
         unique ID should not be confused with the level id returned by
@@ -12515,10 +11389,9 @@ class Level:
         """
         ...
     
-    def GetUsage(*args, **kwargs):
+    @staticmethod
+    def GetUsage(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, inFile: bool) -> tuple:
         """
-        GetUsage(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, inFile: bool) -> tuple
-        
         @Description Get the level usage flag.
         
         Parameter ``usageOut``:
@@ -12548,10 +11421,9 @@ class Level:
         """
         ...
     
-    def GetWeight(*args, **kwargs):
+    @staticmethod
+    def GetWeight(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        GetWeight(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get the level weight and weight-override flag. An element
         is displayed with this style in a view when the weight-override flag
         is true and when level-symbology for the view is turned ON.
@@ -12581,10 +11453,9 @@ class Level:
         """
         ...
     
-    def IsActive(*args, **kwargs):
+    @staticmethod
+    def IsActive(levelId: int) -> bool:
         """
-        IsActive(levelId: int) -> bool
-        
         @Description Check if a level of the current-file is the active level.
         
         Parameter ``levelIdIn``:
@@ -12601,10 +11472,9 @@ class Level:
         """
         ...
     
-    def IsCodeAutoGenerated(*args, **kwargs):
+    @staticmethod
+    def IsCodeAutoGenerated(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        IsCodeAutoGenerated(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Get if the level code is auto generated (that means
         generated by MicroStation) or is manually set by the user
         
@@ -12627,10 +11497,9 @@ class Level:
         """
         ...
     
-    def IsElementLocked(*args, **kwargs):
+    @staticmethod
+    def IsElementLocked(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool:
         """
-        IsElementLocked(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool
-        
         @Description Check if elements on the specified level are locked.
         
         Parameter ``modelRefIn``:
@@ -12651,10 +11520,9 @@ class Level:
         """
         ...
     
-    def IsElementReadOnly(*args, **kwargs):
+    @staticmethod
+    def IsElementReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool:
         """
-        IsElementReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool
-        
         @Description Check if elements on the specified level are read-only
         
         Parameter ``modelRefIn``:
@@ -12675,9 +11543,9 @@ class Level:
         """
         ...
     
+    @staticmethod
     def IsElementViewOnly(*args, **kwargs):
         """
-        IsElementViewOnly(*args, **kwargs)
         Overloaded function.
         
         1. IsElementViewOnly(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool
@@ -12723,10 +11591,9 @@ class Level:
         """
         ...
     
-    def IsExternal(*args, **kwargs):
+    @staticmethod
+    def IsExternal(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool:
         """
-        IsExternal(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool
-        
         @Description Check if a level is an external (library) level or not.
         
         Parameter ``modelRefIn``:
@@ -12746,10 +11613,9 @@ class Level:
         """
         ...
     
-    def IsFrozen(*args, **kwargs):
+    @staticmethod
+    def IsFrozen(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, frozenType: MSPyMstnPlatform.LevelFrozenType) -> bool:
         """
-        IsFrozen(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, frozenType: MSPyMstnPlatform.LevelFrozenType) -> bool
-        
         @Description Check if a level is frozen.
         
         Parameter ``modelRefIn``:
@@ -12773,10 +11639,9 @@ class Level:
         """
         ...
     
-    def IsHidden(*args, **kwargs):
+    @staticmethod
+    def IsHidden(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool:
         """
-        IsHidden(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool
-        
         @Description Check if a level is hidden.
         
         Parameter ``modelRefIn``:
@@ -12796,10 +11661,9 @@ class Level:
         """
         ...
     
-    def IsReadOnly(*args, **kwargs):
+    @staticmethod
+    def IsReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool:
         """
-        IsReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool
-        
         @Description Check if a level is read-only.
         
         Parameter ``modelRefIn``:
@@ -12819,10 +11683,9 @@ class Level:
         """
         ...
     
-    def IsUsed(*args, **kwargs):
+    @staticmethod
+    def IsUsed(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, inFile: bool) -> bool:
         """
-        IsUsed(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, inFile: bool) -> bool
-        
         @Description Check if a level is used. A level is used if there is an
         element on the level.
         
@@ -12848,10 +11711,9 @@ class Level:
         """
         ...
     
-    def IsValid(*args, **kwargs):
+    @staticmethod
+    def IsValid(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool:
         """
-        IsValid(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool
-        
         @Description Check if the specified level id is a valid existing
         level.
         
@@ -12874,10 +11736,9 @@ class Level:
         """
         ...
     
-    def IsValidByCode(*args, **kwargs):
+    @staticmethod
+    def IsValidByCode(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool:
         """
-        IsValidByCode(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> bool
-        
         @Description Check if level with specified code is a valid existing
         level.
         
@@ -12898,10 +11759,9 @@ class Level:
         """
         ...
     
-    def IsValidByName(*args, **kwargs):
+    @staticmethod
+    def IsValidByName(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, levelName: str) -> bool:
         """
-        IsValidByName(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, levelName: str) -> bool
-        
         @Description Check if level with specified name is a valid existing
         level.
         
@@ -12922,10 +11782,9 @@ class Level:
         """
         ...
     
-    def MoveElementLevel(*args, **kwargs):
+    @staticmethod
+    def MoveElementLevel(destLevelId: int, modelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int, inEntireFile: bool) -> tuple:
         """
-        MoveElementLevel(destLevelId: int, modelRef: MSPyDgnPlatform.DgnModelRef, sourceLevelId: int, inEntireFile: bool) -> tuple
-        
         @Description Move elements of source level to destination level. The
         model-refs of both the source level and destination level are the
         same.
@@ -12955,10 +11814,9 @@ class Level:
         """
         ...
     
-    def ReportUsage(*args, **kwargs):
+    @staticmethod
+    def ReportUsage(reportString: MSPyBentley.WString, modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> int:
         """
-        ReportUsage(reportString: MSPyBentley.WString, modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> int
-        
         @Description Generate a report that describes where a level is used in
         the context of the file of specified model-ref
         
@@ -12982,10 +11840,9 @@ class Level:
         """
         ...
     
-    def SelectElement(*args, **kwargs):
+    @staticmethod
+    def SelectElement(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple:
         """
-        SelectElement(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int) -> tuple
-        
         @Description Select elements on specified level.
         
         Parameter ``numElementSelectedOut``:
@@ -13006,10 +11863,9 @@ class Level:
         """
         ...
     
-    def SetActive(*args, **kwargs):
+    @staticmethod
+    def SetActive(levelId: int) -> int:
         """
-        SetActive(levelId: int) -> int
-        
         @Description Set level as active.
         
         Parameter ``levelIdIn``:
@@ -13032,10 +11888,9 @@ class Level:
         """
         ...
     
-    def SetActiveByCode(*args, **kwargs):
+    @staticmethod
+    def SetActiveByCode(levelCode: int) -> int:
         """
-        SetActiveByCode(levelCode: int) -> int
-        
         @Description Set level with specified code as active. This function
         handles setting a library level as active. If the level with specified
         code is a library level, then, if necessary, the library level is
@@ -13056,10 +11911,9 @@ class Level:
         """
         ...
     
-    def SetActiveByName(*args, **kwargs):
+    @staticmethod
+    def SetActiveByName(levelId: int, levelName: str) -> int:
         """
-        SetActiveByName(levelId: int, levelName: str) -> int
-        
         @Description Set level with specified name as active. This function
         handles setting a library level as active. If the level with specified
         name is a library level, then, if necessary, the library level is
@@ -13080,10 +11934,9 @@ class Level:
         """
         ...
     
-    def SetCode(*args, **kwargs):
+    @staticmethod
+    def SetCode(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, levelCode: int) -> int:
         """
-        SetCode(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, levelCode: int) -> int
-        
         @Description Set level code. A level's code should be unique in the
         context of all the levels in a level-table i.e. all level codes in the
         context of a level-table should be unique.
@@ -13138,10 +11991,9 @@ class Level:
         """
         ...
     
-    def SetColor(*args, **kwargs):
+    @staticmethod
+    def SetColor(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, color: int, colorOverride: bool) -> int:
         """
-        SetColor(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, color: int, colorOverride: bool) -> int
-        
         @Description Set level color. This sets the color to apply on an
         element of the level, when " level symbology " is turned on for the
         view. This is also termed as the level's OVERRIDE color. Note that
@@ -13196,10 +12048,9 @@ class Level:
         """
         ...
     
-    def SetDescription(*args, **kwargs):
+    @staticmethod
+    def SetDescription(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, description: str) -> int:
         """
-        SetDescription(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, description: str) -> int
-        
         @Description Set level description
         
         Parameter ``modelRefIn``:
@@ -13244,10 +12095,9 @@ class Level:
         """
         ...
     
-    def SetDisplay(*args, **kwargs):
+    @staticmethod
+    def SetDisplay(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, display: bool) -> int:
         """
-        SetDisplay(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, display: bool) -> int
-        
         @Description Set level display on/off. Turning off the display makes
         all the elements on the level invisible in all the views.
         
@@ -13293,10 +12143,9 @@ class Level:
         """
         ...
     
-    def SetDisplayPriority(*args, **kwargs):
+    @staticmethod
+    def SetDisplayPriority(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, priority: int) -> int:
         """
-        SetDisplayPriority(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, priority: int) -> int
-        
         @Description Set level display priority
         
         Parameter ``modelRefIn``:
@@ -13334,10 +12183,9 @@ class Level:
         """
         ...
     
-    def SetElementAccess(*args, **kwargs):
+    @staticmethod
+    def SetElementAccess(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, elementAccess: MSPyDgnPlatform.LevelElementAccess) -> int:
         """
-        SetElementAccess(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, elementAccess: MSPyDgnPlatform.LevelElementAccess) -> int
-        
         @Description Set the level's element access mode. This can take one of
         4 values - LevelElementAccess.All, LevelElementAccess.Locked,
         LevelElementAccess.ReadOnly & LevelElementAccess.ViewOnly. The mode
@@ -13398,10 +12246,9 @@ class Level:
         """
         ...
     
-    def SetElementByLevel(*args, **kwargs):
+    @staticmethod
+    def SetElementByLevel(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, elementAttributeString: MSPyDgnPlatform.BitMask, inEntireFile: bool, isSetByLevel: bool) -> tuple:
         """
-        SetElementByLevel(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, elementAttributeString: MSPyDgnPlatform.BitMask, inEntireFile: bool, isSetByLevel: bool) -> tuple
-        
         @Description set or unset elements symbology to that of BYLEVEL.
         
         Parameter ``numElementChangedOut``:
@@ -13433,10 +12280,9 @@ class Level:
         """
         ...
     
-    def SetElementColor(*args, **kwargs):
+    @staticmethod
+    def SetElementColor(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, color: int) -> int:
         """
-        SetElementColor(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, color: int) -> int
-        
         @Description Set element color. This sets the color to apply on an
         element of the level, when the element has its color set to BYLEVEL.
         This is also be termed as the level's BYLEVEL color.
@@ -13488,10 +12334,9 @@ class Level:
         """
         ...
     
-    def SetElementMaterialId(*args, **kwargs):
+    @staticmethod
+    def SetElementMaterialId(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, materialId: int) -> int:
         """
-        SetElementMaterialId(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, materialId: int) -> int
-        
         @Description Set level element material id.
         
         Parameter ``modelRefIn``:
@@ -13534,10 +12379,9 @@ class Level:
         """
         ...
     
-    def SetElementStyle(*args, **kwargs):
+    @staticmethod
+    def SetElementStyle(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, style: int, styleParams: MSPyDgnPlatform.LineStyleParams) -> int:
         """
-        SetElementStyle(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, style: int, styleParams: MSPyDgnPlatform.LineStyleParams) -> int
-        
         @Description Set element style. This sets the style to apply on an
         element of the level, when the element has its style set to BYLEVEL.
         This is also be termed as the level's BYLEVEL style.
@@ -13592,10 +12436,9 @@ class Level:
         """
         ...
     
-    def SetElementSymbology(*args, **kwargs):
+    @staticmethod
+    def SetElementSymbology(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, color: int, style: int, styleParams: MSPyDgnPlatform.LineStyleParams, weight: int) -> int:
         """
-        SetElementSymbology(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, color: int, style: int, styleParams: MSPyDgnPlatform.LineStyleParams, weight: int) -> int
-        
         @Description Set element symbology. This functions allows setting the
         one or more of the element color, style, weight & fill color
         simultaneously.
@@ -13655,10 +12498,9 @@ class Level:
         """
         ...
     
-    def SetElementWeight(*args, **kwargs):
+    @staticmethod
+    def SetElementWeight(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, weight: int) -> int:
         """
-        SetElementWeight(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, weight: int) -> int
-        
         @Description Set element weight. This sets the style to apply on an
         element of the level, when the element has its weight set to BYLEVEL.
         This is also be termed as the level's BYLEVEL weight.
@@ -13706,10 +12548,9 @@ class Level:
         """
         ...
     
-    def SetFrozen(*args, **kwargs):
+    @staticmethod
+    def SetFrozen(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, frozenType: MSPyMstnPlatform.LevelFrozenType, frozen: bool) -> int:
         """
-        SetFrozen(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, frozenType: MSPyMstnPlatform.LevelFrozenType, frozen: bool) -> int
-        
         @Description Set level frozen on/off. Turning on the frozen makes all
         the elements on the level invisible. This is like turning off the
         display flag of a level with the following differences:<UL> <LI> If a
@@ -13771,10 +12612,9 @@ class Level:
         """
         ...
     
-    def SetHidden(*args, **kwargs):
+    @staticmethod
+    def SetHidden(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, hidden: bool) -> int:
         """
-        SetHidden(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, hidden: bool) -> int
-        
         @Description Set level hidden on/off. A Hidden Level will not be
         visible in the User Interface i.e. none of the Level Controls will
         display such a level. Applications can use this together with Element
@@ -13822,10 +12662,9 @@ class Level:
         """
         ...
     
-    def SetMaterialId(*args, **kwargs):
+    @staticmethod
+    def SetMaterialId(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, matrialId: int, materialOverride: bool) -> int:
         """
-        SetMaterialId(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, matrialId: int, materialOverride: bool) -> int
-        
         @Description Set level material id.
         
         Parameter ``modelRefIn``:
@@ -13871,10 +12710,9 @@ class Level:
         """
         ...
     
-    def SetName(*args, **kwargs):
+    @staticmethod
+    def SetName(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, name: str) -> int:
         """
-        SetName(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, name: str) -> int
-        
         @Description Set level name. A level's name should be unique in the
         level table.
         
@@ -13932,10 +12770,9 @@ class Level:
         """
         ...
     
-    def SetPlot(*args, **kwargs):
+    @staticmethod
+    def SetPlot(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, plot: bool) -> int:
         """
-        SetPlot(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, plot: bool) -> int
-        
         @Description Set level plot on/off. Turning off the plot disables
         plotting of all elements on the level.
         
@@ -13976,10 +12813,9 @@ class Level:
         """
         ...
     
-    def SetReadOnly(*args, **kwargs):
+    @staticmethod
+    def SetReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, isReadOnly: bool) -> int:
         """
-        SetReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, isReadOnly: bool) -> int
-        
         @Description Set level read-only on/off. Setting a level as read-only
         means that its attributes cannot be changed. (exception:setting the
         level's display on/off is not affected by this setting). A read-only
@@ -14027,10 +12863,9 @@ class Level:
         """
         ...
     
-    def SetStyle(*args, **kwargs):
+    @staticmethod
+    def SetStyle(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, style: int, styleParams: MSPyDgnPlatform.LineStyleParams, styleOverride: bool) -> int:
         """
-        SetStyle(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, style: int, styleParams: MSPyDgnPlatform.LineStyleParams, styleOverride: bool) -> int
-        
         @Description Set level style. This sets the style to apply on an
         element of the level, when " level symbology " is turned on for the
         view. This is also termed as the level's OVERRIDE style. Note that
@@ -14089,10 +12924,9 @@ class Level:
         """
         ...
     
-    def SetTransparency(*args, **kwargs):
+    @staticmethod
+    def SetTransparency(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, transparency: float) -> int:
         """
-        SetTransparency(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, transparency: float) -> int
-        
         @Description Set level display transparency. This sets the display
         transparency to apply on an element of the level.
         
@@ -14132,10 +12966,9 @@ class Level:
         """
         ...
     
-    def SetWeight(*args, **kwargs):
+    @staticmethod
+    def SetWeight(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, weight: int, weightOverride: bool) -> int:
         """
-        SetWeight(modelRef: MSPyDgnPlatform.DgnModelRef, levelId: int, weight: int, weightOverride: bool) -> int
-        
         @Description Set level weight. This sets the weight to apply on an
         element of the level, when " level symbology " is turned on for the
         view. This is also termed as the level's OVERRIDE weight. Note that
@@ -14196,10 +13029,9 @@ class LevelAttribute:
     None
     """
 
-    def GetMask(*args, **kwargs):
+    @staticmethod
+    def GetMask(attribyteType: LevelAttributeMaskType) -> MSPyDgnPlatform.BitMask:
         """
-        GetMask(attribyteType: LevelAttributeMaskType) -> MSPyDgnPlatform.BitMask
-        
         Return the level-attribute bit-mask for a given attribute list type.
         
         Parameter ``attributeTypeIn``:
@@ -14501,10 +13333,9 @@ class LevelName:
     None
     """
 
-    def HasValidCharacters(*args, **kwargs):
+    @staticmethod
+    def HasValidCharacters(nameString: str) -> bool:
         """
-        HasValidCharacters(nameString: str) -> bool
-        
         @Description Check if specified Name String is valid
         
         Parameter ``nameStringIn``:
@@ -14532,10 +13363,9 @@ class LevelTable:
     None
     """
 
-    def DrawLevels(*args, **kwargs):
+    @staticmethod
+    def DrawLevels(viewDraw: List[bool[8]], incremental: bool, drawMode: MSPyDgnPlatform.DgnDrawMode, modelRef: MSPyDgnPlatform.DgnModelRef, levelBitMask: MSPyDgnPlatform.BitMask, startEndMsg: bool, startShared: bool) -> int:
         """
-        DrawLevels(viewDraw: List[bool[8]], incremental: bool, drawMode: MSPyDgnPlatform.DgnDrawMode, modelRef: MSPyDgnPlatform.DgnModelRef, levelBitMask: MSPyDgnPlatform.BitMask, startEndMsg: bool, startShared: bool) -> int
-        
         @Description Draw all elements on a list of specified levels
         
         Parameter ``viewDraw``:
@@ -14572,10 +13402,9 @@ class LevelTable:
         """
         ...
     
-    def GetDisplayFrozenMask(*args, **kwargs):
+    @staticmethod
+    def GetDisplayFrozenMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask:
         """
-        GetDisplayFrozenMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask
-        
         @Description Get the effective combined display + frozen mask for
         level-table. Returns in a bit-mask form a represention of whether is
         level is displayed or not frozen (each bit is represented as:display-
@@ -14603,10 +13432,9 @@ class LevelTable:
         """
         ...
     
-    def GetDisplayMask(*args, **kwargs):
+    @staticmethod
+    def GetDisplayMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask:
         """
-        GetDisplayMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask
-        
         @Description Get the display mask for level-table. Returns a bit-mask
         that represents which level's display is turned on or off.
         
@@ -14632,10 +13460,9 @@ class LevelTable:
         """
         ...
     
-    def GetExternalMask(*args, **kwargs):
+    @staticmethod
+    def GetExternalMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask:
         """
-        GetExternalMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask
-        
         @Description Get the external mask for level-table. Returns a bit-mask
         that represents whether a level is external or not. A level is
         external, if it is associated with a library level.
@@ -14661,10 +13488,9 @@ class LevelTable:
         """
         ...
     
-    def GetFrozenMask(*args, **kwargs):
+    @staticmethod
+    def GetFrozenMask(modelRef: MSPyDgnPlatform.DgnModelRef, frozenType: MSPyMstnPlatform.LevelFrozenType) -> MSPyDgnPlatform.BitMask:
         """
-        GetFrozenMask(modelRef: MSPyDgnPlatform.DgnModelRef, frozenType: MSPyMstnPlatform.LevelFrozenType) -> MSPyDgnPlatform.BitMask
-        
         @Description Get the frozen mask for level-table. Returns a bit-mask
         that represents whether a level is frozen or not.
         
@@ -14693,10 +13519,9 @@ class LevelTable:
         """
         ...
     
-    def GetHiddenMask(*args, **kwargs):
+    @staticmethod
+    def GetHiddenMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask:
         """
-        GetHiddenMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask
-        
         @Description Get the hidden mask for level-table. Returns a bit-mask
         that represents whether a level is hidden or not. If a level is
         hidden, then it is not displayed in the level manager.
@@ -14722,10 +13547,9 @@ class LevelTable:
         """
         ...
     
-    def GetHighestLevelCode(*args, **kwargs):
+    @staticmethod
+    def GetHighestLevelCode(modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
         """
-        GetHighestLevelCode(modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-        
         @Description Get the value of highest used level code in level-table.
         
         Parameter ``highestLevelCodeOut``:
@@ -14744,10 +13568,9 @@ class LevelTable:
         """
         ...
     
-    def GetHighestLevelId(*args, **kwargs):
+    @staticmethod
+    def GetHighestLevelId(modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
         """
-        GetHighestLevelId(modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-        
         @Description Get the value of highest used level id in level-table.
         
         Parameter ``highestLevelIdOut``:
@@ -14766,10 +13589,9 @@ class LevelTable:
         """
         ...
     
-    def GetLevelCount(*args, **kwargs):
+    @staticmethod
+    def GetLevelCount(modelRef: MSPyDgnPlatform.DgnModelRef, levelCountType: int) -> tuple:
         """
-        GetLevelCount(modelRef: MSPyDgnPlatform.DgnModelRef, levelCountType: int) -> tuple
-        
         @Description Get the number of levels in level-table.
         
         Parameter ``levelCountOut``:
@@ -14803,10 +13625,9 @@ class LevelTable:
         """
         ...
     
-    def GetPlotMask(*args, **kwargs):
+    @staticmethod
+    def GetPlotMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask:
         """
-        GetPlotMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask
-        
         @Description Get the plot mask for level-table. Returns a bit-mask
         that represents which level's plot is turned on or off.
         
@@ -14830,10 +13651,9 @@ class LevelTable:
         """
         ...
     
-    def GetReadOnly(*args, **kwargs):
+    @staticmethod
+    def GetReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
         """
-        GetReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-        
         @Description Get read-only flag of level-table.
         
         Parameter ``isReadOnlyOut``:
@@ -14853,10 +13673,9 @@ class LevelTable:
         """
         ...
     
-    def GetReadOnlyMask(*args, **kwargs):
+    @staticmethod
+    def GetReadOnlyMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask:
         """
-        GetReadOnlyMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask
-        
         @Description Get the read-only mask for level-table. Returns a bit-
         mask that represents whether a level is read-only or not. If a level
         is readonly, then its attributes cannot be changed.
@@ -14883,10 +13702,9 @@ class LevelTable:
         """
         ...
     
-    def GetUsageMask(*args, **kwargs):
+    @staticmethod
+    def GetUsageMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask:
         """
-        GetUsageMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BitMask
-        
         @Description Get the level usage mask for level-table. Returns a bit-
         mask that represents whether a level is used or not.
         
@@ -14910,10 +13728,9 @@ class LevelTable:
         """
         ...
     
-    def IsReadOnly(*args, **kwargs):
+    @staticmethod
+    def IsReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         @Description Check if level-table is read-only.
         
         Parameter ``modelRefIn``:
@@ -14933,10 +13750,9 @@ class LevelTable:
         """
         ...
     
-    def Rewrite(*args, **kwargs):
+    @staticmethod
+    def Rewrite(modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        Rewrite(modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Rewrite the level-table data into current-file. This
         action has one of the following effects:<UL> <LI> If the level-table
         does not exist in the file, then it is added into the file. <LI> If
@@ -14972,10 +13788,9 @@ class LevelTable:
         """
         ...
     
-    def SetDisplayMask(*args, **kwargs):
+    @staticmethod
+    def SetDisplayMask(modelRef: MSPyDgnPlatform.DgnModelRef, displayMask: MSPyDgnPlatform.BitMask, updateView: bool) -> int:
         """
-        SetDisplayMask(modelRef: MSPyDgnPlatform.DgnModelRef, displayMask: MSPyDgnPlatform.BitMask, updateView: bool) -> int
-        
         @Description Set the display flag for all levels of level-table.
         
         Parameter ``modelRefIn``:
@@ -14999,10 +13814,9 @@ class LevelTable:
         """
         ...
     
-    def SetFrozenMask(*args, **kwargs):
+    @staticmethod
+    def SetFrozenMask(modelRef: MSPyDgnPlatform.DgnModelRef, frozenMask: MSPyDgnPlatform.BitMask, frozenType: MSPyMstnPlatform.LevelFrozenType, updateView: bool) -> int:
         """
-        SetFrozenMask(modelRef: MSPyDgnPlatform.DgnModelRef, frozenMask: MSPyDgnPlatform.BitMask, frozenType: MSPyMstnPlatform.LevelFrozenType, updateView: bool) -> int
-        
         @Description Set the frozen flag for all levels of level-table.
         
         Parameter ``modelRefIn``:
@@ -15030,10 +13844,9 @@ class LevelTable:
         """
         ...
     
-    def SetReadOnly(*args, **kwargs):
+    @staticmethod
+    def SetReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef, isReadOnly: bool) -> int:
         """
-        SetReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef, isReadOnly: bool) -> int
-        
         @Description Set read-only flag of level-table. Setting a level-table
         as read-only has the following implications:<UL> <LI>No new levels
         can be created in the level-table. <LI>None of the exisiting levels
@@ -15069,10 +13882,8 @@ class MSDocumentManager:
     None
     """
 
-    def CompareDocumentWorkspaces(*args, **kwargs):
+    def CompareDocumentWorkspaces(self: MSPyMstnPlatform.MSDocumentManager, document1: MSPyDgnPlatform.DgnDocumentMoniker, document2: MSPyDgnPlatform.DgnDocumentMoniker, generatorArgs: str) -> tuple:
         """
-        CompareDocumentWorkspaces(self: MSPyMstnPlatform.MSDocumentManager, document1: MSPyDgnPlatform.DgnDocumentMoniker, document2: MSPyDgnPlatform.DgnDocumentMoniker, generatorArgs: str) -> tuple
-        
         Compares workspace of two documents
         
         
@@ -15099,28 +13910,17 @@ class MSDocumentManager:
         """
         ...
     
-    def CreateDgnBaseMonikerList(*args, **kwargs):
-        """
-        CreateDgnBaseMonikerList(self: MSPyMstnPlatform.MSDocumentManager) -> MSPyDgnPlatform.DgnBaseMonikerList
-        """
+    def CreateDgnBaseMonikerList(self: MSPyMstnPlatform.MSDocumentManager) -> MSPyDgnPlatform.DgnBaseMonikerList:
         ...
     
-    def CreateFolderMonikerList(*args, **kwargs):
-        """
-        CreateFolderMonikerList(self: MSPyMstnPlatform.MSDocumentManager) -> MSPyDgnPlatform.DgnFolderMonikerList
-        """
+    def CreateFolderMonikerList(self: MSPyMstnPlatform.MSDocumentManager) -> MSPyDgnPlatform.DgnFolderMonikerList:
         ...
     
-    def CreateMonikerList(*args, **kwargs):
-        """
-        CreateMonikerList(self: MSPyMstnPlatform.MSDocumentManager) -> MSPyDgnPlatform.DgnDocumentMonikerList
-        """
+    def CreateMonikerList(self: MSPyMstnPlatform.MSDocumentManager) -> MSPyDgnPlatform.DgnDocumentMonikerList:
         ...
     
-    def CreateNewDocumentDialog(*args, **kwargs):
+    def CreateNewDocumentDialog(self: MSPyMstnPlatform.MSDocumentManager, params: MSPyMstnPlatform.PyDocumentOpenDialogParams, overwriteMode: MSPyDgnPlatform.DgnDocument.OverwriteMode) -> tuple:
         """
-        CreateNewDocumentDialog(self: MSPyMstnPlatform.MSDocumentManager, params: MSPyMstnPlatform.PyDocumentOpenDialogParams, overwriteMode: MSPyDgnPlatform.DgnDocument.OverwriteMode) -> tuple
-        
         Create a new document, using a dialog to browse for the file name and
         location. Optionally, test for the existence of the file, and
         optionally prompt the user for whether to overwrite the file or not.
@@ -15220,10 +14020,9 @@ class MSDocumentManager:
         def value(arg0: MSPyDgnPlatform.DgnDocumentManager.DgnBrowserStatus) -> int:
             ...
         
-    def GetManager(*args, **kwargs):
+    @staticmethod
+    def GetManager() -> MSPyMstnPlatform.MSDocumentManager:
         """
-        GetManager() -> MSPyMstnPlatform.MSDocumentManager
-        
         Obtain a reference to MicroStation's document manager. To call methods
         on the document manager, use MSDocumentManager.GetManager().Method
         
@@ -15232,10 +14031,8 @@ class MSDocumentManager:
         """
         ...
     
-    def OpenDocumentDialog(*args, **kwargs):
+    def OpenDocumentDialog(self: MSPyMstnPlatform.MSDocumentManager, params: MSPyMstnPlatform.PyDocumentOpenDialogParams, attributes: MSPyMstnPlatform.FileOpenExtAttr, openMode: MSPyDgnPlatform.DgnDocument.FetchMode) -> tuple:
         """
-        OpenDocumentDialog(self: MSPyMstnPlatform.MSDocumentManager, params: MSPyMstnPlatform.PyDocumentOpenDialogParams, attributes: MSPyMstnPlatform.FileOpenExtAttr, openMode: MSPyDgnPlatform.DgnDocument.FetchMode) -> tuple
-        
         Browse for a document. This will browse the current repository, if one
         is active, and the file system if the current session of MicroStation
         is not integrated with a document management system.
@@ -15262,18 +14059,14 @@ class MSDocumentManager:
         """
         ...
     
-    def OpenFolderBrowser(*args, **kwargs):
+    def OpenFolderBrowser(self: MSPyDgnPlatform.DgnDocumentManager, status: MSPyDgnPlatform.DgnDocumentManager.DgnBrowserStatus, defaults: Bentley.DgnPlatform.DgnFolderBrowserDefaults) -> MSPyDgnPlatform.DgnFolderMoniker:
         """
-        OpenFolderBrowser(self: MSPyDgnPlatform.DgnDocumentManager, status: MSPyDgnPlatform.DgnDocumentManager.DgnBrowserStatus, defaults: Bentley.DgnPlatform.DgnFolderBrowserDefaults) -> MSPyDgnPlatform.DgnFolderMoniker
-        
         Browse for a folder in the DMS
         """
         ...
     
-    def OpenFolderDialog(*args, **kwargs):
+    def OpenFolderDialog(self: MSPyMstnPlatform.MSDocumentManager, params: MSPyMstnPlatform.PyDocumentOpenDialogParams, attributes: int, basePath: str, fetchMode: MSPyDgnPlatform.DgnDocument.FetchMode) -> tuple:
         """
-        OpenFolderDialog(self: MSPyMstnPlatform.MSDocumentManager, params: MSPyMstnPlatform.PyDocumentOpenDialogParams, attributes: int, basePath: str, fetchMode: MSPyDgnPlatform.DgnDocument.FetchMode) -> tuple
-        
         Parameter ``attributes``:
         MicroStation file list attribues (FILELISTATTR flagword) *
         
@@ -15285,10 +14078,8 @@ class MSDocumentManager:
         """
         ...
     
-    def PortableNameFromFullPath(*args, **kwargs):
+    def PortableNameFromFullPath(portableName: MSPyBentley.WString, fullPath: str, basePath: str, dirCfgVar: str, relative: MSPyDgnPlatform.RelativePathPreference) -> None:
         """
-        PortableNameFromFullPath(portableName: MSPyBentley.WString, fullPath: str, basePath: str, dirCfgVar: str, relative: MSPyDgnPlatform.RelativePathPreference) -> None
-        
         Creates a portable file name given the data that is returned from the
         File Open dialog. A portable name never includes explicit disk drive
         and path information.
@@ -15320,10 +14111,8 @@ class MSDocumentManager:
         """
         ...
     
-    def PortableNameFromUserEnteredFileName(*args, **kwargs):
+    def PortableNameFromUserEnteredFileName(portableName: MSPyBentley.WString, userEnteredPath: str, fullPath: str, basePath: str, relativePref: MSPyDgnPlatform.RelativePathPreference) -> None:
         """
-        PortableNameFromUserEnteredFileName(portableName: MSPyBentley.WString, userEnteredPath: str, fullPath: str, basePath: str, relativePref: MSPyDgnPlatform.RelativePathPreference) -> None
-        
         Creates a portable file name given the data that is keyed in by a
         user. A portable name never includes explicit disk drive and path
         information.
@@ -15362,10 +14151,8 @@ class MSDocumentManager:
         """
         ...
     
-    def PutDocumentList(*args, **kwargs):
+    def PutDocumentList(self: MSPyMstnPlatform.MSDocumentManager, docs: Bentley.MstnPlatform.DgnDocumentList, putAction: MSPyDgnPlatform.DgnDocument.PutAction, putOptions: MSPyDgnPlatform.DgnDocument.PutOptions, comment: str = None) -> int:
         """
-        PutDocumentList(self: MSPyMstnPlatform.MSDocumentManager, docs: Bentley.MstnPlatform.DgnDocumentList, putAction: MSPyDgnPlatform.DgnDocument.PutAction, putOptions: MSPyDgnPlatform.DgnDocument.PutOptions, comment: str = None) -> int
-        
         commit the local copies of this DgnDocumentList to the DMS *
         """
         ...
@@ -16881,58 +15668,40 @@ class Mesh:
     None
     """
 
-    def BooleanDifference(*args, **kwargs):
-        """
-        BooleanDifference(mesh1: MSPyBentleyGeom.PolyfaceHeader, mesh2: MSPyBentleyGeom.PolyfaceHeader, model: MSPyDgnPlatform.DgnModelRef) -> tuple
-        """
+    @staticmethod
+    def BooleanDifference(mesh1: MSPyBentleyGeom.PolyfaceHeader, mesh2: MSPyBentleyGeom.PolyfaceHeader, model: MSPyDgnPlatform.DgnModelRef) -> tuple:
         ...
     
-    def BooleanIntersection(*args, **kwargs):
-        """
-        BooleanIntersection(mesh1: MSPyBentleyGeom.PolyfaceHeader, mesh2: MSPyBentleyGeom.PolyfaceHeader, model: MSPyDgnPlatform.DgnModelRef) -> tuple
-        """
+    @staticmethod
+    def BooleanIntersection(mesh1: MSPyBentleyGeom.PolyfaceHeader, mesh2: MSPyBentleyGeom.PolyfaceHeader, model: MSPyDgnPlatform.DgnModelRef) -> tuple:
         ...
     
-    def BooleanUnion(*args, **kwargs):
-        """
-        BooleanUnion(mesh1: MSPyBentleyGeom.PolyfaceHeader, mesh2: MSPyBentleyGeom.PolyfaceHeader, model: MSPyDgnPlatform.DgnModelRef) -> tuple
-        """
+    @staticmethod
+    def BooleanUnion(mesh1: MSPyBentleyGeom.PolyfaceHeader, mesh2: MSPyBentleyGeom.PolyfaceHeader, model: MSPyDgnPlatform.DgnModelRef) -> tuple:
         ...
     
-    def ExtrudeToTarget(*args, **kwargs):
-        """
-        ExtrudeToTarget(results: MSPyBentleyGeom.PolyfaceHeaderPtrArray, roofAgenda: MSPyDgnPlatform.ElementAgenda, targetAgenda: MSPyDgnPlatform.ElementAgenda) -> bool
-        """
+    @staticmethod
+    def ExtrudeToTarget(results: MSPyBentleyGeom.PolyfaceHeaderPtrArray, roofAgenda: MSPyDgnPlatform.ElementAgenda, targetAgenda: MSPyDgnPlatform.ElementAgenda) -> bool:
         ...
     
-    def ExtrudeVolume(*args, **kwargs):
-        """
-        ExtrudeVolume(results: MSPyBentleyGeom.PolyfaceHeaderPtrArray, agenda: MSPyDgnPlatform.ElementAgenda, extrusionVec: MSPyBentleyGeom.DVec3d) -> bool
-        """
+    @staticmethod
+    def ExtrudeVolume(results: MSPyBentleyGeom.PolyfaceHeaderPtrArray, agenda: MSPyDgnPlatform.ElementAgenda, extrusionVec: MSPyBentleyGeom.DVec3d) -> bool:
         ...
     
-    def ExtrudeVolumeAlongGlobalZ(*args, **kwargs):
-        """
-        ExtrudeVolumeAlongGlobalZ(results: MSPyBentleyGeom.PolyfaceHeaderPtrArray, agenda: MSPyDgnPlatform.ElementAgenda, length: float) -> bool
-        """
+    @staticmethod
+    def ExtrudeVolumeAlongGlobalZ(results: MSPyBentleyGeom.PolyfaceHeaderPtrArray, agenda: MSPyDgnPlatform.ElementAgenda, length: float) -> bool:
         ...
     
-    def Healholes(*args, **kwargs):
-        """
-        Healholes(mesh: MSPyBentleyGeom.PolyfaceHeader) -> tuple
-        """
+    @staticmethod
+    def Healholes(mesh: MSPyBentleyGeom.PolyfaceHeader) -> tuple:
         ...
     
-    def SubdivideKeepSharp(*args, **kwargs):
-        """
-        SubdivideKeepSharp(mesh: MSPyBentleyGeom.PolyfaceHeader, subdivisionLevel: int, model: MSPyDgnPlatform.DgnModelRef) -> tuple
-        """
+    @staticmethod
+    def SubdivideKeepSharp(mesh: MSPyBentleyGeom.PolyfaceHeader, subdivisionLevel: int, model: MSPyDgnPlatform.DgnModelRef) -> tuple:
         ...
     
-    def SubdivideSmoothly(*args, **kwargs):
-        """
-        SubdivideSmoothly(mesh: MSPyBentleyGeom.PolyfaceHeader, subdivisionLevel: int, model: MSPyDgnPlatform.DgnModelRef) -> tuple
-        """
+    @staticmethod
+    def SubdivideSmoothly(mesh: MSPyBentleyGeom.PolyfaceHeader, subdivisionLevel: int, model: MSPyDgnPlatform.DgnModelRef) -> tuple:
         ...
     
     def __init__(*args, **kwargs):
@@ -16946,22 +15715,16 @@ class MessageCenter:
     None
     """
 
-    def ShowDebugMessage(*args, **kwargs):
-        """
-        ShowDebugMessage(briefMessage: str, detailedMessage: str, openAlertBox: bool) -> None
-        """
+    @staticmethod
+    def ShowDebugMessage(briefMessage: str, detailedMessage: str, openAlertBox: bool) -> None:
         ...
     
-    def ShowErrorMessage(*args, **kwargs):
-        """
-        ShowErrorMessage(briefMessage: str, detailedMessage: str, openAlertBox: bool) -> None
-        """
+    @staticmethod
+    def ShowErrorMessage(briefMessage: str, detailedMessage: str, openAlertBox: bool) -> None:
         ...
     
-    def ShowInfoMessage(*args, **kwargs):
-        """
-        ShowInfoMessage(briefMessage: str, detailedMessage: str, openAlertBox: bool) -> None
-        """
+    @staticmethod
+    def ShowInfoMessage(briefMessage: str, detailedMessage: str, openAlertBox: bool) -> None:
         ...
     
     @StatusCommand.setter
@@ -17019,10 +15782,9 @@ class ModelRef:
     None
     """
 
-    def ActivateAndDisplay(*args, **kwargs):
+    @staticmethod
+    def ActivateAndDisplay(newModelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        ActivateAndDisplay(newModelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Activates and displays the specified modelRef. The
         function checks if the model is displayed in the current views and, if
         not, new views are opened with the modelRef as their root. @Param[in]
@@ -17036,10 +15798,9 @@ class ModelRef:
         """
         ...
     
-    def AreSame(*args, **kwargs):
+    @staticmethod
+    def AreSame(modelRef1: MSPyDgnPlatform.DgnModelRef, modelRef2: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        AreSame(modelRef1: MSPyDgnPlatform.DgnModelRef, modelRef2: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         @Description Determines whether two specified modelRefs are actually
         the same. @Param[in] modelRef1 the first modelRef. @Param[in]
         modelRef2 the second modelRef. @Return true if the two modelRefs the
@@ -17051,10 +15812,9 @@ class ModelRef:
         """
         ...
     
-    def CheckAllRights(*args, **kwargs):
+    @staticmethod
+    def CheckAllRights(modelRef: MSPyDgnPlatform.DgnModelRef, rights: int, diaplayError: MessageDestination) -> int:
         """
-        CheckAllRights(modelRef: MSPyDgnPlatform.DgnModelRef, rights: int, diaplayError: MessageDestination) -> int
-        
         @Description Check if the specified rights are granted to the current
         user for the given model and all references @Param[in] modelRef The
         modelRef to check. @Param[in] rights the rights to query. See
@@ -17073,10 +15833,9 @@ class ModelRef:
         """
         ...
     
-    def CheckAllRightsIfDisplayed(*args, **kwargs):
+    @staticmethod
+    def CheckAllRightsIfDisplayed(modelRef: MSPyDgnPlatform.DgnModelRef, rights: int, view: int, diaplayError: MessageDestination) -> int:
         """
-        CheckAllRightsIfDisplayed(modelRef: MSPyDgnPlatform.DgnModelRef, rights: int, view: int, diaplayError: MessageDestination) -> int
-        
         @Description Check if the specified rights are granted to the current
         user for the given model and all references that are displayed in the
         selected view(s). @Param[in] modelRef The modelRef to check.
@@ -17099,10 +15858,9 @@ class ModelRef:
         """
         ...
     
-    def CheckAllRightsIncludingProtectedRefs(*args, **kwargs):
+    @staticmethod
+    def CheckAllRightsIncludingProtectedRefs(modelRef: MSPyDgnPlatform.DgnModelRef, rights: int, diaplayError: MessageDestination) -> int:
         """
-        CheckAllRightsIncludingProtectedRefs(modelRef: MSPyDgnPlatform.DgnModelRef, rights: int, diaplayError: MessageDestination) -> int
-        
         @Description Check if the specified rights are granted to the current
         user for the given model and all references, including the references
         that could not be opened because the user lacked viewing access.
@@ -17125,10 +15883,9 @@ class ModelRef:
         """
         ...
     
-    def CopyModel(*args, **kwargs):
+    @staticmethod
+    def CopyModel(sourceModelRef: MSPyDgnPlatform.DgnModelRef, destFile: MSPyDgnPlatform.DgnFile, destModelName: str, destModelDescr: str) -> tuple:
         """
-        CopyModel(sourceModelRef: MSPyDgnPlatform.DgnModelRef, destFile: MSPyDgnPlatform.DgnFile, destModelName: str, destModelDescr: str) -> tuple
-        
         @Description Copy a model from one location to another. This function
         handles copying levels, styles, etc. necessary for elements in the
         model. @Remarks Export rights for the source modelRef and edit rights
@@ -17148,10 +15905,9 @@ class ModelRef:
         """
         ...
     
-    def CreateCacheSpecificWorking(*args, **kwargs):
+    @staticmethod
+    def CreateCacheSpecificWorking(dgnFile: MSPyDgnPlatform.DgnFile, modelId: int, fillCache: bool, loadRefs: bool, includeUndisplayedRefs: bool, sectionsToFill: MSPyDgnPlatform.DgnModelSections) -> tuple:
         """
-        CreateCacheSpecificWorking(dgnFile: MSPyDgnPlatform.DgnFile, modelId: int, fillCache: bool, loadRefs: bool, includeUndisplayedRefs: bool, sectionsToFill: MSPyDgnPlatform.DgnModelSections) -> tuple
-        
         @Description Creates a " working " DgnModelRefP containing the specified
         cache sections that can be passed to functions that take DgnModelRefP
         arguments. The ModelRef created must be freed using
@@ -17172,10 +15928,9 @@ class ModelRef:
         """
         ...
     
-    def CreateWorking(*args, **kwargs):
+    @staticmethod
+    def CreateWorking(dgnFile: MSPyDgnPlatform.DgnFile, modelId: int, fillCache: bool, loadRefs: bool) -> tuple:
         """
-        CreateWorking(dgnFile: MSPyDgnPlatform.DgnFile, modelId: int, fillCache: bool, loadRefs: bool) -> tuple
-        
         @Description Creates a " working " DgnModelRefP that can be passed to
         functions that take DgnModelRefP arguments. The ModelRef created must
         be freed using ModelRef.FreeWorking. If the file specified as
@@ -17199,10 +15954,9 @@ class ModelRef:
         """
         ...
     
-    def CreateWorkingByName(*args, **kwargs):
+    @staticmethod
+    def CreateWorkingByName(dgnFile: MSPyDgnPlatform.DgnFile, modelName: str, fillCache: bool, loadRefs: bool) -> tuple:
         """
-        CreateWorkingByName(dgnFile: MSPyDgnPlatform.DgnFile, modelName: str, fillCache: bool, loadRefs: bool) -> tuple
-        
         @Description Creates a " working " DgnModelRefP that can be passed to
         functions that take DgnModelRefP arguments. The ModelRef created must
         be freed using ModelRef.FreeWorking. If the file specified as
@@ -17226,10 +15980,9 @@ class ModelRef:
         """
         ...
     
-    def DeleteModel(*args, **kwargs):
+    @staticmethod
+    def DeleteModel(modelRef: MSPyDgnPlatform.DgnModelRef, deleteElements: bool) -> int:
         """
-        DeleteModel(modelRef: MSPyDgnPlatform.DgnModelRef, deleteElements: bool) -> int
-        
         @Description Deletes the specified model from the file that contains
         it. @Param[in] modelRef the model to delete. @Param[in] deleteElements
         If true, the model will not be deleted unless it is empty. If false,
@@ -17247,10 +16000,9 @@ class ModelRef:
         """
         ...
     
-    def FreeWorking(*args, **kwargs):
+    @staticmethod
+    def FreeWorking(modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        FreeWorking(modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Frees modelRef's created using ModelRef.CreateWorking
         or ModelRef.CreateWorkingByName. @Param[in] modelRef the modelRef
         to free. @Return SUCCESS if the model ref is freed, MDLERR_BADMODELREF
@@ -17269,42 +16021,37 @@ class ModelRef:
         """
         ...
     
-    def GetAttachmentID(*args, **kwargs):
+    @staticmethod
+    def GetAttachmentID(modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        GetAttachmentID(modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         Remark:
         """
         ...
     
-    def GetChildCount(*args, **kwargs):
+    @staticmethod
+    def GetChildCount(modelRef: MSPyDgnPlatform.DgnModelRef, childTypeMask: int) -> int:
         """
-        GetChildCount(modelRef: MSPyDgnPlatform.DgnModelRef, childTypeMask: int) -> int
-        
         Remark:
         """
         ...
     
-    def GetDgnFile(*args, **kwargs):
+    @staticmethod
+    def GetDgnFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.DgnFile:
         """
-        GetDgnFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.DgnFile
-        
         Remark:
         """
         ...
     
-    def GetDgnModel(*args, **kwargs):
+    @staticmethod
+    def GetDgnModel(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.DgnModel:
         """
-        GetDgnModel(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.DgnModel
-        
         Remark:
         """
         ...
     
-    def GetDisplayName(*args, **kwargs):
+    @staticmethod
+    def GetDisplayName(modelRef: MSPyDgnPlatform.DgnModelRef, displayName: MSPyBentley.WString, separator: str) -> int:
         """
-        GetDisplayName(modelRef: MSPyDgnPlatform.DgnModelRef, displayName: MSPyBentley.WString, separator: str) -> int
-        
         @Description Gets the string that MicroStation uses to display the
         name of the modelRef in its user interface. If the modelRef is a
         reference, the string consists of the logical name (if there is any),
@@ -17323,26 +16070,23 @@ class ModelRef:
         """
         ...
     
-    def GetElementRef(*args, **kwargs):
+    @staticmethod
+    def GetElementRef(modelRef: MSPyDgnPlatform.DgnModelRef, filePos: int) -> MSPyDgnPlatform.ElementRefBase:
         """
-        GetElementRef(modelRef: MSPyDgnPlatform.DgnModelRef, filePos: int) -> MSPyDgnPlatform.ElementRefBase
-        
         Remark:
         """
         ...
     
-    def GetEof(*args, **kwargs):
+    @staticmethod
+    def GetEof(modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        GetEof(modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         Remark:
         """
         ...
     
-    def GetFileName(*args, **kwargs):
+    @staticmethod
+    def GetFileName(modelRef: MSPyDgnPlatform.DgnModelRef, fileName: MSPyBentley.WString) -> int:
         """
-        GetFileName(modelRef: MSPyDgnPlatform.DgnModelRef, fileName: MSPyBentley.WString) -> int
-        
         @Description Gets the name of the file that contains the data for the
         specified model. @Param[in] modelRef the model to query. @Param[out]
         fileName buffer to hold the file name. @Param[in] fileNameBufSize size
@@ -17366,18 +16110,16 @@ class ModelRef:
         """
         ...
     
-    def GetModelType(*args, **kwargs):
+    @staticmethod
+    def GetModelType(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.DgnModelType:
         """
-        GetModelType(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.DgnModelType
-        
         Remark:
         """
         ...
     
-    def GetParent(*args, **kwargs):
+    @staticmethod
+    def GetParent(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.DgnModelRef:
         """
-        GetParent(modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.DgnModelRef
-        
         @Description Gets the DgnModelRefP for the model that is the parent of
         the specified modelRef. @Param[in] modelRef The model to get the
         parent of. @Return The modelRef for the parent model of the specified
@@ -17392,10 +16134,9 @@ class ModelRef:
         """
         ...
     
-    def GetRange(*args, **kwargs):
+    @staticmethod
+    def GetRange(modelRef: MSPyDgnPlatform.DgnModelRef, outRange: MSPyBentleyGeom.DRange3d, viewIndex: int, transform: MSPyBentleyGeom.Transform, includeChildren: bool) -> int:
         """
-        GetRange(modelRef: MSPyDgnPlatform.DgnModelRef, outRange: MSPyBentleyGeom.DRange3d, viewIndex: int, transform: MSPyBentleyGeom.Transform, includeChildren: bool) -> int
-        
         @Description Gets the range for the specified modelRef. This
         calculates the range for all geometry in a model - it does not ignore
         elements that are not displayed in the input view. This function is
@@ -17419,32 +16160,27 @@ class ModelRef:
         """
         ...
     
-    def GetTransient(*args, **kwargs):
+    @staticmethod
+    def GetTransient() -> MSPyDgnPlatform.DgnModelRef:
         """
-        GetTransient() -> MSPyDgnPlatform.DgnModelRef
-        
         Remark:
         """
         ...
     
-    def GetUorPerMaster(*args, **kwargs):
-        """
-        GetUorPerMaster(modelRef: MSPyDgnPlatform.DgnModelRef) -> float
-        """
+    @staticmethod
+    def GetUorPerMaster(modelRef: MSPyDgnPlatform.DgnModelRef) -> float:
         ...
     
-    def GetUorScaleBetweenModels(*args, **kwargs):
+    @staticmethod
+    def GetUorScaleBetweenModels(srcModelRef: MSPyDgnPlatform.DgnModelRef, dstModelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
         """
-        GetUorScaleBetweenModels(srcModelRef: MSPyDgnPlatform.DgnModelRef, dstModelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-        
         Remark:
         """
         ...
     
-    def GetViewMask(*args, **kwargs):
+    @staticmethod
+    def GetViewMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        GetViewMask(modelRef: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Gets a bitmask representing the views that display the
         specified modelRef. @Param[in] modelRef the model to get the view
         bitmask for. @Return An integer value that is has one bit for each of
@@ -17458,10 +16194,9 @@ class ModelRef:
         """
         ...
     
-    def InMasterFile(*args, **kwargs):
+    @staticmethod
+    def InMasterFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        InMasterFile(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         @Description Determines whether the specified modelRef is contained in
         the master file. @Param[in] modelRef the model to test. @Return true,
         if the modelRef is valid and its data is stored in the current master
@@ -17476,18 +16211,16 @@ class ModelRef:
         """
         ...
     
-    def Is3D(*args, **kwargs):
+    @staticmethod
+    def Is3D(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        Is3D(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Remark:
         """
         ...
     
-    def IsActiveModel(*args, **kwargs):
+    @staticmethod
+    def IsActiveModel(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsActiveModel(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         @Description Determines whether the specified modelRef is the active
         model. @Param[in] modelRef the model to test. @Return true, if the
         modelRef is the currently active model.
@@ -17497,18 +16230,16 @@ class ModelRef:
         """
         ...
     
-    def IsDefault(*args, **kwargs):
+    @staticmethod
+    def IsDefault(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsDefault(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Remark:
         """
         ...
     
-    def IsDisplayedInView(*args, **kwargs):
+    @staticmethod
+    def IsDisplayedInView(modelRef: MSPyDgnPlatform.DgnModelRef, viewIndex: int) -> bool:
         """
-        IsDisplayedInView(modelRef: MSPyDgnPlatform.DgnModelRef, viewIndex: int) -> bool
-        
         @Description Determines whether the specified DgnPlatform.DgnModelRef
         is displayed in the specified view. @Param[in] modelRef the the model
         to query. @Param[in] viewIndex the view index to test. This value
@@ -17532,18 +16263,16 @@ class ModelRef:
         """
         ...
     
-    def IsEmpty(*args, **kwargs):
+    @staticmethod
+    def IsEmpty(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsEmpty(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Remark:
         """
         ...
     
-    def IsNestedReference(*args, **kwargs):
+    @staticmethod
+    def IsNestedReference(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsNestedReference(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         @Description Determines whether the specified reference model is
         attached to another reference model. @Param[in] modelRef the model to
         test. @Return true if the specified modelRef is referenced from
@@ -17558,10 +16287,9 @@ class ModelRef:
         """
         ...
     
-    def IsReadOnly(*args, **kwargs):
+    @staticmethod
+    def IsReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsReadOnly(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         @Description Determines whether a modelRef is read-only. @Param[in]
         modelRef the modelRef to test. @Return true if the specified model is
         read-only.
@@ -17575,10 +16303,9 @@ class ModelRef:
         """
         ...
     
-    def IsReference(*args, **kwargs):
+    @staticmethod
+    def IsReference(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsReference(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         @Description Determines whether the specified modelRef is a reference
         model. @Param[in] modelRef The model to test. @Return true if the
         specified modelRef represents a reference model.
@@ -17589,26 +16316,23 @@ class ModelRef:
         """
         ...
     
-    def IsSheet(*args, **kwargs):
+    @staticmethod
+    def IsSheet(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsSheet(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Remark:
         """
         ...
     
-    def IsTransient(*args, **kwargs):
+    @staticmethod
+    def IsTransient(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsTransient(modelRef: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         Remark:
         """
         ...
     
-    def LoadReferenceModels(*args, **kwargs):
+    @staticmethod
+    def LoadReferenceModels(modelRef: MSPyDgnPlatform.DgnModelRef, loadCache: bool, loadRasterRefs: bool, loadUndisplayedRefs: bool) -> int:
         """
-        LoadReferenceModels(modelRef: MSPyDgnPlatform.DgnModelRef, loadCache: bool, loadRasterRefs: bool, loadUndisplayedRefs: bool) -> int
-        
         Loads the reference models attached to the specified modelRef. By
         default, reference models are loaded only for the active modelRef (and
         its descendants), and child DgnModelRefP's for other modelRefs are not
@@ -17636,10 +16360,9 @@ class ModelRef:
         """
         ...
     
-    def SetDefaultBackgroundColor(*args, **kwargs):
+    @staticmethod
+    def SetDefaultBackgroundColor(modelRef: MSPyDgnPlatform.DgnModelRef) -> None:
         """
-        SetDefaultBackgroundColor(modelRef: MSPyDgnPlatform.DgnModelRef) -> None
-        
         @Description Sets the model background color to the default value for
         that model type. This has an effect only on sheet models, because
         there is no default background color for normal models.. @Param[in]
@@ -17662,50 +16385,44 @@ class ModelRefList:
     None
     """
 
-    def Add(*args, **kwargs):
+    @staticmethod
+    def Add(modelRefList: MSPyDgnPlatform.DgnModelRefList, entry: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        Add(modelRefList: MSPyDgnPlatform.DgnModelRefList, entry: MSPyDgnPlatform.DgnModelRef) -> int
-        
         Remark:
         """
         ...
     
-    def Clone(*args, **kwargs):
+    @staticmethod
+    def Clone(modelRefList: MSPyDgnPlatform.DgnModelRefList) -> MSPyDgnPlatform.DgnModelRefList:
         """
-        Clone(modelRefList: MSPyDgnPlatform.DgnModelRefList) -> MSPyDgnPlatform.DgnModelRefList
-        
         Remark:
         """
         ...
     
-    def CopyContents(*args, **kwargs):
+    @staticmethod
+    def CopyContents(modelRefList: MSPyDgnPlatform.DgnModelRefList, srcModelRefList: MSPyDgnPlatform.DgnModelRefList) -> None:
         """
-        CopyContents(modelRefList: MSPyDgnPlatform.DgnModelRefList, srcModelRefList: MSPyDgnPlatform.DgnModelRefList) -> None
-        
         Remark:
         """
         ...
     
-    def Create(*args, **kwargs):
+    @staticmethod
+    def Create() -> tuple:
         """
-        Create() -> tuple
-        
         Remark:
         """
         ...
     
-    def Empty(*args, **kwargs):
+    @staticmethod
+    def Empty(modelRefList: MSPyDgnPlatform.DgnModelRefList) -> None:
         """
-        Empty(modelRefList: MSPyDgnPlatform.DgnModelRefList) -> None
-        
         Remark:
         """
         ...
     
-    def Find(*args, **kwargs):
+    @staticmethod
+    def Find(modelRefList: MSPyDgnPlatform.DgnModelRefList, entry: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        Find(modelRefList: MSPyDgnPlatform.DgnModelRefList, entry: MSPyDgnPlatform.DgnModelRef) -> int
-        
         @Description Gets the index of the specified modelRef in the list.
         @Param[in] modelRefList the list to search for the modelRef.
         @Param[in] entry the model to find in the list. @Return The index of
@@ -17722,42 +16439,37 @@ class ModelRefList:
         """
         ...
     
-    def Free(*args, **kwargs):
+    @staticmethod
+    def Free(modelRefList: MSPyDgnPlatform.DgnModelRefList) -> int:
         """
-        Free(modelRefList: MSPyDgnPlatform.DgnModelRefList) -> int
-        
         Remark:
         """
         ...
     
-    def Get(*args, **kwargs):
+    @staticmethod
+    def Get(modelRefList: MSPyDgnPlatform.DgnModelRefList, index: int) -> MSPyDgnPlatform.DgnModelRef:
         """
-        Get(modelRefList: MSPyDgnPlatform.DgnModelRefList, index: int) -> MSPyDgnPlatform.DgnModelRef
-        
         Remark:
         """
         ...
     
-    def GetCount(*args, **kwargs):
+    @staticmethod
+    def GetCount(modelRefList: MSPyDgnPlatform.DgnModelRefList) -> int:
         """
-        GetCount(modelRefList: MSPyDgnPlatform.DgnModelRefList) -> int
-        
         Remark:
         """
         ...
     
-    def Insert(*args, **kwargs):
+    @staticmethod
+    def Insert(modelRefList: MSPyDgnPlatform.DgnModelRefList, insertBefore: int, entry: MSPyDgnPlatform.DgnModelRef) -> None:
         """
-        Insert(modelRefList: MSPyDgnPlatform.DgnModelRefList, insertBefore: int, entry: MSPyDgnPlatform.DgnModelRef) -> None
-        
         Remark:
         """
         ...
     
-    def IsFound(*args, **kwargs):
+    @staticmethod
+    def IsFound(modelRefList: MSPyDgnPlatform.DgnModelRefList, entry: MSPyDgnPlatform.DgnModelRef) -> bool:
         """
-        IsFound(modelRefList: MSPyDgnPlatform.DgnModelRefList, entry: MSPyDgnPlatform.DgnModelRef) -> bool
-        
         @Description Determines whether the specified modelRef is a member of
         the list. @Param[in] modelRefList the list to search. @Param[in] entry
         the modelRef to find in the list. @Return true if the specified entry
@@ -17772,10 +16484,9 @@ class ModelRefList:
         """
         ...
     
-    def Remove(*args, **kwargs):
+    @staticmethod
+    def Remove(modelRefList: MSPyDgnPlatform.DgnModelRefList, entry: MSPyDgnPlatform.DgnModelRef) -> int:
         """
-        Remove(modelRefList: MSPyDgnPlatform.DgnModelRefList, entry: MSPyDgnPlatform.DgnModelRef) -> int
-        
         Remark:
         """
         ...
@@ -17791,10 +16502,8 @@ class MstnEventManager:
     None
     """
 
-    def AddEditActionSource(*args, **kwargs):
+    def AddEditActionSource(self: MSPyMstnPlatform.MstnEventManager, source: Bentley.DgnPlatform.IEditActionSource) -> None:
         """
-        AddEditActionSource(self: MSPyMstnPlatform.MstnEventManager, source: Bentley.DgnPlatform.IEditActionSource) -> None
-        
         Add a new DgnPlatform.IEditActionSource to MicroStation's list of
         installed EditActionSources. After this call, handler will be notified
         of all future EditActionSource events.
@@ -17804,10 +16513,8 @@ class MstnEventManager:
         """
         ...
     
-    def AddMouseWheelHandler(*args, **kwargs):
+    def AddMouseWheelHandler(self: MSPyMstnPlatform.MstnEventManager, handler: MSPyMstnPlatform.IMouseWheelHandler) -> None:
         """
-        AddMouseWheelHandler(self: MSPyMstnPlatform.MstnEventManager, handler: MSPyMstnPlatform.IMouseWheelHandler) -> None
-        
         Add a new IMouseWheelHandler to MicroStation's list of installed
         MouseWheelHandlers.
         
@@ -17816,10 +16523,8 @@ class MstnEventManager:
         """
         ...
     
-    def AddPrintEventHandler(*args, **kwargs):
+    def AddPrintEventHandler(self: MSPyMstnPlatform.MstnEventManager, handler: MSPyMstnPlatform.IPrintEventHandler) -> None:
         """
-        AddPrintEventHandler(self: MSPyMstnPlatform.MstnEventManager, handler: MSPyMstnPlatform.IPrintEventHandler) -> None
-        
         Add a new IPrintEventHandler to MicroStation's list of installed
         PrintEventHandlers.
         
@@ -17828,10 +16533,8 @@ class MstnEventManager:
         """
         ...
     
-    def DropEditActionSource(*args, **kwargs):
+    def DropEditActionSource(self: MSPyMstnPlatform.MstnEventManager, source: Bentley.DgnPlatform.IEditActionSource) -> None:
         """
-        DropEditActionSource(self: MSPyMstnPlatform.MstnEventManager, source: Bentley.DgnPlatform.IEditActionSource) -> None
-        
         Drop an DgnPlatform.IEditActionSource from list of installed
         EditActionSources. After this call, handler will not be notified of
         future EditActionSource events.
@@ -17841,10 +16544,8 @@ class MstnEventManager:
         """
         ...
     
-    def DropMouseWheelHandler(*args, **kwargs):
+    def DropMouseWheelHandler(self: MSPyMstnPlatform.MstnEventManager, handler: MSPyMstnPlatform.IMouseWheelHandler) -> None:
         """
-        DropMouseWheelHandler(self: MSPyMstnPlatform.MstnEventManager, handler: MSPyMstnPlatform.IMouseWheelHandler) -> None
-        
         Drop an IMouseWheelHandler from list of installed MouseWheelHandlers.
         After this call, handler will not be notified of future MouseWheel
         events.
@@ -17854,10 +16555,8 @@ class MstnEventManager:
         """
         ...
     
-    def DropPrintEventHandler(*args, **kwargs):
+    def DropPrintEventHandler(self: MSPyMstnPlatform.MstnEventManager, handler: MSPyMstnPlatform.IPrintEventHandler) -> None:
         """
-        DropPrintEventHandler(self: MSPyMstnPlatform.MstnEventManager, handler: MSPyMstnPlatform.IPrintEventHandler) -> None
-        
         Drop an IPrintEventHandler from list of installed PrintEventHandlers.
         After this call, handler will not be notified of future print events.
         
@@ -17866,10 +16565,9 @@ class MstnEventManager:
         """
         ...
     
-    def GetManager(*args, **kwargs):
+    @staticmethod
+    def GetManager() -> MSPyMstnPlatform.MstnEventManager:
         """
-        GetManager() -> MSPyMstnPlatform.MstnEventManager
-        
         Get the MstnEventManager instance.
         """
         ...
@@ -17885,28 +16583,20 @@ class MstnImage:
     None
     """
 
-    def RGBSeparateToBGR(*args, **kwargs):
-        """
-        RGBSeparateToBGR(rgb: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, colorMode: MSPyDgnPlatform.ImageColorMode) -> tuple
-        """
+    @staticmethod
+    def RGBSeparateToBGR(rgb: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, colorMode: MSPyDgnPlatform.ImageColorMode) -> tuple:
         ...
     
-    def RGBSeparateToRGBInPlace(*args, **kwargs):
-        """
-        RGBSeparateToRGBInPlace(rgb: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, colorMode: MSPyDgnPlatform.ImageColorMode) -> int
-        """
+    @staticmethod
+    def RGBSeparateToRGBInPlace(rgb: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, colorMode: MSPyDgnPlatform.ImageColorMode) -> int:
         ...
     
-    def RGBToRGBSeparate(*args, **kwargs):
-        """
-        RGBToRGBSeparate(rgbInterlacedR: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, colorMode: MSPyDgnPlatform.ImageColorMode) -> tuple
-        """
+    @staticmethod
+    def RGBToRGBSeparate(rgbInterlacedR: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, colorMode: MSPyDgnPlatform.ImageColorMode) -> tuple:
         ...
     
-    def RGBToRGBSeparateInPlace(*args, **kwargs):
-        """
-        RGBToRGBSeparateInPlace(rgb: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, colorMode: MSPyDgnPlatform.ImageColorMode) -> int
-        """
+    @staticmethod
+    def RGBToRGBSeparateInPlace(rgb: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, colorMode: MSPyDgnPlatform.ImageColorMode) -> int:
         ...
     
     def __init__(*args, **kwargs):
@@ -17915,130 +16605,88 @@ class MstnImage:
         """
         ...
     
-    def applyGamma(*args, **kwargs):
-        """
-        applyGamma(rgb: bytearray, sizeR: MSPyBentleyGeom.Point2d, gamma: float) -> None
-        """
+    @staticmethod
+    def applyGamma(rgb: bytearray, sizeR: MSPyBentleyGeom.Point2d, gamma: float) -> None:
         ...
     
-    def extCreateFileFromRGB(*args, **kwargs):
-        """
-        extCreateFileFromRGB(name: str, type: MSPyDgnPlatform.ImageFileFormat, colorMode: MSPyDgnPlatform.ImageColorMode, sizeR: MSPyBentleyGeom.Point2d, imageBufferR: bytearray, compressType: MSPyDgnPlatform.CompressionType, compressRatio: MSPyDgnPlatform.CompressionRatio, transparencyR: bytearray) -> int
-        """
+    @staticmethod
+    def extCreateFileFromRGB(name: str, type: MSPyDgnPlatform.ImageFileFormat, colorMode: MSPyDgnPlatform.ImageColorMode, sizeR: MSPyBentleyGeom.Point2d, imageBufferR: bytearray, compressType: MSPyDgnPlatform.CompressionType, compressRatio: MSPyDgnPlatform.CompressionRatio, transparencyR: bytearray) -> int:
         ...
     
-    def extractSubImage(*args, **kwargs):
-        """
-        extractSubImage(outSizeR: MSPyBentleyGeom.Point2d, inR: bytearray, inSizeR: MSPyBentleyGeom.Point2d, rectR: MSPyDgnPlatform.BSIRect, imageFormat: int) -> tuple
-        """
+    @staticmethod
+    def extractSubImage(outSizeR: MSPyBentleyGeom.Point2d, inR: bytearray, inSizeR: MSPyBentleyGeom.Point2d, rectR: MSPyDgnPlatform.BSIRect, imageFormat: int) -> tuple:
         ...
     
-    def fileType(*args, **kwargs):
-        """
-        fileType(fileType: MSPyDgnPlatform.ImageFileFormat, fileNameP: str) -> MSPyDgnPlatform.ImageFileFormat
-        """
+    @staticmethod
+    def fileType(fileType: MSPyDgnPlatform.ImageFileFormat, fileNameP: str) -> MSPyDgnPlatform.ImageFileFormat:
         ...
     
-    def getExportFormatString(*args, **kwargs):
-        """
-        getExportFormatString(formatId: MSPyDgnPlatform.ImageFileFormat) -> tuple
-        """
+    @staticmethod
+    def getExportFormatString(formatId: MSPyDgnPlatform.ImageFileFormat) -> tuple:
         ...
     
-    def getExportSupport(*args, **kwargs):
-        """
-        getExportSupport(type: MSPyDgnPlatform.ImageFileFormat) -> tuple
-        """
+    @staticmethod
+    def getExportSupport(type: MSPyDgnPlatform.ImageFileFormat) -> tuple:
         ...
     
-    def getExtension(*args, **kwargs):
-        """
-        getExtension(type: MSPyDgnPlatform.ImageFileFormat) -> tuple
-        """
+    @staticmethod
+    def getExtension(type: MSPyDgnPlatform.ImageFileFormat) -> tuple:
         ...
     
-    def getImportFormatString(*args, **kwargs):
-        """
-        getImportFormatString(formatId: MSPyDgnPlatform.ImageFileFormat) -> tuple
-        """
+    @staticmethod
+    def getImportFormatString(formatId: MSPyDgnPlatform.ImageFileFormat) -> tuple:
         ...
     
-    def memorySize(*args, **kwargs):
-        """
-        memorySize(sizeP: MSPyBentleyGeom.Point2d, imageFormat: int) -> int
-        """
+    @staticmethod
+    def memorySize(sizeP: MSPyBentleyGeom.Point2d, imageFormat: int) -> int:
         ...
     
-    def mirror(*args, **kwargs):
-        """
-        mirror(rgb: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, imageFormat: int, vertical: bool) -> int
-        """
+    @staticmethod
+    def mirror(rgb: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, imageFormat: int, vertical: bool) -> int:
         ...
     
-    def negate(*args, **kwargs):
-        """
-        negate(rgb: bytearray, sizeR: MSPyBentleyGeom.Point2d) -> None
-        """
+    @staticmethod
+    def negate(rgb: bytearray, sizeR: MSPyBentleyGeom.Point2d) -> None:
         ...
     
-    def readFileInfo(*args, **kwargs):
-        """
-        readFileInfo(fileName: str, fileType: MSPyDgnPlatform.ImageFileFormat) -> tuple
-        """
+    @staticmethod
+    def readFileInfo(fileName: str, fileType: MSPyDgnPlatform.ImageFileFormat) -> tuple:
         ...
     
-    def readFileToRGB(*args, **kwargs):
-        """
-        readFileToRGB(fileName: str, fileType: MSPyDgnPlatform.ImageFileFormat, requestedSize: Optional[MSPyBentleyGeom.Point2d]) -> tuple
-        """
+    @staticmethod
+    def readFileToRGB(fileName: str, fileType: MSPyDgnPlatform.ImageFileFormat, requestedSize: Optional[MSPyBentleyGeom.Point2d]) -> tuple:
         ...
     
-    def resize(*args, **kwargs):
-        """
-        resize(outputsize: MSPyBentleyGeom.Point2d, inputImageR: bytearray, inputsize: MSPyBentleyGeom.Point2d) -> tuple
-        """
+    @staticmethod
+    def resize(outputsize: MSPyBentleyGeom.Point2d, inputImageR: bytearray, inputsize: MSPyBentleyGeom.Point2d) -> tuple:
         ...
     
-    def rotate(*args, **kwargs):
-        """
-        rotate(inpBufferR: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, imageFormat: int, rotation: int) -> tuple
-        """
+    @staticmethod
+    def rotate(inpBufferR: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, imageFormat: int, rotation: int) -> tuple:
         ...
     
-    def saveView(*args, **kwargs):
-        """
-        saveView(fileNameP: str, imageSizeR: MSPyBentleyGeom.Point2d, renderMode: int, imageFormat: MSPyDgnPlatform.ImageFileFormat, stereo: bool, antialias: bool, view: int) -> int
-        """
+    @staticmethod
+    def saveView(fileNameP: str, imageSizeR: MSPyBentleyGeom.Point2d, renderMode: int, imageFormat: MSPyDgnPlatform.ImageFileFormat, stereo: bool, antialias: bool, view: int) -> int:
         ...
     
-    def saveViewToRGB(*args, **kwargs):
-        """
-        saveViewToRGB(imageSizeR: MSPyBentleyGeom.Point2d, renderMode: int, stereo: bool, antialias: bool, view: int) -> tuple
-        """
+    @staticmethod
+    def saveViewToRGB(imageSizeR: MSPyBentleyGeom.Point2d, renderMode: int, stereo: bool, antialias: bool, view: int) -> tuple:
         ...
     
-    def saveViewToRGBA(*args, **kwargs):
-        """
-        saveViewToRGBA(imageSizeR: MSPyBentleyGeom.Point2d, renderMode: int, stereo: bool, antialias: bool, view: int) -> tuple
-        """
+    @staticmethod
+    def saveViewToRGBA(imageSizeR: MSPyBentleyGeom.Point2d, renderMode: int, stereo: bool, antialias: bool, view: int) -> tuple:
         ...
     
-    def tintImage(*args, **kwargs):
-        """
-        tintImage(imageR: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, tintRGBP: MSPyDgnPlatform.RgbColorDef) -> None
-        """
+    @staticmethod
+    def tintImage(imageR: bytearray, imageSizeR: MSPyBentleyGeom.Point2d, tintRGBP: MSPyDgnPlatform.RgbColorDef) -> None:
         ...
     
-    def typeFromExtension(*args, **kwargs):
-        """
-        typeFromExtension(fileName: str) -> MSPyDgnPlatform.ImageFileFormat
-        """
+    @staticmethod
+    def typeFromExtension(fileName: str) -> MSPyDgnPlatform.ImageFileFormat:
         ...
     
-    def typeFromFile(*args, **kwargs):
-        """
-        typeFromFile(fileNameP: str) -> MSPyDgnPlatform.ImageFileFormat
-        """
+    @staticmethod
+    def typeFromFile(fileNameP: str) -> MSPyDgnPlatform.ImageFileFormat:
         ...
     
 class PyCExprValue:
@@ -18046,22 +16694,13 @@ class PyCExprValue:
     None
     """
 
-    def GetDoubleValue(*args, **kwargs):
-        """
-        GetDoubleValue(self: MSPyMstnPlatform.PyCExprValue) -> float
-        """
+    def GetDoubleValue(self: MSPyMstnPlatform.PyCExprValue) -> float:
         ...
     
-    def GetLongValue(*args, **kwargs):
-        """
-        GetLongValue(self: MSPyMstnPlatform.PyCExprValue) -> int
-        """
+    def GetLongValue(self: MSPyMstnPlatform.PyCExprValue) -> int:
         ...
     
-    def GetUtf8StringValue(*args, **kwargs):
-        """
-        GetUtf8StringValue(self: MSPyMstnPlatform.PyCExprValue) -> MSPyBentley.Utf8String
-        """
+    def GetUtf8StringValue(self: MSPyMstnPlatform.PyCExprValue) -> MSPyBentley.Utf8String:
         ...
     
     @property
@@ -18121,16 +16760,12 @@ class PyCExpression:
     None
     """
 
-    def GetCExpressionValue(*args, **kwargs):
-        """
-        GetCExpressionValue(expression: str, taskId: str, value: MSPyMstnPlatform.PyCExprValue) -> int
-        """
+    @staticmethod
+    def GetCExpressionValue(expression: str, taskId: str, value: MSPyMstnPlatform.PyCExprValue) -> int:
         ...
     
-    def SetCExpressionValue(*args, **kwargs):
-        """
-        SetCExpressionValue(expression: str, value: MSPyMstnPlatform.PyCExprValue, taskId: str) -> int
-        """
+    @staticmethod
+    def SetCExpressionValue(expression: str, value: MSPyMstnPlatform.PyCExprValue, taskId: str) -> int:
         ...
     
     def __init__(*args, **kwargs):
@@ -18144,46 +16779,25 @@ class PyCadInputMessage:
     None
     """
 
-    def GetCommandKeyin(*args, **kwargs):
-        """
-        GetCommandKeyin(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyBentley.WString
-        """
+    def GetCommandKeyin(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyBentley.WString:
         ...
     
-    def GetCursorButton(*args, **kwargs):
-        """
-        GetCursorButton(self: MSPyMstnPlatform.PyCadInputMessage) -> int
-        """
+    def GetCursorButton(self: MSPyMstnPlatform.PyCadInputMessage) -> int:
         ...
     
-    def GetInputType(*args, **kwargs):
-        """
-        GetInputType(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyMstnPlatform.CadInputType
-        """
+    def GetInputType(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyMstnPlatform.CadInputType:
         ...
     
-    def GetKeyin(*args, **kwargs):
-        """
-        GetKeyin(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyBentley.WString
-        """
+    def GetKeyin(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyBentley.WString:
         ...
     
-    def GetPoint(*args, **kwargs):
-        """
-        GetPoint(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyBentleyGeom.DPoint3d
-        """
+    def GetPoint(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyBentleyGeom.DPoint3d:
         ...
     
-    def GetScreenPoint(*args, **kwargs):
-        """
-        GetScreenPoint(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyBentleyGeom.DPoint3d
-        """
+    def GetScreenPoint(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyBentleyGeom.DPoint3d:
         ...
     
-    def GetView(*args, **kwargs):
-        """
-        GetView(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyDgnPlatform.ViewInfo
-        """
+    def GetView(self: MSPyMstnPlatform.PyCadInputMessage) -> MSPyDgnPlatform.ViewInfo:
         ...
     
     def __init__(*args, **kwargs):
@@ -18197,70 +16811,48 @@ class PyCadInputQueue:
     None
     """
 
-    def AttachQtToolSetting(*args, **kwargs):
-        """
-        AttachQtToolSetting(hQtWin: int) -> None
-        """
+    @staticmethod
+    def AttachQtToolSetting(hQtWin: int) -> None:
         ...
     
-    def AttachTkinterToolSetting(*args, **kwargs):
-        """
-        AttachTkinterToolSetting(hTkWin: int) -> None
-        """
+    @staticmethod
+    def AttachTkinterToolSetting(hTkWin: int) -> None:
         ...
     
-    def GetInput(*args, **kwargs):
-        """
-        GetInput(type1: MSPyMstnPlatform.CadInputType, type2: MSPyMstnPlatform.CadInputType, type3: MSPyMstnPlatform.CadInputType, type4: MSPyMstnPlatform.CadInputType) -> Bentley.MstnPlatform.PyCadInputMessage
-        """
+    @staticmethod
+    def GetInput(type1: MSPyMstnPlatform.CadInputType, type2: MSPyMstnPlatform.CadInputType, type3: MSPyMstnPlatform.CadInputType, type4: MSPyMstnPlatform.CadInputType) -> Bentley.MstnPlatform.PyCadInputMessage:
         ...
     
-    def PythonMainLoop(*args, **kwargs):
-        """
-        PythonMainLoop() -> None
-        """
+    @staticmethod
+    def PythonMainLoop() -> None:
         ...
     
-    def SendCommand(*args, **kwargs):
-        """
-        SendCommand(commandStr: str) -> None
-        """
+    @staticmethod
+    def SendCommand(commandStr: str) -> None:
         ...
     
-    def SendDataPoint(*args, **kwargs):
-        """
-        SendDataPoint(point: MSPyBentleyGeom.DPoint3d, view: int) -> None
-        """
+    @staticmethod
+    def SendDataPoint(point: MSPyBentleyGeom.DPoint3d, view: int) -> None:
         ...
     
-    def SendDataPointForLocate(*args, **kwargs):
-        """
-        SendDataPointForLocate(element: MSPyDgnPlatform.ElementRefBase, point: MSPyBentleyGeom.DPoint3d) -> None
-        """
+    @staticmethod
+    def SendDataPointForLocate(element: MSPyDgnPlatform.ElementRefBase, point: MSPyBentleyGeom.DPoint3d) -> None:
         ...
     
-    def SendKeyin(*args, **kwargs):
-        """
-        SendKeyin(keyinStr: str) -> None
-        """
+    @staticmethod
+    def SendKeyin(keyinStr: str) -> None:
         ...
     
-    def SendKeyinToPython(*args, **kwargs):
-        """
-        SendKeyinToPython(keyinStr: str) -> None
-        """
+    @staticmethod
+    def SendKeyinToPython(keyinStr: str) -> None:
         ...
     
-    def SendReset(*args, **kwargs):
-        """
-        SendReset() -> None
-        """
+    @staticmethod
+    def SendReset() -> None:
         ...
     
-    def SequeueLastInput(*args, **kwargs):
-        """
-        SequeueLastInput(position: MSPyMstnPlatform.MSInputQueuePos) -> None
-        """
+    @staticmethod
+    def SequeueLastInput(position: MSPyMstnPlatform.MSInputQueuePos) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -18274,10 +16866,8 @@ class PyCommandState:
     None
     """
 
-    def StartDefaultCommand(*args, **kwargs):
-        """
-        StartDefaultCommand() -> None
-        """
+    @staticmethod
+    def StartDefaultCommand() -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -18291,10 +16881,8 @@ class PyDocumentOpenDialogParams:
     None
     """
 
-    def Create(*args, **kwargs):
-        """
-        Create() -> MSPyMstnPlatform.PyDocumentOpenDialogParams
-        """
+    @staticmethod
+    def Create() -> MSPyMstnPlatform.PyDocumentOpenDialogParams:
         ...
     
     @property
@@ -18395,136 +16983,70 @@ class PyDocumentOpenDialogParams:
     def FilterStringListId(arg0: MSPyMstnPlatform.PyDocumentOpenDialogParams, arg1: int) -> None:
         ...
     
-    def GetDefFileId(*args, **kwargs):
-        """
-        GetDefFileId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetDefFileId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetDefRscFileHandle(*args, **kwargs):
-        """
-        GetDefRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetDefRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetDefSeedDir(*args, **kwargs):
-        """
-        GetDefSeedDir(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetDefSeedDir(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetDefSeedFileId(*args, **kwargs):
-        """
-        GetDefSeedFileId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetDefSeedFileId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetDefSeedFileName(*args, **kwargs):
-        """
-        GetDefSeedFileName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetDefSeedFileName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetDefSeedFilter(*args, **kwargs):
-        """
-        GetDefSeedFilter(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetDefSeedFilter(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetDefaultDir(*args, **kwargs):
-        """
-        GetDefaultDir(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetDefaultDir(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetDefaultFilter(*args, **kwargs):
-        """
-        GetDefaultFilter(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetDefaultFilter(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetDialogId(*args, **kwargs):
-        """
-        GetDialogId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetDialogId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetDialogTitle(*args, **kwargs):
-        """
-        GetDialogTitle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetDialogTitle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetDirCfgVar(*args, **kwargs):
-        """
-        GetDirCfgVar(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetDirCfgVar(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetFilterInfoString(*args, **kwargs):
-        """
-        GetFilterInfoString(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetFilterInfoString(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetFilterRscFileHandle(*args, **kwargs):
-        """
-        GetFilterRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetFilterRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetFilterStringListId(*args, **kwargs):
-        """
-        GetFilterStringListId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetFilterStringListId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetOpenCreate(*args, **kwargs):
-        """
-        GetOpenCreate(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetOpenCreate(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetPostIncludeCADFileOpenFilters(*args, **kwargs):
-        """
-        GetPostIncludeCADFileOpenFilters(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> bool
-        """
+    def GetPostIncludeCADFileOpenFilters(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> bool:
         ...
     
-    def GetPreIncludeCADFileOpenFilters(*args, **kwargs):
-        """
-        GetPreIncludeCADFileOpenFilters(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> bool
-        """
+    def GetPreIncludeCADFileOpenFilters(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> bool:
         ...
     
-    def GetRequiredRights(*args, **kwargs):
-        """
-        GetRequiredRights(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetRequiredRights(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetRscFileHandle(*args, **kwargs):
-        """
-        GetRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int
-        """
+    def GetRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> int:
         ...
     
-    def GetSuggestedFileName(*args, **kwargs):
-        """
-        GetSuggestedFileName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetSuggestedFileName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetWorkSetName(*args, **kwargs):
-        """
-        GetWorkSetName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetWorkSetName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
-    def GetWorkSpaceName(*args, **kwargs):
-        """
-        GetWorkSpaceName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString
-        """
+    def GetWorkSpaceName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams) -> MSPyBentley.WString:
         ...
     
     @property
@@ -18562,136 +17084,70 @@ class PyDocumentOpenDialogParams:
     def RscFileHandle(arg0: MSPyMstnPlatform.PyDocumentOpenDialogParams, arg1: int) -> None:
         ...
     
-    def SetDefFileId(*args, **kwargs):
-        """
-        SetDefFileId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileId: int) -> None
-        """
+    def SetDefFileId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileId: int) -> None:
         ...
     
-    def SetDefRscFileHandle(*args, **kwargs):
-        """
-        SetDefRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileHandle: int) -> None
-        """
+    def SetDefRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileHandle: int) -> None:
         ...
     
-    def SetDefSeedDir(*args, **kwargs):
-        """
-        SetDefSeedDir(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, seedDir: MSPyBentley.WString) -> None
-        """
+    def SetDefSeedDir(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, seedDir: MSPyBentley.WString) -> None:
         ...
     
-    def SetDefSeedFileId(*args, **kwargs):
-        """
-        SetDefSeedFileId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileId: int) -> None
-        """
+    def SetDefSeedFileId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileId: int) -> None:
         ...
     
-    def SetDefSeedFileName(*args, **kwargs):
-        """
-        SetDefSeedFileName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileName: MSPyBentley.WString) -> None
-        """
+    def SetDefSeedFileName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileName: MSPyBentley.WString) -> None:
         ...
     
-    def SetDefSeedFilter(*args, **kwargs):
-        """
-        SetDefSeedFilter(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, seedFilter: MSPyBentley.WString) -> None
-        """
+    def SetDefSeedFilter(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, seedFilter: MSPyBentley.WString) -> None:
         ...
     
-    def SetDefaultDir(*args, **kwargs):
-        """
-        SetDefaultDir(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, defDir: MSPyBentley.WString) -> None
-        """
+    def SetDefaultDir(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, defDir: MSPyBentley.WString) -> None:
         ...
     
-    def SetDefaultFilter(*args, **kwargs):
-        """
-        SetDefaultFilter(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, filter: MSPyBentley.WString) -> None
-        """
+    def SetDefaultFilter(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, filter: MSPyBentley.WString) -> None:
         ...
     
-    def SetDialogId(*args, **kwargs):
-        """
-        SetDialogId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, dlgId: int) -> None
-        """
+    def SetDialogId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, dlgId: int) -> None:
         ...
     
-    def SetDialogTitle(*args, **kwargs):
-        """
-        SetDialogTitle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, title: MSPyBentley.WString) -> None
-        """
+    def SetDialogTitle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, title: MSPyBentley.WString) -> None:
         ...
     
-    def SetDirCfgVar(*args, **kwargs):
-        """
-        SetDirCfgVar(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, cfgVar: MSPyBentley.WString) -> None
-        """
+    def SetDirCfgVar(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, cfgVar: MSPyBentley.WString) -> None:
         ...
     
-    def SetFilterInfoString(*args, **kwargs):
-        """
-        SetFilterInfoString(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, infoString: MSPyBentley.WString) -> None
-        """
+    def SetFilterInfoString(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, infoString: MSPyBentley.WString) -> None:
         ...
     
-    def SetFilterRscFileHandle(*args, **kwargs):
-        """
-        SetFilterRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileHandle: int) -> None
-        """
+    def SetFilterRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileHandle: int) -> None:
         ...
     
-    def SetFilterStringListId(*args, **kwargs):
-        """
-        SetFilterStringListId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, listId: int) -> None
-        """
+    def SetFilterStringListId(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, listId: int) -> None:
         ...
     
-    def SetOpenCreate(*args, **kwargs):
-        """
-        SetOpenCreate(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, openCreate: int) -> None
-        """
+    def SetOpenCreate(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, openCreate: int) -> None:
         ...
     
-    def SetPostIncludeCADFileOpenFilters(*args, **kwargs):
-        """
-        SetPostIncludeCADFileOpenFilters(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, isOn: bool) -> None
-        """
+    def SetPostIncludeCADFileOpenFilters(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, isOn: bool) -> None:
         ...
     
-    def SetPreIncludeCADFileOpenFilters(*args, **kwargs):
-        """
-        SetPreIncludeCADFileOpenFilters(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, isOn: bool) -> None
-        """
+    def SetPreIncludeCADFileOpenFilters(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, isOn: bool) -> None:
         ...
     
-    def SetRequiredRights(*args, **kwargs):
-        """
-        SetRequiredRights(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, rights: int) -> None
-        """
+    def SetRequiredRights(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, rights: int) -> None:
         ...
     
-    def SetRscFileHandle(*args, **kwargs):
-        """
-        SetRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, h: int) -> None
-        """
+    def SetRscFileHandle(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, h: int) -> None:
         ...
     
-    def SetSuggestedFileName(*args, **kwargs):
-        """
-        SetSuggestedFileName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileName: MSPyBentley.WString) -> None
-        """
+    def SetSuggestedFileName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, fileName: MSPyBentley.WString) -> None:
         ...
     
-    def SetWorkSetName(*args, **kwargs):
-        """
-        SetWorkSetName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, name: MSPyBentley.WString) -> None
-        """
+    def SetWorkSetName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, name: MSPyBentley.WString) -> None:
         ...
     
-    def SetWorkSpaceName(*args, **kwargs):
-        """
-        SetWorkSpaceName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, name: MSPyBentley.WString) -> None
-        """
+    def SetWorkSpaceName(self: MSPyMstnPlatform.PyDocumentOpenDialogParams, name: MSPyBentley.WString) -> None:
         ...
     
     @property
@@ -18726,16 +17182,12 @@ class PyEventsHandler:
     None
     """
 
-    def AddModalDialogEventsHandler(*args, **kwargs):
-        """
-        AddModalDialogEventsHandler(eventHandler: MSPyMstnPlatform.IPyModalDialogEvents) -> None
-        """
+    @staticmethod
+    def AddModalDialogEventsHandler(eventHandler: MSPyMstnPlatform.IPyModalDialogEvents) -> None:
         ...
     
-    def RemoveModalDialogEventsHandler(*args, **kwargs):
-        """
-        RemoveModalDialogEventsHandler(eventHandler: MSPyMstnPlatform.IPyModalDialogEvents) -> None
-        """
+    @staticmethod
+    def RemoveModalDialogEventsHandler(eventHandler: MSPyMstnPlatform.IPyModalDialogEvents) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -18809,16 +17261,11 @@ class PythonKeyinManager:
     None
     """
 
-    def GetManager(*args, **kwargs):
-        """
-        GetManager() -> MSPyMstnPlatform.PythonKeyinManager
-        """
+    @staticmethod
+    def GetManager() -> MSPyMstnPlatform.PythonKeyinManager:
         ...
     
-    def LoadCommandTableFromXml(*args, **kwargs):
-        """
-        LoadCommandTableFromXml(self: MSPyMstnPlatform.PythonKeyinManager, pythonFilePath: MSPyBentley.WString, keyInXmlFileName: MSPyBentley.WString) -> int
-        """
+    def LoadCommandTableFromXml(self: MSPyMstnPlatform.PythonKeyinManager, pythonFilePath: MSPyBentley.WString, keyInXmlFileName: MSPyBentley.WString) -> int:
         ...
     
     def __init__(*args, **kwargs):
@@ -18832,9 +17279,9 @@ class RegionPlaneId:
     None
     """
 
+    @staticmethod
     def Create(*args, **kwargs):
         """
-        Create(*args, **kwargs)
         Overloaded function.
         
         1. Create(eh: MSPyDgnPlatform.ElementHandle, pep: MSPyDgnPlatform.PersistentElementPath, status: MSPyMstnPlatform.GeometryId.Status) -> MSPyMstnPlatform.GeometryId
@@ -18933,27 +17380,17 @@ class RegionPlaneId:
         def value(arg0: MSPyMstnPlatform.GeometryId.FlagMasks) -> int:
             ...
         
-    def GetElement(*args, **kwargs):
-        """
-        GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle
-        """
+    def GetElement(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementHandle:
         ...
     
-    def GetElementRef(*args, **kwargs):
-        """
-        GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase
-        """
+    def GetElementRef(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.ElementRefBase:
         ...
     
-    def GetEntityIndex(*args, **kwargs):
-        """
-        GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int
-        """
+    def GetEntityIndex(self: MSPyMstnPlatform.GeometryId) -> int:
         ...
     
     def GetParameter(*args, **kwargs):
         """
-        GetParameter(*args, **kwargs)
         Overloaded function.
         
         1. GetParameter(self: MSPyMstnPlatform.GeometryId) -> float
@@ -18962,28 +17399,16 @@ class RegionPlaneId:
         """
         ...
     
-    def GetRootPep(*args, **kwargs):
-        """
-        GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath
-        """
+    def GetRootPep(self: MSPyMstnPlatform.GeometryId) -> MSPyDgnPlatform.PersistentElementPath:
         ...
     
-    def GetRootRange(*args, **kwargs):
-        """
-        GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetRootRange(self: MSPyMstnPlatform.GeometryId, range: MSPyBentleyGeom.DRange3d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetStatus(*args, **kwargs):
-        """
-        GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status
-        """
+    def GetStatus(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Status:
         ...
     
-    def GetType(*args, **kwargs):
-        """
-        GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type
-        """
+    def GetType(self: MSPyMstnPlatform.GeometryId) -> MSPyMstnPlatform.GeometryId.Type:
         ...
     
     @property
@@ -18993,21 +17418,14 @@ class RegionPlaneId:
     def RootPep(arg0: MSPyMstnPlatform.GeometryId, arg1: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetElementRef(*args, **kwargs):
-        """
-        SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None
-        """
+    def SetElementRef(self: MSPyMstnPlatform.GeometryId, elemRef: MSPyDgnPlatform.ElementRefBase) -> None:
         ...
     
-    def SetEntityIndex(*args, **kwargs):
-        """
-        SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None
-        """
+    def SetEntityIndex(self: MSPyMstnPlatform.GeometryId, entityIndex: int) -> None:
         ...
     
     def SetParameter(*args, **kwargs):
         """
-        SetParameter(*args, **kwargs)
         Overloaded function.
         
         1. SetParameter(self: MSPyMstnPlatform.GeometryId, param: float) -> None
@@ -19016,16 +17434,10 @@ class RegionPlaneId:
         """
         ...
     
-    def SetRootPep(*args, **kwargs):
-        """
-        SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None
-        """
+    def SetRootPep(self: MSPyMstnPlatform.GeometryId, pep: MSPyDgnPlatform.PersistentElementPath) -> None:
         ...
     
-    def SetStatus(*args, **kwargs):
-        """
-        SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None
-        """
+    def SetStatus(self: MSPyMstnPlatform.GeometryId, status: MSPyMstnPlatform.GeometryId.Status) -> None:
         ...
     
     @property
@@ -19116,40 +17528,22 @@ class RevolveSettings:
     None
     """
 
-    def SetAngle(*args, **kwargs):
-        """
-        SetAngle(self: MSPyMstnPlatform.RevolveSettings, angle: float) -> None
-        """
+    def SetAngle(self: MSPyMstnPlatform.RevolveSettings, angle: float) -> None:
         ...
     
-    def SetAxis(*args, **kwargs):
-        """
-        SetAxis(self: MSPyMstnPlatform.RevolveSettings, axis: MSPyBentleyGeom.DRay3d) -> None
-        """
+    def SetAxis(self: MSPyMstnPlatform.RevolveSettings, axis: MSPyBentleyGeom.DRay3d) -> None:
         ...
     
-    def SetAxisDirection(*args, **kwargs):
-        """
-        SetAxisDirection(self: MSPyMstnPlatform.RevolveSettings, axisDirection: MSPyBentleyGeom.DVec3d) -> None
-        """
+    def SetAxisDirection(self: MSPyMstnPlatform.RevolveSettings, axisDirection: MSPyBentleyGeom.DVec3d) -> None:
         ...
     
-    def SetAxisOrigin(*args, **kwargs):
-        """
-        SetAxisOrigin(self: MSPyMstnPlatform.RevolveSettings, axisOrigin: MSPyBentleyGeom.DPoint3d) -> None
-        """
+    def SetAxisOrigin(self: MSPyMstnPlatform.RevolveSettings, axisOrigin: MSPyBentleyGeom.DPoint3d) -> None:
         ...
     
-    def SetThickness(*args, **kwargs):
-        """
-        SetThickness(self: MSPyMstnPlatform.RevolveSettings, thickness: float) -> None
-        """
+    def SetThickness(self: MSPyMstnPlatform.RevolveSettings, thickness: float) -> None:
         ...
     
-    def Validate(*args, **kwargs):
-        """
-        Validate(self: MSPyMstnPlatform.RevolveSettings) -> bool
-        """
+    def Validate(self: MSPyMstnPlatform.RevolveSettings) -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -19251,10 +17645,9 @@ class SmartFeatureElement:
     None
     """
 
-    def AddFeature(*args, **kwargs):
+    @staticmethod
+    def AddFeature(eeh: MSPyDgnPlatform.EditElementHandle, feature: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        AddFeature(eeh: MSPyDgnPlatform.EditElementHandle, feature: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Add parametric feature
         
         Parameter ``out]``:
@@ -19268,10 +17661,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def CollapseHistory(*args, **kwargs):
+    @staticmethod
+    def CollapseHistory(eeh: MSPyDgnPlatform.EditElementHandle, featureTree: MSPyMstnPlatform.SmartFeatureNode, featureNode: MSPyMstnPlatform.SmartFeatureNode) -> tuple:
         """
-        CollapseHistory(eeh: MSPyDgnPlatform.EditElementHandle, featureTree: MSPyMstnPlatform.SmartFeatureNode, featureNode: MSPyMstnPlatform.SmartFeatureNode) -> tuple
-        
         Collapse feature tree
         
         Parameter ``eeh``:
@@ -19288,16 +17680,13 @@ class SmartFeatureElement:
         """
         ...
     
-    def CreateAndWriteSmartFeatureElement(*args, **kwargs):
-        """
-        CreateAndWriteSmartFeatureElement(newFeatureEeh: MSPyDgnPlatform.EditElementHandle, targetEh: MSPyDgnPlatform.ElementHandle, destinationModelRef: MSPyDgnPlatform.DgnModelRef, node: MSPyMstnPlatform.SmartFeatureNode, childElementToControlFlagsMap: dict, mergeParametrics: bool = False) -> int
-        """
+    @staticmethod
+    def CreateAndWriteSmartFeatureElement(newFeatureEeh: MSPyDgnPlatform.EditElementHandle, targetEh: MSPyDgnPlatform.ElementHandle, destinationModelRef: MSPyDgnPlatform.DgnModelRef, node: MSPyMstnPlatform.SmartFeatureNode, childElementToControlFlagsMap: dict, mergeParametrics: bool = False) -> int:
         ...
     
-    def CreateSingleChildSmartFeature(*args, **kwargs):
+    @staticmethod
+    def CreateSingleChildSmartFeature(newFeatureEeh: MSPyDgnPlatform.EditElementHandle, templateEh: MSPyDgnPlatform.ElementHandle, destinationModelRef: MSPyDgnPlatform.DgnModelRef, oldFeatureEh: MSPyDgnPlatform.ElementHandle, node: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        CreateSingleChildSmartFeature(newFeatureEeh: MSPyDgnPlatform.EditElementHandle, templateEh: MSPyDgnPlatform.ElementHandle, destinationModelRef: MSPyDgnPlatform.DgnModelRef, oldFeatureEh: MSPyDgnPlatform.ElementHandle, node: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Create parametric feature having a single child.
         
         Parameter ``newFeatureEeh``:
@@ -19323,10 +17712,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def DoRollBack(*args, **kwargs):
+    @staticmethod
+    def DoRollBack(eeh: MSPyDgnPlatform.EditElementHandle) -> int:
         """
-        DoRollBack(eeh: MSPyDgnPlatform.EditElementHandle) -> int
-        
         Rollback feature
         
         Parameter ``out]``:
@@ -19337,10 +17725,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def DropToLegacy(*args, **kwargs):
+    @staticmethod
+    def DropToLegacy(agenda: MSPyDgnPlatform.ElementAgenda, featureEh: MSPyDgnPlatform.ElementHandle) -> int:
         """
-        DropToLegacy(agenda: MSPyDgnPlatform.ElementAgenda, featureEh: MSPyDgnPlatform.ElementHandle) -> int
-        
         Drop parametric feature to smart solid state
         
         Parameter ``agenda``:
@@ -19354,10 +17741,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def DumpFeatureTree(*args, **kwargs):
+    @staticmethod
+    def DumpFeatureTree(label: MSPyBentley.WString, eh: MSPyDgnPlatform.ElementHandle) -> int:
         """
-        DumpFeatureTree(label: MSPyBentley.WString, eh: MSPyDgnPlatform.ElementHandle) -> int
-        
         Print feature tree information for debug purpose
         
         Parameter ``label``:
@@ -19371,10 +17757,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def ExtractTree(*args, **kwargs):
+    @staticmethod
+    def ExtractTree(eh: MSPyDgnPlatform.ElementHandle) -> tuple:
         """
-        ExtractTree(eh: MSPyDgnPlatform.ElementHandle) -> tuple
-        
         Get smart feature tree of supplied element.
         
         Returns:
@@ -19382,10 +17767,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def GetFeatureName(*args, **kwargs):
+    @staticmethod
+    def GetFeatureName(subEntity: MSPyDgnPlatform.ISubEntity, hostEh: MSPyDgnPlatform.ElementHandle) -> MSPyBentley.WString:
         """
-        GetFeatureName(subEntity: MSPyDgnPlatform.ISubEntity, hostEh: MSPyDgnPlatform.ElementHandle) -> MSPyBentley.WString
-        
         Get feature name
         
         Parameter ``subEntity``:
@@ -19399,10 +17783,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def GetFeaturesFromNodeIds(*args, **kwargs):
+    @staticmethod
+    def GetFeaturesFromNodeIds(features: MSPyMstnPlatform.SmartFeatureNodePtrArray, featureEh: MSPyDgnPlatform.ElementHandle, nodeIdsSet: MSPyBentley.UInt32Array) -> tuple:
         """
-        GetFeaturesFromNodeIds(features: MSPyMstnPlatform.SmartFeatureNodePtrArray, featureEh: MSPyDgnPlatform.ElementHandle, nodeIdsSet: MSPyBentley.UInt32Array) -> tuple
-        
         Get feature by using node id
         
         Parameter ``featureTree``:
@@ -19422,10 +17805,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def GetFeaturesFromNodeName(*args, **kwargs):
+    @staticmethod
+    def GetFeaturesFromNodeName(features: MSPyMstnPlatform.SmartFeatureNodePtrArray, featureEh: MSPyDgnPlatform.ElementHandle, nodeName: MSPyBentley.WString) -> tuple:
         """
-        GetFeaturesFromNodeName(features: MSPyMstnPlatform.SmartFeatureNodePtrArray, featureEh: MSPyDgnPlatform.ElementHandle, nodeName: MSPyBentley.WString) -> tuple
-        
         Get feature by using node name
         
         Parameter ``featureTree``:
@@ -19445,10 +17827,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def GetFeaturesFromSubEntities(*args, **kwargs):
+    @staticmethod
+    def GetFeaturesFromSubEntities(features: MSPyMstnPlatform.SmartFeatureNodePtrArray, featureEh: MSPyDgnPlatform.ElementHandle, subEntities: MSPyDgnPlatform.ISubEntityPtrArray) -> tuple:
         """
-        GetFeaturesFromSubEntities(features: MSPyMstnPlatform.SmartFeatureNodePtrArray, featureEh: MSPyDgnPlatform.ElementHandle, subEntities: MSPyDgnPlatform.ISubEntityPtrArray) -> tuple
-        
         Get feature by supplying sub entities captured by UI
         
         Parameter ``featureTree``:
@@ -19468,10 +17849,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def GetOrCreateSmartFeature(*args, **kwargs):
+    @staticmethod
+    def GetOrCreateSmartFeature(newFeatureEeh: MSPyDgnPlatform.EditElementHandle, templateEh: MSPyDgnPlatform.ElementHandle, destinationModelRef: MSPyDgnPlatform.DgnModelRef, oldFeatureEh: MSPyDgnPlatform.ElementHandle, mergeParametrics: bool, visible: bool, temporary: bool, profile: bool) -> int:
         """
-        GetOrCreateSmartFeature(newFeatureEeh: MSPyDgnPlatform.EditElementHandle, templateEh: MSPyDgnPlatform.ElementHandle, destinationModelRef: MSPyDgnPlatform.DgnModelRef, oldFeatureEh: MSPyDgnPlatform.ElementHandle, mergeParametrics: bool, visible: bool, temporary: bool, profile: bool) -> int
-        
         Get existing parametric feature otherwise create a new one.
         
         Parameter ``newFeatureEeh``:
@@ -19503,10 +17883,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def HideExternalLeaf(*args, **kwargs):
+    @staticmethod
+    def HideExternalLeaf(featureEeh: MSPyDgnPlatform.EditElementHandle, leafElemRef: MSPyDgnPlatform.ElementRefBase) -> int:
         """
-        HideExternalLeaf(featureEeh: MSPyDgnPlatform.EditElementHandle, leafElemRef: MSPyDgnPlatform.ElementRefBase) -> int
-        
         Hide external leaf
         
         Parameter ``featureEeh``:
@@ -19520,10 +17899,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def IsSmartFeature(*args, **kwargs):
+    @staticmethod
+    def IsSmartFeature(eh: MSPyDgnPlatform.ElementHandle) -> bool:
         """
-        IsSmartFeature(eh: MSPyDgnPlatform.ElementHandle) -> bool
-        
         Confirm whether supplied element is parametric feature.
         
         Parameter ``eh``:
@@ -19534,10 +17912,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def RemoveFeature(*args, **kwargs):
+    @staticmethod
+    def RemoveFeature(eh: MSPyDgnPlatform.ElementHandle, tree: MSPyMstnPlatform.SmartFeatureNode, nodeToDelete: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        RemoveFeature(eh: MSPyDgnPlatform.ElementHandle, tree: MSPyMstnPlatform.SmartFeatureNode, nodeToDelete: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Delete parametric feature
         
         Parameter ``eh``:
@@ -19554,10 +17931,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def SaveTree(*args, **kwargs):
+    @staticmethod
+    def SaveTree(featureEeh: MSPyDgnPlatform.EditElementHandle, teatureTree: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        SaveTree(featureEeh: MSPyDgnPlatform.EditElementHandle, teatureTree: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Save smart feature tree on supplied element.
         
         Parameter ``out]``:
@@ -19571,10 +17947,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def ShowExternalLeaf(*args, **kwargs):
+    @staticmethod
+    def ShowExternalLeaf(featureEeh: MSPyDgnPlatform.EditElementHandle, leafElemRef: MSPyDgnPlatform.ElementRefBase) -> int:
         """
-        ShowExternalLeaf(featureEeh: MSPyDgnPlatform.EditElementHandle, leafElemRef: MSPyDgnPlatform.ElementRefBase) -> int
-        
         Show external leaf
         
         Parameter ``featureEeh``:
@@ -19588,10 +17963,9 @@ class SmartFeatureElement:
         """
         ...
     
-    def WriteSmartFeature(*args, **kwargs):
+    @staticmethod
+    def WriteSmartFeature(newFeatureEeh: MSPyDgnPlatform.EditElementHandle, featureTree: MSPyMstnPlatform.SmartFeatureNode, oldFeatureEh: MSPyDgnPlatform.ElementHandle) -> int:
         """
-        WriteSmartFeature(newFeatureEeh: MSPyDgnPlatform.EditElementHandle, featureTree: MSPyMstnPlatform.SmartFeatureNode, oldFeatureEh: MSPyDgnPlatform.ElementHandle) -> int
-        
         Write Smart Feature into the file.
         
         Parameter ``newFeatureEeh``:
@@ -19795,10 +18169,8 @@ class SmartFeatureNode:
     None
     """
 
-    def CanBeDisabled(*args, **kwargs):
+    def CanBeDisabled(self: MSPyMstnPlatform.SmartFeatureNode) -> bool:
         """
-        CanBeDisabled(self: MSPyMstnPlatform.SmartFeatureNode) -> bool
-        
         Whether node can be disabled?
         """
         ...
@@ -19811,26 +18183,20 @@ class SmartFeatureNode:
     def Children(arg0: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNodePtrArray:
         ...
     
-    def ClearColorOverride(*args, **kwargs):
+    def ClearColorOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> None:
         """
-        ClearColorOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> None
-        
         Clear the color
         """
         ...
     
-    def ClearMaterialOverride(*args, **kwargs):
+    def ClearMaterialOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> None:
         """
-        ClearMaterialOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> None
-        
         Clear material
         """
         ...
     
-    def ClearTransparencyOverride(*args, **kwargs):
+    def ClearTransparencyOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> None:
         """
-        ClearTransparencyOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> None
-        
         Clear transparency
         """
         ...
@@ -19849,10 +18215,8 @@ class SmartFeatureNode:
     def Disabled(arg0: MSPyMstnPlatform.SmartFeatureNode, arg1: bool) -> None:
         ...
     
-    def GetAllChildrenRecursively(*args, **kwargs):
+    def GetAllChildrenRecursively(self: MSPyMstnPlatform.SmartFeatureNode, allChildren: MSPyMstnPlatform.SmartFeatureNodePtrArray) -> None:
         """
-        GetAllChildrenRecursively(self: MSPyMstnPlatform.SmartFeatureNode, allChildren: MSPyMstnPlatform.SmartFeatureNodePtrArray) -> None
-        
         Get all children recursively
         
         Parameter ``allChildren``:
@@ -19860,18 +18224,14 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetBasisTransform(*args, **kwargs):
+    def GetBasisTransform(self: MSPyMstnPlatform.SmartFeatureNode, transform: MSPyBentleyGeom.Transform, hostEh: MSPyDgnPlatform.ElementHandle, applyTransform: bool = True) -> MSPyDgnPlatform.BentleyStatus:
         """
-        GetBasisTransform(self: MSPyMstnPlatform.SmartFeatureNode, transform: MSPyBentleyGeom.Transform, hostEh: MSPyDgnPlatform.ElementHandle, applyTransform: bool = True) -> MSPyDgnPlatform.BentleyStatus
-        
         Get basis transform of feature
         """
         ...
     
-    def GetBody(*args, **kwargs):
+    def GetBody(self: MSPyMstnPlatform.SmartFeatureNode, hostEh: MSPyDgnPlatform.ElementHandle, getSolids: bool, getSheets: bool, applyHostTransform: bool, displayError: bool) -> tuple:
         """
-        GetBody(self: MSPyMstnPlatform.SmartFeatureNode, hostEh: MSPyDgnPlatform.ElementHandle, getSolids: bool, getSheets: bool, applyHostTransform: bool, displayError: bool) -> tuple
-        
         Acquire body of parametric feature.
         
         Parameter ``body``:
@@ -19894,10 +18254,8 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetChild(*args, **kwargs):
+    def GetChild(self: MSPyMstnPlatform.SmartFeatureNode, index: int) -> MSPyMstnPlatform.SmartFeatureNode:
         """
-        GetChild(self: MSPyMstnPlatform.SmartFeatureNode, index: int) -> MSPyMstnPlatform.SmartFeatureNode
-        
         Get child
         
         Parameter ``index``:
@@ -19908,10 +18266,8 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetChildCount(*args, **kwargs):
+    def GetChildCount(self: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        GetChildCount(self: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Get child count
         
         Returns:
@@ -19919,10 +18275,8 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetChildren(*args, **kwargs):
+    def GetChildren(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNodePtrArray:
         """
-        GetChildren(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNodePtrArray
-        
         Get all children
         
         Returns:
@@ -19930,51 +18284,39 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetColorOverride(*args, **kwargs):
+    def GetColorOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> tuple:
         """
-        GetColorOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> tuple
-        
         Get color of the body
         """
         ...
     
-    def GetCustomName(*args, **kwargs):
+    def GetCustomName(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyBentley.WString:
         """
-        GetCustomName(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyBentley.WString
-        
         Get custom name
         """
         ...
     
-    def GetDisabled(*args, **kwargs):
+    def GetDisabled(self: MSPyMstnPlatform.SmartFeatureNode) -> bool:
         """
-        GetDisabled(self: MSPyMstnPlatform.SmartFeatureNode) -> bool
-        
         Query the disable status of smart feature node.
         """
         ...
     
-    def GetHandlerId(*args, **kwargs):
+    def GetHandlerId(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureHandlerId:
         """
-        GetHandlerId(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureHandlerId
-        
         Get paramtric feature type. Should be compared with
         SmartFeatureHandlerId enum.
         """
         ...
     
-    def GetHighestNodeId(*args, **kwargs):
+    def GetHighestNodeId(self: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        GetHighestNodeId(self: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Get highest node id in smart feature tree
         """
         ...
     
-    def GetLeaf(*args, **kwargs):
+    def GetLeaf(self: MSPyMstnPlatform.SmartFeatureNode, eh: MSPyDgnPlatform.ElementHandle) -> int:
         """
-        GetLeaf(self: MSPyMstnPlatform.SmartFeatureNode, eh: MSPyDgnPlatform.ElementHandle) -> int
-        
         Get leaf
         
         Parameter ``eh``:
@@ -19985,26 +18327,20 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetLowestNodeId(*args, **kwargs):
+    def GetLowestNodeId(self: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        GetLowestNodeId(self: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Get lowest node id in smart feature tree
         """
         ...
     
-    def GetMaterialOverride(*args, **kwargs):
+    def GetMaterialOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> tuple:
         """
-        GetMaterialOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> tuple
-        
         Get material of body
         """
         ...
     
-    def GetNodeId(*args, **kwargs):
+    def GetNodeId(self: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        GetNodeId(self: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Get node id
         
         Returns:
@@ -20012,10 +18348,8 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetParent(*args, **kwargs):
+    def GetParent(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNode:
         """
-        GetParent(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNode
-        
         Get parent
         
         Returns:
@@ -20023,10 +18357,8 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetParentOfHiddenExternalLeaf(*args, **kwargs):
+    def GetParentOfHiddenExternalLeaf(self: MSPyMstnPlatform.SmartFeatureNode) -> tuple:
         """
-        GetParentOfHiddenExternalLeaf(self: MSPyMstnPlatform.SmartFeatureNode) -> tuple
-        
         Get parent of hidden external leaf. E.g. Extrude feature is returned;
         in case of hidden profile
         
@@ -20038,26 +18370,20 @@ class SmartFeatureNode:
         """
         ...
     
-    def GetSingleChild(*args, **kwargs):
+    def GetSingleChild(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNode:
         """
-        GetSingleChild(self: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNode
-        
         Returns immediate single child.
         """
         ...
     
-    def GetSingleChildBody(*args, **kwargs):
+    def GetSingleChildBody(self: MSPyMstnPlatform.SmartFeatureNode, hostEh: MSPyDgnPlatform.ElementHandle, getSolids: bool, getSheets: bool, applyHostTransform: bool, displayError: bool) -> tuple:
         """
-        GetSingleChildBody(self: MSPyMstnPlatform.SmartFeatureNode, hostEh: MSPyDgnPlatform.ElementHandle, getSolids: bool, getSheets: bool, applyHostTransform: bool, displayError: bool) -> tuple
-        
         Get body of immediate single child.
         """
         ...
     
-    def GetTransparencyOverride(*args, **kwargs):
+    def GetTransparencyOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> tuple:
         """
-        GetTransparencyOverride(self: MSPyMstnPlatform.SmartFeatureNode) -> tuple
-        
         Get transparency
         """
         ...
@@ -20082,34 +18408,27 @@ class SmartFeatureNode:
     def Parent(arg0: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNode:
         ...
     
-    def RelocateFeature(*args, **kwargs):
+    @staticmethod
+    def RelocateFeature(node: MSPyMstnPlatform.SmartFeatureNode, target: MSPyMstnPlatform.SmartFeatureNode, hostEh: MSPyDgnPlatform.ElementHandle, errorStringId: MSPyBentley.WString) -> tuple:
         """
-        RelocateFeature(node: MSPyMstnPlatform.SmartFeatureNode, target: MSPyMstnPlatform.SmartFeatureNode, hostEh: MSPyDgnPlatform.ElementHandle, errorStringId: MSPyBentley.WString) -> tuple
-        
         Relocate feature node
         """
         ...
     
-    def SetColorOverride(*args, **kwargs):
+    def SetColorOverride(self: MSPyMstnPlatform.SmartFeatureNode, color: int) -> None:
         """
-        SetColorOverride(self: MSPyMstnPlatform.SmartFeatureNode, color: int) -> None
-        
         Set color on the body
         """
         ...
     
-    def SetCustomName(*args, **kwargs):
+    def SetCustomName(self: MSPyMstnPlatform.SmartFeatureNode, name: MSPyBentley.WString) -> None:
         """
-        SetCustomName(self: MSPyMstnPlatform.SmartFeatureNode, name: MSPyBentley.WString) -> None
-        
         Set custom name
         """
         ...
     
-    def SetDisabled(*args, **kwargs):
+    def SetDisabled(self: MSPyMstnPlatform.SmartFeatureNode, disable: bool) -> None:
         """
-        SetDisabled(self: MSPyMstnPlatform.SmartFeatureNode, disable: bool) -> None
-        
         Disable the smart feature node.
         
         Parameter ``disabled``:
@@ -20117,18 +18436,14 @@ class SmartFeatureNode:
         """
         ...
     
-    def SetMaterialOverride(*args, **kwargs):
+    def SetMaterialOverride(self: MSPyMstnPlatform.SmartFeatureNode, materialOverride: MSPyDgnPlatform.MaterialId) -> None:
         """
-        SetMaterialOverride(self: MSPyMstnPlatform.SmartFeatureNode, materialOverride: MSPyDgnPlatform.MaterialId) -> None
-        
         Set material on the body
         """
         ...
     
-    def SetTransparencyOverride(*args, **kwargs):
+    def SetTransparencyOverride(self: MSPyMstnPlatform.SmartFeatureNode, transparencyOverride: float) -> None:
         """
-        SetTransparencyOverride(self: MSPyMstnPlatform.SmartFeatureNode, transparencyOverride: float) -> None
-        
         Set transparency
         """
         ...
@@ -20137,10 +18452,8 @@ class SmartFeatureNode:
     def SingleChild(arg0: MSPyMstnPlatform.SmartFeatureNode) -> MSPyMstnPlatform.SmartFeatureNode:
         ...
     
-    def TransformFeatureAndDependents(*args, **kwargs):
+    def TransformFeatureAndDependents(self: MSPyMstnPlatform.SmartFeatureNode, transform: MSPyBentleyGeom.Transform) -> int:
         """
-        TransformFeatureAndDependents(self: MSPyMstnPlatform.SmartFeatureNode, transform: MSPyBentleyGeom.Transform) -> int
-        
         Transform a feature and its dependents
         """
         ...
@@ -20170,33 +18483,26 @@ class SmartFeatureNodePtrArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, x: MSPyMstnPlatform.SmartFeatureNode) -> None:
         """
-        append(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, x: MSPyMstnPlatform.SmartFeatureNode) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyMstnPlatform.SmartFeatureNodePtrArray) -> None:
         """
-        clear(self: MSPyMstnPlatform.SmartFeatureNodePtrArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, x: MSPyMstnPlatform.SmartFeatureNode) -> int:
         """
-        count(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, x: MSPyMstnPlatform.SmartFeatureNode) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, L: MSPyMstnPlatform.SmartFeatureNodePtrArray) -> None
@@ -20209,17 +18515,14 @@ class SmartFeatureNodePtrArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, i: int, x: MSPyMstnPlatform.SmartFeatureNode) -> None:
         """
-        insert(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, i: int, x: MSPyMstnPlatform.SmartFeatureNode) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyMstnPlatform.SmartFeatureNodePtrArray) -> MSPyMstnPlatform.SmartFeatureNode
@@ -20232,10 +18535,8 @@ class SmartFeatureNodePtrArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, x: MSPyMstnPlatform.SmartFeatureNode) -> None:
         """
-        remove(self: MSPyMstnPlatform.SmartFeatureNodePtrArray, x: MSPyMstnPlatform.SmartFeatureNode) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -20245,10 +18546,9 @@ class SmartFeatureUtil:
     None
     """
 
-    def DrawDynamicSpinAxis(*args, **kwargs):
+    @staticmethod
+    def DrawDynamicSpinAxis(axis: MSPyBentleyGeom.DRay3d, range: MSPyBentleyGeom.DRange3d, normal: MSPyBentleyGeom.DVec3d, viewport: MSPyDgnPlatform.Viewport) -> None:
         """
-        DrawDynamicSpinAxis(axis: MSPyBentleyGeom.DRay3d, range: MSPyBentleyGeom.DRange3d, normal: MSPyBentleyGeom.DVec3d, viewport: MSPyDgnPlatform.Viewport) -> None
-        
         Draw dynamic spin axis.
         
         Parameter ``axis``:
@@ -20265,10 +18565,9 @@ class SmartFeatureUtil:
         """
         ...
     
-    def GetCurveVector(*args, **kwargs):
+    @staticmethod
+    def GetCurveVector(eh: MSPyDgnPlatform.ElementHandle, regionsOnly: bool) -> tuple:
         """
-        GetCurveVector(eh: MSPyDgnPlatform.ElementHandle, regionsOnly: bool) -> tuple
-        
         Get CurveVector using elementHandle.
         
         Parameter ``curveVector``:
@@ -20282,10 +18581,9 @@ class SmartFeatureUtil:
         """
         ...
     
-    def GetCurveVectorPlane(*args, **kwargs):
+    @staticmethod
+    def GetCurveVectorPlane(plane: MSPyBentleyGeom.DPlane3d, curveVector: MSPyBentleyGeom.CurveVector, point: MSPyBentleyGeom.DPoint3d = None, parallelIfLinear: bool = True) -> None:
         """
-        GetCurveVectorPlane(plane: MSPyBentleyGeom.DPlane3d, curveVector: MSPyBentleyGeom.CurveVector, point: MSPyBentleyGeom.DPoint3d = None, parallelIfLinear: bool = True) -> None
-        
         Get plane of supplied CurveVector.
         
         Parameter ``plane``:
@@ -20313,10 +18611,9 @@ class SolidUtil:
     None
     """
 
-    def ClosestPoint(*args, **kwargs):
+    @staticmethod
+    def ClosestPoint(entity: MSPyDgnPlatform.ISolidKernelEntity, testPt: MSPyBentleyGeom.DPoint3d) -> tuple:
         """
-        ClosestPoint(entity: MSPyDgnPlatform.ISolidKernelEntity, testPt: MSPyBentleyGeom.DPoint3d) -> tuple
-        
         Get the closest point on body to a given point.
         
         Parameter ``entity``:
@@ -20337,10 +18634,9 @@ class SolidUtil:
         """
         ...
     
-    def ClosestPointToEdge(*args, **kwargs):
+    @staticmethod
+    def ClosestPointToEdge(subEntity: MSPyDgnPlatform.ISubEntity, testPt: MSPyBentleyGeom.DPoint3d) -> tuple:
         """
-        ClosestPointToEdge(subEntity: MSPyDgnPlatform.ISubEntity, testPt: MSPyBentleyGeom.DPoint3d) -> tuple
-        
         Get the closest point on an edge to a given point.
         
         Parameter ``subEntity``:
@@ -20360,10 +18656,9 @@ class SolidUtil:
         """
         ...
     
-    def ClosestPointToFace(*args, **kwargs):
+    @staticmethod
+    def ClosestPointToFace(subEntity: MSPyDgnPlatform.ISubEntity, testPt: MSPyBentleyGeom.DPoint3d, point: MSPyBentleyGeom.DPoint3d, normal: MSPyBentleyGeom.DVec3d, param: MSPyBentleyGeom.DPoint2d) -> bool:
         """
-        ClosestPointToFace(subEntity: MSPyDgnPlatform.ISubEntity, testPt: MSPyBentleyGeom.DPoint3d, point: MSPyBentleyGeom.DPoint3d, normal: MSPyBentleyGeom.DVec3d, param: MSPyBentleyGeom.DPoint2d) -> bool
-        
         Get the closest point on a face to a given point.
         
         Parameter ``subEntity``:
@@ -20391,16 +18686,13 @@ class SolidUtil:
         None
         """
     
-        def BodyToElement(*args, **kwargs):
-            """
-            BodyToElement(eeh: MSPyDgnPlatform.EditElementHandle, entity: MSPyDgnPlatform.ISolidKernelEntity, templateEh: MSPyDgnPlatform.ElementHandle, modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BentleyStatus
-            """
+        @staticmethod
+    def BodyToElement(eeh: MSPyDgnPlatform.EditElementHandle, entity: MSPyDgnPlatform.ISolidKernelEntity, templateEh: MSPyDgnPlatform.ElementHandle, modelRef: MSPyDgnPlatform.DgnModelRef) -> MSPyDgnPlatform.BentleyStatus:
             ...
         
-        def ElementToBodies(*args, **kwargs):
+        @staticmethod
+    def ElementToBodies(out: MSPyDgnPlatform.ISolidKernelEntityPtrArray, eh: MSPyDgnPlatform.ElementHandle, getSolids: bool = True, getSheets: bool = True, getWires: bool = True) -> tuple:
             """
-            ElementToBodies(out: MSPyDgnPlatform.ISolidKernelEntityPtrArray, eh: MSPyDgnPlatform.ElementHandle, getSolids: bool = True, getSheets: bool = True, getWires: bool = True) -> tuple
-            
             Create bodies from an element that represents one or more wire, sheet,
             or solid bodies.
             
@@ -20428,10 +18720,9 @@ class SolidUtil:
             """
             ...
         
-        def ElementToBody(*args, **kwargs):
+        @staticmethod
+    def ElementToBody(eh: MSPyDgnPlatform.ElementHandle, getSolid: bool = True, getSheet: bool = True, getWire: bool = True) -> tuple:
             """
-            ElementToBody(eh: MSPyDgnPlatform.ElementHandle, getSolid: bool = True, getSheet: bool = True, getWire: bool = True) -> tuple
-            
             Create a body from an element that can represent a single wire, sheet,
             or solid body.
             
@@ -20455,10 +18746,9 @@ class SolidUtil:
             """
             ...
         
-        def SubEntityToCurveVector(*args, **kwargs):
+        @staticmethod
+    def SubEntityToCurveVector(subEntity: MSPyDgnPlatform.ISubEntity) -> tuple:
             """
-            SubEntityToCurveVector(subEntity: MSPyDgnPlatform.ISubEntity) -> tuple
-            
             Create a simplified CurveVector representation of the given sub-
             entity.
             
@@ -20476,10 +18766,9 @@ class SolidUtil:
             """
             ...
         
-        def SubEntityToGeometry(*args, **kwargs):
+        @staticmethod
+    def SubEntityToGeometry(subEntity: MSPyDgnPlatform.ISubEntity, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
             """
-            SubEntityToGeometry(subEntity: MSPyDgnPlatform.ISubEntity, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-            
             Create a simplified IGeometryPtr representation of the given sub-
             entity (non-BRep geometry).
             
@@ -20506,6 +18795,7 @@ class SolidUtil:
             """
             ...
         
+    @staticmethod
     def CopyEntity(*args, **kwargs):
         """
         CopyEntity(in: MSPyDgnPlatform.ISolidKernelEntity) -> tuple
@@ -20528,10 +18818,9 @@ class SolidUtil:
         None
         """
     
-        def BodyFromBSurface(*args, **kwargs):
+        @staticmethod
+    def BodyFromBSurface(surface: MSPyBentleyGeom.MSBsplineSurface, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
             """
-            BodyFromBSurface(surface: MSPyBentleyGeom.MSBsplineSurface, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-            
             Create a new sheet body from a MSBsplineSurface.
             
             Parameter ``out``:
@@ -20548,10 +18837,9 @@ class SolidUtil:
             """
             ...
         
-        def BodyFromCurveVector(*args, **kwargs):
+        @staticmethod
+    def BodyFromCurveVector(curve: MSPyBentleyGeom.CurveVector, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
             """
-            BodyFromCurveVector(curve: MSPyBentleyGeom.CurveVector, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-            
             Create a new wire or planar sheet body from a CurveVector that
             represents an open path, closed path, region with holes, or union
             region.
@@ -20573,10 +18861,9 @@ class SolidUtil:
             """
             ...
         
-        def BodyFromExtrusionToBody(*args, **kwargs):
+        @staticmethod
+    def BodyFromExtrusionToBody(extrudeTo: MSPyDgnPlatform.ISolidKernelEntity, profile: MSPyDgnPlatform.ISolidKernelEntity, reverseDirection: bool) -> tuple:
             """
-            BodyFromExtrusionToBody(extrudeTo: MSPyDgnPlatform.ISolidKernelEntity, profile: MSPyDgnPlatform.ISolidKernelEntity, reverseDirection: bool) -> tuple
-            
             Create a new body by extruding a planar sheet body up to another body.
             
             Parameter ``out``:
@@ -20597,10 +18884,9 @@ class SolidUtil:
             """
             ...
         
-        def BodyFromLoft(*args, **kwargs):
+        @staticmethod
+    def BodyFromLoft(profiles: MSPyBentleyGeom.CurveVectorPtrArray, guides: MSPyBentleyGeom.CurveVectorPtrArray, modelRef: MSPyDgnPlatform.DgnModelRef, periodic: bool = False, segment: bool = False) -> tuple:
             """
-            BodyFromLoft(profiles: MSPyBentleyGeom.CurveVectorPtrArray, guides: MSPyBentleyGeom.CurveVectorPtrArray, modelRef: MSPyDgnPlatform.DgnModelRef, periodic: bool = False, segment: bool = False) -> tuple
-            
             Create a new sheet or solid body from surfaces created by lofting
             through a set of cross section profiles.
             
@@ -20635,10 +18921,9 @@ class SolidUtil:
             """
             ...
         
-        def BodyFromPolyface(*args, **kwargs):
+        @staticmethod
+    def BodyFromPolyface(meshData: MSPyBentleyGeom.PolyfaceQuery, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
             """
-            BodyFromPolyface(meshData: MSPyBentleyGeom.PolyfaceQuery, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-            
             Create a new sheet or solid body from a Polyface.
             
             Parameter ``out``:
@@ -20655,10 +18940,9 @@ class SolidUtil:
             """
             ...
         
-        def BodyFromSolidPrimitive(*args, **kwargs):
+        @staticmethod
+    def BodyFromSolidPrimitive(primitive: MSPyBentleyGeom.ISolidPrimitive, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple:
             """
-            BodyFromSolidPrimitive(primitive: MSPyBentleyGeom.ISolidPrimitive, modelRef: MSPyDgnPlatform.DgnModelRef) -> tuple
-            
             Create a new sheet or solid body from an ISolidPrimitive.
             
             Parameter ``out``:
@@ -20675,10 +18959,9 @@ class SolidUtil:
             """
             ...
         
-        def BodyFromSweep(*args, **kwargs):
+        @staticmethod
+    def BodyFromSweep(profile: MSPyBentleyGeom.CurveVector, path: MSPyBentleyGeom.CurveVector, modelRef: MSPyDgnPlatform.DgnModelRef, alignParallel: bool, selfRepair: bool, createSheet: bool, lockDirection: MSPyBentleyGeom.DVec3d = None, twistAngle: Optional[float] = None, scale: Optional[float] = None, scalePoint: MSPyBentleyGeom.DPoint3d = None) -> tuple:
             """
-            BodyFromSweep(profile: MSPyBentleyGeom.CurveVector, path: MSPyBentleyGeom.CurveVector, modelRef: MSPyDgnPlatform.DgnModelRef, alignParallel: bool, selfRepair: bool, createSheet: bool, lockDirection: MSPyBentleyGeom.DVec3d = None, twistAngle: Optional[float] = None, scale: Optional[float] = None, scalePoint: MSPyBentleyGeom.DPoint3d = None) -> tuple
-            
             Create a new sheet or solid body by sweeping a cross section profile
             along a path.
             
@@ -20736,16 +19019,12 @@ class SolidUtil:
         None
         """
     
-        def DumpEntity(*args, **kwargs):
-            """
-            DumpEntity(entity: MSPyDgnPlatform.ISolidKernelEntity, label: str) -> None
-            """
+        @staticmethod
+    def DumpEntity(entity: MSPyDgnPlatform.ISolidKernelEntity, label: str) -> None:
             ...
         
-        def DumpSubEntity(*args, **kwargs):
-            """
-            DumpSubEntity(subEntity: MSPyDgnPlatform.ISubEntity, label: str) -> None
-            """
+        @staticmethod
+    def DumpSubEntity(subEntity: MSPyDgnPlatform.ISubEntity, label: str) -> None:
             ...
         
         def __init__(*args, **kwargs):
@@ -20754,6 +19033,7 @@ class SolidUtil:
             """
             ...
         
+    @staticmethod
     def DisjoinBody(*args, **kwargs):
         """
         DisjoinBody(out: MSPyDgnPlatform.ISolidKernelEntityPtrArray, in: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus
@@ -20772,10 +19052,9 @@ class SolidUtil:
         """
         ...
     
-    def Draw(*args, **kwargs):
+    @staticmethod
+    def Draw(subEntity: MSPyDgnPlatform.ISubEntity, context: MSPyDgnPlatform.ViewContext) -> MSPyDgnPlatform.BentleyStatus:
         """
-        Draw(subEntity: MSPyDgnPlatform.ISubEntity, context: MSPyDgnPlatform.ViewContext) -> MSPyDgnPlatform.BentleyStatus
-        
         Draw geometry for the given face, edge, or vertex to the specified
         ViewContext.
         
@@ -20788,10 +19067,9 @@ class SolidUtil:
         """
         ...
     
-    def EvaluateEdge(*args, **kwargs):
+    @staticmethod
+    def EvaluateEdge(subEntity: MSPyDgnPlatform.ISubEntity, point: MSPyBentleyGeom.DPoint3d, uDir: MSPyBentleyGeom.DVec3d, uParam: float) -> MSPyDgnPlatform.BentleyStatus:
         """
-        EvaluateEdge(subEntity: MSPyDgnPlatform.ISubEntity, point: MSPyBentleyGeom.DPoint3d, uDir: MSPyBentleyGeom.DVec3d, uParam: float) -> MSPyDgnPlatform.BentleyStatus
-        
         Evaluate point and tangent at a u parameter on the curve of the given
         edge sub-entity.
         
@@ -20812,10 +19090,9 @@ class SolidUtil:
         """
         ...
     
-    def EvaluateFace(*args, **kwargs):
+    @staticmethod
+    def EvaluateFace(subEntity: MSPyDgnPlatform.ISubEntity, point: MSPyBentleyGeom.DPoint3d, normal: MSPyBentleyGeom.DVec3d, uDir: MSPyBentleyGeom.DVec3d, vDir: MSPyBentleyGeom.DVec3d, uvParam: MSPyBentleyGeom.DPoint2d) -> MSPyDgnPlatform.BentleyStatus:
         """
-        EvaluateFace(subEntity: MSPyDgnPlatform.ISubEntity, point: MSPyBentleyGeom.DPoint3d, normal: MSPyBentleyGeom.DVec3d, uDir: MSPyBentleyGeom.DVec3d, vDir: MSPyBentleyGeom.DVec3d, uvParam: MSPyBentleyGeom.DPoint2d) -> MSPyDgnPlatform.BentleyStatus
-        
         Evaluate point, normal, and derivatives at a uv parameter on the
         surface of the given face sub-entity.
         
@@ -20842,10 +19119,9 @@ class SolidUtil:
         """
         ...
     
-    def EvaluateVertex(*args, **kwargs):
+    @staticmethod
+    def EvaluateVertex(subEntity: MSPyDgnPlatform.ISubEntity, point: MSPyBentleyGeom.DPoint3d) -> MSPyDgnPlatform.BentleyStatus:
         """
-        EvaluateVertex(subEntity: MSPyDgnPlatform.ISubEntity, point: MSPyBentleyGeom.DPoint3d) -> MSPyDgnPlatform.BentleyStatus
-        
         Evaluate point of the given vertex sub-entity.
         
         Parameter ``subEntity``:
@@ -20859,6 +19135,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetBodyEdges(*args, **kwargs):
         """
         GetBodyEdges(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISolidKernelEntity) -> int
@@ -20877,6 +19154,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetBodyFaces(*args, **kwargs):
         """
         GetBodyFaces(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISolidKernelEntity) -> int
@@ -20895,6 +19173,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetBodyVertices(*args, **kwargs):
         """
         GetBodyVertices(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISolidKernelEntity) -> int
@@ -20913,6 +19192,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetEdgeFaces(*args, **kwargs):
         """
         GetEdgeFaces(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
@@ -20931,10 +19211,9 @@ class SolidUtil:
         """
         ...
     
-    def GetEdgeParameterRange(*args, **kwargs):
+    @staticmethod
+    def GetEdgeParameterRange(subEntities: MSPyDgnPlatform.ISubEntity, uRange: MSPyBentleyGeom.DRange1d) -> MSPyDgnPlatform.BentleyStatus:
         """
-        GetEdgeParameterRange(subEntities: MSPyDgnPlatform.ISubEntity, uRange: MSPyBentleyGeom.DRange1d) -> MSPyDgnPlatform.BentleyStatus
-        
         Get u edge parameter range for the given edge sub-entity.
         
         Parameter ``subEntity``:
@@ -20948,6 +19227,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetEdgeVertices(*args, **kwargs):
         """
         GetEdgeVertices(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
@@ -20966,10 +19246,9 @@ class SolidUtil:
         """
         ...
     
-    def GetEntityRange(*args, **kwargs):
+    @staticmethod
+    def GetEntityRange(range: MSPyBentleyGeom.DRange3d, entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus:
         """
-        GetEntityRange(range: MSPyBentleyGeom.DRange3d, entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus
-        
         Get an axis aligned bounding box for the given body.
         
         Parameter ``range``:
@@ -20983,6 +19262,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetFaceEdges(*args, **kwargs):
         """
         GetFaceEdges(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
@@ -21001,10 +19281,9 @@ class SolidUtil:
         """
         ...
     
-    def GetFaceParameterRange(*args, **kwargs):
+    @staticmethod
+    def GetFaceParameterRange(subEntities: MSPyDgnPlatform.ISubEntity, uRange: MSPyBentleyGeom.DRange1d, vRange: MSPyBentleyGeom.DRange1d) -> MSPyDgnPlatform.BentleyStatus:
         """
-        GetFaceParameterRange(subEntities: MSPyDgnPlatform.ISubEntity, uRange: MSPyBentleyGeom.DRange1d, vRange: MSPyBentleyGeom.DRange1d) -> MSPyDgnPlatform.BentleyStatus
-        
         Get uv face parameter range for the given face sub-entity.
         
         Parameter ``subEntity``:
@@ -21021,6 +19300,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetFaceVertices(*args, **kwargs):
         """
         GetFaceVertices(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
@@ -21039,10 +19319,9 @@ class SolidUtil:
         """
         ...
     
-    def GetLoopEdgesFromEdge(*args, **kwargs):
+    @staticmethod
+    def GetLoopEdgesFromEdge(loopEdges: MSPyDgnPlatform.ISubEntityPtrArray, edge: MSPyDgnPlatform.ISubEntity, face: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus:
         """
-        GetLoopEdgesFromEdge(loopEdges: MSPyDgnPlatform.ISubEntityPtrArray, edge: MSPyDgnPlatform.ISubEntity, face: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
-        
         Query the set of edges that comprise a single face loop containing the
         given edge sub-entity.
         
@@ -21060,10 +19339,9 @@ class SolidUtil:
         """
         ...
     
-    def GetPlanarFaceData(*args, **kwargs):
+    @staticmethod
+    def GetPlanarFaceData(point: MSPyBentleyGeom.DPoint3d, normal: MSPyBentleyGeom.DVec3d, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus:
         """
-        GetPlanarFaceData(point: MSPyBentleyGeom.DPoint3d, normal: MSPyBentleyGeom.DVec3d, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
-        
         Evaluate point and normal at center of face parameter range for the
         given face sub-entity.
         
@@ -21084,10 +19362,9 @@ class SolidUtil:
         """
         ...
     
-    def GetSmoothBlendEdges(*args, **kwargs):
+    @staticmethod
+    def GetSmoothBlendEdges(smoothEdges: MSPyDgnPlatform.ISubEntityPtrArray, edge: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus:
         """
-        GetSmoothBlendEdges(smoothEdges: MSPyDgnPlatform.ISubEntityPtrArray, edge: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
-        
         Query the set of edges that are connected and tangent to the given
         edge sub-entity.
         
@@ -21104,10 +19381,9 @@ class SolidUtil:
         """
         ...
     
-    def GetSubEntityRange(*args, **kwargs):
+    @staticmethod
+    def GetSubEntityRange(range: MSPyBentleyGeom.DRange3d, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus:
         """
-        GetSubEntityRange(range: MSPyBentleyGeom.DRange3d, subEntity: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
-        
         Get an axis aligned bounding box for the given face or edge.
         
         Parameter ``range``:
@@ -21121,6 +19397,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetVertexEdges(*args, **kwargs):
         """
         GetVertexEdges(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
@@ -21139,6 +19416,7 @@ class SolidUtil:
         """
         ...
     
+    @staticmethod
     def GetVertexFaces(*args, **kwargs):
         """
         GetVertexFaces(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, in: MSPyDgnPlatform.ISubEntity) -> MSPyDgnPlatform.BentleyStatus
@@ -21157,10 +19435,9 @@ class SolidUtil:
         """
         ...
     
-    def IsPointInsideBody(*args, **kwargs):
+    @staticmethod
+    def IsPointInsideBody(entity: MSPyDgnPlatform.ISolidKernelEntity, testPt: MSPyBentleyGeom.DPoint3d) -> bool:
         """
-        IsPointInsideBody(entity: MSPyDgnPlatform.ISolidKernelEntity, testPt: MSPyBentleyGeom.DPoint3d) -> bool
-        
         Test if a point is inside or on the boundary of the given body.
         
         Parameter ``entity``:
@@ -21174,10 +19451,9 @@ class SolidUtil:
         """
         ...
     
-    def Locate(*args, **kwargs):
+    @staticmethod
+    def Locate(entity: MSPyDgnPlatform.ISolidKernelEntity, boresite: MSPyBentleyGeom.DRay3d, intersectEntities: MSPyDgnPlatform.ISubEntityPtrArray, intersectPts: MSPyBentleyGeom.DPoint3dArray, intersectParams: MSPyBentleyGeom.DPoint2dArray, maxFace: int, maxEdge: int, maxVertex: int, maxDistance: float) -> bool:
         """
-        Locate(entity: MSPyDgnPlatform.ISolidKernelEntity, boresite: MSPyBentleyGeom.DRay3d, intersectEntities: MSPyDgnPlatform.ISubEntityPtrArray, intersectPts: MSPyBentleyGeom.DPoint3dArray, intersectParams: MSPyBentleyGeom.DPoint2dArray, maxFace: int, maxEdge: int, maxVertex: int, maxDistance: float) -> bool
-        
         Pick face, edge, and vertex sub-entities of a body by their proximity
         to a ray.
         
@@ -21226,10 +19502,9 @@ class SolidUtil:
         None
         """
     
-        def BlendEdges(*args, **kwargs):
+        @staticmethod
+    def BlendEdges(target: MSPyDgnPlatform.ISolidKernelEntity, edges: MSPyDgnPlatform.ISubEntityPtrArray, radii: MSPyBentley.DoubleArray, propagateSmooth: bool = True) -> MSPyDgnPlatform.BentleyStatus:
             """
-            BlendEdges(target: MSPyDgnPlatform.ISolidKernelEntity, edges: MSPyDgnPlatform.ISubEntityPtrArray, radii: MSPyBentley.DoubleArray, propagateSmooth: bool = True) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the specified edges of the given body by changing them into
             faces having the requested blending surface geometry.
             
@@ -21254,9 +19529,9 @@ class SolidUtil:
             """
             ...
         
-        def BooleanCut(*args, **kwargs):
+        @staticmethod
+    def BooleanCut(*args, **kwargs):
             """
-            BooleanCut(*args, **kwargs)
             Overloaded function.
             
             1. BooleanCut(target: MSPyDgnPlatform.ISolidKernelEntity, planarTool: MSPyBentleyGeom.CurveVector, directionMode: MSPyMstnPlatform.SolidUtil.Modify.CutDirectionMode, depthMode: MSPyMstnPlatform.SolidUtil.Modify.CutDepthMode, distance: float, invert: bool, defaultNormal: MSPyBentleyGeom.DVec3d, nodeId: int) -> MSPyDgnPlatform.BentleyStatus
@@ -21335,10 +19610,9 @@ class SolidUtil:
             """
             ...
         
-        def BooleanIntersect(*args, **kwargs):
+        @staticmethod
+    def BooleanIntersect(target: MSPyDgnPlatform.ISolidKernelEntity, tools: MSPyDgnPlatform.ISolidKernelEntityPtrArray) -> MSPyDgnPlatform.BentleyStatus:
             """
-            BooleanIntersect(target: MSPyDgnPlatform.ISolidKernelEntity, tools: MSPyDgnPlatform.ISolidKernelEntityPtrArray) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target body by intersecting with one or more tool bodies.
             
             Parameter ``target``:
@@ -21355,10 +19629,9 @@ class SolidUtil:
             """
             ...
         
-        def BooleanSubtract(*args, **kwargs):
+        @staticmethod
+    def BooleanSubtract(target: MSPyDgnPlatform.ISolidKernelEntity, tools: MSPyDgnPlatform.ISolidKernelEntityPtrArray) -> MSPyDgnPlatform.BentleyStatus:
             """
-            BooleanSubtract(target: MSPyDgnPlatform.ISolidKernelEntity, tools: MSPyDgnPlatform.ISolidKernelEntityPtrArray) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target body by subtracting one or more tool bodies.
             
             Parameter ``target``:
@@ -21375,10 +19648,9 @@ class SolidUtil:
             """
             ...
         
-        def BooleanUnion(*args, **kwargs):
+        @staticmethod
+    def BooleanUnion(target: MSPyDgnPlatform.ISolidKernelEntity, tools: MSPyDgnPlatform.ISolidKernelEntityPtrArray) -> MSPyDgnPlatform.BentleyStatus:
             """
-            BooleanUnion(target: MSPyDgnPlatform.ISolidKernelEntity, tools: MSPyDgnPlatform.ISolidKernelEntityPtrArray) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target body by uniting with one or more tool bodies.
             
             Parameter ``target``:
@@ -21395,10 +19667,9 @@ class SolidUtil:
             """
             ...
         
-        def ChamferEdges(*args, **kwargs):
+        @staticmethod
+    def ChamferEdges(target: MSPyDgnPlatform.ISolidKernelEntity, edges: MSPyDgnPlatform.ISubEntityPtrArray, values1: MSPyBentley.DoubleArray, values2: MSPyBentley.DoubleArray, mode: MSPyMstnPlatform.SolidUtil.Modify.ChamferMode, propagateSmooth: bool = True) -> MSPyDgnPlatform.BentleyStatus:
             """
-            ChamferEdges(target: MSPyDgnPlatform.ISolidKernelEntity, edges: MSPyDgnPlatform.ISubEntityPtrArray, values1: MSPyBentley.DoubleArray, values2: MSPyBentley.DoubleArray, mode: MSPyMstnPlatform.SolidUtil.Modify.ChamferMode, propagateSmooth: bool = True) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the specified edges of the given body by changing them into
             faces having the requested chamfer surface geometry.
             
@@ -21468,10 +19739,9 @@ class SolidUtil:
             def value(arg0: MSPyMstnPlatform.SolidUtil.Modify.ChamferMode) -> int:
                 ...
             
-        def ClashDetectionBetweenTargetAndTool(*args, **kwargs):
+        @staticmethod
+    def ClashDetectionBetweenTargetAndTool(target: MSPyDgnPlatform.ISolidKernelEntity, planarTool: MSPyBentleyGeom.CurveVector, directionMode: MSPyMstnPlatform.SolidUtil.Modify.CutDirectionMode, depthMode: MSPyMstnPlatform.SolidUtil.Modify.CutDepthMode, distance: float, defaultNormal: MSPyBentleyGeom.DVec3d, cutDirection: MSPyBentleyGeom.DVec3d) -> MSPyDgnPlatform.BentleyStatus:
             """
-            ClashDetectionBetweenTargetAndTool(target: MSPyDgnPlatform.ISolidKernelEntity, planarTool: MSPyBentleyGeom.CurveVector, directionMode: MSPyMstnPlatform.SolidUtil.Modify.CutDirectionMode, depthMode: MSPyMstnPlatform.SolidUtil.Modify.CutDepthMode, distance: float, defaultNormal: MSPyBentleyGeom.DVec3d, cutDirection: MSPyBentleyGeom.DVec3d) -> MSPyDgnPlatform.BentleyStatus
-            
             Get clash result between target and tool from the list of targets
             
             Parameter ``clashTool``:
@@ -21562,10 +19832,9 @@ class SolidUtil:
             def value(arg0: MSPyMstnPlatform.SolidUtil.Modify.CutDirectionMode) -> int:
                 ...
             
-        def DeleteFaces(*args, **kwargs):
+        @staticmethod
+    def DeleteFaces(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray) -> MSPyDgnPlatform.BentleyStatus:
             """
-            DeleteFaces(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target solid or sheet body by removing selected faces and
             healing.
             
@@ -21583,10 +19852,9 @@ class SolidUtil:
             """
             ...
         
-        def DeleteRedundantTopology(*args, **kwargs):
+        @staticmethod
+    def DeleteRedundantTopology(target: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus:
             """
-            DeleteRedundantTopology(target: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target body by removing redundant topology. An example of
             redundant topololgy would be an edge where the faces on either side
             have identical surface geometry.
@@ -21599,10 +19867,9 @@ class SolidUtil:
             """
             ...
         
-        def Emboss(*args, **kwargs):
+        @staticmethod
+    def Emboss(target: MSPyDgnPlatform.ISolidKernelEntity, tool: MSPyDgnPlatform.ISolidKernelEntity, reverseDirection: bool) -> MSPyDgnPlatform.BentleyStatus:
             """
-            Emboss(target: MSPyDgnPlatform.ISolidKernelEntity, tool: MSPyDgnPlatform.ISolidKernelEntity, reverseDirection: bool) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target body by adding a protrusion constructed from the
             sheet tool body and its imprint on the target body.
             
@@ -21621,7 +19888,8 @@ class SolidUtil:
             """
             ...
         
-        def HollowFaces(*args, **kwargs):
+        @staticmethod
+    def HollowFaces(*args, **kwargs):
             """
             HollowFaces(target: MSPyDgnPlatform.ISolidKernelEntity, defaultDistance: float, faces: MSPyDgnPlatform.ISubEntityPtrArray, distances: MSPyBentley.DoubleArray, addStep: MSPyMstnPlatform.SolidUtil.Modify.StepFacesOption = <StepFacesOption.eADD_STEP_NonCoincident: 2>) -> MSPyDgnPlatform.BentleyStatus
             
@@ -21656,10 +19924,9 @@ class SolidUtil:
             """
             ...
         
-        def ImprintCurveVectorOnBody(*args, **kwargs):
+        @staticmethod
+    def ImprintCurveVectorOnBody(target: MSPyDgnPlatform.ISolidKernelEntity, curveVector: MSPyBentleyGeom.CurveVector, direction: MSPyBentleyGeom.DVec3d, extendOpenCurvesToEdge: bool = True) -> MSPyDgnPlatform.BentleyStatus:
             """
-            ImprintCurveVectorOnBody(target: MSPyDgnPlatform.ISolidKernelEntity, curveVector: MSPyBentleyGeom.CurveVector, direction: MSPyBentleyGeom.DVec3d, extendOpenCurvesToEdge: bool = True) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target body by imprinting new edges from the specified
             curve vector.
             
@@ -21681,10 +19948,9 @@ class SolidUtil:
             """
             ...
         
-        def ImprintWiresOnFace(*args, **kwargs):
+        @staticmethod
+    def ImprintWiresOnFace(face: MSPyDgnPlatform.ISubEntity, wires: MSPyDgnPlatform.ISolidKernelEntityPtrArray, extendToEdge: bool) -> MSPyDgnPlatform.BentleyStatus:
             """
-            ImprintWiresOnFace(face: MSPyDgnPlatform.ISubEntity, wires: MSPyDgnPlatform.ISolidKernelEntityPtrArray, extendToEdge: bool) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify a face of a body by imprinting the specified wire bodies.
             
             Parameter ``face``:
@@ -21702,7 +19968,8 @@ class SolidUtil:
             """
             ...
         
-        def OffsetFaces(*args, **kwargs):
+        @staticmethod
+    def OffsetFaces(*args, **kwargs):
             """
             OffsetFaces(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, distances: MSPyBentley.DoubleArray, addStep: MSPyMstnPlatform.SolidUtil.Modify.StepFacesOption = <StepFacesOption.eADD_STEP_NonCoincident: 2>) -> MSPyDgnPlatform.BentleyStatus
             
@@ -21728,16 +19995,16 @@ class SolidUtil:
             """
             ...
         
-        def OffsetFacesWithStatus(*args, **kwargs):
+        @staticmethod
+    def OffsetFacesWithStatus(*args, **kwargs):
             """
             OffsetFacesWithStatus(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, distances: MSPyBentley.DoubleArray, addStep: MSPyMstnPlatform.SolidUtil.Modify.StepFacesOption, offsetStatus: int = <StepFacesOption.eADD_STEP_NonCoincident: 2>) -> tuple
             """
             ...
         
-        def OffsetThroughHole(*args, **kwargs):
+        @staticmethod
+    def OffsetThroughHole(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, distances: MSPyBentley.DoubleArray) -> MSPyDgnPlatform.BentleyStatus:
             """
-            OffsetThroughHole(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, distances: MSPyBentley.DoubleArray) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target solid by offsetting face through body. It will punch
             hole .
             
@@ -21758,10 +20025,9 @@ class SolidUtil:
             """
             ...
         
-        def SewBodies(*args, **kwargs):
+        @staticmethod
+    def SewBodies(sewn: MSPyDgnPlatform.ISolidKernelEntityPtrArray, unsewn: MSPyDgnPlatform.ISolidKernelEntityPtrArray, tools: MSPyDgnPlatform.ISolidKernelEntityPtrArray, gapWidthBound: float, nIterations: int = 1) -> MSPyDgnPlatform.BentleyStatus:
             """
-            SewBodies(sewn: MSPyDgnPlatform.ISolidKernelEntityPtrArray, unsewn: MSPyDgnPlatform.ISolidKernelEntityPtrArray, tools: MSPyDgnPlatform.ISolidKernelEntityPtrArray, gapWidthBound: float, nIterations: int = 1) -> MSPyDgnPlatform.BentleyStatus
-            
             Sew the given set of sheet bodies together by joining those that share
             edges in common.
             
@@ -21790,10 +20056,9 @@ class SolidUtil:
             """
             ...
         
-        def SpinBody(*args, **kwargs):
+        @staticmethod
+    def SpinBody(target: MSPyDgnPlatform.ISolidKernelEntity, axis: MSPyBentleyGeom.DRay3d, angle: float) -> MSPyDgnPlatform.BentleyStatus:
             """
-            SpinBody(target: MSPyDgnPlatform.ISolidKernelEntity, axis: MSPyBentleyGeom.DRay3d, angle: float) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target body by spinning along an arc specified by a revolve
             axis and sweep angle.
             
@@ -21812,10 +20077,9 @@ class SolidUtil:
             """
             ...
         
-        def SpinFaces(*args, **kwargs):
+        @staticmethod
+    def SpinFaces(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, axis: MSPyBentleyGeom.DRay3d, angle: float) -> MSPyDgnPlatform.BentleyStatus:
             """
-            SpinFaces(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, axis: MSPyBentleyGeom.DRay3d, angle: float) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target solid or sheet body by spinning selected faces along
             an arc specified by a revolve axis and sweep angle.
             
@@ -21871,10 +20135,9 @@ class SolidUtil:
             def value(arg0: MSPyMstnPlatform.SolidUtil.Modify.StepFacesOption) -> int:
                 ...
             
-        def SweepBody(*args, **kwargs):
+        @staticmethod
+    def SweepBody(target: MSPyDgnPlatform.ISolidKernelEntity, path: MSPyBentleyGeom.DVec3d) -> MSPyDgnPlatform.BentleyStatus:
             """
-            SweepBody(target: MSPyDgnPlatform.ISolidKernelEntity, path: MSPyBentleyGeom.DVec3d) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target body by sweeping along a path vector.
             
             Parameter ``target``:
@@ -21889,10 +20152,9 @@ class SolidUtil:
             """
             ...
         
-        def SweepFaces(*args, **kwargs):
+        @staticmethod
+    def SweepFaces(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, path: MSPyBentleyGeom.DVec3d) -> MSPyDgnPlatform.BentleyStatus:
             """
-            SweepFaces(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, path: MSPyBentleyGeom.DVec3d) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target solid or sheet body by sweeping selected faces along
             a path vector.
             
@@ -21913,10 +20175,9 @@ class SolidUtil:
             """
             ...
         
-        def ThickenSheet(*args, **kwargs):
+        @staticmethod
+    def ThickenSheet(target: MSPyDgnPlatform.ISolidKernelEntity, frontDistance: float, backDistance: float) -> MSPyDgnPlatform.BentleyStatus:
             """
-            ThickenSheet(target: MSPyDgnPlatform.ISolidKernelEntity, frontDistance: float, backDistance: float) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the target sheet body by thickening to create a solid body.
             
             Parameter ``target``:
@@ -21935,16 +20196,13 @@ class SolidUtil:
             """
             ...
         
-        def ThickenSheetWithStatus(*args, **kwargs):
-            """
-            ThickenSheetWithStatus(target: MSPyDgnPlatform.ISolidKernelEntity, frontDistance: float, backDistance: float, status: int) -> tuple
-            """
+        @staticmethod
+    def ThickenSheetWithStatus(target: MSPyDgnPlatform.ISolidKernelEntity, frontDistance: float, backDistance: float, status: int) -> tuple:
             ...
         
-        def TransformBody(*args, **kwargs):
+        @staticmethod
+    def TransformBody(entity: MSPyDgnPlatform.ISolidKernelEntity, transform: MSPyBentleyGeom.Transform) -> MSPyDgnPlatform.BentleyStatus:
             """
-            TransformBody(entity: MSPyDgnPlatform.ISolidKernelEntity, transform: MSPyBentleyGeom.Transform) -> MSPyDgnPlatform.BentleyStatus
-            
             Modify the entity transform for the given body by pre-multiplying the
             current entity transform with the input transform.
             
@@ -21963,7 +20221,8 @@ class SolidUtil:
             """
             ...
         
-        def TransformFaces(*args, **kwargs):
+        @staticmethod
+    def TransformFaces(*args, **kwargs):
             """
             TransformFaces(target: MSPyDgnPlatform.ISolidKernelEntity, faces: MSPyDgnPlatform.ISubEntityPtrArray, translations: MSPyBentleyGeom.TransformArray, addStep: MSPyMstnPlatform.SolidUtil.Modify.StepFacesOption = <StepFacesOption.eADD_STEP_NonCoincident: 2>) -> MSPyDgnPlatform.BentleyStatus
             
@@ -22023,10 +20282,9 @@ class SolidUtil:
         
         eRanges: ChamferMode
         
-    def RayTestFace(*args, **kwargs):
+    @staticmethod
+    def RayTestFace(subEntity: MSPyDgnPlatform.ISubEntity, boresite: MSPyBentleyGeom.DRay3d, intersectPts: MSPyBentleyGeom.DPoint3dArray, intersectParams: MSPyBentleyGeom.DPoint2dArray) -> bool:
         """
-        RayTestFace(subEntity: MSPyDgnPlatform.ISubEntity, boresite: MSPyBentleyGeom.DRay3d, intersectPts: MSPyBentleyGeom.DPoint3dArray, intersectParams: MSPyBentleyGeom.DPoint2dArray) -> bool
-        
         Get the ray intersection with a face.
         
         Parameter ``subEntity``:
@@ -22051,34 +20309,25 @@ class SolidUtil:
         None
         """
     
-        def AddNodeIdAttributes(*args, **kwargs):
-            """
-            AddNodeIdAttributes(entity: MSPyDgnPlatform.ISolidKernelEntity, nodeId: int, overrideExisting: bool) -> MSPyDgnPlatform.BentleyStatus
-            """
+        @staticmethod
+    def AddNodeIdAttributes(entity: MSPyDgnPlatform.ISolidKernelEntity, nodeId: int, overrideExisting: bool) -> MSPyDgnPlatform.BentleyStatus:
             ...
         
-        def DeleteNodeIdAttributes(*args, **kwargs):
-            """
-            DeleteNodeIdAttributes(entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus
-            """
+        @staticmethod
+    def DeleteNodeIdAttributes(entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus:
             ...
         
-        def EdgesFromId(*args, **kwargs):
-            """
-            EdgesFromId(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, edgeId: MSPyBentleyGeom.EdgeId, entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus
-            """
+        @staticmethod
+    def EdgesFromId(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, edgeId: MSPyBentleyGeom.EdgeId, entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus:
             ...
         
-        def FacesFromId(*args, **kwargs):
-            """
-            FacesFromId(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, faceId: MSPyBentleyGeom.FaceId, entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus
-            """
+        @staticmethod
+    def FacesFromId(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, faceId: MSPyBentleyGeom.FaceId, entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus:
             ...
         
-        def FindNodeIdRange(*args, **kwargs):
+        @staticmethod
+    def FindNodeIdRange(entity: MSPyDgnPlatform.ISolidKernelEntity) -> tuple:
             """
-            FindNodeIdRange(entity: MSPyDgnPlatform.ISolidKernelEntity) -> tuple
-            
             Find the highest and lowest nodeId values from the topology ids
             currently assigned to the faces of the given body. Used to avoid
             nodeId conflicts between target and tool bodies.
@@ -22097,10 +20346,9 @@ class SolidUtil:
             """
             ...
         
-        def IdFromEdge(*args, **kwargs):
+        @staticmethod
+    def IdFromEdge(subEntity: MSPyDgnPlatform.ISubEntity, useHighestId: bool) -> tuple:
             """
-            IdFromEdge(subEntity: MSPyDgnPlatform.ISubEntity, useHighestId: bool) -> tuple
-            
             Get the EdgeId currently assigned to a given edge sub-entity.
             
             Parameter ``edgeId``:
@@ -22118,10 +20366,9 @@ class SolidUtil:
             """
             ...
         
-        def IdFromFace(*args, **kwargs):
+        @staticmethod
+    def IdFromFace(subEntity: MSPyDgnPlatform.ISubEntity, useHighestId: bool) -> tuple:
             """
-            IdFromFace(subEntity: MSPyDgnPlatform.ISubEntity, useHighestId: bool) -> tuple
-            
             Get the FaceId currently assigned to a given face sub-entity.
             
             Parameter ``faceId``:
@@ -22139,10 +20386,9 @@ class SolidUtil:
             """
             ...
         
-        def IdFromVertex(*args, **kwargs):
+        @staticmethod
+    def IdFromVertex(subEntity: MSPyDgnPlatform.ISubEntity, useHighestId: bool) -> tuple:
             """
-            IdFromVertex(subEntity: MSPyDgnPlatform.ISubEntity, useHighestId: bool) -> tuple
-            
             Get the VertexId currently assigned to a given vertex sub-entity.
             
             Parameter ``vertexId``:
@@ -22160,16 +20406,12 @@ class SolidUtil:
             """
             ...
         
-        def IncrementNodeIdAttributes(*args, **kwargs):
-            """
-            IncrementNodeIdAttributes(entity: MSPyDgnPlatform.ISolidKernelEntity, increment: int) -> MSPyDgnPlatform.BentleyStatus
-            """
+        @staticmethod
+    def IncrementNodeIdAttributes(entity: MSPyDgnPlatform.ISolidKernelEntity, increment: int) -> MSPyDgnPlatform.BentleyStatus:
             ...
         
-        def VerticesFromId(*args, **kwargs):
-            """
-            VerticesFromId(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, vertexId: MSPyBentleyGeom.VertexId, entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus
-            """
+        @staticmethod
+    def VerticesFromId(subEntities: MSPyDgnPlatform.ISubEntityPtrArray, vertexId: MSPyBentleyGeom.VertexId, entity: MSPyDgnPlatform.ISolidKernelEntity) -> MSPyDgnPlatform.BentleyStatus:
             ...
         
         def __init__(*args, **kwargs):
@@ -22200,28 +20442,20 @@ class StringUtility:
     None
     """
 
-    def FromDirection(*args, **kwargs):
-        """
-        FromDirection(angle_str: MSPyBentley.WString, abs_angle: float, format: MSPyDgnPlatform.AngleFormatVals, igdsChars: bool, addTrueNorth: bool, angleMode: int, precision: int, leadingZero: bool, trailingZeros: bool, modelRef: MSPyDgnPlatform.DgnModelRef) -> None
-        """
+    @staticmethod
+    def FromDirection(angle_str: MSPyBentley.WString, abs_angle: float, format: MSPyDgnPlatform.AngleFormatVals, igdsChars: bool, addTrueNorth: bool, angleMode: int, precision: int, leadingZero: bool, trailingZeros: bool, modelRef: MSPyDgnPlatform.DgnModelRef) -> None:
         ...
     
-    def FromUors(*args, **kwargs):
-        """
-        FromUors(uor_string: MSPyBentley.WString, uors: float) -> None
-        """
+    @staticmethod
+    def FromUors(uor_string: MSPyBentley.WString, uors: float) -> None:
         ...
     
-    def ToDirection(*args, **kwargs):
-        """
-        ToDirection(arg0: MSPyBentley.WString) -> float
-        """
+    @staticmethod
+    def ToDirection(arg0: MSPyBentley.WString) -> float:
         ...
     
-    def ToUors(*args, **kwargs):
-        """
-        ToUors(arg0: MSPyBentley.WString) -> float
-        """
+    @staticmethod
+    def ToUors(arg0: MSPyBentley.WString) -> float:
         ...
     
     def __init__(*args, **kwargs):

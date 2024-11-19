@@ -77,10 +77,11 @@ def test_MiscTest():
     assert 292 == ulBufferSize[2]
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateSingleLinkage(initDgnPlatformHost, loadDgnFile):
-    modelId = loadDgnFile.GetDefaultModelId()
-    ret = loadDgnFile.LoadRootModelById(modelId)
-    cache = loadDgnFile.FillSectionsInModel(ret[0])   
+def test_CreateSingleLinkage(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    modelId = dgnFile.GetDefaultModelId()
+    ret = dgnFile.LoadRootModelById(modelId)
+    cache = dgnFile.FillSectionsInModel(ret[0])   
     eeh = EditElementHandle()
     segment = DSegment3d(0,0,0,0,100,0)
     assert BentleyStatus.eSUCCESS == LineHandler.CreateLineElement(eeh, None, segment, False, ret[0])
@@ -99,10 +100,11 @@ def test_CreateSingleLinkage(initDgnPlatformHost, loadDgnFile):
 #   This test doens't work due to issues with ExtractFromElement
 #-------------------------------------------------------------------
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateMultipleLinkages(initDgnPlatformHost, loadDgnFile):
-    modelId = loadDgnFile.GetDefaultModelId()
-    ret = loadDgnFile.LoadRootModelById(modelId)
-    cache = loadDgnFile.FillSectionsInModel(ret[0])
+def test_CreateMultipleLinkages(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    modelId = dgnFile.GetDefaultModelId()
+    ret = dgnFile.LoadRootModelById(modelId)
+    cache = dgnFile.FillSectionsInModel(ret[0])
     eeh = EditElementHandle()
     
     segment = DSegment3d(100,0,0,100,100,0)
@@ -158,14 +160,15 @@ def test_CreateMultipleLinkages(initDgnPlatformHost, loadDgnFile):
         assert 1 == reducedlinkageFragments.GetCount()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_Create(initDgnPlatformHost, loadDgnFile):
-    modelId = loadDgnFile.GetDefaultModelId()
-    ret = loadDgnFile.LoadRootModelById(modelId)
-    cache = loadDgnFile.FillSectionsInModel(ret[0])
+def test_Create(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    modelId = dgnFile.GetDefaultModelId()
+    ret = dgnFile.LoadRootModelById(modelId)
+    cache = dgnFile.FillSectionsInModel(ret[0])
     eeh = EditElementHandle()
     pXmlFragment = XmlFragment(APPID_GasCompany, APPTYPE_ProjectData, False, projectDataSchema, projectData)
     assert pXmlFragment != None
-    assert BentleyStatus.eSUCCESS == pXmlFragment.CreateXmlElement(eeh, loadDgnFile.GetDictionaryModel(), True)
+    assert BentleyStatus.eSUCCESS == pXmlFragment.CreateXmlElement(eeh, dgnFile.GetDictionaryModel(), True)
     assert BentleyStatus.eSUCCESS == AddElementToModel(eeh, ret[0])
     readFragment = XmlFragment(eeh)
     assert None != readFragment

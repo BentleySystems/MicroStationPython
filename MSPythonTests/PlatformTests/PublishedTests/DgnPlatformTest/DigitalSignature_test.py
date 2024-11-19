@@ -18,12 +18,13 @@ def GetAndFillDgnModel(dgnFile, modelId = -1):
     return model
 
 @pytest.mark.parametrize('fileName', ['HasDigitalSignatureFileScope.dgn'])
-def test_FileSignatureDelete(initDgnPlatformHost,loadDgnFile):
-    assert loadDgnFile.GetSignatureCount() == 1
+def test_FileSignatureDelete(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    assert dgnFile.GetSignatureCount() == 1
     
     nDeleted = 0
     
-    signatures = FileSignatureCollection(loadDgnFile)
+    signatures = FileSignatureCollection(dgnFile)
     
     for i in signatures:
         deleteThis = EditElementHandle(i, False)
@@ -37,15 +38,15 @@ def test_FileSignatureDelete(initDgnPlatformHost,loadDgnFile):
     assert signList.__len__() == 0
 
 @pytest.mark.parametrize('fileName', ['HasDigitalSignatureModelScope2.dgn'])
-def test_Delete1Of2ModelsSignatures(initDgnPlatformHost,loadDgnFile):
+def test_Delete1Of2ModelsSignatures(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
-    
-    model = GetAndFillDgnModel(loadDgnFile)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    model = GetAndFillDgnModel(dgnFile)
     if model == None:
         assert False
         
-    assert loadDgnFile.GetSignatureCount() == 2
+    assert dgnFile.GetSignatureCount() == 2
     
     nDeleted = 0
     
@@ -115,7 +116,7 @@ def test_FindFileSignature(initDgnPlatformHost,loadDgnFileReadOnly):
 
 @pytest.mark.parametrize('fileName',['HasDigitalSignatureModelScope.dgn'])
 def test_FindModelSignature(initDgnPlatformHost, loadDgnFileReadOnly):
-    # model = loadDgnFile.GetAndFillDgnModelP()
+    # model = dgnFile.GetAndFillDgnModelP()
     model = GetAndFillDgnModel(loadDgnFileReadOnly)
     if None == model:
         assert False
@@ -163,7 +164,7 @@ def test_FindModelSignature(initDgnPlatformHost, loadDgnFileReadOnly):
 
 @pytest.mark.parametrize('fileName',['HasDigitalSignatureModelScope2.dgn'])
 def test_Find2ModelSignatures(initDgnPlatformHost, loadDgnFileReadOnly):
-  # model = loadDgnFile.GetAndFillDgnModelP()
+  # model = dgnFile.GetAndFillDgnModelP()
     model = GetAndFillDgnModel(loadDgnFileReadOnly)
     if None == model:
         assert False

@@ -296,6 +296,8 @@ $(o)linestyle$(oext)                    : $(PyDgnPlatformSource)linestyle.cpp $(
 
 $(o)linestylemanager$(oext)             : $(PyDgnPlatformSource)linestylemanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
+$(o)Locate$(oext)                       : $(PyDgnPlatformSource)Locate.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
 $(o)lstyle$(oext)                       : $(PyDgnPlatformSource)lstyle.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)material$(oext)                     : $(PyDgnPlatformSource)material.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}

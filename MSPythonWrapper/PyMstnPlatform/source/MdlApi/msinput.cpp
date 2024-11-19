@@ -53,7 +53,7 @@ void def_msinput(py::module_& m)
 
     py::class_<PyCadInputQueue> c1 (m, "PyCadInputQueue");
     c1.def_static ("SendKeyin", &PyCadInputQueue::SendKeyin, "keyinStr"_a);
-    c1.def_static ("SendDataPoint", &PyCadInputQueue::SendDataPoint, "point"_a, "view"_a);
+    c1.def_static ("SendDataPoint", &PyCadInputQueue::SendDataPoint, "point"_a, "view"_a, "qualifiers"_a = 0);
     c1.def_static ("SendReset", &PyCadInputQueue::SendReset);
     c1.def_static ("SendCommand", &PyCadInputQueue::SendCommand, "commandStr"_a);
     c1.def_static ("SendDataPointForLocate", &PyCadInputQueue::SendDataPointForLocate, "element"_a, "point"_a);

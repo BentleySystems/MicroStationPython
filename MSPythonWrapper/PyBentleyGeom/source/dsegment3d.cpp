@@ -344,7 +344,15 @@ void def_DSegment3d(py::module_& m)
     c1.def_property("point",
         [](DSegment3dR self)
         {
-        return py::array_t<DPoint3d>{ 2, self.point, py::cast(self)};
+        DPoint3d ptSt;
+        self.GetStartPoint(ptSt);
+
+        DPoint3d ptEnd;
+        self.GetEndPoint (ptEnd);
+
+        return py::make_tuple (ptSt, ptEnd);
+
+        //return points; //py::array_t<DPoint3d>{ 2, self.point, py::cast(self)};
         },
         [](DSegment3dR self, py::array_t<DPoint3d> const& arr)
         {
@@ -366,6 +374,11 @@ void def_DSegment3d(py::module_& m)
     c1.def(py::init(py::overload_cast<DSegment3dCR, double, double>(&DSegment3d::FromFractionInterval)), "parent"_a, "startFraction"_a, "endFraction"_a);
     c1.def(py::init(py::overload_cast<DSegment3dCR, DSegment1dCR>(&DSegment3d::FromFractionInterval)), "parent"_a, "interval"_a);
 
+    c1.def("Init", py::overload_cast<double, double, double, double, double, double>(&DSegment3d::Init), "x0"_a, "y0"_a, "z0"_a, "x1"_a, "y1"_a, "z1"_a);
+    c1.def("Init", py::overload_cast<DPoint3dCR, DPoint3dCR>(&DSegment3d::Init), "point0"_a, "point1"_a);
+    c1.def("Init", py::overload_cast<DPoint2dCR, DPoint2dCR>(&DSegment3d::Init), "point0"_a, "point1"_a);
+    c1.def("InitFrom", &DSegment3d::InitFrom, "ray"_a);
+    c1.def("InitFromOriginAndDirection", &DSegment3d::InitFromOriginAndDirection, "point0"_a, "tangent"_a);
     c1.def("InitProduct", &DSegment3d::InitProduct, "transform"_a, "other"_a, DOC(Bentley, Geom, DSegment3d, InitProduct));            
     c1.def("GetEndPoints", &DSegment3d::GetEndPoints, "point0"_a, "point1"_a, DOC(Bentley, Geom, DSegment3d, GetEndPoints));
     c1.def("LengthSquared", &DSegment3d::LengthSquared, DOC(Bentley, Geom, DSegment3d, LengthSquared));
@@ -541,8 +554,8 @@ void def_DSegment3d(py::module_& m)
         double fraction1 = 0;
         DPoint3d point0 = DPoint3d::FromZero();
         DPoint3d point1 = DPoint3d::FromZero();
-        DSegment3d::IntersectXY(fraction0, fraction1, point0, point1, segment0, segment1);
-        return py::make_tuple(fraction0, fraction1, point0, point1);
+        bool bOk = DSegment3d::IntersectXY(fraction0, fraction1, point0, point1, segment0, segment1);
+        return py::make_tuple(bOk, fraction0, fraction1, point0, point1);
         }, "segment0"_a, "segment1"_a, DOC(Bentley, Geom, DSegment3d, IntersectXY));
 
     c1.def("__repr__", [] (DSegment3dCR self)

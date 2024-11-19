@@ -570,9 +570,23 @@ void def_ISessionMgr(py::module_& m)
            }, DOC(Bentley, MstnPlatform, ISessionMgr, OpenDgnFileDialog));
 
     c2.def("CreateNewDgnFile", &ISessionMgr::CreateNewDgnFile, "newName"_a, "defaultDir"_a, "switchToNewFile"_a, DOC(Bentley, MstnPlatform, ISessionMgr, CreateNewDgnFile));
-    c2.def_static("AddSessionMonitor", &ISessionMgr::AddSessionMonitor, "monitor"_a, DOC(Bentley, MstnPlatform, ISessionMgr, AddSessionMonitor));
-    c2.def_static("DropSessionMonitor", &ISessionMgr::DropSessionMonitor, "monitor"_a, DOC(Bentley, MstnPlatform, ISessionMgr, DropSessionMonitor));
-    
+
+    c2.def_static("AddSessionMonitor", [] (SessionMonitor& mon)
+        {
+        py::str str = py::globals()["__mdlDescr__"];
+        WString wstr (std::string (str).c_str ());
+        SaveAndSwitchMdlDesc saver (wstr.c_str ());
+        ISessionMgr::AddSessionMonitor (mon);
+        }, "monitor"_a, DOC(Bentley, MstnPlatform, ISessionMgr, AddSessionMonitor));
+
+    c2.def_static("DropSessionMonitor", [] (SessionMonitor& mon)
+        {
+        py::str str = py::globals()["__mdlDescr__"];
+        WString wstr (std::string (str).c_str ());
+        SaveAndSwitchMdlDesc saver (wstr.c_str ());
+        ISessionMgr::DropSessionMonitor (mon);
+        }, "monitor"_a, DOC(Bentley, MstnPlatform, ISessionMgr, AddSessionMonitor));
+
     c2.def_property_readonly("WriteableFiles", &ISessionMgr::GetWriteableFiles);
     c2.def("GetWriteableFiles", &ISessionMgr::GetWriteableFiles, py::return_value_policy::reference_internal, DOC(Bentley, MstnPlatform, ISessionMgr, GetWriteableFiles));
     

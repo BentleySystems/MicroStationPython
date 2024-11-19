@@ -15,6 +15,7 @@ from MSPyBentleyGeom import *
 from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from util import *
+from conftest import *
 
 s_nLinesCreated = 0
 s_nEllipseCreated = 0
@@ -42,7 +43,8 @@ class TestElementTestToolkitFixture :
         return dgnFile
 
     def loadDgnModel (self):
-        self.m_primaryDgnFileP = self.loadDgnFileByFileName (dgnFileName)
+        seedFile = self.loadDgnFileByFileName (dgnFileName)
+        self.m_primaryDgnFileP = createTempDgnFileFromSeedFile (seedFile)
         self.m_defaultModel, retVal = self.m_primaryDgnFileP.LoadRootModelById (self.m_primaryDgnFileP.DefaultModelId, True)
 
     def GetDgnModel (self):
@@ -1912,8 +1914,8 @@ class TestElementTemplateSymbologyTests (TestElementTemplateTestsFixture):
         global s_nLinesCreated
 
         segment = DSegment3d (0,0,0, 0,0,0)
-        segment.point[1][0] += 10000
-        segment.point[0][1] = segment.point[1][1] = s_nLinesCreated * 10000
+        segment.point[1].x += 10000
+        segment.point[0].y = segment.point[1].y = s_nLinesCreated * 10000
         s_nLinesCreated += 1
         return LineHandler.CreateLineElement (eeh, None, segment, model.Is3d(), model)
 

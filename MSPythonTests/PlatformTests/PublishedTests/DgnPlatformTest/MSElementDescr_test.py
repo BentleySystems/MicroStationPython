@@ -24,8 +24,9 @@ def AllocateNDescriptors (n, ret):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AllocateSimple(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AllocateSimple(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     segment = DSegment3d (-1000.0, 0.0, 0.0, 1000.0, 0.0, 0.0)
     assert LineHandler.CreateLineElement (m_eeh, None, segment, False, ret[0]) == BentleyStatus.eSUCCESS
     descr = MSElementDescr.Allocate(m_eeh.GetElement(), ret[0])
@@ -37,8 +38,9 @@ def test_AllocateSimple(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AllocateComplex(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AllocateComplex(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     NormalCellHeaderHandler.CreateOrphanCellElement (m_eeh, "test", False, ret[0])
     descr = MSElementDescr.Allocate(m_eeh.GetElement(), ret[0])
     assert descr.h.next == None
@@ -51,8 +53,9 @@ def test_AllocateComplex(initDgnPlatformHost, loadDgnFile):
  # DescrValidator is not exposed
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendChildToParent(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendChildToParent(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (2, ret)
     # validator = DescrValidator(descrs[0])
     descrs[0].AppendDescr(descrs[1])
@@ -60,8 +63,9 @@ def test_AppendChildToParent(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendSecondChild(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendSecondChild(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (3, ret)
     descrs[0].AppendDescr(descrs[1])
     # validator = DescrValidator(descrs[0])
@@ -70,8 +74,9 @@ def test_AppendSecondChild(initDgnPlatformHost, loadDgnFile):
 	
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendThirdChild(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendThirdChild(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (4, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[0].AppendDescr(descrs[2])
@@ -81,8 +86,9 @@ def test_AppendThirdChild(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendChildtoChild(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendChildtoChild(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (3, ret)
     descrs[0].AppendDescr(descrs[1])
     # validator = DescrValidator(descrs[0])
@@ -91,8 +97,9 @@ def test_AppendChildtoChild(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendSecondChildtoChild(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendSecondChildtoChild(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (4, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[1].AppendDescr(descrs[2])
@@ -102,8 +109,9 @@ def test_AppendSecondChildtoChild(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendThirdChildtoChild(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendThirdChildtoChild(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (5, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[1].AppendDescr(descrs[2])
@@ -114,8 +122,9 @@ def test_AppendThirdChildtoChild(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendSecondChildFirstHasThreeGrandChildren(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendSecondChildFirstHasThreeGrandChildren(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (6, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[1].AppendDescr(descrs[2])
@@ -127,8 +136,9 @@ def test_AppendSecondChildFirstHasThreeGrandChildren(initDgnPlatformHost, loadDg
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendChildWithThreeChildren(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendChildWithThreeChildren(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (6, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[2].AppendDescr(descrs[3])
@@ -140,8 +150,9 @@ def test_AppendChildWithThreeChildren(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendThirdChildMiddleHasThreeGrandChildren(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendThirdChildMiddleHasThreeGrandChildren(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (7, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[2].AppendDescr(descrs[3])
@@ -154,8 +165,9 @@ def test_AppendThirdChildMiddleHasThreeGrandChildren(initDgnPlatformHost, loadDg
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AppendThreeChildrenEachHasThreeGrandChildren(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AppendThreeChildrenEachHasThreeGrandChildren(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (13, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[1].AppendDescr(descrs[2])
@@ -175,9 +187,10 @@ def test_AppendThreeChildrenEachHasThreeGrandChildren(initDgnPlatformHost, loadD
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_TwoDescrsReplaceParentDescr(initDgnPlatformHost, loadDgnFile):
+def test_TwoDescrsReplaceParentDescr(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     # ScopedDgnHost autoDgnHost
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     model = ret[0]
     parentEeh = EditElementHandle()
     NormalCellHeaderHandler.CreateOrphanCellElement (parentEeh, "parent", False, model)
@@ -196,8 +209,9 @@ def test_TwoDescrsReplaceParentDescr(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_TwoDescrsReplaceChildDescr(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_TwoDescrsReplaceChildDescr(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (3, ret)
     descrs[0].AppendDescr(descrs[1])
     # validator = DescrValidator(descrs[0])
@@ -214,8 +228,9 @@ def test_TwoDescrsReplaceChildDescr(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_TwoDescrsReplacementHasChildren(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_TwoDescrsReplacementHasChildren(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (7, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[0].AppendDescr(descrs[2])
@@ -228,8 +243,9 @@ def test_TwoDescrsReplacementHasChildren(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ReplaceElement(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ReplaceElement(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (2, ret)
     NormalCellHeaderHandler.CreateOrphanCellElement (m_eeh, "test", False, ret[0])
     descrs[0].AppendDescr(descrs[1])
@@ -240,8 +256,9 @@ def test_ReplaceElement(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ClearElementIds(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_ClearElementIds(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (13, ret)
     descrs[0].AppendDescr(descrs[1])
     descrs[1].AppendDescr(descrs[2])
@@ -263,8 +280,9 @@ def test_ClearElementIds(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateAChain(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateAChain(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (2, ret)
     # validator = DescrValidator(descrs[0])
     descrs[0].AddToChain(descrs[1])
@@ -272,8 +290,9 @@ def test_CreateAChain(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_AddToChain(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_AddToChain(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (3, ret)
     descrs[0].AddToChain(descrs[1])
     # validator = DescrValidator(descrs[0])
@@ -282,8 +301,9 @@ def test_AddToChain(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_InitOrAddToChainWithTailStartChain(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_InitOrAddToChainWithTailStartChain(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     descrs = AllocateNDescriptors (1, ret)
     pHead = None
     pTail = None

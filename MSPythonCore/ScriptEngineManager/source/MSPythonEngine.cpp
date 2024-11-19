@@ -183,7 +183,14 @@ bool PythonScriptValue::asString(Utf8StringR outVal)
 +---------------+---------------+---------------+---------------+---------------+------*/
 PythonScriptContext::PythonScriptContext(bool global)
     {
-    m_dict = global ? py::globals() : py::dict();
+    if (global)
+        {
+        m_dict = py::dict();
+        for (auto item : py::globals())
+            m_dict[item.first] = item.second;
+        }
+    else
+        m_dict = py::dict();
     }
 
 /*---------------------------------------------------------------------------------**//**
@@ -638,7 +645,7 @@ bool PythonScriptEngine::AddCmdLineArgs(bvector<WString>& args)
     if (!argvList)
         return false;
     if (!argvList.empty())
-        argvList.attr("pop")(); // remove first empty element
+        argvList.attr("clear")(); // remove last used arguments
 
     for (auto& it : args)
         {
@@ -870,6 +877,9 @@ void PythonScriptEngine::eval_file(WCharCP scriptFile, WCharCP funcName, ScriptC
 
     }
 
+/*---------------------------------------------------------------------------------**//*** 
+ @bsimethod                                  
+ +---------------+---------------+---------------+---------------+---------------+------*/ 
 void PythonScriptEngine::InitSearchPath ()
     {
     BeFileName rootPath(Py_GetProgramFullPath());

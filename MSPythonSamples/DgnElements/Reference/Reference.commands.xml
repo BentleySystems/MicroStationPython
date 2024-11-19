@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="ReferenceSample" CommandClass="MacroCommand" CommandWord="PYREFERENCE">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="ReferenceSample">
+            <Keyword CommandWord="ATTACH" />
+            <Keyword CommandWord="DETACH" />
+            <Keyword CommandWord="ROTATE" />
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="PYREFERENCE ATTACH"                     Function="Attach" />
+        <KeyinHandler Keyin="PYREFERENCE DETACH"                     Function="Detach" />
+        <KeyinHandler Keyin="PYREFERENCE ROTATE"                     Function="Rotate" />
+    </KeyinHandlers>
+</KeyinTree>

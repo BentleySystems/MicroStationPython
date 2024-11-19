@@ -18,8 +18,9 @@ def IsEqual(ellipse0, ellipse1, tolerance = 1.0e-12):
             (abs(ellipse0.sweep - ellipse1.sweep) < tolerance))
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateEllipseElement(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateEllipseElement(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     ellipse = DEllipse3d.FromCenterNormalRadius(DPoint3d.From (0.0, 0.0, 0.0), DVec3d(0.0, 0.0, 1.0), 1.0)
     eeh = EditElementHandle()
     

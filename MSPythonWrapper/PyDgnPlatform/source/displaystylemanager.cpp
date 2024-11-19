@@ -678,6 +678,9 @@ void def_DisplayStyleManager(py::module_& m)
     //===================================================================================
     // struct DisplayStyleList
     py::class_< DisplayStyleList, DisplayStyleCPVector> c5(m, "DisplayStyleList");
+    c5.def(py::init(&DisplayStyleList::CreateForFile), "dgnFile"_a, "DisplayStyleListOptions"_a);
+    c5.def("ContainsDisplayStyle", &DisplayStyleList::ContainsDisplayStyle, "styleName"_a);
+    c5.def("FindDisplayStyleByName", &DisplayStyleList::FindDisplayStyleByName, "styleName"_a, py::return_value_policy::reference_internal);
 
     //===================================================================================
     // struct IDisplayStyleEventHandler

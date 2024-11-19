@@ -17,6 +17,7 @@ IF "%MS%." == "." goto USAGE_Error
 
 set TOOL_VERSION=14.16
 set BB_DEFAULT_TOOLSET=VS2019
+set TargetFrameworkVersion=v4.8
 
 REM MDLTOOLS is the location of the MDLSDK
 set mdltoolsdrive=%~d2

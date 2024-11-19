@@ -198,7 +198,7 @@ void def_ElementCopyContext(py::module_& m)
         {
         //===================================================================================
         // enum class SharedCellNameConflicts
-        py::enum_< ElementCopyContext::SharedCellNameConflicts>(c1, "SharedCellNameConflicts")
+        py::enum_< ElementCopyContext::SharedCellNameConflicts>(c1, "SharedCellNameConflictsEnum")
             .value("eUndefined", ElementCopyContext::SharedCellNameConflicts::Undefined)
             .value("eNone", ElementCopyContext::SharedCellNameConflicts::None)
             .value("eHasDefId", ElementCopyContext::SharedCellNameConflicts::HasDefId)

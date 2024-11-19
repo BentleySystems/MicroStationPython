@@ -228,7 +228,7 @@ void def_ElementRefBase(py::module_& m)
     //===================================================================================
     // struct  ElementRefVec
     py::class_< ElementRefVec> c2(m, "ElementRefVec");
-
+    c2.def(py::init<>());
     c2.def("__bool__", [] (ElementRefVec& self) { return !self.empty(); });
     c2.def("__len__", &ElementRefVec::size);
 

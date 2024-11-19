@@ -438,6 +438,12 @@ void def_ElementHandle(py::module_& m)
             return dynamic_cast <ISharedCellQuery*> (&self.GetHandler());
            }, py::return_value_policy::reference_internal);           
 
+    //Convert internal RasterFrameDisplayHandler to RasterFrameHandler
+    c3.def("GetRasterFrameHandler", [](ElementHandleCR self)
+        {
+        return dynamic_cast <RasterFrameHandler*> (&self.GetHandler());
+        }, py::return_value_policy::reference_internal);
+
 
     c3.def_property_readonly("ElementRef", &ElementHandle::GetElementRef);
     c3.def("GetElementRef", &ElementHandle::GetElementRef, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, ElementHandle, GetElementRef));

@@ -90,8 +90,9 @@ def CreateElement(type, eeh , model , is3d):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateSharedCellElement(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateSharedCellElement(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     SharedCellSetUp ("definition", ret)
     m_points = [[DPoint3d() for i in range(NUM_POINTS)] for j in range(NUM_LINES)]
     numChildren = 0
@@ -104,25 +105,28 @@ def test_CreateSharedCellElement(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SharedCellDef_FindDefinitionByName_Valid(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SharedCellDef_FindDefinitionByName_Valid(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     m_eehDef = EditElementHandle()
     de = m_eehDef.GetDgnFile ()
-    assert m_eehDef.GetElementRef () == SharedCellDefHandler.FindDefinitionByName ("test", loadDgnFile)
+    assert m_eehDef.GetElementRef () == SharedCellDefHandler.FindDefinitionByName ("test", dgnFile)
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SharedCellDef_FindDefinitionByName_InValid(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SharedCellDef_FindDefinitionByName_InValid(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     m_eehDef = EditElementHandle()
     de = m_eehDef.GetDgnFile ()
-    assert None == SharedCellDefHandler.FindDefinitionByName ("fail", loadDgnFile)
+    assert None == SharedCellDefHandler.FindDefinitionByName ("fail", dgnFile)
 
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_SharedCellDef_NonUniqueDefs(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_SharedCellDef_NonUniqueDefs(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     points = [[DPoint3d() for i in range(NUM_POINTS)] for j in range(NUM_LINES)]
     m_eehDef = EditElementHandle()
     m_eehLines = [EditElementHandle() for _ in range(3)]
@@ -150,8 +154,9 @@ def test_SharedCellDef_NonUniqueDefs(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayHandler_IsRenderable_SharedCell(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_IsRenderable_SharedCell(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement(9, m_eeh, ret[0], ret[0].Is3d())
     disp = m_eeh.GetHandler ()
     assert disp != None
@@ -159,8 +164,9 @@ def test_DisplayHandler_IsRenderable_SharedCell(initDgnPlatformHost, loadDgnFile
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayHandler_GetTransformOrigin_SharedCell(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_GetTransformOrigin_SharedCell(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement(9, m_eeh, ret[0], ret[0].Is3d())
     disp = m_eeh.GetHandler (eMISSING_HANDLER_PERMISSION_ChangeAttrib)
     assert disp != None
@@ -171,8 +177,9 @@ def test_DisplayHandler_GetTransformOrigin_SharedCell(initDgnPlatformHost, loadD
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayHandler_GetOrientation_SharedCell(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_GetOrientation_SharedCell(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement(9, m_eeh, ret[0], ret[0].Is3d())
     disp = m_eeh.GetHandler (eMISSING_HANDLER_PERMISSION_ChangeAttrib)
     ROWS = 3
@@ -188,8 +195,9 @@ def test_DisplayHandler_GetOrientation_SharedCell(initDgnPlatformHost, loadDgnFi
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayHandler_IsPlanar_SharedCell(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_IsPlanar_SharedCell(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement(9, m_eeh, ret[0], ret[0].Is3d())
     disp = m_eeh.GetHandler (eMISSING_HANDLER_PERMISSION_ChangeAttrib)
     assert disp != None
@@ -199,8 +207,9 @@ def test_DisplayHandler_IsPlanar_SharedCell(initDgnPlatformHost, loadDgnFile):
     assert disp.IsPlanar(m_eeh, normal, point, de) == True
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayHandler_GetSnapOrigin_SharedCell(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_GetSnapOrigin_SharedCell(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement(9, m_eeh, ret[0], ret[0].Is3d())
     disp = m_eeh.GetHandler (eMISSING_HANDLER_PERMISSION_ChangeAttrib)
     assert disp != None
@@ -211,8 +220,9 @@ def test_DisplayHandler_GetSnapOrigin_SharedCell(initDgnPlatformHost, loadDgnFil
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_DisplayHandler_GetElemDisplayParams_SharedCell(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_GetElemDisplayParams_SharedCell(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement(9, m_eeh, ret[0], ret[0].Is3d())
     propQuery = ElementPropertiesGetter(m_eeh)
     assert propQuery.GetColor () == 0

@@ -24,9 +24,10 @@ def GetAttachmentCount(model):
 
 
 @pytest.mark.parametrize('fileName', ['AnnotationAttachment_Section_Plan_Elevantion.dgn']) 
-def test_Show_Hide(initDgnPlatformHost,loadDgnFile):
-    namedViewCollection = loadDgnFile.GetNamedViews ()
-    m_defaultModel = getDefaultModel(loadDgnFile)
+def test_Show_Hide(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    namedViewCollection = dgnFile.GetNamedViews ()
+    m_defaultModel = getDefaultModel(dgnFile)
     displayed = False
     status = AnnotationAttachmentStatus.BentleyStatus.eSUCCESS
     numberViews = len(namedViewCollection)
@@ -59,9 +60,10 @@ def test_Show_Hide(initDgnPlatformHost,loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['AnnotationAttachment_Section_Plan_Elevantion.dgn']) 
-def test_Show_HideAll(initDgnPlatformHost,loadDgnFile):
-    namedViewCollection = loadDgnFile.GetNamedViews ()
-    m_defaultModel = getDefaultModel(loadDgnFile)
+def test_Show_HideAll(initDgnPlatformHost,loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    namedViewCollection = dgnFile.GetNamedViews ()
+    m_defaultModel = getDefaultModel(dgnFile)
     displayed = False
     status = AnnotationAttachmentStatus.BentleyStatus.eSUCCESS
     numberViews = len(namedViewCollection)

@@ -245,6 +245,10 @@ void def_DRange2d(py::module_& m)
     c1.def(py::init(py::overload_cast<double, double, double, double>(DRange2d::From)), "x0"_a, "y0"_a, "x1"_a, "y1"_a);
     c1.def(py::init(py::overload_cast<DPoint2dCR, DPoint2dCR, DPoint2dCR>(DRange2d::From)), "point0"_a, "point1"_a, "point2"_a);
     c1.def(py::init(py::overload_cast<DPoint2dArray const&>(DRange2d::From)), "points"_a);
+
+    c1.def_property("low", [](DRange2d& self) {return self.low; }, [](DRange2d& self, DPoint2dCR low) {return self.low = low; });
+    c1.def_property("high", [](DRange2d& self) {return self.high; }, [](DRange2d& self, DPoint2dCR high) {return self.high = high; });
+
         
     c1.def("Extend", py::overload_cast<DPoint2dCR>(&DRange2d::Extend), "point"_a, DOC(Bentley, Geom, DRange2d, Extend));
     c1.def("Extend", py::overload_cast<DPoint3dCR>(&DRange2d::Extend), "point"_a, DOC(Bentley, Geom, DRange2d, Extend));

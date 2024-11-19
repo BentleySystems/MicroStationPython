@@ -27,8 +27,9 @@ def GeneratePoints(points, sz):
     return points
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn']) 
-def test_CreateChainHeader(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_CreateChainHeader(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     NUM_LINES = 3
     lines0 = EditElementHandle()
     lines1 = EditElementHandle()
@@ -68,8 +69,9 @@ def test_CreateChainHeader(initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
-def test_IsValidChainComponent_true(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_IsValidChainComponent_true(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     segment = DSegment3d(0.0, 0.0, 0.0, 1.0, 1.0, 1.0)
     
     assert BentleyStatus.eSUCCESS == LineHandler.CreateLineElement(m_eeh, None, segment,ret[0].Is3d(), ret[0])
@@ -79,8 +81,9 @@ def test_IsValidChainComponent_true(initDgnPlatformHost, loadDgnFile):
 
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
-def test_IsValidChainComponent_false(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_IsValidChainComponent_false(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     top = DPoint3d(0, 10, 0)
     bottom = DPoint3d(0, 0, 0)
     

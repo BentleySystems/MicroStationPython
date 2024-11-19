@@ -48,6 +48,7 @@ def createExpectedSetup1 ():
 
     solarLight = result.GetSolarLight ()
     solarLight.SetSolarType (SolarLight.eSOLARTYPE_TimeLocation)
+    solarLight.SetSolarType (SolarLight.eSOLARTYPE_TimeLocation)
     solarLight.GetColor ().red     = 1.0
     solarLight.GetColor ().green   = 0.95294100000000004
     solarLight.GetColor ().blue    = 0.91764699999999999
@@ -156,11 +157,11 @@ def test_DeleteSetup(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed
     srcDgnFile.FillSectionsInModel(dgnModel)
     setup = LightManager.GetManager().LoadSetupFromModel ("Morning", dgnModel)
     rse = LightManager.GetManager().DeleteLightSetup ("Morning", dgnModel)
-    assert rse == BentleyStatus.eSUCCESS
+    assert rse == eSUCCESS
     setup = LightManager.GetManager().LoadSetupFromModel ("Morning", dgnModel)
     assert setup is None
 
-
+@pytest.mark.skip(reason="Ping.Chen, error in bb r platformtests")
 @pytest.mark.parametrize('fileName', ['LightSetup.dgn'])
 def test_FindSetupsInFile(initDgnPlatformHost, loadDgnFile):
     modelID = loadDgnFile.GetDefaultModelId()

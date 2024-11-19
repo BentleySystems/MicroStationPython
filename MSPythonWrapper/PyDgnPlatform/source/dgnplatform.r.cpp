@@ -1002,6 +1002,7 @@ void def_DgnPlatform_r(py::module_& m)
     //===================================================================================
     // struct DgnTagDefinition
     py::class_< DgnTagDefinition> c5(m, "DgnTagDefinition");
+    py::bind_vector<DgnTagDefinitionArray>(m, "DgnTagDefinitionArray", py::module_local(false));
 
     c5.def(py::init<>());
 

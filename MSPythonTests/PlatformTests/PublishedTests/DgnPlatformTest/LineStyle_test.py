@@ -61,9 +61,23 @@ def test_FindByNumberInFileMap(initDgnPlatformHost, loadDgnFile, createTempDgnFi
     assert dgnLsMap != None
     entry = dgnLsMap.GetLineStyleEntry (-113)
     if entry is not None :
+        entry.GetDefinitionLocation ()  #In C++ side, GetDefinitionLocation calls GetLocationType () directly
+        entry.GetSourceFileName ()  #In C++ side, GetSourceFileName calls GetFileName () directly
         entry.GetStyleName ()
         entry.GetStyleNumber()
 
+        #Following member functions are implemented in its base class LsDefinition, but LsDefinition is not published in SDK
+        # entry.GetUnitsDefinition()
+        # entry.IsPhysical ()
+        # entry.IsUnitsUOR()
+        # entry.IsUnitsMaster()
+        # entry.IsUnitsDevice()
+        # entry.IsSnappable ()
+        # entry.IsContinuous ()
+        # entry.IsElement()
+        # entry.IsSCScaleIndependent()
+        # comp = entry.GetComponentCP (None)
+        # TraverseAnyComponent (comp)
         
 
     
@@ -76,8 +90,23 @@ def test_FindByNameInSystemMap(initDgnPlatformHost, loadDgnFile, createTempDgnFi
     for name in styleNames:
         entry = systemLsMap.GetLineStyleEntry (name)
         if entry is not None :
+            entry.GetDefinitionLocation ()  #In C++ side, GetDefinitionLocation calls GetLocationType () directly
+            entry.GetSourceFileName () #In C++ side, GetSourceFileName calls GetFileName () directly
             entry.GetStyleName ()
-            entry.GetStyleNumber()
+            entry.GetStyleNumber ()
+
+            #Following member functions are implemented in its base class LsDefinition, but LsDefinition is not published in SDK
+            # entry.GetUnitsDefinition()
+            # entry.IsPhysical ()
+            # entry.IsUnitsUOR()
+            # entry.IsUnitsMaster()
+            # entry.IsUnitsDevice()
+            # entry.IsSnappable ()
+            # entry.IsContinuous ()
+            # entry.IsElement()
+            # entry.IsSCScaleIndependent()
+            # comp = entry.GetComponent (None)
+            # TraverseAnyComponent (comp)
 
 
 @pytest.mark.skip(reason="DimensionStyleManager is not exposed in python")

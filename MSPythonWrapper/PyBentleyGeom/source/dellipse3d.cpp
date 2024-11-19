@@ -6,6 +6,7 @@
 |
 +--------------------------------------------------------------------------------------*/
 #include "MSPythonPCH.h"
+#include <Pybind11/numpy.h>
 
 
 
@@ -1020,6 +1021,7 @@ void def_DEllipse3d(py::module_& m)
     // struct DEllipse3d
     py::class_<DEllipse3d> c1(m, "DEllipse3d");
     bind_ValidatedValue<DEllipse3d>(m, "ValidatedDEllipse3d", py::module_local(false));
+    py::bind_vector< bvector<DEllipse3d> >(m, "DEllipse3dArray", py::module_local(false));
 
     c1.def_readwrite("center", &DEllipse3d::center);
     c1.def_readwrite("vector0", &DEllipse3d::vector0);
@@ -1052,7 +1054,13 @@ void def_DEllipse3d(py::module_& m)
 
     c1.def("InitArcFromPointPointArcLength", &DEllipse3d::InitArcFromPointPointArcLength, "startIN"_a, "end"_a, "arcLength"_a, "planeVector"_a, DOC(Bentley, Geom, DEllipse3d, InitArcFromPointPointArcLength));
     c1.def("InitArcFromPointTangentPoint", &DEllipse3d::InitArcFromPointTangentPoint, "startIN"_a, "tangent"_a, "end"_a, DOC(Bentley, Geom, DEllipse3d, InitArcFromPointTangentPoint));
-    c1.def("SetStartEnd", &DEllipse3d::SetStartEnd, "startPoint"_a, "endPoint"_a, "ccw"_a, DOC(Bentley, Geom, DEllipse3d, SetStartEnd));    
+    c1.def("SetStartEnd", &DEllipse3d::SetStartEnd, "startPoint"_a, "endPoint"_a, "ccw"_a, DOC(Bentley, Geom, DEllipse3d, SetStartEnd)); 
+    c1.def("Init", &DEllipse3d::Init, "cx"_a, "cy"_a, "cz"_a, "ux"_a, "uy"_a, "uz"_a, "vx"_a, "vy"_a, "vz"_a, "theta0"_a, "sweep"_a);
+    c1.def("InitFromPoints", &DEllipse3d::InitFromPoints, "center0"_a, "point0"_a, "point90"_a, "startRadiansIn"_a, "sweepIn"_a);
+    c1.def("InitFromPointsOnArc", &DEllipse3d::InitFromPointsOnArc, "start"_a, "middle"_a, "end"_a);
+    c1.def("InitArcFromPointTangentPoint", &DEllipse3d::InitArcFromPointTangentPoint, "startIn"_a, "tangent"_a, "end"_a);
+    c1.def("InitFromArcCenterStartEnd", &DEllipse3d::InitFromArcCenterStartEnd, "centerIn"_a, "startIn"_a, "end"_a);
+    c1.def("InitFromVectors", &DEllipse3d::InitFromVectors, "centerIn"_a, "vector01In"_a, "vector90In"_a, "startRadiansIn"_a, "sweepIn"_a);
 
     c1.def("GetScaledRotMatrix", [] (DEllipse3dCR self)
         {
@@ -1081,7 +1089,6 @@ void def_DEllipse3d(py::module_& m)
         
     c1.def("Evaluate", py::overload_cast<DPoint3dR, double, double>(&DEllipse3d::Evaluate, py::const_), "point"_a, "xx"_a, "yy"_a, DOC(Bentley, Geom, DEllipse3d, Evaluate));
     c1.def("Evaluate", py::overload_cast<DPoint3dR, DVec3dR, DVec3dR, double>(&DEllipse3d::Evaluate, py::const_), "point3dX"_a, "dX"_a, "ddX"_a, "theta"_a, DOC(Bentley, Geom, DEllipse3d, Evaluate));
-    
     c1.def("Evaluate", [] (DEllipse3dCR self, int numDerivative, double theta)
            {
            py::list outVal;
@@ -1120,8 +1127,15 @@ void def_DEllipse3d(py::module_& m)
         }, "xyz"_a, DOC(Bentley, Geom, DEllipse3d, ProjectPointToPlane));
 
     c1.def("GetStrokeCount", &DEllipse3d::GetStrokeCount, "nDefault"_a = 12, "nMax"_a = 180, "chordTol"_a = 0.0, "angTol"_a = 0.0, DOC(Bentley, Geom, DEllipse3d, GetStrokeCount));
-    c1.def("EvaluateTrigPairs", &DEllipse3d::EvaluateTrigPairs, "point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
-    c1.def("TestAndEvaluateTrigPairs", &DEllipse3d::TestAndEvaluateTrigPairs, "point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, TestAndEvaluateTrigPairs));
+    //c1.def("EvaluateTrigPairs", &DEllipse3d::EvaluateTrigPairs, "point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
+    c1.def("EvaluateTrigPairs", [](DEllipse3dCR self, DPoint3dArray& point, DPoint2dArray const& trig, int numPoint)
+            {            
+            return self.EvaluateTrigPairs(&point[0], &trig[0], numPoint);
+            },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
+    c1.def("TestAndEvaluateTrigPairs", [](DEllipse3dCR self, DPoint3dArray& point, DPoint2dArray const& trig, int numPoint)
+            {
+            return self.TestAndEvaluateTrigPairs(&point[0], &trig[0], numPoint);
+            },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, TestAndEvaluateTrigPairs));
     c1.def("IsAngleInSweep", &DEllipse3d::IsAngleInSweep, "angle"_a, DOC(Bentley, Geom, DEllipse3d, IsAngleInSweep));        
     c1.def("AngleToFraction", &DEllipse3d::AngleToFraction, "angle"_a, DOC(Bentley, Geom, DEllipse3d, AngleToFraction));
 

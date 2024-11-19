@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="ChangeTrack" CommandClass="MacroCommand" CommandWord="PYChangeTrack">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="ChangeTrack">
+            <Keyword CommandWord="Add" />
+            <Keyword CommandWord="Remove" />
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="PYChangeTrack Add"                     Function="AddFunctions" />
+        <KeyinHandler Keyin="PYChangeTrack Remove"                  Function="RemoveFunctions" />
+    </KeyinHandlers>
+</KeyinTree>

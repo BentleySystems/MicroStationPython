@@ -32,10 +32,7 @@ Returns:
     indicating the failing reason.
 
 See also:
-    AddSolverData, Constraint2dSolverData
-
-Remark:
-    Required Library:Constraint2dElement.lib)doc";
+    AddSolverData, Constraint2dSolverData)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Constraint2dManager_AddSolverData =R"doc(@description Store constraints data.
 
@@ -56,10 +53,7 @@ Remark:
     previous constraints if any.
 
 See also:
-    GetSolverData, Constraint2dSolverData
-
-Remark:
-    Required Library:Constraint2dElement.lib)doc";
+    GetSolverData, Constraint2dSolverData)doc";
 
 USING_NAMESPACE_CONSTRAINT2D;
 

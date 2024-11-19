@@ -230,6 +230,20 @@ void def_DgnColorMap(py::module_& m)
         return std::unique_ptr<UInt32Array> (colorArrayP);
         });
 
+    c1.def("SetTbgrColor", [](DgnColorMap& self, UInt32 val, UInt32 idx)
+        {
+            UInt32* colors = self.GetTbgrColorsP();
+
+            BeAssert(colors != nullptr);
+
+            const int INDEX_Count = 268;  //See DgnColorMap::INDEX_Count 
+            if (idx >= INDEX_Count)
+                return ERROR;
+
+            colors[idx] = val;
+            return SUCCESS;
+        });
+
     c1.def("GetRgbColors", &DgnColorMap::GetRgbColors, "colors"_a, DOC(Bentley, DgnPlatform, DgnColorMap, GetRgbColors));
     c1.def("GetHsvColors", &DgnColorMap::GetHsvColors, "colors"_a, DOC(Bentley, DgnPlatform, DgnColorMap, GetHsvColors));
     c1.def("GetColor", &DgnColorMap::GetColor, py::return_value_policy::reference_internal, "index"_a, DOC(Bentley, DgnPlatform, DgnColorMap, GetColor));

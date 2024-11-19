@@ -855,5 +855,5 @@ void def_DgnECInstance(py::module_& m)
 
     c12.def("empty", &DgnECRelationshipIterable::empty);
     c12.def("__bool__", [] (DgnECRelationshipIterable& self) { return !self.empty(); });
-    c12.def("__iter__", [] (DgnECRelationshipIterable& self) { return py::make_iterator(self.begin(), self.begin()); }, py::keep_alive<0, 1>());
+    c12.def("__iter__", [] (DgnECRelationshipIterable& self) { return py::make_iterator(self.begin(), self.end()); }, py::keep_alive<0, 1>());
     }

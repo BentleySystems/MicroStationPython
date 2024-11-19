@@ -11,6 +11,8 @@
             <Keyword CommandWord="TESTA" />
             <Keyword CommandWord="TESTB" />
             <Keyword CommandWord="TESTC" />
+            <Keyword CommandWord="SESSIONMONITORADD" />
+            <Keyword CommandWord="SESSIONMONITORDROP" />
         </KeyinTable>
     </SubKeyinTables>
 
@@ -18,5 +20,7 @@
         <KeyinHandler Keyin="KEYINTEST TESTA"                     Function="callbacka" />
         <KeyinHandler Keyin="KEYINTEST TESTB"                     Function="callbackb" />
         <KeyinHandler Keyin="KEYINTEST TESTC"                     Function="callbackc" />
+        <KeyinHandler Keyin="KEYINTEST SESSIONMONITORADD"         Function="globalSessionMonitorAdd" />
+        <KeyinHandler Keyin="KEYINTEST SESSIONMONITORDROP"        Function="globalSessionMonitorDrop" />
     </KeyinHandlers>
 </KeyinTree>

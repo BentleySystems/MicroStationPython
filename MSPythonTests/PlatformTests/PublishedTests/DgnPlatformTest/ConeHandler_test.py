@@ -60,8 +60,9 @@ def isQuaternionNear(left, right , Epsilon):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_CreateConeElement (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateConeElement (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     top = DPoint3d (0,10,0)
     bottom = DPoint3d (0,0,0)
     type = 6.0
@@ -87,9 +88,9 @@ def test_CreateConeElement (initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_CreateConeElement_Type2 (initDgnPlatformHost, loadDgnFile):
-
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateConeElement_Type2 (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     rMatrix = RotMatrix()
     top = DPoint3d (0,10,0)
     bottom = DPoint3d (0,0,0)
@@ -121,9 +122,9 @@ def test_CreateConeElement_Type2 (initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_CreateConeElement_Type6 (initDgnPlatformHost, loadDgnFile):
-
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateConeElement_Type6 (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     rMatrix = RotMatrix()
     top = DPoint3d (0,10,0)
     bottom = DPoint3d (0,0,0)
@@ -153,9 +154,9 @@ def test_CreateConeElement_Type6 (initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_DisplayHandler_IsRenderable_Cone (initDgnPlatformHost, loadDgnFile):
-
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_IsRenderable_Cone (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
 
     CreateElement ("Cone" , m_eeh , ret[0] , ret[0].Is3d())
     disp = m_eeh.GetHandler ()
@@ -163,9 +164,9 @@ def test_DisplayHandler_IsRenderable_Cone (initDgnPlatformHost, loadDgnFile):
     assert True == disp.IsRenderable(m_eeh)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_DisplayHandler_GetTransformOrigin_Cone (initDgnPlatformHost, loadDgnFile):
-
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_GetTransformOrigin_Cone (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
 
     CreateElement ("Cone" , m_eeh , ret[0] , ret[0].Is3d())
     disp = m_eeh.GetHandler ()
@@ -177,9 +178,9 @@ def test_DisplayHandler_GetTransformOrigin_Cone (initDgnPlatformHost, loadDgnFil
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_DisplayHandler_GetOrientation_Cone (initDgnPlatformHost, loadDgnFile):
-
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_GetOrientation_Cone (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     CreateElement ("Cone" , m_eeh , ret[0] , ret[0].Is3d())
     disp = m_eeh.GetHandler ()
     ROWS = 3
@@ -207,9 +208,9 @@ def test_DisplayHandler_GetOrientation_Cone (initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_DisplayHandler_IsPlanar_Cone (initDgnPlatformHost, loadDgnFile):
-
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_IsPlanar_Cone (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
 
     CreateElement ("Cone" , m_eeh , ret[0] , ret[0].Is3d())
     disp = m_eeh.GetHandler ()
@@ -224,9 +225,9 @@ def test_DisplayHandler_IsPlanar_Cone (initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_DisplayHandler_GetSnapOrigin_Cone (initDgnPlatformHost, loadDgnFile):
-
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_GetSnapOrigin_Cone (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
 
     CreateElement ("Cone" , m_eeh , ret[0] , ret[0].Is3d())
     disp = m_eeh.GetHandler ()
@@ -239,8 +240,9 @@ def test_DisplayHandler_GetSnapOrigin_Cone (initDgnPlatformHost, loadDgnFile):
 
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_DisplayHandler_GetElemDisplayParams_Cone (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_DisplayHandler_GetElemDisplayParams_Cone (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
 
     CreateElement ("Cone" , m_eeh , ret[0] , ret[0].Is3d())
     propQuery = ElementPropertiesGetter (m_eeh)

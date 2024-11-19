@@ -15,7 +15,7 @@ from util import *
 N_FINAL_STRING_PROPS_IN_FAKE_CLASS = 48
 FIXED_COUNT_ARRAYS_ARE_SUPPORTED = False
 
-s_propertyNames = WStringArray ()
+s_propertyNames = []
 
 def fill_large_string (s, strSize, copySCount):
     largeString = WString ()

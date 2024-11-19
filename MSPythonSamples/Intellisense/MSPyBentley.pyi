@@ -22,10 +22,7 @@ class AString:
         """
         ...
     
-    def clear(*args, **kwargs):
-        """
-        clear(self: MSPyBentley.AString) -> None
-        """
+    def clear(self: MSPyBentley.AString) -> None:
         ...
     
 class AStringArray:
@@ -47,33 +44,26 @@ class AStringArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.AStringArray, x: MSPyBentley.AString) -> None:
         """
-        append(self: MSPyBentley.AStringArray, x: MSPyBentley.AString) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.AStringArray) -> None:
         """
-        clear(self: MSPyBentley.AStringArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.AStringArray, x: MSPyBentley.AString) -> int:
         """
-        count(self: MSPyBentley.AStringArray, x: MSPyBentley.AString) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.AStringArray, L: MSPyBentley.AStringArray) -> None
@@ -86,17 +76,14 @@ class AStringArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.AStringArray, i: int, x: MSPyBentley.AString) -> None:
         """
-        insert(self: MSPyBentley.AStringArray, i: int, x: MSPyBentley.AString) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.AStringArray) -> MSPyBentley.AString
@@ -109,10 +96,8 @@ class AStringArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.AStringArray, x: MSPyBentley.AString) -> None:
         """
-        remove(self: MSPyBentley.AStringArray, x: MSPyBentley.AString) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -122,28 +107,20 @@ class Base64Utilities:
     None
     """
 
-    def Alphabet(*args, **kwargs):
-        """
-        Alphabet() -> MSPyBentley.Utf8String
-        """
+    @staticmethod
+    def Alphabet() -> MSPyBentley.Utf8String:
         ...
     
-    def Decode(*args, **kwargs):
-        """
-        Decode(encodedString: MSPyBentley.Utf8String) -> MSPyBentley.Utf8String
-        """
+    @staticmethod
+    def Decode(encodedString: MSPyBentley.Utf8String) -> MSPyBentley.Utf8String:
         ...
     
-    def Encode(*args, **kwargs):
-        """
-        Encode(stringToEncode: MSPyBentley.Utf8String) -> MSPyBentley.Utf8String
-        """
+    @staticmethod
+    def Encode(stringToEncode: MSPyBentley.Utf8String) -> MSPyBentley.Utf8String:
         ...
     
-    def MatchesAlphabet(*args, **kwargs):
-        """
-        MatchesAlphabet(input: str) -> bool
-        """
+    @staticmethod
+    def MatchesAlphabet(input: str) -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -159,10 +136,9 @@ class BeDateTime:
     A DateTime's accuracy is 100's of nanoseconds (i.e hecto-nanoseconds, i.e. 1e-7 seconds)
     """
 
-    def CommonEraTicksToJulianDay(*args, **kwargs):
+    @staticmethod
+    def CommonEraTicksToJulianDay(commonEraTicks: int) -> int:
         """
-        CommonEraTicksToJulianDay(commonEraTicks: int) -> int
-        
         Computes the Julian Day number from the given Common Era ticks. The
         Common Era begins at 0001-01-01 00:00:00 UTC.
         
@@ -174,10 +150,9 @@ class BeDateTime:
         """
         ...
     
-    def Compare(*args, **kwargs):
+    @staticmethod
+    def Compare(lhs: MSPyBentley.BeDateTime, rhs: MSPyBentley.BeDateTime) -> MSPyBentley.BeDateTime.CompareResult:
         """
-        Compare(lhs: MSPyBentley.BeDateTime, rhs: MSPyBentley.BeDateTime) -> MSPyBentley.BeDateTime.CompareResult
-        
         Compares two DateTimes. This method internally converts the DateTime
         objects to Julian Days and compares those. As the conversion can fail,
         this method can return an error (see DateTime.CompareResult). This is
@@ -251,10 +226,7 @@ class BeDateTime:
         def value(arg0: MSPyBentley.BeDateTime.Component) -> int:
             ...
         
-    def ComputeOffsetToUtcInHns(*args, **kwargs):
-        """
-        ComputeOffsetToUtcInHns(self: MSPyBentley.BeDateTime) -> tuple
-        """
+    def ComputeOffsetToUtcInHns(self: MSPyBentley.BeDateTime) -> tuple:
         ...
     
     CurrentTime: BeDateTime
@@ -273,16 +245,12 @@ class BeDateTime:
     def DayOfYear(arg0: MSPyBentley.BeDateTime) -> int:
         ...
     
-    def EqualTo(*args, **kwargs):
-        """
-        EqualTo(self: MSPyBentley.BeDateTime, rhs: MSPyBentley.BeDateTime, ignoreDateTimeInfo: bool = False) -> bool
-        """
+    def EqualTo(self: MSPyBentley.BeDateTime, rhs: MSPyBentley.BeDateTime, ignoreDateTimeInfo: bool = False) -> bool:
         ...
     
-    def FromCommonEraTicks(*args, **kwargs):
+    @staticmethod
+    def FromCommonEraTicks(dateTime: MSPyBentley.BeDateTime, commonEraTicks: int, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus:
         """
-        FromCommonEraTicks(dateTime: MSPyBentley.BeDateTime, commonEraTicks: int, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus
-        
         Computes the DateTime from the given Common Era ticks. The Common Era
         begins at 0001-01-01 00:00:00 UTC.
         
@@ -302,22 +270,17 @@ class BeDateTime:
         """
         ...
     
-    def FromJulianDay(*args, **kwargs):
-        """
-        FromJulianDay(dateTime: MSPyBentley.BeDateTime, julianDay: float, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus
-        """
+    @staticmethod
+    def FromJulianDay(dateTime: MSPyBentley.BeDateTime, julianDay: float, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus:
         ...
     
-    def FromJulianDayInHns(*args, **kwargs):
-        """
-        FromJulianDayInHns(dateTime: MSPyBentley.BeDateTime, julianDayInHns: int, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus
-        """
+    @staticmethod
+    def FromJulianDayInHns(dateTime: MSPyBentley.BeDateTime, julianDayInHns: int, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus:
         ...
     
-    def FromString(*args, **kwargs):
+    @staticmethod
+    def FromString(dateTime: MSPyBentley.BeDateTime, dateTimeIso8601: str) -> Bentley.BentleyStatus:
         """
-        FromString(dateTime: MSPyBentley.BeDateTime, dateTimeIso8601: str) -> Bentley.BentleyStatus
-        
         Parses an ISO 8601 date time string into a DateTime instance.
         
         Remark:
@@ -339,10 +302,9 @@ class BeDateTime:
         """
         ...
     
-    def FromUnixMilliseconds(*args, **kwargs):
+    @staticmethod
+    def FromUnixMilliseconds(dateTime: MSPyBentley.BeDateTime, unixMilliseconds: int) -> Bentley.BentleyStatus:
         """
-        FromUnixMilliseconds(dateTime: MSPyBentley.BeDateTime, unixMilliseconds: int) -> Bentley.BentleyStatus
-        
         Creates a DateTime in UTC from the given Unix epoch milliseconds
         
         Parameter `` out ``:
@@ -358,10 +320,9 @@ class BeDateTime:
         """
         ...
     
-    def GetCurrentTime(*args, **kwargs):
+    @staticmethod
+    def GetCurrentTime() -> MSPyBentley.BeDateTime:
         """
-        GetCurrentTime() -> MSPyBentley.BeDateTime
-        
         Gets the current system time in local time.
         
         Returns:
@@ -369,10 +330,9 @@ class BeDateTime:
         """
         ...
     
-    def GetCurrentTimeUtc(*args, **kwargs):
+    @staticmethod
+    def GetCurrentTimeUtc() -> MSPyBentley.BeDateTime:
         """
-        GetCurrentTimeUtc() -> MSPyBentley.BeDateTime
-        
         Gets the current system time in UTC.
         
         Returns:
@@ -380,10 +340,8 @@ class BeDateTime:
         """
         ...
     
-    def GetDay(*args, **kwargs):
+    def GetDay(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetDay(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the day component of this DateTime object.
         
         Returns:
@@ -391,10 +349,8 @@ class BeDateTime:
         """
         ...
     
-    def GetDayOfWeek(*args, **kwargs):
+    def GetDayOfWeek(self: MSPyBentley.BeDateTime) -> MSPyBentley.BeDateTime.DayOfWeek:
         """
-        GetDayOfWeek(self: MSPyBentley.BeDateTime) -> MSPyBentley.BeDateTime.DayOfWeek
-        
         Gets the day of the week of this DateTime object.
         
         Remark:
@@ -406,10 +362,8 @@ class BeDateTime:
         """
         ...
     
-    def GetDayOfYear(*args, **kwargs):
+    def GetDayOfYear(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetDayOfYear(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the day of the year of this DateTime object.
         
         Returns:
@@ -418,10 +372,8 @@ class BeDateTime:
         """
         ...
     
-    def GetHectoNanosecond(*args, **kwargs):
+    def GetHectoNanosecond(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetHectoNanosecond(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the hecto-nanosecond component of this DateTime object.
         
         Remark:
@@ -432,10 +384,8 @@ class BeDateTime:
         """
         ...
     
-    def GetHour(*args, **kwargs):
+    def GetHour(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetHour(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the hour component of this DateTime object.
         
         Returns:
@@ -443,10 +393,8 @@ class BeDateTime:
         """
         ...
     
-    def GetInfo(*args, **kwargs):
+    def GetInfo(self: MSPyBentley.BeDateTime) -> MSPyBentley.BeDateTimeInfo:
         """
-        GetInfo(self: MSPyBentley.BeDateTime) -> MSPyBentley.BeDateTimeInfo
-        
         Gets meta data about this DateTime object.
         
         Returns:
@@ -454,10 +402,8 @@ class BeDateTime:
         """
         ...
     
-    def GetMillisecond(*args, **kwargs):
+    def GetMillisecond(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetMillisecond(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the milliseconds component of this DateTime object.
         
         Remark:
@@ -469,10 +415,8 @@ class BeDateTime:
         """
         ...
     
-    def GetMinute(*args, **kwargs):
+    def GetMinute(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetMinute(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the minute component of this DateTime object.
         
         Returns:
@@ -480,10 +424,8 @@ class BeDateTime:
         """
         ...
     
-    def GetMonth(*args, **kwargs):
+    def GetMonth(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetMonth(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the month component of this DateTime object.
         
         Returns:
@@ -491,10 +433,8 @@ class BeDateTime:
         """
         ...
     
-    def GetSecond(*args, **kwargs):
+    def GetSecond(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetSecond(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the second component of this DateTime object.
         
         Returns:
@@ -502,10 +442,8 @@ class BeDateTime:
         """
         ...
     
-    def GetYear(*args, **kwargs):
+    def GetYear(self: MSPyBentley.BeDateTime) -> int:
         """
-        GetYear(self: MSPyBentley.BeDateTime) -> int
-        
         Gets the year component of this DateTime object.
         
         Returns:
@@ -525,10 +463,9 @@ class BeDateTime:
     def Info(arg0: MSPyBentley.BeDateTime) -> MSPyBentley.BeDateTimeInfo:
         ...
     
-    def IsLeapYear(*args, **kwargs):
+    @staticmethod
+    def IsLeapYear(year: int) -> bool:
         """
-        IsLeapYear(year: int) -> bool
-        
         Indicates whether the specified year is a leap year or not
         
         Returns:
@@ -536,10 +473,8 @@ class BeDateTime:
         """
         ...
     
-    def IsValid(*args, **kwargs):
+    def IsValid(self: MSPyBentley.BeDateTime) -> bool:
         """
-        IsValid(self: MSPyBentley.BeDateTime) -> bool
-        
         Indicates whether this DateTime instance is a valid date/time or not.
         
         Remark:
@@ -551,10 +486,9 @@ class BeDateTime:
         """
         ...
     
-    def JulianDayToCommonEraTicks(*args, **kwargs):
+    @staticmethod
+    def JulianDayToCommonEraTicks(julianDayInHectoNanoseconds: int) -> int:
         """
-        JulianDayToCommonEraTicks(julianDayInHectoNanoseconds: int) -> int
-        
         Computes Common Era ticks from the given the Julian Day number. The
         Common Era begins at 0001-01-01 00:00:00 UTC.
         
@@ -566,10 +500,9 @@ class BeDateTime:
         """
         ...
     
-    def JulianDayToUnixMilliseconds(*args, **kwargs):
+    @staticmethod
+    def JulianDayToUnixMilliseconds(julianDayInHectoNanoseconds: int) -> int:
         """
-        JulianDayToUnixMilliseconds(julianDayInHectoNanoseconds: int) -> int
-        
         Computes the Unix milliseconds from the given Julian Day number.
         
         Parameter `` in ``:
@@ -628,28 +561,17 @@ class BeDateTime:
     def Second(arg0: MSPyBentley.BeDateTime) -> int:
         ...
     
-    def ToCommonEraTicks(*args, **kwargs):
-        """
-        ToCommonEraTicks(self: MSPyBentley.BeDateTime) -> tuple
-        """
+    def ToCommonEraTicks(self: MSPyBentley.BeDateTime) -> tuple:
         ...
     
-    def ToJulianDay(*args, **kwargs):
-        """
-        ToJulianDay(self: MSPyBentley.BeDateTime) -> tuple
-        """
+    def ToJulianDay(self: MSPyBentley.BeDateTime) -> tuple:
         ...
     
-    def ToJulianDayInHns(*args, **kwargs):
-        """
-        ToJulianDayInHns(self: MSPyBentley.BeDateTime) -> tuple
-        """
+    def ToJulianDayInHns(self: MSPyBentley.BeDateTime) -> tuple:
         ...
     
-    def ToLocalTime(*args, **kwargs):
+    def ToLocalTime(self: MSPyBentley.BeDateTime, localDateTime: MSPyBentley.BeDateTime) -> Bentley.BentleyStatus:
         """
-        ToLocalTime(self: MSPyBentley.BeDateTime, localDateTime: MSPyBentley.BeDateTime) -> Bentley.BentleyStatus
-        
         Converts this UTC DateTime to local time
         
         Parameter `` out ``:
@@ -662,10 +584,8 @@ class BeDateTime:
         """
         ...
     
-    def ToString(*args, **kwargs):
+    def ToString(self: MSPyBentley.BeDateTime) -> MSPyBentley.WString:
         """
-        ToString(self: MSPyBentley.BeDateTime) -> MSPyBentley.WString
-        
         Converts the value of this DateTime into a string representation.
         
         Remark:
@@ -679,16 +599,11 @@ class BeDateTime:
         """
         ...
     
-    def ToUnixMilliseconds(*args, **kwargs):
-        """
-        ToUnixMilliseconds(self: MSPyBentley.BeDateTime) -> tuple
-        """
+    def ToUnixMilliseconds(self: MSPyBentley.BeDateTime) -> tuple:
         ...
     
-    def ToUtc(*args, **kwargs):
+    def ToUtc(self: MSPyBentley.BeDateTime, utcDateTime: MSPyBentley.BeDateTime) -> Bentley.BentleyStatus:
         """
-        ToUtc(self: MSPyBentley.BeDateTime, utcDateTime: MSPyBentley.BeDateTime) -> Bentley.BentleyStatus
-        
         Converts this local DateTime to UTC
         
         Parameter `` out ``:
@@ -701,10 +616,8 @@ class BeDateTime:
         """
         ...
     
-    def ToUtf8String(*args, **kwargs):
+    def ToUtf8String(self: MSPyBentley.BeDateTime) -> MSPyBentley.Utf8String:
         """
-        ToUtf8String(self: MSPyBentley.BeDateTime) -> MSPyBentley.Utf8String
-        
         Converts the value of this DateTime into a string representation.
         
         Remark:
@@ -718,10 +631,9 @@ class BeDateTime:
         """
         ...
     
-    def UnixMillisecondsToJulianDay(*args, **kwargs):
+    @staticmethod
+    def UnixMillisecondsToJulianDay(unixMilliseconds: int) -> int:
         """
-        UnixMillisecondsToJulianDay(unixMilliseconds: int) -> int
-        
         Computes the Julian Day number from the given Unix milliseconds.
         
         Parameter `` in ``:
@@ -792,22 +704,15 @@ class BeDateTimeInfo:
     def Component(arg0: MSPyBentley.BeDateTimeInfo) -> MSPyBentley.BeDateTime.Component:
         ...
     
-    def ComponentToString(*args, **kwargs):
-        """
-        ComponentToString(component: MSPyBentley.BeDateTime.Component) -> MSPyBentley.WString
-        """
+    @staticmethod
+    def ComponentToString(component: MSPyBentley.BeDateTime.Component) -> MSPyBentley.WString:
         ...
     
-    def GetComponent(*args, **kwargs):
-        """
-        GetComponent(self: MSPyBentley.BeDateTimeInfo) -> MSPyBentley.BeDateTime.Component
-        """
+    def GetComponent(self: MSPyBentley.BeDateTimeInfo) -> MSPyBentley.BeDateTime.Component:
         ...
     
-    def GetKind(*args, **kwargs):
+    def GetKind(self: MSPyBentley.BeDateTimeInfo) -> MSPyBentley.BeDateTime.Kind:
         """
-        GetKind(self: MSPyBentley.BeDateTimeInfo) -> MSPyBentley.BeDateTime.Kind
-        
         Gets the DateTime kind.
         """
         ...
@@ -816,10 +721,8 @@ class BeDateTimeInfo:
     def Kind(arg0: MSPyBentley.BeDateTimeInfo) -> MSPyBentley.BeDateTime.Kind:
         ...
     
-    def KindToString(*args, **kwargs):
-        """
-        KindToString(kind: MSPyBentley.BeDateTime.Kind) -> MSPyBentley.WString
-        """
+    @staticmethod
+    def KindToString(kind: MSPyBentley.BeDateTime.Kind) -> MSPyBentley.WString:
         ...
     
     def __init__(*args, **kwargs):
@@ -843,10 +746,8 @@ class BeFile:
     def Access(arg0: MSPyBentley.BeFile) -> MSPyBentley.BeFileAccess:
         ...
     
-    def Close(*args, **kwargs):
+    def Close(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileStatus:
         """
-        Close(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileStatus
-        
         Closes the disk file.
         """
         ...
@@ -875,10 +776,8 @@ class BeFile:
         """
         ...
     
-    def Flush(*args, **kwargs):
+    def Flush(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileStatus:
         """
-        Flush(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileStatus
-        
         Flushes all pending writes to the file
         
         Returns:
@@ -887,26 +786,20 @@ class BeFile:
         """
         ...
     
-    def GetAccess(*args, **kwargs):
+    def GetAccess(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileAccess:
         """
-        GetAccess(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileAccess
-        
         Gets the access mode used to open the disk file.
         """
         ...
     
-    def GetLastError(*args, **kwargs):
+    def GetLastError(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileStatus:
         """
-        GetLastError(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileStatus
-        
         Gets the status returned by the last operation that failed.
         """
         ...
     
-    def GetPointer(*args, **kwargs):
+    def GetPointer(self: MSPyBentley.BeFile) -> tuple:
         """
-        GetPointer(self: MSPyBentley.BeFile) -> tuple
-        
         Gets the file read/write position
         
         Parameter ``position``:
@@ -918,18 +811,14 @@ class BeFile:
         """
         ...
     
-    def GetShareMode(*args, **kwargs):
+    def GetShareMode(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileSharing:
         """
-        GetShareMode(self: MSPyBentley.BeFile) -> MSPyBentley.BeFileSharing
-        
         Gets the sharing option used to open the disk file.
         """
         ...
     
-    def GetSize(*args, **kwargs):
+    def GetSize(self: MSPyBentley.BeFile) -> tuple:
         """
-        GetSize(self: MSPyBentley.BeFile) -> tuple
-        
         Gets the size of the file.
         
         Parameter ``length``:
@@ -945,10 +834,8 @@ class BeFile:
     def HasOpen(arg0: MSPyBentley.BeFile) -> bool:
         ...
     
-    def IsOpen(*args, **kwargs):
+    def IsOpen(self: MSPyBentley.BeFile) -> bool:
         """
-        IsOpen(self: MSPyBentley.BeFile) -> bool
-        
         Query whether the disk file is open.
         """
         ...
@@ -985,15 +872,11 @@ class BeFile:
         """
         ...
     
-    def Read(*args, **kwargs):
-        """
-        Read(self: MSPyBentley.BeFile, numBytes: int) -> tuple
-        """
+    def Read(self: MSPyBentley.BeFile, numBytes: int) -> tuple:
         ...
     
     def ReadEntireFile(*args, **kwargs):
         """
-        ReadEntireFile(*args, **kwargs)
         Overloaded function.
         
         1. ReadEntireFile(self: MSPyBentley.BeFile, buffer: MSPyBentley.UInt8Array) -> MSPyBentley.BeFileStatus
@@ -1006,10 +889,8 @@ class BeFile:
         """
         ...
     
-    def SetPointer(*args, **kwargs):
+    def SetPointer(self: MSPyBentley.BeFile, position: int, origin: MSPyBentley.BeFileSeekOrigin) -> MSPyBentley.BeFileStatus:
         """
-        SetPointer(self: MSPyBentley.BeFile, position: int, origin: MSPyBentley.BeFileSeekOrigin) -> MSPyBentley.BeFileStatus
-        
         Moves the file read/write position.
         
         Parameter ``position``:
@@ -1024,10 +905,8 @@ class BeFile:
         """
         ...
     
-    def SetSize(*args, **kwargs):
+    def SetSize(self: MSPyBentley.BeFile, length: int) -> MSPyBentley.BeFileStatus:
         """
-        SetSize(self: MSPyBentley.BeFile, length: int) -> MSPyBentley.BeFileStatus
-        
         Sets the size of the file.
         
         Parameter ``length``:
@@ -1043,10 +922,8 @@ class BeFile:
     def ShareMode(arg0: MSPyBentley.BeFile) -> MSPyBentley.BeFileSharing:
         ...
     
-    def Swap(*args, **kwargs):
+    def Swap(self: MSPyBentley.BeFile, other: MSPyBentley.BeFile) -> None:
         """
-        Swap(self: MSPyBentley.BeFile, other: MSPyBentley.BeFile) -> None
-        
         Swap file handles between two BeFile instances.
         
         Parameter ``other``:
@@ -1054,10 +931,7 @@ class BeFile:
         """
         ...
     
-    def Write(*args, **kwargs):
-        """
-        Write(self: MSPyBentley.BeFile, data: bytes) -> tuple
-        """
+    def Write(self: MSPyBentley.BeFile, data: bytes) -> tuple:
         ...
     
     def __init__(self: MSPyBentley.BeFile) -> None:
@@ -1124,10 +998,8 @@ class BeFileListIterator:
     None
     """
 
-    def GetNextFileName(*args, **kwargs):
+    def GetNextFileName(self: MSPyBentley.BeFileListIterator, fileName: Bentley.BeFileName) -> Bentley.BentleyStatus:
         """
-        GetNextFileName(self: MSPyBentley.BeFileListIterator, fileName: Bentley.BeFileName) -> Bentley.BentleyStatus
-        
         Retrieve the next filename found from the path list.
         
         Parameter ``name``:
@@ -1150,16 +1022,11 @@ class BeFileName:
     guarantees to hold the name in a fixed-length buffer of MAX_PATH chars (including the 0-terminator).
     """
 
-    def Abbreviate(*args, **kwargs):
-        """
-        Abbreviate(self: MSPyBentley.BeFileName, maxLength: int) -> None
-        """
+    def Abbreviate(self: MSPyBentley.BeFileName, maxLength: int) -> None:
         ...
     
-    def AddQuotes(*args, **kwargs):
+    def AddQuotes(self: MSPyBentley.WString) -> None:
         """
-        AddQuotes(self: MSPyBentley.WString) -> None
-        
         Put quotes around a string.
         """
         ...
@@ -1181,43 +1048,34 @@ class BeFileName:
         """
         ...
     
-    def AppendExtension(*args, **kwargs):
+    def AppendExtension(self: MSPyBentley.BeFileName, extension: str) -> MSPyBentley.BeFileName:
         """
-        AppendExtension(self: MSPyBentley.BeFileName, extension: str) -> MSPyBentley.BeFileName
-        
         Append *extension* to this filepath. A period is inserted, if
         necessary, before *extension.*
         """
         ...
     
-    def AppendSeparator(*args, **kwargs):
+    def AppendSeparator(self: MSPyBentley.BeFileName) -> None:
         """
-        AppendSeparator(self: MSPyBentley.BeFileName) -> None
-        
         Make sure *dir* ends with a directory separator
         """
         ...
     
-    def AppendSeparatorS(*args, **kwargs):
+    @staticmethod
+    def AppendSeparatorS(arg0: MSPyBentley.WString) -> None:
         """
-        AppendSeparatorS(arg0: MSPyBentley.WString) -> None
-        
         Make sure *dir* ends with a directory separator
         """
         ...
     
-    def AppendString(*args, **kwargs):
+    def AppendString(self: MSPyBentley.BeFileName, string: str) -> None:
         """
-        AppendString(self: MSPyBentley.BeFileName, string: str) -> None
-        
         Append string.
         """
         ...
     
-    def AppendToPath(*args, **kwargs):
+    def AppendToPath(self: MSPyBentley.BeFileName, additionalComponent: str) -> MSPyBentley.BeFileName:
         """
-        AppendToPath(self: MSPyBentley.BeFileName, additionalComponent: str) -> MSPyBentley.BeFileName
-        
         Append *additionComponent* to this filepath. A directory separator
         character is inserted, if necessary, before *additionComponent.*
         """
@@ -1239,10 +1097,9 @@ class BeFileName:
         """
         ...
     
-    def AreSameFile(*args, **kwargs):
+    @staticmethod
+    def AreSameFile(file1: str, file2: str) -> bool:
         """
-        AreSameFile(file1: str, file2: str) -> bool
-        
         Are two filenames equivalent?
         
         Parameter ``file1``:
@@ -1306,10 +1163,9 @@ class BeFileName:
         """
         ...
     
-    def BeCompactPath(*args, **kwargs):
+    @staticmethod
+    def BeCompactPath(shortened: MSPyBentley.WString, path: str, length: int) -> Bentley.BentleyStatus:
         """
-        BeCompactPath(shortened: MSPyBentley.WString, path: str, length: int) -> Bentley.BentleyStatus
-        
         Shortens a file path to be no longer than the specified number of
         characters.
         
@@ -1325,10 +1181,9 @@ class BeFileName:
         """
         ...
     
-    def BeCopyFile(*args, **kwargs):
+    @staticmethod
+    def BeCopyFile(existingFileName: str, newFileName: str, failIfFileExists: bool = False) -> MSPyBentley.BeFileNameStatus:
         """
-        BeCopyFile(existingFileName: str, newFileName: str, failIfFileExists: bool = False) -> MSPyBentley.BeFileNameStatus
-        
         Copy an existing file. If a file with the new name already exists, it
         is overwritten.
         
@@ -1347,10 +1202,9 @@ class BeFileName:
         """
         ...
     
-    def BeDeleteFile(*args, **kwargs):
+    @staticmethod
+    def BeDeleteFile(fileName: str, removeReadOnlyAttribute: bool = False) -> MSPyBentley.BeFileNameStatus:
         """
-        BeDeleteFile(fileName: str, removeReadOnlyAttribute: bool = False) -> MSPyBentley.BeFileNameStatus
-        
         Delete an existing file.
         
         Parameter ``fileNameP``:
@@ -1366,10 +1220,9 @@ class BeFileName:
         """
         ...
     
-    def BeGetDiskFreeSpace(*args, **kwargs):
+    @staticmethod
+    def BeGetDiskFreeSpace(dirName: str) -> tuple:
         """
-        BeGetDiskFreeSpace(dirName: str) -> tuple
-        
         Get free space on disk
         
         Parameter ``freeBytes``:
@@ -1385,10 +1238,9 @@ class BeFileName:
         """
         ...
     
-    def BeGetFullPathName(*args, **kwargs):
+    @staticmethod
+    def BeGetFullPathName(path: MSPyBentley.WString, src: str) -> MSPyBentley.BeFileNameStatus:
         """
-        BeGetFullPathName(path: MSPyBentley.WString, src: str) -> MSPyBentley.BeFileNameStatus
-        
         Get the full name of a file
         
         Remark:
@@ -1396,10 +1248,9 @@ class BeFileName:
         """
         ...
     
-    def BeGetTempFileName(*args, **kwargs):
+    @staticmethod
+    def BeGetTempFileName(tempFileName: MSPyBentley.BeFileName, pathName: MSPyBentley.BeFileName, prefixString: str) -> MSPyBentley.BeFileNameStatus:
         """
-        BeGetTempFileName(tempFileName: MSPyBentley.BeFileName, pathName: MSPyBentley.BeFileName, prefixString: str) -> MSPyBentley.BeFileNameStatus
-        
         Generate a unique name for a temporary file.
         
         Parameter ``tempFileName``:
@@ -1420,10 +1271,9 @@ class BeFileName:
         """
         ...
     
-    def BeGetTempPath(*args, **kwargs):
+    @staticmethod
+    def BeGetTempPath(tempFileName: MSPyBentley.BeFileName) -> MSPyBentley.BeFileNameStatus:
         """
-        BeGetTempPath(tempFileName: MSPyBentley.BeFileName) -> MSPyBentley.BeFileNameStatus
-        
         Retrieves the path of the directory for temporary files.
         
         Parameter ``tempFileName``:
@@ -1435,10 +1285,9 @@ class BeFileName:
         """
         ...
     
-    def BeMoveFile(*args, **kwargs):
+    @staticmethod
+    def BeMoveFile(oldFileName: str, newFileName: str, numRetries: int = 0) -> MSPyBentley.BeFileNameStatus:
         """
-        BeMoveFile(oldFileName: str, newFileName: str, numRetries: int = 0) -> MSPyBentley.BeFileNameStatus
-        
         Move or rename an existing file.
         
         Parameter ``oldFileName``:
@@ -1457,19 +1306,16 @@ class BeFileName:
         """
         ...
     
-    def BuildName(*args, **kwargs):
+    def BuildName(self: MSPyBentley.BeFileName, dev: str, dir: str, name: str, ext: str) -> None:
         """
-        BuildName(self: MSPyBentley.BeFileName, dev: str, dir: str, name: str, ext: str) -> None
-        
         Build a BeFileName from parts of a pathname. Any values that are NULL
         are omitted.
         """
         ...
     
-    def CheckAccess(*args, **kwargs):
+    @staticmethod
+    def CheckAccess(fileName: str, access: MSPyBentley.BeFileNameAccess) -> MSPyBentley.BeFileNameStatus:
         """
-        CheckAccess(fileName: str, access: MSPyBentley.BeFileNameAccess) -> MSPyBentley.BeFileNameStatus
-        
         Check user's access to a file
         
         Parameter ``fileName``:
@@ -1485,18 +1331,15 @@ class BeFileName:
         """
         ...
     
-    def Clear(*args, **kwargs):
+    def Clear(self: MSPyBentley.BeFileName) -> None:
         """
-        Clear(self: MSPyBentley.BeFileName) -> None
-        
         Clear the value of this BeFileName.
         """
         ...
     
-    def CloneDirectory(*args, **kwargs):
+    @staticmethod
+    def CloneDirectory(sourceDir: str, destDir: str, includeSubDirs: bool = True) -> MSPyBentley.BeFileNameStatus:
         """
-        CloneDirectory(sourceDir: str, destDir: str, includeSubDirs: bool = True) -> MSPyBentley.BeFileNameStatus
-        
         Clone the contents of an existing directory, and optionally its
         subdirectories, into a new directory.
         
@@ -1516,7 +1359,6 @@ class BeFileName:
     
     def CompareTo(*args, **kwargs):
         """
-        CompareTo(*args, **kwargs)
         Overloaded function.
         
         1. CompareTo(self: MSPyBentley.WString, other: str) -> int
@@ -1545,7 +1387,6 @@ class BeFileName:
     
     def CompareToI(*args, **kwargs):
         """
-        CompareToI(*args, **kwargs)
         Overloaded function.
         
         1. CompareToI(self: MSPyBentley.WString, other: str) -> int
@@ -1574,7 +1415,6 @@ class BeFileName:
     
     def Contains(*args, **kwargs):
         """
-        Contains(*args, **kwargs)
         Overloaded function.
         
         1. Contains(self: MSPyBentley.WString, other: str) -> bool
@@ -1601,7 +1441,6 @@ class BeFileName:
     
     def ContainsI(*args, **kwargs):
         """
-        ContainsI(*args, **kwargs)
         Overloaded function.
         
         1. ContainsI(self: MSPyBentley.WString, other: str) -> bool
@@ -1626,10 +1465,9 @@ class BeFileName:
         """
         ...
     
-    def CreateNewDirectory(*args, **kwargs):
+    @staticmethod
+    def CreateNewDirectory(path: str) -> MSPyBentley.BeFileNameStatus:
         """
-        CreateNewDirectory(path: str) -> MSPyBentley.BeFileNameStatus
-        
         Create a new directory.
         
         Parameter ``path``:
@@ -1642,10 +1480,9 @@ class BeFileName:
         """
         ...
     
-    def DoesPathExist(*args, **kwargs):
+    @staticmethod
+    def DoesPathExist(path: str) -> bool:
         """
-        DoesPathExist(path: str) -> bool
-        
         Test whether a pathname refers to an existing file or directory.
         
         Parameter ``path``:
@@ -1656,18 +1493,15 @@ class BeFileName:
         """
         ...
     
-    def DropQuotes(*args, **kwargs):
+    def DropQuotes(self: MSPyBentley.WString) -> None:
         """
-        DropQuotes(self: MSPyBentley.WString) -> None
-        
         Remove quotes from around a string.
         """
         ...
     
-    def EmptyAndRemoveDirectory(*args, **kwargs):
+    @staticmethod
+    def EmptyAndRemoveDirectory(path: str) -> MSPyBentley.BeFileNameStatus:
         """
-        EmptyAndRemoveDirectory(path: str) -> MSPyBentley.BeFileNameStatus
-        
         Recursively empty all of the contents of an existing directory and
         then remove it.
         
@@ -1679,18 +1513,14 @@ class BeFileName:
         """
         ...
     
-    def EndsWith(*args, **kwargs):
+    def EndsWith(self: MSPyBentley.WString, endChars: str) -> bool:
         """
-        EndsWith(self: MSPyBentley.WString, endChars: str) -> bool
-        
         Determines if this instance ends with the provided string.
         """
         ...
     
-    def EndsWithI(*args, **kwargs):
+    def EndsWithI(self: MSPyBentley.WString, endChars: str) -> bool:
         """
-        EndsWithI(self: MSPyBentley.WString, endChars: str) -> bool
-        
         Determines if this instance ends with the provided string, ignoring
         case.
         """
@@ -1698,7 +1528,6 @@ class BeFileName:
     
     def Equals(*args, **kwargs):
         """
-        Equals(*args, **kwargs)
         Overloaded function.
         
         1. Equals(self: MSPyBentley.WString, other: str) -> bool
@@ -1725,7 +1554,6 @@ class BeFileName:
     
     def EqualsI(*args, **kwargs):
         """
-        EqualsI(*args, **kwargs)
         Overloaded function.
         
         1. EqualsI(self: MSPyBentley.WString, other: str) -> bool
@@ -1794,19 +1622,16 @@ class BeFileName:
         def value(arg0: MSPyBentley.BeFileName.FileNameParts) -> int:
             ...
         
-    def FindI(*args, **kwargs):
+    def FindI(self: MSPyBentley.WString, findString: str) -> int:
         """
-        FindI(self: MSPyBentley.WString, findString: str) -> int
-        
         Replace all instances of a sub string. Returns the number of
         replacements made.
         """
         ...
     
-    def FindRelativePath(*args, **kwargs):
+    @staticmethod
+    def FindRelativePath(relativePath: MSPyBentley.WString, targetFileName: str, rootFileName: str) -> None:
         """
-        FindRelativePath(relativePath: MSPyBentley.WString, targetFileName: str, rootFileName: str) -> None
-        
         Finds the relative path from a root file to the target file. If the
         files are on different devices, targetFileName is copied to
         relativePath.
@@ -1823,10 +1648,9 @@ class BeFileName:
         """
         ...
     
-    def FixPathName(*args, **kwargs):
+    @staticmethod
+    def FixPathName(path: MSPyBentley.WString, original: str) -> MSPyBentley.BeFileNameStatus:
         """
-        FixPathName(path: MSPyBentley.WString, original: str) -> MSPyBentley.BeFileNameStatus
-        
         Perform any platform-specific fixes of an input pathname into a
         " canonical " pathname. On Windows, this includes converting forward
         slashes to backslashes and removing double backslashes. It also
@@ -1846,96 +1670,82 @@ class BeFileName:
         """
         ...
     
-    def GetDevice(*args, **kwargs):
+    @staticmethod
+    def GetDevice(path: str) -> MSPyBentley.WString:
         """
-        GetDevice(path: str) -> MSPyBentley.WString
-        
         Returns the device letter from path - Empty if the path doesn't start
         with a device. Always empty on unix.
         """
         ...
     
-    def GetDirectoryName(*args, **kwargs):
+    @staticmethod
+    def GetDirectoryName(path: str) -> MSPyBentley.WString:
         """
-        GetDirectoryName(path: str) -> MSPyBentley.WString
-        
         Returns the complete directory (including drive, if any) from path.
         Has terminating separator.
         """
         ...
     
-    def GetDirectoryWithoutDevice(*args, **kwargs):
+    @staticmethod
+    def GetDirectoryWithoutDevice(path: str) -> MSPyBentley.WString:
         """
-        GetDirectoryWithoutDevice(path: str) -> MSPyBentley.WString
-        
         Returns the directory (excluding drive) from path. Has terminating
         separator.
         """
         ...
     
-    def GetExtension(*args, **kwargs):
+    @staticmethod
+    def GetExtension(path: str) -> MSPyBentley.WString:
         """
-        GetExtension(path: str) -> MSPyBentley.WString
-        
         Returns the filename extension from path (everything following the
         last dot non-inclusive), or empty if there is none.
         """
         ...
     
-    def GetFileNameAndExtension(*args, **kwargs):
+    @staticmethod
+    def GetFileNameAndExtension(path: str) -> MSPyBentley.WString:
         """
-        GetFileNameAndExtension(path: str) -> MSPyBentley.WString
-        
         Returns the filename from path, including extension, but not
         directory.
         """
         ...
     
-    def GetFileNameWithoutExtension(*args, **kwargs):
+    @staticmethod
+    def GetFileNameWithoutExtension(path: str) -> MSPyBentley.WString:
         """
-        GetFileNameWithoutExtension(path: str) -> MSPyBentley.WString
-        
         Returns the base filename from path, with no directory or extension.
         """
         ...
     
-    def GetFileSize(*args, **kwargs):
+    @staticmethod
+    def GetFileSize(fileName: str) -> tuple:
         """
-        GetFileSize(fileName: str) -> tuple
-        
         Get file size
         @param in  fileName The name of an existing file.
         @return the file size
         """
         ...
     
-    def GetFullPathName(*args, **kwargs):
-        """
-        GetFullPathName(self: MSPyBentley.BeFileName) -> MSPyBentley.BeFileNameStatus
-        """
+    def GetFullPathName(self: MSPyBentley.BeFileName) -> MSPyBentley.BeFileNameStatus:
         ...
     
-    def GetMaxLocaleCharBytes(*args, **kwargs):
+    def GetMaxLocaleCharBytes(self: MSPyBentley.WString) -> int:
         """
-        GetMaxLocaleCharBytes(self: MSPyBentley.WString) -> int
-        
         Get the number of bytes required to hold the current string. This is
         the value to use to allocate a buffer (e.g. via _alloca) to to call
         #ConvertToLocaleChars.
         """
         ...
     
-    def GetName(*args, **kwargs):
+    def GetName(self: MSPyBentley.BeFileName) -> str:
         """
-        GetName(self: MSPyBentley.BeFileName) -> str
-        
         Copy name into WChar buffer.
         """
         ...
     
+    @staticmethod
     def GetTargetOfSymbolicLink(*args, **kwargs):
         """
-        GetTargetOfSymbolicLink(*args, **kwargs)
         Overloaded function.
         
         1. GetTargetOfSymbolicLink(targetFileName: MSPyBentley.BeFileName, path: str) -> Bentley.BentleyStatus
@@ -1952,34 +1762,27 @@ class BeFileName:
         """
         ...
     
-    def GetUri(*args, **kwargs):
+    def GetUri(self: MSPyBentley.BeFileName) -> MSPyBentley.Utf8String:
         """
-        GetUri(self: MSPyBentley.BeFileName) -> MSPyBentley.Utf8String
-        
         Get the URI for this BeFileName.
         """
         ...
     
-    def GetWCharCP(*args, **kwargs):
+    def GetWCharCP(self: MSPyBentley.WString) -> str:
         """
-        GetWCharCP(self: MSPyBentley.WString) -> str
-        
         Equivalent to c_str
         """
         ...
     
-    def IsAbsolutePath(*args, **kwargs):
+    def IsAbsolutePath(self: MSPyBentley.BeFileName) -> bool:
         """
-        IsAbsolutePath(self: MSPyBentley.BeFileName) -> bool
-        
         Test if a filename is an absolute path.
         """
         ...
     
-    def IsDirectory(*args, **kwargs):
+    @staticmethod
+    def IsDirectory(path: str) -> bool:
         """
-        IsDirectory(path: str) -> bool
-        
         Test whether a pathname refers to an existing directory.
         
         Parameter ``path``:
@@ -1990,26 +1793,21 @@ class BeFileName:
         """
         ...
     
-    def IsEmpty(*args, **kwargs):
+    def IsEmpty(self: MSPyBentley.BeFileName) -> bool:
         """
-        IsEmpty(self: MSPyBentley.BeFileName) -> bool
-        
         Determines if the value of this BeFileName is empty (blank).
         """
         ...
     
-    def IsNullOrEmpty(*args, **kwargs):
+    def IsNullOrEmpty(str: str) -> bool:
         """
-        IsNullOrEmpty(str: str) -> bool
-        
         True if the provided string is NULL or contains no character data.
         """
         ...
     
-    def IsRemovableMedia(*args, **kwargs):
+    @staticmethod
+    def IsRemovableMedia(fileName: str) -> bool:
         """
-        IsRemovableMedia(fileName: str) -> bool
-        
         Check if path is located on a removable storage device.
         
         Parameter ``fn``:
@@ -2020,27 +1818,23 @@ class BeFileName:
         """
         ...
     
-    def IsSymbolicLink(*args, **kwargs):
+    @staticmethod
+    def IsSymbolicLink(path: str) -> bool:
         """
-        IsSymbolicLink(path: str) -> bool
-        
         Determines if the path is a symbolic link. If the path does not exist,
         also returns false.
         """
         ...
     
-    def IsUrl(*args, **kwargs):
+    def IsUrl(self: MSPyBentley.BeFileName) -> bool:
         """
-        IsUrl(self: MSPyBentley.BeFileName) -> bool
-        
         Test if a filename is an URL.
         """
         ...
     
-    def MoveToRecycleBin(*args, **kwargs):
+    @staticmethod
+    def MoveToRecycleBin(path: str) -> MSPyBentley.BeFileNameStatus:
         """
-        MoveToRecycleBin(path: str) -> MSPyBentley.BeFileNameStatus
-        
         Move an existing file or an existing directory to Recycle Bin (on
         Windows).
         
@@ -2059,38 +1853,30 @@ class BeFileName:
     def Name(arg0: MSPyBentley.BeFileName, arg1: str) -> None:
         ...
     
-    def OverrideNameParts(*args, **kwargs):
+    def OverrideNameParts(self: MSPyBentley.BeFileName, overrideName: str) -> None:
         """
-        OverrideNameParts(self: MSPyBentley.BeFileName, overrideName: str) -> None
-        
         Override values for parts of a file name. If the override name
         includes a value for a part of the name, that value is used. Otherwise
         the current value is preserved.
         """
         ...
     
-    def PadLeft(*args, **kwargs):
+    def PadLeft(self: MSPyBentley.WString, totalSize: int, charToPadWidth: str) -> None:
         """
-        PadLeft(self: MSPyBentley.WString, totalSize: int, charToPadWidth: str) -> None
-        
         Pads, if necessary, to the given totalSize by adding charToPadWith to
         the left side.
         """
         ...
     
-    def PadRight(*args, **kwargs):
+    def PadRight(self: MSPyBentley.WString, totalSize: int, charToPadWidth: str) -> None:
         """
-        PadRight(self: MSPyBentley.WString, totalSize: int, charToPadWidth: str) -> None
-        
         Pads, if necessary, to the given totalSize by adding charToPadWith to
         the right side.
         """
         ...
     
-    def ParseName(*args, **kwargs):
+    def ParseName(self: MSPyBentley.BeFileName, dev: MSPyBentley.WString, dir: MSPyBentley.WString, name: MSPyBentley.WString, ext: MSPyBentley.WString) -> None:
         """
-        ParseName(self: MSPyBentley.BeFileName, dev: MSPyBentley.WString, dir: MSPyBentley.WString, name: MSPyBentley.WString, ext: MSPyBentley.WString) -> None
-        
         Parse a full filename into WStrings for the device, directory,
         filename, and extension.
         
@@ -2111,10 +1897,8 @@ class BeFileName:
         """
         ...
     
-    def ParseNameNoClear(*args, **kwargs):
+    def ParseNameNoClear(self: MSPyBentley.BeFileName, dev: MSPyBentley.WString, dir: MSPyBentley.WString, name: MSPyBentley.WString, ext: MSPyBentley.WString) -> None:
         """
-        ParseNameNoClear(self: MSPyBentley.BeFileName, dev: MSPyBentley.WString, dir: MSPyBentley.WString, name: MSPyBentley.WString, ext: MSPyBentley.WString) -> None
-        
         Parse a full filename into WStrings for the device, directory,
         filename, and extension. If the input does not contain a file part,
         the output is not changed.
@@ -2136,37 +1920,29 @@ class BeFileName:
         """
         ...
     
-    def PopDir(*args, **kwargs):
+    def PopDir(self: MSPyBentley.BeFileName) -> None:
         """
-        PopDir(self: MSPyBentley.BeFileName) -> None
-        
         Remove the right-most component from the path. If this BeFileName
         contains a single dirctory (or otherwise contains no directory
         separators), it becomes empty as a result of this function.
         """
         ...
     
-    def RemoveQuotes(*args, **kwargs):
+    def RemoveQuotes(self: MSPyBentley.BeFileName) -> None:
         """
-        RemoveQuotes(self: MSPyBentley.BeFileName) -> None
-        
         Remove enclosing quotes
         """
         ...
     
-    def ReplaceAll(*args, **kwargs):
+    def ReplaceAll(self: MSPyBentley.WString, subStringToReplace: str, replacement: str) -> int:
         """
-        ReplaceAll(self: MSPyBentley.WString, subStringToReplace: str, replacement: str) -> int
-        
         Replace all instances of a sub string. Returns the number of
         replacements made.
         """
         ...
     
-    def ReplaceI(*args, **kwargs):
+    def ReplaceI(self: MSPyBentley.WString, findString: str, replaceString: str) -> bool:
         """
-        ReplaceI(self: MSPyBentley.WString, findString: str, replaceString: str) -> bool
-        
         Replace first occurrence of findString with replaceString, ignoring
         case.
         
@@ -2181,10 +1957,9 @@ class BeFileName:
         """
         ...
     
-    def ResolveRelativePath(*args, **kwargs):
+    @staticmethod
+    def ResolveRelativePath(fullPath: MSPyBentley.WString, relativeFileName: str, basePath: str) -> Bentley.BentleyStatus:
         """
-        ResolveRelativePath(fullPath: MSPyBentley.WString, relativeFileName: str, basePath: str) -> Bentley.BentleyStatus
-        
         Generates a fullpath by resolving relativeFileName relative to
         basePath.
         
@@ -2202,10 +1977,9 @@ class BeFileName:
         """
         ...
     
-    def SetFileReadOnly(*args, **kwargs):
+    @staticmethod
+    def SetFileReadOnly(fileName: str, readOnly: bool) -> MSPyBentley.BeFileNameStatus:
         """
-        SetFileReadOnly(fileName: str, readOnly: bool) -> MSPyBentley.BeFileNameStatus
-        
         Set the read-only status of an existing file
         
         Parameter ``fileName``:
@@ -2220,10 +1994,8 @@ class BeFileName:
         """
         ...
     
-    def SetName(*args, **kwargs):
+    def SetName(self: MSPyBentley.BeFileName, name: str) -> None:
         """
-        SetName(self: MSPyBentley.BeFileName, name: str) -> None
-        
         Change the value of this BeFileName.
         
         Parameter ``name``:
@@ -2231,61 +2003,48 @@ class BeFileName:
         """
         ...
     
-    def StartsWith(*args, **kwargs):
+    def StartsWith(self: MSPyBentley.WString, startChars: str) -> bool:
         """
-        StartsWith(self: MSPyBentley.WString, startChars: str) -> bool
-        
         Determines if this instance starts with the provided string.
         """
         ...
     
-    def StartsWithI(*args, **kwargs):
+    def StartsWithI(self: MSPyBentley.WString, startChars: str) -> bool:
         """
-        StartsWithI(self: MSPyBentley.WString, startChars: str) -> bool
-        
         Determines if this instance starts with the provided string, ignoring
         case.
         """
         ...
     
-    def StripSeparatorAtEnd(*args, **kwargs):
+    def StripSeparatorAtEnd(self: MSPyBentley.BeFileName) -> None:
         """
-        StripSeparatorAtEnd(self: MSPyBentley.BeFileName) -> None
-        
         Strip all separators at the end
         """
         ...
     
-    def StripSeparatorAtEndS(*args, **kwargs):
+    @staticmethod
+    def StripSeparatorAtEndS(arg0: MSPyBentley.WString) -> None:
         """
-        StripSeparatorAtEndS(arg0: MSPyBentley.WString) -> None
-        
         Strip all separators at the end
         """
         ...
     
-    def StripWhiteSpace(*args, **kwargs):
+    def StripWhiteSpace(self: MSPyBentley.BeFileName) -> None:
         """
-        StripWhiteSpace(self: MSPyBentley.BeFileName) -> None
-        
         Remove white space
         """
         ...
     
-    def SupplyDefaultNameParts(*args, **kwargs):
+    def SupplyDefaultNameParts(self: MSPyBentley.BeFileName, defaultName: str) -> None:
         """
-        SupplyDefaultNameParts(self: MSPyBentley.BeFileName, defaultName: str) -> None
-        
         Supply default values for parts of a file name. If the existing name
         includes a value for a part of the name, that value is preserved.
         Otherwise the default is used.
         """
         ...
     
-    def ToLower(*args, **kwargs):
+    def ToLower(self: MSPyBentley.WString) -> None:
         """
-        ToLower(self: MSPyBentley.WString) -> None
-        
         Remark:
         s A WString can share the string buffer with another WString
         object. Do not try to modify its internal buffer without first
@@ -2294,10 +2053,8 @@ class BeFileName:
         """
         ...
     
-    def ToUpper(*args, **kwargs):
+    def ToUpper(self: MSPyBentley.WString) -> None:
         """
-        ToUpper(self: MSPyBentley.WString) -> None
-        
         Remark:
         s A WString can share the string buffer with another WString
         object. Do not try to modify its internal buffer without first
@@ -2308,7 +2065,6 @@ class BeFileName:
     
     def Trim(*args, **kwargs):
         """
-        Trim(*args, **kwargs)
         Overloaded function.
         
         1. Trim(self: MSPyBentley.WString, trimCharacters: str) -> None
@@ -2351,10 +2107,7 @@ class BeFileName:
         """
         ...
     
-    def clear(*args, **kwargs):
-        """
-        clear(self: MSPyBentley.WString) -> None
-        """
+    def clear(self: MSPyBentley.WString) -> None:
         ...
     
     eAll: FileNameParts
@@ -2371,10 +2124,8 @@ class BeFileName:
     
     eNameAndExt: FileNameParts
     
-    def substr(*args, **kwargs):
+    def substr(self: MSPyBentley.WString, pos: int = 0, n: int = 18446744073709551615) -> MSPyBentley.WString:
         """
-        substr(self: MSPyBentley.WString, pos: int = 0, n: int = 18446744073709551615) -> MSPyBentley.WString
-        
         Get a substring.
         
         Parameter ``__pos``:
@@ -2592,28 +2343,16 @@ class BeFileStatus:
     def value(arg0: MSPyBentley.BeFileStatus) -> int:
         ...
     
-def BeGetComputerName(*args, **kwargs):
-    """
-    BeGetComputerName(arg0: MSPyBentley.WString) -> Bentley.BentleyStatus
-    """
+def BeGetComputerName(arg0: MSPyBentley.WString) -> Bentley.BentleyStatus:
     ...
 
-def BeGetComputerNameA(*args, **kwargs):
-    """
-    BeGetComputerNameA(arg0: MSPyBentley.AString) -> Bentley.BentleyStatus
-    """
+def BeGetComputerNameA(arg0: MSPyBentley.AString) -> Bentley.BentleyStatus:
     ...
 
-def BeGetUserName(*args, **kwargs):
-    """
-    BeGetUserName(arg0: MSPyBentley.WString) -> Bentley.BentleyStatus
-    """
+def BeGetUserName(arg0: MSPyBentley.WString) -> Bentley.BentleyStatus:
     ...
 
-def BeGetUserNameA(*args, **kwargs):
-    """
-    BeGetUserNameA(arg0: MSPyBentley.AString) -> Bentley.BentleyStatus
-    """
+def BeGetUserNameA(arg0: MSPyBentley.AString) -> Bentley.BentleyStatus:
     ...
 
 class BeStringUtilities:
@@ -2623,10 +2362,9 @@ class BeStringUtilities:
 
     AsManyAsPossible: int
     
-    def FormatUInt64(*args, **kwargs):
+    @staticmethod
+    def FormatUInt64(dest: MSPyBentley.WString, val: int, opts: MSPyBentley.HexFormatOptions, width: int = 0, precision: int = 1) -> int:
         """
-        FormatUInt64(dest: MSPyBentley.WString, val: int, opts: MSPyBentley.HexFormatOptions, width: int = 0, precision: int = 1) -> int
-        
         Formats an unsigned 64-bit integer using the same options supported by
         printf's " % x " and " % X " specifiers.
         
@@ -2675,10 +2413,9 @@ class BeStringUtilities:
         """
         ...
     
-    def Join(*args, **kwargs):
+    @staticmethod
+    def Join(strings: MSPyBentley.WStringArray, delimiter: str) -> MSPyBentley.WString:
         """
-        Join(strings: MSPyBentley.WStringArray, delimiter: str) -> MSPyBentley.WString
-        
         Joins a list of strings into a single string, optionally separated by
         a delimiter.
         
@@ -2694,10 +2431,9 @@ class BeStringUtilities:
         """
         ...
     
-    def LexicographicCompare(*args, **kwargs):
+    @staticmethod
+    def LexicographicCompare(value0: MSPyBentley.WString, value1: MSPyBentley.WString) -> int:
         """
-        LexicographicCompare(value0: MSPyBentley.WString, value1: MSPyBentley.WString) -> int
-        
         Do a lexicographic comparison of specified strings. This is an
         alphabetical sort that also takes numbers into account, such that
         " file9 " will come before " file11 " in the sort order (even though
@@ -2710,10 +2446,9 @@ class BeStringUtilities:
     
     NPOS: int
     
-    def ParseArguments(*args, **kwargs):
+    @staticmethod
+    def ParseArguments(subStrings: MSPyBentley.WStringArray, inString: MSPyBentley.WString, auxDelimiters: MSPyBentley.WString) -> None:
         """
-        ParseArguments(subStrings: MSPyBentley.WStringArray, inString: MSPyBentley.WString, auxDelimiters: MSPyBentley.WString) -> None
-        
         Default logic for parsing a user supplied argument list. Tokenizes
         based on whitespace and does not tokenize within double-quoted
         substrings.
@@ -2730,10 +2465,9 @@ class BeStringUtilities:
         """
         ...
     
-    def ParseUInt64(*args, **kwargs):
+    @staticmethod
+    def ParseUInt64(value: int, string: MSPyBentley.WString) -> tuple:
         """
-        ParseUInt64(value: int, string: MSPyBentley.WString) -> tuple
-        
         Parses a string containing an integer number in decimal format
         
         Parameter ``value``:
@@ -2750,9 +2484,9 @@ class BeStringUtilities:
         """
         ...
     
+    @staticmethod
     def Split(*args, **kwargs):
         """
-        Split(*args, **kwargs)
         Overloaded function.
         
         1. Split(str: MSPyBentley.WString, delimiters: MSPyBentley.WString, tokens: MSPyBentley.WStringArray) -> None
@@ -2787,10 +2521,8 @@ class BeStringUtilities:
         """
         ...
     
-    def WCharToUtf8(*args, **kwargs):
-        """
-        WCharToUtf8(outStr: MSPyBentley.Utf8String, inStr: str, _count: int = 18446744073709551615) -> Bentley.BentleyStatus
-        """
+    @staticmethod
+    def WCharToUtf8(outStr: MSPyBentley.Utf8String, inStr: str, _count: int = 18446744073709551615) -> Bentley.BentleyStatus:
         ...
     
     def __init__(*args, **kwargs):
@@ -2804,10 +2536,8 @@ class BeTextFile:
     Reads and Writes Text Files regardless of whether they are encoded on disk as locale-encoded ASCII, UTF8, or UTF16.
     """
 
-    def Close(*args, **kwargs):
+    def Close(self: MSPyBentley.BeTextFile) -> None:
         """
-        Close(self: MSPyBentley.BeTextFile) -> None
-        
         Closes the text file.
         
         Remark:
@@ -2816,10 +2546,8 @@ class BeTextFile:
         """
         ...
     
-    def GetChar(*args, **kwargs):
+    def GetChar(self: MSPyBentley.BeTextFile) -> str:
         """
-        GetChar(self: MSPyBentley.BeTextFile) -> str
-        
         Reads the next character from the file.
         
         Returns:
@@ -2827,10 +2555,8 @@ class BeTextFile:
         """
         ...
     
-    def GetLine(*args, **kwargs):
+    def GetLine(self: MSPyBentley.BeTextFile, textLine: MSPyBentley.WString) -> MSPyBentley.TextFileReadStatus:
         """
-        GetLine(self: MSPyBentley.BeTextFile, textLine: MSPyBentley.WString) -> MSPyBentley.TextFileReadStatus
-        
         Reads a line from the file.
         
         Parameter ``textLine``:
@@ -2849,10 +2575,8 @@ class BeTextFile:
         """
         ...
     
-    def GetPointer(*args, **kwargs):
+    def GetPointer(self: MSPyBentley.BeTextFile) -> tuple:
         """
-        GetPointer(self: MSPyBentley.BeTextFile) -> tuple
-        
         Gets the file read/write position.
         
         Parameter ``position``:
@@ -2864,6 +2588,7 @@ class BeTextFile:
         """
         ...
     
+    @staticmethod
     def Open(*args, **kwargs):
         """
         Open(fullFileSpec: str, openType: MSPyBentley.TextFileOpenType, options: MSPyBentley.TextFileOptions, encoding: MSPyBentley.TextFileEncoding = <TextFileEncoding.eCurrentLocale: 0>) -> tuple
@@ -2903,10 +2628,8 @@ class BeTextFile:
         """
         ...
     
-    def PutLine(*args, **kwargs):
+    def PutLine(self: MSPyBentley.BeTextFile, textLine: str, addCR: bool) -> MSPyBentley.TextFileWriteStatus:
         """
-        PutLine(self: MSPyBentley.BeTextFile, textLine: str, addCR: bool) -> MSPyBentley.TextFileWriteStatus
-        
         Writes a line to the file.
         
         Parameter ``textLine``:
@@ -2925,10 +2648,8 @@ class BeTextFile:
         """
         ...
     
-    def Rewind(*args, **kwargs):
+    def Rewind(self: MSPyBentley.BeTextFile) -> MSPyBentley.BeFileStatus:
         """
-        Rewind(self: MSPyBentley.BeTextFile) -> MSPyBentley.BeFileStatus
-        
         Rewinds the file and prepare for reading from the beginning of the
         text data (i.e., just past the encoding signature, if there is one).
         
@@ -2938,10 +2659,8 @@ class BeTextFile:
         """
         ...
     
-    def SetPointer(*args, **kwargs):
+    def SetPointer(self: MSPyBentley.BeTextFile, position: int, origin: MSPyBentley.BeFileSeekOrigin) -> MSPyBentley.BeFileStatus:
         """
-        SetPointer(self: MSPyBentley.BeTextFile, position: int, origin: MSPyBentley.BeFileSeekOrigin) -> MSPyBentley.BeFileStatus
-        
         Moves the file read/write position
         
         Parameter ``position``:
@@ -2987,33 +2706,26 @@ class BoolArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.BoolArray, x: bool) -> None:
         """
-        append(self: MSPyBentley.BoolArray, x: bool) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.BoolArray) -> None:
         """
-        clear(self: MSPyBentley.BoolArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.BoolArray, x: bool) -> int:
         """
-        count(self: MSPyBentley.BoolArray, x: bool) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.BoolArray, L: MSPyBentley.BoolArray) -> None
@@ -3026,17 +2738,14 @@ class BoolArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.BoolArray, i: int, x: bool) -> None:
         """
-        insert(self: MSPyBentley.BoolArray, i: int, x: bool) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.BoolArray) -> bool
@@ -3049,10 +2758,8 @@ class BoolArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.BoolArray, x: bool) -> None:
         """
-        remove(self: MSPyBentley.BoolArray, x: bool) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3076,33 +2783,26 @@ class DoubleArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.DoubleArray, x: float) -> None:
         """
-        append(self: MSPyBentley.DoubleArray, x: float) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.DoubleArray) -> None:
         """
-        clear(self: MSPyBentley.DoubleArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.DoubleArray, x: float) -> int:
         """
-        count(self: MSPyBentley.DoubleArray, x: float) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.DoubleArray, L: MSPyBentley.DoubleArray) -> None
@@ -3115,17 +2815,14 @@ class DoubleArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.DoubleArray, i: int, x: float) -> None:
         """
-        insert(self: MSPyBentley.DoubleArray, i: int, x: float) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.DoubleArray) -> float
@@ -3138,10 +2835,8 @@ class DoubleArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.DoubleArray, x: float) -> None:
         """
-        remove(self: MSPyBentley.DoubleArray, x: float) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3151,18 +2846,15 @@ class DoubleFormatter:
     None
     """
 
-    def Clone(*args, **kwargs):
+    def Clone(self: MSPyBentley.DoubleFormatter) -> MSPyBentley.DoubleFormatter:
         """
-        Clone(self: MSPyBentley.DoubleFormatter) -> MSPyBentley.DoubleFormatter
-        
         Construct a formatter which is a duplicate of an existing formatter.
         """
         ...
     
-    def Create(*args, **kwargs):
+    @staticmethod
+    def Create() -> MSPyBentley.DoubleFormatter:
         """
-        Create() -> MSPyBentley.DoubleFormatter
-        
         Construct a formatter with default settings.
         """
         ...
@@ -3174,61 +2866,48 @@ class DoubleFormatter:
     def DecimalSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: str) -> None:
         ...
     
-    def GetDecimalSeparator(*args, **kwargs):
+    def GetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase) -> str:
         """
-        GetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase) -> str
-        
         Get the decimal separator used by this formatter.
         """
         ...
     
-    def GetInsertThousandsSeparator(*args, **kwargs):
+    def GetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> bool:
         """
-        GetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> bool
-        
         Get the value indicating if the thousands separator is inserted by
         this formatter.
         """
         ...
     
-    def GetLeadingZero(*args, **kwargs):
+    def GetLeadingZero(self: MSPyBentley.DoubleFormatterBase) -> bool:
         """
-        GetLeadingZero(self: MSPyBentley.DoubleFormatterBase) -> bool
-        
         Test if this formatter will include a leading zero.  A leading zero is only
         included for values less than 1.0.  Ex. "0.5" vs. ".5"
         """
         ...
     
-    def GetPrecision(*args, **kwargs):
+    def GetPrecision(self: MSPyBentley.DoubleFormatterBase) -> Bentley.PrecisionFormat:
         """
-        GetPrecision(self: MSPyBentley.DoubleFormatterBase) -> Bentley.PrecisionFormat
-        
         Get the precision used by this formatter.
         """
         ...
     
-    def GetThousandsSeparator(*args, **kwargs):
+    def GetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> str:
         """
-        GetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> str
-        
         Get the thousands separator used by this formatter.
         """
         ...
     
-    def GetTrailingZeros(*args, **kwargs):
+    def GetTrailingZeros(self: MSPyBentley.DoubleFormatterBase) -> bool:
         """
-        GetTrailingZeros(self: MSPyBentley.DoubleFormatterBase) -> bool
-        
         Test if this formatter will include trailing zeros.  Trailing zeros are only included
         up to the requested precision.  Ex. "30.500" vs. "30.5"
         """
         ...
     
-    def GetTypeFromPrecision(*args, **kwargs):
+    @staticmethod
+    def GetTypeFromPrecision(format: Bentley.PrecisionFormat) -> Bentley.PrecisionType:
         """
-        GetTypeFromPrecision(format: Bentley.PrecisionFormat) -> Bentley.PrecisionType
-        
         Categorize a precision value.
         """
         ...
@@ -3254,26 +2933,20 @@ class DoubleFormatter:
     def Precision(arg0: MSPyBentley.DoubleFormatterBase, arg1: Bentley.PrecisionFormat) -> None:
         ...
     
-    def SetDecimalSeparator(*args, **kwargs):
+    def SetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None:
         """
-        SetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None
-        
         Set the formatter's decimal separator.
         """
         ...
     
-    def SetInsertThousandsSeparator(*args, **kwargs):
+    def SetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
         """
-        SetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None
-        
         Specify if the thousands separator should be inserted or not.
         """
         ...
     
-    def SetLeadingZero(*args, **kwargs):
+    def SetLeadingZero(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
         """
-        SetLeadingZero(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None
-        
         Set the formatter's leading zero behavior. A leading zero is only
         included for values less than 1.0. Ex. " 0.5 " vs. " .5 "
         
@@ -3282,26 +2955,20 @@ class DoubleFormatter:
         """
         ...
     
-    def SetPrecision(*args, **kwargs):
+    def SetPrecision(self: MSPyBentley.DoubleFormatterBase, newVal: Bentley.PrecisionFormat) -> None:
         """
-        SetPrecision(self: MSPyBentley.DoubleFormatterBase, newVal: Bentley.PrecisionFormat) -> None
-        
         Set the formatter's precision.
         """
         ...
     
-    def SetThousandsSeparator(*args, **kwargs):
+    def SetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None:
         """
-        SetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None
-        
         Set the formatter's thousands separator.
         """
         ...
     
-    def SetTrailingZeros(*args, **kwargs):
+    def SetTrailingZeros(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
         """
-        SetTrailingZeros(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None
-        
         Set the formatter's trailing zeros behavior.  Trailing zeros are only included
         up to the requested precision.  Ex. "30.500" vs. "30.5"
         @param in  newVal pass true to zero pad the output string to the requested precision.
@@ -3315,10 +2982,8 @@ class DoubleFormatter:
     def ThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: str) -> None:
         ...
     
-    def ToString(*args, **kwargs):
+    def ToString(self: MSPyBentley.DoubleFormatter, value: float) -> MSPyBentley.WString:
         """
-        ToString(self: MSPyBentley.DoubleFormatter, value: float) -> MSPyBentley.WString
-        
         Use the settings defined in this formatter to convert a double value
         to a string.
         
@@ -3352,52 +3017,40 @@ class DoubleFormatterBase:
     def DecimalSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: str) -> None:
         ...
     
-    def GetDecimalSeparator(*args, **kwargs):
+    def GetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase) -> str:
         """
-        GetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase) -> str
-        
         Get the decimal separator used by this formatter.
         """
         ...
     
-    def GetInsertThousandsSeparator(*args, **kwargs):
+    def GetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> bool:
         """
-        GetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> bool
-        
         Get the value indicating if the thousands separator is inserted by
         this formatter.
         """
         ...
     
-    def GetLeadingZero(*args, **kwargs):
+    def GetLeadingZero(self: MSPyBentley.DoubleFormatterBase) -> bool:
         """
-        GetLeadingZero(self: MSPyBentley.DoubleFormatterBase) -> bool
-        
         Test if this formatter will include a leading zero.  A leading zero is only
         included for values less than 1.0.  Ex. "0.5" vs. ".5"
         """
         ...
     
-    def GetPrecision(*args, **kwargs):
+    def GetPrecision(self: MSPyBentley.DoubleFormatterBase) -> Bentley.PrecisionFormat:
         """
-        GetPrecision(self: MSPyBentley.DoubleFormatterBase) -> Bentley.PrecisionFormat
-        
         Get the precision used by this formatter.
         """
         ...
     
-    def GetThousandsSeparator(*args, **kwargs):
+    def GetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> str:
         """
-        GetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> str
-        
         Get the thousands separator used by this formatter.
         """
         ...
     
-    def GetTrailingZeros(*args, **kwargs):
+    def GetTrailingZeros(self: MSPyBentley.DoubleFormatterBase) -> bool:
         """
-        GetTrailingZeros(self: MSPyBentley.DoubleFormatterBase) -> bool
-        
         Test if this formatter will include trailing zeros.  Trailing zeros are only included
         up to the requested precision.  Ex. "30.500" vs. "30.5"
         """
@@ -3424,26 +3077,20 @@ class DoubleFormatterBase:
     def Precision(arg0: MSPyBentley.DoubleFormatterBase, arg1: Bentley.PrecisionFormat) -> None:
         ...
     
-    def SetDecimalSeparator(*args, **kwargs):
+    def SetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None:
         """
-        SetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None
-        
         Set the formatter's decimal separator.
         """
         ...
     
-    def SetInsertThousandsSeparator(*args, **kwargs):
+    def SetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
         """
-        SetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None
-        
         Specify if the thousands separator should be inserted or not.
         """
         ...
     
-    def SetLeadingZero(*args, **kwargs):
+    def SetLeadingZero(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
         """
-        SetLeadingZero(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None
-        
         Set the formatter's leading zero behavior. A leading zero is only
         included for values less than 1.0. Ex. " 0.5 " vs. " .5 "
         
@@ -3452,26 +3099,20 @@ class DoubleFormatterBase:
         """
         ...
     
-    def SetPrecision(*args, **kwargs):
+    def SetPrecision(self: MSPyBentley.DoubleFormatterBase, newVal: Bentley.PrecisionFormat) -> None:
         """
-        SetPrecision(self: MSPyBentley.DoubleFormatterBase, newVal: Bentley.PrecisionFormat) -> None
-        
         Set the formatter's precision.
         """
         ...
     
-    def SetThousandsSeparator(*args, **kwargs):
+    def SetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None:
         """
-        SetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None
-        
         Set the formatter's thousands separator.
         """
         ...
     
-    def SetTrailingZeros(*args, **kwargs):
+    def SetTrailingZeros(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
         """
-        SetTrailingZeros(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None
-        
         Set the formatter's trailing zeros behavior.  Trailing zeros are only included
         up to the requested precision.  Ex. "30.500" vs. "30.5"
         @param in  newVal pass true to zero pad the output string to the requested precision.
@@ -3556,58 +3197,31 @@ class DsigQuery:
     def Email(arg0: MSPyBentley.DsigQuery) -> str:
         ...
     
-    def GetAnnotationData(*args, **kwargs):
-        """
-        GetAnnotationData(self: MSPyBentley.DsigQuery) -> MSPyBentley.DsigAnnotationData
-        """
+    def GetAnnotationData(self: MSPyBentley.DsigQuery) -> MSPyBentley.DsigAnnotationData:
         ...
     
-    def GetCertificate(*args, **kwargs):
-        """
-        GetCertificate(self: MSPyBentley.DsigQuery, x509Cert: MSPyBentley.UInt8Array) -> int
-        """
+    def GetCertificate(self: MSPyBentley.DsigQuery, x509Cert: MSPyBentley.UInt8Array) -> int:
         ...
     
-    def GetCertificateChain(*args, **kwargs):
-        """
-        GetCertificateChain(self: MSPyBentley.DsigQuery, pkcs7: MSPyBentley.UInt8Array) -> int
-        """
+    def GetCertificateChain(self: MSPyBentley.DsigQuery, pkcs7: MSPyBentley.UInt8Array) -> int:
         ...
     
-    def GetCommonName(*args, **kwargs):
-        """
-        GetCommonName(self: MSPyBentley.DsigQuery) -> str
-        """
+    def GetCommonName(self: MSPyBentley.DsigQuery) -> str:
         ...
     
-    def GetEmail(*args, **kwargs):
-        """
-        GetEmail(self: MSPyBentley.DsigQuery) -> str
-        """
+    def GetEmail(self: MSPyBentley.DsigQuery) -> str:
         ...
     
-    def GetPublicKey(*args, **kwargs):
-        """
-        GetPublicKey(self: MSPyBentley.DsigQuery, x509PublicKeyInfo: MSPyBentley.UInt8Array) -> int
-        """
+    def GetPublicKey(self: MSPyBentley.DsigQuery, x509PublicKeyInfo: MSPyBentley.UInt8Array) -> int:
         ...
     
-    def IncludesEntireFile(*args, **kwargs):
-        """
-        IncludesEntireFile(self: MSPyBentley.DsigQuery) -> bool
-        """
+    def IncludesEntireFile(self: MSPyBentley.DsigQuery) -> bool:
         ...
     
-    def IncludesReferences(*args, **kwargs):
-        """
-        IncludesReferences(self: MSPyBentley.DsigQuery) -> bool
-        """
+    def IncludesReferences(self: MSPyBentley.DsigQuery) -> bool:
         ...
     
-    def IsValid(*args, **kwargs):
-        """
-        IsValid(self: MSPyBentley.DsigQuery) -> bool
-        """
+    def IsValid(self: MSPyBentley.DsigQuery) -> bool:
         ...
     
     def __init__(*args, **kwargs):
@@ -3635,33 +3249,26 @@ class FloatArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.FloatArray, x: float) -> None:
         """
-        append(self: MSPyBentley.FloatArray, x: float) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.FloatArray) -> None:
         """
-        clear(self: MSPyBentley.FloatArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.FloatArray, x: float) -> int:
         """
-        count(self: MSPyBentley.FloatArray, x: float) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.FloatArray, L: MSPyBentley.FloatArray) -> None
@@ -3674,17 +3281,14 @@ class FloatArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.FloatArray, i: int, x: float) -> None:
         """
-        insert(self: MSPyBentley.FloatArray, i: int, x: float) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.FloatArray) -> float
@@ -3697,10 +3301,8 @@ class FloatArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.FloatArray, x: float) -> None:
         """
-        remove(self: MSPyBentley.FloatArray, x: float) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3775,33 +3377,26 @@ class Int16Array:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.Int16Array, x: int) -> None:
         """
-        append(self: MSPyBentley.Int16Array, x: int) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.Int16Array) -> None:
         """
-        clear(self: MSPyBentley.Int16Array) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.Int16Array, x: int) -> int:
         """
-        count(self: MSPyBentley.Int16Array, x: int) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.Int16Array, L: MSPyBentley.Int16Array) -> None
@@ -3814,17 +3409,14 @@ class Int16Array:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.Int16Array, i: int, x: int) -> None:
         """
-        insert(self: MSPyBentley.Int16Array, i: int, x: int) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.Int16Array) -> int
@@ -3837,10 +3429,8 @@ class Int16Array:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.Int16Array, x: int) -> None:
         """
-        remove(self: MSPyBentley.Int16Array, x: int) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3864,33 +3454,26 @@ class Int32Array:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.Int32Array, x: int) -> None:
         """
-        append(self: MSPyBentley.Int32Array, x: int) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.Int32Array) -> None:
         """
-        clear(self: MSPyBentley.Int32Array) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.Int32Array, x: int) -> int:
         """
-        count(self: MSPyBentley.Int32Array, x: int) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.Int32Array, L: MSPyBentley.Int32Array) -> None
@@ -3903,17 +3486,14 @@ class Int32Array:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.Int32Array, i: int, x: int) -> None:
         """
-        insert(self: MSPyBentley.Int32Array, i: int, x: int) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.Int32Array) -> int
@@ -3926,10 +3506,8 @@ class Int32Array:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.Int32Array, x: int) -> None:
         """
-        remove(self: MSPyBentley.Int32Array, x: int) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -3953,33 +3531,26 @@ class Int64Array:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.Int64Array, x: int) -> None:
         """
-        append(self: MSPyBentley.Int64Array, x: int) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.Int64Array) -> None:
         """
-        clear(self: MSPyBentley.Int64Array) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.Int64Array, x: int) -> int:
         """
-        count(self: MSPyBentley.Int64Array, x: int) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.Int64Array, L: MSPyBentley.Int64Array) -> None
@@ -3992,17 +3563,14 @@ class Int64Array:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.Int64Array, i: int, x: int) -> None:
         """
-        insert(self: MSPyBentley.Int64Array, i: int, x: int) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.Int64Array) -> int
@@ -4015,10 +3583,8 @@ class Int64Array:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.Int64Array, x: int) -> None:
         """
-        remove(self: MSPyBentley.Int64Array, x: int) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -4042,33 +3608,26 @@ class Int64VecArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> None:
         """
-        append(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.Int64VecArray) -> None:
         """
-        clear(self: MSPyBentley.Int64VecArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> int:
         """
-        count(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.Int64VecArray, L: MSPyBentley.Int64VecArray) -> None
@@ -4081,17 +3640,14 @@ class Int64VecArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.Int64VecArray, i: int, x: MSPyBentley.Int64Array) -> None:
         """
-        insert(self: MSPyBentley.Int64VecArray, i: int, x: MSPyBentley.Int64Array) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.Int64VecArray) -> MSPyBentley.Int64Array
@@ -4104,10 +3660,8 @@ class Int64VecArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> None:
         """
-        remove(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -4131,33 +3685,26 @@ class Int8Array:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.Int8Array, x: int) -> None:
         """
-        append(self: MSPyBentley.Int8Array, x: int) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.Int8Array) -> None:
         """
-        clear(self: MSPyBentley.Int8Array) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.Int8Array, x: int) -> int:
         """
-        count(self: MSPyBentley.Int8Array, x: int) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.Int8Array, L: MSPyBentley.Int8Array) -> None
@@ -4170,17 +3717,14 @@ class Int8Array:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.Int8Array, i: int, x: int) -> None:
         """
-        insert(self: MSPyBentley.Int8Array, i: int, x: int) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.Int8Array) -> int
@@ -4193,10 +3737,8 @@ class Int8Array:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.Int8Array, x: int) -> None:
         """
-        remove(self: MSPyBentley.Int8Array, x: int) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -4590,22 +4132,16 @@ class PyNameSpaceManager:
     None
     """
 
-    def ClearNameSpaceUsing(*args, **kwargs):
-        """
-        ClearNameSpaceUsing() -> None
-        """
+    @staticmethod
+    def ClearNameSpaceUsing() -> None:
         ...
     
-    def DelNameSpaceUsing(*args, **kwargs):
-        """
-        DelNameSpaceUsing(namespaceID: MSPyBentley.PyNameSpaceManager.NameSpaceID) -> int
-        """
+    @staticmethod
+    def DelNameSpaceUsing(namespaceID: MSPyBentley.PyNameSpaceManager.NameSpaceID) -> int:
         ...
     
-    def IsNameSpaceUsing(*args, **kwargs):
-        """
-        IsNameSpaceUsing(namespaceID: MSPyBentley.PyNameSpaceManager.NameSpaceID) -> bool
-        """
+    @staticmethod
+    def IsNameSpaceUsing(namespaceID: MSPyBentley.PyNameSpaceManager.NameSpaceID) -> bool:
         ...
     
     class NameSpaceID:
@@ -4640,16 +4176,12 @@ class PyNameSpaceManager:
         def value(arg0: MSPyBentley.PyNameSpaceManager.NameSpaceID) -> int:
             ...
         
-    def SetDefaultNameSpaceList(*args, **kwargs):
-        """
-        SetDefaultNameSpaceList() -> None
-        """
+    @staticmethod
+    def SetDefaultNameSpaceList() -> None:
         ...
     
-    def UsingNameSpace(*args, **kwargs):
-        """
-        UsingNameSpace(namespaceID: MSPyBentley.PyNameSpaceManager.NameSpaceID) -> int
-        """
+    @staticmethod
+    def UsingNameSpace(namespaceID: MSPyBentley.PyNameSpaceManager.NameSpaceID) -> int:
         ...
     
     def __init__(*args, **kwargs):
@@ -4825,33 +4357,26 @@ class UInt16Array:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.UInt16Array, x: int) -> None:
         """
-        append(self: MSPyBentley.UInt16Array, x: int) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.UInt16Array) -> None:
         """
-        clear(self: MSPyBentley.UInt16Array) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.UInt16Array, x: int) -> int:
         """
-        count(self: MSPyBentley.UInt16Array, x: int) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.UInt16Array, L: MSPyBentley.UInt16Array) -> None
@@ -4864,17 +4389,14 @@ class UInt16Array:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.UInt16Array, i: int, x: int) -> None:
         """
-        insert(self: MSPyBentley.UInt16Array, i: int, x: int) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.UInt16Array) -> int
@@ -4887,10 +4409,8 @@ class UInt16Array:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.UInt16Array, x: int) -> None:
         """
-        remove(self: MSPyBentley.UInt16Array, x: int) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -4914,33 +4434,26 @@ class UInt32Array:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.UInt32Array, x: int) -> None:
         """
-        append(self: MSPyBentley.UInt32Array, x: int) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.UInt32Array) -> None:
         """
-        clear(self: MSPyBentley.UInt32Array) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.UInt32Array, x: int) -> int:
         """
-        count(self: MSPyBentley.UInt32Array, x: int) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.UInt32Array, L: MSPyBentley.UInt32Array) -> None
@@ -4953,17 +4466,14 @@ class UInt32Array:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.UInt32Array, i: int, x: int) -> None:
         """
-        insert(self: MSPyBentley.UInt32Array, i: int, x: int) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.UInt32Array) -> int
@@ -4976,10 +4486,8 @@ class UInt32Array:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.UInt32Array, x: int) -> None:
         """
-        remove(self: MSPyBentley.UInt32Array, x: int) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -5003,33 +4511,26 @@ class UInt64Array:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.UInt64Array, x: int) -> None:
         """
-        append(self: MSPyBentley.UInt64Array, x: int) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.UInt64Array) -> None:
         """
-        clear(self: MSPyBentley.UInt64Array) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.UInt64Array, x: int) -> int:
         """
-        count(self: MSPyBentley.UInt64Array, x: int) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.UInt64Array, L: MSPyBentley.UInt64Array) -> None
@@ -5042,17 +4543,14 @@ class UInt64Array:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.UInt64Array, i: int, x: int) -> None:
         """
-        insert(self: MSPyBentley.UInt64Array, i: int, x: int) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.UInt64Array) -> int
@@ -5065,10 +4563,8 @@ class UInt64Array:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.UInt64Array, x: int) -> None:
         """
-        remove(self: MSPyBentley.UInt64Array, x: int) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -5092,33 +4588,26 @@ class UInt64VecArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> None:
         """
-        append(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.UInt64VecArray) -> None:
         """
-        clear(self: MSPyBentley.UInt64VecArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> int:
         """
-        count(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.UInt64VecArray, L: MSPyBentley.UInt64VecArray) -> None
@@ -5131,17 +4620,14 @@ class UInt64VecArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.UInt64VecArray, i: int, x: MSPyBentley.UInt64Array) -> None:
         """
-        insert(self: MSPyBentley.UInt64VecArray, i: int, x: MSPyBentley.UInt64Array) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.UInt64VecArray) -> MSPyBentley.UInt64Array
@@ -5154,10 +4640,8 @@ class UInt64VecArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> None:
         """
-        remove(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -5181,33 +4665,26 @@ class UInt8Array:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.UInt8Array, x: int) -> None:
         """
-        append(self: MSPyBentley.UInt8Array, x: int) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.UInt8Array) -> None:
         """
-        clear(self: MSPyBentley.UInt8Array) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.UInt8Array, x: int) -> int:
         """
-        count(self: MSPyBentley.UInt8Array, x: int) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.UInt8Array, L: MSPyBentley.UInt8Array) -> None
@@ -5220,17 +4697,14 @@ class UInt8Array:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.UInt8Array, i: int, x: int) -> None:
         """
-        insert(self: MSPyBentley.UInt8Array, i: int, x: int) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.UInt8Array) -> int
@@ -5243,10 +4717,8 @@ class UInt8Array:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.UInt8Array, x: int) -> None:
         """
-        remove(self: MSPyBentley.UInt8Array, x: int) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -5257,10 +4729,8 @@ class Utf8String:
     This class also defines utility functions for constructing and manipulating the string
     """
 
-    def Assign(*args, **kwargs):
+    def Assign(self: MSPyBentley.Utf8String, str: str) -> MSPyBentley.Utf8String:
         """
-        Assign(self: MSPyBentley.Utf8String, str: str) -> MSPyBentley.Utf8String
-        
         Construct a Utf8String by converting from a wchar_t string.
         """
         ...
@@ -5276,7 +4746,6 @@ class Utf8String:
     
     def CompareTo(*args, **kwargs):
         """
-        CompareTo(*args, **kwargs)
         Overloaded function.
         
         1. CompareTo(self: MSPyBentley.Utf8String, other: str) -> int
@@ -5305,7 +4774,6 @@ class Utf8String:
     
     def CompareToI(*args, **kwargs):
         """
-        CompareToI(*args, **kwargs)
         Overloaded function.
         
         1. CompareToI(self: MSPyBentley.Utf8String, other: str) -> int
@@ -5334,7 +4802,6 @@ class Utf8String:
     
     def Equals(*args, **kwargs):
         """
-        Equals(*args, **kwargs)
         Overloaded function.
         
         1. Equals(self: MSPyBentley.Utf8String, other: str) -> bool
@@ -5361,7 +4828,6 @@ class Utf8String:
     
     def EqualsI(*args, **kwargs):
         """
-        EqualsI(*args, **kwargs)
         Overloaded function.
         
         1. EqualsI(self: MSPyBentley.Utf8String, other: str) -> bool
@@ -5386,10 +4852,8 @@ class Utf8String:
         """
         ...
     
-    def GetNextToken(*args, **kwargs):
+    def GetNextToken(self: MSPyBentley.Utf8String, next: MSPyBentley.Utf8String, delims: str, offset: int) -> int:
         """
-        GetNextToken(self: MSPyBentley.Utf8String, next: MSPyBentley.Utf8String, delims: str, offset: int) -> int
-        
         Reads the next token delimited by any character in *delims* or \0.
         
         Parameter ``next``:
@@ -5427,19 +4891,16 @@ class Utf8String:
         """
         ...
     
-    def IsAscii(*args, **kwargs):
+    def IsAscii(self: MSPyBentley.Utf8String) -> bool:
         """
-        IsAscii(self: MSPyBentley.Utf8String) -> bool
-        
         Test if this string contains only characters less than or equal to
         127.
         """
         ...
     
-    def IsAsciiWhiteSpace(*args, **kwargs):
+    @staticmethod
+    def IsAsciiWhiteSpace(val: str) -> bool:
         """
-        IsAsciiWhiteSpace(val: str) -> bool
-        
         Determine whether the supplied character is a whitespace character in
         the ascii (below 128) code page. This is necessary since the c
         "isspace" function is locale specific and sometimes returns true for
@@ -5449,45 +4910,36 @@ class Utf8String:
         """
         ...
     
-    def IsNullOrEmpty(*args, **kwargs):
+    @staticmethod
+    def IsNullOrEmpty(value: str) -> bool:
         """
-        IsNullOrEmpty(value: str) -> bool
-        
         Utility function to test if *value* represents the empty string. This
         function interprets NULL to be the empty string.
         """
         ...
     
-    def ReplaceAll(*args, **kwargs):
+    def ReplaceAll(self: MSPyBentley.Utf8String, subStringToReplace: str, replacement: str) -> int:
         """
-        ReplaceAll(self: MSPyBentley.Utf8String, subStringToReplace: str, replacement: str) -> int
-        
         Replace all instances of a sub string. Returns the number of
         replacements made.
         """
         ...
     
-    def SizeInBytes(*args, **kwargs):
+    def SizeInBytes(self: MSPyBentley.Utf8String) -> int:
         """
-        SizeInBytes(self: MSPyBentley.Utf8String) -> int
-        
         Computes the size, in bytes, of this string's data, including its
         NULL-terminator.
         """
         ...
     
-    def StartsWith(*args, **kwargs):
+    def StartsWith(self: MSPyBentley.Utf8String, startChars: str) -> bool:
         """
-        StartsWith(self: MSPyBentley.Utf8String, startChars: str) -> bool
-        
         Determines if this instance starts with the provided string.
         """
         ...
     
-    def ToLower(*args, **kwargs):
+    def ToLower(self: MSPyBentley.Utf8String) -> None:
         """
-        ToLower(self: MSPyBentley.Utf8String) -> None
-        
         Converts this string, in-place, to all lower case.
         
         Remark:
@@ -5496,17 +4948,15 @@ class Utf8String:
         """
         ...
     
-    def ToLowerChar(*args, **kwargs):
+    @staticmethod
+    def ToLowerChar(c: str) -> str:
         """
-        ToLowerChar(c: str) -> str
-        
         Equivalent to tolower
         """
         ...
     
     def Trim(*args, **kwargs):
         """
-        Trim(*args, **kwargs)
         Overloaded function.
         
         1. Trim(self: MSPyBentley.Utf8String) -> None
@@ -5521,10 +4971,8 @@ class Utf8String:
         """
         ...
     
-    def TrimEnd(*args, **kwargs):
+    def TrimEnd(self: MSPyBentley.Utf8String) -> MSPyBentley.Utf8String:
         """
-        TrimEnd(self: MSPyBentley.Utf8String) -> MSPyBentley.Utf8String
-        
         Removes all whitespace from the end. Whitespace includes space, line
         feed, carriage return, and tab (e.g. iswspace).
         """
@@ -5546,10 +4994,7 @@ class Utf8String:
         """
         ...
     
-    def clear(*args, **kwargs):
-        """
-        clear(self: MSPyBentley.Utf8String) -> None
-        """
+    def clear(self: MSPyBentley.Utf8String) -> None:
         ...
     
 class Utf8StringArray:
@@ -5571,33 +5016,26 @@ class Utf8StringArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.Utf8StringArray, x: MSPyBentley.Utf8String) -> None:
         """
-        append(self: MSPyBentley.Utf8StringArray, x: MSPyBentley.Utf8String) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.Utf8StringArray) -> None:
         """
-        clear(self: MSPyBentley.Utf8StringArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.Utf8StringArray, x: MSPyBentley.Utf8String) -> int:
         """
-        count(self: MSPyBentley.Utf8StringArray, x: MSPyBentley.Utf8String) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.Utf8StringArray, L: MSPyBentley.Utf8StringArray) -> None
@@ -5610,17 +5048,14 @@ class Utf8StringArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.Utf8StringArray, i: int, x: MSPyBentley.Utf8String) -> None:
         """
-        insert(self: MSPyBentley.Utf8StringArray, i: int, x: MSPyBentley.Utf8String) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.Utf8StringArray) -> MSPyBentley.Utf8String
@@ -5633,10 +5068,8 @@ class Utf8StringArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.Utf8StringArray, x: MSPyBentley.Utf8String) -> None:
         """
-        remove(self: MSPyBentley.Utf8StringArray, x: MSPyBentley.Utf8String) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -5682,33 +5115,26 @@ class WCharArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.WCharArray, x: str) -> None:
         """
-        append(self: MSPyBentley.WCharArray, x: str) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.WCharArray) -> None:
         """
-        clear(self: MSPyBentley.WCharArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.WCharArray, x: str) -> int:
         """
-        count(self: MSPyBentley.WCharArray, x: str) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.WCharArray, L: MSPyBentley.WCharArray) -> None
@@ -5721,17 +5147,14 @@ class WCharArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.WCharArray, i: int, x: str) -> None:
         """
-        insert(self: MSPyBentley.WCharArray, i: int, x: str) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.WCharArray) -> str
@@ -5744,10 +5167,8 @@ class WCharArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.WCharArray, x: str) -> None:
         """
-        remove(self: MSPyBentley.WCharArray, x: str) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -5759,10 +5180,8 @@ class WString:
     case-insensitive compare, trimming, padding, and others.
     """
 
-    def AddQuotes(*args, **kwargs):
+    def AddQuotes(self: MSPyBentley.WString) -> None:
         """
-        AddQuotes(self: MSPyBentley.WString) -> None
-        
         Put quotes around a string.
         """
         ...
@@ -5851,7 +5270,6 @@ class WString:
     
     def CompareTo(*args, **kwargs):
         """
-        CompareTo(*args, **kwargs)
         Overloaded function.
         
         1. CompareTo(self: MSPyBentley.WString, other: str) -> int
@@ -5880,7 +5298,6 @@ class WString:
     
     def CompareToI(*args, **kwargs):
         """
-        CompareToI(*args, **kwargs)
         Overloaded function.
         
         1. CompareToI(self: MSPyBentley.WString, other: str) -> int
@@ -5909,7 +5326,6 @@ class WString:
     
     def Contains(*args, **kwargs):
         """
-        Contains(*args, **kwargs)
         Overloaded function.
         
         1. Contains(self: MSPyBentley.WString, other: str) -> bool
@@ -5936,7 +5352,6 @@ class WString:
     
     def ContainsI(*args, **kwargs):
         """
-        ContainsI(*args, **kwargs)
         Overloaded function.
         
         1. ContainsI(self: MSPyBentley.WString, other: str) -> bool
@@ -5961,26 +5376,20 @@ class WString:
         """
         ...
     
-    def DropQuotes(*args, **kwargs):
+    def DropQuotes(self: MSPyBentley.WString) -> None:
         """
-        DropQuotes(self: MSPyBentley.WString) -> None
-        
         Remove quotes from around a string.
         """
         ...
     
-    def EndsWith(*args, **kwargs):
+    def EndsWith(self: MSPyBentley.WString, endChars: str) -> bool:
         """
-        EndsWith(self: MSPyBentley.WString, endChars: str) -> bool
-        
         Determines if this instance ends with the provided string.
         """
         ...
     
-    def EndsWithI(*args, **kwargs):
+    def EndsWithI(self: MSPyBentley.WString, endChars: str) -> bool:
         """
-        EndsWithI(self: MSPyBentley.WString, endChars: str) -> bool
-        
         Determines if this instance ends with the provided string, ignoring
         case.
         """
@@ -5988,7 +5397,6 @@ class WString:
     
     def Equals(*args, **kwargs):
         """
-        Equals(*args, **kwargs)
         Overloaded function.
         
         1. Equals(self: MSPyBentley.WString, other: str) -> bool
@@ -6015,7 +5423,6 @@ class WString:
     
     def EqualsI(*args, **kwargs):
         """
-        EqualsI(*args, **kwargs)
         Overloaded function.
         
         1. EqualsI(self: MSPyBentley.WString, other: str) -> bool
@@ -6040,78 +5447,60 @@ class WString:
         """
         ...
     
-    def FindI(*args, **kwargs):
+    def FindI(self: MSPyBentley.WString, findString: str) -> int:
         """
-        FindI(self: MSPyBentley.WString, findString: str) -> int
-        
         Replace all instances of a sub string. Returns the number of
         replacements made.
         """
         ...
     
-    def GetMaxLocaleCharBytes(*args, **kwargs):
+    def GetMaxLocaleCharBytes(self: MSPyBentley.WString) -> int:
         """
-        GetMaxLocaleCharBytes(self: MSPyBentley.WString) -> int
-        
         Get the number of bytes required to hold the current string. This is
         the value to use to allocate a buffer (e.g. via _alloca) to to call
         #ConvertToLocaleChars.
         """
         ...
     
-    def GetWCharCP(*args, **kwargs):
+    def GetWCharCP(self: MSPyBentley.WString) -> str:
         """
-        GetWCharCP(self: MSPyBentley.WString) -> str
-        
         Equivalent to c_str
         """
         ...
     
-    def IsEmpty(*args, **kwargs):
-        """
-        IsEmpty(self: MSPyBentley.WString) -> bool
-        """
+    def IsEmpty(self: MSPyBentley.WString) -> bool:
         ...
     
-    def IsNullOrEmpty(*args, **kwargs):
+    @staticmethod
+    def IsNullOrEmpty(str: str) -> bool:
         """
-        IsNullOrEmpty(str: str) -> bool
-        
         True if the provided string is NULL or contains no character data.
         """
         ...
     
-    def PadLeft(*args, **kwargs):
+    def PadLeft(self: MSPyBentley.WString, totalSize: int, charToPadWidth: str) -> None:
         """
-        PadLeft(self: MSPyBentley.WString, totalSize: int, charToPadWidth: str) -> None
-        
         Pads, if necessary, to the given totalSize by adding charToPadWith to
         the left side.
         """
         ...
     
-    def PadRight(*args, **kwargs):
+    def PadRight(self: MSPyBentley.WString, totalSize: int, charToPadWidth: str) -> None:
         """
-        PadRight(self: MSPyBentley.WString, totalSize: int, charToPadWidth: str) -> None
-        
         Pads, if necessary, to the given totalSize by adding charToPadWith to
         the right side.
         """
         ...
     
-    def ReplaceAll(*args, **kwargs):
+    def ReplaceAll(self: MSPyBentley.WString, subStringToReplace: str, replacement: str) -> int:
         """
-        ReplaceAll(self: MSPyBentley.WString, subStringToReplace: str, replacement: str) -> int
-        
         Replace all instances of a sub string. Returns the number of
         replacements made.
         """
         ...
     
-    def ReplaceI(*args, **kwargs):
+    def ReplaceI(self: MSPyBentley.WString, findString: str, replaceString: str) -> bool:
         """
-        ReplaceI(self: MSPyBentley.WString, findString: str, replaceString: str) -> bool
-        
         Replace first occurrence of findString with replaceString, ignoring
         case.
         
@@ -6126,27 +5515,21 @@ class WString:
         """
         ...
     
-    def StartsWith(*args, **kwargs):
+    def StartsWith(self: MSPyBentley.WString, startChars: str) -> bool:
         """
-        StartsWith(self: MSPyBentley.WString, startChars: str) -> bool
-        
         Determines if this instance starts with the provided string.
         """
         ...
     
-    def StartsWithI(*args, **kwargs):
+    def StartsWithI(self: MSPyBentley.WString, startChars: str) -> bool:
         """
-        StartsWithI(self: MSPyBentley.WString, startChars: str) -> bool
-        
         Determines if this instance starts with the provided string, ignoring
         case.
         """
         ...
     
-    def ToLower(*args, **kwargs):
+    def ToLower(self: MSPyBentley.WString) -> None:
         """
-        ToLower(self: MSPyBentley.WString) -> None
-        
         Remark:
         s A WString can share the string buffer with another WString
         object. Do not try to modify its internal buffer without first
@@ -6155,10 +5538,8 @@ class WString:
         """
         ...
     
-    def ToUpper(*args, **kwargs):
+    def ToUpper(self: MSPyBentley.WString) -> None:
         """
-        ToUpper(self: MSPyBentley.WString) -> None
-        
         Remark:
         s A WString can share the string buffer with another WString
         object. Do not try to modify its internal buffer without first
@@ -6169,7 +5550,6 @@ class WString:
     
     def Trim(*args, **kwargs):
         """
-        Trim(*args, **kwargs)
         Overloaded function.
         
         1. Trim(self: MSPyBentley.WString, trimCharacters: str) -> None
@@ -6210,16 +5590,11 @@ class WString:
         """
         ...
     
-    def clear(*args, **kwargs):
-        """
-        clear(self: MSPyBentley.WString) -> None
-        """
+    def clear(self: MSPyBentley.WString) -> None:
         ...
     
-    def substr(*args, **kwargs):
+    def substr(self: MSPyBentley.WString, pos: int = 0, n: int = 18446744073709551615) -> MSPyBentley.WString:
         """
-        substr(self: MSPyBentley.WString, pos: int = 0, n: int = 18446744073709551615) -> MSPyBentley.WString
-        
         Get a substring.
         
         Parameter ``__pos``:
@@ -6260,33 +5635,26 @@ class WStringArray:
         """
         ...
     
-    def append(*args, **kwargs):
+    def append(self: MSPyBentley.WStringArray, x: MSPyBentley.WString) -> None:
         """
-        append(self: MSPyBentley.WStringArray, x: MSPyBentley.WString) -> None
-        
         Add an item to the end of the list
         """
         ...
     
-    def clear(*args, **kwargs):
+    def clear(self: MSPyBentley.WStringArray) -> None:
         """
-        clear(self: MSPyBentley.WStringArray) -> None
-        
         Clear the contents
         """
         ...
     
-    def count(*args, **kwargs):
+    def count(self: MSPyBentley.WStringArray, x: MSPyBentley.WString) -> int:
         """
-        count(self: MSPyBentley.WStringArray, x: MSPyBentley.WString) -> int
-        
         Return the number of times ``x`` appears in the list
         """
         ...
     
     def extend(*args, **kwargs):
         """
-        extend(*args, **kwargs)
         Overloaded function.
         
         1. extend(self: MSPyBentley.WStringArray, L: MSPyBentley.WStringArray) -> None
@@ -6299,17 +5667,14 @@ class WStringArray:
         """
         ...
     
-    def insert(*args, **kwargs):
+    def insert(self: MSPyBentley.WStringArray, i: int, x: MSPyBentley.WString) -> None:
         """
-        insert(self: MSPyBentley.WStringArray, i: int, x: MSPyBentley.WString) -> None
-        
         Insert an item at a given position.
         """
         ...
     
     def pop(*args, **kwargs):
         """
-        pop(*args, **kwargs)
         Overloaded function.
         
         1. pop(self: MSPyBentley.WStringArray) -> MSPyBentley.WString
@@ -6322,10 +5687,8 @@ class WStringArray:
         """
         ...
     
-    def remove(*args, **kwargs):
+    def remove(self: MSPyBentley.WStringArray, x: MSPyBentley.WString) -> None:
         """
-        remove(self: MSPyBentley.WStringArray, x: MSPyBentley.WString) -> None
-        
         Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
@@ -6338,22 +5701,13 @@ class WStringWCharMap:
     def __init__(self: MSPyBentley.WStringWCharMap) -> None:
         ...
     
-    def items(*args, **kwargs):
-        """
-        items(self: MSPyBentley.WStringWCharMap) -> MSPyBentley.ItemsView[WStringWCharMap]
-        """
+    def items(self: MSPyBentley.WStringWCharMap) -> MSPyBentley.ItemsView[WStringWCharMap]:
         ...
     
-    def keys(*args, **kwargs):
-        """
-        keys(self: MSPyBentley.WStringWCharMap) -> MSPyBentley.KeysView[WStringWCharMap]
-        """
+    def keys(self: MSPyBentley.WStringWCharMap) -> MSPyBentley.KeysView[WStringWCharMap]:
         ...
     
-    def values(*args, **kwargs):
-        """
-        values(self: MSPyBentley.WStringWCharMap) -> MSPyBentley.ValuesView[WStringWCharMap]
-        """
+    def values(self: MSPyBentley.WStringWCharMap) -> MSPyBentley.ValuesView[WStringWCharMap]:
         ...
     
 class WStringWStringMap:
@@ -6364,22 +5718,13 @@ class WStringWStringMap:
     def __init__(self: MSPyBentley.WStringWStringMap) -> None:
         ...
     
-    def items(*args, **kwargs):
-        """
-        items(self: MSPyBentley.WStringWStringMap) -> MSPyBentley.ItemsView[WStringWStringMap]
-        """
+    def items(self: MSPyBentley.WStringWStringMap) -> MSPyBentley.ItemsView[WStringWStringMap]:
         ...
     
-    def keys(*args, **kwargs):
-        """
-        keys(self: MSPyBentley.WStringWStringMap) -> MSPyBentley.KeysView[WStringWStringMap]
-        """
+    def keys(self: MSPyBentley.WStringWStringMap) -> MSPyBentley.KeysView[WStringWStringMap]:
         ...
     
-    def values(*args, **kwargs):
-        """
-        values(self: MSPyBentley.WStringWStringMap) -> MSPyBentley.ValuesView[WStringWStringMap]
-        """
+    def values(self: MSPyBentley.WStringWStringMap) -> MSPyBentley.ValuesView[WStringWStringMap]:
         ...
     
 eAccessViolation: BeFileNameStatus

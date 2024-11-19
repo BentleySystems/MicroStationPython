@@ -71,8 +71,9 @@ def test_CreateFromTbgrColors():
     VerifyColors (colors , colorMap)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_GetForDisplay(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_GetForDisplay(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     colorMap = DgnColorMap.GetForDisplay (ret[0])
     if(colorMap == None):
        assert False
@@ -93,25 +94,27 @@ def test_SetForFile_ERROR (initDgnPlatformHost):
     assert BentleyStatus.eERROR == colorMap.SetForFile (None, "Doesn't Matter")
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])       
-def test_SetForFile (initDgnPlatformHost, loadDgnFile):
+def test_SetForFile (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     SZ = DgnColorMap.eINDEX_ColorCount
     colors = [RgbColorDef() for _ in range(int(SZ)) ]
     
     _GenerateColors (colors,1)
     # Make sure the colors get set.
     colorMap = DgnColorMap.CreateFromRgbColors (colors)
-    nmCache = loadDgnFile.GetDictionaryModel ()
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    nmCache = dgnFile.GetDictionaryModel ()
     numberBeforeAdded = nmCache.GetElementCount (DgnModelSections.eAll)
-    assert BentleyStatus.eSUCCESS == colorMap.SetForFile (loadDgnFile, "Doesn't Matter")
+    assert BentleyStatus.eSUCCESS == colorMap.SetForFile (dgnFile, "Doesn't Matter")
 
-    fileColor = DgnColorMap.GetForFile (loadDgnFile)
+    fileColor = DgnColorMap.GetForFile (dgnFile)
     assert True == AreTBGRColorMapsEqual (fileColor.GetTbgrColors (), colorMap.GetTbgrColors ())
     numberAfterAdded = nmCache.GetElementCount (DgnModelSections.eAll)
 
     assert numberAfterAdded > numberBeforeAdded
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])       
-def test_SetForFile_Replace (initDgnPlatformHost, loadDgnFile):
+def test_SetForFile_Replace (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     SZ = DgnColorMap.eINDEX_ColorCount
     colors = [RgbColorDef() for _ in range(int(SZ)) ]
     differentColors = [RgbColorDef()]* int(SZ)
@@ -122,15 +125,15 @@ def test_SetForFile_Replace (initDgnPlatformHost, loadDgnFile):
     colorMap = DgnColorMap.CreateFromRgbColors (colors)
     differentColorMap = DgnColorMap.CreateFromRgbColors (differentColors)
 
-    nmCache = loadDgnFile.GetDictionaryModel ()
-    assert BentleyStatus.eSUCCESS == colorMap.SetForFile (loadDgnFile, "First Color")
+    nmCache = dgnFile.GetDictionaryModel ()
+    assert BentleyStatus.eSUCCESS == colorMap.SetForFile (dgnFile, "First Color")
     numberBeforeAdded = nmCache.GetElementCount (DgnModelSections.eAll)
-    fileColor = DgnColorMap.GetForFile (loadDgnFile)
+    fileColor = DgnColorMap.GetForFile (dgnFile)
     assert True == AreTBGRColorMapsEqual (fileColor.GetTbgrColors (), colorMap.GetTbgrColors ())
 
-    assert BentleyStatus.eSUCCESS == differentColorMap.SetForFile (loadDgnFile, "Second Color")
+    assert BentleyStatus.eSUCCESS == differentColorMap.SetForFile (dgnFile, "Second Color")
     numberAfterAdded = nmCache.GetElementCount (DgnModelSections.eAll)
-    fileColor = DgnColorMap.GetForFile (loadDgnFile)
+    fileColor = DgnColorMap.GetForFile (dgnFile)
     assert True == AreTBGRColorMapsEqual (fileColor.GetTbgrColors (), differentColorMap.GetTbgrColors ())
 
     assert numberAfterAdded == numberBeforeAdded

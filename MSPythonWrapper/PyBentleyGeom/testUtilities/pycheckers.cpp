@@ -18,6 +18,16 @@ void def_Checkers(py::module_& m)
     // struct Check created for geom API tests
     py::class_<Check> c1(m, "Check");
 
+    //===================================================================================
+    // Enum ToleranceSelect
+    py::enum_< ToleranceSelect>(m, "ToleranceSelect", py::arithmetic())
+        .value("eToleranceSelect_default", ToleranceSelect_default)
+        .value("eToleranceSelect_Loose", ToleranceSelect_Loose)
+        .value("eToleranceSelect_Tight", ToleranceSelect_Tight)
+        .value("eToleranceSelect_Medium", ToleranceSelect_Medium)
+        .value("eToleranceSelect_NearMachine", ToleranceSelect_NearMachine)
+        .export_values();
+
     c1.def_static("Start", &Check::Start);
     c1.def_static("End", &Check::End);
     c1.def_static("Tol", py::overload_cast<double>(&Check::Tol), "a"_a);
@@ -151,5 +161,23 @@ void def_Checkers(py::module_& m)
                                 return Check::StartScope (name);
                                 }, "name"_a);
     c1.def_static("EndScope", &Check::EndScope);
+    c1.def_static("PushTolerance", &Check::PushTolerance, "s"_a);
+    c1.def_static("PopTolerance", &Check::PopTolerance);
+    c1.def_static("Shift", py::overload_cast<double, double, double>(&Check::Shift), "dx"_a, "dy"_a, "dz"_a = 0.0);
+    c1.def_static("Shift", py::overload_cast<DVec3dCR>(&Check::Shift), "shift"_a);
+    c1.def_static("SetTransform", &Check::SetTransform, "transform"_a);
+    c1.def_static("SaveTransformed", [](CurveVectorCR data)
+        {
+            return Check::SaveTransformed(data);
+        }, "data"_a);
+    c1.def_static("SaveTransformedMarker", &Check::SaveTransformedMarker, "data"_a, "markerSize"_a = 0.1);
+    c1.def_static("ClearGeometry", &Check::ClearGeometry, "name"_a, "saveIModelJson"_a = true);
+
+    py::class_<SaveAndRestoreCheckTransform> c2(m, "SaveAndRestoreCheckTransform");
+    c2.def(py::init<>());
+    c2.def(py::init<double, double, double>(), "dxFinal"_a, "dyFinal"_a, "dzFinal"_a);
+    c2.def("DoShift", &SaveAndRestoreCheckTransform::DoShift);
+    c2.def("SetShift", &SaveAndRestoreCheckTransform::SetShift, "dx"_a, "dy"_a, "dz"_a);
+
     }
 

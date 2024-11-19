@@ -183,10 +183,10 @@ void def_DgnStoreHandlers(py::module_& m)
     c2.def_static("ExtractTagDefByID", &TagSetHandler::ExtractTagDefByID, "eh"_a, "tagDef"_a, "tagDefID"_a, DOC(Bentley, DgnPlatform, TagSetHandler, ExtractTagDefByID));
     c2.def_static("ExtractTagDefByName", &TagSetHandler::ExtractTagDefByName, "eh"_a, "tagDef"_a, "name"_a, DOC(Bentley, DgnPlatform, TagSetHandler, ExtractTagDefByName));
     c2.def_static("ExtractTagDefs", &TagSetHandler::ExtractTagDefs, "eh"_a, "tagDefs"_a, DOC(Bentley, DgnPlatform, TagSetHandler, ExtractTagDefs));
-    c2.def_static("Create", [] (EditElementHandleR eeh, bvector<DgnTagDefinition>& tagDefs, WCharCP setName, WCharCP reportName, bool assignNewIds, DgnFileR file, int ownerID)
+    c2.def_static("Create", [] (EditElementHandleR eeh, bvector<DgnTagDefinition>& tagDefs, UInt32 numTagDefs, WCharCP setName, WCharCP reportName, bool assignNewIds, DgnFileR file, int ownerID)
                   {
-                  return TagSetHandler::Create(eeh, &tagDefs[0], (UInt32) tagDefs.size(), setName, reportName, assignNewIds, file, ownerID);
-                  }, "eeh"_a, "tagDefs"_a, "setName"_a, "reportName"_a, "assignNewIds"_a, "file"_a, "ownerID"_a);
+                  return TagSetHandler::Create(eeh, &tagDefs[0], numTagDefs, setName, reportName, assignNewIds, file, ownerID);
+                  }, "eeh"_a, "tagDefs"_a, "numTagDefs"_a, "setName"_a, "reportName"_a, "assignNewIds"_a, "file"_a, "ownerID"_a = 0);
 
     c2.def_static("GetByID", &TagSetHandler::GetByID, "eeh"_a, "uniqueId"_a, "dgnFile"_a, DOC(Bentley, DgnPlatform, TagSetHandler, GetByID));
 

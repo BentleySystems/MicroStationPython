@@ -260,7 +260,7 @@ includeUndisplayedRefs IN If true, load the caches for references that
 are not displayed. The fillCache and loadRefs arguments must be true
 for this to work. @Param sectionsToFill IN Specific cache sections to
 fill. @Return SUCCESS if the modelRef is returned and filled as
-requested. @ALinkJoin usmthModelRef.CreateWorkingC
+requested. 
 
 )doc";
 

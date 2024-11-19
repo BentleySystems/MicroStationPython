@@ -15,7 +15,7 @@ from MSPyDgnPlatform import *
 from util import *
 
 #---------------------------------------------------------------------------------/#
-# @bsimethod                                                    JoshSchifter    12/09
+# @bsimethod                                                    Ping.Chen    01/2024
 #---------------#---------------#---------------#---------------#---------------#------/
 def GetTestSchemaXMLString ():
     fmt = WString ("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
@@ -45,7 +45,7 @@ def GetTestSchemaXMLString ():
 
 
 #---------------------------------------------------------------------------------/#
-# @bsimethod                                    Bill.Steinbock                  04/2012
+# @bsimethod                                    Ping.Chen                  01/2024
 #---------------#---------------#---------------#---------------#---------------#------/
 def CreateTestSchema ():
     schemaXMLString = GetTestSchemaXMLString ()
@@ -58,7 +58,7 @@ def CreateTestSchema ():
 
 class TestECRelationshipTests:
     #---------------------------------------------------------------------------------/#
-    # @bsimethod                                    Bill.Steinbock                  04/2012
+    # @bsimethod                                    Ping.Chen                  01/2024
     #---------------#---------------#---------------#---------------#---------------#------/
     def test_SimpleRelationship (self):
         schema = CreateTestSchema()
@@ -113,7 +113,7 @@ class TestECRelationshipTests:
         ASSERT_TRUE (readValue == b2)
 
     #---------------------------------------------------------------------------------/#
-    # @bsimethod                                    Bill.Steinbock                  04/2012
+    # @bsimethod                                    Ping.Chen                  01/2024
     #---------------#---------------#---------------#---------------#---------------#------/
     def test_SetRelationshipProperties (self):
         schema = CreateTestSchema()

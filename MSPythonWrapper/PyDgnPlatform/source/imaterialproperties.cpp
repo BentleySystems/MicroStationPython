@@ -228,7 +228,7 @@ void def_IMaterialProperties(py::module_& m)
     {
     //===================================================================================
     // struct IMaterialPropertiesExtension
-    py::class_< IMaterialPropertiesExtension> c1(m, "IMaterialPropertiesExtension", py::multiple_inheritance());
+    py::class_< IMaterialPropertiesExtension, Handler::Extension> c1(m, "IMaterialPropertiesExtension", py::multiple_inheritance());
 
     c1.def("FindMaterialAttachment", &IMaterialPropertiesExtension::FindMaterialAttachment, "eh"_a, "renderModelRef"_a, py::return_value_policy::reference_internal);
     c1.def("StoresAttachmentInfo", &IMaterialPropertiesExtension::StoresAttachmentInfo, "eh"_a, "id"_a, DOC(Bentley, DgnPlatform, IMaterialPropertiesExtension, StoresAttachmentInfo));
@@ -244,5 +244,7 @@ void def_IMaterialProperties(py::module_& m)
     c1.def("GetMaterialProjectionParameters", &IMaterialPropertiesExtension::GetMaterialProjectionParameters, "eh"_a, "type"_a, "units"_a, "params"_a, DOC(Bentley, DgnPlatform, IMaterialPropertiesExtension, GetMaterialProjectionParameters));
     c1.def("AddElementProjection", &IMaterialPropertiesExtension::AddElementProjection, "eeh"_a, "offset"_a, "scale"_a, "angles"_a, "mode"_a, "variant"_a, DOC(Bentley, DgnPlatform, IMaterialPropertiesExtension, AddElementProjection));
     c1.def("DeleteElementProjection", &IMaterialPropertiesExtension::DeleteElementProjection, "eeh"_a, DOC(Bentley, DgnPlatform, IMaterialPropertiesExtension, DeleteElementProjection));
+
+    c1.def_static ("Cast", &IMaterialPropertiesExtension::Cast, py::return_value_policy::reference_internal);
 
     }

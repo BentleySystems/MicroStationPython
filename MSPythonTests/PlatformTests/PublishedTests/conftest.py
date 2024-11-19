@@ -53,23 +53,27 @@ def createTempDgnFileWithSeed():
         return dgnFile
     return _createTempDgnFileWithSeed
 
+def createTempDgnFileFromSeedFile (seedDgnFile):
+    emptyDir = WString ()
+    ConfigurationManager.GetLocalTempDirectory (emptyDir,"")       
+    tempFileName = next(tempfile._get_candidate_names()) + ".dgn"
+    fileSpec = str (emptyDir) + str (tempFileName)
+    BeFileName.BeDeleteFile (fileSpec)
+    shutil.copy(str (seedDgnFile.GetFileName ()),fileSpec)
+    ret = DgnDocument.CreateFromFileName (fileSpec, "", -101, DgnDocument.FetchMode.eWrite)
+    if (ret[1] != DgnFileStatus.eDGNFILE_STATUS_Success):
+        assert False
+    dgnFile = DgnFile (ret[0], DgnFileOpenMode.eReadWrite)
+    dgnFile.LoadDgnFile ()
+    dgnFile.FillDictionaryModel ()
+    globalData[fileSpec]=fileSpec        
+    return dgnFile
+
 @pytest.fixture
 def createTempDgnFileFromSeed ():
     def _createTempDgnFileFromSeed (seedDgnFile):
-        emptyDir = WString ()
-        ConfigurationManager.GetLocalTempDirectory (emptyDir,"")       
-        tempFileName = next(tempfile._get_candidate_names()) + ".dgn"
-        fileSpec = str (emptyDir) + str (tempFileName)
-        BeFileName.BeDeleteFile (fileSpec)
-        shutil.copy(str (seedDgnFile.GetFileName ()),fileSpec)
-        ret = DgnDocument.CreateFromFileName (fileSpec, "", -101, DgnDocument.FetchMode.eWrite)
-        if (ret[1] != DgnFileStatus.eDGNFILE_STATUS_Success):
-            assert False
-        dgnFile = DgnFile (ret[0], DgnFileOpenMode.eReadWrite)
-        dgnFile.LoadDgnFile ()
-        dgnFile.FillDictionaryModel ()
-        globalData[fileSpec]=fileSpec        
-        return dgnFile
+        return createTempDgnFileFromSeedFile (seedDgnFile)
+
     return _createTempDgnFileFromSeed
 
 @pytest.fixture

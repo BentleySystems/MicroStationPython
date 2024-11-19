@@ -25,8 +25,9 @@ m_eesh = EditElementHandle()
 eeh = EditElementHandle()
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_IsValidProfileType (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_IsValidProfileType (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     TestValidProfile(True, eSURFACE_ELM, m_eeh.GetDgnModel(), 0, ret, m_eeh)
     TestValidProfile(True, eSOLID_ELM, m_eeh.GetDgnModel(), 0, ret, m_eeh)
     TestValidProfile(True, eLINE_ELM, m_eeh.GetDgnModel(), 0, ret, m_eeh)
@@ -40,9 +41,10 @@ def test_IsValidProfileType (initDgnPlatformHost, loadDgnFile):
     TestValidProfile(True, eBSPLINE_CURVE_ELM, m_eeh.GetDgnModel(), 0, ret, m_eeh)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateProjectionElement_Example (initDgnPlatformHost, loadDgnFile):
+def test_CreateProjectionElement_Example (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global isCapped
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidProj(False, ret, "LineStringCreator", m_eeh, True)
     isCapped = True
     isSuccess = m_eeh.AddToModel()
@@ -53,9 +55,10 @@ def test_CreateProjectionElement_Example (initDgnPlatformHost, loadDgnFile):
     # assert BentleyStatus.eSUCCESS == SaveAndCopyFile("CreateProjectionElement.dgn")
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_IsSurfaceOfProjection (initDgnPlatformHost, loadDgnFile):
+def test_IsSurfaceOfProjection (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global isCapped
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidProj(False, ret, "LineStringCreator", m_eeh)
     isCapped = False
     retVal = IsSurfaceOfProjection(m_eeh, isCapped)
@@ -64,9 +67,10 @@ def test_IsSurfaceOfProjection (initDgnPlatformHost, loadDgnFile):
     assert False == retVal[1]
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_IsSurfaceOfProjection_Capped (initDgnPlatformHost, loadDgnFile):
+def test_IsSurfaceOfProjection_Capped (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global isCapped
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidProj(True, ret, "ShapeCreator", m_eeh)
     isCapped = True
     retVal = IsSurfaceOfProjection(m_eeh, isCapped)
@@ -75,9 +79,10 @@ def test_IsSurfaceOfProjection_Capped (initDgnPlatformHost, loadDgnFile):
     assert True == retVal[1]
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_IsSurfaceOfRevolution (initDgnPlatformHost, loadDgnFile):
+def test_IsSurfaceOfRevolution (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global isCapped
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidRev(False, ret, "LineStringCreator", m_eeh)
     isCapped = True
     retVal = IsSurfaceOfRevolution(m_eeh, isCapped)
@@ -86,9 +91,10 @@ def test_IsSurfaceOfRevolution (initDgnPlatformHost, loadDgnFile):
     assert False == retVal[1]
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_IsSurfaceOfRevolution_Capped (initDgnPlatformHost, loadDgnFile):
+def test_IsSurfaceOfRevolution_Capped (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global isCapped
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidRev(True, ret, "ShapeCreator", m_eeh)
     isCapped = True
     retVal = IsSurfaceOfRevolution(m_eeh, isCapped)
@@ -97,9 +103,10 @@ def test_IsSurfaceOfRevolution_Capped (initDgnPlatformHost, loadDgnFile):
     assert True == retVal[1]
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_IsSurfaceOfProjection_False (initDgnPlatformHost, loadDgnFile):
+def test_IsSurfaceOfProjection_False (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global isCapped
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidRev(True, ret, "ShapeCreator", m_eeh)
     isCapped = True
     retVal = IsSurfaceOfProjection(m_eeh, isCapped)
@@ -107,9 +114,10 @@ def test_IsSurfaceOfProjection_False (initDgnPlatformHost, loadDgnFile):
     assert False == retVal[0]
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_IsSurfaceOfRevolution_False (initDgnPlatformHost, loadDgnFile):
+def test_IsSurfaceOfRevolution_False (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     global isCapped
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidProj(True, ret, "ShapeCreator", m_eeh)
     isCapped = True
     retVal = IsSurfaceOfRevolution(m_eeh, isCapped)
@@ -117,8 +125,9 @@ def test_IsSurfaceOfRevolution_False (initDgnPlatformHost, loadDgnFile):
     assert False == retVal[0]
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ExtractRevolutionParameters_FALSE (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_ExtractRevolutionParameters_FALSE (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidProj(True, ret, "ShapeCreator", m_eeh)
     center = DPoint3d()
     axis = DVec3d()
@@ -129,8 +138,9 @@ def test_ExtractRevolutionParameters_FALSE (initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eERROR == ExtractRevolutionParameters(m_eeh, eh, center, axis, sweep, True, ret)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ExtractRevolutionParameters (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_ExtractRevolutionParameters (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidRev(True, ret, "ShapeCreator", m_eeh)
     center = DPoint3d()
     axis = DVec3d()
@@ -152,8 +162,9 @@ def test_ExtractRevolutionParameters (initDgnPlatformHost, loadDgnFile):
     # assert math.isclose(sweep, EPSILON)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_CreateConeElement (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateConeElement (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     ConeElementSetUp(ret[0], m_eesh)
     top = DPoint3d (0, 10, 0)
     bottom = DPoint3d (0, 0, 0)
@@ -189,8 +200,9 @@ def test_CreateConeElement (initDgnPlatformHost, loadDgnFile):
     # assert ElementSize == elm.ehdr.attrOffset
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_CreateBoxElement (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateBoxElement (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     point1 = DPoint3d.From (1.0, 1.0, 2.0)
     point2 = DPoint3d.From (1.0, 1.0, 3.0)
     upVector1 = DVec3d.From (1.0, 0.0, 0.0)
@@ -201,8 +213,9 @@ def test_CreateBoxElement (initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == DraftingElementSchema.ToElement (m_eesh, solid, None, ret[0])
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])  
-def test_CreateCompleteSphereElement (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+def test_CreateCompleteSphereElement (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
     point = DPoint3d.From (1.0, 1.0, 2.0)
     upVector1 = DVec3d.From (1.0, 0.0, 0.0)
     upVector2 = DVec3d.From (0.0, 1.0, 0.0)
@@ -212,8 +225,9 @@ def test_CreateCompleteSphereElement (initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS == DraftingElementSchema.ToElement (m_eesh, solid, None, ret[0])
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ExtractProfiles_FAIL (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_ExtractProfiles_FAIL (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidRev(True, ret, "ShapeCreator", m_eeh)
     profiles = ElementAgenda()
     id = m_eeh.GetElementId()
@@ -222,8 +236,9 @@ def test_ExtractProfiles_FAIL (initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eSUCCESS != ExtractProfiles(eh, profiles, m_eeh, ret)
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ExtractProjectionParameters_FALSE (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_ExtractProjectionParameters_FALSE (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidRev(True, ret, "ShapeCreator", m_eeh)
     dir = DVec3d()
     distance = 0.0
@@ -233,8 +248,9 @@ def test_ExtractProjectionParameters_FALSE (initDgnPlatformHost, loadDgnFile):
     assert BentleyStatus.eERROR == ExtractProjectionParameters(m_eeh, eh, dir, distance, True)
 
 @pytest.mark.skip(reason = "SetBoundaryType method for CurveVector class is not exposed.")
-def test_ExtractProfiles_Revolution (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_ExtractProfiles_Revolution (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidRev(True, ret, "ShapeCreator", m_eeh)
     profiles = ElementAgenda()
     id = m_eeh.GetElementId()
@@ -253,8 +269,9 @@ def test_ExtractProfiles_Revolution (initDgnPlatformHost, loadDgnFile):
         isDPoint3dNear(elm.line_string_3d.numverts[i], m_eeh.GetElement().line_string_3d.numverts[i], EPSILON)
 
 @pytest.mark.skip(reason = "m_sectionCurves method for DgnRuledSweepDetail class is not exposed")
-def test_ExtractProjectionParameters (initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_ExtractProjectionParameters (initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     CreateSolidProj(True, ret, "ShapeCreator", m_eeh)
     expectedDir = DPoint3d()
     dir = DVec3d()

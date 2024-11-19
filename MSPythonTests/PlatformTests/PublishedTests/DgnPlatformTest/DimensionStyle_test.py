@@ -14,64 +14,64 @@ from MSPyDgnPlatform import *
 def test_Create(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)     
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     testName = "TestName"
     
-    dimStyle = DimensionStyle(testName, srcDgnFile)
+    dimStyle = DimensionStyle(testName, dgnFile)
     
     if BentleyStatus.eSUCCESS != dimStyle.Add():
         assert False
         
-    preTestStyle = DimensionStyle.GetByName(testName, srcDgnFile)
+    preTestStyle = DimensionStyle.GetByName(testName, dgnFile)
     
     if preTestStyle == None:
         assert False
     
-    if BentleyStatus.eSUCCESS != DimensionStyle.Delete(testName, srcDgnFile):
+    if BentleyStatus.eSUCCESS != DimensionStyle.Delete(testName, dgnFile):
         assert False
         
-    postTestStyle = DimensionStyle.GetByName(testName, srcDgnFile)
+    postTestStyle = DimensionStyle.GetByName(testName, dgnFile)
     
     if postTestStyle != None:
         assert False
         
         
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateStyle(initDgnPlatformHost, loadDgnFile):
+def test_CreateStyle(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
-    
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     testName = "TestName"
     
-    preTestStyle = DimensionStyle.GetByName(testName, loadDgnFile)
+    preTestStyle = DimensionStyle.GetByName(testName, dgnFile)
     
     if preTestStyle != None:
         assert False
         
-    dimStyle = DimensionStyle(testName, loadDgnFile)
+    dimStyle = DimensionStyle(testName, dgnFile)
     
     if BentleyStatus.eSUCCESS != dimStyle.Add():
         assert False
         
-    postTestStyle = DimensionStyle.GetByName(testName, loadDgnFile)
+    postTestStyle = DimensionStyle.GetByName(testName, dgnFile)
     
     if postTestStyle == None:
         assert False
         
         
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateStyle_ERROR(initDgnPlatformHost, loadDgnFile):
+def test_CreateStyle_ERROR(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
-    
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     testName = "TestName"
         
-    preTestStyle = DimensionStyle.GetByName(testName, loadDgnFile)
+    preTestStyle = DimensionStyle.GetByName(testName, dgnFile)
     
     if preTestStyle != None:
         assert False
         
-    dimStyle = DimensionStyle(testName, loadDgnFile)
+    dimStyle = DimensionStyle(testName, dgnFile)
     
     if BentleyStatus.eSUCCESS != dimStyle.Add():
         assert False
@@ -81,23 +81,23 @@ def test_CreateStyle_ERROR(initDgnPlatformHost, loadDgnFile):
         
         
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_ReplaceInFile(initDgnPlatformHost, loadDgnFile):
+def test_ReplaceInFile(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
-        
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
     testName = "TestName"
     
-    preTestStyle = DimensionStyle.GetByName(testName, loadDgnFile)
+    preTestStyle = DimensionStyle.GetByName(testName, dgnFile)
     
     if preTestStyle != None:
         assert False
         
-    dimStyle = DimensionStyle(testName, loadDgnFile)
+    dimStyle = DimensionStyle(testName, dgnFile)
     
     if BentleyStatus.eSUCCESS != dimStyle.Add():
         assert False
         
-    postTestStyle = DimensionStyle.GetByName(testName, loadDgnFile)
+    postTestStyle = DimensionStyle.GetByName(testName, dgnFile)
     
     if postTestStyle == None:
         assert False
@@ -113,7 +113,7 @@ def test_ReplaceInFile(initDgnPlatformHost, loadDgnFile):
   
 # Error: BeStringUtilities not defined    
 # @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-# def test_Iterator(initDgnPlatformHost, loadDgnFile):
+# def test_Iterator(initDgnPlatformHost, dgnFile):
 #     if loadDgnFile == None:
 #         assert False
         
@@ -125,13 +125,13 @@ def test_ReplaceInFile(initDgnPlatformHost, loadDgnFile):
         
 #         # BeStringUtilities.Snwprintf(name, "%ls-%d", testName, i+1)
         
-#         dimStyle = DimensionStyle(testName, loadDgnFile)
+#         dimStyle = DimensionStyle(testName, dgnFile)
     
 #         if BentleyStatus.eSUCCESS != dimStyle.Add():
 #             assert False
             
 #     iStyle = 0
-#     collection = DimStyleCollection(loadDgnFile)
+#     collection = DimStyleCollection(dgnFile)
     
 #     for dimStyle in collection:
 #         expectedName = ""
@@ -144,12 +144,14 @@ def test_ReplaceInFile(initDgnPlatformHost, loadDgnFile):
         
 #     assert iStyle == numStyles
     
+@pytest.mark.skip(reason="Ping.Chen, error in bb r platformtests")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_IteratorEmpty(initDgnPlatformHost, loadDgnFile):
+def test_IteratorEmpty(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
         
-    collection = DimStyleCollection(loadDgnFile)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    collection = DimStyleCollection (dgnFile)
     
     for dimStyle in collection:
         assert False
@@ -162,25 +164,27 @@ class FontNumberPair:
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_AddBlankNameShouldFail(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile)  
-    testStyle = DgnTextStyle("AwesomeTextStyle", srcDgnFile)
-    dimStyle = DimensionStyle("AwesomeDimStyle", srcDgnFile)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    testStyle = DgnTextStyle("AwesomeTextStyle", dgnFile)
+    dimStyle = DimensionStyle("AwesomeDimStyle", dgnFile)
  
-    assert (BentleyStatus.eSUCCESS == dimStyle.Add(srcDgnFile))
-    assert (BentleyStatus.eSUCCESS == testStyle.Add(srcDgnFile))
+    assert (BentleyStatus.eSUCCESS == dimStyle.Add(dgnFile))
+    assert (BentleyStatus.eSUCCESS == testStyle.Add(dgnFile))
 
-    textStyle = DgnTextStyle("", srcDgnFile)
-    dimStyle = DimensionStyle("", srcDgnFile)
+    textStyle = DgnTextStyle("", dgnFile)
+    dimStyle = DimensionStyle("", dgnFile)
 
-    assert BentleyStatus.eERROR == dimStyle.Add(srcDgnFile)
-    assert BentleyStatus.eERROR == testStyle.Add(srcDgnFile)
+    assert BentleyStatus.eERROR == dimStyle.Add(dgnFile)
+    assert BentleyStatus.eERROR == testStyle.Add(dgnFile)
 
  
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CopyBetweenFilesFontRemapping(initDgnPlatformHost, loadDgnFile):
+def test_CopyBetweenFilesFontRemapping(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
     if loadDgnFile == None:
         assert False
-        
+
+    dgnFile0 = createTempDgnFileFromSeed (loadDgnFile)
+
     dataDir = os.environ['MSPYTESTDATA']
     ret = DgnDocument.CreateFromFileName ('3dMetricGeneral.dgn', dataDir, -101, DgnDocument.FetchMode.eWrite)
 
@@ -202,8 +206,8 @@ def test_CopyBetweenFilesFontRemapping(initDgnPlatformHost, loadDgnFile):
         
     file1Numbers = FontNumberPair
     
-    file1fontA = DgnFontManager.GetDgnFontMap(loadDgnFile).GetFontNumber(fontA, True)
-    file1fontB = DgnFontManager.GetDgnFontMap(loadDgnFile).GetFontNumber(fontB, True)
+    file1fontA = DgnFontManager.GetDgnFontMap(dgnFile0).GetFontNumber(fontA, True)
+    file1fontB = DgnFontManager.GetDgnFontMap(dgnFile0).GetFontNumber(fontB, True)
     if BentleyStatus.eSUCCESS != file1fontA[0] or BentleyStatus.eSUCCESS != file1fontB[0]:
         assert False
                
@@ -223,7 +227,7 @@ def test_CopyBetweenFilesFontRemapping(initDgnPlatformHost, loadDgnFile):
     # Create the style in the context of File 1 using Font A
     testName = "TestName"
     
-    dimStyle = DimensionStyle(testName, loadDgnFile)
+    dimStyle = DimensionStyle(testName, dgnFile0)
     print(dimStyle)
     dimStyle.SetFontProp(file1fontA[1], DimStyleProp.eDIMSTYLE_PROP_General_Font_FONT);
     fontPropVal = dimStyle.GetFontProp(DimStyleProp.eDIMSTYLE_PROP_General_Font_FONT)

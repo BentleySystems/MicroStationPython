@@ -410,7 +410,7 @@ void def_MSBsplineCurve(py::module_& m)
     // struct MSBsplineCurve
     py::class_<MSBsplineCurve> c1(m, "MSBsplineCurve");
     py::bind_vector<MSBsplineCurveArray>(m, "MSBsplineCurveArray", py::module_local(false));
-    py::class_<RefCountedMSBsplineCurve, std::unique_ptr<RefCountedMSBsplineCurve, py::nodelete>, MSBsplineCurve> cx(m, "RefCountedMSBsplineCurve");
+    py::class_<RefCountedMSBsplineCurve, std::unique_ptr<RefCountedMSBsplineCurve, py::nodelete>, MSBsplineCurve> cx(m, "RefCountedMSBsplineCurve", py::multiple_inheritance());
     py::bind_vector<MSBsplineCurvePtrArray>(m, "MSBsplineCurvePtrArray", py::module_local(false));
 
     if (true)
@@ -432,6 +432,16 @@ void def_MSBsplineCurve(py::module_& m)
     c1.def_static("CreateFromPolesAndOrder",
                   py::overload_cast<DPoint3dArray const&, DoubleArray const*, DoubleArray const*, int, bool, bool>(&MSBsplineCurve::CreateFromPolesAndOrder),
                   "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+
+    c1.def_static("CreateFromPolesAndOrder", [](DPoint3dArray const& poles, int order, bool closed = true)
+        {
+        return MSBsplineCurve::CreateFromPolesAndOrder(poles.data(), (int)poles.size(), order, closed);
+        }, "poles"_a, "order"_a, "closed"_a = true);
+
+    c1.def_static("CreateFromPolesAndOrder", [](DPoint2dArray const& poles, int order, bool closed = true)
+        {
+        return MSBsplineCurve::CreateFromPolesAndOrder(poles.data(), (int)poles.size(), order, closed);
+        }, "poles"_a, "order"_a, "closed"_a = true);
 
     c1.def("CreateCapture", &MSBsplineCurve::CreateCapture, DOC(Bentley, Geom, MSBsplineCurve, CreateCapture));    
     c1.def("ExtractTo", &MSBsplineCurve::ExtractTo, "dest"_a, DOC(Bentley, Geom, MSBsplineCurve, ExtractTo));    
@@ -930,6 +940,38 @@ void def_MSBsplineCurve(py::module_& m)
      c1.def_readwrite("rational", &MSBsplineCurve::rational);
      c1.def_readwrite("display", &MSBsplineCurve::display);
      c1.def_readwrite("params", &MSBsplineCurve::params);
+
+     c1.def_property_readonly("poles",
+         [](MSBsplineCurve& self)
+        {
+         py::list poleArray;
+         for (int32_t i = 0; i < self.params.numPoles; i++)
+             poleArray.append(py::cast(self.poles[i], py::return_value_policy::reference));
+         return poleArray;
+        });
+
+     c1.def_property_readonly("knots",
+         [](MSBsplineCurve& self)
+        {
+         py::list knotArray;
+         for (int32_t i = 0; i < self.params.numKnots; i++)
+             knotArray.append(py::cast(self.knots[i], py::return_value_policy::reference));
+         return knotArray;
+        });
+
+     c1.def_property_readonly("weights",
+         [](MSBsplineCurve& self)
+        {
+         py::list wArray;
+
+         if (self.rational)
+            {
+            for (int32_t i = 0; i < self.params.numPoles; i++)
+                wArray.append(py::cast(self.weights[i], py::return_value_policy::reference));
+            }
+
+         return wArray;
+        });
 
      c1.def("__repr__", [] (MSBsplineCurve& self)
             {

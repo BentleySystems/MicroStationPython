@@ -371,6 +371,9 @@ void def_DRange3d(py::module_& m)
                   }), "transform"_a, "points"_a, "weights"_a);
     c1.def(py::init(py::overload_cast<TransformCR, DPoint3dArray const&>(&DRange3d::From)), "transform"_a, "points"_a);
     c1.def(py::init(py::overload_cast<TransformCR, DPoint4dArray const&>(&DRange3d::From)), "transform"_a, "points"_a);
+
+    c1.def_property ("low", [] (DRange3d& self) {return self.low; }, [](DRange3d& self, DPoint3dCR low) {return self.low = low; });
+    c1.def_property ("high", [](DRange3d& self) {return self.high; }, [](DRange3d& self, DPoint3dCR high) {return self.high = high; });
         
     c1.def("Extend", py::overload_cast<double>(&DRange3d::Extend), "extend"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<DRange3dCR>(&DRange3d::Extend), "range1"_a, DOC(Bentley, Geom, DRange3d, Extend));

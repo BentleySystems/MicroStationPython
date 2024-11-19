@@ -28,8 +28,9 @@ def CountElementOfType(model, elementType):
     return count
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateRasterAttachment_Example_emptyFilename(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_CreateRasterAttachment_Example_emptyFilename(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     identityTransform = Transform()
     
     extentInUOR = DPoint2d()
@@ -45,7 +46,7 @@ def test_CreateRasterAttachment_Example_emptyFilename(initDgnPlatformHost, loadD
     frameCollection = RasterFrameElementCollection(ret[0])
     # collection = iter(frameCollection)
     collection = list(frameCollection)
-    assert collection.__eq__(None)
+    assert collection.__len__ () == 0  #__eq__(None)
     
     # add the raster attachment to the cache
     assert BentleyStatus.eSUCCESS == m_eeh.AddToModel()
@@ -53,7 +54,7 @@ def test_CreateRasterAttachment_Example_emptyFilename(initDgnPlatformHost, loadD
     # verify the raster attachment is now in the cache.
     frameCollectionAfter = RasterFrameElementCollection(ret[0])
     collection = iter(frameCollectionAfter)
-    assert collection.__ne__(None)
+    assert collection != None
     
     rasterFrameCR = next(collection)
     pIRasterAttachmentQuery = rasterFrameCR.GetHandler()
@@ -62,8 +63,9 @@ def test_CreateRasterAttachment_Example_emptyFilename(initDgnPlatformHost, loadD
     
     
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
-def test_CreateRasterAttachment_Example(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_CreateRasterAttachment_Example(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     identityTransform = Transform()
     
     extentInUOR = DPoint2d()
@@ -80,7 +82,7 @@ def test_CreateRasterAttachment_Example(initDgnPlatformHost, loadDgnFile):
     # Verify there are no Raster Attachment in the cache
     frameCollection = RasterFrameElementCollection(ret[0])
     collection = list(frameCollection)
-    assert collection.__eq__(None)
+    assert collection.__len__ () == 0 #__eq__(None)
     
     # add the raster attachment to the cache
     assert BentleyStatus.eSUCCESS == m_eeh.AddToModel()
@@ -88,7 +90,7 @@ def test_CreateRasterAttachment_Example(initDgnPlatformHost, loadDgnFile):
     # verify the raster attachment is now in the cache.
     frameCollectionAfter = RasterFrameElementCollection(ret[0])
     collection = iter(frameCollectionAfter)
-    assert collection.__ne__(None)
+    assert collection != None
     
     # Validate filename
     rasterFrameCR = next(collection)
@@ -97,8 +99,9 @@ def test_CreateRasterAttachment_Example(initDgnPlatformHost, loadDgnFile):
     assert WString("MyFilename.tif") == portalName
 
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])    
-def test_CreateRaster8788_Example_ByteMap(initDgnPlatformHost, loadDgnFile):
-    ret = loadDgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
+def test_CreateRaster8788_Example_ByteMap(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel("Test", DgnModelType.eNormal, False)
     origin = DPoint3d()
     origin.x = 0.0
     origin.y = 0.0

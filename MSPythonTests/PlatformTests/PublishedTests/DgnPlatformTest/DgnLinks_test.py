@@ -32,9 +32,9 @@ def GetLinkTree (loadDgnFile):
 @pytest.mark.skip(reason = "NEEDS WORK")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])     #(Not completed)
 def test_CreateDrawingRegionLink(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
-    dgnFile = srcDgnFile
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    #dgnFile = loadDgnFile
     dgnDocument = dgnFile.GetDocument ()
     dgnMoniker  = dgnDocument.GetMoniker ()
     linkTreeSpec = DgnLinkManager.CreateTreeSpec ("Linkset", dgnMoniker, DgnLinkTreeKey.eProject)
@@ -47,9 +47,9 @@ def test_CreateDrawingRegionLink(initDgnPlatformHost, loadDgnFile, createTempDgn
 @pytest.mark.skip(reason = "NEEDS WORK")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_FindChildNode(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
-    linkTree = GetLinkTree (srcDgnFile)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    linkTree = GetLinkTree (dgnFile)
     root = linkTree.GetRoot ()
     node = root.FindChildNode ("FileNodeOnRootBranch", False)
     # assert node != None
@@ -57,9 +57,9 @@ def test_FindChildNode(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSe
 # Test for creating link tree
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_CreateProjectTree(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
-    dgnDocument = srcDgnFile.GetDocument()
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnDocument = dgnFile.GetDocument()
     dgnMoniker = dgnDocument.GetMoniker()
     linkTreeSpec = DgnLinkManager.CreateTreeSpec ("Linkset", dgnMoniker, DgnLinkTreeKey.eProject)
     linkTree = DgnLinkManager.ReadLinkTree (linkTreeSpec, True)
@@ -78,9 +78,9 @@ def test_CreateProjectTree(initDgnPlatformHost, loadDgnFile, createTempDgnFileFr
 # Test for deleting link tree
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_DeleteProjectTree(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
-    dgnDocument = srcDgnFile.GetDocument()
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    dgnDocument = dgnFile.GetDocument()
     dgnMoniker = dgnDocument.GetMoniker()
     linkTreeSpec = DgnLinkManager.CreateTreeSpec ("Linkset", dgnMoniker, DgnLinkTreeKey.eProject)
 
@@ -94,7 +94,7 @@ def test_DeleteProjectTree(initDgnPlatformHost, loadDgnFile, createTempDgnFileFr
     assert linkTree != None
 
     status = DgnLinkManager.DeleteProjectTree (linkTreeSpec)
-    assert status == BentleyStatus.eSUCCESS
+    assert status == eSUCCESS
 
     ITxnManager.GetManager().CloseCurrentTxn (True)
 
@@ -131,15 +131,14 @@ def test_DeleteProjectTree(initDgnPlatformHost, loadDgnFile, createTempDgnFileFr
     assert linkTree == None
 
 # Test for deleting dgn link Tree
-@pytest.mark.skip(reason = "NEEDS WORK")
 @pytest.mark.parametrize('fileName', ['2dMetricGeneral.dgn'])
 def test_DgnLinks_DeleteProjectTree(initDgnPlatformHost, loadDgnFile, createTempDgnFileFromSeed):
-    srcDgnFile = createTempDgnFileFromSeed (loadDgnFile) 
-    ret = srcDgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
-    linkTree = GetLinkTree(srcDgnFile)
+    dgnFile = createTempDgnFileFromSeed (loadDgnFile)
+    ret = dgnFile.CreateNewModel ("Test", DgnModelType.eNormal, False)
+    linkTree = GetLinkTree(dgnFile)
     linkTreeSpec = linkTree.GetTreeSpec ()
     status = DgnLinkManager.DeleteProjectTree (linkTreeSpec)
-    # assert status == BentleyStatus.eSUCCESS
+    # assert status == eSUCCESS
     linkTree = DgnLinkManager.ReadLinkTree (linkTreeSpec, False)
     assert linkTree == None
     savedResult = WString("DeleteProjectTree.dgn")

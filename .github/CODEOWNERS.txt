@@ -11,7 +11,7 @@
 
 * @chaterpaul
 
-.github/CODEOWNERS @chaterpaul
+.github/CODEOWNERS.* @chaterpaul
 
 .gitignore      @chaterpaul
 
