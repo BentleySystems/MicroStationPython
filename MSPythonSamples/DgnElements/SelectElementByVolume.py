@@ -48,9 +48,11 @@ def selectElementsbyVolume(inputVolume):
              for instance in instanceItr[0]:
                 instance.GetValue(propValue, 'Volume', 0)
                 if (not propValue.IsNull()):                   
-                        #UOR value converted to CU M , 100000*100000*10000
-                        volume = propValue.GetDouble()
-                        print("Volume:", propValue.GetDouble()/1000000000000)
+                        #UOR value converted to CU M , 10000*10000*10000
+                        modelInfo = dgnModel.GetModelInfo()
+                        scaleFactor = modelInfo.UorPerMeter
+                        volume = propValue.GetDouble()/(scaleFactor * scaleFactor * scaleFactor)
+                        print("Volume:", propValue.GetDouble()/(scaleFactor * scaleFactor * scaleFactor))
                         if (inputVolume > volume):
                             selSetManager.AddElement(perElementRef,dgnModel)
                         break
@@ -58,7 +60,7 @@ def selectElementsbyVolume(inputVolume):
                      break
 
 '''
-Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with '3D Data' model 
+Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with '3D Data' model
 '''
 #main
 if __name__ == "__main__":

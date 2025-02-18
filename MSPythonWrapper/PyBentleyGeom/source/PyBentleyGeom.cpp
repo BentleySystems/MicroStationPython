@@ -31,6 +31,7 @@ void bind_container_PyGeom(py::module_& m)
 * Forward declarations for class definition generators.
 * @bsimethod                                                                       2/2023
 +---------------+---------------+---------------+---------------+---------------+------*/
+void bind_container_PyBentley(py::module_&);
 void def_Angle(py::module_&);
 void def_BSIQuadrature(py::module_&);
 void def_BsplineStructs(py::module_&);
@@ -72,6 +73,9 @@ void def_GeomApi_r(py::module_&);
 void def_Polyface(py::module_&);
 void def_Point(py::module_&);
 void def_GeoPoint(py::module_&);
+void def_XmlCGStreamReader(py::module_&);
+void def_DPoint3dOps(py::module_&);
+void def_PolylineOps(py::module_& m);
 
 /*---------------------------------------------------------------------------------**//**
 * Module definition.
@@ -99,6 +103,9 @@ PYBIND11_MODULE(MSPyBentleyGeom, m)
     m.attr("mgds_fc_condition") = mgds_fc_condition;
     m.attr("mgds_fc_epsilon") = mgds_fc_epsilon;
     m.attr("DISCONNECT") = DISCONNECT;
+
+    //bvector container of base type 
+    bind_container_PyBentley(m);
 
     // class defines
     bind_container_PyGeom(m);
@@ -144,6 +151,9 @@ PYBIND11_MODULE(MSPyBentleyGeom, m)
     def_Polyface(m);
     def_Point(m);
     def_GeoPoint(m);
+    def_XmlCGStreamReader(m);
+    def_DPoint3dOps(m);
+    def_PolylineOps(m);
     }
 
 

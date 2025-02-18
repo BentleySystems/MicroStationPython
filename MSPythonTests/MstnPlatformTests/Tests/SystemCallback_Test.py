@@ -63,28 +63,29 @@ def test_OnModelChange_Create_Active ():
     g_modelChangeType = None
 
     dgnFile = ISessionMgr.ActiveDgnFile
-    ret = dgnFile.CreateNewModel('TestCreateModel', DgnModelType.eNormal, True)
-    assert ret[0] is not None
-    assert ret[1] == DgnModelStatus.eDGNMODEL_STATUS_Success
+    error = MsPyDgnModelStatus ()
+    newModel = dgnFile.CreateNewModel(error, 'TestCreateModel', DgnModelType.eNormal, True)
+    assert newModel is not None
+    assert error.value == DgnModelStatus.eDGNMODEL_STATUS_Success
 
     assert g_modelChangeCallbackFired == True
-    assert ret[0].GetModelId() == g_callbackDgnModelRef.GetDgnModel().GetModelId()
+    assert newModel.GetModelId() == g_callbackDgnModelRef.GetDgnModel().GetModelId()
     assert g_modelChangeType == ModelChangeType.eMODEL_CHANGE_Create
 
     g_modelChangeCallbackFired = False
     g_callbackDgnModelRef = None
     g_modelChangeType = None
-    assert not ISessionMgr.GetManager().IsActiveModel(ret[0])
+    assert not ISessionMgr.GetManager().IsActiveModel(newModel)
 
-    assert BentleyStatus.eSUCCESS == ModelRef.ActivateAndDisplay(ret[0])
+    assert BentleyStatus.eSUCCESS == ModelRef.ActivateAndDisplay(newModel)
 
-    assert ISessionMgr.GetManager().IsActiveModel(ret[0])
+    assert ISessionMgr.GetManager().IsActiveModel(newModel)
     assert g_modelChangeCallbackFired == True
-    assert ret[0].GetModelId() == g_callbackDgnModelRef.GetDgnModel().GetModelId()
+    assert newModel.GetModelId() == g_callbackDgnModelRef.GetDgnModel().GetModelId()
     assert g_modelChangeType == ModelChangeType.eMODEL_CHANGE_Active
 
     SystemCallback.SetModelChangeFunction(None, '')
-    assert BentleyStatus.eSUCCESS == dgnFile.DeleteModel(ret[0])
+    assert BentleyStatus.eSUCCESS == dgnFile.DeleteModel(newModel)
 
 ''' Callback when create and delete level ''' 
 def test_OnLevelChange_Create_PreDelete():

@@ -1055,6 +1055,7 @@ void def_DgnTool(py::module_& m)
             .export_values();
         }
 
+    c1.def(py::init<>());
     c1.def("IsValid", &DgnButtonEvent::IsValid);
     c1.def("Invalidate", &DgnButtonEvent::Invalidate);
     

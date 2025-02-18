@@ -6,9 +6,6 @@
 |
 +--------------------------------------------------------------------------------------*/
 #include "MSPythonPCH.h"
-#include <DgnView/IViewManager.h>
-
-
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelRef_TreatAs3d =R"doc(Query if this model should be treated as a 3D model for user interface
 purposes. It is true if the model is 3D and not a sheet model.)doc";
@@ -220,7 +217,7 @@ void def_DgnModelRef(py::module_& m)
            DgnAttachmentP pAtt = nullptr;
            StatusInt retVal = self.CreateDgnAttachment(pAtt, moniker, modelName, loadCache);
            return py::make_tuple(retVal, std::unique_ptr< DgnAttachment, py::nodelete>(pAtt));
-           }, "moniker"_a, "modelName"_a, "loadCache"_a, DOC(Bentley, DgnPlatform, DgnModelRef, CreateDgnAttachment));
+           }, "moniker"_a, "modelName"_a, "loadCache"_a = true, DOC(Bentley, DgnPlatform, DgnModelRef, CreateDgnAttachment));
 
     c4.def("DeleteDgnAttachment", [] (DgnModelRefR self, DgnAttachment* attachment) { return self.DeleteDgnAttachment(attachment); }, "attachment"_a);
 
@@ -271,7 +268,4 @@ void def_DgnModelRef(py::module_& m)
     // struct DgnModelRefList
     py::class_< DgnModelRefList, bvector< DgnModelRefP> > c5(m, "DgnModelRefList");
 
-    //===================================================================================
-    // struct UpdateSequenceList
-    py::class_< UpdateSequenceList, bvector< ElementId> > c6(m, "UpdateSequenceList");
     }

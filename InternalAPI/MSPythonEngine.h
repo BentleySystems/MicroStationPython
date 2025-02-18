@@ -162,4 +162,34 @@ public:
 
 };
 
+//=======================================================================================
+// @bsiclass                                                                        09/23
+//=======================================================================================
+struct PyNameSpaceManager
+    {
+    //WIP: need to add all namespace ID
+    public: enum NameSpaceID
+        {
+        Bentley_Geometry,
+        Bentley_DgnPlatform,
+        Bentley_DgnPlatform_Raster,
+        Bentley_GeoCoordinates,
+        };
+
+    typedef PyNameSpaceManager::NameSpaceID PyNameSpaceID;
+
+    private:
+        static bvector<PyNameSpaceID> m_namespaceIDArray;
+
+    public:
+
+        MSPYTHONDLL_EXPORT   static StatusInt UsingNameSpace(PyNameSpaceID namespaceID);
+        MSPYTHONDLL_EXPORT   static bool IsNameSpaceUsing(PyNameSpaceID namespaceID);
+        MSPYTHONDLL_EXPORT   static StatusInt DelNameSpaceUsing(PyNameSpaceID namespaceID);
+        MSPYTHONDLL_EXPORT   static void ClearNameSpaceUsing();
+        MSPYTHONDLL_EXPORT   static void SetDefaultNameSpaceList();
+
+        MSPYTHONDLL_EXPORT   static bool IsRegisteredInPython(AStringCR attrName);
+    };
+
 END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE

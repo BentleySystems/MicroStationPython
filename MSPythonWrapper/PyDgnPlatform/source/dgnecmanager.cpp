@@ -525,6 +525,7 @@ void def_DgnECManager(py::module_& m)
     c4.def_static("GetManager", &DgnECManager::GetManager, py::return_value_policy::reference, DOC(Bentley, DgnPlatform, DgnECManager, GetManager));
 
     c4.def("RegisterDgnECChangeListener", &DgnECManager::RegisterDgnECChangeListener, "listener"_a, py::keep_alive<1, 2>(), DOC(Bentley, DgnPlatform, DgnECManager, RegisterDgnECChangeListener));    
+    c4.def("UnregisterDgnECChangeListener", &DgnECManager::UnregisterDgnECChangeListener, "listener"_a);
 
     c4.def("AppendECInstancesToModel", &DgnECManager::AppendECInstancesToModel, "ecInstances"_a, "dgnModel"_a, DOC(Bentley, DgnPlatform, DgnECManager, AppendECInstancesToModel));
     c4.def("ReadECInstancesFromModel", &DgnECManager::ReadECInstancesFromModel, "ecInstances"_a, "dgnModel"_a, DOC(Bentley, DgnPlatform, DgnECManager, ReadECInstancesFromModel));
@@ -582,12 +583,12 @@ void def_DgnECManager(py::module_& m)
            return py::make_tuple(it, count);
            }, "scope"_a, "query"_a, DOC(Bentley, DgnPlatform, DgnECManager, FindInstances));
 
-    c4.def_static("GetInstanceCounts", &DgnECManager::GetInstanceCounts, "scope"_a, "requestedClasses"_a, "searchFlags"_a = ECQUERY_PROCESS_SearchAllClasses, DOC(Bentley, DgnPlatform, DgnECManager, GetInstanceCounts));
+    c4.def_static("GetInstanceCounts", &DgnECManager::GetInstanceCounts, "scope"_a, "requestedClasses"_a, "searchFlags"_a, DOC(Bentley, DgnPlatform, DgnECManager, GetInstanceCounts));
     c4.def("FindInstanceOnElement", &DgnECManager::FindInstanceOnElement, "el"_a, "ecClass"_a, "polymorphic"_a = false, DOC(Bentley, DgnPlatform, DgnECManager, FindInstanceOnElement));
     c4.def("FindRelatedInstances", &DgnECManager::FindRelatedInstances, "sourceInstance"_a, "relationshipClassSpecifier"_a, "createContext"_a, DOC(Bentley, DgnPlatform, DgnECManager, FindRelatedInstances));
     c4.def("FindRelationshipEntriesOnElement", &DgnECManager::FindRelationshipEntriesOnElement, "rootElement"_a, "entries"_a, DOC(Bentley, DgnPlatform, DgnECManager, FindRelationshipEntriesOnElement));
-    c4.def("DiscoverSchemas", &DgnECManager::DiscoverSchemas, "infos"_a, "dgnFile"_a, "persistence"_a = ECSCHEMAPERSISTENCE_Stored, "hostType"_a = DgnECHostType::All, DOC(Bentley, DgnPlatform, DgnECManager, DiscoverSchemas));
-    c4.def("DiscoverSchemasForModel", &DgnECManager::DiscoverSchemasForModel, "schemaInfoVector"_a, "dgnModel"_a, "persistence"_a = ECSCHEMAPERSISTENCE_Stored, "scopeOption"_a = REFERENCED_MODEL_SCOPE_None, DOC(Bentley, DgnPlatform, DgnECManager, DiscoverSchemasForModel));
+    c4.def("DiscoverSchemas", &DgnECManager::DiscoverSchemas, "infos"_a, "dgnFile"_a, "persistence"_a, "hostType"_a, DOC(Bentley, DgnPlatform, DgnECManager, DiscoverSchemas));
+    c4.def("DiscoverSchemasForModel", &DgnECManager::DiscoverSchemasForModel, "schemaInfoVector"_a, "dgnModel"_a, "persistence"_a, "scopeOption"_a = REFERENCED_MODEL_SCOPE_None, DOC(Bentley, DgnPlatform, DgnECManager, DiscoverSchemasForModel));
     c4.def("IsSchemaContainedWithinFile", &DgnECManager::IsSchemaContainedWithinFile, "schemaInfo"_a, "matchType"_a, DOC(Bentley, DgnPlatform, DgnECManager, IsSchemaContainedWithinFile));
     c4.def("LocateSchemaInDgnFile", &DgnECManager::LocateSchemaInDgnFile, "schemaInfo"_a, "matchType"_a, "includeDeliveredSchemas"_a = true, "includeReferenceAttachments"_a = false, DOC(Bentley, DgnPlatform, DgnECManager, LocateSchemaInDgnFile));
 

@@ -1,0 +1,43 @@
+MS_PL--1
+
+material External1
+ color 1.000000 1.000000 1.000000
+ specular_color 1.000000 1.000000 1.000000
+ lock_efficiency off
+ lock_specular_and_reflect off
+ lock_finish_to_specular on
+ ambient 1.0000
+ diffuse 0.5000
+ specular 0.2000
+ reflect 0.0000
+ actual_reflect 0.000000
+ highlight plastic
+ finish 0.8067
+ transmit 0.0000
+ refract 1.0000
+ translucency 0.0000
+ thickness 0.0000
+ shadows on
+ radiosity on
+end
+
+material External2
+ color 1.000000 1.000000 1.000000
+ specular_color 1.000000 1.000000 1.000000
+ lock_efficiency off
+ lock_specular_and_reflect off
+ lock_finish_to_specular on
+ ambient 1.0000
+ diffuse 0.5000
+ specular 0.2000
+ reflect 0.0000
+ actual_reflect 0.000000
+ highlight plastic
+ finish 0.8067
+ transmit 0.0000
+ refract 1.0000
+ translucency 0.0000
+ thickness 0.0000
+ shadows on
+ radiosity on
+end

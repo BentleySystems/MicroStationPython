@@ -1,0 +1,925 @@
+MS_PL--1
+
+material DgnLib Material 1
+ color 1.000000 1.000000 1.000000
+ specular_color 1.000000 1.000000 1.000000
+ transparent_color 1.000000 1.000000 1.000000
+ lock_efficiency off
+ lock_specular_and_reflect off
+ lock_finish_to_specular on
+ lock_fresnel_to_specular on
+ lock_refraction_roughness_to_finish on
+ ambient 1.0000
+ diffuse 0.5000
+ specular 0.2000
+ reflect 0.0000
+ actual_reflect 0.000000
+ reflection_rays 64
+ refraction_rays 64
+ displacement_distance 0.000000
+ subsurface_samples 64
+ material_version 6
+ dispersion 0.000000
+ clearcoat 0.000000
+ anisotropy 0.000000
+ front_weighting 50.000000
+ scattering_distance 0.000000
+ reflect_fresnel 20.000000
+ dissolve 0.000000
+ absorption_distance 0.000000
+ refraction_roughness 20.000000
+ blur_reflections off
+ blur_refractions off
+ linked_to_lxp off
+ use_fur off
+ highlight plastic
+ finish 0.8067
+ transmit 0.0000
+ refract 1.0000
+ translucency 0.0000
+ glow 0.0000
+ thickness 0.0000
+ shadows on
+ radiosity on
+ invisible off
+ glow_color_map NULL
+  map_link pattern
+  map_end
+ reflect_color_map NULL
+  map_link specular_color
+  map_end
+ shader_type default
+ shader_effect full_shading
+ shader_blend normal
+ shader_indirect_illum_type irradiance_caching
+ shader_opacity 100.0000
+ shader_rate 1.0000
+ shader_direct_mult 100.0000
+ shader_indirect_mult 100.0000
+ shader_saturation 100.0000
+ shader_flag_enabled on
+ shader_flag_invert off
+ shader_flag_receive_shadows on
+ shader_flag_visible_to_camera on
+ shader_flag_visible_to_indirect_rays on
+ shader_flag_visible_to_reflection_rays on
+ shader_flag_visible_to_refraction_rays on
+end
+
+material DgnLib Material 4
+ color 1.000000 1.000000 1.000000
+ specular_color 1.000000 1.000000 1.000000
+ transparent_color 1.000000 1.000000 1.000000
+ lock_efficiency off
+ lock_specular_and_reflect off
+ lock_finish_to_specular on
+ lock_fresnel_to_specular on
+ lock_refraction_roughness_to_finish on
+ ambient 1.0000
+ diffuse 0.5000
+ specular 0.2000
+ reflect 0.0000
+ actual_reflect 0.000000
+ reflection_rays 64
+ refraction_rays 64
+ displacement_distance 0.000000
+ subsurface_samples 64
+ material_version 6
+ dispersion 0.000000
+ clearcoat 0.000000
+ anisotropy 0.000000
+ front_weighting 50.000000
+ scattering_distance 0.000000
+ reflect_fresnel 20.000000
+ dissolve 0.000000
+ absorption_distance 0.000000
+ refraction_roughness 20.000000
+ blur_reflections off
+ blur_refractions off
+ linked_to_lxp off
+ use_fur off
+ highlight plastic
+ finish 0.8067
+ transmit 0.0000
+ refract 1.0000
+ translucency 0.0000
+ glow 0.0000
+ thickness 0.0000
+ shadows on
+ radiosity on
+ invisible off
+ glow_color_map NULL
+  map_link pattern
+  map_end
+ reflect_color_map NULL
+  map_link specular_color
+  map_end
+ shader_type default
+ shader_effect full_shading
+ shader_blend normal
+ shader_indirect_illum_type irradiance_caching
+ shader_opacity 100.0000
+ shader_rate 1.0000
+ shader_direct_mult 100.0000
+ shader_indirect_mult 100.0000
+ shader_saturation 100.0000
+ shader_flag_enabled on
+ shader_flag_invert off
+ shader_flag_receive_shadows on
+ shader_flag_visible_to_camera on
+ shader_flag_visible_to_indirect_rays on
+ shader_flag_visible_to_reflection_rays on
+ shader_flag_visible_to_refraction_rays on
+end
+
+material Material1
+ color 1.000000 1.000000 1.000000
+ specular_color 1.000000 1.000000 1.000000
+ transparent_color 1.000000 1.000000 1.000000
+ lock_efficiency off
+ lock_specular_and_reflect off
+ lock_finish_to_specular on
+ lock_fresnel_to_specular on
+ lock_refraction_roughness_to_finish on
+ ambient 1.0000
+ diffuse 0.5000
+ specular 0.2000
+ reflect 0.0000
+ actual_reflect 0.000000
+ reflection_rays 64
+ refraction_rays 64
+ displacement_distance 0.000000
+ subsurface_samples 64
+ material_version 6
+ dispersion 0.000000
+ clearcoat 0.000000
+ anisotropy 0.000000
+ front_weighting 50.000000
+ scattering_distance 0.000000
+ reflect_fresnel 20.000000
+ dissolve 0.000000
+ absorption_distance 0.000000
+ refraction_roughness 20.000000
+ blur_reflections off
+ blur_refractions off
+ linked_to_lxp off
+ use_fur off
+ highlight plastic
+ finish 0.8067
+ transmit 0.0000
+ refract 1.0000
+ translucency 0.0000
+ glow 0.0000
+ thickness 0.0000
+ shadows on
+ radiosity on
+ invisible off
+ pattern layers.pma
+  bgtrans on
+  pattern_weight 1.0000
+  map_state on
+  map_type 0
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  pattern_lock_size off
+  pattern_scalemode master
+  pattern_units meters
+
+  layer IMAGE block11.jpg
+  pattern_angle 30.0000
+  pattern_offset -0.400000 0.285714
+  pattern_opacity 1.000000
+  pattern_scale 1.250000 1.750000
+  image_gamma 1.000000
+  pattern_flip off
+  pattern_u_flip on
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u on
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u on
+  pattern_tile_mirror_v on
+  pattern_lock_size off
+  pattern_scalemode master
+  pattern_units meters
+  bgtrans on
+  layer_state on
+
+  layer_blend NORMAL
+  layer_state off
+  map_end
+ glow_color_map layers.pma
+  map_state on
+  map_type 0
+  map_link pattern
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  pattern_lock_size off
+  pattern_scalemode master
+  pattern_units meters
+
+  layer IMAGE block11.jpg
+  pattern_angle 30.0000
+  pattern_offset -0.400000 0.285714
+  pattern_opacity 1.000000
+  pattern_scale 1.250000 1.750000
+  image_gamma 1.000000
+  pattern_flip off
+  pattern_u_flip on
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u on
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u on
+  pattern_tile_mirror_v on
+  pattern_lock_size off
+  pattern_scalemode master
+  pattern_units meters
+  layer_state on
+
+  layer_blend NORMAL
+  layer_state off
+  map_end
+ reflect_color_map NULL
+  map_link specular_color
+  map_end
+ shader_type default
+ shader_effect full_shading
+ shader_blend normal
+ shader_indirect_illum_type irradiance_caching
+ shader_opacity 100.0000
+ shader_rate 1.0000
+ shader_direct_mult 100.0000
+ shader_indirect_mult 100.0000
+ shader_saturation 100.0000
+ shader_flag_enabled on
+ shader_flag_invert off
+ shader_flag_receive_shadows on
+ shader_flag_visible_to_camera on
+ shader_flag_visible_to_indirect_rays on
+ shader_flag_visible_to_reflection_rays on
+ shader_flag_visible_to_refraction_rays on
+end
+
+material Material2
+ color 1.000000 1.000000 1.000000
+ specular_color 1.000000 1.000000 1.000000
+ transparent_color 1.000000 1.000000 1.000000
+ lock_efficiency off
+ lock_specular_and_reflect off
+ lock_finish_to_specular on
+ lock_fresnel_to_specular on
+ lock_refraction_roughness_to_finish on
+ ambient 1.0000
+ diffuse 0.5000
+ specular 0.4100
+ reflect 1.0000
+ actual_reflect 0.410000
+ reflection_rays 64
+ refraction_rays 32
+ displacement_distance 0.000000
+ subsurface_samples 32
+ material_version 6
+ dispersion 0.044000
+ clearcoat 38.000000
+ anisotropy 0.000000
+ front_weighting 26.000000
+ scattering_distance 3.400000
+ reflect_fresnel 41.000000
+ dissolve 0.000000
+ absorption_distance 0.000000
+ refraction_roughness 41.000000
+ blur_reflections off
+ blur_refractions on
+ linked_to_lxp off
+ use_fur off
+ highlight plastic
+ finish 1.7486
+ transmit 0.4100
+ refract 1.6700
+ translucency 0.3500
+ glow 200.0000
+ thickness 0.0000
+ shadows off
+ radiosity on
+ invisible on
+ bump_map D:\mstrunk\out\Mstn\Bentley\WorkSpace\System\materials\Bumps\StoneFence.jpg
+  bump_map_scale 2.0500
+  bump_map_invert on
+  map_state on
+  map_type 0
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 0.745342
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  pattern_lock_size on
+  pattern_scalemode relative
+  map_end
+ specular_map layers.pma
+  map_state on
+  map_type 0
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  value_map_invert off
+  pattern_lock_size on
+  pattern_scalemode relative
+
+  layer IMAGE bikelane dirty.jpg
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_opacity 0.500000
+  pattern_scale 1.000000 1.000000
+  image_gamma 1.000000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  pattern_lock_size on
+  pattern_scalemode relative
+  layer_state on
+
+  layer_blend NORMAL
+  layer_state off
+
+  layer_state off
+
+  layer_blend SUBTRACT
+  layer_state on
+
+  layer IMAGE bikelane dirty.jpg
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_opacity 1.000000
+  pattern_scale 0.500000 0.500000
+  image_gamma 1.000000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  pattern_lock_size on
+  pattern_scalemode relative
+  layer_state off
+
+  layer_blend NORMAL
+  layer_state off
+  map_end
+ clearcoat_amount_map lxogradient.jpg
+  map_state on
+  map_type 4
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  value_map_invert off
+  pattern_lock_size on
+  pattern_scalemode relative
+  lxo_procedure_type 10
+  lxo_gradient_input 7
+  lxo_gradient_env_type 1 0
+  lxo_gradient_pre 1 1
+  lxo_gradient_post 1 1
+  lxo_gradient_keyX 1 0.0000
+  lxo_gradient_keyY 1 0.8187
+  lxo_gradient_TANI_slope_type 1 0
+  lxo_gradient_TANI_weight_type 1 0
+  lxo_gradient_TANI_slope 1 0.0000
+  lxo_gradient_TANI_weight 1 0.0000
+  lxo_gradient_TANI_value 1 0.0000
+  lxo_gradient_TANO_breaks 1 0
+  lxo_gradient_TANO_slope_type 1 0
+  lxo_gradient_TANO_weight_type 1 0
+  lxo_gradient_TANO_slope 1 0.0000
+  lxo_gradient_TANO_weight 1 0.0000
+  lxo_gradient_TANO_value 1 0.0000
+  lxo_gradient_flag 1 0
+  lxo_gradient_keyX 1 1.0000
+  lxo_gradient_keyY 1 0.4155
+  lxo_gradient_TANI_slope_type 1 0
+  lxo_gradient_TANI_weight_type 1 0
+  lxo_gradient_TANI_slope 1 0.0000
+  lxo_gradient_TANI_weight 1 0.0000
+  lxo_gradient_TANI_value 1 0.0000
+  lxo_gradient_TANO_breaks 1 0
+  lxo_gradient_TANO_slope_type 1 0
+  lxo_gradient_TANO_weight_type 1 0
+  lxo_gradient_TANO_slope 1 0.0000
+  lxo_gradient_TANO_weight 1 0.0000
+  lxo_gradient_TANO_value 1 0.0000
+  lxo_gradient_flag 1 0
+  lxo_gradient_version 1 1
+  lxo_gradient_env_type 2 0
+  lxo_gradient_pre 2 1
+  lxo_gradient_post 2 1
+  lxo_gradient_keyX 2 0.0000
+  lxo_gradient_keyY 2 0.6118
+  lxo_gradient_TANI_slope_type 2 0
+  lxo_gradient_TANI_weight_type 2 0
+  lxo_gradient_TANI_slope 2 0.0000
+  lxo_gradient_TANI_weight 2 0.0000
+  lxo_gradient_TANI_value 2 0.0000
+  lxo_gradient_TANO_breaks 2 0
+  lxo_gradient_TANO_slope_type 2 0
+  lxo_gradient_TANO_weight_type 2 0
+  lxo_gradient_TANO_slope 2 0.0000
+  lxo_gradient_TANO_weight 2 0.0000
+  lxo_gradient_TANO_value 2 0.0000
+  lxo_gradient_flag 2 0
+  lxo_gradient_keyX 2 1.0000
+  lxo_gradient_keyY 2 0.7216
+  lxo_gradient_TANI_slope_type 2 0
+  lxo_gradient_TANI_weight_type 2 0
+  lxo_gradient_TANI_slope 2 0.0000
+  lxo_gradient_TANI_weight 2 0.0000
+  lxo_gradient_TANI_value 2 0.0000
+  lxo_gradient_TANO_breaks 2 0
+  lxo_gradient_TANO_slope_type 2 0
+  lxo_gradient_TANO_weight_type 2 0
+  lxo_gradient_TANO_slope 2 0.0000
+  lxo_gradient_TANO_weight 2 0.0000
+  lxo_gradient_TANO_value 2 0.0000
+  lxo_gradient_flag 2 0
+  lxo_gradient_version 2 1
+  lxo_gradient_env_type 3 0
+  lxo_gradient_pre 3 1
+  lxo_gradient_post 3 1
+  lxo_gradient_keyX 3 0.0000
+  lxo_gradient_keyY 3 0.8902
+  lxo_gradient_TANI_slope_type 3 0
+  lxo_gradient_TANI_weight_type 3 0
+  lxo_gradient_TANI_slope 3 0.0000
+  lxo_gradient_TANI_weight 3 0.0000
+  lxo_gradient_TANI_value 3 0.0000
+  lxo_gradient_TANO_breaks 3 0
+  lxo_gradient_TANO_slope_type 3 0
+  lxo_gradient_TANO_weight_type 3 0
+  lxo_gradient_TANO_slope 3 0.0000
+  lxo_gradient_TANO_weight 3 0.0000
+  lxo_gradient_TANO_value 3 0.0000
+  lxo_gradient_flag 3 0
+  lxo_gradient_keyX 3 1.0000
+  lxo_gradient_keyY 3 0.2078
+  lxo_gradient_TANI_slope_type 3 0
+  lxo_gradient_TANI_weight_type 3 0
+  lxo_gradient_TANI_slope 3 0.0000
+  lxo_gradient_TANI_weight 3 0.0000
+  lxo_gradient_TANI_value 3 0.0000
+  lxo_gradient_TANO_breaks 3 0
+  lxo_gradient_TANO_slope_type 3 0
+  lxo_gradient_TANO_weight_type 3 0
+  lxo_gradient_TANO_slope 3 0.0000
+  lxo_gradient_TANO_weight 3 0.0000
+  lxo_gradient_TANO_value 3 0.0000
+  lxo_gradient_flag 3 0
+  lxo_gradient_version 3 1
+  lxo_gradient_env_type 4 0
+  lxo_gradient_pre 4 1
+  lxo_gradient_post 4 1
+  lxo_gradient_keyX 4 0.0000
+  lxo_gradient_keyY 4 1.0000
+  lxo_gradient_TANI_slope_type 4 0
+  lxo_gradient_TANI_weight_type 4 0
+  lxo_gradient_TANI_slope 4 0.0000
+  lxo_gradient_TANI_weight 4 0.0000
+  lxo_gradient_TANI_value 4 0.0000
+  lxo_gradient_TANO_breaks 4 0
+  lxo_gradient_TANO_slope_type 4 0
+  lxo_gradient_TANO_weight_type 4 0
+  lxo_gradient_TANO_slope 4 0.0000
+  lxo_gradient_TANO_weight 4 0.0000
+  lxo_gradient_TANO_value 4 0.0000
+  lxo_gradient_flag 4 0
+  lxo_gradient_keyX 4 1.0000
+  lxo_gradient_keyY 4 0.6941
+  lxo_gradient_TANI_slope_type 4 0
+  lxo_gradient_TANI_weight_type 4 0
+  lxo_gradient_TANI_slope 4 0.0000
+  lxo_gradient_TANI_weight 4 0.0000
+  lxo_gradient_TANI_value 4 0.0000
+  lxo_gradient_TANO_breaks 4 0
+  lxo_gradient_TANO_slope_type 4 0
+  lxo_gradient_TANO_weight_type 4 0
+  lxo_gradient_TANO_slope 4 0.0000
+  lxo_gradient_TANO_weight 4 0.0000
+  lxo_gradient_TANO_value 4 0.0000
+  lxo_gradient_flag 4 0
+  lxo_gradient_version 4 1
+  lxo_gradient_env_type 5 0
+  lxo_gradient_pre 5 1
+  lxo_gradient_post 5 1
+  lxo_gradient_keyX 5 0.0000
+  lxo_gradient_keyY 5 1.0000
+  lxo_gradient_TANI_slope_type 5 0
+  lxo_gradient_TANI_weight_type 5 0
+  lxo_gradient_TANI_slope 5 0.0000
+  lxo_gradient_TANI_weight 5 0.0000
+  lxo_gradient_TANI_value 5 0.0000
+  lxo_gradient_TANO_breaks 5 0
+  lxo_gradient_TANO_slope_type 5 0
+  lxo_gradient_TANO_weight_type 5 0
+  lxo_gradient_TANO_slope 5 0.0000
+  lxo_gradient_TANO_weight 5 0.0000
+  lxo_gradient_TANO_value 5 0.0000
+  lxo_gradient_flag 5 0
+  lxo_gradient_keyX 5 1.0000
+  lxo_gradient_keyY 5 1.0000
+  lxo_gradient_TANI_slope_type 5 0
+  lxo_gradient_TANI_weight_type 5 0
+  lxo_gradient_TANI_slope 5 0.0000
+  lxo_gradient_TANI_weight 5 0.0000
+  lxo_gradient_TANI_value 5 0.0000
+  lxo_gradient_TANO_breaks 5 0
+  lxo_gradient_TANO_slope_type 5 0
+  lxo_gradient_TANO_weight_type 5 0
+  lxo_gradient_TANO_slope 5 0.0000
+  lxo_gradient_TANO_weight 5 0.0000
+  lxo_gradient_TANO_value 5 0.0000
+  lxo_gradient_flag 5 0
+  lxo_gradient_version 5 1
+  map_end
+ glow_color_map NULL
+  map_link pattern
+  map_end
+ reflect_color_map NULL
+  map_link specular_color
+  map_end
+ shader_type default
+ shader_effect full_shading
+ shader_blend normal
+ shader_indirect_illum_type monte_carlo
+ shader_opacity 100.0000
+ shader_rate 4.5000
+ shader_direct_mult 26.0000
+ shader_indirect_mult 59.0000
+ shader_saturation 35.0000
+ shader_flag_enabled on
+ shader_flag_invert off
+ shader_flag_receive_shadows off
+ shader_flag_visible_to_camera off
+ shader_flag_visible_to_indirect_rays on
+ shader_flag_visible_to_reflection_rays on
+ shader_flag_visible_to_refraction_rays off
+end
+
+material Material3
+ color 1.000000 1.000000 1.000000
+ specular_color 1.000000 1.000000 1.000000
+ transparent_color 1.000000 1.000000 1.000000
+ lock_efficiency off
+ lock_specular_and_reflect off
+ lock_finish_to_specular on
+ lock_fresnel_to_specular on
+ lock_refraction_roughness_to_finish off
+ ambient 1.0000
+ diffuse 0.5000
+ specular 0.2000
+ reflect 0.0000
+ actual_reflect 0.000000
+ reflection_rays 64
+ refraction_rays 64
+ displacement_distance 300.000000
+ subsurface_samples 64
+ material_version 6
+ dispersion 0.000000
+ clearcoat 0.000000
+ anisotropy 0.000000
+ front_weighting 50.000000
+ scattering_distance 13.000000
+ reflect_fresnel 20.000000
+ dissolve 0.000000
+ absorption_distance 25.000000
+ refraction_roughness 20.000000
+ blur_reflections off
+ blur_refractions off
+ linked_to_lxp off
+ use_fur on
+ highlight plastic
+ finish 0.8067
+ transmit 0.2900
+ refract 1.4000
+ translucency 0.0000
+ glow 0.0000
+ thickness 0.0000
+ shadows on
+ radiosity on
+ invisible off
+ displacement_map Wdfloor13.jpg
+  map_state on
+  map_type 1
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  value_map_invert off
+  pattern_lock_size on
+  pattern_scalemode relative
+  map_end
+ fur_lengthM_map BRICK01.jpg
+  map_state on
+  map_type 1
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  value_map_invert off
+  pattern_lock_size on
+  pattern_scalemode relative
+  map_end
+ fur_density_map BRICK06.jpg
+  map_state on
+  map_type 1
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  value_map_invert off
+  pattern_lock_size on
+  pattern_scalemode relative
+  map_end
+ fur_jitter_map BLOCK03.jpg
+  map_state on
+  map_type 1
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  value_map_invert off
+  pattern_lock_size on
+  pattern_scalemode relative
+  map_end
+ fur_flex_map BLOCK03.jpg
+  map_state on
+  map_type 1
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  value_map_invert off
+  pattern_lock_size on
+  pattern_scalemode relative
+  map_end
+ fur_clumps_map block12.jpg
+  map_state on
+  map_type 1
+  pattern_angle 0.0000
+  pattern_offset 0.000000 0.000000
+  pattern_scale 1.000000 1.000000
+  pattern_proj_offset 0.000000 0.000000 0.000000
+  pattern_proj_angles 0.000000 0.000000 0.000000
+  pattern_proj_scale 0.000000 0.000000 0.000000
+  image_gamma 1.0000
+  pattern_flip off
+  pattern_u_flip off
+  pattern_lock_projection_scale off
+  pattern_cylindrical_projection_capped off
+  pattern_tile_decal_u off
+  pattern_tile_decal_v off
+  pattern_tile_mirror_u off
+  pattern_tile_mirror_v off
+  value_map_invert off
+  pattern_lock_size on
+  pattern_scalemode relative
+  map_end
+ glow_color_map NULL
+  map_link pattern
+  map_end
+ reflect_color_map NULL
+  map_link specular_color
+  map_end
+ shader_type default
+ shader_effect full_shading
+ shader_blend normal
+ shader_indirect_illum_type none
+ shader_opacity 100.0000
+ shader_rate 0.7500
+ shader_direct_mult 35.0000
+ shader_indirect_mult 76.0000
+ shader_saturation 53.0000
+ shader_flag_enabled on
+ shader_flag_invert off
+ shader_flag_receive_shadows off
+ shader_flag_visible_to_camera on
+ shader_flag_visible_to_indirect_rays off
+ shader_flag_visible_to_reflection_rays off
+ shader_flag_visible_to_refraction_rays off
+ fur_type cylinders
+ fur_guides none
+ fur_flag_adaptive_sampling off
+ fur_flag_remove_base_surface on
+ fur_auto_fading on
+ fur_hair_shader on
+ use_fur_material on
+ fur_spacing 2.3000
+ fur_length 0.1500
+ fur_width 74.0000
+ fur_taper 65.0000
+ fur_offset 2.0000
+ fur_strip_rotation 29.0000
+ fur_growth_jitter 62.0000
+ fur_position_jitter 3.0000
+ fur_direction_jitter 35.0000
+ fur_size_jitter 21.0000
+ fur_flex 85.0000
+ fur_root_bend 18.0000
+ fur_curls 0.0000
+ fur_bump_amplitude 50.0000
+ fur_guide_range 0.1000
+ fur_guide_length 100.0000
+ fur_blend_amount 0.0000
+ fur_blend_angle 45.0000
+ fur_clumps 32.0000
+ fur_clump_range 0.7500
+ fur_rate 3.0000
+ fur_segments 3
+ fur_material_name Material1
+ fur_palette_name $(_DGNFILE)\Palette1.pal
+end
+
+material Material4
+ color 1.000000 1.000000 1.000000
+ specular_color 1.000000 1.000000 1.000000
+ transparent_color 1.000000 1.000000 1.000000
+ lock_efficiency off
+ lock_specular_and_reflect off
+ lock_finish_to_specular on
+ lock_fresnel_to_specular on
+ lock_refraction_roughness_to_finish on
+ ambient 1.0000
+ diffuse 0.5000
+ specular 0.2000
+ reflect 0.0000
+ actual_reflect 0.000000
+ reflection_rays 64
+ refraction_rays 64
+ displacement_distance 0.000000
+ subsurface_samples 64
+ material_version 6
+ dispersion 0.000000
+ clearcoat 0.000000
+ anisotropy 0.000000
+ front_weighting 50.000000
+ scattering_distance 0.000000
+ reflect_fresnel 20.000000
+ dissolve 0.000000
+ absorption_distance 0.000000
+ refraction_roughness 20.000000
+ blur_reflections off
+ blur_refractions off
+ linked_to_lxp off
+ use_fur off
+ highlight plastic
+ finish 0.8067
+ transmit 0.0000
+ refract 1.0000
+ translucency 0.0000
+ glow 0.0000
+ thickness 0.0000
+ shadows on
+ radiosity on
+ invisible off
+ glow_color_map NULL
+  map_link pattern
+  map_end
+ reflect_color_map NULL
+  map_link specular_color
+  map_end
+ shader_type default
+ shader_effect full_shading
+ shader_blend normal
+ shader_indirect_illum_type irradiance_caching
+ shader_opacity 100.0000
+ shader_rate 1.0000
+ shader_direct_mult 100.0000
+ shader_indirect_mult 100.0000
+ shader_saturation 100.0000
+ shader_flag_enabled on
+ shader_flag_invert off
+ shader_flag_receive_shadows on
+ shader_flag_visible_to_camera on
+ shader_flag_visible_to_indirect_rays on
+ shader_flag_visible_to_reflection_rays on
+ shader_flag_visible_to_refraction_rays on
+end

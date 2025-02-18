@@ -416,7 +416,7 @@ void def_ConfigurationManager(py::module_& m)
     c3.def_static("IsVariableDefined", &ConfigurationManager::IsVariableDefined, "cfgVarName"_a, DOC(Bentley, DgnPlatform, ConfigurationManager, IsVariableDefined));
     c3.def_static("IsVariableDefinedAndTrue", &ConfigurationManager::IsVariableDefinedAndTrue, "cfgVarName"_a, DOC(Bentley, DgnPlatform, ConfigurationManager, IsVariableDefinedAndTrue));
     c3.def_static("IsVariableDefinedAndFalse", &ConfigurationManager::IsVariableDefinedAndFalse, "cfgVarName"_a, DOC(Bentley, DgnPlatform, ConfigurationManager, IsVariableDefinedAndFalse));
-    c3.def_static("GetVariable", &ConfigurationManager::GetVariable, "cfgVarValue"_a, "cfgVarName"_a, "level"_a = ConfigurationVariableLevel::User, DOC(Bentley, DgnPlatform, ConfigurationManager, GetVariable));
+    c3.def_static("GetVariable", &ConfigurationManager::GetVariable, "cfgValue"_a, "cfgVarName"_a, "level"_a = ConfigurationVariableLevel::User, DOC(Bentley, DgnPlatform, ConfigurationManager, GetVariable));
     c3.def_static("DefineVariable", &ConfigurationManager::DefineVariable, "cfgVarName"_a, "cfgValue"_a, "level"_a = ConfigurationVariableLevel::User, DOC(Bentley, DgnPlatform, ConfigurationManager, DefineVariable));
     c3.def_static("UndefineVariable", &ConfigurationManager::UndefineVariable, "cfgVarName"_a, DOC(Bentley, DgnPlatform, ConfigurationManager, UndefineVariable));
     c3.def_static("IterateThroughVariables", &ConfigurationManager::IterateThroughVariables, "iterator"_a, DOC(Bentley, DgnPlatform, ConfigurationManager, IterateThroughVariables));

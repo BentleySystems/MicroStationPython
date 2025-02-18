@@ -55,6 +55,7 @@ void def_SheetSizeDefinition(py::module_& m)
     //===================================================================================
     // struct SheetSizeDefinition
     py::class_< SheetSizeDefinition> c1(m, "SheetSizeDefinition");
+    py::bind_vector< SheetSizeDefinitionVector >(m, "SheetSizeDefinitionVector", py::module_local(false));
 
     c1.def(py::init<>());
     c1.def(py::init<WCharCP, double, double, UnitDefinitionCR, UnitSystemMaskCR>(), "name"_a, "height"_a, "width"_a, "unitDef"_a, "mask"_a);

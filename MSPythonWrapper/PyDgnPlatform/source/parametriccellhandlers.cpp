@@ -27,35 +27,14 @@ Returns (Tuple, 1):
 )doc";
 
 
-static const char * __doc_Bentley_DgnPlatform_ParametricCellHandler_GetCellInfo =R"doc(Extracts the ParametricCellInfo from an element
-Returns (Tuple, 0):
-	retVal.
-
-Returns (Tuple, 1):
-	status.
-
-)doc";
+static const char * __doc_Bentley_DgnPlatform_ParametricCellHandler_GetCellInfo =R"doc(Extracts the ParametricCellInfo from an element)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellHandler_CreateCellElement =R"doc(Creates a new parametric cell element)doc";
 
-static const char * __doc_Bentley_DgnPlatform_ParametricCellInfo_Clone =R"doc(Clone
-Returns (Tuple, 0):
-	retVal.
-
-Returns (Tuple, 1):
-	status.
-
-)doc";
+static const char * __doc_Bentley_DgnPlatform_ParametricCellInfo_Clone =R"doc(Clone)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellInfo_Create =R"doc(Constructs a ParametricCellInfo object to initialize a new parametric
-cell element.
-Returns (Tuple, 0):
-	retVal.
-
-Returns (Tuple, 1):
-	status.
-
-)doc";
+cell element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellInfo_Schedule =R"doc(Schedule ParametricCellInfo on a supplied element.)doc";
 
@@ -132,7 +111,7 @@ void def_ParametricCellHandlers(py::module_& m)
     {
     //===================================================================================
     // struct ParametricCellDefinition
-    py::class_< ParametricCellDefinition, IParameterValues> c1(m, "ParametricCellDefinition", py::multiple_inheritance());
+    py::class_< ParametricCellDefinition, IParameterValues, std::unique_ptr < ParametricCellDefinition, mspydelete > > c1(m, "ParametricCellDefinition", py::multiple_inheritance());
 
     c1.def_property_readonly("ParameterSets", &ParametricCellDefinition::GetParameterSets);
     c1.def("GetParameterSets", &ParametricCellDefinition::GetParameterSets, DOC(Bentley, DgnPlatform, ParametricCellDefinition, GetParameterSets));
@@ -183,9 +162,10 @@ void def_ParametricCellHandlers(py::module_& m)
 
     c4.def("FindByName", &ParametricCellDefHandler::FindByName, "name"_a, "dgnFile"_a, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, ParametricCellDefHandler, FindByName));
     c4.def("GetCellDefinition", &ParametricCellDefHandler::GetCellDefinition, "cellDefEh"_a, DOC(Bentley, DgnPlatform, ParametricCellDefHandler, GetCellDefinition));
+    c4.def_static("GetInstance", [] () { return std::unique_ptr < ParametricCellDefHandler, py::nodelete>(&ParametricCellDefHandler::GetInstance()); });
     //===================================================================================
     // struct ParametricCellInfo
-    py::class_< ParametricCellInfo, IParameterValues> c5(m, "ParametricCellInfo", py::multiple_inheritance());
+    py::class_< ParametricCellInfo, IParameterValues, std::unique_ptr< ParametricCellInfo, mspydelete > > c5(m, "ParametricCellInfo", py::multiple_inheritance());
 
     c5.def_property("ParameterSetName", &ParametricCellInfo::GetParameterSetName, &ParametricCellInfo::SetParameterSetName);
     c5.def("GetParameterSetName", &ParametricCellInfo::GetParameterSetName, DOC(Bentley, DgnPlatform, ParametricCellInfo, GetParameterSetName));
@@ -204,19 +184,15 @@ void def_ParametricCellHandlers(py::module_& m)
 
     c5.def("Schedule", &ParametricCellInfo::Schedule, "eeh"_a, DOC(Bentley, DgnPlatform, ParametricCellInfo, Schedule));
     
-    c5.def_static("Create", [] (ParametricCellDefinitionR cellDef, WCharCP parameterSetName, DgnModelR placementModel)
-                  {
-                  ParameterStatus status = ParameterStatus::Error;
-                  auto retVal = ParametricCellInfo::Create(status, cellDef, parameterSetName, placementModel);
-                  return py::make_tuple(retVal, status);
-                  }, "cellDef"_a, "parameterSetName"_a, "placementModel"_a, DOC(Bentley, DgnPlatform, ParametricCellInfo, Create));
+    c5.def_static("Create", [](ParameterStatusWrapper& status, ParametricCellDefinitionR cellDef, WCharCP parameterSetName, DgnModelR placementModel)
+        {
+            return ParametricCellInfo::Create(status.value, cellDef, parameterSetName, placementModel);
+        }, "status"_a, "cellDef"_a, "parameterSetName"_a, "placementModel"_a, DOC(Bentley, DgnPlatform, ParametricCellInfo, Create));
 
-    c5.def("Clone", [] (ParametricCellInfo const& self)
+    c5.def("Clone", [] (ParametricCellInfo const& self, ParameterStatusWrapper& status)
            {
-           ParameterStatus status = ParameterStatus::Error;
-           auto retVal = self.Clone(status);
-           return py::make_tuple(retVal, status);
-           }, DOC(Bentley, DgnPlatform, ParametricCellInfo, Clone));
+           return self.Clone(status.value);
+           }, "status"_a, DOC(Bentley, DgnPlatform, ParametricCellInfo, Clone));
 
     //===================================================================================
     // struct ParametricCellHandler
@@ -226,12 +202,10 @@ void def_ParametricCellHandlers(py::module_& m)
            py::overload_cast<EditElementHandleR, ParametricCellInfoCR>(&ParametricCellHandler::CreateCellElement),
            "cellEeh"_a, "cellInfo"_a, DOC(Bentley, DgnPlatform, ParametricCellHandler, CreateCellElement));
 
-    c6.def("GetCellInfo", [] (ParametricCellHandler& self, ElementHandleCR eh)
+    c6.def("GetCellInfo", [] (ParametricCellHandler& self, ParameterStatusWrapper& status, ElementHandleCR eh)
            {
-           ParameterStatus status = ParameterStatus::Error;
-           auto retVal = self.GetCellInfo(status, eh);
-           return py::make_tuple(retVal, status);
-           }, "eh"_a, DOC(Bentley, DgnPlatform, ParametricCellHandler, GetCellInfo));
+           return self.GetCellInfo(status.value, eh);
+           }, "status"_a, "eh"_a, DOC(Bentley, DgnPlatform, ParametricCellHandler, GetCellInfo));
 
     c6.def("GetDefinitionID", [] (ParametricCellHandler& self, ElementHandleCR cellEh)
            {
@@ -242,5 +216,6 @@ void def_ParametricCellHandlers(py::module_& m)
 
     c6.def("GetDefinitionElement", &ParametricCellHandler::GetDefinitionElement, "cellEh"_a, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, ParametricCellHandler, GetDefinitionElement));
     c6.def("IsAnnotation", &ParametricCellHandler::IsAnnotation, "eh"_a, DOC(Bentley, DgnPlatform, ParametricCellHandler, IsAnnotation));
+    c6.def_static("GetInstance", []() { return std::unique_ptr < ParametricCellHandler, py::nodelete>(&ParametricCellHandler::GetInstance()); });
 
     }

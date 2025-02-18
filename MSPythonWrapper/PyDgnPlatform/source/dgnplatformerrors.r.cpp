@@ -171,6 +171,7 @@ void def_DgnPlatformErrors_r(py::module_& m)
         .value("eDGNMODEL_STATUS_BadFileRefCount", DGNMODEL_STATUS_BadFileRefCount)
         .value("eDGNMODEL_STATUS_ElementListNotFilled", DGNMODEL_STATUS_ElementListNotFilled)
         .export_values();
+    bind_TypeWrapper<DgnModelStatus>(m, "MsPyDgnModelStatus");
 
     //===================================================================================
     // enum DgnFileEmbedStatus

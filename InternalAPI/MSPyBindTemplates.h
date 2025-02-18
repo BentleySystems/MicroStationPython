@@ -36,6 +36,9 @@ py::class_<TypeWrapper<T>> bind_TypeWrapper(py::handle scope, std::string const&
 typedef TypeWrapper<int> IntWrapper;
 typedef TypeWrapper<double> DoubleWrapper;
 typedef TypeWrapper<bool> BoolWrapper;
+typedef TypeWrapper<MSElementDescrP> MSElementDescrReceiver;
+typedef TypeWrapper<DgnModelStatus> DgnModelStatusWrapper;
+typedef TypeWrapper<ParameterStatus> ParameterStatusWrapper;
 
 // template<typename T> struct ValueSizeSize
 template <typename ValueType, typename holder_type = std::unique_ptr< ValueSizeSize<ValueType> >, typename... Args>

@@ -81,9 +81,11 @@ $(o)xcommandmanager$(oext)                  : $(PyMstnSource)xcommandmanager.cpp
 
 $(o)messagecenter$(oext)                    : $(PyMstnSource)messagecenter.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
-$(o)meshapi$(oext)                          : $(PyMstnSource)3dModeling/meshapi.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+$(o)MicroStation.r$(oext)                   : $(PyMstnSource)MicroStation.r.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
-$(o)clashdetection$(oext)                   : $(PyMstnSource)ClashDetection/clashdetection.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+$(o)MstnTypes$(oext)                        : $(PyMstnSource)MstnTypes.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)meshapi$(oext)                          : $(PyMstnSource)3dModeling/meshapi.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
 $(o)constraint2dcoreapi$(oext)              : $(PyMstnSource)Constraint2d/constraint2dcoreapi.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
@@ -127,6 +129,12 @@ $(o)msmodel$(oext)                          : $(PyMstnSource)MdlApi/msmodel.cpp 
 
 $(o)mslocate$(oext)                         : $(PyMstnSource)MdlApi/mslocate.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
+$(o)msstate$(oext)                          : $(PyMstnSource)MdlApi/msstate.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)msview$(oext)                           : $(PyMstnSource)MdlApi/msview.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)mshistory$(oext)                        : $(PyMstnSource)MdlApi/mshistory.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
 $(o)userfnc$(oext)                          : $(PyMstnSource)MdlApi/userfnc.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
 $(o)auxsystm.r$(oext)                       : $(PyMstnSource)MdlApi/auxsystm.r.cpp $(PyMstnDependencies) ${MultiCompileDepends}
@@ -144,6 +152,14 @@ $(o)dialog$(oext)                           : $(PyMstnSource)MdlApi/dialog.cpp $
 $(o)expression$(oext)                       : $(PyMstnSource)MdlApi/expression.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
 $(o)strutil$(oext)                          : $(PyMstnSource)MdlApi/strutil.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)global$(oext)                           : $(PyMstnSource)MdlApi/global.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)dlogitem$(oext)                         : $(PyMstnSource)MdlApi/dlogitem.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)MSWindow$(oext)                         : $(PyMstnSource)MdlApi/MSWindow.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)BaseWindow$(oext)                       : $(PyMstnSource)MdlApi/BaseWindow.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
 $(o)MstnDefs$(oext)                         : $(PyMstnSource)MstnDefs.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
@@ -192,7 +208,6 @@ LINKER_LIBRARIES            = $(PythonLibName) \
                               $(ContextSubpartsLibs)DgnPlatform.lib \
                               $(ContextSubpartsLibs)mdlbltin.lib \
                               $(ContextSubpartsLibs)3dmodeling.lib \
-                              $(ContextSubpartsLibs)ClashDetection.lib \
                               $(ContextSubpartsLibs)Constraint2dCore.lib \
                               $(ContextSubpartsLibs)Constraint2dElement.lib \
                               $(ContextSubpartsLibs)Constraint3dCore.lib \

@@ -793,6 +793,31 @@ void PythonScriptEngine::exec(WCharCP stms, WCharCP funcName, ScriptContext* glo
 
     }
 
+/*---------------------------------------------------------------------------------**//***
+ @bsimethod                                                                       12/2024
+ +---------------+---------------+---------------+---------------+---------------+------*/
+static void getCachedTypes(std::unordered_map<std::type_index, std::string>& before_type_cache)
+    {
+    auto& internals = py::detail::get_internals();
+    for (const auto& item : internals.registered_types_cpp)
+        before_type_cache[item.first] = item.second->type->tp_name;
+    }
+
+/*---------------------------------------------------------------------------------**//***
+ @bsimethod                                                                       12/2024
+ +---------------+---------------+---------------+---------------+---------------+------*/
+static void removeCachedtypes(const std::unordered_map<std::type_index, std::string>& before_type_cache)
+    {
+    auto& internals = py::detail::get_internals();
+    for (auto it = internals.registered_types_cpp.begin(); it != internals.registered_types_cpp.end();) 
+        {
+        if (before_type_cache.find(it->first) == before_type_cache.end())
+            it = internals.registered_types_cpp.erase(it);
+        else 
+            ++it;
+        }
+    }
+
 /*---------------------------------------------------------------------------------**//*** 
  @bsimethod                                                                       2/2023 
  +---------------+---------------+---------------+---------------+---------------+------*/ 
@@ -826,21 +851,27 @@ void PythonScriptEngine::eval_file(WCharCP scriptFile, WCharCP funcName, ScriptC
         localDict = pyLocalDict->m_dict;
 
     m_engineProcessing = true;
+
+    // The cache of types registered by pybind11 before running the script
+    std::unordered_map<std::type_index, std::string> before_type_cache;
+    getCachedTypes(before_type_cache);
+
     // User want to run a file directly
     if (strFileOrModule.EndsWithI(L".py"))
         {
-        // Run file
         try
             {
-            // Python returns errors if the local dictionary is empty
+            // Run file, Python returns errors if the local dictionary is empty
             py::eval_file(py::cast(scriptFile), globalDict, py::len(localDict) > 0 ? localDict : py::object ());
             }
         catch (py::error_already_set& e)
             {
+            removeCachedtypes(before_type_cache);
             ScriptEngineManager::Get().InjectError( e.what ());
             }
         catch (std::exception& err)
             {
+            removeCachedtypes(before_type_cache);
             ScriptEngineManager::Get().InjectException(err);
             }
         }
@@ -870,6 +901,7 @@ void PythonScriptEngine::eval_file(WCharCP scriptFile, WCharCP funcName, ScriptC
             }        
         catch (std::exception& err)
             {
+            removeCachedtypes(before_type_cache);
             ScriptEngineManager::Get().InjectException(err);
             }        
         }
@@ -1017,6 +1049,38 @@ void PythonScriptEngine::InitSearchPath ()
     UsingNameSpace(PyNameSpaceManager::Bentley_DgnPlatform_Raster);
     }
 
+ /*---------------------------------------------------------------------------------**//***
+   @bsimethod                                   Chris Wu                   08/24
++---------------+---------------+---------------+---------------+---------------+------*/
+ bool PyNameSpaceManager::IsRegisteredInPython(AStringCR attrName)
+    {
+     try 
+        {
+         PyObject* modulesDict = PyImport_GetModuleDict();
+         PyObject* key, * value;
+         Py_ssize_t pos = 0;
+
+         while (PyDict_Next(modulesDict, &pos, &key, &value))
+            {
+             if (!PyModule_Check(value))
+                 continue;
+
+             const char* moduleName = PyModule_GetName(value);
+             auto module = py::module_::import(moduleName);
+
+             if (py::hasattr(module, attrName.c_str()))
+                 return true;
+            }
+        }
+     catch (py::error_already_set& e) 
+        {
+         e.clear();
+        }
+
+     return false;
+    }
+
+ 
 /*---------------------------------------------------------------------------------**//***
     @bsimethod                                   Chris Wu                   05/24
 +---------------+---------------+---------------+---------------+---------------+------*/

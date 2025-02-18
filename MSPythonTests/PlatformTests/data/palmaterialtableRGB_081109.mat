@@ -1,0 +1,16 @@
+MV_AS--0
+
+palette palmaterialsrgbassignments_081109.pal
+
+assign
+Material1
+"Default" (181,255,193)
+"Level1" (255,176,219)
+Material2
+"Level1" (186,36,255)
+"Level2" (255,241,138)
+Material3
+"Level2" (79,255,240)
+Material4
+"Level1" (206,255,8)
+end

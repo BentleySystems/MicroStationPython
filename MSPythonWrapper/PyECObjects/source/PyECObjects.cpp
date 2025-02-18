@@ -40,6 +40,20 @@ void def_auiitem(py::module_&);
 void def_auiprovider(py::module_&);
 void def_ecimagekey(py::module_&);
 
+//From dgnplatform
+void def_WhereCriterion(py::module_& m);
+void def_IEditActionSource(py::module_& m);
+void def_ECReportNode(py::module_& m);
+void def_ECQuery(py::module_& m);
+void def_DgnECTypes(py::module_& m);
+void def_DgnECProviders(py::module_& m);
+void def_DgnECInstance(py::module_& m);
+
+
+void def_XDataTreeNode(py::module_& m);
+void def_UserInterfaceNode(py::module_& m);
+void def_ElementTemplateNode(py::module_& m);
+
 /*---------------------------------------------------------------------------------**//**
 * Module definition.
 * @bsimethod                                                                       2/2023
@@ -74,6 +88,19 @@ There are also ECRelationshipClasses that are ECClasses that also define Relatio
     def_auiprovider(m);
     def_auiitem(m);    
     def_ecimagekey(m);
+
+    def_XDataTreeNode(m);
+    def_UserInterfaceNode(m);
+    def_ElementTemplateNode(m);
+
+    ////From dgnplatform
+    def_WhereCriterion(m);
+    def_IEditActionSource(m);
+    def_ECReportNode(m);
+    def_ECQuery(m);
+    def_DgnECTypes(m);
+    def_DgnECProviders(m);
+    def_DgnECInstance(m);
     }
 
 

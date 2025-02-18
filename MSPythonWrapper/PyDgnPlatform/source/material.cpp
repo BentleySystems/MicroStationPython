@@ -1303,6 +1303,7 @@ void def_Material(py::module_& m)
     //===================================================================================
     // struct Material
     py::class_< Material, MaterialPtr> c5(m, "DgnMaterial", py::multiple_inheritance());
+    py::bind_vector< MaterialList >(m, "MaterialList", py::module_local(false));
 
     c5.def(py::init(py::overload_cast<DgnModelRefR>(&Material::Create)), "modelRef"_a);
     c5.def(py::init(py::overload_cast<MaterialCR, DgnModelRefR>(&Material::Create)), "initFrom"_a, "modelRef"_a);
@@ -1319,8 +1320,8 @@ void def_Material(py::module_& m)
     c5.def("GetModelRef", &Material::GetModelRefR, py::return_value_policy::reference_internal);
     c5.def("SetModelRef", &Material::SetModelRef, "modelRef"_a, py::keep_alive<1, 2>(), DOC(Bentley, DgnPlatform, Material, SetModelRef));
     
-    c5.def_property_readonly("Settings", &Material::GetSettingsR);
-    c5.def("GetSettings", &Material::GetSettingsR, DOC(Bentley, DgnPlatform, Material, GetSettings));
+    c5.def_property_readonly("Settings", &Material::GetSettingsR, py::return_value_policy::reference_internal);
+    c5.def("GetSettings", &Material::GetSettingsR, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, Material, GetSettings));
     
     c5.def_property_readonly("PBRSettings", &Material::GetPBRSettingsR);
     c5.def("GetPBRSettings", &Material::GetPBRSettingsR, py::return_value_policy::reference_internal);
@@ -1352,6 +1353,7 @@ void def_Material(py::module_& m)
     c6.def("SetElementId", &MaterialId::SetElementId, "elemId"_a, DOC(Bentley, DgnPlatform, MaterialId, SetElementId));
     
     c6.def(py::self == py::self);
+    c6.def("Equals", &MaterialId::Equals);
 
     //===================================================================================
     // struct IMaterialStore

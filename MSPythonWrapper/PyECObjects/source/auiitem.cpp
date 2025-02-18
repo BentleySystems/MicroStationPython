@@ -68,7 +68,6 @@ struct IPyAUIDataContext : IAUIDataContext
 +---------------+---------------+---------------+---------------+---------------+------*/
 void def_auiitem(py::module_& m)
     {
-
     //===================================================================================
     // struct IAUIDataContext
     py::class_< IAUIDataContext, IPyAUIDataContext> c3(m, "IAUIDataContext");

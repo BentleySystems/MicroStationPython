@@ -45,6 +45,7 @@ dependencies    =   $(MSPythonSrc)/MSPythonPCH.h
 
 %include MultiCppCompileRule.mki
 
+PyDgnPlatformSource    = $(PyhonWrapper)PyDgnPlatform/source/
 PyDgnViewSource        = $(PyhonWrapper)PyDgnView/source/
 PyDgnViewDependencies  = $(dependencies)
 
@@ -62,13 +63,13 @@ $(o)fencemanager$(oext)                          : $(PyDgnViewSource)fencemanage
 
 $(o)iredraw$(oext)                               : $(PyDgnViewSource)iredraw.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
 
-$(o)iviewmanager$(oext)                          : $(PyDgnViewSource)iviewmanager.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
-
 $(o)PyDgnView$(oext)                             : $(PyDgnViewSource)PyDgnView.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
 
 $(o)selectionsetmanager$(oext)                   : $(PyDgnViewSource)selectionsetmanager.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
 
 $(o)locatesubentitytool$(oext)                   : $(PyDgnViewSource)locatesubentitytool.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
+
+$(o)imodifyelement$(oext)                        : $(PyDgnPlatformSource)ParentTypes/imodifyelement.cpp $(PyDgnViewDependencies) ${MultiCompileDepends}
 
 %include MultiCppCompileGo.mki
 

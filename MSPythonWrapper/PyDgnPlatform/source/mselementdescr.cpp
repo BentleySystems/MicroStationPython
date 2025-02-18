@@ -130,6 +130,7 @@ Returns:
 void def_MSElementDescr(py::module_& m)
     {
     using MSElementDescrPtr = RefCountedPtr<MSElementDescr>;
+    bind_TypeWrapper<MSElementDescrP>(m, "MSElementDescrReceiver");
     
     //===================================================================================
     // struct MSElementDescr

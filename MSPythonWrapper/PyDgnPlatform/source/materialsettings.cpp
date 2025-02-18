@@ -2157,6 +2157,9 @@ void def_MaterialSettings(py::module_& m)
     c4.def("GetLibrary", &PaletteInfo::GetLibraryR, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, PaletteInfo, GetLibrary));
     c4.def("SetLibrary", &PaletteInfo::SetLibrary, "library"_a, DOC(Bentley, DgnPlatform, PaletteInfo, SetLibrary));
 
+    c4.def("Init", py::overload_cast<>(&PaletteInfo::Init));
+    c4.def("Init", py::overload_cast<WCharCP, DgnDocumentMonikerCR, PaletteInfo::PaletteType>(&PaletteInfo::Init));
+    c4.def("Init", py::overload_cast<WCharCP, DgnDocumentMonikerCR, DgnDocumentMonikerCR, PaletteInfo::PaletteType>(&PaletteInfo::Init));
 
     //===================================================================================
     // struct MaterialMapLayer
@@ -2223,11 +2226,13 @@ void def_MaterialSettings(py::module_& m)
     c6.def_property("FlipU", &MaterialMapLayer::GetFlipU, &MaterialMapLayer::SetFlipU);
     c6.def("GetFlipU", &MaterialMapLayer::GetFlipU, DOC(Bentley, DgnPlatform, MaterialMapLayer, GetFlipU));
     c6.def("SetFlipU", &MaterialMapLayer::SetFlipU, "flipU"_a, DOC(Bentley, DgnPlatform, MaterialMapLayer, SetFlipU));
-    
+    c6.def("SetFlipV", &MaterialMapLayer::SetFlipV, "flipV"_a);
+
     c6.def_property("MirrorU", &MaterialMapLayer::GetMirrorU, &MaterialMapLayer::SetMirrorU);
     c6.def("GetMirrorU", &MaterialMapLayer::GetMirrorU, DOC(Bentley, DgnPlatform, MaterialMapLayer, GetMirrorU));
     c6.def("SetMirrorU", &MaterialMapLayer::SetMirrorU, "mirrorU"_a, DOC(Bentley, DgnPlatform, MaterialMapLayer, SetMirrorU));
-    
+    c6.def("SetMirrorV", &MaterialMapLayer::SetMirrorV, "mirrorV"_a);
+
     c6.def_property("RepeatU", &MaterialMapLayer::GetRepeatU, &MaterialMapLayer::SetRepeatU);
     c6.def("GetRepeatU", &MaterialMapLayer::GetRepeatU, DOC(Bentley, DgnPlatform, MaterialMapLayer, GetRepeatU));
     c6.def("SetRepeatU", &MaterialMapLayer::SetRepeatU, "repeatU"_a, DOC(Bentley, DgnPlatform, MaterialMapLayer, SetRepeatU));
@@ -2286,6 +2291,7 @@ void def_MaterialSettings(py::module_& m)
 
     c6.def("GetAdjustedOffset", &MaterialMapLayer::GetAdjustedOffset, "offset"_a, DOC(Bentley, DgnPlatform, MaterialMapLayer, GetAdjustedOffset));
     c6.def("SetAdjustedOffset", py::overload_cast<DPoint3dCR>(&MaterialMapLayer::SetAdjustedOffset), "offset"_a, DOC(Bentley, DgnPlatform, MaterialMapLayer, SetAdjustedOffset));
+    c6.def("SetAdjustedOffset", py::overload_cast<double, double, double>(&MaterialMapLayer::SetAdjustedOffset));
 
     c6.def_property("Opacity", &MaterialMapLayer::GetOpacity, &MaterialMapLayer::SetOpacity);
     c6.def("GetOpacity", &MaterialMapLayer::GetOpacity, DOC(Bentley, DgnPlatform, MaterialMapLayer, GetOpacity));
@@ -2808,6 +2814,8 @@ void def_MaterialSettings(py::module_& m)
     c11.def("GetEffect", &MaterialShader::GetEffect, DOC(Bentley, DgnPlatform, MaterialShader, GetEffect));
     c11.def("SetEffect", &MaterialShader::SetEffect, "effect"_a, DOC(Bentley, DgnPlatform, MaterialShader, SetEffect));
 
+    c11.def("SetIndirectIlluminationSaturation", &MaterialShader::SetIndirectIlluminationSaturation);
+
     //===================================================================================
     // struct MaterialShaderCollection
     py::class_< MaterialShaderCollection> c12(m, "MaterialShaderCollection");
@@ -3164,4 +3172,11 @@ void def_MaterialSettings(py::module_& m)
     c14.def_property("PBREmissiveColor", &MaterialSettings::GetPBREmissiveColorR, [] (MaterialSettings& self, RgbFactorCR color) { self.SetPBREmissiveColor(color.red, color.green, color.blue); });
     c14.def("GetPBREmissiveColor", &MaterialSettings::GetPBREmissiveColorR, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, MaterialSettings, GetPBREmissiveColor));
     c14.def("SetPBREmissiveColor", &MaterialSettings::SetPBREmissiveColor, "red"_a, "green"_a, "blue"_a, DOC(Bentley, DgnPlatform, MaterialSettings, SetPBREmissiveColor));
+
+    py::class_<Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >> c15(m, "MapTypeToMaterialMapPair", py::multiple_inheritance());
+    c15.def_property_readonly("First", [](Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >& self) {return self.first; });
+    c15.def_property_readonly("Second", [](Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >& self) {return self.second; });
+
+    //c15.def("GetFirst", [](Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >& self) {return self.first; });
+   //c15.def("GetSecond", [](Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >& self) {return self.second; });
     }

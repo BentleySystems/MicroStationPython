@@ -70,10 +70,19 @@ void def_Constraint2dManager(py::module_& m)
 
     c1.def_static("GetSolverData", &Constraint2dManager::GetSolverData, "solverData"_a, "eh"_a, "includingDeleted"_a = false, DOC(Bentley, MstnPlatform, Constraint2dManager, GetSolverData));
 
-    c1.def_static("AddConstraint",
-                  &Constraint2dManager::AddConstraint,
-                  "constraintedElements"_a, "constraintType"_a, "primitiveId1"_a = 0, "defaultSubIndex1"_a = 0, 
-                  "primitiveId2"_a = 0, "defaultSubIndex2"_a = 0, "dimValue"_a = 0.0, "varName"_a = L"");
+    c1.def_static("AddConstraint", [](ElementAgendaR constrainedElements, Constraint2dType consType, int primitiveId1,
+                                      int defaultSubIndex1, int primitiveId2, int defaultSubIndex2, double dimValue, WCharCP varName)
+                                    {
+                                        return Constraint2dManager::AddConstraint(constrainedElements, consType, primitiveId1, defaultSubIndex1, primitiveId2, defaultSubIndex2, dimValue, WString(varName));
+                                    }, "constraintedElements"_a, "constraintType"_a, "primitiveId1"_a = 0, "defaultSubIndex1"_a = 0, 
+                                       "primitiveId2"_a = 0, "defaultSubIndex2"_a = 0, "dimValue"_a = 0.0, "varName"_a = L"");
+
+    c1.def_static("AddConstraint", [](ElementAgendaR constrainedElements, Constraint2dType consType, 
+                                      bvector<int> const& primitiveIndexes, bvector<int> const& subIndexes, bvector<VertexType> const& vertexTypes,
+                                      double dimValue, WCharCP varName)
+        {
+            return Constraint2dManager::AddConstraint(constrainedElements, consType, primitiveIndexes, subIndexes, vertexTypes, dimValue, WString(varName));
+        }, "constraintedElements"_a, "constraintType"_a, "primitiveIndexes"_a, "subIndexes"_a, "vertexTypes"_a, "dimValue"_a = 0.0, "varName"_a = L"");
 
     c1.def_static("EvaluateAndUpdate", [] (Constraint2dSolverDataCR solverData, DgnModelR dgnModel, bvector<ElementRefP> const& directChanges, bool isDynamic,
                                            ElementAgendaP results, bvector<Constraint2dData>* inconsistentConstraints)

@@ -57,21 +57,15 @@ $(o)befilelistiterator$(oext)             : $(PyBentleySource)befilelistiterator
 
 $(o)befilename$(oext)                     : $(PyBentleySource)befilename.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
 
-$(o)betextfile$(oext)                     : $(PyBentleySource)betextfile.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
-
 $(o)codepages$(oext)                      : $(PyBentleySource)codepages.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
 
 $(o)PyBentley$(oext)                      : $(PyBentleySource)PyBentley.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
-
-$(o)valueformat$(oext)                    : $(PyBentleySource)valueformat.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
 
 $(o)valueformat.r$(oext)                  : $(PyBentleySource)valueformat.r.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
 
 $(o)wstring$(oext)                        : $(PyBentleySource)wstring.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
 
 $(o)datetime$(oext)                       : $(PyBentleySource)datetime.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
-
-$(o)dsig$(oext)                           : $(PyBentleySource)dsig.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
 
 $(o)heapzone$(oext)                       : $(PyBentleySource)heapzone.cpp $(PyBentleyDependencies) ${MultiCompileDepends}
 

@@ -345,6 +345,7 @@ void def_ParametricModeling(py::module_& m)
         .value("eRecursiveCellDefinition", ParameterStatus::RecursiveCellDefinition)
         .value("eError", ParameterStatus::Error)
         .export_values();
+    bind_TypeWrapper<ParameterStatus>(m, "MsPyParameterStatus");
 
     //===================================================================================
     // enum class ParameterType
@@ -530,7 +531,9 @@ void def_ParametricModeling(py::module_& m)
 
     c10.def_property_readonly("TargetAccessString", &IParseParameterExpressionContext::GetTargetAccessString);
     c10.def("GetTargetAccessString", &IParseParameterExpressionContext::GetTargetAccessString, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, IParseParameterExpressionContext, GetTargetAccessString));
-    
+
+    c10.def_static("Create", &IParseParameterExpressionContext::Create, "defs"_a, "resultType"_a, "targetAccessString"_a = nullptr);
+
     //===================================================================================
     // struct IEvaluateParameterExpressionContext
     py::class_< IEvaluateParameterExpressionContext, IEvaluateParameterExpressionContextPtr, IParameterExpressionContext> c11(m, "IEvaluateParameterExpressionContext");
@@ -587,7 +590,7 @@ void def_ParametricModeling(py::module_& m)
     c16.def(py::init<ParameterCsvSectionPresenceFlagsCR>(), "presenceFlags"_a);
     //===================================================================================
     // struct IParameterDefinitions
-    py::class_< IParameterDefinitions, IActiveParameters> c17(m, "IParameterDefinitions");
+    py::class_< IParameterDefinitions, IActiveParameters, std::unique_ptr< IParameterDefinitions, mspydelete > > c17(m, "IParameterDefinitions");
 
     c17.def("__iter__", [] (IParameterDefinitions& self) { return py::make_iterator(self.begin(), self.end()); }, py::keep_alive<0, 1>());
     c17.def("GetForEdit", [] (IParameterDefinitions& self) { return IEditParameterDefinitionsPtr(self.GetForEdit()); });
@@ -612,7 +615,7 @@ void def_ParametricModeling(py::module_& m)
     c17.def("GetParamSetValue", &IParameterDefinitions::GetParamSetValue, "def"_a, "values"_a, "sections"_a, DOC(Bentley, DgnPlatform, IParameterDefinitions, GetParamSetValue));
     //===================================================================================
     // struct IEditParameterDefinitions
-    py::class_< IEditParameterDefinitions, IParameterDefinitions> c18(m, "IEditParameterDefinitions");
+    py::class_< IEditParameterDefinitions, IParameterDefinitions, std::unique_ptr< IEditParameterDefinitions, mspydelete > > c18(m, "IEditParameterDefinitions");
 
     c18.def("Add",
             py::overload_cast<WCharCP, ParameterType, double, bool>(&IEditParameterDefinitions::Add),
