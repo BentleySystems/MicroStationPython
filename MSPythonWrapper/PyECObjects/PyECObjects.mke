@@ -46,6 +46,7 @@ dependencies    =   $(MSPythonSrc)/MSPythonPCH.h
 
 %include MultiCppCompileRule.mki
 
+PyDgnPlatformSource  = $(PyhonWrapper)PyDgnPlatform/source/
 PyDgnECSource        = $(PyhonWrapper)PyECObjects/source/
 PyDgnECDependencies  = $(dependencies)
 
@@ -87,6 +88,25 @@ $(o)standardcustomattributehelper$(oext)            : $(PyDgnECSource)standardcu
 
 $(o)supplementalschema$(oext)                       : $(PyDgnECSource)supplementalschema.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
 
+$(o)wherecriterion$(oext)                           : $(PyDgnPlatformSource)ParentTypes/wherecriterion.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ieditactionsource$(oext)                        : $(PyDgnPlatformSource)ParentTypes/ieditactionsource.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecreportnode$(oext)                             : $(PyDgnPlatformSource)ParentTypes/ecreportnode.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)ecquery$(oext)                                  : $(PyDgnPlatformSource)ParentTypes/ecquery.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)dgnectypes$(oext)                               : $(PyDgnPlatformSource)ParentTypes/dgnectypes.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)dgnecproviders$(oext)                           : $(PyDgnPlatformSource)ParentTypes/dgnecproviders.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)dgnecinstance$(oext)                            : $(PyDgnPlatformSource)ParentTypes/dgnecinstance.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)xdatatreenode$(oext)                            : $(PyDgnPlatformSource)ParentTypes/xdatatreenode.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)userinterfacenode$(oext)                        : $(PyDgnPlatformSource)ParentTypes/userinterfacenode.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
+
+$(o)elementtemplatenode$(oext)                      : $(PyDgnPlatformSource)ParentTypes/elementtemplatenode.cpp $(PyDgnECDependencies) ${MultiCompileDepends}
 
 %include MultiCppCompileGo.mki
 
@@ -112,7 +132,8 @@ LINKER_LIBRARIES            = $(PythonLibName) \
                               $(ContextSubpartsLibs)bentley.lib \
                               $(ContextSubpartsLibs)BentleyAllocator.lib \
                               $(ContextSubpartsLibs)ECObjects.lib \
-                              $(ContextSubpartsLibs)MSPythonCore.lib
+                              $(ContextSubpartsLibs)MSPythonCore.lib \
+                              $(ContextSubpartsLibs)DgnPlatform.lib
 
 
 DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/

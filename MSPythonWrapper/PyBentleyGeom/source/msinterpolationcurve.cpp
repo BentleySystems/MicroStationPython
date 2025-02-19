@@ -49,7 +49,7 @@ void def_MSInterpolationCurve(py::module_& m)
            "inPoints"_a, "removeData"_a, "removeTol"_a, "endTangents"_a, "closedCurve"_a, "colinearTangents"_a, "chordLenTangents"_a, "naturalTangents"_a);
 
     c1.def("Populate", [] (MSInterpolationCurveR self, int order, bool periodic, int isChordLenKnots, int isColinearTangents, int isChordLenTangents, int isNaturalTangents,
-                           std::vector<DPoint3d> const& fitPoints, std::vector<double> const& knots, DVec3dCP pStartTangent, DVec3dCP pEndTangent)
+                           DPoint3dArray const& fitPoints, DoubleArray const& knots, DVec3dCP pStartTangent, DVec3dCP pEndTangent)
            {
            auto retVal = self.Populate(order, periodic, isChordLenKnots, isColinearTangents, isChordLenTangents, isNaturalTangents,
                                        fitPoints.data(), (int) fitPoints.size(), knots.data(), (int) knots.size(), pStartTangent, pEndTangent);

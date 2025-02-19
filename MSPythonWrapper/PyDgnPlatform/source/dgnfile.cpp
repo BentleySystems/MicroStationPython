@@ -600,7 +600,12 @@ void def_DgnFile(py::module_& m)
     c8.def("GetDefaultModelId", &DgnFile::GetDefaultModelId, DOC(Bentley, DgnPlatform, DgnFile, GetDefaultModelId));
     
     c8.def("FindLoadedModelById", &DgnFile::FindLoadedModelById, "modelId"_a, DOC(Bentley, DgnPlatform, DgnFile, FindLoadedModelById));
-    c8.def("LoadModelById", &DgnFile::LoadModelById, "modelId"_a, DOC(Bentley, DgnPlatform, DgnFile, LoadModelById));
+    c8.def("LoadModelById", 
+        [](DgnFileR self, ModelId modelid)
+        {
+            DgnModelPtr dgnModel = self.LoadModelById(modelid);
+            return dgnModel.get();
+        }, "modelId"_a, py::return_value_policy::reference, DOC(Bentley, DgnPlatform, DgnFile, LoadModelById));
     c8.def("HasPendingChanges", &DgnFile::HasPendingChanges, DOC(Bentley, DgnPlatform, DgnFile, HasPendingChanges));
     c8.def("SetFullSaveFlag", &DgnFile::SetFullSaveFlag, DOC(Bentley, DgnPlatform, DgnFile, SetFullSaveFlag));
     c8.def("SetAbandonChangesFlag", &DgnFile::SetAbandonChangesFlag, DOC(Bentley, DgnPlatform, DgnFile, SetAbandonChangesFlag));
@@ -664,11 +669,13 @@ void def_DgnFile(py::module_& m)
                   return py::make_tuple(retVal, status);
                   }, "document"_a, "openMode"_a, "seedData"_a, "format"_a, "threeD"_a);
 
-    c8.def("CreateNewModel", [] (DgnFileR self, WCharCP name, DgnModelType type, bool is3D, DgnModelCP seedModel, ModelId modelId)
+    c8.def("CreateNewModel", [] (DgnFileR self, DgnModelStatusWrapper& error, WCharCP name, DgnModelType type, bool is3D, DgnModelCP seedModel, ModelId modelId)
            {
-           DgnModelStatus error = DGNMODEL_STATUS_Success;
-           return py::make_tuple(self.CreateNewModel(&error, name, type, is3D, seedModel, modelId), error);
-           }, "name"_a, "type"_a, "is3D"_a, "seedModel"_a = nullptr, "modelId"_a = INVALID_MODELID, py::return_value_policy::reference_internal);
+            DgnModelStatus tmpError = DGNMODEL_STATUS_NotFound;
+            DgnModelP newModel = self.CreateNewModel(&tmpError, name, type, is3D, seedModel, modelId);
+            error = tmpError;
+            return newModel;
+           }, py::keep_alive<0, 1>(), "error"_a, "name"_a, "type"_a, "is3D"_a, "seedModel"_a = nullptr, "modelId"_a = INVALID_MODELID, py::return_value_policy::reference_internal);
 
     c8.def("DeleteModel", &DgnFile::DeleteModel, "model"_a, DOC(Bentley, DgnPlatform, DgnFile, DeleteModel));
 

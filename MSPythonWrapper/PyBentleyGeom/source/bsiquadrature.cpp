@@ -235,7 +235,7 @@ class PyBSIVectorIntegrand : public BSIVectorIntegrand
                     if (nItem > 0)
                         {
                         DoubleArray pF_(nItem, 0);
-                        func(t, pF_);
+                        func(t, &pF_);
                         memcpy((void*) pF, (const void*) pF_.data(), sizeof(double) * nItem);
                         }
                     }
@@ -277,7 +277,7 @@ class PyBSIIncrementalVectorIntegrand : public BSIIncrementalVectorIntegrand
                     if (nItem > 0)
                         {
                         DoubleArray pF_(nItem, 0);
-                        func(t, pF_);
+                        func(t, &pF_);
                         memcpy((void*) pF, (const void*) pF_.data(), sizeof(double) * nItem);
                         }
                     }
@@ -352,7 +352,7 @@ class PyBSIVectorIntegrandXY : public BSIVectorIntegrandXY
                     if (nItem > 0)
                         {
                         DoubleArray pF_(nItem, 0);
-                        func(x, y, pF_);
+                        func(x, y, &pF_);
                         memcpy((void*) pF, (const void*) pF_.data(), sizeof(double) * nItem);
                         }
                     }

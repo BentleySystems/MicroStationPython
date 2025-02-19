@@ -35,11 +35,8 @@ void def_DgnComponentHandlers(py::module_&);
 void def_DgnCore(py::module_&);
 void def_DgnDocumentManager(py::module_&);
 void def_DgnECFinders(py::module_&);
-void def_DgnECInstance(py::module_&);
 void def_DgnHost(py::module_&);
 void def_DgnECManager(py::module_&);
-void def_DgnECProviders(py::module_&);
-void def_DgnECTypes(py::module_&);
 void def_DgnFile(py::module_&);
 void def_DgnFontManager(py::module_&);
 void def_DgnLinkHandler(py::module_&);
@@ -72,15 +69,12 @@ void def_DisplayRulesManager(py::module_&);
 void def_DisplayStyleManager(py::module_&);
 void def_DropGraphics(py::module_&);
 void def_ECInstanceHolderHandler(py::module_& m);
-void def_ECQuery(py::module_&);
-void def_ECReportNode(py::module_&);
 void def_ElementAgenda(py::module_&);
 void def_ElementCopyContext(py::module_&);
 void def_ElementGeometry(py::module_&);
 void def_ElementGraphics(py::module_&);
 void def_ElementHandle(py::module_&);
 void def_ElementProperties(py::module_&);
-void def_ElementTemplateNode(py::module_&);
 void def_ElementTemplateParamsHelper(py::module_&);
 void def_ElementTemplateUtils(py::module_&);
 void def_ExtendedElementHandler(py::module_&);
@@ -95,10 +89,8 @@ void def_IAnnotationHandler(py::module_&);
 void def_IAreaFillProperties(py::module_&);
 void def_IAuxCoordSys(py::module_&);
 void def_IconElementHandler(py::module_&);
-void def_IEditActionSource(py::module_&);
 void def_image(py::module_&);
 void def_IMaterialProperties(py::module_&);
-void def_IModifyElement(py::module_&);
 void def_INamedViewElementHandler(py::module_&);
 void def_IPointCloud(py::module_&);
 void def_IRasterAttachment(py::module_&);
@@ -164,18 +156,15 @@ void def_TextString(py::module_&);
 void def_TextStringProperties(py::module_&);
 void def_TextTableHandler(py::module_&);
 void def_TransformClipStack(py::module_&);
-void def_UserInterfaceNode(py::module_&);
 void def_ValueFormat(py::module_&);
 void def_ValueParse(py::module_&);
 void def_ViewContext(py::module_&);
 void def_ViewGroup(py::module_&);
 void def_ViewInfo(py::module_&);
-void def_WhereCriterion(py::module_&);
 void def_WorkSet(py::module_&);
 void def_XAttributeChange(py::module_&);
 void def_XDataNodeCollection(py::module_&);
 void def_XDataTreeManager(py::module_&);
-void def_XDataTreeNode(py::module_&);
 void def_XDataTreeOwner(py::module_&);
 
 void def_BentleyDgn(py::module_&);
@@ -221,6 +210,14 @@ void def_DgnGCS(py::module_& m);
 
 void def_DesignHistory(py::module_& m);
 
+void def_BeTextFile(py::module_& m);
+void def_Dsig(py::module_& m);
+void def_DoubleValueFormat(py::module_& m);
+
+void def_DgnECChangeManager (py::module_& m);
+
+void def_IViewManager(py::module_& m);
+
 /*---------------------------------------------------------------------------------**//**
 * Module definition.
 * @bsimethod                                                                       2/2023
@@ -229,6 +226,11 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
     {
     // Document for module
     m.doc() = "The MSPyDgnPlatform library, is used to read and write DgnFiles. A design file is composed of Design Models. A model contains Elements. Use the Transaction Manager in order to persist changes";
+
+    //From pybentley
+    def_BeTextFile(m);
+    def_Dsig(m);
+    def_DoubleValueFormat(m);
 
     // class defines
     def_DgnPlatform(m);
@@ -269,13 +271,9 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
     def_DgnComponentHandlers(m);
     def_DgnCore(m);
     def_DgnDocumentManager(m);
-    def_WhereCriterion(m);
     def_DgnECFinders(m);
-    def_DgnECInstance(m);
     def_DgnHost(m);
-    def_DgnECProviders(m);
-    def_DgnECManager(m);        
-    def_DgnECTypes(m);
+	def_DgnECManager(m); 
     def_DgnFile(m);
     def_DgnFontManager(m);
     def_DgnLinkHandler(m);
@@ -312,14 +310,10 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
     def_IViewOutput(m);
     def_DropGraphics(m);
     def_ECInstanceHolderHandler(m);
-    def_ECQuery(m);
-    def_XDataTreeNode(m);
-    def_ECReportNode(m);
     def_ElementCopyContext(m);    
     def_ElementGraphics(m);    
     def_ITxnManager(m);
     def_ElementProperties(m);
-    def_ElementTemplateNode(m);
     def_ElementTemplateParamsHelper(m);
     def_ElementTemplateUtils(m);
     def_ExtendedElementHandler(m);
@@ -331,10 +325,8 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
     def_HUDMarker(m);    
     def_IAuxCoordSys(m);
     def_IconElementHandler(m);
-    def_IEditActionSource(m);
     def_image(m);
     def_IMaterialProperties(m);
-    def_IModifyElement(m);
     def_INamedViewElementHandler(m);
     def_IPointCloud(m);
     def_IRasterAttachment(m);
@@ -391,7 +383,6 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
     def_TextStringProperties(m);
     def_TextTableHandler(m);
     def_TransformClipStack(m);
-    def_UserInterfaceNode(m);
     def_ValueFormat(m);
     def_ValueParse(m);
     def_ViewContext(m);
@@ -434,6 +425,10 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
     def_BaseGCS(m);
     def_DgnGCS(m);
     def_DesignHistory(m);
+    def_DgnECChangeManager (m);
+
+	//From DgnView
+    def_IViewManager(m);
     }
 
 

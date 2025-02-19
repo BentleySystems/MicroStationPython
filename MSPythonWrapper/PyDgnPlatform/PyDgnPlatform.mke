@@ -46,6 +46,8 @@ dependencies    =   $(MSPythonSrc)/MSPythonPCH.h
 
 %include MultiCppCompileRule.mki
 
+PyDgnViewSource            = $(PyhonWrapper)PyDgnView/source/
+PyBentleySource            = $(PyhonWrapper)PyBentley/source/
 PyDgnPlatformSource        = $(PyhonWrapper)PyDgnPlatform/source/
 PyDgnPlatformDependencies  = $(dependencies) \
                              $(PythonInternalHeaders)OpqueTypes_Bentley.h \
@@ -116,13 +118,7 @@ $(o)dgndocumentmanager$(oext)           : $(PyDgnPlatformSource)dgndocumentmanag
 
 $(o)dgnecfinders$(oext)                 : $(PyDgnPlatformSource)dgnecfinders.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
-$(o)dgnecinstance$(oext)                : $(PyDgnPlatformSource)dgnecinstance.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
 $(o)dgnecmanager$(oext)                 : $(PyDgnPlatformSource)dgnecmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
-$(o)dgnecproviders$(oext)               : $(PyDgnPlatformSource)dgnecproviders.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
-$(o)dgnectypes$(oext)                   : $(PyDgnPlatformSource)dgnectypes.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)dgnelements$(oext)                  : $(PyDgnPlatformSource)dgnelements.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
@@ -196,10 +192,6 @@ $(o)displaystylemanager$(oext)          : $(PyDgnPlatformSource)displaystylemana
 
 $(o)dropgraphics$(oext)                 : $(PyDgnPlatformSource)dropgraphics.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
-$(o)ecquery$(oext)                      : $(PyDgnPlatformSource)ecquery.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
-$(o)ecreportnode$(oext)                 : $(PyDgnPlatformSource)ecreportnode.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
 $(o)elementagenda$(oext)                : $(PyDgnPlatformSource)elementagenda.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)elementcopycontext$(oext)           : $(PyDgnPlatformSource)elementcopycontext.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
@@ -213,8 +205,6 @@ $(o)elementhandle$(oext)                : $(PyDgnPlatformSource)elementhandle.cp
 $(o)elementproperties$(oext)            : $(PyDgnPlatformSource)elementproperties.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)elementrefbase$(oext)               : $(PyDgnPlatformSource)elementrefbase.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
-$(o)elementtemplatenode$(oext)          : $(PyDgnPlatformSource)elementtemplatenode.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)elementtemplateparamshelper$(oext)  : $(PyDgnPlatformSource)elementtemplateparamshelper.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
@@ -248,13 +238,9 @@ $(o)iconelementhandler$(oext)           : $(PyDgnPlatformSource)iconelementhandl
 
 $(o)idgntextstyleapplyable$(oext)       : $(PyDgnPlatformSource)idgntextstyleapplyable.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
-$(o)ieditactionsource$(oext)            : $(PyDgnPlatformSource)ieditactionsource.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
 $(o)image$(oext)                        : $(PyDgnPlatformSource)image.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)imaterialproperties$(oext)          : $(PyDgnPlatformSource)imaterialproperties.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
-$(o)imodifyelement$(oext)               : $(PyDgnPlatformSource)imodifyelement.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)inamedviewelementhandler$(oext)     : $(PyDgnPlatformSource)inamedviewelementhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
@@ -416,8 +402,6 @@ $(o)transformclipstack$(oext)           : $(PyDgnPlatformSource)transformclipsta
 
 $(o)unitdefinition$(oext)               : $(PyDgnPlatformSource)unitdefinition.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
-$(o)userinterfacenode$(oext)            : $(PyDgnPlatformSource)userinterfacenode.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
 $(o)valueformat$(oext)                  : $(PyDgnPlatformSource)valueformat.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)valueparse$(oext)                   : $(PyDgnPlatformSource)valueparse.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
@@ -427,8 +411,6 @@ $(o)viewcontext$(oext)                  : $(PyDgnPlatformSource)viewcontext.cpp 
 $(o)viewgroup$(oext)                    : $(PyDgnPlatformSource)viewgroup.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)viewinfo$(oext)                     : $(PyDgnPlatformSource)viewinfo.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
-$(o)wherecriterion$(oext)               : $(PyDgnPlatformSource)wherecriterion.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)whitespace$(oext)                   : $(PyDgnPlatformSource)whitespace.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
@@ -441,8 +423,6 @@ $(o)xattributeiter$(oext)               : $(PyDgnPlatformSource)xattributeiter.c
 $(o)xdatanodecollection$(oext)          : $(PyDgnPlatformSource)xdatanodecollection.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)xdatatreemanager$(oext)             : $(PyDgnPlatformSource)xdatatreemanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
-$(o)xdatatreenode$(oext)                : $(PyDgnPlatformSource)xdatatreenode.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)xdatatreeowner$(oext)               : $(PyDgnPlatformSource)xdatatreeowner.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
@@ -459,6 +439,16 @@ $(o)dgngeocoord$(oext)                  : $(PyDgnPlatformSource)dgngeocoord.cpp 
 $(o)designhistory$(oext)                : $(PyDgnPlatformSource)designhistory.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)rastercollection$(oext)             : $(PyDgnPlatformSource)rastercollection.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)betextfile$(oext)                   : $(PyBentleySource)ParentTypes/betextfile.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dsig$(oext)                         : $(PyBentleySource)ParentTypes/dsig.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)doublevalueformat$(oext)            : $(PyBentleySource)ParentTypes/doublevalueformat.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)iviewmanager$(oext)                 : $(PyDgnViewSource)ParentTypes/iviewmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)dgnecchangemanager$(oext)           : $(PyDgnPlatformSource)dgnecchangemanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 %include MultiCppCompileGo.mki
 
@@ -491,7 +481,8 @@ LINKER_LIBRARIES            = $(PythonLibName) \
                               $(ContextSubpartsLibs)RasterCore.lib \
                               $(ContextSubpartsLibs)BaseGeoCoord.lib \
                               $(ContextSubpartsLibs)PointCloud.lib \
-                              $(ContextSubpartsLibs)DgnGeoCoord.lib
+                              $(ContextSubpartsLibs)DgnGeoCoord.lib \
+                              $(ContextSubpartsLibs)DgnView.lib
 
 
 DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/

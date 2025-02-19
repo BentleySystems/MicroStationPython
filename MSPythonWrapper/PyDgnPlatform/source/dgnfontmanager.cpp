@@ -124,7 +124,7 @@ Returns (Tuple, 0):
 Returns (Tuple, 1):
 	fontNum.
 
-)doc";    
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_VisitFonts =R"doc(Visit all fonts in this table, optionally with a filter applied.
 

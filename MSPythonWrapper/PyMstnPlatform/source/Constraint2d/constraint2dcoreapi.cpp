@@ -287,6 +287,8 @@ Returns:
 
 USING_NAMESPACE_CONSTRAINT2D;
 
+DEFINE_BVECTOR_TYPE(VertexType, VertexTypeArray);
+
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023
 +---------------+---------------+---------------+---------------+---------------+------*/
@@ -310,6 +312,7 @@ void def_Constraint2dCoreAPI(py::module_& m)
         .value("eEllipseMinorEdge", VertexType::EllipseMinorEdge)
         .value("ePlanarFace", VertexType::PlanarFace)
         .export_values();
+    py::bind_vector< VertexTypeArray >(m, "VertexTypeArray", py::module_local(false));
 
     //===================================================================================
     // enum class SectorAngleType
@@ -577,7 +580,16 @@ void def_Constraint2dCoreAPI(py::module_& m)
     c9.def("__bool__", [] (Constraint2dSolverData& self) { return !self.IsEmpty(); });
     c9.def("IsResolved", &Constraint2dSolverData::IsResolved, DOC(Bentley, DgnPlatform, Constraint2dSolverData, IsResolved));
     c9.def("IsComplete", &Constraint2dSolverData::IsComplete, DOC(Bentley, DgnPlatform, Constraint2dSolverData, IsComplete));
-    c9.def("GetElementRefs", &Constraint2dSolverData::GetElementRefs, "elemRefs"_a, DOC(Bentley, DgnPlatform, Constraint2dSolverData, GetElementRefs));
+    c9.def("GetElementRefs",
+        [](Constraint2dSolverData& self, bvector<ElementRefP>& elemRefs)
+        {
+            T_StdElementRefSet  elementRefs;
+            self.GetElementRefs(elementRefs);
+            for (ElementRefP ref : elementRefs)
+            {
+                elemRefs.push_back(ref);
+            }
+        }, "elemRefs"_a, DOC(Bentley, DgnPlatform, Constraint2dSolverData, GetElementRefs));
     c9.def("Merge", &Constraint2dSolverData::Merge, "rhs"_a, DOC(Bentley, DgnPlatform, Constraint2dSolverData, Merge));
     c9.def("CollateByElement", &Constraint2dSolverData::CollateByElement, "childGroups"_a, DOC(Bentley, DgnPlatform, Constraint2dSolverData, CollateByElement));
     c9.def("RemoveElementRef", &Constraint2dSolverData::RemoveElementRef, "elemRef"_a, DOC(Bentley, DgnPlatform, Constraint2dSolverData, RemoveElementRef));
@@ -594,4 +606,14 @@ void def_Constraint2dCoreAPI(py::module_& m)
     c9.def("Replace", &Constraint2dSolverData::Replace, "oldElemRef"_a, "newElemRef"_a);
     c9.def("IsCurvePlaneFixed", &Constraint2dSolverData::IsCurvePlaneFixed, "curveId"_a, DOC(Bentley, DgnPlatform, Constraint2dSolverData, IsCurvePlaneFixed));
     c9.def("IsCurvePlaneConstrained", &Constraint2dSolverData::IsCurvePlaneConstrained, "curveId"_a, DOC(Bentley, DgnPlatform, Constraint2dSolverData, IsCurvePlaneConstrained));
+    c9.def_property_readonly("m_constraints", 
+        [](Constraint2dSolverData& self)
+        {
+            return &self.m_constraints;
+        });
+    c9.def_property_readonly("m_dimensions",
+        [](Constraint2dSolverData& self)
+        {
+            return &self.m_dimensions;
+        });
     }

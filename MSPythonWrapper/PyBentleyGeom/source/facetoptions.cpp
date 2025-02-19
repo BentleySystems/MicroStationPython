@@ -774,7 +774,7 @@ void def_FacetOptions(py::module_& m)
     c2.def("AddParamIndexTerminator", &IPolyfaceConstruction::AddParamIndexTerminator, DOC(Bentley, Geom, IPolyfaceConstruction, AddParamIndexTerminator));
     c2.def("AddColorIndexTerminator", &IPolyfaceConstruction::AddColorIndexTerminator, DOC(Bentley, Geom, IPolyfaceConstruction, AddColorIndexTerminator));            
     
-//    c2.def_property_readonly("ClientMesh", &IPolyfaceConstruction::GetClientMeshPtr);
+    c2.def_property_readonly("ClientMesh", &IPolyfaceConstruction::GetClientMeshPtr);
     c2.def("GetClientMesh", &IPolyfaceConstruction::GetClientMeshPtr, py::return_value_policy::reference_internal);
 
     c2.def_property_readonly("FacetOptions", &IPolyfaceConstruction::GetFacetOptionsR);
@@ -877,7 +877,7 @@ void def_FacetOptions(py::module_& m)
            }, "curves"_a, "points"_a, DOC(Bentley, Geom, IPolyfaceConstruction, Stroke));
 
     c2.def("AddTriangulation", &IPolyfaceConstruction::AddTriangulation, "points"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddTriangulation));
-    c2.def("AddTriangles", &IPolyfaceConstruction::AddTriangles, "triangles"_a, "reverse"_a, "paramTriangles"_a = nullptr, DOC(Bentley, Geom, IPolyfaceConstruction, AddTriangles));
+    c2.def("AddTriangles", &IPolyfaceConstruction::AddTriangles, "triangles"_a, "reverse"_a = false, "paramTriangles"_a = nullptr, DOC(Bentley, Geom, IPolyfaceConstruction, AddTriangles));
     c2.def("AddTriangulationPair", &IPolyfaceConstruction::AddTriangulationPair, "pointA"_a, "reverseA"_a, "pointB"_a, "reverseB"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddTriangulationPair));    
 
     c2.def("AddRotationalSweepLoop", &IPolyfaceConstruction::AddRotationalSweepLoop,

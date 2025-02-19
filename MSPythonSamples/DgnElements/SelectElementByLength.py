@@ -47,7 +47,10 @@ def selectElementsbyLength(inputLength):
 
             primitiveType = curve.HasSingleCurvePrimitive()
             if primitiveType == ICurvePrimitive.eCURVE_PRIMITIVE_TYPE_Line or primitiveType == ICurvePrimitive.eCURVE_PRIMITIVE_TYPE_LineString:
-                lineLength = curve.Length()
+                modelInfo = dgnModel.GetModelInfo()
+                scaleFactor = modelInfo.UorPerMeter
+                lineLength = curve.Length()/scaleFactor
+                print("line", lineLength)
                 if(inputLength > lineLength):
                     selSetManager.AddElement(perElementRef,dgnModel)         
 

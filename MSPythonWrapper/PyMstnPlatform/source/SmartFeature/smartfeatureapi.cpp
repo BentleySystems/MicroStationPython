@@ -868,4 +868,10 @@ void def_SmartFeatureAPI(py::module_& m)
                   }, "eh"_a, "regionsOnly"_a, DOC(Bentley, MstnPlatform, SmartFeatureUtil, GetCurveVector));
 
     c4.def_static("DrawDynamicSpinAxis", &SmartFeatureUtil::DrawDynamicSpinAxis, "axis"_a, "range"_a, "normal"_a, "viewport"_a, DOC(Bentley, MstnPlatform, SmartFeatureUtil, DrawDynamicSpinAxis));
+    c4.def_static("InitSmartFeature", [] ()
+                  {
+                      if (nullptr != mdlSystem_findMdlDesc(L"SMARTFEATURE"))
+                          return (int)SUCCESS;
+                      return mdlSystem_loadMdlProgram(L"SMARTFEATURE", L"SMARTFEATURE", L"");
+                  });
     }

@@ -27,9 +27,10 @@ void def_DgnRegionElementTool(py::module_&);
 void def_DgnTool(py::module_&);
 void def_FenceManager(py::module_&);
 void def_IRedraw(py::module_&);
-void def_IViewManager(py::module_&);
 void def_SelectionSetManager(py::module_&);
 void def_LocateSubEntityTool(py::module_&);
+
+void def_IModifyElement(py::module_&);
 
 /*---------------------------------------------------------------------------------**//**
 * Module definition.
@@ -40,6 +41,9 @@ PYBIND11_MODULE(MSPyDgnView, m)
     // Document for module
     m.doc() = "The MSPyDgnView library, provides the framework for locating, selecting and manipulating geometry in a DesignFile using a the concept of a Tool.";
 
+    //From DgnPlatform
+    def_IModifyElement(m);
+
     // class defines
     bind_container_PyDgnView(m);
     def_AccuDraw(m);
@@ -49,7 +53,6 @@ PYBIND11_MODULE(MSPyDgnView, m)
     def_DgnElementSetTool(m);
     def_DgnRegionElementTool(m);    
     def_FenceManager(m);    
-    def_IViewManager(m);
     def_SelectionSetManager(m);
     def_LocateSubEntityTool(m);
     }

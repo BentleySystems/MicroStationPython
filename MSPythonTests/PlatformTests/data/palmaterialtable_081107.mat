@@ -1,0 +1,20 @@
+MV_AS--0
+
+palette palmaterials_081107.pal
+
+assign
+DgnLib Material 1
+"Def*lt" *
+DgnLib Material 4
+"Level1" 6
+"Level1" 7
+Material4
+"L*2" *
+Material1
+"Level1" 3
+"Level2" 1
+Material2
+"Default" 0
+Material3
+"Level1" 2
+end

@@ -8,8 +8,6 @@
 #include "MSPythonPCH.h"
 #include <DgnPlatform/DgnViewport.h>
 
-
-
 static const char * __doc_Bentley_DgnPlatform_Viewport_ComputeDisplayedModelRefRange =R"doc(Compute range of a model ref when display in the viewport)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Viewport_ComputeFittedElementRange =R"doc(Compute the range of the element when displayed in the viewport)doc";
@@ -614,5 +612,4 @@ void def_DgnViewport(py::module_& m)
     c3.def("SynchWithViewInfo", &Viewport::SynchWithViewInfo, "saveInUndo"_a, "updateViewTitle"_a, DOC(Bentley, DgnPlatform, Viewport, SynchWithViewInfo));
     c3.def("ComputeFittedElementRange", &Viewport::ComputeFittedElementRange, "range"_a, "elements"_a, "rMatrix"_a, DOC(Bentley, DgnPlatform, Viewport, ComputeFittedElementRange));
     c3.def("ComputeDisplayedModelRefRange", &Viewport::ComputeDisplayedModelRefRange, "range"_a, "modelRef"_a, "includeChildren"_a, "fitParams"_a, DOC(Bentley, DgnPlatform, Viewport, ComputeDisplayedModelRefRange));
-
     }

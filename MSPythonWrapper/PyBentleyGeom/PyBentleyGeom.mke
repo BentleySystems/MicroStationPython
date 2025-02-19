@@ -46,6 +46,7 @@ dependencies    =   $(MSPythonSrc)/MSPythonPCH.h
 
 %include MultiCppCompileRule.mki
 
+PyBentleySource            = $(PyhonWrapper)PyBentley/source/
 PyBentleyGeomSource        = $(PyhonWrapper)PyBentleyGeom/source/
 PyBentleyGeomDependencies  = $(dependencies) \
                              $(PythonInternalHeaders)OpqueTypes_Bentley.h \
@@ -137,6 +138,14 @@ $(o)point$(oext)                       : $(PyBentleyGeomSource)point.cpp $(PyBen
 
 $(o)geopoint$(oext)                    : $(PyBentleyGeomSource)geopoint.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
 
+$(o)basetypebvector$(oext)             : $(PyBentleySource)ParentTypes/basetypebvector.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)BeXmlCGStreamReader$(oext)         : $(PyBentleyGeomSource)BeXmlCGStreamReader.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)DPoint3dOps$(oext)                 : $(PyBentleyGeomSource)DPoint3dOps.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
+$(o)PolylineOps$(oext)                 : $(PyBentleyGeomSource)PolylineOps.cpp $(PyBentleyGeomDependencies) ${MultiCompileDepends}
+
 %include MultiCppCompileGo.mki
 
 CCPchOpts =
@@ -159,6 +168,7 @@ DLM_NO_DLS                  = 1
 DLM_NO_DEF                  = 1
 LINKER_LIBRARIES            = $(PythonLibName) \
                               $(ContextSubpartsLibs)BentleyGeom.lib \
+                              $(ContextSubpartsLibs)BentleyGeomSerialization.lib \
                               $(ContextSubpartsLibs)bentley.lib \
                               $(ContextSubpartsLibs)BentleyAllocator.lib \
                               $(ContextSubpartsLibs)MSPythonCore.lib

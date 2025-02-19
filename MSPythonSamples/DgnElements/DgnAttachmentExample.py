@@ -32,8 +32,9 @@ def createDgnAttachment():
     modelName = 'MyNewModel'
     modelId = loadDgnFile.FindModelIdByName(modelName)
     if(INVALID_MODELID == modelId):
-        ret = loadDgnFile.CreateNewModel(modelName, DgnModelType.eNormal, False)
-        if ret[1] != eDGNMODEL_STATUS_Success:
+        error = MsPyDgnModelStatus ()
+        ret = loadDgnFile.CreateNewModel(error, modelName, DgnModelType.eNormal, False)
+        if error.value != eDGNMODEL_STATUS_Success:
             return False
 
     ret = ACTIVEMODEL.CreateDgnAttachment(moniker, 'MyNewModel', False)

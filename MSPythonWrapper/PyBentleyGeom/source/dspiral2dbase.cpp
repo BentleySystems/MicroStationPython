@@ -580,6 +580,9 @@ void def_DSpiral2dBase(py::module_& m)
     c2.attr("TransitionType_JapaneseCubic") = DSpiral2dBase::TransitionType_JapaneseCubic;
     c2.attr("TransitionType_CzechAlongTangent") = DSpiral2dBase::TransitionType_CzechAlongTangent;
 
+    c2.def_property_readonly ("mLength", [](DSpiral2dBase const& self) { return self.mLength; });
+
+
     c2.def("GetExtraData", &DSpiral2dBase::GetExtraData, "extraData"_a, DOC(Bentley, Geom, DSpiral2dBase, GetExtraData));
 
     c2.def_static("StringToTransitionType", &DSpiral2dBase::StringToTransitionType, "name"_a, DOC(Bentley, Geom, DSpiral2dBase, StringToTransitionType));

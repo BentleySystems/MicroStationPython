@@ -21,6 +21,7 @@ void def_GeomApi(py::module_& m)
     //===================================================================================
     // struct IGeometry
     py::class_<IGeometry, IGeometryPtr> c1(m, "IGeometry");
+
     if (true)
         {
         py::enum_<IGeometry::GeometryType>(c1, "GeometryType")
@@ -100,4 +101,16 @@ void def_GeomApi(py::module_& m)
         .value("eLOCAL_COORDINATE_SCALE_01RangeBothAxes", LOCAL_COORDINATE_SCALE_01RangeBothAxes)
         .value("eLOCAL_COORDINATE_SCALE_01RangeLargerAxis", LOCAL_COORDINATE_SCALE_01RangeLargerAxis)
         .export_values();
+
+    //===================================================================================
+    // struct OrderedIGeometryPtr
+    py::class_<OrderedIGeometryPtr> c4(m, "OrderedIGeometryPtr");
+
+    c4.def(py::init<ICurvePrimitivePtr const&>(), "target"_a);
+    c4.def(py::init<CurveVectorPtr const&>(), "target"_a);
+    c4.def(py::init<ISolidPrimitivePtr const&>(), "target"_a);
+    c4.def(py::init<MSBsplineSurfacePtr const&>(), "target"_a);
+    c4.def(py::init<PolyfaceHeaderPtr const&>(), "target"_a);
+
+    c4.def(py::self < py::self);
     }

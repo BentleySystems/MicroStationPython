@@ -382,7 +382,7 @@ void def_Constraint3dCoreAPI(py::module_& m)
                 retVal = self.Initialize(constraints, modelRef, nullptr, debugJournal);
 
             return retVal;
-            }, "constraints"_a, "modelRef"_a, "modifiedElements"_a = nullptr, "debugJournal"_a = nullptr);
+            }, "constraints"_a, "modelRef"_a, "modifiedElements"_a = py::dict(), "debugJournal"_a = nullptr);
 
     c17.def("Evaluate", [] (Constraint3dSolver& self)
             {
@@ -410,7 +410,7 @@ void def_Constraint3dCoreAPI(py::module_& m)
                 {
                 for (auto& it : tm)
                     {
-                    auto key = py::cast(it.first, py::return_value_policy::reference_internal);
+                    auto key = py::cast(it.first);
                     auto val = py::cast(it.second);
                     outVal[key] = val;
                     }

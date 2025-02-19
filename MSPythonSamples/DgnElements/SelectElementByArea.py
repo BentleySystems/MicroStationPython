@@ -51,8 +51,10 @@ def selectElementsbyArea(inputArea):
                 instance.GetValue(propValue, 'EnclosedArea', 0)
                 if (not propValue.IsNull()):
                     #UOR value converted to SQ M , 10000*10000
-                    area = propValue.GetDouble()/10000000
-                    print("EnclosedArea:", propValue.GetDouble()/10000000)
+                    modelInfo = dgnModel.GetModelInfo()
+                    scaleFactor = modelInfo.UorPerMeter
+                    area = propValue.GetDouble()/(scaleFactor * scaleFactor)
+                    print("EnclosedArea:", propValue.GetDouble()/(scaleFactor * scaleFactor))
                     if (inputArea > area):
                         selSetManager.AddElement(perElementRef,dgnModel)
                     break
@@ -60,7 +62,7 @@ def selectElementsbyArea(inputArea):
                      break
 
 '''
-Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '3D Data' model 
+Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '2D Metric Design' model 
 '''
 #main
 if __name__ == "__main__":

@@ -527,11 +527,11 @@ void def_MSBsplineCurve(py::module_& m)
            py::overload_cast<DPoint3dArray&, DoubleArray&>(&MSBsplineCurve::FractionToPoints),
            "points"_a, "fractions"_a);
 
-    c1.def("GetFrenetFrame", [] (MSBsplineCurveCR self, DVec3dP frame, DPoint3dR point, double u)
+    c1.def("GetFrenetFrame", [] (MSBsplineCurveCR self, DVec3dArray frame, DPoint3dR point, double u)
            {
            double curvature = 0;
            double torsion = 0;
-           MSBsplineStatus retVal = self.GetFrenetFrame(frame, point, curvature, torsion, u);
+           MSBsplineStatus retVal = self.GetFrenetFrame(frame.data(), point, curvature, torsion, u);
            return py::make_tuple(retVal, curvature, torsion);
            }, "frame"_a, "point"_a, "u"_a);
 
@@ -539,7 +539,16 @@ void def_MSBsplineCurve(py::module_& m)
            py::overload_cast<TransformR, double>(&MSBsplineCurve::GetFrenetFrame, py::const_),
            "frame"_a, "u"_a);
 
-    c1.def("ComputeDerivatives", &MSBsplineCurve::ComputeDerivatives, "dervs"_a, "numDervs"_a, "fractionParameter"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeDerivatives));
+    c1.def("ComputeDerivatives", [](MSBsplineCurveCR self, DVec3dArray& dervs, int numDervs, double u)
+            {
+            DVec3d* pDervs = new DVec3d[numDervs+1];
+            self.ComputeDerivatives (pDervs , numDervs, u);
+            for (int i = 0; i < numDervs+1; i++)
+                dervs.push_back (pDervs[i]);
+
+            delete[] pDervs;
+            pDervs = nullptr;
+            });
 
     c1.def("ClosestPoint", [] (MSBsplineCurveCR self, DPoint3dR curvePoint, DPoint3dCR spacePoint)
            {
@@ -652,12 +661,11 @@ void def_MSBsplineCurve(py::module_& m)
     c1.def("CountDistinctBeziers", &MSBsplineCurve::CountDistinctBeziers, DOC(Bentley, Geom, MSBsplineCurve, CountDistinctBeziers));
     c1.def("FindKnotInterval", &MSBsplineCurve::FindKnotInterval, "knotValue"_a, DOC(Bentley, Geom, MSBsplineCurve, FindKnotInterval));
 
-    c1.def("AdvanceToBezierInKnotInterval", [] (MSBsplineCurveCR self, BCurveSegmentR segment, DRange1dCR interval)
+    c1.def("AdvanceToBezierInKnotInterval", [] (MSBsplineCurveCR self, BCurveSegmentR segment, size_t& bezierSelect, DRange1dCR interval)
            {
-           size_t bezierSelect = 0;
            bool bOk = self.AdvanceToBezierInKnotInterval(segment, bezierSelect, interval);
            return py::make_tuple(bOk, bezierSelect);
-           }, "segment"_a, "interval"_a);
+           }, "segment"_a, "bezierSelect"_a, "interval"_a);
 
     c1.def("AdvanceToBezierInFractionInterval", [] (MSBsplineCurveCR self, BCurveSegmentR segment, DRange1dCR interval)
            {
@@ -668,12 +676,11 @@ void def_MSBsplineCurve(py::module_& m)
 
     c1.def("GetTailBezierSelect", &MSBsplineCurve::GetTailBezierSelect, DOC(Bentley, Geom, MSBsplineCurve, GetTailBezierSelect));
 
-    c1.def("RetreatToBezierInKnotInterval", [] (MSBsplineCurveCR self, BCurveSegmentR segment, DRange1dCR interval)
+    c1.def("RetreatToBezierInKnotInterval", [] (MSBsplineCurveCR self, BCurveSegmentR segment, size_t& bezierSelect, DRange1dCR interval)
            {
-           size_t bezierSelect = 0;
            bool bOk = self.RetreatToBezierInKnotInterval(segment, bezierSelect, interval);
            return py::make_tuple(bOk, bezierSelect);
-           }, "segment"_a, "interval"_a);    
+           }, "segment"_a, "bezierSelect"_a, "interval"_a);
 
     c1.def("SearchKnot", [] (MSBsplineCurveCR self, double unnormalizedKnotValue)
            {
@@ -885,9 +892,11 @@ void def_MSBsplineCurve(py::module_& m)
             &MSBsplineCurve::InitFromGeneralLeastSquares,
             "avgDistance"_a, "maxDistance"_a, "info"_a, "knts"_a, "pnts"_a, "uValues"_a, "numPnts"_a);
 
-     c1.def("InitFromInterpolatePoints",
-            &MSBsplineCurve::InitFromInterpolatePoints,
-            "points"_a, "numPoints"_a, "parameterization"_a, "endControl"_a, "sTangent"_a, "eTangent"_a, "keepTanMag"_a, "order"_a);
+     c1.def("InitFromInterpolatePoints", [](MSBsplineCurve& self, DPoint3dArray const& points, int parametrization, bool endControl, DVec3dCP sTangent, DVec3dCP eTangent, bool keepTanMag, int order)
+            {
+             size_t numPoints = points.size();
+             self.InitFromInterpolatePoints(points.data(), (int)numPoints, parametrization, endControl, sTangent, eTangent, keepTanMag, order);
+            }, "points"_a, "parameterization"_a, "endControl"_a, "sTangent"_a, "eTangent"_a, "keepTanMag"_a, "order"_a);
 
      c1.def_static("SampleG1CurveByPoints",
             &MSBsplineCurve::SampleG1CurveByPoints,

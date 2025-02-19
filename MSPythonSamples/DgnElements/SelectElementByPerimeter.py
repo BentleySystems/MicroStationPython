@@ -49,15 +49,17 @@ def selectElementsbyPerimeter(inputPerimeter):
                 instance.GetValue(propValue, 'Perimeter', 0)
                 if (not propValue.IsNull()):                   
                         #UOR value converted to M , 10000
-                        perimeter = propValue.GetDouble()
-                        print("Perimeter:", propValue.GetDouble()/10000)
+                        modelInfo = dgnModel.GetModelInfo()
+                        scaleFactor = modelInfo.UorPerMeter
+                        perimeter = propValue.GetDouble()/scaleFactor
+                        print("Perimeter:", propValue.GetDouble()/scaleFactor)
                         if (inputPerimeter > perimeter):
                             selSetManager.AddElement(perElementRef,dgnModel)
                         break
                 else:
                      break
 '''
-Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '3D Data' model 
+Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '2D Metric Design' model 
 '''
 #main
 if __name__ == "__main__":

@@ -7,9 +7,6 @@
 +--------------------------------------------------------------------------------------*/
 #include "MSPythonPCH.h"
 #include <DgnView/DgnElementSetTool.h>
-#include <Mstn/MdlApi/msoutput.fdf>
-
-
 
 //=======================================================================================
 // Publicist class for ModifyOp

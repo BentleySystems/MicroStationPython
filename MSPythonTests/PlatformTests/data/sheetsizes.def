@@ -1,0 +1,85 @@
+#-------------------------------------------------------------------------------
+# This is a MicroStation V8 Sheet Size Definition file.
+#
+# Lines that begin with # are for descriptive comments.
+#
+# $Copyright: (c) 2015 Bentley Systems, Incorporated. All rights reserved. $
+#-------------------------------------------------------------------------------
+# The active sheetsizes.def file is used to control the available list of Sheet Sizes
+# which are used to define the printable area for sheet models.
+#
+# The format of this file consists of one sheet size definition per line, where the
+# format of each line is:
+#
+# Name;     Units;      Height; Width;      TopMargin;  LeftMargin;  BottomMargin;  RightMargin; UnitSystems
+#
+# Name:
+# Used for display of the sheet size in the user interface.  Use the special value "_[SYSTEM]_"
+# to indicate that the program should use the standard builtin name.
+#
+# Units:
+# Controls the interpretation of the subsequent numeric values such as Height and Width.  True
+# scale will be applied to all values.
+#
+#   Valid values for Units are:
+#   1 Inches
+#   2 Millimeters
+#
+# Heigth and Width:
+# Control the corresponding dimensions of the sheet.
+#
+# TopMargin, LeftMargin, BottomMargin, and RightMargin:
+# Control the corresponding margins that decrease the printable area within the sheet size defined
+# by the Height and Width.  Negative values can be used for any of the margins to move the margins
+# outside of the displayed paper.
+#
+# UnitSystems:
+# Used to filter the list of sizes.  The user interface will typically use the active model's
+# master units to control the visible sizes.  Only sizes that specify a system that matches 
+# the system of the active model will be displayed.  Multiple systems can be specified.  If 
+# 1,2,3 is specified then the size will not be filtered based on the system.
+#
+# For each line any content following '#' is ignored.
+#
+# NOTE: The Roll paper sizes can be used with any roll paper device. The height and width will
+# emulate the size of the paper after it is cut.
+#
+# NOTE: The Cut Sheet sizes can be use be used with most sheet paper printers such that the margin
+# is less than the maximum printable area that the printing device can produce.
+#
+# To customize this data make a copy of this file, place it within your configuration, and
+# define the configuration variable MS_CUSTOMSHEETSIZEDEF with that location.
+#
+#-------------------------------------------------------------------------------
+#
+# MicroStation Standard Sheet Size Examples
+#
+#   Name              Units       Height      Width     TopMargin  LeftMargin  BottomMargin  RightMargin  UnitSystems
+#Roll paper sizes.
+_[SYSTEM]_ ;            1;         8.5;         11;         0.00;       0.00;       0.00;       0.00;       1,3        #ANSIA
+_[SYSTEM]_ ;            1;          11;         17;         0.00;       0.00;       0.00;       0.00;       1,3        #ANSIB
+_[SYSTEM]_ ;            1;          17;         22;         0.00;       0.00;       0.00;       0.00;       1,3        #ANSIC
+_[SYSTEM]_ ;            1;          22;         34;         0.00;       0.00;       0.00;       0.00;       1,3        #ANSID
+_[SYSTEM]_ ;            1;          34;         44;         0.00;       0.00;       0.00;       0.00;       1,3        #ANSIE
+
+# Architectural Sizes.
+_[SYSTEM]_ ;            1;           9;         12;         0.00;       0.00;       0.00;       0.00;       1,3        #ARCHA
+_[SYSTEM]_ ;            1;          12;         18;         0.00;       0.00;       0.00;       0.00;       1,3        #ARCHB
+_[SYSTEM]_ ;            1;          18;         24;         0.00;       0.00;       0.00;       0.00;       1,3        #ARCHC
+_[SYSTEM]_ ;            1;          24;         36;         0.00;       0.00;       0.00;       0.00;       1,3        #ARCHD
+_[SYSTEM]_ ;            1;          36;         48;         0.00;       0.00;       0.00;       0.00;       1,3        #ARCHE
+_[SYSTEM]_ ;            1;          30;         42;         0.00;       0.00;       0.00;       0.00;       1,3        #ARCHE1
+
+_[SYSTEM]_ ;            2;         841;       1189;         0.00;       0.00;       0.00;       0.00;       2          #ISOA0
+_[SYSTEM]_ ;            2;         594;        841;         0.00;       0.00;       0.00;       0.00;       2          #ISOA1
+_[SYSTEM]_ ;            2;         420;        594;         0.00;       0.00;       0.00;       0.00;       2          #ISOA2
+_[SYSTEM]_ ;            2;         297;        420;         0.00;       0.00;       0.00;       0.00;       2          #ISOA3
+_[SYSTEM]_ ;            2;         210;        297;         0.00;       0.00;       0.00;       0.00;       2          #ISOA4
+
+#Cut Sheet sizes.
+_[SYSTEM]_;             1;        8.00;      10.50;         0.25;       0.25;       0.25;       0.25;       1,3        #ANSIACutSheet
+_[SYSTEM]_;             1;       10.50;      16.50;         0.25;       0.25;       0.25;       0.25;       1,3        #ANSIBCutSheet
+_[SYSTEM]_;             1;       16.50;      21.50;         0.25;       0.25;       0.25;       0.25;       1,3        #ANSICCutSheet
+_[SYSTEM]_;             1;       21.50;      33.50;         0.25;       0.25;       0.25;       0.25;       1,3        #ANSIDCutSheet
+_[SYSTEM]_;             1;       33.50;      43.50;         0.25;       0.25;       0.25;       0.25;       1,3        #ANSIECutSheet
+

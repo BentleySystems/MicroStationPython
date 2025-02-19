@@ -8,8 +8,6 @@
 #include "MSPythonPCH.h"
 #include <DgnPlatform/DgnPlatform.h>
 
-
-
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023
 +---------------+---------------+---------------+---------------+---------------+------*/
@@ -833,4 +831,13 @@ void def_DgnPlatform(py::module_& m)
         {
         return 20;  //const length in C++ side
         });
+
+    //===================================================================================
+    //Struct LevelClassMask
+    py::class_< LevelClassMask> c1(m, "LevelClassMask");
+    c1.def(py::init<>());
+    c1.def_property("levelBitMask", 
+        [](LevelClassMask const& self) { return self.levelBitMaskP; },
+        [](LevelClassMask& self, BitMaskCP val) { self.levelBitMaskP = val; }, py::keep_alive<1, 2>() );
+    c1.def_readwrite("classMask", &LevelClassMask::classMask);
     }

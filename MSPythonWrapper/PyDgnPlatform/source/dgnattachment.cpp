@@ -833,6 +833,7 @@ void def_DgnAttachment(py::module_& m)
     if (true)
         {
         py::class_<DgnAttachmentAppData::Key, AppDataKey> c1_1(c1, "Key");
+        c1_1.def(py::init<>());
         }
 
     c1.def(py::init<>());

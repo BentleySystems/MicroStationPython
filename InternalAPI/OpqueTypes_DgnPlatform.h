@@ -19,3 +19,17 @@ DEFINE_BVECTOR_TYPE(DgnPlatform::GeoreferencePriority, GeoreferencePriorityVecto
 
 DEFINE_BVECTOR_TYPE(DgnECInstancePtr, DgnECInstanceVector);
 DEFINE_BVECTOR_TYPE(DgnTagDefinition, DgnTagDefinitionArray);
+
+DEFINE_BVECTOR_TYPE(MaterialCP, MaterialList);
+
+DEFINE_BMAP_TYPE(MaterialMap::MapType, MaterialMapPtr, MaterialMapPtrList);
+
+DEFINE_BVECTOR_TYPE(DgnFileP, DgnFiles);
+
+DEFINE_BVECTOR_TYPE(IDgnECChangeListenerP, DgnECChangeListeners);
+
+DEFINE_BVECTOR_TYPE(DgnInstanceChangeRecordP, DgnInstanceChangeRecords);
+
+DEFINE_BVECTOR_TYPE(DgnRelationChangeRecordP, DgnRelationChangeRecords);
+
+DEFINE_BVECTOR_TYPE(SheetSizeDefinition, SheetSizeDefinitionVector);
