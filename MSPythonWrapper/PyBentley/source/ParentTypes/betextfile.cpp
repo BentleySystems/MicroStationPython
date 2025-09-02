@@ -12,10 +12,10 @@
 
 static const char * __doc_Bentley_BeTextFile_GetPointer = R"doc(Gets the file read/write position.
 
-Parameter ``position``:
+:param position:
     the current read/write position
 
-Returns:
+:returns:
     BeFileStatus::Success if the operation was successful or non-zero
     if it failed.)doc";
 
@@ -40,28 +40,28 @@ Remark:
 static const char * __doc_Bentley_BeTextFile_Rewind = R"doc(Rewinds the file and prepare for reading from the beginning of the
 text data (i.e., just past the encoding signature, if there is one).
 
-Returns:
+:returns:
     BeFileStatus::Success if the operation was successful or non-zero
     if it failed.)doc";
 
 static const char * __doc_Bentley_BeTextFile_GetChar = R"doc(Reads the next character from the file.
 
-Returns:
+:returns:
     The next character or WEOF.)doc";
 
 static const char * __doc_Bentley_BeTextFile_PutLine = R"doc(Writes a line to the file.
 
-Parameter ``textLine``:
+:param textLine:
     The buffer to read the line into.
 
-Parameter ``addCarriageReturn``:
+:param addCarriageReturn:
     If true, appends a newline character to the input *textLine.*
 
 Remark:
     s The data will be converted to the encoding specified when
     opening the file.
 
-Returns:
+:returns:
     TextFileWriteStatus::Success if the line was written successfully;
     otherwise an error code.)doc";
 
@@ -89,19 +89,19 @@ Remark:
 
 static const char * __doc_Bentley_BeTextFile_Open = R"doc(Opens a text file for reading or writing.
 
-Parameter ``status``:
+:param status:
     BeFileStatus::Success on success or the file open error.
 
-Parameter ``fullFileSpec``:
+:param fullFileSpec:
     Name of the file to open.
 
-Parameter ``openType``:
+:param openType:
     Whether to open the file for read, write or append.
 
-Parameter ``options``:
+:param options:
     Options controlling how newline characters are treated on read.
 
-Parameter ``encoding``:
+:param encoding:
     Encoding for the file; use TextFileEncoding::CurrentLocale for
     ASCII. This parameter is used only when openType is
     TextFileOpenType::Write.
@@ -116,7 +116,7 @@ Remark:
     output is to be written. If there is an existing file with the
     same name, that file is replaced by a new file.
 
-Returns:
+:returns:
     A pointer to the file. If status is not BeFileStatus::Success then
     the pointer will fail the IsValid() check.)doc";
 

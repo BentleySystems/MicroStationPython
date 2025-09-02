@@ -21,7 +21,7 @@ static const char * __doc_Bentley_DgnPlatform_LsSystemMap_GetSystemMap =R"doc(Ge
 static const char * __doc_Bentley_DgnPlatform_LsResourceFileMap_GetRscHandle =R"doc(Returns the Resource File Handle associated with this map. Be careful
 not to close it.
 
-Returns:
+:returns:
     The resource File Handle or 0 if no file is open.
 
 See also:
@@ -29,10 +29,10 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_LsResourceFileMap_CreateNewFile =R"doc(Creates a new line style resource file.
 
-Parameter ``fileName``:
+:param fileName:
     Name of the file.
 
-Returns:
+:returns:
     LINESTYLE_STATUS_Success if it creates the file; an error
     indicator otherwise
 
@@ -47,10 +47,10 @@ be used to access the line styles and components that file
 contains.<p>
 
 
-Parameter ``fileName``:
+:param fileName:
     Name of the file to open.
 
-Parameter ``readonly``:
+:param readonly:
     Pass true to open the file readonly.
 
 See also:
@@ -69,10 +69,10 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_LsMap_GetLineStyleEntry =R"doc(Searches the set of names associated with the LsMap.
 
-Parameter ``lsName``:
+:param lsName:
     The name of the line style.
 
-Returns:
+:returns:
     The associated LsDefinition object if found. Otherwise, it returns
     NULL; @note If the line style map is a LsDgnFileMap then the
     LsDefinitionP that is returned may point to a line style defined

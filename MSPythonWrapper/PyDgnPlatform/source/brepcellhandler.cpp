@@ -13,16 +13,16 @@
 
 static const char * __doc_Bentley_DgnPlatform_BrepCellHeaderHandler_CreateBRepCellElement =R"doc(Create a new BRep cell from the supplied ISolidKernelEntity.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Optional template element.
 
-Parameter ``entity``:
+:param entity:
     The brep data.
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Will be returned from
     eeh.GetModelRef () and later used by AddChildComplete to update
     the cell's range.
@@ -30,7 +30,7 @@ Parameter ``modelRef``:
 Remark:
     s Requires host implementation of SolidsKernelAdmin.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated. Bentley Systems +---------------+---------------+-----
     ----------+---------------+---------------+------)doc";

@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------------------------+
 |
-|     $Source: MSPython\MSPythonWrapper\PyDgnPlatform\source\light.cpp $
+|     $Source: MSPython\MSPythonWrapper\PyDgnPlatform\sourceght.cpp $
 |
 |  $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
 |
@@ -14,53 +14,53 @@ static const char * __doc_Bentley_DgnPlatform_LightManager_ScaleColorForDisplay 
 guaranteed that all types of material stores can be created or written
 to.
 
-Parameter ``colorToScale``:
+:param colorToScale:
     Color in either 0-255 or 0-1 range based on isNormalized.
 
-Parameter ``isNormalized``:
+:param isNormalized:
     If true, colorToScale is 0-1. If false, colorToScale is 0-255.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightManager_InitializeLightName =R"doc(Initialize light name
 
-Parameter ``lightNameP``:
+:param lightNameP:
     initialized light name
 
-Parameter ``elemId``:
+:param elemId:
     tag to use to generate name
 
-Parameter ``modelRef``:
+:param modelRef:
     the model reference
 
-Parameter ``type``:
+:param type:
     the type of the light
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightManager_FindIESFile =R"doc(Find IES file by specified name from the render dgn file.
 
-Parameter ``iesName``:
+:param iesName:
     the name of the Ies file.
 
-Parameter ``renderDgnFile``:
+:param renderDgnFile:
     the dng file to be scaned.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightManager_GetLightingSearchPath =R"doc(Returns the lighting search path by the render dgn document moniker.
 
-Parameter ``renderDgnMoniker``:
+:param renderDgnMoniker:
     the moniker of the dgn document.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightManager_DeleteLightSetup =R"doc(Delete the specified setup from the model.
 
-Parameter ``setupName``:
+:param setupName:
     the name of the setup to delete.
 
-Parameter ``sourceModel``:
+:param sourceModel:
     The model to search for.
 
 )doc";
@@ -70,10 +70,10 @@ possible that this list can be empty when in a dgn file even though
 there is an active and modeling setup. Due to these setups not having
 been persisted yet
 
-Parameter ``map``:
+:param map:
     The map to populate with setups
 
-Parameter ``sourceModel``:
+:param sourceModel:
     The model to search for.
 
 )doc";
@@ -82,10 +82,10 @@ static const char * __doc_Bentley_DgnPlatform_LightManager_SetActiveLightSetupFo
 to the values stored in the light setup. Also making the setup passed
 in the active setup.
 
-Parameter ``setup``:
+:param setup:
     the setup to set active.
 
-Parameter ``model``:
+:param model:
     the model of the setup.
 
 )doc";
@@ -94,10 +94,10 @@ static const char * __doc_Bentley_DgnPlatform_LightManager_SaveSetupToModel =R"d
 
 static const char * __doc_Bentley_DgnPlatform_LightManager_GetActiveLightSetupForModel =R"doc(Returns the active light setup of the specified model.
 
-Parameter ``useModelLighting``:
+:param useModelLighting:
     if use model lighting.
 
-Parameter ``model``:
+:param model:
     The specified model.
 
 )doc";
@@ -114,10 +114,10 @@ static const char * __doc_Bentley_DgnPlatform_LightManager_LoadSetupFromModelByI
 files do not have multiple light setups, but always have an active
 light setup.
 
-Parameter ``lightSetupElId``:
+:param lightSetupElId:
     The elementId of the setup to load.
 
-Parameter ``sourceModel``:
+:param sourceModel:
     The model to search for the specified light setup.
 
 )doc";
@@ -126,18 +126,18 @@ static const char * __doc_Bentley_DgnPlatform_LightManager_LoadSetupFromModel =R
 files do not have multiple light setups, but always have an active
 light setup.
 
-Parameter ``setupName``:
+:param setupName:
     The name of the setup to load. Pass NULL or L" " for setupName to
     get the active setup.
 
-Parameter ``sourceModel``:
+:param sourceModel:
     The model to search for the specified light setup.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightManager_FindLightsInModelRef =R"doc(Returns all the light elements in the specified DgnModelRef.
 
-Returns:
+:returns:
     NULL only if the DgnModelRef doesn't resolve to either a
     DgnAttachment or DgnModel.
 
@@ -146,43 +146,43 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_LightManager_ConfigureLightSetupFromLegacySettings =R"doc(Configure the settings of the setup from legacy settings. the setup
 will be configured from tcb settings first.
 
-Parameter ``setup``:
+:param setup:
     the setup.
 
-Parameter ``model``:
+:param model:
     the model of the setup.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightManager_GetActiveLightSetupPtrForModel =R"doc(Returns the active light setup of the specified model.
 
-Parameter ``model``:
+:param model:
     The specified model.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightManager_ConfigureSetupFromXml =R"doc(Configure the settings of the setup from given Xml.
 
-Parameter ``lightSetup``:
+:param lightSetup:
     the setup.
 
-Parameter ``xml``:
+:param xml:
     the xml string in Utf16.
 
-Parameter ``model``:
+:param model:
     the model of the setup.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupCollection_AddLightSetup =R"doc(Add a LightSetup to this collection.
 
-Parameter ``id``:
+:param id:
     the element id of the LightSetup to be added.
 
-Parameter ``setup``:
+:param setup:
     the LightSetup to be added.
 
-Returns:
+:returns:
     the new entry or, if one already exists for this id, the existing
     entry.
 
@@ -190,14 +190,14 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupCollection_DeleteLightSetup =R"doc(Delete the LightSetup by the specified Element Id
 
-Parameter ``id``:
+:param id:
     the element id of the LightSetup to be removed.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupCollection_Copy =R"doc(Copy the contents of the specified LightSetupCollection.
 
-Parameter ``rhs``:
+:param rhs:
     The LightSetupCollection to be copied.
 
 )doc";
@@ -208,7 +208,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetupCollection_InitDefaults 
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetNaturalFilmResponseExposure =R"doc(Sets the natural film response exposure of this LightSetup.
 
-Parameter ``exposure``:
+:param exposure:
     the new exposure value.
 
 )doc";
@@ -219,7 +219,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetNaturalFilmResponseE
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetToneMappingMode =R"doc(Sets the tone mapping mode of this LightSetup.
 
-Parameter ``mode``:
+:param mode:
     the new tone mapping mode.
 
 )doc";
@@ -230,7 +230,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetToneMappingMode =R"d
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetFattalAttenuation =R"doc(Sets the fattal attenuation of this LightSetup.
 
-Parameter ``attenuation``:
+:param attenuation:
     the new fattal attenuation value.
 
 )doc";
@@ -241,7 +241,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetFattalAttenuation =R
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetFattalColorSaturation =R"doc(Sets the fattal color saturation of this LightSetup.
 
-Parameter ``colorSaturation``:
+:param colorSaturation:
     the new fattal color saturation.
 
 )doc";
@@ -252,7 +252,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetFattalColorSaturatio
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetReinhardContrast =R"doc(Sets the reinhard contrast of this LightSetup.
 
-Parameter ``contrast``:
+:param contrast:
     the new reinhard contrast value.
 
 )doc";
@@ -263,7 +263,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetReinhardContrast =R"
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetReinhardIntensity =R"doc(Sets the reinhard intensity of this LightSetup.
 
-Parameter ``intensity``:
+:param intensity:
     the new reinhard intensity value.
 
 )doc";
@@ -274,7 +274,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetReinhardIntensity =R
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetDragoExposure =R"doc(Sets the drago exposure of this LightSetup.
 
-Parameter ``exposure``:
+:param exposure:
     the new exposure value.
 
 )doc";
@@ -285,7 +285,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetDragoExposure =R"doc
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetAutoCorrectColorMapGamma =R"doc(Sets if this LightSetup is auto correct color map gamma.
 
-Parameter ``autoCorrect``:
+:param autoCorrect:
     if auto correct color map gamma.
 
 )doc";
@@ -304,7 +304,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_IsActiveSetup =R"doc(Te
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetUseHistogramForLuxology =R"doc(Sets if this LightSetup is using histogram for luxology.
 
-Parameter ``useHistogram``:
+:param useHistogram:
     if using histogram for luxology.
 
 )doc";
@@ -315,7 +315,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_UseHistogramForLuxology
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetGammaForLuxology =R"doc(Sets the gamma for luxology.
 
-Parameter ``gamma``:
+:param gamma:
     the new gamma value.
 
 )doc";
@@ -326,7 +326,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetGammaForLuxology =R"
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetContrastForLuxology =R"doc(Sets the contrast for luxology.
 
-Parameter ``contrast``:
+:param contrast:
     the new contrast value.
 
 )doc";
@@ -337,7 +337,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetContrastForLuxology 
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetBrightnessMultiplierForLuxology =R"doc(Sets the brightness multiplier for luxology.
 
-Parameter ``multiplier``:
+:param multiplier:
     the new brightness multiplier.
 
 )doc";
@@ -348,7 +348,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetBrightnessMultiplier
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetAdaptationLevelForLuxology =R"doc(Sets the adaptation level for luxology.
 
-Parameter ``level``:
+:param level:
     the new adaptation level.
 
 )doc";
@@ -359,7 +359,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetAdaptationLevelForLu
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetUseFixedAdaptationForLuxology =R"doc(Sets if this LightSetup is using fixed adaptation for luxology.
 
-Parameter ``useAdaptation``:
+:param useAdaptation:
     if use fixed adaptation for luxology.
 
 )doc";
@@ -374,7 +374,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetElementId =R"doc(Get
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetBrightnessMultiplierForView =R"doc(Changes the brightness multiplier for view.
 
-Parameter ``multiplier``:
+:param multiplier:
     the new brightness multiplier.
 
 )doc";
@@ -385,7 +385,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetBrightnessMultiplier
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetAdaptationLevelForView =R"doc(Changes the adaptation level for view.
 
-Parameter ``level``:
+:param level:
     the new adaptation level.
 
 )doc";
@@ -396,7 +396,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetAdaptationLevelForVi
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetUseFixedAdaptationForView =R"doc(Sets if this LightSetup is using fixed adaptation for view.
 
-Parameter ``useAdaptation``:
+:param useAdaptation:
     if use fixed adaptation.
 
 )doc";
@@ -428,7 +428,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetSolarLight =R"doc(Ge
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_SetName =R"doc(Sets the name of this LightSetup.
 
-Parameter ``name``:
+:param name:
     the new name.
 
 )doc";
@@ -439,7 +439,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_GetName =R"doc(Returns 
 
 static const char * __doc_Bentley_DgnPlatform_LightSetup_Copy =R"doc(Copy the contents of the specified LightSetup.
 
-Parameter ``rhs``:
+:param rhs:
     The LightSetup to be copied.
 
 )doc";
@@ -451,20 +451,20 @@ static const char * __doc_Bentley_DgnPlatform_LightSetup_InitDefaults =R"doc(Ini
 static const char * __doc_Bentley_DgnPlatform_LightSetupEntryCollection_SynchToLightList =R"doc(Synch this list of lights and references to the dgn file lights and
 references
 
-Parameter ``rootModelRef``:
+:param rootModelRef:
     the root model.
 
-Parameter ``useCurrentLightValue``:
+:param useCurrentLightValue:
     if use current light value to synch.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupEntryCollection_AddEntry =R"doc(Add a LightSetupEntry to this collection.
 
-Parameter ``id``:
+:param id:
     the element id of the LightSetupEntry to be added.
 
-Returns:
+:returns:
     the new entry or, if one already exists for this id, the existing
     entry.
 
@@ -472,14 +472,14 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupEntryCollection_DeleteEntry =R"doc(Delete the LightSetupEntry by the specified Element Id
 
-Parameter ``id``:
+:param id:
     the element id of the LightSetupEntry to be removed.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupEntryCollection_Copy =R"doc(Copy the contents of the specified LightSetupEntryCollection.
 
-Parameter ``rhs``:
+:param rhs:
     The LightSetupEntryCollection to be copied.
 
 )doc";
@@ -490,7 +490,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetupEntryCollection_InitDefa
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupEntry_SetIntensity =R"doc(Sets the intensity of this LightSetupEntry.
 
-Parameter ``intensity``:
+:param intensity:
     the new intensity value.
 
 )doc";
@@ -501,7 +501,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetupEntry_GetIntensity =R"do
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupEntry_SetIsEnabled =R"doc(Sets if the LightSetupEntry is enabled.
 
-Parameter ``isEnabled``:
+:param isEnabled:
     if enabled.
 
 )doc";
@@ -512,7 +512,7 @@ static const char * __doc_Bentley_DgnPlatform_LightSetupEntry_IsEnabled =R"doc(T
 
 static const char * __doc_Bentley_DgnPlatform_LightSetupEntry_Copy =R"doc(Copy the contents of the specified LightSetupEntry.
 
-Parameter ``rhs``:
+:param rhs:
     The LightSetupEntry to be copied.
 
 )doc";
@@ -523,14 +523,14 @@ static const char * __doc_Bentley_DgnPlatform_LightSetupEntry_InitDefaults =R"do
 
 static const char * __doc_Bentley_DgnPlatform_ModelingLightCollection_SetModelRef =R"doc(Sets the model of this light collection.
 
-Parameter ``modelRef``:
+:param modelRef:
     Specify the model.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_ModelingLightCollection_InsertLightElement =R"doc(Append the given light to this collection.
 
-Parameter ``light``:
+:param light:
     the light element to add to this collection.
 
 )doc";
@@ -541,15 +541,15 @@ static const char * __doc_Bentley_DgnPlatform_LightElementCollection_GetModelRef
 
 static const char * __doc_Bentley_DgnPlatform_LightElementCollection_Find =R"doc(Find the LightElement by id.
 
-Parameter ``id``:
+:param id:
     the element id of the light to find.
 
-Returns:
+:returns:
     the constaining pointer of the LightElement.
 
 )doc";
 
-static const char * __doc_Bentley_DgnPlatform_SkyOpeningLight_SaveNewLight =R"doc(Parameter ``skyOpeningGeometryEEh``:
+static const char * __doc_Bentley_DgnPlatform_SkyOpeningLight_SaveNewLight =R"doc(:param skyOpeningGeometryEEh:
     the element handle of geometry.
 
 )doc";
@@ -560,7 +560,7 @@ static const char * __doc_Bentley_DgnPlatform_SkyOpeningLight_GetDirection =R"do
 
 static const char * __doc_Bentley_DgnPlatform_SkyOpeningLight_SetMaximumSamples =R"doc(Sets the maximum samples of this sky opening light.
 
-Parameter ``samples``:
+:param samples:
     the new maximum samples value.
 
 )doc";
@@ -571,7 +571,7 @@ static const char * __doc_Bentley_DgnPlatform_SkyOpeningLight_GetMaximumSamples 
 
 static const char * __doc_Bentley_DgnPlatform_SkyOpeningLight_SetMinimumSamples =R"doc(Sets the minimum samples of this sky opening light.
 
-Parameter ``samples``:
+:param samples:
     the new minimum samples value.
 
 )doc";
@@ -580,14 +580,14 @@ static const char * __doc_Bentley_DgnPlatform_SkyOpeningLight_GetMinimumSamples 
 
 )doc";
 
-static const char * __doc_Bentley_DgnPlatform_AreaLight_SaveNewLight =R"doc(Parameter ``areaGeometryEEh``:
+static const char * __doc_Bentley_DgnPlatform_AreaLight_SaveNewLight =R"doc(:param areaGeometryEEh:
     the element handle of geometry.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_AreaLight_GetLightGeometry =R"doc(Gets the light gemoetry of this area light.
 
-Returns:
+:returns:
     the ElementRefP of the light area geometry.
 
 )doc";
@@ -598,7 +598,7 @@ static const char * __doc_Bentley_DgnPlatform_AreaLight_GetDirection =R"doc(Gets
 
 static const char * __doc_Bentley_DgnPlatform_AreaLight_SetBulbCount =R"doc(Sets the bulb count of this area light.
 
-Parameter ``bulbCount``:
+:param bulbCount:
     the new bulb count.
 
 )doc";
@@ -613,7 +613,7 @@ static const char * __doc_Bentley_DgnPlatform_SpotLight_GetDirection =R"doc(Gets
 
 static const char * __doc_Bentley_DgnPlatform_SpotLight_SetBulbCount =R"doc(Sets the bulb count of this spot light.
 
-Parameter ``count``:
+:param count:
     the new bulb count.
 
 )doc";
@@ -624,7 +624,7 @@ static const char * __doc_Bentley_DgnPlatform_SpotLight_GetBulbCount =R"doc(Gets
 
 static const char * __doc_Bentley_DgnPlatform_SpotLight_SetBulbSizeInUors =R"doc(Sets the bulb size in UORs of this spot light.
 
-Parameter ``size``:
+:param size:
     the new bulb size in Uors.
 
 )doc";
@@ -635,42 +635,42 @@ static const char * __doc_Bentley_DgnPlatform_SpotLight_GetBulbSizeInUors =R"doc
 
 static const char * __doc_Bentley_DgnPlatform_SpotLight_GetInnerAngleInRadians =R"doc(Gets the inner angle of this SpotLight.
 
-Returns:
+:returns:
     the inner angle in radians.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_SpotLight_SetOuterAngleInRadians =R"doc(Sets the outer angle of this SpotLight.
 
-Parameter ``angle``:
+:param angle:
     the outer angle in radians.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_SpotLight_GetOuterAngleInRadians =R"doc(Gets the outer angle of this SpotLight.
 
-Returns:
+:returns:
     the outer angle in radians.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_SpotLight_SetDeltaAngleInRadians =R"doc(Sets the delta angle of this SpotLight.
 
-Parameter ``angle``:
+:param angle:
     the new delta angle in radians.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_SpotLight_GetDeltaAngleInRadians =R"doc(Gets the delta angle of this SpotLight.
 
-Returns:
+:returns:
     the delta angle in radians.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointLight_SetBulbCount =R"doc(Sets the bulb count of this point light.
 
-Parameter ``count``:
+:param count:
     the new bulb count.
 
 )doc";
@@ -681,7 +681,7 @@ static const char * __doc_Bentley_DgnPlatform_PointLight_GetBulbCount =R"doc(Get
 
 static const char * __doc_Bentley_DgnPlatform_PointLight_SetBulbSizeInUors =R"doc(Sets the bulb size in UORs of this point light.
 
-Parameter ``size``:
+:param size:
     the new bilb size in Uors.
 
 )doc";
@@ -694,14 +694,14 @@ static const char * __doc_Bentley_DgnPlatform_DistantLight_GetDirection =R"doc(G
 
 static const char * __doc_Bentley_DgnPlatform_LightElement_Save =R"doc(Save the light.
 
-Parameter ``transform``:
+:param transform:
     An optional transformation to apply to the light
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightElement_GetRMatrix =R"doc(Return the rotation matrix of this light element.
 
-Parameter ``rMatrix``:
+:param rMatrix:
     the rotation matrix of this light element.
 
 )doc";
@@ -709,7 +709,7 @@ Parameter ``rMatrix``:
 static const char * __doc_Bentley_DgnPlatform_LightElement_SetIesRotation =R"doc(Set the IES rotation angle of this light element. This setting is
 ignored if the light type does not support IES.
 
-Parameter ``rotation``:
+:param rotation:
     the new Ies rotation value.
 
 )doc";
@@ -722,7 +722,7 @@ ignored if the light type does not support IES.
 static const char * __doc_Bentley_DgnPlatform_LightElement_SetIesFileName =R"doc(Sets the IES file name of this light element. This setting is ignored
 if the light type does not support IES.
 
-Parameter ``fileName``:
+:param fileName:
     the new Ies file path name.
 
 )doc";
@@ -735,7 +735,7 @@ if the light type does not support IES.
 static const char * __doc_Bentley_DgnPlatform_LightElement_SetUsesIesData =R"doc(Sets if this light element is using IES data. This setting is ignored
 if the light type does not support IES.
 
-Parameter ``useIesData``:
+:param useIesData:
     if uses Ies date.
 
 )doc";
@@ -752,7 +752,7 @@ type supports IES.
 
 static const char * __doc_Bentley_DgnPlatform_LightElement_SetAttenuationDistance =R"doc(Sets the attenuation distance of this light.
 
-Parameter ``distance``:
+:param distance:
     the new distance value.
 
 )doc";
@@ -773,7 +773,7 @@ static const char * __doc_Bentley_DgnPlatform_LightElement_GetOrigin =R"doc(Gets
 
 static const char * __doc_Bentley_DgnPlatform_LightElement_SetPresetName =R"doc(Sets the preset name of this light. Used by GUI only.
 
-Parameter ``name``:
+:param name:
     the new preset name.
 
 )doc";
@@ -785,7 +785,7 @@ on other settings.
 
 static const char * __doc_Bentley_DgnPlatform_LightElement_SetName =R"doc(Sets the name of this light.
 
-Parameter ``name``:
+:param name:
     the new name of the light.
 
 )doc";
@@ -797,7 +797,7 @@ static const char * __doc_Bentley_DgnPlatform_LightElement_GetName =R"doc(Gets t
 static const char * __doc_Bentley_DgnPlatform_LightElement_SetModelRef =R"doc(Sets the DgnModelRef of this light. Only required when creating a new
 light for writing to file
 
-Parameter ``modelRef``:
+:param modelRef:
     the specified model of this light.
 
 )doc";
@@ -808,7 +808,7 @@ static const char * __doc_Bentley_DgnPlatform_LightElement_GetElementRef =R"doc(
 
 static const char * __doc_Bentley_DgnPlatform_LightElement_LoadFromElement =R"doc(Creates a new light element instance from the given ElementRef.
 
-Parameter ``element``:
+:param element:
     the ElementRef of the light.
 
 )doc";
@@ -816,7 +816,7 @@ Parameter ``element``:
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetGmtOffset =R"doc(Sets the GMT offset for the location of solar light. Used only if
 SolarType is set to SOLARTYPE_TimeLocation.
 
-Parameter ``offset``:
+:param offset:
     the new Gmt offset value.
 
 )doc";
@@ -839,7 +839,7 @@ emulates.
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetAltitudeAngle =R"doc(Sets the angle of the Sun above the horizon (from 0-90 degrees). Used
 only if SolarType is set to SOLARTYPE_Direction.
 
-Parameter ``altitude``:
+:param altitude:
     the new altitude value.
 
 )doc";
@@ -852,7 +852,7 @@ only if SolarType is set to SOLARTYPE_Direction.
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetAzimuthAngle =R"doc(Sets the azimuth direction of the solar light emulates. Used only if
 SolarType is set to SOLARTYPE_Direction.
 
-Parameter ``azimuth``:
+:param azimuth:
     the new azimuth value.
 
 )doc";
@@ -864,7 +864,7 @@ degrees). Used only if SolarType is set to SOLARTYPE_Direction.
 
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetTurbidity =R"doc(Sets the turbidity of this light emulates.
 
-Parameter ``turbidity``:
+:param turbidity:
     the new turbidity value.
 
 )doc";
@@ -875,7 +875,7 @@ static const char * __doc_Bentley_DgnPlatform_SolarLight_GetTurbidity =R"doc(Get
 
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetCloudiness =R"doc(Sets the cloudiness of this light emulates.
 
-Parameter ``cloudiness``:
+:param cloudiness:
     the new cloudiness value.
 
 )doc";
@@ -886,7 +886,7 @@ static const char * __doc_Bentley_DgnPlatform_SolarLight_GetCloudiness =R"doc(Ge
 
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetIsColorPhysicallyBased =R"doc(Sets if the color of this light emulates is physically based.
 
-Parameter ``usePhysicalColor``:
+:param usePhysicalColor:
     if the color is physically based.
 
 )doc";
@@ -898,7 +898,7 @@ static const char * __doc_Bentley_DgnPlatform_SolarLight_IsColorPhysicallyBased 
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetUseDaylightSavings =R"doc(Set if this light emulates is using day light saving. Used only if
 SolarType is set to SOLARTYPE_TimeLocation.
 
-Parameter ``useDst``:
+:param useDst:
     is using day light saving.
 
 )doc";
@@ -911,7 +911,7 @@ SolarType is set to SOLARTYPE_TimeLocation.
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetYear =R"doc(Sets the year of this light emulates. Used only if SolarType is set to
 SOLARTYPE_TimeLocation.
 
-Parameter ``year``:
+:param year:
     new year value.
 
 )doc";
@@ -924,7 +924,7 @@ SOLARTYPE_TimeLocation.
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetMonth =R"doc(Sets the month of this light emulates. Used only if SolarType is set
 to SOLARTYPE_TimeLocation.
 
-Parameter ``month``:
+:param month:
     Specified in range 0-11.
 
 )doc";
@@ -932,7 +932,7 @@ Parameter ``month``:
 static const char * __doc_Bentley_DgnPlatform_SolarLight_GetMonth =R"doc(Gets the month of this light emulates. Used only if SolarType is set
 to SOLARTYPE_TimeLocation.
 
-Returns:
+:returns:
     the month the light emulates (from 0-11).
 
 )doc";
@@ -940,7 +940,7 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetDay =R"doc(Sets the day of this light emulates. Used only if SolarType is set to
 SOLARTYPE_TimeLocation.
 
-Parameter ``day``:
+:param day:
     new day value.
 
 )doc";
@@ -953,7 +953,7 @@ SOLARTYPE_TimeLocation.
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetMinute =R"doc(Sets the minute of this light emulates. Used only if SolarType is set
 to SOLARTYPE_TimeLocation.
 
-Parameter ``minute``:
+:param minute:
     new minute value.
 
 )doc";
@@ -966,7 +966,7 @@ to SOLARTYPE_TimeLocation.
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetHour =R"doc(Sets the hour this light emulates. Used only if SolarType is set to
 SOLARTYPE_TimeLocation.
 
-Parameter ``hour``:
+:param hour:
     Specified in range 1-24.
 
 )doc";
@@ -974,14 +974,14 @@ Parameter ``hour``:
 static const char * __doc_Bentley_DgnPlatform_SolarLight_GetHour =R"doc(Gets the hour of this light emulates. Used only if SolarType is set to
 SOLARTYPE_TimeLocation.
 
-Returns:
+:returns:
     the hour of the light emulates in (1-24).
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolarLight_SetSolarType =R"doc(Changes the SolarType of this solar light.
 
-Parameter ``solarType``:
+:param solarType:
     the new solar type.
 
 )doc";
@@ -993,7 +993,7 @@ static const char * __doc_Bentley_DgnPlatform_SolarLight_GetSolarType =R"doc(Get
 static const char * __doc_Bentley_DgnPlatform_SolarLight_Create =R"doc(Creates a new solar light instance that initialized the properties
 from the SolarLight passed in.
 
-Parameter ``solarLight``:
+:param solarLight:
     The specified SolarLight object.
 
 )doc";
@@ -1009,7 +1009,7 @@ constant color.
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetDeepShadowSamples =R"doc(Changes the deep shadow samples of this light.
 
-Parameter ``samples``:
+:param samples:
     the new deep shadow samples.
 
 )doc";
@@ -1020,7 +1020,7 @@ static const char * __doc_Bentley_DgnPlatform_AdvancedLight_GetDeepShadowSamples
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetShadowType =R"doc(Sets the shadow type of this light.
 
-Parameter ``type``:
+:param type:
     the new shadow type. see GetShadowType().
 
 )doc";
@@ -1037,7 +1037,7 @@ Number of samples - 64 - Soft - Fine - Number of samples - 160 - Soft
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetCastsShadows =R"doc(Sets the casts shadows of this light. If on, shadows are generated by
 the lighting.
 
-Parameter ``castsShadows``:
+:param castsShadows:
     if casts shadows.
 
 See also:
@@ -1054,7 +1054,7 @@ scatter color to produce more interesting volume lighting effects.
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetSpreadAngleInRadians =R"doc(Changes the spread angle of this light.
 
-Parameter ``angle``:
+:param angle:
     the new apread angle in radians.
 
 )doc";
@@ -1065,14 +1065,14 @@ values produce softer shadows. A Spread Angle of 2 would produce
 reasonably soft shadows whereas a value of 10 to 15 would produce very
 soft shadows like you would expect on a overcast day.
 
-Returns:
+:returns:
     the spread angle in radians.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeAffectCaustics =R"doc(Changes the volume affect caustics of this light.
 
-Parameter ``scale``:
+:param scale:
     the new affect caustics value.
 
 See also:
@@ -1088,7 +1088,7 @@ caustic effects.
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeAffectSpecular =R"doc(Changes the volume affect diffuse of this light.
 
-Parameter ``scale``:
+:param scale:
     the new affect diffuse value.
 
 See also:
@@ -1103,7 +1103,7 @@ the scene. A value of zero will produce no specular highlights.
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeAffectDiffuse =R"doc(Changes the volume affect diffuse of this light.
 
-Parameter ``scale``:
+:param scale:
     the new affect diffuse value.
 
 See also:
@@ -1122,7 +1122,7 @@ the light from Diffuse shading. This allows the creation of a
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeRadiusBaseInMeters =R"doc(Changes the volume radius or base value of this light. For spot light
 set the base value, else set the radius value.
 
-Parameter ``radius``:
+:param radius:
     the new radius or base value in meters.
 
 See also:
@@ -1138,7 +1138,7 @@ point lights, radius defines the radius of the sphere for the
 scattering volume. - For spot lights, base defines the offset from the
 spotlight at which the scattering can occur.
 
-Returns:
+:returns:
     the base value for spot light or radius for other lights in
     meters.
 
@@ -1146,7 +1146,7 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeHeightInMeters =R"doc(Changes the volume height of this light.
 
-Parameter ``height``:
+:param height:
     the new height in meters.
 
 See also:
@@ -1161,14 +1161,14 @@ height. Height determines the length of the cylinder. For point lights
 the effect is radial, so this occurs within a defined sphere and the
 spot lights volume effects occur within a defined cone.
 
-Returns:
+:returns:
     the volume height in meters.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeShift =R"doc(Changes the volume shift of this light.
 
-Parameter ``scale``:
+:param scale:
     the new shift.
 
 See also:
@@ -1187,7 +1187,7 @@ be a number above 0% to see any effect.
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeAttenuation =R"doc(Changes the volume attenuation of this light.
 
-Parameter ``scale``:
+:param scale:
     the new attenuation.
 
 See also:
@@ -1204,7 +1204,7 @@ greater.
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeDensity =R"doc(Sets the density for the volumetric effect. Higher values will make
 the volume thicker and more opaque.
 
-Parameter ``scale``:
+:param scale:
     the new density.
 
 )doc";
@@ -1218,7 +1218,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeScattering =R"doc(Changes the volume scattering value of this light.
 
-Parameter ``scale``:
+:param scale:
     the new scale.
 
 See also:
@@ -1234,7 +1234,7 @@ volume. Higher values result in more scattering.
 
 static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetVolumeSampleCount =R"doc(Changes the volume sample count of this light.
 
-Parameter ``count``:
+:param count:
     the new count.
 
 See also:
@@ -1248,7 +1248,7 @@ objects. Increasing the samples value improves the accuracy.
 
 )doc";
 
-static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetUseVolumetrics =R"doc(Set this advanced light is using volumetrices. param[in]
+static const char * __doc_Bentley_DgnPlatform_AdvancedLight_SetUseVolumetrics =R"doc(Set this advanced light is using volumetrices. param(input)
 useVolumetrics if using volumetrics.
 
 See also:
@@ -1272,17 +1272,17 @@ static const char * __doc_Bentley_DgnPlatform_AdvancedLight_GetMaps =R"doc(Gets 
 static const char * __doc_Bentley_DgnPlatform_LightMapCollection_AddMap =R"doc(Create a LightMap by type and add it to this collection. If a map of
 this type is already associated with this light, it will be replaced.
 
-Parameter ``type``:
+:param type:
     the map type to be added.
 
-Returns:
+:returns:
     the LightMap pointer of given type.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightMapCollection_DeleteMap =R"doc(Remove the LightMap by specified map type.
 
-Parameter ``type``:
+:param type:
     the map type to be deleted.
 
 )doc";
@@ -1307,10 +1307,10 @@ static const char * __doc_Bentley_DgnPlatform_LightMap_ClearLxoProcedure =R"doc(
 static const char * __doc_Bentley_DgnPlatform_LightMap_AddLxoProcedure =R"doc(Add a LxoProcedure to this map by LxoProcedure type. If a LxoProcedure
 already exists for this map, it will be replaced.
 
-Parameter ``type``:
+:param type:
     the type of the procedure to be added.
 
-Returns:
+:returns:
     the pointer of the added LxoProcedure.
 
 )doc";
@@ -1318,7 +1318,7 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_LightMap_SetFileName =R"doc(Changes the image file name of this map if the style is
 MAPSTYLE_Image.
 
-Parameter ``fileName``:
+:param fileName:
     the new file name of the map.
 
 )doc";
@@ -1329,14 +1329,14 @@ static const char * __doc_Bentley_DgnPlatform_LightMap_GetFileName =R"doc(Gets t
 
 static const char * __doc_Bentley_DgnPlatform_LightMap_SetAngleInRadians =R"doc(Changes the rotation of this map.
 
-Parameter ``angle``:
+:param angle:
     the new angle in radians.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightMap_GetAngleInRadians =R"doc(Gets the rotation of this map.
 
-Returns:
+:returns:
     the angle in radians.
 
 )doc";
@@ -1393,14 +1393,14 @@ static const char * __doc_Bentley_DgnPlatform_LightMap_GetMode =R"doc(Gets the m
 
 static const char * __doc_Bentley_DgnPlatform_LightMap_SetIsEnabled =R"doc(Sets if the light map is to be enabled.
 
-Parameter ``isEnabled``:
+:param isEnabled:
     true if the light map is to be enabled.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_LightMap_IsEnabled =R"doc(Checks if the light map is enabled.
 
-Returns:
+:returns:
     true if the light map is on, else return false if the light map is
     off.
 
@@ -1426,7 +1426,7 @@ static const char * __doc_Bentley_DgnPlatform_ModelDistantLight_GetDirection =R"
 
 static const char * __doc_Bentley_DgnPlatform_SkyDomeLight_SetIsColorPhysicallyBased =R"doc(Sets if the light color is physically based.
 
-Parameter ``usePhysicalColor``:
+:param usePhysicalColor:
     true if using physical color,false if user defined.
 
 See also:
@@ -1440,14 +1440,14 @@ via the Color setting, or automatically via the Temperature setting. -
 Physically Based - Color is computed based on factors such as its
 position in the sky, air quality, and cloudiness.
 
-Returns:
+:returns:
     true if is physically based, else return false (if user defined).
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_SkyDomeLight_SetCastsShadows =R"doc(Sets if the light has cast shadows.
 
-Parameter ``castsShadows``:
+:param castsShadows:
     true if the light has cast shadows.
 
 See also:
@@ -1457,21 +1457,21 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_AmbientLight_SetIsAutoAmbient =R"doc(Set percentage of solar.
 
-Parameter ``isAuto``:
+:param isAuto:
     Is auto ambient or not.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_AmbientLight_IsAutoAmbient =R"doc(Get if is auto ambient.
 
-Returns:
+:returns:
     Is auto ambient or not.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_AmbientLight_SetPercentageOfSolar =R"doc(Set percentage of solar.
 
-Parameter ``percentage``:
+:param percentage:
     The percentage value of solar. (0.0 to 1.0).
 
 See also:
@@ -1481,14 +1481,14 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_AmbientLight_GetPercentageOfSolar =R"doc(Get percentage of solar.
 
-Returns:
+:returns:
     The percentage value of solar. (0.0 to 1.0).
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_Light_GetShadowQualityFromSamples =R"doc(Gets the shadow quality by shadow samples value.
 
-Parameter ``samples``:
+:param samples:
     the given samples.
 
 See also:
@@ -1498,7 +1498,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_Light_GetSamplesFromShadowQuality =R"doc(Gets the shadow samples value by shadow quality.
 
-Parameter ``quality``:
+:param quality:
     the given shadow quality.
 
 See also:
@@ -1508,7 +1508,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_Light_SetShadowQuality =R"doc(Changes the shadow quality of the light.
 
-Parameter ``quality``:
+:param quality:
     the new shadow quality.
 
 See also:
@@ -1525,7 +1525,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_Light_SetShadowSamples =R"doc(Changes the shadow samples of the light.
 
-Parameter ``samples``:
+:param samples:
     the new shadow samples value.
 
 See also:
@@ -1544,7 +1544,7 @@ Fine - Number of samples - 256
 
 static const char * __doc_Bentley_DgnPlatform_Light_SetTemperatureInKelvin =R"doc(Changes the temperature of the light.
 
-Parameter ``temperature``:
+:param temperature:
     The new temperature value in Kelvin.
 
 See also:
@@ -1561,7 +1561,7 @@ to Custom (0).
 
 static const char * __doc_Bentley_DgnPlatform_Light_SetBrightness =R"doc(Changes the brightness of the light.
 
-Parameter ``brightness``:
+:param brightness:
     the new brightness value.
 
 See also:
@@ -1584,14 +1584,14 @@ Multiplier - allowable range is -4 to 4.
 
 static const char * __doc_Bentley_DgnPlatform_Light_SetIsEnabled =R"doc(Sets if the light is to be enabled.
 
-Parameter ``enabled``:
+:param enabled:
     true if the light is to be enabled.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_Light_IsEnabled =R"doc(Checks if the light is enabled.
 
-Returns:
+:returns:
     true if the light is on, else return false if the light is off.
 
 )doc";
@@ -1606,7 +1606,7 @@ static const char * __doc_Bentley_DgnPlatform_Light_GetColor =R"doc(Gets the RGB
 
 static const char * __doc_Bentley_DgnPlatform_Light_SetIntensity =R"doc(Sets the brightness of the lighting from 0 (no Sun) to 100 (full Sun).
 
-Parameter ``intensity``:
+:param intensity:
     The new intensity value of the light.
 
 See also:
@@ -1623,7 +1623,7 @@ represents very bright sunlight. - For other lights, its value
 represents the brightness of the lighting from 0 (no Sun) to 100 (full
 Sun).
 
-Returns:
+:returns:
     The intensity value of the light (0.0 to 1.0).
 
 )doc";
@@ -1641,20 +1641,20 @@ static const char * __doc_Bentley_DgnPlatform_Light_InitDefaults =R"doc(Configur
 
 static const char * __doc_Bentley_DgnPlatform_Light_Equals =R"doc(Test two lights for equality.
 
-Parameter ``rhs``:
+:param rhs:
     The another light object.
 
-Parameter ``testPersistedOnly``:
+:param testPersistedOnly:
     if only test persisted settings.
 
-Returns:
+:returns:
     true for equal, else return false.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_Light_Copy =R"doc(Copy the contents of the specified light.
 
-Parameter ``copyFrom``:
+:param copyFrom:
     The light to be copied.
 
 )doc";

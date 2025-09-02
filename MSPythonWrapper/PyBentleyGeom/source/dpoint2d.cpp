@@ -15,286 +15,286 @@ absolute and relative tolerance. points are equal if squared distance
 between is less than (squared abstol) plus (squared relTol) * sum of
 cmponent squares
 
-Parameter ``[in]``:
+:param (input):
     dataB second DPoint2d
 
-Returns:
+:returns:
     true if within tolerance.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_IsConvexPair =R"doc(return true if the point has x, y, and x+1 all between 0 and 1
 (inclusive).)doc";
 
-static const char * __doc_Bentley_Geom_DPoint2d_IsDisconnect =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPoint2d_IsDisconnect =R"doc(:returns:
     true if the point has coordinates which indicate it is a
     disconnect (separator) ponit.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_MaxAbs =R"doc( Finds the largest absolute value among the components of
 a point or vector.
 
-Returns:
+:returns:
     largest absolute value among point coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_IsEqual =R"doc( Test if two points or vectors are exactly equal.
 
-Parameter ``[in]``:
+:param (input):
     vector2 Second point or vector
 
-Returns:
+:returns:
     true if the points are identical. (DPoint2dCR, double))doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_IsPerpendicularTo =R"doc( Test if two vectors are perpendicular.
 
-Parameter ``[in]``:
+:param (input):
     vector2 Second vector
 
-Returns:
+:returns:
     true if vectors are (nearly) parallel.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_IsParallelTo =R"doc( Test if two vectors are parallel.
 
-Parameter ``[in]``:
+:param (input):
     vector2 Second vector
 
-Returns:
+:returns:
     true if vectors are (nearly) parallel.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_AngleTo =R"doc( Returns (signed, counterclockwise) angle between two
 vectors. The angle is in radians. The angle range is from -pi to +pi;
 positive angles are counterclockwise, negative angles are clockwise.
 
-Parameter ``[in]``:
+:param (input):
     vector2 second vector
 
-Returns:
+:returns:
     angle in radians)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_GetComponent =R"doc( Gets a single component of a point. If the index is out
 of range 0,1, it is interpreted cyclically.
 
-Parameter ``[in]``:
+:param (input):
     index 0=x, 1=y, others cyclic
 
-Returns:
+:returns:
     specified component of the point or vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_SetComponent =R"doc( Sets a single component of a point. If the index is out
 of range 0,1, it is interpreted cyclically.
 
-Parameter ``[in]``:
+:param (input):
     a value for component
 
-Parameter ``[in]``:
+:param (input):
     index 0=x, 1=y, others cyclic)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_DotProductToPoints =R"doc( Returns the (scalar) dot product of two vectors. The
 vectors are computed from the Origin to Target1 and Target2.
 
-Parameter ``[in]``:
+:param (input):
     target1 target of first vector
 
-Parameter ``[in]``:
+:param (input):
     target2 target of second vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_DotProduct =R"doc( Returns the (scalar) dot product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 second vector.
 
-Returns:
+:returns:
     dot product of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_CrossProductToPoints =R"doc( Returns the (scalar) cross product of two vectors. The
 vectors are computed from the Origin to Target1 and Target2.
 
-Parameter ``[in]``:
+:param (input):
     target1 target of first vector
 
-Parameter ``[in]``:
+:param (input):
     target2 target of second vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_CrossProduct =R"doc( Returns the (scalar) cross product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector1 first vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_DistanceSquared =R"doc( Return the squared distance between two points or
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     point2 end point
 
-Returns:
+:returns:
     squared distance between points)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Distance =R"doc( Returns the distance between 2 points
 
-Parameter ``[in]``:
+:param (input):
     point1 second point
 
-Returns:
+:returns:
     distance from point 0 to point 1)doc";
 
-static const char * __doc_Bentley_Geom_DPoint2d_MagnitudeSquared =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPoint2d_MagnitudeSquared =R"doc(:returns:
     squared magnitude of the vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Magnitude =R"doc( Returns the magnitude (length) of a vector.
 
-Returns:
+:returns:
     Length of the vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Swap =R"doc(Swap contents of instance, other.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     other second point.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint2d_RotateCCW =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DPoint2d_RotateCCW =R"doc(:param (input):
     vec original vector
 
-Parameter ``[in]``:
+:param (input):
     radians rotation angle
 
 Remark:
     Note that this is a counterclockwise rotation. The " rotate " method
     in prior api was clockwise.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint2d_Rotate90 =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DPoint2d_Rotate90 =R"doc(:param (input):
     vec original vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_FromInterpolateBilinear =R"doc( Returns a bilinear interpolation from corners
 (00)(10)(01)(11)
 
-Parameter ``[in]``:
+:param (input):
     point00 point at (0,0)
 
-Parameter ``[in]``:
+:param (input):
     point10 point at (1,0)
 
-Parameter ``[in]``:
+:param (input):
     point01 point at (0,1)
 
-Parameter ``[in]``:
+:param (input):
     point11 point at (1,1)
 
-Parameter ``[in]``:
+:param (input):
     u interpolation fraction for edges (point00,point10) and
     (point01,point11)
 
-Parameter ``[in]``:
+:param (input):
     v interpolation fraction for edges (point00,point10) and
     (point10,point11))doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Interpolate =R"doc(Compute the point at an interpolated (fractional) position between a
 start and end point.
 
-Parameter ``[in]``:
+:param (input):
     point0 start point (at parameter s=0)
 
-Parameter ``[in]``:
+:param (input):
     s interpolation parameter
 
-Parameter ``[in]``:
+:param (input):
     point1 end point (at parameter s=1))doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_FromInterpolate =R"doc( Returns an interpolated point.
 
-Parameter ``[in]``:
+:param (input):
     point0 point at fraction 0
 
-Parameter ``[in]``:
+:param (input):
     fraction fraction from interpolation.
 
-Parameter ``[in]``:
+:param (input):
     point1 point at fraction 1)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_SumOf =R"doc( Compute the sum of two points or vectors.
 
-Parameter ``[in]``:
+:param (input):
     point1 First point or vector
 
-Parameter ``[in]``:
+:param (input):
     point2 Second point or vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_FromSumOf =R"doc( Returns a linear combination of points
 
-Parameter ``[in]``:
+:param (input):
     point0 first point
 
-Parameter ``[in]``:
+:param (input):
     scale0 first scale
 
-Parameter ``[in]``:
+:param (input):
     point1 second point
 
-Parameter ``[in]``:
+:param (input):
     scale1 second scale)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Normalize =R"doc(normalizes pVector1 in place, and returns the original magnitude. If
 the original magnitude is 0 the vector is left unchanged.
 
-Returns:
+:returns:
     original length)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_ScaleToLength =R"doc( Scales a vector to specified length. If the input vector
 length is 0, the output vector is a zero vector and the returned
 length is 0.
 
-Parameter ``[in]``:
+:param (input):
     source The original vector.
 
-Parameter ``[in]``:
+:param (input):
     length The requested length.
 
-Returns:
+:returns:
     The length prior to scaling.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Negate =R"doc( returns the negative of a vector.
 
-Parameter ``[in]``:
+:param (input):
     vector input)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Scale =R"doc(Scale the instance coordinates from source
 
-Parameter ``[in]``:
+:param (input):
     source input point
 
-Parameter ``[in]``:
+:param (input):
     s scale factor)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_FromScale =R"doc( Returns a scalar multiple of a DPoint2d
 
-Parameter ``[in]``:
+:param (input):
     point input point
 
-Parameter ``[in]``:
+:param (input):
     scale scale factor)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_NormalizedDifferenceOf =R"doc(Sets pNormal to the unit vector in the direction of point1 point2
 
-Parameter ``[in]``:
+:param (input):
     point1 point 1
 
-Parameter ``[in]``:
+:param (input):
     point2 point 2
 
-Returns:
+:returns:
     double distance between input points)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_DifferenceOf =R"doc( Return the difference of two points or vectors.
 
-Parameter ``[in]``:
+:param (input):
     point1 First point or vector.
 
-Parameter ``[in]``:
+:param (input):
     point2 Second (subtracted) point or vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Subtract =R"doc( Subtract one vector from another in place.
 
-Parameter ``[in]``:
+:param (input):
     vector vector to subtract)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_Add =R"doc(Add a vector to the instance.
 
-Parameter ``[in]``:
+:param (input):
     vector vector to add)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_InitDisconnect =R"doc(Initialize a point with all coordinates as the disconnect value.)doc";
@@ -305,10 +305,10 @@ static const char * __doc_Bentley_Geom_DPoint2d_Zero =R"doc( Sets all components
 
 static const char * __doc_Bentley_Geom_DPoint2d_Init =R"doc(Initialize with given components
 
-Parameter ``[in]``:
+:param (input):
     x x component
 
-Parameter ``[in]``:
+:param (input):
     y y component)doc";
 
 static const char * __doc_Bentley_Geom_DPoint2d_FromOne =R"doc(Return a DPoint2d with xy = 1.)doc";
@@ -318,10 +318,10 @@ static const char * __doc_Bentley_Geom_DPoint2d_FromZero =R"doc(Return a DPoint2
 static const char * __doc_Bentley_Geom_DPoint2d_From =R"doc( Returns a DPoint2d with 2 components (xy) from given
 components
 
-Parameter ``[in]``:
+:param (input):
     ax x coordinate
 
-Parameter ``[in]``:
+:param (input):
     ay y coordinate)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -339,6 +339,9 @@ void def_DPoint2d(py::module_& m)
 
     c1.def_readwrite("x", &DPoint2d::x);
     c1.def_readwrite("y", &DPoint2d::y);
+
+    c1.def_readwrite("X", &DPoint2d::x);
+    c1.def_readwrite("Y", &DPoint2d::y);
 
     c1.def(py::init(&DPoint2d::FromZero));
 

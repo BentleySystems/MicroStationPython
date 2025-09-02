@@ -1,11 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
-import os
 from MSPyBentley import *
 from MSPyBentleyGeom import *
 from MSPyECObjects import *
@@ -14,45 +8,37 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
 '''
-/*=================================================================================**//**
-* Example showing how to use DgnElementSetTool to write a basic MOVE ELEMENT tool.
-* 
-* The base class populates an ElementAgenda from a pick or selection set on the 1st
-* data button and starts element dynamics. The 2nd data button accepts the modification.
-*
-* The base class provides generic user prompts such as Identify Element and
-* Accept/Reject Selection. Override _SetupAndPromptForNextAction to supply more detailed
-* direction to the user.
-* 
-* This sub-class is responsible for applying the desired modification to the element(s). 
-* The _OnElementModify method is called for each entry in the ElementAgenda both during
-* element dynamics as well as for the final accept.
-* 
-* @bsiclass                                                               Bentley Systems
-+===============+===============+===============+===============+===============+======*/
+Example demonstrating how to use DgnElementSetTool to write a basic MOVE ELEMENT tool.
 '''
 class ElementMover(DgnElementSetTool):
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
+
     def __init__(self, toolId):
+        """
+        Initialize the ElementMover tool.
+
+        :param toolId: Identifier for the tool.
+        :type toolId: int
+        """
         DgnElementSetTool.__init__(self, toolId) # C++ base's __init__ must be called.
         self.m_transform = Transform()
-        self.m_self = self # Keep self reference
+        #self.m_self = self # Keep self reference
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * Tools that modify elements relative to the current cursor location in dynamics, or
-    * the data button location to accept, should pre-compute the necessary information needed
-    * for their _OnElementModify method in _SetupForModify. Unless this method returns
-    * true, _OnElementModify won't be called.
-    *
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _SetupForModify(self, ev, isDynamics):
+        """
+        Pre-compute the necessary information needed for the _OnElementModify method.
+
+        Tools that modify elements relative to the current cursor location in dynamics, or
+        the data button location to accept, should pre-compute the necessary information needed
+        for their _OnElementModify method in _SetupForModify. Unless this method returns
+        true, _OnElementModify won't be called.
+
+        :param ev: The event containing the point information.
+        :type ev: Event
+        :param isDynamics: Flag indicating if the modification is in dynamics mode.
+        :type isDynamics: bool
+        :return: True if the setup is successful, False otherwise.
+        :rtype: bool
+        """
         anchorPt = DPoint3d()
 
         # Base class saves the location that was used to accept the element, selection set, or fence.
@@ -67,49 +53,58 @@ class ElementMover(DgnElementSetTool):
 
         return True
 
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * Apply the transform previously computed in _SetupForModify to the supplied element.
-    * Will be called both for element dynamics and on the data button to accept the modification.
-    *
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _OnElementModify(self, eeh):
+        """
+        Apply the transform previously computed in _SetupForModify to the supplied element.
+        Will be called both for element dynamics and on the data button to accept the modification.
+
+        :param eeh: The element handle to be modified.
+        :type eeh: ElementHandle
+        :return: Result of the transform application.
+        :rtype: StatusInt
+        """
         tInfo = TransformInfo(self.m_transform)
         return eeh.GetHandler(eMISSING_HANDLER_PERMISSION_Transform).ApplyTransform(eeh, tInfo)
 
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * Install a new instance of the tool. Will be called in response to external events
-    * such as undo or by the base class from _OnReinitialize when the tool needs to be
-    * reset to it's initial state.
-    *
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _OnRestartTool(self):
+        """
+        Install a new instance of the tool. Will be called in response to external events
+        such as undo or by the base class from _OnReinitialize when the tool needs to be
+        reset to its initial state.
+        """
+        ElementMover.s_instance = None  # Clear instance reference
         ElementMover.InstallNewInstance(self.ToolId)
 
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * Method to create and install a new instance of the tool. If InstallTool returns ERROR,
-    * the new tool instance will be freed/invalid. Never call delete on RefCounted classes.
-    *
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
+    def _OnCleanup(self):
+        """
+        Called when current command is being terminated.
+        """
+        ElementMover.s_instance = None  # Clear instance reference
+        super()._OnCleanup()
+
+    def _GetToolName (self, name):
+        """
+        Customize the tool name prompt at bottom left.
+
+        :return: Tool name.
+        :rtype: WString
+        """
+        s = WString("Move Element")
+        return s
+
     def InstallNewInstance(toolId):
+        """
+        Create and install a new instance of the tool. If InstallTool returns ERROR,
+        the new tool instance will be freed/invalid. Never call delete on RefCounted classes.
+
+        :param toolId: Identifier for the tool.
+        :type toolId: int
+        """
         tool = ElementMover(toolId)
         tool.InstallTool()
+        ElementMover.s_instance = tool  # Keep instance reference
 
-'''
-/*=================================================================================**//**
-* Default entrypoint for current module unit.
-*
-* @bsiclass                                                               Bentley Systems
-+===============+===============+===============+===============+===============+======*/
-'''
 if __name__ == "__main__":
+    SelectionSetManager.GetManager().EmptyAll() # Clear selection
     ElementMover.InstallNewInstance(1)
 

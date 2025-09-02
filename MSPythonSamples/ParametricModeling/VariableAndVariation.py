@@ -13,11 +13,28 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
+'''
+Examples demonstrates how to CRUD variables
+'''
 
-'''
-Function to create variable with given name, value and type in given dgn model
-'''
 def CreateVariable(name, type, value, dgnModel):
+    """
+    Creates a variable in the given design model.
+    
+    :param name: The name of the variable to be created.
+    :type name: str
+    :param type: The type of the variable.
+    :type type: str
+    :param value: The initial value of the variable.
+    :type value: Any
+    :param dgnModel: The design model where the variable will be created.
+    :type dgnModel: DgnModel
+    
+    :return: The status of the variable creation process.
+    :rtype: ParameterStatus
+    :raises: ParameterStatus.eError if the design model or any required handler is None.
+             ParameterStatus.eDuplicateName if a variable with the given name already exists.
+    """
     if (dgnModel is None):
         return ParameterStatus.eError
 
@@ -39,10 +56,19 @@ def CreateVariable(name, type, value, dgnModel):
     # Add variable in model
     return editParameterDefinitions.Add(name, type, value, False)
 
-'''
-Function to remove variable with given name in given dgn model
-'''
 def RemoveVariable(name, dgnModel):
+    """
+    Removes a variable with the given name from the specified DGN model.
+    
+    :param name: The name of the variable to be removed.
+    :type name: str
+    :param dgnModel: The DGN model from which the variable will be removed.
+    :type dgnModel: DgnModel
+    
+    :return: The status of the operation.
+    :rtype: ParameterStatus
+    :raises ValueError: If dgnModel is None or if definitionModelHandler is None or if editParameterDefinitions is None.
+    """
     if (dgnModel is None):
         return ParameterStatus.eError
 
@@ -65,10 +91,25 @@ def RemoveVariable(name, dgnModel):
     # Remove variable in dgn model
     return editParameterDefinitions.Remove(paramDef.GetAccessString())
 
-'''
-Function to create parameter set with given name and description in given dgn model
-'''
 def CreateVariation(name, desc, dgnModel):
+    """
+    Creates a variation with the given name and description in the specified design model.
+    
+    :param name: The name of the variation to be created.
+    :type name: str
+    :param desc: The description of the variation to be created.
+    :type desc: str
+    :param dgnModel: The design model in which the variation is to be created.
+    :type dgnModel: DgnModel
+    
+    :return: The status of the parameter creation process.
+    :rtype: ParameterStatus
+    
+    :raises ValueError: If the dgnModel is None.
+    :raises ValueError: If the definitionModelHandler is None.
+    :raises ValueError: If the editParameterDefinitions is None.
+    :raises ValueError: If a parameter set with the given name already exists.
+    """
     if (dgnModel is None):
         return ParameterStatus.eError
 
@@ -92,10 +133,20 @@ def CreateVariation(name, desc, dgnModel):
     status, parameterSet = definitionModelHandler.CreateParameterSet(name, desc, editParameterDefinitions)
     return status
 
-'''
-Function to remove variation with given name in given dgn model
-'''
 def RemoveVariation(name, dgnModel):
+    """
+    Remove a variation from the given design model.
+    
+    :param name: The name of the parameter set to be removed.
+    :type name: str
+    :param dgnModel: The design model from which the variation will be removed.
+    :type dgnModel: DgnModel
+    
+    :return: The status of the operation.
+    :rtype: ParameterStatus
+    
+    :raises: None
+    """
     if (dgnModel is None):
         return ParameterStatus.eError
 
@@ -113,10 +164,18 @@ def RemoveVariation(name, dgnModel):
     # Delete variation in model
     return definitionModelHandler.DeleteParameterSet(parameterSet)
 
-'''
-Function to export variables and variations in dgn model to csv file
-'''
 def ExportVariables(dgnModel, csvPath):
+    """
+    Export variables from a DGN model to a CSV file.
+    
+    :param dgnModel: The DGN model from which to export variables.
+    :type dgnModel: DgnModel
+    :param csvPath: The file path where the CSV file will be saved.
+    :type csvPath: str
+    
+    :return: True if the export was successful, False otherwise.
+    :rtype: bool
+    """
     if (dgnModel is None):
         return False
 
@@ -139,10 +198,18 @@ def ExportVariables(dgnModel, csvPath):
     csvFile.Close()
     return True
 
-'''
-Function to import variables and variations in csv file to dgn model
-'''
 def ImportVariables(dgnModel, csvPath):
+    """
+    Imports variables from a CSV file into the given DGN model.
+    
+    :param dgnModel: The DGN model to which the variables will be imported.
+    :type dgnModel: DgnModel
+    :param csvPath: The file path of the CSV file containing the variables.
+    :type csvPath: str
+    
+    :return: True if the variables were successfully imported, False otherwise.
+    :rtype: bool
+    """
     if (dgnModel is None):
         return False
 
@@ -164,10 +231,22 @@ def ImportVariables(dgnModel, csvPath):
 
     return True
 
-'''
-Function to set variaible value with given name and value in the given parameter set and given dgn model
-'''
 def SetVariableValueInParameterSet(setName, varName, varValue, dgnModel):
+    """
+    Sets the value of a variable in a specified parameter set within a DGN model.
+    
+    :param setName: The name of the parameter set.
+    :type setName: str
+    :param varName: The name of the variable.
+    :type varName: str
+    :param varValue: The value to set for the variable.
+    :type varValue: Any
+    :param dgnModel: The DGN model object.
+    :type dgnModel: DgnModel
+    
+    :return: True if the variable value was successfully set, False otherwise.
+    :rtype: bool
+    """
     if (dgnModel is None):
         return ParameterStatus.eError
 
@@ -199,10 +278,24 @@ def SetVariableValueInParameterSet(setName, varName, varValue, dgnModel):
 
     return True
 
-'''
-Function to create variable with expression
-'''
 def CreateVariableWithExpression(name, type, value, expression, dgnModel):
+    """
+    Create a variable with an expression in the specified design model.
+    
+    :param name: The name of the variable to create.
+    :type name: str
+    :param type: The type of the variable.
+    :type type: str
+    :param value: The initial value of the variable.
+    :type value: any
+    :param expression: The expression to associate with the variable.
+    :type expression: str
+    :param dgnModel: The design model in which to create the variable.
+    :type dgnModel: object
+    
+    :return: True if the variable and expression were successfully created and evaluated, False otherwise.
+    :rtype: bool
+    """
     if (dgnModel is None):
         return False
 
@@ -225,10 +318,22 @@ def CreateVariableWithExpression(name, type, value, expression, dgnModel):
     return True
 
 
-'''
-Function to create Distance variable "Radius", and create 2 parameter sets "Small" and "Large"
-'''
 def CreateCircleVariableAndParameterSets(dgnModel):
+    """
+    Creates a circle variable and parameter sets in the given design model.
+    This function creates a distance variable named "Radius" and two parameter sets named "Small" and "Large".
+    It then sets the value of the "Radius" variable for each parameter set.
+    :param dgnModel: The design model in which to create the variable and parameter sets.
+    :type dgnModel: object
+    :Example:
+    >>> CreateCircleVariableAndParameterSets(dgnModel)
+    The function performs the following steps:
+    1. Creates a distance variable named "Radius" with an initial value of 20000.
+    2. Creates a parameter set named "Small" with a description "Small circle parameter set".
+    3. Creates a parameter set named "Large" with a description "Large circle parameter set".
+    4. Sets the value of the "Radius" variable to 1 for the "Small" parameter set.
+    5. Sets the value of the "Radius" variable to 5 for the "Large" parameter set.
+    """
     variableName = "Radius"
     parameterSetNameSmall = "Small"
     parameterSetDescSmall = "Small circle parameter set"
@@ -241,16 +346,37 @@ def CreateCircleVariableAndParameterSets(dgnModel):
     SetVariableValueInParameterSet(parameterSetNameSmall, variableName, 1, dgnModel) # Set "Radius" variable value for "Small" parameter set
     SetVariableValueInParameterSet(parameterSetNameLarge, variableName, 5, dgnModel) # Set "Radius" variable value for "Large" parameter set
 
-'''
-Example to show how to create variable and parameter sets to active model
-'''
 def ExampleCreateCircleVariableAndParameterSets():
+    """
+    Example function to create a circle with variable and parameter sets.
+
+    This function demonstrates how to create a circle using variable and parameter sets
+    in the active DGN model. It utilizes the `CreateCircleVariableAndParameterSets` function
+    and the `ISessionMgr.GetActiveDgnModel()` method to achieve this.
+
+    Note:
+        Ensure that the DGN model is active before calling this function.
+
+    Raises:
+        Exception: If there is an issue with creating the circle or accessing the active DGN model.
+    """
     CreateCircleVariableAndParameterSets(ISessionMgr.GetActiveDgnModel())
 
-'''
-Example to show how to create variable with expression to active model
-'''
 def ExampleCreateVariableWithExpression():
+    """
+    Demonstrates how to create a variable with an expression in a DGN model.
+    This function performs the following steps:
+    1. Retrieves the active DGN model.
+    2. Creates a distance variable named "SmallRadius" with a value of 20000.0.
+    3. Creates another distance variable named "RadiusDouble" with an expression "2 * SmallRadius".
+    4. Performs a simple test to verify that the variable "RadiusDouble" evaluates correctly.
+    The test involves:
+    - Retrieving the parameter definitions for the model.
+    - Getting the model information.
+    - Comparing the actual value of "RadiusDouble" with the expected value.
+    
+    :raises AssertionError: If the actual value of "RadiusDouble" does not match the expected value.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
 
     smallRadiusName = "SmallRadius"
@@ -272,41 +398,77 @@ def ExampleCreateVariableWithExpression():
     expect.SetDouble(2 * smallRadiusValue/modelInfo.GetUorPerStorage())
     assert (actual == expect)
 
-'''
-Example to show how to remove variable from dgn model
-'''
 def ExampleRemoveVariable():
+    """
+    Removes a specified variable from the active DGN model.
+
+    This function retrieves the active DGN model and removes the variable
+    with the name "Radius" from it.
+
+    :raises Exception: If the variable cannot be removed or the model is not found.
+    """
     variableName = "Radius"
     dgnModel = ISessionMgr.GetActiveDgnModel()
     RemoveVariable(variableName, dgnModel)
 
-'''
-Example to show how to remove variation from dgn model
-'''
 def ExampleRemoveVariation():
+    """
+    Removes a specified variation from the active DGN model.
+
+    This function removes a variation named "Small" from the currently active
+    DGN model using the `RemoveVariation` function.
+
+    :raises SomeException: If the variation cannot be removed or the model is not found.
+    """
     variationName = "Small"
     dgnModel = ISessionMgr.GetActiveDgnModel()
     RemoveVariation(variationName, dgnModel)
 
-'''
-Example to show how to export variables and variations from dgn model into csv file
-'''
 def ExampleExportVariables():
+    """
+    Export variables from the active DGN model to a CSV file.
+
+    This function retrieves the active DGN model and constructs a file path
+    for the export CSV file. It then calls the ExportVariables function to
+    export the variables to the specified CSV file.
+
+    :raises Exception: If there is an error during the export process.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
     path = BeFileName.GetDirectoryName(repr(ISessionMgr.GetActiveDgnFile().GetFileName()))
     path.AppendA("export.csv")
     ExportVariables(dgnModel, str(path))
 
-'''
-Example to show how to import variables and variations from csv file into dgn model
-'''
 def ExampleImportVariables():
+    """
+    Example function to import variables from a CSV file into the active DGN model.
+
+    This function retrieves the active DGN model and constructs the path to the 
+    'export.csv' file located in the same directory as the active DGN file. It then 
+    calls the ImportVariables function to import the variables from the CSV file 
+    into the DGN model.
+
+    :raises Exception: If there is an error in retrieving the active DGN model or file.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
     path = BeFileName.GetDirectoryName(repr(ISessionMgr.GetActiveDgnFile().GetFileName()))
     path.AppendA("export.csv")
     ImportVariables(dgnModel, str(path))
 
 def RunSamples(index = 1):
+    """
+    Run sample functions based on the provided index.
+
+    :param index: An integer representing the sample function to run. 
+                  Defaults to 1. The valid values are:
+                  1 - Run ExampleCreateCircleVariableAndParameterSets
+                  2 - Run ExampleCreateVariableWithExpression
+                  3 - Run ExampleExportVariables
+                  4 - Run ExampleImportVariables
+                  5 - Run ExampleRemoveVariable
+                  6 - Run ExampleRemoveVariation
+    :type index: int
+    """
     if (1 == index):
         ExampleCreateCircleVariableAndParameterSets()
     elif(2 == index):

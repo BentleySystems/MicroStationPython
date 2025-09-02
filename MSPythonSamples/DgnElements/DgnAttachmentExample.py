@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 import os
 import math
@@ -14,9 +9,25 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
+'''
+Sample demonstrating how to create a DGN attachment in an active model.
+''' 
 
-'''Create dgn attachment in Microstation'''
 def createDgnAttachment():
+    """
+    Creates a new DGN attachment in the active DGN model.
+
+    This function performs the following steps:
+    1. Retrieves the active DGN model reference.
+    2. Loads the DGN file associated with the active model.
+    3. Retrieves the moniker of the document associated with the DGN file.
+    4. Checks if a model with the name 'MyNewModel' exists in the DGN file.
+    5. If the model does not exist, creates a new model with the name 'MyNewModel'.
+    6. Creates a new DGN attachment using the moniker and the model name 'MyNewModel'.
+
+    :returns: True if the DGN attachment is successfully created, False otherwise.
+    :rtype: bool
+    """    
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:
         return False

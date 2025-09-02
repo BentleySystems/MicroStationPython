@@ -10,22 +10,22 @@
 
 
 
-static const char * __doc_Bentley_DgnPlatform_StoredExpressionEntry_SetNameAndLabel =R"doc(Parameter ``name``:
+static const char * __doc_Bentley_DgnPlatform_StoredExpressionEntry_SetNameAndLabel =R"doc(:param name:
     entry name.
 
-Parameter ``label``:
+:param label:
     entry label.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionEntry_SetLabel =R"doc(Set entry label
 
-Parameter ``label``:
+:param label:
     entry label.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionEntry_GetLabel =R"doc(Get entry label)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionEntry_SetName =R"doc(Set entry name
 
-Parameter ``name``:
+:param name:
     entry name.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionEntry_GetName =R"doc(Get entry name)doc";
@@ -36,36 +36,36 @@ static const char * __doc_Bentley_DgnPlatform_StoredExpression_GetKeyWordVector 
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpression_AddKeyWord =R"doc(Add a Keyword name to the Stored Expression.
 
-Parameter ``keyword``:
+:param keyword:
     Keyword name to add to the list of Keyword that exposes this
     expression.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpression_AddSymbolSet =R"doc(Add a Symbol Set name to the Stored Expression.
 
-Parameter ``symbolSetName``:
+:param symbolSetName:
     Symbol set name to add to the list of Symbol Set required to
     evaluate the expression.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpression_SetExpression =R"doc(Set the Stored Expression's expression string.
 
-Parameter ``expression``:
+:param expression:
     New expression string that is processed by the Expression
     Evaluator.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpression_SetDescription =R"doc(Set the Description of a Stored Expression.
 
-Parameter ``description``:
+:param description:
     New description for expression. The description is localizable.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpression_SetDisplayLabel =R"doc(Set the Display Label of a Stored Expression.
 
-Parameter ``label``:
+:param label:
     New label for expression. The label is localizable and used in to
     identify the expression in the UI.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpression_SetName =R"doc(Set the Name of a Stored Expression.
 
-Parameter ``name``:
+:param name:
     New name for expression. This is a non-localizable string that is
     used to identify the expression.)doc";
 
@@ -73,37 +73,37 @@ static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_GetElementR
 XAttributes. All the Stored Expressions in the file are associated
 with this one element.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     Dgn file to process.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_CollectKeywordNames =R"doc(Get bvector of Store Expression Keyword Names.
 
-Parameter ``keywordVector``:
+:param keywordVector:
     empty bvector to populate with the names of the Stored Expressions
     Keywords.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     Dgn file to process.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_CollectExpressionEntries =R"doc(Get bvector of Store Expression Entries, useful for population User
 Interface Components.
 
-Parameter ``expressionEntriesVector``:
+:param expressionEntriesVector:
     bvector to populate with available Expression entries.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     Dgn file to process.
 
-Parameter ``limitingKeyword``:
+:param limitingKeyword:
     limit to specific keyword.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_CollectExpressionNames =R"doc(Get bvector of Store Expression Names.
 
-Parameter ``expressionVector``:
+:param expressionVector:
     empty bvector to populate with the names of the Stored
     Expressions.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     Dgn file to process.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_GetKeywordHandlerID =R"doc(Get XAttributeHandlerId for the Store Expression Keyword XAttributes.)doc";
@@ -112,22 +112,22 @@ static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_GetExpressi
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_AddOrUpdateKeywordInFile =R"doc(Add or update the XAttributes that define a Stored Expression Keyword.
 
-Parameter ``keyword``:
+:param keyword:
     Stored Expression Keyword definition.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     Dgn file to process.
 
-Parameter ``originalKeywordName``:
+:param originalKeywordName:
     optional, original name, used when renaming.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_UpdateKeyword =R"doc(Update a specific XAttributes to match the supplied Stored Expression
 Keyword.
 
-Parameter ``xAttr``:
+:param xAttr:
     Existing XAttributeHandle.
 
-Parameter ``keyword``:
+:param keyword:
     Stored Expression Keyword definition used to update existing
     XAttribute.)doc";
 
@@ -135,51 +135,51 @@ static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_FindKeyword
 name is not found the returned pointer .IsValid() method will return
 false.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     Dgn file to process.
 
-Parameter ``name``:
+:param name:
     Named of Stored Expression Keyword to return.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_CreateKeywordFromXAttributes =R"doc(Return Stored Expression Keyword stored in the XAttributes defined be
 the input XAttributeHandle.
 
-Parameter ``xAttr``:
+:param xAttr:
     XAttributeHandle containing the Stored Expression Keyword
     XAttributes.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_AddOrUpdateExpressionInFile =R"doc(Add or update the XAttribute that define a Stored Expression Keyword.
 
-Parameter ``expression``:
+:param expression:
     Stored Expression definition.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     Dgn file to process.
 
-Parameter ``originalExpressionName``:
+:param originalExpressionName:
     optional, original name, used when renaming.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_UpdateExpression =R"doc(Update a specific XAttribute to match the supplied Stored Expression.
 
-Parameter ``xAttr``:
+:param xAttr:
     Existing XAttributeHandle.
 
-Parameter ``expression``:
+:param expression:
     Stored Expression definition used to update existing XAttribute.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_FindExpressionByName =R"doc(Return Stored Expression found in file by name. If a matching name is
 not found the returned pointer .IsValid() method will return false.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     Dgn file to process.
 
-Parameter ``name``:
+:param name:
     Named of Stored Expression to return.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StoredExpressionHelper_CreateExpressionFromXAttributes =R"doc(Return Stored Expression stored in the XAttributes defined be the
 input XAttributeHandle.
 
-Parameter ``xAttr``:
+:param xAttr:
     XAttributeHandle containing the Stored Expression XAttributes.)doc";
 
 /*---------------------------------------------------------------------------------**//**

@@ -6,6 +6,12 @@ from MSPyMstnPlatform import *
 from MSPyDgnView import *
 import math
 
+
+'''
+Sample demonstrating how to measure the angles between segments of a line string.
+'''
+
+
 """
 Retrieve all visible graphical elements from the active model.
     
@@ -164,7 +170,7 @@ def calculateNewPoint(point, bisectorDirection, distance):
     return DPoint3d(newX, newY, newZ)
 
 '''
-Prerequisite: Open MSPythonSamples\data\PythonMeasuringAngleExample.dgn 
+Prerequisite: Open MSPythonSamples\\data\\PythonMeasuringAngleExample.dgn 
 '''
 #main
 if __name__ == "__main__":

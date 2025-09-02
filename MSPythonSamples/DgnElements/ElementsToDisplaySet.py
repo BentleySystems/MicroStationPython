@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -14,11 +9,22 @@ from MSPyDgnView import *
 import sys
 
 '''
-Function to iterate levels available on model
-    lvlName : str      Level Name
-    lvlId   : int      Level number
+Sample demonstrating how to select elements in the active DGN model by the specified level name and  create display set by its level number
+Prerequisite : Run the sample on DisplaySetExample.dgn 
 '''
+
 def getLevelName(lvlName, lvlId):
+    """
+    Checks if a level with the specified name and ID exists in the active DGN model. Iterates over all the levels in the active model to do this
+
+    :param lvlName: The name of the level to check.
+    :type lvlName: str
+    :param lvlId: The ID of the level to check.
+    :type lvlId: int
+
+    :returns: True if the level with the specified name and ID exists, False otherwise.
+    :rtype: bool
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     levelCache = ACTIVEMODEL.GetDgnFile().GetLevelCache()
@@ -32,11 +38,16 @@ def getLevelName(lvlName, lvlId):
 
     return False
 
-'''
-Function to create display set by its level number
-    userLevelName : str      Level name
-'''
+
 def selectElementsbyLevelName(userLevelName):
+    """
+    Selects elements in the active DGN model by the specified level name and  create display set by its level number
+
+    :param userLevelName: The name of the level to select elements from.
+    :type userLevelName: str
+
+    :returns: None
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -66,7 +77,6 @@ def selectElementsbyLevelName(userLevelName):
         print(perElementRef.IsInDisplaySet(None))
 
 '''
-Prerequisite : Run the sample on DisplaySetExample.dgn 
 Update the View in Microstation to see the results in view
 '''
 

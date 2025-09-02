@@ -12,25 +12,25 @@
 
 static const char * __doc_Bentley_DgnPlatform_ChildElemIter_ToNext =R"doc(Move to the next sibling element from the current element.
 
-Returns:
+:returns:
     a ChildElemIter pointing to the next sibling element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementSet_GetNext =R"doc(Get the next ElementHandle in the set.
 
-Parameter ``elHandle``:
+:param elHandle:
     The ElementHandle for the first member.
 
-Returns:
+:returns:
     true if there were more members in the set and *elHandle* was set.
     If false, *elHandle* was not modified.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementSet_GetFirst =R"doc(Reset the iterator to the begining of the set and return the first
 member.
 
-Parameter ``elHandle``:
+:param elHandle:
     The ElementHandle for the first member.
 
-Returns:
+:returns:
     true if there was at least one member of the set and *elHandle*
     was set. If false, *elHandle* was not modified.)doc";
 
@@ -41,10 +41,10 @@ modified MSElementDescr held by this EditElementHandle. The
 replacement is via the current transaction (see ITxn::ReplaceElement)
 and is always undoable.
 
-Parameter ``oldRef``:
+:param oldRef:
     Element to replace.
 
-Returns:
+:returns:
     SUCCESS if the element was replaced in the model. This method will
     fail if there is no MSElementDescr for this EditElementHandle.
 
@@ -59,7 +59,7 @@ current transaction (see ITxn::DeleteElement) and is always undoable.
 The deletion is via the current transaction (see ITxn::DeleteElement)
 and is always undoable.
 
-Returns:
+:returns:
     SUCCESS if the element was deleted from the model.
 
 Remark:
@@ -70,7 +70,7 @@ static const char * __doc_Bentley_DgnPlatform_EditElementHandle_AddToModel =R"do
 via the current transaction (see ITxn::AddElement) and is always
 undoable.
 
-Returns:
+:returns:
     SUCCESS if the element was added to its model. This method will
     fail if there is no MSElementDescr for this EditElementHandle, or
     if the MSElementDescr is not owned by this EditElementHandle, or
@@ -89,25 +89,25 @@ static const char * __doc_Bentley_DgnPlatform_EditElementHandle_FindByID =R"doc(
 
 static const char * __doc_Bentley_DgnPlatform_EditElementHandle_CancelDeleteXAttribute =R"doc(Cancel out the effects of a prior call to ScheduleDeleteXAttribute
 
-Parameter ``h``:
+:param h:
     XAttributeHandler ID
 
-Parameter ``xAttrId``:
+:param xAttrId:
     XAttribute ID
 
-Returns:
+:returns:
     non-zero error status if the XAttribute was not scheduled for
     deletion)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditElementHandle_ScheduleDeleteXAttribute =R"doc(Schedule removal of the specified XAttribute from the MSElementDescr.
 
-Parameter ``h``:
+:param h:
     XAttributeHandler ID
 
-Parameter ``xAttrId``:
+:param xAttrId:
     XAttribute ID
 
-Returns:
+:returns:
     non-zero error status if the change cannot be scheduled. Normally,
     this would only happen in an out-of-memory situation.
 
@@ -123,13 +123,13 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_EditElementHandle_CancelWriteXAttribute =R"doc(Cancel out the effects of a prior call to ScheduleWriteXAttribute
 
-Parameter ``h``:
+:param h:
     XAttributeHandler ID
 
-Parameter ``xAttrId``:
+:param xAttrId:
     XAttribute ID
 
-Returns:
+:returns:
     non-zero error status if the XAttribute was not scheduled for
     write)doc";
 
@@ -138,19 +138,19 @@ static const char * __doc_Bentley_DgnPlatform_EditElementHandle_ScheduleWriteXAt
 Remark:
     s This function makes a copy of *data*
 
-Parameter ``h``:
+:param h:
     XAttributeHandler ID
 
-Parameter ``xAttrId``:
+:param xAttrId:
     XAttribute ID
 
-Parameter ``dataSize``:
+:param dataSize:
     Number of bytes of data in XAttribute data
 
-Parameter ``data``:
+:param data:
     XAttribute data
 
-Returns:
+:returns:
     non-zero error status if the change cannot be scheduled. Normally,
     this would only happen in an out-of-memory situation.
 
@@ -185,17 +185,17 @@ Remark:
 See also:
     ReplaceElementDescr.
 
-Parameter ``elDscr``:
+:param elDscr:
     MSElementDescr to be referenced by this ElementHandle.
 
-Parameter ``owned``:
+:param owned:
     If true, destructor will free *elDscr.* Otherwise, caller
     maintains ownership of *elDscr.*
 
-Parameter ``isUnmodified``:
+:param isUnmodified:
     If true, *elDscr* is an exact image of the element in the cache.
 
-Parameter ``modelRef``:
+:param modelRef:
     Will be used if elDscr.h.dgnModelRef is NULL.
 
 See also:
@@ -204,7 +204,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_EditElementHandle_ExtractElementDescr =R"doc(Extract and take ownership of the MSElementDescr associated with this
 EditElementHandle.
 
-Returns:
+:returns:
     The MSElementDescrP from the EditElementHandle. The MSElementDescr
     is no longer associated with the EditElementHandle, and the caller
     is responsible for freeing it.
@@ -219,12 +219,12 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_EditElementHandle_ReplaceElementDescr =R"doc(Replace the MSElementDescr associated with the EditElementHandle with
 a new MSElementDescr.
 
-Parameter ``elDscr``:
+:param elDscr:
     The new MSElementDescr to be associated with the
     EditElementHandle. After this call, *elDscr* becomes owned by this
     EditElementHandle.
 
-Returns:
+:returns:
     SUCCESS if the MSElementDescr was successfully replaced by
     *elDscr,* ERROR otherwise.
 
@@ -239,7 +239,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_EditElementHandle_ReplaceElement =R"doc(Replace the element associated with this EditElementHandle with a new
 element.
 
-Parameter ``el``:
+:param el:
     The new element. The element is copied from this buffer and
     allocated in a new MSElementDescr.)doc";
 
@@ -252,8 +252,8 @@ element in the cache.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditElementHandle_SetModelRef =R"doc(Change the DgnModelRef for this EditElementHandle.
 
-Parameter ``modelRef``:
-    IN new DgnModelRef)doc";
+:param modelRef:
+    (input) new DgnModelRef)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditElementHandle_Duplicate =R"doc(Duplicate the element descriptor and its scheduled XAttribute changes.)doc";
 
@@ -263,37 +263,37 @@ static const char * __doc_Bentley_DgnPlatform_ElementHandle_EndElementLinkages =
 
 static const char * __doc_Bentley_DgnPlatform_ElementHandle_BeginElementLinkages =R"doc(Get an iterator over the element's user data linkages
 
-Parameter ``rl``:
+:param rl:
     Linkage ID filter value identifies the linkages of interest.
     Defaults to all linkages.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementHandle_GetElementType =R"doc(Get the element type of the element referenced by this ElementHandle.
 
-Returns:
+:returns:
     the type of the element referenced by this ElementHandle)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementHandle_IsPersistent =R"doc(Determine whether this ElementHandle references an unmodified element
 in the cache.
 
-Returns:
+:returns:
     true if ElementHandle is unmodified representation of element in
     the cache.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementHandle_IsValid =R"doc(Determine whether this ElementHandle is currently valid.
 
-Returns:
+:returns:
     true if this ElementHandle references a valid element. If not, all
     other methods on this ElementHandle will either fail or crash.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementHandle_GetModelRef =R"doc(Get the DgnModelRef for this ElementHandle.
 
-Returns:
+:returns:
     the DgnModelRef. @note This method CAN (and often will) return
     NULL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementHandle_GetElementRef =R"doc(@name Element Data Queries Get the ElementRefP for this ElementHandle.
 
-Returns:
+:returns:
     the ElementRefP, or NULL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementHandle_GetITextEdit =R"doc(A shortcut method to get the ITextEdit interface on the Handler for
@@ -321,7 +321,7 @@ handler. This method returns a reference to the Handler for this
 element. If this ElementHandle has an ElementRefP, its handler is
 returned. Otherwise, the MSElementDescr is used.
 
-Parameter ``perm``:
+:param perm:
     The requsted permission for the task for which the Handler will be
     used. This is only relevant when the element's Handler is not
     present on the system and no appropriate Enabler can be located.
@@ -350,6 +350,9 @@ void def_ElementHandle(py::module_& m)
         .value("eMISSING_HANDLER_PERMISSION_ChangeAttrib", MISSING_HANDLER_PERMISSION_ChangeAttrib)
         .value("eMISSING_HANDLER_PERMISSION_All_", MISSING_HANDLER_PERMISSION_All_)
         .export_values();
+
+
+    py::class_<Bentley::DgnPlatform::IDependencyHandler> c1 (m, "IDependencyHandler");
 
     //===================================================================================
     // struct IElementState

@@ -1,9 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 
 from MSPyBentley import *
@@ -13,16 +9,36 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
+
+'''
+This sample demonstrates how to add key-in commands and use those commands to attach or detach item type
+'''
+
 g_itemTypeLibName = str('Imported Furniture')
 g_itemTypeName = str('Sofa')
 g_typePropertyName = str('Type')
 g_propertyValueName = str('Modified Sofa')
 g_eeh = EditElementHandle()
 
-'''
-Function to create item type library, item type and property
-'''
 def InitItemTypeLib () :
+    """
+    Initialize an item type library, item type, and property.
+
+    This function performs the following steps:
+    
+    1. Retrieves the active design file using `ISessionMgr.GetActiveDgnFile()`.
+    2. Creates an instance of `ItemTypeLibrary` with the global item type library name (`g_itemTypeLibName`), the active design file, and a boolean flag set to `False`.
+    3. Adds a new item type to the library using the global item type name (`g_itemTypeName`) and a boolean flag set to `False`.
+    4. Adds a property to the newly created item type using the global type property name (`g_typePropertyName`) and a boolean flag set to `False`.
+    5. Sets the data type of the property to string using `CustomProperty.Type1.eString`.
+    6. Creates an instance of `ECValue` with the global property value name (`g_propertyValueName`).
+    7. Sets the default value of the property to the created `ECValue` instance.
+    8. Writes any changes made to the library to the file.
+    9. Returns `True` to indicate that the initialization was successful.
+
+    :returns: `True` if the initialization was successful.
+    :rtype: bool
+    """
     # Define a function to initialize an item type library
     dgnFile = ISessionMgr.GetActiveDgnFile()
      # Get the active design file
@@ -51,10 +67,33 @@ def InitItemTypeLib () :
     return True
      # Return True to indicate that the initialization was successful
 
-'''
-Function to create a line element
-'''
 def CreateLine (dgnmodel, x1, y1, x2, y2):
+    """
+    Create a line element in a design model.
+
+    This function performs the following steps:
+
+    1. Declares the variable `g_eeh` as a global variable.
+    2. Creates a 3D segment (`DSegment3d`) with the given coordinates and elevation set to 0.0.
+    3. Attempts to create a line element using `LineHandler.CreateLineElement()`.
+       - If the creation is unsuccessful, sets `g_eeh` to `None` and returns `False`.
+    4. Adds the created line element to the model using `g_eeh.AddToModel()`.
+    5. Returns `True` to indicate that the creation was successful.
+
+    :param dgnmodel: The design model where the line element will be created.
+    :type dgnmodel: DesignModel
+    :param x1: The x-coordinate of the start point of the line.
+    :type x1: float
+    :param y1: The y-coordinate of the start point of the line.
+    :type y1: float
+    :param x2: The x-coordinate of the end point of the line.
+    :type x2: float
+    :param y2: The y-coordinate of the end point of the line.
+    :type y2: float
+    :returns: `True` if the line element creation was successful, `False` otherwise.
+    :rtype: bool
+    """
+    
      # Define a function that creates a line in a design model
     global g_eeh
 
@@ -72,10 +111,30 @@ def CreateLine (dgnmodel, x1, y1, x2, y2):
 
     return True
      # Return True to indicate that the creation was successful
-'''
-Function to attach item type to element
-'''
+
 def AttachItemType():
+    """
+    Attach an item type to an element.
+
+    This function performs the following steps:
+
+    1. Declares the variable `g_eeh` as a global variable.
+    2. Prints a message indicating the start of the function.
+    3. Initializes the item type library by calling `InitItemTypeLib()`.
+       - If the initialization is unsuccessful, the function returns immediately.
+    4. Creates a line element in the active design model by calling `CreateLine()`.
+       - If the creation is unsuccessful, the function returns immediately.
+    5. Retrieves the active design file using `ISessionMgr.GetActiveDgnFile()`.
+    6. Finds the item type library by name in the design file using `ItemTypeLibrary.FindByName()`.
+    7. Gets the item type from the item type library by its name using `itemTypeLib.GetItemTypeByName()`.
+    8. Creates an instance of `CustomItemHost` with the global element handle (`g_eeh`) and a boolean flag set to `False`.
+    9. Applies the custom item to the host using `itemHost.ApplyCustomItem()`.
+    10. Sets the property value on the applied instance using `dgnecinstance.SetValue()`.
+    11. Writes any changes made to the instance using `dgnecinstance.WriteChanges()`.
+    12. Prints a message indicating the end of the function.
+
+    :returns: None
+    """
      # Define a function called AttachItemType
     global g_eeh
 
@@ -102,10 +161,21 @@ def AttachItemType():
 
     print ('END: Attached successfully \n')  # Print a message indicating the end of the function
 
-'''
-Function to detach item type from element
-'''
 def DetachItemType():
+    """
+    Detach an item type from an element.
+
+    This function performs the following steps:
+
+    1. Declares the variable `g_eeh` as a global variable.
+    2. Prints a message indicating the start of the function.
+    3. Creates an instance of `CustomItemHost` with the global element handle (`g_eeh`) and a boolean flag set to `False`.
+    4. Retrieves a custom item from the item host using the global item type library name (`g_itemTypeLibName`) and the global item type name (`g_itemTypeName`).
+    5. Deletes the retrieved custom instance.
+    6. Prints a message indicating the end of the function.
+
+    :returns: None
+    """
     # Define a function called DetachItemType
     global g_eeh
 
@@ -120,6 +190,7 @@ def DetachItemType():
     dgnecinstance.Delete();  # Delete the retrieved custom instance
 
     print ('END: Detach successfully \n')  # Print a message indicating the end of the function
+    
 if __name__ == "__main__":
     keyinXml = os.path.dirname(__file__) + '/ItemTypeAttach.commands.xml'
     PythonKeyinManager.GetManager ().LoadCommandTableFromXml (WString (__file__), WString (keyinXml))

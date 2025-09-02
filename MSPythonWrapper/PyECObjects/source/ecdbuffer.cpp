@@ -13,7 +13,7 @@
 static const char * __doc_Bentley_ECObjects_ECDBuffer_CopyFromBuffer = R"doc(Attempts to copy property values from source buffer. Expects source to
 have a compatible class layout.
 
-Parameter ``source``:
+:param source:
     The ECDBuffer to copy values from)doc";
 
 static const char * __doc_Bentley_ECObjects_ECDBuffer_ClearValues = R"doc(Sets all values to null)doc";
@@ -52,7 +52,7 @@ static const char * __doc_Bentley_ECObjects_SchemaLayout_FindClassIndex = R"doc(
 ClassLayout
 
 
-Parameter ``className``:
+:param className:
     The name of the class to find the ClassLayout index of
 
 Returns (Tuple, 0):
@@ -72,10 +72,10 @@ Parameter ``className``:
 
 static const char * __doc_Bentley_ECObjects_SchemaLayout_GetClassLayout = R"doc(Returns the ClassLayout at the given index
 
-Parameter ``classIndex``:
+:param classIndex:
     The index of the desired ClassLayout
 
-Returns:
+:returns:
     A pointer to the requested ClassLayout if the index is valid, NULL
     otherwise)doc";
 
@@ -92,13 +92,13 @@ Returns:
 
 static const char * __doc_Bentley_ECObjects_SchemaLayout_AddClassLayout = R"doc(Adds the ClassLayout at the given index
 
-Parameter ``classLayout``:
+:param classLayout:
     The ClassLayout to add
 
-Parameter ``classIndex``:
+:param classIndex:
     The index where to add the ClassLayout
 
-Returns:
+:returns:
     ERROR if a class layout already exists with the given index)doc";
 
 static const char * __doc_Bentley_ECObjects_SchemaLayout_GetSchemaIndex = R"doc(Gets the SchemaIndex of this particular SchemaLayout.)doc";
@@ -109,10 +109,10 @@ properties)doc";
 static const char * __doc_Bentley_ECObjects_ClassLayout_IsCompatible = R"doc(Checks the given classLayout to see if it is equal to, or a subset of,
 this layout
 
-Parameter ``layout``:
+:param layout:
     The ClassLayout to test compatibility of
 
-Returns:
+:returns:
     true if the given ClassLayout is equal to or a subset of this
     layout, false otherwise)doc";
 
@@ -121,14 +121,14 @@ static const char * __doc_Bentley_ECObjects_ClassLayout_CalculateBytesUsed = R"d
 static const char * __doc_Bentley_ECObjects_ClassLayout_SetPropertyReadOnly = R"doc(Sets the read-only status of a property, given its index within the
 ClassLayout
 
-Parameter ``propertyIndex``:
+:param propertyIndex:
     The index within the ClassLayout of the property to set the read-
     only flag for
 
-Parameter ``readOnly``:
+:param readOnly:
     Flag indicating whether this property is read-only
 
-Returns:
+:returns:
     The value of readOnly if successfully set, otherwise false)doc";
 
 static const char * __doc_Bentley_ECObjects_ClassLayout_IsPropertyReadOnly = R"doc(Given a propertyIndex, will return whether the property is read-only
@@ -144,7 +144,7 @@ static const char * __doc_Bentley_ECObjects_ClassLayout_GetPropertyIndex = R"doc
 ClassLayout
 
 
-Parameter ``accessString``:
+:param accessString:
     The access string for the desired property
 
 Returns(Tuple, 0):
@@ -177,13 +177,13 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_ECObjects_ClassLayout_GetPropertyLayoutByIndex = R"doc(Given a property index, will return the PropertyLayout
 
-Parameter ``propertyLayout``:
+:param propertyLayout:
     Will point to the PropertyLayout if found
 
-Parameter ``propertyIndex``:
+:param propertyIndex:
     The index in the ClassLayout of the desired property
 
-Returns:
+:returns:
     ECOBJECTS_STATUS_PropertyNotFound if the property is not found,
     ECOBJECTS_STATUS_Success otherwise)doc";
 
@@ -208,17 +208,17 @@ static const char * __doc_Bentley_ECObjects_ClassLayout_GetChecksum = R"doc(Retu
 
 static const char * __doc_Bentley_ECObjects_ClassLayout_GetECPointerIndex = R"doc(Returns the property index of the given relationship end
 
-Parameter ``end``:
+:param end:
     The ECRelationshipEnd for which to get the pointer index
 
-Returns:
+:returns:
     The property index of the pointer for the given relationship end)doc";
 
 static const char * __doc_Bentley_ECObjects_ClassLayout_GetECClassName = R"doc(Returns the name of the ECClass that this ClassLayout manages)doc";
 
 static const char * __doc_Bentley_ECObjects_ClassLayout_CreateEmpty = R"doc(Creates an empty ClassLayout for a class with the given name
 
-Parameter ``className``:
+:param className:
     The name of the class that this ClassLayout will define)doc";
 
 static const char * __doc_Bentley_ECObjects_ClassLayout_BuildFromClass = R"doc(Given a class, will create the ClassLayout that manages that class

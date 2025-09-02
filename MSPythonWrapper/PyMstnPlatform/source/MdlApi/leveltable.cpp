@@ -13,10 +13,10 @@
 
 static const char * __doc_MstnPlatform_LevelName_HasValidCharacters =R"doc(@Description Check if specified Name String is valid
 
-Parameter ``nameStringIn``:
+:param nameStringIn:
     level name
 
-Returns:
+:returns:
     true if the Name String is valid, else false
 
 See also:
@@ -28,10 +28,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelAttribute_GetMask =R"doc(Return the level-attribute bit-mask for a given attribute list type.
 
-Parameter ``attributeTypeIn``:
+:param attributeTypeIn:
     level attribute mask type to get
 
-Returns:
+:returns:
     level attribute bit-mask for given type.
 
 Bentley Systems
@@ -51,10 +51,10 @@ Remark:
     apply the seed in one step, call the function
     <i>Level.CreateFromSeed</i>
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model ref
 
-Returns:
+:returns:
     DgnPlatform::LevelId of seed level
 
 Bentley Systems
@@ -64,27 +64,27 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_SetElementByLevel =R"doc(@Description set or unset elements symbology to that of BYLEVEL.
 
-Parameter ``numElementChangedOut``:
+:param numElementChangedOut:
     number of elements changed
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model ref
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level to change elements symbology
 
-Parameter ``elementAttributeStringIn``:
+:param elementAttributeStringIn:
     mask of attributes, 1:color, 2:style, 3:weight
 
-Parameter ``inEntireFileIn``:
+:param inEntireFileIn:
     if true, then set elements symbology in entire file of modelrefIn,
     else set elements symbology only in the specified model
 
-Parameter ``isSetByLevel``:
+:param isSetByLevel:
     if true, then set elements symbology to that of BYLEVEL, else
     unset elements symbology to that of BYLEVEL.
 
-Returns:
+:returns:
     ERROR if the model-ref or the level ids are invalid, else SUCCESS
 
 Bentley Systems
@@ -96,23 +96,23 @@ static const char * __doc_MstnPlatform_Level_MoveElementLevel =R"doc(@Descriptio
 model-refs of both the source level and destination level are the
 same.
 
-Parameter ``numElementMovedOut``:
+:param numElementMovedOut:
     number of elements moved
 
-Parameter ``destLevelIdIn``:
+:param destLevelIdIn:
     destination level to move elements to
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model ref
 
-Parameter ``sourceLevelIdIn``:
+:param sourceLevelIdIn:
     source level from which to elements from
 
-Parameter ``inEntireFileIn``:
+:param inEntireFileIn:
     if true, then move elements in entire file of modelRefIn, else
     move elements only in the specified model
 
-Returns:
+:returns:
     ERROR if the model-ref or the level ids are invalid, else SUCCESS
 
 Bentley Systems
@@ -122,26 +122,26 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_CopyElement =R"doc(@Description Copy elements in source level to destination level.
 
-Parameter ``numElementCopiedOut``:
+:param numElementCopiedOut:
     number of elements copied
 
-Parameter ``destModelRefIn``:
+:param destModelRefIn:
     destination model to copy elements to
 
-Parameter ``destLevelIdIn``:
+:param destLevelIdIn:
     destination level to copy elements to
 
-Parameter ``sourceModelRefIn``:
+:param sourceModelRefIn:
     source model ref whose elements to copy
 
-Parameter ``sourceLevelIdIn``:
+:param sourceLevelIdIn:
     source level from which to copy elements from
 
-Parameter ``inEntireFileIn``:
+:param inEntireFileIn:
     if true, then move elements in entire file of sourceModelRefIn,
     else copy elements only in the specified model
 
-Returns:
+:returns:
     ERROR if the model-ref or the level ids are invalid, else SUCCESS
 
 Bentley Systems
@@ -151,23 +151,23 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_DeleteElement =R"doc(@Description Delete elements on specified level.
 
-Parameter ``numElementDeletedOut``:
+:param numElementDeletedOut:
     number of elements deleted
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     source model ref whose elements to delete
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     source level from which to delete elements
 
-Parameter ``inEntireFileIn``:
+:param inEntireFileIn:
     if true, then delete elements in entire file that contains
     modelRefIn, else delete elements only in the specified model
 
-Parameter ``updateViewIn``:
+:param updateViewIn:
     if true, then update the views
 
-Returns:
+:returns:
     ERROR if the model-ref or the level ids are invalid, else SUCCESS
 
 Bentley Systems
@@ -177,16 +177,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_SelectElement =R"doc(@Description Select elements on specified level.
 
-Parameter ``numElementSelectedOut``:
+:param numElementSelectedOut:
     number of elements selected
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     source model ref whose elements to copy
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     source level from which to copy elements from
 
-Returns:
+:returns:
     ERROR if the model-ref or the level ids are invalid, else SUCCESS
 
 Bentley Systems
@@ -196,29 +196,29 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_Draw =R"doc(@Description Draw all elements on specified level
 
-@Param[in] viewDrawIn views to update. Should point to an array
+@Param(input) viewDrawIn views to update. Should point to an array
 dimensioned to DgnPlatform::MAX_VIEWS, and viewDraw[i] controls
 whether view i is drawn. If NULL, all views are drawn.
 
-Parameter ``incrementalIn``:
+:param incrementalIn:
     if false, don't erase before drawing
 
-Parameter ``drawModeIn``:
+:param drawModeIn:
     erasing portion of drawing
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model ref
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level to draw
 
-Parameter ``startEndMsgIn``:
+:param startEndMsgIn:
     if true then want in prog/complete msg
 
-Parameter ``drawSharedIn``:
+:param drawSharedIn:
     if true, then draw all models/attachments which use the same level
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -231,23 +231,23 @@ static const char * __doc_MstnPlatform_Level_CopyLevel =R"doc(@Description Copy 
 Creates a new level in the destination model with the same level-name
 & level-code as the source level.
 
-Parameter ``levelIdOut``:
+:param levelIdOut:
     id of new level in pDestModelRefIn
 
-Parameter ``destModelRefIn``:
+:param destModelRefIn:
     destination model-ref to copy into
 
-Parameter ``sourceModelRefIn``:
+:param sourceModelRefIn:
     source model ref
 
-Parameter ``sourceLevelIdIn``:
+:param sourceLevelIdIn:
     id of library level to copy
 
-Parameter ``setExternalIn``:
+:param setExternalIn:
     if true, then set the imported level as " external ". Should be true
     only if pSourceModelRef is LEVEL_LIBRARY_MODELREF.
 
-Returns:
+:returns:
     SUCCESS if the level data is successfully copied.
 
 Remark:
@@ -275,16 +275,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetHidden =R"doc(@Description Get the hidden flag.
 
-Parameter ``levelHiddenOut``:
+:param levelHiddenOut:
     level hidden flag
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -296,19 +296,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetFrozen =R"doc(@Description Get the frozen flag
 
-Parameter ``levelFrozenOut``:
+:param levelFrozenOut:
     level frozen flag
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``frozenTypeIn``:
+:param frozenTypeIn:
     one of <TT>LEVEL_FROZEN_TYPE_</TT>... (defined in leveltable.h)
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -323,22 +323,22 @@ static const char * __doc_MstnPlatform_Level_CopyLevelDataByAttributeMask =R"doc
 attributes mask from source level into destination level. This
 function does not copy the level-name & level-code.
 
-Parameter ``destModelRefIn``:
+:param destModelRefIn:
     destination model
 
-Parameter ``destLevelIdIn``:
+:param destLevelIdIn:
     destination level id
 
-Parameter ``sourceModelRefIn``:
+:param sourceModelRefIn:
     source model
 
-Parameter ``sourceLevelIdIn``:
+:param sourceLevelIdIn:
     source level id
 
-Parameter ``copyAttributesMaskIn``:
+:param copyAttributesMaskIn:
     mask of attributes to copy - will never copy level name
 
-Returns:
+:returns:
     SUCCESS if the level data is successfully copied.
 
 Remark:
@@ -366,19 +366,19 @@ static const char * __doc_MstnPlatform_Level_CopyLevelData =R"doc(@Description C
 destination level. This function does not copy the level-name & level-
 code.
 
-Parameter ``destModelRefIn``:
+:param destModelRefIn:
     destination model
 
-Parameter ``destLevelIdIn``:
+:param destLevelIdIn:
     destination level id
 
-Parameter ``sourceModelRefIn``:
+:param sourceModelRefIn:
     source model
 
-Parameter ``sourceLevelIdIn``:
+:param sourceLevelIdIn:
     source level id
 
-Returns:
+:returns:
     SUCCESS if the level data is successfully copied.
 
 Remark:
@@ -407,26 +407,26 @@ function will compare only those attributes as specified in
 pCompareAttributesMaskIn. If pCompareAttributesMaskIn is NULL, then
 all the attributes will be compared.
 
-Parameter ``compareAttributesOut``:
+:param compareAttributesOut:
     if non-null, then return a set of bits that represent the
     attributes of the levels that are not the same.
 
-Parameter ``modelRef1In``:
+:param modelRef1In:
     model 1
 
-Parameter ``levelId1In``:
+:param levelId1In:
     level id of model 1
 
-Parameter ``modelRef2In``:
+:param modelRef2In:
     model 2
 
-Parameter ``levelId2In``:
+:param levelId2In:
     level id of model 2
 
-Parameter ``compareAttributesIn``:
+:param compareAttributesIn:
     mask of attributes to compare
 
-Returns:
+:returns:
     true if the level data of the two levels matches for attributes
     specified in pCompareAttributesMaskIn
 
@@ -440,16 +440,16 @@ means that its attributes cannot be changed. (exception:setting the
 level's display on/off is not affected by this setting). A read-only
 level cannot be deleted.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``isReadOnlyIn``:
+:param isReadOnlyIn:
     read-only flag - true or false
 
-Returns:
+:returns:
     SUCCESS if the level read-only flag is successfully set.
 
 Remark:
@@ -484,16 +484,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_SetTransparency =R"doc(@Description Set level display transparency. This sets the display
 transparency to apply on an element of the level.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``transparencyIn``:
+:param transparencyIn:
     level transparency (value between 0.0 & 1.0)
 
-Returns:
+:returns:
     SUCCESS if the level transparency is successfully set.
 
 Remark:
@@ -521,16 +521,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_SetDisplayPriority =R"doc(@Description Set level display priority
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``priorityIn``:
+:param priorityIn:
     level priority - may be NULL
 
-Returns:
+:returns:
     SUCCESS if the level priority is successfully set.
 
 Remark:
@@ -562,16 +562,16 @@ Access set to READ_ONLY/VIEW_ONLY to throw elements into the design
 file that can only be viewed. Using regular Microstation, the user has
 no control over such elements. By default Hidden is OFF
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``hiddenIn``:
+:param hiddenIn:
     hidden flag - true or false
 
-Returns:
+:returns:
     SUCCESS if the level hidden flag is successfully set.
 
 Remark:
@@ -604,16 +604,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_SetPlot =R"doc(@Description Set level plot on/off. Turning off the plot disables
 plotting of all elements on the level.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``plotIn``:
+:param plotIn:
     plot flag - true or false
 
-Returns:
+:returns:
     SUCCESS if the level plot flag is successfully set.
 
 Remark:
@@ -662,20 +662,20 @@ Remark:
     to all the model-refs (within the layout or viewport) with same
     file-object as the specified model-ref. </DL>
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``frozenTypeIn``:
+:param frozenTypeIn:
     one of <TT>LEVEL_FROZEN_TYPE_GLOBAL</TT> or
     <TT>LEVEL_FROZEN_TYPE_VP_FREEZE</TT> (defined in leveltable.h)
 
-Parameter ``frozenIn``:
+:param frozenIn:
     frozen flag - true or false
 
-Returns:
+:returns:
     SUCCESS if the level freeze flag is successfully set.
 
 Remark:
@@ -707,16 +707,16 @@ Remark:
     s Call View.SetLevelDisplay to control the level display in a
     specific view.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``displayIn``:
+:param displayIn:
     display flag - true or false
 
-Returns:
+:returns:
     SUCCESS if the level display flag is successfully set.
 
 Remark:
@@ -764,17 +764,17 @@ active.</TD> </TR> <TR> <TD><TT>LevelElementAccess::ViewOnly</TT></TD>
 modified or deleted. The level cannot be set active.</TD> </TR>
 </TABLE>
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``elementAccessIn``:
+:param elementAccessIn:
     element access - one of <TT>LEVEL_ELEMENT_ACCESS_</TT>... (defined
     in leveltypes.h)
 
-Returns:
+:returns:
     SUCCESS if the level element access is successfully set.
 
 Remark:
@@ -807,25 +807,25 @@ static const char * __doc_MstnPlatform_Level_SetElementSymbology =R"doc(@Descrip
 one or more of the element color, style, weight & fill color
 simultaneously.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``colorIn``:
+:param colorIn:
     element color - maybe NULL
 
-Parameter ``styleIn``:
+:param styleIn:
     element style - maybe NULL
 
-Parameter ``styleParamsIn``:
+:param styleParamsIn:
     custom line style modifiers - maybe NULL
 
-Parameter ``weightIn``:
+:param weightIn:
     element weight - maybe NULL
 
-Returns:
+:returns:
     SUCCESS if the level element fill color is successfully set.
 
 Remark:
@@ -865,16 +865,16 @@ static const char * __doc_MstnPlatform_Level_SetElementWeight =R"doc(@Descriptio
 element of the level, when the element has its weight set to BYLEVEL.
 This is also be termed as the level's BYLEVEL weight.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``weightIn``:
+:param weightIn:
     element weight
 
-Returns:
+:returns:
     SUCCESS if the level element weight is successfully set.
 
 Remark:
@@ -911,19 +911,19 @@ static const char * __doc_MstnPlatform_Level_SetElementStyle =R"doc(@Description
 element of the level, when the element has its style set to BYLEVEL.
 This is also be termed as the level's BYLEVEL style.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``styleIn``:
+:param styleIn:
     element style - maybe NULL
 
-Parameter ``styleParamsIn``:
+:param styleParamsIn:
     custom line style modifiers - maybe NULL
 
-Returns:
+:returns:
     SUCCESS if the level element style is successfully set.
 
 Remark:
@@ -962,16 +962,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_SetElementMaterialId =R"doc(@Description Set level element material id.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``materialIdIn``:
+:param materialIdIn:
     material id
 
-Returns:
+:returns:
     SUCCESS if the level color is successfully set.
 
 Remark:
@@ -1005,16 +1005,16 @@ static const char * __doc_MstnPlatform_Level_SetElementColor =R"doc(@Description
 element of the level, when the element has its color set to BYLEVEL.
 This is also be termed as the level's BYLEVEL color.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``colorIn``:
+:param colorIn:
     element color
 
-Returns:
+:returns:
     SUCCESS if the level element color is successfully set.
 
 Remark:
@@ -1057,19 +1057,19 @@ view. This is also termed as the level's OVERRIDE weight. Note that
 this function has an additional " override " flag. The " override " flag
 has to be ON in order to use the weight.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``weightIn``:
+:param weightIn:
     level weight
 
-Parameter ``weightOverrideIn``:
+:param weightOverrideIn:
     level weight override - true or false
 
-Returns:
+:returns:
     SUCCESS if the level weight is successfully set.
 
 Remark:
@@ -1105,22 +1105,22 @@ view. This is also termed as the level's OVERRIDE style. Note that
 this function has an additional " override " flag. The " override " flag
 has to be ON in order to use the style.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``styleIn``:
+:param styleIn:
     level style - may be NULL
 
-Parameter ``styleParamsIn``:
+:param styleParamsIn:
     custom line style modifiers - may be NULL
 
-Parameter ``styleOverrideIn``:
+:param styleOverrideIn:
     level style override (true or false) - may be NULL
 
-Returns:
+:returns:
     SUCCESS if the level style is successfully set.
 
 Remark:
@@ -1158,19 +1158,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_SetMaterialId =R"doc(@Description Set level material id.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``materialIdIn``:
+:param materialIdIn:
     material id - may be NULL
 
-Parameter ``materialOverrideIn``:
+:param materialOverrideIn:
     material override (true or false) - may be NULL
 
-Returns:
+:returns:
     SUCCESS if the level color is successfully set.
 
 Remark:
@@ -1206,19 +1206,19 @@ view. This is also termed as the level's OVERRIDE color. Note that
 this function has an additional " override " flag. The " override " flag
 has to be ON in order to use the color.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``colorIn``:
+:param colorIn:
     level color - may be NULL
 
-Parameter ``colorOverrideIn``:
+:param colorOverrideIn:
     level color override (true or false) - may be NULL
 
-Returns:
+:returns:
     SUCCESS if the level color is successfully set.
 
 Remark:
@@ -1255,16 +1255,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_SetDescription =R"doc(@Description Set level description
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``descriptionIn``:
+:param descriptionIn:
     level name
 
-Returns:
+:returns:
     SUCCESS if the level description is successfully set.
 
 Remark:
@@ -1304,16 +1304,16 @@ Remark:
     s A level code is displayed under the " Number " column of the
     level-manager.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``levelCodeIn``:
+:param levelCodeIn:
     level code
 
-Returns:
+:returns:
     SUCCESS if the level code is successfully set.
 
 Remark:
@@ -1359,16 +1359,16 @@ Remark:
     trailing spaces are disallowed. This function will strip off
     leading and trailing spaces from the specified name.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``nameIn``:
+:param nameIn:
     level name
 
-Returns:
+:returns:
     SUCCESS if the level is successfully renamed.
 
 Remark:
@@ -1411,13 +1411,13 @@ Remark:
     s A level can be deleted only in the context of the current file
     (i.e. modelRefIn should be a root-model of the current file).
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id to delete
 
-Returns:
+:returns:
     SUCCESS if the level is successfully deleted.
 
 Remark:
@@ -1457,25 +1457,25 @@ specified " copyAttributeMaskIn " from the " seed " level. Typically,
 <i>LevelAttribute.GetMask
 (MS_LEVEL_CREATE_FROM_SEED_ATTRIBUTE_MASK)</i>
 
-Parameter ``levelIdOut``:
+:param levelIdOut:
     level id of new level
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelNameIn``:
+:param levelNameIn:
     level name of new level
 
-Parameter ``levelCodeIn``:
+:param levelCodeIn:
     level code of new level - maybe LEVEL_NULL_CODE.
 
-Parameter ``seedLevelIdIn``:
+:param seedLevelIdIn:
     seed level
 
-Parameter ``copyAttributeMaskIn``:
+:param copyAttributeMaskIn:
     seed level
 
-Returns:
+:returns:
     SUCCESS if level is successfully created.
 
 Remark:
@@ -1513,19 +1513,19 @@ Remark:
     code and assign it to the new level. Such a level-code will be
     termed as a " system - assigned " level-code.
 
-Parameter ``levelIdOut``:
+:param levelIdOut:
     level id of new level
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelNameIn``:
+:param levelNameIn:
     level name of new level
 
-Parameter ``levelCodeIn``:
+:param levelCodeIn:
     level code of new level - maybe LEVEL_NULL_CODE.
 
-Returns:
+:returns:
     SUCCESS if level is successfully created.
 
 Remark:
@@ -1556,16 +1556,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetTransparency =R"doc(@Description Get level display transparency
 
-Parameter ``transparencyOut``:
+:param transparencyOut:
     level display transparency (value between 0.0 & 1.0)
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -1576,16 +1576,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetDisplayPriority =R"doc(@Description Get level display priority
 
-Parameter ``priorityOut``:
+:param priorityOut:
     level display priority
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -1597,16 +1597,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_GetElementCount =R"doc(@Description Get the the number of elements of specified model-ref
 that use specified level.
 
-Parameter ``usageCountOut``:
+:param usageCountOut:
     number of elements that use the level
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -1619,16 +1619,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_ReportUsage =R"doc(@Description Generate a report that describes where a level is used in
 the context of the file of specified model-ref
 
-Parameter ``reportStringOut``:
+:param reportStringOut:
     report string
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model ref
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -1640,19 +1640,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetUsage =R"doc(@Description Get the level usage flag.
 
-Parameter ``usageOut``:
+:param usageOut:
     usage flag - true or false
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``inFile``:
+:param inFile:
     if true, then check the level is used in the entire file
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 Remark:
@@ -1669,18 +1669,18 @@ Remark:
 static const char * __doc_MstnPlatform_Level_IsUsed =R"doc(@Description Check if a level is used. A level is used if there is an
 element on the level.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``inFile``:
+:param inFile:
     if false, then check if a level is used in the context of
     modelRefIn only. if true, then returns if a level is used in the
     entire file of modelRefIn.
 
-Returns:
+:returns:
     true if the level is used, else false
 
 See also:
@@ -1693,16 +1693,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_GetIdFromCodeIncludingLibraries =R"doc(@Description Given a level-code, get its level-id, including levels
 that are in level libraries.
 
-Parameter ``levelIdOut``:
+:param levelIdOut:
     level id
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelCodeIn``:
+:param levelCodeIn:
     level code
 
-Returns:
+:returns:
     SUCCESS if the level-id is successfully returned.
 
 See also:
@@ -1723,16 +1723,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetIdFromCode =R"doc(@Description Given a level-code, get its level-id.
 
-Parameter ``levelIdOut``:
+:param levelIdOut:
     level id
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelCodeIn``:
+:param levelCodeIn:
     level code
 
-Returns:
+:returns:
     SUCCESS if the level-id is successfully returned.
 
 Remark:
@@ -1757,16 +1757,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_GetIdFromNameIncludingLibraries =R"doc(@Description Given a level-name, get its level-id, including levels
 that are in level libraries.
 
-Parameter ``levelIdOut``:
+:param levelIdOut:
     level id
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelNameIn``:
+:param levelNameIn:
     level name
 
-Returns:
+:returns:
     SUCCESS if the level-id is successfully returned.
 
 See also:
@@ -1787,16 +1787,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetIdFromName =R"doc(@Description Given a level-name, get its level-id.
 
-Parameter ``levelIdOut``:
+:param levelIdOut:
     level id
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelNameIn``:
+:param levelNameIn:
     level name
 
-Returns:
+:returns:
     SUCCESS if the level-id is successfully returned.
 
 Remark:
@@ -1827,16 +1827,16 @@ element->ehdr.uniqueId and is unique in the context of a file-object.
 The level-id is also system assigned, but is a UInt and is unique in
 the context of a level-table.
 
-Parameter ``uniqueIDOut``:
+:param uniqueIDOut:
     unique ID
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 Bentley Systems
@@ -1846,16 +1846,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_IsFrozen =R"doc(@Description Check if a level is frozen.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Parameter ``frozenTypeIn``:
+:param frozenTypeIn:
     one of <TT>LEVEL_FROZEN_TYPE_</TT>... (defined in leveltable.h)
 
-Returns:
+:returns:
     true if the level is frozen, else false
 
 See also:
@@ -1868,13 +1868,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_IsReadOnly =R"doc(@Description Check if a level is read-only.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     true if the level is read-only, else false
 
 See also:
@@ -1886,13 +1886,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_IsHidden =R"doc(@Description Check if a level is hidden.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     true if the level is hidden, else false
 
 See also:
@@ -1904,13 +1904,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_IsExternal =R"doc(@Description Check if a level is an external (library) level or not.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     true if the level is external, else false
 
 See also:
@@ -1922,19 +1922,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetAttributesDifferFromSource =R"doc(@Description Get the 'level's attributes differ from source' flag.
 
-Parameter ``levelDifferOut``:
+:param levelDifferOut:
     true if the level differs from its source
 
-Parameter ``differencesMaskOut``:
+:param differencesMaskOut:
     list of attributes which differ.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 Bentley Systems
@@ -1944,16 +1944,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetPlot =R"doc(@Description Get the plot flag.
 
-Parameter ``levelPlotOut``:
+:param levelPlotOut:
     level plot flag
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -1964,16 +1964,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetDisplay =R"doc(@Description Get the display flag.
 
-Parameter ``levelDisplayOut``:
+:param levelDisplayOut:
     level display flag - true or false
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -1985,13 +1985,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_IsElementViewOnly =R"doc(@Description Check if elements on the specified level are view-only
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     true if the level's element-access is view-only, else false
 
 See also:
@@ -2004,13 +2004,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_IsElementReadOnly =R"doc(@Description Check if elements on the specified level are read-only
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     true if the level's element-access is atleast read-only, else
     false
 
@@ -2023,13 +2023,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_IsElementLocked =R"doc(@Description Check if elements on the specified level are locked.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     true if the level's element-access is atleast locked, else false,
     else SUCCESS
 
@@ -2042,17 +2042,17 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetElementAccess =R"doc(@Description Get the element access mode.
 
-Parameter ``elementAccessOut``:
+:param elementAccessOut:
     element access - one of <TT>LEVEL_ELEMENT_ACCESS_</TT>... (defined
     in leveltypes.h)
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2065,25 +2065,25 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetElementSymbology =R"doc(@Description Get the element symbology.
 
-Parameter ``elementColorOut``:
+:param elementColorOut:
     element color
 
-Parameter ``elementStyleOut``:
+:param elementStyleOut:
     element style
 
-Parameter ``elementStyleParamsOut``:
+:param elementStyleParamsOut:
     custom line style modifiers
 
-Parameter ``elementWeightOut``:
+:param elementWeightOut:
     element weight
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2095,16 +2095,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_GetElementWeight =R"doc(@Description Get the level element weight. This weight value is
 applied on an element when the the element's weight is set to BYLEVEL.
 
-Parameter ``weightOut``:
+:param weightOut:
     element weight
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2122,19 +2122,19 @@ static const char * __doc_MstnPlatform_Level_GetElementStyle =R"doc(@Description
 override info. This style value is applied on an element when the
 element's style is set to BYLEVEL.
 
-Parameter ``styleOut``:
+:param styleOut:
     element style
 
-Parameter ``styleParamsOut``:
+:param styleParamsOut:
     custom line style modifiers
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2150,16 +2150,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetElementMaterialId =R"doc(@Description Get level element material id associated with the level.
 
-Parameter ``materialIdOut``:
+:param materialIdOut:
     element material id
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2171,16 +2171,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_GetElementColor =R"doc(@Description Get the level element color. This color value is applied
 on an element when the element's color is set to BYLEVEL.
 
-Parameter ``colorOut``:
+:param colorOut:
     element color
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2196,34 +2196,34 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetSymbology =R"doc(@Description Get the level symbology and symbology-override flags.
 
-Parameter ``colorOut``:
+:param colorOut:
     color
 
-Parameter ``colorOverrideOut``:
+:param colorOverrideOut:
     color override - true or false
 
-Parameter ``styleOut``:
+:param styleOut:
     style
 
-Parameter ``styleParamsOut``:
+:param styleParamsOut:
     custom line style modifiers
 
-Parameter ``styleOverrideOut``:
+:param styleOverrideOut:
     style override - true or false
 
-Parameter ``weightOut``:
+:param weightOut:
     weight
 
-Parameter ``weightOverrideOut``:
+:param weightOverrideOut:
     weight override - true or false
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2236,19 +2236,19 @@ static const char * __doc_MstnPlatform_Level_GetWeight =R"doc(@Description Get t
 is displayed with this style in a view when the weight-override flag
 is true and when level-symbology for the view is turned ON.
 
-Parameter ``weightOut``:
+:param weightOut:
     level weight
 
-Parameter ``weightOverrideOut``:
+:param weightOverrideOut:
     level weight override - true or false
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2265,22 +2265,22 @@ style-override flag. An element is displayed with this style in a view
 when the style-override flag is true and when level-symbology for the
 view is turned ON.
 
-Parameter ``styleOut``:
+:param styleOut:
     level style
 
-Parameter ``styleParamsOut``:
+:param styleParamsOut:
     custom line style modifiers
 
-Parameter ``styleOverrideOut``:
+:param styleOverrideOut:
     level style override - true or false
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2294,19 +2294,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetMaterialId =R"doc(@Description Get material id associated with the level.
 
-Parameter ``materialIdOut``:
+:param materialIdOut:
     level material id
 
-Parameter ``materialOverrideOut``:
+:param materialOverrideOut:
     level material override
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2319,19 +2319,19 @@ static const char * __doc_MstnPlatform_Level_GetColor =R"doc(@Description Get le
 displayed with this color in a view when the color-override flag is
 true and when level-symbology for the view is turned ON.
 
-Parameter ``colorOut``:
+:param colorOut:
     level color
 
-Parameter ``colorOverrideOut``:
+:param colorOverrideOut:
     level color override - true or false
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2345,19 +2345,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetDescription =R"doc(@Description Get level description.
 
-Parameter ``descriptionOut``:
+:param descriptionOut:
     level description
 
-Parameter ``stringSizeIn``:
+:param stringSizeIn:
     number of characters pLevelDescriptionOut can hold
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2368,16 +2368,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetCreateTimeStamp =R"doc(@Description Get level create time stamp
 
-Parameter ``createTimeStampOut``:
+:param createTimeStampOut:
     level create time stamp
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2389,16 +2389,16 @@ Remark:
 static const char * __doc_MstnPlatform_Level_IsCodeAutoGenerated =R"doc(@Description Get if the level code is auto generated (that means
 generated by MicroStation) or is manually set by the user
 
-Parameter ``isAutoGeneratedOut``:
+:param isAutoGeneratedOut:
     true if the level code is auto generated
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2409,16 +2409,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetCode =R"doc(@Description Get level code.
 
-Parameter ``levelCodeOut``:
+:param levelCodeOut:
     level code
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2429,19 +2429,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetName =R"doc(@Description Get level name.
 
-Parameter ``levelNameOut``:
+:param levelNameOut:
     level name
 
-Parameter ``stringSizeIn``:
+:param stringSizeIn:
     number of (WChar) characters pLevelNameOut can hold
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the model-ref or level id is invalid, else SUCCESS
 
 See also:
@@ -2453,13 +2453,13 @@ Remark:
 static const char * __doc_MstnPlatform_Level_IsValidByCode =R"doc(@Description Check if level with specified code is a valid existing
 level.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level code
 
-Returns:
+:returns:
     true if the level is valid, else false. Returns false if
     modelRefIn is invalid.
 
@@ -2472,13 +2472,13 @@ Remark:
 static const char * __doc_MstnPlatform_Level_IsValidByName =R"doc(@Description Check if level with specified name is a valid existing
 level.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelNameIn``:
+:param levelNameIn:
     level name
 
-Returns:
+:returns:
     true if the level is valid, else false. Returns false if
     modelRefIn is invalid.
 
@@ -2491,13 +2491,13 @@ Remark:
 static const char * __doc_MstnPlatform_Level_IsValid =R"doc(@Description Check if the specified level id is a valid existing
 level.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     true if the level is valid, else false. Returns false if
     modelRefIn is invalid.
 
@@ -2514,10 +2514,10 @@ handles setting a library level as active. If the level with specified
 code is a library level, then, if necessary, the library level is
 copied into the current-file before setting the level active.
 
-Parameter ``levelCodeIn``:
+:param levelCodeIn:
     level code
 
-Returns:
+:returns:
     ERROR if the level code is invalid or the level cannot be set as
     active, else SUCCESS
 
@@ -2533,10 +2533,10 @@ handles setting a library level as active. If the level with specified
 name is a library level, then, if necessary, the library level is
 copied into the current-file before setting the level active.
 
-Parameter ``levelNameIn``:
+:param levelNameIn:
     level name
 
-Returns:
+:returns:
     ERROR if the level name is invalid or the level cannot be set as
     active, else SUCCESS
 
@@ -2549,10 +2549,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_SetActive =R"doc(@Description Set level as active.
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     ERROR if the level id is invalid or the level cannot be set as
     active
 
@@ -2570,10 +2570,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_GetActive =R"doc(@Description Get the current active level.
 
-Parameter ``levelIdOut``:
+:param levelIdOut:
     active level id
 
-Returns:
+:returns:
     SUCCESS
 
 See also:
@@ -2585,10 +2585,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_Level_IsActive =R"doc(@Description Check if a level of the current-file is the active level.
 
-Parameter ``levelIdIn``:
+:param levelIdIn:
     level id
 
-Returns:
+:returns:
     true if iLevelIdIn is the active level, else false
 
 See also:
@@ -2600,30 +2600,30 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelTable_DrawLevels =R"doc(@Description Draw all elements on a list of specified levels
 
-Parameter ``viewDraw``:
+:param viewDraw:
     views to update. Should point to an array dimensioned to
     DgnPlatform::MAX_VIEWS, and viewDraw[i] controls whether view i is
     drawn. If NULL, all views are drawn.
 
-Parameter ``incrementalIn``:
+:param incrementalIn:
     if false, don't erase before drawing
 
-Parameter ``drawModeIn``:
+:param drawModeIn:
     erasing portion of drawing
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model ref
 
-Parameter ``levelBitMaskIn``:
+:param levelBitMaskIn:
     bitmask representing the list of levels to draw
 
-Parameter ``startEndMsgIn``:
+:param startEndMsgIn:
     if true then want in prog/complete msg
 
-Parameter ``drawSharedIn``:
+:param drawSharedIn:
     if true, then draw all models/attachments which use the same level
 
-Returns:
+:returns:
     ERROR if the input level bit-mask is NULL or the model-ref is
     invalid, else SUCCESS
 
@@ -2635,19 +2635,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelTable_SetFrozenMask =R"doc(@Description Set the frozen flag for all levels of level-table.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``frozenMaskIn``:
+:param frozenMaskIn:
     level frozen mask to set
 
-Parameter ``frozenTypeIn``:
+:param frozenTypeIn:
     one of <TT>LEVEL_FROZEN_TYPE_</TT>... (defined in leveltable.h)
 
-Parameter ``updateViewIn``:
+:param updateViewIn:
     if true, then update the views
 
-Returns:
+:returns:
     ERROR if the model-ref is invalid or the level-table is READ-ONLY,
     else SUCCESS @Group " Level Tables "
 
@@ -2661,16 +2661,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelTable_SetDisplayMask =R"doc(@Description Set the display flag for all levels of level-table.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``displayMaskIn``:
+:param displayMaskIn:
     level display mask to set
 
-Parameter ``updateViewIn``:
+:param updateViewIn:
     if true, then update the views
 
-Returns:
+:returns:
     ERROR if the model-ref is invalid or the level-table is READ-ONLY,
     else SUCCESS @Group " Level Tables "
 
@@ -2690,10 +2690,10 @@ like:BitMask.TestBit(pUsedBitMask, levelid -1) @Remarks Note the
 " const "ness of the returned bit-mask. It is important not to cast into
 a non-const bit-mask. This bit-mask should not be changed.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     The usage mask as a BitMask. Returns NULL if modelRefIn is
     invalid. @Group " Level Tables "
 
@@ -2715,10 +2715,10 @@ levelid -1) @Remarks Note the " const "ness of the returned bit-mask. It
 is important not to cast into a non-const bit-mask. This bit-mask
 should not be changed.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     The display + frozen mask as a BitMask. Returns NULL if modelRefIn
     is invalid. @Group " Level Tables "
 
@@ -2738,13 +2738,13 @@ look like:BitMask.TestBit(pFrozenBitMask, levelid -1) @Remarks
 Note the " const "ness of the returned bit-mask. It is important not to
 cast into a non-const bit-mask. This bit-mask should not be changed.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``frozenTypeIn``:
+:param frozenTypeIn:
     one of <TT>LEVEL_FROZEN_TYPE_</TT>... (defined in leveltable.h)
 
-Returns:
+:returns:
     The frozen mask as a BitMask. Returns NULL if modelRefIn is
     invalid. @Group " Level Tables "
 
@@ -2767,10 +2767,10 @@ should look like:BitMask.TestBit(pReadOnlyBitMask, levelid -1)
 important not to cast into a non-const bit-mask. This bit-mask should
 not be changed.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     The read-only mask as a BitMask. Returns NULL if modelRefIn is
     invalid. @Group " Level Tables "
 
@@ -2791,10 +2791,10 @@ look like:BitMask.TestBit(pHiddenBitMask, levelid -1) @Remarks
 Note the " const "ness of the returned bit-mask. It is important not to
 cast into a non-const bit-mask. This bit-mask should not be changed.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     The hidden mask as a BitMask. Returns NULL if modelRefIn is
     invalid. @Group " Level Tables "
 
@@ -2815,10 +2815,10 @@ look like:BitMask.TestBit(pExternalBitMask, levelid -1) @Remarks
 Note the " const "ness of the returned bit-mask. It is important not to
 cast into a non-const bit-mask. This bit-mask should not be changed.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     The external mask as a BitMask. Returns NULL if modelRefIn is
     invalid. @Group " Level Tables "
 
@@ -2838,10 +2838,10 @@ like:BitMask.TestBit(pPlotBitMask, levelid -1) @Remarks Note the
 " const "ness of the returned bit-mask. It is important not to cast into
 a non-const bit-mask. This bit-mask should not be changed.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     The plot mask as a BitMask. Returns NULL if modelRefIn is invalid
     @Group " Level Tables "
 
@@ -2860,10 +2860,10 @@ look like:BitMask.TestBit(pDisplayBitMask, levelid -1) @Remarks
 Note the " const "ness of the returned bit-mask. It is important not to
 cast into a non-const bit-mask. This bit-mask should not be changed.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     The display mask as a BitMask. Returns NULL if modelRefIn is
     invalid. @Group " Level Tables "
 
@@ -2898,10 +2898,10 @@ ref. </p>
 @Remarks A successful write to file raises a LEVEL_TABLE_REWRITE
 event.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     ERROR if the model-ref is invalid, else SUCCESS
 
 Bentley Systems
@@ -2917,13 +2917,13 @@ can be modified. <LI>No new level library can be attached to the
 level-table. <LI>None of the existing level libraries can be detached
 from the level-table. </UL> By default, read-only is OFF.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``isReadOnlyIn``:
+:param isReadOnlyIn:
     read-only flag - true or false
 
-Returns:
+:returns:
     ERROR if the model-ref is invalid, else SUCCESS
 
 See also:
@@ -2934,10 +2934,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelTable_IsReadOnly =R"doc(@Description Check if level-table is read-only.
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     true if the level-table is read-only, else false
 
 Remark:
@@ -2952,13 +2952,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelTable_GetReadOnly =R"doc(@Description Get read-only flag of level-table.
 
-Parameter ``isReadOnlyOut``:
+:param isReadOnlyOut:
     read-only flag - true or false
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     ERROR if the model-ref is invalid or isReadOnlyOut is NULL, else
     SUCCESS
 
@@ -2970,13 +2970,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelTable_GetHighestLevelCode =R"doc(@Description Get the value of highest used level code in level-table.
 
-Parameter ``highestLevelCodeOut``:
+:param highestLevelCodeOut:
     highest level code
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     ERROR if the model-ref is invalid or pHighestLevelCode is NULL,
     else SUCCESS
 
@@ -2987,13 +2987,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelTable_GetHighestLevelId =R"doc(@Description Get the value of highest used level id in level-table.
 
-Parameter ``highestLevelIdOut``:
+:param highestLevelIdOut:
     highest level id
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Returns:
+:returns:
     ERROR if the model-ref is invalid or highestLevelIdOut is NULL,
     else SUCCESS
 
@@ -3004,13 +3004,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_LevelTable_GetLevelCount =R"doc(@Description Get the number of levels in level-table.
 
-Parameter ``levelCountOut``:
+:param levelCountOut:
     level count in level-table
 
-Parameter ``modelRefIn``:
+:param modelRefIn:
     model-ref of level-table
 
-Parameter ``levelCountTypeIn``:
+:param levelCountTypeIn:
     one of <TT>LEVEL_COUNT_TYPE_</TT>... (defined in leveltable.h)
 
 Remark:
@@ -3025,7 +3025,7 @@ Remark:
     <TD><TT>LEVEL_COUNT_TYPE_UNUSED</TT></TD> <TD>The number of un-
     used levels in level table</TD> </TR> </TABLE>
 
-Returns:
+:returns:
     ERROR if the model-ref is invalid or levelCountOut is NULL, else
     SUCCESS
 

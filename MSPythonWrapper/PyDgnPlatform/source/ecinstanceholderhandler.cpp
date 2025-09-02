@@ -12,10 +12,10 @@
 
 static const char * __doc_Bentley_DgnPlatform_ECInstanceHolderHandler_CreateECInstanceHolderElement =R"doc(Create a new ECInstanceHolder element.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with.
 
 Returns (Tuple,0):

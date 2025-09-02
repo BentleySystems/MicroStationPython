@@ -26,7 +26,7 @@ static const char * __doc_Bentley_MstnPlatform_UserKeyinXCommand_GetCmdString =R
 
 static const char * __doc_Bentley_MstnPlatform_XCommand_SetJournal =R"doc(Set property to journal the command for macro recording.
 
-Parameter ``journal``:
+:param journal:
     set to true if the command is to be recorded. The default is to
     journal.
 
@@ -39,20 +39,20 @@ macro recording.
 
 static const char * __doc_Bentley_MstnPlatform_XCommand_SetIsUserDefined =R"doc(Marks the Command as being user created.
 
-Parameter ``isUserDefined``:
+:param isUserDefined:
     set to true if the command is user defined.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_XCommand_SetCmdNumber =R"doc(Sets the Command Number.
 
-Parameter ``cmdNumber``:
+:param cmdNumber:
     The command number
 
-Parameter ``taskId``:
+:param taskId:
     The Id of the task owning the Command Number
 
-Parameter ``unparsed``:
+:param unparsed:
     The string parameter for this command
 
 )doc";

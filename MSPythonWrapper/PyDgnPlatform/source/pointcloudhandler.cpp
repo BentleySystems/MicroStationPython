@@ -12,33 +12,33 @@
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudHandler_GetPointCloudElementRefsInModel =R"doc(Get the set of point cloud elements in the model.
 
-Parameter ``modelR``:
+:param modelR:
     Model for which the point clouds set is requested.
 
-Returns:
+:returns:
     A set of point cloud elementRef. Bentley Systems +---------------+
     ---------------+---------------+---------------+---------------+--
     ----)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudHandler_CreatePointCloudElement =R"doc(Create a new point cloud element using the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Parameter ``pointCloudProperties``:
+:param pointCloudProperties:
     Properties to assign to the new point cloud element. Use
     PointCloudProperties::Create to create these properties.
 
-Parameter ``range``:
+:param range:
     Range of the element to create. It's important to set the actual
     range of the point cloud element to create because this method
     does not open the point cloud file and thus does not read the
     range from the file.
 
-Returns:
+:returns:
     SUCCESS or ERROR if the range of the element can't be validated.
 
 Bentley Systems +---------------+---------------+---------------+-----

@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 
 import os
 from tkinter import messagebox
@@ -13,30 +9,68 @@ from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 
+'''
+Sample demonstrating how system callback works in Python
+'''
+
 FILE = os.path.abspath(__file__)
 
-# Close dgn file to call this callback
 def OnNewDesignFile(file, reason):
+    """
+    Callback function that is triggered when a new design file is created or closed.
+
+    :param file: The design file that triggered the callback.
+    :type file: str
+    :param reason: The reason for the callback trigger.
+    :type reason: NewDesignFileReason
+    """
     if reason == NewDesignFileReason.eSYSTEM_NEWFILE_CLOSE:
         message = "[file]: " + str(file)
         message += "\n"
         message += "[reason]: " + str(reason)
         print("Callback OnNewDesignFile:\n" + message)
 
-# Use keyin "python unload DgnFileCallbacks.py" to call this callback
 def OnUnloadProgram(reason):
+    """
+    Callback function that is triggered when a program is unloaded.
+
+    :param reason: The reason for unloading the program.
+    :type reason: str
+    """
     message = "[reason]: " + str(reason)
     print("Callback OnUnloadProgram:\n" + message)
 
-# Use Save As command or Export command to call this callback
 def OnFileSaveAs(postSave, destinationFileName):
+    """
+    Callback function that is triggered after a file is saved with a new name.
+
+    :param postSave: A boolean indicating whether the save operation was successful.
+    :type postSave: bool
+    :param destinationFileName: The name of the file after it has been saved.
+    :type destinationFileName: str
+    """
     message = "[post save]: " + str(postSave)
     message += "\n"
     message += "[destination file name]: " + str(destinationFileName)
     print("Callback OnFileSaveAs:\n" + message)
 
-# Use Save command to call this callback
 def OnFileSave(when, changesFlag, reason, timestamp, file):
+    """
+    Callback function that is triggered when a file is saved.
+
+    :param when: The time when the file was saved.
+    :type when: str
+    :param changesFlag: A flag indicating the changes made to the file.
+    :type changesFlag: bool
+    :param reason: The reason for saving the file.
+    :type reason: str
+    :param timestamp: The timestamp of the save event.
+    :type timestamp: str
+    :param file: The file object that was saved.
+    :type file: object or None
+    
+    :return: None
+    """
     message = "[when]: " + str(when)
     message += "\n"
     message += "[changes flag]: " + str(changesFlag)
@@ -49,8 +83,15 @@ def OnFileSave(when, changesFlag, reason, timestamp, file):
         message += "[file]: " + str(file.GetFileName())
     print("Callback OnFileSave:\n" + message)
 
-# Use create fence command to call this callback
 def OnFenceChange(changeType):
+    """
+    Callback function that handles changes to the system fence.
+
+    :param changeType: The type of change that occurred. This should be one of the values from the FenceChangedType enumeration.
+    :type changeType: FenceChangedType
+
+    The function prints a message indicating whether a system fence was created or cleared based on the changeType provided.
+    """
     if FenceChangedType.eSYSTEM_FENCE_CREATED == changeType:
         message = "[change type]: " + str(changeType)
         print("Callback OnFenceChange, Fence created:\n" + message)
@@ -58,39 +99,82 @@ def OnFenceChange(changeType):
         message = "[change type]: " + str(changeType)
         print("Callback OnFenceChange, Fence cleared:\n" + message)
 
-# Use Compress File command to call this callback
 def OnCompressDgnFile(errorMessage, type):
+    """
+    Callback function for handling DGN file compression events.
+
+    This function is called when a DGN file compression event occurs. It checks the type of compression event
+    and assigns an error message if the event type is `ePRE_COMPRESS_DGNFILE`.
+
+    :param errorMessage: An object that allows assigning an error message.
+    :type errorMessage: ErrorMessage
+    :param type: The type of compression event.
+    :type type: CompressType
+    
+    :return: The status of the compression event handling.
+    :rtype: BentleyStatus
+    """
     if CompressType.ePRE_COMPRESS_DGNFILE == type:
         errorMessage.AssignA("Compress error test!")
         message = "[type]: " + str(type)
         print("Callback OnCompressDgnFile:\n" + message)
         return BentleyStatus.eERROR
 
-# Use Compress File command to call this callback
 def OnCompressDgnModel(dgnModel, type):
+    """
+    Callback function that is triggered when a DGN model is compressed.
+
+    :param dgnModel: The DGN model object that is being compressed.
+    :type dgnModel: object
+    :param type: The type of compression being performed.
+    :type type: str
+    """
     message = "[dgnModel]: " + str(dgnModel.GetModelName())
     message += "\n"
     message += "[type]: " + str(type)
     print("Callback OnCompressDgnModel:\n" + message)
 
-# Open a file to call this callback
 def OnDgnFileLoaded(dgnFile):
+    """
+    Callback function that is triggered when a DGN file is loaded.
+
+    :param dgnFile: The DGN file object that has been loaded.
+    :type dgnFile: object
+    """
     message = "[dgnFile]: " + str(dgnFile.GetFileName ())
     print("Callback OnDgnFileLoaded:\n" + message)
 
-# This doesn't seem to be called?
 def OnDgnFileUnloading(dgnFile):
+    """
+    Callback function that is triggered when a DGN file is unloading.
+
+    :param dgnFile: The DGN file that is being unloaded.
+    :type dgnFile: object
+    """
     message = "[dgnFile]: " + str(dgnFile.GetFileName ())
     print("Callback OnDgnFileUnloading:\n" + message)
 
-# Save a file to call this callback
 def OnQueryHasPending(dgnFile):
+    """
+    Callback function that checks if there are any pending queries for the given DGN file.
+
+    :param dgnFile: The DGN file object to check for pending queries.
+    :type dgnFile: DgnFile
+    
+    :return: Always returns True.
+    :rtype: bool
+    """
     message = "[dgnFile]: " + str(dgnFile.GetFileName ())
     print("Callback OnQueryHasPending:\n" + message)
     return True
 
-# Open another dgn file to call this callback
 def OnDgnCacheUnloading(dgnModel): 
+    """
+    Callback function that is triggered when a DGN cache is unloading.
+
+    :param dgnModel: The DGN model that is unloading. It is expected to have methods `GetModelId` and `GetModelName`.
+    :type dgnModel: object
+    """
     message = ""
     if dgnModel is not None and dgnModel.GetModelId() >= 0:
         message += "[dgnModel]: " + str(dgnModel.GetModelName())
@@ -98,12 +182,26 @@ def OnDgnCacheUnloading(dgnModel):
         message += "[dgnModel Id]: " + str(dgnModel.GetModelId())
     print("Callback OnDgnCacheUnloading:\n" + message)
 
-# Use Close File command to call this callback
 def OnMasterfileClosed(): 
+    """
+    Callback function that is triggered when the master file is closed.
+
+    This function is intended to be used as a callback and will execute
+    when the master file is closed. It currently prints a message to the console.
+
+    :return: None
+    """
     print("Callback OnMasterfileClosed.")
 
-# Create/delete/active... model to call this callback
 def OnSetModelChangeFunction(modelRef, changeTypeId): 
+    """
+    Callback function that handles model change events.
+
+    :param modelRef: Reference to the model object. If None, indicates no model reference.
+    :type modelRef: object or None
+    :param changeTypeId: Identifier for the type of change that occurred.
+    :type changeTypeId: int
+    """
     if modelRef is not None:
         message = "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
     else:
@@ -112,20 +210,42 @@ def OnSetModelChangeFunction(modelRef, changeTypeId):
     message += "[change type Id]: " + str(changeTypeId)
     print("Callback OnSetModelChangeFunction:\n" + message)
 
-# Use Close File command to call this callback
 def OnModelRefDestroy(modelRef): 
+    """
+    Callback function that is triggered when a model reference is destroyed.
+
+    :param modelRef: The model reference that is being destroyed. It can be None.
+    :type modelRef: object or None
+    """
     if modelRef is not None:
         message = "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
     else:
         message = "[modelRef]: " + str(modelRef)
     print("Callback OnModelRefDestroy:\n" + message)
 
-# Use Close File command to call this callback
 def OnExitDesignFileState(): 
+    """
+    Callback function that is triggered when exiting the design file state.
+
+    This function is called to perform any necessary cleanup or finalization
+    tasks when the design file state is exited. It currently prints a message
+    indicating that the callback has been triggered.
+    """
     print("Callback OnExitDesignFileState.")
 
-# This callback will be called when a message is written to the Message Center
 def OnMessageCenterWrite(messageType, messageInput, detail, detailMessageAttributes):
+    """
+    Callback function that handles message center write events.
+
+    :param messageType: The type of the message.
+    :type messageType: str
+    :param messageInput: The content of the message.
+    :type messageInput: str
+    :param detail: Additional details about the message.
+    :type detail: str
+    :param detailMessageAttributes: Attributes related to the detail message.
+    :type detailMessageAttributes: dict
+    """
     message = "[message type]: " + str(messageType)
     message += "\n"
     message += "[message]: " + str(messageInput)
@@ -135,8 +255,17 @@ def OnMessageCenterWrite(messageType, messageInput, detail, detailMessageAttribu
     message += "[detail message attributes]: " + str(detailMessageAttributes)
     print("Callback OnMessageCenterWrite:\n" + message)
 
-# This callback will be called when a prompt is written to the status bar
 def OnPromptOutput(text, combinedText, fieldNumber):
+    """
+    Callback function that processes and prints prompt output details.
+
+    :param text: The text output from the prompt.
+    :type text: str
+    :param combinedText: The combined text output from the prompt.
+    :type combinedText: str
+    :param fieldNumber: The field number associated with the prompt output.
+    :type fieldNumber: int
+    """
     message = "[text]: " + str(text)
     message += "\n"
     message += "[combined text]: " + str(combinedText)
@@ -144,20 +273,47 @@ def OnPromptOutput(text, combinedText, fieldNumber):
     message += "[field number]: " + str(fieldNumber)
     print("Callback OnPromptOutput:\n" + message)
 
-# This callback will be called when a status message is written to the status bar
 def OnStatusOutput(text, fieldNumber):
+    """
+    Callback function that handles status output.
+
+    :param text: The status message to be output.
+    :type text: str
+    :param fieldNumber: The field number associated with the status message.
+    :type fieldNumber: int
+    """
     message = "[text]: " + str(text)
     message += "\n"
     message += "[field number]: " + str(fieldNumber)
     print("Callback OnStatusOutput:\n" + message)
 
-# This callback will be called when the Application Area is changed
-# Open a dgn file can call into this callback
 def OnApplicationAreaChange(): 
+    """
+    Callback function that gets triggered when the application area changes.
+
+    This function is called automatically by the system when there is a change
+    in the application area. It currently prints a message indicating that the
+    callback has been triggered.
+
+    Note:
+        This is a sample callback function and can be modified to include
+        additional logic as needed.
+
+    """
     print("Callback OnApplicationAreaChange.")
 
-# Use Attach Reference command to call this callback
 def OnReferenceBeforeAttach(fileName, parentModelRef):
+    """
+    Callback function that is triggered before a reference is attached.
+
+    :param fileName: The name of the file to be attached.
+    :type fileName: str
+    :param parentModelRef: The reference to the parent model. Can be None.
+    :type parentModelRef: ModelReference or None
+    
+    :return: Status of the operation.
+    :rtype: BentleyStatus
+    """
     message = "[file name]: " + str(fileName)
     message += "\n"
     if parentModelRef is not None:
@@ -167,8 +323,24 @@ def OnReferenceBeforeAttach(fileName, parentModelRef):
     print("Callback OnReferenceBeforeAttach:\n" + message)
     return BentleyStatus.eSUCCESS
 
-# Use Attach Reference command to call this callback
 def OnReferenceAttach(fileName, fullSavedPath, parentModelRef, providerId, attachmentId):
+    """
+    Callback function triggered when a reference is attached.
+
+    :param fileName: The name of the file being attached.
+    :type fileName: str
+    :param fullSavedPath: The full saved path of the file being attached.
+    :type fullSavedPath: str
+    :param parentModelRef: The reference to the parent model. Can be None.
+    :type parentModelRef: object or None
+    :param providerId: The ID of the provider.
+    :type providerId: int
+    :param attachmentId: The ID of the attachment.
+    :type attachmentId: int
+    
+    :return: Status of the operation.
+    :rtype: BentleyStatus
+    """
     message = "[file name]: " + str(fileName)
     message += "\n"
     message += "[full saved path]: " + str(fullSavedPath)
@@ -184,8 +356,15 @@ def OnReferenceAttach(fileName, fullSavedPath, parentModelRef, providerId, attac
     print("Callback OnReferenceAttach:\n" + message)
     return BentleyStatus.eSUCCESS
 
-# Use Attach Reference command to call this callback
 def OnReferenceAttached(modelRef,  cause):
+    """
+    Callback function that is triggered when a reference is attached to a model.
+
+    :param modelRef: The reference to the model being attached. If None, indicates no model reference.
+    :type modelRef: object
+    :param cause: The cause or reason for the attachment.
+    :type cause: str
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -195,13 +374,26 @@ def OnReferenceAttached(modelRef,  cause):
     message += "[cause]: " + str(cause)
     print("Callback OnReferenceAttached:\n" + message)
 
-# Use Attach Reference command to call this callback
 def OnReferenceAttachQueue(state):
+    """
+    Callback function that is triggered when a reference is attached to the queue.
+
+    :param state: The state information related to the reference attachment.
+    :type state: Any
+    """
     message = "[state]: " + str(state)
     print("Callback OnReferenceAttachQueue:\n" + message)
 
-# Use Detach Reference command to call this callback
 def OnReferenceDetach(modelRef):
+    """
+    Callback function that is triggered when a reference is detached.
+
+    :param modelRef: The reference model that is being detached. It can be None.
+    :type modelRef: ModelReference or None
+    
+    :return: Status of the operation.
+    :rtype: BentleyStatus
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -210,8 +402,18 @@ def OnReferenceDetach(modelRef):
     print("Callback OnReferenceDetach:\n" + message)
     return BentleyStatus.eSUCCESS
 
-# Use Detach Reference command to call this callback
 def OnReferenceDetached(modelRef, fileName, cause):
+    """
+    Callback function that is triggered when a reference is detached.
+
+    :param modelRef: The reference to the model that is being detached. 
+                     If None, indicates that no model reference is available.
+    :type modelRef: object or None
+    :param fileName: The name of the file from which the reference is detached.
+    :type fileName: str
+    :param cause: The cause or reason for the detachment.
+    :type cause: str
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -223,8 +425,21 @@ def OnReferenceDetached(modelRef, fileName, cause):
     message += "[cause]: " + str(cause)
     print("Callback OnReferenceDetached:\n" + message)
 
-# Use Move Reference to call this callback
 def OnReferenceModified(oldRef, newRef, modelRef, changesWritten, isUndo):
+    """
+    Callback function that is triggered when a reference is modified.
+
+    :param oldRef: The old reference object before modification. Can be None.
+    :type oldRef: object or None
+    :param newRef: The new reference object after modification. Can be None.
+    :type newRef: object or None
+    :param modelRef: The model reference object associated with the modification. Can be None.
+    :type modelRef: object or None
+    :param changesWritten: Indicates whether the changes were written to the file.
+    :type changesWritten: bool
+    :param isUndo: Indicates whether the modification is an undo operation.
+    :type isUndo: bool
+    """
     message = ""
     if oldRef is not None:
         message += "[old reference]: " + str(oldRef.GetAttachFileName())
@@ -249,8 +464,23 @@ def OnReferenceModified(oldRef, newRef, modelRef, changesWritten, isUndo):
     message += "[is undo]: " + str(isUndo)
     print("Callback OnReferenceModified:\n" + message)
 
-# Use Attach Reference command to call this callback
 def OnReferenceNesting(refModelRef, nestFlag, nestDepth, previousNestFlag, previousNestDepth, changeExisting):
+    """
+    Callback function that handles reference nesting events.
+
+    :param refModelRef: The reference model object. If None, indicates no reference model.
+    :type refModelRef: object or None
+    :param nestFlag: The current nesting flag.
+    :type nestFlag: bool
+    :param nestDepth: The current nesting depth.
+    :type nestDepth: int
+    :param previousNestFlag: The previous nesting flag.
+    :type previousNestFlag: bool
+    :param previousNestDepth: The previous nesting depth.
+    :type previousNestDepth: int
+    :param changeExisting: Flag indicating whether to change existing settings.
+    :type changeExisting: bool
+    """
     message = ""
     if refModelRef is not None:
         message += "[referenced modelRef]: " + str(refModelRef.GetDgnModel().GetModelName())
@@ -268,8 +498,18 @@ def OnReferenceNesting(refModelRef, nestFlag, nestDepth, previousNestFlag, previ
     message += "[change existing]: " + str(changeExisting)
     print("Callback OnReferenceNesting:\n" + message)
 
-# Use Attach Reference command to call this callback
 def OnBeforeReferenceWrite(modelRef, newAttachment):
+    """
+    Callback function that is triggered before a reference is written.
+
+    :param modelRef: The model reference object. If not None, it provides access to the DGN model.
+    :type modelRef: object or None
+    :param newAttachment: The new attachment information.
+    :type newAttachment: object
+    
+    :return: None
+    :rtype: None
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -279,8 +519,20 @@ def OnBeforeReferenceWrite(modelRef, newAttachment):
     message += "[new attachment]: " + str(newAttachment)
     print("Callback OnBeforeReferenceWrite:\n" + message)
 
-# Use Reload Reference command to call this callback
 def OnFileOutdated(dgnFile, modelRef, reason):
+    """
+    Callback function that is triggered when a file is outdated.
+    
+    :param dgnFile: The design file object that is outdated. Can be None.
+    :type dgnFile: object or None
+    :param modelRef: The model reference object associated with the design file. Can be None.
+    :type modelRef: object or None
+    :param reason: The reason why the file is considered outdated.
+    :type reason: str
+    
+    :return: Always returns True.
+    :rtype: bool
+    """
     message = ""
     if dgnFile is not None:
         message += "[dgnFile]: " + str(dgnFile.GetFileName())
@@ -297,8 +549,25 @@ def OnFileOutdated(dgnFile, modelRef, reason):
     print("Callback OnFileOutdated:\n" + message)
     return True
 
-# Use Copy command to call this callback
 def OnElmDscrCopy(eeh, sourceModelRef, destModelRef, preCopy):
+    """
+    Callback function that is triggered during the element descriptor copy process.
+    
+    :param eeh: Element handle, which provides access to the element being copied.
+    :type eeh: ElementHandle or None
+    :param sourceModelRef: Reference to the source model from which the element is being copied.
+    :type sourceModelRef: ModelReference or None
+    :param destModelRef: Reference to the destination model to which the element is being copied.
+    :type destModelRef: ModelReference or None
+    :param preCopy: Boolean flag indicating whether the callback is being called before the copy operation.
+    :type preCopy: bool
+    
+    :returns: None
+    :rtype: None
+    This function constructs a message containing details about the element being copied, the source model,
+    the destination model, and whether the callback is being called before the copy operation. The message
+    is then printed to the console.
+    """
     message = ""
     if eeh is not None:
         message = "[element Id]: " + str(eeh.GetElementId())
@@ -321,13 +590,35 @@ def OnElmDscrCopy(eeh, sourceModelRef, destModelRef, preCopy):
     message += "[pre copy]: " + str(preCopy)
     print("Callback OnElmDscrCopy:\n" + message)
 
-# Use Save Settings command to call this callback
 def OnSaveSettings():
+    """
+    Callback function that is triggered when settings are saved.
+
+    This function is intended to be used as a callback and will be called
+    automatically when the save settings event occurs. It currently prints
+    a message indicating that the OnSaveSettings callback has been triggered.
+
+    :return: None
+    """
     print("Callback OnSaveSettings.")
 
-# This callback will be called when an ACS is created, deleted, or modified
-# You can operate in ACS Manager to call this callback
 def OnAcsOperation(name, description, acsType, changeTypeId, acs, eventType):
+    """
+    Callback function that handles ACS operations and logs the details.
+
+    :param name: The name associated with the ACS operation.
+    :type name: str
+    :param description: A description of the ACS operation.
+    :type description: str
+    :param acsType: The type of ACS.
+    :type acsType: str
+    :param changeTypeId: The ID representing the type of change.
+    :type changeTypeId: int
+    :param acs: The ACS object, which may be None.
+    :type acs: object or None
+    :param eventType: The type of event.
+    :type eventType: int
+    """
     message = "[name]: " + str(name)
     message += "\n"
     message += "[description]: " + str(description)
@@ -344,9 +635,17 @@ def OnAcsOperation(name, description, acsType, changeTypeId, acs, eventType):
     message += "[event type]: " + str(int(eventType))
     print("Callback OnAcsOperation:\n" + message)
 
-# This callback will be called when selected view changed
-# Use Ribbon command View->View Groups->Prev/Next to call this callback
 def OnSelectedViewChanged(oldViewIndex, newViewIndex, isFromButtonEvent):
+    """
+    Callback function that is triggered when the selected view changes.
+
+    :param oldViewIndex: The index of the previously selected view.
+    :type oldViewIndex: int
+    :param newViewIndex: The index of the newly selected view.
+    :type newViewIndex: int
+    :param isFromButtonEvent: Indicates whether the change was triggered by a button event.
+    :type isFromButtonEvent: bool
+    """
     message = "[old view index]: " + str(oldViewIndex)
     message += "\n"
     message += "[new view index]: " + str(newViewIndex)
@@ -354,13 +653,28 @@ def OnSelectedViewChanged(oldViewIndex, newViewIndex, isFromButtonEvent):
     message += "[is from button event]: " + str(isFromButtonEvent)
     print("Callback OnSelectedViewChanged:\n" + message)
 
-# This callback will be called just before the views open
-# Use Ribbon command View->View Groups->Prev/Next to call this callback
 def OnBeforeViewsOpen():
+    """
+    Callback function that is triggered before views are opened.
+
+    This function is called to perform any necessary actions or checks
+    before the views in the application are opened.
+
+    :return: None
+    """
     print("Callback OnBeforeViewsOpen.")
 
-# This callback will be called when ViewGroup cache changes
 def OnViewGroupCacheChange(name, description, changeTypeId):
+    """
+    Callback function that handles changes in the view group cache.
+
+    :param name: The name of the view group.
+    :type name: str
+    :param description: A description of the change.
+    :type description: str
+    :param changeTypeId: The type ID of the change.
+    :type changeTypeId: int
+    """
     message = "[name]: " + str(name)
     message += "\n"
     message += "[description]: " + str(description)
@@ -368,27 +682,53 @@ def OnViewGroupCacheChange(name, description, changeTypeId):
     message += "[change type Id]: " + str(changeTypeId)
     print("Callback OnViewGroupCacheChange:\n" + message)
 
-# This callback will be called when MicroStation starts or exits from a viewing command.
-# You can use Fit View command to call this callback
 def OnMonitorViewCommands(starting):
+    """
+    Callback function that handles monitor view commands.
+
+    This function is triggered to handle commands related to the monitor view.
+    It prints a message indicating whether the monitoring has started or not.
+
+    :param starting: A boolean value indicating the state of the monitor view.
+                     True if the monitoring is starting, False otherwise.
+    :type starting: bool
+    """
     message = "[starting]: " + str(starting)
     print("Callback OnMonitorViewCommands:\n" + message)
 
-# This callback will be called after one of the MicroStation "locks" has been changed
-# You can change the Snap Mode to call this callback
 def OnLockChanged(eventType):
+    """
+    Callback function that is triggered when the lock state changes.
+
+    :param eventType: The type of event that triggered the callback.
+    :type eventType: str
+    """
     message = "[eventType]: " + str(eventType)
     print("Callback OnLockChanged:\n" + message)
 
-# This callback will be called after one of the MicroStation "active parameters" has been changed
-# You can change the Active Cell when using Place Active Cell command to call this callback
 def OnActiveParamChanged(paramType):
+    """
+    Callback function that is triggered when an active parameter changes.
+
+    :param paramType: The type of the parameter that has changed.
+    :type paramType: Any
+    """
     message = "[param type]: " + str(paramType)
     print("Callback OnActiveParamChanged:\n" + message)
 
-# This callback will be called when the model update sequence is defined or modified
-# You can add a reference to call this callback
 def OnUpdateSequenceChanged(modelRef, sequence):
+    """
+    Callback function that is triggered when the update sequence changes.
+    
+    :param modelRef: Reference to the model. If not None, it is expected to have a method `GetDgnModel` 
+                     which returns an object with a method `GetModelName`.
+    :type modelRef: object or None
+    :param sequence: The sequence that has changed. It is expected to be an iterable.
+    :type sequence: iterable or None
+    
+    :returns: None
+    :rtype: None
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -402,9 +742,17 @@ def OnUpdateSequenceChanged(modelRef, sequence):
         message += "[sequence]: " + str(sequence)
     print("Callback OnUpdateSequenceChanged:\n" + message)
 
-# This callback will be called each time a dimension style is added, deleted, or updated in a file
-# You can make a demension active in Dimension Style dialog to call this callback
 def OnDimStyleChange(modelRef, styleIdIn, changeType):
+    """
+    Callback function that is triggered when a dimension style changes.
+    
+    :param modelRef: Reference to the model where the dimension style change occurred.
+    :type modelRef: object
+    :param styleIdIn: Identifier of the dimension style that has changed.
+    :type styleIdIn: int
+    :param changeType: Type of change that occurred to the dimension style.
+    :type changeType: int
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -417,8 +765,18 @@ def OnDimStyleChange(modelRef, styleIdIn, changeType):
     message += "[change type]: " + str(changeType)
     print("Callback OnDimStyleChange:\n" + message)
 
-# This callback will be called each time a text style is added, deleted, or updated in a file
 def OnTextStyleChange(modelRef, styleId, changeTypeId):
+    """
+    Callback function that is triggered when a text style change occurs.
+    
+    :param modelRef: Reference to the model where the text style change occurred. 
+                     If `None`, it indicates that the model reference is not available.
+    :type modelRef: object or None
+    :param styleId: Identifier of the text style that has changed.
+    :type styleId: int
+    :param changeTypeId: Identifier of the type of change that occurred.
+    :type changeTypeId: int
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -431,9 +789,17 @@ def OnTextStyleChange(modelRef, styleId, changeTypeId):
     message += "[change type]: " + str(changeTypeId)
     print("Callback OnTextStyleChange:\n" + message)
 
-# This callback will be called when a level is changed
-# You can create a level to call this callback
 def OnLevelChange(modelRef, levelId, changeTypeId):
+    """
+    Callback function that is triggered when there is a change in the level.
+    
+    :param modelRef: Reference to the model. If not None, it provides access to the model's name.
+    :type modelRef: object
+    :param levelId: Identifier for the level that has changed.
+    :type levelId: int
+    :param changeTypeId: Identifier for the type of change that occurred.
+    :type changeTypeId: int
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -446,9 +812,20 @@ def OnLevelChange(modelRef, levelId, changeTypeId):
     message += "[change type]: " + str(changeTypeId)
     print("Callback OnLevelChange:\n" + message)
 
-# This callback will be called before a level is changed
-# You can delete a level to call this callback
 def OnLevelPreChange(modelRef, levelIdIn, changeType):
+    """
+    Callback function that is triggered before a level change occurs.
+    
+    :param modelRef: Reference to the model. If not None, it provides the model name.
+    :type modelRef: object
+    :param levelIdIn: Identifier for the level that is changing.
+    :type levelIdIn: int
+    :param changeType: Type of change that is occurring.
+    :type changeType: int
+    
+    :return: Status of the callback execution.
+    :rtype: BentleyStatus
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -462,9 +839,15 @@ def OnLevelPreChange(modelRef, levelIdIn, changeType):
     print("Callback OnLevelPreChange:\n" + message)
     return BentleyStatus.eSUCCESS
 
-# This callback will be called before the level mask cached is changed
-# You can turn on/off a level display in Level Display dialog to call this callback
 def OnLevelMaskCachePreChange(modelRef, viewNumber):
+    """
+    Callback function that is triggered before the level mask cache changes.
+    
+    :param modelRef: Reference to the model. If not None, it provides access to the model's name.
+    :type modelRef: object or None
+    :param viewNumber: The number of the view that is being affected.
+    :type viewNumber: int
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -475,9 +858,15 @@ def OnLevelMaskCachePreChange(modelRef, viewNumber):
     message += "[viewNumber]: " + str(viewNumber)
     print("Callback OnLevelMaskCachePreChange:\n" + message)
 
-# This callback will be called before the level mask cached is changed
-# You can turn on/off a level display in Level Display dialog to call this callback
 def OnLevelMaskCachePostChange(modelRef, viewNumber):
+    """
+    Callback function that is triggered after the level mask cache changes.
+    
+    :param modelRef: Reference to the model. If not None, it provides access to the model's name.
+    :type modelRef: object or None
+    :param viewNumber: The number of the view that has changed.
+    :type viewNumber: int
+    """
     message = ""
     if modelRef is not None:
         message += "[modelRef]: " + str(modelRef.GetDgnModel().GetModelName())
@@ -488,9 +877,17 @@ def OnLevelMaskCachePostChange(modelRef, viewNumber):
     message += "[viewNumber]: " + str(viewNumber)
     print("Callback OnLevelMaskCachePostChange:\n" + message)
 
-# This callback will be called when the level filter is changed
-# You can change the filter in Level Display dialog to call this callback
 def OnFilterChange(filterTableName, filterId, changeTypeId):
+    """
+    Callback function that is triggered when a filter changes.
+
+    :param filterTableName: The name of the filter table.
+    :type filterTableName: str
+    :param filterId: The ID of the filter.
+    :type filterId: int
+    :param changeTypeId: The type of change that occurred.
+    :type changeTypeId: int
+    """
     message = "[filter table name]: " + str(filterTableName)
     message += "\n"
     message += "[filter Id]: " + str(filterId)
@@ -498,28 +895,50 @@ def OnFilterChange(filterTableName, filterId, changeTypeId):
     message += "[change type]: " + str(changeTypeId)
     print("Callback OnFilterChange:\n" + message)
 
-# This callback will be called when Batch Processing start, pauses, resumes, and stops
-# Operate in Batch Process dialog to call this callback
 def OnMonitorBatchProcessing(state):
+    """
+    Callback function that handles batch processing monitoring.
+
+    :param state: The current state of the batch processing.
+    :type state: Any
+    """
     message = "[state]: " + str(state)
     print("Callback OnMonitorBatchProcessing:\n" + message)
 
-# This callback will be called when the workspace, project, or interface changes
-# You can switch workset to call this callback
 def OnWorkspaceChanged():
+    """
+    Callback function that is triggered when the workspace changes.
+
+    This function is called automatically whenever there is a change in the workspace.
+    It prints a message indicating that the workspace has changed.
+    """
     print("Callback OnWorkspaceChanged.")
 
-# This callback will be called after the current UI "main" task (e.g. via task navigation) has changed
-# Switch between Dialog/ToolBox/ComboBox in "Select V8i mode" pulldown which is beside workflow pulldown to call this callback
 def OnMainToolBoxTaskChanged(previousPath, newPath):
+    """
+    Callback function that is triggered when the main toolbox task changes.
+
+    :param previousPath: The previous path of the toolbox task.
+    :type previousPath: str
+    :param newPath: The new path of the toolbox task.
+    :type newPath: str
+    """
     message = "[previous path]: " + str(previousPath)
     message += "\n"
     message += "[new path]: " + str(newPath)
     print("Callback OnMainToolBoxTaskChanged:\n" + message)
 
-# This callback will be called before the active task is changed
-# Switch between Dialog/ToolBox/ComboBox in "Select V8i mode" pulldown which is beside workflow pulldown to call this callback
 def OnTaskNavigationTaskChanging(cancelTaskChange, currentPath, newPath):
+    """
+    Callback function that is triggered when a task navigation change is occurring.
+
+    :param cancelTaskChange: A boolean-like object indicating whether the task change should be canceled.
+    :type cancelTaskChange: bool
+    :param currentPath: The current path of the task.
+    :type currentPath: str
+    :param newPath: The new path to which the task is navigating.
+    :type newPath: str
+    """
     message = "[cancel task change]: " + str(cancelTaskChange.value)
     message += "\n"
     message += "[current path]: " + str(currentPath)
@@ -527,30 +946,114 @@ def OnTaskNavigationTaskChanging(cancelTaskChange, currentPath, newPath):
     message += "[new path]: " + str(newPath)
     print("Callback OnTaskNavigationTaskChanging:\n" + message)
 
-# This callback will be called after the active Element Template is changed
-# You can set a template active in Element Template dialog to call this callback
 def OnActiveElementTemplateChanged(previousPath, newPath):
+    """
+    Callback function that is triggered when the active element template changes.
+
+    :param previousPath: The file path of the previous active element template.
+    :type previousPath: str
+    :param newPath: The file path of the new active element template.
+    :type newPath: str
+    """
     message = "[previous path]: " + str(previousPath)
     message += "\n"
     message += "[new path]: " + str(newPath)
     print("Callback OnActiveElementTemplateChanged:\n" + message)
 
-# This callback will be called when the Clipboard has been updated
-# You can use Copy command to call this callback
 def OnClipboardUpdated():
+    """
+    Callback function that is triggered when the clipboard is updated.
+
+    This function is called automatically whenever there is a change in the clipboard content.
+    It prints a message indicating that the clipboard has been updated.
+    """
     print("Callback OnClipboardUpdated.")
 
-# This callback will be called when the set of DgnLibs has been changed
 def OnDgnLibsChanged(selectors):
+    """
+    Callback function that is triggered when DGN libraries change.
+
+    :param selectors: An integer representing the selectors that have changed.
+    :type selectors: int
+    """
     message = "[selectors]: " + str(int(selectors))
     print("Callback OnDgnLibsChanged:\n" + message)
 
-# This callback will be called when the Ribbon's Backstage is opened
 def OnRibbonBackstageOpened():
+    """
+    Callback function that is triggered when the Ribbon Backstage is opened.
+
+    This function is called automatically when the Ribbon Backstage view is opened.
+    It prints a message indicating that the callback has been triggered.
+    """
     print("Callback OnRibbonBackstageOpened.")
 
 
 def SetCallbacks():
+    """
+    Set various system callback functions.
+
+    This function registers multiple callback functions to handle different system events.
+    Each callback function is associated with a specific event and is set using the 
+    corresponding `SystemCallback` method.
+
+    The following callbacks are set:
+    
+    - OnNewDesignFile: Triggered when a new design file is created.
+    - OnUnloadProgram: Triggered when the program is unloaded.
+    - OnFileSaveAs: Triggered when a file is saved as a new file.
+    - OnFileSave: Triggered when a file is saved.
+    - OnFenceChange: Triggered when the fence changes.
+    - OnCompressDgnFile: Triggered when a DGN file is compressed.
+    - OnCompressDgnModel: Triggered when a DGN model is compressed.
+    - OnDgnFileLoaded: Triggered when a DGN file is loaded.
+    - OnDgnFileUnloading: Triggered when a DGN file is unloading.
+    - OnQueryHasPending: Triggered when there is a query with pending status.
+    - OnDgnCacheUnloading: Triggered when the DGN cache is unloading.
+    - OnMasterfileClosed: Triggered when the master file is closed.
+    - OnSetModelChangeFunction: Triggered when the model changes.
+    - OnModelRefDestroy: Triggered when a model reference is destroyed.
+    - OnExitDesignFileState: Triggered when exiting the design file state.
+    - OnMessageCenterWrite: Triggered when writing to the message center.
+    - OnPromptOutput: Triggered when there is prompt output.
+    - OnStatusOutput: Triggered when there is status output.
+    - OnApplicationAreaChange: Triggered when the application area changes.
+    - OnReferenceBeforeAttach: Triggered before a reference is attached.
+    - OnReferenceAttach: Triggered when a reference is attached.
+    - OnReferenceAttached: Triggered after a reference is attached.
+    - OnReferenceAttachQueue: Triggered when a reference attach queue is processed.
+    - OnReferenceDetach: Triggered when a reference is detached.
+    - OnReferenceDetached: Triggered after a reference is detached.
+    - OnReferenceModified: Triggered when a reference is modified.
+    - OnReferenceNesting: Triggered when reference nesting occurs.
+    - OnBeforeReferenceWrite: Triggered before a reference is written.
+    - OnFileOutdated: Triggered when a file is outdated.
+    - OnElmDscrCopy: Triggered when an element description is copied.
+    - OnSaveSettings: Triggered when settings are saved.
+    - OnAcsOperation: Triggered during ACS operations.
+    - OnSelectedViewChanged: Triggered when the selected view changes.
+    - OnBeforeViewsOpen: Triggered before views are opened.
+    - OnViewGroupCacheChange: Triggered when the view group cache changes.
+    - OnMonitorViewCommands: Triggered to monitor view commands.
+    - OnLockChanged: Triggered when a lock state changes.
+    - OnActiveParamChanged: Triggered when an active parameter changes.
+    - OnUpdateSequenceChanged: Triggered when the update sequence changes.
+    - OnDimStyleChange: Triggered when the dimension style changes.
+    - OnTextStyleChange: Triggered when the text style changes.
+    - OnLevelChange: Triggered when a level changes.
+    - OnLevelPreChange: Triggered before a level changes.
+    - OnLevelMaskCachePreChange: Triggered before the level mask cache changes.
+    - OnLevelMaskCachePostChange: Triggered after the level mask cache changes.
+    - OnFilterChange: Triggered when a filter changes.
+    - OnMonitorBatchProcessing: Triggered to monitor batch processing.
+    - OnWorkspaceChanged: Triggered when the workspace changes.
+    - OnMainToolBoxTaskChanged: Triggered when the main toolbox task changes.
+    - OnTaskNavigationTaskChanging: Triggered when the task navigation task is changing.
+    - OnActiveElementTemplateChanged: Triggered when the active element template changes.
+    - OnClipboardUpdated: Triggered when the clipboard is updated.
+    - OnDgnLibsChanged: Triggered when DGN libraries change.
+    - OnRibbonBackstageOpened: Triggered when the ribbon backstage is opened.
+    """
     SystemCallback.SetNewDesignFileFunction(OnNewDesignFile, FILE + ".OnNewDesignFile")
     SystemCallback.SetUnloadProgramFunction(OnUnloadProgram, FILE + ".OnUnloadProgram")
     SystemCallback.SetFileSaveAsFunction(OnFileSaveAs, FILE + ".OnFileSaveAs")
@@ -607,6 +1110,72 @@ def SetCallbacks():
     SystemCallback.SetRibbonBackstageOpenedFunction(OnRibbonBackstageOpened, FILE + ".OnRibbonBackstageOpened")
 
 def ClearCallbacks():
+    """
+    Clears all system callback functions by setting them to None.
+
+    This function resets various system callbacks to their default state by 
+    assigning None to each callback function. The callbacks affected include 
+    design file functions, program unload functions, file save functions, 
+    fence change functions, compression functions, file load/unload functions, 
+    model change functions, reference attach/detach functions, view change 
+    functions, level change functions, and many more.
+
+    The following callbacks are cleared:
+    - New Design File Function
+    - Unload Program Function
+    - File Save As Function
+    - File Save Function
+    - Fence Changed Function
+    - Compress Dgn File Function
+    - Compress Dgn Model Function
+    - Dgn File Loaded Function
+    - Dgn File Unloading Function
+    - Query Has Pending Function
+    - Dgn Cache Unloading Function
+    - Masterfile Closed Function
+    - Model Change Function
+    - Model Ref Destroy Function
+    - Exit Design File State Function
+    - Message Center Write Function
+    - Prompt Output Function
+    - Status Output Function
+    - Application Area Change Function
+    - Reference Before Attach Function
+    - Reference Attach Function
+    - Reference Attached Function
+    - Reference Attach Queue Function
+    - Reference Detach Function
+    - Reference Detached Function
+    - Reference Modified Function
+    - Reference Nesting Function
+    - Before Reference Write Function
+    - File Outdated Function
+    - Elm Dscr Copy Function
+    - Save Settings Function
+    - Acs Operation Function
+    - Selected View Changed Function
+    - Before Views Open Function
+    - View Group Cache Change Function
+    - Monitor View Commands Function
+    - Lock Changed Function
+    - Active Param Changed Function
+    - Update Sequence Changed Function
+    - Dim Style Change Function
+    - Text Style Change Function
+    - Level Change Function
+    - Level Pre Change Function
+    - Level Mask Cache Pre Change Function
+    - Level Mask Cache Post Change Function
+    - Filter Change Function
+    - Monitor Batch Processing Function
+    - Workspace Changed Function
+    - Main Tool Box Task Changed Function
+    - Task Navigation Task Changing Function
+    - Active Element Template Changed Function
+    - Clipboard Updated Function
+    - Dgn Libs Changed Function
+    - Ribbon Backstage Opened Function
+    """
     SystemCallback.SetNewDesignFileFunction(None, "")
     SystemCallback.SetUnloadProgramFunction(None, "")
     SystemCallback.SetFileSaveAsFunction(None, "")

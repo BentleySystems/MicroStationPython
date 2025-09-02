@@ -13,47 +13,47 @@
 static const char * __doc_Bentley_DgnPlatform_GPArray_ToGroupElement =R"doc(Represent the GPArray as a group cell containing simple curve
 elements.
 
-Parameter ``eeh``:
+:param eeh:
     The new element .
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``closePhysicallyClosed``:
+:param closePhysicallyClosed:
     For indivual curves that are physically closed whether to create
     as open or closed type.
 
-Parameter ``model``:
+:param model:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_ToElement =R"doc(Represent the GPArray as a simple curve, path, or region element.
 
-Parameter ``eeh``:
+:param eeh:
     The new element .
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``closed``:
+:param closed:
     True if GPArray represents a closed path and a closed element type
     should be created.
 
-Parameter ``model``:
+:param model:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated.)doc";
 
@@ -62,29 +62,29 @@ static const char * __doc_Bentley_DgnPlatform_GPArray_ToCurveVector =R"doc(Creat
 static const char * __doc_Bentley_DgnPlatform_GPArray_IsMajorBreak =R"doc(Query if the supplied index represents a break between curve loops in
 a region.
 
-Parameter ``index``:
+:param index:
     Index of point to test.
 
-Returns:
+:returns:
     true if point at index is a major break.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_GetCurveType =R"doc(Query the gpa for the curve type starting as the supplied index.
 
-Parameter ``index``:
+:param index:
     Index of point that is the start of a curve segment.
 
-Returns:
+:returns:
     The type of curve segment.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_GetPoint =R"doc(Extract a single point from the GPArray.
 
-Parameter ``point``:
+:param point:
     Where to store point
 
-Parameter ``index``:
+:param index:
     Index of point to return.
 
-Returns:
+:returns:
     A pointer to the returned point.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_MarkMajorBreak =R"doc(Denote the break between multiple curve loops as in the solid and hole
@@ -94,67 +94,67 @@ static const char * __doc_Bentley_DgnPlatform_GPArray_MarkBreak =R"doc(Denote a 
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_Add =R"doc(Add a single point to the GPArray.
 
-Parameter ``pt``:
+:param pt:
     point to add.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_Append =R"doc(Appends the source GPArray contents to the contents of this instance.
 
-Parameter ``source``:
+:param source:
     GPArray to append.
 
-Returns:
+:returns:
     true if append was successful.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_CopyContentsOf =R"doc(Copies the source GPArray contents and replace the contents of this
 instance.
 
-Parameter ``source``:
+:param source:
     GPArray to copy.
 
-Returns:
+:returns:
     true if copy was successful.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_Transform =R"doc(Transform the contents of the GPArray by the supplied transform.
 
-Parameter ``transform``:
+:param transform:
     To apply to GPArray contents.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_Stroke =R"doc(Replace the (possibly curved) contents of the array by strokes with
 weight 1.
 
-Parameter ``tolerance``:
+:param tolerance:
     Stroke tolerance, to be applied only to the xy values.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_IsPointInsideXY =R"doc(Compute an in/out classification of a single point using only xy
 coordinates.
 
-Parameter ``point``:
+:param point:
     point to test.
 
-Returns:
+:returns:
     true if point is on or inside the region defined by the gpa (by
     parity rules).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_GetPlane =R"doc(Get a plane which contains the geometry in the array.
 
-Parameter ``plane``:
+:param plane:
     Where to store the GPArray plane.
 
-Returns:
+:returns:
     true if geometry is planar. If geometry is non-planar the plane is
     arbitrary but may be close.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_GetRange =R"doc(Initialize a range from all the point in the array.
 
-Parameter ``range``:
+:param range:
     Where to store the GPArray range.
 
-Returns:
+:returns:
     A pointer to GPArray range.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_Length =R"doc(Compute the total length of the curves in the array.
 
-Returns:
+:returns:
     Total curve length.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GPArray_Empty =R"doc(Remove all points in the array.)doc";
@@ -162,7 +162,7 @@ static const char * __doc_Bentley_DgnPlatform_GPArray_Empty =R"doc(Remove all po
 static const char * __doc_Bentley_DgnPlatform_GPArray_GetCount =R"doc(Get the number of points in the array. @note This is not the number of
 curves, it's the total number of points for all curves.
 
-Returns:
+:returns:
     Graphics point array count.)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -213,6 +213,12 @@ void def_GPArray(py::module_& m)
            self.Add(points.data(), (int) points.size());
            }, "points"_a);
 
+    c2.def("Add", [] (GPArray& self, py::list const& points)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           self.Add(cppPoints.data(), (int) cppPoints.size());
+           }, "points"_a);
+
     c2.def("Add", [] (GPArray& self, DPoint2dArray const& points)
            {
            self.Add(points.data(), (int) points.size());
@@ -230,6 +236,15 @@ void def_GPArray(py::module_& m)
            int index = 0;
            int nPoints = 0;
            auto retVal = self.GetLineString(&index, points.data(), &nPoints, (int) points.size());
+           return py::make_tuple(retVal, index, nPoints);
+           }, "points"_a);
+
+    c2.def("GetLineString", [] (GPArray const& self, py::list& points)
+           {
+           int index = 0;
+           int nPoints = 0;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           auto retVal = self.GetLineString(&index, cppPoints.data(), &nPoints, (int) cppPoints.size());
            return py::make_tuple(retVal, index, nPoints);
            }, "points"_a);
 

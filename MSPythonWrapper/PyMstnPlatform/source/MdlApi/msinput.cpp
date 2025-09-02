@@ -8,6 +8,45 @@
 #include "MSPythonPCH.h"
 #include <Mstn/IEditAction.h>
 #include <Mstn/MdlApi/msinput.fdf>
+
+static const char* __doc_MstnPlatform_PyCadInputQueue_SendKeyin = R"doc(@Description Used to send a key-in to MicroStation. ~mSendKeyin does not return until MicroStation
+has processed the key-in. @Param[in] keyinStr is a keyin string.
+)doc";
+
+static const char* __doc_MstnPlatform_PyCadInputQueue_SendDataPoint = R"doc(@Description Used to send a datapoint to MicroStation. ~mSendDataPoint does not return until MicroStation
+has processed the datapoint. @Param[in] point is the point. @Param[in]view is a view index.
+)doc";
+
+static const char* __doc_MstnPlatform_PyCadInputQueue_SendReset = R"doc(@Description Used to send a reset to MicroStation. ~mSendReset does not return until MicroStation
+has processed the reset.
+)doc";
+
+static const char* __doc_MstnPlatform_PyCadInputQueue_SendCommand = R"doc(@Description This statement sends the string to MicroStation's input queue.  The string is to be interpreted as a command.
+@Param Command A key-in that invokes a MicroStation command.
+)doc";
+
+static const char* __doc_MstnPlatform_PyCadInputQueue_GetInput = R"doc(@Description Used to wait for the user to enter input in MicroStation's key-in area or one of MicroStation's views.
+@Remarks GetInput does not return until the user has entered the input of the appropriate type.
+Accepted input is limited to the types specified in the optional arguments.  All types of input
+are allowed if no arguments are specified.
+P>Do not call GetInput from an event handler of a modal dialog box.  When this happens, neither MicroStation nor the
+dialog box can get any input.</P>
+<P>While there is an outstanding call to ~mGetInput, the Visual Basic Editor does not accept input. Therefore,
+while a program is blocked at a call to ~mGetInput, it is impossible to use the Visual Basic Editor to set or clear breakpoints, edit source
+code, terminate the program, add variables to the watch area, etc.<P>
+@Remarks There can only be one outstanding call to GetInput at a time. GetInput raises an error if it is called while there is another
+)doc";
+
+static const char* __doc_MstnPlatform_PyCadInputQueue_SendDataPointForLocate = R"doc(@Description Selects an element for the current command to operate on.
+@Param element Must refer to an element that is already in the model. It cannot refer to a newly created element that has
+not been added to the model.
+@Param DataPoint The data point to send
+)doc";
+
+static const char* __doc_MstnPlatform_PyCadInputQueue_SequeueLastInput = R"doc(@Description The method sends the last input that was received by GetInput
+)doc";
+
+
 extern "C" __declspec(dllimport) void mdlDialog_AttachTkinterToolSetting(int hTkWin);
 extern "C" __declspec(dllimport) void mdlDialog_AttachQtToolSetting(int hQtWin);
 #include <Mstn/PythonMacro/PyCadInputQueue.h>
@@ -125,13 +164,13 @@ void def_msinput(py::module_& m)
         .export_values();
 
     py::class_<PyCadInputQueue> c1 (m, "PyCadInputQueue");
-    c1.def_static ("SendKeyin", &PyCadInputQueue::SendKeyin, "keyinStr"_a);
-    c1.def_static ("SendDataPoint", &PyCadInputQueue::SendDataPoint, "point"_a, "view"_a, "qualifiers"_a = 0);
-    c1.def_static ("SendReset", &PyCadInputQueue::SendReset);
-    c1.def_static ("SendCommand", &PyCadInputQueue::SendCommand, "commandStr"_a);
-    c1.def_static ("SendDataPointForLocate", &PyCadInputQueue::SendDataPointForLocate, "element"_a, "point"_a);
-    c1.def_static ("GetInput", &PyCadInputQueue::GetInput, "type1"_a, "type2"_a, "type3"_a, "type4"_a);
-    c1.def_static ("RequeueLastInput", &mdlInput_requeueLastInput, "position"_a);
+    c1.def_static ("SendKeyin", &PyCadInputQueue::SendKeyin, "keyinStr"_a, DOC(MstnPlatform, PyCadInputQueue, SendKeyin));
+    c1.def_static ("SendDataPoint", &PyCadInputQueue::SendDataPoint, "point"_a, "view"_a, "qualifiers"_a = 0, DOC(MstnPlatform, PyCadInputQueue, SendDataPoint));
+    c1.def_static ("SendReset", &PyCadInputQueue::SendReset, DOC(MstnPlatform, PyCadInputQueue, SendReset));
+    c1.def_static ("SendCommand", &PyCadInputQueue::SendCommand, "commandStr"_a, DOC(MstnPlatform, PyCadInputQueue, SendCommand));
+    c1.def_static ("SendDataPointForLocate", &PyCadInputQueue::SendDataPointForLocate, "element"_a, "point"_a, DOC(MstnPlatform, PyCadInputQueue, SendDataPointForLocate));
+    c1.def_static ("GetInput", &PyCadInputQueue::GetInput, "type1"_a, "type2"_a, "type3"_a, "type4"_a, DOC(MstnPlatform, PyCadInputQueue, GetInput));
+    c1.def_static ("SequeueLastInput", &mdlInput_requeueLastInput, "position"_a, DOC(MstnPlatform, PyCadInputQueue, SequeueLastInput));
     c1.def_static ("PythonMainLoop", &mdlInput_pythonMainLoop);
     c1.def_static ("AttachTkinterToolSetting", &mdlDialog_AttachTkinterToolSetting, "hTkWin"_a);
     c1.def_static("AttachQtToolSetting", &mdlDialog_AttachQtToolSetting, "hQtWin"_a);

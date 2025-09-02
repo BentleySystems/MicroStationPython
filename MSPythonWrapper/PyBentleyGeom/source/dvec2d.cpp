@@ -15,44 +15,44 @@ absolute and relative tolerance. points are equal if squared distance
 between is less than (squared abstol) plus (squared relTol) * sum of
 cmponent squares
 
-Parameter ``[in]``:
+:param (input):
     dataB second DVec2d
 
-Returns:
+:returns:
     true if within tolerance.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_IsEqual =R"doc( Test for exact equality between all components of two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     true if the vectors are identical.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_IsPerpendicularTo =R"doc( Tests if two vectors are perpendicular.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     true if vectors are perpendicular within tolerance)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_IsParallelTo =R"doc( Tests if two vectors are parallel.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     true if the vectors are parallel within tolerance)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_IsVectorInCCWSector =R"doc( test if the instance is " between " vector0 and vector1
 when vector0 is rotated counterclockwise towards vector1.
 
-Parameter ``[in]``:
+:param (input):
     vector0 start vector for CCW sweep.
 
-Parameter ``[in]``:
+:param (input):
     vector1 end vector for CCW sweep.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_IsVectorInSmallerSector =R"doc( Test a vector is " between " vector0 and vector1. If the
@@ -70,108 +70,108 @@ tolerances will cause " nearby " cases to be unpredictable. It is
 assumed that if the caller considers the " parallel " cases important
 they will be checked explicitly.
 
-Parameter ``[in]``:
+:param (input):
     vector0 The first boundary vector.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The second boundary vector.
 
-Returns:
+:returns:
     true if the test vector is within the angle.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_SmallerUnorientedAngleTo =R"doc( Returns the angle between two vectors, choosing the
 smaller of the two possible angles when both the vectors and their
 negations are considered. This angle is between 0 and pi/2.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The angle between the vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_AngleTo =R"doc( Returns the angle between two vectors. This angle is
 between 0 and pi. Rotating the first vector by this angle around the
 cross product between the vectors aligns it with the second vector.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The angle between the vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_CrossProductSquared =R"doc( Returns the (vector) cross product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_CrossProduct =R"doc( Returns the (vector) cross product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_DotProduct =R"doc( Returns the (scalar) dot product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The dot product of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_SetComponent =R"doc( Set one of three components (x,y) of the vector.
 
-Parameter ``[in]``:
+:param (input):
     a The component value.
 
-Parameter ``[in]``:
+:param (input):
     index Selects the the axis:0=x, 1=y)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_GetComponent =R"doc( Gets a single component of a vector. If the index is out
 of range 0,1 it is interpretted cyclically.
 
-Parameter ``[in]``:
+:param (input):
     index Indicates which component is accessed. The values are 0=x,
     1=y Other values are treated cyclically.
 
-Returns:
+:returns:
     The specified component of the vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_DistanceSquared =R"doc( Computes the squared distance between two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector.
 
-Returns:
+:returns:
     The squared distance between the vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_Distance =R"doc( Computes the (cartesian) distance between two vectors
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The distance between vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_MaxAbs =R"doc( Finds the largest absolute value among the components of
 a vector.
 
-Returns:
+:returns:
     The largest absolute value among vector coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_Magnitude =R"doc( Computes the magnitude of a vector.
 
-Returns:
+:returns:
     The length of the vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_MagnitudeSquared =R"doc( Computes the squared magnitude of a vector.
 
-Returns:
+:returns:
     The squared magnitude of the vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_XyOf =R"doc( Sets the x,y, and z components of a DVec2d structure from
 the corresponding parts of a DPoint4d. Weight part of DPoint4d is not
 used.
 
-Parameter ``[in]``:
+:param (input):
     hPoint The homogeneous point)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_UnitPerpendicular =R"doc( Compute a unit vector perpendicular given vector.
@@ -179,44 +179,44 @@ static const char * __doc_Bentley_Geom_DVec2d_UnitPerpendicular =R"doc( Compute 
 Remark:
     s Input may equal output.
 
-Parameter ``[in]``:
+:param (input):
     vector The source vector
 
-Returns:
+:returns:
     true if the input vector has nonzero length)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_RotateCCW =R"doc( Rotate a vector COUNTERCLOCKWISE around the z axis.
 
-Parameter ``[in]``:
+:param (input):
     vector vector to rotate.
 
-Parameter ``[in]``:
+:param (input):
     theta The rotation angle.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_Interpolate =R"doc( Computes a vector whose position is given by a fractional
 argument and two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector0 The vector corresponding to fractionParameter of 0.
 
-Parameter ``[in]``:
+:param (input):
     fractionParameter The fractional parametric coordinate. 0.0 is the
     start of the segment, 1.0 is the end, 0.5 is middle
 
-Parameter ``[in]``:
+:param (input):
     vector1 The vector corresponding to fractionParameter of 1.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_SafeDivide =R"doc( Try to divide each component of a vector by a scalar. If
 the denominator near zero compared to any numerator component, return
 the original vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The initial vector.
 
-Parameter ``[in]``:
+:param (input):
     denominator The divisor.
 
-Returns:
+:returns:
     true if division is numerically safe.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_ScaleToLength =R"doc( Scales a vector to specified length.
@@ -225,13 +225,13 @@ Remark:
     In the 0-length error case, the vector is set to (1,0) in the
     legacy microstation style.
 
-Parameter ``[in]``:
+:param (input):
     vector The original vector.
 
-Parameter ``[in]``:
+:param (input):
     length The requested length.
 
-Returns:
+:returns:
     The length prior to scaling.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_Normalize =R"doc( Normalizes (scales) a vector to length 1.
@@ -240,10 +240,10 @@ Remark:
     In the 0-length error case, the vector is set to (1,0) in the
     legacy microstation style.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be normalized.
 
-Returns:
+:returns:
     The length prior to normalization)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_NormalizedDifference =R"doc( Computes a unit vector in the direction of the difference
@@ -254,69 +254,69 @@ Remark:
     In the 0-length error case, the vector is set to (1,0) in the
     legacy microstation style.
 
-Parameter ``[in]``:
+:param (input):
     target The target point.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin point.
 
-Returns:
+:returns:
     The length of original difference vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_Subtract =R"doc( Subtract two vectors, and return the result in place of
 the first.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The vector to subtract.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_DifferenceOf =R"doc( Subtract coordinates of two vectors. (Compute Vector1 -
 Vector2)
 
-Parameter ``[in]``:
+:param (input):
     vector1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second (subtracted) vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_FromSumOf =R"doc( Returns a linear combination of vectors
 
-Parameter ``[in]``:
+:param (input):
     vector0 first vector
 
-Parameter ``[in]``:
+:param (input):
     scale0 first scale
 
-Parameter ``[in]``:
+:param (input):
     vector1 second vector
 
-Parameter ``[in]``:
+:param (input):
     scale1 second scale)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_Scale =R"doc( Multiplies a vector by a scale factor.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be scaled.
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_Add =R"doc( Adds a vector to a pointer or vector, returns the result
 in place.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to add.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_SumOf =R"doc( Compute the sum of two vectors or vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The the first vector
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_Negate =R"doc( Computes a negated (opposite) vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be negated.)doc";
 
 static const char * __doc_Bentley_Geom_DVec2d_One =R"doc( Returns a vector with all components 1.0.)doc";

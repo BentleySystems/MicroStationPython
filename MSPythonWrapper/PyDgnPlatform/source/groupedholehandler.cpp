@@ -14,16 +14,16 @@ static const char * __doc_Bentley_DgnPlatform_GroupedHoleHandler_CreateGroupedHo
 collection of hole elements. Only closed curves are acceptable for the
 solid and hole loops.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``solidEeh``:
+:param solidEeh:
     Element to use for solid loop.
 
-Parameter ``holes``:
+:param holes:
     Elements to use for hole loops, requires a minimum of one.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated. @note solidEeh and hole agenda entries will be invalid
     after this call unless they represent persistent elements.
@@ -35,23 +35,23 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_GroupedHoleHandler_IsValidGroupedHoleComponentType =R"doc(Check the supplied element to determine if it is an acceptable type
 for inclusion in a grouped hole, either as a solid or hole loop. Valid
-components are closed curves of the following types:\li SHAPE_ELM \li
-CMPLX_SHAPE_ELM \li ELLIPSE_ELM \li BSPLINE_CURVE_ELM <p>
+components are closed curves of the following types: SHAPE_ELM 
+CMPLX_SHAPE_ELM  ELLIPSE_ELM  BSPLINE_CURVE_ELM <p>
 
-Parameter ``eh``:
+:param eh:
     The element to check.
 
-Returns:
+:returns:
     true if element is valid candidate. Bentley Systems +-------------
     --+---------------+---------------+---------------+---------------
     +------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GroupedHoleHandler_IsGroupedHole =R"doc(Check the supplied element to see if it represents a grouped hole.
 
-Parameter ``eh``:
+:param eh:
     The element to check.
 
-Returns:
+:returns:
     true if element is a grouped hole.
 
 See also:

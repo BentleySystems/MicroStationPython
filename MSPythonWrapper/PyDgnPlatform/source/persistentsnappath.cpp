@@ -15,22 +15,22 @@ static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_GetDescription 
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_DisclosePointers =R"doc(Report all ElementRefs on the path (including reference attachment
 elements)
 
-Parameter ``refs``:
+:param refs:
     where to store target ElementRefs
 
-Parameter ``homeModel``:
+:param homeModel:
     the model that contains the dependent element)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_OnPreprocessCopyRemapIds =R"doc(Phase II of copying a persistent display path:remap the display's IDs
 to copied target elements
 
-Parameter ``unused``:
+:param unused:
     for future use. Always pass false.
 
-Parameter ``hostElement``:
+:param hostElement:
     The host element
 
-Returns:
+:returns:
     non-zero error status if the remapping failed and the displaypath
     should be dropped
 
@@ -40,16 +40,16 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_OnPreprocessCopy =R"doc(Phase I of copying a persistent display path:deep-copy target
 elements and/or replace stored IDs with remap keys
 
-Parameter ``opt``:
+:param opt:
     How to handle the references contained in the display path
 
-Parameter ``cc``:
+:param cc:
     The copy context
 
-Parameter ``hostElement``:
+:param hostElement:
     The element that contains the XAttribute
 
-Returns:
+:returns:
     non-zero error status if the display path cannot be copied and
     should be dropped
 
@@ -70,10 +70,10 @@ static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_SetPayloadData 
 
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_GetPayloadData =R"doc(Get the payload data
 
-Parameter ``bytes``:
+:param bytes:
     payload data
 
-Parameter ``nbytes``:
+:param nbytes:
     number of bytes of payload data
 
 Remark:
@@ -92,10 +92,10 @@ call EvaluatePoint)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_SetCustomKeypointData =R"doc(Set or update the custom keyoint data associated with this snap
 
-Parameter ``data``:
+:param data:
     custom data
 
-Parameter ``nbytes``:
+:param nbytes:
     number of bytes of custom data
 
 Remark:
@@ -104,13 +104,13 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_GetCustomKeypointData =R"doc(Get the custom keypoint data associated with this snap
 
-Returns:
+:returns:
     ERROR if there is no custom data
 
-Parameter ``data``:
+:param data:
     pointer to saved custom data
 
-Parameter ``nbytes``:
+:param nbytes:
     number of bytes of custom data
 
 Remark:
@@ -164,13 +164,13 @@ static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_HasTwoPaths =R"
 
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_EvaluateAssocPoint =R"doc(Compute the location identified by an AssocPoint
 
-Parameter ``pt``:
+:param pt:
     the computed snap location
 
-Parameter ``assoc``:
+:param assoc:
     the snap definition to evaluate
 
-Parameter ``homeModel``:
+:param homeModel:
     the model that contains the dependent element
 
 Remark:
@@ -179,7 +179,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_PersistentSnapPath_EvaluatePoint =R"doc(Compute the point identified by the snap
 
 Remark:
-    s May call the DisplayHandler::EvaluateSnap method. pt[out] the
+    s May call the DisplayHandler::EvaluateSnap method. pt(output) the
     point (transformed into the coordinate system of the home model
     aka " world cooordinates "))doc";
 
@@ -244,7 +244,7 @@ void def_PersistentSnapPath(py::module_& m)
 
     c1.def("GetCustomKeypointData", [] (PersistentSnapPathCR self, py::bytearray& kpData)
            {
-           byte const* data = nullptr;
+           Byte const* data = nullptr;
            UInt32 dataSize = 0;
            auto retVal = self.GetCustomKeypointData(data, dataSize);
            if (retVal == SUCCESS && nullptr != data && dataSize > 0)
@@ -256,14 +256,14 @@ void def_PersistentSnapPath(py::module_& m)
            {
            std::string strData = kpData.cast<std::string>();
            if (!strData.empty())
-               self.SetCustomKeypointData((const byte*) strData.data(), (UInt32) strData.size());
+               self.SetCustomKeypointData((const Byte*) strData.data(), (UInt32) strData.size());
            }, "kpData"_a, DOC(Bentley, DgnPlatform, PersistentSnapPath, SetCustomKeypointData));
 
     c1.def("IsStaticDPoint3d", &PersistentSnapPath::IsStaticDPoint3d, DOC(Bentley, DgnPlatform, PersistentSnapPath, IsStaticDPoint3d));
 
     c1.def("GetPayloadData", [] (PersistentSnapPathCR self, py::bytearray& plData)
            {
-           byte const* data = nullptr;
+           Byte const* data = nullptr;
            UInt32 dataSize = 0;
            auto retVal = self.GetPayloadData((void const*&)data, dataSize);
            if (retVal == SUCCESS && nullptr != data && dataSize > 0)
@@ -275,7 +275,7 @@ void def_PersistentSnapPath(py::module_& m)
            {
            std::string strData = plData.cast<std::string>();
            if (!strData.empty())
-               self.SetPayloadData((const byte*) strData.data(), (UInt32) strData.size());
+               self.SetPayloadData((const Byte*) strData.data(), (UInt32) strData.size());
            }, "plData"_a, DOC(Bentley, DgnPlatform, PersistentSnapPath, SetPayloadData));
 
     c1.def_property("DoDeepCopy", &PersistentSnapPath::GetDoDeepCopy, &PersistentSnapPath::SetDoDeepCopy);

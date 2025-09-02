@@ -15,26 +15,26 @@ static const char * __doc_Bentley_Geom_BSITriangleQuadraturePoints_GetNumEval =R
 static const char * __doc_Bentley_Geom_BSITriangleQuadraturePoints_GetEval =R"doc(@description Get the coordinates and weight of the i'th quadrature
 point
 
-Parameter ``[in]``:
+:param (input):
     i index of evaluation point.
 
-Parameter ``[out]``:
+:param (output):
     u evaluation coordinate.
 
-Parameter ``[out]``:
+:param (output):
     v evaluation coordinate.
 
-Parameter ``[out]``:
+:param (output):
     w weight.
 
-Returns:
+:returns:
     false if index is out of range.)doc";
 
 static const char * __doc_Bentley_Geom_BSITriangleQuadraturePoints_InitStrang =R"doc(@description Setup for a " Strang " rule as defined in http://people.sc.
 fsu.edu/~jburkardt/datasets/quadrature_rules_tri/quadrature_rules_tri.
 html
 
-Parameter ``[in]``:
+:param (input):
     selector rule selector.
 
 Remark:
@@ -66,41 +66,41 @@ subintervals.
 
 * The caller is can capture sums as announced
 
-Parameter ``[in]``:
+:param (input):
     function function object that can be called as often as needed.
 
-Parameter ``[in]``:
+:param (input):
     t0 start of interval.
 
-Parameter ``[in]``:
+:param (input):
     t1 end of interval.
 
-Parameter ``[in]``:
+:param (input):
     numInterval number of intervals to use within t0..t1.
 
-Parameter ``[out]``:
+:param (output):
     totalErrorBound
 
-Returns:
+:returns:
     false if function.AnnounceIntermediateIntergral () returned false.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+------)doc";
 
 static const char * __doc_Bentley_Geom_BSIQuadraturePoints_AccumulateWeightedSums =R"doc(@description Evaluate and accumulate function values over an interval.
 
-Parameter ``[in]``:
+:param (input):
     function function object that can be called as often as needed.
 
-Parameter ``[in]``:
+:param (input):
     t0 start of interval.
 
-Parameter ``[in]``:
+:param (input):
     t1 end of interval.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pSums accumulating sums.
 
-Parameter ``[in]``:
+:param (input):
     numInterval number of intervals to use within t0..t1.)doc";
 
 static const char * __doc_Bentley_Geom_BSIQuadraturePoints_GetConvergencePower =R"doc(@description Return the exponent for the convergence rate of the rule.)doc";
@@ -110,78 +110,78 @@ static const char * __doc_Bentley_Geom_BSIQuadraturePoints_GetNumEval =R"doc(@de
 static const char * __doc_Bentley_Geom_BSIQuadraturePoints_GetXYEval =R"doc(Get the coordinates and weight of quarature point (i,j) in a 2D
 rectangular domain with specified quadrature for each direction.
 
-Parameter ``[in]``:
+:param (input):
     xRule x direction quadrature rule
 
-Parameter ``[in]``:
+:param (input):
     ix point index in x rule.
 
-Parameter ``[in]``:
+:param (input):
     x0 started of x mapped interval
 
-Parameter ``[in]``:
+:param (input):
     x1 end of x mapped interval
 
-Parameter ``[in]``:
+:param (input):
     yRule y direction quadrature rule.
 
-Parameter ``[in]``:
+:param (input):
     iy point index in y rule.
 
-Parameter ``[in]``:
+:param (input):
     y0 start of y mapped interval
 
-Parameter ``[in]``:
+:param (input):
     y1 end of y mapped interval
 
-Parameter ``[out]``:
+:param (output):
     x x coordinate to evaluate.
 
-Parameter ``[out]``:
+:param (output):
     y y coordinate to evaluate.
 
-Parameter ``[out]``:
+:param (output):
     w weight for sums)doc";
 
 static const char * __doc_Bentley_Geom_BSIQuadraturePoints_GetEval =R"doc(@description Get the coordinate a weight of the i'th quadrature point,
 mapped to interval a0..a1
 
-Parameter ``[in]``:
+:param (input):
     i index of evaluation point.
 
-Parameter ``[in]``:
+:param (input):
     a0 start of mapped interval.
 
-Parameter ``[in]``:
+:param (input):
     a1 end of mapped interval.
 
-Parameter ``[out]``:
+:param (output):
     a evaluation coordinate.
 
-Parameter ``[out]``:
+:param (output):
     w weight. Both the local quadrature weight and the interval length
     are incorporated in the returned weight.
 
-Returns:
+:returns:
     false if index is out of range.)doc";
 
 static const char * __doc_Bentley_Geom_BSIQuadraturePoints_InitGaussKronrod =R"doc(@description Setup for a " Kronrod " part of Gauss-Kronrad quadrature.
 The simple Gauss x values appear (in order) at the odd positions of
 the Kronrod rule.
 
-Parameter ``numEval``:
-    IN requested number of points. ONLY 7 IS SUPPORTED
+:param numEval:
+    (input) requested number of points. ONLY 7 IS SUPPORTED
 
-Parameter ``gaussPartner``:
-    IN corresponding simple Gauss rule.
+:param gaussPartner:
+    (input) corresponding simple Gauss rule.
 
-Returns:
+:returns:
     Number of points actually to be used.)doc";
 
 static const char * __doc_Bentley_Geom_BSIQuadraturePoints_InitGaussLobatto =R"doc(@description Setup for " Gauss - Lobatto " quadrature. This uses endpoints
 plus gauss-like interior points.
 
-Parameter ``[in]``:
+:param (input):
     numEval requested number of points.
 
 Remark:
@@ -192,10 +192,10 @@ Remark:
 
 static const char * __doc_Bentley_Geom_BSIQuadraturePoints_InitGauss =R"doc(@description Setup for a " Gaussian " quadrature.
 
-Parameter ``[in]``:
+:param (input):
     numEval requested number of points.
 
-Returns:
+:returns:
     Number of points actually to be used. max is 5)doc";
 
 static const char * __doc_Bentley_Geom_BSIQuadraturePoints_InitUniform =R"doc(@description Setup for a " Newton - Cotes " regularly spaced quadrature.
@@ -205,10 +205,10 @@ Remark:
     1 is " rectangle rule " numEval == 2 is " trapezoid rule " numEval ==
     3 is " Simpson s rule "
 
-Parameter ``[in]``:
+:param (input):
     numEval requested number of points.
 
-Returns:
+:returns:
     Number of points actually to be used. max is 4)doc";
 
 USING_NAMESPACE_BENTLEY_MSTNPLATFORM_MSPYTHON
@@ -220,6 +220,9 @@ USING_NAMESPACE_BENTLEY_MSTNPLATFORM_MSPYTHON
 class PyBSIVectorIntegrand : public BSIVectorIntegrand
     {
     public:
+        using BSIVectorIntegrand::BSIVectorIntegrand;
+
+        virtual ~PyBSIVectorIntegrand() {};
         /*---------------------------------------------------------------------------------**//**
         * @bsimethod                                                                       2/2023
         +---------------+---------------+---------------+---------------+---------------+------*/
@@ -262,6 +265,7 @@ class PyBSIVectorIntegrand : public BSIVectorIntegrand
 class PyBSIIncrementalVectorIntegrand : public BSIIncrementalVectorIntegrand
     {
     public:
+        using BSIIncrementalVectorIntegrand::BSIIncrementalVectorIntegrand;
         /*---------------------------------------------------------------------------------**//**
         * @bsimethod                                                                       2/2023
         +---------------+---------------+---------------+---------------+---------------+------*/
@@ -337,6 +341,7 @@ class PyBSIIncrementalVectorIntegrand : public BSIIncrementalVectorIntegrand
 class PyBSIVectorIntegrandXY : public BSIVectorIntegrandXY
     {
     public:
+        using BSIVectorIntegrandXY::BSIVectorIntegrandXY;
         /*---------------------------------------------------------------------------------**//**
         * @bsimethod                                                                       2/2023
         +---------------+---------------+---------------+---------------+---------------+------*/

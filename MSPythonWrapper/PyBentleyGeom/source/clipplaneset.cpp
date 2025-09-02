@@ -13,70 +13,70 @@
 static const char * __doc_Bentley_Geom_ClipPlaneSet_ClipAndMaskPlanarRegion =R"doc(Clip a planar region to the (optional) outsideClip. Subtract the
 (optional) holeClip.
 
-Parameter ``outsideClip``:
-    [in] optional outer clip
+:param outsideClip:
+    (input) optional outer clip
 
-Parameter ``holeClip``:
-    [in] optional hole clip
+:param holeClip:
+    (input) optional hole clip
 
-Parameter ``planarRegion``:
+:param planarRegion:
     A CurveVector of type Loop or ParityRegion.)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlaneSet_ClipPlanarRegion =R"doc(Clip a planar region to this ClipPlaneset
 
-Parameter ``planarRegion``:
-    [in] A CurveVector of type Loop or ParityRegion.
+:param planarRegion:
+    (input) A CurveVector of type Loop or ParityRegion.
 
-Parameter ``localToWorld``:
-    [out] transform from the plane of the planarRegion to world
+:param localToWorld:
+    (output) transform from the plane of the planarRegion to world
 
-Parameter ``worldToLocal``:
-    [out] transform from world to the plane of the planarRegion)doc";
+:param worldToLocal:
+    (output) transform from world to the plane of the planarRegion)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlaneSet_SweptPolygonClipPolyface =R"doc(Clip a polyface to a swept polygon. This produces side faces where the
 sweep makes a closed cut. If the polyface is not closed, cut faces may
 be produced where sections are closed loops.
 
-Parameter ``polyface``:
-    [in] polyface to test
+:param polyface:
+    (input) polyface to test
 
-Parameter ``polygon``:
-    [in] polygon points.
+:param polygon:
+    (input) polygon points.
 
-Parameter ``sweepDirection``:
-    [in] sweep direction for the polygon.
+:param sweepDirection:
+    (input) sweep direction for the polygon.
 
-Parameter ``constructNewFacetsOnClipSetPlanes``:
-    [in] true to construct new faces where clip planes are inside the
+:param constructNewFacetsOnClipSetPlanes:
+    (input) true to construct new faces where clip planes are inside the
     facet.
 
-Parameter ``inside``:
-    [out] (optional) " inside " parts
+:param inside:
+    (output) (optional) " inside " parts
 
-Parameter ``outside``:
-    [out] (optional) " outside " parts)doc";
+:param outside:
+    (output) (optional) " outside " parts)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlaneSet_ClipPlaneSetIntersectPolyface =R"doc(Clip a polyface to a a postive ClipPlaneSet. This produces cut faces
 where the clipSet is inside the polyface. If the polyface is not
 closed, cut faces may be produced where sections are closed loops.
 
-Parameter ``polyface``:
-    [in] polyface to test
+:param polyface:
+    (input) polyface to test
 
-Parameter ``clipSet``:
-    [in] the positive clip set
+:param clipSet:
+    (input) the positive clip set
 
-Parameter ``constructNewFacetsOnClipSetPlanes``:
-    [in] true to construct new faces where clip planes are inside the
+:param constructNewFacetsOnClipSetPlanes:
+    (input) true to construct new faces where clip planes are inside the
     facet.
 
-Parameter ``inside``:
-    [out] (optional) " inside " parts
+:param inside:
+    (output) (optional) " inside " parts
 
-Parameter ``outside``:
-    [out] (optional) " outside " parts
+:param outside:
+    (output) (optional) " outside " parts
 
-Parameter ``distanceTolerance``:
+:param distanceTolerance:
     (optional) if nonzero, this is the distance tolerance for various
     internal steps. It is recommended that callers with metric data
     pass DoubleOps::SmallMetricDistance ().)doc";
@@ -84,68 +84,68 @@ Parameter ``distanceTolerance``:
 static const char * __doc_Bentley_Geom_ClipPlaneSet_ClipToSetDifference =R"doc(Clip a polyface to a a postive ClipPlaneSet and a mask (hole)
 ClipPlaneSet.
 
-Parameter ``polyface``:
-    [in] polyface to test
+:param polyface:
+    (input) polyface to test
 
-Parameter ``clipSet``:
-    [in] the positive clip set
+:param clipSet:
+    (input) the positive clip set
 
-Parameter ``maskSet``:
-    [in] the negative (holes) clip set
+:param maskSet:
+    (input) the negative (holes) clip set
 
-Parameter ``inside``:
-    [out] (optional) " inside " parts
+:param inside:
+    (output) (optional) " inside " parts
 
-Parameter ``outside``:
-    [out] (optional) " outside " parts)doc";
+:param outside:
+    (output) (optional) " outside " parts)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlaneSet_ClassifyPolyfaceInSetDifference =R"doc(Determine if a Polyface is completely in, completely out, or mixed
 with respect to a postive ClipPlaneSet and a mask (hole) ClipPlaneSet.
 
-Parameter ``polyface``:
-    [in] polyface to test
+:param polyface:
+    (input) polyface to test
 
-Parameter ``clipSet``:
-    [in] the positive clip set
+:param clipSet:
+    (input) the positive clip set
 
-Parameter ``maskSet``:
-    [in] the negative (holes) clip set)doc";
+:param maskSet:
+    (input) the negative (holes) clip set)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlaneSet_ClassifyCurvePrimitiveInSetDifference =R"doc(Determine if a CurveVector is completely in, completely out, or mixed
 with respect to a postive ClipPlaneSet and a mask (hole) ClipPlaneSet.
 
-Parameter ``curve``:
-    [in] curve to test
+:param curve:
+    (input) curve to test
 
-Parameter ``clipSet``:
-    [in] the positive clip set
+:param clipSet:
+    (input) the positive clip set
 
-Parameter ``maskSet``:
-    [in] the negative (holes) clip set)doc";
+:param maskSet:
+    (input) the negative (holes) clip set)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlaneSet_ClassifyCurveVectorInSetDifference =R"doc(Determine if a CurveVector is completely in, completely out, or mixed
 with respect to a postive ClipPlaneSet and a mask (hole) ClipPlaneSet.
 
-Parameter ``curves``:
-    [in] curves or region to clip.
+:param curves:
+    (input) curves or region to clip.
 
-Parameter ``clipSet``:
-    [in] the positive clip set
+:param clipSet:
+    (input) the positive clip set
 
-Parameter ``maskSet``:
-    [in] the negative (holes) clip set
+:param maskSet:
+    (input) the negative (holes) clip set
 
-Parameter ``considerRegions``:
-    [in] if true, treat Outer, Inner, Parity, and Union regions as
+:param considerRegions:
+    (input) if true, treat Outer, Inner, Parity, and Union regions as
     areas. If false, only consider boundaries.)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlaneSet_AppendCrossings =R"doc(Compute crossings of this ClipPlaneSet with curve primitives within a
 CurveVector.
 
-Parameter ``[in]``:
+:param (input):
     curves candidate curves
 
-Parameter ``[out]``:
+:param (output):
     crossings detailed crossing data.)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlaneSet_AppendIntervals =R"doc(Enumerate the " in " intervals .. the array is NOT cleared)doc";
@@ -187,10 +187,10 @@ direction is Z)doc";
 static const char * __doc_Bentley_Geom_ConvexClipPlaneSet_AppendCrossings =R"doc(Compute crossings of this set's planes with curve primitives within a
 CurveVector.
 
-Parameter ``[in]``:
+:param (input):
     curves candidate curves
 
-Parameter ``[out]``:
+:param (output):
     crossings detailed crossing data.)doc";
 
 static const char * __doc_Bentley_Geom_ConvexClipPlaneSet_AppendIntervals =R"doc(Enumerate the " in " intervals .. the array is NOT cleared If the
@@ -319,6 +319,24 @@ void def_ClipPlaneSet(py::module_& m)
     c1.def("ConvexPolygonClip", py::overload_cast<DPoint3dArray const&, DPoint3dArray&, DPoint3dArray&>(&ConvexClipPlaneSet::ConvexPolygonClip, py::const_), "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
     c1.def("ConvexPolygonClip", py::overload_cast<DPoint3dArray const&, DPoint3dArray&, DPoint3dArray&, int>(&ConvexClipPlaneSet::ConvexPolygonClip, py::const_), "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
 
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const& input, py::list& output,  py::list& work)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
+        DPoint3dArray cppOutput;
+        self.ConvexPolygonClip(cppInput, cppOutput, cppWork);
+        CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d);
+        }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const& input, py::list& output,  py::list& work, int onPlaneHandling)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
+        DPoint3dArray cppOutput;
+        self.ConvexPolygonClip(cppInput, cppOutput, cppWork, onPlaneHandling);
+        CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d);
+        }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
     c1.def("AppendIntervals", py::overload_cast<DEllipse3dCR, DSegment1dArray*, double>(&ConvexClipPlaneSet::AppendIntervals, py::const_), "arc"_a, "intervals"_a, "planeSign"_a = 1.0, DOC(Bentley, Geom, ConvexClipPlaneSet, AppendIntervals));
     c1.def("AppendIntervals", py::overload_cast<MSBsplineCurveCR, DSegment1dArray*>(&ConvexClipPlaneSet::AppendIntervals, py::const_), "curve"_a, "intervals"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, AppendIntervals));
 
@@ -353,6 +371,12 @@ void def_ClipPlaneSet(py::module_& m)
     c2.def_static("FromSweptPolygon", [] (DPoint3dArray const& points, DVec3dCP direction)
                   {
                   return ClipPlaneSet::FromSweptPolygon(&points[0], points.size(), direction);
+                  }, "points"_a, "direction"_a = nullptr, DOC(Bentley, Geom, ClipPlaneSet, FromSweptPolygon));
+
+    c2.def_static("FromSweptPolygon", [] (py::list const& points, DVec3dCP direction)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint3dArray, DPoint3d);
+                  return ClipPlaneSet::FromSweptPolygon(&cpppoints[0], cpppoints.size(), direction);
                   }, "points"_a, "direction"_a = nullptr, DOC(Bentley, Geom, ClipPlaneSet, FromSweptPolygon));
 
     c2.def("IsPointInside", &ClipPlaneSet::IsPointInside, "point"_a, DOC(Bentley, Geom, ClipPlaneSet, IsPointInside));

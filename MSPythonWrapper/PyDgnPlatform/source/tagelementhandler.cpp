@@ -12,97 +12,97 @@
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_SetOffset =R"doc(Modify the origin offset stored in the tag element
 
-Parameter ``tagElement``:
-    IN tag element
+:param tagElement:
+    (input) tag element
 
-Parameter ``offset``:
-    IN new offset)doc";
+:param offset:
+    (input) new offset)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_SetVisibility =R"doc(Modify the visibility of a tag element
 
-Parameter ``tagElement``:
-    IN tag element
+:param tagElement:
+    (input) tag element
 
-Parameter ``hide``:
-    IN bool whether to hide the tag element
+:param hide:
+    (input) bool whether to hide the tag element
 
-Parameter ``isSharedCell``:
-    IN bool whether it is associated with a shared cell)doc";
+:param isSharedCell:
+    (input) bool whether it is associated with a shared cell)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_GetAttributeValue =R"doc(Get the attribute value associated with the tag element.
 
-Parameter ``tagElement``:
-    IN tag element.
+:param tagElement:
+    (input) tag element.
 
-Parameter ``value``:
-    OUT value.)doc";
+:param value:
+    (output) value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_SetAttributeValue =R"doc(Modify the attribute value associated with the tag element.
 
-Parameter ``tagElement``:
-    IN Target element.
+:param tagElement:
+    (input) Target element.
 
-Parameter ``value``:
-    IN The new value to set.)doc";
+:param value:
+    (input) The new value to set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_GetTargetElement =R"doc(Get the target element associated with the tag element.
 
-Parameter ``targetOut``:
-    OUT Target element.
+:param targetOut:
+    (output) Target element.
 
-Parameter ``tagElement``:
-    IN Tag element to query on.)doc";
+:param tagElement:
+    (input) Tag element to query on.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_Extract =R"doc(Extract the tag definitions associated with a tag element
 
-Parameter ``tagDef``:
-    OUT filled tag definition information
+:param tagDef:
+    (output) filled tag definition information
 
-Parameter ``in``:
-    IN tag element
+:param in:
+    (input) tag element
 
-Parameter ``dgnCache``:
-    IN the loaded DGN cache to search for tag definition)doc";
+:param dgnCache:
+    (input) the loaded DGN cache to search for tag definition)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_GetSetName =R"doc(Gets tag set name
 
-Parameter ``name``:
-    OUT tag set name
+:param name:
+    (output) tag set name
 
-Parameter ``bufferSize``:
-    IN sizeof(allocated) name bugger
+:param bufferSize:
+    (input) sizeof(allocated) name bugger
 
-Parameter ``in``:
-    IN tag element
+:param in:
+    (input) tag element
 
-Parameter ``dgnCache``:
-    IN the loaded DGN cache to search for tag definition
+:param dgnCache:
+    (input) the loaded DGN cache to search for tag definition
     @DotNetMethodParameterIsReturnString{name,bufferSize}
     @DotNetMethodCustomImplementation)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_SetSetDefinitionID =R"doc(Sets element Id of the tagset associated with this tag element
 
-Parameter ``in``:
-    IN tag element
+:param in:
+    (input) tag element
 
-Parameter ``id``:
-    IN tagset element id)doc";
+:param id:
+    (input) tagset element id)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagElementHandler_GetSetDefinitionID =R"doc(Gets element Id of the tagset associated with this tag element
 
-Parameter ``in``:
-    IN tag element)doc";
+:param in:
+    (input) tag element)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITagCreateData_SetTagVisibility =R"doc(Set the value associated with the tag
 
-Parameter ``hide``:
-    IN set true to hide the tag element.)doc";
+:param hide:
+    (input) set true to hide the tag element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITagCreateData_SetAttributeValue =R"doc(Set the value associated with the tag. By default, the value comes
 from the default value of tag in the tagset
 
-Parameter ``value``:
-    IN tag value.)doc";
+:param value:
+    (input) tag value.)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

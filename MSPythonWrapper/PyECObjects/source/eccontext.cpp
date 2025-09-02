@@ -23,21 +23,21 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_GetCache = R"doc(Gets the schemas cached by this context.
 
-Returns:
+:returns:
     Schemas cached by this context)doc";
 
 static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_LocateSchema = R"doc(Find the schema matching the schema key and using matchType as the
 match criteria. This uses the prioritized list of locators to find the
 schema.
 
-Parameter ``key``:
+:param key:
     The SchemaKey that defines the schema (name and version
     information) that is being looked for
 
-Parameter ``matchType``:
+:param matchType:
     The match type criteria used to locate the requested schema
 
-Returns:
+:returns:
     An ECSchemaPtr. This ptr will return false for IsValid() if the
     schema could not be located.)doc";
 
@@ -52,7 +52,7 @@ static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_GetCultures = R"
 static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_AddCulture = R"doc(Adds a culture string that will be appended to the existing search
 paths when looking for localization supplemental schemas.
 
-Parameter ``culture``:
+:param culture:
     string in format cu-CU or just cu)doc";
 
 static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_AddSchemaPath = R"doc(Adds a file path that should be used to search for a matching schema
@@ -63,7 +63,7 @@ Parameter ``path``:
 
 static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_RemoveSchemaLocater = R"doc(Removes a schema locater from the current context
 
-Parameter ``locater``:
+:param locater:
     Locater to remove from the current context)doc";
 
 static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_AddSchemaLocater = R"doc(Adds a schema locater to the current context
@@ -77,11 +77,11 @@ Parameter ``priority``:
 
 static const char * __doc_Bentley_ECObjects_ECSchemaReadContext_CreateContext = R"doc(Creates a context for deserializing ECSchemas
 
-Parameter ``standaloneEnablerLocater``:
+:param standaloneEnablerLocater:
     Used to find enablers for instantiating instances of
     ECCustomAttributes used in the read ECSchema
 
-Parameter ``acceptLegacyImperfectLatestCompatibleMatch``:
+:param acceptLegacyImperfectLatestCompatibleMatch:
     If true, LatestCompatible only checks that the major version
     matches. A warning will be logged if minor version is too low, but
     the ECSchema will be accepted

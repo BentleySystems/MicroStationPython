@@ -290,7 +290,26 @@ struct PyDgnElementSetTool : DgnElementSetTool
         * @bsimethod                                                                       2/2023
         +---------------+---------------+---------------+---------------+---------------+------*/        
         virtual void _GetToolName(WStringR name) override
-            { PYBIND11_OVERRIDE_EX(void, DgnElementSetTool, _GetToolName, name); }
+            {
+            try
+                {
+                py::gil_scoped_acquire gil;
+                py::function func = py::get_override(this, "_GetToolName");
+                if (func)
+                    {
+                    auto obj = func(name);
+                    auto tuple = obj.cast<WString>();
+                    name = tuple;
+                    }
+                else
+                    __super::_GetToolName(name);
+
+                }
+            catch (std::exception& ex)
+                {
+                ScriptEngineManager::Get().InjectException(ex);
+                }
+            }
 
         /*---------------------------------------------------------------------------------**//**
         * @bsimethod                                                                       2/2023
@@ -1294,6 +1313,15 @@ void def_DgnElementSetTool(py::module_& m)
            if (shapePoints.size() < 5)
                shapePoints.resize(5);
            static_cast<DgnElementSetToolPub&>(self)._GetBoxPoints(shapePoints.data(), sys, activeOrigin, activeCorner, vp);
+           }, "shapePoints"_a, "sys"_a, "activeOrigin"_a, "activeCorner"_a, "vp"_a);
+
+    c2.def("_GetBoxPoints", [] (DgnElementSetTool& self, py::list& shapePoints, DgnCoordSystem sys, DPoint3dCR activeOrigin, DPoint3dCR activeCorner, ViewportP vp)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(shapePoints, cppShapePoints, DPoint3dArray, DPoint3d);
+           if (cppShapePoints.size() < 5)
+               cppShapePoints.resize(5);
+           static_cast<DgnElementSetToolPub&>(self)._GetBoxPoints(cppShapePoints.data(), sys, activeOrigin, activeCorner, vp);
+           CONVERT_CPPARRAY_TO_PYLIST(shapePoints, cppShapePoints, DPoint3dArray, DPoint3d);
            }, "shapePoints"_a, "sys"_a, "activeOrigin"_a, "activeCorner"_a, "vp"_a);
 
     c2.def("_NotifyListeners", [] (DgnElementSetTool& self, ElementAgendaR agenda, AgendaOperation agendaOperation, AgendaModify agendaModify, AgendaEvent agendaEvt, py::capsule const& eventArg)

@@ -12,12 +12,12 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DatumEnumerator_Des
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DatumEnumerator_GetCurrent =R"doc(Gets the current Datum.
 
-Returns:
+:returns:
     the current Datum. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DatumEnumerator_MoveNext =R"doc(Moves to the next Datum
 
-Returns:
+:returns:
     true if successful in moving to the next Datum, false if there are
     no more. )doc";
 
@@ -25,8 +25,8 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_OutputAsASC =
 the datum. This format is only useful for dictionary management
 purposes.
 
-Parameter ``DatumAsASC``:
-    OUT Reference to string that receives the text ASC desctiption of
+:param DatumAsASC:
+    (output) Reference to string that receives the text ASC desctiption of
     GCS.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_Destroy =R"doc(Free this Datum. )doc";
@@ -34,84 +34,84 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_Destroy =R"do
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_ExtendedParametersValid =R"doc(Returns whether the delta, rotation, and scale parameters are valid
 for this Datum.
 
-Parameter ``deltaValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param deltaValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the delta parameters are used.
 
-Parameter ``rotationValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param rotationValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the rotation parameters are used.
 
-Parameter ``scaleValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param scaleValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the scale parameter is used.
 
-Parameter ``gridValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param gridValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that grid file is used.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_ParametersValid =R"doc(Returns whether the delta, rotation, and scale parameters are valid
 for this Datum.
 
-Parameter ``deltaValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param deltaValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the delta parameters are used.
 
-Parameter ``rotationValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param rotationValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the rotation parameters are used.
 
-Parameter ``scaleValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param scaleValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the scale parameter is used.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetEllipsoid =R"doc(Sets the ellipsoid for the datum. The ellipsoid is captured and must
 not be destroyed by the caller.
 
-Parameter ``newEllipsoid``:
-    IN The new Ellipsoid for the Datum.
+:param newEllipsoid:
+    (input) The new Ellipsoid for the Datum.
 
-Returns:
+:returns:
     SUCCESS if ellipsoid was correctly set.  .)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEllipsoid =R"doc(Returns the pointer to the internal ellipsoid used by this Datum
 
-Returns:
+:returns:
     The Ellipsoid of the Datum. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEllipsoidEccentricity =R"doc(Gets the eccentricity value for the Ellipsoid.
 
-Returns:
+:returns:
     The eccentricity value for the Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEllipsoidEquatorialRadius =R"doc(Gets the equatorial radius of the Ellipsoid.
 
-Returns:
+:returns:
     The equatorial radius of the Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEllipsoidPolarRadius =R"doc(Gets the polar radius of the Coordinate System.
 
-Returns:
+:returns:
     The polar radius of the Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEllipsoidSource =R"doc(Gets the source of the Ellipsoid used in this Datum
 
-Returns:
+:returns:
     The source of the Ellipsoid of the Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEllipsoidDescription =R"doc(Gets the description of the Ellipsoid used in this Datum
 
-Returns:
+:returns:
     The description of the Ellipsoid of the Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetEllipsoidCode =R"doc(Sets the internal index of the Ellipsoid used in this Datum
 
-Returns:
+:returns:
     Index of the Coordinate System Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEllipsoidCode =R"doc(Gets the internal index of the Ellipsoid used in this Datum
 
-Returns:
+:returns:
     Index of the Coordinate System Ellipsoid. If not set then
     Ellipsoid::NO_ELLIPSOID_CODE is returned. If the ellipsoid is
     custom (for self-defined datums) then
@@ -119,21 +119,21 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEllipsoidName =R"doc(Gets the key name of the Ellipsoid used in this Datum
 
-Returns:
+:returns:
     The key name Ellipsoid of the Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetEPSGCode =R"doc(Sets the EPSG code in the datum definition.
 
-Parameter ``value``:
-    IN The new EPSG code. Can be 0 to 32767. Value 0 indicates there
+:param value:
+    (input) The new EPSG code. Can be 0 to 32767. Value 0 indicates there
     is no EPSG code for this definition.
 
-Returns:
+:returns:
     SUCCESS is successful.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetEPSGCode =R"doc(Gets the EPSG code for this Datum, if known.
 
-Returns:
+:returns:
     The EPSG code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetGridFile =R"doc(Utilitarian method. Although the grid file definitions are part of the
@@ -146,17 +146,17 @@ contain a single grid file definition. If any of those conditions are
 not met ERROR is returned, otherwise the grid file definition is
 returned with a SUCCESS status.
 
-Parameter ``gridFileDef``:
-    OUT Reference to the grid file that will receive the current datum
+:param gridFileDef:
+    (output) Reference to the grid file that will receive the current datum
     grid file definition.
 
-Parameter ``strict``:
-    IN OPTIONAL default true. If false is provided then the method
+:param strict:
+    (input) OPTIONAL default true. If false is provided then the method
     will return the grid file definition of the first transform even
     if additional transform exists. If true then there must not exist
     any additional transform.
 
-Returns:
+:returns:
     SUCCESS is successful or ERROR if any prerequisite condition
     indicated above is not met.)doc";
 
@@ -168,110 +168,110 @@ setting the convert method to GENGRID, removing the stored transform
 path if any then creating a new stored transform path containing a
 single transform to WGS84 based on grid file using a single grid file.
 
-Parameter ``gridFileDef``:
-    IN The new grid file definition for the datum transform.
+:param gridFileDef:
+    (input) The new grid file definition for the datum transform.
 
-Returns:
+:returns:
     SUCCESS is successful or ERROR in case of any error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetScale =R"doc(Sets the datum transformation scaling in parts per million if known.
 
-Parameter ``scalePPM``:
-    IN The scale in parts per million.
+:param scalePPM:
+    (input) The scale in parts per million.
 
-Returns:
+:returns:
     GEOCOORDERR_ParameterNotUsed if the datum ConvertToWGS84Method
     does not use the scale setting. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetScale =R"doc(Gets the datum transformation scaling in parts per million if known.
 
-Returns:
+:returns:
     The datum transformation scale in ppm.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetRotation =R"doc(Sets the angles from the WGS84 x, y, and z axes to those of this Datum
 
-Parameter ``rotation``:
-    IN The rotation angles.
+:param rotation:
+    (input) The rotation angles.
 
-Returns:
+:returns:
     GEOCOORDERR_ParameterNotUsed if the datum ConvertToWGS84Method
     does not use the rotation settings.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetRotation =R"doc(Gets the angles from the WGS84 x, y, and z axes to those of this Datum
 
-Parameter ``rotation``:
-    OUT The rotation angles.)doc";
+:param rotation:
+    (output) The rotation angles.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetDelta =R"doc(Sets the vector from the geocenter of the WGS84 Datum to the geocenter
 of this Datum.
 
-Parameter ``delta``:
-    IN The vector from the geocenter of the WGS84 Datum to the
+:param delta:
+    (input) The vector from the geocenter of the WGS84 Datum to the
     geocenter of this Datum.
 
-Returns:
+:returns:
     GEOCOORDERR_ParameterNotUsed if the datum ConvertToWGS84Method
     does not use the delta settings.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetDelta =R"doc(Gets the vector from the geocenter of the WGS84 Datum to the geocenter
 of this Datum.
 
-Parameter ``delta``:
-    OUT The vector from the geocenter of the WGS84 Datum to the
+:param delta:
+    (output) The vector from the geocenter of the WGS84 Datum to the
     geocenter of this Datum. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_UsesAGeocentricMethod =R"doc(Inidcates if the datum transformation uses one of the geocentric
 methods (3, 4, 6, 7, molodenski, bursa wolf,...)
 
-Returns:
+:returns:
     true if the datum transformation uses a geocentric method.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetConvertToWGS84MethodCode =R"doc(Sets the method used to convert longitude/latitude from this Datum to
 the WGS84 datum.
 
-Returns:
+:returns:
     BSISUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetConvertToWGS84MethodCode =R"doc(Gets the method used to convert longitude/latitude from this Datum to
 the WGS84 datum.
 
-Returns:
+:returns:
     The convert method.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetSource =R"doc(Sets the source of the Datum
 
-Returns:
+:returns:
     BSISUCCESS or an error code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetSource =R"doc(Gets the source of the Datum
 
-Returns:
+:returns:
     The source of the Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetDescription =R"doc(Sets the description of the Datum.
 
-Returns:
+:returns:
     BSISUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetDescription =R"doc(Gets the description of the Datum.
 
-Returns:
+:returns:
     The description of the Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_SetName =R"doc(Sets the key name of the Datum.
 
-Returns:
+:returns:
     BSISUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetName =R"doc(Gets the name of the Datum
 
-Returns:
+:returns:
     The name of the Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetErrorMessage =R"doc(Gets the error message associated with constructor failure if IsValid
 is false.
 
-Returns:
+:returns:
     The CSMap error message.
 
 See also:
@@ -280,7 +280,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_GetError =R"doc(Gets the error code associated with constructor failure if IsValid is
 false.
 
-Returns:
+:returns:
     The CSMap error code.
 
 See also:
@@ -288,7 +288,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_IsValid =R"doc(Returns whether the Datum is valid or not.
 
-Returns:
+:returns:
     True if the Datum is valid, False otherwise.
 
 See also:
@@ -301,7 +301,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Datum_CreateDatum =R"doc(Initializes a new instance of the Datum class
 
-Returns:
+:returns:
     Initialized Datum.
 
 Remark:
@@ -313,83 +313,83 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_EllipsoidEnumerator
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_EllipsoidEnumerator_GetCurrent =R"doc(Gets the current Ellipsoid.
 
-Returns:
+:returns:
     the current Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_EllipsoidEnumerator_MoveNext =R"doc(Moves to the next Ellipsoid
 
-Returns:
+:returns:
     true if successful in moving to the next Ellipsoid, false if there
     are no more.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_CreateEnumerator =R"doc(Factory method to create an EllipsoidEnumerator
 
-Returns:
+:returns:
     An initialized EllipsoidEnumerator )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_OutputAsASC =R"doc(Creates a string that contains the CSMAP ASC format text definition of
 the Ellipsoid. This format is only useful for dictionary management
 purposes.
 
-Parameter ``EllipsoidAsASC``:
-    OUT Reference to string that receives the text ASC desctiption of
+:param EllipsoidAsASC:
+    (output) Reference to string that receives the text ASC desctiption of
     GCS )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_Destroy =R"doc(Free this Group. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_SetEPSGCode =R"doc(Sets the EPSG code in the ellipsoid definition.
 
-Parameter ``value``:
-    IN The new EPSG code. Can be 0 to 32767 where 0 indicates there
+:param value:
+    (input) The new EPSG code. Can be 0 to 32767 where 0 indicates there
     are no EPSG code for this definition
 
-Returns:
+:returns:
     SUCCESS is successful.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetEPSGCode =R"doc(Gets the EPSG code for this Ellipsoid, if known.
 
-Returns:
+:returns:
     The EPSG code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetEccentricity =R"doc(Gets the eccentricity value for the Ellipsoid.
 
-Returns:
+:returns:
     The eccentricity value for the Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetEquatorialRadius =R"doc(Gets the equatorial radius of the Ellipsoid in meters.
 
-Returns:
+:returns:
     The equatorial radius of the Ellipsoid in meters.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetPolarRadius =R"doc(Gets the polar radius of the Ellipsoid in meters.
 
-Returns:
+:returns:
     The polar radius of the Ellipsoid in meters.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetSource =R"doc(Sets the source of the Ellipsoid
 
-Returns:
+:returns:
     The source of the Ellipsoid. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetDescription =R"doc(Gets the description of the Ellipsoid.
 
-Returns:
+:returns:
     The description of the Ellipsoid. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_SetName =R"doc(Sets the key name of the Ellipsoid.
 
-Returns:
+:returns:
     BSISUCCESS or an error code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetName =R"doc(Gets the name of the Ellipsoid
 
-Returns:
+:returns:
     The name of the Ellipsoid. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetErrorMessage =R"doc(Gets the error message associated with constructor failure if IsValid
 is false.
 
-Returns:
+:returns:
     The CSMap error message.
 
 See also:
@@ -398,7 +398,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_GetError =R"doc(Gets the error code associated with constructor failure if IsValid is
 false.
 
-Returns:
+:returns:
     The CSMap error code.
 
 See also:
@@ -406,7 +406,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Ellipsoid_IsValid =R"doc(Returns whether the Ellipsoid is valid or not.
 
-Returns:
+:returns:
     True if the Ellipsoid is valid, False otherwise.
 
 See also:
@@ -421,12 +421,12 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_UnitEnumerator_Dest
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_UnitEnumerator_GetCurrent =R"doc(Gets the current Unit.
 
-Returns:
+:returns:
     the current Unit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_UnitEnumerator_MoveNext =R"doc(Moves to the next unit
 
-Returns:
+:returns:
     true if successful in moving to the next Unit, false if there are
     no more.)doc";
 
@@ -434,17 +434,17 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_MemberEnumerator_De
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_MemberEnumerator_GetCurrentGCSDescription =R"doc(Gets the current GCS Description.
 
-Returns:
+:returns:
     the current member GCS description.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_MemberEnumerator_GetCurrentGCSName =R"doc(Gets the current GCS Name.
 
-Returns:
+:returns:
     the current member GCS name )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_MemberEnumerator_MoveNext =R"doc(Moves to the GCS group member
 
-Returns:
+:returns:
     true if successful in moving to the next GCS, false if there are
     no more.)doc";
 
@@ -452,12 +452,12 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_GroupEnumerator_Des
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_GroupEnumerator_GetCurrent =R"doc(Gets the current Group.
 
-Returns:
+:returns:
     the current GCS Group.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_GroupEnumerator_MoveNext =R"doc(Moves to the next group
 
-Returns:
+:returns:
     true if successful in moving to the next Group, false if there are
     no more. -)doc";
 
@@ -465,22 +465,22 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Group_Destroy =R"do
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Group_GetGroupEnumerator =R"doc(Gets enumerator for Groups in the library
 
-Returns:
+:returns:
     The enumerator. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Group_GetMemberEnumerator =R"doc(Gets enumerator for members of this group
 
-Returns:
+:returns:
     The enumerator.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Group_GetDescription =R"doc(Gets the description of the GCS Group
 
-Returns:
+:returns:
     The description of the Coordinate System.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_Group_GetName =R"doc(Gets the name of the GCS Group
 
-Returns:
+:returns:
     The name of the GCS Group.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_XYZFromLatLong =R"doc(Calculates the XYZ (ECEF) coordinates from the longitude, latitude and
@@ -510,11 +510,11 @@ is vertically neutral. BritishNatGrid with vertical datum set to
 vdcLocalEllipsoid WILL WORK. Because coordinates already expressed
 relative to the OSGB datum based on the Airy30 ellipsoid.
 
-Parameter ``outXYZ``:
-    OUT The calculated XYZ (ECEF) coordinates.
+:param outXYZ:
+    (output) The calculated XYZ (ECEF) coordinates.
 
-Parameter ``inLatLong``:
-    IN The latitude, longitude and elevation to convert.)doc";
+:param inLatLong:
+    (input) The latitude, longitude and elevation to convert.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_LatLongFromXYZ =R"doc(Calculates the longitude and latitude from ECEF coordinate according
 to GCS current datum. This does not compute necessarily the ECEF
@@ -542,57 +542,57 @@ is vertically neutral. BritishNatGrid with vertical datum set to
 vdcLocalEllipsoid WILL WORK. Because coordinates already expressed
 relative to the OSGB datum based on the Airy30 ellipsoid.
 
-Parameter ``outLatLong``:
-    OUT The calculated longitude,latitude,elevation.
+:param outLatLong:
+    (output) The calculated longitude,latitude,elevation.
 
-Parameter ``inXYZ``:
-    IN The XYZ (ECEF) coordinates of this GCS. )doc";
+:param inXYZ:
+    (input) The XYZ (ECEF) coordinates of this GCS. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_DegreesFromRadians =R"doc(Converts from Radians to Degrees
 
-Parameter ``inRadians``:
-    IN Angular value in radians.
+:param inRadians:
+    (input) Angular value in radians.
 
-Returns:
+:returns:
     Angular value in degrees )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_RadiansFromDegrees =R"doc(Converts from Degrees to Radians
 
-Parameter ``inDegrees``:
-    IN Angular value in degrees.
+:param inDegrees:
+    (input) Angular value in degrees.
 
-Returns:
+:returns:
     Angular value in radians   )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_LatLongFromLatLong2D =R"doc(Calculates the longitude and latitude in the target GCS, applying the
 appropriate datum shift.
 
-Parameter ``outLatLong``:
-    OUT The calculated longitude,latitude in the datum of targetGCS.
+:param outLatLong:
+    (output) The calculated longitude,latitude in the datum of targetGCS.
 
-Parameter ``inLatLong``:
-    IN The longitude,latitude in the datum of this GCS.
+:param inLatLong:
+    (input) The longitude,latitude in the datum of this GCS.
 
-Parameter ``targetGCS``:
-    IN The Coordinate System corresponding to outLatLong.)doc";
+:param targetGCS:
+    (input) The Coordinate System corresponding to outLatLong.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_LatLongFromLatLong =R"doc(Calculates the longitude and latitude in the target GCS, applying the
 appropriate datum shift.
 
-Parameter ``outLatLong``:
-    OUT The calculated longitude,latitude,elevation in the datum of
+:param outLatLong:
+    (output) The calculated longitude,latitude,elevation in the datum of
     targetGCS.
 
-Parameter ``inLatLong``:
-    IN The longitude,latitude,elevation in the datum of this GCS.
+:param inLatLong:
+    (input) The longitude,latitude,elevation in the datum of this GCS.
 
-Parameter ``targetGCS``:
-    IN The Coordinate System corresponding to outLatLong.)doc";
+:param targetGCS:
+    (input) The Coordinate System corresponding to outLatLong.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetReprojectElevation =R"doc(Sets whether reprojections from this coordinate system sadjust
 elevations.
 
-Returns:
+:returns:
     The previous ReprojectElevation setting.
 
 Remark:
@@ -606,7 +606,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetReprojectElevation =R"doc(Gets whether reprojections from this coordinate system adjust
 elevations.
 
-Returns:
+:returns:
     The ReprojectElevation setting.
 
 Remark:
@@ -620,11 +620,11 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_CheckCartesianRange =R"doc(Determines whether the input GeoPoints are within the useful range of
 the coordinate system.
 
-Parameter ``points``:
-    IN The points to test.
+:param points:
+    (input) The points to test.
 
-Parameter ``numPoints``:
-    IN Number of points to test.
+:param numPoints:
+    (input) Number of points to test.
 
 Remark:
     s The input points must be in the cartesian units of the
@@ -633,11 +633,11 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_CheckGeoPointRange =R"doc(Determines whether the input GeoPoints are within the useful range of
 the coordinate system.
 
-Parameter ``points``:
-    IN The points to test.
+:param points:
+    (input) The points to test.
 
-Parameter ``numPoints``:
-    IN Number of points to test. )doc";
+:param numPoints:
+    (input) Number of points to test. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_UnitsFromMeters =R"doc(Returns the scale factor needed to convert to the units of the
 coordinate system from meters by multiplication.  )doc";
@@ -645,52 +645,52 @@ coordinate system from meters by multiplication.  )doc";
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_LatLongFromCartesian2D =R"doc(Calculates the longitude and latitude from cartesian x and y.
 Elevation is unchanged.
 
-Parameter ``outLatLong``:
-    OUT The calculated longitude and latitude in the datum of this
+:param outLatLong:
+    (output) The calculated longitude and latitude in the datum of this
     GCS.
 
-Parameter ``inCartesian``:
-    IN The input cartesian coordinates. )doc";
+:param inCartesian:
+    (input) The input cartesian coordinates. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_LatLongFromCartesian =R"doc(Calculates the longitude, latitude, and elevation from cartesian x,y,
 and z.
 
-Parameter ``outLatLong``:
-    OUT The calculated longitude,latitude,elevation in the datum of
+:param outLatLong:
+    (output) The calculated longitude,latitude,elevation in the datum of
     this GCS.
 
-Parameter ``inCartesian``:
-    IN The input cartesian coordinates.)doc";
+:param inCartesian:
+    (input) The input cartesian coordinates.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_CartesianFromLatLong2D =R"doc(Calculates the cartesian x and y of the input Longitude/Latitude
 point. The input elevation is ignored.
 
-Parameter ``outCartesian``:
-    OUT The calculated cartesian coordinates.
+:param outCartesian:
+    (output) The calculated cartesian coordinates.
 
-Parameter ``inLatLong``:
-    IN The longitude,latitude,elevation in the datum of this GCS.)doc";
+:param inLatLong:
+    (input) The longitude,latitude,elevation in the datum of this GCS.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_CartesianFromLatLong =R"doc(Calculates the cartesian coordinates of the input
 Longitude/Latitude/Elevation point.
 
-Parameter ``outCartesian``:
-    OUT The calculated cartesian coordinates.
+:param outCartesian:
+    (output) The calculated cartesian coordinates.
 
-Parameter ``inLatLong``:
-    IN The longitude,latitude,elevation in the datum of this GCS.)doc";
+:param inLatLong:
+    (input) The longitude,latitude,elevation in the datum of this GCS.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetStoredEPSGCode =R"doc(Sets the EPSG code in the coordinate system definition.
 
-Parameter ``value``:
-    IN The new EPSG code. Can be 0 to 32768
+:param value:
+    (input) The new EPSG code. Can be 0 to 32768
 
-Returns:
+:returns:
     SUCCESS is successful )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetStoredEPSGCode =R"doc(Returns the EPSG code as stored in the coordinate system definition.
 
-Returns:
+:returns:
     The EPSG code as stored in the definition. A value of 0 indicates
     it is undefined. )doc";
 
@@ -703,7 +703,7 @@ Remark:
     " noSearch " argument is included for symmetry with GetEPSGCode and
     GetEPSGDatumCode.
 
-Returns:
+:returns:
     The EPSG code, or 0 if this coordinate system does not match any
     EPSG CS known to the system. )doc";
 
@@ -714,7 +714,7 @@ Remark:
     EPSG datum is required. This can be time consuming. To prevent the
     search, pass true for the " noSearch " argument.
 
-Returns:
+:returns:
     The EPSG code, or 0 if this coordinate system does not match any
     EPSG CS known to the system.  )doc";
 
@@ -726,22 +726,22 @@ Remark:
     consuming. To prevent the search, pass true for the " noSearch "
     argument.
 
-Returns:
+:returns:
     The EPSG code, or 0 if this coordinate system does not match any
     EPSG CS known to the system. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_HasEquivalentDatum =R"doc(Compares the Datum of this coordinate system with the argument and
 returns true if they have equivalent datum (including ellipsoid).
 
-Parameter ``compareTo``:
-    IN The BaseGCS to compare to.)doc";
+:param compareTo:
+    (input) The BaseGCS to compare to.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_OutputAsASC =R"doc(Creates a string that contains the CSMAP ASC format text definition of
 the BaseGCS. This format is only useful for dictionary management
 purposes.
 
-Parameter ``GCSAsASC``:
-    OUT Reference to string that receives the text ASC desctiption of
+:param GCSAsASC:
+    (output) Reference to string that receives the text ASC desctiption of
     GCS )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMathematicalDomainExtent =R"doc(Returns the extent of the mathematical domain as returned by
@@ -754,19 +754,19 @@ mininum longitude to be greater than the maximum longitude. This
 occurs if the extent of the domain overlaps the boundary between -180
 degrees and +180 longitude.
 
-Parameter ``minLongitude``:
+:param minLongitude:
     The minimum longitude of the domain in degrees.
 
-Parameter ``maxLongitude``:
+:param maxLongitude:
     The maximum longitude of the domain in degrees.
 
-Parameter ``minLatitude``:
+:param minLatitude:
     The minimum latitude of the domain in degrees.
 
-Parameter ``maxLatitude``:
+:param maxLatitude:
     The maximum latitude of the domain in degrees.
 
-Returns:
+:returns:
     BSIERROR in case of error or if computations are not implemented
     for this projection method and BSISUCCESS otherwise. )doc";
 
@@ -791,7 +791,7 @@ Zealand. As a base map we want to use Bing. Raster Manager will
 compute the mathematical limit of reprojecting Bing into a New Zealand
 GCS resulting in clipping Bing to the New Zealand area only.
 
-Parameter ``shape``:
+:param shape:
     A list of GeoPoint (latitude/longitude) that contains the
     definition of the shape of the mathematical domain. The shape
     contains the closing point. This shape is usually rectangular but
@@ -800,7 +800,7 @@ Parameter ``shape``:
     will either contain the user domain definition or a shape
     containing the whole Earth (excluding the poles)
 
-Returns:
+:returns:
     BSIERROR in case of error or if computations are not implemented
     for this projection method and BSISUCCESS otherwise. Note that a
     valid shape is always returned even if an error occurs.)doc";
@@ -808,27 +808,27 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_Compare =R"doc(Compares this coordinate system with the argument and returns true if
 they have equivalent projection, parameters, datum, and ellipsoid.
 
-Parameter ``compareTo``:
+:param compareTo:
     The BaseGCS to compare to.
 
-Parameter ``datumDifferent``:
+:param datumDifferent:
     true if the datum is different.
 
-Parameter ``csDifferent``:
+:param csDifferent:
     true if the coordinate system projection is different.
 
-Parameter ``verticalDatumDifferent``:
+:param verticalDatumDifferent:
     true if the vertical datum is different.
 
-Parameter ``localTransformDifferent``:
+:param localTransformDifferent:
     true if the local transform is different.
 
-Parameter ``stopFirstDifference``:
+:param stopFirstDifference:
     If true, the comparison stops when the first difference is
     encountered. Only one of datumDifferent, csDifferent, and
     modifiersDifferent will be set.
 
-Returns:
+:returns:
     True if the coordinate systems are identical, false otherwise.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_CorrectVerticalDatumToPreserveLegacyElevation =R"doc(If a BaseGCS has been created from a WKT that does not include a
@@ -841,13 +841,13 @@ been switched off i.e. we now have reproject elevation switched on and
 the extent passed will be at the same elevation when reprojected as it
 was when reproject elevation was switched off. datum set
 
-Parameter ``extent``:
+:param extent:
     the extent in this CS
 
-Parameter ``targetGCS``:
+:param targetGCS:
     the target CS we are reprojecting to
 
-Returns:
+:returns:
     ERROR if we were not able to generate a linear transform between
     this CS and the target CS, SUCCESS if a new vertical datum was
     selected or if the existing vertical datum was not changed - note
@@ -861,23 +861,23 @@ they are equal. This method differs from the IsEquivalent() method as
 it requires that all fields including name, description, source,
 projection method, unit etc be identical.
 
-Parameter ``compareTo``:
-    IN The BaseGCS to compare to. )doc";
+:param compareTo:
+    (input) The BaseGCS to compare to. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_IsEquivalent =R"doc(Compares this coordinate system with the argument and returns true if
 they have equivalent projection, parameters, datum, ellipsoid, and
 modifiers.
 
-Parameter ``compareTo``:
-    IN The BaseGCS to compare to. )doc";
+:param compareTo:
+    (input) The BaseGCS to compare to. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetCenterPoint =R"doc(Gets the latitude and longitude of a " center " point in the coordinate
 system. This might be the origin of longitude/origin of latitude, or
 perhaps the central meridian and latitude of latitude, depending on
 the projection in use.
 
-Parameter ``centerPoint``:
-    OUT The center point.)doc";
+:param centerPoint:
+    (output) The center point.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDistanceInMeters =R"doc(Computes distance (in meters) and starting azimuthal angle (in
 degrees) from one geographic point to another. This distance is the
@@ -886,18 +886,18 @@ BaseGCS. It does not take into account the elevation of points
 provided or the fact the GCS can indicate another vertical datum
 setting.
 
-Parameter ``distance``:
-    OUT The distance, in meters from startPoint to endPoint.
+:param distance:
+    (output) The distance, in meters from startPoint to endPoint.
 
-Parameter ``azimuth``:
-    OUT The initial azimuth, in degrees clockwise from true north,
+:param azimuth:
+    (output) The initial azimuth, in degrees clockwise from true north,
     needed to get from startPoint to endPoint.
 
-Parameter ``startPoint``:
-    IN The starting point.
+:param startPoint:
+    (input) The starting point.
 
-Parameter ``endPoint``:
-    IN The end point.
+:param endPoint:
+    (input) The end point.
 
 Remark:
     s If either distance or azimuth is not needed, pass NULL.)doc";
@@ -909,19 +909,19 @@ BaseGCS. It does not take into account the elevation of points
 provided or the fact the GCS can indicate another vertical datum
 setting.
 
-Parameter ``distance``:
-    OUT The distance, in units of this GCS, from startPoint to
+:param distance:
+    (output) The distance, in units of this GCS, from startPoint to
     endPoint.
 
-Parameter ``azimuth``:
-    OUT The initial azimuth, in degrees clockwise from true north,
+:param azimuth:
+    (output) The initial azimuth, in degrees clockwise from true north,
     needed to get from startPoint to endPoint.
 
-Parameter ``startPoint``:
-    IN The starting point.
+:param startPoint:
+    (input) The starting point.
 
-Parameter ``endPoint``:
-    IN The end point.
+:param endPoint:
+    (input) The end point.
 
 Remark:
     s If either distance or azimuth is not needed, pass NULL.)doc";
@@ -929,8 +929,8 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetConvergenceAngle =R"doc(Gets the convergence angle, in degrees, of the coordinate system at
 the specified longitude/latitude.
 
-Parameter ``point``:
-    IN The point at which the convergence angle is to be computed.
+:param point:
+    (input) The point at which the convergence angle is to be computed.
 
 See also:
     #GetScaleAlongMeridian, #GetScaleAlongParallel.)doc";
@@ -938,10 +938,10 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetGridScale =R"doc(Gets the grid scale of the coordinate system at the specified
 longitude/latitude.
 
-Parameter ``point``:
-    IN The point at which the grid scale is to be computed.
+:param point:
+    (input) The point at which the grid scale is to be computed.
 
-Returns:
+:returns:
     The grid scale at the position specified.
 
 Remark:
@@ -961,10 +961,10 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetScaleAlongParallel =R"doc(Gets the grid scale along a parallel of the coordinate system at the
 specified longitude/latitude.
 
-Parameter ``point``:
-    IN The point at which the grid scale is to be computed.
+:param point:
+    (input) The point at which the grid scale is to be computed.
 
-Returns:
+:returns:
     The grid scale along the parallel at the position specified.
 
 Remark:
@@ -981,10 +981,10 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetScaleAlongMeridian =R"doc(Gets the grid scale along a meridian of the coordinate system at the
 specified longitude/latitude.
 
-Parameter ``point``:
-    IN The point at which the grid scale is to be computed.
+:param point:
+    (input) The point at which the grid scale is to be computed.
 
-Returns:
+:returns:
     The grid scale along the meridian at the position specified.
 
 Remark:
@@ -1000,29 +1000,29 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidNames =R"doc(Gets the available Ellipsoid Names.
 
-Returns:
+:returns:
     vector of strings of datum names. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumNames =R"doc(Gets the available Datum Names.
 
-Returns:
+:returns:
     vector of strings of datum names. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetUnitNames =R"doc(Gets all available Units, linear and degree-based.
 
-Returns:
+:returns:
     vector of strings of unit names.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetLinearUnitNames =R"doc(Gets the available Linear Units.
 
-Returns:
+:returns:
     vector of strings of unit names.  )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_DefinitionComplete =R"doc(Signals that the caller has finished setting the coordinate system
 parameters, and that the coordinate system internal definition should
 be initialized with the current parameter set.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetAffineParameters =R"doc(Sets the affine parameters for the affine post-processing portion of
@@ -1032,345 +1032,345 @@ be valid, the determinant of the matrix formed by parameters A1 A2 and
 B1 B2 must be different than 0.0. To express no rotation, scale nor
 shearing, set A1 and B2 equal to 1.0 and A2 and B1 equal to 0.0.
 
-Parameter ``A0``:
-    IN The X translation of the affine transformation
+:param A0:
+    (input) The X translation of the affine transformation
 
-Parameter ``A1``:
-    IN The A1 parameter of the rotation/scale/shearing portion of the
+:param A1:
+    (input) The A1 parameter of the rotation/scale/shearing portion of the
     affine.
 
-Parameter ``A2``:
-    IN The A2 parameter of the rotation/scale/shearing portion of the
+:param A2:
+    (input) The A2 parameter of the rotation/scale/shearing portion of the
     affine.
 
-Parameter ``B0``:
-    IN The Y translation of the affine transformation
+:param B0:
+    (input) The Y translation of the affine transformation
 
-Parameter ``B1``:
-    IN The B1 parameter of the rotation/scale/shearing portion of the
+:param B1:
+    (input) The B1 parameter of the rotation/scale/shearing portion of the
     affine.
 
-Parameter ``B2``:
-    IN The B2 parameter of the rotation/scale/shearing portion of the
+:param B2:
+    (input) The B2 parameter of the rotation/scale/shearing portion of the
     affine.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetAffineParameters =R"doc(Gets the affine parameters for the affine post-processing portion of
 Transverse Mercator with post affine or Lambert Conformal Conic with
 post affine projections.
 
-Parameter ``A0``:
-    OUT The X translation of the affine transformation
+:param A0:
+    (output) The X translation of the affine transformation
 
-Parameter ``A1``:
-    OUT The A1 parameter of the rotation/scale/shearing portion of the
+:param A1:
+    (output) The A1 parameter of the rotation/scale/shearing portion of the
     affine.
 
-Parameter ``A2``:
-    OUT The A2 parameter of the rotation/scale/shearing portion of the
+:param A2:
+    (output) The A2 parameter of the rotation/scale/shearing portion of the
     affine.
 
-Parameter ``B0``:
-    OUT The Y translation of the affine transformation
+:param B0:
+    (output) The Y translation of the affine transformation
 
-Parameter ``B1``:
-    OUT The B1 parameter of the rotation/scale/shearing portion of the
+:param B1:
+    (output) The B1 parameter of the rotation/scale/shearing portion of the
     affine.
 
-Parameter ``B2``:
-    OUT The B2 parameter of the rotation/scale/shearing portion of the
+:param B2:
+    (output) The B2 parameter of the rotation/scale/shearing portion of the
     affine.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetAffineB2 =R"doc(Sets the B2 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetAffineB2 =R"doc(Gets the B2 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     The B2 Affine post-processing parameter for Projections that have
     one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetAffineB1 =R"doc(Sets the B1 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetAffineB1 =R"doc(Gets the B1 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     The B1 Affine post-processing parameter for Projections that have
     one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetAffineB0 =R"doc(Sets the B0 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetAffineB0 =R"doc(Gets the B0 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     The B0 Affine post-processing parameter for Projections that have
     one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetAffineA2 =R"doc(Sets the A2 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetAffineA2 =R"doc(Gets the A2 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     The A2 Affine post-processing parameter for Projections that have
     one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetAffineA1 =R"doc(Sets the A1 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     SUCCESS or error code .)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetAffineA1 =R"doc(Gets the A1 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     The A1 Affine post-processing parameter for Projections that have
     one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetAffineA0 =R"doc(Sets the A0 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetAffineA0 =R"doc(Gets the A0 Affine post-processing parameter for Projections that have
 one.
 
-Returns:
+:returns:
     The A0 Affine post-processing parameter for Projections that have
     one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetDanishSys34Region =R"doc(Sets the Danish System 34 Region for Danish Sys 34 Projections.
 
-Returns:
+:returns:
     The Region.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDanishSys34Region =R"doc(Gets the Danish System 34 Region for Danish Sys 34 Projections.
 
-Returns:
+:returns:
     The Region.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetQuadrant =R"doc(Sets the Quadrant for Projections that use that parameter.
 
-Returns:
+:returns:
     The Quadrant for Projections that use that parameter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetQuadrant =R"doc(Gets the Quadrant for Projections that use that parameter.
 
-Returns:
+:returns:
     The Quadrant for Projections that use that parameter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetHemisphere =R"doc(Sets the Hemisphere (1 for north or -1 for south) for the Univeral
 Transverse Mercator projection.
 
-Returns:
+:returns:
     SUCCESS or error code .)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetHemisphere =R"doc(Gets the Hemisphere (1 for north or -1 for south) for the Univeral
 Transverse Mercator projection.
 
-Returns:
+:returns:
     The UTM Zone number for Projections that use that parameter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetUTMZone =R"doc(Sets the UTM Zone number (1-60) for the Universal Transverse Mercator
 projections.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetUTMZone =R"doc(Gets the UTM Zone number (1-60) for the Univeral Transverse Mercator
 projection.
 
-Returns:
+:returns:
     The UTM Zone number for Projections that use that parameter.-)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetEllipsoidScaleFactor =R"doc(Sets the ellisoid scale factor for a Lambert Conformal Conic Michigan
 variation. The value given must be reasonnably close to 1.0.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidScaleFactor =R"doc(Gets the ellipsoid scale factor, used by Lambert Conformal Conic
 Michigan variation.
 
-Returns:
+:returns:
     The ellipsoid scale factor.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetElevationAboveGeoid =R"doc(Sets the elevation above the geoid, in CS units, for Projections that
 have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetElevationAboveGeoid =R"doc(Gets the elevation above the geoid, in CS units, for Projections that
 use that parameter.
 
-Returns:
+:returns:
     The elevation above the geoid, in CS Units for Projections that
     use that parameter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetGeoidSeparation =R"doc(Sets the geoid separation, in CS units, for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetGeoidSeparation =R"doc(Gets the geoid separation, in CS units, for Projections that use that
 parameter.
 
-Returns:
+:returns:
     The geoid separation, in CS Units for Projections that use that
     parameter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetPoint2Latitude =R"doc(Sets the latitude of the second point of the central geodesic (in
 degrees) for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetPoint2Latitude =R"doc(Gets the latitude of the second point of the central geodesic (in
 degrees) for Projections that have one.
 
-Returns:
+:returns:
     The latitude of the second point of the central geodesic for
     Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetPoint2Longitude =R"doc(Sets the longitude of the second point of the central geodesic (in
 degrees) for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetPoint2Longitude =R"doc(Gets the longitude of the second point of the central geodesic (in
 degrees) for Projections that have one.
 
-Returns:
+:returns:
     The longitude of the second point of the central geodesic for
     Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetPoint1Latitude =R"doc(Sets the latitude of the first point of the central geodesic (in
 degrees) for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetPoint1Latitude =R"doc(Gets the latitude of the first point of the central geodesic (in
 degrees) for Projections that have one.
 
-Returns:
+:returns:
     The latitude of the first point of the central geodesic for
     Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetPoint1Longitude =R"doc(Sets the longitude of the first point of the central geodesic (in
 degrees) for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetPoint1Longitude =R"doc(Gets the longitude of the first point of the central geodesic (in
 degrees) for Projections that have one.
 
-Returns:
+:returns:
     The longitude of the first point of the central geodesic for
     Projections that have one. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetCentralPointLatitude =R"doc(Sets the central point latitude (in degrees) for Projections that have
 one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetCentralPointLatitude =R"doc(Gets the central point latitude (in degrees) for Projections that have
 one.
 
-Returns:
+:returns:
     The central point latitude for Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetCentralPointLongitude =R"doc(Sets the central point longitude (in degrees) for Projections that
 have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetCentralPointLongitude =R"doc(Gets the central point longitude (in degrees) for Projections that
 have one.
 
-Returns:
+:returns:
     The central point longitude for Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetEasternMeridian =R"doc(Sets the central meridian (in degrees) for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEasternMeridian =R"doc(Gets the eastern meridian (in degrees) for Projections that have one.
 
-Returns:
+:returns:
     The eastern meridian longitude for Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetCentralMeridian =R"doc(Sets the central meridian (in degrees) for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetCentralMeridian =R"doc(Gets the central meridian (in degrees) for Projections that have one.
 
-Returns:
+:returns:
     The central meridian longitude for Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetAzimuth =R"doc(Sets the azimuth angle for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetAzimuth =R"doc(Gets the azimuth angle for Projections that have one.
 
-Returns:
+:returns:
     The azimuth angle for Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetStandardParallel2 =R"doc(Sets the second standard parallel for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetStandardParallel2 =R"doc(Gets the first standard parallel for Projections that have one.
 
-Returns:
+:returns:
     The first standard parallel for Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetStandardParallel1 =R"doc(Sets the first standard parallel for Projections that have one.
 
-Returns:
+:returns:
     SUCCESS or error code .)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetStandardParallel1 =R"doc(Gets the first standard parallel for Projections that have one.
 
-Returns:
+:returns:
     The first standard parallel for Projections that have one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMaximumUsefulLatitude =R"doc(Gets the maximum useful latitude for the Geographic coordinate system.
 
-Returns:
+:returns:
     The maximum useful latitude for Geographic (Longitude/Latitude)
     coordinate systems.
 
@@ -1380,7 +1380,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMinimumUsefulLatitude =R"doc(Gets the minimum useful latitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     The minimum useful latitude for Geographic (Longitude/Latitude)
     coordinate systems.
 
@@ -1391,7 +1391,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMaximumUsefulLongitude =R"doc(Gets the maximum useful longitude for the Geographic Coordinate
 System.
 
-Returns:
+:returns:
     The maximum useful longitude for Geographic (Longitude/Latitude)
     coordinate systems.
 
@@ -1402,7 +1402,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMinimumUsefulLongitude =R"doc(Gets the minimum useful longitude for the Geographic Coordinate
 System.
 
-Returns:
+:returns:
     The minimum useful longitude for Geographic (Longitude/Latitude)
     coordinate systems.
 
@@ -1412,111 +1412,111 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetMaximumLatitude =R"doc(Sets the maximum latitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or error code )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMaximumLatitude =R"doc(Gets the maximum latitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     The maximum latitude for Geographic (Longitude/Latitude)
     coordinate systems.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetMinimumLatitude =R"doc(Sets the minimum latitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMinimumLatitude =R"doc(Gets the minimum latitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     The minimum latitude for Geographic (Longitude/Latitude)
     coordinate systems. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetMaximumLongitude =R"doc(Sets the maximum longitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMaximumLongitude =R"doc(Gets the maximum longitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     The maximum longitude for Geographic (Longitude/Latitude)
     coordinate systems.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetMinimumLongitude =R"doc(Sets the minimum longitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetMinimumLongitude =R"doc(Gets the minimum longitude for the Geographic Coordinate System.
 
-Returns:
+:returns:
     The minimum longitude for Geographic (Longitude/Latitude)
     coordinate systems.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidEccentricity =R"doc(Gets the eccentricity value for the Ellipsoid.
 
-Returns:
+:returns:
     The eccentricity value for the Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidEquatorialRadius =R"doc(Gets the equatorial radius of the Ellipsoid.
 
-Returns:
+:returns:
     The equatorial radius of the Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidPolarRadius =R"doc(Gets the polar radius of the Coordinate System.
 
-Returns:
+:returns:
     The polar radius of the Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetScaleReduction =R"doc(Sets the Scale Reduction of the Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or an error code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetScaleReduction =R"doc(Gets the scale reduction of the Coordinate System.
 
-Returns:
+:returns:
     The scale reduction for the Coordinate System.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetFalseNorthing =R"doc(Sets the false northing of the Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetFalseNorthing =R"doc(Gets the false northing of the Coordinate System.
 
-Returns:
+:returns:
     The value added to all y cartesian coordinates.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetFalseEasting =R"doc(Sets the false easting of the Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetFalseEasting =R"doc(Gets the false easting of the Coordinate System.
 
-Returns:
+:returns:
     The value added to all x cartesian coordinates.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetOriginLatitude =R"doc(Sets the origin latitude of the Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetOriginLatitude =R"doc(Gets the origin latitude of the Coordinate System.
 
-Returns:
+:returns:
     The origin latitude of the Coordinate System.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidSource =R"doc(Gets the Coordinate System Ellipsoid source citation.
 
-Returns:
+:returns:
     Source citation of the Coordinate System Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidDescription =R"doc(Gets the description of the Coordinate System Ellipsoid.
 
-Returns:
+:returns:
     The description of the Coordinate System Ellipsoid. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetEllipsoidCode =R"doc(Sets the internal index of the Coordinate System Ellipsoid. Must be an
@@ -1527,25 +1527,25 @@ Remark:
     Ellipsoid::NO_ELLIPSOID_CODE(-1). Otherwise, the Datum determines
     the Ellipsoid.
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidCode =R"doc(Gets the internal index of the Coordinate System Ellipsoid.
 
-Returns:
+:returns:
     Index of the Coordinate System Ellipsoid. Ellipsoid::
     NO_ELLIPSOID_CODE (-1) is returned if there are no ellipsoid set.
     If a custom ellipsoid is set the Ellipsoid::CUSTOM_ELLIPSOID_CODE.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEllipsoidName =R"doc(Gets the name of the Coordinate System Ellipsoid.
 
-Returns:
+:returns:
     Name of the Coordinate System Ellipsoid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetVerticalDatumByKey =R"doc(Sets the Vertical Datum by vertical datum key See
 SetVerticalDatumCode() for details.
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetVerticalDatumCode =R"doc(Sets the Vertical Datum Code. In only a few instances, the Vertical
@@ -1553,7 +1553,7 @@ Datum can be set separately from the Datum. Currently, when the Datum
 of this GCS is either NAD83 or NAD27, the Vertical Datum can be set to
 either NAVD88 or NGVD29 independently of the Datum.
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetNetVerticalDatumCode =R"doc(Gets the Vertical Datum Code. In only a few instances, the Vertical
@@ -1563,7 +1563,7 @@ either NAVD88 or NGVD29 independently of the Datum. This method
 contrary to GetVerticalDatumCode() never returns vdcFromDatum but
 returns the explicit datum code for ellipsoid, NGVD29 or NAVD88.
 
-Returns:
+:returns:
     Member of the VerticalDatum enum indicating Vertical Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetVerticalDatumCode =R"doc(Gets the Vertical Datum Code. In only a few instances, the Vertical
@@ -1571,7 +1571,7 @@ Datum can be set separately from the Datum. Currently, when the Datum
 of this GCS is either NAD83 or NAD27, the Vertical Datum can be set to
 either NAVD88 or NGVD29 independently of the Datum.
 
-Returns:
+:returns:
     Member of the VerticalDatum enum indicating Vertical Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetVerticalDatumName =R"doc(Gets the name of the Coordinate System Vertical Datum. It will be
@@ -1583,47 +1583,47 @@ string internal to the BaseGCS which is bad practice. We will be
 phasing off the support of this methid that will be replaced
 eventually.
 
-Returns:
+:returns:
     Name of the Coordinate System Vertical Datum. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_DatumExtendedParametersValid =R"doc(Returns whether the delta, rotation, and scale parameters are valid
 for the Datum of this GCS.
 
-Parameter ``deltaValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param deltaValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the delta parameters are used.
 
-Parameter ``rotationValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param rotationValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the rotation parameters are used.
 
-Parameter ``scaleValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param scaleValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the scale parameter is used.
 
-Parameter ``gridValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param gridValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that grid file is used.
 
-Returns:
+:returns:
     true if any of the output valid flags are true.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_DatumParametersValid =R"doc(Returns whether the delta, rotation, and scale parameters are valid
 for the Datum of this GCS.
 
-Parameter ``deltaValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param deltaValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the delta parameters are used.
 
-Parameter ``rotationValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param rotationValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the rotation parameters are used.
 
-Parameter ``scaleValid``:
-    OUT Returns true if the datum is valid and its WGS84ConvertCode
+:param scaleValid:
+    (output) Returns true if the datum is valid and its WGS84ConvertCode
     indicates that the scale parameter is used.
 
-Returns:
+:returns:
     true if any of the output valid flags are true.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumGridFile =R"doc(Utilitarian method. The present method will return the grid file
@@ -1633,53 +1633,53 @@ File method to WGS84 and contain a single grid file definition. If any
 of those conditions are not met ERROR is returned, otherwise the grid
 file definition is returned with a SUCCESS status.
 
-Parameter ``gridFileDef``:
-    OUT Reference to the grid file that will receive the current datum
+:param gridFileDef:
+    (output) Reference to the grid file that will receive the current datum
     grid file definition.
 
-Returns:
+:returns:
     SUCCESS is successful or ERROR if any prerequisite condition
     indicated above is not met. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumScale =R"doc(Gets the datum transformation scaling in parts per million of the
 Datum of this GCS, if known.
 
-Returns:
+:returns:
     The datum transformation scale in ppm.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumRotation =R"doc(Gets the angles from the WGS84 x, y, and z axes to those of the Datum
 of this GCS
 
-Parameter ``rotation``:
-    OUT The rotation angles. )doc";
+:param rotation:
+    (output) The rotation angles. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumDelta =R"doc(Gets the vector from the geocenter of the WGS84 Datum to the geocenter
 of the Datum of this GCS.
 
-Parameter ``delta``:
-    OUT The vector from the geocenter of the WGS84 Datum to the
+:param delta:
+    (output) The vector from the geocenter of the WGS84 Datum to the
     geocenter of this Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumConvertMethod =R"doc(Gets the method used to convert longitude/latitude from the Datum of
 this GCS to the WGS84 datum.
 
-Returns:
+:returns:
     The convert method. @note:If this GCS does not have a Datum,
     ConvertType_NONE is returned.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumSource =R"doc(Gets the Coordinate System Datum source citation.
 
-Returns:
+:returns:
     Source citation of the Coordinate System Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumDescription =R"doc(Gets the description of the Coordinate System Datum.
 
-Returns:
+:returns:
     Description of the Coordinate System Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_HasCustomDatum =R"doc(Indicates if the GCS uses a custom datum
 
-Returns:
+:returns:
     true if the GCS uses a custom datum. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetDatum =R"doc(Sets the datum. If the datum indicates it is stored in a user library
@@ -1688,7 +1688,7 @@ the datum is self contained and unstored then the stored datum code
 will be set to -2. The datum is captured and must not be destroyed by
 the caller.
 
-Returns:
+:returns:
     SUCCESS if successful )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatum =R"doc(Returns the pointer to the internal datum. The datum must not be
@@ -1696,7 +1696,7 @@ deallocated. The datum returned will be the internal datum set using
 SetDatum() or the datum obtained from the library. If the BaseGCS has
 no datum and is ellipsoid based then NULL is returned
 
-Returns:
+:returns:
     Pointer to internal datum or NULL if no datum. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetDatumCode =R"doc(Sets the internal index of the Datum for the Coordinate System Datum.
@@ -1708,7 +1708,7 @@ that the GCS does not use a datum and is ellipsoid based after which
 the SetEllipsoidCode() method must be used to indicate the proper
 ellipsoid.
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumCode =R"doc(Gets the internal index of the Coordinate System Datum. This index
@@ -1720,12 +1720,12 @@ Datum::NO_DATUM_CODE (-1). For a fully self-contained datum as set
 using SetDatum() then the code will be Datum::CUSTOM_DATUM_CODE(-2) in
 which case the GCS cannot be stored in any library.
 
-Returns:
+:returns:
     Index of the Coordinate System Datum.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDatumName =R"doc(Gets the name of the Coordinate System Datum.
 
-Returns:
+:returns:
     Name of the Coordinate System Datum. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetUnitByKeyname =R"doc(Sets the Units to those indicated by the unit keyname. The unit key
@@ -1734,12 +1734,12 @@ insensitive). Typically the units in use are 'METER', 'IFOOT' for
 internatial foot and 'FOOT' for US Survey foot. The only possible unit
 for a latitude/longitude GCS is 'DEGREE'.
 
-Returns:
+:returns:
     SUCCESS or an error code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetEPSGUnitCode =R"doc(Finds the EPSG code for the unit used by this coordinate system.
 
-Returns:
+:returns:
     The EPSG code, or 0 if the unit cannot be found in the CS Map
     table or the there is no EPSG code corresponding to the unit used.
     Mathieu St-Pierre )doc";
@@ -1748,100 +1748,100 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetUnitCode
 come from either GetUnitCode or an index into the array returned by
 GetUnitNames.
 
-Returns:
+:returns:
     SUCCESS or an error code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetUnitCode =R"doc(Gets the internal index for the Coordinate System units.
 
-Returns:
+:returns:
     index into internal table of unit names.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetUnits =R"doc(Gets the name of the Coordinate System units.
 
-Returns:
+:returns:
     Name of source of the Coordinate System units.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetSource =R"doc(Sets the source of the Coordinate System
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetSource =R"doc(Gets the source of the Coordinate System.
 
-Returns:
+:returns:
     The source of the Coordinate System.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetLocation =R"doc(Gets the location for which the Coordinate System applies.
 
-Returns:
+:returns:
     The location for which the Coordinate System applies.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetGroup =R"doc(Sets the group of the Coordinate System. The group specified must be
 the identifier of a known group. In all cases the group name may not
 be more than 23 characters long.
 
-Returns:
+:returns:
     SUCCESS or an error code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetGroup =R"doc(Gets the CSMap group to which the Coordinate System belongs.
 
-Returns:
+:returns:
     The CSMap group to which the Coordinate System belongs.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetProjectionCode =R"doc(Sets CS_Map projection code of the Coordinate System.
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetProjectionCode =R"doc(Gets CS_Map projection code of the Coordinate System.
 
-Returns:
+:returns:
     The CS_Map projection code of the Coordinate System.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetProjection =R"doc(Gets the name of the projection used by the Coordinate System.
 
-Returns:
+:returns:
     The name of the projection used by the Coordinate System.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetDescription =R"doc(Sets the description of the Coordinate System
 
-Returns:
+:returns:
     SUCCESS or an error code. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetDescription =R"doc(Gets the description of the Coordinate System.
 
-Returns:
+:returns:
     The description of the Coordinate System. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_SetName =R"doc(Sets the name of the Coordinate System
 
-Returns:
+:returns:
     SUCCESS or an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetName =R"doc(Gets the name of the Coordinate System
 
-Returns:
+:returns:
     The name of the Coordinate System. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_IsStandard =R"doc(Returns whether the Coordinate System is a standard coordinate system
 or not.
 
-Returns:
+:returns:
     True if the Coordinate System originated from the coordinate
     system library, False otherwise. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_Validate =R"doc(Tests the coordinate system definition for validity.
 
-Returns:
+:returns:
     True if the Coordinate System parameters are valid, false if not.
 
-Parameter ``errorList``:
-    OUT A list of validation errors generated by CSMap.)doc";
+:param errorList:
+    (output) A list of validation errors generated by CSMap.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetError =R"doc(Gets the error code associated with constructor failure if IsValid is
 false.
 
-Returns:
+:returns:
     The CSMap error code.
 
 See also:
@@ -1849,7 +1849,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_IsValid =R"doc(Returns whether the Coordinate System is valid or not.
 
-Returns:
+:returns:
     True if the Coordinate System is valid, False otherwise.
 
 See also:
@@ -1864,7 +1864,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_CanSaveToGeoTiffKeys =R"doc(Reveals whether the coordinate system can be saved to GeoTiffKeys.
 
-Returns:
+:returns:
     true if the coordinate system can be saved to GeoTiffKeys, false
     if not. )doc";
 
@@ -1872,7 +1872,7 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_ECEFFromCar
 ECEFFromCartesian - Converts from source cartesian to the ECEF. 3D
 conversion is applied.
 
-Returns:
+:returns:
     REPROJECT_Success if the process was fully successful.
     REPROJECT_CSMAPERR_OutOfUsefulRange if at least one conversion
     used for computing was out of the normal useful domain of either
@@ -1887,11 +1887,11 @@ Returns:
     configuration issue. Any other error is a hard error depending on
     the value.
 
-Parameter ``outECEF``:
-    OUT Receives the output coordinate.
+:param outECEF:
+    (output) Receives the output coordinate.
 
-Parameter ``inCartesian``:
-    IN The input coordinate.
+:param inCartesian:
+    (input) The input coordinate.
 
 Sarah Keenan.)doc";
 
@@ -1899,7 +1899,7 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_CartesianFr
 CartesianFromECEF - Converts from ECEF to the cartesian of the target.
 3D conversion is applied.
 
-Returns:
+:returns:
     REPROJECT_Success if the process was fully successful.
     REPROJECT_CSMAPERR_OutOfUsefulRange if at least one conversion
     used for computing was out of the normal useful domain of either
@@ -1914,21 +1914,21 @@ Returns:
     configuration issue. Any other error is a hard error depending on
     the value.
 
-Parameter ``outCartesian``:
-    OUT Receives the output coordinate.
+:param outCartesian:
+    (output) Receives the output coordinate.
 
-Parameter ``inECEF``:
-    IN The input coordinate.
+:param inECEF:
+    (input) The input coordinate.
 
-Parameter ``targetGCS``:
-    IN Target coordinate system
+:param targetGCS:
+    (input) Target coordinate system
 
 Sarah Keenan.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_CartesianFromCartesian =R"doc(CartesianFromCartesian - Converts from the cartesian representation of
 a GCS to the cartesian of the target. 3D conversion is applied.
 
-Returns:
+:returns:
     REPROJECT_Success if the process was fully successful.
     REPROJECT_CSMAPERR_OutOfUsefulRange if at least one conversion
     used for computing was out of the normal useful domain of either
@@ -1943,14 +1943,14 @@ Returns:
     configuration issue. Any other error is a hard error depending on
     the value.
 
-Parameter ``outCartesian``:
-    OUT Receives the output coordinate.
+:param outCartesian:
+    (output) Receives the output coordinate.
 
-Parameter ``inCartesian``:
-    IN The input coordinate.
+:param inCartesian:
+    (input) The input coordinate.
 
-Parameter ``targetGCS``:
-    IN target coordinate system
+:param targetGCS:
+    (input) target coordinate system
 
  .)doc";
 
@@ -1958,7 +1958,7 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetLinearTr
 approximates the transformation between this source coordinate system
 and ECEF.
 
-Returns:
+:returns:
     REPROJECT_Success if the process was fully successful.
     REPROJECT_CSMAPERR_OutOfUsefulRange if at least one conversion
     used for computing was out of the normal useful domain of either
@@ -1973,12 +1973,12 @@ Returns:
     configuration issue. Any other error is a hard error depending on
     the value.
 
-Parameter ``outTransform``:
-    OUT the transform effective at the point elementOrigin in source
+:param outTransform:
+    (output) the transform effective at the point elementOrigin in source
     coordinates
 
-Parameter ``extent``:
-    IN the extent in source GCS coordinate to use to find the
+:param extent:
+    (input) the extent in source GCS coordinate to use to find the
     transform. This extent must of course be valid (not empty) but
     shall also define an extent no less than 0.01 of the linear units
     of the input GCS wide in all dimensions. If the input GCS is
@@ -1986,18 +1986,18 @@ Parameter ``extent``:
     (1e-07) degrees for the first two ordinate and 0.01[Meter] for the
     elevation (z) ordinate.
 
-Parameter ``maxError``:
-    OUT If provided receives the max error observed over the extent
+:param maxError:
+    (output) If provided receives the max error observed over the extent
 
-Parameter ``meanError``:
-    OUT If provided receives the mean error observed over the extent
+:param meanError:
+    (output) If provided receives the mean error observed over the extent
     Sarah.Keenan )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetLinearTransformECEF =R"doc(Computes a linear transformation over a designated area that
 approximates the transformation between ECEF and given target
 coordinate system.
 
-Returns:
+:returns:
     REPROJECT_Success if the process was fully successful.
     REPROJECT_CSMAPERR_OutOfUsefulRange if at least one conversion
     used for computing was out of the normal useful domain of either
@@ -2012,31 +2012,31 @@ Returns:
     configuration issue. Any other error is a hard error depending on
     the value.
 
-Parameter ``outTransform``:
-    OUT the transform effective at the point elementOrigin in source
+:param outTransform:
+    (output) the transform effective at the point elementOrigin in source
     coordinates
 
-Parameter ``extentECEF``:
-    IN the extent in ECEF coordinate to use to find the transform.
+:param extentECEF:
+    (input) the extent in ECEF coordinate to use to find the transform.
     This extent must of course be valid (not empty) but shall also
     define an extent no less than 0.01[meter] wide in all three
     dimensions.
 
-Parameter ``targetGCS``:
-    IN target coordinate system
+:param targetGCS:
+    (input) target coordinate system
 
-Parameter ``maxError``:
-    OUT If provided receives the max error observed over the extent
+:param maxError:
+    (output) If provided receives the max error observed over the extent
 
-Parameter ``meanError``:
-    OUT If provided receives the mean error observed over the extent
+:param meanError:
+    (output) If provided receives the mean error observed over the extent
     Sarah.Keenan)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetLinearTransform =R"doc(Computes a linear transformation over a designated area that
 approximates the transformation between source and given target
 coordinate system.
 
-Returns:
+:returns:
     REPROJECT_Success if the process was fully successful.
     REPROJECT_CSMAPERR_OutOfUsefulRange if at least one conversion
     used for computing was out of the normal useful domain of either
@@ -2051,12 +2051,12 @@ Returns:
     configuration issue. Any other error is a hard error depending on
     the value.
 
-Parameter ``outTransform``:
-    OUT the transform effective at the point elementOrigin in source
+:param outTransform:
+    (output) the transform effective at the point elementOrigin in source
     coordinates
 
-Parameter ``extent``:
-    IN the extent in source GCS coordinate to use to find the
+:param extent:
+    (input) the extent in source GCS coordinate to use to find the
     transform. This extent must of course be valid (not empty) but
     shall also define an extent no less than 0.01 of the linear units
     of the input GCS wide in all dimensions. If the input GCS is
@@ -2064,14 +2064,14 @@ Parameter ``extent``:
     (1e-07) degrees for the first two ordinate and 0.01[Meter] for the
     elevation (z) ordinate.
 
-Parameter ``targetGCS``:
-    IN target coordinate system
+:param targetGCS:
+    (input) target coordinate system
 
-Parameter ``maxError``:
-    OUT If provided receives the max error observed over the extent
+:param maxError:
+    (output) If provided receives the max error observed over the extent
 
-Parameter ``meanError``:
-    OUT If provided receives the mean error observed over the extent)doc";
+:param meanError:
+    (output) If provided receives the mean error observed over the extent)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_InitFromGeoTiffKeys =R"doc(Used in conjunction with the CreateGCS factory method to set the
 BaseGCS from a set of GeoTiff Keys. Note that the original list of
@@ -2079,22 +2079,22 @@ geotiff keys will be preserved inside the BaseGCS object. This
 mechanism allows to obtain the geotiff keys exactly as they were when
 interpreted for the sake of conformity to a client data standard.
 
-Returns:
+:returns:
     SUCCESS, a CS_MAP error code, or a GeoCoord error code.
 
-Parameter ``warning``:
-    OUT if non-NULL, this might reveal a warning even if the return
+:param warning:
+    (output) if non-NULL, this might reveal a warning even if the return
     value is SUCCESS.
 
-Parameter ``warningErrorMsg``:
-    OUT if non-NULL, the WString is filled in with the CS_MAP warning
+:param warningErrorMsg:
+    (output) if non-NULL, the WString is filled in with the CS_MAP warning
     or error message.
 
-Parameter ``geoTiffKeys``:
-    IN an object implementing the IGeoTiffKeysList interface.
+:param geoTiffKeys:
+    (input) an object implementing the IGeoTiffKeysList interface.
 
-Parameter ``allowUnitsOverride``:
-    IN if true then default units can be overriden by the presence a
+:param allowUnitsOverride:
+    (input) if true then default units can be overriden by the presence a
     proj linear unit even though the units associated to the GCS
     specifies different units This parameter is necessary since many
     client make use of this mechanism. This parameter is optional
@@ -2106,17 +2106,17 @@ definition. This compound coordinate system is composed of a PROJCS or
 GEOCS section followed by a VERT_CS section that contains the
 definition of the vertical datum used.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.
 
-Parameter ``wellKnownText``:
+:param wellKnownText:
     Out The Well Known Text specifying the coordinate system.
 
-Parameter ``wktFlavor``:
-    IN The WKT Flavor desired. If not known, use wktFlavorUnknown
+:param wktFlavor:
+    (input) The WKT Flavor desired. If not known, use wktFlavorUnknown
 
-Parameter ``originalIfPresent``:
-    IN true indicates that if the BaseGCS originates from a WKT
+:param originalIfPresent:
+    (input) true indicates that if the BaseGCS originates from a WKT
     fragment then this WKT should be returned. In this case the
     wktFlavor is only used if an original was not present. Note that
     if the original was not a compound WKT but a plain WKT then this
@@ -2125,42 +2125,42 @@ Parameter ``originalIfPresent``:
     parameters are discouraged. For reasons of backward compatibility
     this was considered necessary.
 
-Parameter ``doNotInsertTOWGS84``:
-    IN If true indicates that the TOWGS84 clause should not be added.
+:param doNotInsertTOWGS84:
+    (input) If true indicates that the TOWGS84 clause should not be added.
     default is false which indicates to add it if applicable to flavor
     and datum transformation.
 
-Parameter ``posVectorRotationSignConvention``:
-    IN If true indicates that the TOWGS84 rotation signal convention
+:param posVectorRotationSignConvention:
+    (input) If true indicates that the TOWGS84 rotation signal convention
     should follow Position Vector (EPSG:9607) convention. The default
     is false to use the Coordinate Frame (EPSG:9606) convention.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_GetWellKnownText =R"doc(Gets the Well Known Text string from a coordinate system definition.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.
 
-Parameter ``wellKnownText``:
+:param wellKnownText:
     Out The Well Known Text specifying the coordinate system.
 
-Parameter ``wktFlavor``:
-    IN The WKT Flavor desired. If not known, use wktFlavorUnknown
+:param wktFlavor:
+    (input) The WKT Flavor desired. If not known, use wktFlavorUnknown
 
-Parameter ``originalIfPresent``:
-    IN true indicates that if the BaseGCS originates from a WKT
+:param originalIfPresent:
+    (input) true indicates that if the BaseGCS originates from a WKT
     fragment then this WKT should be returned. In this case the
     wktFlavor is only used if an original was not present. This
     parameter is optional regardless optional parameters are
     discouraged. For reasons of backward compatibility this was
     considered necessary.
 
-Parameter ``doNotInsertTOWGS84``:
-    IN If true indicates that the TOWGS84 clause should not be added.
+:param doNotInsertTOWGS84:
+    (input) If true indicates that the TOWGS84 clause should not be added.
     default is false which indicates to add it if applicable to flavor
     and datum transformation.
 
-Parameter ``posVectorRotationSignConvention``:
-    IN If true indicates that the TOWGS84 rotation signal convention
+:param posVectorRotationSignConvention:
+    (input) If true indicates that the TOWGS84 rotation signal convention
     should follow Position Vector (EPSG:9607) convention. The default
     is false to use the Coordinate Frame (EPSG:9606) convention.)doc";
 
@@ -2169,19 +2169,19 @@ BaseGCS from an EPSG coordinate system code. The valid EPSG code
 ranges are from 20000 through 32767 for projected coordinate systems
 and 4000 through 4199 for geographic (Lat/long) coordinate systems.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.
 
-Parameter ``warning``:
-    OUT if non-NULL, this might reveal a warning even if the return
+:param warning:
+    (output) if non-NULL, this might reveal a warning even if the return
     value is SUCCESS.
 
-Parameter ``warningErrorMsg``:
-    OUT if non-NULL, the WString is filled in with the CS_MAP warning
+:param warningErrorMsg:
+    (output) if non-NULL, the WString is filled in with the CS_MAP warning
     or error message.
 
-Parameter ``epsgCode``:
-    IN The EPSG code for the desired coordinate system.
+:param epsgCode:
+    (input) The EPSG code for the desired coordinate system.
 
 Remark:
     s Only those EPSG coordinate systems that are in our library will
@@ -2194,97 +2194,97 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_InitFromOSGEOXML =R"doc(Used in conjunction with the CreateGCS factory method to set the
 BaseGCS from a " OSGEO XML " string.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.
 
-Parameter ``autoXML``:
-    IN The XML specifying the coordinate system. )doc";
+:param autoXML:
+    (input) The XML specifying the coordinate system. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_InitFromWellKnownText =R"doc(Used in conjunction with the CreateGCS factory method to set the
 BaseGCS from a " well known text " string.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.
 
-Parameter ``warning``:
-    OUT if non-NULL, this might reveal a warning even if the return
+:param warning:
+    (output) if non-NULL, this might reveal a warning even if the return
     value is SUCCESS.
 
-Parameter ``warningErrorMsg``:
-    OUT if non-NULL, the WString is filled in with the CS_MAP warning
+:param warningErrorMsg:
+    (output) if non-NULL, the WString is filled in with the CS_MAP warning
     or error message.
 
-Parameter ``wktFlavor``:
-    IN The WKT Flavor. If not known, use wktFlavorUnknown.
+:param wktFlavor:
+    (input) The WKT Flavor. If not known, use wktFlavorUnknown.
 
-Parameter ``wellKnownText``:
-    IN The Well Known Text specifying the coordinate system.)doc";
+:param wellKnownText:
+    (input) The Well Known Text specifying the coordinate system.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_InitLatLong =R"doc(Used in conjunction with the no-argument contructor to set the BaseGCS
 to give cartesian angular values. This is often useful for applying
 datum shifts when you have Longitude Latitude values in one datum and
 you need then in a different datum.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.
 
-Parameter ``errorMsg``:
-    OUT if non-NULL, the WString is filled in with the CS_MAP error
+:param errorMsg:
+    (output) if non-NULL, the WString is filled in with the CS_MAP error
     message when an error occurs.
 
-Parameter ``datumName``:
-    IN The name of the datum used in the GCS, such as " WGS84 ".
+:param datumName:
+    (input) The name of the datum used in the GCS, such as " WGS84 ".
 
-Parameter ``ellipsoidName``:
-    IN The name of the ellipsoid used in the GCS, such as " WGS84 ".
+:param ellipsoidName:
+    (input) The name of the ellipsoid used in the GCS, such as " WGS84 ".
     This is used only if the datumName is NULL.
 
-Parameter ``unitName``:
-    IN The name of the linear unit for the Cartesian coordinates, such
+:param unitName:
+    (input) The name of the linear unit for the Cartesian coordinates, such
     as " METER ".
 
-Parameter ``originLongitude``:
-    IN Allows displacement of the longitude values if a different
+:param originLongitude:
+    (input) Allows displacement of the longitude values if a different
     origin is desired - usually 0.0.
 
-Parameter ``originLatitude``:
-    IN Allows displacement of the latitude values if a different
+:param originLatitude:
+    (input) Allows displacement of the latitude values if a different
     origin is desired - usually 0.0. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_InitTransverseMercator =R"doc(Used in conjunction with the no-argument contructor to set the BaseGCS
 to an Transverse Mercator projection.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.
 
-Parameter ``errorMsg``:
-    OUT if non-NULL, the WString is filled in with the CS_MAP error
+:param errorMsg:
+    (output) if non-NULL, the WString is filled in with the CS_MAP error
     message when an error occurs.
 
-Parameter ``datumName``:
-    IN The name of the datum used in the GCS, such as " WGS84 ".
+:param datumName:
+    (input) The name of the datum used in the GCS, such as " WGS84 ".
 
-Parameter ``unitName``:
-    IN The name of the linear unit for the Cartesian coordinates, such
+:param unitName:
+    (input) The name of the linear unit for the Cartesian coordinates, such
     as " METER ".
 
-Parameter ``originLongitude``:
-    IN The longitude of the tangency point.
+:param originLongitude:
+    (input) The longitude of the tangency point.
 
-Parameter ``originLatitude``:
-    IN The latitude of the tangency point.
+:param originLatitude:
+    (input) The latitude of the tangency point.
 
-Parameter ``scale``:
-    IN This scale reduction at the origin.
+:param scale:
+    (input) This scale reduction at the origin.
 
-Parameter ``falseEasting``:
-    IN The value to add to each Cartesian X value.
+:param falseEasting:
+    (input) The value to add to each Cartesian X value.
 
-Parameter ``falseNorthing``:
-    IN The value to add to each Cartesian Y value.
+:param falseNorthing:
+    (input) The value to add to each Cartesian Y value.
 
-Parameter ``quadrant``:
-    IN Quadrant for the cartesian coordinate system. If north is up
+:param quadrant:
+    (input) Quadrant for the cartesian coordinate system. If north is up
     and east is right, pass 1.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_InitAzimuthalEqualArea =R"doc(Used in conjunction with the no-argument contructor to set the BaseGCS
@@ -2294,41 +2294,41 @@ surface of the area at originLongitude, originLatitude, projecting the
 earth's surface onto that paper, and then adding the " falseEasting ",
 " falseNorthing " values to yield cartesian coordinates.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code.
 
-Parameter ``errorMsg``:
-    OUT if non-NULL, the WString is filled in with the CS_MAP error
+:param errorMsg:
+    (output) if non-NULL, the WString is filled in with the CS_MAP error
     message when an error occurs.
 
-Parameter ``datumName``:
-    IN The name of the datum used in the GCS, such as " WGS84 ".
+:param datumName:
+    (input) The name of the datum used in the GCS, such as " WGS84 ".
 
-Parameter ``unitName``:
-    IN The name of the linear unit for the Cartesian coordinates, such
+:param unitName:
+    (input) The name of the linear unit for the Cartesian coordinates, such
     as " METER ".
 
-Parameter ``originLongitude``:
-    IN The longitude of the tangency point.
+:param originLongitude:
+    (input) The longitude of the tangency point.
 
-Parameter ``originLatitude``:
-    IN The latitude of the tangency point.
+:param originLatitude:
+    (input) The latitude of the tangency point.
 
-Parameter ``azimuthAngle``:
-    IN The angle, clockwise from true north in decimal degrees, of the
+:param azimuthAngle:
+    (input) The angle, clockwise from true north in decimal degrees, of the
     rotation to be applied.
 
-Parameter ``scale``:
-    IN This argument is ignored. The scale is always 1.0.
+:param scale:
+    (input) This argument is ignored. The scale is always 1.0.
 
-Parameter ``falseEasting``:
-    IN The value to add to each Cartesian X value.
+:param falseEasting:
+    (input) The value to add to each Cartesian X value.
 
-Parameter ``falseNorthing``:
-    IN The value to add to each Cartesian Y value.
+:param falseNorthing:
+    (input) The value to add to each Cartesian Y value.
 
-Parameter ``quadrant``:
-    IN Quadrant for the cartesian coordinate system. If north is up
+:param quadrant:
+    (input) Quadrant for the cartesian coordinate system. If north is up
     and east is right, pass 1. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_BaseGCS_ClearConverterCache =R"doc(This method is only intended to be called when previous conversion

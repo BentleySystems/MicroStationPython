@@ -6,6 +6,9 @@ from MSPyMstnPlatform import *
 from MSPyDgnView import *
 import math
 
+'''
+Sample demonstrating how to measure distance.
+'''
 
 """
 Retrieve circles and B-spline elements from the active model.
@@ -129,10 +132,20 @@ def createCircleAtPosition(basePoint, radius):
     return BentleyStatus.eSUCCESS == eeh.AddToModel()
 
 
-"""
-Measures distances from circles to the B-spline and draws arcs on the opposite side of the B-spline.
-"""
 def drawCircleOnOppositeSide():
+    """
+    Draws circles on the opposite side of a B-spline based on the distances 
+    measured from existing circles to the B-spline.
+    This function performs the following steps:
+    1. Measures the distances from existing circles to a B-spline.
+    2. Calculates the center of new circles on the opposite side of the B-spline.
+    3. Creates new circles at the calculated positions with the same radius as the original circles.
+    The function relies on the following helper functions:
+    - measureDistancesFromCirclesToBspline: Measures distances from circles to a B-spline.
+    - calculateOppositeSideCircleCenter: Calculates the center of a new circle on the opposite side.
+    - createCircleAtPosition: Creates a circle at a specified position with a given radius.
+    :return: None
+    """
     
     # Get the circles data and their distance from bspline
     circleDistances = measureDistancesFromCirclesToBspline()

@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -15,11 +10,22 @@ import ctypes
 import sys
 
 '''
-Function to select elements by its item type data
-    inPropName  : str      Property Name
-    inPropValue : str      Property Value
+This sample demonstrates how to select elements by item type
 '''
+
 def selectElementsbyItemType(inPropName, inPropValue):
+    """
+    Select elements by item type property.
+
+    This function iterates through all graphical elements in the active model,
+    checks their custom item properties, and adds elements to the selection set
+    if they match the specified property name and value.
+
+    :param inPropName: The name of the property to match.
+    :type inPropName: str
+    :param inPropValue: The value of the property to match.
+    :type inPropValue: str
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -54,9 +60,17 @@ def selectElementsbyItemType(inPropName, inPropValue):
                 if (propertyName == inPropName and propertyValue == inPropValue):
                     selSetManager.AddElement(perElementRef,dgnModel)
 
-'''
-Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with 'ItemType' model 
-'''
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {agenda.GetCount()} elements")
+    # iterate over the selection set printing the element ids of elements in the selection set
+    for i in range(agenda.GetCount()):
+        editElementHandle = agenda.GetEntry(i)
+        print (f"  Element ID: {editElementHandle.GetElementId()}")
+    
+    
+#Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with 'ItemType' model 
 #main
 if __name__ == "__main__":
     #highlight all the elements with type 

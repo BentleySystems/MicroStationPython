@@ -8,8 +8,6 @@
 #include "MSPythonPCH.h"
 #include <DgnPlatform/DgnLinkTree.h>
 
-
-
 static const char * __doc_Bentley_DgnPlatform_DgnLinkTree_GetLastModifiedTime =R"doc(returned as unix millis)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkTree_FindNodeById =R"doc(Find a node at the given index by recursively traversing the tree's
@@ -112,6 +110,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnLinkTreeNode_SetName =R"doc(Set
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkTreeNode_Copy =R"doc(Copy the node to given link tree specification)doc";
 
+
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023
 +---------------+---------------+---------------+---------------+---------------+------*/
@@ -144,7 +143,7 @@ void def_DgnLinkTree(py::module_& m)
 
     //===================================================================================
     // struct DgnLinkTreeNode
-    py::class_< DgnLinkTreeNode, std::unique_ptr<DgnLinkTreeNode, py::nodelete> > c2(m, "DgnLinkTreeNode");
+    py::class_< DgnLinkTreeNode, TempObjectOwner<DgnLinkTreeNode> > c2(m, "DgnLinkTreeNode");
 
     c2.def("Copy", &DgnLinkTreeNode::Copy, "treeSpec"_a, DOC(Bentley, DgnPlatform, DgnLinkTreeNode, Copy));
     c2.def("SetName", &DgnLinkTreeNode::SetName, "name"_a, "checkDuplicateNames"_a = true, DOC(Bentley, DgnPlatform, DgnLinkTreeNode, SetName));
@@ -155,7 +154,6 @@ void def_DgnLinkTree(py::module_& m)
     c2.def_property_readonly("PathName", &DgnLinkTreeNode::GetPathName);
     c2.def("GetPathName", &DgnLinkTreeNode::GetPathName, DOC(Bentley, DgnPlatform, DgnLinkTreeNode, GetPathName));
     
-    c2.def_property_readonly("HybridPathName", &DgnLinkTreeNode::GetHybridPathName);
     c2.def("GetHybridPathName", &DgnLinkTreeNode::GetHybridPathName, DOC(Bentley, DgnPlatform, DgnLinkTreeNode, GetHybridPathName));
     
     c2.def_property_readonly("HandlerKey", &DgnLinkTreeNode::GetHandlerKey);
@@ -195,9 +193,24 @@ void def_DgnLinkTree(py::module_& m)
     c2.def("AsDgnLinkTreeLeaf", &DgnLinkTreeNode::AsDgnLinkTreeLeafP, py::return_value_policy::reference_internal);
 
     //===================================================================================
-    // struct DgnLinkTreeBranch
-    py::class_< DgnLinkTreeBranch, std::unique_ptr<DgnLinkTreeBranch, py::nodelete>, DgnLinkTreeNode> c3(m, "DgnLinkTreeBranch");
+    // struct DgnLinkTreeLeaf
+    py::class_< DgnLinkTreeLeaf, TempObjectOwner<DgnLinkTreeLeaf>, DgnLinkTreeNode> c4(m, "DgnLinkTreeLeaf");
+    c4.def_property_readonly("Handler", &DgnLinkTreeLeaf::GetHandler);
+    c4.def("GetHandler", &DgnLinkTreeLeaf::GetHandler, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, DgnLinkTreeLeaf, GetHandler));
 
+    c4.def_property_readonly("Link", &DgnLinkTreeLeaf::GetLinkP);
+    c4.def("GetLink", &DgnLinkTreeLeaf::GetLinkP, py::return_value_policy::reference_internal);
+
+    c4.def_property("ValidFlags", &DgnLinkTreeLeaf::GetValidFlag, &DgnLinkTreeLeaf::SetValidFlag);
+    c4.def("GetValidFlags", &DgnLinkTreeLeaf::GetValidFlag);
+    c4.def("SetValidFlags", &DgnLinkTreeLeaf::SetValidFlag, "flag"_a);
+
+    c4.def_property_readonly("SequenceNumber", &DgnLinkTreeLeaf::GetSequenceNumber);
+    c4.def("GetSequenceNumber", &DgnLinkTreeLeaf::GetSequenceNumber, DOC(Bentley, DgnPlatform, DgnLinkTreeLeaf, GetSequenceNumber));
+
+    //===================================================================================
+    // struct DgnLinkTreeBranch
+    py::class_< DgnLinkTreeBranch, TempObjectOwner<DgnLinkTreeBranch>, DgnLinkTreeNode> c3(m, "DgnLinkTreeBranch");
 
     c3.def_property_readonly("Handler", &DgnLinkTreeBranch::GetHandler);
     c3.def("GetHandler", &DgnLinkTreeBranch::GetHandler, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, DgnLinkTreeBranch, GetHandler));
@@ -223,22 +236,6 @@ void def_DgnLinkTree(py::module_& m)
     c3.def("DropChild", &DgnLinkTreeBranch::DropChild, "iChild"_a, DOC(Bentley, DgnPlatform, DgnLinkTreeBranch, DropChild));
     c3.def("GetUniqueChildName", &DgnLinkTreeBranch::GetUniqueChildName, "namePrefix"_a, DOC(Bentley, DgnPlatform, DgnLinkTreeBranch, GetUniqueChildName));
     c3.def("DeepCopy", &DgnLinkTreeBranch::DeepCopy, "treeSpec"_a, DOC(Bentley, DgnPlatform, DgnLinkTreeBranch, DeepCopy));
-
-    //===================================================================================
-    // struct DgnLinkTreeLeaf
-    py::class_< DgnLinkTreeLeaf, std::unique_ptr<DgnLinkTreeLeaf, py::nodelete>, DgnLinkTreeNode> c4(m, "DgnLinkTreeLeaf");
-    c4.def_property_readonly("Handler", &DgnLinkTreeLeaf::GetHandler);
-    c4.def("GetHandler", &DgnLinkTreeLeaf::GetHandler, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, DgnLinkTreeLeaf, GetHandler));
-
-    c4.def_property_readonly("Link", &DgnLinkTreeLeaf::GetLinkP);
-    c4.def("GetLink", &DgnLinkTreeLeaf::GetLinkP, py::return_value_policy::reference_internal);
-
-    c4.def_property("ValidFlags", &DgnLinkTreeLeaf::GetValidFlag, &DgnLinkTreeLeaf::SetValidFlag);
-    c4.def("GetValidFlags", &DgnLinkTreeLeaf::GetValidFlag);
-    c4.def("SetValidFlags", &DgnLinkTreeLeaf::SetValidFlag, "flag"_a);
-
-    c4.def_property_readonly("SequenceNumber", &DgnLinkTreeLeaf::GetSequenceNumber);
-    c4.def("GetSequenceNumber", &DgnLinkTreeLeaf::GetSequenceNumber, DOC(Bentley, DgnPlatform, DgnLinkTreeLeaf, GetSequenceNumber));
 
     //===================================================================================
     // struct DgnLinkTreeSpec

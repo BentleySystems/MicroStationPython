@@ -13,34 +13,34 @@
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_CreateElementColor =R"doc(Get a element color id that can be stored on an element from the
 supplied IntColorDef.
 
-Parameter ``colorDef``:
+:param colorDef:
     Color table name.
 
-Parameter ``bookName``:
+:param bookName:
     Color book name for the supplied IntColorDef (can be NULL).
 
-Parameter ``colorName``:
+:param colorName:
     Color name in color book of the supplied IntColorDef (can be
     NULL).
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The file for the new element color. @note A valid element color id
-    is one of the following:\li COLOR_BYLEVEL \li COLOR_BYCELL \li An
+    is one of the following: COLOR_BYLEVEL  COLOR_BYCELL  An
     index into a files DgnColorMap (value from 0 to INDEX_Background).
-    \li A color book or rgb color id as returned by
+     A color book or rgb color id as returned by
     CreateElementColor.
 
-Returns:
+:returns:
     element color or INVALID_COLOR.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_ExtractElementColorInfo =R"doc(Get the color information from the supplied element color id.
 
 
 
-Parameter ``elementColor``:
+:param elementColor:
     The element color to extract the information for.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The file for the supplied element color.
 
 Returns (Tuple, 0):
@@ -65,34 +65,34 @@ Returns (Tuple, 5):
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_GetColorTableDescription =R"doc(Called to get the name string associated with the files color table.
 
-Parameter ``name``:
+:param name:
     color table name.
 
-Parameter ``bufferSize``:
+:param bufferSize:
     length of name buffer.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The file to return the color map for.
 
-Returns:
+:returns:
     SUCCESS if file isn't using a default color table.
     @DotNetMethodParameterIsReturnString{name,bufferSize})doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_GetForFile =R"doc(Called to get the color map used for a dgn file.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The file to return the color map for.
 
 Remark:
     s This is the stored or default color map for the file, it is used
     by all models.
 
-Returns:
+:returns:
     The color map, should never be NULL for a valid dgnFile object.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_GetForDisplay =R"doc(Called to get the color map used to display the specified modelRef.
 
-Parameter ``modelRef``:
+:param modelRef:
     The modelRef to return the color map for.
 
 Remark:
@@ -101,52 +101,52 @@ Remark:
     also the preference to use the reference color map may be
     disabled.
 
-Returns:
+:returns:
     The color map, should never be NULL for a valid modelRef.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_CreateDefaultForFileType =R"doc(Create new default color map for a particular file format type.
 
-Parameter ``format``:
+:param format:
     type of file, DgnFileFormatType::DWG, DgnFileFormatType::DXF,
     DgnFileFormatType::V8, etc.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_CreateFromTbgrColors =R"doc(Create new color map from array of TBGR.
 
-Parameter ``colors``:
+:param colors:
     Array of TBGR of size INDEX_ColorCount.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_CreateFromRgbColors =R"doc(Create new color map from array of RgbColorDef.
 
-Parameter ``colors``:
+:param colors:
     Array of RBGColorDef of size INDEX_ColorCount.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_SetForFile =R"doc(Called to change the color table for the supplied dgn file.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The file to set the color map for.
 
-Parameter ``name``:
+:param name:
     Description to store for color table.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_FindClosestMatch =R"doc(Called to return the element color index of the closest matching color
 map entry to the supplied IntColorDef.
 
-Parameter ``colorDef``:
+:param colorDef:
     Color to find the closest match for.
 
-Parameter ``preComputedHSVTable``:
+:param preComputedHSVTable:
     Optional hsv map for this color table (will be computed if NULL).
 
 See also:
     GetHsvColors.
 
-Returns:
+:returns:
     Element color index for closest match.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_GetColor =R"doc(Called to return the information for a specific color index as an
 IntColorDef.
 
-Parameter ``index``:
+:param index:
     Which color index to return the color information for.
 
 Remark:
@@ -154,13 +154,13 @@ Remark:
     INDEX_Background. The IntColorDef is convenient for accessing the
     color either as a TBGR or as an RgbColorDef.
 
-Returns:
+:returns:
     IntColor for specified color index.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_GetHsvColors =R"doc(Called to return color map entries converted to an array of
 HsvColorDef.
 
-Parameter ``colors``:
+:param colors:
     Array of HsvColorDef of size INDEX_ColorCount
 
 Remark:
@@ -170,7 +170,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_DgnColorMap_GetRgbColors =R"doc(Called to return color map entries converted to an array of
 RgbColorDef.
 
-Parameter ``colors``:
+:param colors:
     Array of RBGColorDef of size INDEX_ColorCount
 
 Remark:

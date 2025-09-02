@@ -35,7 +35,7 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_IsStandardCell =
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetPatternOrigin =R"doc(Return the pattern origin of a patterned closed element.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element. @Return SUCCESS if the property can be returned from the
     element.
@@ -50,7 +50,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetPatternParams =R"doc(Return the pattern parameter of a patterned closed element.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element. 
 Returns (Tuple, 0):
@@ -65,7 +65,7 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetDetailingSymb
 Detailing Symbol.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element. 
     
@@ -81,7 +81,7 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetAreaMode =R"d
 element either as a solid or a hole.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.
 Returns (Tuple, 0):
@@ -99,7 +99,7 @@ a fill color is specified it will be either a solid fill color ID or a
 Gradient color specification.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element. 
 
@@ -114,7 +114,7 @@ Returns (Tuple, 2):
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetCellName =R"doc(Return the Cell Name if the element is a named cell.
 
-Parameter ``index``:
+:param index:
     For future use. Pass 0 for index, or do not pass paramter and
     allow the default of 0 to be used.    
 Returns (Tuple, 0):
@@ -127,7 +127,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetAnnotationScale =R"doc(Return the Annotation Scale of the element if the element supports
 annotation scale.
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -140,7 +140,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetScale =R"doc(Return the Scale of the element if the element supports scaling.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.    
 Returns (Tuple, 0):
@@ -153,7 +153,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetElementTemplateID =R"doc(Return the ID of the element template associate with the element.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -166,7 +166,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetTransparency =R"doc(Return the transparency value of the element.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -179,7 +179,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetDisplayPriority =R"doc(Return the display of the element. This is only applicable to elements
 in 2D models.
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.    
 Returns (Tuple, 0):
@@ -192,7 +192,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetElementClass =R"doc(Return the class of the element.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -205,7 +205,7 @@ Returns (Tuple, 1):
 )doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetWeight =R"doc(Return the line weight.
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -219,7 +219,7 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetMaterialId =R
 specification.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.    
 Returns (Tuple, 0):
@@ -233,7 +233,7 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetMlineStyleID 
 element.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -247,7 +247,7 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetLineStylePara
 style.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.    
 Returns (Tuple, 0):
@@ -261,7 +261,7 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetDimStyleID =R
 element.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -274,7 +274,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetLineStyleID =R"doc(Return the ID of the LineStyle.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.    
 Returns (Tuple, 0):
@@ -286,7 +286,7 @@ Returns (Tuple, 1):
 )doc";
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetTextStyleId =R"doc(Return the ID of the TextStyle if the element contains text.
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.    
 Returns (Tuple, 0):
@@ -300,7 +300,7 @@ static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetColorID =R"do
 element color into DgnColorMap::ExtractElementColorInfo to get more
 specific color information.
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -313,7 +313,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetFontID =R"doc(Return the ID of the font if the element contains text.
 
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):
@@ -326,7 +326,7 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_SymbologyReporter_GetLevelId =R"doc(Return the level ID.
 
-Parameter ``index``:
+:param index:
     The index of the property. Pass 0 if the element is not a complex
     element.     
 Returns (Tuple, 0):

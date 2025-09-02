@@ -11,13 +11,13 @@
 
 
 static const char * __doc_Bentley_DgnPlatform_LineStyleManager_Reinitialize =R"doc(Reinitializes the line style maps. The steps to reinitializing are:
-\li Close all resource files that are associated with the existing
-system map. \li Free the system map and design file maps. \li
+ Close all resource files that are associated with the existing
+system map.  Free the system map and design file maps. 
 Initialize the system map, calling _GetLocalLineStylePaths to get a
 new list of search patterns used to find the RSC files. <p>The design
 file maps are loaded as needed.
 
-Returns:
+:returns:
     BSISUCCESS if successul, or BSIERROR otherwise. It fails if the
     LineStyleManager was not previously initialized, or if there are
     any LsResourceFileMap maps open.)doc";
@@ -29,28 +29,28 @@ that that maps to the name. This returns the appropriate strings for
 the standard line codes and for the special numbers listed in
 LsKnownStyleNumber.
 
-Parameter ``name``:
+:param name:
     The name to use as the search key.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The DgnFile of interest.
 
-Parameter ``createIDIfNecessary``:
+:param createIDIfNecessary:
     Add an entry to the file LsDgnFileMap if it is not already there.
 
-Returns:
+:returns:
     style number if found, otherwise STYLE_Invalid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LineStyleManager_GetStringFromNumber =R"doc(Gets a name corresponding to the style number. This method will return
 printable strings for line codes, ByLevel, and ByCell.
 
-Parameter ``styleNumber``:
+:param styleNumber:
     A style number for one of the special styles.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The DgnFile of interest.
 
-Returns:
+:returns:
     The name of the style corresponding to the number. If the style
     number corresponds to an entry in the design file's LsMap then
     this returns the name as stored in the map. If the style number is
@@ -66,13 +66,13 @@ static const char * __doc_Bentley_DgnPlatform_LineStyleManager_GetNameFromNumber
 string if the line style number is a line code (0-7) or ByLevel or
 ByCell. If you want strings for those, use GetStringFromNumber().
 
-Parameter ``styleNumber``:
+:param styleNumber:
     A style number for a style known to the design file.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The DgnFile of interest.
 
-Returns:
+:returns:
     The name of the style corresponding to the number. If the style
     number corresponds to an entry in the design file's LsMap then
     this returns the name as stored in the map. Otherwise, this
@@ -80,7 +80,7 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_LineStyleManager_GetSystemLineStyleMap =R"doc(Get the LsSystemMap.
 
-Returns:
+:returns:
     a reference to the LsSystemMap for the session.)doc";
 
 /*---------------------------------------------------------------------------------**//**

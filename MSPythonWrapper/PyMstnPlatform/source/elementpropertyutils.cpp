@@ -12,37 +12,37 @@
 
 static const char * __doc_Bentley_MstnPlatform_ElementPropertyUtils_ApplyActivePattern =R"doc(Apply the active pattern type and settings to the supplied element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``paramsP``:
+:param paramsP:
     pattern params or NULL.
 
-Parameter ``hatchDefLinesP``:
+:param hatchDefLinesP:
     DWG hatch definition or NULL.
 
-Parameter ``option``:
+:param option:
     pattern type:PATTERN_HATCH, PATTERN_CROSSHATCH, or PATTERN_AREA,
     used if paramsP is NULL.
 
-Parameter ``originP``:
+:param originP:
     pattern origin or NULL.
 
-Parameter ``rMatrix``:
+:param rMatrix:
     pattern rotation or NULL.
 
-Parameter ``line1``:
+:param line1:
     Multiline specific profile index if patterning between specific
     profile lines.
 
-Parameter ``line2``:
+:param line2:
     Multiline specific profile index if patterning between specific
     profile lines.
 
-Parameter ``index``:
+:param index:
     Pattern index (only for multilines).
 
-Returns:
+:returns:
     true if element was updated.
 
 See also:
@@ -52,10 +52,10 @@ Remark:)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ElementPropertyUtils_ApplyActiveGradientFill =R"doc(Apply the active gradient fill to the supplied element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Returns:
+:returns:
     true if element was updated.
 
 See also:
@@ -65,10 +65,10 @@ Remark:)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ElementPropertyUtils_ApplyActiveSolidFill =R"doc(Apply the active solid fill to the supplied element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Returns:
+:returns:
     true if element was updated.
 
 See also:
@@ -78,13 +78,13 @@ Remark:)doc";
 
 static const char * __doc_Bentley_MstnPlatform_ElementPropertyUtils_ApplyActiveAreaFill =R"doc(Apply the active solid or gradient fill to the supplied element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``fillMode``:
+:param fillMode:
     0 = none, 1 = opaque fill, -1 to use the active fill settings.
 
-Returns:
+:returns:
     true if element was updated.
 
 See also:

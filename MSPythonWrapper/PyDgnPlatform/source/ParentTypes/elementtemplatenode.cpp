@@ -29,11 +29,11 @@ static const char * __doc_Bentley_DgnPlatform_ElementTemplateNode_CreateNode =R"
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateNode_FindByElementId =R"doc(Return a pointer to an ElementTemplateNode for an existing element.
 
-Parameter ``elemID``:
+:param elemID:
     The ElementId of the Type 66 element that holds the element
     template XAttribute data.
 
-Parameter ``owner``:
+:param owner:
     The owner of the node. The owner can be determined by the
     DgnFileP. See XDataTreeManager::GetDgnXDataTreeOwner.)doc";
 

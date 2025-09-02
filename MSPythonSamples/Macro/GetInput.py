@@ -1,10 +1,5 @@
-# -*- coding: utf-8 -*-
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
 import math
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -12,10 +7,12 @@ from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 
-# This sample demos how to use GetInput(keyin, data point etc.). (Used: GetInput)
-# 1. Set Command and data point as the expected input.
-# 2. Wait for the input. (PyCadInputQueue.GetInput will wait for user input.)
-# 3. Print the input received by type.
+'''
+This sample demonstrates how to use GetInput(keyin, data point etc.). (Used: GetInput)
+1. Set Command and data point as the expected input.
+2. Wait for the input. (PyCadInputQueue.GetInput will wait for user input.)
+3. Print the input received by type.
+'''
 
 print("Click the active view to input data point:")
 msg = PyCadInputQueue.GetInput (CadInputType.eCadInputTypeCommand, CadInputType.eCadInputTypeDataPoint, CadInputType.eCadInputTypeNone, CadInputType.eCadInputTypeNone);

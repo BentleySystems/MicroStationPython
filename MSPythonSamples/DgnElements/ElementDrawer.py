@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 import math
 from MSPyBentley import *
@@ -12,15 +7,23 @@ from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 
-'''
-Function to create a set of parallel lines into current model
-    basePoint : DPoint3d    base point of lines
-    step : float            distance between lines
-    length : float          length of each line
-    nLines : int            number of lines to be created
-    rotAngle : float        plane rotate angle of lines in degree.
-'''
 def drawLines(basePoint = DPoint3d(0,0,0), step = 10.0, length = 200.0, nLines = 20, rotAngle = 0.0):
+    """
+    Draws multiple lines in the active DGN model.
+
+    :param basePoint: The starting point for the first line.
+    :type basePoint: DPoint3d
+    :param step: The distance between the starting points of consecutive lines.
+    :type step: float
+    :param length: The length of each line.
+    :type length: float
+    :param nLines: The number of lines to draw.
+    :type nLines: int
+    :param rotAngle: The rotation angle of the lines in degrees.
+    :type rotAngle: float
+
+    :returns: None
+    """
     if step <= 0.0 or length <=0.0 or nLines < 1:
         return
         
@@ -37,14 +40,21 @@ def drawLines(basePoint = DPoint3d(0,0,0), step = 10.0, length = 200.0, nLines =
         LineHandler.CreateLineElement(eeh, None, seg, ACTIVEMODEL.Is3d(), ACTIVEMODEL)
         eeh.AddToModel()
 
-'''
-Function to create a set of concentric circles into current model
-    centerPoint : DPoint3d  center point of circles
-    startRadius : float     start radius of circles
-    step : float            distance between each circles
-    nCircles : int          number of circles to be created    
-'''     
 def drawCircles(centerPoint = DPoint3d(0,0,0), startRadius = 5.0, step = 2.0, nCircles = 20):
+    """
+    Draws multiple concentric circles in the active DGN model.
+
+    :param centerPoint: The center point for all the circles.
+    :type centerPoint: DPoint3d
+    :param startRadius: The radius of the first circle.
+    :type startRadius: float
+    :param step: The incremental increase in radius for each subsequent circle.
+    :type step: float
+    :param nCircles: The number of circles to draw.
+    :type nCircles: int
+
+    :returns: None
+    """
     if startRadius <=0.0 or step <= 0.0 or nCircles < 1:
         return
         
@@ -56,17 +66,28 @@ def drawCircles(centerPoint = DPoint3d(0,0,0), startRadius = 5.0, step = 2.0, nC
         ArcHandler.CreateArcElement(eeh, None, ell, ACTIVEMODEL.Is3d(), ACTIVEMODEL)
         eeh.AddToModel()
         
-'''
-Function to create a set of round rectangles into current model
-    centerPoint : DPoint3d      center point of rectangles
-    startSizeX : float          start dimension on x direction
-    startSizeY : float          start dimension on y direction
-    step : float                distance between rectangles
-    baseRadius : float          base radius of round
-    nRects : int                number of rectangles to be created
-    rotAngle : 
-'''
+
 def drawRoundRectangles(centerPoint = DPoint3d(0,0,0), startSizeX = 30.0, startSizeY = 10.0, step = 5.0, baseRadius = 2.0, nRects = 20, rotAngle = 0.0):
+    """
+    Draws multiple rounded rectangles in the active DGN model.
+
+    :param centerPoint: The center point for all the rectangles.
+    :type centerPoint: DPoint3d
+    :param startSizeX: The width of the first rectangle.
+    :type startSizeX: float
+    :param startSizeY: The height of the first rectangle.
+    :type startSizeY: float
+    :param step: The incremental increase in size for each subsequent rectangle.
+    :type step: float
+    :param baseRadius: The radius of the corners of the rectangles.
+    :type baseRadius: float
+    :param nRects: The number of rectangles to draw.
+    :type nRects: int
+    :param rotAngle: The rotation angle of the rectangles in degrees.
+    :type rotAngle: float
+
+    :returns: None
+    """
     if startSizeX <= 0.0 or startSizeY <= 0.0 or step <= 0.0 or baseRadius <= 0.0 or nRects < 1:
         return
         

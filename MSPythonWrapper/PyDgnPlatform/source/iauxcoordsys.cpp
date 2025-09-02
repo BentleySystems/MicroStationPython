@@ -162,7 +162,9 @@ void def_IAuxCoordSys(py::module_& m)
     c5.def("GetScale", &IAuxCoordSys::GetScale);
     c5.def("SetScale", &IAuxCoordSys::SetScale, "scale"_a);
     
+    c5.def_property("Origin", &IAuxCoordSys::GetOrigin, &IAuxCoordSys::SetOrigin);
     c5.def("GetOrigin", &IAuxCoordSys::GetOrigin, "pOrigin"_a);
+    c5.def("SetOrigin", &IAuxCoordSys::SetOrigin, "pOrigin"_a);
     c5.def("GetRotation", py::overload_cast<RotMatrixR>(&IAuxCoordSys::GetRotation, py::const_), "pRot"_a);
     c5.def_property_readonly("IsReadOnly", &IAuxCoordSys::GetIsReadOnly);
     c5.def("GetIsReadOnly", &IAuxCoordSys::GetIsReadOnly);
@@ -171,7 +173,6 @@ void def_IAuxCoordSys(py::module_& m)
     c5.def("GetFlags", &IAuxCoordSys::GetFlags);
     c5.def("SetFlags", &IAuxCoordSys::SetFlags, "flags"_a);
 
-    c5.def("SetOrigin", &IAuxCoordSys::SetOrigin, "pOrigin"_a);
     c5.def("SetRotation", &IAuxCoordSys::SetRotation, "pRot"_a);
     c5.def("PointFromString", &IAuxCoordSys::PointFromString, "outPoint"_a, "errorMsg"_a, "inString"_a, "relative"_a, "lastPoint"_a, "modelRef"_a);
     c5.def("StringFromPoint", &IAuxCoordSys::StringFromPoint, "outPoint"_a, "errorMsg"_a, "inPoint"_a, "delta"_a, "deltaOrigin"_a, "modelRef"_a, "distanceFormatter"_a, "directionFormatter"_a);

@@ -856,8 +856,8 @@ void def_ECSchema(py::module_& m)
     c24.def_static("SetErrorHandling", &ECSchema::SetErrorHandling);
 
     py::class_<Bentley::Bstdcxx::bpair<Bentley::ECN::SchemaKey const, Bentley::RefCountedPtr<Bentley::ECN::ECSchema> >> c26(m, "SchemaKeyToSchemaBPair", py::multiple_inheritance());
-    c26.def("GetFirst", [](Bentley::Bstdcxx::bpair<Bentley::ECN::SchemaKey const, Bentley::RefCountedPtr<Bentley::ECN::ECSchema> >& self) {return self.first; });
-    c26.def("GetSecond", [](Bentley::Bstdcxx::bpair<Bentley::ECN::SchemaKey const, Bentley::RefCountedPtr<Bentley::ECN::ECSchema> >& self) {return self.second; });
+    //c26.def("GetFirst", [](Bentley::Bstdcxx::bpair<Bentley::ECN::SchemaKey const, Bentley::RefCountedPtr<Bentley::ECN::ECSchema> >& self) {return self.first; });
+    //c26.def("GetSecond", [](Bentley::Bstdcxx::bpair<Bentley::ECN::SchemaKey const, Bentley::RefCountedPtr<Bentley::ECN::ECSchema> >& self) {return self.second; });
 
     c26.def(py::init<>());
     c26.def(py::init<Bentley::ECN::SchemaKey const, Bentley::RefCountedPtr<Bentley::ECN::ECSchema>>(), "key"_a, "value"_a);

@@ -38,7 +38,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPrinterDriverBase_PushClip
 static const char * __doc_Bentley_MstnPlatform_Print_IPrinterDriverBase_CheckStop =R"doc(Periodically called to give the driver the opportunity to abort print
 processing.
 
-Returns:
+:returns:
     false to continue processing; true to abort.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrinterDriverBase_DriverEndPlot =R"doc(Last IPrinterDriver method called before finishing print processing.
@@ -48,12 +48,12 @@ Remark:
     it. Note that this method is called regardless of whether the job
     succeeded or failed.
 
-Returns:
+:returns:
     SUCCESS to continue print processing; ERROR to abort.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrinterDriverBase_DriverBeginPlot =R"doc(Called just before print processing begins.
 
-Returns:
+:returns:
     SUCCESS to continue print processing; ERROR to abort.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrinterDriverBase_DriverPreBeginPlot =R"doc(Called for each plot, before DriverBeginPlot, just before
@@ -62,7 +62,7 @@ IPrintEventHandler.PrePenChart.
 Remark:
     s The print engine has not yet been completely initialized.
 
-Returns:
+:returns:
     SUCCESS to continue print processing; ERROR to abort.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrinterDriverBase_DriverUnload =R"doc(Called when the printer driver configuration file is closed.
@@ -76,7 +76,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPrinterDriverBase_DriverLo
 Remark:
     s May be called more than once during the lifespan of the DLL.
 
-Returns:
+:returns:
     SUCCESS to continue loading the driver; ERROR to abort.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrinterDriverBase_DriverPreLoad =R"doc(Called after the printer driver configuration file is opened, but
@@ -87,7 +87,7 @@ values.
 Remark:
     s May be called more than once during the lifespan of the DLL.
 
-Returns:
+:returns:
     SUCCESS to continue loading the driver; ERROR to abort.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IDriverEndPlotParam_IsSuccess =R"doc(True if print successful.)doc";
@@ -156,7 +156,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPlotPathParam_ResetCurrent
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotPathParam_GetNextOperator =R"doc(Gets the next operator and optionally its vertices.
 
-Parameter ``operatorVerticesP``:
+:param operatorVerticesP:
     Vertices for next operator. May be NULL.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotPathParam_GetNumOperators =R"doc(Gets the number of operators in this path.)doc";
@@ -568,7 +568,7 @@ private:
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       6/2024
     +---------------+---------------+---------------+---------------+---------------+------*/
-    byte* GetByteCache(std::string methodName)
+    Byte* GetByteCache(std::string methodName)
         {
         try
             {
@@ -582,11 +582,11 @@ private:
                 if (imageSize < 1)
                     return nullptr;
 
-                static byte* imageP = nullptr; //Use static to keep consistent with the behavior of PYBIND11_OVERRIDE_*
+                static Byte* imageP = nullptr; //Use static to keep consistent with the behavior of PYBIND11_OVERRIDE_*
                 if (imageP)
                     delete[] imageP;
                 
-                imageP = new byte[imageSize]; //Caller needs to release cache
+                imageP = new Byte[imageSize]; //Caller needs to release cache
                 memcpy(imageP, (const void*)strData.data(), imageSize);
 
                 return imageP;
@@ -613,7 +613,7 @@ public:
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       6/2024
     +---------------+---------------+---------------+---------------+---------------+------*/
-    virtual byte* GetImage() override
+    virtual Byte* GetImage() override
     {
         return GetByteCache("GetImage");
     }
@@ -629,7 +629,7 @@ public:
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       6/2024
     +---------------+---------------+---------------+---------------+---------------+------*/
-    virtual byte* GetRedMap() override
+    virtual Byte* GetRedMap() override
     {
         return GetByteCache("GetRedMap");
     }
@@ -637,7 +637,7 @@ public:
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       6/2024
     +---------------+---------------+---------------+---------------+---------------+------*/
-    virtual byte* GetGreenMap() override
+    virtual Byte* GetGreenMap() override
     {
         return GetByteCache("GetGreenMap");
     }
@@ -645,7 +645,7 @@ public:
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       6/2024
     +---------------+---------------+---------------+---------------+---------------+------*/
-    virtual byte* GetBlueMap() override
+    virtual Byte* GetBlueMap() override
     {
         return GetByteCache("GetBlueMap");
     }

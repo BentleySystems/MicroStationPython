@@ -13,27 +13,27 @@
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_GetManager =R"doc(Obtain a reference to MicroStation's document manager. To call methods
 on the document manager, use MSDocumentManager::GetManager().Method
 
-Returns:
+:returns:
     The document manager *
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_GetDocumentWorkspace =R"doc(Retrieves the workspace information for a document.
 
-Returns:
+:returns:
     SUCCESS if workspace info is successfully retrieved.
 
-Parameter ``workspaceAssigned``:
+:param workspaceAssigned:
     Pointer to bool. It will be set to true if workspace is assigned.
 
-Parameter ``workspaceInfo``:
+:param workspaceInfo:
     Pointer to MSWorkspaceInfo. If non-null, it will contain
     information to workspace for the given document.
 
-Parameter ``documentMoniker``:
+:param documentMoniker:
     Moniker to document for workspace to be returned.
 
-Parameter ``generatorArgs``:
+:param generatorArgs:
     Arguments for worker process *
 
 )doc";
@@ -43,15 +43,15 @@ static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_CompareDocument
 
 
 
-Parameter ``document1``:
+:param document1:
     Moniker to first document of which workspace is to be compared
     with that of second document.
 
-Parameter ``document2``:
+:param document2:
     Moniker to second document of which workspace is to be compared
     with that of first document.
 
-Parameter ``generatorArgs``:
+:param generatorArgs:
     Arguments for worker process *
 
 Returns (Tuple, 0):
@@ -64,7 +64,7 @@ Returns (Tuple, 1):
 
 )doc";
 
-static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_OpenFolderDialog =R"doc(Parameter ``attributes``:
+static const char * __doc_Bentley_MstnPlatform_MSDocumentManager_OpenFolderDialog =R"doc(:param attributes:
     MicroStation file list attribues (FILELISTATTR flagword) *
 
 Returns (Tuple, 0):
@@ -91,11 +91,11 @@ optionally prompt the user for whether to overwrite the file or not.
 
 
 
-Parameter ``params``:
+:param params:
     A structure containing file open parameters. The entire structure
     should be memset to 0 and then individual fields set as necessary.
 
-Parameter ``overwriteMode``:
+:param overwriteMode:
     Sepcifies what to do if the document already exists *
 
 Returns(Tuple, 0):
@@ -112,14 +112,14 @@ is active, and the file system if the current session of MicroStation
 is not integrated with a document management system.
 
 
-Parameter ``params``:
+:param params:
     A structure containing file open parameters. The entire structure
     should be memset to 0 and then individual fields set as necessary.
 
-Parameter ``attributes``:
+:param attributes:
     MicroStation file open dialog attribues (FILEOPENEXTATTR flagword)
 
-Parameter ``openMode``:
+:param openMode:
     With what access the DgnDocument should be fetched from the DMS,
     if integrated, or what file access is required of the local file,
     if not integrated.. *
@@ -150,26 +150,26 @@ static const char * __doc_Bentley_DgnPlatform_DgnDocumentManager_PortableNameFro
 user. A portable name never includes explicit disk drive and path
 information.
 
-Parameter ``portableName``:
+:param portableName:
     A portable file name that can be used in a moniker that is to be
     persisted in a design file.
 
-Parameter ``userEnteredPath``:
+:param userEnteredPath:
     The file name that the user keyed in. If not NULL, as much as
     possible of it is used to generate portableName.
 
-Parameter ``fullPath``:
+:param fullPath:
     Identifies the disk file to which the portable moniker should
     point. This is often the full file name as returned from the File
     Open dialog box.
 
-Parameter ``basePath``:
+:param basePath:
     The base path that the caller will use relative searches for the
     file represented by the portable moniker. If the portable moniker
     is to be persisted in a DgnFile, basePath is usually the path of
     that DgnFile.
 
-Parameter ``relativePref``:
+:param relativePref:
     The preference for relative paths. If Allow, accepts relative
     paths that are in userEnteredPath. If CreateIfPossible, attempts
     to create a relative path. If Never, discards relative paths.
@@ -186,23 +186,23 @@ static const char * __doc_Bentley_DgnPlatform_DgnDocumentManager_PortableNameFro
 File Open dialog. A portable name never includes explicit disk drive
 and path information.
 
-Parameter ``portableName``:
+:param portableName:
     A portable file name that can be used in a moniker that is to be
     persisted in a design file.
 
-Parameter ``fullPath``:
+:param fullPath:
     The full file path to the file for which the portableName is
     generated.
 
-Parameter ``basePath``:
+:param basePath:
     The full file path to the file in which the portableName will be
     persisted.
 
-Parameter ``dirCfgVar``:
+:param dirCfgVar:
     If not NULL, this is a configuration variable whose value is the
     directory in fullPath.
 
-Parameter ``relative``:
+:param relative:
     The preference for relative paths. If Allow or CreateIfPossible,
     and dirCfgVar is NULL, attempts to make the portableName a
     relative path from basePath to fullPath. @note If dirCfgVar is not

@@ -14,22 +14,22 @@ static const char * __doc_Bentley_DgnPlatform_IEditParameterDefinitions_SetParam
 converted with respect to the current unit system if any conversion is
 needed for any type of parameter.
 
-Parameter ``def``:
+:param def:
     The parameter definition for which we are setting the value of the
     paramter set.
 
-Parameter ``pSet``:
+:param pSet:
     The parameter set for which we are setting the value.
 
-Parameter ``value``:
+:param value:
     The value in char to be stored in as the value of the paramter
     set.
 
-Parameter ``unitFactor``:
+:param unitFactor:
     The value in double is used to convert the value with respect to
     the current model unit for some type of parameter
 
-Returns:
+:returns:
     status of the setting of the value to the parameter set. If true
     then it is successfule else failed)doc";
 
@@ -37,15 +37,15 @@ static const char * __doc_Bentley_DgnPlatform_IEditParameterDefinitions_ReadFrom
 that produced by IParameterDefinitions::WriteToCsv(), and applies the
 data to these parameter definitions.
 
-Parameter ``src``:
+:param src:
     The CSV file from which to read the data
 
-Parameter ``context``:
+:param context:
     The context in which to read the contents. In particular, this
     context specifies which sections of the CSV to include and which
     to ignore.
 
-Returns:
+:returns:
     The sections of CSV which were successfully read and applied.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IEditParameterDefinitions_SetExpressionForParameter =R"doc(Associates an expression with a parameter, or removes an existing
@@ -54,14 +54,14 @@ parameter becomes read-only and its value will be calculated
 dynamically by evaluating the expression. Expressions can reference
 other parameters, as well as various functions and constants.
 
-Parameter ``accessString``:
+:param accessString:
     The internal name of the parameter associated with the expression
 
-Parameter ``expr``:
+:param expr:
     The expression to be associated with the parameter, or nullptr if
     the existing expression is to be removed
 
-Returns:
+:returns:
     Success if the expression was updated for the specified parameter,
     or an error status)doc";
 
@@ -79,31 +79,31 @@ expressions. The property values of the supplied IECInstance will
 provide the initial values of each domain parameter. These values will
 be applied to all IParameterSets as well.
 
-Parameter ``domainParams``:
+:param domainParams:
     An IECInstance of the desired ECClass, or nullptr to remove
     existing domain parameters.
 
-Returns:
+:returns:
     Success if the domain parameters were successfully updated, or an
     error status.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IEditParameterDefinitions_Replace =R"doc(Updates the parameter definition with the same internal name as the
 specified parameter definition
 
-Parameter ``def``:
+:param def:
     The updated parameter definition
 
-Returns:
+:returns:
     Success if the parameter definition was updated, or an error
     status)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IEditParameterDefinitions_Remove =R"doc(Removes the parameter definition with the specified name Removes the
 parameter definition with the specified internal name
 
-Parameter ``accessString``:
+:param accessString:
     The internal name of the parameter
 
-Returns:
+:returns:
     Success if the parameter was successfully removed, or else an
     error status)doc";
 
@@ -112,64 +112,64 @@ The value will be applied to the host model's active parameters and
 any existing parameter sets. Distance values should be specified in
 UORs, angles in radians, areas in square UORs
 
-Parameter ``label``:
+:param label:
     The user-visible name of the new parameter. Must be non-empty and
     unique within all existing parameters.
 
-Parameter ``type``:
+:param type:
     The type of the new parameter. Must be one of the types which is
     stored as a floating point value.
 
-Parameter ``value``:
+:param value:
     The initial value of the new parameter. This value will be applied
     to all variations as well.
 
-Parameter ``hidden``:
+:param hidden:
     If true, the parameter will be flagged as hidden.
 
-Returns:
+:returns:
     a status Success if the parameter was successfully created, or an
     error status)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IParameterDefinitions_GetParamSetValue =R"doc(Gets the parameter set value for a given parameter definition
 
-Parameter ``def``:
+:param def:
     The parameter definition for which the parameter set value we are
     trying to get.
 
-Parameter ``pSet``:
+:param pSet:
     The parameter set from the parameter definition for which we are
     trying to get the value.
 
-Parameter ``sections``:
+:param sections:
     sections Identifies which sections of data are to be included in
     object creation of the ParameterCsvWriter class.
 
-Returns:
+:returns:
     the value in string format.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IParameterDefinitions_EvaluateExpressions =R"doc(Attempts to evaluate all expressions defined for these parameter
 definitions, and assigns the result of each expression to the
 corresponding parameter value in the supplied IParameterValues.
 
-Parameter ``values``:
+:param values:
     The values to which the result of each expression are to be
     assigned.
 
-Returns:
+:returns:
     a status indicating any error which occurred during evaluation.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IParameterDefinitions_WriteToCsv =R"doc(Exports these parameter definitions to a .csv file in a format which
 can subsequently be imported into a parametric model.
 
-Parameter ``file``:
+:param file:
     The file to which the CSV is to be written
 
-Parameter ``sections``:
+:param sections:
     Identifies which sections of data are to be included in the
     exported CSV
 
-Returns:
+:returns:
     a status indicating any error which occurred while writing to the
     file.)doc";
 
@@ -207,27 +207,27 @@ static const char * __doc_Bentley_DgnPlatform_ParameterCsvSectionPresenceFlags_S
 static const char * __doc_Bentley_DgnPlatform_IParameterExpressionHandler_Parse =R"doc(Attempts to parse a parameter expression string into an
 IParameterExpression object.
 
-Parameter ``input``:
+:param input:
     The expression string to be parsed
 
-Parameter ``context``:
+:param context:
     The context in which the expression is to be parsed
 
-Returns:
+:returns:
     a ParseParameterExpressionResult encapsulating the return status,
     details about any parse errors encountered, and the
     IParameterExpression object if parsing succeeded.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IParameterExpression_Evaluate =R"doc(Evaluates this expression against the supplied context
 
-Parameter ``pv``:
+:param pv:
     Holds the value of the evaluated expression, if evaluation
     succeeds
 
-Parameter ``context``:
+:param context:
     The context against which the expression is to be evaluated
 
-Returns:
+:returns:
     ParameterStatus.Success if evaluation succeeds, or else an error
     code.)doc";
 

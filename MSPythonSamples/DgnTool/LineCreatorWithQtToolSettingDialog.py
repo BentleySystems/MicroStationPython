@@ -1,9 +1,4 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 import os
 from MSPyBentley import *
@@ -22,20 +17,33 @@ from PyQt5.QtWidgets import QGridLayout
 
 from PyQt5.QtGui import QFont, QWindow
 
-import win32gui
+'''
+This sample demonstrates how to create a DgnPrimitiveTool with a tool setting dialog implemented using PyQt5.
+'''
+
+class MsQtApplication(QApplication):
+    @staticmethod
+    def updateMstn ():
+        PyCadInputQueue.PythonMainLoop()
+
+    timerForMsMessagePump = None  
+
+    @staticmethod
+    def exec():
+        MsQtApplication.timerForMsMessagePump = QTimer()
+        MsQtApplication.timerForMsMessagePump.timeout.connect(MsQtApplication.updateMstn)
+        MsQtApplication.timerForMsMessagePump.start()
+        QApplication.exec()
+        MsQtApplication.timerForMsMessagePump.stop()      
 
 class MsQtWidgiet(QWidget):
     def __init__(self) :
+        """
+        Initialize the MsQtWidgiet.
+        """
         super().__init__()
-        self.storedWinId = self.winId()
-#        self.winIdCapsule = self.winId.ascapsule()
-        self.loop = QEventLoop()
-        PyCadInputQueue.AttachQtToolSetting(int(self.storedWinId))
+        PyCadInputQueue.AttachQtToolSetting(int(self.winId()))
 
-    def ms_mainLoop(self):
-        while win32gui.IsWindow(self.storedWinId):
-            self.loop.processEvents()
-            PyCadInputQueue.PythonMainLoop()
 
 class LineToolSetting:
     def __init__(self) -> None:
@@ -43,10 +51,28 @@ class LineToolSetting:
         self.angle = 0.0
 
 def bind(objectName, propertyName, type):
-  # Define a function that takes an object name, property name, and type as arguments
+    """
+    Bind a property of a child widget to a specified type.
+
+    :param objectName: The name of the child widget.
+    :type objectName: str
+    :param propertyName: The name of the property to bind.
+    :type propertyName: str
+    :param type: The type to which the property value should be converted.
+    :type type: type
+    :return: A property object with getter and setter functions.
+    :rtype: property
+    """
+    # Define a function that takes an object name, property name, and type as arguments
     
     def getter(self):
-      # Find the child widget with the given object name
+        """
+        Retrieve the property value from the child widget and convert it to the specified type.
+
+        :return: The converted property value.
+        :rtype: type
+        """
+        # Find the child widget with the given object name
         child = self.findChild(QObject, objectName)
         # Get the property value from the child widget
         p = child.property(propertyName)
@@ -57,10 +83,16 @@ def bind(objectName, propertyName, type):
       # Define a getter function that retrieves the property value
     
     def setter(self, value):
-      # Find the child widget with the given object name
-      self.findChild(QObject, objectName)
-      # Set the property value on the child widget
-      self.findChild(QObject, objectName).setProperty(propertyName, QVariant(value))
+        """
+        Set the property value on the child widget.
+
+        :param value: The value to set on the property.
+        :type value: Any
+        """      
+        # Find the child widget with the given object name
+        self.findChild(QObject, objectName)
+        # Set the property value on the child widget
+        self.findChild(QObject, objectName).setProperty(propertyName, QVariant(value))
       
       # Define a setter function that sets the property value
     
@@ -69,12 +101,42 @@ def bind(objectName, propertyName, type):
 
 class LineToolSettingDlg(MsQtWidgiet):
     def __init__(self):
+        """
+        Initialize the LineToolSettingDlg.
+
+        This initializes the dialog with the superclass constructor call,
+        creates an instance of LineToolSetting, and populates the tool setting.
+        """
         # Initialize the dialog with the superclass constructor call
         super().__init__()
         self.tool_setting = LineToolSetting()  # Create an instance of LineToolSetting
         self.populate_tool_setting()  # Populate the tool setting
 
     def populate_tool_setting(self):  # all are Qt codes without Microstation logic involved
+        """
+        Populate the tool setting dialog with widgets.
+
+        This method creates and arranges the widgets in a grid layout, including checkboxes,
+        labels, and edit boxes for length and angle settings. It also sets the fixed size
+        of the dialog and initializes the tool setting properties.
+
+        :ivar checkBoxUseL: Checkbox to enable or disable length setting.
+        :vartype checkBoxUseL: QCheckBox
+        :ivar editBoxLength: Edit box to input the length value.
+        :vartype editBoxLength: QLineEdit
+        :ivar checkBoxUseA: Checkbox to enable or disable angle setting.
+        :vartype checkBoxUseA: QCheckBox
+        :ivar editBoxAngle: Edit box to input the angle value.
+        :vartype editBoxAngle: QLineEdit
+        :ivar length: The length property from the tool setting.
+        :vartype length: float
+        :ivar angle: The angle property from the tool setting.
+        :vartype angle: float
+        :ivar use_length: Flag to indicate if length setting is used.
+        :vartype use_length: bool
+        :ivar use_angle: Flag to indicate if angle setting is used.
+        :vartype use_angle: bool
+        """
         # Create a QGridLayout and set it as the layout for this dialog
         self.grid = QGridLayout()
         self.setLayout(self.grid)
@@ -116,50 +178,59 @@ class LineToolSettingDlg(MsQtWidgiet):
     use_angle = bind("checkBoxUseA", "checked", bool)  # Bind the checked state of checkBoxUseA to a boolean type
 
 
-'''
-/*=================================================================================**//**
-* Example showing how to use DgnPrimitiveTool to write a place line tool.
-*
-* Demonstrates using the RedrawElems class for element dynamics.
-* 
-* @bsiclass                                                               Bentley Systems
-+===============+===============+===============+===============+===============+======*/
-'''
 class LineCreator(DgnPrimitiveTool):
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
+    """
+    Example showing how to use DgnPrimitiveTool to write a place line tool.
+
+    Demonstrates using the RedrawElems class for element dynamics.
+
+    """
+    
     def __init__(self, toolName, toolPrompt):
+        """
+        Initialize the LineCreator tool.
+
+        :param toolName: The name of the tool.
+        :type toolName: str
+        :param toolPrompt: The prompt for the tool.
+        :type toolPrompt: str
+        """
         DgnPrimitiveTool.__init__(self, toolName, toolPrompt) # C++ base's __init__ must be called.
         self.m_points = DPoint3dArray()
         self.m_self = self # Keep self reference
     
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _OnPostInstall(self):
+        """
+        Perform post-installation steps for the LineCreator tool.
+
+        This method enables snapping for create tools and calls the superclass's
+        _OnPostInstall method.
+        """
         AccuSnap.GetInstance().EnableSnap(True) # Enable snapping for create tools.
     
         DgnPrimitiveTool._OnPostInstall(self)
        
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _OnRestartTool(self):
+        """
+        Restart the LineCreator tool.
+
+        This method installs a new instance of the tool with the current tool ID and prompt.
+        """
         LineCreator.InstallNewInstance(self.GetToolId(), self.GetToolPrompt())
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
+
     def _OnDataButton(self, ev):
+        """
+        Handle the data button event.
+
+        This method processes the data button event, updates the tool settings, and creates
+        a line element in the active model.
+
+        :param ev: The event object containing information about the button event.
+        :type ev: DgnButtonEvent
+        :return: True if the event was handled successfully, False otherwise.
+        :rtype: bool
+        """
         if len(self.m_points) == 0:
             self._BeginDynamics() # Start dynamics on first point. Enables AccuDraw and triggers _OnDynamicFrame being called.
 
@@ -188,10 +259,31 @@ class LineCreator(DgnPrimitiveTool):
     +---------------+---------------+---------------+---------------+---------------+------*/
     '''
     def _OnResetButton(self, ev):
+        """
+        Handle the reset button event.
+
+        This method restarts the tool when the reset button is pressed.
+
+        :param ev: The event object containing information about the button event.
+        :type ev: DgnButtonEvent
+        :return: True if the event was handled successfully, False otherwise.
+        :rtype: bool
+        """       
         self._OnRestartTool()
         return True
         
     def __UpdateToolSettingAndGetEndPoint(self, ev):
+        """
+        Update the tool settings and get the end point based on the event.
+
+        This method calculates the end point of the line based on the current tool settings
+        and the event data. It updates the length and angle settings of the tool.
+
+        :param ev: The event object containing information about the button event.
+        :type ev: DgnButtonEvent
+        :return: The calculated end point.
+        :rtype: DPoint3d
+        """
         startPt = self.m_points[0]
         dynamicEndPt = ev.GetPoint()
 
@@ -233,12 +325,17 @@ class LineCreator(DgnPrimitiveTool):
         endPt = startPt + dir * self.toolSettingDlg.tool_setting.length
         return endPt             
 
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
+
     def _OnDynamicFrame(self, ev):
+        """
+        Handle the dynamic frame event.
+
+        This method updates the tool settings, creates a temporary line element,
+        and redraws it dynamically in the active view.
+
+        :param ev: The event object containing information about the dynamic frame event.
+        :type ev: DgnButtonEvent
+        """
         tmpPts = DPoint3dArray(self.m_points)
         eeh = EditElementHandle()
 
@@ -257,19 +354,38 @@ class LineCreator(DgnPrimitiveTool):
         redrawElems.DoRedraw(eeh)
 
     def _GetToolName (self, name):
+        """
+        Get the name of the tool.
+
+        :param name: The name of the tool.
+        :type name: str
+        :return: The name of the tool as a WString.
+        :rtype: WString
+        """
         s = WString ("LineCreator")
         return s
     
     def _OnCleanup (self):
-        if win32gui.IsWindow(self.toolSettingDlg.storedWinId):
-            self.toolSettingDlg.destroy()
+        """
+        Perform cleanup operations for the LineCreator tool.
+
+        This method destroys the tool setting dialog if its window is still valid.
+        """
+        self.toolSettingDlg.close()
  
-    '''    
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def CreateElement(self, eeh, points):
+        """
+        Create a line element from the given points.
+
+        This method creates a line element using the provided points and applies active settings to it.
+
+        :param eeh: The edit element handle to store the created element.
+        :type eeh: EditElementHandle
+        :param points: The points to create the line element from.
+        :type points: list[DPoint3d]
+        :return: True if the element was created successfully, False otherwise.
+        :rtype: bool
+        """
         if len(points) != 2:
             return False
 
@@ -282,12 +398,16 @@ class LineCreator(DgnPrimitiveTool):
 
         return True
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def SetupAndPromptForNextAction(self):
+        """
+        Set up the tool and prompt the user for the next action.
+
+        This method displays a prompt message based on the number of points collected
+        and sets the AccuDraw context for the next point.
+
+        :ivar m_points: The list of points collected by the tool.
+        :vartype m_points: list[DPoint3d]
+        """
         msgStr = ''
         
         if (len(self.m_points)==1):
@@ -304,30 +424,32 @@ class LineCreator(DgnPrimitiveTool):
 
         AccuDraw.GetInstance().SetContext(AccuDrawFlags.eACCUDRAW_SetXAxis, None, xVec) # Orient AccuDraw to last segment.
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * Method to create and install a new instance of the tool. If InstallTool returns ERROR,
-    * the new tool instance will be freed/invalid. Never call delete on RefCounted classes.
-    *
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
-    def InstallNewInstance(toolId, toolPrompt):   
-        tool = LineCreator(toolId, toolPrompt) 
-        tool.InstallTool()
-        tool.app = QApplication(sys.argv)
-        tool.toolSettingDlg = LineToolSettingDlg()
-        tool.toolSettingDlg.setWindowTitle("Place Line")
-        tool.toolSettingDlg.show()
-        tool.toolSettingDlg.ms_mainLoop()
 
-'''
-/*=================================================================================**//**
-* Default entrypoint for current module unit.
-*
-* @bsiclass                                                               Bentley Systems
-+===============+===============+===============+===============+===============+======*/
-'''
+    tool = None
+
+    def InstallNewInstance(toolId, toolPrompt):   
+        """
+        Create and install a new instance of the LineCreator tool.
+
+        This method creates a new instance of the LineCreator tool, installs it, and
+        initializes the tool setting dialog.
+
+        :param toolId: The ID of the tool.
+        :type toolId: str
+        :param toolPrompt: The prompt for the tool.
+        :type toolPrompt: str
+        """
+        LineCreator.tool = LineCreator(toolId, toolPrompt) 
+        LineCreator.tool.InstallTool()
+        LineCreator.tool.toolSettingDlg = LineToolSettingDlg()
+        LineCreator.tool.toolSettingDlg.setWindowTitle("Place Line")
+        LineCreator.tool.toolSettingDlg.show()
+
 if __name__ == "__main__":
-#    app = QApplication(sys.argv)
+    app = QApplication.instance()
+    if app is None:
+        app = MsQtApplication(sys.argv) 
+
     LineCreator.InstallNewInstance(0, 0)
+
+    app.exec()

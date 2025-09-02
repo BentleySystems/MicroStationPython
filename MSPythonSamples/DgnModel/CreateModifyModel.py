@@ -1,9 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -13,8 +9,19 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
 
-''' Create dgn model with given name '''
+'''
+Sample demonstrating how to create a model and change its type
+''' 
+
 def CreateModel(modelName):
+    """
+    Create a new model in the active DGN file if it does not already exist.
+
+    :param modelName: The name of the model to create.
+    :type modelName: str
+    :return: True if the model was created or already exists, False otherwise.
+    :rtype: bool
+    """
     # Get active dgn model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:
@@ -34,8 +41,16 @@ def CreateModel(modelName):
             
     return True
 
-''' Change model type to sheet for the dgn model with given name '''
+
 def ChangeModelTypeToSheet(modelName):
+    """
+    Change the type of the specified model to a sheet model.
+
+    :param modelName: The name of the model to change.
+    :type modelName: str
+    :return: True if the model type was successfully changed to sheet, False otherwise.
+    :rtype: bool
+    """
     # Get active dgn model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:

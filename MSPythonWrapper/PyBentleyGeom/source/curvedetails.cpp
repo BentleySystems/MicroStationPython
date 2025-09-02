@@ -29,22 +29,22 @@ with identity transforms and an empty range.)doc";
 
 static const char * __doc_Bentley_Geom_CurveGapOptions_SetRemovePriorGapPrimitives =R"doc(Set flag to remove prior gap primitives)doc";
 
-static const char * __doc_Bentley_Geom_CurveGapOptions_GetRemovePriorGapPrimitives =R"doc(Returns:
+static const char * __doc_Bentley_Geom_CurveGapOptions_GetRemovePriorGapPrimitives =R"doc(:returns:
     flag to remove prior gap primitives)doc";
 
 static const char * __doc_Bentley_Geom_CurveGapOptions_SetMaxAdjustAlongCurve =R"doc(Set max motion along a curve.)doc";
 
-static const char * __doc_Bentley_Geom_CurveGapOptions_GetMaxAdjustAlongCurve =R"doc(Returns:
+static const char * __doc_Bentley_Geom_CurveGapOptions_GetMaxAdjustAlongCurve =R"doc(:returns:
     max allowable motion along a curve.)doc";
 
 static const char * __doc_Bentley_Geom_CurveGapOptions_SetMaxDirectAdjustTolerance =R"doc(Set max allowable motion of line and linestring endpoints.)doc";
 
-static const char * __doc_Bentley_Geom_CurveGapOptions_GetMaxDirectAdjustTolerance =R"doc(Returns:
+static const char * __doc_Bentley_Geom_CurveGapOptions_GetMaxDirectAdjustTolerance =R"doc(:returns:
     max allowable motion of line and linestring endpoints.)doc";
 
 static const char * __doc_Bentley_Geom_CurveGapOptions_SetEqualPointTolerance =R"doc(Set gap size that does not need to be corrected.)doc";
 
-static const char * __doc_Bentley_Geom_CurveGapOptions_GetEqualPointTolerance =R"doc(Returns:
+static const char * __doc_Bentley_Geom_CurveGapOptions_GetEqualPointTolerance =R"doc(:returns:
     tolerance for gaps that do not have to be closed at all.)doc";
 
 static const char * __doc_Bentley_Geom_SolidLocationDetail_MapPickParameterFractionToRange =R"doc(Treat current pick parameter as fractions in new interval. return
@@ -565,6 +565,15 @@ void def_CurveDetails(py::module_& m)
 
     
     //===================================================================================
+    // struct CurvePrimitivePtrPair, CurvePrimitivePtrPairArray/CurvePrimitivePtrPairVector
+    py::class_<CurvePrimitivePtrPair> c80(m, "CurvePrimitivePtrPair");
+    py::bind_vector< CurvePrimitivePtrPairArray >(m, "CurvePrimitivePtrPairArray", py::module_local(false));
+
+    c80.def_readwrite("curveA", &CurvePrimitivePtrPair::curveA);
+    c80.def_readwrite("curveB", &CurvePrimitivePtrPair::curveB);
+    c80.def(py::init<ICurvePrimitivePtr, ICurvePrimitivePtr>(), "curveA"_a, "curveB"_a);
+ 
+    //===================================================================================
     // struct LocalRange
     py::class_<LocalRange> c9(m, "LocalRange");
     bind_ValidatedValue<LocalRange>(m, "ValidatedLocalRange", py::module_local(false));
@@ -579,6 +588,10 @@ void def_CurveDetails(py::module_& m)
     c9.def("InitNullRange", &LocalRange::InitNullRange, DOC(Bentley, Geom, LocalRange, InitNullRange));        
     c9.def("InitFromPrincipalAxesOfPoints", py::overload_cast<DPoint3dArray const&>(&LocalRange::InitFromPrincipalAxesOfPoints), "xyz"_a);
     c9.def("InitFromPrincipalAxesOfPoints", py::overload_cast<DPoint4dArray const&>(&LocalRange::InitFromPrincipalAxesOfPoints), "xyzw"_a);
+
+    c9.def("InitFromPrincipalAxesOfPoints", [](LocalRange& self, py::list const& xyz)
+           { CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+            return self.InitFromPrincipalAxesOfPoints(cppxyz); }, "xyz"_a);
 
     c9.def("DistanceOutside", &LocalRange::DistanceOutside, "spacePoint"_a);
 

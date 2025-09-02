@@ -14,7 +14,7 @@
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetNamedView =R"doc(Gets the named view to which this attachment refers in the referenced
 file.
 
-Returns:
+:returns:
     A named view, or a NamedViewPtr with IsNull() true if this
     attachment does not refer to a named view.
 )doc";
@@ -22,18 +22,18 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_ApplyStandardView =R"doc(Use a standard view to define the location and extent of this
 attachment.
 
-Parameter ``stdview``:
+:param stdview:
     The standard view to apply.
 
-Parameter ``userScale``:
+:param userScale:
     The scale to be applied to the attachment.
 
-Parameter ``acsScale``:
+:param acsScale:
     An additional scale to be applied to the attachment. This normally
     comes from the current ACS, but only if the model's
     MODELFLAG_ACS_LOCK flag is set. Optional, with default of 1.0.
 
-Returns:
+:returns:
     SUCCESS if successful or a non-zero error status if the view could
     not be applied.
 
@@ -47,7 +47,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetAttachDescription =R"doc(Gets the attachment description.
 
-Returns:
+:returns:
     an empty string if the attachment has no description.
 
 See also:
@@ -65,7 +65,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetLogicalName =R"do
 names are required for duplicate attachments of the same model to the
 parent model.
 
-Returns:
+:returns:
     non-zero error status if this attachment is a duplicate and the
     specified logical is not unique.
 
@@ -75,7 +75,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetLogicalName =R"doc(Gets the attachment's logical name.
 
-Returns:
+:returns:
     the logical name of the attachment or the empty string if not set.
 
 See also:
@@ -97,7 +97,7 @@ the attachment refers to a named view. See #GetNamedView.
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetRotateClipping =R"doc(Sets the attachment clip rotation.
 
-Parameter ``yesNo``:
+:param yesNo:
     Set to false to have clipping points relative to view coordinate
     system. The clipping points are relative to the global X-Y plane
     if a value of true is specified.
@@ -111,7 +111,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_IsRotateClipping =R"doc(Indicates whether the clipping points are to be rotated to global
 coordinate system.
 
-Returns:
+:returns:
     false if clipping point are view independent and are relative to
     the view coordinate system.
 
@@ -123,7 +123,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetClipRotMatrix =R"doc(Sets the attachment clip rotation.
 
-Parameter ``rotation``:
+:param rotation:
     Rotation matrix for clipping points.
 
 )doc";
@@ -133,11 +133,11 @@ static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetClipRotMatrix =R"
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetBackClipDepth =R"doc(Sets depth of back clipping plane.
 
-Parameter ``depth``:
+:param depth:
     Value for back clipping plane, this value must be less than the
     value for the front clip depth.
 
-Returns:
+:returns:
     SUCCESS if specified clip depth can be set. ERROR typically means
     that the depth specified is greater than the front clip depth.
 
@@ -145,7 +145,7 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetBackClipDepth =R"doc(Gets the attachment back clip depth.
 
-Returns:
+:returns:
     value of the back clip depth.
 
 See also:
@@ -155,11 +155,11 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetFrontClipDepth =R"doc(Sets depth of front clipping plane.
 
-Parameter ``depth``:
+:param depth:
     Value for front clipping plane, this value must be greater than
     the value for the back clip depth.
 
-Returns:
+:returns:
     SUCCESS if specified clip depth can be set. ERROR typically means
     that the depth specified is less than the back clip depth.
 
@@ -167,7 +167,7 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetFrontClipDepth =R"doc(Gets the attachment front clip depth.
 
-Returns:
+:returns:
     value of the front clip depth.
 
 See also:
@@ -177,14 +177,14 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_HasFrontClip =R"doc(Indicates whether the attachment has a back clip depth defined.
 
-Returns:
+:returns:
     true if back clip depth is defined.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_HasBackClip =R"doc(Indicates whether the attachment has a back clip depth defined.
 
-Returns:
+:returns:
     true if back clip depth is defined.
 
 )doc";
@@ -193,27 +193,27 @@ static const char * __doc_Bentley_DgnPlatform_DgnAttachment_AppendClipVoidPoints
 Clip points a relative to the origin specified, with the specified
 rotation.
 
-Parameter ``points``:
+:param points:
     An array of clip points, in the coordinate system of a view
     specified by the other arguments. The points in this array might
     be changed by this method.
 
-Parameter ``numPoints``:
+:param numPoints:
     The number of clip points in the array. The maximum number of
     points allowed is specified by MAX_REFCLIPPNTS.
 
-Parameter ``viewRotMatrix``:
+:param viewRotMatrix:
     The viewing rotation matrix.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetClipPoints =R"doc(Sets clip boundary points.
 
-Parameter ``points``:
+:param points:
     An array of clip points, in UORs of the DgnAttachment model,
     relative to the DgnAttachment model's origin.
 
-Parameter ``numPoints``:
+:param numPoints:
     The number of clip points in the array. The maximum number of
     points allowed is specified by MAX_REFCLIPPNTS.
 
@@ -221,7 +221,7 @@ Parameter ``numPoints``:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetClipPoints =R"doc(Gets clip boundary points.
 
-Parameter ``clipPoints``:
+:param clipPoints:
     Vector of points to be populated. @DotNetMethodExclude
 
 )doc";
@@ -237,10 +237,10 @@ static const char * __doc_Bentley_DgnPlatform_DgnAttachment_ClearClipElementId =
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetClipElementId =R"doc(Sets the ElementId of the clipping element.
 
-Parameter ``clipElement``:
+:param clipElement:
     Element ID of clipping element.
 
-Returns:
+:returns:
     ERROR if an element with the specified element ID is not found
     with the DgnAttachment's DgnModel.
 
@@ -253,20 +253,20 @@ defined then 0L is returned.
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetClipBoundaries =R"doc(Gets the clip descriptor for this attachments clip boundary.
 
-Parameter ``clip``:
+:param clip:
     The ClipVector object that describes the clipping for this
     reference.
 
-Parameter ``vp``:
+:param vp:
     The viewport for which to get the ClipVector. This is needed in
     cases where the DgnAttachment is clipped by an element.
 
-Parameter ``relativeToImmediateParent``:
+:param relativeToImmediateParent:
     When true, the ClipVector coordinates are in the coordinate system
     of the immediate parent, rather than the coordinate system of the
     root model.
 
-Parameter ``onlyMasksIfClipElement``:
+:param onlyMasksIfClipElement:
     When true, and the DgnAttachment is clipped by an element, gets
     only the clip masks.
 
@@ -282,8 +282,8 @@ static const char * __doc_Bentley_DgnPlatform_DgnAttachment_IsHighlighted =R"doc
 highlighted if the attachment is highlighted or if its parent is
 highlighted.
 
-Parameter ``checkParents``:
-    [in] If true, check the parent highlighted state, and return true
+:param checkParents:
+    (input) If true, check the parent highlighted state, and return true
     if any parent is highlighted.
 
 )doc";
@@ -374,7 +374,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetDgnAttachmentLevel =R"doc(Assign the attachment itself to a level in the parent file
 
-Parameter ``[in]``:
+:param (input):
     levelId The level to assign. Pass (LevelId) 0 to specify that the
     DgnAttachment is not on any level.
 
@@ -404,13 +404,13 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_SetIsDisplayed =R"doc(Sets the DgnAttachment's display flag.
 
-Parameter ``state``:
+:param state:
     The new display state.
 
-Parameter ``loadIfNecessary``:
+:param loadIfNecessary:
     Load the attachment model, if not already loaded.
 
-Parameter ``processAffected``:
+:param processAffected:
     Whether to invoke dependency callbacks when loading the
     DgnAttachment is complete. This only matters if loadIfNecessary is
     true and the DgnAttachment model was not previously loaded.
@@ -642,7 +642,7 @@ Remark:
     s This function returns the empty string if the referenced model
     is the default model.
 
-Returns:
+:returns:
     the name of the model to be attached or blank for the default
     model.
 
@@ -650,18 +650,18 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetAttachFullFileSpec =R"doc(Gets the full path to the local file as attached.
 
-Parameter ``dontFindIfPreviouslyNotFound``:
+:param dontFindIfPreviouslyNotFound:
     Avoid repeating file system or network search if previous attempt
     to resolve the local file path failed.
 
-Returns:
+:returns:
     the full filepath of the referenced file. @See GetAttachFileName
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetAttachFileName =R"doc(Gets the file name for this DgnAttachment.
 
-Returns:
+:returns:
     the name of the referenced file or blank for the parent file.
 
 Remark:
@@ -673,7 +673,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetBaseDgnAttachment =R"doc(Gets the direct attachment that leads to this attachment.
 
-Returns:
+:returns:
     If this DgnAttachment is a nested DgnAttachment, return its
     outermost (non-nested) parent DgnAttachment. This is sometimes
     referred to as the " direct attachment ". If this DgnAttachment is
@@ -689,7 +689,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnAttachment_GetParent =R"doc(Get
 Remark:
     s Every DgnAttachment has a parent.
 
-Returns:
+:returns:
     the parent DgnModelRef of this DgnAttachment.
 
 )doc";
@@ -697,7 +697,7 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_FindAppData =R"doc(Search the DgnAttachmentAppData list for this DgnAttachment for an
 entry with a particular key.
 
-Returns:
+:returns:
     the DgnAttachmentAppData with *key,* or NULL. @See AddAppData
     @DotNetMethodCustomImplementation
 
@@ -705,7 +705,7 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_DropAppData =R"doc(Remove DgnAttachmentAppData from this DgnAttachment.
 
-Returns:
+:returns:
     SUCCESS if appData with key is found and was dropped. @See
     AddAppData @DotNetMethodCustomImplementation
 
@@ -714,7 +714,7 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_AddAppData =R"doc(@name DgnAttachmentAppData Management Add (or replace)
 DgnAttachmentAppData to this DgnAttachment.
 
-Returns:
+:returns:
     SUCCESS if appData was successfully added. Note that it is illegal
     to add or remove AppData from within any of the AppData " _On "
     methods. If an entry with *key* already exists, it will be dropped
@@ -731,10 +731,10 @@ DgnModelRef:;FindDgnAttachmentByElementId
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_Rewrite =R"doc(Rewrite the DgnAttachment definition to the parent model. Call this
 after changing parameters using any Set methods.
 
-Returns:
-    Non-zero error status if the write operation failed. May be \li
+:returns:
+    Non-zero error status if the write operation failed. May be 
     DGNATTACHMENT_ERROR_DuplicateLogical - You must call
-    SetLogicalName or SetUniqueLogical \li DGNMODEL_STATUS_ReadOnly -
+    SetLogicalName or SetUniqueLogical  DGNMODEL_STATUS_ReadOnly -
     the parent model is read-only <p>@See DgnFile::ProcessChanges
 
 )doc";
@@ -742,10 +742,10 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DgnAttachment_WriteToModel =R"doc(@name Persistence Write the DgnAttachment definition to the parent
 model. Call this after creating a new attachment.
 
-Returns:
-    Non-zero error status if the write operation failed. May be \li
+:returns:
+    Non-zero error status if the write operation failed. May be 
     DGNATTACHMENT_ERROR_DuplicateLogical - You must call
-    SetLogicalName or SetUniqueLogical \li DGNMODEL_STATUS_ReadOnly -
+    SetLogicalName or SetUniqueLogical  DGNMODEL_STATUS_ReadOnly -
     the parent model is read-only <p>@See DgnFile::ProcessChanges
 
 )doc";
@@ -983,13 +983,39 @@ void def_DgnAttachment(py::module_& m)
     c2.def("GetClipPointCount", &DgnAttachment::GetClipPointCount, DOC(Bentley, DgnPlatform, DgnAttachment, GetClipPointCount));
     
     c2.def("GetClipPoints", &DgnAttachment::GetClipPoints, "clipPoints"_a, DOC(Bentley, DgnPlatform, DgnAttachment, GetClipPoints));
-    c2.def("SetClipPoints", &DgnAttachment::SetClipPoints, "points"_a, "numPoints"_a, DOC(Bentley, DgnPlatform, DgnAttachment, SetClipPoints));
-    
-    c2.def("SetClipBoundFromViewPoints",
-           &DgnAttachment::SetClipBoundFromViewPoints,
-           "points"_a, "numPoints"_a, "viewRotMatrix"_a, "viewOrigin"_a, "viewActiveZ"_a, "discardClipMasks"_a);
 
-    c2.def("AppendClipVoidPoints", &DgnAttachment::AppendClipVoidPoints, "points"_a, "numPoints"_a, "viewRotMatrix"_a, DOC(Bentley, DgnPlatform, DgnAttachment, AppendClipVoidPoints));
+    c2.def("SetClipPoints", [](DgnAttachmentR self, const DPoint2dArray& points)
+        {
+        return self.SetClipPoints(points.data(), (UInt32)points.size());
+        }, "points"_a, DOC(Bentley, DgnPlatform, DgnAttachment, SetClipPoints));
+
+    c2.def("SetClipPoints", [](DgnAttachmentR self, const py::list & pyPoints)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(pyPoints, cppPoints, DPoint2dArray, DPoint2d);
+        return self.SetClipPoints(cppPoints.data(), (UInt32)cppPoints.size());
+        }, "points"_a, DOC(Bentley, DgnPlatform, DgnAttachment, SetClipPoints));
+
+    c2.def("SetClipBoundFromViewPoints", [](DgnAttachmentR self, const DPoint2dArray& points, RotMatrixCR viewRotMatrix, DPoint3dR viewOrigin, double viewActiveZ, bool discardClipMasks)
+        {
+        return self.SetClipBoundFromViewPoints(points.data(), (UInt32)points.size(), viewRotMatrix, viewOrigin, viewActiveZ, discardClipMasks);
+        },"points"_a, "viewRotMatrix"_a, "viewOrigin"_a, "viewActiveZ"_a, "discardClipMasks"_a);
+
+    c2.def("SetClipBoundFromViewPoints", [](DgnAttachmentR self, const py::list& pyPoints, RotMatrixCR viewRotMatrix, DPoint3dR viewOrigin, double viewActiveZ, bool discardClipMasks)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(pyPoints, cppPoints, DPoint2dArray, DPoint2d);
+        return self.SetClipBoundFromViewPoints(cppPoints.data(), (UInt32)cppPoints.size(), viewRotMatrix, viewOrigin, viewActiveZ, discardClipMasks);
+        },"points"_a, "viewRotMatrix"_a, "viewOrigin"_a, "viewActiveZ"_a, "discardClipMasks"_a);
+
+    c2.def("AppendClipVoidPoints", [](DgnAttachmentR self, DPoint2dArray& points, RotMatrixCR viewRotMatrix)
+        {
+        return self.AppendClipVoidPoints(points.data(), (UInt32)points.size(), viewRotMatrix);
+        }, "points"_a, "viewRotMatrix"_a, DOC(Bentley, DgnPlatform, DgnAttachment, AppendClipVoidPoints));
+    
+    c2.def("AppendClipVoidPoints", [](DgnAttachmentR self, const py::list& pyPoints, RotMatrixCR viewRotMatrix)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(pyPoints, cppPoints, DPoint2dArray, DPoint2d);
+        return self.AppendClipVoidPoints(cppPoints.data(), (UInt32)cppPoints.size(), viewRotMatrix);
+        }, "points"_a, "viewRotMatrix"_a, DOC(Bentley, DgnPlatform, DgnAttachment, AppendClipVoidPoints));
 
     c2.def("HasBackClip", &DgnAttachment::HasBackClip, DOC(Bentley, DgnPlatform, DgnAttachment, HasBackClip));
     c2.def("HasFrontClip", &DgnAttachment::HasFrontClip, DOC(Bentley, DgnPlatform, DgnAttachment, HasFrontClip));

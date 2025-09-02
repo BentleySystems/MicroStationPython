@@ -16,10 +16,10 @@ static const char * __doc_Bentley_DgnPlatform_IModifyElement__ResetStop =R"doc(C
 
 static const char * __doc_Bentley_DgnPlatform_IModifyElement__OnElementModify =R"doc(Called to apply element modification.
 
-Parameter ``eeh``:
-    IN element to apply modification to.
+:param eeh:
+    (input) element to apply modification to.
 
-Returns:
+:returns:
     SUCCESS if modify was ok and element should be replaced, deleted,
     or added/copied.)doc";
 

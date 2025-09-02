@@ -62,7 +62,7 @@ identified as such.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextBlock_Remove =R"doc(Removes all content between two carets (from inclusive, to exclusive).
 
-Returns:
+:returns:
     The new position of the 'from' caret parameter. Note that the
     original 'from' caret can become invalid (e.g. if you remove the
     last run of a paragraph, the resulting paragraph is removed, and
@@ -75,7 +75,7 @@ be truncated). If it is less, the resulting run will be padded with
 space characters (U+0020) according to the EDF justification. @note
 The maximum length of an enter data field is currently 128.
 
-Returns:
+:returns:
     The new position of the insert caret. Note that this is not
     necessarily N insert positions from the original insert position
     (where N is the length of the string) (e.g. if you append a
@@ -85,7 +85,7 @@ static const char * __doc_Bentley_DgnPlatform_TextBlock_InsertStackedFraction =R
 inserting a NoBarFraction, a HorizontalBarFraction, or a
 DiagonalBarFraction.
 
-Returns:
+:returns:
     The new position of the insert caret. Note that this is not
     necessarily N insert positions from the original insert position
     (where N is the length of the string) (e.g. if you append a
@@ -104,7 +104,7 @@ analagous to inserting a CharStream. @note The string will be
 processed for control characters such as carriage returns, line feeds,
 and tabs, and appropriate runs will be added on your behalf.
 
-Returns:
+:returns:
     The new position of the insert caret. Note that this is not
     necessarily N insert positions from the original insert position
     (where N is the length of the string) (e.g. if you append a

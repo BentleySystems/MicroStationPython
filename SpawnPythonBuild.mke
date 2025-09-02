@@ -123,6 +123,9 @@ always:
         set WORKING_ON_PORT_TO_NEW_TOOLSET=$(WORKING_ON_PORT_TO_NEW_TOOLSET)
         set SrcBsiCommon=$(SrcBsiCommon)
     %endif
+    %if defined (BUILD_USING_VS2022)
+        set BUILD_USING_VS2022=1
+    %endif
     %if defined (BUILD_USING_VS2019)
         set BUILD_USING_VS2019=1
     %endif

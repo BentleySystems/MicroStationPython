@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -15,10 +10,17 @@ import ctypes
 import sys
 
 '''
-Function to select elements by its area
-    inputArea : float      Area
+This sample demonstrates how to select elements by area
 '''
+
 def selectElementsbyArea(inputArea):
+    """
+    unction to select elements by its area
+    :param inputArea: Area
+    :type float: inputArea
+
+    :returns: None
+    """
     #Get active model   
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -57,13 +59,30 @@ def selectElementsbyArea(inputArea):
                     print("EnclosedArea:", propValue.GetDouble()/(scaleFactor * scaleFactor))
                     if (inputArea > area):
                         selSetManager.AddElement(perElementRef,dgnModel)
+                        print (f"Element ID: {perElementRef.GetElementId ()} Area: {area}")
                     break
                 else:
                      break
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {agenda.GetCount()} elements")
 
-'''
-Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '2D Metric Design' model 
-'''
+    unique_element_types = set()
+    # iterate over the selection set printing the element ids of elements in the selection set
+    for i in range(agenda.GetCount()):
+        editElementHandle = agenda.GetEntry(i)
+        element_type = editElementHandle.ElementType
+        unique_element_types.add(element_type)
+        elementRange = DRange3d()
+        center = DPoint3d ()
+        DisplayHandler.Instance.CalcElementRange(editElementHandle, elementRange, None)
+        center = elementRange.high - elementRange.low
+        print (f"  Element ID: {editElementHandle.GetElementId()}, Range : {elementRange} Center :{center}")
+    
+    print("Unique Element Types:", list(unique_element_types)) 
+#Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '2D Metric Design' model 
 #main
 if __name__ == "__main__":
     #highlight all the elements with type 
@@ -71,5 +90,5 @@ if __name__ == "__main__":
     #2-D/3-D Line String Element (type 4)
     #2-D/3-D Ellipse Element (type 15)
     #2-D/3-D Arc Element (type 16)
-    inputArea = 200.0  #consider values in SQ M
+    inputArea = 200000.0  #consider values in SQ M
     selectElementsbyArea(inputArea)

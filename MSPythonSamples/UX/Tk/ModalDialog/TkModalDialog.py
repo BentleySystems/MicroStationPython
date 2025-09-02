@@ -1,9 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+﻿# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 import win32gui
 import win32process
@@ -31,6 +27,23 @@ FACTOR = 0.5
 Function to attach the image
 '''
 def AttachRaster (fileName, fullPath, modelRef, extentInch=DPoint2d(6.4, 4.8), ptLocaton=DPoint3d(0.0, 0.0, 0.0)):
+    """
+    Attaches a raster image to a model reference.
+    
+    :param fileName: The name of the raster file.
+    :type fileName: str
+    :param fullPath: The full path to the raster file.
+    :type fullPath: str
+    :param modelRef: The model reference to which the raster will be attached.
+    :type modelRef: ModelReference
+    :param extentInch: The extent of the raster in inches, defaults to DPoint2d(6.4, 4.8).
+    :type extentInch: DPoint2d, optional
+    :param ptLocaton: The location point where the raster will be attached, defaults to DPoint3d(0.0, 0.0, 0.0).
+    :type ptLocaton: DPoint3d, optional
+    
+    :return: True if the raster was successfully attached, False otherwise.
+    :rtype: bool
+    """
     # Create a moniker from the raw data (file name and full path)
     moniker = DgnDocumentMoniker.CreateFromRawData(fileName, fullPath, None, "", False, None)
     if moniker is None:   # check if the moniker was successfully created
@@ -68,6 +81,21 @@ def AttachRaster (fileName, fullPath, modelRef, extentInch=DPoint2d(6.4, 4.8), p
 Function to define the size and location of the output image
 '''
 def GetImageSizeLocation():
+    """
+    Calculate the size and location of an image in the active viewport.
+    This function retrieves the active view set from the view manager, gets the selected viewport,
+    and calculates the extent of the image in the viewport based on the view's origin, delta vector,
+    and rotation vector.
+    
+    Returns:
+        tuple: A tuple containing:
+            - uorExtentPt (DPoint2d): The calculated extent point.
+            - startPt (DPoint3d): The origin point of the view.
+    
+    Notes:
+        - If the viewport is None, the function returns an empty point.
+        - The extent in the Y direction is calculated by multiplying the extent in the X direction by a constant factor.
+    """
     # Get the active view set from the view manager
     vSet = IViewManager.GetActiveViewSet()
     # Get the selected viewport from the view set
@@ -109,12 +137,24 @@ def GetImageSizeLocation():
     return uorExtentPt, startPt  # return the calculated point and starting point
 
 def on_closing ():
+    """
+    Handle the event when the modal dialog is requested to close.
+
+    This function destroys the default Tkinter root window, effectively 
+    closing the application.
+    """
     tk._default_root.destroy()
 
 '''
 Function to open a file picker
 '''
 def show_dialog(text):
+    """
+    Display a file dialog for selecting a raster file and update the provided text widget with the selected file path.
+    
+    :param text: The text widget to be updated with the selected file path.
+    :type text: tkinter.Text
+    """
     # Define a function to display a dialog for selecting a raster file
     
     file_path = filedialog.askopenfilename(initialdir="/", title="Select raster file", filetypes=[("All Files", "*.*")])  # open file dialog with default directory and file type filters
@@ -128,6 +168,26 @@ def show_dialog(text):
     text.config(state="disabled")  # disable text widget to prevent further editing
 
 def attach(file_path):
+    """
+    Attach a raster file to the active design model.
+    
+    :param file_path: The path to the raster file to be attached.
+    :type file_path: str
+    :raises FileNotFoundError: If the provided file path does not point to a valid file.
+    
+    This function performs the following steps:
+    1. Checks if the provided file path is valid.
+    2. Displays an info message box if the file path is invalid.
+    3. Calls the `on_closing` function to handle the window close event.
+    4. Retrieves the base name of the selected file.
+    5. References the active design model.
+    6. Gets the size and location of an image.
+    7. Retrieves information about the active design model.
+    8. Converts the image width and height from meters to inches.
+    9. Attaches the raster file to the active design model.
+    
+    :returns: None
+    """
 
     if not os.path.isfile(file_path):  # check if the selected path is a valid file
         messagebox.showinfo("Info", "Please select a raster file to attach")   # show an info message box with a prompt
@@ -145,6 +205,15 @@ def attach(file_path):
     AttachRaster(file_name, file_path, ISessionMgr.ActiveDgnModelRef, DPoint2d(imageWidth, imageHeight), imageOrg)  # attach the raster file
 
 def get_all_windows():
+    """
+    Get the foreground window and all top-level windows belonging to the same process.
+    This function retrieves the handle of the currently active (foreground) window and enumerates 
+    all top-level windows that belong to the same process as the foreground window.
+    
+    :return: A tuple containing the handle of the foreground window and a list of handles of all 
+             top-level windows belonging to the same process.
+    :rtype: tuple (int, list of int)
+    """
     # Get the foreground window (i.e., the currently active window)
     MShwnd = win32gui.GetForegroundWindow()
     
@@ -162,6 +231,20 @@ def get_all_windows():
     return MShwnd, windows  # return the foreground window and the list of all windows
 
 def doModal():
+    """
+    Displays a modal dialog using Tkinter, disables all other windows while the dialog is open,
+    and re-enables them once the dialog is closed.
+    The dialog allows the user to select a raster file to attach.
+    The function performs the following steps:
+    1. Disables all open windows.
+    2. Creates a Tkinter window with a title "Attach Raster".
+    3. Adds a Text widget with a prompt message.
+    4. Adds a button to open a file selection dialog.
+    5. Adds a button to attach the selected file.
+    6. Runs the Tkinter event loop.
+    7. Re-enables all previously disabled windows and restores the original foreground window.
+    :return: None
+    """
      # Get all window handles and disable them
     MShwnd, windows = get_all_windows()  # get the foreground window and a list of all window handles
     for hwnd in windows:  # iterate through each window handle

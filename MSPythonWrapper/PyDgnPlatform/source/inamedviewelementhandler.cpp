@@ -10,14 +10,14 @@
 
 
 
-static const char * __doc_Bentley_DgnPlatform_INamedViewElementHandler_GetViewTypeNameForPersistence =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_INamedViewElementHandler_GetViewTypeNameForPersistence =R"doc(:returns:
     View type string
 
 Remark:
     s This is the same as GetViewTypeName () which is a translatable
     string displayed in the UI.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_INamedViewElementHandler_GetViewTypeName =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_INamedViewElementHandler_GetViewTypeName =R"doc(:returns:
     View type string
 
 Remark:
@@ -26,10 +26,10 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_INamedViewElementHandler_CreateView =R"doc(Call this method to create an object of your view type
 
-Parameter ``destinationFile``:
+:param destinationFile:
     reference to DgnFile object
 
-Returns:
+:returns:
     RefCounted pointer to view object)doc";
 
 //=======================================================================================

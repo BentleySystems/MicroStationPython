@@ -10,10 +10,10 @@
 
 static const char* __doc_Bentley_DgnPlatform_ViewPortInfo_From = R"doc(Copies the contents of the source ViewPortInfo to this ViewPortInfo.
 
-Parameter ``source``:
+:param source:
     The source ViewPortInfo.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_ViewPortInfo_CopyFrom =R"doc(Parameter ``source``:
+static const char * __doc_Bentley_DgnPlatform_ViewPortInfo_CopyFrom =R"doc(:param source:
     The source ViewPortInfo.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewPortInfo_GetAspectRatio =R"doc(Gets the aspect ratio of the view.)doc";
@@ -22,25 +22,25 @@ static const char * __doc_Bentley_DgnPlatform_ViewPortInfo_Clear =R"doc(Clears t
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetStandardViewByName =R"doc(Gets a standard view by name.
 
-Parameter ``rotP``:
+:param rotP:
     [optional] The orientation of the standard view
 
-Parameter ``standardIdP``:
+:param standardIdP:
     [optional] The identifier of the standard view
 
-Parameter ``viewName``:
+:param viewName:
     The name of the standard view to look up. Note that the comparison
     is case-insensitive.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetStandardViewName =R"doc(Gets the name of a StandardView.
 
-Parameter ``viewName``:
+:param viewName:
     True to check the 3D members of StandardRotation.
 
-Parameter ``standardView``:
+:param standardView:
     The StandardView orientation.
 
-Returns:
+:returns:
     A member of the StandardView enumeration.
     StandardView::NotStandard indicates that rotation does not match
     any.)doc";
@@ -48,25 +48,25 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_IsStandardViewRotation =R"doc(Tests whether an orientation matrix corresponds to one of the
 StandardView orientations.
 
-Parameter ``rotation``:
+:param rotation:
     The orientation to test.
 
-Parameter ``check3D``:
+:param check3D:
     True to check the 3D members of StandardRotation.
 
-Returns:
+:returns:
     A member of the StandardView enumeration.
     StandardView::NotStandard indicates that rotation does not match
     any.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetDefaultFlags =R"doc(Get the default values for ViewFlags.
 
-Parameter ``viewFlags``:
+:param viewFlags:
     The default ViewFlags.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_Create =R"doc(Creates a new ViewInfo.
 
-Parameter ``namedView``:
+:param namedView:
     True if the ViewInfo will be used for a NamedView, false if it is
     to be used for a numbered view.)doc";
 
@@ -75,14 +75,14 @@ displayed for the given model, taking into account the per-view level
 display (see #GetLevelDisplayMask) and the on/off and frozen states of
 the levels.
 
-Parameter ``levelBitMask``:
+:param levelBitMask:
     The per-view level display mask.
 
-Parameter ``model``:
+:param model:
     The model for which the display is desired. Must be rootModel or a
     descendant of the rootModel (see #GetRootModelP).
 
-Returns:
+:returns:
     VI_Success or VI_BadModelRef if the model is not the rootModel or
     a descendant of rootModel.
 
@@ -97,11 +97,11 @@ on/off and frozen state of the level.
 
 
 
-Parameter ``model``:
+:param model:
     The model for which the display is desired. Must be rootModel or a
     descendant of the rootModel (see #GetRootModelP).
 
-Parameter ``levelID``:
+:param levelID:
     The level for which the display is desired. @See
     EnsureLevelMaskCoverage, ViewInfoCodeSamples
 
@@ -116,14 +116,14 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetLevelDisplayMask =R"doc(Sets the per-view level display mask for the the given model.
 
-Parameter ``model``:
+:param model:
     The model for which the display is desired. Must be rootModel or a
     descendant of the rootModel (see #GetRootModelP).
 
-Parameter ``levelBitMask``:
+:param levelBitMask:
     The new per-view level display mask.
 
-Returns:
+:returns:
     VI_Success or VI_BadModelRef if the model is not the rootModel or
     a descendant of rootModel.
 
@@ -143,14 +143,14 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetLevelDisplayMask =R"doc(Returns the BitMask containing the per-view level display for the
 given model.
 
-Parameter ``levelBitMask``:
+:param levelBitMask:
     The per-view level display mask.
 
-Parameter ``model``:
+:param model:
     The model for which the display is desired. Must be rootModel or a
     descendant of the rootModel (see #GetRootModelP).
 
-Returns:
+:returns:
     VI_Success or VI_BadModelRef if the model is not the rootModel or
     a descendant of rootModel.
 
@@ -166,17 +166,17 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetLevelDisplay =R"doc(Sets the per-view level display bit for the the given model and level.
 
-Parameter ``model``:
+:param model:
     The model for which the display is desired. Must be rootModel or a
     descendant of the rootModel (see #GetRootModelP).
 
-Parameter ``levelID``:
+:param levelID:
     The level for which the display is desired.
 
-Parameter ``onOff``:
+:param onOff:
     The new state for the per-view level display bit.
 
-Returns:
+:returns:
     VI_Success or VI_BadModelRef if the model is not the rootModel or
     a descendant of rootModel.
 
@@ -189,11 +189,11 @@ static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetLevelDisplay =R"doc(Re
 given model and level.
 
 
-Parameter ``model``:
+:param model:
     The model for which the display is desired. Must be rootModel or a
     descendant of the rootModel (see #GetRootModelP).
 
-Parameter ``levelID``:
+:param levelID:
     The level for which the display is desired.
 
 Remark:
@@ -212,7 +212,7 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetTargetModelRef =R"doc(Sets the Target ModelRef for this ViewInfo.
 
-Parameter ``target``:
+:param target:
     The target model that is modified by user inputs in this view.
 
 Remark:
@@ -223,13 +223,13 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetGeometry =R"doc(Sets the geometry that determines the portion of the model that is
 visible.
 
-Parameter ``origin``:
+:param origin:
     The lower left front point that is visible.
 
-Parameter ``delta``:
+:param delta:
     The extent of the visible area.
 
-Parameter ``rotation``:
+:param rotation:
     The view orientation.
 
 Remark:
@@ -239,13 +239,13 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_IsEqual =R"doc(Tests this ViewInfo for equality with another ViewInfo.
 
-Parameter ``other``:
+:param other:
     The other ViewInfo
 
-r ``compareACS``:
+r ``compareACS:
     True if the ACS of the two should be compared.
 
-Parameter ``compareDisplayStyleFlags``:
+:param compareDisplayStyleFlags:
     True if the display style portion of ViewFlags of the two should
     be compared.
 
@@ -264,7 +264,7 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetRootModel =R"doc(Sets the root model for this ViewInfo.
 
-Parameter ``rootModel``:
+:param rootModel:
     The new RootModel for this ViewInfo.
 
 Remark:
@@ -274,7 +274,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetDynamicViewSettings =R"doc(Sets the the DynamicViewSettings for this ViewInfo.
 
-Parameter ``settings``:
+:param settings:
     The new DynamicViewSettings.
 
 Remark:
@@ -291,7 +291,7 @@ static const char * __doc_Bentley_DgnPlatform_ViewInfo_Init =R"doc(Initializes t
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetAuxCoordinateSystem =R"doc(Sets the Auxiliary Coordinate System to use in the view.
 
-Parameter ``acs``:
+:param acs:
     The Auxiliary Coordinate System.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetAuxCoordinateSystem =R"doc(Gets the Auxiliary Coordinate System in use in the view.)doc";
@@ -304,7 +304,7 @@ content, even if the RootModel is a 2D model.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetBackgroundColor =R"doc(Sets the backgroun color of the view.
 
-Parameter ``color``:
+:param color:
     The background color
 
 Remark:
@@ -322,7 +322,7 @@ static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetViewFlags =R"doc(Gets 
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_SetGeomInfo =R"doc(Copy the ViewGeompInfo from the source.
 
-Parameter ``source``:
+:param source:
     The source ViewGeomInfo.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewInfo_GetGeomInfo =R"doc(Gets a const reference to the ViewGeomInfo.)doc";
@@ -350,11 +350,11 @@ static const char * __doc_Bentley_DgnPlatform_ViewInfo_EnsureLevelMaskCoverage =
 
 static const char * __doc_Bentley_DgnPlatform_ViewGeomInfo_SetClippingDepths =R"doc(Set the front and back clipping planes distances.
 
-Parameter ``frontClip``:
+:param frontClip:
     The distance to the front clipping plane from design plane origin
     (or NULL).
 
-Parameter ``backClip``:
+:param backClip:
     The distance to the back clipping plane from design plane origin
     (or NULL).)doc";
 
@@ -366,30 +366,30 @@ camera (m_viewFlags.camera false),)doc";
 static const char * __doc_Bentley_DgnPlatform_ViewGeomInfo_GetTargetPoint =R"doc(The target point of the view camera. If the view doesn't use the
 camera (m_viewFlags.camera false), the Center is returned.
 
-Parameter ``target``:
+:param target:
     The target point.
 
-Returns:
+:returns:
     The target argument, so that further calculations can conveniently
     use that value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGeomInfo_GetCenter =R"doc(Get the center point of the view.
 
-Parameter ``center``:
+:param center:
     The center point.
 
-Returns:
+:returns:
     The center argument, so that further calculations can conveniently
     use that value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGeomInfo_ApplyTransform =R"doc(Applies the given transform to the view position and orientation.
 
-Parameter ``transform``:
+:param transform:
     The transformation to apply.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGeomInfo_SetActiveDepthPoint =R"doc(Set the active depth given a point in world coordinates.
 
-Parameter ``point``:
+:param point:
     The point from which to calculate m_activez.)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -419,6 +419,13 @@ void def_ViewInfo(py::module_& m)
     // struct ViewGeomInfo
     py::class_< ViewGeomInfo> c1(m, "ViewGeomInfo");
 
+    c1.def_readwrite("viewFlags", &ViewGeomInfo::m_viewFlags);
+    c1.def_readwrite("origin", &ViewGeomInfo::m_origin);
+    c1.def_readwrite("delta", &ViewGeomInfo::m_delta);
+    c1.def_readwrite("rotation", &ViewGeomInfo::m_rotation);
+    c1.def_readwrite("activez", &ViewGeomInfo::m_activez);
+    c1.def_readwrite("camera", &ViewGeomInfo::m_camera);
+
     c1.def("SetActiveDepthPoint", &ViewGeomInfo::SetActiveDepthPoint, "point"_a, DOC(Bentley, DgnPlatform, ViewGeomInfo, SetActiveDepthPoint));
     c1.def("ApplyTransform", &ViewGeomInfo::ApplyTransform, "transform"_a, DOC(Bentley, DgnPlatform, ViewGeomInfo, ApplyTransform));
     c1.def("GetCenter", &ViewGeomInfo::GetCenter, "center"_a, DOC(Bentley, DgnPlatform, ViewGeomInfo, GetCenter));
@@ -429,8 +436,7 @@ void def_ViewInfo(py::module_& m)
         [](ViewGeomInfo& self, boost::optional<double> frontClip, boost::optional<double> backClip)
         {
             return self.SetClippingDepths(frontClip.get_ptr(), backClip.get_ptr());
-        },
-        "frontClip"_a, "backClip"_a, DOC(Bentley, DgnPlatform, ViewGeomInfo, SetClippingDepths));
+        },"frontClip"_a, "backClip"_a, DOC(Bentley, DgnPlatform, ViewGeomInfo, SetClippingDepths));
 
     //===================================================================================
     // enum class ViewChangeType
@@ -558,7 +564,7 @@ void def_ViewInfo(py::module_& m)
            {
            BitMaskCP levelBitMask = nullptr;
            auto retVal = self.GetLevelDisplayMask(levelBitMask, model);
-           return py::make_tuple(retVal, std::unique_ptr< BitMask, py::nodelete>(const_cast<BitMaskP>(levelBitMask)));
+           return py::make_tuple(retVal, const_cast<BitMaskP>(levelBitMask));
            }, "modelRef"_a, DOC(Bentley, DgnPlatform, ViewInfo, GetLevelDisplayMask));
 
     c2.def("SetLevelDisplayMask", &ViewInfo::SetLevelDisplayMask, "modelRef"_a, "levelBitMask"_a, DOC(Bentley, DgnPlatform, ViewInfo, SetLevelDisplayMask));

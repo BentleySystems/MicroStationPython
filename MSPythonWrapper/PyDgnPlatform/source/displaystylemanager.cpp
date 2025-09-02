@@ -24,14 +24,14 @@ elements, this method is preferred (over CopyDisplayStyleToFile)
 because generally speaking, you will want to respect the desintation
 file's version of the display style, if present.
 
-Parameter ``sourceDgnFile``:
-    IN source file form where style will be imported
+:param sourceDgnFile:
+    (input) source file form where style will be imported
 
-Parameter ``destinationDgnFile``:
-    IN the destination dgn file
+:param destinationDgnFile:
+    (input) the destination dgn file
 
-Parameter ``sourceIndex``:
-    IN this must be more than -1
+:param sourceIndex:
+    (input) this must be more than -1
 
 Returns (Tuple, 0):
     SUCCESS if import is successful
@@ -43,13 +43,13 @@ Returns (Tuple,1):
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_DoesDisplayStyleExistInFile =R"doc(Determines if a display style, by-name, exists in a specific file.
 
-Parameter ``styleName``:
-    IN style name which needs to be checked
+:param styleName:
+    (input) style name which needs to be checked
 
-Parameter ``dgnFile``:
-    IN the dgn on which we want to check the presence of style name
+:param dgnFile:
+    (input) the dgn on which we want to check the presence of style name
 
-Returns:
+:returns:
     true if it is found)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_RenameDisplayStyleInFile =R"doc(Renames a display style in a file. Its ID remains the same. @note When
@@ -58,14 +58,14 @@ normalize existing elements. The is acceptable because all current
 known elements store display style IDs, which are unaffected by this
 operation.
 
-Parameter ``originalName``:
-    IN the old style name
+:param originalName:
+    (input) the old style name
 
-Parameter ``newName``:
-    IN the new style name
+:param newName:
+    (input) the new style name
 
-Parameter ``dgnFile``:
-    IN the object of MSDgnFileR where it will be renamed)doc";
+:param dgnFile:
+    (input) the object of MSDgnFileR where it will be renamed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_RemoveDisplayStyleFromFile =R"doc(Removes a display style from a file. Its ID cannot be re-used at this
 point. @note When a display style is removed, no attempts are
@@ -73,11 +73,11 @@ currently made to normalize existing elements. Thus elements may still
 attempt to reference a missing display style, but must be written to
 assume such a display style doesn't exist.
 
-Parameter ``styleName``:
-    IN the style which will be removed
+:param styleName:
+    (input) the style which will be removed
 
-Parameter ``dgnFile``:
-    IN the object of MSDgnFileR from where display style will be
+:param dgnFile:
+    (input) the object of MSDgnFileR from where display style will be
     removed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_CopyDisplayStyleToFile =R"doc(Copies a display style by-name from one file to another. This is
@@ -94,17 +94,17 @@ See also:
 See also:
     ImportDisplayStyle for a higher level alternative
 
-Parameter ``styleName``:
-    IN MSWCharCR
+:param styleName:
+    (input) MSWCharCR
 
-Parameter ``sourceDgnFile``:
-    IN the object of MSDgnFileR from where it will copy into
+:param sourceDgnFile:
+    (input) the object of MSDgnFileR from where it will copy into
     destination dgn file
 
-Parameter ``destinationDgnFile``:
-    IN the object of MSDgnFileR where data will be copied
+:param destinationDgnFile:
+    (input) the object of MSDgnFileR where data will be copied
 
-Returns:
+:returns:
     DisplayStyleCP object type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_WriteDisplayStyleToFile =R"doc(Writes the given display style to the given file. If one by the same
@@ -112,13 +112,13 @@ name already exists, it is replaced. A replaced display style retains
 the ID of the version already in the file. The persisted version of
 the display style is returned, and should be used from this point on.
 
-Parameter ``displayStyle``:
-    IN the object of type DisplayStyleCR
+:param displayStyle:
+    (input) the object of type DisplayStyleCR
 
-Parameter ``destinationDgnFile``:
-    IN the object of MSDgnFileR
+:param destinationDgnFile:
+    (input) the object of MSDgnFileR
 
-Returns:
+:returns:
     DisplayStyleCP type of object)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_EnsureDisplayStyleIsInFile =R"doc(This ensures that a display style by the given name exists in the
@@ -128,72 +128,72 @@ instead. If the display style by the given name doesn't exist, it is
 written to the file, and the persisted version is returned. This
 method will not return NULL under expected conditions.
 
-Parameter ``displayStyle``:
-    IN the object of DisplayStyleCR
+:param displayStyle:
+    (input) the object of DisplayStyleCR
 
-Parameter ``destinationDgnFile``:
-    IN the object of MSDgnFileR
+:param destinationDgnFile:
+    (input) the object of MSDgnFileR
 
-Returns:
+:returns:
     DisplayStyleCP type of object)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_GetDisplayStyleByIndex =R"doc(Returns the display style, if present, from the file's display style
 collection as indicated by the provided index.
 
-Parameter ``index``:
-    IN DisplayStyleList::size_type
+:param index:
+    (input) DisplayStyleList::size_type
 
-Parameter ``dgnFile``:
-    IN the object of MSDgnFileP
+:param dgnFile:
+    (input) the object of MSDgnFileP
 
-Returns:
+:returns:
     DisplayStyleCP type of object)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleManager_GetDisplayStyleForViewInfo =R"doc(Returns the display style, if present, from the file's display style
 collection as indicated by the provided ViewInfo. @note The ViewInfo
 root is used as the file to search in.
 
-Parameter ``viewInfo``:
-    IN the object of ViewInfoCR
+:param viewInfo:
+    (input) the object of ViewInfoCR
 
-Returns:
+:returns:
     DisplayStyleCP type of object)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetReflectionTypeDisplayed =R"doc(Sets the Environment Type which will be displayed
 
-Parameter ``typeDisplayed``:
-    IN UInt32 type parameter)doc";
+:param typeDisplayed:
+    (input) UInt32 type parameter)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetReflectionTypeDisplayed =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetReflectionTypeDisplayed =R"doc(:returns:
     Environment Type which will be displayed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetReflectionMapName =R"doc(Changes the reflection map name
 
-Parameter ``reflection``:
-    map name IN WCharCP)doc";
+:param reflection:
+    map name (input) WCharCP)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetReflectionMapName =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetReflectionMapName =R"doc(:returns:
     the reflection map name WStringCR)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_EnsureDisplayStyleHandler =R"doc(Ensures that it has a handler)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetGroundPlane =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetGroundPlane =R"doc(:returns:
     the reference to ground plane for this display style)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetEnvironmentTypeDisplayed =R"doc(Sets the Environment Type which will be displayed
 
-Parameter ``typeDisplayed``:
-    IN UInt32 type parameter)doc";
+:param typeDisplayed:
+    (input) UInt32 type parameter)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetEnvironmentTypeDisplayed =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetEnvironmentTypeDisplayed =R"doc(:returns:
     Environment Type which will be displayed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetEnvironmentName =R"doc(Changes the Environment name
 
-Parameter ``environmentName``:
-    IN WCharCP)doc";
+:param environmentName:
+    (input) WCharCP)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetEnvironmentName =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetEnvironmentName =R"doc(:returns:
     the environment name WStringCR)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_CopySettingsTo =R"doc(Pushes this display style's settings to the provided viewinfo, re-
@@ -203,42 +203,42 @@ with DgnPlatform. Users of the PowerPlatform should use
 IViewManager::ApplyDisplayStyleToView instead. @note The provided file
 should match the view's root.
 
-Parameter ``viewInfo``:
-    IN on which it apply the setting from other
+:param viewInfo:
+    (input) on which it apply the setting from other
 
-Parameter ``destinationDgnFile``:
-    IN the object of dgn file)doc";
+:param destinationDgnFile:
+    (input) the object of dgn file)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_IsValidForViewport =R"doc(True if this display style can be applied to the provided Viewport.
 @note If you need more information about why a display style is not
 valid for a Viewport, use another overload of this method.
 
-Returns:
+:returns:
     true if is valid for the viewport)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_MatchesViewInfoData =R"doc(True if this display style effectively matches the provided view data.
 
-Parameter ``viewInfo``:
-    IN the object of ViewInfoCR)doc";
+:param viewInfo:
+    (input) the object of ViewInfoCR)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetIsUsableForClipVolumes =R"doc(Sets if this display style can be used for individual sections.
 
-Parameter ``isValid``:
-    IN bool)doc";
+:param isValid:
+    (input) bool)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_IsUsableForClipVolumes =R"doc(True if this display style can be used for individual sections.
 
-Returns:
+:returns:
     true if it is usable for clip volumes)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetIsUsableForViews =R"doc(Sets if this display style can be used for whole views.
 
-Parameter ``isValid``:
-    IN bool)doc";
+:param isValid:
+    (input) bool)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_IsUsableForViews =R"doc(True if this display style can be used for whole views.
 
-Returns:
+:returns:
     true if it is usable for views)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetOverrides =R"doc(Sets the overrides (
@@ -248,18 +248,18 @@ See also:
     overrides are based on, since they contain file-specific IDs that
     will be remapped to be stored in this display style.
 
-Parameter ``newOverrides``:
-    IN the object of ViewDisplayOverridesCR
+:param newOverrides:
+    (input) the object of ViewDisplayOverridesCR
 
-Parameter ``sourceDgnFile``:
-    IN the source dgn file)doc";
+:param sourceDgnFile:
+    (input) the source dgn file)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetOverrides =R"doc(Gets a read-only reference to the overrides (
 
 See also:
     ViewDisplayOverrides).
 
-Returns:
+:returns:
     the object of ViewDisplayOverridesCR)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetFlags =R"doc(Sets the flags (
@@ -267,10 +267,10 @@ static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetFlags =R"doc(Sets 
 See also:
     DisplayStyleFlags).
 
-Parameter ``newFlags``:
-    IN the object of DisplayStyleFlagsCR)doc";
+:param newFlags:
+    (input) the object of DisplayStyleFlagsCR)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetFlags =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetFlags =R"doc(:returns:
     the object of DisplayStyleFlagsCR Gets a read-only reference to
     the flags (
 
@@ -279,12 +279,12 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_IsFromHardCodedDefault =R"doc(True if this display style originated from a hard-coded default
 
-Returns:
+:returns:
     true if it is a hard coded default.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_IsFromFile =R"doc(True if this display style originated from a file.
 
-Returns:
+:returns:
     true if it is from dgn file otherwise false)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetDisplayMode =R"doc(Sets the display mode.
@@ -292,12 +292,12 @@ static const char * __doc_Bentley_DgnPlatform_DisplayStyle_SetDisplayMode =R"doc
 See also:
     GetDisplayMode for additional notes
 
-Parameter ``newDisplayMode``:
-    IN UInt32 type)doc";
+:param newDisplayMode:
+    (input) UInt32 type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetDisplayMode =R"doc(Gets the display mode. This is an intrinsic property, not an override.
 
-Returns:
+:returns:
     UInt32 type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetName =R"doc(Gets the name.
@@ -305,7 +305,7 @@ static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetName =R"doc(Gets t
 See also:
     DisplayStyleManager to rename a DisplayStyle
 
-Returns:
+:returns:
     name of the display style WStringCR)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_GetIndex =R"doc(Gets the ID of this display style. Display styles do not have a valid
@@ -313,23 +313,23 @@ ID until they are written to the file. @note When writing a display
 style to a file, make sure you re-read the display style (by-name) to
 get its persisted ID.
 
-Returns:
+:returns:
     int)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_IsInFile =R"doc(Determines if this display style is based on the provided file. @note
 This method does not determine if the display style is actually
 persisted in the given file; see DisplayStyleManager.
 
-Returns:
+:returns:
     true if it is found otherwise false)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyle_Equals =R"doc(Performs a deep equality check. @note This overload is equivalent to
 calling Equals(rhs, false), and is provided as a convenience.
 
-Parameter ``rhs``:
-    IN the object to compare with
+:param rhs:
+    (input) the object to compare with
 
-Returns:
+:returns:
     true if this object and the rhs parameter are equal by-value;
     false otherwise)doc";
 
@@ -338,65 +338,65 @@ ID, allowing you to save it to the file, replacing the existing one.
 @note This overload does not remap any IDs, and keeps the same file as
 the original.
 
-Returns:
+:returns:
     DisplayStylePtr " smart pointer ")doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_SetShowGroundFromBelow =R"doc(It will change the showing of ground plane from below
 
-Parameter ``showGroundFromBelow``:
-    IN the boolean parameter)doc";
+:param showGroundFromBelow:
+    (input) the boolean parameter)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_ShowGroundFromBelow =R"doc(It will check for the ground plane whether it has been shown from
 below or not
 
-Returns:
+:returns:
     true if is matched.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_SetTransparency =R"doc(It will change the Transparency of ground plane
 
-Parameter ``transparency``:
-    IN the double parameter)doc";
+:param transparency:
+    (input) the double parameter)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_GetTransparency =R"doc(It will return the Transparency of the ground plane
 
-Returns:
+:returns:
     double)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_SetHeight =R"doc(It will change the height of ground plane
 
-Parameter ``height``:
-    IN the double parameter)doc";
+:param height:
+    (input) the double parameter)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_GetHeight =R"doc(It will return the height of the ground plane
 
-Returns:
+:returns:
     double)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_SetGroundColor =R"doc(It will set the ground plane color
 
-Parameter ``color``:
-    IN the object of RGBFactor)doc";
+:param color:
+    (input) the object of RGBFactor)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_GetGroundColor =R"doc(It will return the ground plane color
 
-Returns:
+:returns:
     the RGBFactor)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleGroundPlane_Clone =R"doc(Performs a deep clone from given DisplayStyleGroundPlane.
 
-Parameter ``rhs``:
+:param rhs:
     the DisplayStyleGroundPlane, from which it will creates the clone)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewDisplayOverrides_ExtractMaterialPaletteAndName =R"doc(Resolves the material palette name and material name for this object's
 material ID. Note that the lookup is done based on the file given.
 
-Parameter ``paletteName``:
+:param paletteName:
     the resolved material palette name
 
-Parameter ``materialName``:
+:param materialName:
     the resolved material name
 
-Parameter ``dgnFile``:
+:param dgnFile:
     the context to resolve material indices with Bentley Systems +----
     -----------+---------------+---------------+---------------+------
     ---------+------)doc";
@@ -404,10 +404,10 @@ Parameter ``dgnFile``:
 static const char * __doc_Bentley_DgnPlatform_ViewDisplayOverrides_AreFlagsEqual =R"doc(Performs a by-value equality check between this object's flags and
 another's.
 
-Parameter ``rhs``:
+:param rhs:
     the object to compare flags with
 
-Returns:
+:returns:
     true if this object's flags and the rhs parameter's flags are
     equal by-value; false otherwise Bentley Systems +---------------+-
     --------------+---------------+---------------+---------------+---
@@ -418,36 +418,36 @@ another. Note that this overload is file-invariant, meaning that color
 and material indices will NOT be remapped to equivalent values if the
 objects are from different files.
 
-Parameter ``rhs``:
+:param rhs:
     the object to compare with
 
-Returns:
+:returns:
     true if this object and the rhs parameter are equal by-value;
     false otherwise Bentley Systems +---------------+---------------+-
     --------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewDisplayOverrides_Clone =R"doc(Performs a deep clone.
 
-Parameter ``sourceDgnFile``:
+:param sourceDgnFile:
     the source DGN file (used for color and material index remapping)
 
-Parameter ``destinationDgnFile``:
+:param destinationDgnFile:
     the destination DGN file (used for color and material index
     remapping)
 
-Returns:
+:returns:
     a deep copy of this object Bentley Systems +---------------+------
     ---------+---------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewDisplayOverrides_GetDisplayStyleHandlerId =R"doc(Get the display style handler Id
 
-Returns:
+:returns:
     the object of Element::XAttributeHandlerId)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewDisplayOverrides_SetDisplayStyleHandlerById =R"doc(Change the display style handler Id
 
-Parameter ``id``:
-    IN the object of Element::XAttributeHandlerId)doc";
+:param id:
+    (input) the object of Element::XAttributeHandlerId)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewDisplayOverrides_ResolveDisplayStyleHandler =R"doc(Reloads the display style handler and settings from the handler id.
 Bentley Systems +---------------+---------------+---------------+-----
@@ -561,6 +561,72 @@ void def_DisplayStyleManager(py::module_& m)
     //===================================================================================
     // struct ViewDisplayOverrides
     py::class_< ViewDisplayOverrides> c2(m, "ViewDisplayOverrides");
+
+    //===================================================================================
+    // struct ViewDisplayOverrides::OverrideFlags
+    if (true)
+        {
+        py::class_< ViewDisplayOverrides::OverrideFlags> c2_0(c2,"OverrideFlags");
+
+        c2_0.def(py::init<>());
+        c2_0.def_property("visibleEdgeColor",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_visibleEdgeColor; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_visibleEdgeColor = (unsigned)value; });
+        c2_0.def_property("visibleEdgeWeight",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_visibleEdgeWeight; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_visibleEdgeWeight = (unsigned)value; });
+        c2_0.def_property("useTransparency",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_useTransparency; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_useTransparency = (unsigned)value; });
+        c2_0.def_property("elementColor",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_elementColor; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_elementColor = (unsigned)value; });
+        c2_0.def_property("lineStyle",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_lineStyle; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_lineStyle = (unsigned)value; });
+        c2_0.def_property("lineWeight",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_lineWeight; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_lineWeight = (unsigned)value; });
+        c2_0.def_property("material",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_material; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_material = (unsigned)value; });
+        c2_0.def_property("visibleEdgeStyle",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_visibleEdgeStyle; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_visibleEdgeStyle = (unsigned)value; });
+        c2_0.def_property("hiddenEdgeStyle",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_hiddenEdgeStyle; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_hiddenEdgeStyle = (unsigned)value; });
+        c2_0.def_property("hiddenEdgeWeightZero",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_hiddenEdgeWeightZero; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_hiddenEdgeWeightZero = (unsigned)value; });
+        c2_0.def_property("hLineTransparency",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_hLineTransparency; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_hLineTransparency = (unsigned)value; });
+        c2_0.def_property("hLineMaterialColors",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_hLineMaterialColors; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_hLineMaterialColors = (unsigned)value; });
+        c2_0.def_property("smoothIgnoreLights",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_smoothIgnoreLights; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_smoothIgnoreLights = (unsigned)value; });
+        c2_0.def_property("useDisplayHandler",
+            [](ViewDisplayOverrides::OverrideFlags const& self) { return (bool)self.m_useDisplayHandler; },
+            [](ViewDisplayOverrides::OverrideFlags& self, bool value) { self.m_useDisplayHandler = (unsigned)value; });
+        }
+ 
+    c2.def_readwrite("flags", &ViewDisplayOverrides::m_flags);
+    c2.def_readwrite("visibleEdgeColor", &ViewDisplayOverrides::m_visibleEdgeColor);
+    c2.def_readwrite("visibleEdgeWeight", &ViewDisplayOverrides::m_visibleEdgeWeight);
+    c2.def_readwrite("hiddenEdgeWeight", &ViewDisplayOverrides::m_hiddenEdgeWeight);
+    c2.def_readwrite("transparency", &ViewDisplayOverrides::m_transparency);
+    c2.def_readwrite("elementColor", &ViewDisplayOverrides::m_elementColor);
+    c2.def_readwrite("lineStyle", &ViewDisplayOverrides::m_lineStyle);
+    c2.def_readwrite("lineWeight", &ViewDisplayOverrides::m_lineWeight);
+    c2.def_readwrite("material", &ViewDisplayOverrides::m_material);
+    c2.def_readwrite("backgroundColor", &ViewDisplayOverrides::m_backgroundColor);
+    c2.def_readwrite("reflectionColor", &ViewDisplayOverrides::m_reflectionColor);
+    c2.def_readwrite("hLineTransparencyThreshold", &ViewDisplayOverrides::m_hLineTransparencyThreshold);
+
+    c2.attr("eHiddenEdgeWeight_SameAsVisible") = 0xffff;
 
     c2.def(py::init<>());
     c2.def("ResolveDisplayStyleHandler", &ViewDisplayOverrides::ResolveDisplayStyleHandler, DOC(Bentley, DgnPlatform, ViewDisplayOverrides, ResolveDisplayStyleHandler));

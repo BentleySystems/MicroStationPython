@@ -50,7 +50,7 @@ static const char * __doc_Bentley_DgnPlatform_DateTimeFormatter_GetDecimalSepara
 static const char * __doc_Bentley_DgnPlatform_VolumeFormatter_ToString =R"doc(Use the settings defined in this formatter to convert a uor value to a
 string.
 
-Parameter ``uors``:
+:param uors:
     uor value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_VolumeFormatter_Clone =R"doc(Construct a formatter which is a duplicate of an existing formatter.)doc";
@@ -60,7 +60,7 @@ static const char * __doc_Bentley_DgnPlatform_VolumeFormatter_Create =R"doc(Cons
 static const char * __doc_Bentley_DgnPlatform_AreaFormatter_ToString =R"doc(Use the settings defined in this formatter to convert a uor value to a
 string.
 
-Parameter ``uors``:
+:param uors:
     uor value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AreaFormatter_Clone =R"doc(Construct a formatter which is a duplicate of an existing formatter.)doc";
@@ -97,7 +97,7 @@ static const char * __doc_Bentley_DgnPlatform_AreaOrVolumeFormatterBase_GetMaste
 static const char * __doc_Bentley_DgnPlatform_PointFormatter_ToString =R"doc(Use the settings defined in this formatter to convert a point value to
 a string.
 
-Parameter ``point``:
+:param point:
     uor value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointFormatter_Clone =R"doc(Construct a formatter which is a duplicate of an existing formatter.)doc";
@@ -127,7 +127,7 @@ behavior of the PointFormatter.)doc";
 static const char * __doc_Bentley_DgnPlatform_DistanceFormatter_ToString =R"doc(Use the settings defined in this formatter to convert a uor value to a
 string.
 
-Parameter ``uors``:
+:param uors:
     uor value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DistanceFormatter_Clone =R"doc(Construct a formatter which is a duplicate of an existing formatter.)doc";
@@ -180,14 +180,14 @@ static const char * __doc_Bentley_DgnPlatform_DistanceFormatter_GetUnitFormat =R
 static const char * __doc_Bentley_DgnPlatform_DirectionFormatter_ToStringFromRadians =R"doc(Use the settings defined in this formatter to convert a direction
 value to a string.
 
-Parameter ``value``:
+:param value:
     Direction in radians measured counter clockwise from the positive
     x-axis.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DirectionFormatter_ToString =R"doc(Use the settings defined in this formatter to convert a direction
 value to a string.
 
-Parameter ``value``:
+:param value:
     Direction in degrees measured counter clockwise from the positive
     x-axis.)doc";
 
@@ -244,13 +244,13 @@ behavior of the DirectionFormatter.)doc";
 static const char * __doc_Bentley_DgnPlatform_AngleFormatter_ToStringFromRadians =R"doc(Use the settings defined in this formatter to convert an angle value
 to a string.
 
-Parameter ``value``:
+:param value:
     Angle in radians.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AngleFormatter_ToString =R"doc(Use the settings defined in this formatter to convert an angle value
 to a string.
 
-Parameter ``value``:
+:param value:
     Angle in degrees.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AngleFormatter_Clone =R"doc(Construct a formatter which is a duplicate of an existing formatter.)doc";
@@ -266,7 +266,7 @@ less than zero. Ex. " - 30 " vs. " 30 ")doc";
 static const char * __doc_Bentley_DgnPlatform_AngleFormatter_SetTrailingZeros =R"doc(Set the formatter's trailing zeros behavior. Trailing zeros are only
 included up to the requested precision. Ex. " 30.500 " vs. " 30.5 "
 
-Parameter ``newVal``:
+:param newVal:
     pass true to zero pad the output string to the requested
     precision.)doc";
 
@@ -276,7 +276,7 @@ only included up to the requested precision. Ex. " 30.500 " vs. " 30.5 ")doc";
 static const char * __doc_Bentley_DgnPlatform_AngleFormatter_SetLeadingZero =R"doc(Set the formatter's leading zero behavior. A leading zero is only
 included for values less than 1.0. Ex. " 0.5 " vs. " .5 "
 
-Parameter ``newVal``:
+:param newVal:
     pass true to include a leading zero for values less than 1.0)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AngleFormatter_GetLeadingZero =R"doc(Test if this formatter will include a leading zero. A leading zero is

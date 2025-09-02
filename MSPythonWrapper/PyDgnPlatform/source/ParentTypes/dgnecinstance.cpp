@@ -66,22 +66,22 @@ specify properties to be set in the relationship instance.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECRelationshipEnabler_CreateRelationship =R"doc(Method to create a relationship between two DgnElementECInstance.
 
-Parameter ``wipRelationship``:
+:param wipRelationship:
     A reference to a StandaloneInstance that will contain properties
     of the relationship instance.
 
-Parameter ``instanceA``:
+:param instanceA:
     DgnElementECInstance to be related to instanceB.
 
-Parameter ``instanceB``:
+:param instanceB:
     DgnElementECInstance to be related to instanceA.
 
-Parameter ``hostModelRef``:
+:param hostModelRef:
     Optional modelRef of element to receive relationship (may be
     different then either source or target host element). For future
     use.
 
-Parameter ``hostElementRef``:
+:param hostElementRef:
     Optional element to receive relationship (may be different then
     either source or target host element). For future use.
 
@@ -109,7 +109,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnElementECInstance_GetElementHan
 static const char * __doc_Bentley_DgnPlatform_DgnECInstance_SetReadOnly =R"doc(Set Instance ReadOnly setting. May be ignored if implementation does
 not support setting read-only flag.
 
-Parameter ``isReadOnly``:
+:param isReadOnly:
     Read-only flag)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstance_GetAsElementInstance =R"doc(To avoid expensive dynamic casting use this method to see if the
@@ -119,40 +119,40 @@ to a Model or File.)doc";
 static const char * __doc_Bentley_DgnPlatform_DgnECInstance_SetValueAsString =R"doc(Set the value of a property as a string. An IDgnECTypeAdapter is used
 to convert string to value.
 
-Parameter ``accessString``:
+:param accessString:
     The name of the property to set the value of
 
-Parameter ``strVal``:
+:param strVal:
     If successful, will contain the value of the property
 
-Parameter ``useArrayIndex``:
+:param useArrayIndex:
     Set this to true if retrieving an entry in an array. If this is
     false arrayIndex is ignored;
 
-Parameter ``arrayIndex``:
+:param arrayIndex:
     The array index, if this is an ArrayProperty
 
-Returns:
+:returns:
     ECOBJECTS_STATUS_Success if successful, otherwise an error code
     indicating the failure)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstance_GetValueAsString =R"doc(Get the value of a property as a string. An IDgnECTypeAdapter is used
 to convert value to string.
 
-Parameter ``strVal``:
+:param strVal:
     If successful, will contain the value of the property
 
-Parameter ``accessString``:
+:param accessString:
     The name of the property to set the value of
 
-Parameter ``useArrayIndex``:
+:param useArrayIndex:
     Set this to true if retrieving an entry in an array. If this is
     false arrayIndex is ignored;
 
-Parameter ``arrayIndex``:
+:param arrayIndex:
     The array index, if this is an ArrayProperty
 
-Returns:
+:returns:
     ECOBJECTS_STATUS_Success if successful, otherwise an error code
     indicating the failure)doc";
 
@@ -161,7 +161,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnECInstance_GetDgnECInstanceEnab
 static const char * __doc_Bentley_DgnPlatform_DgnECInstance_ScheduleDelete =R"doc(If supported, schedule the delete of the instance from the element.
 The instance is removed when the element is written.
 
-Parameter ``element``:
+:param element:
     Element that serves as a host for the instance.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstance_DeleteAndIgnoreOwnership =R"doc(If supported, delete the instance from the design file but do not
@@ -172,7 +172,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnECInstance_Delete =R"doc(If sup
 static const char * __doc_Bentley_DgnPlatform_DgnECInstance_ScheduleWriteChanges =R"doc(Schedule to write any in-memory modifications when its associated
 element is written.
 
-Parameter ``eeh``:
+:param eeh:
     Element that will host the instance.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstance_WriteChanges =R"doc(Write any in-memory modifications made to the instance to the design
@@ -186,7 +186,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnECInstance_GetHostType =R"doc(G
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_IsEnablerValidForDgnFile =R"doc(Returns true if the enabler supports writing instances to DgnFile.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The destination DGN file for the instance)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceAsElement =R"doc(Creates an DgnElementECInstance as a new element. You must call
@@ -194,13 +194,13 @@ SupportsCreateInstanceAsElement to determine if it is safe to call
 this on a given DgnECInstanceEnabler.
 
 
-Parameter ``wipInstance``:
+:param wipInstance:
     A ECN::StandaloneECInstance that was probably obtained from
     #GetSharedWipInstance It should have been intialized with all of
     the values to allow efficient one-shot creation of the new
     persistent DgnElementECInstance.
 
-Parameter ``modelRef``:
+:param modelRef:
     The modelRef to be used by the returned DgnElementECInstance.
     Typically you should pass *elementRef.GetDgnModelP(). The
     exception is if you will be using the returned
@@ -210,7 +210,7 @@ Parameter ``modelRef``:
     attachment that will be used by that ECRelationship. See docs for
     DgnECManager::CreateRelationship.
 
-Parameter ``instanceOwnsElement``:
+:param instanceOwnsElement:
     If true, when the instance is deleted the element will be deleted
     as well.
 
@@ -229,12 +229,12 @@ will be written to the element immediately. You must call
 SupportsCreateInstanceOnElement to determine if it is safe to call
 this on a given DgnECInstanceEnabler.
 
-Parameter ``wipInstance``:
+:param wipInstance:
     A ECN::StandaloneECInstance that was probably obtained from
     #GetSharedWipInstance. It should have been intialized with all of
     the values
 
-Parameter ``eh``:
+:param eh:
     ElementHandle containing the ElementRef and DgnModelRef to be used
     by the returned DgnElementECInstance. The ElementHandle must
     contain a valid ElementRef. Typically the DgnModelRef should come
@@ -245,7 +245,7 @@ Parameter ``eh``:
     particular attachment that will be used by that ECRelationship.
     See docs for DgnECManager::CreateRelationship.
 
-Parameter ``instanceOwnsElement``:
+:param instanceOwnsElement:
     If true, when the instance is deleted the element will be deleted
     as well.
 
@@ -264,11 +264,11 @@ element that is identified by the localid. The element is identified
 by an EditElementHandle.
 
 
-Parameter ``wipInstance``:
+:param wipInstance:
     A ECN::StandaloneECInstance that was probably a " shared " instance
     with its memory shared with a managed ECDInstance.
 
-Parameter ``modelRef``:
+:param modelRef:
     The modelRef to be used by the returned DgnECInstance. Typically
     you should pass *elementRef.GetDgnModelP(). The exception is if
     you will be using the returned DgnECInstance to create an
@@ -277,10 +277,10 @@ Parameter ``modelRef``:
     the particular attachment that will be used by that
     ECRelationship. See docs for DgnECManager::CreateRelationship.
 
-Parameter ``eh``:
+:param eh:
     The element on which to persist the newly-created DgnECInstance
 
-Parameter ``localId``:
+:param localId:
     Identifies the existing instance to replace. Typically the
     xattribute id.
 
@@ -298,16 +298,16 @@ You must call SupportsCreateInstanceOnElement to determine if it is
 safe to call this on a given DgnECInstanceEnabler.
 
 
-Parameter ``wipInstance``:
+:param wipInstance:
     An ECN::StandaloneECInstance that was probably obtained from
     #GetSharedWipInstance It should have been intialized with all of
     the values
 
-Parameter ``eh``:
+:param eh:
     The element on which to schedule the newly-created
     DgnElementECInstance
 
-Parameter ``instanceOwnsElement``:
+:param instanceOwnsElement:
     If true, when the instance is deleted the element will be deleted
     as well.
 
@@ -327,20 +327,20 @@ CreateInstanceOnElement and similar methods))doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnHost =R"doc(Create an instance which is stored on the specified host.
 
-Parameter ``wipInstance``:
+:param wipInstance:
     A standalone instance from to get properties of the new instance.
 
-Parameter ``host``:
+:param host:
     The host on which to create the ECInstance
 
-Parameter ``intendedLocalId``:
+:param intendedLocalId:
     If INVALID_XATTR_ID, then use the next available Id, Otherwise use
     the provided ID and error if not available.
 
-Parameter ``createContext``:
+:param createContext:
     Context with which to create the ECInstance
 
-Parameter ``instanceOwnsHost``:
+:param instanceOwnsHost:
     (if supported) indicates that if the ECInstance is later deleted,
     the host on which it resides will be deleted as well.
 Returns (Tuple, 0):
@@ -354,10 +354,10 @@ Returns (Tuple,1):
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnLinkNode =R"doc(Create an instance which is stored on a DgnLinkTreeNode (ex:Folders
 and Links in a Link Set or Sheet Index)
 
-Parameter ``wipInstance``:
+:param wipInstance:
     A standalone instance from to get properties of the new instance.
 
-Parameter ``linknode``:
+:param linknode:
     The linknode on which to store
 
 Returns (Tuple, 0):
@@ -371,10 +371,10 @@ Returns (Tuple,1):
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnModel =R"doc(Create an instance which is stored on the model or attachment.
 
 
-Parameter ``wipInstance``:
+:param wipInstance:
     A standalone instance from to get properties of the new instance.
 
-Parameter ``model``:
+:param model:
     The dgnmodel on which to store
 Returns (Tuple, 0):
 	retVal.
@@ -386,11 +386,11 @@ Returns (Tuple,1):
 static const char * __doc_Bentley_DgnPlatform_DgnECInstanceEnabler_CreateInstanceOnFile =R"doc(Create an instance which is stored on the DgnFile.
 
 
-Parameter ``wipInstance``:
+:param wipInstance:
     A template instance from which to get properties of the new
     instance.
 
-Parameter ``dgnfile``:
+:param dgnfile:
     The DgnFile on which to store the instance
     
 Returns (Tuple, 0):
@@ -486,7 +486,7 @@ static const char * __doc_Bentley_DgnPlatform_SelectedProperties_Duplicate =R"do
 static const char * __doc_Bentley_DgnPlatform_SelectedProperties_AddPropertyNameToSelect =R"doc(Adds a property name to select/populate in the DgnECInstance.
 Currently only ECXA Instances support partial instance loading.
 
-Parameter ``accessString``:
+:param accessString:
     Property name to select)doc";
 
 /*---------------------------------------------------------------------------------**//**

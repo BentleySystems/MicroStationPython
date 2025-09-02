@@ -49,13 +49,13 @@ model option.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementCopyContext_DropHandler =R"doc(Un-register a handler.
 
-Parameter ``handler``:
+:param handler:
     the handler to un-register. This function calls Release on
     *handler.*)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementCopyContext_AddHandler =R"doc(Register a handler to react when DoCopy is called.
 
-Parameter ``handler``:
+:param handler:
     the handler to register. This function calls AddRef on *handler.*)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementCopyContext_GetModelFromElmdscr =R"doc(@DotNetMethodExclude)doc";
@@ -97,10 +97,10 @@ static const char * __doc_Bentley_DgnPlatform_ElementCopyContext_GetDestinationM
 static const char * __doc_Bentley_DgnPlatform_ElementCopyContext_DoCopy =R"doc(Turn the specified element into a copy of the original. Units and ids
 are remapped from the source to the destination model.
 
-Parameter ``eh``:
+:param eh:
     The element that is to be transformed.
 
-Returns:
+:returns:
     non-zero error status if remapping failed or write to cache
     failed.
 
@@ -109,16 +109,16 @@ Remark:
     actually written to the destination model.
 
 Remark:
-    s Invokes the following handler methods:\li
-    Bentley::DgnPlatform::Handler::ChangetUnits \li
-    Bentley::DgnPlatform::Handler::ApplyTransform \li
-    Bentley::DgnPlatform::Handler::ConvertTo2d \li
-    Bentley::DgnPlatform::Handler::ConvertTo3d \li
-    Bentley::DgnPlatform::Handler::PreprocessCopy \li
-    Bentley::DgnPlatform::Handler::PostProcessCopy \li
-    Bentley::DgnPlatform::Handler::EditProperties \li
-    Bentley::DgnPlatform::Handler::_OnPreProcessDeepCopy \li
-    Bentley::DgnPlatform::XAttributeHandler::_PreprocessCopy \li Bentl
+    s Invokes the following handler methods:
+    Bentley::DgnPlatform::Handler::ChangetUnits 
+    Bentley::DgnPlatform::Handler::ApplyTransform 
+    Bentley::DgnPlatform::Handler::ConvertTo2d 
+    Bentley::DgnPlatform::Handler::ConvertTo3d 
+    Bentley::DgnPlatform::Handler::PreprocessCopy 
+    Bentley::DgnPlatform::Handler::PostProcessCopy 
+    Bentley::DgnPlatform::Handler::EditProperties 
+    Bentley::DgnPlatform::Handler::_OnPreProcessDeepCopy 
+    Bentley::DgnPlatform::XAttributeHandler::_PreprocessCopy  Bentl
     ey::DgnPlatform::IXAttributePointerContainerHandler::PreprocessCop
     yRemapIds See ElementCopyingAlgorithm
 

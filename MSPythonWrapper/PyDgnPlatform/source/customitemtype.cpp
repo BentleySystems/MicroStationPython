@@ -12,21 +12,21 @@
 
 static const char * __doc_Bentley_DgnPlatform_IPickListProvider_IsValidSettings =R"doc(Check PickList Settings are valid for particular provider
 
-Parameter ``providerName``:
-    $Parameter ``strSettings``:)doc";
+:param providerName:
+    $:param strSettings:)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPickListProvider_GetStandardValues =R"doc(Get string collection of PickList values
 
-Parameter ``DgnFileP``:
+:param DgnFileP:
     dgnFile
 
-Parameter ``ECPropertyCP``:
+:param ECPropertyCP:
     Property for which picklist values are needed
 
-Parameter ``PrimitiveType``:
+:param PrimitiveType:
     PrimitiveType of value that ECProperty holds
 
-Parameter ``PickList``:
+:param PickList:
     value collection)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPickListProvider_IsActive =R"doc(If IsActive returns false, we will not get call in GetStandardValues.
@@ -35,29 +35,29 @@ Override this method, if you want to disable provider)doc";
 static const char * __doc_Bentley_DgnPlatform_IPickListProvider_SetDisplayLabel =R"doc(Set DisplayLabel of provider. If DisplayLabel is not set, it will
 return Name
 
-Parameter ``Label``:)doc";
+:param Label:)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPickListProvider_GetDisplayLabel =R"doc(Name of pickList provider
 
-Returns:
+:returns:
     Name of picklist provider)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPickListProvider_GetName =R"doc(Name of pickList provider
 
-Returns:
+:returns:
     Name of picklist provider)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPickListProvider_GetProviderSettings =R"doc(Get Provider Settings for input property
 
-Parameter ``ecProperty.``:
-    $Parameter ``PickList``:
+:param ecProperty.:
+    $:param PickList:
 
 Provider Settings value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPickListProvider_GetProviderName =R"doc(Get Provider Name for input property
 
-Parameter ``ecProperty.``:
-    $Parameter ``PickList``:
+:param ecProperty.:
+    $:param PickList:
 
 Provider Name)doc";
 
@@ -159,13 +159,13 @@ property)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_SetExpression =R"doc(Changes the CalculationExpression of this property
 
-Parameter ``expression``:
+:param expression:
     CalculatedECExpression
 
-Parameter ``expressionFailureValue``:
+:param expressionFailureValue:
     If expression fails, failuer value will be returned
 
-Returns:
+:returns:
     true if the calculationExpression was successfully set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_GetExpressionFailureValue =R"doc(Returns the Failure value for CalculatedECExpression of this property)doc";
@@ -175,21 +175,21 @@ static const char * __doc_Bentley_DgnPlatform_CustomProperty_GetExpression =R"do
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_SetPickListName =R"doc(Changes the PickList Name of this property This will set PickList
 source as 'DgnFile' & PickList setting as
 
-Parameter ``pickListName``:
-    $Parameter ``pickListName``:
+:param pickListName:
+    $:param pickListName:
 
 The PickList Name to be set.
 
-Returns:
+:returns:
     true if the pickListName was successfully set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_GetPickListName =R"doc(Returns the PickList Name of this property This will return
 PickListSetting if PickListSource is DgnFile.
 
-Parameter ``v``:
+:param v:
     Holds the PickList Name, if it was obtained successfully
 
-Returns:
+:returns:
     true if the PickList Name was obtained.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_CompareTo =R"doc(Returns true if this property is equivalent to the specified property)doc";
@@ -198,18 +198,18 @@ static const char * __doc_Bentley_DgnPlatform_CustomProperty_SetDefaultValue =R"
 type compatible with GetType(). Default values are not supported for
 properties of Type::Custom
 
-Parameter ``v``:
+:param v:
     The new default value.
 
-Returns:
+:returns:
     true if the default value was successfully set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_GetDefaultValue =R"doc(Returns the default value of this property.
 
-Parameter ``v``:
+:param v:
     Holds the default value, if it was obtained successfully
 
-Returns:
+:returns:
     true if the default value was obtained.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_DecrementPriority =R"doc(Decrements the priority of this property, if a property of lower
@@ -251,11 +251,11 @@ of CustomPropertyTypes cannot themselves be of a Custom type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_SetType =R"doc(Changes the type of this property.
 
-Parameter ``type``:
+:param type:
     The new type. Cannot be Type::Custom - use
     SetType(CustomPropertyTypeCR) overload to set the custom type.
 
-Returns:
+:returns:
     true if the type was successfully changed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_GetType =R"doc(Returns the type of this property)doc";
@@ -270,35 +270,35 @@ static const char * __doc_Bentley_DgnPlatform_CustomProperty_IsHiddenProperty =R
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_GetPickListSource =R"doc(Returns registered IPickListProvider name
 
-Parameter ``v``:
+:param v:
     Holds the name of IPickListProvider
 
-Returns:
+:returns:
     true if the PickList setting was obtained.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_SetPickListSource =R"doc(Set the pickList source on property. IPickListProvider with input name
 must exist
 
-Parameter ``IPickListProvider``:
+:param IPickListProvider:
     Name
 
-Returns:
+:returns:
     true if settings was successfully set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_GetPickListSettings =R"doc(Returns the PickList settings
 
-Parameter ``v``:
+:param v:
     Holds the PickList settings for registered IPickListProvider
 
-Returns:
+:returns:
     true if the PickList setting was obtained.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_SetPickListSettings =R"doc(Set the pickList setting on property
 
-Parameter ``Settings``:
+:param Settings:
     as per registered IPickListProvider
 
-Returns:
+:returns:
     true if settings was successfully set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CustomProperty_GetInternalName =R"doc(Retuens Internal name)doc";

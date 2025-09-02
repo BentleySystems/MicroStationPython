@@ -22,7 +22,7 @@ class AccuDraw:
         ...
     
     @property
-    def CompassViewport(arg0: MSPyDgnView.AccuDraw) -> Bentley.DgnPlatform.IndexedViewport:
+    def CompassViewport(arg0: MSPyDgnView.AccuDraw) -> MSPyDgnPlatform.IndexedViewport:
         ...
     
     def Deactivate(self: MSPyDgnView.AccuDraw) -> None:
@@ -56,7 +56,7 @@ class AccuDraw:
         """
         ...
     
-    def GetCompassViewport(self: MSPyDgnView.AccuDraw) -> Bentley.DgnPlatform.IndexedViewport:
+    def GetCompassViewport(self: MSPyDgnView.AccuDraw) -> MSPyDgnPlatform.IndexedViewport:
         """
         Current compass viewport
         """
@@ -344,7 +344,7 @@ class AccuSnap:
         """
         Add a new AccuSnapHandler to the list of installed AccuSnapHandlers.
         
-        Parameter ``accuSnapHandler``:
+        :param accuSnapHandler:
         New AccuSnapHandler to add
         """
         ...
@@ -367,7 +367,7 @@ class AccuSnap:
         this call, handler will not be notified of future AccuSnapHandler
         events.
         
-        Parameter ``accuSnapHandler``:
+        :param accuSnapHandler:
         the AccuSnapHandler to drop.
         """
         ...
@@ -400,37 +400,37 @@ class AccuSnap:
     
     Instance: AccuSnap
     
-    def IsActive(self: MSPyDgnView.AccuSnap, ev: Bentley.DgnPlatform.DgnButtonEvent) -> bool:
+    def IsActive(self: MSPyDgnView.AccuSnap, ev: MSPyDgnPlatform.DgnButtonEvent) -> bool:
         """
         Determine whether AccuSnap is currently active. To be active both the
         tool and the user must indicate that they want it.
         
-        Parameter ``ev``:
+        :param ev:
         The current button event. Used to check the modifier keys that can
         temporarily enable/disable AccuSnap.
         
-        Returns:
+        :returns:
         true if active.
         """
         ...
     
     def IsHot(self: MSPyDgnView.AccuSnap) -> bool:
         """
-        Returns:
+        :returns:
         true if AccuSnap is currently active and snapped to an element.
         """
         ...
     
     def IsLocateEnabled(self: MSPyDgnView.AccuSnap) -> bool:
         """
-        Returns:
+        :returns:
         true if AutoLocate has been enabled by the current tool.
         """
         ...
     
     def IsSnapEnabled(self: MSPyDgnView.AccuSnap) -> bool:
         """
-        Returns:
+        :returns:
         true if AccuSnap has been enabled by the current tool.
         """
         ...
@@ -443,7 +443,7 @@ class AccuSnap:
         """
         ...
     
-    def SetComponentMode(self: MSPyDgnView.AccuSnap, mode: Bentley.DgnPlatform.ComponentMode) -> None:
+    def SetComponentMode(self: MSPyDgnView.AccuSnap, mode: MSPyDgnPlatform.ComponentMode) -> None:
         """
         @note Resets to default value of ComponentMode.None whenever locate
         is enabled.
@@ -455,21 +455,21 @@ class AccuSnap:
         Can be called by a tool to temporarily suspend Accusnap. Calls to this
         function should be paired.
         
-        Parameter ``doSuspend``:
+        :param doSuspend:
         true to suspend AccuSnap, false to resume it.
         """
         ...
     
     def UserWantsLocates(self: MSPyDgnView.AccuSnap) -> bool:
         """
-        Returns:
+        :returns:
         true if the user has enabled AutoLocate. Controlled by " Identify Elements Automatically " preference.
         """
         ...
     
     def UserWantsSnaps(self: MSPyDgnView.AccuSnap) -> bool:
         """
-        Returns:
+        :returns:
         true if the user has enabled AccuSnap.
         """
         ...
@@ -696,7 +696,7 @@ class DgnButtonEvent:
     
     def GetKeyModifiers(self: MSPyDgnView.DgnButtonEvent) -> int:
         """
-        Returns:
+        :returns:
         the complete key modifier mask when this event occurred.
         """
         ...
@@ -727,7 +727,7 @@ class DgnButtonEvent:
         """
         ...
     
-    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         """
         Get the viewport in which the cursor resided for this event.
         """
@@ -738,21 +738,21 @@ class DgnButtonEvent:
     
     def IsAltKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if an Altkey was pressed when this event occurred.
         """
         ...
     
     def IsControlKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Control key was pressed when this event occurred.
         """
         ...
     
     def IsShiftKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Shift key was pressed when this event occurred.
         """
         ...
@@ -782,7 +782,7 @@ class DgnButtonEvent:
         """
         ...
     
-    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: MSPyDgnPlatform.IndexedViewport) -> None:
         """
         Set the viewport.
         """
@@ -797,16 +797,13 @@ class DgnButtonEvent:
         ...
     
     @property
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         ...
     @Viewport.setter
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: MSPyDgnPlatform.IndexedViewport) -> None:
         ...
     
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
+    def __init__(self: MSPyDgnView.DgnButtonEvent) -> None:
         ...
     
     eFROM_ElemSnap: CoordSource
@@ -935,7 +932,7 @@ class DgnElementSetTool:
         def value(arg0: MSPyDgnView.DgnElementSetTool.ErrorNums) -> int:
             ...
         
-    def GetActivePrimitiveTool() -> Bentley.DgnPlatform.DgnPrimitiveTool:
+    def GetActivePrimitiveTool() -> MSPyDgnPlatform.DgnPrimitiveTool:
         ...
     
     def GetActiveViewTool() -> MSPyDgnView.DgnTool:
@@ -945,8 +942,8 @@ class DgnElementSetTool:
         """
         Call to get a button event representing the current cursor location.
         
-        Parameter ``ev``:
-        IN Current button event.
+        :param ev:
+        (input) Current button event.
         """
         ...
     
@@ -990,7 +987,7 @@ class DgnElementSetTool:
         """
         Call to make this tool instance the current active command.
         
-        Returns:
+        :returns:
         SUCCESS if new tool instance is now the current command.
         
         See also:
@@ -1041,8 +1038,8 @@ class DgnElementSetTool:
         """
         Internal method to reset the current qualifier mask.
         
-        Parameter ``mask``:
-        IN New qualifier mask.
+        :param mask:
+        (input) New qualifier mask.
         """
         ...
     
@@ -1051,8 +1048,8 @@ class DgnElementSetTool:
         Call to set an adjusted point as the last datapoint location. This is
         the location that precision key-ins and axis/isometric lock will use.
         
-        Parameter ``ev``:
-        IN new button event.
+        :param ev:
+        (input) new button event.
         """
         ...
     
@@ -1063,7 +1060,7 @@ class DgnElementSetTool:
         """
         Called to set the current modifier transition state.
         
-        Returns:
+        :returns:
         The id of the current command promnpt.
         """
         ...
@@ -1277,7 +1274,7 @@ class DgnFlickEvent:
     
     def GetKeyModifiers(self: MSPyDgnView.DgnButtonEvent) -> int:
         """
-        Returns:
+        :returns:
         the complete key modifier mask when this event occurred.
         """
         ...
@@ -1308,7 +1305,7 @@ class DgnFlickEvent:
         """
         ...
     
-    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         """
         Get the viewport in which the cursor resided for this event.
         """
@@ -1319,21 +1316,21 @@ class DgnFlickEvent:
     
     def IsAltKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if an Altkey was pressed when this event occurred.
         """
         ...
     
     def IsControlKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Control key was pressed when this event occurred.
         """
         ...
     
     def IsShiftKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Shift key was pressed when this event occurred.
         """
         ...
@@ -1363,7 +1360,7 @@ class DgnFlickEvent:
         """
         ...
     
-    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: MSPyDgnPlatform.IndexedViewport) -> None:
         """
         Set the viewport.
         """
@@ -1378,10 +1375,10 @@ class DgnFlickEvent:
         ...
     
     @property
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         ...
     @Viewport.setter
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: MSPyDgnPlatform.IndexedViewport) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -1487,7 +1484,7 @@ class DgnGestureEvent:
         def GetDistance(self: MSPyDgnView.DgnGestureEvent.GestureInfo) -> float:
             ...
         
-        def GetViewPoint(self: MSPyDgnView.DgnGestureEvent.GestureInfo, vp: Bentley.DgnPlatform.IndexedViewport) -> MSPyBentleyGeom.DPoint3d:
+        def GetViewPoint(self: MSPyDgnView.DgnGestureEvent.GestureInfo, vp: MSPyDgnPlatform.IndexedViewport) -> MSPyBentleyGeom.DPoint3d:
             ...
         
         def __init__(*args, **kwargs):
@@ -1514,7 +1511,7 @@ class DgnGestureEvent:
     
     def GetKeyModifiers(self: MSPyDgnView.DgnButtonEvent) -> int:
         """
-        Returns:
+        :returns:
         the complete key modifier mask when this event occurred.
         """
         ...
@@ -1545,7 +1542,7 @@ class DgnGestureEvent:
         """
         ...
     
-    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         """
         Get the viewport in which the cursor resided for this event.
         """
@@ -1560,21 +1557,21 @@ class DgnGestureEvent:
     
     def IsAltKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if an Altkey was pressed when this event occurred.
         """
         ...
     
     def IsControlKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Control key was pressed when this event occurred.
         """
         ...
     
     def IsShiftKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Shift key was pressed when this event occurred.
         """
         ...
@@ -1604,7 +1601,7 @@ class DgnGestureEvent:
         """
         ...
     
-    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: MSPyDgnPlatform.IndexedViewport) -> None:
         """
         Set the viewport.
         """
@@ -1619,10 +1616,10 @@ class DgnGestureEvent:
         ...
     
     @property
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         ...
     @Viewport.setter
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: MSPyDgnPlatform.IndexedViewport) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -1683,7 +1680,7 @@ class DgnMouseWheelEvent:
     
     def GetKeyModifiers(self: MSPyDgnView.DgnButtonEvent) -> int:
         """
-        Returns:
+        :returns:
         the complete key modifier mask when this event occurred.
         """
         ...
@@ -1714,7 +1711,7 @@ class DgnMouseWheelEvent:
         """
         ...
     
-    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         """
         Get the viewport in which the cursor resided for this event.
         """
@@ -1732,21 +1729,21 @@ class DgnMouseWheelEvent:
     
     def IsAltKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if an Altkey was pressed when this event occurred.
         """
         ...
     
     def IsControlKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Control key was pressed when this event occurred.
         """
         ...
     
     def IsShiftKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Shift key was pressed when this event occurred.
         """
         ...
@@ -1776,7 +1773,7 @@ class DgnMouseWheelEvent:
         """
         ...
     
-    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: MSPyDgnPlatform.IndexedViewport) -> None:
         """
         Set the viewport.
         """
@@ -1791,10 +1788,10 @@ class DgnMouseWheelEvent:
         ...
     
     @property
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         ...
     @Viewport.setter
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: MSPyDgnPlatform.IndexedViewport) -> None:
         ...
     
     @property
@@ -1841,7 +1838,7 @@ class DgnPrimitiveTool:
     def EnableUndoPreviousStep(self: MSPyDgnView.DgnPrimitiveTool) -> None:
         ...
     
-    def GetActivePrimitiveTool() -> Bentley.DgnPlatform.DgnPrimitiveTool:
+    def GetActivePrimitiveTool() -> MSPyDgnPlatform.DgnPrimitiveTool:
         ...
     
     def GetActiveViewTool() -> MSPyDgnView.DgnTool:
@@ -1851,8 +1848,8 @@ class DgnPrimitiveTool:
         """
         Call to get a button event representing the current cursor location.
         
-        Parameter ``ev``:
-        IN Current button event.
+        :param ev:
+        (input) Current button event.
         """
         ...
     
@@ -1893,7 +1890,7 @@ class DgnPrimitiveTool:
         """
         Call to make this tool instance the current active command.
         
-        Returns:
+        :returns:
         SUCCESS if new tool instance is now the current command.
         
         See also:
@@ -1905,8 +1902,8 @@ class DgnPrimitiveTool:
         """
         Internal method to reset the current qualifier mask.
         
-        Parameter ``mask``:
-        IN New qualifier mask.
+        :param mask:
+        (input) New qualifier mask.
         """
         ...
     
@@ -1915,8 +1912,8 @@ class DgnPrimitiveTool:
         Call to set an adjusted point as the last datapoint location. This is
         the location that precision key-ins and axis/isometric lock will use.
         
-        Parameter ``ev``:
-        IN new button event.
+        :param ev:
+        (input) new button event.
         """
         ...
     
@@ -1927,7 +1924,7 @@ class DgnPrimitiveTool:
         """
         Called to set the current modifier transition state.
         
-        Returns:
+        :returns:
         The id of the current command promnpt.
         """
         ...
@@ -2083,7 +2080,7 @@ class DgnRegionElementTool:
         def value(arg0: MSPyDgnView.DgnElementSetTool.ErrorNums) -> int:
             ...
         
-    def GetActivePrimitiveTool() -> Bentley.DgnPlatform.DgnPrimitiveTool:
+    def GetActivePrimitiveTool() -> MSPyDgnPlatform.DgnPrimitiveTool:
         ...
     
     def GetActiveViewTool() -> MSPyDgnView.DgnTool:
@@ -2093,8 +2090,8 @@ class DgnRegionElementTool:
         """
         Call to get a button event representing the current cursor location.
         
-        Parameter ``ev``:
-        IN Current button event.
+        :param ev:
+        (input) Current button event.
         """
         ...
     
@@ -2144,7 +2141,7 @@ class DgnRegionElementTool:
         """
         Call to make this tool instance the current active command.
         
-        Returns:
+        :returns:
         SUCCESS if new tool instance is now the current command.
         
         See also:
@@ -2261,8 +2258,8 @@ class DgnRegionElementTool:
         """
         Internal method to reset the current qualifier mask.
         
-        Parameter ``mask``:
-        IN New qualifier mask.
+        :param mask:
+        (input) New qualifier mask.
         """
         ...
     
@@ -2271,8 +2268,8 @@ class DgnRegionElementTool:
         Call to set an adjusted point as the last datapoint location. This is
         the location that precision key-ins and axis/isometric lock will use.
         
-        Parameter ``ev``:
-        IN new button event.
+        :param ev:
+        (input) new button event.
         """
         ...
     
@@ -2283,7 +2280,7 @@ class DgnRegionElementTool:
         """
         Called to set the current modifier transition state.
         
-        Returns:
+        :returns:
         The id of the current command promnpt.
         """
         ...
@@ -2479,7 +2476,7 @@ class DgnTool:
     ActiveViewTool: NoneType
     
     @staticmethod
-    def GetActivePrimitiveTool() -> Bentley.DgnPlatform.DgnPrimitiveTool:
+    def GetActivePrimitiveTool() -> MSPyDgnPlatform.DgnPrimitiveTool:
         ...
     
     @staticmethod
@@ -2490,8 +2487,8 @@ class DgnTool:
         """
         Call to get a button event representing the current cursor location.
         
-        Parameter ``ev``:
-        IN Current button event.
+        :param ev:
+        (input) Current button event.
         """
         ...
     
@@ -2529,7 +2526,7 @@ class DgnTool:
         """
         Call to make this tool instance the current active command.
         
-        Returns:
+        :returns:
         SUCCESS if new tool instance is now the current command.
         
         See also:
@@ -2541,8 +2538,8 @@ class DgnTool:
         """
         Internal method to reset the current qualifier mask.
         
-        Parameter ``mask``:
-        IN New qualifier mask.
+        :param mask:
+        (input) New qualifier mask.
         """
         ...
     
@@ -2551,8 +2548,8 @@ class DgnTool:
         Call to set an adjusted point as the last datapoint location. This is
         the location that precision key-ins and axis/isometric lock will use.
         
-        Parameter ``ev``:
-        IN new button event.
+        :param ev:
+        (input) new button event.
         """
         ...
     
@@ -2563,7 +2560,7 @@ class DgnTool:
         """
         Called to set the current modifier transition state.
         
-        Returns:
+        :returns:
         The id of the current command promnpt.
         """
         ...
@@ -2625,7 +2622,7 @@ class DgnTouchEvent:
     
     def GetKeyModifiers(self: MSPyDgnView.DgnButtonEvent) -> int:
         """
-        Returns:
+        :returns:
         the complete key modifier mask when this event occurred.
         """
         ...
@@ -2659,7 +2656,7 @@ class DgnTouchEvent:
         """
         ...
     
-    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def GetViewport(self: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         """
         Get the viewport in which the cursor resided for this event.
         """
@@ -2670,21 +2667,21 @@ class DgnTouchEvent:
     
     def IsAltKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if an Altkey was pressed when this event occurred.
         """
         ...
     
     def IsControlKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Control key was pressed when this event occurred.
         """
         ...
     
     def IsShiftKey(self: MSPyDgnView.DgnButtonEvent) -> bool:
         """
-        Returns:
+        :returns:
         true if a Shift key was pressed when this event occurred.
         """
         ...
@@ -2714,7 +2711,7 @@ class DgnTouchEvent:
         """
         ...
     
-    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def SetViewport(self: MSPyDgnView.DgnButtonEvent, vp: MSPyDgnPlatform.IndexedViewport) -> None:
         """
         Set the viewport.
         """
@@ -2773,7 +2770,7 @@ class DgnTouchEvent:
         None
         """
     
-        def GetViewPoint(self: MSPyDgnView.DgnTouchEvent.TouchInput, vp: Bentley.DgnPlatform.IndexedViewport) -> MSPyBentleyGeom.DPoint3d:
+        def GetViewPoint(self: MSPyDgnView.DgnTouchEvent.TouchInput, vp: MSPyDgnPlatform.IndexedViewport) -> MSPyBentleyGeom.DPoint3d:
             ...
         
         def IsDown(self: MSPyDgnView.DgnTouchEvent.TouchInput) -> bool:
@@ -2807,10 +2804,10 @@ class DgnTouchEvent:
         ...
     
     @property
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> Bentley.DgnPlatform.IndexedViewport:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent) -> MSPyDgnPlatform.IndexedViewport:
         ...
     @Viewport.setter
-    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: Bentley.DgnPlatform.IndexedViewport) -> None:
+    def Viewport(arg0: MSPyDgnView.DgnButtonEvent, arg1: MSPyDgnPlatform.IndexedViewport) -> None:
         ...
     
     def __init__(*args, **kwargs):
@@ -2852,7 +2849,7 @@ class DgnViewTool:
     
     ActiveViewTool: NoneType
     
-    def GetActivePrimitiveTool() -> Bentley.DgnPlatform.DgnPrimitiveTool:
+    def GetActivePrimitiveTool() -> MSPyDgnPlatform.DgnPrimitiveTool:
         ...
     
     def GetActiveViewTool() -> MSPyDgnView.DgnTool:
@@ -2862,8 +2859,8 @@ class DgnViewTool:
         """
         Call to get a button event representing the current cursor location.
         
-        Parameter ``ev``:
-        IN Current button event.
+        :param ev:
+        (input) Current button event.
         """
         ...
     
@@ -2896,18 +2893,18 @@ class DgnViewTool:
         HOOKITEMID_ViewBorderIconCmdHook in order to be passed the view number
         as unparsedP.
         
-        Parameter ``sourceFoundP``:
-        OUT Source of preferred viewport.
+        :param sourceFoundP:
+        (output) Source of preferred viewport.
         
-        Parameter ``unparsedP``:
-        IN unparsed string containing a view number or NULL.
+        :param unparsedP:
+        (input) unparsed string containing a view number or NULL.
         
-        Parameter ``sourceToSearch``:
-        IN Mask of allow sources for preferred viewport,
+        :param sourceToSearch:
+        (input) Mask of allow sources for preferred viewport,
         PREFERRED_VIEW_Unparsed only used as an output, assumed if
         unparsedP isn't NULL.
         
-        Returns:
+        :returns:
         Preferred viewport for tool or NULL.
         """
         ...
@@ -2928,7 +2925,7 @@ class DgnViewTool:
         """
         Call to make this tool instance the current active command.
         
-        Returns:
+        :returns:
         SUCCESS if new tool instance is now the current command.
         
         See also:
@@ -2972,8 +2969,8 @@ class DgnViewTool:
         """
         Internal method to reset the current qualifier mask.
         
-        Parameter ``mask``:
-        IN New qualifier mask.
+        :param mask:
+        (input) New qualifier mask.
         """
         ...
     
@@ -2982,8 +2979,8 @@ class DgnViewTool:
         Call to set an adjusted point as the last datapoint location. This is
         the location that precision key-ins and axis/isometric lock will use.
         
-        Parameter ``ev``:
-        IN new button event.
+        :param ev:
+        (input) new button event.
         """
         ...
     
@@ -2994,7 +2991,7 @@ class DgnViewTool:
         """
         Called to set the current modifier transition state.
         
-        Returns:
+        :returns:
         The id of the current command promnpt.
         """
         ...
@@ -3154,7 +3151,7 @@ class ElementGraphicsTool:
         def value(arg0: MSPyDgnView.DgnElementSetTool.ErrorNums) -> int:
             ...
         
-    def GetActivePrimitiveTool() -> Bentley.DgnPlatform.DgnPrimitiveTool:
+    def GetActivePrimitiveTool() -> MSPyDgnPlatform.DgnPrimitiveTool:
         ...
     
     def GetActiveViewTool() -> MSPyDgnView.DgnTool:
@@ -3164,12 +3161,12 @@ class ElementGraphicsTool:
         """
         Call to get a button event representing the current cursor location.
         
-        Parameter ``ev``:
-        IN Current button event.
+        :param ev:
+        (input) Current button event.
         """
         ...
     
-    def GetDisplayPath(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyDgnPlatform.DisplayPath:
+    def GetDisplayPath(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyDgnPlatform.DisplayPath:
         ...
     
     def GetDynamicsStarted(self: MSPyDgnView.DgnPrimitiveTool) -> bool:
@@ -3178,10 +3175,7 @@ class ElementGraphicsTool:
     def GetElementAgenda(self: MSPyDgnView.DgnElementSetTool) -> MSPyDgnPlatform.ElementAgenda:
         ...
     
-    def GetElementGraphicsCache(*args, **kwargs):
-        """
-        GetElementGraphicsCache(self: MSPyDgnView.ElementGraphicsTool, eh: MSPyDgnPlatform.ElementHandle, geomCache: Bentley.Bstdcxx.bvector<Bentley.RefCountedPtr<Bentley.IRefCounted>,Bentley.BentleyAllocator<Bentley.RefCountedPtr<Bentley.IRefCounted> > >) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetElementGraphicsCache(self: MSPyDgnView.ElementGraphicsTool, eh: MSPyDgnPlatform.ElementHandle, geomCache: List[IRefCounted]) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
     def GetElementGraphicsCacheCount(self: MSPyDgnView.ElementGraphicsTool, eh: MSPyDgnPlatform.ElementHandle) -> int:
@@ -3224,7 +3218,7 @@ class ElementGraphicsTool:
         """
         Call to make this tool instance the current active command.
         
-        Returns:
+        :returns:
         SUCCESS if new tool instance is now the current command.
         
         See also:
@@ -3232,19 +3226,19 @@ class ElementGraphicsTool:
         """
         ...
     
-    def IsFromLocatedComponent(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> bool:
+    def IsFromLocatedComponent(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> bool:
         ...
     
     def IsGeometryMissing(self: MSPyDgnView.ElementGraphicsTool, eh: MSPyDgnPlatform.ElementHandle) -> bool:
         ...
     
-    def IsGeometrySheet(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> bool:
+    def IsGeometrySheet(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> bool:
         ...
     
-    def IsGeometrySolid(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> bool:
+    def IsGeometrySolid(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> bool:
         ...
     
-    def IsGeometryWire(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> bool:
+    def IsGeometryWire(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> bool:
         ...
     
     def OnModifierKeyTransitionHelper(self: MSPyDgnView.DgnElementSetTool, wentDown: bool, key: int) -> bool:
@@ -3289,8 +3283,8 @@ class ElementGraphicsTool:
         """
         Internal method to reset the current qualifier mask.
         
-        Parameter ``mask``:
-        IN New qualifier mask.
+        :param mask:
+        (input) New qualifier mask.
         """
         ...
     
@@ -3299,8 +3293,8 @@ class ElementGraphicsTool:
         Call to set an adjusted point as the last datapoint location. This is
         the location that precision key-ins and axis/isometric lock will use.
         
-        Parameter ``ev``:
-        IN new button event.
+        :param ev:
+        (input) new button event.
         """
         ...
     
@@ -3311,7 +3305,7 @@ class ElementGraphicsTool:
         """
         Called to set the current modifier transition state.
         
-        Returns:
+        :returns:
         The id of the current command promnpt.
         """
         ...
@@ -3345,19 +3339,19 @@ class ElementGraphicsTool:
     def ToolPrompt(arg0: MSPyDgnView.DgnTool, arg1: int) -> None:
         ...
     
-    def TryGetAsBRep(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyDgnPlatform.ISolidKernelEntity:
+    def TryGetAsBRep(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyDgnPlatform.ISolidKernelEntity:
         ...
     
-    def TryGetAsCurveVector(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyBentleyGeom.CurveVector:
+    def TryGetAsCurveVector(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyBentleyGeom.CurveVector:
         ...
     
-    def TryGetAsPolyface(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyBentleyGeom.PolyfaceHeader:
+    def TryGetAsPolyface(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyBentleyGeom.PolyfaceHeader:
         ...
     
-    def TryGetAsPrimitive(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyBentleyGeom.ISolidPrimitive:
+    def TryGetAsPrimitive(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyBentleyGeom.ISolidPrimitive:
         ...
     
-    def TryGetAsSurface(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyBentleyGeom.RefCountedMSBsplineSurface:
+    def TryGetAsSurface(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyBentleyGeom.RefCountedMSBsplineSurface:
         ...
     
     class UsesDragSelect:
@@ -3447,10 +3441,7 @@ class ElementGraphicsTool:
     def WantAdditionalLocateHelper(self: MSPyDgnView.DgnElementSetTool, ev: MSPyDgnView.DgnButtonEvent) -> bool:
         ...
     
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
+    def __init__(self: MSPyDgnView.ElementGraphicsTool) -> None:
         ...
     
     eCLIP_RESULT_NewElements: ClipResult
@@ -3539,8 +3530,16 @@ class FenceManager:
         """
         ...
     
-    def DefineByPoints(self: MSPyDgnView.FenceManager, points: MSPyBentleyGeom.DPoint3dArray, vp: MSPyDgnPlatform.Viewport) -> int:
+    def DefineByPoints(*args, **kwargs):
         """
+        Overloaded function.
+        
+        1. DefineByPoints(self: MSPyDgnView.FenceManager, points: MSPyBentleyGeom.DPoint3dArray, vp: MSPyDgnPlatform.Viewport) -> int
+        
+        Set active fence by points.
+        
+        2. DefineByPoints(self: MSPyDgnView.FenceManager, points: list, vp: MSPyDgnPlatform.Viewport) -> int
+        
         Set active fence by points.
         """
         ...
@@ -3711,47 +3710,13 @@ class FenceManager:
     
     eFENCE_NormalDraw: FenceDisplayMode
     
-class IModelTransientHandler:
+class IModifyElement:
     """
     None
     """
 
-    class ModelTransientPurpose:
-        """
-        Members:
-        
-        eModelTransientPurpose_Normal
-        
-        eModelTransientPurpose_PreDisplayList
-        
-        eModelTransientPurpose_PostDisplayList
-        """
-    
-        def __init__(self: MSPyDgnView.IModelTransientHandler.ModelTransientPurpose, value: int) -> None:
-            ...
-        
-        eModelTransientPurpose_Normal: ModelTransientPurpose
-        
-        eModelTransientPurpose_PostDisplayList: ModelTransientPurpose
-        
-        eModelTransientPurpose_PreDisplayList: ModelTransientPurpose
-        
-        @property
-        def name(self: handle) -> str:
-            ...
-        
-        @property
-        def value(arg0: MSPyDgnView.IModelTransientHandler.ModelTransientPurpose) -> int:
-            ...
-        
-    def __init__(self: MSPyDgnView.IModelTransientHandler) -> None:
+    def __init__(self: MSPyDgnView.IModifyElement) -> None:
         ...
-    
-    eModelTransientPurpose_Normal: ModelTransientPurpose
-    
-    eModelTransientPurpose_PostDisplayList: ModelTransientPurpose
-    
-    eModelTransientPurpose_PreDisplayList: ModelTransientPurpose
     
 class IRedrawAbort:
     """
@@ -3775,757 +3740,6 @@ class ISelectionEvents:
     """
 
     def __init__(self: MSPyDgnView.ISelectionEvents) -> None:
-        ...
-    
-class IViewDecoration:
-    """
-    None
-    """
-
-    def __init__(self: MSPyDgnView.IViewDecoration) -> None:
-        ...
-    
-class IViewManager:
-    """
-    None
-    """
-
-    def AddElementDecorator(self: MSPyDgnView.IViewManager, decorator: MSPyDgnView.IViewDecoration) -> None:
-        ...
-    
-    def AddModelTransientHandler(self: MSPyDgnView.IViewManager, handler: MSPyDgnView.IModelTransientHandler) -> None:
-        ...
-    
-    def AddViewDecoration(self: MSPyDgnView.IViewManager, decorator: MSPyDgnView.IViewDecoration) -> None:
-        """
-        @name Viewport Event Handlers
-        """
-        ...
-    
-    def AddViewMonitor(self: MSPyDgnView.IViewManager, monitor: MSPyDgnView.IViewMonitor) -> None:
-        ...
-    
-    def AddViewTransientHandler(self: MSPyDgnView.IViewManager, handler: MSPyDgnPlatform.IViewTransients) -> None:
-        ...
-    
-    @property
-    def CurrentViewNumber(arg0: MSPyDgnView.IViewManager) -> int:
-        ...
-    
-    def DropElementDecorator(self: MSPyDgnView.IViewManager, decorator: MSPyDgnView.IViewDecoration) -> None:
-        ...
-    
-    def DropModelTransientHandler(self: MSPyDgnView.IViewManager, handler: MSPyDgnView.IModelTransientHandler) -> None:
-        ...
-    
-    def DropViewDecoration(self: MSPyDgnView.IViewManager, decorator: MSPyDgnView.IViewDecoration) -> None:
-        ...
-    
-    def DropViewMonitor(self: MSPyDgnView.IViewManager, monitor: MSPyDgnView.IViewMonitor) -> None:
-        ...
-    
-    def DropViewTransientHandler(self: MSPyDgnView.IViewManager, handler: MSPyDgnPlatform.IViewTransients) -> None:
-        ...
-    
-    @staticmethod
-    def GetActiveViewSet() -> MSPyDgnView.IndexedViewSet:
-        ...
-    
-    def GetCurrentViewNumber(self: MSPyDgnView.IViewManager) -> int:
-        """
-        Return the index of the active viewport
-        """
-        ...
-    
-    @staticmethod
-    def GetManager() -> MSPyDgnView.IViewManager:
-        ...
-    
-    def IsGraphicsOn(self: MSPyDgnView.IViewManager) -> bool:
-        ...
-    
-    def OnHostTermination(self: MSPyDgnPlatform.DgnHost.IHostobject, isProgramExit: bool) -> None:
-        ...
-    
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
-        ...
-    
-class IViewMonitor:
-    """
-    None
-    """
-
-    def __init__(self: MSPyDgnView.IViewMonitor) -> None:
-        ...
-    
-class IndexedViewSet:
-    """
-    None
-    """
-
-    @property
-    def DgnHost(arg0: MSPyDgnView.IndexedViewSet) -> MSPyDgnPlatform.DgnHost:
-        ...
-    
-    class DynamicUpdateInfo:
-        """
-        None
-        """
-    
-        def ClearLastMotion(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo) -> None:
-            ...
-        
-        def GetLastCursorPos(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo) -> MSPyBentleyGeom.Point2d:
-            ...
-        
-        @property
-        def LastCursorPos(arg0: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo) -> MSPyBentleyGeom.Point2d:
-            ...
-        
-        def SetDeferShadows(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo, deferShadows: bool) -> None:
-            ...
-        
-        def SetDoBackingStore(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo, doBackingStore: bool) -> None:
-            ...
-        
-        def SetDynamicsMotionTolerance(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo, dynamicsMotionTolerance: int) -> None:
-            ...
-        
-        def SetDynamicsStopInterval(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo, dynamicsStopInterval: int) -> None:
-            ...
-        
-        def SetIncludeList(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo, includeList: MSPyDgnPlatform.DgnModelRefList) -> None:
-            ...
-        
-        def SetMaxFrameTime(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo, maxFrameTime: int) -> None:
-            ...
-        
-        def SetMinLODDelta(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo, minLodDelta: int) -> None:
-            ...
-        
-        def SetStopEvents(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo, stopEvents: MSPyDgnView.StopEvents) -> None:
-            ...
-        
-        def __init__(self: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo) -> None:
-            ...
-        
-    @property
-    def FirstOpenView(arg0: MSPyDgnView.IndexedViewSet) -> MSPyDgnView.IndexedViewport:
-        ...
-    
-    def ForgetViewport(self: MSPyDgnView.IndexedViewSet, viewNum: int) -> int:
-        ...
-    
-    class FullUpdateInfo:
-        """
-        None
-        """
-    
-        def GetIncremental(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo) -> bool:
-            ...
-        
-        def GetStartEndMsg(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo) -> bool:
-            ...
-        
-        @property
-        def Incremental(arg0: MSPyDgnView.IndexedViewSet.FullUpdateInfo) -> bool:
-            ...
-        @Incremental.setter
-        def Incremental(arg0: MSPyDgnView.IndexedViewSet.FullUpdateInfo, arg1: bool) -> None:
-            ...
-        
-        def SetDeferShadows(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, deferShadows: bool) -> None:
-            ...
-        
-        def SetFenceParams(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, fp: MSPyDgnPlatform.FenceParams) -> None:
-            ...
-        
-        def SetIncludeList(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, includeList: MSPyDgnPlatform.DgnModelRefList) -> None:
-            ...
-        
-        def SetIncremental(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, incremental: bool) -> None:
-            ...
-        
-        def SetStartAbortState(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, state: bool) -> None:
-            ...
-        
-        def SetStartEndMsg(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, startEndMsg: bool) -> None:
-            ...
-        
-        def SetStopEvents(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, stopEvents: MSPyDgnView.StopEvents) -> None:
-            ...
-        
-        def SetSubRect(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, subRect: MSPyDgnPlatform.BSIRect) -> None:
-            ...
-        
-        def SetUseCachedElems(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo, useCacheElems: bool) -> None:
-            ...
-        
-        @property
-        def StartEndMsg(arg0: MSPyDgnView.IndexedViewSet.FullUpdateInfo) -> bool:
-            ...
-        @StartEndMsg.setter
-        def StartEndMsg(arg0: MSPyDgnView.IndexedViewSet.FullUpdateInfo, arg1: bool) -> None:
-            ...
-        
-        def __init__(self: MSPyDgnView.IndexedViewSet.FullUpdateInfo) -> None:
-            ...
-        
-    def GetDgnHost(self: MSPyDgnView.IndexedViewSet) -> MSPyDgnPlatform.DgnHost:
-        ...
-    
-    def GetFirstOpenView(self: MSPyDgnView.IndexedViewSet) -> MSPyDgnView.IndexedViewport:
-        ...
-    
-    def GetSelectedView(self: MSPyDgnView.IndexedViewSet) -> int:
-        ...
-    
-    def GetSelectedViewport(self: MSPyDgnView.IndexedViewSet) -> MSPyDgnView.IndexedViewport:
-        ...
-    
-    def GetViewTitle(self: MSPyDgnView.IndexedViewSet, title: MSPyBentley.WString, viewIndex: int) -> None:
-        ...
-    
-    def GetViewport(self: MSPyDgnView.IndexedViewSet, viewNum: int) -> MSPyDgnView.IndexedViewport:
-        ...
-    
-    def IsHealingEnabled(self: MSPyDgnView.IndexedViewSet) -> bool:
-        ...
-    
-    @property
-    def SelectedView(arg0: MSPyDgnView.IndexedViewSet) -> int:
-        ...
-    
-    @property
-    def SelectedViewport(arg0: MSPyDgnView.IndexedViewSet) -> MSPyDgnView.IndexedViewport:
-        ...
-    
-    def SetSelectedView(self: MSPyDgnView.IndexedViewSet, inVp: MSPyDgnView.IndexedViewport, setActiveModel: bool, fromButtonEvent: bool) -> MSPyDgnPlatform.BentleyStatus:
-        ...
-    
-    def SetViewport(self: MSPyDgnView.IndexedViewSet, viewNum: int, vp: MSPyDgnView.IndexedViewport) -> int:
-        ...
-    
-    def UpdateView(self: MSPyDgnView.IndexedViewSet, vp: MSPyDgnView.IndexedViewport, drawMode: MSPyDgnPlatform.DgnDrawMode, drawPurpose: MSPyDgnPlatform.DrawPurpose, info: MSPyDgnView.IndexedViewSet.FullUpdateInfo) -> bool:
-        ...
-    
-    def UpdateViewDynamic(self: MSPyDgnView.IndexedViewSet, vp: MSPyDgnView.IndexedViewport, info: MSPyDgnView.IndexedViewSet.DynamicUpdateInfo) -> MSPyDgnView.UpdateAbortReason:
-        ...
-    
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
-        ...
-    
-class IndexedViewport:
-    """
-    None
-    """
-
-    def ActiveToRoot(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ActiveToRoot(self: MSPyDgnPlatform.Viewport, rootPts: MSPyBentleyGeom.DPoint3dArray, activePts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ActiveToRoot(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, activePt: MSPyBentleyGeom.DPoint3d) -> None
-        
-        3. ActiveToRoot(self: MSPyDgnPlatform.Viewport, rootRMatrix: MSPyBentleyGeom.RotMatrix, activeRMatrix: MSPyBentleyGeom.RotMatrix) -> None
-        """
-        ...
-    
-    @property
-    def ActiveToRootMap(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def ActiveToView(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ActiveToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint3dArray, activePts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ActiveToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint3d, activePt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    @property
-    def ActiveZRoot(arg0: MSPyDgnPlatform.Viewport) -> float:
-        ...
-    
-    def AdjustColorForContrast(self: MSPyDgnPlatform.Viewport, thisColor: int, againstColor: int) -> int:
-        ...
-    
-    @property
-    def BackgroundColor(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    @property
-    def CameraRoot(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.CameraParams:
-        ...
-    
-    @property
-    def ClipBoundElementRef(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.ElementRefBase:
-        ...
-    
-    @property
-    def ClipMaskElementRef(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.ElementRefBase:
-        ...
-    
-    def ComputeDisplayedModelRefRange(self: MSPyDgnPlatform.Viewport, range: MSPyBentleyGeom.DRange3d, modelRef: MSPyDgnPlatform.DgnModelRef, includeChildren: bool, fitParams: MSPyDgnPlatform.FitViewParams) -> int:
-        """
-        Compute range of a model ref when display in the viewport
-        """
-        ...
-    
-    def ComputeFittedElementRange(self: MSPyDgnPlatform.Viewport, range: MSPyBentleyGeom.DRange3d, elements: Bentley.DgnPlatform.IElementSet, rMatrix: MSPyBentleyGeom.RotMatrix) -> int:
-        """
-        Compute the range of the element when displayed in the viewport
-        """
-        ...
-    
-    @property
-    def ContrastToBackgroundColor(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def GetActiveToRootMap(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def GetActiveZRoot(self: MSPyDgnPlatform.Viewport) -> float:
-        ...
-    
-    def GetBackgroundColor(self: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def GetCameraRoot(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.CameraParams:
-        ...
-    
-    def GetCameraTarget(self: MSPyDgnPlatform.Viewport, target: MSPyBentleyGeom.DPoint3d) -> int:
-        ...
-    
-    def GetCameraView(self: MSPyDgnPlatform.Viewport, camera: Bentley.DgnPlatform.CameraParams) -> None:
-        ...
-    
-    def GetClipBoundElemHandle(self: MSPyDgnPlatform.Viewport, eeh: Bentley.DgnPlatform.EditElementHandle) -> int:
-        ...
-    
-    def GetClipBoundElementRef(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.ElementRefBase:
-        ...
-    
-    def GetClipMaskElemHandle(self: MSPyDgnPlatform.Viewport, eeh: Bentley.DgnPlatform.EditElementHandle) -> int:
-        ...
-    
-    def GetClipMaskElementRef(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.ElementRefBase:
-        ...
-    
-    def GetContrastToBackgroundColor(self: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def GetHiliteColor(self: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def GetHiliteColorFromPath(self: MSPyDgnPlatform.Viewport, path: Bentley.DgnPlatform.DisplayPath) -> int:
-        ...
-    
-    def GetICachedDraw(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ICachedDraw:
-        """
-        Gets the object required for advanced cached drawing to the Viewport.
-        Cached Drawing is seldom required by applications.
-        """
-        ...
-    
-    def GetIViewDraw(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.IViewDraw:
-        """
-        Gets the object required for immediate drawing to the Viewport. The
-        methods on IViewDraw can be used to draw View Decorators.
-        """
-        ...
-    
-    def GetIViewOutput(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.IViewOutput:
-        """
-        Gets the object required for advanced immediate drawing to the
-        Viewport. IViewOutput is a subclass of IViewDraw, and generally only
-        IViewDraw is needed.
-        """
-        ...
-    
-    def GetIndexedLinePattern(self: MSPyDgnPlatform.Viewport, index: int) -> int:
-        ...
-    
-    def GetIndexedLineWidth(self: MSPyDgnPlatform.Viewport, index: int) -> int:
-        ...
-    
-    def GetPixelSizeAtPoint(*args, **kwargs):
-        """
-        GetPixelSizeAtPoint(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, coordSys: MSPyDgnPlatform.DgnCoordSystem = <DgnCoordSystem.eRoot: 3>) -> float
-        
-        Get the size of a single pixel at a given point as a distance along
-        the view-x axis. The size of a pixel will only differ at different
-        points within the same Viewport if the camera is on for this Viewport
-        (in which case, points closer to the eye return larger values than
-        ones further from the eye.)
-        
-        Parameter ``rootPt``:
-        The point in DgnCoordSystem.Root for determining pixel size. If
-        NULL, use the center of the Viewport.
-        
-        Parameter ``coordSys``:
-        The coordinate system for the returned distance.
-        
-        Returns:
-        the size of the pixel at point ``rootPt.``
-        """
-        ...
-    
-    def GetRootModel(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.DgnModel:
-        ...
-    
-    def GetRootToNpcMap(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def GetRootToViewMap(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def GetRotMatrix(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.RotMatrix:
-        ...
-    
-    def GetScale(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        ...
-    
-    def GetScreenNumber(self: MSPyDgnPlatform.Viewport) -> int:
-        """
-        Get the screen number on which this Viewport resides.
-        """
-        ...
-    
-    def GetTargetModel(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.DgnModelRef:
-        ...
-    
-    def GetViewBox(self: MSPyDgnPlatform.Viewport, points: MSPyBentleyGeom.DPoint3dArray, sys: MSPyDgnPlatform.DgnCoordSystem, adjustedBox: bool) -> None:
-        ...
-    
-    def GetViewCorners(self: MSPyDgnPlatform.Viewport, low: MSPyBentleyGeom.DPoint3d, high: MSPyBentleyGeom.DPoint3d) -> None:
-        ...
-    
-    def GetViewDelta(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        """
-        Get the View Delta (size) of this Viewport in root coordinate
-        distances.
-        
-        Returns:
-        the view delta in root coordinate distances.
-        """
-        ...
-    
-    def GetViewFlags(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ViewFlags:
-        """
-        Get the current View Flags for this Viewport.
-        
-        Returns:
-        the View flags for this Viewport.
-        """
-        ...
-    
-    def GetViewInfo(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ViewInfo:
-        ...
-    
-    def GetViewName(self: MSPyDgnPlatform.Viewport, name: MSPyBentley.WString) -> None:
-        ...
-    
-    def GetViewNumber(self: MSPyDgnPlatform.Viewport) -> int:
-        """
-        Get the view number of this Viewport. If this Viewport is one of the 8
-        MicroStation numbered views (i.e. " View 1 " through " View 8 "), then
-        return the index of view number (e.g. " View 1 " is view index 0, " View 8 " is view index 7). If the Viewport is not one of the 8 MicroStation
-        numbered views, this method will return -1.
-        
-        Returns:
-        the view index of this Viewport, or -1 if it is not one of the
-        numbered views.
-        """
-        ...
-    
-    def GetViewOrigin(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        """
-        Get View Origin for this Viewport.
-        
-        Returns:
-        the root coordinates of the lower left back corner of the
-        Viewport.
-        """
-        ...
-    
-    def GetViewRect(self: MSPyDgnPlatform.Viewport, rect: MSPyDgnPlatform.BSIRect) -> None:
-        ...
-    
-    @property
-    def HiliteColor(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    @property
-    def ICachedDraw(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ICachedDraw:
-        ...
-    
-    @property
-    def IViewDraw(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.IViewDraw:
-        ...
-    
-    @property
-    def IViewOutput(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.IViewOutput:
-        ...
-    
-    def Is3dModel(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def IsActive(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def IsCameraOn(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def IsGridOn(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def IsSheetView(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def MakeColorTransparency(color: int, transparency: int) -> int:
-        ...
-    
-    def MakeTransparentIfOpaque(color: int, transparency: int) -> int:
-        ...
-    
-    def MakeTrgbColor(red: int, green: int, blue: int, transparency: int) -> int:
-        ...
-    
-    def NpcToRoot(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. NpcToRoot(self: MSPyDgnPlatform.Viewport, rootPts: MSPyBentleyGeom.DPoint3dArray, npcPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. NpcToRoot(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, npcPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def NpcToView(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. NpcToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint3dArray, npcPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. NpcToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint3d, npcPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def ResynchColorMap(self: MSPyDgnPlatform.Viewport) -> None:
-        ...
-    
-    @property
-    def RootModel(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.DgnModel:
-        ...
-    
-    def RootToActive(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. RootToActive(self: MSPyDgnPlatform.Viewport, activePts: MSPyBentleyGeom.DPoint3dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. RootToActive(self: MSPyDgnPlatform.Viewport, activePt: MSPyBentleyGeom.DPoint3d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        
-        3. RootToActive(self: MSPyDgnPlatform.Viewport, activeRMatrix: MSPyBentleyGeom.RotMatrix, rootRMatrix: MSPyBentleyGeom.RotMatrix) -> None
-        """
-        ...
-    
-    def RootToNpc(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. RootToNpc(self: MSPyDgnPlatform.Viewport, npcPts: MSPyBentleyGeom.DPoint3dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. RootToNpc(self: MSPyDgnPlatform.Viewport, npcPt: MSPyBentleyGeom.DPoint3d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    @property
-    def RootToNpcMap(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def RootToView(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. RootToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint4dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. RootToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint4d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        
-        3. RootToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint3dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        4. RootToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint3d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def RootToView2d(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. RootToView2d(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint2dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. RootToView2d(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint2d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    @property
-    def RootToViewMap(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    @property
-    def RotMatrix(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.RotMatrix:
-        ...
-    
-    @property
-    def Scale(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        ...
-    
-    @property
-    def ScreenNumber(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def ScreenToView(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ScreenToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint3dArray, screenPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ScreenToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint3d, screenPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def Scroll(self: MSPyDgnPlatform.Viewport, viewDist: MSPyBentleyGeom.Point2d) -> int:
-        """
-        @name Changing Viewport Frustum Scroll the Viewport by a given number
-        of pixels in the view's X and/or Y direction. This method will move
-        the Viewport's frustum in the indicated direction, but does *not*
-        update the screen (even if the Viewport happens to be a visible View.)
-        This method does change the ViewInfo associated with the Viewport.
-        
-        Parameter ``viewDist``:
-        The distance to scroll, in pixels. @note To update the view, see
-        IViewManager.UpdateView or IViewManager.UpdateViewDynamic. To
-        save the change to the ViewInfo in the view undo buffer, see
-        SynchWithViewInfo.
-        """
-        ...
-    
-    def SetMinimumLOD(self: MSPyDgnPlatform.Viewport, minLod: float) -> None:
-        ...
-    
-    def SetNeedsRefresh(self: MSPyDgnPlatform.Viewport) -> None:
-        """
-        Sets the flag indicating that the Viewport needs to be refreshed from
-        the backing store at the next opportunity. When the Viewport is
-        refreshed, the view decorators are redrawn.
-        """
-        ...
-    
-    def SetSymbologyRgb(self: MSPyDgnPlatform.Viewport, lineColorTBGR: int, fillColorTBGR: int, lineWidth: int, lineColorIndex: int) -> None:
-        ...
-    
-    def SetTemporaryClipElementRef(self: MSPyDgnPlatform.Viewport, element: MSPyDgnPlatform.ElementRefBase) -> None:
-        ...
-    
-    def SetTemporaryClipMaskElementRef(self: MSPyDgnPlatform.Viewport, element: MSPyDgnPlatform.ElementRefBase) -> None:
-        ...
-    
-    def SetupFromFrustum(self: MSPyDgnPlatform.Viewport, frustPts: MSPyBentleyGeom.DPoint3dArray) -> int:
-        ...
-    
-    def SynchWithViewInfo(self: MSPyDgnPlatform.Viewport, saveInUndo: bool, updateViewTitle: bool) -> MSPyDgnPlatform.BentleyStatus:
-        """
-        Synchronizes the view information that is displayed with this
-        viewport. Optionally add an entry in the view undo stack and update
-        the view title.
-        """
-        ...
-    
-    @property
-    def TargetModel(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.DgnModelRef:
-        ...
-    
-    @property
-    def ViewDelta(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        ...
-    
-    @property
-    def ViewFlags(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ViewFlags:
-        ...
-    
-    @property
-    def ViewInfo(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ViewInfo:
-        ...
-    
-    @property
-    def ViewNumber(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    @property
-    def ViewOrigin(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        ...
-    
-    def ViewToActive(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ViewToActive(self: MSPyDgnPlatform.Viewport, activePts: MSPyBentleyGeom.DPoint3dArray, viewPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ViewToActive(self: MSPyDgnPlatform.Viewport, activePt: MSPyBentleyGeom.DPoint3d, viewPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def ViewToNpc(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ViewToNpc(self: MSPyDgnPlatform.Viewport, npcPts: MSPyBentleyGeom.DPoint3dArray, viewPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ViewToNpc(self: MSPyDgnPlatform.Viewport, npcPt: MSPyBentleyGeom.DPoint3d, viewPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def ViewToRoot(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ViewToRoot(self: MSPyDgnPlatform.Viewport, rootPts: MSPyBentleyGeom.DPoint3dArray, npcPts: MSPyBentleyGeom.DPoint4dArray) -> None
-        
-        2. ViewToRoot(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, npcPt: MSPyBentleyGeom.DPoint4d) -> None
-        
-        3. ViewToRoot(self: MSPyDgnPlatform.Viewport, rootPts: MSPyBentleyGeom.DPoint3dArray, npcPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        4. ViewToRoot(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, npcPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def ViewToScreen(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ViewToScreen(self: MSPyDgnPlatform.Viewport, screenPts: MSPyBentleyGeom.DPoint3dArray, viewPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ViewToScreen(self: MSPyDgnPlatform.Viewport, screenPt: MSPyBentleyGeom.DPoint3d, viewPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def Zoom(self: MSPyDgnPlatform.Viewport, newCenterPoint: MSPyBentleyGeom.DPoint3d, factor: float, normalizeCamera: bool) -> int:
-        ...
-    
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
         ...
     
 class KeyModifierMasks:
@@ -4692,7 +3906,7 @@ class LocateSubEntityTool:
     def GetAcceptedSubEntities(self: MSPyDgnView.LocateSubEntityTool) -> MSPyDgnPlatform.ISubEntityPtrArray:
         ...
     
-    def GetActivePrimitiveTool() -> Bentley.DgnPlatform.DgnPrimitiveTool:
+    def GetActivePrimitiveTool() -> MSPyDgnPlatform.DgnPrimitiveTool:
         ...
     
     def GetActiveViewTool() -> MSPyDgnView.DgnTool:
@@ -4705,12 +3919,12 @@ class LocateSubEntityTool:
         """
         Call to get a button event representing the current cursor location.
         
-        Parameter ``ev``:
-        IN Current button event.
+        :param ev:
+        (input) Current button event.
         """
         ...
     
-    def GetDisplayPath(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyDgnPlatform.DisplayPath:
+    def GetDisplayPath(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyDgnPlatform.DisplayPath:
         ...
     
     def GetDynamicsStarted(self: MSPyDgnView.DgnPrimitiveTool) -> bool:
@@ -4719,10 +3933,7 @@ class LocateSubEntityTool:
     def GetElementAgenda(self: MSPyDgnView.DgnElementSetTool) -> MSPyDgnPlatform.ElementAgenda:
         ...
     
-    def GetElementGraphicsCache(*args, **kwargs):
-        """
-        GetElementGraphicsCache(self: MSPyDgnView.ElementGraphicsTool, eh: MSPyDgnPlatform.ElementHandle, geomCache: Bentley.Bstdcxx.bvector<Bentley.RefCountedPtr<Bentley.IRefCounted>,Bentley.BentleyAllocator<Bentley.RefCountedPtr<Bentley.IRefCounted> > >) -> MSPyDgnPlatform.BentleyStatus
-        """
+    def GetElementGraphicsCache(self: MSPyDgnView.ElementGraphicsTool, eh: MSPyDgnPlatform.ElementHandle, geomCache: List[IRefCounted]) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
     def GetElementGraphicsCacheCount(self: MSPyDgnView.ElementGraphicsTool, eh: MSPyDgnPlatform.ElementHandle) -> int:
@@ -4731,7 +3942,7 @@ class LocateSubEntityTool:
     def GetFaceParameterRange(self: MSPyDgnView.LocateSubEntityTool, subEntity: MSPyDgnPlatform.ISubEntity, uRange: MSPyBentleyGeom.DRange1d, vRange: MSPyBentleyGeom.DRange1d) -> MSPyDgnPlatform.BentleyStatus:
         ...
     
-    def GetIElementGraphics(self: MSPyDgnView.LocateSubEntityTool, subEntity: MSPyDgnPlatform.ISubEntity) -> Bentley.IRefCounted:
+    def GetIElementGraphics(self: MSPyDgnView.LocateSubEntityTool, subEntity: MSPyDgnPlatform.ISubEntity) -> IRefCounted:
         ...
     
     @staticmethod
@@ -4799,7 +4010,7 @@ class LocateSubEntityTool:
         """
         Call to make this tool instance the current active command.
         
-        Returns:
+        :returns:
         SUCCESS if new tool instance is now the current command.
         
         See also:
@@ -4807,19 +4018,19 @@ class LocateSubEntityTool:
         """
         ...
     
-    def IsFromLocatedComponent(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> bool:
+    def IsFromLocatedComponent(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> bool:
         ...
     
     def IsGeometryMissing(self: MSPyDgnView.ElementGraphicsTool, eh: MSPyDgnPlatform.ElementHandle) -> bool:
         ...
     
-    def IsGeometrySheet(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> bool:
+    def IsGeometrySheet(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> bool:
         ...
     
-    def IsGeometrySolid(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> bool:
+    def IsGeometrySolid(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> bool:
         ...
     
-    def IsGeometryWire(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> bool:
+    def IsGeometryWire(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> bool:
         ...
     
     def IsSolidKernelSubEntity(self: MSPyDgnView.LocateSubEntityTool, subEntity: MSPyDgnPlatform.ISubEntity) -> bool:
@@ -4867,8 +4078,8 @@ class LocateSubEntityTool:
         """
         Internal method to reset the current qualifier mask.
         
-        Parameter ``mask``:
-        IN New qualifier mask.
+        :param mask:
+        (input) New qualifier mask.
         """
         ...
     
@@ -4880,8 +4091,8 @@ class LocateSubEntityTool:
         Call to set an adjusted point as the last datapoint location. This is
         the location that precision key-ins and axis/isometric lock will use.
         
-        Parameter ``ev``:
-        IN new button event.
+        :param ev:
+        (input) new button event.
         """
         ...
     
@@ -4892,7 +4103,7 @@ class LocateSubEntityTool:
         """
         Called to set the current modifier transition state.
         
-        Returns:
+        :returns:
         The id of the current command promnpt.
         """
         ...
@@ -4926,28 +4137,28 @@ class LocateSubEntityTool:
     def ToolPrompt(arg0: MSPyDgnView.DgnTool, arg1: int) -> None:
         ...
     
-    def TryGetAsBRep(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyDgnPlatform.ISolidKernelEntity:
+    def TryGetAsBRep(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyDgnPlatform.ISolidKernelEntity:
         ...
     
     def TryGetAsCurveLocationDetail(self: MSPyDgnView.LocateSubEntityTool, location: MSPyBentleyGeom.CurveLocationDetail, subEntity: MSPyDgnPlatform.ISubEntity) -> bool:
         ...
     
-    def TryGetAsCurveVector(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyBentleyGeom.CurveVector:
+    def TryGetAsCurveVector(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyBentleyGeom.CurveVector:
         ...
     
     def TryGetAsFacetLocationDetail(self: MSPyDgnView.LocateSubEntityTool, location: MSPyBentleyGeom.FacetLocationDetail, subEntity: MSPyDgnPlatform.ISubEntity) -> bool:
         ...
     
-    def TryGetAsPolyface(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyBentleyGeom.PolyfaceHeader:
+    def TryGetAsPolyface(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyBentleyGeom.PolyfaceHeader:
         ...
     
-    def TryGetAsPrimitive(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyBentleyGeom.ISolidPrimitive:
+    def TryGetAsPrimitive(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyBentleyGeom.ISolidPrimitive:
         ...
     
     def TryGetAsSolidLocationDetail(self: MSPyDgnView.LocateSubEntityTool, location: MSPyBentleyGeom.SolidLocationDetail, subEntity: MSPyDgnPlatform.ISubEntity) -> bool:
         ...
     
-    def TryGetAsSurface(self: MSPyDgnView.ElementGraphicsTool, geom: Bentley.IRefCounted) -> MSPyBentleyGeom.RefCountedMSBsplineSurface:
+    def TryGetAsSurface(self: MSPyDgnView.ElementGraphicsTool, geom: IRefCounted) -> MSPyBentleyGeom.RefCountedMSBsplineSurface:
         ...
     
     class UsesDragSelect:
@@ -5037,10 +4248,7 @@ class LocateSubEntityTool:
     def WantAdditionalLocateHelper(self: MSPyDgnView.DgnElementSetTool, ev: MSPyDgnView.DgnButtonEvent) -> bool:
         ...
     
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
+    def __init__(self: MSPyDgnView.LocateSubEntityTool) -> None:
         ...
     
     eCLIP_RESULT_NewElements: ClipResult
@@ -5097,513 +4305,6 @@ class ModifyOp:
     """
 
     def __init__(self: MSPyDgnView.ModifyOp) -> None:
-        ...
-    
-class QvViewportRef:
-    """
-    None
-    """
-
-    def ActiveToRoot(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ActiveToRoot(self: MSPyDgnPlatform.Viewport, rootPts: MSPyBentleyGeom.DPoint3dArray, activePts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ActiveToRoot(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, activePt: MSPyBentleyGeom.DPoint3d) -> None
-        
-        3. ActiveToRoot(self: MSPyDgnPlatform.Viewport, rootRMatrix: MSPyBentleyGeom.RotMatrix, activeRMatrix: MSPyBentleyGeom.RotMatrix) -> None
-        """
-        ...
-    
-    @property
-    def ActiveToRootMap(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def ActiveToView(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ActiveToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint3dArray, activePts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ActiveToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint3d, activePt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    @property
-    def ActiveZRoot(arg0: MSPyDgnPlatform.Viewport) -> float:
-        ...
-    
-    def AdjustColorForContrast(self: MSPyDgnPlatform.Viewport, thisColor: int, againstColor: int) -> int:
-        ...
-    
-    @property
-    def BackgroundColor(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    @property
-    def CameraRoot(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.CameraParams:
-        ...
-    
-    @property
-    def ClipBoundElementRef(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.ElementRefBase:
-        ...
-    
-    @property
-    def ClipMaskElementRef(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.ElementRefBase:
-        ...
-    
-    def ComputeDisplayedModelRefRange(self: MSPyDgnPlatform.Viewport, range: MSPyBentleyGeom.DRange3d, modelRef: MSPyDgnPlatform.DgnModelRef, includeChildren: bool, fitParams: MSPyDgnPlatform.FitViewParams) -> int:
-        """
-        Compute range of a model ref when display in the viewport
-        """
-        ...
-    
-    def ComputeFittedElementRange(self: MSPyDgnPlatform.Viewport, range: MSPyBentleyGeom.DRange3d, elements: Bentley.DgnPlatform.IElementSet, rMatrix: MSPyBentleyGeom.RotMatrix) -> int:
-        """
-        Compute the range of the element when displayed in the viewport
-        """
-        ...
-    
-    @property
-    def ContrastToBackgroundColor(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def GetActiveToRootMap(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def GetActiveZRoot(self: MSPyDgnPlatform.Viewport) -> float:
-        ...
-    
-    def GetBackgroundColor(self: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def GetCameraRoot(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.CameraParams:
-        ...
-    
-    def GetCameraTarget(self: MSPyDgnPlatform.Viewport, target: MSPyBentleyGeom.DPoint3d) -> int:
-        ...
-    
-    def GetCameraView(self: MSPyDgnPlatform.Viewport, camera: Bentley.DgnPlatform.CameraParams) -> None:
-        ...
-    
-    def GetClipBoundElemHandle(self: MSPyDgnPlatform.Viewport, eeh: Bentley.DgnPlatform.EditElementHandle) -> int:
-        ...
-    
-    def GetClipBoundElementRef(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.ElementRefBase:
-        ...
-    
-    def GetClipMaskElemHandle(self: MSPyDgnPlatform.Viewport, eeh: Bentley.DgnPlatform.EditElementHandle) -> int:
-        ...
-    
-    def GetClipMaskElementRef(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.ElementRefBase:
-        ...
-    
-    def GetContrastToBackgroundColor(self: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def GetHiliteColor(self: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def GetHiliteColorFromPath(self: MSPyDgnPlatform.Viewport, path: Bentley.DgnPlatform.DisplayPath) -> int:
-        ...
-    
-    def GetICachedDraw(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ICachedDraw:
-        """
-        Gets the object required for advanced cached drawing to the Viewport.
-        Cached Drawing is seldom required by applications.
-        """
-        ...
-    
-    def GetIViewDraw(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.IViewDraw:
-        """
-        Gets the object required for immediate drawing to the Viewport. The
-        methods on IViewDraw can be used to draw View Decorators.
-        """
-        ...
-    
-    def GetIViewOutput(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.IViewOutput:
-        """
-        Gets the object required for advanced immediate drawing to the
-        Viewport. IViewOutput is a subclass of IViewDraw, and generally only
-        IViewDraw is needed.
-        """
-        ...
-    
-    def GetIndexedLinePattern(self: MSPyDgnPlatform.Viewport, index: int) -> int:
-        ...
-    
-    def GetIndexedLineWidth(self: MSPyDgnPlatform.Viewport, index: int) -> int:
-        ...
-    
-    def GetPixelSizeAtPoint(*args, **kwargs):
-        """
-        GetPixelSizeAtPoint(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, coordSys: MSPyDgnPlatform.DgnCoordSystem = <DgnCoordSystem.eRoot: 3>) -> float
-        
-        Get the size of a single pixel at a given point as a distance along
-        the view-x axis. The size of a pixel will only differ at different
-        points within the same Viewport if the camera is on for this Viewport
-        (in which case, points closer to the eye return larger values than
-        ones further from the eye.)
-        
-        Parameter ``rootPt``:
-        The point in DgnCoordSystem.Root for determining pixel size. If
-        NULL, use the center of the Viewport.
-        
-        Parameter ``coordSys``:
-        The coordinate system for the returned distance.
-        
-        Returns:
-        the size of the pixel at point ``rootPt.``
-        """
-        ...
-    
-    def GetRootModel(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.DgnModel:
-        ...
-    
-    def GetRootToNpcMap(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def GetRootToViewMap(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def GetRotMatrix(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.RotMatrix:
-        ...
-    
-    def GetScale(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        ...
-    
-    def GetScreenNumber(self: MSPyDgnPlatform.Viewport) -> int:
-        """
-        Get the screen number on which this Viewport resides.
-        """
-        ...
-    
-    def GetTargetModel(self: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.DgnModelRef:
-        ...
-    
-    def GetViewBox(self: MSPyDgnPlatform.Viewport, points: MSPyBentleyGeom.DPoint3dArray, sys: MSPyDgnPlatform.DgnCoordSystem, adjustedBox: bool) -> None:
-        ...
-    
-    def GetViewCorners(self: MSPyDgnPlatform.Viewport, low: MSPyBentleyGeom.DPoint3d, high: MSPyBentleyGeom.DPoint3d) -> None:
-        ...
-    
-    def GetViewDelta(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        """
-        Get the View Delta (size) of this Viewport in root coordinate
-        distances.
-        
-        Returns:
-        the view delta in root coordinate distances.
-        """
-        ...
-    
-    def GetViewFlags(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ViewFlags:
-        """
-        Get the current View Flags for this Viewport.
-        
-        Returns:
-        the View flags for this Viewport.
-        """
-        ...
-    
-    def GetViewInfo(self: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ViewInfo:
-        ...
-    
-    def GetViewName(self: MSPyDgnPlatform.Viewport, name: MSPyBentley.WString) -> None:
-        ...
-    
-    def GetViewNumber(self: MSPyDgnPlatform.Viewport) -> int:
-        """
-        Get the view number of this Viewport. If this Viewport is one of the 8
-        MicroStation numbered views (i.e. " View 1 " through " View 8 "), then
-        return the index of view number (e.g. " View 1 " is view index 0, " View 8 " is view index 7). If the Viewport is not one of the 8 MicroStation
-        numbered views, this method will return -1.
-        
-        Returns:
-        the view index of this Viewport, or -1 if it is not one of the
-        numbered views.
-        """
-        ...
-    
-    def GetViewOrigin(self: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        """
-        Get View Origin for this Viewport.
-        
-        Returns:
-        the root coordinates of the lower left back corner of the
-        Viewport.
-        """
-        ...
-    
-    def GetViewRect(self: MSPyDgnPlatform.Viewport, rect: MSPyDgnPlatform.BSIRect) -> None:
-        ...
-    
-    @property
-    def HiliteColor(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    @property
-    def ICachedDraw(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ICachedDraw:
-        ...
-    
-    @property
-    def IViewDraw(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.IViewDraw:
-        ...
-    
-    @property
-    def IViewOutput(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.IViewOutput:
-        ...
-    
-    def Is3dModel(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def IsActive(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def IsCameraOn(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def IsGridOn(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def IsSheetView(self: MSPyDgnPlatform.Viewport) -> bool:
-        ...
-    
-    def MakeColorTransparency(color: int, transparency: int) -> int:
-        ...
-    
-    def MakeTransparentIfOpaque(color: int, transparency: int) -> int:
-        ...
-    
-    def MakeTrgbColor(red: int, green: int, blue: int, transparency: int) -> int:
-        ...
-    
-    def NpcToRoot(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. NpcToRoot(self: MSPyDgnPlatform.Viewport, rootPts: MSPyBentleyGeom.DPoint3dArray, npcPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. NpcToRoot(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, npcPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def NpcToView(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. NpcToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint3dArray, npcPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. NpcToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint3d, npcPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def ResynchColorMap(self: MSPyDgnPlatform.Viewport) -> None:
-        ...
-    
-    @property
-    def RootModel(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.DgnModel:
-        ...
-    
-    def RootToActive(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. RootToActive(self: MSPyDgnPlatform.Viewport, activePts: MSPyBentleyGeom.DPoint3dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. RootToActive(self: MSPyDgnPlatform.Viewport, activePt: MSPyBentleyGeom.DPoint3d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        
-        3. RootToActive(self: MSPyDgnPlatform.Viewport, activeRMatrix: MSPyBentleyGeom.RotMatrix, rootRMatrix: MSPyBentleyGeom.RotMatrix) -> None
-        """
-        ...
-    
-    def RootToNpc(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. RootToNpc(self: MSPyDgnPlatform.Viewport, npcPts: MSPyBentleyGeom.DPoint3dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. RootToNpc(self: MSPyDgnPlatform.Viewport, npcPt: MSPyBentleyGeom.DPoint3d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    @property
-    def RootToNpcMap(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    def RootToView(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. RootToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint4dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. RootToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint4d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        
-        3. RootToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint3dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        4. RootToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint3d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def RootToView2d(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. RootToView2d(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint2dArray, rootPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. RootToView2d(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint2d, rootPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    @property
-    def RootToViewMap(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DMap4d:
-        ...
-    
-    @property
-    def RotMatrix(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.RotMatrix:
-        ...
-    
-    @property
-    def Scale(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        ...
-    
-    @property
-    def ScreenNumber(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    def ScreenToView(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ScreenToView(self: MSPyDgnPlatform.Viewport, viewPts: MSPyBentleyGeom.DPoint3dArray, screenPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ScreenToView(self: MSPyDgnPlatform.Viewport, viewPt: MSPyBentleyGeom.DPoint3d, screenPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def Scroll(self: MSPyDgnPlatform.Viewport, viewDist: MSPyBentleyGeom.Point2d) -> int:
-        """
-        @name Changing Viewport Frustum Scroll the Viewport by a given number
-        of pixels in the view's X and/or Y direction. This method will move
-        the Viewport's frustum in the indicated direction, but does *not*
-        update the screen (even if the Viewport happens to be a visible View.)
-        This method does change the ViewInfo associated with the Viewport.
-        
-        Parameter ``viewDist``:
-        The distance to scroll, in pixels. @note To update the view, see
-        IViewManager.UpdateView or IViewManager.UpdateViewDynamic. To
-        save the change to the ViewInfo in the view undo buffer, see
-        SynchWithViewInfo.
-        """
-        ...
-    
-    def SetMinimumLOD(self: MSPyDgnPlatform.Viewport, minLod: float) -> None:
-        ...
-    
-    def SetNeedsRefresh(self: MSPyDgnPlatform.Viewport) -> None:
-        """
-        Sets the flag indicating that the Viewport needs to be refreshed from
-        the backing store at the next opportunity. When the Viewport is
-        refreshed, the view decorators are redrawn.
-        """
-        ...
-    
-    def SetSymbologyRgb(self: MSPyDgnPlatform.Viewport, lineColorTBGR: int, fillColorTBGR: int, lineWidth: int, lineColorIndex: int) -> None:
-        ...
-    
-    def SetTemporaryClipElementRef(self: MSPyDgnPlatform.Viewport, element: MSPyDgnPlatform.ElementRefBase) -> None:
-        ...
-    
-    def SetTemporaryClipMaskElementRef(self: MSPyDgnPlatform.Viewport, element: MSPyDgnPlatform.ElementRefBase) -> None:
-        ...
-    
-    def SetupFromFrustum(self: MSPyDgnPlatform.Viewport, frustPts: MSPyBentleyGeom.DPoint3dArray) -> int:
-        ...
-    
-    def SynchWithViewInfo(self: MSPyDgnPlatform.Viewport, saveInUndo: bool, updateViewTitle: bool) -> MSPyDgnPlatform.BentleyStatus:
-        """
-        Synchronizes the view information that is displayed with this
-        viewport. Optionally add an entry in the view undo stack and update
-        the view title.
-        """
-        ...
-    
-    @property
-    def TargetModel(arg0: MSPyDgnPlatform.Viewport) -> MSPyDgnPlatform.DgnModelRef:
-        ...
-    
-    @property
-    def ViewDelta(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        ...
-    
-    @property
-    def ViewFlags(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ViewFlags:
-        ...
-    
-    @property
-    def ViewInfo(arg0: MSPyDgnPlatform.Viewport) -> Bentley.DgnPlatform.ViewInfo:
-        ...
-    
-    @property
-    def ViewNumber(arg0: MSPyDgnPlatform.Viewport) -> int:
-        ...
-    
-    @property
-    def ViewOrigin(arg0: MSPyDgnPlatform.Viewport) -> MSPyBentleyGeom.DPoint3d:
-        ...
-    
-    def ViewToActive(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ViewToActive(self: MSPyDgnPlatform.Viewport, activePts: MSPyBentleyGeom.DPoint3dArray, viewPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ViewToActive(self: MSPyDgnPlatform.Viewport, activePt: MSPyBentleyGeom.DPoint3d, viewPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def ViewToNpc(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ViewToNpc(self: MSPyDgnPlatform.Viewport, npcPts: MSPyBentleyGeom.DPoint3dArray, viewPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ViewToNpc(self: MSPyDgnPlatform.Viewport, npcPt: MSPyBentleyGeom.DPoint3d, viewPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def ViewToRoot(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ViewToRoot(self: MSPyDgnPlatform.Viewport, rootPts: MSPyBentleyGeom.DPoint3dArray, npcPts: MSPyBentleyGeom.DPoint4dArray) -> None
-        
-        2. ViewToRoot(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, npcPt: MSPyBentleyGeom.DPoint4d) -> None
-        
-        3. ViewToRoot(self: MSPyDgnPlatform.Viewport, rootPts: MSPyBentleyGeom.DPoint3dArray, npcPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        4. ViewToRoot(self: MSPyDgnPlatform.Viewport, rootPt: MSPyBentleyGeom.DPoint3d, npcPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def ViewToScreen(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. ViewToScreen(self: MSPyDgnPlatform.Viewport, screenPts: MSPyBentleyGeom.DPoint3dArray, viewPts: MSPyBentleyGeom.DPoint3dArray) -> None
-        
-        2. ViewToScreen(self: MSPyDgnPlatform.Viewport, screenPt: MSPyBentleyGeom.DPoint3d, viewPt: MSPyBentleyGeom.DPoint3d) -> None
-        """
-        ...
-    
-    def Zoom(self: MSPyDgnPlatform.Viewport, newCenterPoint: MSPyBentleyGeom.DPoint3d, factor: float, normalizeCamera: bool) -> int:
-        ...
-    
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
         ...
     
 class RedrawElems:
@@ -5672,7 +4373,7 @@ class RedrawElems:
         """
         ...
     
-    def SetDynamicsViews(self: MSPyDgnView.RedrawElems, viewSet: Bentley.DgnPlatform.IndexedViewSet, cursorView: MSPyDgnPlatform.Viewport) -> None:
+    def SetDynamicsViews(self: MSPyDgnView.RedrawElems, viewSet: MSPyDgnPlatform.IndexedViewSet, cursorView: MSPyDgnPlatform.Viewport) -> None:
         """
         Set views for dynamic display. The cursor view is given priority.
         """
@@ -5685,7 +4386,7 @@ class RedrawElems:
         """
         ...
     
-    def SetOneView(self: MSPyDgnView.RedrawElems, viewSet: Bentley.DgnPlatform.IndexedViewSet, view: int) -> None:
+    def SetOneView(self: MSPyDgnView.RedrawElems, viewSet: MSPyDgnPlatform.IndexedViewSet, view: int) -> None:
         """
         Set an individual viewport to display to by view number.
         """
@@ -5721,7 +4422,7 @@ class RedrawElems:
         """
         ...
     
-    def SetViews(self: MSPyDgnView.RedrawElems, viewSet: Bentley.DgnPlatform.IndexedViewSet, viewMask: int) -> None:
+    def SetViews(self: MSPyDgnView.RedrawElems, viewSet: MSPyDgnPlatform.IndexedViewSet, viewMask: int) -> None:
         """
         Set a mask of views (0-7) to display to.
         """
@@ -5805,13 +4506,13 @@ class SelectionSetManager:
         """
         Add an element to the current selection set.
         
-        Parameter ``elem``:
-        IN Element to add.
+        :param elem:
+        (input) Element to add.
         
-        Parameter ``elemModel``:
-        IN DgnModelRef of element being added.
+        :param elemModel:
+        (input) DgnModelRef of element being added.
         
-        Returns:
+        :returns:
         SUCCESS if entry was added. Bentley Systems +---------------+-----
         ----------+---------------+---------------+---------------+------
         """
@@ -5821,10 +4522,10 @@ class SelectionSetManager:
         """
         Add a set of elements to the current selection set.
         
-        Parameter ``elSet``:
-        IN Elements to add.
+        :param elSet:
+        (input) Elements to add.
         
-        Returns:
+        :returns:
         SUCCESS if at least one entry was added. Bentley Systems +--------
         -------+---------------+---------------+---------------+----------
         -----+------
@@ -5835,8 +4536,8 @@ class SelectionSetManager:
         """
         Add selection set changed/event listener.
         
-        Parameter ``selectionListener``:
-        IN The listener object to add. Bentley Systems +---------------+--
+        :param selectionListener:
+        (input) The listener object to add. Bentley Systems +---------------+--
         -------------+---------------+---------------+---------------+----
         --
         """
@@ -5851,22 +4552,22 @@ class SelectionSetManager:
         Populate an element agenda suitable for modification from the current
         selection set.
         
-        Parameter ``agenda``:
-        IN OUT selection set entries that passed the input criteria.
+        :param agenda:
+        (input) (output) selection set entries that passed the input criteria.
         
-        Parameter ``searchList``:
-        IN list of acceptable modelRefs to filter selection set entries..
+        :param searchList:
+        (input) list of acceptable modelRefs to filter selection set entries..
         
-        Parameter ``modifyOrig``:
-        IN whether agenda will be used to modify original elements.
+        :param modifyOrig:
+        (input) whether agenda will be used to modify original elements.
         
-        Parameter ``allowLocked``:
-        IN whether to accept locked elements.
+        :param allowLocked:
+        (input) whether to accept locked elements.
         
-        Parameter ``callAsynch``:
-        IN whether to call GLOBAL_LOCATE_SELECTIONSET filter.
+        :param callAsynch:
+        (input) whether to call GLOBAL_LOCATE_SELECTIONSET filter.
         
-        Returns:
+        :returns:
         SUCCESS if agenda contains at least one entry. Bentley Systems +--
         -------------+---------------+---------------+---------------+----
         -----------+------
@@ -5876,22 +4577,22 @@ class SelectionSetManager:
         Populate an element agenda suitable for modification from the current
         selection set.
         
-        Parameter ``agenda``:
-        IN OUT selection set entries that passed the input criteria.
+        :param agenda:
+        (input) (output) selection set entries that passed the input criteria.
         
-        Parameter ``searchList``:
-        IN list of acceptable modelRefs to filter selection set entries..
+        :param searchList:
+        (input) list of acceptable modelRefs to filter selection set entries..
         
-        Parameter ``modifyOrig``:
-        IN whether agenda will be used to modify original elements.
+        :param modifyOrig:
+        (input) whether agenda will be used to modify original elements.
         
-        Parameter ``allowLocked``:
-        IN whether to accept locked elements.
+        :param allowLocked:
+        (input) whether to accept locked elements.
         
-        Parameter ``callAsynch``:
-        IN whether to call GLOBAL_LOCATE_SELECTIONSET filter.
+        :param callAsynch:
+        (input) whether to call GLOBAL_LOCATE_SELECTIONSET filter.
         
-        Returns:
+        :returns:
         SUCCESS if agenda contains at least one entry. Bentley Systems +--
         -------------+---------------+---------------+---------------+----
         -----------+------
@@ -5902,8 +4603,8 @@ class SelectionSetManager:
         """
         Drop selection set changed/event listener.
         
-        Parameter ``selectionListener``:
-        IN The listener object to drop. Bentley Systems +---------------+-
+        :param selectionListener:
+        (input) The listener object to drop. Bentley Systems +---------------+-
         --------------+---------------+---------------+---------------+---
         ---
         """
@@ -5922,16 +4623,16 @@ class SelectionSetManager:
         Get the ElementRefP and DgnModelRef in the current selection set by
         index.
         
-        Parameter ``index``:
-        IN The index to get the entry for.
+        :param index:
+        (input) The index to get the entry for.
         
-        Parameter ``elemRef``:
-        OUT ElementRefP at index.
+        :param elemRef:
+        (output) ElementRefP at index.
         
-        Parameter ``modelRef``:
-        OUT DgnModelRef at index.
+        :param modelRef:
+        (output) DgnModelRef at index.
         
-        Returns:
+        :returns:
         SUCCESS if index was valid. Bentley Systems +---------------+-----
         ----------+---------------+---------------+---------------+------
         """
@@ -5942,7 +4643,7 @@ class SelectionSetManager:
         """
         Get the manager class for selection sets.
         
-        Returns:
+        :returns:
         The SelectionSetManager class. Bentley Systems +---------------+--
         -------------+---------------+---------------+---------------+----
         --
@@ -5954,13 +4655,13 @@ class SelectionSetManager:
         Add element not currently selected and remove element currently
         selected.
         
-        Parameter ``elem``:
-        IN Element to process.
+        :param elem:
+        (input) Element to process.
         
-        Parameter ``elemModel``:
-        IN DgnModelRef of element being processed.
+        :param elemModel:
+        (input) DgnModelRef of element being processed.
         
-        Returns:
+        :returns:
         SUCCESS if current selection was changed. Bentley Systems +-------
         --------+---------------+---------------+---------------+---------
         ------+------
@@ -5972,10 +4673,10 @@ class SelectionSetManager:
         Add elements not currently selected and remove elements currently
         selected.
         
-        Parameter ``elSet``:
-        IN Elements to process.
+        :param elSet:
+        (input) Elements to process.
         
-        Returns:
+        :returns:
         SUCCESS if current selection was changed. Bentley Systems +-------
         --------+---------------+---------------+---------------+---------
         ------+------
@@ -5986,7 +4687,7 @@ class SelectionSetManager:
         """
         Check whether there is a current selection set active.
         
-        Returns:
+        :returns:
         true if current selection set contains at least one entry. Bentley
         Systems +---------------+---------------+---------------+---------
         ------+---------------+------
@@ -5999,13 +4700,13 @@ class SelectionSetManager:
         """
         Modifies current selection by removing and adding sets of elements.
         
-        Parameter ``toRemove``:
-        IN Elements to remove.
+        :param toRemove:
+        (input) Elements to remove.
         
-        Parameter ``toAdd``:
-        IN Elements to add.
+        :param toAdd:
+        (input) Elements to add.
         
-        Returns:
+        :returns:
         SUCCESS if at least one entry was added or removed. @note Remove
         list is processed before add list. Bentley Systems +--------------
         -+---------------+---------------+---------------+---------------+
@@ -6017,7 +4718,7 @@ class SelectionSetManager:
         """
         Get the number of entries in the current selection set.
         
-        Returns:
+        :returns:
         count of entries in current selection set. Bentley Systems +------
         ---------+---------------+---------------+---------------+--------
         -------+------
@@ -6028,13 +4729,13 @@ class SelectionSetManager:
         """
         Remove an element from the current selection set.
         
-        Parameter ``elem``:
-        IN Element to remove.
+        :param elem:
+        (input) Element to remove.
         
-        Parameter ``elemModel``:
-        IN DgnModelRef of element being removed.
+        :param elemModel:
+        (input) DgnModelRef of element being removed.
         
-        Returns:
+        :returns:
         SUCCESS if entry was removed. Bentley Systems +---------------+---
         ------------+---------------+---------------+---------------+-----
         -
@@ -6045,10 +4746,10 @@ class SelectionSetManager:
         """
         Remove a set of elements to the current selection set.
         
-        Parameter ``elSet``:
-        IN Elements to remove.
+        :param elSet:
+        (input) Elements to remove.
         
-        Returns:
+        :returns:
         SUCCESS if at least one entry was removed. Bentley Systems +------
         ---------+---------------+---------------+---------------+--------
         -------+------
@@ -6059,13 +4760,13 @@ class SelectionSetManager:
         """
         Set the current selection set to the supplied element.
         
-        Parameter ``elem``:
-        IN Element to become new selection.
+        :param elem:
+        (input) Element to become new selection.
         
-        Parameter ``elemModel``:
-        IN DgnModelRef of replacement element.
+        :param elemModel:
+        (input) DgnModelRef of replacement element.
         
-        Returns:
+        :returns:
         SUCCESS if current selection was changed. Bentley Systems +-------
         --------+---------------+---------------+---------------+---------
         ------+------
@@ -6076,10 +4777,10 @@ class SelectionSetManager:
         """
         Set the current selection set to the supplied set of elements.
         
-        Parameter ``elSet``:
-        IN Elements to become current selection.
+        :param elSet:
+        (input) Elements to become current selection.
         
-        Returns:
+        :returns:
         SUCCESS if current selection was changed. Bentley Systems +-------
         --------+---------------+---------------+---------------+---------
         ------+------
@@ -6090,72 +4791,6 @@ class SelectionSetManager:
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
-        ...
-    
-class StopEvents:
-    """
-    None
-    """
-
-    def Clear(self: MSPyDgnView.StopEvents) -> None:
-        ...
-    
-    def SetStopOnModifierKey(self: MSPyDgnView.StopEvents, stop: bool) -> None:
-        """
-        Stop when the ctrl or shift key is pressed or released.
-        """
-        ...
-    
-    def __init__(self: MSPyDgnView.StopEvents, keystrokes: bool, controlC: bool, wheel: bool, button: bool, paint: bool, focus: bool) -> None:
-        ...
-    
-    @property
-    def button(arg0: MSPyDgnView.StopEvents) -> bool:
-        ...
-    @button.setter
-    def button(arg0: MSPyDgnView.StopEvents, arg1: bool) -> None:
-        ...
-    
-    @property
-    def controlC(arg0: MSPyDgnView.StopEvents) -> bool:
-        ...
-    @controlC.setter
-    def controlC(arg0: MSPyDgnView.StopEvents, arg1: bool) -> None:
-        ...
-    
-    @property
-    def focus(arg0: MSPyDgnView.StopEvents) -> bool:
-        ...
-    @focus.setter
-    def focus(arg0: MSPyDgnView.StopEvents, arg1: bool) -> None:
-        ...
-    
-    @property
-    def keystrokes(arg0: MSPyDgnView.StopEvents) -> bool:
-        ...
-    @keystrokes.setter
-    def keystrokes(arg0: MSPyDgnView.StopEvents, arg1: bool) -> None:
-        ...
-    
-    @property
-    def modifierKeyTransition(arg0: MSPyDgnView.StopEvents) -> bool:
-        ...
-    @modifierKeyTransition.setter
-    def modifierKeyTransition(arg0: MSPyDgnView.StopEvents, arg1: bool) -> None:
-        ...
-    
-    @property
-    def paint(arg0: MSPyDgnView.StopEvents) -> bool:
-        ...
-    @paint.setter
-    def paint(arg0: MSPyDgnView.StopEvents, arg1: bool) -> None:
-        ...
-    
-    @property
-    def wheel(arg0: MSPyDgnView.StopEvents) -> bool:
-        ...
-    @wheel.setter
-    def wheel(arg0: MSPyDgnView.StopEvents, arg1: bool) -> None:
         ...
     
 class TentativePoint:
@@ -6178,7 +4813,7 @@ class TentativePoint:
     
     def GetPoint(self: MSPyDgnView.TentativePoint) -> MSPyBentleyGeom.DPoint3d:
         """
-        Returns:
+        :returns:
         The current tentative point location as adjusted by the snap mode
         and locks.
         """
@@ -6188,14 +4823,14 @@ class TentativePoint:
     
     def IsActive(self: MSPyDgnView.TentativePoint) -> bool:
         """
-        Returns:
+        :returns:
         true if the tentative point is currently active.
         """
         ...
     
     def IsSnapped(self: MSPyDgnView.TentativePoint) -> bool:
         """
-        Returns:
+        :returns:
         true if the tentative point is currently active and snapped to an
         element.
         """
@@ -6209,70 +4844,6 @@ class TentativePoint:
         """
         Initialize self.  See help(type(self)) for accurate signature.
         """
-        ...
-    
-class UpdateAbortReason:
-    """
-    Members:
-    
-    eUPDATE_ABORT_None
-    
-    eUPDATE_ABORT_BadView
-    
-    eUPDATE_ABORT_Motion
-    
-    eUPDATE_ABORT_MotionStopped
-    
-    eUPDATE_ABORT_Keystroke
-    
-    eUPDATE_ABORT_ControlC
-    
-    eUPDATE_ABORT_MouseWheel
-    
-    eUPDATE_ABORT_Timeout
-    
-    eUPDATE_ABORT_Button
-    
-    eUPDATE_ABORT_Paint
-    
-    eUPDATE_ABORT_Focus
-    
-    eUPDATE_ABORT_ModifierKey
-    """
-
-    def __init__(self: MSPyDgnView.UpdateAbortReason, value: int) -> None:
-        ...
-    
-    eUPDATE_ABORT_BadView: UpdateAbortReason
-    
-    eUPDATE_ABORT_Button: UpdateAbortReason
-    
-    eUPDATE_ABORT_ControlC: UpdateAbortReason
-    
-    eUPDATE_ABORT_Focus: UpdateAbortReason
-    
-    eUPDATE_ABORT_Keystroke: UpdateAbortReason
-    
-    eUPDATE_ABORT_ModifierKey: UpdateAbortReason
-    
-    eUPDATE_ABORT_Motion: UpdateAbortReason
-    
-    eUPDATE_ABORT_MotionStopped: UpdateAbortReason
-    
-    eUPDATE_ABORT_MouseWheel: UpdateAbortReason
-    
-    eUPDATE_ABORT_None: UpdateAbortReason
-    
-    eUPDATE_ABORT_Paint: UpdateAbortReason
-    
-    eUPDATE_ABORT_Timeout: UpdateAbortReason
-    
-    @property
-    def name(self: handle) -> str:
-        ...
-    
-    @property
-    def value(arg0: MSPyDgnView.UpdateAbortReason) -> int:
         ...
     
 eACCUDRAW_AllowStartInLocate: AccuDrawFlags
@@ -6362,28 +4933,4 @@ eSELECT_SS_EMPTY: SelectionSetAction
 eSELECT_STRETCH: SelectionSetAction
 
 eSELECT_WINDOW: SelectionSetAction
-
-eUPDATE_ABORT_BadView: UpdateAbortReason
-
-eUPDATE_ABORT_Button: UpdateAbortReason
-
-eUPDATE_ABORT_ControlC: UpdateAbortReason
-
-eUPDATE_ABORT_Focus: UpdateAbortReason
-
-eUPDATE_ABORT_Keystroke: UpdateAbortReason
-
-eUPDATE_ABORT_ModifierKey: UpdateAbortReason
-
-eUPDATE_ABORT_Motion: UpdateAbortReason
-
-eUPDATE_ABORT_MotionStopped: UpdateAbortReason
-
-eUPDATE_ABORT_MouseWheel: UpdateAbortReason
-
-eUPDATE_ABORT_None: UpdateAbortReason
-
-eUPDATE_ABORT_Paint: UpdateAbortReason
-
-eUPDATE_ABORT_Timeout: UpdateAbortReason
 

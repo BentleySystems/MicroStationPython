@@ -116,6 +116,12 @@ void def_FenceManager(py::module_& m)
            return self.DefineByPoints(points.data(), (int) points.size(), vp);
            }, "points"_a, "vp"_a, DOC(Bentley, DgnPlatform, FenceManager, DefineByPoints));
 
+    c1.def("DefineByPoints", [] (FenceManager& self, py::list const& points, ViewportP vp)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           return self.DefineByPoints(cppPoints.data(), (int) cppPoints.size(), vp);
+           }, "points"_a, "vp"_a, DOC(Bentley, DgnPlatform, FenceManager, DefineByPoints));
+
     c1.def("TransformFence", &FenceManager::TransformFence, "transform"_a, DOC(Bentley, DgnPlatform, FenceManager, TransformFence));
     c1.def("InitFromActiveFence", &FenceManager::InitFromActiveFence, "fp"_a, "overlap"_a, "doClip"_a, "allowClipFlag"_a, DOC(Bentley, DgnPlatform, FenceManager, InitFromActiveFence));
     c1.def("BuildAgenda", &FenceManager::BuildAgenda, "fp"_a, "agenda"_a, "modelRefList"_a, "modifyOrig"_a, "allowLocked"_a, "callAsynch"_a, DOC(Bentley, DgnPlatform, FenceManager, BuildAgenda));

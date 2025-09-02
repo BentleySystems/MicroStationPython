@@ -14,11 +14,11 @@ static const char * __doc_Bentley_DgnPlatform_TemplateRefAttributes_AttachToElem
 element. If the element already contains a reference it will be
 replaced. The XAttribute are written immediately.
 
-Parameter ``elemRef``:
+:param elemRef:
     The element to receive the Element Template reference.
 
 
-Parameter ``applyDefaultSymbology``:
+:param applyDefaultSymbology:
     If true the element is updated to match the default symbology
     specifications in the template. @Return SUCCESS if the Element
     Template reference was attached.
@@ -32,7 +32,7 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_TemplateRefAttributes_GetReferencedTemplateIDFromHandle =R"doc(Get the ElementId of the element template referenced by an element.
 
-Parameter ``elem``:
+:param elem:
     A reference to an element that contains an Element Template
     reference. @Return ElementId of the referenced template or 0 if
     not referenced to an element template.)doc";
@@ -40,18 +40,18 @@ Parameter ``elem``:
 static const char * __doc_Bentley_DgnPlatform_TemplateRefAttributes_GetReferencedTemplateID =R"doc(Get the ElementId of the element template referenced by the existing
 element.
 
-Parameter ``elemRef``:
+:param elemRef:
     A reference to an existing element that contains an Element
     Template reference. @Return ElementId of the referenced template
     or 0 if not referenced to an element template.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TemplateRefAttributes_GetReferencedTemplatePath =R"doc(Get the Template Path or the referenced element template.
 
-Parameter ``elementRef``:
+:param elementRef:
     A reference to an existing element that contains an Element
     Template reference.
 
-Parameter ``templatePath``:
+:param templatePath:
     The path of the referenced Element Template. @Return SUCCESS if
     the Element Template path can be returned.)doc";
 
@@ -59,11 +59,11 @@ static const char * __doc_Bentley_DgnPlatform_TemplateRefAttributes_AttachToHand
 element. If the element already contains a reference it will be
 replaced.
 
-Parameter ``eeh``:
+:param eeh:
     The element to receive the Element Template reference.
 
 
-Parameter ``applyDefaultSymbology``:
+:param applyDefaultSymbology:
     If true the element is updated to match the default symbology
     specifications in the template.
     .
@@ -77,7 +77,7 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_TemplateRefAttributes_Remove =R"doc(Remove reference to Element Template from specified element.
 
-Parameter ``elemRef``:
+:param elemRef:
     A reference to an existing element that contains an Element
     Template reference. @Return SUCCESS if the Element Template
     reference was removed.)doc";
@@ -86,13 +86,13 @@ static const char * __doc_Bentley_DgnPlatform_ElementTemplateReferenceEventManag
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateReferenceEventManager_UnregisterEventMonitor =R"doc(Unregister an event monitor
 
-Parameter ``monitor``:
+:param monitor:
     A monitor class. @Return SUCCESS if the ElementTemplateRef monitor
     was unregistered.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateReferenceEventManager_RegisterEventMonitor =R"doc(Register an event monitor
 
-Parameter ``monitor``:
+:param monitor:
     A monitor class. @Return SUCCESS if the ElementTemplateRef monitor
     was registered.)doc";
 
@@ -100,23 +100,23 @@ static const char * __doc_Bentley_DgnPlatform_ElementTemplateReferenceEventManag
 
 static const char * __doc_Bentley_DgnPlatform_IElementTemplateRefMonitor_OnElementTemplateReferenceRemoved =R"doc(Monitor method called when the reference element template is removed.
 
-Parameter ``dependent``:
+:param dependent:
     Element containing an element template reference.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementTemplateRefMonitor_OnElementTemplateReferenceAdded =R"doc(Monitor method called when the reference element template is added.
 
-Parameter ``dependent``:
+:param dependent:
     Element containing an element template reference.
 
-Parameter ``templateId``:
+:param templateId:
     The ElementId of the element template being changed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementTemplateRefMonitor_OnReferencedElementTemplateChanged =R"doc(Monitor method called when the reference element template is changed.
 
-Parameter ``dependent``:
+:param dependent:
     Element containing an element template reference.
 
-Parameter ``templateId``:
+:param templateId:
     The ElementId of the element template being changed.)doc";
 
 //=======================================================================================

@@ -13,21 +13,21 @@
 
 static const char * __doc_Bentley_MstnPlatform_Constraint2dManager_GetSolverData =R"doc(@description Get constraint data of the specified profile.
 
-Parameter ``[out]``:
+:param (output):
     solverData A Constraint2dSolverData object receiving constraint
     model data.
 
-Parameter ``[in]``:
+:param (input):
     eh An element handle to specify where to get the data. *eh* can be
     any element of the members constructing the profile.
 
-Parameter ``[in]``:
+:param (input):
     includingDeleted A boolean to specify whether to include being-
     deleted elements. If set to **True**, this method will check and
     try to resolve members if they are deleted; otherwise if set to
     **False**(by default) deleted elements will be left unresolved.
 
-Returns:
+:returns:
     SUCCESS if implemented successfully; otherwise an error code
     indicating the failing reason.
 
@@ -36,15 +36,15 @@ See also:
 
 static const char * __doc_Bentley_MstnPlatform_Constraint2dManager_AddSolverData =R"doc(@description Store constraints data.
 
-Parameter ``[in]``:
+:param (input):
     eh An element handle to specify where to store the data. *eh* can
     be any of the member elements that are constructing the profile.
 
-Parameter ``[in]``:
+:param (input):
     solverData A Constraint2dSolverData object holding constraint
     model data to store.
 
-Returns:
+:returns:
     SUCCESS if implemented successfully; otherwise an error code
     indicating the failing reason.
 

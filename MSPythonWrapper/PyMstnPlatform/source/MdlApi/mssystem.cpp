@@ -12,30 +12,30 @@
 
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetUnloadProgramFunction = R"doc(@Description An MDL application can use this to set a function to be
 called when the application is about to be unloaded. 
-@Param[in]unloadFunction The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+:param unloadFunction The new function to call, or NULL. 
+:param  funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set for this MdlApp, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetMessageCenterWriteFunction = R"doc(@description Set a function that is called when a message is written
 to the Message Center.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
-Returns:
+:returns:
     The return value is the previous function that was set for this
     MdlApp, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetPromptOutputFunction = R"doc(@description Set a function that is called when a prompt is output to
 the Status Bar.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
 Returns:
@@ -45,23 +45,23 @@ Returns:
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetStatusOutputFunction = R"doc(@description Set a function that is called when a status message is
 output to the Status Bar.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
-Returns:
+:returns:
     The return value is the previous function that was set for this
     MdlApp, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetApplicationAreaChangeFunction = R"doc(@description Set a function that is called when the Application Area
 has changed.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
 Returns:
@@ -71,23 +71,23 @@ Returns:
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetFenceChangedFunction = R"doc(@description Set a function that is called when a fence is defined or
 cleared.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
-Returns:
+:returns:
     The return value is the previous function that was set for this
     MdlApp, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetElmDscrCopyFunction = R"doc(@description Set a function that is called when an element is being
 copied between models.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
 Returns:
@@ -97,13 +97,13 @@ Returns:
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetAcsOperationFunction = R"doc(@description Set a function that is called when an ACS is created,
 deleted, or modified.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
-Returns:
+:returns:
     The return value is the previous function that was set for this
     MdlApp, or NULL.
 
@@ -114,10 +114,10 @@ Remark:
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetLockChangedFunction = R"doc(@description Set a function that is called when the state of an active
 lock changes.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
 Returns:
@@ -127,23 +127,23 @@ Returns:
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetActiveParamChangedFunction = R"doc(@description Set a function that is called when the state of an active
 parameter changes.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
-Returns:
+:returns:
     The return value is the previous function that was set for this
     MdlApp, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetUpdateSequenceChangedFunction = R"doc(@description Set a function that is called when the model update
 sequence is defined or modified.
 
-Parameter ``newFunc``:
+:param newFunc:
     The new function to call.
 
-Parameter ``funcID``:
+:param funcID:
     Unique ID of the callback function that user defines.
 
 Returns:
@@ -154,8 +154,8 @@ static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetDimStyleChangeFu
 is added, deleted, or updated in a file. Also called when the active
 dimension style changes. 
 
-@Param[in] newFunc The new function to call.
-@Param[in] funcID Unique ID of the callback function that user defines.
+:param  newFunc The new function to call.
+:param  funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set for
 this MdlApp, or NULL.
 
@@ -166,8 +166,8 @@ Remark:
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetTextStyleChangeFunction = R"doc(@Description Set a function that is called each time a text style is
 added, deleted, or updated in a file. Also called when the active text
 style changes. 
-@Param[in] newFunc The new function to call. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+:param  newFunc The new function to call. 
+:param  funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set for this
 MdlApp, or NULL.
 
@@ -177,8 +177,8 @@ Remark:
 
 static const char* __doc_Bentley_MstnPlatform_SystemCallback_SetWorkspaceChangedFunction = R"doc(@Description Set a function that is called when the workspace,
 project, or interface changes. 
-@Param[in] newFunc The new function to call. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+:param  newFunc The new function to call. 
+:param  funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set
 for this MdlApp, or NULL.)doc";
 

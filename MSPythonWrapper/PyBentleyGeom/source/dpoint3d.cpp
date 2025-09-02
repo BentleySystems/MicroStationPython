@@ -15,10 +15,10 @@ absolute and relative tolerance. points are equal if squared distance
 between is less than (squared abstol) plus (squared relTol) * sum of
 cmponent squares
 
-Parameter ``[in]``:
+:param (input):
     dataB second DPoint3d
 
-Returns:
+:returns:
     true if within tolerance.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_AlmostEqual =R"doc(test if two points are equal. Uses library " small angle " as both
@@ -26,48 +26,48 @@ absolute and relative tolerance. points are equal if squared distance
 between is less than (squared abstol) plus (squared relTol) * sum of
 cmponent squares
 
-Parameter ``[in]``:
+:param (input):
     dataB second DPoint3d
 
-Returns:
+:returns:
     true if within tolerance.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_FromScale =R"doc(@description Returns a scalar multiple of a DPoint3d
 
-Parameter ``[in]``:
+:param (input):
     point input point
 
-Parameter ``[in]``:
+:param (input):
     scale scale factor)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_FromSumOf =R"doc(Add a point and a vector.
 
-Parameter ``[in]``:
+:param (input):
     origin start point
 
-Parameter ``[in]``:
+:param (input):
     vector vector add)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_FromInterpolateBilinear =R"doc(@description Returns a bilinear interpolation from corners
 (00)(10)(01)(11)
 
-Parameter ``[in]``:
+:param (input):
     point00 point at (0,0)
 
-Parameter ``[in]``:
+:param (input):
     point10 point at (1,0)
 
-Parameter ``[in]``:
+:param (input):
     point01 point at (0,1)
 
-Parameter ``[in]``:
+:param (input):
     point11 point at (1,1)
 
-Parameter ``[in]``:
+:param (input):
     u interpolation fraction for edges (point00,point10) and
     (point01,point11)
 
-Parameter ``[in]``:
+:param (input):
     v interpolation fraction for edges (point00,point10) and
     (point10,point11))doc";
 
@@ -76,81 +76,81 @@ static const char * __doc_Bentley_Geom_DPoint3d_FromWeightedAverage =R"doc(retur
 static const char * __doc_Bentley_Geom_DPoint3d_FromInterpolateAndPerpendicularXY =R"doc(interpolate between points. Then add a shift in the xy plane by a
 fraction of the XY projection perpendicular
 
-Parameter ``[in]``:
+:param (input):
     pointA start point
 
-Parameter ``[in]``:
+:param (input):
     fraction fractional parameter along the line from A to B
 
-Parameter ``[in]``:
+:param (input):
     pointB end point
 
-Parameter ``[in]``:
+:param (input):
     fractionXYPerp fractional parameter applied to vector that is the
     XY parts of (B-A), rotated CCW in plane.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_FromInterpolate =R"doc(interpolate between points.
 
-Parameter ``[in]``:
+:param (input):
     pointA start point
 
-Parameter ``[in]``:
+:param (input):
     fraction fractional parameter
 
-Parameter ``[in]``:
+:param (input):
     pointB end point)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_FromProduct =R"doc(return product of transform times point given as components.
 
-Parameter ``[in]``:
+:param (input):
     transform affine transform.
 
-Parameter ``[in]``:
+:param (input):
     x x component
 
-Parameter ``[in]``:
+:param (input):
     y y component
 
-Parameter ``[in]``:
+:param (input):
     z z component)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DivideArrayByScales =R"doc(@description Divide each point in an array by its corresponding scale
 factor. Leave any point with near zero weight unchanged.
 
-Parameter ``[out]``:
+:param (output):
     pDest destination array.
 
-Parameter ``[in]``:
+:param (input):
     pSource source array.
 
-Parameter ``[in]``:
+:param (input):
     pScales scale factors
 
-Parameter ``[in]``:
+:param (input):
     n number of points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_MultiplyArrayByScales =R"doc(@description Multiply each point in an array by its corresponding
 scale factor.
 
-Parameter ``[out]``:
+:param (output):
     pDest destination array.
 
-Parameter ``[in]``:
+:param (input):
     pSource source array.
 
-Parameter ``[in]``:
+:param (input):
     pScales scale factors
 
-Parameter ``[in]``:
+:param (input):
     n number of points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DifferenceOf =R"doc(@description Subtract coordinates of two vectors or points. (Compute
 Point1 - Point2)
 
-Parameter ``[in]``:
+:param (input):
     point1 The first point
 
-Parameter ``[in]``:
+:param (input):
     point2 The second (subtracted) point.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_TripleProduct =R"doc(@description Computes the triple product of three vectors. The
@@ -164,142 +164,142 @@ rows. <LI>The (signed)volume of the parallelepiped whose 4 vertices
 are at the origin and at the ends of the 3 vectors placed at the
 origin. </UL>
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector.
 
-Parameter ``[in]``:
+:param (input):
     point3 The third vector.
 
-Returns:
+:returns:
     The triple product)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_SafeDivide =R"doc(@description Try to divide each component of a vector by a scalar. If
 the denominator near zero compared to any numerator component, return
 the original vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The initial vector.
 
-Parameter ``[in]``:
+:param (input):
     denominator The divisor.
 
-Returns:
+:returns:
     true if division is numerically safe.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_IsPerpendicularTo =R"doc(@description Tests if two vectors are perpendicular.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     true if vectors are perpendicular within default tolerance)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_IsParallelTo =R"doc(@description Tests if two vectors are parallel.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     true if the vectors are parallel within default tolerance)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_ScaleToLength =R"doc(@description Scales a vector to specified length. If the input vector
 length is 0, the output vector is a zero vector and the returned
 length is 0.
 
-Parameter ``[in]``:
+:param (input):
     vector The original vector.
 
-Parameter ``[in]``:
+:param (input):
     length The requested length.
 
-Returns:
+:returns:
     The length prior to scaling.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Normalize =R"doc(@description Normalizes (scales) a vector to length 1. If the input
 vector length is 0, the output vector is a zero vector and the
 returned length is 0.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be normalized.
 
-Returns:
+:returns:
     The length prior to normalization)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Negate =R"doc(@description Computes a negated (opposite) vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be negated.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Scale =R"doc(@description Multiplies a vector by a scale factor.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be scaled.
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_UnitPerpendicularXY =R"doc(@description Compute a unit vector perpendicular to the xy parts of
 given vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The source vector
 
-Returns:
+:returns:
     true if the input vector has nonzero length)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_MagnitudeSquaredXY =R"doc(@description Computes the squared magnitude of the xy part of a
 vector.
 
-Returns:
+:returns:
     The squared magnitude of the xy parts of the given vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_MagnitudeXY =R"doc(@description Computes the magnitude of the xy part of a vector.
 
-Returns:
+:returns:
     The magnitude of the xy parts of the given vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_MagnitudeSquared =R"doc(@description Computes the squared magnitude of a vector.
 
-Returns:
+:returns:
     The squared magnitude of the vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Magnitude =R"doc(@description Computes the magnitude of a vector.
 
-Returns:
+:returns:
     The length of the vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_WeightedDifferenceCrossProduct =R"doc(@description Form the cross product of the weighted differences from
 point0 to point1 and point2.
 
-Parameter ``[in]``:
+:param (input):
     basePoint The common base point (second point for differences)
 
-Parameter ``[in]``:
+:param (input):
     target1 The first target point.
 
-Parameter ``[in]``:
+:param (input):
     target2 The second target point.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_WeightedDifferenceOf =R"doc(@description Scale each point by the other's weight and subtract, i.e.
 form (point1 * point2.w - point2 * point1.w). The weight term
 vanishes. Copy the xyz parts back as a vector.
 
-Parameter ``[in]``:
+:param (input):
     point1 The first point
 
-Parameter ``[in]``:
+:param (input):
     point2 The second pont.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_PlanarAngleTo =R"doc(@description Computes the signed angle between the projection of two
 vectors onto a plane with given normal.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Parameter ``[in]``:
+:param (input):
     planeNormal The plane normal vector
 
-Returns:
+:returns:
     The angle in plane)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_SignedAngleTo =R"doc(@description Computes the signed from one vector to another, in the
@@ -309,41 +309,41 @@ plane of the vectors is viewed. To choose which side to view, go on
 the side whose normal has a positive dot product with the orientation
 vector. This angle can be between -pi and +pi.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Parameter ``[in]``:
+:param (input):
     orientationVector The vector used to determine orientation.
 
-Returns:
+:returns:
     The signed angle)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_RotateXY =R"doc(@description Rotate vector around the z axis, return as calling
 instance.
 
-Parameter ``[in]``:
+:param (input):
     vector vector to rotate.
 
-Parameter ``[in]``:
+:param (input):
     theta The rotation angle.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_SmallerUnorientedAngleToXY =R"doc(@description Returns the angle between two vectors, considering both
 the vectors and their negations and choosing the smaller. This angle
 is between 0 and pi/2.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The angle between vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_AngleToXY =R"doc(@description Returns the angle from Vector1 to Vector2 using only xy
 parts. This angle is between -pi and +pi.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The angle between vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_IsVectorInCCWSector =R"doc(@description Test if the test vector vector is " between " point0 and
@@ -351,16 +351,16 @@ point1, with CCW direction resolved by an up vector. The cross product
 of point0 and point1 is considered the positive plane normal if its
 dot product with the up vector is positive.
 
-Parameter ``[in]``:
+:param (input):
     point0 The boundary vector.
 
-Parameter ``[in]``:
+:param (input):
     point1 The boundary vector.
 
-Parameter ``[in]``:
+:param (input):
     upVector The out of plane vector.
 
-Returns:
+:returns:
     true if test vector is within the angle.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_IsVectorInSmallerSector =R"doc(@description Test a vector is " between " point0 and point1. If the
@@ -378,23 +378,23 @@ tolerances will cause " nearby " cases to be unpredictable. It is
 assumed that if the caller considers the " parallel " cases important
 they will be checked explicitly.
 
-Parameter ``[in]``:
+:param (input):
     point0 The first boundary vector.
 
-Parameter ``[in]``:
+:param (input):
     point1 The second boundary vector.
 
-Returns:
+:returns:
     true if the test vector is within the angle.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_SmallerUnorientedAngleTo =R"doc(@description Returns the angle between two vectors, choosing the
 smaller of the two possible angles when both the vectors and their
 negations are considered. This angle is between 0 and pi/2.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The angle between the vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_AngleXY =R"doc(@description Computes the (signed) angle from xy axis to the vector,
@@ -404,40 +404,40 @@ static const char * __doc_Bentley_Geom_DPoint3d_AngleTo =R"doc(@description Retu
 between 0 and pi. Rotating the first vector by this angle around the
 cross product between the vectors aligns it with the second vector.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The angle between the vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_NormalizedDifference =R"doc(@description Computes a unit vector in the direction of the difference
 of the points or vectors (Second parameter vector is subtracted from
 the first parameter vector, exactly as in the subtract function.)
 
-Parameter ``[in]``:
+:param (input):
     target The target point.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin point.
 
-Returns:
+:returns:
     The length of original difference vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DotProductXY =R"doc(@description Returns the (scalar) dot product of xy parts of two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The dot product of the xy parts of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DotProduct =R"doc(@description Returns the (scalar) dot product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The dot product of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_GeometricMeanCrossProduct =R"doc(@description Computes the cross product of two vectors and scales it
@@ -446,13 +446,13 @@ useful because it has the direction of the cross product (i.e. normal
 to the plane of the two vectors) and a size in between the two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     point1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The length of original vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_SizedCrossProduct =R"doc(@description Computes the cross product of the two parameter vectors
@@ -460,68 +460,68 @@ and scales it to a given length. The scaled vector is stored as the
 product vector, and the length of the original cross product vector is
 returned.
 
-Parameter ``[in]``:
+:param (input):
     point1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Parameter ``[in]``:
+:param (input):
     productLength The Desired length
 
-Returns:
+:returns:
     The length of original vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_NormalizedCrossProduct =R"doc(@description Compute the normalized cross product of two vectors and
 return the length of the unnormalized cross product.
 
-Parameter ``[in]``:
+:param (input):
     point1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The length of the original (prenormalization) cross product vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_CrossProductXY =R"doc(@description Return the (scalar) cross product of the xy parts of two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector
 
-Returns:
+:returns:
     The 2d cross product.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_CrossProductToPoints =R"doc(@description Returns the (vector) cross product of two vectors. The
 vectors are computed from the Origin to target1 and target2.
 
-Parameter ``[in]``:
+:param (input):
     origin The base point for computing vectors.
 
-Parameter ``[in]``:
+:param (input):
     target1 The target point for the first vector.
 
-Parameter ``[in]``:
+:param (input):
     target2 The target point for the second vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_CrossProduct =R"doc(@description Returns the cross (vector) cross product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     point1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     point2 The second vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_SumOf =R"doc(@description Adds an origin and a scaled vector.
 
-Parameter ``[in]``:
+:param (input):
     origin Origin for the sum.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be added.
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_AddToArray =R"doc(Add translation to all points.)doc";
@@ -529,42 +529,42 @@ static const char * __doc_Bentley_Geom_DPoint3d_AddToArray =R"doc(Add translatio
 static const char * __doc_Bentley_Geom_DPoint3d_Add =R"doc(@description Adds a vector to a pointer or vector, returns the result
 in place.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to add.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Subtract =R"doc(@description Subtract a vector from a point.
 
-Parameter ``[in]``:
+:param (input):
     base The the first point or vector
 
-Parameter ``[in]``:
+:param (input):
     vector The second point or vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_InitDisconnect =R"doc(Initialize a point with all coordinates as the disconnect value.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint3d_IsDisconnect =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPoint3d_IsDisconnect =R"doc(:returns:
     true if the point has coordinates which indicate it is a
     disconnect (separator) ponit.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_NpcCoordinatesOf =R"doc(@description Computes the coordinates of point under the translation
 and scaling that puts 000 at cube>low and 111 at cube>high.
 
-Parameter ``[in]``:
+:param (input):
     point Point whose NPC coordinates are to be computed
 
-Parameter ``[in]``:
+:param (input):
     cube Cube whose corners map to 000 and 111)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_IsEqual =R"doc(@description Test for exact equality between all components of two
 points or vectors.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second point or vector
 
-Returns:
+:returns:
     true if the points are identical.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint3d_ComponentRange =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPoint3d_ComponentRange =R"doc(:returns:
     min and max of componetns.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_MinAbsIndex =R"doc(return in the index of the MinAbs () value)doc";
@@ -574,127 +574,127 @@ static const char * __doc_Bentley_Geom_DPoint3d_MaxAbsIndex =R"doc(return in the
 static const char * __doc_Bentley_Geom_DPoint3d_MinAbs =R"doc(@description Finds the smallest absolute value among the components of
 a point or vector.
 
-Returns:
+:returns:
     The smallest absolute value among point coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_MaxAbs =R"doc(@description Finds the largest absolute value among the components of
 a point or vector.
 
-Returns:
+:returns:
     The largest absolute value among point coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DistanceXY =R"doc(@description Computes the distance between two points, using only x
 and y components.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second point
 
-Returns:
+:returns:
     The distance between the XY projections of the two points. (i.e.
     any z difference is ignored))doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DistanceSquaredXY =R"doc(@description Computes the squared distance between two points, using
 only the xy parts.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second point
 
-Returns:
+:returns:
     The squared distance between the XY projections of the two points.
     (i.e. any z difference is ignored))doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DistanceSquared =R"doc(@description Computes the squared distance between two points.
 
-Parameter ``[in]``:
+:param (input):
     point2 The second point.
 
-Returns:
+:returns:
     The squared distance between the points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Distance =R"doc(@description Computes the (cartesian) distance between two points
 
-Parameter ``[in]``:
+:param (input):
     point2 The second point
 
-Returns:
+:returns:
     The distance between points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_IsPointInCCWector =R"doc(@description Test if a point is within the counter-clockwise sector
 defined by an origin and two boundary points, with an up vector to
 determine which direction is counter clockwise.
 
-Parameter ``[in]``:
+:param (input):
     origin The point to test.
 
-Parameter ``[in]``:
+:param (input):
     target0 The first target point.
 
-Parameter ``[in]``:
+:param (input):
     target1 The second target point.
 
-Parameter ``[in]``:
+:param (input):
     upVector vector towards eye to resolve direction.
 
-Returns:
+:returns:
     true if the test point is within the angle.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_IsPointInSmallerSector =R"doc(@description Form vectors from the origin to the test point and the
 two boundary vectors. Test if the test vector is within the smaller
 angle between the other two vectors.
 
-Parameter ``[in]``:
+:param (input):
     origin The point to test.
 
-Parameter ``[in]``:
+:param (input):
     target1 The first target point.
 
-Parameter ``[in]``:
+:param (input):
     target2 The second target point.
 
-Returns:
+:returns:
     true if the test point is within the angle.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Interpolate =R"doc(@description Computes a point whose position is given by a fractional
 argument and two endpoints.
 
-Parameter ``[in]``:
+:param (input):
     point0 The point corresponding to fractionParameter of 0.
 
-Parameter ``[in]``:
+:param (input):
     fractionParameter The fractional parametric coordinate. 0.0 is the
     start of the segment, 1.0 is the end, 0.5 is midpoint.
 
-Parameter ``[in]``:
+:param (input):
     point1 The point corresponding to fractionParameter of 1.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_GetComponent =R"doc(@description Gets a single component of a point. If the index is out
 of range 0,1,2, it is interpreted cyclically.
 
-Parameter ``[in]``:
+:param (input):
     index Indicates which component is accessed. The values are 0=x,
     1=y, 2=z. Other values are treated cyclically.
 
-Returns:
+:returns:
     The specified component of the point or vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_SetComponent =R"doc(@description Set one of three components (x,y,z) of the point.
 
-Parameter ``[in]``:
+:param (input):
     a The component value.
 
-Parameter ``[in]``:
+:param (input):
     index Selects the the axis:0=x, 1=y, 2=z, others cyclic.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_XyzOf =R"doc(@description Sets the x,y, and z components of a DPoint3d structure
 from the corresponding parts of a DPoint4d. Weight part of DPoint4d is
 not used.
 
-Parameter ``[in]``:
+:param (input):
     hPoint The homogeneous point)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Init =R"doc(@description Copy from a 2d point setting z to zero.
 
-Parameter ``[in]``:
+:param (input):
     source source point)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_One =R"doc(@description Returns a point or vector with all components 1.0.)doc";
@@ -704,16 +704,16 @@ static const char * __doc_Bentley_Geom_DPoint3d_Zero =R"doc(@description Sets al
 static const char * __doc_Bentley_Geom_DPoint3d_TripleProductToPoints =R"doc(@description Computes the triple product of vectors from a base point
 three target points.
 
-Parameter ``[in]``:
+:param (input):
     target1 The target point for the first vector.
 
-Parameter ``[in]``:
+:param (input):
     target2 The target point for the second vector.
 
-Parameter ``[in]``:
+:param (input):
     target3 The target point for the third vector.
 
-Returns:
+:returns:
     The triple product)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DotDifference =R"doc(@description Returns the (scalar) dot product of a two vectors. One
@@ -721,45 +721,45 @@ vector is computed internally as the difference of the TargetPoint and
 Origin. (TargetPoint-Origin) The other is given directly as a single
 argument.
 
-Parameter ``[in]``:
+:param (input):
     origin The start (orign) point of the first vector of the cross
     product.
 
-Parameter ``[in]``:
+:param (input):
     vector The second)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DotProductToPointsXY =R"doc(@description Returns the (scalar) dot product of xy parts of two
 vectors. The vectors are computed from the BasePoint to target1 and
 target2.
 
-Parameter ``[in]``:
+:param (input):
     target1 The target point for the first vector.
 
-Parameter ``[in]``:
+:param (input):
     target2 The target point for the second vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_DotProductToPoints =R"doc(@description Returns the (scalar) dot product of two vectors. The
 vectors are computed from the Origin to target1 and target2.
 
-Parameter ``[in]``:
+:param (input):
     target1 The target point for the first vector.
 
-Parameter ``[in]``:
+:param (input):
     target2 The target point for the second vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_CrossProductToPointsXY =R"doc(@description Returns the (scalar) cross product of the xy parts of two
 vectors. The vectors are computed from the Origin to target1 and
 target2.
 
-Parameter ``[in]``:
+:param (input):
     target1 The target point for the first vector.
 
-Parameter ``[in]``:
+:param (input):
     target2 The target point for the second vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_Swap =R"doc(Swap contents of instance, other.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     other second point.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint3d_FromOne =R"doc(Return a DPoint3d with xyz = 1.)doc";
@@ -786,6 +786,10 @@ void def_DPoint3d(py::module_& m)
     c1.def_readwrite("x", &DPoint3d::x);
     c1.def_readwrite("y", &DPoint3d::y);
     c1.def_readwrite("z", &DPoint3d::z);
+
+    c1.def_readwrite("X", &DPoint3d::x);
+    c1.def_readwrite("Y", &DPoint3d::y);
+    c1.def_readwrite("Z", &DPoint3d::z);
 
     c1.def(py::init([] (DVec3d const& v) { return DPoint3d::From(v.x, v.y, v.z); }), "vector"_a);
     c1.def(py::init(&DPoint3d::FromZero));
@@ -895,6 +899,14 @@ void def_DPoint3d(py::module_& m)
             DPoint3d::AddToArray(&points[0], (int) points.size(), delta);
         }, "points"_a, "delta"_a, DOC(Bentley, Geom, DPoint3d, AddToArray));
 
+    c1.def_static("AddToArray", [](py::list &points, DPoint3dCR delta)
+        {
+        if (!points.empty()){
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            DPoint3d::AddToArray(&cppPoints[0], (int) cppPoints.size(), delta);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+        } }, "points"_a, "delta"_a, DOC(Bentley, Geom, DPoint3d, AddToArray));
+
     c1.def("SumOf",
            py::overload_cast<DPoint3dCR, DVec3dCR, double>(&DPoint3d::SumOf),
            "origin"_a, "vector"_a, "scale"_a, DOC(Bentley, Geom, DPoint3d, SumOf));
@@ -991,6 +1003,16 @@ void def_DPoint3d(py::module_& m)
         DPoint3d::MultiplyArrayByScales(outPoints.data(), inPoints.data(), scales.data(), (int) scales.size());            
         }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
 
+    c1.def_static("MultiplyArrayByScales", [] (py::list& outPoints, py::list const& inPoints, DoubleArray& scales)
+        {
+        if (outPoints.size() != inPoints.size() || inPoints.size() != scales.size() || scales.empty())
+            return;
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        DPoint3d::MultiplyArrayByScales(cppOutPoints.data(), cppInPoints.data(), scales.data(), (int) scales.size());   
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints,  DPoint3dArray, DPoint3d);         
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
+
     c1.def_static("DivideArrayByScales", [] (DPoint3dArray& outPoints, DPoint3dArray const& inPoints, DoubleArray& scales)
         {
         if (outPoints.size() != inPoints.size() || inPoints.size() != scales.size() || scales.empty())
@@ -999,7 +1021,17 @@ void def_DPoint3d(py::module_& m)
         DPoint3d::DivideArrayByScales(outPoints.data(), inPoints.data(), scales.data(), (int) scales.size());
         }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
 
-    
+    c1.def_static("DivideArrayByScales", [] (py::list& outPoints, py::list const& inPoints, DoubleArray& scales)
+        {
+        if (outPoints.size() != inPoints.size() || inPoints.size() != scales.size() || scales.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+
+        DPoint3d::DivideArrayByScales(cppOutPoints.data(), cppInPoints.data(), scales.data(), (int) scales.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints,  DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
     c1.def_static("FromProduct", py::overload_cast<TransformCR, double, double, double>(&DPoint3d::FromProduct), "transform"_a, "x"_a, "y"_a, "z"_a, DOC(Bentley, Geom, DPoint3d, FromProduct));
     c1.def_static("FromProduct", py::overload_cast<TransformCR, DPoint3dCR>(&DPoint3d::FromProduct), "transform"_a, "point"_a, DOC(Bentley, Geom, DPoint3d, FromProduct));
     c1.def_static("FromInterpolate", &DPoint3d::FromInterpolate, "pointA"_a, "fraction"_a, "pointB"_a, DOC(Bentley, Geom, DPoint3d, FromInterpolate));

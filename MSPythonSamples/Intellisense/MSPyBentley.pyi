@@ -4,7 +4,7 @@ import MSPyBentley
 
 class AString:
     """
-    A string class that has many of the same capabilities as std.string, plus
+    A string class that has many of the same capabilities as std::string, plus
     additional functions such as conversion
     """
 
@@ -132,7 +132,7 @@ class Base64Utilities:
 class BeDateTime:
     """
     Represents an instant in time, typically expressed as a date and time of day
-    A DateTime also holds additional metadata about the actual date time in its DateTime.Info member.
+    A DateTime also holds additional metadata about the actual date time in its DateTime::Info member.
     A DateTime's accuracy is 100's of nanoseconds (i.e hecto-nanoseconds, i.e. 1e-7 seconds)
     """
 
@@ -142,10 +142,10 @@ class BeDateTime:
         Computes the Julian Day number from the given Common Era ticks. The
         Common Era begins at 0001-01-01 00:00:00 UTC.
         
-        Parameter `` in ``:
+        :param in :
         commonEraTicks Common Era ticks in hecto-nanoseconds
         
-        Returns:
+        :returns:
         Julian Day number in hecto-nanoseconds
         """
         ...
@@ -159,13 +159,13 @@ class BeDateTime:
         also the reason why the class does not provide comparison operators
         other than equality and inequality.
         
-        Parameter `` in ``:
+        :param in :
         lhs Left-hand side DateTime
         
-        Parameter `` in ``:
+        :param in :
         rhs Right-hand side DateTime
         
-        Returns:
+        :returns:
         A CompareResult value.
         """
         ...
@@ -249,37 +249,37 @@ class BeDateTime:
         ...
     
     @staticmethod
-    def FromCommonEraTicks(dateTime: MSPyBentley.BeDateTime, commonEraTicks: int, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus:
+    def FromCommonEraTicks(dateTime: MSPyBentley.BeDateTime, commonEraTicks: int, targetInfo: MSPyBentley.BeDateTimeInfo) -> BentleyStatus:
         """
         Computes the DateTime from the given Common Era ticks. The Common Era
         begins at 0001-01-01 00:00:00 UTC.
         
-        Parameter `` out ``:
+        :param out :
         dateTime Resulting DateTime object (on the proleptic Gregorian
         calendar)
         
-        Parameter `` in ``:
+        :param in :
         commonEraTicks Common Era ticks in hecto-nanoseconds
         
-        Parameter `` in ``:
+        :param in :
         targetInfo DateTime.Info the resulting DateTime should have
         
-        Returns:
+        :returns:
         SUCCESS if computation was successful. ERROR in case of errors,
         e.g. if computation of local time zone offset failed.
         """
         ...
     
     @staticmethod
-    def FromJulianDay(dateTime: MSPyBentley.BeDateTime, julianDay: float, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus:
+    def FromJulianDay(dateTime: MSPyBentley.BeDateTime, julianDay: float, targetInfo: MSPyBentley.BeDateTimeInfo) -> BentleyStatus:
         ...
     
     @staticmethod
-    def FromJulianDayInHns(dateTime: MSPyBentley.BeDateTime, julianDayInHns: int, targetInfo: MSPyBentley.BeDateTimeInfo) -> Bentley.BentleyStatus:
+    def FromJulianDayInHns(dateTime: MSPyBentley.BeDateTime, julianDayInHns: int, targetInfo: MSPyBentley.BeDateTimeInfo) -> BentleyStatus:
         ...
     
     @staticmethod
-    def FromString(dateTime: MSPyBentley.BeDateTime, dateTimeIso8601: str) -> Bentley.BentleyStatus:
+    def FromString(dateTime: MSPyBentley.BeDateTime, dateTimeIso8601: str) -> BentleyStatus:
         """
         Parses an ISO 8601 date time string into a DateTime instance.
         
@@ -291,31 +291,31 @@ class BeDateTime:
         delimiter), which allows to parse SQL-99 date time literals
         (specifies the space delimiter)
         
-        Parameter ``dateTime``:
+        :param dateTime:
         the resulting DateTime instance
         
-        Parameter ``dateTimeIso8601``:
+        :param dateTimeIso8601:
         the ISO 8601 date time string to parse
         
-        Returns:
+        :returns:
         SUCCESS, if parsing was successful. ERROR, otherwise
         """
         ...
     
     @staticmethod
-    def FromUnixMilliseconds(dateTime: MSPyBentley.BeDateTime, unixMilliseconds: int) -> Bentley.BentleyStatus:
+    def FromUnixMilliseconds(dateTime: MSPyBentley.BeDateTime, unixMilliseconds: int) -> BentleyStatus:
         """
         Creates a DateTime in UTC from the given Unix epoch milliseconds
         
-        Parameter `` out ``:
+        :param out :
         dateTime The resulting DateTime object on the proleptic Gregorian
         calendar (in UTC).
         
-        Parameter `` in ``:
+        :param in :
         unixMilliseconds The Unix epoch milliseconds. Negative if they
         refer to a date before the Unix epoch (1970-01-01 00:00:00 UTC)
         
-        Returns:
+        :returns:
         SUCCESS if conversion was successful. ERROR otherwise
         """
         ...
@@ -325,7 +325,7 @@ class BeDateTime:
         """
         Gets the current system time in local time.
         
-        Returns:
+        :returns:
         Current system time in local time
         """
         ...
@@ -335,7 +335,7 @@ class BeDateTime:
         """
         Gets the current system time in UTC.
         
-        Returns:
+        :returns:
         Current system time in UTC
         """
         ...
@@ -344,7 +344,7 @@ class BeDateTime:
         """
         Gets the day component of this DateTime object.
         
-        Returns:
+        :returns:
         Day in the month (1 through the number in GetMonth)
         """
         ...
@@ -357,7 +357,7 @@ class BeDateTime:
         s Only call this method if the DateTime is valid (see
         DateTime.IsValid)
         
-        Returns:
+        :returns:
         Day of the week
         """
         ...
@@ -366,7 +366,7 @@ class BeDateTime:
         """
         Gets the day of the year of this DateTime object.
         
-        Returns:
+        :returns:
         Day of the year or 0 if the DateTime object is not valid (see
         DateTime.IsValid)
         """
@@ -379,7 +379,7 @@ class BeDateTime:
         Remark:
         s 1 hecto-nanosecond is 1e-7 seconds.
         
-        Returns:
+        :returns:
         Hecto-nanoseconds (0 through 9,999,999)
         """
         ...
@@ -388,7 +388,7 @@ class BeDateTime:
         """
         Gets the hour component of this DateTime object.
         
-        Returns:
+        :returns:
         Hours (0 through 59)
         """
         ...
@@ -397,7 +397,7 @@ class BeDateTime:
         """
         Gets meta data about this DateTime object.
         
-        Returns:
+        :returns:
         DateTime.Info of this DateTime object.
         """
         ...
@@ -410,7 +410,7 @@ class BeDateTime:
         s The hecto-nanoseconds are truncated (not rounded) at the
         millisecond position.
         
-        Returns:
+        :returns:
         Milliseconds (0 through 999)
         """
         ...
@@ -419,7 +419,7 @@ class BeDateTime:
         """
         Gets the minute component of this DateTime object.
         
-        Returns:
+        :returns:
         Minutes (0 through 59)
         """
         ...
@@ -428,7 +428,7 @@ class BeDateTime:
         """
         Gets the month component of this DateTime object.
         
-        Returns:
+        :returns:
         Month (1 through 12).
         """
         ...
@@ -437,7 +437,7 @@ class BeDateTime:
         """
         Gets the second component of this DateTime object.
         
-        Returns:
+        :returns:
         Seconds (0 through 59)
         """
         ...
@@ -446,7 +446,7 @@ class BeDateTime:
         """
         Gets the year component of this DateTime object.
         
-        Returns:
+        :returns:
         Year (negative if BCE, positive otherwise).
         """
         ...
@@ -468,7 +468,7 @@ class BeDateTime:
         """
         Indicates whether the specified year is a leap year or not
         
-        Returns:
+        :returns:
         true, if ``year`` is a leap year. false, otherwise.
         """
         ...
@@ -481,7 +481,7 @@ class BeDateTime:
         s Using the default constructor creates an invalid date time as
         none of the components have been set.
         
-        Returns:
+        :returns:
         true, if the DateTime instance is valid, false otherwise
         """
         ...
@@ -492,10 +492,10 @@ class BeDateTime:
         Computes Common Era ticks from the given the Julian Day number. The
         Common Era begins at 0001-01-01 00:00:00 UTC.
         
-        Parameter `` in ``:
+        :param in :
         julianDayInHectoNanoseconds Julian Day number
         
-        Returns:
+        :returns:
         Common Era ticks in hecto-nanoseconds
         """
         ...
@@ -505,11 +505,11 @@ class BeDateTime:
         """
         Computes the Unix milliseconds from the given Julian Day number.
         
-        Parameter `` in ``:
+        :param in :
         julianDayInHectoNanoseconds Julian day in hecto-
         nanoseconds.unixMilliseconds Unix milliseconds.
         
-        Returns:
+        :returns:
         Unix milliseconds. Negative numbers indicate dates before the Unix
         epoch.
         """
@@ -570,14 +570,14 @@ class BeDateTime:
     def ToJulianDayInHns(self: MSPyBentley.BeDateTime) -> tuple:
         ...
     
-    def ToLocalTime(self: MSPyBentley.BeDateTime, localDateTime: MSPyBentley.BeDateTime) -> Bentley.BentleyStatus:
+    def ToLocalTime(self: MSPyBentley.BeDateTime, localDateTime: MSPyBentley.BeDateTime) -> BentleyStatus:
         """
         Converts this UTC DateTime to local time
         
-        Parameter `` out ``:
+        :param out :
         localDateTime Resulting DateTime object in local time
         
-        Returns:
+        :returns:
         SUCCESS if successful. ERROR in case of errors, e.g. if this date
         time instance is invalid (see DateTime.IsValid) or if computation
         of local time zone offset failed.
@@ -592,7 +592,7 @@ class BeDateTime:
         s The resulting string is formatted according to the ISO8601
         standard. Second fractions are rounded to milliseconds.
         
-        Returns:
+        :returns:
         String representation of this DateTime object. An empty string is
         returned if this date time info object is not valid (see
         DateTime.IsValid )
@@ -602,14 +602,14 @@ class BeDateTime:
     def ToUnixMilliseconds(self: MSPyBentley.BeDateTime) -> tuple:
         ...
     
-    def ToUtc(self: MSPyBentley.BeDateTime, utcDateTime: MSPyBentley.BeDateTime) -> Bentley.BentleyStatus:
+    def ToUtc(self: MSPyBentley.BeDateTime, utcDateTime: MSPyBentley.BeDateTime) -> BentleyStatus:
         """
         Converts this local DateTime to UTC
         
-        Parameter `` out ``:
+        :param out :
         utcDateTime Resulting DateTime object in UTC
         
-        Returns:
+        :returns:
         SUCCESS if successful. ERROR in case of errors, e.g. if this date
         time instance is invalid (see DateTime.IsValid) or if computation
         of local time zone offset failed.
@@ -624,7 +624,7 @@ class BeDateTime:
         s The resulting string is formatted according to the ISO8601
         standard. Second fractions are rounded to milliseconds.
         
-        Returns:
+        :returns:
         String representation of this DateTime object. An empty string is
         returned if this date time info object is not valid (see
         DateTime.IsValid )
@@ -636,11 +636,11 @@ class BeDateTime:
         """
         Computes the Julian Day number from the given Unix milliseconds.
         
-        Parameter `` in ``:
+        :param in :
         unixMilliseconds Unix milliseconds. Negative numbers indicate
         dates before the Unix epoch.
         
-        Returns:
+        :returns:
         Julian Day number in hecto-nanoseconds
         """
         ...
@@ -758,20 +758,20 @@ class BeFile:
         
         Creates a new disk file
         
-        Parameter ``filename``:
+        :param filename:
         The full path of the file to create.
         
-        Parameter ``createAlways``:
-        If false, returns a status other than BeFileStatus.Success, and
+        :param createAlways:
+        If false, returns a status other than BeFileStatus::Success, and
         does not create a new file if *filename* already exists. If true,
         deletes any existing file before creating a new one by the same
         name.
         
-        Parameter ``attributes``:
+        :param attributes:
         File attributes.
         
-        Returns:
-        BeFileStatus.Success if the file was created or non-zero if
+        :returns:
+        BeFileStatus::Success if the file was created or non-zero if
         create failed.
         """
         ...
@@ -780,7 +780,7 @@ class BeFile:
         """
         Flushes all pending writes to the file
         
-        Returns:
+        :returns:
         BeFileStatus.Success if the operation was successful or non-zero
         if it failed.
         """
@@ -802,10 +802,10 @@ class BeFile:
         """
         Gets the file read/write position
         
-        Parameter ``position``:
+        :param position:
         the current read/write position
         
-        Returns:
+        :returns:
         BeFileStatus.Success if the operation was successful or non-zero
         if it failed.
         """
@@ -821,10 +821,10 @@ class BeFile:
         """
         Gets the size of the file.
         
-        Parameter ``length``:
+        :param length:
         The size of the file in bytes
         
-        Returns:
+        :returns:
         BeFileStatus.Success if the operation was successful or non-zero
         if it failed.
         """
@@ -850,24 +850,24 @@ class BeFile:
         
         Opens an existing file.
         
-        Parameter ``filename``:
+        :param filename:
         The full path the file to open.
         
-        Parameter ``mode``:
+        :param mode:
         The file open mode.
         
-        Parameter ``shareOptions``:
+        :param shareOptions:
         The file sharing options.
         
-        Parameter ``attributes``:
+        :param attributes:
         The file attributes.
         
-        Parameter ``numRetries``:
+        :param numRetries:
         The number of times to retry the open in the event of a sharing
         violation.
         
-        Returns:
-        BeFileStatus.Success if the file was opened or non-zero if open
+        :returns:
+        BeFileStatus::Success if the file was opened or non-zero if open
         failed.
         """
         ...
@@ -879,11 +879,11 @@ class BeFile:
         """
         Overloaded function.
         
-        1. ReadEntireFile(self: MSPyBentley.BeFile, buffer: MSPyBentley.UInt8Array) -> MSPyBentley.BeFileStatus
+        1. ReadEntireFile(self: MSPyBentley.BeFile, buffer: List[unsigned char]) -> MSPyBentley.BeFileStatus
         
         Reads entire file to a byte vector.
         
-        2. ReadEntireFile(self: MSPyBentley.BeFile, byteStream: Bentley.ByteStream) -> MSPyBentley.BeFileStatus
+        2. ReadEntireFile(self: MSPyBentley.BeFile, byteStream: ByteStream) -> MSPyBentley.BeFileStatus
         
         Reads entire file to a byte vector.
         """
@@ -893,13 +893,13 @@ class BeFile:
         """
         Moves the file read/write position.
         
-        Parameter ``position``:
+        :param position:
         The new read/write position.
         
-        Parameter ``origin``:
+        :param origin:
         The origin mode for the move.
         
-        Returns:
+        :returns:
         BeFileStatus.Success if the operation was successful or non-zero
         if it failed.
         """
@@ -909,10 +909,10 @@ class BeFile:
         """
         Sets the size of the file.
         
-        Parameter ``length``:
+        :param length:
         The new size of the file in bytes.
         
-        Returns:
+        :returns:
         BeFileStatus.Success if the operation was successful or non-zero
         if it failed.
         """
@@ -926,7 +926,7 @@ class BeFile:
         """
         Swap file handles between two BeFile instances.
         
-        Parameter ``other``:
+        :param other:
         The other file.
         """
         ...
@@ -998,14 +998,14 @@ class BeFileListIterator:
     None
     """
 
-    def GetNextFileName(self: MSPyBentley.BeFileListIterator, fileName: Bentley.BeFileName) -> Bentley.BentleyStatus:
+    def GetNextFileName(self: MSPyBentley.BeFileListIterator, fileName: BeFileName) -> BentleyStatus:
         """
         Retrieve the next filename found from the path list.
         
-        Parameter ``name``:
+        :param name:
         The name of the next valid file from the path list.
         
-        Returns:
+        :returns:
         SUCCESS if the name returned is valid, ERROR if there are no more
         files.
         """
@@ -1089,10 +1089,10 @@ class BeFileName:
         WString internally, so if you are appending a character constant it is
         more efficient to use append (L"string to append").
         
-        Parameter ``in``:
+        :param in:
         The multibyte string
         
-        Returns:
+        :returns:
         Reference to this string.
         """
         ...
@@ -1102,13 +1102,13 @@ class BeFileName:
         """
         Are two filenames equivalent?
         
-        Parameter ``file1``:
+        :param file1:
         name of a file
         
-        Parameter ``file2``:
+        :param file2:
         name of another file
         
-        Returns:
+        :returns:
         true if the two strings are aliases for the same (existing)
         physical file.
         """
@@ -1121,10 +1121,10 @@ class BeFileName:
         Define the contents of this WString from a CharCP using the current
         system locale
         
-        Parameter ``in``:
+        :param in:
         The ASCII string
         
-        Returns:
+        :returns:
         Reference to this string.
         """
         ...
@@ -1141,10 +1141,10 @@ class BeFileName:
         
         Define the contents of this WString from a Utf8CP
         
-        Parameter ``in``:
+        :param in:
         The Utf8 string. May be NULL.
         
-        Returns:
+        :returns:
         Reference to this string.
         """
         ...
@@ -1164,18 +1164,18 @@ class BeFileName:
         ...
     
     @staticmethod
-    def BeCompactPath(shortened: MSPyBentley.WString, path: str, length: int) -> Bentley.BentleyStatus:
+    def BeCompactPath(shortened: MSPyBentley.WString, path: str, length: int) -> BentleyStatus:
         """
         Shortens a file path to be no longer than the specified number of
         characters.
         
-        Parameter ``shortened``:
+        :param shortened:
         the string shortened to the specified length
         
-        Parameter ``path``:
+        :param path:
         the original path
         
-        Parameter ``length``:
+        :param length:
         the number of characters to display in the shortened string
         @Return non-zero error status if not successful
         """
@@ -1187,17 +1187,17 @@ class BeFileName:
         Copy an existing file. If a file with the new name already exists, it
         is overwritten.
         
-        Parameter ``newFileName``:
+        :param newFileName:
         The name for the newly copied file.
         
-        Parameter ``existingFileName``:
+        :param existingFileName:
         The name for the source file.
         
-        Parameter ``failIfFileExists``:
+        :param failIfFileExists:
         Do not copy and return error if the destination file already
         exists.
         
-        Returns:
+        :returns:
         DGNFILE_STATUS_Success if the file was successfully copied.
         """
         ...
@@ -1207,14 +1207,14 @@ class BeFileName:
         """
         Delete an existing file.
         
-        Parameter ``fileNameP``:
+        :param fileNameP:
         The name of an existing file.
         
-        Parameter ``removeReadOnlyAttribute``:
+        :param removeReadOnlyAttribute:
         Remove read-only attribute for the file before making an
         attempting to delete it.
         
-        Returns:
+        :returns:
         BeFileNameStatus.Success if the file was successfully deleted or
         BeFileNameStatus.CantDeleteFile if not.
         """
@@ -1225,13 +1225,13 @@ class BeFileName:
         """
         Get free space on disk
         
-        Parameter ``freeBytes``:
+        :param freeBytes:
         The amount of free space on the storage device, in bytes
         
-        Parameter ``dirName``:
+        :param dirName:
         The name of a file or directory on the device to check
         
-        Returns:
+        :returns:
         BeFileNameStatus.Success, if the query succeeded. Non-zero if the
         directory is invalid or refers to a storage device that does not
         exist.
@@ -1253,17 +1253,17 @@ class BeFileName:
         """
         Generate a unique name for a temporary file.
         
-        Parameter ``tempFileName``:
+        :param tempFileName:
         The name for a temporary file.
         
-        Parameter ``pathName``:
+        :param pathName:
         The path to contain the temp file. If NULL, the result of
         BeGetTempPath is used.
         
-        Parameter ``prefixString``:
+        :param prefixString:
         up to 3 chars of this will be used in the generated filename
         
-        Returns:
+        :returns:
         BeFileNameStatus.Success, if the directory for the temporary file
         exists or was created. @note This method does not create a
         temporary file, it merely returns a name that can be used to
@@ -1276,10 +1276,10 @@ class BeFileName:
         """
         Retrieves the path of the directory for temporary files.
         
-        Parameter ``tempFileName``:
+        :param tempFileName:
         The name for a temporary file.
         
-        Returns:
+        :returns:
         BeFileNameStatus.Success, if the directory for the temporary file
         exists or was created.
         """
@@ -1290,17 +1290,17 @@ class BeFileName:
         """
         Move or rename an existing file.
         
-        Parameter ``oldFileName``:
+        :param oldFileName:
         The name of an existing file.
         
-        Parameter ``newFileName``:
+        :param newFileName:
         The new name for the file.
         
-        Parameter ``numRetries``:
+        :param numRetries:
         the number of times to retry the open in the event of a sharing
         violation
         
-        Returns:
+        :returns:
         BeFileNameStatus.Success if the file was successfully moved or
         BeFileNameStatus.UnknownError if not.
         """
@@ -1318,13 +1318,13 @@ class BeFileName:
         """
         Check user's access to a file
         
-        Parameter ``fileName``:
+        :param fileName:
         The name of an existing file.
         
-        Parameter ``accs``:
+        :param accs:
         The kinds of access to check for
         
-        Returns:
+        :returns:
         BeFileNameStatus.Success if all of the specified access rights
         are granted; non-zero if the file does not exist or some of the
         specified rights are not granted.
@@ -1343,16 +1343,16 @@ class BeFileName:
         Clone the contents of an existing directory, and optionally its
         subdirectories, into a new directory.
         
-        Parameter ``destDir``:
+        :param destDir:
         The name for the new directory.
         
-        Parameter ``sourceDir``:
+        :param sourceDir:
         The source directory to clone.
         
-        Parameter ``includeSubDirs``:
+        :param includeSubDirs:
         If true, also clone all subdirectories, recursively.
         
-        Returns:
+        :returns:
         DGNFILE_STATUS_Success if the directory was successfully cloned.
         """
         ...
@@ -1376,11 +1376,11 @@ class BeFileName:
         
         Perform a (case-sensitive) comparison.
         
-        Returns:
+        :returns:
         0 if the strings are equal, or -1 or 1 if this string should come
         before or after *other.*
         
-        Parameter ``other``:
+        :param other:
         The other string.
         """
         ...
@@ -1404,11 +1404,11 @@ class BeFileName:
         
         Perform a case-insensitive comparison.
         
-        Returns:
+        :returns:
         0 if the strings are equal (ignoring case), or -1 or 1 if this
         string should come before or after *other.*
         
-        Parameter ``other``:
+        :param other:
         The other string.
         """
         ...
@@ -1421,10 +1421,10 @@ class BeFileName:
         
         Test for whether this string contains another string.
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
-        Returns:
+        :returns:
         true if this string contains the other string.
         
         2. Contains(self: MSPyBentley.WString, other: MSPyBentley.WString) -> bool
@@ -1447,10 +1447,10 @@ class BeFileName:
         
         Test for whether this string contains another string, ignoring case.
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
-        Returns:
+        :returns:
         true if this string contains the other string.
         
         2. ContainsI(self: MSPyBentley.WString, other: MSPyBentley.WString) -> bool
@@ -1470,10 +1470,10 @@ class BeFileName:
         """
         Create a new directory.
         
-        Parameter ``path``:
+        :param path:
         The pathname for the new directory.
         
-        Returns:
+        :returns:
         DGNFILE_STATUS_Success if the directory was successfully created.
         @note this method will return an error if the directory already
         exists.
@@ -1485,10 +1485,10 @@ class BeFileName:
         """
         Test whether a pathname refers to an existing file or directory.
         
-        Parameter ``path``:
+        :param path:
         The pathname to test.
         
-        Returns:
+        :returns:
         true if the pathname refers to an existing file or directory.
         """
         ...
@@ -1505,10 +1505,10 @@ class BeFileName:
         Recursively empty all of the contents of an existing directory and
         then remove it.
         
-        Parameter ``path``:
+        :param path:
         The pathname for the directory to remove.
         
-        Returns:
+        :returns:
         DGNFILE_STATUS_Success if the directory was successfully removed.
         """
         ...
@@ -1534,10 +1534,10 @@ class BeFileName:
         
         Test for equality with another string.
         
-        Returns:
+        :returns:
         true if the strings are equal.
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
         2. Equals(self: MSPyBentley.WString, other: MSPyBentley.WString) -> bool
@@ -1560,10 +1560,10 @@ class BeFileName:
         
         Test for equality with another string, ignoring case.
         
-        Returns:
+        :returns:
         true if the strings are equal (ignoring case).
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
         2. EqualsI(self: MSPyBentley.WString, other: MSPyBentley.WString) -> bool
@@ -1636,15 +1636,15 @@ class BeFileName:
         files are on different devices, targetFileName is copied to
         relativePath.
         
-        Parameter ``relativePath``:
-        OUT the relative path to the target file
+        :param relativePath:
+        (output) the relative path to the target file
         
-        Parameter ``targetFileName``:
-        IN the full file specification of the file the relative path is
+        :param targetFileName:
+        (input) the full file specification of the file the relative path is
         needed for.
         
-        Parameter ``rootFileName``:
-        IN the full file specification of the root for the relative path.
+        :param rootFileName:
+        (input) the full file specification of the root for the relative path.
         """
         ...
     
@@ -1654,16 +1654,16 @@ class BeFileName:
         Perform any platform-specific fixes of an input pathname into a
         " canonical " pathname. On Windows, this includes converting forward
         slashes to backslashes and removing double backslashes. It also
-        removes " \ " and " \ " notation. On other platforms those rules may be
+        removes " \\ " and " \\ " notation. On other platforms those rules may be
         different.
         
-        Parameter ``path``:
+        :param path:
         The " fixed " version of the pathname.
         
-        Parameter ``original``:
+        :param original:
         The " raw " pathname.
         
-        Returns:
+        :returns:
         DGNFILE_STATUS_Success if the pathname was successfully " fixed "
         (whether any changes were made or not), or PATH_IllegalName if the
         pathname is invalid for any reason.
@@ -1721,7 +1721,7 @@ class BeFileName:
     def GetFileSize(fileName: str) -> tuple:
         """
         Get file size
-        @param in  fileName The name of an existing file.
+        @param in fileName The name of an existing file.
         @return the file size
         """
         ...
@@ -1748,13 +1748,13 @@ class BeFileName:
         """
         Overloaded function.
         
-        1. GetTargetOfSymbolicLink(targetFileName: MSPyBentley.BeFileName, path: str) -> Bentley.BentleyStatus
+        1. GetTargetOfSymbolicLink(targetFileName: MSPyBentley.BeFileName, path: str) -> BentleyStatus
         
         Determines a symbolic link's target. This recurses, meaning that it
         keeps evaluating each incremental target until it reaches a concrete
         file, or the target does not exist.
         
-        2. GetTargetOfSymbolicLink(targetFileName: MSPyBentley.BeFileName, path: str, shouldRecurse: bool) -> Bentley.BentleyStatus
+        2. GetTargetOfSymbolicLink(targetFileName: MSPyBentley.BeFileName, path: str, shouldRecurse: bool) -> BentleyStatus
         
         Determines a symbolic link's target. This recurses, meaning that it
         keeps evaluating each incremental target until it reaches a concrete
@@ -1785,10 +1785,10 @@ class BeFileName:
         """
         Test whether a pathname refers to an existing directory.
         
-        Parameter ``path``:
+        :param path:
         The pathname to test.
         
-        Returns:
+        :returns:
         true if the pathname refers to an existing directory.
         """
         ...
@@ -1810,10 +1810,10 @@ class BeFileName:
         """
         Check if path is located on a removable storage device.
         
-        Parameter ``fn``:
+        :param fn:
         The name of a file or directory on the device to check
         
-        Returns:
+        :returns:
         true if the storage device is removable
         """
         ...
@@ -1838,10 +1838,10 @@ class BeFileName:
         Move an existing file or an existing directory to Recycle Bin (on
         Windows).
         
-        Parameter ``path``:
+        :param path:
         The pathname for the file or directory to remove.
         
-        Returns:
+        :returns:
         DGNFILE_STATUS_Success if the target was successfully removed.
         """
         ...
@@ -1880,19 +1880,19 @@ class BeFileName:
         Parse a full filename into WStrings for the device, directory,
         filename, and extension.
         
-        Parameter ``dev``:
+        :param dev:
         The device part of this filename. May be NULL.
         
-        Parameter ``dir``:
+        :param dir:
         The directory part of this filename. May be NULL.
         
-        Parameter ``name``:
+        :param name:
         The filename part of this filename. May be NULL.
         
-        Parameter ``ext``:
+        :param ext:
         The extension part of this filename. May be NULL.
         
-        Parameter ``fullFileName``:
+        :param fullFileName:
         The filename to parse.
         """
         ...
@@ -1903,19 +1903,19 @@ class BeFileName:
         filename, and extension. If the input does not contain a file part,
         the output is not changed.
         
-        Parameter ``dev``:
+        :param dev:
         The device part of this filename. May be NULL.
         
-        Parameter ``dir``:
+        :param dir:
         The directory part of this filename. May be NULL.
         
-        Parameter ``name``:
+        :param name:
         The filename part of this filename. May be NULL.
         
-        Parameter ``ext``:
+        :param ext:
         The extension part of this filename. May be NULL.
         
-        Parameter ``fullFileName``:
+        :param fullFileName:
         The filename to parse.
         """
         ...
@@ -1946,31 +1946,31 @@ class BeFileName:
         Replace first occurrence of findString with replaceString, ignoring
         case.
         
-        Parameter ``findString``:
+        :param findString:
         The substring to find.
         
-        Parameter ``replaceString``:
+        :param replaceString:
         The replacement string.
         
-        Returns:
+        :returns:
         true is a replacement is made.
         """
         ...
     
     @staticmethod
-    def ResolveRelativePath(fullPath: MSPyBentley.WString, relativeFileName: str, basePath: str) -> Bentley.BentleyStatus:
+    def ResolveRelativePath(fullPath: MSPyBentley.WString, relativeFileName: str, basePath: str) -> BentleyStatus:
         """
         Generates a fullpath by resolving relativeFileName relative to
         basePath.
         
-        Parameter ``fullPath``:
-        OUT the full path resolved from the inputs.
+        :param fullPath:
+        (output) the full path resolved from the inputs.
         
-        Parameter ``relativeFileName``:
-        IN the relative file name to resolve.
+        :param relativeFileName:
+        (input) the relative file name to resolve.
         
-        Parameter ``basePath``:
-        IN used as a root for the expansion. @Return non-zero error status
+        :param basePath:
+        (input) used as a root for the expansion. @Return non-zero error status
         if not successful @Remarks This function only performs a string
         manipulation. It does not require or make any use of an actual
         file.
@@ -1982,13 +1982,13 @@ class BeFileName:
         """
         Set the read-only status of an existing file
         
-        Parameter ``fileName``:
+        :param fileName:
         The name of an existing file.
         
-        Parameter ``readOnly``:
+        :param readOnly:
         the desired read-only status
         
-        Returns:
+        :returns:
         BeFileNameStatus.Success if the operation was successful or non-
         zero if not
         """
@@ -1998,7 +1998,7 @@ class BeFileName:
         """
         Change the value of this BeFileName.
         
-        Parameter ``name``:
+        :param name:
         The new value for this BeFileName. If NULL, the value is cleared.
         """
         ...
@@ -2098,8 +2098,8 @@ class BeFileName:
         3. __init__(self: MSPyBentley.BeFileName, mask: MSPyBentley.BeFileName.FileNameParts, fullName: str) -> None
         
         Construct a BeFileName from parts of another full filename. Only the parts of the name where the corresponding argument is true are copied.
-        @param in  mask     Mask of the parts of fullName that will used to construct this BeFileName
-        @param in  fullName The full pathname from which this BeFileName is to be constructed.
+        @param in mask Mask of the parts of fullName that will used to construct this BeFileName
+        @param in fullName The full pathname from which this BeFileName is to be constructed.
         
         4. __init__(self: MSPyBentley.BeFileName, dev: str, dir: str, name: str, ext: str) -> None
         
@@ -2128,13 +2128,13 @@ class BeFileName:
         """
         Get a substring.
         
-        Parameter ``__pos``:
+        :param __pos:
         Index of first character (default 0).
         
-        Parameter ``__n``:
+        :param __n:
         Number of characters in substring (default remainder).
         
-        Returns:
+        :returns:
         The new string.
         
         Throws:
@@ -2343,16 +2343,16 @@ class BeFileStatus:
     def value(arg0: MSPyBentley.BeFileStatus) -> int:
         ...
     
-def BeGetComputerName(arg0: MSPyBentley.WString) -> Bentley.BentleyStatus:
+def BeGetComputerName(arg0: MSPyBentley.WString) -> BentleyStatus:
     ...
 
-def BeGetComputerNameA(arg0: MSPyBentley.AString) -> Bentley.BentleyStatus:
+def BeGetComputerNameA(arg0: MSPyBentley.AString) -> BentleyStatus:
     ...
 
-def BeGetUserName(arg0: MSPyBentley.WString) -> Bentley.BentleyStatus:
+def BeGetUserName(arg0: MSPyBentley.WString) -> BentleyStatus:
     ...
 
-def BeGetUserNameA(arg0: MSPyBentley.AString) -> Bentley.BentleyStatus:
+def BeGetUserNameA(arg0: MSPyBentley.AString) -> BentleyStatus:
     ...
 
 class BeStringUtilities:
@@ -2368,38 +2368,38 @@ class BeStringUtilities:
         Formats an unsigned 64-bit integer using the same options supported by
         printf's " % x " and " % X " specifiers.
         
-        Parameter ``dest``:
+        :param dest:
         The buffer which will hold the string representation of the
         integer. Must not be NULL.
         
-        Parameter ``numCharsInBuffer``:
+        :param numCharsInBuffer:
         The maximum number of characters which can be written to *dest,*
         including the null terminator. Must be at least 1.
         
-        Parameter ``val``:
+        :param val:
         The value to format
         
-        Parameter ``opts``:
+        :param opts:
         Flags indicating how formatting should be applied
         
-        Parameter ``width``:
+        :param width:
         The minimum number of characters in the formatted string.
         Additional characters will be added according to *opts.* Width >
         18 will be truncated to 18.
         
-        Parameter ``precision``:
+        :param precision:
         The minimum number of digits in the formatted string. Leading
         zeros will be prepended to match the precision. Precision> 16
         will be truncated to 16.
         
-        Returns:
+        :returns:
         Returns the number of characters written to *dest,* not including
         the null terminator
         
         Remark:
         s If the length of the formatted string exceeds
         *numCharsInBuffer,* the string is truncated (i.e.,
-        dest\[numCharsInBuffer-1\] = 0;)
+        dest\\[numCharsInBuffer-1\\] = 0;)
         
         Remark:
         s This method is provided to produce the same hexadecimal
@@ -2419,13 +2419,13 @@ class BeStringUtilities:
         Joins a list of strings into a single string, optionally separated by
         a delimiter.
         
-        Parameter ``strings``:
+        :param strings:
         The list of strings to join
         
-        Parameter ``delimiter``:
+        :param delimiter:
         The delimiter to be inserted between each string
         
-        Returns:
+        :returns:
         Returns a string comprised of all strings in the list in input
         order, separated by the supplied delimiter.
         """
@@ -2438,7 +2438,7 @@ class BeStringUtilities:
         alphabetical sort that also takes numbers into account, such that
         " file9 " will come before " file11 " in the sort order (even though
         alphabetically 1 is before 9). This method always ignores case.
-        param in  pszName1 IN first string param in  pszName2 IN second string
+        param in pszName1 (input) first string param in pszName2 (input) second string
         return 0 if strings are equal,<0 if pszName1 is less than pszName2,
         else> 0
         """
@@ -2453,13 +2453,13 @@ class BeStringUtilities:
         based on whitespace and does not tokenize within double-quoted
         substrings.
         
-        Parameter ``subStrings``:
+        :param subStrings:
         The resulting sub strings will be added to this collection
         
-        Parameter ``inString``:
+        :param inString:
         The string to tokenize; cannot be NULL or empty
         
-        Parameter ``auxDelimiters``:
+        :param auxDelimiters:
         (optional) Each character in the string Will be used as a
         delimiter in addition to whitespace.
         """
@@ -2470,10 +2470,10 @@ class BeStringUtilities:
         """
         Parses a string containing an integer number in decimal format
         
-        Parameter ``value``:
+        :param value:
         The resulting integer number
         
-        Parameter ``string``:
+        :param string:
         A string representation of a decimal value.
         
         Remark:
@@ -2495,13 +2495,13 @@ class BeStringUtilities:
         WString for each token into the provided collection. This essentially
         wraps wcstok for more convenient access.
         
-        Parameter ``str``:
+        :param str:
         The string to tokenize; cannot be NULL or empty
         
-        Parameter ``delimiters``:
+        :param delimiters:
         One or more delimiters; cannot be NULL or empty
         
-        Parameter ``tokens``:
+        :param tokens:
         One or more tokens
         
         2. Split(str: MSPyBentley.WString, delimiters: MSPyBentley.WString, escapeChars: MSPyBentley.WString, tokens: MSPyBentley.WStringArray) -> None
@@ -2510,800 +2510,24 @@ class BeStringUtilities:
         WString for each token into the provided collection. This essentially
         wraps wcstok for more convenient access.
         
-        Parameter ``str``:
+        :param str:
         The string to tokenize; cannot be NULL or empty
         
-        Parameter ``delimiters``:
+        :param delimiters:
         One or more delimiters; cannot be NULL or empty
         
-        Parameter ``tokens``:
+        :param tokens:
         One or more tokens
         """
         ...
     
     @staticmethod
-    def WCharToUtf8(outStr: MSPyBentley.Utf8String, inStr: str, _count: int = 18446744073709551615) -> Bentley.BentleyStatus:
+    def WCharToUtf8(outStr: MSPyBentley.Utf8String, inStr: str, _count: int = 18446744073709551615) -> BentleyStatus:
         ...
     
     def __init__(*args, **kwargs):
         """
         Initialize self.  See help(type(self)) for accurate signature.
-        """
-        ...
-    
-class BeTextFile:
-    """
-    Reads and Writes Text Files regardless of whether they are encoded on disk as locale-encoded ASCII, UTF8, or UTF16.
-    """
-
-    def Close(self: MSPyBentley.BeTextFile) -> None:
-        """
-        Closes the text file.
-        
-        Remark:
-        s This call is not usually necessary, as the file is closed
-        automatically when the reference-counted pointer is released.
-        """
-        ...
-    
-    def GetChar(self: MSPyBentley.BeTextFile) -> str:
-        """
-        Reads the next character from the file.
-        
-        Returns:
-        The next character or WEOF.
-        """
-        ...
-    
-    def GetLine(self: MSPyBentley.BeTextFile, textLine: MSPyBentley.WString) -> MSPyBentley.TextFileReadStatus:
-        """
-        Reads a line from the file.
-        
-        Parameter ``textLine``:
-        The buffer to read the line into.
-        
-        Remark:
-        s The line is always converted to Unicode in UTF-16.
-        
-        Remark:
-        s The handling of newlines is controlled by the options when
-        opening the file.
-        
-        Returns:
-        TextFileReadStatus.Success if the line was read successfully;
-        otherwise TextFileReadStatus.Eof or an error code.
-        """
-        ...
-    
-    def GetPointer(self: MSPyBentley.BeTextFile) -> tuple:
-        """
-        Gets the file read/write position.
-        
-        Parameter ``position``:
-        the current read/write position
-        
-        Returns:
-        BeFileStatus.Success if the operation was successful or non-zero
-        if it failed.
-        """
-        ...
-    
-    @staticmethod
-    def Open(*args, **kwargs):
-        """
-        Open(fullFileSpec: str, openType: MSPyBentley.TextFileOpenType, options: MSPyBentley.TextFileOptions, encoding: MSPyBentley.TextFileEncoding = <TextFileEncoding.eCurrentLocale: 0>) -> tuple
-        
-        Opens a text file for reading or writing.
-        
-        Parameter ``status``:
-        BeFileStatus.Success on success or the file open error.
-        
-        Parameter ``fullFileSpec``:
-        Name of the file to open.
-        
-        Parameter ``openType``:
-        Whether to open the file for read, write or append.
-        
-        Parameter ``options``:
-        Options controlling how newline characters are treated on read.
-        
-        Parameter ``encoding``:
-        Encoding for the file; use TextFileEncoding.CurrentLocale for
-        ASCII. This parameter is used only when openType is
-        TextFileOpenType.Write.
-        
-        Remark:
-        s When opened for read or append, the text file encoding will be
-        read from the beginning of the file (if it is there) and the
-        contents will be read and converted from its encoding to Unicode.
-        
-        Remark:
-        s When opened for write, the *encoding* argument indicates how the
-        output is to be written. If there is an existing file with the
-        same name, that file is replaced by a new file.
-        
-        Returns:
-        A pointer to the file. If status is not BeFileStatus.Success then
-        the pointer will fail the IsValid() check.
-        """
-        ...
-    
-    def PutLine(self: MSPyBentley.BeTextFile, textLine: str, addCR: bool) -> MSPyBentley.TextFileWriteStatus:
-        """
-        Writes a line to the file.
-        
-        Parameter ``textLine``:
-        The buffer to read the line into.
-        
-        Parameter ``addCarriageReturn``:
-        If true, appends a newline character to the input *textLine.*
-        
-        Remark:
-        s The data will be converted to the encoding specified when
-        opening the file.
-        
-        Returns:
-        TextFileWriteStatus.Success if the line was written successfully;
-        otherwise an error code.
-        """
-        ...
-    
-    def Rewind(self: MSPyBentley.BeTextFile) -> MSPyBentley.BeFileStatus:
-        """
-        Rewinds the file and prepare for reading from the beginning of the
-        text data (i.e., just past the encoding signature, if there is one).
-        
-        Returns:
-        BeFileStatus.Success if the operation was successful or non-zero
-        if it failed.
-        """
-        ...
-    
-    def SetPointer(self: MSPyBentley.BeTextFile, position: int, origin: MSPyBentley.BeFileSeekOrigin) -> MSPyBentley.BeFileStatus:
-        """
-        Moves the file read/write position
-        
-        Parameter ``position``:
-        The new read/write position.
-        
-        Parameter ``origin``:
-        The origin mode for the move.
-        
-        Returns:
-        BeFileStatus.Success if the operation was successful or non-zero
-        if it failed.
-        
-        Remark:
-        s Use Rewind to go to the beginning of rthe text data (rather than
-        SetPointer (0, BeFileSeekOrigin.Begin) because Rewind accounts
-        for the encoding signature that might be at the beginning of the
-        file.
-        """
-        ...
-    
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
-        ...
-    
-class BoolArray:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.BoolArray) -> None
-        
-        2. __init__(self: MSPyBentley.BoolArray, arg0: MSPyBentley.BoolArray) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.BoolArray, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.BoolArray, x: bool) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.BoolArray) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.BoolArray, x: bool) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.BoolArray, L: MSPyBentley.BoolArray) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.BoolArray, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.BoolArray, i: int, x: bool) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.BoolArray) -> bool
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.BoolArray, i: int) -> bool
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.BoolArray, x: bool) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class DoubleArray:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.DoubleArray) -> None
-        
-        2. __init__(self: MSPyBentley.DoubleArray, arg0: MSPyBentley.DoubleArray) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.DoubleArray, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.DoubleArray, x: float) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.DoubleArray) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.DoubleArray, x: float) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.DoubleArray, L: MSPyBentley.DoubleArray) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.DoubleArray, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.DoubleArray, i: int, x: float) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.DoubleArray) -> float
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.DoubleArray, i: int) -> float
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.DoubleArray, x: float) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class DoubleFormatter:
-    """
-    None
-    """
-
-    def Clone(self: MSPyBentley.DoubleFormatter) -> MSPyBentley.DoubleFormatter:
-        """
-        Construct a formatter which is a duplicate of an existing formatter.
-        """
-        ...
-    
-    @staticmethod
-    def Create() -> MSPyBentley.DoubleFormatter:
-        """
-        Construct a formatter with default settings.
-        """
-        ...
-    
-    @property
-    def DecimalSeparator(arg0: MSPyBentley.DoubleFormatterBase) -> str:
-        ...
-    @DecimalSeparator.setter
-    def DecimalSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: str) -> None:
-        ...
-    
-    def GetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase) -> str:
-        """
-        Get the decimal separator used by this formatter.
-        """
-        ...
-    
-    def GetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> bool:
-        """
-        Get the value indicating if the thousands separator is inserted by
-        this formatter.
-        """
-        ...
-    
-    def GetLeadingZero(self: MSPyBentley.DoubleFormatterBase) -> bool:
-        """
-        Test if this formatter will include a leading zero.  A leading zero is only
-        included for values less than 1.0.  Ex. "0.5" vs. ".5"
-        """
-        ...
-    
-    def GetPrecision(self: MSPyBentley.DoubleFormatterBase) -> Bentley.PrecisionFormat:
-        """
-        Get the precision used by this formatter.
-        """
-        ...
-    
-    def GetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> str:
-        """
-        Get the thousands separator used by this formatter.
-        """
-        ...
-    
-    def GetTrailingZeros(self: MSPyBentley.DoubleFormatterBase) -> bool:
-        """
-        Test if this formatter will include trailing zeros.  Trailing zeros are only included
-        up to the requested precision.  Ex. "30.500" vs. "30.5"
-        """
-        ...
-    
-    @staticmethod
-    def GetTypeFromPrecision(format: Bentley.PrecisionFormat) -> Bentley.PrecisionType:
-        """
-        Categorize a precision value.
-        """
-        ...
-    
-    @property
-    def InsertThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase) -> bool:
-        ...
-    @InsertThousandsSeparator.setter
-    def InsertThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: bool) -> None:
-        ...
-    
-    @property
-    def LeadingZero(arg0: MSPyBentley.DoubleFormatterBase) -> bool:
-        ...
-    @LeadingZero.setter
-    def LeadingZero(arg0: MSPyBentley.DoubleFormatterBase, arg1: bool) -> None:
-        ...
-    
-    @property
-    def Precision(arg0: MSPyBentley.DoubleFormatterBase) -> Bentley.PrecisionFormat:
-        ...
-    @Precision.setter
-    def Precision(arg0: MSPyBentley.DoubleFormatterBase, arg1: Bentley.PrecisionFormat) -> None:
-        ...
-    
-    def SetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None:
-        """
-        Set the formatter's decimal separator.
-        """
-        ...
-    
-    def SetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
-        """
-        Specify if the thousands separator should be inserted or not.
-        """
-        ...
-    
-    def SetLeadingZero(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
-        """
-        Set the formatter's leading zero behavior. A leading zero is only
-        included for values less than 1.0. Ex. " 0.5 " vs. " .5 "
-        
-        Parameter ``newVal``:
-        pass true to include a leading zero for values less than 1.0
-        """
-        ...
-    
-    def SetPrecision(self: MSPyBentley.DoubleFormatterBase, newVal: Bentley.PrecisionFormat) -> None:
-        """
-        Set the formatter's precision.
-        """
-        ...
-    
-    def SetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None:
-        """
-        Set the formatter's thousands separator.
-        """
-        ...
-    
-    def SetTrailingZeros(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
-        """
-        Set the formatter's trailing zeros behavior.  Trailing zeros are only included
-        up to the requested precision.  Ex. "30.500" vs. "30.5"
-        @param in  newVal pass true to zero pad the output string to the requested precision.
-        """
-        ...
-    
-    @property
-    def ThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase) -> str:
-        ...
-    @ThousandsSeparator.setter
-    def ThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: str) -> None:
-        ...
-    
-    def ToString(self: MSPyBentley.DoubleFormatter, value: float) -> MSPyBentley.WString:
-        """
-        Use the settings defined in this formatter to convert a double value
-        to a string.
-        
-        Parameter ``value``:
-        value to format.
-        """
-        ...
-    
-    @property
-    def TrailingZeros(arg0: MSPyBentley.DoubleFormatterBase) -> bool:
-        ...
-    @TrailingZeros.setter
-    def TrailingZeros(arg0: MSPyBentley.DoubleFormatterBase, arg1: bool) -> None:
-        ...
-    
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
-        ...
-    
-class DoubleFormatterBase:
-    """
-    None
-    """
-
-    @property
-    def DecimalSeparator(arg0: MSPyBentley.DoubleFormatterBase) -> str:
-        ...
-    @DecimalSeparator.setter
-    def DecimalSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: str) -> None:
-        ...
-    
-    def GetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase) -> str:
-        """
-        Get the decimal separator used by this formatter.
-        """
-        ...
-    
-    def GetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> bool:
-        """
-        Get the value indicating if the thousands separator is inserted by
-        this formatter.
-        """
-        ...
-    
-    def GetLeadingZero(self: MSPyBentley.DoubleFormatterBase) -> bool:
-        """
-        Test if this formatter will include a leading zero.  A leading zero is only
-        included for values less than 1.0.  Ex. "0.5" vs. ".5"
-        """
-        ...
-    
-    def GetPrecision(self: MSPyBentley.DoubleFormatterBase) -> Bentley.PrecisionFormat:
-        """
-        Get the precision used by this formatter.
-        """
-        ...
-    
-    def GetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase) -> str:
-        """
-        Get the thousands separator used by this formatter.
-        """
-        ...
-    
-    def GetTrailingZeros(self: MSPyBentley.DoubleFormatterBase) -> bool:
-        """
-        Test if this formatter will include trailing zeros.  Trailing zeros are only included
-        up to the requested precision.  Ex. "30.500" vs. "30.5"
-        """
-        ...
-    
-    @property
-    def InsertThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase) -> bool:
-        ...
-    @InsertThousandsSeparator.setter
-    def InsertThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: bool) -> None:
-        ...
-    
-    @property
-    def LeadingZero(arg0: MSPyBentley.DoubleFormatterBase) -> bool:
-        ...
-    @LeadingZero.setter
-    def LeadingZero(arg0: MSPyBentley.DoubleFormatterBase, arg1: bool) -> None:
-        ...
-    
-    @property
-    def Precision(arg0: MSPyBentley.DoubleFormatterBase) -> Bentley.PrecisionFormat:
-        ...
-    @Precision.setter
-    def Precision(arg0: MSPyBentley.DoubleFormatterBase, arg1: Bentley.PrecisionFormat) -> None:
-        ...
-    
-    def SetDecimalSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None:
-        """
-        Set the formatter's decimal separator.
-        """
-        ...
-    
-    def SetInsertThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
-        """
-        Specify if the thousands separator should be inserted or not.
-        """
-        ...
-    
-    def SetLeadingZero(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
-        """
-        Set the formatter's leading zero behavior. A leading zero is only
-        included for values less than 1.0. Ex. " 0.5 " vs. " .5 "
-        
-        Parameter ``newVal``:
-        pass true to include a leading zero for values less than 1.0
-        """
-        ...
-    
-    def SetPrecision(self: MSPyBentley.DoubleFormatterBase, newVal: Bentley.PrecisionFormat) -> None:
-        """
-        Set the formatter's precision.
-        """
-        ...
-    
-    def SetThousandsSeparator(self: MSPyBentley.DoubleFormatterBase, newVal: str) -> None:
-        """
-        Set the formatter's thousands separator.
-        """
-        ...
-    
-    def SetTrailingZeros(self: MSPyBentley.DoubleFormatterBase, newVal: bool) -> None:
-        """
-        Set the formatter's trailing zeros behavior.  Trailing zeros are only included
-        up to the requested precision.  Ex. "30.500" vs. "30.5"
-        @param in  newVal pass true to zero pad the output string to the requested precision.
-        """
-        ...
-    
-    @property
-    def ThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase) -> str:
-        ...
-    @ThousandsSeparator.setter
-    def ThousandsSeparator(arg0: MSPyBentley.DoubleFormatterBase, arg1: str) -> None:
-        ...
-    
-    @property
-    def TrailingZeros(arg0: MSPyBentley.DoubleFormatterBase) -> bool:
-        ...
-    @TrailingZeros.setter
-    def TrailingZeros(arg0: MSPyBentley.DoubleFormatterBase, arg1: bool) -> None:
-        ...
-    
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
-        ...
-    
-class DsigAnnotationData:
-    """
-    Signature annotation data.
-    @Remarks Annotation data is not certified> by any outside party.
-    The identity and trustworthiness of the signer should be based solely on the certificate stored in the signature.
-    """
-
-    @property
-    def Location(arg0: MSPyBentley.DsigAnnotationData) -> str:
-        ...
-    @Location.setter
-    def Location(arg0: MSPyBentley.DsigAnnotationData, arg1: str) -> None:
-        ...
-    
-    @property
-    def Name(arg0: MSPyBentley.DsigAnnotationData) -> str:
-        ...
-    @Name.setter
-    def Name(arg0: MSPyBentley.DsigAnnotationData, arg1: str) -> None:
-        ...
-    
-    @property
-    def Purpose(arg0: MSPyBentley.DsigAnnotationData) -> str:
-        ...
-    @Purpose.setter
-    def Purpose(arg0: MSPyBentley.DsigAnnotationData, arg1: str) -> None:
-        ...
-    
-    def __init__(self: MSPyBentley.DsigAnnotationData) -> None:
-        ...
-    
-    @property
-    def expiryDate(self: MSPyBentley.DsigAnnotationData) -> float:
-        ...
-    @expiryDate.setter
-    def expiryDate(self: MSPyBentley.DsigAnnotationData, arg0: float) -> None:
-        ...
-    
-    @property
-    def signDate(self: MSPyBentley.DsigAnnotationData) -> float:
-        ...
-    @signDate.setter
-    def signDate(self: MSPyBentley.DsigAnnotationData, arg0: float) -> None:
-        ...
-    
-class DsigQuery:
-    """
-    None
-    """
-
-    @property
-    def CommonName(arg0: MSPyBentley.DsigQuery) -> str:
-        ...
-    
-    @property
-    def Email(arg0: MSPyBentley.DsigQuery) -> str:
-        ...
-    
-    def GetAnnotationData(self: MSPyBentley.DsigQuery) -> MSPyBentley.DsigAnnotationData:
-        ...
-    
-    def GetCertificate(self: MSPyBentley.DsigQuery, x509Cert: MSPyBentley.UInt8Array) -> int:
-        ...
-    
-    def GetCertificateChain(self: MSPyBentley.DsigQuery, pkcs7: MSPyBentley.UInt8Array) -> int:
-        ...
-    
-    def GetCommonName(self: MSPyBentley.DsigQuery) -> str:
-        ...
-    
-    def GetEmail(self: MSPyBentley.DsigQuery) -> str:
-        ...
-    
-    def GetPublicKey(self: MSPyBentley.DsigQuery, x509PublicKeyInfo: MSPyBentley.UInt8Array) -> int:
-        ...
-    
-    def IncludesEntireFile(self: MSPyBentley.DsigQuery) -> bool:
-        ...
-    
-    def IncludesReferences(self: MSPyBentley.DsigQuery) -> bool:
-        ...
-    
-    def IsValid(self: MSPyBentley.DsigQuery) -> bool:
-        ...
-    
-    def __init__(*args, **kwargs):
-        """
-        Initialize self.  See help(type(self)) for accurate signature.
-        """
-        ...
-    
-class FloatArray:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.FloatArray) -> None
-        
-        2. __init__(self: MSPyBentley.FloatArray, arg0: MSPyBentley.FloatArray) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.FloatArray, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.FloatArray, x: float) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.FloatArray) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.FloatArray, x: float) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.FloatArray, L: MSPyBentley.FloatArray) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.FloatArray, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.FloatArray, i: int, x: float) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.FloatArray) -> float
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.FloatArray, i: int) -> float
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.FloatArray, x: float) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
         """
         ...
     
@@ -3358,388 +2582,31 @@ class HexFormatOptions:
     def value(arg0: MSPyBentley.HexFormatOptions) -> int:
         ...
     
-class Int16Array:
+class IntIntMap:
+    """
+    None
+    """
+
+    def __init__(self: MSPyBentley.IntIntMap) -> None:
+        ...
+    
+    def items(self: MSPyBentley.IntIntMap) -> MSPyBentley.ItemsView[IntIntMap]:
+        ...
+    
+    def keys(self: MSPyBentley.IntIntMap) -> MSPyBentley.KeysView[IntIntMap]:
+        ...
+    
+    def values(self: MSPyBentley.IntIntMap) -> MSPyBentley.ValuesView[IntIntMap]:
+        ...
+    
+class ItemsView[IntIntMap]:
     """
     None
     """
 
     def __init__(*args, **kwargs):
         """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.Int16Array) -> None
-        
-        2. __init__(self: MSPyBentley.Int16Array, arg0: MSPyBentley.Int16Array) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.Int16Array, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.Int16Array, x: int) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.Int16Array) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.Int16Array, x: int) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.Int16Array, L: MSPyBentley.Int16Array) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.Int16Array, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.Int16Array, i: int, x: int) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.Int16Array) -> int
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.Int16Array, i: int) -> int
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.Int16Array, x: int) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class Int32Array:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.Int32Array) -> None
-        
-        2. __init__(self: MSPyBentley.Int32Array, arg0: MSPyBentley.Int32Array) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.Int32Array, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.Int32Array, x: int) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.Int32Array) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.Int32Array, x: int) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.Int32Array, L: MSPyBentley.Int32Array) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.Int32Array, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.Int32Array, i: int, x: int) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.Int32Array) -> int
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.Int32Array, i: int) -> int
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.Int32Array, x: int) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class Int64Array:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.Int64Array) -> None
-        
-        2. __init__(self: MSPyBentley.Int64Array, arg0: MSPyBentley.Int64Array) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.Int64Array, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.Int64Array, x: int) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.Int64Array) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.Int64Array, x: int) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.Int64Array, L: MSPyBentley.Int64Array) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.Int64Array, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.Int64Array, i: int, x: int) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.Int64Array) -> int
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.Int64Array, i: int) -> int
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.Int64Array, x: int) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class Int64VecArray:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.Int64VecArray) -> None
-        
-        2. __init__(self: MSPyBentley.Int64VecArray, arg0: MSPyBentley.Int64VecArray) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.Int64VecArray, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.Int64VecArray) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.Int64VecArray, L: MSPyBentley.Int64VecArray) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.Int64VecArray, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.Int64VecArray, i: int, x: MSPyBentley.Int64Array) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.Int64VecArray) -> MSPyBentley.Int64Array
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.Int64VecArray, i: int) -> MSPyBentley.Int64Array
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.Int64VecArray, x: MSPyBentley.Int64Array) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class Int8Array:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.Int8Array) -> None
-        
-        2. __init__(self: MSPyBentley.Int8Array, arg0: MSPyBentley.Int8Array) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.Int8Array, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.Int8Array, x: int) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.Int8Array) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.Int8Array, x: int) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.Int8Array, L: MSPyBentley.Int8Array) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.Int8Array, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.Int8Array, i: int, x: int) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.Int8Array) -> int
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.Int8Array, i: int) -> int
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.Int8Array, x: int) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
+        Initialize self.  See help(type(self)) for accurate signature.
         """
         ...
     
@@ -3755,6 +2622,17 @@ class ItemsView[WStringWCharMap]:
         ...
     
 class ItemsView[WStringWStringMap]:
+    """
+    None
+    """
+
+    def __init__(*args, **kwargs):
+        """
+        Initialize self.  See help(type(self)) for accurate signature.
+        """
+        ...
+    
+class KeysView[IntIntMap]:
     """
     None
     """
@@ -4198,531 +3076,6 @@ class PyNameSpaceManager:
     
     eBentley_Geometry: NameSpaceID
     
-class TextFileEncoding:
-    """
-    Members:
-    
-    eCurrentLocale
-    
-    eUtf8
-    
-    eUtf16
-    """
-
-    def __init__(self: MSPyBentley.TextFileEncoding, value: int) -> None:
-        ...
-    
-    eCurrentLocale: TextFileEncoding
-    
-    eUtf16: TextFileEncoding
-    
-    eUtf8: TextFileEncoding
-    
-    @property
-    def name(self: handle) -> str:
-        ...
-    
-    @property
-    def value(arg0: MSPyBentley.TextFileEncoding) -> int:
-        ...
-    
-class TextFileOpenType:
-    """
-    Members:
-    
-    eRead
-    
-    eWrite
-    
-    eAppend
-    """
-
-    def __init__(self: MSPyBentley.TextFileOpenType, value: int) -> None:
-        ...
-    
-    eAppend: TextFileOpenType
-    
-    eRead: TextFileOpenType
-    
-    eWrite: TextFileOpenType
-    
-    @property
-    def name(self: handle) -> str:
-        ...
-    
-    @property
-    def value(arg0: MSPyBentley.TextFileOpenType) -> int:
-        ...
-    
-class TextFileOptions:
-    """
-    Members:
-    
-    eNone_
-    
-    eKeepNewLine
-    
-    eNewLinesToSpace
-    """
-
-    def __init__(self: MSPyBentley.TextFileOptions, value: int) -> None:
-        ...
-    
-    eKeepNewLine: TextFileOptions
-    
-    eNewLinesToSpace: TextFileOptions
-    
-    eNone_: TextFileOptions
-    
-    @property
-    def name(self: handle) -> str:
-        ...
-    
-    @property
-    def value(arg0: MSPyBentley.TextFileOptions) -> int:
-        ...
-    
-class TextFileReadStatus:
-    """
-    Members:
-    
-    eSuccess
-    
-    eEof
-    
-    eBadParameter
-    """
-
-    def __init__(self: MSPyBentley.TextFileReadStatus, value: int) -> None:
-        ...
-    
-    eBadParameter: TextFileReadStatus
-    
-    eEof: TextFileReadStatus
-    
-    eSuccess: TextFileReadStatus
-    
-    @property
-    def name(self: handle) -> str:
-        ...
-    
-    @property
-    def value(arg0: MSPyBentley.TextFileReadStatus) -> int:
-        ...
-    
-class TextFileWriteStatus:
-    """
-    Members:
-    
-    eSuccess
-    
-    eError
-    
-    eBadParameter
-    """
-
-    def __init__(self: MSPyBentley.TextFileWriteStatus, value: int) -> None:
-        ...
-    
-    eBadParameter: TextFileWriteStatus
-    
-    eError: TextFileWriteStatus
-    
-    eSuccess: TextFileWriteStatus
-    
-    @property
-    def name(self: handle) -> str:
-        ...
-    
-    @property
-    def value(arg0: MSPyBentley.TextFileWriteStatus) -> int:
-        ...
-    
-class UInt16Array:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.UInt16Array) -> None
-        
-        2. __init__(self: MSPyBentley.UInt16Array, arg0: MSPyBentley.UInt16Array) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.UInt16Array, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.UInt16Array, x: int) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.UInt16Array) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.UInt16Array, x: int) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.UInt16Array, L: MSPyBentley.UInt16Array) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.UInt16Array, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.UInt16Array, i: int, x: int) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.UInt16Array) -> int
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.UInt16Array, i: int) -> int
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.UInt16Array, x: int) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class UInt32Array:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.UInt32Array) -> None
-        
-        2. __init__(self: MSPyBentley.UInt32Array, arg0: MSPyBentley.UInt32Array) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.UInt32Array, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.UInt32Array, x: int) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.UInt32Array) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.UInt32Array, x: int) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.UInt32Array, L: MSPyBentley.UInt32Array) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.UInt32Array, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.UInt32Array, i: int, x: int) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.UInt32Array) -> int
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.UInt32Array, i: int) -> int
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.UInt32Array, x: int) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class UInt64Array:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.UInt64Array) -> None
-        
-        2. __init__(self: MSPyBentley.UInt64Array, arg0: MSPyBentley.UInt64Array) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.UInt64Array, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.UInt64Array, x: int) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.UInt64Array) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.UInt64Array, x: int) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.UInt64Array, L: MSPyBentley.UInt64Array) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.UInt64Array, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.UInt64Array, i: int, x: int) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.UInt64Array) -> int
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.UInt64Array, i: int) -> int
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.UInt64Array, x: int) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class UInt64VecArray:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.UInt64VecArray) -> None
-        
-        2. __init__(self: MSPyBentley.UInt64VecArray, arg0: MSPyBentley.UInt64VecArray) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.UInt64VecArray, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.UInt64VecArray) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.UInt64VecArray, L: MSPyBentley.UInt64VecArray) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.UInt64VecArray, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.UInt64VecArray, i: int, x: MSPyBentley.UInt64Array) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.UInt64VecArray) -> MSPyBentley.UInt64Array
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.UInt64VecArray, i: int) -> MSPyBentley.UInt64Array
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.UInt64VecArray, x: MSPyBentley.UInt64Array) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
-class UInt8Array:
-    """
-    None
-    """
-
-    def __init__(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. __init__(self: MSPyBentley.UInt8Array) -> None
-        
-        2. __init__(self: MSPyBentley.UInt8Array, arg0: MSPyBentley.UInt8Array) -> None
-        
-        Copy constructor
-        
-        3. __init__(self: MSPyBentley.UInt8Array, arg0: Iterable) -> None
-        """
-        ...
-    
-    def append(self: MSPyBentley.UInt8Array, x: int) -> None:
-        """
-        Add an item to the end of the list
-        """
-        ...
-    
-    def clear(self: MSPyBentley.UInt8Array) -> None:
-        """
-        Clear the contents
-        """
-        ...
-    
-    def count(self: MSPyBentley.UInt8Array, x: int) -> int:
-        """
-        Return the number of times ``x`` appears in the list
-        """
-        ...
-    
-    def extend(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. extend(self: MSPyBentley.UInt8Array, L: MSPyBentley.UInt8Array) -> None
-        
-        Extend the list by appending all the items in the given list
-        
-        2. extend(self: MSPyBentley.UInt8Array, L: Iterable) -> None
-        
-        Extend the list by appending all the items in the given list
-        """
-        ...
-    
-    def insert(self: MSPyBentley.UInt8Array, i: int, x: int) -> None:
-        """
-        Insert an item at a given position.
-        """
-        ...
-    
-    def pop(*args, **kwargs):
-        """
-        Overloaded function.
-        
-        1. pop(self: MSPyBentley.UInt8Array) -> int
-        
-        Remove and return the last item
-        
-        2. pop(self: MSPyBentley.UInt8Array, i: int) -> int
-        
-        Remove and return the item at index ``i``
-        """
-        ...
-    
-    def remove(self: MSPyBentley.UInt8Array, x: int) -> None:
-        """
-        Remove the first item from the list whose value is x. It is an error if there is no such item.
-        """
-        ...
-    
 class Utf8String:
     """
     Contains a UTF-8 encoded string. This class has many of the capabilities of a python string
@@ -4752,11 +3105,11 @@ class Utf8String:
         
         Perform a (case-sensitive) comparison.
         
-        Returns:
+        :returns:
         0 if the strings are equal, or -1 or 1 if this string should come
         before or after *other.*
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
         2. CompareTo(self: MSPyBentley.Utf8String, other: MSPyBentley.Utf8String) -> int
@@ -4780,11 +3133,11 @@ class Utf8String:
         
         Perform a case-insensitive comparison.
         
-        Returns:
+        :returns:
         0 if the strings are equal (ignoring case), or -1 or 1 if this
         string should come before or after *other.*
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
         2. CompareToI(self: MSPyBentley.Utf8String, other: MSPyBentley.Utf8String) -> int
@@ -4808,10 +3161,10 @@ class Utf8String:
         
         Test for equality with another string.
         
-        Returns:
+        :returns:
         true if the strings are equal.
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
         2. Equals(self: MSPyBentley.Utf8String, other: MSPyBentley.Utf8String) -> bool
@@ -4834,10 +3187,10 @@ class Utf8String:
         
         Test for equality with another string, ignoring case.
         
-        Returns:
+        :returns:
         true if the strings are equal (ignoring case).
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
         2. EqualsI(self: MSPyBentley.Utf8String, other: MSPyBentley.Utf8String) -> bool
@@ -4856,16 +3209,16 @@ class Utf8String:
         """
         Reads the next token delimited by any character in *delims* or \0.
         
-        Parameter ``next``:
+        :param next:
         set to next token, if found, or cleared if not
         
-        Parameter ``delims``:
+        :param delims:
         the characters that could delimit the tokens
         
-        Parameter ``offset``:
+        :param offset:
         where to start search
         
-        Returns:
+        :returns:
         1 beyond the end of the current token or npos if token not found
         Example
         
@@ -5074,6 +3427,17 @@ class Utf8StringArray:
         """
         ...
     
+class ValuesView[IntIntMap]:
+    """
+    None
+    """
+
+    def __init__(*args, **kwargs):
+        """
+        Initialize self.  See help(type(self)) for accurate signature.
+        """
+        ...
+    
 class ValuesView[WStringWCharMap]:
     """
     None
@@ -5175,7 +3539,7 @@ class WCharArray:
     
 class WString:
     """
-    A string class that has many of the same capabilities as std.string,
+    A string class that has many of the same capabilities as std::string,
     plus additional functions such as conversion from UTF-8, UTF-16, and local-encoded strings,
     case-insensitive compare, trimming, padding, and others.
     """
@@ -5211,10 +3575,10 @@ class WString:
         WString internally, so if you are appending a character constant it is
         more efficient to use append (L"string to append").
         
-        Parameter ``in``:
+        :param in:
         The multibyte string
         
-        Returns:
+        :returns:
         Reference to this string.
         """
         ...
@@ -5226,10 +3590,10 @@ class WString:
         Define the contents of this WString from a CharCP using the current
         system locale
         
-        Parameter ``in``:
+        :param in:
         The ASCII string
         
-        Returns:
+        :returns:
         Reference to this string.
         """
         ...
@@ -5246,10 +3610,10 @@ class WString:
         
         Define the contents of this WString from a Utf8CP
         
-        Parameter ``in``:
+        :param in:
         The Utf8 string. May be NULL.
         
-        Returns:
+        :returns:
         Reference to this string.
         """
         ...
@@ -5287,11 +3651,11 @@ class WString:
         
         Perform a (case-sensitive) comparison.
         
-        Returns:
+        :returns:
         0 if the strings are equal, or -1 or 1 if this string should come
         before or after *other.*
         
-        Parameter ``other``:
+        :param other:
         The other string.
         """
         ...
@@ -5315,11 +3679,11 @@ class WString:
         
         Perform a case-insensitive comparison.
         
-        Returns:
+        :returns:
         0 if the strings are equal (ignoring case), or -1 or 1 if this
         string should come before or after *other.*
         
-        Parameter ``other``:
+        :param other:
         The other string.
         """
         ...
@@ -5332,10 +3696,10 @@ class WString:
         
         Test for whether this string contains another string.
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
-        Returns:
+        :returns:
         true if this string contains the other string.
         
         2. Contains(self: MSPyBentley.WString, other: MSPyBentley.WString) -> bool
@@ -5358,10 +3722,10 @@ class WString:
         
         Test for whether this string contains another string, ignoring case.
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
-        Returns:
+        :returns:
         true if this string contains the other string.
         
         2. ContainsI(self: MSPyBentley.WString, other: MSPyBentley.WString) -> bool
@@ -5403,10 +3767,10 @@ class WString:
         
         Test for equality with another string.
         
-        Returns:
+        :returns:
         true if the strings are equal.
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
         2. Equals(self: MSPyBentley.WString, other: MSPyBentley.WString) -> bool
@@ -5429,10 +3793,10 @@ class WString:
         
         Test for equality with another string, ignoring case.
         
-        Returns:
+        :returns:
         true if the strings are equal (ignoring case).
         
-        Parameter ``other``:
+        :param other:
         The other string.
         
         2. EqualsI(self: MSPyBentley.WString, other: MSPyBentley.WString) -> bool
@@ -5504,13 +3868,13 @@ class WString:
         Replace first occurrence of findString with replaceString, ignoring
         case.
         
-        Parameter ``findString``:
+        :param findString:
         The substring to find.
         
-        Parameter ``replaceString``:
+        :param replaceString:
         The replacement string.
         
-        Returns:
+        :returns:
         true is a replacement is made.
         """
         ...
@@ -5584,7 +3948,7 @@ class WString:
         
         Construct a WString from a CharCP using either the current system locale or Utf8
         
-        7. __init__(self: MSPyBentley.WString, in: str, encoding: Bentley.BentleyCharEncoding) -> None
+        7. __init__(self: MSPyBentley.WString, in: str, encoding: BentleyCharEncoding) -> None
         
         Construct a WString from a CharCP string in the specified encoding
         """
@@ -5597,13 +3961,13 @@ class WString:
         """
         Get a substring.
         
-        Parameter ``__pos``:
+        :param __pos:
         Index of first character (default 0).
         
-        Parameter ``__n``:
+        :param __n:
         Number of characters in substring (default remainder).
         
-        Returns:
+        :returns:
         The new string.
         
         Throws:
@@ -5733,11 +4097,7 @@ eAccessViolationError: BeFileStatus
 
 eAlreadyExists: BeFileNameStatus
 
-eAppend: TextFileOpenType
-
 eArabic: LangCodePage
-
-eBadParameter: TextFileWriteStatus
 
 eBaltic: LangCodePage
 
@@ -5752,8 +4112,6 @@ eCantDeleteFile: BeFileNameStatus
 eCentral_European: LangCodePage
 
 eCurrent: BeFileSeekOrigin
-
-eCurrentLocale: TextFileEncoding
 
 eCyrillic: LangCodePage
 
@@ -5780,10 +4138,6 @@ eDecimalWhole: PrecisionFormat
 eDeleteOnClose: BeFileAttributes
 
 eEnd: BeFileSeekOrigin
-
-eEof: TextFileReadStatus
-
-eError: TextFileWriteStatus
 
 eExists: BeFileNameAccess
 
@@ -5849,8 +4203,6 @@ eJapanese: LangCodePage
 
 eJohab: LangCodePage
 
-eKeepNewLine: TextFileOptions
-
 eKorean: LangCodePage
 
 eLatinI: LangCodePage
@@ -5859,11 +4211,7 @@ eLeadingZeros: HexFormatOptions
 
 eLeftJustify: HexFormatOptions
 
-eNewLinesToSpace: TextFileOptions
-
 eNone: HexFormatOptions
-
-eNone_: TextFileOptions
 
 eNormal: BeFileAttributes
 
@@ -5893,7 +4241,7 @@ eOEM_US: LangCodePage
 
 eRandomIO: BeFileAttributes
 
-eRead: TextFileOpenType
+eRead: BeFileNameAccess
 
 eReadError: BeFileStatus
 
@@ -5923,7 +4271,7 @@ eSharingViolationError: BeFileStatus
 
 eSimplified_Chinese: LangCodePage
 
-eSuccess: TextFileWriteStatus
+eSuccess: BeFileNameStatus
 
 eTooManyOpenFilesError: BeFileStatus
 
@@ -5947,11 +4295,7 @@ eUppercase: HexFormatOptions
 
 eUsePrecision: HexFormatOptions
 
-eUtf16: TextFileEncoding
-
-eUtf8: TextFileEncoding
-
 eVietnamese: LangCodePage
 
-eWrite: TextFileOpenType
+eWrite: BeFileNameAccess
 

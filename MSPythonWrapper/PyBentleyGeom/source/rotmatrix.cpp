@@ -14,70 +14,70 @@ static const char * __doc_Bentley_Geom_RotMatrix_HyperbolicColumnOp =R"doc(Apply
 hyperbolic reflection matrix The matrix is an identity except for the
 4 entries R(i0,i0)=R(i1,i1)=secant R(i0,i1)=R(i1,i0)=tangent
 
-Parameter ``[in]``:
+:param (input):
     secant The cosine of reflection.
 
-Parameter ``[in]``:
+:param (input):
     tangent The sine of reflection.
 
-Parameter ``[in]``:
+:param (input):
     i0 The index of the first affected row.
 
-Parameter ``[in]``:
+:param (input):
     i1 The index of the second affected row.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_HyperbolicRowOp =R"doc(Apply a hyperbolic " row operation ", i.e. pre-multiply by a hyperbolic
 reflection matrix The matrix is an identity except for the 4 entries
 R(i0,i0)=R(i1,i1)=secant R(i0,i1)=R(i1,i0)=tangent
 
-Parameter ``[in]``:
+:param (input):
     secant The cosine of reflection.
 
-Parameter ``[in]``:
+:param (input):
     tangent The sine of reflection.
 
-Parameter ``[in]``:
+:param (input):
     i0 The index of the first affected row.
 
-Parameter ``[in]``:
+:param (input):
     i1 The index of the second affected row.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_GivensColumnOp =R"doc(Apply a Givens " column operation ", i.e. post-multiply by a Givens
 rotation matrix. The Givens matrix is an identity except for the 4
 rotational entries, viz R(i0,i0)=R(i1,i1)=c R(i0,i1)=-s R(i1,i0)=s
 
-Parameter ``[in]``:
+:param (input):
     c The cosine of givens rotation.
 
-Parameter ``[in]``:
+:param (input):
     s The sine of givens rotation.
 
-Parameter ``[in]``:
+:param (input):
     i0 The index of the first affected row.
 
-Parameter ``[in]``:
+:param (input):
     i1 The index of the second affected row.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_GivensRowOp =R"doc(Apply a Givens " row operation ", i.e. pre-multiply by a Givens rotation
 matrix. The Givens matrix is an identity except for the 4 rotational
 entries, viz R(i0,i0)=R(i1,i1)=c R(i0,i1)=s R(i1,i0)=-s
 
-Parameter ``[in]``:
+:param (input):
     c The cosine of givens rotation.
 
-Parameter ``[in]``:
+:param (input):
     s The sine of givens rotation.
 
-Parameter ``[in]``:
+:param (input):
     i0 The index of the first affected row.
 
-Parameter ``[in]``:
+:param (input):
     i1 The index of the second affected row.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_ColumnXAngleXY =R"doc(Returns the (0 or positive) angle from (1,0) to the XY vector in the
 first column.
 
-Returns:
+:returns:
     rotation angle (in radians) between 0 and 2Pi)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_GetRotationAngleAndVector =R"doc(Returns the angle of rotation of this instance and sets axis to be the
@@ -87,64 +87,64 @@ matrix. Since negating both angle and axis produces an identical
 rotation, calculations are simplified by assuming (and returning) the
 angle in [0,Pi].
 
-Parameter ``[out]``:
+:param (output):
     axis normalized axis of rotation
 
-Returns:
+:returns:
     rotation angle (in radians) between 0 and Pi, inclusive)doc";
 
-static const char * __doc_Bentley_Geom_RotMatrix_GetQuaternion =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_RotMatrix_GetQuaternion =R"doc(:param (output):
     quat quaternion, stored as xyzw
 
-Parameter ``[in]``:
+:param (input):
     transpose true if matrix is stored transposed)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitTransposedFromQuaternionWXYZ =R"doc(Initialization, compatible with mdlRMatrix_fromQuat.
 
-Parameter ``[in]``:
+:param (input):
     pQuatAsDoubleArray The quaternion, stored as (w,x,y,z) in an array
     of doubles.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FactorOrthogonalColumns =R"doc(Factor the instance as a product B*V^ where B has mutually
 perpendicular columns and V is orthogonal.
 
-Parameter ``[out]``:
+:param (output):
     matrixB orthogonal columns
 
-Parameter ``[out]``:
+:param (output):
     matrixV transpose of right factor. (I.e. B = A*V))doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_RotateAndSkewFactors =R"doc(Factor as{rotation*skewFactor} where the rotation favors indicated
 primary and secondary axes.
 
-Parameter ``[out]``:
+:param (output):
     rotation the (orthogonal, right handed) rotation.
 
-Parameter ``[out]``:
+:param (output):
     skewFactor the scale and skew parts.
 
-Parameter ``[in]``:
+:param (input):
     primaryAxis selects column whose direction is preserved.
 
-Parameter ``[in]``:
+:param (input):
     secondaryAxis selects columns that defines plane (with
     primaryAxis)
 
-Returns:
+:returns:
     true if primary and secondary are independent.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FactorRotateScaleRotate =R"doc(Factor as{rotation1 * scale * rotation2}
 
-Returns:
+:returns:
     number of nonzero scales (independent columns).
 
-Parameter ``[out]``:
+:param (output):
     rotation1 pure rotation
 
-Parameter ``[out]``:
+:param (output):
     scalePoint scale factors, largest first.
 
-Parameter ``[out]``:
+:param (output):
     rotation2 pure rotation)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsEqual =R"doc( Tests for equality between two matrices " Equality " means
@@ -152,10 +152,10 @@ relative error less than 1.0e-12, in the sense that each component-
 wise difference is less than 1.0e-12 times the largest absolute value
 of the components of one matrix.
 
-Parameter ``[in]``:
+:param (input):
     matrix2 The second matrix
 
-Returns:
+:returns:
     true if the matrices are identical.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsPlanar =R"doc( Tests if this instance matrix has no effects
@@ -163,10 +163,10 @@ perpendicular to any plane with the given normal. This will be true if
 the matrix represents a combination of (a) scaling perpencicular to
 the normal and (b) rotation around the normal.
 
-Parameter ``[in]``:
+:param (input):
     normal The plane normal
 
-Returns:
+:returns:
     true if the matrix has no effects perpendicular to any plane with
     the given normal.)doc";
 
@@ -179,106 +179,106 @@ identify old DGN file matrices that are " dirty " by modern standards
 but were meant to be identity, rotation, or scaled rotations in the
 UOR era.
 
-Parameter ``[in]``:
+:param (input):
     dest result matrix
 
-Parameter ``[in]``:
+:param (input):
     primaryAxis axis whose orientation and direction is preserved.
 
-Parameter ``[in]``:
+:param (input):
     tolerance relative tolerance for recognizing near-perpendicular
     conditions.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsRigidScale =R"doc( Test if this instance matrix is composed of only rigid
 rotation and scaling.
 
-Parameter ``[out]``:
+:param (output):
     columns matrix containing the unit vectors along the columns.
 
-Parameter ``[out]``:
+:param (output):
     scale largest axis scale factor. If function value is true, the
     min scale is the same. Use areColumnsOrthonormal to get separate
     column scales.
 
-Returns:
+:returns:
     true if the matrix is orthonormal.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsOrthonormal =R"doc( Test if this instance matrix has orthonormal columns,
 i.e. its columns are all perpendicular to one another.
 
-Parameter ``[out]``:
+:param (output):
     columns matrix containing the unit vectors along the columns.
 
-Parameter ``[out]``:
+:param (output):
     axisScales point whose x, y, and z components are the magnitudes
     of the original columns.
 
-Parameter ``[out]``:
+:param (output):
     axisRatio smallest axis length divided by largest.
 
-Returns:
+:returns:
     true if the matrix is orthonormal.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsOrthogonal =R"doc( Test if this instance matrix is orthogonal, i.e. its
 transpose is its inverse. This class of matrices includes both rigid
 body rotations and reflections.
 
-Returns:
+:returns:
     true if the matrix is orthogonal.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsRigid =R"doc( Test if a matrix is a rigid body rotation, i.e. its
 transpose is its inverse and it has a positive determinant.
 
-Returns:
+:returns:
     true if the matrix is a rigid body rotation.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsNearSignedPermutation =R"doc( Test if this instance matrix does nothing more than
 exchange and possibly negate principle axes, within a tolerance.
 
-Parameter ``[out]``:
+:param (output):
     result the nearby permutation, or the orignal matrix if none near.
 
-Parameter ``[in]``:
+:param (input):
     tolerance tolerance for comparison to the permutation
 
-Returns:
+:returns:
     true if the matrix is a near permutation of the principle axes.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsSignedPermutation =R"doc( Test if this instance matrix does nothing more than
 exchange and possibly negate principle axes.
 
-Returns:
+:returns:
     true if the matrix is a permutation of the principle axes.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SumOffDiagonalSquares =R"doc( Computes the sum of the squares of the off-diagonal
 entries of this instance matrix.
 
-Returns:
+:returns:
     sum of square of off-diagonal entries of the matrix.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SumDiagonalSquares =R"doc( Computes the sum of the squares of the diagonal entries
 of this instance matrix.
 
-Returns:
+:returns:
     Sum of squares of diagonal entries)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_MaxDiff =R"doc( Returns the largest absolute value difference between
 corresponding coefficients in Matrix1 and Matrix2.
 
-Parameter ``[in]``:
+:param (input):
     matrix2 The matrix to compare to
 
-Returns:
+:returns:
     largest absolute difference between the two matrices.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_MaxAbs =R"doc( Find the largest absolute value of entries in the matrix.
 
-Returns:
+:returns:
     largest absolute value in matrix)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SumSquares =R"doc( Return the sum of squares of coefficients in a matrix.
 
-Returns:
+:returns:
     Sum of squares of all entries in matrix)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_DiagonalMaxAbs =R"doc( return the largest absolute value on the diagonal)doc";
@@ -296,44 +296,44 @@ diagonal.)doc";
 static const char * __doc_Bentley_Geom_RotMatrix_OffDiagonalAbsRange =R"doc( Return the (absolute value) range of entries off the
 diagonal.
 
-Parameter ``[out]``:
+:param (output):
     minValue smallest absolute value
 
-Parameter ``[out]``:
+:param (output):
     maxValue largest absolute value)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_OffDiagonalSignedRange =R"doc( Return the (signed) range of entries off the diagonal.
 
-Parameter ``[out]``:
+:param (output):
     minValue smallest signed value
 
-Parameter ``[out]``:
+:param (output):
     maxValue largest signed value)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_DiagonalAbsRange =R"doc( Return the (absolute value) range of entries on the
 diagonal.
 
-Parameter ``[out]``:
+:param (output):
     minValue smallest absolute value
 
-Parameter ``[out]``:
+:param (output):
     maxValue largest absolute value)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_DiagonalSignedRange =R"doc( Return the (signed) range of entries on the diagonal.
 
-Parameter ``[out]``:
+:param (output):
     minValue smallest signed value
 
-Parameter ``[out]``:
+:param (output):
     maxValue largest signed value)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsUniformScale =R"doc( Tests if a matrix has (nearly) equal diagaonal entries
 and (nearly) zero off diagonals. Tests use a tight relative tolerance.
 
-Parameter ``[out]``:
+:param (output):
     maxScale the largest diagaonal entry
 
-Returns:
+:returns:
     true if matrix is approximately diagonal)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsDiagonal =R"doc( Tests if a matrix has small offdiagonal entries compared
@@ -341,29 +341,29 @@ to diagonals. The specific test condition is that the largest off
 diagonal absolute value is less than a tight tolerance fraction times
 the largest diagonal entry.
 
-Returns:
+:returns:
     true if matrix is approximately diagonal)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_IsIdentity =R"doc( Tests if a matrix is the identity matrix.
 
-Returns:
+:returns:
     true if matrix is approximately an identity.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_ConditionNumber =R"doc(Computes an estimate of the condition of this instance matrix. Values
 near 0 are bad.
 
-Returns:
+:returns:
     estimated condition number.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Determinant =R"doc( Returns the determinant of the matrix.
 
-Returns:
+:returns:
     determinant of the matrix.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_GetRowValuesXY =R"doc( Copies 4 doubles from xx,xy,yx,yy positions into an
 array.
 
-Parameter ``[out]``:
+:param (output):
     data returned data -- first 2 entries in row 0, then first 2 in
     row 1.)doc";
 
@@ -372,89 +372,89 @@ static const char * __doc_Bentley_Geom_RotMatrix_GetRowValues =R"doc( Get all co
 static const char * __doc_Bentley_Geom_RotMatrix_GetComponentByRowAndColumn =R"doc( Returns a value from a specified row and column of the
 matrix.
 
-Parameter ``[in]``:
+:param (input):
     row The index of row to read. Row indices are 0, 1, 2.
 
-Parameter ``[in]``:
+:param (input):
     col The index of column to read. Column indices are 0, 1, 2.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SetRow =R"doc( Set the components in a row.
 
-Parameter ``[in]``:
+:param (input):
     vector new values
 
-Parameter ``[in]``:
+:param (input):
     row The index of row to change. Row indices are 0, 1, 2.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SetColumn =R"doc( Set the components in a column.
 
-Parameter ``[in]``:
+:param (input):
     vector new values
 
-Parameter ``[in]``:
+:param (input):
     col The index of column to change. Column indices are 0, 1, 2.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_GetRow =R"doc( Returns a vector taken from a column of a matrix.
 
-Parameter ``[out]``:
+:param (output):
     vector filled vector
 
-Parameter ``[in]``:
+:param (input):
     row The index of row to extract. Row indices are 0, 1, and 2.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_GetColumn =R"doc( Returns a point taken from a column of a matrix.
 
-Parameter ``[out]``:
+:param (output):
     vector filled vector
 
-Parameter ``[in]``:
+:param (input):
     col The index of column to extract. Column indices are 0, 1, 2.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_GetRows =R"doc( Copies from rows of this instance matrix to corresponding
 points.
 
-Parameter ``[out]``:
+:param (output):
     vectorU first row
 
-Parameter ``[out]``:
+:param (output):
     vectorV second row
 
-Parameter ``[out]``:
+:param (output):
     vectorW third row)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_GetColumns =R"doc( Copies from columns of this instance matrix to
 corresponding points.
 
-Parameter ``[out]``:
+:param (output):
     vectorU first column
 
-Parameter ``[out]``:
+:param (output):
     vectorV second column
 
-Parameter ``[out]``:
+:param (output):
     vectorW third column)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SolveTranspose =R"doc( Return the product of a matrix inverse transpose and a
 point.
 
-Parameter ``[out]``:
+:param (output):
     result result of the multiplication
 
-Parameter ``[in]``:
+:param (input):
     point The known point multipled by the matrix inverse.
 
-Returns:
+:returns:
     false if this instance is singular.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Solve =R"doc( Return the product of a matrix inverse and a point.
 
-Parameter ``[out]``:
+:param (output):
     result the unknown point
 
-Parameter ``[in]``:
+:param (input):
     point The The known point
 
-Returns:
+:returns:
     false if this instance is singular.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SolveArray =R"doc( Solve M*xyzOut[i] = xyzIn[i] for array of points.
@@ -463,39 +463,39 @@ static const char * __doc_Bentley_Geom_RotMatrix_SolveArray =R"doc( Solve M*xyzO
 static const char * __doc_Bentley_Geom_RotMatrix_MultiplyTransposeComponents =R"doc( Returns the product P = [x,y,z]*M where M is the input
 matrix and P is the product point.
 
-Parameter ``[out]``:
+:param (output):
     result product point
 
-Parameter ``[in]``:
+:param (input):
     x The x component
 
-Parameter ``[in]``:
+:param (input):
     y The y component
 
-Parameter ``[in]``:
+:param (input):
     z The z component)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_MultiplyComponents =R"doc( Returns the product of a matrix times a point, with the
 point given as separate components.
 
-Parameter ``[out]``:
+:param (output):
     result result of multiplication
 
-Parameter ``[in]``:
+:param (input):
     x The x component of input point
 
-Parameter ``[in]``:
+:param (input):
     y The y component of input point
 
-Parameter ``[in]``:
+:param (input):
     z The z component of input point)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_MultiplyTranspose =R"doc( Returns the product of a matrix transpose times a point.
 
-Parameter ``[out]``:
+:param (output):
     result result of the multiplication.
 
-Parameter ``[in]``:
+:param (input):
     point The known point.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Multiply =R"doc(Computes{M*P[i]} where M is this instance matrix and each P[i] is a
@@ -503,36 +503,36 @@ point in the input array point. Each result is placed in the
 corresponding entry in the output array result. The same array may be
 named for the input and output arrays.
 
-Parameter ``[out]``:
+:param (output):
     result output points
 
-Parameter ``[in]``:
+:param (input):
     point The input points
 
-Parameter ``[in]``:
+:param (input):
     numPoint The number of points)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Invert =R"doc( Inverts this instance matrix in place.
 
-Returns:
+:returns:
     true if the matrix is invertible.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InverseOf =R"doc( Returns the inverse of the a matrix.
 
-Parameter ``[in]``:
+:param (input):
     forward The input matrix
 
-Returns:
+:returns:
     true if the matrix is invertible.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Subtract =R"doc( Subtract a matrix (componentwise, in place).
 
-Parameter ``[in]``:
+:param (input):
     delta The matrix to subtract)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Add =R"doc( Add a matrix (componentwise, in place).
 
-Parameter ``[in]``:
+:param (input):
     delta The matrix to add)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SumOf =R"doc( Returns{Matrix0 + Matrix1*s1+Matrix2*s2}, i.e. the sum
@@ -540,58 +540,58 @@ of matrix M0, matrix M1 multiplied by scale s1, and matrix M2
 multiplied by scale s2. Any combination of the matrix pointers may
 have identical addresses.
 
-Parameter ``[in]``:
+:param (input):
     matrix0 The matrix0 of formula
 
-Parameter ``[in]``:
+:param (input):
     matrix1 The matrix1 of formula
 
-Parameter ``[in]``:
+:param (input):
     scale1 The scale factor to apply to Matrix1
 
-Parameter ``[in]``:
+:param (input):
     matrix2 The matrix2 of formula
 
-Parameter ``[in]``:
+:param (input):
     scale2 The scale factor to apply to Matrix2)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Transpose =R"doc( Transposes a matrix in place.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_TransposeOf =R"doc( Initializes this instance as the transpose of a matrix.
 
-Parameter ``[in]``:
+:param (input):
     matrix The input matrix)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitProductRotMatrixRotMatrixTranspose =R"doc( Returns the product of rotMatrixA times the transpose of
 rotMatrixB
 
-Parameter ``[in]``:
+:param (input):
     rotMatrixA The first factor
 
-Parameter ``[in]``:
+:param (input):
     rotMatrixB The second factor (to be transposed))doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitProductRotMatrixTransposeRotMatrix =R"doc( Returns the product of the transpose of rotMatrixA times
 rotMatrixB
 
-Parameter ``[in]``:
+:param (input):
     rotMatrixA The first factor (to be transposed)
 
-Parameter ``[in]``:
+:param (input):
     rotMatrixB The second factor)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitProduct =R"doc( Returns the product{A*B} of two matrices.
 
-Parameter ``[in]``:
+:param (input):
     rotMatrixA The first factor
 
-Parameter ``[in]``:
+:param (input):
     rotMatrixB The second factor)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Copy =R"doc( Sets this instance matrix by copying from the matrix
 parameter.
 
-Parameter ``[in]``:
+:param (input):
     in The source matrix)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_SquareAndNormalizeColumnsAnyOrder =R"doc( Returns an orthogonal matrix that preserves aligns with
@@ -599,10 +599,10 @@ the columns of inMatrix. This is done by trying various combinations
 of primary and secondary axes until one succeeds in
 squareAndNormalizeColumns.
 
-Parameter ``[in]``:
+:param (input):
     inMatrix The input matrix
 
-Parameter ``[in]``:
+:param (input):
     preferredOrientation
 
 * 1 for right handed system
@@ -625,18 +625,18 @@ columns. To preserve X axis and XY plane, call with axis id's 0 and 1.
 To preserve Z axis and ZX plane, call with axis id's 2 and 0. inMatrix
 and pMatrix may be the same address.
 
-Parameter ``[in]``:
+:param (input):
     inMatrix The input matrix
 
-Parameter ``[in]``:
+:param (input):
     primaryAxis The axis id (0, 1, 2) which is to be normalized but
     left in its current direction
 
-Parameter ``[in]``:
+:param (input):
     secondaryAxis The axis id (0, 1, 2) which is to be kept within the
     plane of the primary and secondary axis.
 
-Returns:
+:returns:
     false if primaryAxis and secondaryAxis are the same, or either
     axis has zero length)doc";
 
@@ -645,7 +645,7 @@ rotation that moves startVector so it is in the direction of
 endVector. In the normal case where the vectors are not parallel or
 antiparallel, this is a rotation around their cross product.
 
-Returns:
+:returns:
     false if one or both are zero vectors.
 
 Remark:
@@ -655,29 +655,29 @@ Remark:
 static const char * __doc_Bentley_Geom_RotMatrix_ShuffleColumnsOf =R"doc( Moves columns 0, 1, 2 of the input matrix into columns
 i0, i1, i2 of the instance.
 
-Parameter ``[in]``:
+:param (input):
     inMatrix The input matrix
 
-Parameter ``[in]``:
+:param (input):
     i0 The column to receive input column 0
 
-Parameter ``[in]``:
+:param (input):
     i1 The column to receive input column 1
 
-Parameter ``[in]``:
+:param (input):
     i2 The column to receive input column 2)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_AddScaledOuterProductInPlace =R"doc( Accumulates a 'rank one' matrix defined as a scale factor
 times the 'vector outer product' of two vectors, i.e. as the matrix
 {s*U*V^T}
 
-Parameter ``[in]``:
+:param (input):
     vectorU The column vector U
 
-Parameter ``[in]``:
+:param (input):
     vectorV The row vector V
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_Scale =R"doc( Returns a matrix formed from a scaling matrix which is
@@ -685,19 +685,19 @@ multiplied on the left and/or right with other matrices. That is, form
 LeftMatrix * ScaleMatrix * RightMatrix where the ScaleMatrix is
 constructed from the given scale factors.
 
-Parameter ``[in]``:
+:param (input):
     leftMatrix The matrix on left of product
 
-Parameter ``[in]``:
+:param (input):
     xs The x scale factor
 
-Parameter ``[in]``:
+:param (input):
     ys The y scale factor
 
-Parameter ``[in]``:
+:param (input):
     zs The z scale factor
 
-Parameter ``[in]``:
+:param (input):
     rightMatrix The matrix on right of product)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_NormalizeColumnsOf =R"doc( Returns a matrix whose rows are unit vectors in the same
@@ -705,58 +705,58 @@ drection as corresponding columns of the input matrix. Also
 (optionally) stores the original column magnitudes as components of
 the point.
 
-Parameter ``[in]``:
+:param (input):
     inMatrix The input matrix
 
-Parameter ``[out]``:
+:param (output):
     scaleVector length of original columns)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_NormalizeRowsOf =R"doc( Returns a matrix whose rows are unit vectors in the same
 drection as corresponding rows of the input matrix. Also (optionally)
 stores the original row magnitudes as components of the point.
 
-Parameter ``[in]``:
+:param (input):
     inMatrix The input matrix
 
-Parameter ``[out]``:
+:param (output):
     scaleVector length of original rows)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_ScaleColumns =R"doc( Applies scale factors to corresponding columns of the
 input matrix, and places the result in this instance matrix.
 
-Parameter ``[in]``:
+:param (input):
     in The initial matrix
 
-Parameter ``[in]``:
+:param (input):
     xs The scale factor for column 0
 
-Parameter ``[in]``:
+:param (input):
     ys The scale factor for column 1
 
-Parameter ``[in]``:
+:param (input):
     zs The scale factor for column 2)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_ScaleRows =R"doc( Applies scale factors to corresponding rows of the input
 matrix, and places the result in this instance matrix.
 
-Parameter ``[in]``:
+:param (input):
     inMatrix The initial matrix
 
-Parameter ``[in]``:
+:param (input):
     xScale The scale factor for row 0
 
-Parameter ``[in]``:
+:param (input):
     yScale The scale factor for row 1
 
-Parameter ``[in]``:
+:param (input):
     zScale The scale factor for row 2)doc";
 
-static const char * __doc_Bentley_Geom_RotMatrix_InitFromQuaternion =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_RotMatrix_InitFromQuaternion =R"doc(:param (input):
     quat The quaternion, stored as (xyzw))doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFrom =R"doc(Sets this instance matrix by copying the matrix part of the trasnform.
 
-Parameter ``[in]``:
+:param (input):
     transform The transformation whose matrix part is returned)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitRotationFromOriginXY =R"doc( Set this instance matrix to be an orthogonal (rotation)
@@ -764,13 +764,13 @@ matrix with column 0 in the direction from the origin to the x point,
 column 1 in the plane of the 3 points, directed so the Y point on the
 positive side, and column 2 as their cross product.
 
-Parameter ``[in]``:
+:param (input):
     origin The reference point
 
-Parameter ``[in]``:
+:param (input):
     xPoint The x axis target point
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 3rd point defining xy plane.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFrom1Vector =R"doc( Initializes this instance matrix so that the indicated
@@ -779,160 +779,160 @@ flag selects between normalized axes (all matrix columns of unit
 length) and unnormalized axes (all matrix columns of same length as
 the dir vector).
 
-Parameter ``[in]``:
+:param (input):
     dir The fixed direction vector
 
-Parameter ``[in]``:
+:param (input):
     axis The axis column to be aligned with direction
 
-Parameter ``[in]``:
+:param (input):
     normalize true to have normalized columns
 
-Returns:
+:returns:
     true if the direction vector is nonzero.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromPrincipleAxisRotations =R"doc( Returns the product{RX*RY*RZ*M} where RX, RY, and RZ are
 rotations (in radians) around X, Y, and Z axes, and M is the input
 matrix.
 
-Parameter ``[in]``:
+:param (input):
     inMatrix The prior matrix
 
-Parameter ``[in]``:
+:param (input):
     xrot The x axis rotation
 
-Parameter ``[in]``:
+:param (input):
     yrot The y axis rotation
 
-Parameter ``[in]``:
+:param (input):
     zrot The z axis rotation)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromDirectionAndScale =R"doc( Initializes a matrix which scales along a vector
 direction.
 
-Parameter ``[in]``:
+:param (input):
     vector The scaling direction
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromAxisAndRotationAngle =R"doc( Returns a matrix of rotation about the x,y, or z axis
 (indicated by axis = 0,1, or 2) by an angle in radians.
 
-Parameter ``[in]``:
+:param (input):
     axis The axis index 0=x, 1=y, 2=z
 
-Parameter ``[in]``:
+:param (input):
     radians The rotation angle in radians)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromRowVectors =R"doc( Initializes a matrix with 3 points copied to respective
 rows.
 
-Parameter ``[in]``:
+:param (input):
     vectorU The vector to insert in row 0
 
-Parameter ``[in]``:
+:param (input):
     vectorV The vector to insert in row 1
 
-Parameter ``[in]``:
+:param (input):
     vectorW The vector to insert in row 2)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromColumnVectors =R"doc( Returns a matrix with 3 points copied to respective
 columns.
 
-Parameter ``[in]``:
+:param (input):
     vectorU The vector to insert in column 0
 
-Parameter ``[in]``:
+:param (input):
     vectorV The vector to insert in column 1
 
-Parameter ``[in]``:
+:param (input):
     vectorW The vector to insert in column 2)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromRowValuesXY =R"doc( Initializes a matrix with the 4 specified coefficients in
 xx,xy,yx,yy positions, and 1 in zz in " row major " order.
 
-Parameter ``[in]``:
+:param (input):
     x00 The 00 entry
 
-Parameter ``[in]``:
+:param (input):
     x01 The 01 entry
 
-Parameter ``[in]``:
+:param (input):
     x10 The 10 entry
 
-Parameter ``[in]``:
+:param (input):
     x11 The 11 entry)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromRowValues =R"doc( Initializes a matrix with the 9 specified coefficients
 given in " row major " order.
 
-Parameter ``[in]``:
+:param (input):
     x00 The 00 entry
 
-Parameter ``[in]``:
+:param (input):
     x01 The 01 entry
 
-Parameter ``[in]``:
+:param (input):
     x02 The 02 entry
 
-Parameter ``[in]``:
+:param (input):
     x10 The 10 entry
 
-Parameter ``[in]``:
+:param (input):
     x11 The 11 entry
 
-Parameter ``[in]``:
+:param (input):
     x12 The 12 entry
 
-Parameter ``[in]``:
+:param (input):
     x20 The 20 entry
 
-Parameter ``[in]``:
+:param (input):
     x21 The 21 entry
 
-Parameter ``[in]``:
+:param (input):
     x22 The 22 entry)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromScaledOuterProduct =R"doc( Returns a 'rank one' matrix defined as a scale factor
 times the 'vector outer product' of two vectors, i.e. as the matrix
 {s*U*V^T}
 
-Parameter ``[in]``:
+:param (input):
     vectorU The column vector U
 
-Parameter ``[in]``:
+:param (input):
     vectorV The row vector V
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitFromScaleFactors =R"doc( Returns a scaling matrix with respective x, y, and z
 scaling factors.
 
-Parameter ``[in]``:
+:param (input):
     xscale The x direction scale factor
 
-Parameter ``[in]``:
+:param (input):
     yscale The y direction scale factor
 
-Parameter ``[in]``:
+:param (input):
     zscale The z direction scale factor)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_InitIdentity =R"doc( Initialize an identity matrix.)doc";
 
-static const char * __doc_Bentley_Geom_RotMatrix_FromQuaternion =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_RotMatrix_FromQuaternion =R"doc(:param (input):
     quat The quaternion, stored as (xyzw))doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromTransposeOf =R"doc( Return (as function value) the transpose of a matrix.
 
-Parameter ``[in]``:
+:param (input):
     matrix The input matrix)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_From =R"doc( Returns a matrix copying the matrix part of the
 trasnform.
 
-Parameter ``[in]``:
+:param (input):
     transform The transformation whose matrix part is returned)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_RotationFromOriginXY =R"doc( Set this instance matrix to be an orthogonal (rotation)
@@ -940,13 +940,13 @@ matrix with column 0 in the direction from the origin to the x point,
 column 1 in the plane of the 3 points, directed so the Y point on the
 positive side, and column 2 as their cross product.
 
-Parameter ``[in]``:
+:param (input):
     origin The reference point
 
-Parameter ``[in]``:
+:param (input):
     xPoint The x axis target point
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 3rd point defining xy plane.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_From1Vector =R"doc( Initializes this instance matrix so that the indicated
@@ -955,40 +955,40 @@ flag selects between normalized axes (all matrix columns of unit
 length) and unnormalized axes (all matrix columns of same length as
 the dir vector).
 
-Parameter ``[in]``:
+:param (input):
     dir The fixed direction vector
 
-Parameter ``[in]``:
+:param (input):
     axis The axis column to be aligned with direction
 
-Parameter ``[in]``:
+:param (input):
     normalize true to have normalized columns
 
-Returns:
+:returns:
     true if the direction vector is nonzero.)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromPrincipleAxisRotations =R"doc( Returns the product{RX*RY*RZ*M} where RX, RY, and RZ are
 rotations (in radians) around X, Y, and Z axes, and M is the input
 matrix.
 
-Parameter ``[in]``:
+:param (input):
     inMatrix The prior matrix
 
-Parameter ``[in]``:
+:param (input):
     xrot The x axis rotation
 
-Parameter ``[in]``:
+:param (input):
     yrot The y axis rotation
 
-Parameter ``[in]``:
+:param (input):
     zrot The z axis rotation)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromDirectionAndScale =R"doc( Returns a matrix which scales along a vector direction.
 
-Parameter ``[in]``:
+:param (input):
     vector The scaling direction
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromRotate90 =R"doc(Return a matrix for retation of 90 degrees about a vector.)doc";
@@ -996,102 +996,102 @@ static const char * __doc_Bentley_Geom_RotMatrix_FromRotate90 =R"doc(Return a ma
 static const char * __doc_Bentley_Geom_RotMatrix_FromAxisAndRotationAngle =R"doc( Returns a matrix of rotation about the x,y, or z axis
 (indicated by axis = 0,1, or 2) by an angle in radians.
 
-Parameter ``[in]``:
+:param (input):
     axis The axis index 0=x, 1=y, 2=z
 
-Parameter ``[in]``:
+:param (input):
     radians The rotation angle in radians)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromVectorAndRotationAngle =R"doc( Returns a matrix representing rotation around a vector.
 
-Parameter ``[in]``:
+:param (input):
     axis The axis of rotation
 
-Parameter ``[in]``:
+:param (input):
     radians The rotation angle)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromRowVectors =R"doc( Returns a matrix with 3 vectors copied to respective
 rows.
 
-Parameter ``[in]``:
+:param (input):
     vectorU The vector to insert in row 0
 
-Parameter ``[in]``:
+:param (input):
     vectorV The vector to insert in row 1
 
-Parameter ``[in]``:
+:param (input):
     vectorW The vector to insert in row 2)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromColumnVectors =R"doc( Returns a matrix with 3 vectors copied to respective
 columns.
 
-Parameter ``[in]``:
+:param (input):
     vectorU The vector to insert in column 0
 
-Parameter ``[in]``:
+:param (input):
     vectorV The vector to insert in column 1
 
-Parameter ``[in]``:
+:param (input):
     vectorW The vector to insert in column 2)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromRowValues =R"doc( Returns a matrix with the 9 specified coefficients given
 in " row major " order.
 
-Parameter ``[in]``:
+:param (input):
     x00 The 00 entry
 
-Parameter ``[in]``:
+:param (input):
     x01 The 01 entry
 
-Parameter ``[in]``:
+:param (input):
     x02 The 02 entry
 
-Parameter ``[in]``:
+:param (input):
     x10 The 10 entry
 
-Parameter ``[in]``:
+:param (input):
     x11 The 11 entry
 
-Parameter ``[in]``:
+:param (input):
     x12 The 12 entry
 
-Parameter ``[in]``:
+:param (input):
     x20 The 20 entry
 
-Parameter ``[in]``:
+:param (input):
     x21 The 21 entry
 
-Parameter ``[in]``:
+:param (input):
     x22 The 22 entry)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromScaledOuterProduct =R"doc( Returns a 'rank one' matrix defined as a scale factor
 times the 'vector outer product' of two vectors, i.e. as the matrix
 {s*U*V^T}
 
-Parameter ``[in]``:
+:param (input):
     vectorU The column vector U
 
-Parameter ``[in]``:
+:param (input):
     vectorV The row vector V
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor)doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromScaleFactors =R"doc( Returns a scaling matrix with respective x, y, and z
 scaling factors.
 
-Parameter ``[in]``:
+:param (input):
     xscale The x direction scale factor (00 diagonal)
 
-Parameter ``[in]``:
+:param (input):
     yscale The y direction scale factor (11 diagonal)
 
-Parameter ``[in]``:
+:param (input):
     zscale The z direction scale factor (22 diagonal))doc";
 
 static const char * __doc_Bentley_Geom_RotMatrix_FromScale =R"doc( Returns a uniform scaling matrix.
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor.)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -1245,6 +1245,14 @@ void def_RotMatrix(py::module_& m)
            py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&RotMatrix::Multiply, py::const_),
            "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
 
+    c1.def("Multiply", [] (RotMatrixCR self, py::list& xyzOut, py::list const& xyzIn)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzIn, cppxyzIn, DPoint3dArray, DPoint3d);
+           self.Multiply(cppxyzOut, cppxyzIn);
+           CONVERT_CPPARRAY_TO_PYLIST(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
+           }, "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
+
     c1.def("Multiply",
            py::overload_cast<DPoint2dArray&, DPoint2dArray const&>(&RotMatrix::Multiply, py::const_),
            "xyOut"_a, "xyIn"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
@@ -1253,10 +1261,26 @@ void def_RotMatrix(py::module_& m)
     c1.def("MultiplyTranspose", py::overload_cast<DPoint3dR>(&RotMatrix::MultiplyTranspose, py::const_), "point"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
     c1.def("MultiplyTranspose", py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&RotMatrix::MultiplyTranspose, py::const_), "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
 
+    c1.def("MultiplyTranspose", [] (RotMatrixCR self, py::list& outXYZ, py::list const& inXYZ)
+           {  
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);  
+           self.MultiplyTranspose(cppOutXYZ, cppInXYZ);
+           CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
+
     c1.def("MultiplyComponents", &RotMatrix::MultiplyComponents, "result"_a, "x"_a, "y"_a, "z"_a, DOC(Bentley, Geom, RotMatrix, MultiplyComponents));
     c1.def("MultiplyTransposeComponents", &RotMatrix::MultiplyTransposeComponents, "result"_a, "x"_a, "y"_a, "z"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTransposeComponents));
         
     c1.def("SolveArray", py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&RotMatrix::SolveArray, py::const_), "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, SolveArray));    
+    
+    c1.def("SolveArray", [] (RotMatrixCR self, py::list& xyzOut, py::list const& xyzIn)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzIn, cppxyzIn, DPoint3dArray, DPoint3d);
+           self.SolveArray(cppxyzOut, cppxyzIn);
+           CONVERT_CPPARRAY_TO_PYLIST(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
+           }, "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, SolveArray));
 
     c1.def("Solve", &RotMatrix::Solve, "result"_a, "point"_a, DOC(Bentley, Geom, RotMatrix, Solve));
     c1.def("SolveTranspose", &RotMatrix::SolveTranspose, "result"_a, "point"_a, DOC(Bentley, Geom, RotMatrix, SolveTranspose));

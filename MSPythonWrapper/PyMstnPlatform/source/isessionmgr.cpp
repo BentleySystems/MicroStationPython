@@ -12,20 +12,20 @@
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_RemoveUIItemStateEntry =R"doc(Remove UIItemState entry that matches specified key if one exist.
 
-Parameter ``key``:
+:param key:
     The key used to store UIItem state values.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetUIItemMenuMarkState =R"doc(Get the MenuMarkType defined by key.
 
-Parameter ``key``:
+:param key:
     The key used to retrieve UIItem state values.
 
-Parameter ``defaultIfKeyNotFound``:
+:param defaultIfKeyNotFound:
     The value to return if state value has not been specified.
 
-Returns:
+:returns:
     MenuMarkType associated with key, or defaultIfKeyNotFound if no
     entry is found matching the key.
 
@@ -34,13 +34,13 @@ Returns:
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SetUIItemMenuMarkState =R"doc(Set the menu mark value for a menu item. This will trigger a
 SystemEvent.ApplicationSyncUIItem event.
 
-Parameter ``key``:
+:param key:
     The key that defines the name of the entry to modify or create.
 
-Parameter ``value``:
+:param value:
     The MenuMarkType value.
 
-Parameter ``sendImmediateMessage``:
+:param sendImmediateMessage:
     If true send immediate sync message, if false the sync message
     will be sent in the next UISync timer cycle.
 
@@ -48,16 +48,16 @@ Parameter ``sendImmediateMessage``:
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetUIItemState =R"doc(Get the boolean value defined by key and itemState.
 
-Parameter ``key``:
+:param key:
     The key used to retrieve UIItem state values.
 
-Parameter ``itemState``:
+:param itemState:
     The UIItemStateType that specifies which state value to get.
 
-Parameter ``defaultIfKeyNotFound``:
+:param defaultIfKeyNotFound:
     The value to return if state value has not been specified.
 
-Returns:
+:returns:
     bool value associated with key, or defaultIfKeyNotFound if no
     entry is found matching the key.
 
@@ -66,16 +66,16 @@ Returns:
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SetUIItemState =R"doc(Set the boolean value that defines the state of a UI item. This will
 trigger a SystemEvent.ApplicationSyncUIItem event.
 
-Parameter ``key``:
+:param key:
     The key that defines the name of the entry to modify or create.
 
-Parameter ``itemState``:
+:param itemState:
     The UIItemStateType that specifies which state value to set.
 
-Parameter ``value``:
+:param value:
     The boolean value.
 
-Parameter ``sendImmediateMessage``:
+:param sendImmediateMessage:
     If true send immediate sync message, if false the sync message
     will be sent in the next UISync timer cycle.
 
@@ -92,7 +92,7 @@ references.
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_DropSessionMonitor =R"doc(Drop an existing SessionMonitor.
 
-Parameter ``mon``:
+:param mon:
     the SessionMonitor object to remove and deactivate.
 
 Remark:
@@ -106,7 +106,7 @@ See also:
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_AddSessionMonitor =R"doc(Add a new SessionMonitor.
 
-Parameter ``mon``:
+:param mon:
     the new SessionMonitor object. This object will be notified when
     session-related events occur until it is dropped using
     DropSessionMonitor. Ownership of the monitor object is *not*
@@ -121,18 +121,18 @@ See also:
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_CreateNewDgnFile =R"doc(Prompts the user to create a new DGN file and then optionally makes it
 the Master DGN.
 
-Returns:
+:returns:
     SUCCESS if a file was created; otherwise, a non-zero error status
     if the user cancelled, or an error status code based on
     DGNOPEN_STATUS_BASE if the file creation failed.
 
-Parameter ``newName``:
+:param newName:
     The file path of the newly created file if successful
 
-Parameter ``defaultDir``:
+:param defaultDir:
     Optional:The default directory.
 
-Parameter ``switchToNewFile``:
+:param switchToNewFile:
     Make the new file the Master DGN?
 
 Remark:
@@ -181,16 +181,16 @@ Returns (Tuple, 1) :
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_FindDesignFile =R"doc(Opens a file from a specified file name or path.
 
-Parameter ``inFileName``:
+:param inFileName:
     The name or path of the file to be opened.
 
-Parameter ``inModelName``:
+:param inModelName:
     Will be non-NULL if a specific model will be opened.
 
-Parameter ``fileType``:
+:param fileType:
     The format of the file.
 
-Parameter ``allowCancel``:
+:param allowCancel:
     Pass <code>true</code> if MicroStation should prompt the user to
     accept or cancel if the file cannot be opened read-write because
     of a sharing violation. If *allowCancel* is <code>false</code>,
@@ -234,36 +234,36 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_SwitchToNewFile =R"doc(Makes the specified file the Master DGN, opening it if necessary.
 
-Returns:
+:returns:
     SUCCESS if *doc* was opened (if necessary) and has become the new
     Master DGN. See #FindDesignFile for errors that can result from a
     failed attempt to open a file.
 
-Parameter ``doc``:
+:param doc:
     Identifies the DGN to become the new master.
 
-Parameter ``inputModelName``:
+:param inputModelName:
     The model in *doc* to become active
 
-Parameter ``fileType``:
+:param fileType:
     The format of the file. Should be one of the GRAPHICSFILE_...
     values.
 
-Parameter ``doUpdate``:
+:param doUpdate:
     Pass <code>true</code> if MicroStation should issue the UPDATE ALL
     command after making this file master.
 
-Parameter ``releaseReferences``:
+:param releaseReferences:
     Pass <code>true</code> to disable reference file load
     optimization. If <code>true</code>, the new master DGN will be
     forced to load all of its references, even those that are already
     loaded by the current master DGN. Normally, you should pass pass
     <code><code>false</code></code> for this parameter.
 
-Parameter ``reopeningAfterSave``:
+:param reopeningAfterSave:
     Is this open being peformed after a save?
 
-Parameter ``runInitUCM``:
+:param runInitUCM:
     Runs the user command specified by MS_IT.
 
 Remark:
@@ -346,21 +346,21 @@ window close events.
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetActiveDgnFile =R"doc(Get the DgnFileP for the current active model
 
-Returns:
+:returns:
     The DgnFileP for the current active model.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetMasterDgnFile =R"doc(Get the DgnFileP for the current Master DGN file
 
-Returns:
+:returns:
     The DgnFileP for the current Master DGN file.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_ISessionMgr_GetMaster =R"doc(Get the Document for the Master DGN
 
-Returns:
+:returns:
     The document for the current Master DGN file, or NULL.
 
 )doc";
@@ -600,4 +600,8 @@ void def_ISessionMgr(py::module_& m)
     c2.def("IsActiveWorkSetAssociatedToCONNECTProject", &ISessionMgr::IsActiveWorkSetAssociatedToCONNECTProject);    
     c2.def("IsActiveWorkSetNoWorkSet", &ISessionMgr::IsActiveWorkSetNoWorkSet);    
     c2.def("IsActiveWorkSetAssociatedToCONNECTProjectAndDGNMode", &ISessionMgr::IsActiveWorkSetAssociatedToCONNECTProjectAndDGNMode);
+
+    c2.def_readonly_static("mdlErrno", &mdlErrno);
+
+
     }

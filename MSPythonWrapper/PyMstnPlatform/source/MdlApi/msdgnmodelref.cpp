@@ -49,21 +49,21 @@ its descendants), and child DgnModelRefP's for other modelRefs are not
 created. When this function is called, the child DgnModelRefPs will be
 created so they can be iterated using ModelRefIterator.Create.
 
-Parameter ``modelRef``:
+:param modelRef:
     The modelRef for which the reference DgnModelRefPs are to be
     created.
 
-Parameter ``loadCache``:
+:param loadCache:
     true if caches should be loaded for reference models, false if
     only modelRefs should be created.
 
-Parameter ``loadRasterRefs``:
+:param loadRasterRefs:
     true if raster reference files should be loaded, false if not.
 
-Parameter ``loadUndisplayedRefs``:
+:param loadUndisplayedRefs:
     true if even undisplayed reference files should be loaded.
 
-Returns:
+:returns:
     SUCCESS or a nonzero error code. @Group " Models "
 
 Remark:
@@ -81,12 +81,12 @@ static const char * __doc_MstnPlatform_ModelRef_GetDgnModel =R"doc(Remark:
 static const char * __doc_MstnPlatform_ModelRef_CopyModel =R"doc(@Description Copy a model from one location to another. This function
 handles copying levels, styles, etc. necessary for elements in the
 model. @Remarks Export rights for the source modelRef and edit rights
-for the destination file are checked. @Param[out] returnDestModelRef
+for the destination file are checked. @Param(output) returnDestModelRef
 Working model ref for resulting model. If NULL is not passed for this
 parameter, the resulting modelRef must be freed using
-ModelRef.FreeWorking. @Param[in] sourceModelRef Model to copy.
-@Param[in] destFile File in which the model should be written.
-@Param[in] pDestModelName Name for the copied model. @Param[in]
+ModelRef.FreeWorking. @Param(input) sourceModelRef Model to copy.
+@Param(input) destFile File in which the model should be written.
+@Param(input) pDestModelName Name for the copied model. @Param(input)
 pDestModelDescr Description for the copied model; may be NULL. @Return
 SUCCESS if the model was copied successfully; error returns are
 defined in mdlerrs.r.h. @See DgnFileObj.CreateModel
@@ -99,9 +99,9 @@ Remark:
 static const char * __doc_MstnPlatform_ModelRef_CheckAllRightsIncludingProtectedRefs =R"doc(@Description Check if the specified rights are granted to the current
 user for the given model and all references, including the references
 that could not be opened because the user lacked viewing access.
-@Param[in] modelRef The modelRef to check. @Param[in] rights the
+@Param(input) modelRef The modelRef to check. @Param(input) rights the
 rights to query. See DgnFileObj.CheckRights for a description of
-the rights values. @Param[in] displayError Determines whether an error
+the rights values. @Param(input) displayError Determines whether an error
 should be displayed in the message center, a pop-up dialog, or the
 function should return silently. @Return SUCCESS if all of the rights
 are granted for all files. MDLERR_RIGHT_NOT_GRANTED if any of the
@@ -118,10 +118,10 @@ Remark:
      )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_CheckAllRights =R"doc(@Description Check if the specified rights are granted to the current
-user for the given model and all references @Param[in] modelRef The
-modelRef to check. @Param[in] rights the rights to query. See
+user for the given model and all references @Param(input) modelRef The
+modelRef to check. @Param(input) rights the rights to query. See
 DgnFileObj.CheckRights for a description of the rights values.
-@Param[in] displayError Determines whether an error should be
+@Param(input) displayError Determines whether an error should be
 displayed in the message center, a pop-up dialog, or the function
 should return silently. @Return SUCCESS if all of the rights are
 granted for all files.
@@ -136,10 +136,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_ModelRef_CheckAllRightsIfDisplayed =R"doc(@Description Check if the specified rights are granted to the current
 user for the given model and all references that are displayed in the
-selected view(s). @Param[in] modelRef The modelRef to check.
-@Param[in] rights the rights to query. See DgnFileObj.CheckRights
-for a description of the rights values. @Param[in] view the view to
-query or ANY_VIEW. @Param[in] displayError Determines whether an error
+selected view(s). @Param(input) modelRef The modelRef to check.
+@Param(input) rights the rights to query. See DgnFileObj.CheckRights
+for a description of the rights values. @Param(input) view the view to
+query or ANY_VIEW. @Param(input) displayError Determines whether an error
 should be displayed in the message center, a pop-up dialog, or the
 function should return silently. @Return SUCCESS if all of the rights
 are granted for all files in the specified view.
@@ -159,9 +159,9 @@ static const char * __doc_MstnPlatform_ModelRef_GetDisplayName =R"doc(@Descripti
 name of the modelRef in its user interface. If the modelRef is a
 reference, the string consists of the logical name (if there is any),
 followed by the file name, followed by the model name (if there is
-more than one model in the file). @Param[in] modelRef the model for
-which to retrieve the name @Param[out] displayName the display name.
-@Param[in] maxChars the size of displayName, in MSWChars. @Param[in]
+more than one model in the file). @Param(input) modelRef the model for
+which to retrieve the name @Param(output) displayName the display name.
+@Param(input) maxChars the size of displayName, in MSWChars. @Param(input)
 separator the separator to use. Maximum size allowed is 10 wide chars.
 If NULL is passed in, ", " will be used by default. @Return
 MDLERR_NAMETOOLONG if name does not fit, MDLERR_BADMODELREF if invalid
@@ -177,16 +177,16 @@ static const char * __doc_MstnPlatform_ModelRef_GetRange =R"doc(@Description Get
 calculates the range for all geometry in a model - it does not ignore
 elements that are not displayed in the input view. This function is
 relatively fast. It does not iterate through the model but uses a
-range that is stored internally. @Param[in] modelRef the model to get
-the range for. @Param[out] pRange the model range
+range that is stored internally. @Param(input) modelRef the model to get
+the range for. @Param(output) pRange the model range
 
-Parameter ``viewIndex``:
+:param viewIndex:
     index of view, used to get the clip volume of the view.
 
-Parameter ``transformP``:
+:param transformP:
     NULL or transform to apply before calculating range.
 
-Parameter ``includeChildren``:
+:param includeChildren:
     true to include the range of child references. @Return SUCCESS if
     the requested params were acceptable, otherwise ERROR
 
@@ -197,7 +197,7 @@ Remark:
 
 static const char * __doc_MstnPlatform_ModelRef_SetDefaultBackgroundColor =R"doc(@Description Sets the model background color to the default value for
 that model type. This has an effect only on sheet models, because
-there is no default background color for normal models.. @Param[in]
+there is no default background color for normal models.. @Param(input)
 modelRefP the modelRef for which the default background color is set.
 
 Bentley Systems
@@ -206,7 +206,7 @@ Remark:
      )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_FreeWorking =R"doc(@Description Frees modelRef's created using ModelRef.CreateWorking
-or ModelRef.CreateWorkingByName. @Param[in] modelRef the modelRef
+or ModelRef.CreateWorkingByName. @Param(input) modelRef the modelRef
 to free. @Return SUCCESS if the model ref is freed, MDLERR_BADMODELREF
 if the modelRef specified is not a working modelRef. @Remarks Only
 modelRefs created with ModelRef.CreateWorking or
@@ -226,12 +226,12 @@ static const char * __doc_MstnPlatform_ModelRef_CreateWorkingByName =R"doc(@Desc
 functions that take DgnModelRefP arguments. The ModelRef created must
 be freed using ModelRef.FreeWorking. If the file specified as
 dgnFileP is read-only, then the modelRef will be read-only also.
-@Param[out] dgnModelRefP modelRef referring to the model created
-@Param[in] dgnFileP the file object to search for the model @Param[in]
+@Param(output) dgnModelRefP modelRef referring to the model created
+@Param(input) dgnFileP the file object to search for the model @Param(input)
 modelNameP the name of the model to find in the design file.
-@Param[in] fillCache true if the cache for the model should be filled.
+@Param(input) fillCache true if the cache for the model should be filled.
 Operations like changing name, description, etc., can be performed
-even if the cache is not filled. @Param[in] loadRefs true if the
+even if the cache is not filled. @Param(input) loadRefs true if the
 caches for the model's attached references should also be loaded. The
 fillCache argument must be true for this to work. @Return SUCCESS if
 the modelRef is returned and filled as requested.
@@ -249,16 +249,16 @@ cache sections that can be passed to functions that take DgnModelRefP
 arguments. The ModelRef created must be freed using
 ~mModelRef.FreeWorking. If the file specified as dgnFileP is read-
 only, then the modelRef will be read-only also. @Param dgnModelRefP
-OUT modelRef referring to the model created @Param dgnFileP IN the
-file object to search for the model @Param modelID IN the ID of the
-model to load @Param fillCache IN true if the cache for the model
+(output) modelRef referring to the model created @Param dgnFileP (input) the
+file object to search for the model @Param modelID (input) the ID of the
+model to load @Param fillCache (input) true if the cache for the model
 should be filled. Operations like changing name, description, etc.,
-can be performed even if the cache is not filled. @Param loadRefs IN
+can be performed even if the cache is not filled. @Param loadRefs (input)
 true if the caches for the model's attached references should also be
 loaded. The fillCache argument must be true for this to work. @Param
-includeUndisplayedRefs IN If true, load the caches for references that
+includeUndisplayedRefs (input) If true, load the caches for references that
 are not displayed. The fillCache and loadRefs arguments must be true
-for this to work. @Param sectionsToFill IN Specific cache sections to
+for this to work. @Param sectionsToFill (input) Specific cache sections to
 fill. @Return SUCCESS if the modelRef is returned and filled as
 requested. 
 
@@ -268,12 +268,12 @@ static const char * __doc_MstnPlatform_ModelRef_CreateWorking =R"doc(@Descriptio
 functions that take DgnModelRefP arguments. The ModelRef created must
 be freed using ModelRef.FreeWorking. If the file specified as
 dgnFileP is read-only, then the modelRef will be read-only also.
-@Param[out] dgnModelRefP modelRef referring to the model created
-@Param[in] dgnFileP the file object to search for the model @Param[in]
-modelID the ID of the model to load @Param[in] fillCache true if the
+@Param(output) dgnModelRefP modelRef referring to the model created
+@Param(input) dgnFileP the file object to search for the model @Param(input)
+modelID the ID of the model to load @Param(input) fillCache true if the
 cache for the model should be filled. Operations like changing name,
 description, etc., can be performed even if the cache is not filled.
-@Param[in] loadRefs true if the caches for the model's attached
+@Param(input) loadRefs true if the caches for the model's attached
 references should also be loaded. The fillCache argument must be true
 for this to work. @Return SUCCESS if the modelRef is returned and
 filled as requested.
@@ -288,7 +288,7 @@ Remark:
 
 static const char * __doc_MstnPlatform_ModelRef_ActivateAndDisplay =R"doc(@Description Activates and displays the specified modelRef. The
 function checks if the model is displayed in the current views and, if
-not, new views are opened with the modelRef as their root. @Param[in]
+not, new views are opened with the modelRef as their root. @Param(input)
 newModelRef the model to activate. The modelRef must be from the
 current master file. @Return SUCCESS if the model is found and
 activated successfully; otherwise, ERROR.
@@ -299,7 +299,7 @@ Remark:
      )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_DeleteModel =R"doc(@Description Deletes the specified model from the file that contains
-it. @Param[in] modelRef the model to delete. @Param[in] deleteElements
+it. @Param(input) modelRef the model to delete. @Param(input) deleteElements
 If true, the model will not be deleted unless it is empty. If false,
 all elements assigned to the model are also deleted. @Return SUCCESS
 if the model is found and deleted successfully; otherwise, ERROR.
@@ -315,7 +315,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_GetViewMask =R"doc(@Description Gets a bitmask representing the views that display the
-specified modelRef. @Param[in] modelRef the model to get the view
+specified modelRef. @Param(input) modelRef the model to get the view
 bitmask for. @Return An integer value that is has one bit for each of
 views 1 through 8 whether the modelRef is displayed in the
 corresponding view. Bit 0 corresponds to " View 1 ".
@@ -327,8 +327,8 @@ Remark:
      )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_IsDisplayedInView =R"doc(@Description Determines whether the specified DgnPlatform::DgnModelRef
-is displayed in the specified view. @Param[in] modelRef the the model
-to query. @Param[in] viewIndex the view index to test. This value
+is displayed in the specified view. @Param(input) modelRef the the model
+to query. @Param(input) viewIndex the view index to test. This value
 should be in the range of 0 - (DgnPlatform::MAX_VIEWS-1), or the value
 ANY_VIEW if the test is to see whether it is displayed in any view.
 @Return true if the specified modelRef is currently displayed in the
@@ -349,8 +349,8 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_GetFileName =R"doc(@Description Gets the name of the file that contains the data for the
-specified model. @Param[in] modelRef the model to query. @Param[out]
-fileName buffer to hold the file name. @Param[in] fileNameBufSize size
+specified model. @Param(input) modelRef the model to query. @Param(output)
+fileName buffer to hold the file name. @Param(input) fileNameBufSize size
 of the buffer (in characters) pointed to by fileName. @Return SUCCESS
 if the name is obtained without error; MDLERR_BADARG if modelRef was
 invalid; MDLERR_BADMODELREF if the file could not be obtained.
@@ -372,7 +372,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_AreSame =R"doc(@Description Determines whether two specified modelRefs are actually
-the same. @Param[in] modelRef1 the first modelRef. @Param[in]
+the same. @Param(input) modelRef1 the first modelRef. @Param(input)
 modelRef2 the second modelRef. @Return true if the two modelRefs the
 same.
 
@@ -381,7 +381,7 @@ Bentley Systems
 Remark:
      )doc";
 
-static const char * __doc_MstnPlatform_ModelRef_IsReadOnly =R"doc(@Description Determines whether a modelRef is read-only. @Param[in]
+static const char * __doc_MstnPlatform_ModelRef_IsReadOnly =R"doc(@Description Determines whether a modelRef is read-only. @Param(input)
 modelRef the modelRef to test. @Return true if the specified model is
 read-only.
 
@@ -394,7 +394,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_IsNestedReference =R"doc(@Description Determines whether the specified reference model is
-attached to another reference model. @Param[in] modelRef the model to
+attached to another reference model. @Param(input) modelRef the model to
 test. @Return true if the specified modelRef is referenced from
 another referenced model.
 
@@ -407,7 +407,7 @@ Remark:
      )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_GetParent =R"doc(@Description Gets the DgnModelRefP for the model that is the parent of
-the specified modelRef. @Param[in] modelRef The model to get the
+the specified modelRef. @Param(input) modelRef The model to get the
 parent of. @Return The modelRef for the parent model of the specified
 modelRef if a parent exists; otherwise, NULL. @Remarks Reference
 attachments have a parent, but the active model does not. The parent
@@ -420,7 +420,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_IsReference =R"doc(@Description Determines whether the specified modelRef is a reference
-model. @Param[in] modelRef The model to test. @Return true if the
+model. @Param(input) modelRef The model to test. @Return true if the
 specified modelRef represents a reference model.
 
 Bentley Systems
@@ -429,7 +429,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_IsActiveModel =R"doc(@Description Determines whether the specified modelRef is the active
-model. @Param[in] modelRef the model to test. @Return true, if the
+model. @Param(input) modelRef the model to test. @Return true, if the
 modelRef is the currently active model.
 
 See also:
@@ -438,7 +438,7 @@ See also:
 )doc";
 
 static const char * __doc_MstnPlatform_ModelRef_InMasterFile =R"doc(@Description Determines whether the specified modelRef is contained in
-the master file. @Param[in] modelRef the model to test. @Return true,
+the master file. @Param(input) modelRef the model to test. @Return true,
 if the modelRef is valid and its data is stored in the current master
 file.
 
@@ -481,7 +481,7 @@ static const char * __doc_MstnPlatform_ModelRefList_Create =R"doc(Remark:
     )doc";
 
 static const char * __doc_MstnPlatform_ModelRefList_IsFound =R"doc(@Description Determines whether the specified modelRef is a member of
-the list. @Param[in] modelRefList the list to search. @Param[in] entry
+the list. @Param(input) modelRefList the list to search. @Param(input) entry
 the modelRef to find in the list. @Return true if the specified entry
 is found in the list.
 
@@ -494,8 +494,8 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_ModelRefList_Find =R"doc(@Description Gets the index of the specified modelRef in the list.
-@Param[in] modelRefList the list to search for the modelRef.
-@Param[in] entry the model to find in the list. @Return The index of
+@Param(input) modelRefList the list to search for the modelRef.
+@Param(input) entry the model to find in the list. @Return The index of
 the modelRef in the list if it is found; the value -1 if the entry
 isn't found.
 

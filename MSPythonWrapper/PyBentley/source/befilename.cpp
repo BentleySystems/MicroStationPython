@@ -12,26 +12,26 @@
 
 static const char * __doc_Bentley_BeFileName_BeGetTempPath = R"doc(Retrieves the path of the directory for temporary files.
 
-Parameter ``tempFileName``:
+:param tempFileName:
     The name for a temporary file.
 
-Returns:
+:returns:
     BeFileNameStatus::Success, if the directory for the temporary file
     exists or was created.)doc";
 
 static const char * __doc_Bentley_BeFileName_BeGetTempFileName = R"doc(Generate a unique name for a temporary file.
 
-Parameter ``tempFileName``:
+:param tempFileName:
     The name for a temporary file.
 
-Parameter ``pathName``:
+:param pathName:
     The path to contain the temp file. If NULL, the result of
     BeGetTempPath is used.
 
-Parameter ``prefixString``:
+:param prefixString:
     up to 3 chars of this will be used in the generated filename
 
-Returns:
+:returns:
     BeFileNameStatus::Success, if the directory for the temporary file
     exists or was created. @note This method does not create a
     temporary file, it merely returns a name that can be used to
@@ -40,46 +40,46 @@ Returns:
 static const char * __doc_Bentley_BeFileName_BeCompactPath = R"doc(Shortens a file path to be no longer than the specified number of
 characters.
 
-Parameter ``shortened``:
+:param shortened:
     the string shortened to the specified length
 
-Parameter ``path``:
+:param path:
     the original path
 
-Parameter ``length``:
+:param length:
     the number of characters to display in the shortened string
     @Return non-zero error status if not successful)doc";
 
 static const char * __doc_Bentley_BeFileName_IsRemovableMedia = R"doc(Check if path is located on a removable storage device.
 
-Parameter ``fn``:
+:param fn:
     The name of a file or directory on the device to check
 
-Returns:
+:returns:
     true if the storage device is removable)doc";
 
 static const char * __doc_Bentley_BeFileName_BeGetDiskFreeSpace = R"doc(Get free space on disk
 
-Parameter ``freeBytes``:
+:param freeBytes:
     The amount of free space on the storage device, in bytes
 
-Parameter ``dirName``:
+:param dirName:
     The name of a file or directory on the device to check
 
-Returns:
+:returns:
     BeFileNameStatus::Success, if the query succeeded. Non-zero if the
     directory is invalid or refers to a storage device that does not
     exist.)doc";
 
 static const char * __doc_Bentley_BeFileName_CheckAccess = R"doc(Check user's access to a file
 
-Parameter ``fileName``:
+:param fileName:
     The name of an existing file.
 
-Parameter ``accs``:
+:param accs:
     The kinds of access to check for
 
-Returns:
+:returns:
     BeFileNameStatus::Success if all of the specified access rights
     are granted; non-zero if the file does not exist or some of the
     specified rights are not granted.)doc";
@@ -87,109 +87,109 @@ Returns:
 static const char * __doc_Bentley_BeFileName_MoveToRecycleBin = R"doc(Move an existing file or an existing directory to Recycle Bin (on
 Windows).
 
-Parameter ``path``:
+:param path:
     The pathname for the file or directory to remove.
 
-Returns:
+:returns:
     DGNFILE_STATUS_Success if the target was successfully removed.)doc";
 
 static const char * __doc_Bentley_BeFileName_SetFileReadOnly = R"doc(Set the read-only status of an existing file
 
-Parameter ``fileName``:
+:param fileName:
     The name of an existing file.
 
-Parameter ``readOnly``:
+:param readOnly:
     the desired read-only status
 
-Returns:
+:returns:
     BeFileNameStatus::Success if the operation was successful or non-
     zero if not)doc";
 
 static const char * __doc_Bentley_BeFileName_BeMoveFile = R"doc(Move or rename an existing file.
 
-Parameter ``oldFileName``:
+:param oldFileName:
     The name of an existing file.
 
-Parameter ``newFileName``:
+:param newFileName:
     The new name for the file.
 
-Parameter ``numRetries``:
+:param numRetries:
     the number of times to retry the open in the event of a sharing
     violation
 
-Returns:
+:returns:
     BeFileNameStatus::Success if the file was successfully moved or
     BeFileNameStatus::UnknownError if not.)doc";
 
 static const char * __doc_Bentley_BeFileName_BeDeleteFile = R"doc(Delete an existing file.
 
-Parameter ``fileNameP``:
+:param fileNameP:
     The name of an existing file.
 
-Parameter ``removeReadOnlyAttribute``:
+:param removeReadOnlyAttribute:
     Remove read-only attribute for the file before making an
     attempting to delete it.
 
-Returns:
+:returns:
     BeFileNameStatus::Success if the file was successfully deleted or
     BeFileNameStatus::CantDeleteFile if not.)doc";
 
 static const char * __doc_Bentley_BeFileName_BeCopyFile = R"doc(Copy an existing file. If a file with the new name already exists, it
 is overwritten.
 
-Parameter ``newFileName``:
+:param newFileName:
     The name for the newly copied file.
 
-Parameter ``existingFileName``:
+:param existingFileName:
     The name for the source file.
 
-Parameter ``failIfFileExists``:
+:param failIfFileExists:
     Do not copy and return error if the destination file already
     exists.
 
-Returns:
+:returns:
     DGNFILE_STATUS_Success if the file was successfully copied.)doc";
 
 static const char * __doc_Bentley_BeFileName_CloneDirectory = R"doc(Clone the contents of an existing directory, and optionally its
 subdirectories, into a new directory.
 
-Parameter ``destDir``:
+:param destDir:
     The name for the new directory.
 
-Parameter ``sourceDir``:
+:param sourceDir:
     The source directory to clone.
 
-Parameter ``includeSubDirs``:
+:param includeSubDirs:
     If true, also clone all subdirectories, recursively.
 
-Returns:
+:returns:
     DGNFILE_STATUS_Success if the directory was successfully cloned.)doc";
 
 static const char * __doc_Bentley_BeFileName_EmptyAndRemoveDirectory = R"doc(Recursively empty all of the contents of an existing directory and
 then remove it.
 
-Parameter ``path``:
+:param path:
     The pathname for the directory to remove.
 
-Returns:
+:returns:
     DGNFILE_STATUS_Success if the directory was successfully removed.)doc";
 
 static const char * __doc_Bentley_BeFileName_CreateNewDirectory = R"doc(Create a new directory.
 
-Parameter ``path``:
+:param path:
     The pathname for the new directory.
 
-Returns:
+:returns:
     DGNFILE_STATUS_Success if the directory was successfully created.
     @note this method will return an error if the directory already
     exists.)doc";
 
 static const char * __doc_Bentley_BeFileName_IsDirectory = R"doc(Test whether a pathname refers to an existing directory.
 
-Parameter ``path``:
+:param path:
     The pathname to test.
 
-Returns:
+:returns:
     true if the pathname refers to an existing directory.)doc";
 
 static const char * __doc_Bentley_BeFileName_IsEmpty = R"doc(Determines if the value of this BeFileName is empty (blank).)doc";
@@ -200,21 +200,21 @@ static const char * __doc_Bentley_BeFileName_IsAbsolutePath = R"doc(Test if a fi
 
 static const char * __doc_Bentley_BeFileName_DoesPathExist = R"doc(Test whether a pathname refers to an existing file or directory.
 
-Parameter ``path``:
+:param path:
     The pathname to test.
 
-Returns:
+:returns:
     true if the pathname refers to an existing file or directory.)doc";
 
 static const char * __doc_Bentley_BeFileName_AreSameFile = R"doc(Are two filenames equivalent?
 
-Parameter ``file1``:
+:param file1:
     name of a file
 
-Parameter ``file2``:
+:param file2:
     name of another file
 
-Returns:
+:returns:
     true if the two strings are aliases for the same (existing)
     physical file.)doc";
 
@@ -234,16 +234,16 @@ Remark:
 static const char * __doc_Bentley_BeFileName_FixPathName = R"doc(Perform any platform-specific fixes of an input pathname into a
 " canonical " pathname. On Windows, this includes converting forward
 slashes to backslashes and removing double backslashes. It also
-removes " \ " and " \ " notation. On other platforms those rules may be
+removes " \\ " and " \\ " notation. On other platforms those rules may be
 different.
 
-Parameter ``path``:
+:param path:
     The " fixed " version of the pathname.
 
-Parameter ``original``:
+:param original:
     The " raw " pathname.
 
-Returns:
+:returns:
     DGNFILE_STATUS_Success if the pathname was successfully " fixed "
     (whether any changes were made or not), or PATH_IllegalName if the
     pathname is invalid for any reason.)doc";
@@ -251,14 +251,14 @@ Returns:
 static const char * __doc_Bentley_BeFileName_ResolveRelativePath = R"doc(Generates a fullpath by resolving relativeFileName relative to
 basePath.
 
-Parameter ``fullPath``:
-    OUT the full path resolved from the inputs.
+:param fullPath:
+    (output) the full path resolved from the inputs.
 
-Parameter ``relativeFileName``:
-    IN the relative file name to resolve.
+:param relativeFileName:
+    (input) the relative file name to resolve.
 
-Parameter ``basePath``:
-    IN used as a root for the expansion. @Return non-zero error status
+:param basePath:
+    (input) used as a root for the expansion. @Return non-zero error status
     if not successful @Remarks This function only performs a string
     manipulation. It does not require or make any use of an actual
     file.)doc";
@@ -267,15 +267,15 @@ static const char * __doc_Bentley_BeFileName_FindRelativePath = R"doc(Finds the 
 files are on different devices, targetFileName is copied to
 relativePath.
 
-Parameter ``relativePath``:
-    OUT the relative path to the target file
+:param relativePath:
+    (output) the relative path to the target file
 
-Parameter ``targetFileName``:
-    IN the full file specification of the file the relative path is
+:param targetFileName:
+    (input) the full file specification of the file the relative path is
     needed for.
 
-Parameter ``rootFileName``:
-    IN the full file specification of the root for the relative path.)doc";
+:param rootFileName:
+    (input) the full file specification of the root for the relative path.)doc";
 
 static const char * __doc_Bentley_BeFileName_GetDevice = R"doc(Returns the device letter from path - Empty if the path doesn't start
 with a device. Always empty on unix.)doc";
@@ -302,37 +302,37 @@ static const char * __doc_Bentley_BeFileName_ParseNameNoClear = R"doc(Parse a fu
 filename, and extension. If the input does not contain a file part,
 the output is not changed.
 
-Parameter ``dev``:
+:param dev:
     The device part of this filename. May be NULL.
 
-Parameter ``dir``:
+:param dir:
     The directory part of this filename. May be NULL.
 
-Parameter ``name``:
+:param name:
     The filename part of this filename. May be NULL.
 
-Parameter ``ext``:
+:param ext:
     The extension part of this filename. May be NULL.
 
-Parameter ``fullFileName``:
+:param fullFileName:
     The filename to parse.)doc";
 
 static const char * __doc_Bentley_BeFileName_ParseName = R"doc(Parse a full filename into WStrings for the device, directory,
 filename, and extension.
 
-Parameter ``dev``:
+:param dev:
     The device part of this filename. May be NULL.
 
-Parameter ``dir``:
+:param dir:
     The directory part of this filename. May be NULL.
 
-Parameter ``name``:
+:param name:
     The filename part of this filename. May be NULL.
 
-Parameter ``ext``:
+:param ext:
     The extension part of this filename. May be NULL.
 
-Parameter ``fullFileName``:
+:param fullFileName:
     The filename to parse.)doc";
 
 static const char * __doc_Bentley_BeFileName_GetUri = R"doc(Get the URI for this BeFileName.)doc";
@@ -360,7 +360,7 @@ static const char * __doc_Bentley_BeFileName_Clear = R"doc(Clear the value of th
 
 static const char * __doc_Bentley_BeFileName_SetName = R"doc(Change the value of this BeFileName.
 
-Parameter ``name``:
+:param name:
     The new value for this BeFileName. If NULL, the value is cleared.)doc";
 
 static const char * __doc_Bentley_BeFileName_GetName = R"doc(Copy name into WChar buffer.)doc";

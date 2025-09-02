@@ -12,69 +12,69 @@
 
 static const char * __doc_Bentley_DgnPlatform_ArcHandler_CreateArcElement =R"doc(Create a new ARC_ELM with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``center``:
+:param center:
     arc center
 
-Parameter ``axis1``:
+:param axis1:
     size of the primary arc axis
 
-Parameter ``axis2``:
+:param axis2:
     size of the secondary arc axis
 
-Parameter ``rotation``:
+:param rotation:
     arc rotation
 
-Parameter ``start``:
+:param start:
     arc starting angle in radians
 
-Parameter ``sweep``:
+:param sweep:
     arc sweep angle in radians
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated. Instance)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EllipseHandler_CreateEllipseElement =R"doc(Create a new ELLIPSE_ELM with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``center``:
+:param center:
     ellipse center
 
-Parameter ``axis1``:
+:param axis1:
     size of the primary ellipse axis
 
-Parameter ``axis2``:
+:param axis2:
     size of the secondary ellipse axis
 
-Parameter ``rotation``:
+:param rotation:
     ellipse rotation
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated.)doc";
 

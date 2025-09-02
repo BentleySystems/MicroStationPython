@@ -12,37 +12,37 @@
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetClipProperties =R"doc(Change clipProperties set on this raster attachment.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``clipProperties``:
+:param clipProperties:
     The clip properties object to set.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetGeocoding =R"doc(Change the element handle that describe the geographic coordinate
 system (geocoding) for this raster attachment.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``geocoding``:
+:param geocoding:
     The element handle that describe the geographic coordinate system
     (geocoding) to set. Use an invalid elemHandle to remove geocoding.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetWorldFileDefaultUnitFactor =R"doc(Change default unit factor multiplier for world file unit definition.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``factor``:
+:param factor:
     The default unit factor multiplier for world file unit definition.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetWorldFileUnit =R"doc(Change default unit definition to use when the georeference is
@@ -50,166 +50,166 @@ extracted from a world file that accompanied the raster file. This
 represent the unit to use to interpret a world file sister file when
 raster file are accompanied by one.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``WorldFileUnit``:
+:param WorldFileUnit:
     The unit definition that will be used.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetGeotiffUnitPriority =R"doc(Change which geotiff unit definition must be use in a geotiff raster
 file.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``priority``:
+:param priority:
     The geotiff unit definition that must be use in a geotiff raster
     file.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetGeotiffUnitUseUOR =R"doc(Change if geotiff default unit are UOR.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``useUOR``:
+:param useUOR:
     Set to true if geotiff default unit are UOR.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetGeotiffDefaultUnitFactor =R"doc(Change default unit factor multiplier for geotiff unit definition.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``factor``:
+:param factor:
     The default unit factor multiplier for geotiff unit definition.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetGeotiffUnit =R"doc(Change the unit definition to use when interpreting a geotiff raster
 file.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``GeotiffUnit``:
+:param GeotiffUnit:
     The unit definition that will be set.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetTransparentColors =R"doc(Change transparent color set on this raster attachment.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``rasterTransparentColors``:
+:param rasterTransparentColors:
     The transparent color collection to set.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetImageTransparencyLevel =R"doc(Change transparency value applied to all raster image at display
 [0,255], 0 -> Opaque.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``transparency``:
+:param transparency:
     The transparency value applied to all raster image at display
     [0,255], 0 -> Opaque.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetBrightness =R"doc(Change brightness apply at display [-128,+127], 0 -> nothing.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``brightness``:
+:param brightness:
     The brightness apply at display [-128,+127], 0 -> nothing.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetContrast =R"doc(Change contrast apply at display [-128,+127], 0 -> nothing.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``contrast``:
+:param contrast:
     The contrast apply at display [-128,+127], 0 -> nothing.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetBackgroundColor =R"doc(Change raw color index used as background color.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``rawColorIndex``:
+:param rawColorIndex:
     The raw color index used as background color.
 
-Returns:
+:returns:
     true if element was updated. @See RgbFromColorIndexInModel @See
     ColorIndexFromRgbInModel)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetForegroundColor =R"doc(Change raw color index used as foreground color.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``rawColorIndex``:
+:param rawColorIndex:
     The raw color index used as foreground color.
 
-Returns:
+:returns:
     true if element was updated. @See RgbFromColorIndexInModel @See
     ColorIndexFromRgbInModel)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetTintColor =R"doc(Change raw color index used to tint raster.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``rawColorIndex``:
+:param rawColorIndex:
     The raw color index used to tint raster.
 
-Returns:
+:returns:
     true if element was updated. @See RgbFromColorIndexInModel @See
     ColorIndexFromRgbInModel)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetPrintGamma =R"doc(Change gamma value used to print raster.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``gamma``:
+:param gamma:
     The new gamma value used to print raster (0 is illegal and no
     gamma = 1.0).
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetViewGamma =R"doc(Change gamma value used to display raster in views.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``gamma``:
+:param gamma:
     The gamma value used to display raster in views (0 is illegal and
     no gamma = 1.0).
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetLayer =R"doc(Change the layer number of this raster attachment. Raster in back and
@@ -218,37 +218,37 @@ being at the back of the view and stack to front in order. Two raster
 might have the same layer number in which case the order in file will
 determine the final order. You should try to avoid this situation.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``layer``:
+:param layer:
     The new layer number.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetDisplayPriorityPlane =R"doc(Change the RasterDisplayPriorityPlane value.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``plane``:
+:param plane:
     The RasterDisplayPriorityPlane value.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetBinaryPrintInvertState =R"doc(Change if background and foreground color should be inverted for
 binary raster file during print.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     Set to true if background and foreground color should be inverted
     for binary raster file during print.
 
-Returns:
+:returns:
     true if element was updated.
 
 Remark:
@@ -256,84 +256,84 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetTransparencyState =R"doc(Change if transparency must be displayed.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     Set to true if transparency must be displayed.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetClipState =R"doc(Change if raster clip properties are applied at display time.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     Set to true to applied clip properties at display time.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetPrintState =R"doc(Change if raster must be print.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     Set to true if raster must be print.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetInvertState =R"doc(Change if raster color must be inverted on display.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     Set to true if raster color must be inverted on display.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetViewState =R"doc(Change if the raster is displayed in a specific view.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view number to query [0..7].
 
-Parameter ``state``:
+:param state:
     Set to true if the raster is displayed in the view.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetScanningResolution =R"doc(Change scanning resolution (in dot per inches (DPI), in x and y
 directions).
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``scanningResolutionDPI``:
+:param scanningResolutionDPI:
     The new scanning resolution (in dot per inches (DPI), in x and y
     directions).
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetColorMode =R"doc(Change color mode stored in this raster attachment.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``colorMode``:
+:param colorMode:
     The color mode value of this raster attachment.
 
-Returns:
+:returns:
     true if element was updated.
 
 Remark:
@@ -342,118 +342,118 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetPageNumber =R"doc(Change page number for multi-page file.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``page``:
+:param page:
     The new page number, default is 0.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetTransform =R"doc(Change raster attachment transformation matrix (pixel to UOR) and
 compute a new extent base on estimated bitmap size (from previous
 transform and extent).
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``matrix``:
+:param matrix:
     The new transformation matrix to set (pixel to UOR).
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetGCSInheritedFromModelState =R"doc(Change if raster Geographic Coordinate System is inherited from the
 DgnModel or not.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     Set to true if raster Geographic Coordinate System is inherited
     from the DgnModel raster is attached to.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetGeoreferencePriority =R"doc(Change which georeference has priority when raster is loaded.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``priority``:
+:param priority:
     Set which georeference has priority when raster is loaded.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetOpenReadWrite =R"doc(Change if the raster file should be open in read-write mode or in
 read-only.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``isWritable``:
+:param isWritable:
     Set to true if the raster file should be open in read-write mode,
     for read-only set it to false.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetViewIndependentState =R"doc(Change view independent display state for this attachment.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     Set to true if this raster display is view independent.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetLockedState =R"doc(Change the lock state for this raster.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     The new lock state to set.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetSnappableState =R"doc(Change if snap is enable for this raster.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     Set to true if snap is enable for this raster.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetLogicalName =R"doc(Change logical name.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``logicalName``:
+:param logicalName:
     The new logical name.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetAttachDescription =R"doc(Change raster attachment description.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``description``:
+:param description:
     The new description.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetAttachMoniker0 =R"doc(Set the moniker that identifies the raster file; basic not overridable
@@ -461,61 +461,61 @@ method.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_SetAttachMoniker =R"doc(Set the moniker that identifies the raster file
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``moniker``:
+:param moniker:
     The moniker that identify that raster file.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentEdit_CreateRasterAttachment =R"doc(Create a new Raster attachment with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Initialize default properties from this template element or NULL.
 
-Parameter ``moniker``:
+:param moniker:
     Moniker that identifies the raster file.
 
-Parameter ``matrix``:
+:param matrix:
     The new transformation matrix to set (pixel to UOR).
 
-Parameter ``extentInUOR``:
+:param extentInUOR:
     The new raster size in UOR.
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was successfully
     calculated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetClipProperties =R"doc(Query clipProperties set on this raster attachment.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     a newly created RasterClipProperties filled from raster attachment
     values.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetGeocoding =R"doc(Query the element handle that describe the geographic coordinate
 system (geocoding) for this raster attachment.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     the element handle that describe the geographic coordinate system
     (geocoding) for this raster attachment.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetWorldFileDefaultUnitFactor =R"doc(Query default unit factor multiplier for world file unit definition.
 
-Parameter ``eh``:
+:param eh:
     The element to query. Returns default unit factor multiplier for
     world file unit definition.)doc";
 
@@ -524,132 +524,132 @@ extracted from a world file that accompanied the raster file. This
 represent the unit to use to interpret a world file sister file when
 raster file are accompanied by one.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Parameter ``WorldFileUnit``:
+:param WorldFileUnit:
     Unit definition that will be filled.
 
-Returns:
+:returns:
     a const reference to input WorldFileUnit filled from raster
     attachment values.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetGeotiffUnitPriority =R"doc(Query which geotiff unit definition must be use in a geotiff raster
 file.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     which geotiff unit definition must be use in a geotiff raster
     file.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetGeotiffUnitUseUOR =R"doc(Query if geotiff default unit are UOR.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true is geotiff default unit are UOR.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetGeotiffDefaultUnitFactor =R"doc(Query default unit factor multiplier for geotiff unit definition.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     default unit factor multiplier)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetGeotiffUnit =R"doc(Query the unit definition to use when interpreting a geotiff raster
 file.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Parameter ``GeotiffUnit``:
+:param GeotiffUnit:
     Unit definition that will be filled.
 
-Returns:
+:returns:
     a const reference to input GeotiffUnit filled from raster
     attachment values.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetTransparentColors =R"doc(Query transparent color set on this raster attachment.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     a newly created transparent color collection smart pointer filled
     from raster attachment values.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetImageTransparencyLevel =R"doc(Query transparency value applied to all raster image at display [0,
 255], 0 -> Opaque.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     transparency value applied to all raster image at display [0,
     255], 0 -> Opaque.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetBrightness =R"doc(Query brightness apply at display [-128, +127], 0 -> nothing.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     brightness apply at display [-128, +127], 0 -> nothing.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetContrast =R"doc(Query contrast apply at display [-128, +127], 0 -> nothing.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     contrast apply at display [-128, +127], 0 -> nothing.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetBackgroundColor =R"doc(Query raw color index used as background color. @See
 RgbFromColorIndexInModel
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raw color index used as background color.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetForegroundColor =R"doc(Query raw color index used as foreground color. @See
 RgbFromColorIndexInModel
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raw color index used as foreground color.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetTintColor =R"doc(Query raw color index used to tint raster. @See
 RgbFromColorIndexInModel
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raw color index used to tint raster.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetPrintGamma =R"doc(Query gamma value used to print raster.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     gamma value used to print raster. Zero is illegal and no gamma =
     1.0.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetViewGamma =R"doc(Query gamma value used to display raster in views.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     gamma value used to display raster in views. Zero is illegal and
     no gamma = 1.0.)doc";
 
@@ -659,18 +659,18 @@ being at the back of the view and stack to front in order. Two raster
 might have the same layer number in which case the order in file will
 determine the final order. You should try to avoid this situation.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     the layer number of this raster attachment.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetDisplayPriorityPlane =R"doc(Query the RasterDisplayPriorityPlane value.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     one of the RasterDisplayPriorityPlane value, or 0 if never
     initialized.)doc";
 
@@ -680,71 +680,71 @@ raster file during print.
 Remark:
     This setting has not effect if the raster file is not binary.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if background and foreground color should be inverted for
     binary raster file during print.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetTransparencyState =R"doc(Query if transparency must be displayed.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if transparency must be displayed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetClipState =R"doc(Query if raster clip properties are applied at display time.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if raster clip properties are applied at display time.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetPrintState =R"doc(Query if raster must be print.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if raster must be print.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetInvertState =R"doc(Query if raster color must be inverted on display.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if raster color must be inverted on display.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetViewState =R"doc(Query if the raster is displayed in a specific view.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view number to query [0..7].
 
-Returns:
+:returns:
     true if the raster is displayed in the view.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetScanningResolution =R"doc(Query scanning resolution (in dot per inches (DPI), in x and y
 directions).
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     scanning resolution (in x and y directions).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetExtent =R"doc(Query raster size in UORs
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raster size in UORs)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetColorMode =R"doc(Query last color mode value set in the attachment (will not query the
@@ -756,31 +756,31 @@ Remark:
     export to dgn version 7 which store raster attachment differently
     based on the color mode.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     one of the COLORMODE defines from image.h - returns
     ImageColorMode::Any if unknown)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetPageNumber =R"doc(Returns page number for multi-page file.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     page number for multi-page file. Default is 0.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetTransform =R"doc(Query raster attachment transformation matrix (pixel to UOR).
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Parameter ``matrix``:
+:param matrix:
     The matrix that will be filled from the transform stored in that
     raster attachment (pixel to UOR).
 
-Returns:
+:returns:
     BSISUCCESS if matrix that was filled is valid, otherwise BSIERROR.
     Notice that matrix output parameter will be filled even if
     BSIERROR is returned.)doc";
@@ -788,69 +788,69 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetGCSInheritedFromModelState =R"doc(Query if raster Geographic Coordinate System is inherited from the
 DgnModel raster is attached to.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if raster Geographic Coordinate System is inherited from the
     DgnModel raster is attached to.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetGeoreferencePriority =R"doc(Query which georeference has priority when raster is loaded.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     which georeference has priority when raster is loaded.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetOpenReadWrite =R"doc(Query if the raster file should be open in read-write mode, otherwise
 open in read-only.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if the raster file should be open in read-write mode,
     otherwise open in read-only.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetViewIndependentState =R"doc(Query if this raster display is view independent.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if this raster display is view independent.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetLockedState =R"doc(Query if lock is set for this raster.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if lock is enable for this raster.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetSnappableState =R"doc(Query if snap is enable for this raster.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if snap is enable for this raster.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetLogicalName =R"doc(Query logical name.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     logical name.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetAttachDescription =R"doc(Query raster attachment description.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     description.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetAttachMoniker =R"doc(Get the moniker that identifies the raster file)doc";
@@ -858,34 +858,34 @@ static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetAttachMo
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_GetSearchPath =R"doc(Return default search path used with the attach moniker to find
 attached raster file.
 
-Parameter ``modelRef``:
+:param modelRef:
     Will search in this model design file folder.
 
-Returns:
+:returns:
     the search string.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_RgbFromColorIndexInModel =R"doc(Query the RGB triplet from a DgnModelRef rawIndex.
 
-Parameter ``color``:
+:param color:
     the RGB triplet found.
 
-Parameter ``modelRef``:
+:param modelRef:
     The DgnModelRef to look to for RGB color value.
 
-Parameter ``rawIndex``:
+:param rawIndex:
     The rawIndex of the RGB triplet to extract.
 
-Returns:
+:returns:
     SUCCESS if Successful, ERROR otherwise.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_ColorIndexFromRgbInModel =R"doc(Query the raw color index of an RGB triplet from a DgnModelRef color
 table, add a color book entry if not found.
 
 
-Parameter ``modelRef``:
+:param modelRef:
     The DgnModelRef to look to for color table.
 
-Parameter ``rgbColor``:
+:param rgbColor:
     The RGB triplet to find index in color table.
 
 Returns (Tuple, 0):
@@ -899,41 +899,41 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_IsTransform3D =R"doc(Check if the matrix contains 3D transformation.
 
-Parameter ``matrix``:
+:param matrix:
     The matrix to check.
 
-Returns:
+:returns:
     true if matrix contain 3D transformation.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterAttachmentQuery_IsValidTransform =R"doc(Check if the matrix is a valid raster transform matrix.
 
-Parameter ``matrix``:
+:param matrix:
     The matrix to check
 
-Returns:
+:returns:
     true if matrix is valid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_AddTransparentColor =R"doc(Add a new indexed transparent color definition at the end of the
 collection.
 
-Parameter ``index``:
+:param index:
     The transparent color index you want to set.
 
-Parameter ``transparency``:
+:param transparency:
     The transparency value of the color at this index. [0, 255], 255
     -> Opaque.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_SetTransparentColor =R"doc(Set a new indexed transparent color definition at index.
 
-Parameter ``index``:
+:param index:
     The index of the indexed transparent color you want to set.
 
-Parameter ``value``:
+:param value:
     The new value of the indexed transparent color you want to set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_GetTransparentColor =R"doc(Returns access to indexed transparent color definition at index.
 
-Parameter ``index``:
+:param index:
     The index of the indexed transparent color you want to access.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_GetMaxTransparentColor =R"doc(Returns the maximum number of valid indexed colors (continuous tones)
@@ -942,38 +942,38 @@ this collection can contain.)doc";
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_AddRgbTransparentColor =R"doc(Add a new RGB transparent color definition at the end of the
 collection.
 
-Parameter ``colorMin``:
+:param colorMin:
     Minimum RGB transparent color of the RGB cube you want to set.
 
-Parameter ``colorMax``:
+:param colorMax:
     Maximum RGB transparent color of the RGB cube you want to set.
 
-Parameter ``transparency``:
+:param transparency:
     The transparency value of this RGB cube. [0, 255], 255 -> Opaque.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_SetRgbTransparentColor =R"doc(Set a new RGB transparent color definition at index.
 
-Parameter ``index``:
+:param index:
     The index of the RGB transparent color you want to set.
 
-Parameter ``value``:
+:param value:
     The new value of the RGB transparent color you want to set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_GetRgbTransparentColor =R"doc(Returns access to RGB transparent color definition at index.
 
-Parameter ``index``:
+:param index:
     The index of the RGB transparent color you want to access.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_SetCount =R"doc(Set the number of valid colors in this collection.
 
-Parameter ``count``:
+:param count:
     Number of valid color in the collection.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_GetCount =R"doc(Returns the number of valid colors in this collection.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_SetColorType =R"doc(Set the TransparentColorType of this transparent colors collection.
 
-Parameter ``colorType``:
+:param colorType:
     The type of color in the collection.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_GetColorType =R"doc(Returns the TransparentColorType of this transparent colors
@@ -981,14 +981,14 @@ collection.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_Init =R"doc(Initialize an empty raster transparent colors collection instance.
 
-Parameter ``colorType``:
+:param colorType:
     The type of color in the transparentColor parameter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterTransparentColorsCollection_Clone =R"doc(Create an empty raster transparent colors collection instance.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterClipProperties_SetMaskCollection =R"doc(Set a new clip mask properties.
 
-Parameter ``clipMasksP``:
+:param clipMasksP:
     New RasterClipCollectionPtr or NULL to remove all clip masks.
 
 Remark:
@@ -998,7 +998,7 @@ static const char * __doc_Bentley_DgnPlatform_RasterClipProperties_GetMaskCollec
 
 static const char * __doc_Bentley_DgnPlatform_RasterClipProperties_SetBoundary =R"doc(Set a new clip boundary property.
 
-Parameter ``boundaryP``:
+:param boundaryP:
     New RasterClipPtr or NULL to remove boundary.
 
 Remark:
@@ -1013,7 +1013,7 @@ static const char * __doc_Bentley_DgnPlatform_RasterClipProperties_Clone =R"doc(
 static const char * __doc_Bentley_DgnPlatform_RasterClip_ComputeStrokePoints =R"doc(Compute and returns the element handle stroke points for the current
 raster clip.
 
-Parameter ``strokePts``:
+:param strokePts:
     Vector that will be filled with computed stroke points (in
     Pixels).)doc";
 
@@ -1024,7 +1024,7 @@ NOT check the properties of the clip itself).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterClip_SetClipElement =R"doc(Set raster clip element handle.
 
-Parameter ``clipEh``:
+:param clipEh:
     Element handle to create the clip from. Will be duplicate.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterClip_GetClipElement =R"doc(Returns the element handle of the current raster clip.)doc";
@@ -1084,6 +1084,10 @@ void def_IRasterAttachment(py::module_& m)
     c1.def(py::init(py::overload_cast<>(&RasterClip::Create)));
     c1.def(py::init(py::overload_cast<ElementHandleCR>(&RasterClip::Create)), "clipEh"_a);
     c1.def(py::init([] (DPoint3dArray const& points, DgnModelRefR modelRef) { return RasterClip::Create(points.data(), points.size(), modelRef); }), "points"_a, "modelRef"_a);
+    c1.def(py::init([](py::list const &points, DgnModelRefR modelRef)
+                    {
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d)
+                    return RasterClip::Create(cppPoints.data(), cppPoints.size(), modelRef); }), "points"_a, "modelRef"_a);
     c1.def("Clone", &RasterClip::Clone, DOC(Bentley, DgnPlatform, RasterClip, Clone));
     
     c1.def_property("ClipElement",

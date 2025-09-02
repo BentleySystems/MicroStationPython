@@ -8,1018 +8,1016 @@
 #include "MSPythonPCH.h"
 #include <PSolid/PSolidCoreAPI.h>
 
-
-
 static const char * __doc_Bentley_DgnPlatform_TopologyID_IdFromVertex =R"doc(Get the VertexId currently assigned to a given vertex sub-entity.
 
-Parameter ``vertexId``:
+:param vertexId:
     The requested nodeId-entityId triple.
 
-Parameter ``subEntity``:
+:param subEntity:
     The vertex sub-entity to query.
 
-Parameter ``useHighestId``:
+:param useHighestId:
     true to return the highest nodeId-entityId triple for this face,
     false to return the lowest. Typically true.
 
-Returns:
+:returns:
     SUCCESS if a VertexId was assigned.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TopologyID_IdFromEdge =R"doc(Get the EdgeId currently assigned to a given edge sub-entity.
 
-Parameter ``edgeId``:
+:param edgeId:
     The requested nodeId-entityId pairs.
 
-Parameter ``subEntity``:
+:param subEntity:
     The edge sub-entity to query.
 
-Parameter ``useHighestId``:
+:param useHighestId:
     true to return the highest nodeId-entityId pairs for this face,
     false to return the lowest. Typically true.
 
-Returns:
+:returns:
     SUCCESS if an EdgeId was assigned.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TopologyID_IdFromFace =R"doc(Get the FaceId currently assigned to a given face sub-entity.
 
-Parameter ``faceId``:
+:param faceId:
     The requested nodeId-entityId pair.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face sub-entity to query.
 
-Parameter ``useHighestId``:
+:param useHighestId:
     true to return the highest nodeId-entityId pair for this face,
     false to return the lowest. Typically true.
 
-Returns:
+:returns:
     SUCCESS if a FaceId was assigned.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TopologyID_FindNodeIdRange =R"doc(Find the highest and lowest nodeId values from the topology ids
 currently assigned to the faces of the given body. Used to avoid
 nodeId conflicts between target and tool bodies.
 
-Parameter ``entity``:
+:param entity:
     The solid or sheet body to inspect.
 
-Parameter ``highestNodeId``:
+:param highestNodeId:
     The highest nodeId currently assigned.
 
-Parameter ``lowestNodeId``:
+:param lowestNodeId:
     The lowest nodeId currently assigned.
 
-Returns:
+:returns:
     SUCCESS if face ids are assigned to the body.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_ClashDetectionBetweenTargetAndTool =R"doc(Get clash result between target and tool from the list of targets
 
-Parameter ``clashTool``:
+:param clashTool:
     List of target tool causing clashes with the target
 
-Parameter ``target``:
+:param target:
     The target body
 
-Parameter ``planarTool``:
+:param planarTool:
     The planar sheet body for the cut profile.
 
-Parameter ``directionMode``:
+:param directionMode:
     The sweep direction relative to the sheet body normal of the cut
     profile.
 
-Parameter ``depthMode``:
+:param depthMode:
     To specify if the cut should extended through the entire body or
     only create a pocket of fixed depth.
 
-Parameter ``distance``:
+:param distance:
     To specify the cut depth for CutDepthMode::Blind.
 
-Parameter ``invert``:
+:param invert:
     Set true to reverse the sense of the tool (outside rather than
     inside if closed).
 
-Parameter ``defaultNormal``:
+:param defaultNormal:
     If not NULL, uused to to determine the cut direction only if the
     tool is a line segment.
 
-Parameter ``cutDirection``:
+:param cutDirection:
     Cut direction
 
-Returns:
+:returns:
     SUCCESS if there occur clash between given vector and target)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_OffsetThroughHole =R"doc(Modify the target solid by offsetting face through body. It will punch
 hole .
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``faces``:
+:param faces:
     The array of faces to be offset.
 
-Parameter ``distances``:
+:param distances:
     The array of offsets for each face.
 
-Parameter ``nFaces``:
+:param nFaces:
     Count of face sub-entities.
 
-Returns:
+:returns:
     SUCCESS if hole cutting is successfull.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_DeleteRedundantTopology =R"doc(Modify the target body by removing redundant topology. An example of
 redundant topololgy would be an edge where the faces on either side
 have identical surface geometry.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Returns:
+:returns:
     SUCCESS if operation was completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_ImprintWiresOnFace =R"doc(Modify a face of a body by imprinting the specified wire bodies.
 
-Parameter ``face``:
+:param face:
     The target face sub-entity to imprint.
 
-Parameter ``wires``:
+:param wires:
     The vector of wire bodies to imprint the curves of onto the face.
 
-Parameter ``extendToEdge``:
+:param extendToEdge:
     The option to extend an open wire body to ensure that it splits
     the face.
 
-Returns:
+:returns:
     SUCCESS if face imprint created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_ImprintCurveVectorOnBody =R"doc(Modify the target body by imprinting new edges from the specified
 curve vector.
 
-Parameter ``target``:
+:param target:
     The target body to imprint.
 
-Parameter ``curveVector``:
+:param curveVector:
     The curve geometry to imprint.
 
-Parameter ``direction``:
+:param direction:
     The project direction for imprinting the curve.
 
-Parameter ``extendOpenCurvesToEdge``:
+:param extendOpenCurvesToEdge:
     The option to extend an open curve to ensure that it splits the
     face.
 
-Returns:
+:returns:
     SUCCESS if imprint created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_DeleteFaces =R"doc(Modify the target solid or sheet body by removing selected faces and
 healing.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``faces``:
+:param faces:
     The array of faces to be delted.
 
-Parameter ``nFaces``:
+:param nFaces:
     Count of face sub-entities.
 
-Returns:
+:returns:
     SUCCESS if faces could be deleted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_SpinFaces =R"doc(Modify the target solid or sheet body by spinning selected faces along
 an arc specified by a revolve axis and sweep angle.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``faces``:
+:param faces:
     The array of faces to be spun.
 
-Parameter ``nFaces``:
+:param nFaces:
     Count of face sub-entities.
 
-Parameter ``axis``:
+:param axis:
     The revolve axis.
 
-Parameter ``angle``:
+:param angle:
     The sweep angle. (value in range of -2pi to 2pi)
 
-Returns:
+:returns:
     SUCCESS if faces could be spun.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_SweepFaces =R"doc(Modify the target solid or sheet body by sweeping selected faces along
 a path vector.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``faces``:
+:param faces:
     The array of faces to be swept.
 
-Parameter ``nFaces``:
+:param nFaces:
     Count of face sub-entities.
 
-Parameter ``path``:
+:param path:
     A scaled vector to define the sweep direction and distance.
 
-Returns:
+:returns:
     SUCCESS if faces could be swept.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_TransformFaces =R"doc(Modify the target solid or sheet body by transforming selected faces.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``faces``:
+:param faces:
     The array of faces to be transformed.
 
-Parameter ``translations``:
+:param translations:
     The array of transforms for each face.
 
-Parameter ``nFaces``:
+:param nFaces:
     Count of face sub-entities.
 
-Parameter ``addStep``:
+:param addStep:
     The option for how to handle the creation of step faces.
 
-Returns:
+:returns:
     SUCCESS if faces could be transformed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_OffsetFaces =R"doc(Modify the target solid or sheet body by offsetting selected faces.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``faces``:
+:param faces:
     The array of faces to be offset.
 
-Parameter ``distances``:
+:param distances:
     The array of offsets for each face.
 
-Parameter ``nFaces``:
+:param nFaces:
     Count of face sub-entities.
 
-Parameter ``addStep``:
+:param addStep:
     The option for how to handle the creation of step faces.
 
-Returns:
+:returns:
     SUCCESS if faces could be offset.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_HollowFaces =R"doc(Modify the target solid body by hollowing using specified face
 offsets.
 
-Parameter ``target``:
+:param target:
     The target body to hollow.
 
-Parameter ``defaultDistance``:
+:param defaultDistance:
     The offset distance to apply to any face not specifically included
     in the faces array.
 
-Parameter ``faces``:
+:param faces:
     The array of faces to be offset by other than the default offset
     distance.
 
-Parameter ``distances``:
+:param distances:
     The array of offsets for each face.
 
-Parameter ``nFaces``:
+:param nFaces:
     Count of face sub-entities.
 
-Parameter ``addStep``:
+:param addStep:
     The option for how to handle the creation of step faces. @note A
     positive offset goes outwards (in the direction of the surface
     normal), a negative offset is inwards, and a face with zero offset
     will be pierced/removed.
 
-Returns:
+:returns:
     SUCCESS if hollow could be created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_ChamferEdges =R"doc(Modify the specified edges of the given body by changing them into
 faces having the requested chamfer surface geometry.
 
-Parameter ``target``:
+:param target:
     The target body to chamfer.
 
-Parameter ``edges``:
+:param edges:
     The array of edge sub-entities to attach chamfers to.
 
-Parameter ``values1``:
+:param values1:
     The array of chamfer values for each edge, value meaning varies by
     ChamferMode.
 
-Parameter ``values2``:
+:param values2:
     The array of chamfer values for each edge, value meaning varies by
     ChamferMode. (Unused for ChamferMode::Length)
 
-Parameter ``nEdges``:
+:param nEdges:
     Count of edge sub-entities.
 
-Parameter ``mode``:
+:param mode:
     Specifies chamfer type and determines how values1 and values2 are
     interpreted and used.
 
-Parameter ``propagateSmooth``:
+:param propagateSmooth:
     Whether to automatically continue chamfer along connected and
     tangent edges that aren't explicitly specified in edges array.
 
-Returns:
+:returns:
     SUCCESS if chamfers could be created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_BlendEdges =R"doc(Modify the specified edges of the given body by changing them into
 faces having the requested blending surface geometry.
 
-Parameter ``target``:
+:param target:
     The target body to blend.
 
-Parameter ``edges``:
+:param edges:
     The array of edge sub-entities to attach blends to.
 
-Parameter ``radii``:
+:param radii:
     The array of blend radius values for each edge.
 
-Parameter ``nEdges``:
+:param nEdges:
     Count of edge sub-entities.
 
-Parameter ``propagateSmooth``:
+:param propagateSmooth:
     Whether to automatically continue blend along connected and
     tangent edges that aren't explicitly specified in edges array.
 
-Returns:
+:returns:
     SUCCESS if blends could be created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_TransformBody =R"doc(Modify the entity transform for the given body by pre-multiplying the
 current entity transform with the input transform.
 
-Parameter ``entity``:
+:param entity:
     The body whose body to uor transform is to be updated.
 
-Parameter ``transform``:
+:param transform:
     The transform to apply to the body. @note This method does not
     change the BRep data in any way, it only changes it's body to uor
     transform. This is a helper method added for discoverabiliy that
     is the same as calling
     ISolidKernelEntity::PreMultiplyEntityTransformInPlace.
 
-Returns:
+:returns:
     SUCCESS if transform was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_SewBodies =R"doc(Sew the given set of sheet bodies together by joining those that share
 edges in common.
 
-Parameter ``sewn``:
+:param sewn:
     The new bodies produced by sewing.
 
-Parameter ``unsewn``:
+:param unsewn:
     The bodies that were not able to be sewn.
 
-Parameter ``tools``:
+:param tools:
     The array of sheet bodies. (invalidated after sew).
 
-Parameter ``nTools``:
+:param nTools:
     Count of tool bodies.
 
-Parameter ``gapWidthBound``:
+:param gapWidthBound:
     Defines a limit on the width of the gap between sheet body edges
     that will be allowed to remain.
 
-Parameter ``nIterations``:
+:param nIterations:
     To request repeated sew attempts that automatically increase gap
     up to limit set by gapWidthBound.
 
-Returns:
+:returns:
     SUCCESS if some bodies were able to be sewn together.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_ThickenSheet =R"doc(Modify the target sheet body by thickening to create a solid body.
 
-Parameter ``target``:
+:param target:
     The target sheet body to thicken.
 
-Parameter ``frontDistance``:
+:param frontDistance:
     The offset distance in the direction of the sheet body face
     normal.
 
-Parameter ``backDistance``:
+:param backDistance:
     The offset distance in the opposite direction of the sheet body
     face normal.
 
-Returns:
+:returns:
     SUCCESS if thicken could be completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_SpinBody =R"doc(Modify the target body by spinning along an arc specified by a revolve
 axis and sweep angle.
 
-Parameter ``target``:
+:param target:
     The target body to spin. A wire body becomes a sheet, and a sheet
     body becomes a solid.
 
-Parameter ``axis``:
+:param axis:
     The revolve axis.
 
-Parameter ``angle``:
+:param angle:
     The sweep angle. (value in range of -2pi to 2pi)
 
-Returns:
+:returns:
     SUCCESS if spin could be completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_SweepBody =R"doc(Modify the target body by sweeping along a path vector.
 
-Parameter ``target``:
+:param target:
     The target body to sweep. A wire body becomes a sheet, and a sheet
     body becomes a solid.
 
-Parameter ``path``:
+:param path:
     A scaled vector to define the sweep direction and distance.
 
-Returns:
+:returns:
     SUCCESS if sweep could be completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_Emboss =R"doc(Modify the target body by adding a protrusion constructed from the
 sheet tool body and its imprint on the target body.
 
-Parameter ``target``:
+:param target:
     The target body to modify, can be a sheet or solid.
 
-Parameter ``tool``:
+:param tool:
     The planar sheet body for the emboss profile.
 
-Parameter ``reverseDirection``:
+:param reverseDirection:
     To specify if material is to be added in the same direction or
     opposite direction to the surface normal of the tool sheet body.
 
-Returns:
+:returns:
     SUCCESS if emboss operation was completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_BooleanCut =R"doc(Modify the target body by subtracting a cut body produced from
 sweeping the sheet tool body according to the specified cut direction
 and depth.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``planarTool``:
+:param planarTool:
     The planar sheet body for the cut profile.
 
-Parameter ``directionMode``:
+:param directionMode:
     The sweep direction relative to the sheet body normal of the cut
     profile.
 
-Parameter ``depthMode``:
+:param depthMode:
     To specify if the cut should extended through the entire body or
     only create a pocket of fixed depth.
 
-Parameter ``distance``:
+:param distance:
     To specify the cut depth for CutDepthMode::Blind.
 
-Parameter ``invert``:
+:param invert:
     Set true to reverse the sense of the tool (outside rather than
     inside if closed).
 
-Parameter ``defaultNormal``:
+:param defaultNormal:
     If not NULL, uused to to determine the cut direction only if the
     tool is a line segment.
 
-Parameter ``nodeId``:
+:param nodeId:
     The node id of the entity.
 
-Returns:
+:returns:
     SUCCESS if cut operation was completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_BooleanUnion =R"doc(Modify the target body by uniting with one or more tool bodies.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``tools``:
+:param tools:
     Array of one or more tool bodies (consumed in boolean).
 
-Parameter ``nTools``:
+:param nTools:
     Count of tool bodies.
 
-Returns:
+:returns:
     SUCCESS if boolean operation was completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_BooleanSubtract =R"doc(Modify the target body by subtracting one or more tool bodies.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``tools``:
+:param tools:
     Array of one or more tool bodies (consumed in boolean).
 
-Parameter ``nTools``:
+:param nTools:
     Count of tool bodies.
 
-Returns:
+:returns:
     SUCCESS if boolean operation was completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Modify_BooleanIntersect =R"doc(Modify the target body by intersecting with one or more tool bodies.
 
-Parameter ``target``:
+:param target:
     The target body to modify.
 
-Parameter ``tools``:
+:param tools:
     A list of one or more tool bodies (consumed in boolean).
 
-Parameter ``nTools``:
+:param nTools:
     Count of tool bodies.
 
-Returns:
+:returns:
     SUCCESS if boolean operation was completed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Convert_SubEntityToCurveVector =R"doc(Create a simplified CurveVector representation of the given sub-
 entity.
 
-Parameter ``curves``:
+:param curves:
     A CurveVector representing the sub-entity.
 
-Parameter ``subEntity``:
+:param subEntity:
     The planar face, edge, or vertex to convert. @note A planar face,
     edge, or vertex can be represented by a CurveVector. Non-planar
     faces will return ERROR.
 
-Returns:
+:returns:
     SUCCESS if a CurveVector could be created to represent the sub-
     entity.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Convert_SubEntityToGeometry =R"doc(Create a simplified IGeometryPtr representation of the given sub-
 entity (non-BRep geometry).
 
-Parameter ``geom``:
+:param geom:
     A reference counted pointer to the new geometry type.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face, edge, or vertex to convert.
 
-Parameter ``modelRef``:
+:param modelRef:
     The destination modelRef. @note A planar face, edge, or vertex can
     be represented by a CurveVector. Non-planar faces can be
     represented by a MSBsplineSurface or ISolidPrimitive.
 
-Returns:
+:returns:
     SUCCESS if a IGeometryPtr could be created to represent the sub-
     entity.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Convert_ElementToBodies =R"doc(Create bodies from an element that represents one or more wire, sheet,
 or solid bodies.
 
-Parameter ``out``:
+:param out:
     The collection of new bodies.
 
-Parameter ``hasMissingGeom``:
+:param hasMissingGeom:
     Will be set to true if not all geometry for the element is
     included in the output body collection.
 
-Parameter ``eh``:
+:param eh:
     The element to convert.
 
-Parameter ``getSolids``:
+:param getSolids:
     Collect solid bodies.
 
-Parameter ``getSheets``:
+:param getSheets:
     Collect sheet bodies.
 
-Parameter ``getWires``:
+:param getWires:
     Collect wire bodies.
 
-Returns:
+:returns:
     SUCCESS if at least one body of the requested type was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Convert_ElementToBody =R"doc(Create a body from an element that can represent a single wire, sheet,
 or solid body.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``eh``:
+:param eh:
     The element to convert.
 
-Parameter ``getSolid``:
+:param getSolid:
     Accept element that can be converted to a single solid body.
 
-Parameter ``getSheet``:
+:param getSheet:
     Accept element that can be converted to a single sheet body.
 
-Parameter ``getWire``:
+:param getWire:
     Accept element that can be converted to a single wire body.
 
-Returns:
+:returns:
     SUCCESS if a body of the requested type was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Create_BodyFromExtrusionToBody =R"doc(Create a new body by extruding a planar sheet body up to another body.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``extrudeTo``:
+:param extrudeTo:
     The body to trim the extruded body to.
 
-Parameter ``profile``:
+:param profile:
     The planar sheet body to extrude.
 
-Parameter ``reverseDirection``:
+:param reverseDirection:
     To specify if extrusion is in the same direction or opposite
     direction to the surface normal of the profile sheet body.
 
-Returns:
+:returns:
     SUCCESS if body was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Create_BodyFromSweep =R"doc(Create a new sheet or solid body by sweeping a cross section profile
 along a path.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``profile``:
+:param profile:
     The cross section profile. (open, closed, or region with holes)
 
-Parameter ``path``:
+:param path:
     The path to sweep along.
 
-Parameter ``model``:
+:param model:
     Used to get the solid to uor scale. (ModelInfo::GetSolidExtent)
 
-Parameter ``alignParallel``:
+:param alignParallel:
     true to keep profile at a fixed angle to global axis instead of
     path tangent (and lock direction).
 
-Parameter ``selfRepair``:
+:param selfRepair:
     true to attempt repair of self-intersections.
 
-Parameter ``createSheet``:
+:param createSheet:
     true to force a sheet body to be created from a closed profile
     which would normally produce a solid body. (Similiar behavior to
     ISolidPrimitive::GetCapped)
 
-Parameter ``lockDirection``:
+:param lockDirection:
     Optionally keep profile at a fixed angle relative to the path
     tangent projected into a plane perpendicular to the lock
     direction. Only valid when alignParallel is false.
 
-Parameter ``twistAngle``:
+:param twistAngle:
     Optionally spin profile as it moves along the path.
 
-Parameter ``scale``:
+:param scale:
     Optionally scale profile as it moves along the path.
 
-Parameter ``scalePoint``:
+:param scalePoint:
     The profile point to scale about, required when applying scale.
 
-Returns:
+:returns:
     SUCCESS if body was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Create_BodyFromLoft =R"doc(Create a new sheet or solid body from surfaces created by lofting
 through a set of cross section profiles.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``profiles``:
+:param profiles:
     The cross sections profiles.
 
-Parameter ``nProfiles``:
+:param nProfiles:
     The profile count.
 
-Parameter ``guides``:
+:param guides:
     An optional set of guide curves for constrolling the loft.
 
-Parameter ``nGuides``:
+:param nGuides:
     The guide curve count.
 
-Parameter ``model``:
+:param model:
     Used to get the solid to uor scale. (ModelInfo::GetSolidExtent)
 
-Parameter ``periodic``:
+:param periodic:
     If true, a closed surface is constructed in which the first
     section curve is used as the last section curve.
 
-Parameter ``segment``:
+:param segment:
     If true, surfaces are created linearly between each section curve,
     with no smoothing.
 
-Returns:
+:returns:
     SUCCESS if body was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Create_BodyFromPolyface =R"doc(Create a new sheet or solid body from a Polyface.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``meshData``:
+:param meshData:
     The surface or solid to create a body from.
 
-Parameter ``model``:
+:param model:
     Used to get the solid to uor scale. (ModelInfo::GetSolidExtent)
 
-Returns:
+:returns:
     SUCCESS if body was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Create_BodyFromBSurface =R"doc(Create a new sheet body from a MSBsplineSurface.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``surface``:
+:param surface:
     The surface to create a body from.
 
-Parameter ``model``:
+:param model:
     Used to get the solid to uor scale. (ModelInfo::GetSolidExtent)
 
-Returns:
+:returns:
     SUCCESS if body was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Create_BodyFromSolidPrimitive =R"doc(Create a new sheet or solid body from an ISolidPrimitive.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``primitive``:
+:param primitive:
     The surface or solid to create a body from.
 
-Parameter ``model``:
+:param model:
     Used to get the solid to uor scale. (ModelInfo::GetSolidExtent)
 
-Returns:
+:returns:
     SUCCESS if body was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Create_BodyFromCurveVector =R"doc(Create a new wire or planar sheet body from a CurveVector that
 represents an open path, closed path, region with holes, or union
 region.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``curve``:
+:param curve:
     The curve vector to create a body from.
 
-Parameter ``model``:
+:param model:
     Used to get the solid to uor scale. (ModelInfo::GetSolidExtent)
     @note The CurvePrimitives that define an open path or closed loop
     are expected to be connected head-to-tail and may not intersect
     except at a vertex. A vertex can be shared by at most 2 edges.
 
-Returns:
+:returns:
     SUCCESS if body was created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_IsPointInsideBody =R"doc(Test if a point is inside or on the boundary of the given body.
 
-Parameter ``entity``:
+:param entity:
     The entity to test.
 
-Parameter ``testPt``:
+:param testPt:
     The space point.
 
-Returns:
+:returns:
     true if point is not outside the body.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_ClosestPointToEdge =R"doc(Get the closest point on an edge to a given point.
 
-Parameter ``subEntity``:
+:param subEntity:
     The edge to test.
 
-Parameter ``testPt``:
+:param testPt:
     The space point.
 
-Parameter ``point``:
+:param point:
     The closest point on the edge.
 
-Parameter ``param``:
+:param param:
     The u parameter at the closest point.
 
-Returns:
+:returns:
     true if closest point was found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_ClosestPointToFace =R"doc(Get the closest point on a face to a given point.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face to test.
 
-Parameter ``testPt``:
+:param testPt:
     The space point.
 
-Parameter ``point``:
+:param point:
     The closest point on the face.
 
-Parameter ``normal``:
+:param normal:
     The surface normal at the closest point.
 
-Parameter ``param``:
+:param param:
     The uv parameter at the closest point.
 
-Returns:
+:returns:
     true if closest point was found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_ClosestPoint =R"doc(Get the closest point on body to a given point.
 
-Parameter ``entity``:
+:param entity:
     The entity to pick sub-entities for.
 
-Parameter ``testPt``:
+:param testPt:
     The space point.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face, edge, or vertext sub-entity that contains the closest
     point.
 
-Parameter ``point``:
+:param point:
     The closest point on the body.
 
-Returns:
+:returns:
     true if closest point was found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_RayTestFace =R"doc(Get the ray intersection with a face.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face to intersect.
 
-Parameter ``boresite``:
+:param boresite:
     The ray origin and direction.
 
-Parameter ``intersectPts``:
+:param intersectPts:
     The hit points on the face.
 
-Parameter ``intersectParams``:
+:param intersectParams:
     The uv parameters on the face.
 
-Returns:
+:returns:
     true if ray intersects face.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_Locate =R"doc(Pick face, edge, and vertex sub-entities of a body by their proximity
 to a ray.
 
-Parameter ``entity``:
+:param entity:
     The entity to pick sub-entities for.
 
-Parameter ``boresite``:
+:param boresite:
     The ray origin and direction.
 
-Parameter ``intersectEntities``:
+:param intersectEntities:
     The selected sub-entities.
 
-Parameter ``intersectPts``:
+:param intersectPts:
     The hit points on the selected sub-entities.
 
-Parameter ``intersectParams``:
+:param intersectParams:
     The parameters on the selected sub-entities. For edge hits x is
     the u parameter (y always 0). Not meaningful for vertex hits
     (always 0,0).
 
-Parameter ``maxFace``:
+:param maxFace:
     The maximum number of face hits to return. Pass 0 to not pick
     faces.
 
-Parameter ``maxEdge``:
+:param maxEdge:
     The maximum number of edge hits to return. Pass 0 to not pick
     edges.
 
-Parameter ``maxVertex``:
+:param maxVertex:
     The maximum number of vertex hits to return. Pass 0 to not pick
     vertices.
 
-Parameter ``maxDistance``:
+:param maxDistance:
     An edge or vertex will be picked if it is within this distance
     from the ray. Not used for face picking. @note The returned
     entities are ordered by increasing distance from ray origin to hit
     point on entity.
 
-Returns:
+:returns:
     true if ray intersected a requested entity type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_Draw =R"doc(Draw geometry for the given face, edge, or vertex to the specified
 ViewContext.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face, edge, or vertex sub-entity to display.
 
-Parameter ``context``:
+:param context:
     The ViewContext to output geometry to. @note Uses the current
     ElemMatSymb, caller is expected to setup symbology beforehand.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetSubEntityRange =R"doc(Get an axis aligned bounding box for the given face or edge.
 
-Parameter ``range``:
+:param range:
     The bounding box.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face or edge sub-entity to query.
 
-Returns:
+:returns:
     SUCCESS if bounding box could be computed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetEntityRange =R"doc(Get an axis aligned bounding box for the given body.
 
-Parameter ``range``:
+:param range:
     The bounding box.
 
-Parameter ``entity``:
+:param entity:
     The entity to query.
 
-Returns:
+:returns:
     SUCCESS if bounding box could be computed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetEdgeParameterRange =R"doc(Get u edge parameter range for the given edge sub-entity.
 
-Parameter ``subEntity``:
+:param subEntity:
     The edge sub-entity to query.
 
-Parameter ``uRange``:
+:param uRange:
     The u parameter range of the edge.
 
-Returns:
+:returns:
     SUCCESS if edge parameter range was computed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetFaceParameterRange =R"doc(Get uv face parameter range for the given face sub-entity.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face sub-entity to query.
 
-Parameter ``uRange``:
+:param uRange:
     The u parameter range of the face.
 
-Parameter ``vRange``:
+:param vRange:
     The v parameter range of the face.
 
-Returns:
+:returns:
     SUCCESS if face parameter range was computedx.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetPlanarFaceData =R"doc(Evaluate point and normal at center of face parameter range for the
 given face sub-entity.
 
-Parameter ``point``:
+:param point:
     The coordinates of the point on the surface at the center of the
     face parameter range. Can be NULL.
 
-Parameter ``normal``:
+:param normal:
     The normalized surface normal at the center of the face parameter
     range. Can be NULL.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face sub-entity to query.
 
-Returns:
+:returns:
     SUCCESS if face is planar. The point and normal are still returned
     when non-planar if the face sub-entity is valid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_EvaluateVertex =R"doc(Evaluate point of the given vertex sub-entity.
 
-Parameter ``subEntity``:
+:param subEntity:
     The vertex sub-entity to query.
 
-Parameter ``point``:
+:param point:
     The coordinates of the point at the given vertex.
 
-Returns:
+:returns:
     SUCCESS if vertex point exists.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_EvaluateEdge =R"doc(Evaluate point and tangent at a u parameter on the curve of the given
 edge sub-entity.
 
-Parameter ``subEntity``:
+:param subEntity:
     The edge sub-entity to query.
 
-Parameter ``point``:
+:param point:
     The coordinates of the point on the curve at the u parameter.
 
-Parameter ``uDir``:
+:param uDir:
     The normalized curve tangent at the u parameter.
 
-Parameter ``uParam``:
+:param uParam:
     The u parameter to evaluate.
 
-Returns:
+:returns:
     SUCCESS if the parameter could be evaluated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_EvaluateFace =R"doc(Evaluate point, normal, and derivatives at a uv parameter on the
 surface of the given face sub-entity.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face sub-entity to query.
 
-Parameter ``point``:
+:param point:
     The coordinates of the point on the surface at the uv parameter.
 
-Parameter ``normal``:
+:param normal:
     The normalized surface normal at the uv parameter.
 
-Parameter ``uDir``:
+:param uDir:
     The first derivative with respect to u at the uv parameter.
 
-Parameter ``vDir``:
+:param vDir:
     The first derivative with respect to v at the uv parameter.
 
-Parameter ``uvParam``:
+:param uvParam:
     The uv parameter pair to evaluate.
 
-Returns:
+:returns:
     SUCCESS if the parameter could be evaluated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetSmoothBlendEdges =R"doc(Query the set of edges that are connected and tangent to the given
 edge sub-entity.
 
-Parameter ``smoothEdges``:
+:param smoothEdges:
     A vector to hold the sub-entities of type SubEntityType_Edge.
 
-Parameter ``edge``:
+:param edge:
     The edge sub-entity to query smoothly connected edges for.
 
-Returns:
+:returns:
     SUCCESS if the output vector was populated. @note These are the
     edges that would be included by the propagateSmooth option of
     SolidUtil::Modify::BlendEdges and SolidUtil::Modify::ChamferEdges.)doc";
@@ -1027,147 +1025,147 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetLoopEdgesFromEdge =R"doc(Query the set of edges that comprise a single face loop containing the
 given edge sub-entity.
 
-Parameter ``loopEdges``:
+:param loopEdges:
     A vector to hold the sub-entities of type SubEntityType_Edge.
 
-Parameter ``edge``:
+:param edge:
     The edge sub-entity that is part of the loop.
 
-Parameter ``face``:
+:param face:
     The face sub-entity that has the loop as part of it's bounds.
 
-Returns:
+:returns:
     SUCCESS if the output vector was populated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetVertexEdges =R"doc(Query the set of edges for the input vertex sub-entity.
 
-Parameter ``subEntities``:
+:param subEntities:
     A vector to hold the sub-entities of type SubEntityType_Edge.
 
-Parameter ``subEntity``:
+:param subEntity:
     The vertex sub-entity to query.
 
-Returns:
+:returns:
     SUCCESS if input entity was the correct type and output vector was
     populated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetVertexFaces =R"doc(Query the set of faces for the input vertex sub-entity.
 
-Parameter ``subEntities``:
+:param subEntities:
     A vector to hold the sub-entities of type SubEntityType_Face.
 
-Parameter ``subEntity``:
+:param subEntity:
     The vertex sub-entity to query.
 
-Returns:
+:returns:
     SUCCESS if input entity was the correct type and output vector was
     populated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetEdgeVertices =R"doc(Query the set of vertices for the input edge sub-entity.
 
-Parameter ``subEntities``:
+:param subEntities:
     A vector to hold the sub-entities of type SubEntityType_Vertex.
 
-Parameter ``subEntity``:
+:param subEntity:
     The edge sub-entity to query.
 
-Returns:
+:returns:
     SUCCESS if input entity was the correct type and output vector was
     populated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetEdgeFaces =R"doc(Query the set of faces for the input edge sub-entity.
 
-Parameter ``subEntities``:
+:param subEntities:
     A vector to hold the sub-entities of type SubEntityType_Face.
 
-Parameter ``subEntity``:
+:param subEntity:
     The edge sub-entity to query.
 
-Returns:
+:returns:
     SUCCESS if input entity was the correct type and output vector was
     populated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetFaceVertices =R"doc(Query the set of vertices for the input face sub-entity.
 
-Parameter ``subEntities``:
+:param subEntities:
     A vector to hold the sub-entities of type SubEntityType_Vertex.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face sub-entity to query.
 
-Returns:
+:returns:
     SUCCESS if input entity was the correct type and output vector was
     populated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetFaceEdges =R"doc(Query the set of edges for the input face sub-entity.
 
-Parameter ``subEntities``:
+:param subEntities:
     A vector to hold the sub-entities of type SubEntityType_Edge.
 
-Parameter ``subEntity``:
+:param subEntity:
     The face sub-entity to query.
 
-Returns:
+:returns:
     SUCCESS if input entity was the correct type and output vector was
     populated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetBodyVertices =R"doc(Query the set of vertices of the input body.
 
-Parameter ``subEntities``:
+:param subEntities:
     An optional vector to hold the sub-entities of type
     SubEntityType_Vertex, pass NULL if just interested in count.
 
-Parameter ``in``:
+:param in:
     The entity to query.
 
-Returns:
+:returns:
     A count of the number of vertices.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetBodyEdges =R"doc(Query the set of edges of the input body.
 
-Parameter ``subEntities``:
+:param subEntities:
     An optional vector to hold the sub-entities of type
     SubEntityType_Edge, pass NULL if just interested in count.
 
-Parameter ``in``:
+:param in:
     The entity to query.
 
-Returns:
+:returns:
     A count of the number of edges.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_GetBodyFaces =R"doc(Query the set of faces of the input body.
 
-Parameter ``subEntities``:
+:param subEntities:
     An optional vector to hold the sub-entities of type
     SubEntityType_Face, pass NULL if just interested in count.
 
-Parameter ``in``:
+:param in:
     The entity to query.
 
-Returns:
+:returns:
     A count of the number of faces.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_DisjoinBody =R"doc(Create separate bodies from a single multi-region body.
 
-Parameter ``out``:
+:param out:
     The collection of new bodies.
 
-Parameter ``in``:
+:param in:
     The body to separate.
 
-Returns:
+:returns:
     SUCCESS if input body could be separated, ERROR if input body is
     already a single region.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SolidUtil_CopyEntity =R"doc(Create a new ISolidKernelEntityPtr by copying the input body.
 
-Parameter ``out``:
+:param out:
     The new body.
 
-Parameter ``in``:
+:param in:
     The body to copy.
 
-Returns:
+:returns:
     SUCCESS if copy is valid.)doc";
 
 /*---------------------------------------------------------------------------------**//**

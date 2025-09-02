@@ -15,16 +15,16 @@ static const char * __doc_Bentley_BeStringUtilities_LexicographicCompare = R"doc
 alphabetical sort that also takes numbers into account, such that
 " file9 " will come before " file11 " in the sort order (even though
 alphabetically 1 is before 9). This method always ignores case.
-param in  pszName1 IN first string param in  pszName2 IN second string
+param in  pszName1 (input) first string param in  pszName2 (input) second string
 return 0 if strings are equal,<0 if pszName1 is less than pszName2,
 else> 0)doc";
 
 static const char * __doc_Bentley_BeStringUtilities_ParseUInt64 = R"doc(Parses a string containing an integer number in decimal format
 
-Parameter ``value``:
+:param value:
     The resulting integer number
 
-Parameter ``string``:
+:param string:
     A string representation of a decimal value.
 
 Remark:
@@ -36,38 +36,38 @@ Remark:
 static const char * __doc_Bentley_BeStringUtilities_FormatUInt64 = R"doc(Formats an unsigned 64-bit integer using the same options supported by
 printf's " % x " and " % X " specifiers.
 
-Parameter ``dest``:
+:param dest:
     The buffer which will hold the string representation of the
     integer. Must not be NULL.
 
-Parameter ``numCharsInBuffer``:
+:param numCharsInBuffer:
     The maximum number of characters which can be written to *dest,*
     including the null terminator. Must be at least 1.
 
-Parameter ``val``:
+:param val:
     The value to format
 
-Parameter ``opts``:
+:param opts:
     Flags indicating how formatting should be applied
 
-Parameter ``width``:
+:param width:
     The minimum number of characters in the formatted string.
     Additional characters will be added according to *opts.* Width >
     18 will be truncated to 18.
 
-Parameter ``precision``:
+:param precision:
     The minimum number of digits in the formatted string. Leading
     zeros will be prepended to match the precision. Precision> 16
     will be truncated to 16.
 
-Returns:
+:returns:
     Returns the number of characters written to *dest,* not including
     the null terminator
 
 Remark:
     s If the length of the formatted string exceeds
     *numCharsInBuffer,* the string is truncated (i.e.,
-    dest\[numCharsInBuffer-1\] = 0;)
+    dest\\[numCharsInBuffer-1\\] = 0;)
 
 Remark:
     s This method is provided to produce the same hexadecimal
@@ -85,26 +85,26 @@ static const char * __doc_Bentley_BeStringUtilities_ParseArguments = R"doc(Defau
 based on whitespace and does not tokenize within double-quoted
 substrings.
 
-Parameter ``subStrings``:
+:param subStrings:
     The resulting sub strings will be added to this collection
 
-Parameter ``inString``:
+:param inString:
     The string to tokenize; cannot be NULL or empty
 
-Parameter ``auxDelimiters``:
+:param auxDelimiters:
     (optional) Each character in the string Will be used as a
     delimiter in addition to whitespace.)doc";
 
 static const char * __doc_Bentley_BeStringUtilities_Join = R"doc(Joins a list of strings into a single string, optionally separated by
 a delimiter.
 
-Parameter ``strings``:
+:param strings:
     The list of strings to join
 
-Parameter ``delimiter``:
+:param delimiter:
     The delimiter to be inserted between each string
 
-Returns:
+:returns:
     Returns a string comprised of all strings in the list in input
     order, separated by the supplied delimiter.)doc";
 
@@ -112,13 +112,13 @@ static const char * __doc_Bentley_BeStringUtilities_Split = R"doc(Tokenizes a st
 WString for each token into the provided collection. This essentially
 wraps wcstok for more convenient access.
 
-Parameter ``str``:
+:param str:
     The string to tokenize; cannot be NULL or empty
 
-Parameter ``delimiters``:
+:param delimiters:
     One or more delimiters; cannot be NULL or empty
 
-Parameter ``tokens``:
+:param tokens:
     One or more tokens)doc";
 
 /*---------------------------------------------------------------------------------**//**

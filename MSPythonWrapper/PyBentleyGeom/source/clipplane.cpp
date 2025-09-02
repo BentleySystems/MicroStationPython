@@ -17,7 +17,7 @@ both of two planes.)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlane_OffsetDistance =R"doc(Apply offset to plane.)doc";
 
-static const char * __doc_Bentley_Geom_ClipPlane_ConvexPolygonSplitInsideOutside =R"doc([in] original polygon [out] inside part [out] outside part [out] min
+static const char * __doc_Bentley_Geom_ClipPlane_ConvexPolygonSplitInsideOutside =R"doc((input) original polygon (output) inside part (output) outside part (output) min
 and max altitude values.)doc";
 
 static const char * __doc_Bentley_Geom_ClipPlane_PolygonCrossings =R"doc(Return crossings of all edges of a polygon (including final closure)
@@ -29,9 +29,9 @@ works space. result is written inplace to xyz.
 
 * onPlaneHandling=0 means no special handling for all-oin.
 
-* onPlaneHandling=1 means treat all-on as IN
+* onPlaneHandling=1 means treat all-on as (input)
 
-* onPlaneHandling= -1 means treat all-on as OUT)doc";
+* onPlaneHandling= -1 means treat all-on as (output))doc";
 
 static const char * __doc_Bentley_Geom_ClipPlane_Negate =R"doc(Flip the normal direction.)doc";
 
@@ -158,7 +158,24 @@ void def_ClipPlane(py::module_& m)
 
     c1.def("ConvexPolygonClipInPlace", py::overload_cast<DPoint3dArray&, DPoint3dArray&, int>(&ClipPlane::ConvexPolygonClipInPlace, py::const_), "xyz"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
     c1.def("ConvexPolygonClipInPlace", py::overload_cast<DPoint3dArray&, DPoint3dArray&>(&ClipPlane::ConvexPolygonClipInPlace, py::const_), "xyz"_a, "work"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
-    
+
+    c1.def("ConvexPolygonClipInPlace", [](ClipPlaneCR self, py::list& xyz, py::list const& work, int onPlaneHandling)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppwork, DPoint3dArray, DPoint3d);
+        DPoint3dArray cppxyz;
+        self.ConvexPolygonClipInPlace(cppxyz, cppwork, onPlaneHandling);
+        CONVERT_CPPARRAY_TO_PYLIST(xyz, cppxyz, DPoint3dArray, DPoint3d);
+        }, "xyz"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
+
+    c1.def("ConvexPolygonClipInPlace", [](ClipPlaneCR self, py::list& xyz, py::list const& work)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppwork, DPoint3dArray, DPoint3d);
+        DPoint3dArray cppxyz;
+        self.ConvexPolygonClipInPlace(cppxyz, cppwork);
+        CONVERT_CPPARRAY_TO_PYLIST(xyz, cppxyz, DPoint3dArray, DPoint3d);
+        },"xyz"_a, "work"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
+
+
     c1.def("PolygonCrossings", &ClipPlane::PolygonCrossings, "xyz"_a, "crossings"_a, DOC(Bentley, Geom, ClipPlane, PolygonCrossings));
 
     c1.def("SimpleIntersectionFractions", [] (ClipPlaneCR self, DEllipse3dCR arc, bool bounded)

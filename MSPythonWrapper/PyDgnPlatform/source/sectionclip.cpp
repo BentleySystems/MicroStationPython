@@ -12,49 +12,49 @@
 
 static const char * __doc_Bentley_DgnPlatform_SectionClipElementHandler_CreateClipObject =R"doc(Creates the clip object from the clip element and
 
-Returns:
+:returns:
     a reference counted pointer to the object created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IHasViewClipObject_GetClipObject =R"doc(Gets the pointer to the clip object IViewClipObject using the clip
 element.
 
-Parameter ``clipElement``:
+:param clipElement:
     the clip data of the clip element.
 
-Returns:
+:returns:
     the pointer to the clip object IViewClipObject.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_SetPointCloudProjectPoints =R"doc(Sets project points flag to indicate that the PointCloud will project
-the points. param[in] flag pass 1 for project and zero for unproject.)doc";
+the points. param(input) flag pass 1 for project and zero for unproject.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_GetPointCloudProjectPoints =R"doc(Gets project points flag to indicate that the PointCloud will project
 the points.
 
-Returns:
+:returns:
     the project points flag.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_SetPointCloudTolerance =R"doc(Set the tolerance use by Point Cloud to a user defined value
 newTolerance.
 
-Parameter ``newTolerance``:
+:param newTolerance:
     the value to be assigned to the tolerance use by Point Cloud)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_GetPointCloudTolerance =R"doc(Gets tolerance use by Point Cloud.
 
-Returns:
+:returns:
     the tolerance for PointCloud.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_SetWidth =R"doc(Set the width of the clip element to a user defined value newWidth.
 
-Parameter ``newWidth``:
+:param newWidth:
     the value to be assigned to the width of the clip element.
 
-Returns:
+:returns:
     width of the clip element to a user defined value newWidth.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_GetWidth =R"doc(Gets width of the clip element.
 
-Returns:
+:returns:
     the width of the clip element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_SetPreserveUp =R"doc(@verbatim IHasViewClipObject* hasViewClipObject = dynamic_cast
@@ -69,18 +69,18 @@ clipObjPtr = hasViewClipObject->GetClipObject (clipEEH) ; bool getFlag
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_ToElement =R"doc(Creates and modifies an element from the clip data.
 
-Parameter ``eeh``:
+:param eeh:
     to edit the clip data of the clip element.
 
-Parameter ``templateEH``:
+:param templateEH:
     const pointer to a clip element previously created and points to
     null if the element is getting created for the first time.
 
-Parameter ``modelRef``:
+:param modelRef:
     instance of DgnModelRef,that provides access to a model in
     Bentley::DgnPlatform::DgnFile.
 
-Returns:
+:returns:
     the new created or modified element from the clip data.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_CopyCrops =R"doc(@verbatim EditElementHandle sourceClipEEH; EditElementHandle
@@ -96,25 +96,25 @@ destinationClipObjPtr->CopyCrops (sourceClipObjPtr.get()) ;
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_FromElement =R"doc(**Reads the clip data from a clip element**
 
-Parameter ``elem``:
+:param elem:
     retrieves the clip data from clip element to control the element
     actions.
 
-Returns:
+:returns:
     the clip data from a clip element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_GetPoints =R"doc(Obtains the data points of the clipped volume.
 
-Parameter ``points``:
+:param points:
     reference to the vector containing the 3D points.
 
-Parameter ``iFromPoint``:
+:param iFromPoint:
     initial index point of the clip volume.
 
-Parameter ``numPoints``:
+:param numPoints:
     number of index points of the clip volume.
 
-Returns:
+:returns:
     the data points of the clipped volume.
 
 See also:
@@ -130,7 +130,7 @@ clipObjPtr->SetPoints (numPoints,clipPoints.data()) ; @endverbatim)doc";
 static const char * __doc_Bentley_DgnPlatform_IViewClipObject_SetRotationMatrix =R"doc(Sets the rotation matrix of the element to a defined matrix and set
 the orientation in the 3D space.
 
-Returns:
+:returns:
     the orientation details in the 3D space of the element to be
     clipped, in the form of the defined matrix.
 
@@ -207,6 +207,12 @@ void def_SectionClip(py::module_& m)
     c1.def("SetPoints", [] (IViewClipObject& self, DPoint3dArray const& points)
            {
            self.SetPoints(points.size(), points.data());
+           }, "points"_a, DOC(Bentley, DgnPlatform, IViewClipObject, SetPoints));
+
+    c1.def("SetPoints", [] (IViewClipObject& self, py::list const& points)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           self.SetPoints(cppPoints.size(), cppPoints.data());
            }, "points"_a, DOC(Bentley, DgnPlatform, IViewClipObject, SetPoints));
     
     c1.def("NumPoints", &IViewClipObject::GetNumPoints);

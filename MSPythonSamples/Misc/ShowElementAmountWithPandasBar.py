@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 import sys
 import math
@@ -28,10 +24,24 @@ METERTOINCH = 39.37007874
 FIGDPI = 100
 FACTOR = 0.5
 
-'''
-Function to attach the image
-'''
 def AttachRaster(fileName, fullPath, modelRef, extentInch=DPoint2d(6.4, 4.8), ptLocation=DPoint3d(0.0, 0.0, 0.0)):
+    """
+    Attach a raster image to a model reference.
+    
+    :param fileName: The name of the raster file.
+    :type fileName: str
+    :param fullPath: The full path to the raster file.
+    :type fullPath: str
+    :param modelRef: The model reference to attach the raster to.
+    :type modelRef: ModelReference
+    :param extentInch: The extent of the raster in inches, defaults to DPoint2d(6.4, 4.8).
+    :type extentInch: DPoint2d, optional
+    :param ptLocation: The location point to place the raster, defaults to DPoint3d(0.0, 0.0, 0.0).
+    :type ptLocation: DPoint3d, optional
+    
+    :return: True if the raster attachment was successful, False otherwise.
+    :rtype: bool
+    """
     moniker = DgnDocumentMoniker.CreateFromRawData(fileName, fullPath, None, "", False, None)   # Create a moniker from the file name and full path
     if moniker is None:
         return False     # Return False if the moniker creation failed
@@ -64,10 +74,17 @@ def AttachRaster(fileName, fullPath, modelRef, extentInch=DPoint2d(6.4, 4.8), pt
     
     return True      # Return True if all operations were successful
 
-'''
-Function to define the size and location of the output image
-'''
 def GetImageSizeLocation():
+    """
+    Get the size and location of the active viewport.
+    This function retrieves the active view set and the selected viewport within it.
+    It calculates the extent point and the starting point of the viewport based on
+    the viewport's origin, delta, and rotation information.
+    Returns:
+        tuple: A tuple containing:
+            - uorExtentPt (DPoint2d): The extent point of the viewport.
+            - startPt (DPoint3d): The starting point (origin) of the viewport.
+    """
     vSet = IViewManager.GetActiveViewSet()  # Get the active view set
     viewport = vSet.GetSelectedViewport()   # Get the selected viewport from the view set
 
@@ -99,8 +116,14 @@ def GetImageSizeLocation():
 
     return uorExtentPt, startPt   # Return the extent point and the starting point
 
-'''Function to count elements as per type and display element amount with pandas chart for each type'''
 def CountElementsByType():
+    """
+    Count graphical elements by type in the active design model and create a bar chart image.
+    This function retrieves all graphical elements from the active design model, counts the number of elements for each type,
+    and generates a bar chart image representing the element counts. The image is saved as a PNG file and attached to the active model.
+    
+    :raises RuntimeError: If there are no graphical elements in the model.
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()  # Get the current design model
@@ -150,5 +173,6 @@ def CountElementsByType():
 
     #Attach the image to active model
     AttachRaster(tmpImageFileName, tmpImageFullPath, ACTIVEMODEL, DPoint2d(imageWidth, imageHeight), imageOrg)  # Attach the chart image to the current design model at the specified coordinates (x, y)
+
 if __name__ == "__main__":
     CountElementsByType()

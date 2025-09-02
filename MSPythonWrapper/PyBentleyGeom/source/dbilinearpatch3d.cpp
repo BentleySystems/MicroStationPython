@@ -17,7 +17,7 @@ static const char * __doc_Bentley_Geom_DBilinearPatch3d_IsParallelogram =R"doc(T
 
 static const char * __doc_Bentley_Geom_DBilinearPatch3d_GetVEdgeVector =R"doc(return vector along v edge (left, right)
 
-Parameter ``[in]``:
+:param (input):
     i 0,1 for left, right edge.)doc";
 
 static const char * __doc_Bentley_Geom_DBilinearPatch3d_GetDiagonalFrom01 =R"doc(return diagonal vector starting at 01)doc";
@@ -26,7 +26,7 @@ static const char * __doc_Bentley_Geom_DBilinearPatch3d_GetDiagonalFrom00 =R"doc
 
 static const char * __doc_Bentley_Geom_DBilinearPatch3d_GetUEdgeVector =R"doc(return vector along u edge (lower or upper)
 
-Parameter ``[in]``:
+:param (input):
     i 0,1 for lower, upper edge.)doc";
 
 static const char * __doc_Bentley_Geom_DBilinearPatch3d_GetCCWEdge =R"doc(Return specified edge as a line segment. Edge order is:bottom, right,

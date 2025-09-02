@@ -17,196 +17,196 @@ only used if the Offset Mode is MlineOffsetMode::Custom. This distance
 will be used if the style is reapplied; it does not modify the current
 profile locations.
 
-Parameter ``element``:
+:param element:
     multiline element
 
-Parameter ``placementOffset``:
+:param placementOffset:
     distance for multiline)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetOffsetMode =R"doc(Set the Offset Mode stored on the multi-line element. This mode will
 be used if the style is reapplied. Note that this does not modify the
 current profile locations.
 
-Parameter ``element``:
+:param element:
     multiline element
 
-Parameter ``offsetMode``:
+:param offsetMode:
     for multiline)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_ApplyStyle =R"doc(Apply a multiline style to a given multiline element.
 
-Parameter ``element``:
+:param element:
     The element to update.
 
-Parameter ``mlineStyle``:
+:param mlineStyle:
     The style to apply
 
-Parameter ``styleScale``:
+:param styleScale:
     The scale for the style. Scale applies to the multi-line profile
     offsets.
 
-Returns:
+:returns:
     true if eeh is the correct type and the element was updated. @note
     To query the multiline element's Z bvector use
     DisplayHandler::IsPlanar)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetProfile =R"doc(Replace a multiline profile
 
-Parameter ``element``:
+:param element:
     The element to update.
 
-Parameter ``index``:
+:param index:
     The index of the profile to replace. The multiline must already
     have a profile at this index.
 
-Parameter ``profile``:
+:param profile:
     The new profile
 
-Returns:
+:returns:
     SUCCESS if element is the correct type, the profile index is
     within range, and the element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetMidCap =R"doc(Replace the symbology of the multiline middle or joint cap geometry.
 
-Parameter ``element``:
+:param element:
     The element to update.
 
-Parameter ``capSymbology``:
+:param capSymbology:
     The new symbology
 
-Returns:
+:returns:
     SUCCESS if element is the correct type and the element was
     updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetEndCap =R"doc(Replace the symbology of the multiline end cap geometry.
 
-Parameter ``element``:
+:param element:
     The element to update.
 
-Parameter ``capSymbology``:
+:param capSymbology:
     The new symbology
 
-Returns:
+:returns:
     SUCCESS if element is the correct type and the element was
     updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetOriginCap =R"doc(Replace the symbology of the multiline origin cap geometry.
 
-Parameter ``element``:
+:param element:
     The element to update.
 
-Parameter ``capSymbology``:
+:param capSymbology:
     The new symbology
 
-Returns:
+:returns:
     SUCCESS if element is the correct type and the element was
     updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetClosed =R"doc(Set the closed property of a multiline element.
 
-Parameter ``element``:
+:param element:
     The element to update.
 
-Parameter ``isClosed``:
+:param isClosed:
     new closure status.
 
-Returns:
+:returns:
     SUCCESS if element's closure status was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetZVector =R"doc(Set the z axis of a 3d multiline element. The element is planar, and
 this bvector defines that plane.
 
-Parameter ``element``:
+:param element:
     The element to update.
 
-Parameter ``normal``:
+:param normal:
     new z axis of multiline element.
 
-Returns:
+:returns:
     SUCCESS if element is the correct type and the element was
     updated. @note To query the multiline element's Z bvector use
     DisplayHandler::IsPlanar)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_DeleteBreak =R"doc(Delete a break from the multiline definition.
 
-Parameter ``element``:
+:param element:
     source element
 
-Parameter ``segment``:
+:param segment:
     which segment the break is on
 
-Parameter ``breakNo``:
+:param breakNo:
     which break on the segment it is
 
-Returns:
+:returns:
     SUCCESS if the element is a multiline and the break currently
     exists.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_InsertBreak =R"doc(Replace a break in the multiline definition.
 
-Parameter ``element``:
+:param element:
     source element
 
-Parameter ``mlbreak``:
+:param mlbreak:
     break to replace
 
-Parameter ``segment``:
+:param segment:
     which segment the break is on
 
-Returns:
+:returns:
     SUCCESS if the element is a multiline and the break currently
     exists.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetEndAngle =R"doc(Set the end cap angle for the multiline. PI/2 is perpindicular.
 
-Parameter ``element``:
+:param element:
     source element
 
-Parameter ``angle``:
+:param angle:
     New angle in radians
 
-Returns:
+:returns:
     SUCCESS if the element is a multiline.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_SetOriginAngle =R"doc(Set the origin or start cap angle for the multiline. PI/2 is
 perpindicular.
 
-Parameter ``element``:
+:param element:
     source element
 
-Parameter ``angle``:
+:param angle:
     New angle in radians
 
-Returns:
+:returns:
     SUCCESS if the element is a multiline.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_DeletePoint =R"doc(Delete point in the multiline definition.
 
-Parameter ``element``:
+:param element:
     source element
 
-Parameter ``pointNum``:
+:param pointNum:
     index to delete point.
 
-Returns:
+:returns:
     SUCCESS if the element is a multiline and the point was deleted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_InsertPoint =R"doc(Insert point in the multiline definition.
 
-Parameter ``element``:
+:param element:
     source element
 
-Parameter ``newPoint``:
+:param newPoint:
     point to add
 
-Parameter ``assocPointP``:
+:param assocPointP:
     associative point for this mline point. NULL to use a normal point
     from newPoint.
 
-Parameter ``pointNum``:
+:param pointNum:
     index to insert point. -1 means at the end.
 
-Returns:
+:returns:
     SUCCESS if the element is a multiline and the point was inserted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineEdit_ReplacePoint =R"doc(Replace point in the multiline definition. If you want to replace a
@@ -215,75 +215,75 @@ MlineModifyPoint::RemoveAssociations option; otherwise you cannot
 replace an Associative Point. To make a point Associative, use
 DeletePoint followed by InsertPoint.
 
-Parameter ``element``:
+:param element:
     source element
 
-Parameter ``newPoint``:
+:param newPoint:
     point to replace
 
-Parameter ``pointNum``:
+:param pointNum:
     index to replace
 
-Parameter ``options``:
+:param options:
     replace option flags - see enum MlineModifyPoint
 
-Returns:
+:returns:
     SUCCESS if the element is a multiline and the point currently
     exists.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetPlacementOffset =R"doc(Get the Offset Distance stored on the multi-line element. Note that
 this is only valid for a Offset Mode of MlineOffsetMode::Custom.
 
-Parameter ``source``:
+:param source:
     multiline element
 
-Returns:
+:returns:
     multiline offset distance)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetOffsetMode =R"doc(Get the Offset Mode stored on the multi-line element
 
-Parameter ``source``:
+:param source:
     multiline element
 
-Returns:
+:returns:
     multiline offset mode)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetStyleScale =R"doc(Get the style scale stored on the multi-line element
 
-Parameter ``source``:
+:param source:
     multiline element
 
-Returns:
+:returns:
     multiline style scale)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetStyle =R"doc(Get an object representing the style of a multiline element. In
 general, the properties of the returned style object may differ from
 the file's version of the same style.
 
-Parameter ``source``:
+:param source:
     multiline element
 
-Parameter ``seedStyle``:
+:param seedStyle:
     multiline style to use as a seed. This is copied into the new
     style, and then all salient properties from the multi-line are
     applied on top. For example if the multi-line doesn't use a color
     for profile 1 but there is a color in the seed style, then that
     color will appear in the resulting style.
 
-Parameter ``options``:
+:param options:
     multiline style options - currently 0 or MLINE_MATCH_ENDCAPS.
 
-Returns:
+:returns:
     multiline style)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_ExtractPoints =R"doc(Extract the array of points from a multi-line. These represent the
 workline of the multi-line, and may not correspond to anything
 displayed.
 
-Parameter ``source``:
+:param source:
     source element
 
-Parameter ``pXYZBuffer``:
+:param pXYZBuffer:
     (optional) buffer for points.
 
 
@@ -299,162 +299,162 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_ExtractCapJointDefinition =R"doc(Extract a multiline cap joint definition for a given segment of the
 multiline.
 
-Parameter ``source``:
+:param source:
     source element
 
-Parameter ``pts``:
+:param pts:
     start and end points of line segment.
 
-Parameter ``pointNo``:
+:param pointNo:
     cap joint, 0 for org and 1 for end.
 
-Returns:
+:returns:
     A joint definition)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_ExtractJointDefinition =R"doc(Extract a multiline joint definition for a given segment of the
 multiline.
 
-Parameter ``source``:
+:param source:
     source element
 
-Parameter ``pts``:
+:param pts:
     base point array from ExtractPoints.
 
-Parameter ``pointNo``:
+:param pointNo:
     index of first point.
 
-Returns:
+:returns:
     A joint definition)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetBreak =R"doc(Get a pointer to a multiline break based on the segment of the
 multiline.
 
-Parameter ``source``:
+:param source:
     source element
 
-Parameter ``segmentNumber``:
+:param segmentNumber:
     Segment to find break
 
-Parameter ``segBreakNumber``:
+:param segBreakNumber:
     Which break on that segment
 
-Returns:
+:returns:
     A pointer to the a copy of the break. Be sure to check isValid()
     on the return in case the break doesn't exist.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetBreakCount =R"doc(Get the number of breaks on a multline.
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     The number of breaks)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetPointCount =R"doc(Query the number of points in the multiline element.
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     multiline point count)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetPoint =R"doc(Get a pointer to the first MlinePoint definition.
 
-Parameter ``source``:
+:param source:
     source element
 
-Parameter ``pointNumber``:
+:param pointNumber:
     point index to return
 
-Returns:
+:returns:
     A pointer to the first MlinePoint definition)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetEndAngle =R"doc(Get the end cap angle for the multiline
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     The angle in radians)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetOriginAngle =R"doc(Get the origin or start cap angle for the multiline
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     The angle in radians)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetMidCap =R"doc(Query the symbology of the multiline middle or joint cap.
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     A copy of the cap symbology)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetEndCap =R"doc(Query the symbology of the multiline end cap.
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     A copy of the cap symbology)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetOriginCap =R"doc(Query the symbology of the multiline origin cap.
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     A copy of the cap symbology)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetProfile =R"doc(Query a profile line definition. The profile definition defines the
 offset from the base profile line as well as the symbology of the
 profile line.
 
-Parameter ``source``:
+:param source:
     source element
 
-Parameter ``index``:
+:param index:
     number of profile line to extract
 
-Returns:
+:returns:
     A pointer to the MlineProfile definition.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_GetProfileCount =R"doc(Query the number of profile lines in the multiline element.
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     multiline profile count)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMultilineQuery_IsClosed =R"doc(Query if the multiline element represents a closed path.
 
-Parameter ``source``:
+:param source:
     source element
 
-Returns:
+:returns:
     true for a closed multiline)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_ProfileIsMasked =R"doc(Determine if a given profile is affected by this break. This is just a
 convenience routine that does the bit comparisons. Profiles are
 0-based.
 
-Parameter ``profileNum``:
+:param profileNum:
     Profile to test.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_SetProfileMask =R"doc(Get the profile mask for the breaks. Each bit represents a profile.
 Bits are in profile order, not in any spatial order.
 
-Parameter ``lineMask``:
+:param lineMask:
     The new mask for the break.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_GetProfileMask =R"doc(Get the profile mask for the breaks. Each bit represents a profile.
 Bits are in profile order, not in any spatial order.
 
-Returns:
+:returns:
     The profile mask of the break)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_SetOffset =R"doc(Get the offset from the first point in the segment. The offset is
@@ -462,7 +462,7 @@ always along the workline, regardless of angle. This value is ignored
 if the the MlineBreakLengthType is MLBREAK_FROM_JOINT or
 MLBREAK_BETWEEN_JOINTS.
 
-Parameter ``offset``:
+:param offset:
     The new offset for the break.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_GetOffset =R"doc(Get the offset from the first point in the segment. The offset is
@@ -470,63 +470,63 @@ always along the workline, regardless of angle. This value is ignored
 if the the MlineBreakLengthType is MLBREAK_FROM_JOINT or
 MLBREAK_BETWEEN_JOINTS.
 
-Returns:
+:returns:
     The offset along the segment of the break)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_SetLength =R"doc(Set the length from the multi-line break. This value is ignored if the
 the MlineBreakLengthType is MLBREAK_TO_JOINT or
 MLBREAK_BETWEEN_JOINTS.
 
-Parameter ``length``:
+:param length:
     The new length of the break.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_GetLength =R"doc(Get the length from the multi-line break. This value is ignored if the
 the MlineBreakLengthType is MLBREAK_TO_JOINT or
 MLBREAK_BETWEEN_JOINTS.
 
-Returns:
+:returns:
     The length of the break)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_SetLengthType =R"doc(Set the length flags from the multi-line break. This flag determines
 whether the break extends from one or both of the points, or just has
 a fixed length.
 
-Parameter ``type``:
+:param type:
     The new type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineBreak_GetLengthType =R"doc(Get the length flags from the multi-line break. This flag determines
 whether the break extends from one or both of the points, or just has
 a fixed length.
 
-Returns:
+:returns:
     The current type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilinePoint_GetNumBreaks =R"doc(Get the number of breaks on the segment that begins witn this point
 
-Returns:
+:returns:
     The number of breaks between this point and the subsequent point)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilinePoint_IsAssociative =R"doc(Determine if a MultilinePoint is associative
 
-Returns:
+:returns:
     True if the point is associative.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilinePoint_SetPoint =R"doc(Set the X,Y,Z coordinates for a MultilinePoint
 
-Parameter ``point``:
+:param point:
     The coordinates of the point)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilinePoint_GetPoint =R"doc(Get the X,Y,Z coordinates from a MultilinePoint
 
-Returns:
+:returns:
     The X,Y,Z coordinates)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilinePoint_CreateFromPoint =R"doc(Create a multi-line point from X,Y,Z coordinates
 
-Parameter ``point``:
+:param point:
     The coordinates of the point
 
-Returns:
+:returns:
     a MultilinePoint)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -595,15 +595,36 @@ void def_MultilineHandler(py::module_& m)
            return self.ExtractJointDefinition(source, points.data(), pointNo);
            }, "source"_a, "points"_a, "pointNo"_a, DOC(Bentley, DgnPlatform, IMultilineQuery, ExtractJointDefinition));
 
+    c3.def("ExtractJointDefinition", [] (IMultilineQuery const& self, ElementHandleCR source, py::list const& points, int pointNo)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           return self.ExtractJointDefinition(source, cppPoints.data(), pointNo);
+           }, "source"_a, "points"_a, "pointNo"_a, DOC(Bentley, DgnPlatform, IMultilineQuery, ExtractJointDefinition));
+
     c3.def("ExtractCapJointDefinition", [] (IMultilineQuery const& self, ElementHandleCR source, DPoint3dArray const& points, int pointNo)
            {
            return self.ExtractCapJointDefinition(source, points.data(), pointNo);
+           }, "source"_a, "points"_a, "pointNo"_a, DOC(Bentley, DgnPlatform, IMultilineQuery, ExtractCapJointDefinition));
+
+    c3.def("ExtractCapJointDefinition", [] (IMultilineQuery const& self, ElementHandleCR source, py::list const& points, int pointNo)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           return self.ExtractCapJointDefinition(source, cppPoints.data(), pointNo);
            }, "source"_a, "points"_a, "pointNo"_a, DOC(Bentley, DgnPlatform, IMultilineQuery, ExtractCapJointDefinition));
 
     c3.def("ExtractPoints", [] (IMultilineQuery const& self, ElementHandleCR source, DPoint3dArray& points)
            {
            size_t numPoints = 0;
            auto retVal = self.ExtractPoints(source, points.data(), numPoints, points.size());
+           return py::make_tuple(retVal, numPoints);
+           }, "source"_a, "points"_a, DOC(Bentley, DgnPlatform, IMultilineQuery, ExtractPoints));
+
+    c3.def("ExtractPoints", [] (IMultilineQuery const& self, ElementHandleCR source, py::list& points)
+           {
+           size_t numPoints = 0;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           auto retVal = self.ExtractPoints(source, cppPoints.data(), numPoints, cppPoints.size());
+           CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
            return py::make_tuple(retVal, numPoints);
            }, "source"_a, "points"_a, DOC(Bentley, DgnPlatform, IMultilineQuery, ExtractPoints));
 
@@ -640,5 +661,11 @@ void def_MultilineHandler(py::module_& m)
     c5.def_static("CreateMultilineElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, MultilineStyleCR mlineStyle, double styleScale, DVec3dCR normal, DPoint3dArray const& points, bool is3d, DgnModelRefR modelRef)
                   {
                   return MultilineHandler::CreateMultilineElement(eeh, templateEh, mlineStyle, styleScale, normal, points.data(), (int) points.size(), is3d, modelRef);
-                  }, "eeh"_a, "templateEh"_a, "mlineStyle"_a, "styleScale"_a, "normal"_a, "points"_a, "is3d"_a, "modelRef"_a);        
+                  }, "eeh"_a, "templateEh"_a, "mlineStyle"_a, "styleScale"_a, "normal"_a, "points"_a, "is3d"_a, "modelRef"_a);
+
+    c5.def_static("CreateMultilineElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, MultilineStyleCR mlineStyle, double styleScale, DVec3dCR normal, py::list const& points, bool is3d, DgnModelRefR modelRef)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                  return MultilineHandler::CreateMultilineElement(eeh, templateEh, mlineStyle, styleScale, normal, cppPoints.data(), (int) cppPoints.size(), is3d, modelRef);
+                  }, "eeh"_a, "templateEh"_a, "mlineStyle"_a, "styleScale"_a, "normal"_a, "points"_a, "is3d"_a, "modelRef"_a);
     }

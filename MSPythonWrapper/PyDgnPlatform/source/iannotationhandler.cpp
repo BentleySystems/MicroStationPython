@@ -12,12 +12,12 @@
 
 static const char * __doc_Bentley_DgnPlatform_IAnnotationHandler_RemoveAnnotationScale =R"doc(Remove annotation scale from *eh.*
 
-Returns:
+:returns:
     non-zero error status if annotation scale could not be removed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IAnnotationHandler_AddAnnotationScale =R"doc(Set up annotation scale on *eh.*
 
-Returns:
+:returns:
     non-zero error status if annotation scale could not be
     initialized.)doc";
 

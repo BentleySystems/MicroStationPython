@@ -12,51 +12,51 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetHandler_CreateLinkSet =R"doc(Creates the linkset from optional key type and link tree branch.
 
-Parameter ``branch``:
+:param branch:
     a object of type DgnLinkTreeBranch.
 
-Returns:
+:returns:
     the DgnLinkSet pointer.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetHandler_GetKey =R"doc(Gets the key from given link tree node.
 
-Parameter ``branch``:
+:param branch:
     a object of DgnLinkTreeBranch.
 
-Returns:
+:returns:
     the key)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetHandler_CanHandleKey =R"doc(Checks whether the provided linkset type is a valid key and can be
 handled or not.
 
-Parameter ``key``:
+:param key:
     a type of linkset key
 
-Returns:
+:returns:
     the status of function)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkHandler_GetKey =R"doc(Gets the key from given link tree node.
 
-Parameter ``leaf``:
+:param leaf:
     a object of DgnLinkTreeLeaf.
 
-Returns:
+:returns:
     the key)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkHandler_CanHandleKey =R"doc(Check whether this can handle the provided link type
 
-Parameter ``key``:
+:param key:
     denotes the type of link.
 
-Returns:
+:returns:
     the status of function)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSchemaProvider_CreateECInstance =R"doc(Gets the instance enabler for the given class.
 
-Parameter ``ecClassName``:
+:param ecClassName:
     name of the class
 
-Returns:
+:returns:
     the object of type StandaloneECInstance)doc";
 
 /*---------------------------------------------------------------------------------**//**

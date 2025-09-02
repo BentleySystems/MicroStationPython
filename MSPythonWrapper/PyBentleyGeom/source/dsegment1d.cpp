@@ -30,7 +30,7 @@ static const char * __doc_Bentley_Geom_DSegment1d_Length =R"doc(Return absolute 
 
 static const char * __doc_Bentley_Geom_DSegment1d_PointToFraction =R"doc(Find fractional parameter for specified coordinate.
 
-Returns:
+:returns:
     false if endpoints are identical.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment1d_FractionToPoint =R"doc(Return coordinate at fractional parameter from start to end.)doc";

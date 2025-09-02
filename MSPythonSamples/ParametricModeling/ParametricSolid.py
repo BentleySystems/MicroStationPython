@@ -13,11 +13,22 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 import PSampUtility
 
+'''
+Example demonstrating how to create a cylinder by extruding a circle
+''' 
 
-'''
-Function to create parametric solid by extruding a profile
-'''
 def CreateSmartFeatureElementExtrude(profileEditElementHandle, distance = 50000):
+    """
+    Creates a smart feature element by extruding a given profile.
+    
+    :param profileEditElementHandle: Handle to the profile edit element to be extruded.
+    :type profileEditElementHandle: EditElementHandle
+    :param distance: The distance to extrude the profile, defaults to 50000.
+    :type distance: float, optional
+    
+    :return: Handle to the new edit element created by the extrusion, or None if creation failed.
+    :rtype: EditElementHandle or None
+    """
     status, curveVector = SmartFeatureUtil.GetCurveVector (profileEditElementHandle, True)
     if (BentleyStatus.eSUCCESS != status or curveVector is None):
         return None
@@ -48,10 +59,16 @@ def CreateSmartFeatureElementExtrude(profileEditElementHandle, distance = 50000)
 
     return newEditElementHandle
 
-'''
-Example to show how to create a cylinder by extruding a circle
-''' 
 def ExampleExtrudeFeature():
+    """
+    Creates a parametric solid cylinder by extruding a circular profile.
+    This function performs the following steps:
+    1. Creates a circle element as the profile using `PSampUtility.CreateEllipseAndAdd2Model`.
+    2. Extrudes the circle profile to create a parametric solid cylinder using `CreateSmartFeatureElementExtrude`.
+    
+    Returns:
+        bool: True if the parametric solid cylinder is successfully created, False otherwise.
+    """
     # Create a circle element as the profile
     eeh = PSampUtility.CreateEllipseAndAdd2Model(DPoint3d.From(0.0, 0.0, 0.0), 20000.0, 20000.0, ISessionMgr.GetActiveDgnModel(), True)
     if (eeh is None):

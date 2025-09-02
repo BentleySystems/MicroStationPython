@@ -12,10 +12,10 @@
 
 static const char * __doc_Bentley_DgnPlatform_RasterOverridesCollection_Write =R"doc(Write RasterOverrides collection.
 
-Parameter ``ref``:
+:param ref:
     The DgnAttachment.
 
-Returns:
+:returns:
     non-zero error status if the write operation failed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterOverridesCollection_ClearAll =R"doc(Clear all RasterOverrides.)doc";
@@ -24,10 +24,10 @@ static const char * __doc_Bentley_DgnPlatform_RasterOverridesCollection_HasOverr
 
 static const char * __doc_Bentley_DgnPlatform_RasterOverridesCollection_GetCP =R"doc(Query RasterOverrides collection for the input DgnAttachment.
 
-Parameter ``ref``:
+:param ref:
     The DgnAttachment.
 
-Returns:
+:returns:
     a const pointer to the RasterOverrides collection or NULL if no
     overrides exist.)doc";
 

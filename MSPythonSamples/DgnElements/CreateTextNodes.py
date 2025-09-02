@@ -13,6 +13,10 @@ from MSPyMstnPlatform import *
 from MSPyDgnView import *
 
 '''
+Sample demonstrating how to create text block
+''' 
+
+'''
 Function to text nodes in model in MicroStation using python.
 sampleTexts[String array]: Collection of strings to display.
 '''

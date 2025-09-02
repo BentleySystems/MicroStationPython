@@ -15,44 +15,44 @@ not RGBA, original data read will be converted to RGBA the first pixel
 will be used as the background colour for the production of an alpha
 mask
 
-Parameter ``RgbaBuffer``:
+:param RgbaBuffer:
     The buffer to be filled. Caller must allocate the buffer before
     calling the method.
 
-Parameter ``maxBufferLength``:
+:param maxBufferLength:
     The size of the input buffer.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterSourceFileQuery_ReadToRGBA =R"doc(Fill a buffer with RGBA data read from a raster file. If the file is
 not RGBA, original data read will be converted to RGBA
 
-Parameter ``RgbaBuffer``:
+:param RgbaBuffer:
     The buffer to be filled. Caller must allocate the buffer before
     calling the method.
 
-Parameter ``maxBufferLength``:
+:param maxBufferLength:
     The size of the input buffer.
 
-Parameter ``useBgIfNoAlpha``:
+:param useBgIfNoAlpha:
     If True and there is no alpha channel present in file, will create
     alpha based on background color. Use first pixel as background
     color if no background defined in file.
 
-Returns:
+:returns:
     BSISUCCESS or BSIERROR.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterSourceFileQuery_GetBitmapWidth =R"doc(Query bitmap width in pixels.
 
-Returns:
+:returns:
     bitmap width in pixels.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterSourceFileQuery_GetBitmapHeight =R"doc(Query bitmap height in pixels.
 
-Returns:
+:returns:
     bitmap height in pixels.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IRasterSourceFileQuery_InitFrom =R"doc(Initialize the source file query object.
 
-Parameter ``eh``:
+:param eh:
     A pointer to corresponding raster attachment elementHandle.)doc";
 
 /*---------------------------------------------------------------------------------**//**

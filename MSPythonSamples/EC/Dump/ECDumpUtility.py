@@ -1,12 +1,7 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 import json
-import debugpy
 import io
 import tempfile
 import sys
@@ -17,6 +12,9 @@ from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 from MSPyDgnView import *
 
+'''
+Sample demonstrating how to dump EC data for selected element
+'''
 
 '''
 This class has responsibility to serialize property names and values in dictionary
@@ -28,10 +26,17 @@ class ECInstanceSerializer:
     def __init__(self, instance):
         self.m_instance = instance
 
-    '''
-    Returns dictionary of propertyNames and values
-    ''' 
     def SerializePropValues (dgnECInstance, collection, ecPropNamValDict):
+        """
+        Serialize property values from a collection into a dictionary.
+
+        :param dgnECInstance: The EC instance containing the property values.
+        :type dgnECInstance: ECInstance
+        :param collection: The collection of property values to serialize.
+        :type collection: list
+        :param ecPropNamValDict: The dictionary to store serialized property names and values.
+        :type ecPropNamValDict: dict
+        """
         #iterate through propety value collection
         for propertyValue in collection:
             #get accessor
@@ -53,10 +58,17 @@ class ECInstanceSerializer:
             if (propertyValue.HasChildValues ()):
                 ECInstanceSerializer.SerializePropValues (dgnECInstance, propertyValue.GetChildValues(), ecPropNamValDict)
 
-    '''
-    Returns dictionary of propertyNames and values
-    ''' 
     def SerializeInstance (instance, ecPropNamValDict):
+        """
+        Serialize an EC instance into a dictionary of property names and values.
+
+        :param instance: The EC instance to serialize.
+        :type instance: ECInstance
+        :param ecPropNamValDict: The dictionary to store serialized property names and values.
+        :type ecPropNamValDict: dict
+        :returns: Dictionary of property names and values.
+        :rtype: dict
+        """
         #ECSchema
         ecPropNamValDict['Instance schema'] = str(instance.GetClass().GetSchema().GetName())
         #ECClass
@@ -68,10 +80,13 @@ class ECInstanceSerializer:
         #serialize values
         ECInstanceSerializer.SerializePropValues(instance, collection, ecPropNamValDict)
     
-    '''
-    Returns dictionary of propertyNames and values
-    ''' 
     def Serialize(self):
+        """
+        Returns a dictionary of property names and values.
+
+        :returns: Dictionary of property names and values.
+        :rtype: dict
+        """
         ecPropNamValDict = dict()
         ECInstanceSerializer.SerializeInstance(self.m_instance, ecPropNamValDict)
         return ecPropNamValDict
@@ -79,10 +94,15 @@ class ECInstanceSerializer:
 
     
 
-'''
-Function to query EC instances on a given elementHandle
-''' 
 def ProcessElementInstaces(elementHandle):
+    """
+    Query EC instances on a given element handle and serialize them into a list of dictionaries.
+
+    :param elementHandle: The handle of the element to query EC instances from.
+    :type elementHandle: ElementHandle
+    :returns: List of dictionaries containing serialized property names and values.
+    :rtype: list
+    """
     #get DgnEC manager
     mgr = DgnECManager.GetManager()
     #Prepare ECQuery
@@ -100,10 +120,12 @@ def ProcessElementInstaces(elementHandle):
         #appeng propertis to final list
         finalPropList.append(ecPropNamValDict)
 
-'''
-Function to write Json
-''' 
 def WriteJson():
+    """
+    Write the final property list to a JSON file.
+
+    :returns: None
+    """
     fd,path = tempfile.mkstemp(suffix=".json")
     with io.open(path, 'w', encoding='utf-8') as buff:
         json_string = json.dumps(finalPropList, indent=1)
@@ -112,10 +134,16 @@ def WriteJson():
 
 # Collect all instance property information in list 
 finalPropList = list()
-'''
-Function to dump EC data for selected element or given elementID
-'''
+
 def DumpECData ():
+    """
+    Dump EC data for a selected element or given elementID.
+
+    If an elementID is provided as a command-line argument, it processes the element with that ID.
+    Otherwise, it processes the currently selected element.
+
+    :returns: None
+    """
     #list for holding elements
     elementList = list()
     #check if elementId is provided

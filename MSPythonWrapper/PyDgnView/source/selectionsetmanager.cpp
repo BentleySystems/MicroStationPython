@@ -12,20 +12,20 @@
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_GetManager =R"doc(Get the manager class for selection sets.
 
-Returns:
+:returns:
     The SelectionSetManager class. Bentley Systems +---------------+--
     -------------+---------------+---------------+---------------+----
     --)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_ModifyWithElementSets =R"doc(Modifies current selection by removing and adding sets of elements.
 
-Parameter ``toRemove``:
-    IN Elements to remove.
+:param toRemove:
+    (input) Elements to remove.
 
-Parameter ``toAdd``:
-    IN Elements to add.
+:param toAdd:
+    (input) Elements to add.
 
-Returns:
+:returns:
     SUCCESS if at least one entry was added or removed. @note Remove
     list is processed before add list. Bentley Systems +--------------
     -+---------------+---------------+---------------+---------------+
@@ -33,23 +33,23 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_ReplaceWithElementSet =R"doc(Set the current selection set to the supplied set of elements.
 
-Parameter ``elSet``:
-    IN Elements to become current selection.
+:param elSet:
+    (input) Elements to become current selection.
 
-Returns:
+:returns:
     SUCCESS if current selection was changed. Bentley Systems +-------
     --------+---------------+---------------+---------------+---------
     ------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_ReplaceWithElement =R"doc(Set the current selection set to the supplied element.
 
-Parameter ``elem``:
-    IN Element to become new selection.
+:param elem:
+    (input) Element to become new selection.
 
-Parameter ``elemModel``:
-    IN DgnModelRef of replacement element.
+:param elemModel:
+    (input) DgnModelRef of replacement element.
 
-Returns:
+:returns:
     SUCCESS if current selection was changed. Bentley Systems +-------
     --------+---------------+---------------+---------------+---------
     ------+------)doc";
@@ -57,10 +57,10 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_InvertElementSet =R"doc(Add elements not currently selected and remove elements currently
 selected.
 
-Parameter ``elSet``:
-    IN Elements to process.
+:param elSet:
+    (input) Elements to process.
 
-Returns:
+:returns:
     SUCCESS if current selection was changed. Bentley Systems +-------
     --------+---------------+---------------+---------------+---------
     ------+------)doc";
@@ -68,59 +68,59 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_InvertElement =R"doc(Add element not currently selected and remove element currently
 selected.
 
-Parameter ``elem``:
-    IN Element to process.
+:param elem:
+    (input) Element to process.
 
-Parameter ``elemModel``:
-    IN DgnModelRef of element being processed.
+:param elemModel:
+    (input) DgnModelRef of element being processed.
 
-Returns:
+:returns:
     SUCCESS if current selection was changed. Bentley Systems +-------
     --------+---------------+---------------+---------------+---------
     ------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_RemoveElementSet =R"doc(Remove a set of elements to the current selection set.
 
-Parameter ``elSet``:
-    IN Elements to remove.
+:param elSet:
+    (input) Elements to remove.
 
-Returns:
+:returns:
     SUCCESS if at least one entry was removed. Bentley Systems +------
     ---------+---------------+---------------+---------------+--------
     -------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_RemoveElement =R"doc(Remove an element from the current selection set.
 
-Parameter ``elem``:
-    IN Element to remove.
+:param elem:
+    (input) Element to remove.
 
-Parameter ``elemModel``:
-    IN DgnModelRef of element being removed.
+:param elemModel:
+    (input) DgnModelRef of element being removed.
 
-Returns:
+:returns:
     SUCCESS if entry was removed. Bentley Systems +---------------+---
     ------------+---------------+---------------+---------------+-----
     -)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_AddElementSet =R"doc(Add a set of elements to the current selection set.
 
-Parameter ``elSet``:
-    IN Elements to add.
+:param elSet:
+    (input) Elements to add.
 
-Returns:
+:returns:
     SUCCESS if at least one entry was added. Bentley Systems +--------
     -------+---------------+---------------+---------------+----------
     -----+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_AddElement =R"doc(Add an element to the current selection set.
 
-Parameter ``elem``:
-    IN Element to add.
+:param elem:
+    (input) Element to add.
 
-Parameter ``elemModel``:
-    IN DgnModelRef of element being added.
+:param elemModel:
+    (input) DgnModelRef of element being added.
 
-Returns:
+:returns:
     SUCCESS if entry was added. Bentley Systems +---------------+-----
     ----------+---------------+---------------+---------------+------)doc";
 
@@ -134,73 +134,73 @@ selection set. Bentley Systems +---------------+---------------+------
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_BuildAgenda =R"doc(Populate an element agenda suitable for modification from the current
 selection set.
 
-Parameter ``agenda``:
-    IN OUT selection set entries that passed the input criteria.
+:param agenda:
+    (input) (output) selection set entries that passed the input criteria.
 
-Parameter ``searchList``:
-    IN list of acceptable modelRefs to filter selection set entries..
+:param searchList:
+    (input) list of acceptable modelRefs to filter selection set entries..
 
-Parameter ``modifyOrig``:
-    IN whether agenda will be used to modify original elements.
+:param modifyOrig:
+    (input) whether agenda will be used to modify original elements.
 
-Parameter ``allowLocked``:
-    IN whether to accept locked elements.
+:param allowLocked:
+    (input) whether to accept locked elements.
 
-Parameter ``callAsynch``:
-    IN whether to call GLOBAL_LOCATE_SELECTIONSET filter.
+:param callAsynch:
+    (input) whether to call GLOBAL_LOCATE_SELECTIONSET filter.
 
-Returns:
+:returns:
     SUCCESS if agenda contains at least one entry. Bentley Systems +--
     -------------+---------------+---------------+---------------+----
     -----------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_DropListener =R"doc(Drop selection set changed/event listener.
 
-Parameter ``selectionListener``:
-    IN The listener object to drop. Bentley Systems +---------------+-
+:param selectionListener:
+    (input) The listener object to drop. Bentley Systems +---------------+-
     --------------+---------------+---------------+---------------+---
     ---)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_AddListener =R"doc(Add selection set changed/event listener.
 
-Parameter ``selectionListener``:
-    IN The listener object to add. Bentley Systems +---------------+--
+:param selectionListener:
+    (input) The listener object to add. Bentley Systems +---------------+--
     -------------+---------------+---------------+---------------+----
     --)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_GetElement =R"doc(Get the ElementRefP and DgnModelRef in the current selection set by
 index.
 
-Parameter ``index``:
-    IN The index to get the entry for.
+:param index:
+    (input) The index to get the entry for.
 
-Parameter ``elemRef``:
-    OUT ElementRefP at index.
+:param elemRef:
+    (output) ElementRefP at index.
 
-Parameter ``modelRef``:
-    OUT DgnModelRef at index.
+:param modelRef:
+    (output) DgnModelRef at index.
 
-Returns:
+:returns:
     SUCCESS if index was valid. Bentley Systems +---------------+-----
     ----------+---------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_NumSelected =R"doc(Get the number of entries in the current selection set.
 
-Returns:
+:returns:
     count of entries in current selection set. Bentley Systems +------
     ---------+---------------+---------------+---------------+--------
     -------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SelectionSetManager_IsActive =R"doc(Check whether there is a current selection set active.
 
-Returns:
+:returns:
     true if current selection set contains at least one entry. Bentley
     Systems +---------------+---------------+---------------+---------
     ------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISelectionEvents__OnSelectionEvent =R"doc(Notification of a specific event.
 
-Returns:
+:returns:
     true to stop.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISelectionEvents__OnSelectionChanged =R"doc(Called when current selection set is changed in any way. Elements

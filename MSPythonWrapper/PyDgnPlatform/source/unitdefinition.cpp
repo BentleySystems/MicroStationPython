@@ -17,10 +17,10 @@ comparison is only valid within a single #UnitBase, this method will
 restrict the iteration to only those units with the same base as the
 specified unit.
 
-Parameter ``[in]``:
+:param (input):
     unitDef The unit on which to base the filtering.
 
-Parameter ``[in]``:
+:param (input):
     method The method used to compare candidate units to the specified
     unit.)doc";
 
@@ -43,27 +43,27 @@ the user interface. The list contains those units defined in the
 user's workspace. The list may contain invalid UnitDefinitions which
 represent separators.
 
-Parameter ``includeUnit``:
+:param includeUnit:
     The current value, always included in the list (or NULL). The base
     of this unit must be the same as " base " parameter.
 
-Parameter ``compareUnit``:
+:param compareUnit:
     Unit on which to base restrictions (or NULL). The base of this
     unit must be the same as " base " parameter.
 
-Parameter ``base``:
+:param base:
     The returned bvector will include only this base.
 
-Parameter ``restrictSize``:
+:param restrictSize:
     Only show units equal to or smaller than compareUnit.
 
-Parameter ``restrictSystem``:
+:param restrictSystem:
     Only show units in the same system as compareUnit.
 
-Parameter ``useSingularNames``:
+:param useSingularNames:
     Ex. true->" Meter " false->" Meters ".
 
-Returns:
+:returns:
     A bvector containing the units.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_UnitDefinition_GetByLabel =R"doc(Find the definition of a unit from the user's workspace by matching
@@ -95,7 +95,7 @@ static const char * __doc_Bentley_DgnPlatform_UnitDefinition_GetStandardLabel =R
 
 static const char * __doc_Bentley_DgnPlatform_UnitDefinition_IsStandardUnit =R"doc(Determine if a unit definition is the same size as a standard unit.
 
-Returns:
+:returns:
     StandardUnit::None if the input does not match a standard unit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_UnitDefinition_GetStandardUnitByName =R"doc(Find the definition of a standard unit from its name in the current
@@ -143,7 +143,7 @@ Returns (Tuple,1):
 static const char * __doc_Bentley_DgnPlatform_UnitDefinition_CompareByScale =R"doc(Test if two units are the same size. See #IsEqual for a more strict
 equality test.
 
-Returns:
+:returns:
     an integer i, such that:- i == ERROR if the units could not be
     compared. See #AreComparable. - i<0 if this unit is larger than
     other. - i> 0 if other unit is larger than this unit. - i == 0 if

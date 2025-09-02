@@ -6,6 +6,7 @@
 |
 +--------------------------------------------------------------------------------------*/
 #include "MSPythonPCH.h"
+#include <DgnPlatform/DgnTextStyleProperties.r.h>
 #include <DgnPlatform/DgnTextStyle.h>
 
 
@@ -29,14 +30,14 @@ static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_Copy =R"doc(Create an
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_Replace =R"doc(* Saves the style to the file.
 
-Parameter ``oldName``:
-    IN oldName to look up the style if the style was renamed.
+:param oldName:
+    (input) oldName to look up the style if the style was renamed.
 
-Parameter ``file``:
-    IN If no file is provided, the file pointer in style is used to
+:param file:
+    (input) If no file is provided, the file pointer in style is used to
     determine the file in which it is saved.
 
-Returns:
+:returns:
     status. Note:it returns ERROR if a style cannot be found or if
     replace fails.
 
@@ -44,14 +45,14 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_RemapDependents =R"doc(Remap all the elements that reference one style to different style.
 
-Parameter ``destStyle``:
-    IN remap to this style.
+:param destStyle:
+    (input) remap to this style.
 
-Parameter ``sourceStyle``:
-    IN remap from this style.
+:param sourceStyle:
+    (input) remap from this style.
 
-Parameter ``file``:
-    IN file in which to search.
+:param file:
+    (input) file in which to search.
 
 )doc";
 
@@ -60,11 +61,11 @@ static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_HasDependants =R"doc(
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_Delete =R"doc(Deletes a textstyle from a dgn file. This method will fail if any
 elements refer to the style.
 
-Parameter ``name``:
-    IN name to lookup for.
+:param name:
+    (input) name to lookup for.
 
-Parameter ``file``:
-    IN file in which to search.
+:param file:
+    (input) file in which to search.
 
 See also:
     HasDependents
@@ -76,69 +77,69 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_Add =R"doc(Creates a style in the given file.
 
-Parameter ``file``:
-    IN file pointer for the target style.
+:param file:
+    (input) file pointer for the target style.
 
-Returns:
+:returns:
     status. Note:it returns ERROR if a style is already present
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_BuildList =R"doc(Create a list of all the styles in the specified file.
 
-Parameter ``file``:
-    IN file in which to search.
+:param file:
+    (input) file in which to search.
 
-Returns:
+:returns:
     list of styles
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_ExistsByName =R"doc(Returns true if a style with the given name exists in the given file.
 
-Parameter ``name``:
-    IN name to look for.
+:param name:
+    (input) name to look for.
 
-Parameter ``file``:
-    IN file in which to search.
+:param file:
+    (input) file in which to search.
 
-Returns:
+:returns:
     true if a style with the specified name exists, else false.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_GetByName =R"doc(Looks up the style from the given file.
 
-Parameter ``name``:
-    IN name to lookup for.
+:param name:
+    (input) name to lookup for.
 
-Parameter ``file``:
-    IN file in which to search.
+:param file:
+    (input) file in which to search.
 
-Returns:
+:returns:
     style pointer if found else null.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_GetByID =R"doc(Looks up the style from the given file.
 
-Parameter ``styleID``:
-    IN ID to lookup for.
+:param styleID:
+    (input) ID to lookup for.
 
-Parameter ``file``:
-    IN file in which to search.
+:param file:
+    (input) file in which to search.
 
-Returns:
-    DgnTextStylePtr OUT style pointer. Null if not found.
+:returns:
+    DgnTextStylePtr (output) style pointer. Null if not found.
 
 )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextStyle_Compare =R"doc(Compares the style with the provided one.
 
-Parameter ``style``:
-    IN Style to be comapred against.
+:param style:
+    (input) Style to be comapred against.
 
-Returns:
+:returns:
     TextstylePropertymask Pointer filled with differences.
 
 )doc";
@@ -267,8 +268,15 @@ void def_DgnTextStyle(py::module_& m)
 
 
     c3.def(py::init(&TextStylePropertyMask::CreatePropMask));
-    c3.def("GetPropertyFlag", &TextStylePropertyMask::GetPropertyFlag, "flag"_a, DOC(Bentley, DgnPlatform, TextStylePropertyMask, GetPropertyFlag));
-    c3.def("SetPropertyFlag", &TextStylePropertyMask::SetPropertyFlag, "flag"_a, "value"_a, DOC(Bentley, DgnPlatform, TextStylePropertyMask, SetPropertyFlag));
+    c3.def("GetPropertyFlag", [] (TextStylePropertyMask const& self, TextStyleProperty flag) 
+        {
+        return self.GetPropertyFlag (flag);    
+        },   "flag"_a);
+    c3.def("SetPropertyFlag", [] (TextStylePropertyMask& self, TextStyleProperty flag, bool value) 
+        {
+        return self.SetPropertyFlag (flag, value);    
+        },   "flag"_a, "value"_a);
+
     c3.def("AnyBitSet", &TextStylePropertyMask::AnyBitSet, DOC(Bentley, DgnPlatform, TextStylePropertyMask, AnyBitSet));
     c3.def("ResetFlags", &TextStylePropertyMask::ResetFlags, DOC(Bentley, DgnPlatform, TextStylePropertyMask, ResetFlags));
 

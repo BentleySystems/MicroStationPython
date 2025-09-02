@@ -16,7 +16,7 @@ static const char * __doc_Bentley_DgnPlatform_RunRange_GetStartCaret =R"doc(Gets
 
 static const char * __doc_Bentley_DgnPlatform_RunIterator_ToCaret =R"doc(Attempts to create a Caret representing this iterator's paragraph.
 
-Returns:
+:returns:
     Can return NULL if this is an end iterator (one past the last
     valid).)doc";
 
@@ -26,7 +26,7 @@ static const char * __doc_Bentley_DgnPlatform_ParagraphRange_GetStartCaret =R"do
 
 static const char * __doc_Bentley_DgnPlatform_ParagraphIterator_ToCaret =R"doc(Attempts to create a Caret representing this iterator's paragraph.
 
-Returns:
+:returns:
     Can return NULL if this is an end iterator (one past the last
     valid).)doc";
 

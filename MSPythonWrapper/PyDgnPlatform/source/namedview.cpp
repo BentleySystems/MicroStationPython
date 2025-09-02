@@ -13,79 +13,79 @@
 static const char * __doc_Bentley_DgnPlatform_NamedViewDisplayable_SetViewData =R"doc(Sets the NamedViewDisplayableData corresponding to a NamedView
 Displayable element
 
-Parameter ``viewData``:
+:param viewData:
     The NamedViewDisplayableData
 
-Parameter ``displayElement``:
+:param displayElement:
     The Displayable element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewDisplayable_GetViewData =R"doc(Gets the NamedViewDisplayableData corresponding to a NamedView
 Displayable element
 
-Parameter ``viewData``:
+:param viewData:
     The NamedViewDisplayableData
 
-Parameter ``displayElement``:
+:param displayElement:
     The Displayable element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewDisplayable_GetViewInfo =R"doc(Gets the ViewInfo corresponding to a NamedView Displayable element
 
-Parameter ``displayElement``:
+:param displayElement:
     The Displayable element.
 
-Returns:
+:returns:
     The ViewInfo)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewDisplayable_IsNamedViewDisplayable =R"doc(Returns true if the NamedView element corresponds to a NamedView that
 has a Displayable element.
 
-Parameter ``namedViewElement``:
+:param namedViewElement:
     The NamedView element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewDisplayable_GetClipElement =R"doc(Gets the clip element corresponding to the Displayable element
 
-Parameter ``clipElement``:
+:param clipElement:
     The clip element.
 
-Parameter ``displayElement``:
+:param displayElement:
     The Displayable element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewDisplayable_GetNamedViewElement =R"doc(Gets the NamedView element corresponding to the Displayable element
 
-Parameter ``namedViewElement``:
+:param namedViewElement:
     The NamedView element.
 
-Parameter ``displayElement``:
+:param displayElement:
     The Displayable element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewDisplayable_FindElement =R"doc(Find the NamedViewDisplayable element
 
-Parameter ``displayElement``:
+:param displayElement:
     The located Displayable element.
 
-Parameter ``namedViewElement``:
+:param namedViewElement:
     The NamedView
 
-Parameter ``model``:
+:param model:
     The DgnModel of the NamedView.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewDisplayable_CreateElement =R"doc(Creates the NamedViewDisplayable element
 
-Parameter ``displayElement``:
+:param displayElement:
     The newly created Displayable element.
 
-Parameter ``namedViewElement``:
+:param namedViewElement:
     The NamedView
 
-Parameter ``model``:
+:param model:
     The DgnModel of the NamedView.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_IsViewMemberOfNamedGroup =R"doc(Check if a view element is member of a namedgroup. If it is, return
 the namedgroup.
 
 
-Parameter ``viewEH``:
-    IN View element to check
+:param viewEH:
+    (input) View element to check
 
 Remark:
     s Caller is responsible for freeing group by calling
@@ -101,62 +101,62 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_HideAllAnnotationAttachments =R"doc(De-annotate (hide) all annotation attachments
 
-Parameter ``hostModel``:
-    IN ModelRef to look annotations into.
+:param hostModel:
+    (input) ModelRef to look annotations into.
 
-Parameter ``viewElemRefToSkip``:
-    IN View element whose annotation attachment should not be
+:param viewElemRefToSkip:
+    (input) View element whose annotation attachment should not be
     deannotated (optional, can pass NULL))doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_IsAnnotationAttachmentDisplayed =R"doc(Check if annotation cross-reference of a named view is displayed in
 the given model.
 
-Parameter ``hostModel``:
-    IN Model to show annotation attachment in
+:param hostModel:
+    (input) Model to show annotation attachment in
 
-Parameter ``drawingIndex``:
-    IN Index of drawing in the list of all links. -1 for Default
+:param drawingIndex:
+    (input) Index of drawing in the list of all links. -1 for Default
     behavior (1st drawing link, if not found then 1st reference link)
 
-Returns:
+:returns:
     true if annotated cross-reference is displayed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_HideAnnotationAttachment =R"doc(Hide the annotation cross-reference of a named view in the given
 model.
 
-Parameter ``hostModel``:
-    IN Model to hide annotation attachment in
+:param hostModel:
+    (input) Model to hide annotation attachment in
 
-Returns:
+:returns:
     non-zero error status if annotated cross-reference could not be
     hidden.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_ShowAnnotationAttachment =R"doc(Show the annotation cross-reference of a named view in the given
 model.
 
-Parameter ``hostModel``:
-    IN Model to show annotation attachment in
+:param hostModel:
+    (input) Model to show annotation attachment in
 
-Parameter ``viewRefModel``:
-    IN Reference path from named view's root model to hostModel
+:param viewRefModel:
+    (input) Reference path from named view's root model to hostModel
 
-Parameter ``drawingIndex``:
-    IN Index of drawing in the list of all links. -1 for Default
+:param drawingIndex:
+    (input) Index of drawing in the list of all links. -1 for Default
     behavior (1st drawing link, if not found then 1st reference link)
 
-Returns:
+:returns:
     non-zero error status if annotated cross-reference is not
     displayed or could not be created.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_Create =R"doc(Creates a new NamedView.
 
-Parameter ``namedView``:
+:param namedView:
     The newly created NamedView.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The DgnFile the NamedView will go into.
 
-Parameter ``name``:
+:param name:
     The NamedView Name.
 
 Returns (Tuple, 0):
@@ -170,18 +170,18 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_Apply =R"doc(Apply a named view to the specified viewport.
 
-Parameter ``viewport``:
+:param viewport:
     The viewport to which to apply the NamedView.
 
-Parameter ``options``:
+:param options:
     The apply options.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_Compare =R"doc(Compare this NamedView with another NamedView.
 
-Parameter ``other``:
+:param other:
     The other NamedView.
 
-Returns:
+:returns:
     A NamedViewPropMask with bits set that indicate differences
     between the two NamedViews.)doc";
 
@@ -202,10 +202,10 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_SetClipElement =R"doc(Sets the clip element of this NamedView.
 
-Parameter ``clipElement``:
+:param clipElement:
     The clip element.
 
-Returns:
+:returns:
     SUCCESS or error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_GetClipElement =R"doc(Gets the clip element of this NamedView. For Associated clip element,
@@ -218,23 +218,23 @@ saved view again.)doc";
 static const char * __doc_Bentley_DgnPlatform_NamedView_CopyAndConvertToFile =R"doc(Creates a new NamedView from this NamedView and converts it to the
 destination file.
 
-Parameter ``destination``:
+:param destination:
     The DgnFile to which the NamedView is to be converted.
 
-Returns:
+:returns:
     The newly created NamedView.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_CompareName =R"doc(Compare the name of this NamedView with the argument.
 
-Parameter ``compareName``:
+:param compareName:
     The name to compare to.
 
-Parameter ``partialMatch``:
+:param partialMatch:
     If true, returns 0 if the NamedView name matches through all
     characters in compareName (i.e, a NamedView named " Future Site ",
     matches the name " Future " when partialMatch is true).
 
-Returns:
+:returns:
     0 if match, otherwise the first character that differs.
 
 Remark:
@@ -244,28 +244,28 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_NamedView_GetDisplayableElement =R"doc(Gets the the ElementHandle of the displayable representation of this
 NamedView.
 
-Returns:
+:returns:
     STATUS_Success, or an error code.
 
-Parameter ``displayableHandle``:
+:param displayableHandle:
     The displayable element.
 
-Parameter ``model``:
+:param model:
     The DgnModel of the displayable.
 
-Parameter ``createIfNecessary``:
+:param createIfNecessary:
     Create the Displayable element if doesn't already exist.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_CopySettingsFromSeedView =R"doc(Copies the contents of the seed NamedView to this NamedView. Copies
 only 'settings' data. Does not copy clip element - so, a named view
 with existing clip element can call it to copy just the settings
 
-Parameter ``seedView``:
+:param seedView:
     The source NamedView.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_DeleteFromFile =R"doc(Delete this NamedView from the DgnFile.
 
-Returns:
+:returns:
     Success, or one of the NamedViewStatus values if there is an
     error.
 
@@ -274,7 +274,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_WriteToFile =R"doc(Write this NamedView to the DgnFile.
 
-Returns:
+:returns:
     Success, or one of the NamedViewStatus values if there is an
     error.
 
@@ -283,18 +283,18 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_ConvertToFile =R"doc(Converts the information in this NamedView to the destination DgnFile.
 
-Parameter ``destination``:
+:param destination:
     The DgnFile to which the NamedView is to be converted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_SynchViewBoundaryWithClipVolume =R"doc(Synch the saved view's boundary with the clip volume.
 
-Parameter ``options``:
+:param options:
     ViewBoundary synch options.
 
-Parameter ``rotMatrix``:
+:param rotMatrix:
     orientation for saved view.
 
-Returns:
+:returns:
     Success, if viewboundary synched with clip volume.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_GetIcon =R"doc(Gets the name of the Icon used to represent this type of NamedView in
@@ -302,10 +302,10 @@ the User Interface.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_SetViewPortInfo =R"doc(Sets the ViewPortInfo for this NamedView.
 
-Parameter ``viewPortInfo``:
+:param viewPortInfo:
     The new ViewPortInfo for this NamedView.
 
-Returns:
+:returns:
     Success, or one of the NamedViewStatus values if there is an
     error.)doc";
 
@@ -313,10 +313,10 @@ static const char * __doc_Bentley_DgnPlatform_NamedView_GetViewPortInfo =R"doc(G
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_SetViewInfo =R"doc(Sets the ViewInfo for this NamedView.
 
-Parameter ``viewInfo``:
+:param viewInfo:
     The new ViewInfo for this NamedView.
 
-Returns:
+:returns:
     Success, or one of the NamedViewStatus values if there is an
     error.)doc";
 
@@ -328,17 +328,17 @@ static const char * __doc_Bentley_DgnPlatform_NamedView_GetElementId =R"doc(Gets
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_SetDescription =R"doc(Sets the description of this NamedView
 
-Parameter ``description``:
+:param description:
     The new description for this NamedView.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_GetDescription =R"doc(Gets the description of this NamedView)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedView_SetName =R"doc(Sets the Name of this NamedView
 
-Parameter ``name``:
+:param name:
     The new name for this NamedView.
 
-Returns:
+:returns:
     Success, or one of the NamedViewStatus values if there is an
     error.)doc";
 
@@ -346,61 +346,61 @@ static const char * __doc_Bentley_DgnPlatform_NamedView_GetName =R"doc(Gets the 
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewPropMask_From =R"doc(Creates a new NamedViewPropMask from an existing one.
 
-Parameter ``other``:
+:param other:
     bitmask)doc";
 
-static const char * __doc_Bentley_DgnPlatform_NamedViewPropMask_AnyBitSet =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_NamedViewPropMask_AnyBitSet =R"doc(:returns:
     true if any bit is set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewPropMask_GetBit =R"doc(Gets the designated bit
 
-Parameter ``bitToTest``:
+:param bitToTest:
     Which bit.
 
-Returns:
+:returns:
     The state of the designated bit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewPropMask_SetBit =R"doc(Sets the designated bit
 
-Parameter ``bitToChange``:
+:param bitToChange:
     Which bit.
 
-Parameter ``value``:
+:param value:
     Value to set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewCollection_GetUniqueNameFromBase =R"doc(Gets a unique name for a NamedViewp given a " base " name.
 
-Parameter ``uniqueName``:
+:param uniqueName:
     The generated uniqueName.
 
-Parameter ``baseName``:
+:param baseName:
     The base name. If NULL, the name of the model (decorated with
     " transient " if transient is true) is used as the base name.
 
-Parameter ``forCopy``:
+:param forCopy:
     If the object with the new name is a copy of the object of
     'baseName', then new name will be built with " - Copy " suffix
 
-Returns:
+:returns:
     Success, or one of the NamedViewStatus values if there is an
     error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewCollection_NameUnused =R"doc(Returns true if the name tested is unique within this
 NamedViewCollection.
 
-Parameter ``name``:
+:param name:
     The name to test)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewCollection_Replace =R"doc(Replaces an existing named view with a new named view.
 
-Parameter ``namedView``:
+:param namedView:
     The new named view.
 
-Parameter ``nameOfViewReplaced``:
+:param nameOfViewReplaced:
     The name of the named view to replace. If NULL, replaces the
     existing namedView with name namedView.GetName();
 
-Returns:
+:returns:
     Success, or one of the NamedViewStatus values if there is an
     error.
 
@@ -410,22 +410,22 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_NamedViewCollection_FindByElementId =R"doc(Finds a NamedView by the ElementId of the element that stores the
 NamedView.
 
-Parameter ``elementId``:
+:param elementId:
     The ElementId of the NamedView to search for.
 
-Returns:
+:returns:
     The NamedViewPtr that references the NamedView with the given name
     or NULL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedViewCollection_FindByName =R"doc(Finds a NamedView by name.
 
-Parameter ``name``:
+:param name:
     The name of the NamedView to search for.
 
-Parameter ``partialMatch``:
+:param partialMatch:
     Allow partial match. See NamedView::CompareName.
 
-Returns:
+:returns:
     The NamedViewPtr that references the NamedView with the given name
     or NULL.
 

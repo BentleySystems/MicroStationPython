@@ -733,12 +733,14 @@ ScriptValuePtr PythonScriptEngine::eval(WCharCP expr, ScriptContext* global, Scr
     ScriptEngineManager::Get().ClearException();
     try
         {
+        mdlErrno = 0;
         py::object obj = py::eval(py::cast(expr), globalDict, py::len(localDict) > 0 ? localDict : py::object ());
         outVal = new PythonScriptValue(obj);
         }
     catch (py::error_already_set& err)
         {
         ScriptEngineManager::Get().InjectException(err);
+        mdlErrno = MDLERR_PYTHONEXECUTIONERROR;
         }
 
     m_engineProcessing = false;    
@@ -783,14 +785,54 @@ void PythonScriptEngine::exec(WCharCP stms, WCharCP funcName, ScriptContext* glo
     m_engineProcessing = true;
     try
         {
+        mdlErrno = 0;
         py::exec(py::cast(stms), globalDict, py::len(localDict) > 0 ? localDict : py::object ());
         }
     catch (py::error_already_set& err)
         {
         ScriptEngineManager::Get().InjectException(err);
+        mdlErrno = MDLERR_PYTHONEXECUTIONERROR;
         }
     m_engineProcessing = false;
 
+    }
+
+
+/*---------------------------------------------------------------------------------**//***
+ @bsimethod                                                                       3/2025
+ +---------------+---------------+---------------+---------------+---------------+------*/
+static bool isPydLoadingFailed(const std::string& nameModule)
+    {
+    auto& internals = py::detail::get_internals();
+    auto& registered_types_cpp = internals.registered_types_cpp;
+
+    for (const auto& item : registered_types_cpp)
+        {
+        std::string name = item.second->type->tp_name;
+        if (name.find(nameModule) != std::string::npos)
+            {
+            py::module_ sys = py::module_::import("sys");
+            if (sys.attr("modules").contains(nameModule))
+                return false;  //loaded successfully
+            else
+                return true; //failed to load
+            }
+        }
+
+    return false; // not found
+    }
+
+/*---------------------------------------------------------------------------------**//***
+ @bsimethod                                                                       3/2025
+ +---------------+---------------+---------------+---------------+---------------+------*/
+static bool allPydsLoadedSuc()
+    {
+    if (isPydLoadingFailed("MSPyBentley") || isPydLoadingFailed("MSPyBentleyGeom") ||
+        isPydLoadingFailed("MSPyECObjects") || isPydLoadingFailed("MSPyDgnPlatform") ||
+        isPydLoadingFailed("MSPyDgnView") || isPydLoadingFailed("MSPyMstnPlatform"))
+        return false;
+
+    return true;
     }
 
 /*---------------------------------------------------------------------------------**//***
@@ -808,6 +850,10 @@ static void getCachedTypes(std::unordered_map<std::type_index, std::string>& bef
  +---------------+---------------+---------------+---------------+---------------+------*/
 static void removeCachedtypes(const std::unordered_map<std::type_index, std::string>& before_type_cache)
     {
+    if (allPydsLoadedSuc())
+        return;
+
+    //TODO: call py::finalize_interpreter()&py::initialize_interpreter() to restart the python interpreter
     auto& internals = py::detail::get_internals();
     for (auto it = internals.registered_types_cpp.begin(); it != internals.registered_types_cpp.end();) 
         {
@@ -849,7 +895,7 @@ void PythonScriptEngine::eval_file(WCharCP scriptFile, WCharCP funcName, ScriptC
     auto pyLocalDict = dynamic_cast<PythonScriptContext*>(localCtx.get());
     if (nullptr != pyLocalDict)
         localDict = pyLocalDict->m_dict;
-
+    
     m_engineProcessing = true;
 
     // The cache of types registered by pybind11 before running the script
@@ -861,18 +907,21 @@ void PythonScriptEngine::eval_file(WCharCP scriptFile, WCharCP funcName, ScriptC
         {
         try
             {
-            // Run file, Python returns errors if the local dictionary is empty
+            mdlErrno = 0;
+            // Python returns errors if the local dictionary is empty
             py::eval_file(py::cast(scriptFile), globalDict, py::len(localDict) > 0 ? localDict : py::object ());
             }
         catch (py::error_already_set& e)
             {
-            removeCachedtypes(before_type_cache);
             ScriptEngineManager::Get().InjectError( e.what ());
+            mdlErrno = MDLERR_PYTHONEXECUTIONERROR;
+            removeCachedtypes(before_type_cache);
             }
         catch (std::exception& err)
             {
-            removeCachedtypes(before_type_cache);
             ScriptEngineManager::Get().InjectException(err);
+            mdlErrno = MDLERR_PYTHONEXECUTIONERROR;
+            removeCachedtypes(before_type_cache);
             }
         }
     else // User want to run a function inside given module
@@ -895,14 +944,15 @@ void PythonScriptEngine::eval_file(WCharCP scriptFile, WCharCP funcName, ScriptC
             WString function(funcName);
 
             function.append (L" ()");
-
+            mdlErrno = 0;
             py::exec(py::cast(function.c_str ()) ,globalDict, localDict);
 
             }        
         catch (std::exception& err)
             {
-            removeCachedtypes(before_type_cache);
             ScriptEngineManager::Get().InjectException(err);
+            mdlErrno = MDLERR_PYTHONEXECUTIONERROR;
+            removeCachedtypes(before_type_cache);
             }        
         }
     m_engineProcessing = false;

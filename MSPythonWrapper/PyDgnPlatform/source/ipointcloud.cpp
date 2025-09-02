@@ -12,141 +12,141 @@
 
 static const char * __doc_Bentley_DgnPlatform_IPointCloudEdit_SetPointCloudClipProperties =R"doc(Sets the PointCloudClipProperties on an element.
 
-Parameter ``eeh``:
+:param eeh:
     Element on which the PointCloudClipProperties are set.
 
-Parameter ``props``:
+:param props:
     PointCloudClipProperties to set on the element.
 
-Returns:
+:returns:
     SUCCESS or ERROR.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPointCloudEdit_SetPointCloudProperties =R"doc(Sets the PointCloudProperties on an element.
 
-Parameter ``eeh``:
+:param eeh:
     Element on which the PointCloudProperties are set.
 
-Parameter ``props``:
+:param props:
     PointCloudProperties to set on the element.
 
-Returns:
+:returns:
     SUCCESS or ERROR.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPointCloudQuery_GetPointCloudClipProperties =R"doc(Gets the PointCloudClipProperties associated to the provided element.
 
-Parameter ``eh``:
+:param eh:
     Element from which the PointCloudClipProperties are extracted.
 
-Returns:
+:returns:
     Point cloud clip properties.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IPointCloudQuery_GetPointCloudProperties =R"doc(Gets the PointCloudProperties associated to the provided element.
 
-Parameter ``eh``:
+:param eh:
     Element from which the PointCloudProperties are extracted.
 
-Returns:
+:returns:
     Point cloud properties.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_SetGlobalOrigin =R"doc(Sets translation factor between points coordinates and UOR.
 
-Parameter ``val``:
+:param val:
     Global origin.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetGlobalOrigin =R"doc(Gets translation factor between points coordinates and UOR.
 
-Returns:
+:returns:
     Global origin.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_SetUorPerMeter =R"doc(Sets scale factor between points coordinates and UOR.
 
-Parameter ``val``:
+:param val:
     UOR per meter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetUorPerMeter =R"doc(Gets scale factor between points coordinates and UOR.
 
-Returns:
+:returns:
     UOR per meter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_SetViewDensity =R"doc(Sets the density of a point cloud. This represents the density of
 points displayed for this point cloud. Default is 1.0.
 
-Parameter ``density``:
+:param density:
     The view density expressed as percentage (a float value between
     0.0 and 1.0).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetViewDensity =R"doc(Gets the density of a point cloud. This represents the density of
 points displayed for this point cloud.
 
-Returns:
+:returns:
     The density (a float value between 0.0 and 1.0).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_SetViewState =R"doc(Sets if the point cloud is displayed in a specific view.
 
-Parameter ``state``:
+:param state:
     Set to true to display in the view.
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view number to query [0..7].)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetViewState =R"doc(Indicates if the point cloud is displayed in a specific view.
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view number to query [0..7].
 
-Returns:
+:returns:
     true if the point cloud is displayed in the specified view.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_SetDescription =R"doc(Sets the description of the point cloud.
 
-Parameter ``description``:
+:param description:
     Description of the point cloud.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetDescription =R"doc(Gets the description of the point cloud.
 
-Returns:
+:returns:
     Description of the point cloud.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_SetLockedGeoReference =R"doc(Sets georeference lock state.
 
-Parameter ``isLocked``:
+:param isLocked:
     If true, locks the point cloud's geoReference.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetLockedGeoReference =R"doc(Returns Indicates if the point cloud's geoReference can be changed.
 
-Returns:
+:returns:
     true if the point cloud's geoReference can be changed; false
     otherwise.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_SetLocate =R"doc(Sets locate state.
 
-Parameter ``isOn``:
+:param isOn:
     If true, sets the point cloud as locatable.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetLocate =R"doc(Indicates if the point cloud is locatable.
 
-Returns:
+:returns:
     true if the point cloud is locatable; false otherwise.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_SetFileMoniker =R"doc(Sets the moniker that identifies the point cloud file. Will add a
 reference to the DgnDocumentMoniker.
 
-Parameter ``moniker``:
+:param moniker:
     The DgnDocumentMoniker that identifies the point cloud file.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetFileMoniker =R"doc(Gets the moniker that identifies the point cloud file.
 
-Returns:
+:returns:
     A moniker.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_GetTransform =R"doc(Gets the transformation matrix.
 
-Returns:
+:returns:
     A transformation matrix.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudProperties_Create =R"doc(Creates an instance of a PointCloudProperties.
 
-Returns:
+:returns:
     An instance of a PointCloudProperties.)doc";
 
 /*---------------------------------------------------------------------------------**//**

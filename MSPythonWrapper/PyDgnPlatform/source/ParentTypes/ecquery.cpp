@@ -34,25 +34,25 @@ property.)doc";
 static const char * __doc_Bentley_DgnPlatform_ECQuery_SetWhereCriterion =R"doc(Specify the WhereCiterion that this query should apply when used to
 choose DgnECInstances.
 
-Parameter ``wh``:
+:param wh:
     The where criterion that this query should apply when used to
     choose DgnECInstances)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ECQuery_AddSearchClass =R"doc(Tell this query to choose only instances of the specified class and
 any other classes passed to this method.
 
-Parameter ``schemaName``:
+:param schemaName:
     The schema
 
-Parameter ``className``:
+:param className:
     The class
 
-Parameter ``isPolymorphic``:
+:param isPolymorphic:
     True to include derived classes)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ECQuery_SetSelectProperties =R"doc(Set to indicate if found ECInstances should contain ECPropertyValues
 
-Parameter ``value``:
+:param value:
     Pass false to return empty ECInstances (they will still have
     ECInstanceId))doc";
 
@@ -64,21 +64,21 @@ and then call #AddSearchClass to specify classes. Also, see
 static const char * __doc_Bentley_DgnPlatform_IECPropertyValueFilter_AddChainedFilter =R"doc(Add a chained filter to be executed on any property values which pass
 this filter If a chained filter already exists, it will be replaced
 
-Parameter ``chainedFilter``:
+:param chainedFilter:
     The filter to add)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IECPropertyValueFilter_GetChainedFilter =R"doc(Get the next filter in the chain, if one exists
 
-Returns:
+:returns:
     The filter executed after this one.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IECPropertyValueFilter_Accept =R"doc(Applies this filter to the specified property value to determine if it
 meets the criterion
 
-Parameter ``propertyValue``:
+:param propertyValue:
     The property value to accept or reject
 
-Returns:
+:returns:
     true if the property value meets the criterion of this filter)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IECPropertyValueFilter_ConsiderChildValues =R"doc(Get whether members of the specified array or struct property should
@@ -86,15 +86,15 @@ be examined by this filter. This allows arrays and structs to be
 trivially skipped in circumstances under which the filter will not
 accept any of them
 
-Parameter ``parentPropertyValue``:
+:param parentPropertyValue:
     The array or struct property value
 
-Returns:
+:returns:
     true if child values should be examined by the filter.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IECPropertyValueFilter_GetRequiredPrimitiveType =R"doc(Gets the primitive property type this filter applies to
 
-Returns:
+:returns:
     The primitive type this filter applies to, or 0 if it applies to
     properties of any type)doc";
 

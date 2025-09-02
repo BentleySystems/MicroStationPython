@@ -30,3 +30,4 @@ DEFINE_BVECTOR_TYPE(Utf8String, Utf8StringArray);
 // Commonly used bmap
 DEFINE_BMAP_TYPE(WString, WString, WStringWStringMap);
 DEFINE_BMAP_TYPE(WString, WCharCP, WStringWCharMap);
+DEFINE_BMAP_TYPE(int, int, IntIntMap);

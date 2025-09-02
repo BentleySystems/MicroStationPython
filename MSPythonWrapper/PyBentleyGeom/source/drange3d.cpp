@@ -16,22 +16,22 @@ Remark:
     This may only be meaningful in context of range tree tests where
     some prior relationship among ranges is known to apply.
 
-Parameter ``[in]``:
+:param (input):
     newRange candidate for modified range relationship.
 
-Parameter ``[in]``:
+:param (input):
     outerRange containing range
 
-Returns:
+:returns:
     true if touching condition occurs.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IntersectionExtentSquared =R"doc(Compute the intersection of given range with another range and return
 the extentSquared of the intersection range.
 
-Parameter ``[in]``:
+:param (input):
     range2 second range
 
-Returns:
+:returns:
     extentSquared() for the intersection range.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IntersectBounded =R"doc(Compute the intersection of a range cube and a ray.
@@ -39,19 +39,19 @@ static const char * __doc_Bentley_Geom_DRange3d_IntersectBounded =R"doc(Compute 
 If there is not a finite intersection, both params are set to 0 and
 and the output segment consists of only the start point.
 
-Parameter ``[out]``:
+:param (output):
     param0 ray parameter where cube is entered
 
-Parameter ``[out]``:
+:param (output):
     param1 ray parameter where cube is left
 
-Parameter ``[out]``:
+:param (output):
     clipped clipped segment
 
-Parameter ``[out]``:
+:param (output):
     segment line segment to intersect with range cube.
 
-Returns:
+:returns:
     true if non-empty intersection.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IntersectRay =R"doc(Compute the intersection of a range cube and a ray.
@@ -59,25 +59,25 @@ static const char * __doc_Bentley_Geom_DRange3d_IntersectRay =R"doc(Compute the 
 If there is not a finite intersection, both params are set to 0 and
 and both points to point0.
 
-Parameter ``[out]``:
+:param (output):
     param0 ray parameter where cube is entered
 
-Parameter ``[out]``:
+:param (output):
     param1 ray parameter where cube is left
 
-Parameter ``[out]``:
+:param (output):
     point0 entry point
 
-Parameter ``[out]``:
+:param (output):
     point1 exit point
 
-Parameter ``[in]``:
+:param (input):
     start start point of ray
 
-Parameter ``[in]``:
+:param (input):
     direction direction of ray
 
-Returns:
+:returns:
     true if non-empty intersection.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_RestrictToMinMax =R"doc(Returns a range which is the intersection of two ranges. The first
@@ -91,95 +91,95 @@ surface range, i.e. is known a priori to be 'forwards'. The clipping
 restricts unreliable range0 to the nominal surface range pRange1.
 range0 and instance may be the same address. minMax must be different.
 
-Parameter ``[in]``:
+:param (input):
     range0 range to be restricted
 
-Parameter ``[in]``:
+:param (input):
     minMax allowable minmax range. Assumed to have low<high)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IsStrictlyContainedXY =R"doc(Test if the given range is a proper subset of outerRange, using only
 xy parts
 
-Parameter ``[in]``:
+:param (input):
     outerRange outer range
 
-Returns:
+:returns:
     true if the given range is a proper subset of outerRange.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IsEqual =R"doc(Test if two ranges are exactly equal.
 
-Parameter ``[in]``:
+:param (input):
     range1 second range
 
-Returns:
+:returns:
     true if ranges are identical in all components.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IntersectsWith =R"doc(Test if two ranges have strictly non-null overlap (intersection)
 
-Parameter ``[in]``:
+:param (input):
     range2 second range
 
-Returns:
+:returns:
     true if ranges overlap, false if not.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_DistanceSquaredTo =R"doc( Compute the smallest distance to the other range. This is
 0 if the ranges overlap.
 
-Parameter ``[in]``:
+:param (input):
     other second range
 
-Returns:
+:returns:
     distance between range cubes (i.e. edge to edge or vertex to edge))doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_DistanceSquaredOutside =R"doc( Compute the smallest distance squared from xyz to the
 range. This is 0 for any point inside the range.
 
-Parameter ``[in]``:
+:param (input):
     xyz space point.
 
-Returns:
+:returns:
     distance squared from xyz to closest point of the range.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_DistanceOutside =R"doc( Compute the smallest distance from xyz to the range. This
 is 0 for any point inside the range.
 
-Parameter ``[in]``:
+:param (input):
     xyz space point.
 
-Returns:
+:returns:
     distance from xyz to closest point of the range.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IsContainedXY =R"doc( Test if a point is contained in a range, using only xy
 parts.
 
-Parameter ``[in]``:
+:param (input):
     point point to test.
 
-Returns:
+:returns:
     true if the point is in (or on boundary of))doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IsContained =R"doc( Test if the first range is contained in the second range.
 
-Parameter ``[in]``:
+:param (input):
     outerRange candidate outer range.
 
-Returns:
+:returns:
     true if the inner range is a (possibly improper) subset of the
     outer range.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_LocalToGlobal =R"doc(Convert fractional coordinates in x,y,z directions to global
 coordinates.
 
-Parameter ``[in]``:
+:param (input):
     xFraction
 
-Parameter ``[in]``:
+:param (input):
     yFraction
 
-Parameter ``[in]``:
+:param (input):
     zFraction
 
-Returns:
+:returns:
     interpolated point.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IndexOfMaximalAxis =R"doc(Return the index of the axis with largest absolute range.)doc";
@@ -188,46 +188,46 @@ static const char * __doc_Bentley_Geom_DRange3d_GetCornerRange =R"doc(Compute ra
 ray.origin to corners of the range. (The ray direction is NOT
 renormalized on each call)
 
-Parameter ``[in]``:
+:param (input):
     ray origin and vector for dot products.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_GetComponentDRange1d =R"doc(Extract a single component (x,y,z) as a DRange1d.
 
-Parameter ``[in]``:
+:param (input):
     index component index interpretted cyclically.
 
-Returns:
+:returns:
     single component range. Ranges may be null independently.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_GetEdges =R"doc(Generates individual DSegment3d for the 12 edges of the box.
 
-Parameter ``[out]``:
+:param (output):
     edges array of 12 edges)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_Get6Planes =R"doc(Generates 6 planes for the faces of the box.
 
-Parameter ``[out]``:
+:param (output):
     planes array of 6 planes. (Declared and allocated by caller)
 
-Parameter ``[in]``:
+:param (input):
     normalLength scale factor for plane normals. 1.0 is outward unit
     normals, -1.0 is inward unit normals)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_Get8Corners =R"doc(Generates an 8point box around around a range cube. Point ordering is
 maintained from the cube.
 
-Parameter ``[out]``:
+:param (output):
     box array of 8 points of the box)doc";
 
-static const char * __doc_Bentley_Geom_DRange3d_LargestCoordinateXY =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DRange3d_LargestCoordinateXY =R"doc(:returns:
     the largest individual XY coordinate value among (a) range min
     point, (b) range max point, and (c) range diagonal vector.)doc";
 
-static const char * __doc_Bentley_Geom_DRange3d_MaxAbs =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DRange3d_MaxAbs =R"doc(:returns:
     the largest individual coordinate value among range low and high,
     zero if empty range.)doc";
 
-static const char * __doc_Bentley_Geom_DRange3d_LargestCoordinate =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DRange3d_LargestCoordinate =R"doc(:returns:
     the largest individual coordinate value among (a) range min point,
     (b) range max point, and (c) range diagonal vector.)doc";
 
@@ -253,7 +253,7 @@ static const char * __doc_Bentley_Geom_DRange3d_XLength =R"doc(Returns differenc
 
 static const char * __doc_Bentley_Geom_DRange3d_Volume =R"doc(returns product of axis extents. No test for zero or negative axes.)doc";
 
-static const char * __doc_Bentley_Geom_DRange3d_IsPoint =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DRange3d_IsPoint =R"doc(:returns:
     true if high is exactly equal to low in every direction.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IsEmpty =R"doc(Test if low component is (strictly) less than high in any direction.
@@ -263,70 +263,70 @@ low component is less than the corresponding high component)doc";
 static const char * __doc_Bentley_Geom_DRange3d_ExtentSquared =R"doc( returns 0 if the range is null (Range3dIsNull), otherwise
 sum of squared axis extents.
 
-Returns:
+:returns:
     squared magnitude of the diagonal vector.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IsNull =R"doc( Check if the range is exactly the same as the null ranges
 of a just-initialized range.
 
-Returns:
+:returns:
     true if the range is null.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IntersectIndependentComponentsOf =R"doc(Compute intersection of x,y,z components independently.
 
-Parameter ``[in]``:
+:param (input):
     range1 first range
 
-Parameter ``[in]``:
+:param (input):
     range2 second range)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_IntersectionOf =R"doc(Compute the intersection of two ranges. If any direction has no
 intersection the result range is initialized to a null range. (Zero
 thickness intersection is null.)
 
-Parameter ``[in]``:
+:param (input):
     range1 first range
 
-Parameter ``[in]``:
+:param (input):
     range2 second range)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_UnionOf =R"doc( returns the union of two ranges.
 
-Parameter ``[in]``:
+:param (input):
     range0 first range
 
-Parameter ``[in]``:
+:param (input):
     range1 second range)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_ExtendBySweep =R"doc( Extend either low or high of each axis by corresponding
 vector entry for sweep of the range cube. Any axis with low> high is
 left unchanged.
 
-Parameter ``[in]``:
+:param (input):
     vector sweep drection)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_InitFromMinMax =R"doc( Initialize the range from given min and max in all
 directions. Given values will be swapped if needed.
 
-Parameter ``[in]``:
+:param (input):
     v0 min (or max)
 
-Parameter ``[in]``:
+:param (input):
     v1 max (or min))doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_FromMinMax =R"doc( Initialize the range.InitFrom given min and max in all
 directions. Given values will be swapped if needed.
 
-Parameter ``[in]``:
+:param (input):
     v0 min (or max)
 
-Parameter ``[in]``:
+:param (input):
     v1 max (or min))doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_Extend =R"doc( Extends the coordinates of the range cube points in
 pRange so as to include the single additional point point.
 
-Parameter ``[in]``:
+:param (input):
     point new point to be included in the range.)doc";
 
 static const char * __doc_Bentley_Geom_DRange3d_Init =R"doc( Initializes a range cube with (inverted) large positive
@@ -357,6 +357,9 @@ void def_DRange3d(py::module_& m)
     c1.def(py::init(py::overload_cast<double, double, double, double, double, double>(&DRange3d::From)), "x0"_a, "y0"_a, "z0"_a, "x1"_a, "y1"_a, "z1"_a);
     c1.def(py::init(py::overload_cast<DPoint2dArray const&, double>(&DRange3d::From)), "points"_a, "zVal"_a);
     c1.def(py::init(py::overload_cast<DPoint3dArray const&>(&DRange3d::From)), "points"_a);
+    c1.def_static("From",([](py::list const& points) {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+        return DRange3d::From(cppPoints); }), "points"_a);
     c1.def(py::init(py::overload_cast<DPoint4dArray const&>(&DRange3d::From)), "points"_a);
     c1.def(py::init(py::overload_cast<DPoint3dVecArray const&>(&DRange3d::From)), "points"_a);
     c1.def(py::init(py::overload_cast<DPoint3dVecVecArray const&>(&DRange3d::From)), "points"_a);
@@ -370,6 +373,10 @@ void def_DRange3d(py::module_& m)
                   return DRange3d::From(transform, points.data(), weights.data(), (int) points.size());
                   }), "transform"_a, "points"_a, "weights"_a);
     c1.def(py::init(py::overload_cast<TransformCR, DPoint3dArray const&>(&DRange3d::From)), "transform"_a, "points"_a);
+    c1.def_static("From", ([](TransformCR transform, py::list const& points) {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+        return DRange3d::From(transform, cppPoints);
+    }), "transform"_a, "points"_a);
     c1.def(py::init(py::overload_cast<TransformCR, DPoint4dArray const&>(&DRange3d::From)), "transform"_a, "points"_a);
 
     c1.def_property ("low", [] (DRange3d& self) {return self.low; }, [](DRange3d& self, DPoint3dCR low) {return self.low = low; });
@@ -384,8 +391,16 @@ void def_DRange3d(py::module_& m)
     c1.def("Extend", py::overload_cast<double, double, double>(&DRange3d::Extend), "x"_a, "y"_a, "z"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<DPoint2dArray const&, double>(&DRange3d::Extend), "points"_a, "zVal"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<DPoint3dArray const&>(&DRange3d::Extend), "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
+    c1.def("Extend", [](DRange3dR self, py::list const& points)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           self.Extend(cppPoints); }, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<DPoint4dArray const&>(&DRange3d::Extend), "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<TransformCR, DPoint3dArray const&>(&DRange3d::Extend), "transform"_a, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
+    c1.def("Extend", [](DRange3dR self, TransformCR transform, py::list const& points)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           self.Extend(transform, cppPoints); }, "transform"_a, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<TransformCR, DPoint4dArray const&>(&DRange3d::Extend), "transform"_a, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));    
 
     c1.def("Extend", [] (DRange3dR self, TransformCR transform, std::vector<DPoint3d> const& points, std::vector<double> const& weights)
@@ -436,6 +451,17 @@ void def_DRange3d(py::module_& m)
            if (normals.size() < 6) normals.resize(6);
            self.Get6Planes(&origins[0], &normals[0]);
            }, "origins"_a, "normals"_a = 1.0, DOC(Bentley, Geom, DRange3d, Get6Planes));    
+
+    c1.def("Get6Planes", [] (DRange3dCR self, py::list& origins, py::list& normals)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(origins, cppOrigins, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(normals, cppNormals, DPoint3dArray, DPoint3d); 
+           if (cppOrigins.size() < 6) cppOrigins.resize(6);
+           if (cppNormals.size() < 6) cppNormals.resize(6);
+           self.Get6Planes(&cppOrigins[0], &cppNormals[0]);
+           CONVERT_CPPARRAY_TO_PYLIST(origins, cppOrigins, DPoint3dArray, DPoint3d);
+           CONVERT_CPPARRAY_TO_PYLIST(normals, cppNormals, DPoint3dArray, DPoint3d); 
+           }, "origins"_a, "normals"_a = 1.0, DOC(Bentley, Geom, DRange3d, Get6Planes));
 
     c1.def("GetEdges", &DRange3d::GetEdges, "edges"_a, DOC(Bentley, Geom, DRange3d, GetEdges));
 

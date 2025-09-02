@@ -14,26 +14,26 @@ static const char * __doc_Bentley_DgnPlatform_LsLinePointComponent_GetLineCodeTy
 
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_Duplicate =R"doc(Duplicate a stroke, usually to populate the LsLineCodeComponent.
 
-Returns:
+:returns:
     A smart pointer to a full copy of the stroke.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_Create =R"doc(Create a new stroke. A stroke is one piece of a line code, either a
 Dash or a Gap. Each stroke in the pattern can have its own parameters
 defining the behavior.
 
-Parameter ``isDash``:
+:param isDash:
     True to a Dash, false to make a Pap.
 
-Parameter ``length``:
+:param length:
     The lenght of the stroke.
 
-Returns:
+:returns:
     A smart pointer to a new stroke)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_SetStretchable =R"doc(Set whether the stroke can be stretched to fit segments to allow them
 to end on a dash, or to support a fixed number of iterations.
 
-Parameter ``stretchable``:
+:param stretchable:
     True to make it stretchable, false for fixed length.
 
 See also:
@@ -41,7 +41,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_IsStretchable =R"doc(Check if the stroke can be stretched to fit segment lengths.
 
-Returns:
+:returns:
     If stroke is strechable (variable length).
 
 See also:
@@ -53,7 +53,7 @@ corner. False (break) means that the stroke should terminate at the
 corner and the next stroke in the Line Code will begin the next
 segment of the element.
 
-Parameter ``bypass``:
+:param bypass:
     True to make it bypass, false for break.
 
 See also:
@@ -62,7 +62,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_BypassCorner =R"doc(Check if the stroke should bypass or break at a corner of a
 linestring, etc.
 
-Returns:
+:returns:
     True if the stroke should bypass the corner and continue on, False
     if it breaks at the corner and a the next stroke should begin
     after the corner.
@@ -72,7 +72,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_SetDash =R"doc(Set whether the stroke is a dash or a gap.
 
-Parameter ``isDash``:
+:param isDash:
     True to make it a dash, false for gap.
 
 See also:
@@ -80,7 +80,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_IsDash =R"doc(Check if the stroke is a dash or gap.
 
-Returns:
+:returns:
     True if it is a dash, false for a gap.
 
 See also:
@@ -89,7 +89,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_SetCapMode =R"doc(Set the cap mode for the stroke. Strokes with width can show the end
 of the dash differently.
 
-Parameter ``capMode``:
+:param capMode:
     The new cap mode for the stroke. remarks This is ignored for Gaps.
 
 See also:
@@ -98,7 +98,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_GetCapMode =R"doc(Get the cap mode for the stroke. Strokes with width can show the end
 of the dash differently.
 
-Returns:
+:returns:
     the type of cap for this stroke. remarks This is ignored for Gaps.
 
 See also:
@@ -108,7 +108,7 @@ static const char * __doc_Bentley_DgnPlatform_LsStrokeData_SetEndWidth =R"doc(Se
 as the start width so unless taper is desired this does not need to be
 called.
 
-Parameter ``width``:
+:param width:
     The new end width for the stroke. remarks This only applies to
     Dashes (not Gaps).
 
@@ -118,7 +118,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_GetEndWidth =R"doc(Get the end width for the stroke. By default the end width is the same
 as the start width.
 
-Returns:
+:returns:
     The end width for the stroke remarks This only applies to Dashes
     (not Gaps).
 
@@ -128,7 +128,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_SetStartWidth =R"doc(Set the start width for the stroke. By default this will set width for
 the dash unless the end width is set for a taper.
 
-Parameter ``width``:
+:param width:
     The new start width for the stroke. remarks This only applies to
     Dashes (not Gaps).
 
@@ -138,7 +138,7 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_GetStartWidth =R"doc(Get the start width for the stroke. By default if there is no end
 width this is the width of the entire dash.
 
-Returns:
+:returns:
     The start width or width for the stroke remarks This only applies
     to Dashes (not Gaps).
 
@@ -147,7 +147,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_SetLength =R"doc(Set the lenght of the stroke.
 
-Parameter ``length``:
+:param length:
     The new length for the stroke. remarks This only applies to Dashes
     (not Gaps).
 
@@ -156,7 +156,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_LsStrokeData_GetLength =R"doc(Get the length of the stroke.
 
-Returns:
+:returns:
     The length of the stroke
 
 See also:

@@ -9,21 +9,21 @@
 
 
 
-static const char * __doc_Bentley_Geom_DMap4d_IsIdentity =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DMap4d_IsIdentity =R"doc(:returns:
     true if the mapping is an identity)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_Explode =R"doc(Copy various parts of the 4x4 matrix to separate data structures.
 
-Parameter ``[out]``:
+:param (output):
     matrix upper 3x3
 
-Parameter ``[out]``:
+:param (output):
     translation last column (above diagonal)
 
-Parameter ``[out]``:
+:param (output):
     perspective last row (including diagonal)
 
-Parameter ``[in]``:
+:param (input):
     inverse false for forward part, true for inverse
 
 Remark:
@@ -31,78 +31,78 @@ Remark:
 
 static const char * __doc_Bentley_Geom_DMap4d_IsPerspective =R"doc(Test if a transform is perspective.
 
-Returns:
+:returns:
     true if the mapping contains perspective.)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_IsAffine =R"doc(Test if a transform is affiine.
 
-Returns:
+:returns:
     true if the mapping is affine.)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_IsSingular =R"doc(Test if a transform is singular
 
-Returns:
+:returns:
     true if the mapping is singular)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_IsIndependent =R"doc(Checks if the mapping is strictly a scale/translate in specified
 directions.
 
-Parameter ``[in]``:
+:param (input):
     xChange 1 if x may change, 0 if it must stay fixed
 
-Parameter ``[in]``:
+:param (input):
     yChange 1 if y may change, 0 if it must stay fixed
 
-Parameter ``[in]``:
+:param (input):
     zChange 1 if z may change, 0 if it must stay fixed
 
-Returns:
+:returns:
     true if independence tests are satisfied.)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_InitProduct =R"doc(Multiply transforms
 
-Parameter ``[in]``:
+:param (input):
     A transform A
 
-Parameter ``[in]``:
+:param (input):
     B transform B)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_SandwichOfBinverseAB =R"doc(Form the product Binv * A * B
 
-Parameter ``[in]``:
+:param (input):
     A inside term of sandwich
 
-Parameter ``[in]``:
+:param (input):
     B outer term of sandwich)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_SandwichOfBABinverse =R"doc(Form the product B * A * BInv A NULL for B or C skips that part.
 
-Parameter ``[in]``:
+:param (input):
     A inside term of sandwich
 
-Parameter ``[in]``:
+:param (input):
     B outer term of sandwich)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_SandwichOf =R"doc(Form the product C * Binv * A * B * Cinv
 
-Parameter ``[in]``:
+:param (input):
     A inside term of sandwich
 
-Parameter ``[in]``:
+:param (input):
     B middle term of sandwich
 
-Parameter ``[in]``:
+:param (input):
     C outer term of sandwich)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_InverseOf =R"doc(Sets pA to the inverse of B.
 
-Parameter ``[in]``:
+:param (input):
     B original mapping)doc";
 
-static const char * __doc_Bentley_Geom_DMap4d_ZFrustum =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DMap4d_ZFrustum =R"doc(:param (input):
     z0 reference z. Normalized projective coordinate is 0 at this z
 
-Parameter ``[in]``:
+:param (input):
     zetaHalf controls rate of growth of normalized projective z.
     Projective z at z0/k is k-1*zetahalf, i.e. is zetahalf at z0/2)doc";
 
@@ -120,131 +120,131 @@ In device space, we do a projection in the z direction. Hence we need
 a 4th point Qz=(0,0,1,0). Build this matrix by calling
 jmdlDMap4d_fillHomogeneousSkewFrame (pHMap, Q00, Q10,Q01,Qz)
 
-Parameter ``point0001``:
+:param point0001:
     0001 in the unit space maps here
 
-Parameter ``point1001``:
+:param point1001:
     1001 in the unit space maps here
 
-Parameter ``point0101``:
+:param point0101:
     0100 in the unit space maps here
 
-Parameter ``point0010``:
+:param point0010:
     0010 in the unit space maps here
 
-Returns:
+:returns:
     true if the 4 points are independent)doc";
 
-static const char * __doc_Bentley_Geom_DMap4d_InitFromTransform =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DMap4d_InitFromTransform =R"doc(:param (input):
     transform affine transformation 3x4 matrix
 
-Parameter ``[in]``:
+:param (input):
     invert true to treat this matrix as the inverse of the mapping,
     false if forward.
 
-Returns:
+:returns:
     true if the Transfrom was invertible.)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_InitFromTaper =R"doc(Initialize a transform with perspective entries for a (nonzero) taper
 in the z direction.
 
-Parameter ``[in]``:
+:param (input):
     taper taper fraction
 
-Returns:
+:returns:
     true if an invertible map was constructed.)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_InitFromRanges =R"doc(Initialize a transform which translates and scales along principle
 axes so box loAP..hiAP maps to box loBP..hiBP
 
-Parameter ``[in]``:
+:param (input):
     loAP corner of box A
 
-Parameter ``[in]``:
+:param (input):
     hiAP diagonally opposite corner of box A
 
-Parameter ``[in]``:
+:param (input):
     loBP corner of box B
 
-Parameter ``[in]``:
+:param (input):
     hiBP diagonally opposite corner of box B
 
-Returns:
+:returns:
     int)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_InitFrom =R"doc(Direct initialization from matrices. Caller is responsible for correct
 inverse relationship.
 
-Parameter ``[in]``:
+:param (input):
     forwardMatrix " forward " matrix.
 
-Parameter ``[in]``:
+:param (input):
     inverseMatrix " inverse " matrix.)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_FromTranslation =R"doc(Initialize a translation transform.
 
-Parameter ``[in]``:
+:param (input):
     tx x component of translation
 
-Parameter ``[in]``:
+:param (input):
     ty y component of translation
 
-Parameter ``[in]``:
+:param (input):
     tz z component of translation)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_FromPrincipleProjection =R"doc(Initialize a transform that is a (noninvertible) projection to a
 principle plane.
 
-Parameter ``[in]``:
+:param (input):
     height distance of plane from origin
 
-Parameter ``[in]``:
+:param (input):
     axis 0,1,2 for x,y,z normal)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_FromScale =R"doc(Initialize a pure scaling transformation. If any scale factor is zero,
 the corresponding inverse entry is also zero.
 
-Parameter ``[in]``:
+:param (input):
     ax x scale factor
 
-Parameter ``[in]``:
+:param (input):
     ay y scale factor
 
-Parameter ``[in]``:
+:param (input):
     az z scale factor)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_FromQuadrantRotation =R"doc(Rotate about vx,yv,vz by an integer multiple of 90 degrees. Providing
 the angle as an integer allows exact table lookup without
 approximation of pi.
 
-Parameter ``[in]``:
+:param (input):
     multiple rotation angle is multiple * 90 degrees
 
-Parameter ``[in]``:
+:param (input):
     vx x component of rotation axis
 
-Parameter ``[in]``:
+:param (input):
     vy y component of rotation axis
 
-Parameter ``[in]``:
+:param (input):
     vz z component of rotation axis)doc";
 
 static const char * __doc_Bentley_Geom_DMap4d_FromRotation =R"doc(Initialize a rotation about axis vx,vy,vz by angle whose cosine and
 sine are (proportional to) c and s.
 
-Parameter ``[in]``:
+:param (input):
     c cosine of angle
 
-Parameter ``[in]``:
+:param (input):
     s sine of angle
 
-Parameter ``[in]``:
+:param (input):
     vx x component of rotation axis
 
-Parameter ``[in]``:
+:param (input):
     vy y component of rotation axis
 
-Parameter ``[in]``:
+:param (input):
     vz z component of rotation axis)doc";
 
 /*---------------------------------------------------------------------------------**//**

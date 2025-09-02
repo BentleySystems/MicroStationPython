@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="ModifyElement" CommandClass="MacroCommand" CommandWord="MODIFYELEMENT">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="ModifyElement">
+            <Keyword CommandWord="TEXTSTYLE" />
+            <Keyword CommandWord="LINESTYLE" />
+            <Keyword CommandWord="WEIGHT" />
+            <Keyword CommandWord="COLOUR" />
+            <Keyword CommandWord="LEVEL" />
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="MODIFYELEMENT TEXTSTYLE"                     Function="modifyTextStyle" />
+        <KeyinHandler Keyin="MODIFYELEMENT LINESTYLE"                     Function="modifyLineStyle" />
+        <KeyinHandler Keyin="MODIFYELEMENT WEIGHT"                        Function="modifyElementWeight" />
+        <KeyinHandler Keyin="MODIFYELEMENT COLOUR"                        Function="modifyElementColour" />
+        <KeyinHandler Keyin="MODIFYELEMENT LEVEL"                         Function="modifyElementLevel" />
+    </KeyinHandlers>
+</KeyinTree>

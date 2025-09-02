@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -15,10 +10,19 @@ import ctypes
 import sys
 
 '''
-Function to select elements by its length
-    inputLength : int      Length
+This sample demonstrates how to select elements by Length
 '''
+
 def selectElementsbyLength(inputLength):
+    """
+    Select elements from the active model based on their length.
+
+    This function retrieves all graphical elements from the active model and selects those
+    that are either lines or line strings with a length less than the specified input length.
+
+    :param inputLength: The maximum length of the elements to be selected.
+    :type inputLength: float
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -53,10 +57,19 @@ def selectElementsbyLength(inputLength):
                 print("line", lineLength)
                 if(inputLength > lineLength):
                     selSetManager.AddElement(perElementRef,dgnModel)         
+    
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {agenda.GetCount()} elements")
+    # iterate over the selection set printing the element ids of elements in the selection set
+    for i in range(agenda.GetCount()):
+        editElementHandle = agenda.GetEntry(i)
+        print (f"  Element ID: {editElementHandle.GetElementId()}")
+    
 
-'''
-Prerequisite: Open SelectExample.dgn with '2D Metric Design' 
-'''
+#Prerequisite: Open SelectExample.dgn with '2D Metric Design' 
 #main
 if __name__ == "__main__":
     #highlight all the elements with type 

@@ -58,6 +58,6 @@ void def_Dsig(py::module_& m)
     c2.def("IncludesReferences", &DsigQuery::IncludesReferences);
     c2.def("GetCertificate", &DsigQuery::GetCertificate, "x509Cert"_a);
     c2.def("GetCertificateChain", &DsigQuery::GetCertificateChain, "pkcs7"_a);
-    c2.def("GetPublicKey", py::overload_cast<bvector<byte>&>(&DsigQuery::GetPublicKey, py::const_), "x509PublicKeyInfo"_a);
+    c2.def("GetPublicKey", py::overload_cast<bvector<Byte>&>(&DsigQuery::GetPublicKey, py::const_), "x509PublicKeyInfo"_a);
     c2.def("GetAnnotationData", &DsigQuery::GetAnnotationData, py::return_value_policy::reference_internal);
     }

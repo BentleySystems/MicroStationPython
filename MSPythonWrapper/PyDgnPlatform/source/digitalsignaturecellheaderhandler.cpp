@@ -14,10 +14,10 @@
 static const char * __doc_Bentley_DgnPlatform_DigitalSignatureCellHeaderHandler_GetData =R"doc(Test of an element is a digital signature and, if so, get information
 about the signature.
 
-Parameter ``sigel``:
+:param sigel:
     element to query
 
-Returns:
+:returns:
     Information about the digital signature @Remarks Call IsValid on
     the returned object. If false, then *sigel* is not a digital
     signature. Bentley Systems +---------------+---------------+------
@@ -25,10 +25,10 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DigitalSignatureCellHeaderHandler_GetPrerequisites =R"doc(Query the signatures on which this signature depends
 
-Parameter ``prereqs``:
+:param prereqs:
     prerequisite signature elements
 
-Parameter ``sigel``:
+:param sigel:
     signature element to query @Return non-zero error status if this
     is not a valid signature element Bentley Systems +----------------
     ------------------------------------------------------)doc";
@@ -40,7 +40,7 @@ signature has prerequisites, it is verified only of those required
 signatures are also verified. @Remarks This function does not verify
 the trustworthiness of the signer's certificate.
 
-Parameter ``sigref``:
+:param sigref:
     signature element to test @Return SUCCESS if signature is verified
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -78,7 +78,7 @@ void def_DigitalSignatureCellHeaderHandler(py::module_& m)
                      bool includeCertChain)
                   {
                   std::string strData = (std::string) x509Cert;
-                  return DigitalSignatureCellHeaderHandler::ConvertToSignatureElement(sigEh, (const byte*) strData.data(), (ULong32) strData.size(),
+                  return DigitalSignatureCellHeaderHandler::ConvertToSignatureElement(sigEh, (const Byte*) strData.data(), (ULong32) strData.size(),
                                                                                       includeReferences, prereqs, annotations, includeCertChain);
                   }, "sigEh"_a, "x509Cert"_a, "includeReferences"_a = false, "prereqs"_a = ElementAgenda(), 
                       "annotation"_a = DsigAnnotationData(), "includeCertChain"_a = true);

@@ -14,56 +14,56 @@ static const char * __doc_Bentley_DgnPlatform_IDgnComponentDefinitionModelHandle
 parameter set and parameter definition names, used when updating a
 parametric cell definition
 
-Parameter ``remapTable``:
+:param remapTable:
     The table which will be initialized with default remappings
 
-Parameter ``cellDef``:
+:param cellDef:
     The existing parametric cell definition which is to be updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnComponentDefinitionModelHandler_UpdateCellDefinition =R"doc(Updates the parametric cell definition having the same name as this
 handler's model in the specified DgnFile to match the current state of
 the definition model.
 
-Parameter ``targetFile``:
+:param targetFile:
     The DgnFile containing the cell definition to be updated
 
-Parameter ``remapTable``:
+:param remapTable:
     Indicates how to remap names of parameter sets and parameter
     definitions between the previous and updated cell definitions
 
-Returns:
+:returns:
     Success if the cell definition and all cell instances were
     updated, or else an error code)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnComponentDefinitionModelHandler_CreateCellDefinition =R"doc(Creates a parametric cell definition element (and associated hidden
 cell model) from this handler's model in the specified DgnFile.
 
-Parameter ``targetFile``:
+:param targetFile:
     The DgnFile in which to create the parametric cell definition
 
-Returns:
+:returns:
     Success if the cell definition was created, or else an error code.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnComponentDefinitionModelHandler_DeleteParameterSet =R"doc(Deletes the specified parameter set
 
-Parameter ``parameterSet``:
+:param parameterSet:
     The parameter set to delete
 
-Returns:
+:returns:
     Success if the parameter set was deleted, or else an error code)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnComponentDefinitionModelHandler_CreateParameterSet =R"doc(Creates a new parameter set
 
 
-Parameter ``name``:
+:param name:
     The name of the new parameter set. Must be non-empty and unique
     within all existing parameter sets.
 
-Parameter ``description``:
+:param description:
     The description of the new parameter set, or null if no
     description is desired.
 
-Parameter ``values``:
+:param values:
     The initial values of all parameters for the new parameter set.
     The values must come from this handler's DgnModel.
 
@@ -84,18 +84,18 @@ static const char * __doc_Bentley_DgnPlatform_ParametricCellRemapTable_RemapPara
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellRemapTable_ResolveVariable =R"doc(Looks up the remapped name of a parameter definition.
 
-Parameter ``oldVariableAccessString``:
+:param oldVariableAccessString:
     The previous internal name of the parameter definition
 
-Returns:
+:returns:
     the new name, or null if the old name could not be remapped.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellRemapTable_ResolveParameterSet =R"doc(Looks up the remapped name of a parameter set.
 
-Parameter ``oldParameterSetName``:
+:param oldParameterSetName:
     The previous name of the parameter set.
 
-Returns:
+:returns:
     the new name, or null if the old name could not be remapped.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnComponentDefinitionHandler_GetDefinitionModelHandler =R"doc(If the model managed by this handler can serve as a " definition model "

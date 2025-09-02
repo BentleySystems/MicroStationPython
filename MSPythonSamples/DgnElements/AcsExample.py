@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 import os
 import math
@@ -15,10 +10,28 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
 
-'''Create acs in Microstation'''
+'''
+Sample demonstrating how to create acs
+'''
 
 def createAcs(basePoint, acsName="MyACS1", acsDesc="My ACS1", scale=1,
               rotation=RotMatrix.FromRowValues(1,0,0,0,1,0,0,0,1)):
+    """
+    Create an Auxiliary Coordinate System (ACS) in the active DGN model.
+
+    :param basePoint: The base point for the ACS origin.
+    :type basePoint: Point3d
+    :param acsName: The name of the ACS. Defaults to "MyACS1".
+    :type acsName: str, optional
+    :param acsDesc: The description of the ACS. Defaults to "My ACS1".
+    :type acsDesc: str, optional
+    :param scale: The scale of the ACS. Defaults to 1.
+    :type scale: float, optional
+    :param rotation: The rotation matrix for the ACS. Defaults to identity matrix.
+    :type rotation: RotMatrix, optional
+    :return: True if the ACS was successfully created and set as active, False otherwise.
+    :rtype: bool
+    """    
     # Get the active DGN model reference
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:

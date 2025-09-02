@@ -12,67 +12,67 @@
 
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_DeleteElementProjection =R"doc(Remove a projection from an element
 
-Parameter ``eeh``:
+:param eeh:
     source element to remove the projection from
 
-Returns:
+:returns:
     SUCCESS if the projection was removed Bentley Systems +-----------
     ----+---------------+---------------+---------------+-------------
     --+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_AddElementProjection =R"doc(Add a projection to this element
 
-Parameter ``eeh``:
+:param eeh:
     source element to attach the projection to
 
-Parameter ``offset``:
+:param offset:
     the projection offset from the element origin
 
-Parameter ``scale``:
+:param scale:
     the projection scale this is a factor based on the element size
 
-Parameter ``angles``:
+:param angles:
     the rotation applied to the projection relative to the orientation
     of the element
 
-Parameter ``mode``:
+:param mode:
     the type of projection to apply this parameter must be either
     MapMode::DirectionalDrape, MapMode::Cubic, MapMode::Spherical,
     MapMode::Cylindrical
 
-Parameter ``variant``:
+:param variant:
     any variation to the default settings for the mode
 
-Returns:
+:returns:
     SUCCESS if the projection was attached Bentley Systems +----------
     -----+---------------+---------------+---------------+------------
     ---+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_GetMaterialProjectionParameters =R"doc(Extract the paramaters relating to the projection and the element
 
-Parameter ``eh``:
+:param eh:
     source element to query
 
-Parameter ``type``:
+:param type:
     the material attachment type to query the data for
 
-Parameter ``units``:
+:param units:
     the units of the material layer associated with this projection
 
-Parameter ``params``:
+:param params:
     the calculated parameters of the attached projection
 
-Returns:
+:returns:
     SUCCESS if the projection is attached to the element and the
     parameters can be calculated Bentley Systems +---------------+----
     -----------+---------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_FindMaterialProjection =R"doc(Find which projection if any is associated with this element
 
-Parameter ``eh``:
+:param eh:
     source element to query
 
-Returns:
+:returns:
     The type of projection attactment found Bentley Systems +---------
     ------+---------------+---------------+---------------+-----------
     ----+------)doc";
@@ -81,13 +81,13 @@ static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_Detac
 Implementors must call the appropriate IMaterialListener method for
 valid dettachments
 
-Parameter ``eeh``:
+:param eeh:
     source element to be modified
 
-Parameter ``subEntities``:
+:param subEntities:
     sub entities to remove the material attachments from
 
-Returns:
+:returns:
     SUCCESS if the dettachment was made Bentley Systems +-------------
     --+---------------+---------------+---------------+---------------
     +------)doc";
@@ -100,16 +100,16 @@ mateial changes when materials are renamed. Note:Extension
 Implementors must call the appropriate IMaterialListener method for
 valid attachments
 
-Parameter ``eeh``:
+:param eeh:
     source element to be modified
 
-Parameter ``subEntities``:
+:param subEntities:
     sub entities to attach the material to
 
-Parameter ``materialId``:
+:param materialId:
     material to be associated with the subEntity
 
-Returns:
+:returns:
     SUCCESS if the attachment was made Bentley Systems +--------------
     -+---------------+---------------+---------------+---------------+
     ------)doc";
@@ -117,24 +117,24 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_GetSubEntityAttachments =R"doc(Fill in a map of material attachments to sub components of this
 element.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Parameter ``attachments``:
+:param attachments:
     A vector containing WString, materialId pairs of attachments to
     sub elements
 
-Returns:
+:returns:
     SUCCESS if the method is succeded Bentley Systems +---------------
     +---------------+---------------+---------------+---------------+-
     -----)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_HasSubEntityAttachments =R"doc(Query if this element has multiple materials associated with it
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if there are multiple materials associated with this element,
     false otherwise Bentley Systems +---------------+---------------+-
     --------------+---------------+---------------+------)doc";
@@ -142,33 +142,33 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_SupportsSubEntityAttachments =R"doc(Query whether the element has the ability to associate multiple
 materials with itself
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if multiple materials can be associated with this element,
     false otherwise Bentley Systems +---------------+---------------+-
     --------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_DeleteMaterialAttachment =R"doc(Delete a material attachment from an element.
 
-Parameter ``eeh``:
+:param eeh:
     The element detach the material from.
 
-Returns:
+:returns:
     SUCCESS if the attachment was removed Bentley Systems +-----------
     ----+---------------+---------------+---------------+-------------
     --+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IMaterialPropertiesExtension_AddMaterialAttachment =R"doc(Associate a material with an element via a material attachment.
 
-Parameter ``eeh``:
+:param eeh:
     The element attach the material to.
 
-Parameter ``materialId``:
+:param materialId:
     The material associated with the attachment
 
-Returns:
+:returns:
     SUCCESS if the attachment was made Bentley Systems +--------------
     -+---------------+---------------+---------------+---------------+
     ------)doc";
@@ -179,26 +179,26 @@ material assignments, attachments, overrides, etc. This pointer is
 valid only as long as the element's design file remains loaded and the
 material is not modified by another caller.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Parameter ``level``:
+:param level:
     The effective level of the element. Because of overrides, this may
     differ from the level declared in the ElementHandle.
 
-Parameter ``colorIndex``:
+:param colorIndex:
     The effective color of the element. Because of overrides, this may
     differ from the color declared in the ElementHandle.
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be used with - needed to
     determine the scaling for maps that make use of real world units.
 
-Parameter ``useSymbologyOverride``:
+:param useSymbologyOverride:
     Specifies whether the lookup will search for an override material
     or a by-level material.
 
-Returns:
+:returns:
     The material associated with the element. Bentley Systems +-------
     --------+---------------+---------------+---------------+---------
     ------+------)doc";
@@ -210,13 +210,13 @@ passed in with either the ElementId of the internal attachment for the
 missing material if the stored attachment is internal. Or the name of
 the missing material if the attachment type stored is a linkage
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Parameter ``id``:
+:param id:
     The id to populate with the information
 
-Returns:
+:returns:
     SUCCESS if attachment information is stored for this element
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";

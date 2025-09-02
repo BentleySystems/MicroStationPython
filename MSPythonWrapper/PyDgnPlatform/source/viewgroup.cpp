@@ -25,7 +25,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_FindActiveViewGroup =R"doc(Find the active ViewGroup in *dgnFile.*
 
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The file to read
 
 Returns (Tuple, 0):
@@ -42,13 +42,13 @@ static const char * __doc_Bentley_DgnPlatform_ViewGroup_Copy =R"doc(Creates a ne
 ViewGroup that references the designated source model.
 
 
-Parameter ``rootModel``:
+:param rootModel:
     The Root Model for every view in the new viewGroup.
 
-Parameter ``sourceModel``:
+:param sourceModel:
     The Root Model for which to attempt to find an existing ViewGroup.
 
-Parameter ``copyOptions``:
+:param copyOptions:
     Specifies certain copy behaviors. See ViewGroupCopyOptions
 
 Remark:
@@ -77,18 +77,18 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_Create =R"doc(Creates a new instance of ViewGroup
 
 
-Parameter ``rootModel``:
+:param rootModel:
     The model that becomes the Root Model of all views in the
     ViewGroup.
 
-Parameter ``transient``:
+:param transient:
     True to create a temporary ViewGroup that is not saved to the
     DgnFile.
 
-Parameter ``name``:
+:param name:
     The ViewGroup name. If name is NULL, generates a new unique name.
 
-Parameter ``addToCollection``:
+:param addToCollection:
     If true, the ViewGroup is added to the ViewGroupCollection
     associated with the DgnFile.
 
@@ -110,36 +110,36 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_From =R"doc(Copies the contents of the source ViewGroup to this ViewGroup.
 
-Parameter ``source``:
+:param source:
     The source ViewGroup.
 
-Parameter ``copyOptions``:
+:param copyOptions:
     Specifies certain copy behaviors. See ViewGroupCopyOptions)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetActiveStyle =R"doc(Sets the active line style associated with this view group.
 
-Parameter ``activeStyle``:
+:param activeStyle:
     The active style.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetActiveStyle =R"doc(Gets the active line style associated with this view group.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetActiveWeight =R"doc(Sets the active line weight associated with this view group.
 
-Parameter ``activeWeight``:
+:param activeWeight:
     The active weight.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetActiveWeight =R"doc(Gets the active line weight associated with this view group.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetActiveColor =R"doc(Sets the active color associated with this view group.
 
-Parameter ``activeColor``:
+:param activeColor:
     The active color.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetActiveColor =R"doc(Gets the active color associated with this view group.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetActiveLevel =R"doc(Sets the active level associated with this view group.
 
-Parameter ``activeLevel``:
+:param activeLevel:
     The active level.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetActiveLevel =R"doc(Gets the active level associated with this view group.)doc";
@@ -159,20 +159,20 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_WriteImmediatelyToFile =R"doc(Write this ViewGroup immediately to the DgnFile.
 
-Returns:
+:returns:
     VG_Success, or one of the ViewGroupStatus values if there is an
     error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SaveChanges =R"doc(Save the changes to this ViewGroup persistently to the DgnFile.
 
-Returns:
+:returns:
     VG_Success, or one of the ViewGroupStatus values if there is an
     error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_ResetEffectiveLevelMasksForChildren =R"doc(Direct that effective level display mask for all descendants of the
 indicated model, but not the model itself.
 
-Parameter ``modelRef``:
+:param modelRef:
     The model whose descendant effectiveLevelMaks should be
     recalculated.
 
@@ -186,10 +186,10 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_ResetEffectiveLevelMasksForModel =R"doc(Direct that effective level display mask for the indicated model and,
 optionally, its descendants be recalculated for every view.
 
-Parameter ``modelRef``:
+:param modelRef:
     The model at which to start the traversal.
 
-Parameter ``includeChildModelRefs``:
+:param includeChildModelRefs:
     If true, traverse all child modelRefs.
 
 Remark:
@@ -211,75 +211,75 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_EnsureLevelMaskCoverage =R"doc(Traverse the modelRef and its descendants, and make sure that there is
 a per-view level display mask for each in every view.
 
-Parameter ``modelRef``:
+:param modelRef:
     The model at which to start the traversal.
 
-Parameter ``fromExchange``:
+:param fromExchange:
     If true, do not revert to level masks stored in reference, even if
     the refernce has REF_NESTOVERRIDES_NEVER set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SynchViewDisplay =R"doc(Tells the host to synchronize the displayed view with the state stored
 in this ViewGroup
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view to synchronize.
 
-Parameter ``levelsChanged``:
+:param levelsChanged:
     Informs the host that the per-view level display has been
     manipulated.
 
-Parameter ``undoable``:
+:param undoable:
     Informs the host that the manipulation should be treated as
     undoable.
 
-Parameter ``synchViewTitle``:
+:param synchViewTitle:
     Informs the host that the view title may need to be updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_MatchesModel =R"doc(Returns true if this ViewGroup matches the indicated Model.
 
-Parameter ``modelID``:
+:param modelID:
     The model for which to test.
 
-Parameter ``allViewsMatch``:
+:param allViewsMatch:
     If true, returns true only if the root model of all views matches
     modelID.
 
-Parameter ``thisViewMatches``:
+:param thisViewMatches:
     If between 0 and MAX_VIEWS-1, inclusive, returns true if that view
     has modelID as its root Model. Otherwise, returns true if the
     first view that is on matches modelID.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetViewPortInfo =R"doc(Sets the ViewPortInfo for the indicated view.
 
-Parameter ``viewPortInfo``:
+:param viewPortInfo:
     The ViewPortInfo to set.
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view for which the ViewPortInfo is set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetViewInfo =R"doc(Sets the ViewInfo for the indicated view, copy of viewInfo will be
 made and then copied one will be set at the viewNumber index in
 viewGroup. It is not taking ownership of viewInfo.
 
-Parameter ``viewInfo``:
+:param viewInfo:
     The ViewInfo to set.
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view for which the ViewInfo is set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetViewPortInfo =R"doc(Gets a const reference to the ViewPortInfo for the indicated view.
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view for which the ViewPortInfo is requested)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetViewInfo =R"doc(Gets a const reference to the ViewInfo for the indicated view.
 
-Parameter ``viewNumber``:
+:param viewNumber:
     The view for which the ViewInfo is requested)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetTransient =R"doc(Sets this ViewGroup's transient status
 
-Parameter ``transient``:
+:param transient:
     True if the ViewGroup should be treated as transient.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_IsTransient =R"doc(Returns true if this ViewGroup was created temporarily and will not be
@@ -291,7 +291,7 @@ static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetElementId =R"doc(Gets
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetUIDisplayOrder =R"doc(Sets the User Interface display order value for this ViewGroup
 
-Parameter ``value``:
+:param value:
     The new UI display order value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetUIDisplayOrder =R"doc(Gets an integer representing the desired User Interface display order
@@ -303,17 +303,17 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetDescription =R"doc(Sets the description of this ViewGroup
 
-Parameter ``description``:
+:param description:
     The new description for this ViewGroup.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_GetDescription =R"doc(Gets the description of this ViewGroup)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroup_SetName =R"doc(Sets the Name of this ViewGroup
 
-Parameter ``name``:
+:param name:
     The new name for this ViewGroup.
 
-Returns:
+:returns:
     VG_Success, or one of the ViewGroupStatus values if there is an
     error.)doc";
 
@@ -337,34 +337,34 @@ static const char * __doc_Bentley_DgnPlatform_ViewGroupCopyOptions_Duplicate =R"
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_GetUniqueNameFromBase =R"doc(Gets a unique name for a ViewGroup given a " base " name.
 
-Parameter ``uniqueName``:
+:param uniqueName:
     The generated uniqueName.
 
-Parameter ``baseName``:
+:param baseName:
     The base name. If NULL, the name of the model (decorated with
     " transient " if transient is true) is used as the base name.
 
-Parameter ``model``:
+:param model:
     The model. Used only to get the base name if the baseName argument
     is NULL.
 
-Parameter ``transient``:
+:param transient:
     True if the name should be generated for a transient ViewGroup.
 
-Returns:
+:returns:
     VG_Success, or one of the ViewGroupStatus values if there is an
     error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_MakeActive =R"doc(Attempt to make the indicated ViewGroup the active ViewGroup.
 
-Parameter ``newActive``:
+:param newActive:
     The ViewGroup which is to be made active.
 
-Parameter ``deferInitialUpdate``:
+:param deferInitialUpdate:
     Passed to the host application to indicate that the initial update
     of the Views associated with the ViewGroup should be deferred.
 
-Returns:
+:returns:
     VG_Success, or one of the ViewGroupStatus values if there is an
     error.
 
@@ -379,23 +379,23 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_FindLastModifiedMatchingModel =R"doc(Finds a ViewGroup by the ModelId of the Root Model of its view(s).
 
-Parameter ``preferredElementID``:
+:param preferredElementID:
     The ElementId of a ViewGroup that tested first, and if it matches,
     is preferentially returned.
 
-Parameter ``modelID``:
+:param modelID:
     The ModelId to search for.
 
-Parameter ``allViewsMatch``:
+:param allViewsMatch:
     If true, every view must have modelID as the Root Model, and
     thisViewMatches is ignored.
 
-Parameter ``thisViewMatches``:
+:param thisViewMatches:
     If between 0 and MAX_VIEWS-1, inclusive, returns a viewgroup for
     which that view has modelID as its root Model. Otherwise, returns
     a viewgroup for which the first view that is on matches modelID.
 
-Returns:
+:returns:
     The ViewGroupPtr that references the ViewGroup with the given name
     or NULL.
 
@@ -406,10 +406,10 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_Delete =R"doc(Deletes the designated ViewGroup from this ViewGroupCollection.
 
-Parameter ``viewGroup``:
+:param viewGroup:
     The ViewGroup to delete.
 
-Returns:
+:returns:
     VG_Success, or one of the ViewGroupStatus values if there is an
     error.
 
@@ -419,10 +419,10 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_Add =R"doc(Adds the designated ViewGroup to this ViewGroupCollection.
 
-Parameter ``viewGroup``:
+:param viewGroup:
     The ViewGroup to add.
 
-Returns:
+:returns:
     VG_Success, or one of the ViewGroupStatus values if there is an
     error.
 
@@ -434,7 +434,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_NameUnused =R"doc(Returns true if the name tested is unique within this
 ViewGroupCollection.
 
-Parameter ``name``:
+:param name:
     The name to test)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_SaveChanges =R"doc(Save the changes to all the ViewGroups in the collection to the
@@ -442,19 +442,19 @@ DgnFile.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_FindByModelId =R"doc(Finds a ViewGroup by the ModelId of the Root Model of its view(s).
 
-Parameter ``modelID``:
+:param modelID:
     The ModelId to search for.
 
-Parameter ``allViewsMatch``:
+:param allViewsMatch:
     If true, every view must have modelID as the Root Model, and the
     thisViewMatches argument is ignored.
 
-Parameter ``thisViewMatches``:
+:param thisViewMatches:
     If between 0 and MAX_VIEWS-1, inclusive, returns true if that view
     has modelID as its root Model. Otherwise, returns true if the
     first view that is on matches modelID.
 
-Returns:
+:returns:
     The ViewGroupPtr that references the ViewGroup with the given name
     or NULL.
 
@@ -466,19 +466,19 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_FindByElementId =R"doc(Finds a ViewGroup by the ElementId of the element that stores the
 ViewGroup.
 
-Parameter ``elementID``:
+:param elementID:
     The elementID of the ViewGroup to search for.
 
-Returns:
+:returns:
     The ViewGroupPtr that references the ViewGroup with the given name
     or NULL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewGroupCollection_FindByName =R"doc(Finds a ViewGroup by name.
 
-Parameter ``name``:
+:param name:
     The name of the ViewGroup to search for.
 
-Returns:
+:returns:
     The ViewGroupPtr that references the ViewGroup with the given name
     or NULL.
 
@@ -561,7 +561,7 @@ void def_ViewGroup(py::module_& m)
     c2.def("SetCopyType", &ViewGroupCopyOptions::SetCopyType, "options"_a, DOC(Bentley, DgnPlatform, ViewGroupCopyOptions, SetCopyType));
     c2.def("SetCopyViewClip", &ViewGroupCopyOptions::SetCopyViewClip, DOC(Bentley, DgnPlatform, ViewGroupCopyOptions, SetCopyViewClip));
     c2.def("SetCopyViewLevels", &ViewGroupCopyOptions::SetCopyViewLevels, DOC(Bentley, DgnPlatform, ViewGroupCopyOptions, SetCopyViewLevels));
-    c2.def("SetCopyViewACSSetCopyViewACS", &ViewGroupCopyOptions::SetCopyViewACS);
+    c2.def("SetCopyViewACS", &ViewGroupCopyOptions::SetCopyViewACS);
     c2.def("SetDoNotAddToCollection", &ViewGroupCopyOptions::SetDoNotAddToCollection, DOC(Bentley, DgnPlatform, ViewGroupCopyOptions, SetDoNotAddToCollection));
     c2.def("SetNewName", &ViewGroupCopyOptions::SetNewName, "name"_a, DOC(Bentley, DgnPlatform, ViewGroupCopyOptions, SetNewName));
     c2.def("SetNewDescription", &ViewGroupCopyOptions::SetNewDescription, "descr"_a, DOC(Bentley, DgnPlatform, ViewGroupCopyOptions, SetNewDescription));

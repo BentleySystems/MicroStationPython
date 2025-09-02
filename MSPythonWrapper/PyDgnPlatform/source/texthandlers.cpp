@@ -11,7 +11,7 @@
 
 
 static const char * __doc_Bentley_DgnPlatform_TextElemHandler_InitTextString =R"doc(Initializes a TextString to represent a text element. Any existing
-data in the TextString is cleared before use. \note This is here on
+data in the TextString is cleared before use.  This is here on
 TextElemHandler instead of TextHandlerBase because you cannot make
 TextString objects out of text nodes; see TextBlock for more generic
 support.)doc";
@@ -32,15 +32,15 @@ See also:
     ITextQuery::IsTextElement to determine if an element is a normal
     text or text node element.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_TextHandlerBase_CreateElement =R"doc(Creates a new text element from the given TextBlock. \note If no
+static const char * __doc_Bentley_DgnPlatform_TextHandlerBase_CreateElement =R"doc(Creates a new text element from the given TextBlock.  If no
 template element is provided (or it is not a text or text node
 element), you will get a type 17 text element unless a type 7 text
 node in required (based on the contents of the TextBlock). If a
 template element is provided, and it is a text node, the resulting
 element will be a text node regardless of whether one is actually
 required (if it is a text element, you may still get a node depending
-on the contents of the TextBlock). \note You cannot create elements
-from a TextString object; see TextBlock. \note The DgnModelRefP used
+on the contents of the TextBlock).  You cannot create elements
+from a TextString object; see TextBlock.  The DgnModelRefP used
 is that of the provided TextBlock.)doc";
 
 /*---------------------------------------------------------------------------------**//**

@@ -12,45 +12,41 @@
 
 static const char * __doc_Bentley_DgnPlatform_ChainHeaderHandler_AddComponentComplete =R"doc(Update the chains's range once all component elements have been added.
 
-Parameter ``eeh``:
+:param eeh:
     The chain element.
 
-Returns:
+:returns:
     SUCCESS if the chain has components and it's range was sucessfully
-    updated. Bentley Systems +---------------+---------------+--------
-    -------+---------------+---------------+------)doc";
+    updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ChainHeaderHandler_AddComponentElement =R"doc(Add another element as a component of the chain. Only open curves will
 be accepted. The components are expected to be properly oriented, head
 to tail. A complex chain will stroke across gaps during display.
 
-Parameter ``eeh``:
+:param eeh:
     The chain to add the component to.
 
-Parameter ``componentEeh``:
+:param componentEeh:
     The chain element to add.
 
-Returns:
+:returns:
     SUCCESS if component is suitable for a chain component and was
     successfully added. @note componentEeh will be invalid after this
     call unless it represents a persistent element.
 
 See also:
-    IsValidChainComponentType Bentley Systems +---------------+-------
-    --------+---------------+---------------+---------------+------)doc";
+    IsValidChainComponentType )doc";
 
 static const char * __doc_Bentley_DgnPlatform_ChainHeaderHandler_IsValidChainComponentType =R"doc(Check the supplied element to determine if it is an acceptable type
 for inclusion in a complex string or shape. Valid components are open
-curves of the following types:\li LINE_ELM \li LINE_STRING_ELM \li
-CURVE_ELM \li ARC_ELM \li BSPLINE_CURVE_ELM <p>
+curves of the following types: LINE_ELM  LINE_STRING_ELM 
+CURVE_ELM  ARC_ELM  BSPLINE_CURVE_ELM <p>
 
-Parameter ``eh``:
+:param eh:
     The element to check.
 
-Returns:
-    true if element is valid candidate. Bentley Systems +-------------
-    --+---------------+---------------+---------------+---------------
-    +------)doc";
+:returns:
+    true if element is valid candidate.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ChainHeaderHandler_CreateChainHeaderElement =R"doc(Create a new CMPLX_STRING_ELM or CMPLX_SHAPE_ELM header. After
 creating the chain header the application should use
@@ -58,26 +54,25 @@ AddComponentElement to add open curve elements to the chain, and
 AddComponentComplete once all components have been added to finish the
 chain creation.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``isClosed``:
+:param isClosed:
     true for a CMPLX_SHAPE_ELM and false for a CMPLX_STRING_ELM.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Will be returned from
     eeh.GetModelRef () and later used by AddComponentComplete to
     update the chain's range. @note Chain components can only be open
     curves and only non-extended types, this is enforced by
-    AddComponentElement. Bentley Systems +---------------+------------
-    ---+---------------+---------------+---------------+------)doc";
+    AddComponentElement.)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

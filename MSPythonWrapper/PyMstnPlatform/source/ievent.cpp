@@ -16,40 +16,40 @@ static const char * __doc_Bentley_MstnPlatform_MstnEventManager_GetManager =R"do
 static const char * __doc_Bentley_MstnPlatform_MstnEventManager_DropPrintEventHandler =R"doc(Drop an IPrintEventHandler from list of installed PrintEventHandlers.
 After this call, handler will not be notified of future print events.
 
-Parameter ``[in]``:
+:param (input):
     handler to drop.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MstnEventManager_AddPrintEventHandler =R"doc(Add a new IPrintEventHandler to MicroStation's list of installed
 PrintEventHandlers.
 
-Parameter ``[in]``:
+:param (input):
     handler New handler to add)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MstnEventManager_DropMouseWheelHandler =R"doc(Drop an IMouseWheelHandler from list of installed MouseWheelHandlers.
 After this call, handler will not be notified of future MouseWheel
 events.
 
-Parameter ``[in]``:
+:param (input):
     mwHandler the IMouseWheelHandler to drop.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MstnEventManager_AddMouseWheelHandler =R"doc(Add a new IMouseWheelHandler to MicroStation's list of installed
 MouseWheelHandlers.
 
-Parameter ``[in]``:
+:param (input):
     mwHandler New IMouseWheelHandler to add)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MstnEventManager_DropEditActionSource =R"doc(Drop an DgnPlatform::IEditActionSource from list of installed
 EditActionSources. After this call, handler will not be notified of
 future EditActionSource events.
 
-Parameter ``[in]``:
+:param (input):
     source the DgnPlatform::IEditActionSource to drop.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_MstnEventManager_AddEditActionSource =R"doc(Add a new DgnPlatform::IEditActionSource to MicroStation's list of
 installed EditActionSources. After this call, handler will be notified
 of all future EditActionSource events.
 
-Parameter ``[in]``:
+:param (input):
     source New DgnPlatform::IEditActionSource to add)doc";
 
 //=======================================================================================

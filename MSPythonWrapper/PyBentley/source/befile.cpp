@@ -15,46 +15,46 @@ static const char * __doc_Bentley_BeFile_ReadEntireFile = R"doc(Reads entire fil
 
 static const char * __doc_Bentley_BeFile_SetSize = R"doc(Sets the size of the file.
 
-Parameter ``length``:
+:param length:
     The new size of the file in bytes.
 
-Returns:
+:returns:
     BeFileStatus::Success if the operation was successful or non-zero
     if it failed.)doc";
 
 static const char * __doc_Bentley_BeFile_GetSize = R"doc(Gets the size of the file.
 
-Parameter ``length``:
+:param length:
     The size of the file in bytes
 
-Returns:
+:returns:
     BeFileStatus::Success if the operation was successful or non-zero
     if it failed.)doc";
 
 static const char * __doc_Bentley_BeFile_Flush = R"doc(Flushes all pending writes to the file
 
-Returns:
+:returns:
     BeFileStatus::Success if the operation was successful or non-zero
     if it failed.)doc";
 
 static const char * __doc_Bentley_BeFile_GetPointer = R"doc(Gets the file read/write position
 
-Parameter ``position``:
+:param position:
     the current read/write position
 
-Returns:
+:returns:
     BeFileStatus::Success if the operation was successful or non-zero
     if it failed.)doc";
 
 static const char * __doc_Bentley_BeFile_SetPointer = R"doc(Moves the file read/write position.
 
-Parameter ``position``:
+:param position:
     The new read/write position.
 
-Parameter ``origin``:
+:param origin:
     The origin mode for the move.
 
-Returns:
+:returns:
     BeFileStatus::Success if the operation was successful or non-zero
     if it failed.)doc";
 
@@ -70,47 +70,47 @@ static const char * __doc_Bentley_BeFile_Close = R"doc(Closes the disk file.)doc
 
 static const char * __doc_Bentley_BeFile_Open = R"doc(Opens an existing file.
 
-Parameter ``filename``:
+:param filename:
     The full path the file to open.
 
-Parameter ``mode``:
+:param mode:
     The file open mode.
 
-Parameter ``shareOptions``:
+:param shareOptions:
     The file sharing options.
 
-Parameter ``attributes``:
+:param attributes:
     The file attributes.
 
-Parameter ``numRetries``:
+:param numRetries:
     The number of times to retry the open in the event of a sharing
     violation.
 
-Returns:
+:returns:
     BeFileStatus::Success if the file was opened or non-zero if open
     failed.)doc";
 
 static const char * __doc_Bentley_BeFile_Create = R"doc(Creates a new disk file
 
-Parameter ``filename``:
+:param filename:
     The full path of the file to create.
 
-Parameter ``createAlways``:
+:param createAlways:
     If false, returns a status other than BeFileStatus::Success, and
     does not create a new file if *filename* already exists. If true,
     deletes any existing file before creating a new one by the same
     name.
 
-Parameter ``attributes``:
+:param attributes:
     File attributes.
 
-Returns:
+:returns:
     BeFileStatus::Success if the file was created or non-zero if
     create failed.)doc";
 
 static const char * __doc_Bentley_BeFile_Swap = R"doc(Swap file handles between two BeFile instances.
 
-Parameter ``other``:
+:param other:
     The other file.)doc";
 
 

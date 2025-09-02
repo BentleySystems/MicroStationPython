@@ -12,10 +12,10 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_FindMatchingLink =R"doc(Find the matching link from given scenarios like for textfiled.
 
-Parameter ``elemHandle``:
+:param elemHandle:
     an element handle object
 
-Parameter ``linkTrav``:
+:param linkTrav:
     a object of type IDgnLinkTraverser
 
 Returns (Tuple, 0) :
@@ -28,100 +28,100 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_GetManager =R"doc(Get DgnLinkManager.
 
-Returns:
+:returns:
     the DgnLinkManager object )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_RemoveUserDataHandler =R"doc(Remove the specified link user data handler.
 
-Parameter ``userDataHandler``:
+:param userDataHandler:
     a inkUserData handler object
 
-Returns:
+:returns:
     a false if not able to remove it)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_AddUserDataHandler =R"doc(Add the user data handler.
 
-Parameter ``userDataHandler``:
+:param userDataHandler:
     a linkUserData handler object
 
-Returns:
+:returns:
     a false if not able to remove it)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_RemoveLinkSetHandler =R"doc(Remove the specified link set handler.
 
-Parameter ``linkSetHandlerIn``:
+:param linkSetHandlerIn:
     a linkset handler object
 
-Returns:
+:returns:
     a false if not able to remove it )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_RemoveLinkHandler =R"doc(Remove the specified link handler.
 
-Parameter ``linkHandlerIn``:
+:param linkHandlerIn:
     a links handler object
 
-Returns:
+:returns:
     a false if not able to remove it )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_AddLinkSetHandler =R"doc(Add a link set handler for handling a link set type.
 
-Parameter ``linkHandlerIn``:
+:param linkHandlerIn:
     a linkset handler object
 
-Returns:
+:returns:
     a false if not able to add it )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_AddLinkHandler =R"doc(Add link handler for handling a link type.
 
-Parameter ``linkHandlerIn``:
+:param linkHandlerIn:
     a link handler object
 
-Returns:
+:returns:
     a false if not able to add it)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_SetLeafPropertyString =R"doc(Add or replace an optional property string of a leaf node)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_GetLeafPropertyString =R"doc(Get the value of the optional property string of a leaf node.
 
-Parameter ``leaf``:
+:param leaf:
     a leaf of the link tree
 
-Parameter ``propertyID``:
+:param propertyID:
     linktree leaf property ID
 
-Returns:
+:returns:
     nullptr if the property is not found )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_ValidateLinkTarget =R"doc(Validate the link target
 
-Parameter ``link``:
+:param link:
     a link object
 
-Parameter ``logger``:
+:param logger:
     a object of type DgnLinkValidationCenter
 
-Returns:
+:returns:
     the validation result)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_BuildSuggestedName =R"doc(Build the name from given tree and parant
 
-Parameter ``link``:
+:param link:
     a link object
 
-Parameter ``contextParent``:
+:param contextParent:
     the barnch where link is attached
 
-Parameter ``fullContext``:
+:param fullContext:
     a boolean variable
 
-Returns:
+:returns:
     the unique name for given link and parent node.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_CreateLink =R"doc(Create a link from given key, and in this user have to make sure that,
 link should be added into tree, so that it can be deleted with tree
 object. Otherwise use have call delete to delete this object
 
-Parameter ``key``:
+:param key:
     by which it will create a link set
 
 Returns (Tuple, 0):
@@ -134,21 +134,21 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_CreateLinkSet =R"doc(Create a linkset from given key
 
-Parameter ``key``:
+:param key:
     by which it will create a link set
 
-Returns:
+:returns:
     the link tree branch where this linkset is attached)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_CreateTreeSpec =R"doc(Create a tree spec from given tree name
 
-Parameter ``treeName``:
+:param treeName:
     the name of the tree
 
-Parameter ``moniker``:
+:param moniker:
     document moniker
 
-Parameter ``key``:
+:param key:
     link tree key. See DgnLinkTreeKey
 
 Returns(Tuple, 0):
@@ -161,59 +161,59 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_FindProjectTree =R"doc(Find the link tree from given name
 
-Parameter ``treeName``:
+:param treeName:
     the name of the tree
 
-Parameter ``document``:
+:param document:
     document where tree is present)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_ListProjectTrees =R"doc(List out the link tree from give link tree specs and document
 
-Parameter ``treeSpecList``:
+:param treeSpecList:
     list of tree specs
 
-Parameter ``document``:
+:param document:
     a document where the link tree is present
 
-Parameter ``key``:
+:param key:
     link tree key. See DgnLinkTreeKey
 
-Returns:
+:returns:
     the list of tree specs)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_Deserialize =R"doc(Read the link tree from xml string
 
-Parameter ``xmlString``:
+:param xmlString:
     a XML string
 
-Returns:
+:returns:
     the link tree pointer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_Serialize =R"doc(Serialize the link tree in XML formate
 
-Parameter ``xmlString``:
+:param xmlString:
     a XML string
 
-Parameter ``linkTree``:
+:param linkTree:
     link tree object
 
-Returns:
+:returns:
     the status of function)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_DeleteProjectTree =R"doc(Delete the specified link tree
 
-Parameter ``treeSpec``:
+:param treeSpec:
     is used to find the proper link tree
 
-Returns:
+:returns:
     the status of API)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_WriteLinkTree =R"doc(Write a link tree into the memory
 
-Parameter ``linkTree``:
+:param linkTree:
     a tree which needs to written in memory
 
-Returns:
+:returns:
     the status of API in terms of True/false)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_ReadLinkTreeFromElement =R"doc(Reads a link tree from given EditElementHandle object This method is
@@ -221,58 +221,59 @@ intended to provide link tree from an element which has not been
 written in the dgn file so it does not have an ElementId and
 elementRef
 
-Parameter ``elemHandle``:
+:param elemHandle:
     EditElementHandle of the element
 
-Parameter ``createIfDoesNotExist``:
+:param createIfDoesNotExist:
     create a link tree if it not exist
 
-Returns:
+:returns:
     the links tree pointer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkManager_ReadLinkTree =R"doc(Read a link tree from given tree spec. We can also
 
-Parameter ``treeSpec``:
+:param treeSpec:
     a spec of tree by using this we can read a link tree
 
-Parameter ``createIfDoesNotExists``:
+:param createIfDoesNotExists:
     create a link tree if it not exist
 
-Returns:
+:returns:
     the links tree pointer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkValidationCenter_GetInvalidLinkCount =R"doc(Get the count of invalide link
 
-Returns:
+:returns:
     the counts)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkValidationCenter_GetTestedLinkCount =R"doc(Get the count of tested link
 
-Returns:
+:returns:
     the counts)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkValidationCenter_LogValidationProblem =R"doc(Log the validation problem
 
-Parameter ``link``:
+:param link:
     for which we want log validation
 
-Parameter ``logString``:
+:param logString:
     describs the log information)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkValidationCenter_GetRecurseFlag =R"doc(Get the flag information for recurse
 
-Returns:
+:returns:
     true/false)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkValidationCenter_GetUpdateInvalidationFlag =R"doc(Get the update inavlidateion flag
 
-Returns:
+:returns:
     the status of update invalidation flag)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkValidationCenter_GetDoValidationFlag =R"doc(Get the doValidation flag
 
-Returns:
+:returns:
     true/false)doc";
+
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023
@@ -438,7 +439,6 @@ void def_DgnLinkManager(py::module_& m)
     // struct DgnLinkManager
     py::class_< DgnLinkManager> c2(m, "DgnLinkManager");
 
-
     c2.def_static("ReadLinkTree", py::overload_cast<DgnLinkTreeSpecCR, bool>(&DgnLinkManager::ReadLinkTree), "treeSpec"_a, "createIfDoesNotExists"_a, DOC(Bentley, DgnPlatform, DgnLinkManager, ReadLinkTree));
     c2.def_static("ReadLinkTreeFromElement", &DgnLinkManager::ReadLinkTreeFromElement, "elementHandle"_a, "createIfDoesNotExists"_a, DOC(Bentley, DgnPlatform, DgnLinkManager, ReadLinkTreeFromElement));
     c2.def_static("WriteLinkTree", py::overload_cast<DgnLinkTreeR>(&DgnLinkManager::WriteLinkTree), "linkTree"_a, DOC(Bentley, DgnPlatform, DgnLinkManager, WriteLinkTree));
@@ -458,15 +458,15 @@ void def_DgnLinkManager(py::module_& m)
     c2.def_static("CreateLinkSet", [] (WCharCP key)
                   {
                   StatusInt status = ERROR;
-                  auto retVal = DgnLinkManager::CreateLinkSet(status, key);
-                  return py::make_tuple(retVal, status);
+                  TempDgnLinkTreeBranchOwner linksetPtr = DgnLinkManager::CreateLinkSet(status, key);
+                  return py::make_tuple(std::move(linksetPtr), status);
                   }, "key"_a, DOC(Bentley, DgnPlatform, DgnLinkManager, CreateLinkSet));
 
     c2.def_static("CreateLink", [] (WCharCP key)
                   {
                   StatusInt status = ERROR;
-                  auto retVal = DgnLinkManager::CreateLink(status, key);
-                  return py::make_tuple(retVal, status);
+                  TempDgnLinkTreeLeafOwner linkPtr = DgnLinkManager::CreateLink(status, key);
+                  return py::make_tuple(std::move(linkPtr), status);
                   }, "key"_a, DOC(Bentley, DgnPlatform, DgnLinkManager, CreateLink));
     
     c2.def_static("BuildSuggestedName", &DgnLinkManager::BuildSuggestedName, "link"_a, "contextParent"_a, "fullContext"_a, DOC(Bentley, DgnPlatform, DgnLinkManager, BuildSuggestedName));

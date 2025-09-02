@@ -76,7 +76,26 @@ struct PyElementGraphicsTool : ElementGraphicsTool
         * @bsimethod                                                                       2/2023
         +---------------+---------------+---------------+---------------+---------------+------*/
         virtual void _GetToolName(WStringR name) override
-            { PYBIND11_OVERRIDE_EX(void, ElementGraphicsTool, _GetToolName, name); }
+            {
+            try
+                {
+                py::gil_scoped_acquire gil;
+                py::function func = py::get_override(this, "_GetToolName");
+                if (func)
+                    {
+                    auto obj = func(name);
+                    auto tuple = obj.cast<WString>();
+                    name = tuple;
+                    }
+                else
+                    __super::_GetToolName(name);
+
+                }
+            catch (std::exception& ex)
+                {
+                ScriptEngineManager::Get().InjectException(ex);
+                }
+            }
 
         /*---------------------------------------------------------------------------------**//**
         * @bsimethod                                                                       2/2023
@@ -964,14 +983,15 @@ struct PyElementGraphicsTool : ElementGraphicsTool
         +---------------+---------------+---------------+---------------+---------------+------*/
         virtual BentleyStatus _OnProcessPolyface(PolyfaceHeaderPtr& geomPtr, DisplayPathCR path) override
             {
-            try
+             try
                 {
                 py::gil_scoped_acquire gil;
                 BentleyStatus retVal = ERROR;
                 py::function func = py::get_override(this, "_OnProcessPolyface");
                 if (func)
                     {
-                    auto obj = func(geomPtr.get(), path);
+                    py::object geomP = py::cast(geomPtr, py::return_value_policy::reference);
+                    auto obj = func(geomP, path);
                     retVal = obj.cast< BentleyStatus>();
                     }
                 else
@@ -1105,7 +1125,26 @@ struct PyLocateSubEntityTool : LocateSubEntityTool
         * @bsimethod                                                                       2/2023
         +---------------+---------------+---------------+---------------+---------------+------*/
         virtual void _GetToolName(WStringR name) override
-            { PYBIND11_OVERRIDE_EX(void, LocateSubEntityTool, _GetToolName, name); }
+            {
+            try
+                {
+                py::gil_scoped_acquire gil;
+                py::function func = py::get_override(this, "_GetToolName");
+                if (func)
+                    {
+                    auto obj = func(name);
+                    auto tuple = obj.cast<WString>();
+                    name = tuple;
+                    }
+                else
+                    __super::_GetToolName(name);
+
+                }
+            catch (std::exception& ex)
+                {
+                ScriptEngineManager::Get().InjectException(ex);
+                }
+            }
 
         /*---------------------------------------------------------------------------------**//**
         * @bsimethod                                                                       2/2023
@@ -1946,7 +1985,8 @@ struct PyLocateSubEntityTool : LocateSubEntityTool
                 py::function func = py::get_override(this, "_OnProcessPolyface");
                 if (func)
                     {
-                    auto obj = func(geomPtr.get(), path);
+                    py::object geomP = py::cast(geomPtr, py::return_value_policy::reference);
+                    auto obj = func(geomP, path);
                     retVal = obj.cast< BentleyStatus>();
                     }
                 else
@@ -2077,7 +2117,7 @@ struct PyLocateSubEntityTool : LocateSubEntityTool
         * @bsimethod                                                                       2/2023
         +---------------+---------------+---------------+---------------+---------------+------*/
         virtual bool _WantSubEntityDisplay() override
-            { PYBIND11_OVERRIDE_EX(bool, LocateSubEntityTool, _WantSubEntityDisplay, ); }
+            { PYBIND11_OVERRIDE_EXR(bool, LocateSubEntityTool, _WantSubEntityDisplay, false, ); }
 
         /*---------------------------------------------------------------------------------**//**
         * @bsimethod                                                                       2/2023
@@ -2229,6 +2269,7 @@ void def_LocateSubEntityTool(py::module_& m)
     // struct ElementGraphicsTool
     py::class_<ElementGraphicsTool, RefCountedPtr<ElementGraphicsTool>, PyElementGraphicsTool, DgnElementSetTool> c1(m, "ElementGraphicsTool");
 
+    c1.def(py::init<>());
     c1.def("_CollectCurves", &ElementGraphicsToolPub::_CollectCurves);
     c1.def("_CollectSurfaces", &ElementGraphicsToolPub::_CollectSurfaces);
     c1.def("_CollectSolids", &ElementGraphicsToolPub::_CollectSolids);
@@ -2341,8 +2382,9 @@ void def_LocateSubEntityTool(py::module_& m)
 
     //===================================================================================
     // struct LocateSubEntityTool
-    py::class_< LocateSubEntityTool, RefCountedPtr< LocateSubEntityTool>, PyLocateSubEntityTool, ElementGraphicsTool/*, IViewTransients*/> c2(m, "LocateSubEntityTool");
+    py::class_< LocateSubEntityTool, RefCountedPtr< LocateSubEntityTool>, PyLocateSubEntityTool, ElementGraphicsTool/*, IViewTransients*/> c2(m, "LocateSubEntityTool", py::multiple_inheritance());
 
+    c2.def(py::init<>());
     c2.def("_GetSubEntityTypeMask", &LocateSubEntityToolPub::_GetSubEntityTypeMask);
     c2.def("_RequireSubEntitySupport", &LocateSubEntityToolPub::_RequireSubEntitySupport);
     c2.def("_AcceptIdentifiesSubEntity", &LocateSubEntityToolPub::_AcceptIdentifiesSubEntity);

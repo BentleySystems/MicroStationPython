@@ -4,8 +4,10 @@
 #---------------------------------------------------------------------------------------------
 import win32com.client as win32
 
-# Example of how to use the Microstation COM API to create a Line. 
-# Note: Running this sample need to install lib win32com
+'''
+Example demonstrating how to use the Microstation COM API to create a Line. 
+Note: Running this sample need to install lib win32com
+'''
 
 msApp = win32.Dispatch('MicrostationDGN.Application') # Dispatch the Microstation DGN application
 

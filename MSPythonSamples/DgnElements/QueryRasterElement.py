@@ -1,9 +1,6 @@
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 # -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -12,12 +9,22 @@ from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 
 '''
-Function to query rasters in the model
-Use the GetRasterFrameHandler() method to get the raster handler 
-of element instead of using GetHandler() method.
-
+Sample demonstrating how to list and query raster elements in a model
 '''
+
 def ListAndQueyRastersInModel():
+    """
+    Lists and queries raster elements in the active DGN model.
+    Use the GetRasterFrameHandler() method to get the raster handler 
+    of element instead of using GetHandler() method.
+    
+    This function performs the following steps:
+    1. Retrieves all graphical elements from the active DGN model.
+    2. Checks if each element is a raster and prints its extent if it is.
+    3. Retrieves all raster frame elements from the model and prints their handlers.
+
+    :returns: None
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
     graphicalElements = dgnModel.GetGraphicElements()

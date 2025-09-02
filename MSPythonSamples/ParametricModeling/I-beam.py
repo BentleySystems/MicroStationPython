@@ -15,9 +15,22 @@ import PSampUtility
 import VariableAndVariation
 
 '''
-Function to ceate variables which are used for the I-beam profile
-'''
+Example demonstrating how to create I-beam profile with 2D constraint
+''' 
+
 def createVariables(dgnModel):
+    """
+    Create and initialize distance variables in the given design model.
+    This function creates five distance variables in the specified design model.
+    Four of the variables are initialized with fixed values, while the fifth variable
+    is initialized with an expression based on one of the other variables.
+    
+    :param dgnModel: The design model in which to create the variables.
+    :type dgnModel: object
+    
+    :return: Returns True upon successful creation of the variables.
+    :rtype: bool
+    """
     VariableAndVariation.CreateVariable("var1", ParameterType.eDistance, 5000, dgnModel) # Create distance variable "var1"
     VariableAndVariation.CreateVariable("var2", ParameterType.eDistance, 110000, dgnModel) # Create distance variable "var2"
     VariableAndVariation.CreateVariable("var3", ParameterType.eDistance, 10000, dgnModel) # Create distance variable "var3"
@@ -26,10 +39,21 @@ def createVariables(dgnModel):
 
     return True
 
-'''
-Example to show how to create I-beam profile with 2D constraint
-''' 
 def ExampleCreateIbeamProfile():
+    """
+    Creates an I-beam profile in the active DGN model.
+    This function performs the following steps:
+    1. Creates variables used for the I-beam profile.
+    2. Creates a base line as a construction element.
+    3. Adds fixed constraints to the base line to fix its direction and base point.
+    4. Creates lines for the I-beam profile without adding them to the model.
+    5. Creates a complex shape header and adds the I-beam profile lines to it.
+    6. Adds the complex shape to the model.
+    7. Adds various constraints (equal, parallel, perpendicular, equal distance, distance, and coincident) to the lines in the complex shape.
+    
+    Returns:
+        bool: True if the I-beam profile is successfully created and added to the model, False otherwise.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
 
     # Create variables which are used for the I-beam profile

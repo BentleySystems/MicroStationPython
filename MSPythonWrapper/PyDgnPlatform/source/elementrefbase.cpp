@@ -22,7 +22,7 @@ the old ElementRefP becomes valid again.] Call this method to get the
 If the element has moved, it uses the ElementId to find the valid
 ElementRefP.
 
-Returns:
+:returns:
     The valid ElementRefP for this element. In the common case where
     the element has *not* been moved to a new ElementRefP, this method
     will return itself. If the element or DgnModel has been deleted,
@@ -50,10 +50,10 @@ static const char * __doc_Bentley_DgnPlatform_ElementRefBase_IsDependent =R"doc(
 (or, optionally, on any elements that are dependent on this
 ElementRefP.)
 
-Parameter ``isThisDependent``:
+:param isThisDependent:
     Other element to test.
 
-Parameter ``recurse``:
+:param recurse:
     If true, test whether *isThisDependent* is directly or indirectly
     depenent on this ElementRefP.)doc";
 
@@ -62,35 +62,35 @@ non-complex elements.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementRefBase_FindAppData =R"doc(Find ElementRefAppData on this ElementRefP by key.
 
-Parameter ``key``:
+:param key:
     The key for the ElementRefAppData of interest.
 
-Returns:
+:returns:
     the ElementRefAppData for key *key,* or NULL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementRefBase_DropAppData =R"doc(Drop Application data from this ElementRefP.
 
-Parameter ``key``:
+:param key:
     the key for the ElementRefAppData to drop.
 
-Returns:
+:returns:
     SUCCESS if an entry with *key* is found and dropped.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementRefBase_AddAppData =R"doc(Add Application Data to this ElementRefP.
 
-Parameter ``key``:
+:param key:
     The AppData's key. If an ElementRefAppData with this key already
     exists on this ElementRefP, it is dropped and replaced with
     *appData.*
 
-Parameter ``appData``:
+:param appData:
     The appData object to attach to this ElementRefP.
 
-Parameter ``heapZone``:
+:param heapZone:
     HeapZone for this ElementRefP. **Must** be the HeapZone returned
     by #GetHeapZone.
 
-Parameter ``allowOnDeleted``:
+:param allowOnDeleted:
     if false (the default), this method will reject adds if the
     ElementRef is deleted.)doc";
 
@@ -99,35 +99,35 @@ holding this ElementRefP.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementRefBase_GetFilePos =R"doc(Get file pos.
 
-Returns:
+:returns:
     the file pos.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementRefAppData__OnElemChanged =R"doc(Called to allow app data to react to changes to the persisent element
 it was added to.
 
-Parameter ``host``:
+:param host:
     ElementRefP that app data was added to.
 
-Parameter ``qvCacheDeleted``:
+:param qvCacheDeleted:
     Specific to app data used to cache the display representation. of
     the element. Clearing the qvCache invalidates QvElems stored in
     app data.
 
-Parameter ``reason``:
+:param reason:
     Why _OnElementChanged is being called.
 
-Returns:
+:returns:
     true to drop this app data entry from the element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementRefAppData__OnCleanup =R"doc(Called to clean up owned resources and delete the app data.
 
-Parameter ``host``:
+:param host:
     ElementRefP that app data was added to.
 
-Parameter ``unloadingModel``:
+:param unloadingModel:
     If DgnModel containing host is being unloaded.
 
-Parameter ``zone``:
+:param zone:
     HeapZone for the ElementRefP holding the app data.
 
 Remark:
@@ -143,7 +143,7 @@ Remark:
     s Strictly for convenience when debugging, does not need to be
     localized.
 
-Returns:
+:returns:
     The name string or NULL.)doc";
 
 static const char* __doc_Bentley_DgnPlatform_ElementRefBase_SetInDisplaySet = R"doc(Add the element in display set.)doc";

@@ -15,27 +15,27 @@ obtain distances. On ouptut, params are in PARAM_MODE_01BothAxes,
 PARAM_MODE_01LargerAxis, or PARAM_MODE_Distance as requested by the
 facet options in effect.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     params parameters to remap.
 
-Parameter ``[out]``:
+:param (output):
     distanceRange range of parameters when scaled to distance (whether
     or not params are returned as distances)
 
-Parameter ``[out]``:
+:param (output):
     paramRange range of parameters as actually returned.
 
-Parameter ``[in]``:
+:param (input):
     xDistanceFactor scale factor to turn input x coordinates to
     distance (if distance requested either as final result or for
     larger axis scaling)
 
-Parameter ``[in]``:
+:param (input):
     yDistanceFactor scale factor to turn input y coordinates to
     distance (if distance requested either as final result or for
     larger axis scaling)
 
-Parameter ``[out]``:
+:param (output):
     transform optional transform (e.g. to be applied later to more
     params in the same parameter space) (May be nullptr))doc";
 
@@ -68,54 +68,54 @@ wraparounds.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_AddSweptNGon =R"doc(Sweep a regular polygon (parallel to xy plane) from z0 to z1.
 
-Parameter ``[in]``:
+:param (input):
     n number of edges. Must be 3 or greater.
 
-Parameter ``[in]``:
+:param (input):
     rOuter outer radius
 
-Parameter ``[in]``:
+:param (input):
     z0 start z
 
-Parameter ``[in]``:
+:param (input):
     z1 end z
 
-Parameter ``[in]``:
+:param (input):
     bottomCap true to include bottom cap
 
-Parameter ``[in]``:
+:param (input):
     topCap true to include top cap.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_AddFullSphere =R"doc(Add complete sphere.
 
-Parameter ``[in]``:
+:param (input):
     center ellipse center
 
-Parameter ``[in]``:
+:param (input):
     radius ellipse radius
 
-Parameter ``[in]``:
+:param (input):
     numPerQuadrantNS if nonzero overrides all option controls.
 
-Parameter ``[in]``:
+:param (input):
     numPerQuadrantEW if nonzero overrides all option controls.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_AddFullDiskTriangles =R"doc(Add complete disk. When options specify maxEdgeLength, triangles are
 created without imposed radial edges.
 
-Parameter ``[in]``:
+:param (input):
     ellipse arc to stroke
 
-Parameter ``[in]``:
+:param (input):
     numPerQuadrant overrides all options controls.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_AddFullDisk =R"doc(Add complete disk. When options specify maxEdgeLength, radial lines go
 full distance from center to edge. (See AddFulLDiskTriangles)
 
-Parameter ``[in]``:
+:param (input):
     ellipse arc to stroke
 
-Parameter ``[in]``:
+:param (input):
     numPerQuadrant overrides all options controls.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_AddRotationalSweepLoop =R"doc(Make a Rotational sweep from base points. To indicate a sharp corner,
@@ -123,34 +123,34 @@ duplicate the point, using incoming tangent on the first, outgoing on
 the second. The zero-length edge will be skipped, and the sweep edge
 will be marked visible.
 
-Parameter ``[in]``:
+:param (input):
     pointA base curve points
 
-Parameter ``[in]``:
+:param (input):
     tangentA base curve tangents
 
-Parameter ``[in]``:
+:param (input):
     center center of rotation
 
-Parameter ``[in]``:
+:param (input):
     rotationAxis rotation axis
 
-Parameter ``[in]``:
+:param (input):
     totalSweepRadians sweep angle
 
-Parameter ``[in]``:
+:param (input):
     reverse true to reverse facet orientations.
 
-Parameter ``[in]``:
+:param (input):
     nominalBaseCurveLength if nonzero, parameter distances along the
     base curve are scaled to this length
 
-Parameter ``[in]``:
+:param (input):
     startCapPointAccumulator optional array to receive fully
     transformed endcap points. This array is NOT cleared (so caller
     can combine over multiple calls.)
 
-Parameter ``[in]``:
+:param (input):
     endCapPointAccumulator optional array to receive fully transformed
     endcap points. This array is NOT cleared (so caller can combine
     over multiple calls.))doc";
@@ -189,35 +189,35 @@ static const char * __doc_Bentley_Geom_IPolyfaceConstruction_AddTubeMesh =R"doc(
 The centerline curve (bspline) should be planar or nearly so. (If it
 is not, the successive circular sections may pinch in strange ways)
 
-Parameter ``[in]``:
+:param (input):
     centerlineCurve tube centerline
 
-Parameter ``[in]``:
+:param (input):
     radius tube radius
 
-Parameter ``[in]``:
+:param (input):
     numEdgePerSection number of edges around each section circle. If
     zero, determined from builder's facet options.
 
-Parameter ``[in]``:
+:param (input):
     numSectionEdge number of edges along curve. If zero, determined
     from builder's facet options.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_AddTriStrip =R"doc(Add square grid with normal, param at each point.
 
-Parameter ``[in]``:
+:param (input):
     points coordinates alternating between bottom and top of strip.
 
-Parameter ``[in]``:
+:param (input):
     params corresponding parameters
 
-Parameter ``[in]``:
+:param (input):
     normals corresponding normals
 
-Parameter ``[in]``:
+:param (input):
     numPoint number of points (2 more than number of triangles)
 
-Parameter ``[in]``:
+:param (input):
     firstTriangle012 true if 012 is leading triangle order, false if
     021 is leading triangle order.)doc";
 
@@ -243,10 +243,10 @@ static const char * __doc_Bentley_Geom_IPolyfaceConstruction_ToggleIndexOrderAnd
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_GetLocalToWorldNormals =R"doc(Get the local to world matrix for surface normals.
 
-Parameter ``[out]``:
+:param (output):
     matrix returned matrix
 
-Returns:
+:returns:
     false if no local to world transform is in effect.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_SetReverseNewNormals =R"doc(Set the current normal vector reversal state.)doc";
@@ -255,34 +255,34 @@ static const char * __doc_Bentley_Geom_IPolyfaceConstruction_SetReverseNewFacetI
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_PopState =R"doc(Pop the current transform and revesal state.
 
-Returns:
+:returns:
     true if the stack had a state to pop.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_PushState =R"doc(Push the current transform and revesal state.
 
-Parameter ``[in]``:
+:param (input):
     initializeCurrentState controls whether current state is
     reinitialized (true) or left unchanged (false))doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_MultiplyNormalByLocalToWorld =R"doc(Multiply a surface normal by the local to world effects and
 renormalize. This also applies the normal reversal flag.
 
-Returns:
+:returns:
     transformed ponit.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_MultiplyByLocalToWorld =R"doc(Multiply the local to world transform times the input point.
 
-Returns:
+:returns:
     transformed point.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_ApplyLocalToWorld =R"doc(Apply (right multiply) the local to world transform.
 
-Returns:
+:returns:
     false if the given transform is not invertible.)doc";
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_SetLocalToWorld =R"doc(Set the local to world transform.
 
-Returns:
+:returns:
     false if the given transform is not invertible.
 
 Remark:
@@ -290,7 +290,7 @@ Remark:
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_GetLocalToWorld =R"doc(Get the local to world placement transform.
 
-Returns:
+:returns:
     false if the transform is an identity.
 
 Remark:
@@ -303,7 +303,7 @@ Remark:
 
 static const char * __doc_Bentley_Geom_IPolyfaceConstruction_GetWorldToLocal =R"doc(Get the world to local placement transform.
 
-Returns:
+:returns:
     false if the transform is an identity.
 
 Remark:
@@ -849,7 +849,14 @@ void def_FacetOptions(py::module_& m)
 
     c2.def("AddTubeMesh", &IPolyfaceConstruction::AddTubeMesh, "centerlineCurve"_a, "radius"_a, "numEdgePerSection"_a, "numSectionEdge"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddTubeMesh));
     c2.def("AddLinearSweep", py::overload_cast<DPoint3dArray&, DVec3dArray&, DVec3dCR>(&IPolyfaceConstruction::AddLinearSweep), "pointA"_a, "tangentA"_a, "step"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddLinearSweep));    
-            
+
+    c2.def("AddLinearSweep", [](IPolyfaceConstructionR self, py::list& pointA, DVec3dArray& tangentA, DVec3dCR step)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(pointA, cppPointA, DPoint3dArray, DPoint3d);
+           self.AddLinearSweep(cppPointA, tangentA, step);
+           CONVERT_CPPARRAY_TO_PYLIST(pointA, cppPointA, DPoint3dArray, DPoint3d);
+           }, "pointA"_a, "tangentA"_a, "step"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddLinearSweep));
+
     c2.def("AddRotationalSweep", 
            py::overload_cast<CurveVectorPtr, DPoint3dCR, DVec3dCR, double, bool>(&IPolyfaceConstruction::AddRotationalSweep), 
            "curve"_a, "center"_a, "axis"_a, "totalSweep"_a, "capped"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddRotationalSweep));
@@ -863,6 +870,14 @@ void def_FacetOptions(py::module_& m)
            return py::make_tuple(bOk, numLoop);
            }, "curves"_a, "points"_a, "tangents"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
 
+    c2.def("StrokeWithDoubledPointsAtCorners", [] (IPolyfaceConstructionR self, CurveVectorCR curves, py::list& points, DVec3dArray& tangents)
+           {
+           size_t numLoop = 0;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           bool bOk = self.StrokeWithDoubledPointsAtCorners(curves, cppPoints, tangents, numLoop);
+           CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+           return py::make_tuple(bOk, numLoop);
+           }, "curves"_a, "points"_a, "tangents"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
 
     c2.def("StrokeWithDoubledPointsAtCorners",
            py::overload_cast<CurveVectorCR, DPoint3dVecArray&, DVec3dVecArray&, DoubleArray&>(&IPolyfaceConstruction::StrokeWithDoubledPointsAtCorners),
@@ -914,6 +929,12 @@ void def_FacetOptions(py::module_& m)
     c2.def("FindOrAddPoints", 
            py::overload_cast<DPoint3dArray&, size_t, size_t, UInt64Array&>(&IPolyfaceConstruction::FindOrAddPoints), 
            "point"_a, "n"_a, "numWrap"_a, "index"_a, DOC(Bentley, Geom, IPolyfaceConstruction, FindOrAddPoints));
+
+    c2.def("FindOrAddPoints", [](IPolyfaceConstructionR self, py::list &point, size_t n, size_t numWrap, UInt64Array& index)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cpppoint, DPoint3dArray, DPoint3d);
+           self.FindOrAddPoints(cpppoint, n, numWrap, index);
+           CONVERT_CPPARRAY_TO_PYLIST(point, cpppoint, DPoint3dArray, DPoint3d); }, "point"_a, "n"_a, "numWrap"_a, "index"_a, DOC(Bentley, Geom, IPolyfaceConstruction, FindOrAddPoints));
 
     c2.def("FindOrAddNormals",
            py::overload_cast<DVec3dArray&, size_t, size_t, UInt64Array&>(&IPolyfaceConstruction::FindOrAddNormals),

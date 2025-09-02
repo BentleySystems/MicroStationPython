@@ -40,9 +40,9 @@ void def_DgnECManager(py::module_&);
 void def_DgnFile(py::module_&);
 void def_DgnFontManager(py::module_&);
 void def_DgnLinkHandler(py::module_&);
-void def_DgnLinkManager(py::module_&);
 void def_DgnLinks(py::module_&);
 void def_DgnLinkTree(py::module_&);
+void def_DgnLinkManager(py::module_&);
 void def_DgnModel(py::module_&);
 void def_DgnModelRef(py::module_&);
 void def_DgnPlatform(py::module_&);
@@ -217,6 +217,7 @@ void def_DoubleValueFormat(py::module_& m);
 void def_DgnECChangeManager (py::module_& m);
 
 void def_IViewManager(py::module_& m);
+void def_ScanCriteria(py::module_& m);
 
 /*---------------------------------------------------------------------------------**//**
 * Module definition.
@@ -276,10 +277,10 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
 	def_DgnECManager(m); 
     def_DgnFile(m);
     def_DgnFontManager(m);
+    def_DgnLinkTree(m);
     def_DgnLinkHandler(m);
     def_DgnLinkManager(m);
     def_DgnLinks(m);
-    def_DgnLinkTree(m);
     def_ElementRefBase(m);
     def_DgnModelRef(m);
     def_DgnAttachment(m);
@@ -426,9 +427,11 @@ PYBIND11_MODULE(MSPyDgnPlatform, m)
     def_DgnGCS(m);
     def_DesignHistory(m);
     def_DgnECChangeManager (m);
+    def_ScanCriteria(m);
 
 	//From DgnView
     def_IViewManager(m);
+
     }
 
 

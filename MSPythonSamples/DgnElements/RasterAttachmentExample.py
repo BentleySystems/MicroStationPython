@@ -1,9 +1,5 @@
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 # -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
 
 import os
 import math
@@ -14,9 +10,20 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
+'''
+Sample demonstrating how to create Raster Attachment
+'''
 
-'''Create raster attachment in Microstation'''
 def createRasterAttachment(extentInUOR=DPoint2d(100, 100)):
+    """
+    Creates a raster attachment in the active DGN model.
+
+    :param extentInUOR: The extent of the raster in units of resolution (UOR).
+    :type extentInUOR: DPoint2d
+
+    :returns: True if the raster attachment is successfully created and added to the model, False otherwise.
+    :rtype: bool
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:
         return False

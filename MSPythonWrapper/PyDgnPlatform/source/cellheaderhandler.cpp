@@ -13,23 +13,23 @@
 static const char * __doc_Bentley_DgnPlatform_NormalCellHeaderHandler_AddChildComplete =R"doc(Update the cell's range, origin, range diagonal, and component count
 once all child elements have been added.
 
-Parameter ``eeh``:
+:param eeh:
     The cell element.
 
-Returns:
+:returns:
     SUCCESS if the cell has children and it's range was sucessfully
     updated. Bentley Systems +---------------+---------------+--------
     -------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NormalCellHeaderHandler_AddChildElement =R"doc(Add another element as a child of the cell.
 
-Parameter ``eeh``:
+:param eeh:
     The cell to add the child to.
 
-Parameter ``childEeh``:
+:param childEeh:
     The child element to add.
 
-Returns:
+:returns:
     SUCCESS if child is suitable for a cell component and was
     successfully added. @note childEeh will be invalid after this call
     unless it represents a persistent element. Bentley Systems +------
@@ -42,23 +42,23 @@ AddChildElement to add child elements to the cell, and
 AddChildComplete once all children have been added to finish the cell
 creation.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``cellName``:
+:param cellName:
     Name of the new cell element.
 
-Parameter ``origin``:
+:param origin:
     new cell's origin.
 
-Parameter ``rMatrix``:
+:param rMatrix:
     new cell's rotation.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Will be returned from
     eeh.GetModelRef () and later used by AddChildComplete to update
     the cell's range. @note Use this method to create cells where the
@@ -76,17 +76,17 @@ should use AddChildElement to add child elements to the cell, and
 AddChildComplete once all children have been added to finish the cell
 creation.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``cellName``:
+:param cellName:
     Name of the new cell element which may be NULL.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Will be returned from
     eeh.GetModelRef () and later used by AddChildComplete to update
     the cell's range. @note An orphan (or anonymous) cell is a cell
@@ -97,13 +97,13 @@ Parameter ``modelRef``:
 
 static const char * __doc_Bentley_DgnPlatform_NormalCellHeaderHandler_CreateGroupCellElement =R"doc(Create a new group cell (orphan cell) from a collection of elements.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``agenda``:
+:param agenda:
     The child elements.
 
-Parameter ``cellName``:
+:param cellName:
     The cell name (optional) @note All child elements must be from the
     same model, the model to associate the new cell element with.
     Bentley Systems +---------------+---------------+---------------+-
@@ -111,26 +111,26 @@ Parameter ``cellName``:
 
 static const char * __doc_Bentley_DgnPlatform_NormalCellHeaderHandler_SetDescription =R"doc(Set the given cell element's description when creating a new element.
 
-Parameter ``eeh``:
+:param eeh:
     The cell element.
 
-Parameter ``descr``:
+:param descr:
     New cell description.
 
-Returns:
+:returns:
     SUCCESS if eeh is a CELL_HEADER_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NormalCellHeaderHandler_SetName =R"doc(Set the given cell element's name when creating a new element.
 
-Parameter ``eeh``:
+:param eeh:
     The cell element.
 
-Parameter ``cellName``:
+:param cellName:
     New cell name.
 
-Returns:
+:returns:
     SUCCESS if eeh is a CELL_HEADER_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -138,13 +138,13 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_NormalCellHeaderHandler_SetPointCell =R"doc(Set the given cell element's point cell status when creating a new
 element.
 
-Parameter ``eeh``:
+:param eeh:
     The cell element.
 
-Parameter ``isPointCell``:
+:param isPointCell:
     New point cell status.
 
-Returns:
+:returns:
     SUCCESS if eeh is a CELL_HEADER_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";

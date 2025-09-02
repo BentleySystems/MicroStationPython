@@ -11,183 +11,183 @@
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_SetIsInvertBinary =R"doc(Change raster invert color state for binary raster.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     The new invert color state.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_SetIsTransparent =R"doc(Change raster background transparency state.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``state``:
+:param state:
     The new background transparency state.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_SetBackgroundIndex =R"doc(Change raster background index.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``backgroundIndex``:
+:param backgroundIndex:
     The new background index.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_SetForegroundIndex =R"doc(Change raster foreground index.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``foregroundIndex``:
+:param foregroundIndex:
     The new foreground index.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_SetResolution =R"doc(Change raster resolution.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``resolution``:
+:param resolution:
     The new raster resolution.
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_SetScale =R"doc(Change raster scale factor
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``scale``:
+:param scale:
     The new raster scale factor (ratio of design file coordinates in
     the current coordinate system to pixels).
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_SetOrigin =R"doc(Change raster origin (in UOR)
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``origin``:
+:param origin:
     The new raster origin in UOR (upper left corner of the raster
     element in the design file).
 
-Returns:
+:returns:
     true if element was updated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_GetDataFormat =R"doc(Query raster data format.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     one of MSRasterElemTypes data format.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_IsBinary =R"doc(Query if raster is binary.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if raster is binary.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_IsInvertBinary =R"doc(Query if binary raster color are inverted.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if binary raster color are inverted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_IsTransparent =R"doc(Query if raster background is transparent.
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     true if raster background is transparent.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_GetBackgroundIndex =R"doc(Query raster background index
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raster background index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_GetForegroundIndex =R"doc(Query raster foreground index
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raster foreground index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_GetPixelExtent =R"doc(Query raster extent in Pixels
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raster extent in Pixels)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_GetResolution =R"doc(Query raster resoltution
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raster resolution)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_GetScale =R"doc(Query raster scale factor
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raster scale factor (ratio of design file coordinates in the
     current coordinate system to pixels).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_GetOrigin =R"doc(Query raster origin in UORs
 
-Parameter ``eh``:
+:param eh:
     The element to query.
 
-Returns:
+:returns:
     raster origin in UORs (upper left corner of the raster element in
     the design file).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RasterHdrHandler_Create =R"doc(Create a new Raster Element (type 87/88) with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Initialize default properties from this template element or NULL.
 
-Parameter ``origin``:
+:param origin:
     Element origin.
 
-Parameter ``scale``:
+:param scale:
     Element scale.
 
-Parameter ``format``:
+:param format:
     Element format.
 
-Parameter ``imageBuffer``:
+:param imageBuffer:
     Image buffer. The buffer type depend on 'format':BITMAP_RASTER:
     Expect one bit per pixel buffer with a pitch of
     BITMAP_ROWBYTES(imageSize.x). BYTE_DATA_RASTER:Expect one byte
@@ -196,19 +196,19 @@ Parameter ``imageBuffer``:
     BYTE_RLE_RASTER:Same input as BYTE_DATA_RASTER but will store the
     data in BYTE RLE.
 
-Parameter ``imageSize``:
+:param imageSize:
     Image size (in pixels).
 
-Parameter ``foreground``:
+:param foreground:
     Foreground index.
 
-Parameter ``background``:
+:param background:
     Background index.
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was successfully
     calculated.)doc";
 
@@ -247,10 +247,10 @@ void def_RasterHandlers(py::module_& m)
     py::class_< RasterHdrHandler, std::unique_ptr< RasterHdrHandler, py::nodelete>, DisplayHandler> c4(m, "RasterHdrHandler");
 
     c4.def_static("Create", [] (EditElementHandleR eeh, ElementHandleCP templateEh, DPoint3dCR origin, double scale, MSRasterElemTypes format,
-                                py::bytes const& imageData, Point2dCR imageSize, byte foreground, byte background, DgnModelRefR modelRef)
+                                py::bytes const& imageData, Point2dCR imageSize, Byte foreground, Byte background, DgnModelRefR modelRef)
                   {
                   std::string strData = imageData.cast<std::string>();
-                  return RasterHdrHandler::Create(eeh, templateEh, origin, scale, format, (const byte*) strData.data(), imageSize, foreground, background, modelRef);
+                  return RasterHdrHandler::Create(eeh, templateEh, origin, scale, format, (const Byte*) strData.data(), imageSize, foreground, background, modelRef);
                   }, "eeh"_a, "templateEh"_a, "origin"_a, "scale"_a, "format"_a, "imageData"_a, "imageSize"_a, "foreground"_a, "background"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, RasterHdrHandler, Create));
 
     c4.def("GetOrigin", &RasterHdrHandler::GetOrigin, "eh"_a, DOC(Bentley, DgnPlatform, RasterHdrHandler, GetOrigin));
@@ -270,7 +270,7 @@ void def_RasterHandlers(py::module_& m)
            size_t inputBufferSize = py::len(imageData);
            if (inputBufferSize > 0)
                {
-               byte* imageBuffer = (byte*) _alloca(inputBufferSize);
+               Byte* imageBuffer = (Byte*) _alloca(inputBufferSize);
                retVal = self.GetBitMap(eh, imageBuffer, inputBufferSize);
                if (retVal == SUCCESS)
                    imageData = py::bytearray((const char*) imageBuffer, inputBufferSize);
@@ -288,7 +288,7 @@ void def_RasterHandlers(py::module_& m)
 
            if (inputBufferSize > 0)
                {
-               byte* imageBuffer = (byte*) _alloca(inputBufferSize);
+               Byte* imageBuffer = (Byte*) _alloca(inputBufferSize);
                if (lookupTableP.size () > 0)
                     retVal = self.GetByteMap(eh, imageBuffer, (size_t)inputBufferSize, (UInt32 const*)(&lookupTableP.front ()));
                else

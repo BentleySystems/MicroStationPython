@@ -1,0 +1,44 @@
+Version 300
+Charset "WindowsLatin1"
+Delimiter ", "
+CoordSys Nonearth Units "M" Bounds (406353, 154215) (407929, 155887)
+Columns 15
+  MSLINK Integer
+  MAPID Integer
+  ID Char (10)
+  WEIGHT Integer
+  CLASS Integer
+  OWNER Char (16)
+  EASTING Float
+  NORTHING Float
+  ELEVATION Float
+  SD_EAST Float
+  SD_NORTH Float
+  SD_ELEV Float
+  ROTATION Float
+  CONVER Float
+  DATUM Char (8)
+
+Data
+Point 406568.165 154434.341
+Symbol (35, 65280, 12)
+Point 406864.751 154340.559
+Symbol (35, 65280, 12)
+Point 406477.785 154943.519
+Symbol (35, 65280, 12)
+Point 407462.325 154364.256
+Symbol (35, 65280, 12)
+Point 407353.993 154807.300
+Symbol (35, 65280, 12)
+Point 406557.527 155634.851
+Symbol (35, 65280, 12)
+Point 407531.890 155006.700
+Symbol (35, 65280, 12)
+Point 407237.296 155386.078
+Symbol (35, 65280, 12)
+Point 407803.594 155298.329
+Symbol (35, 65280, 12)
+Point 407255.548 155645.950
+Symbol (35, 65280, 12)
+Point 406954.278 155762.227
+Symbol (35, 65280, 12)

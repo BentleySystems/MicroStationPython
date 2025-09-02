@@ -261,7 +261,7 @@ def test_GetWriteableFiles ():
 
 
     
-if __name__ == "__main__":
+#if __name__ == "__main__":
 #    debugpy.listen(('0.0.0.0',5678), in_process_debug_adapter=True)
 #    print("Waiting for debugger attach")
 #    debugpy.wait_for_client()

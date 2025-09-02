@@ -14,9 +14,9 @@ static const char * __doc_MstnPlatform_Cell_ReplaceLibraryHeaderElement =R"doc(@
 this will replace all linkages on the element except name and
 description, care must be taken to avoid removing linkages that should
 remain. Typically Cell.ReadLibraryElements is used to get the cell
-header so that the original linkages are in place. @Param[in] library
-is the pointer to the cell library to use. @Param[in] cellEdP is the
-new cell element to use to replace the header. @Param[in] cellType is
+header so that the original linkages are in place. @Param(input) library
+is the pointer to the cell library to use. @Param(input) cellEdP is the
+new cell element to use to replace the header. @Param(input) cellType is
 the cell type; see Cell.AddLibDescr for a description of types.
 @Return SUCCESS if the operation is completed successfully, otherwise
 ERROR.
@@ -28,10 +28,10 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_Cell_ModifyInfo =R"doc(@Description Replace the name and description of a cell in a library.
-@Param[in] newName is the new cell name. Pass NULL to use the old
-name. @Param[in] newdescr is the new cell description. Pass NULL to
-use the old description. @Param[in] cellName is the name of the cell
-to modify. @Param[in] library is the pointer to the cell library to
+@Param(input) newName is the new cell name. Pass NULL to use the old
+name. @Param(input) newdescr is the new cell description. Pass NULL to
+use the old description. @Param(input) cellName is the name of the cell
+to modify. @Param(input) library is the pointer to the cell library to
 use. @Return SUCCESS if the operation is completed successfully,
 otherwise ERROR. @Remarks Cell names are case-insensitive, so this
 function will not work to change only the case of a name. If the cell
@@ -47,11 +47,11 @@ Cell.ReplaceLibraryHeaderElement )doc";
 
 static const char * __doc_MstnPlatform_Cell_ReadLibraryElements =R"doc(@Description Get the component elements of the specified cell from the
 cell library. Calling this function with justHeader false is the same
-as calling Cell.GetElmDscr with no transformations. @Param[out]
+as calling Cell.GetElmDscr with no transformations. @Param(output)
 cellElementsPP is an element descriptor containing the elements of the
-cell. @Param[in] cellName the name of the cell to find and read.
-@Param[in] library the cell library to read the cell from, or NULL to
-search. @Param[in] justHeader if set true, only the cell header is
+cell. @Param(input) cellName the name of the cell to find and read.
+@Param(input) library the cell library to read the cell from, or NULL to
+search. @Param(input) justHeader if set true, only the cell header is
 read and returned. @Return SUCCESS if the operation is completed
 successfully, otherwise ERROR.
 
@@ -64,7 +64,7 @@ static const char * __doc_MstnPlatform_Cell_SetOriginAndRange =R"doc(@Descriptio
 origin is set to the middle of the range. This function only validates
 the range of the cell against the ACTIVEMODEL. If you are working with
 a different modelRef, you must use Elmdscr.Validate and
-Cell.SetRange. @Param[in] cellDP the cell's element descriptor.
+Cell.SetRange. @Param(input) cellDP the cell's element descriptor.
 
 See also:
     Cell.SetRange
@@ -81,7 +81,7 @@ typically creates a cell element, creates a new element descriptor,
 adds the component elements to that element descriptor, calls
 Cell.SetRange, and then adds the cell to the library using
 Cell.AddLibDescr. @Param[in,out] cellDP the element descriptor of
-the cell. @Param[in] modelRef indicates the model to validate the cell
+the cell. @Param(input) modelRef indicates the model to validate the cell
 range against. ACTIVEMODEL is typically used. @Remarks The
 Cell.SetRange function must be called to update the range block
 diagonal in the header of a cell library element descriptor. The range
@@ -99,9 +99,9 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_Cell_Rename =R"doc(@Description Changes the name of cell in the current cell library.
-@Param[in] newName is the new name of the cell in the library. This
+@Param(input) newName is the new name of the cell in the library. This
 must be less than DgnPlatform::MAX_CELLNAME_LENGTH characters, and
-must be valid as tested by Model.NameIsValid. @Param[in] oldName
+must be valid as tested by Model.NameIsValid. @Param(input) oldName
 old name for cell in library @Return SUCCESS if the specified cell was
 renamed. If an error occurs, they return one the following values:
 MDLERR_CELLNOTFOUND, MDLERR_CELLEXISTS, MDLERR_INVALIDLIBRARY,
@@ -126,8 +126,8 @@ Cell.SetDescription (&element, L" NEW DESCRIPTION ");
 Elmdscr.ReplaceElement (&cellDP, &element);
 ```
 
-@Param[in] elmP the cell element on which the description will be set.
-@Param[in] cellDescrP the description to give the cell. @Return
+@Param(input) elmP the cell element on which the description will be set.
+@Param(input) cellDescrP the description to give the cell. @Return
 SUCCESS if the operation is completed successfully, otherwise ERROR.
 
 See also:
@@ -143,10 +143,10 @@ to the provided buffer. Note that graphic cells and shared cell
 instances as placed by MicroStation do not keep their descriptions.
 For shared cells, you should use this function on the definition. For
 graphic cells, you must find the cell in a library and extract its
-description that way. @Param[in] cellDescrP the buffer where the
-extracted cell description will be placed. @Param[in] bufferSize the
+description that way. @Param(input) cellDescrP the buffer where the
+extracted cell description will be placed. @Param(input) bufferSize the
 maximum number of MSWChars to copy to the cellDescrP buffer.
-@Param[in] elmP is the cell element from which the description is
+@Param(input) elmP is the cell element from which the description is
 extracted. @Return SUCCESS if the operation is completed successfully,
 otherwise ERROR
 
@@ -171,8 +171,8 @@ Cell.SetName (&element, L" NEW NAME ");
 Elmdscr.ReplaceElement (&cellDP, &element);
 ```
 
-@Param[in] elmP the cell element on which the name will be set.
-@Param[in] cellNameP the name to give to the cell. @Return SUCCESS if
+@Param(input) elmP the cell element on which the name will be set.
+@Param(input) cellNameP the name to give to the cell. @Return SUCCESS if
 the operation is completed successfully, otherwise ERROR .
 
 See also:
@@ -184,10 +184,10 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_Cell_ExtractName =R"doc(@Description Retrieve the name string from a non-shared or shared cell
-element and copy it to the provided buffer. @Param[out] cellNameP the
-buffer where the extracted cell name will be placed. @Param[in]
+element and copy it to the provided buffer. @Param(output) cellNameP the
+buffer where the extracted cell name will be placed. @Param(input)
 bufferSize the maximum number of MSWChars to copy to cellNameP.
-@Param[in] elmP the cell element from which the name is extracted.
+@Param(input) elmP the cell element from which the name is extracted.
 @Return SUCCESS if the cell name is successfully found and copied to
 the buffer, otherwise ERROR.
 
@@ -221,43 +221,43 @@ Remark:
     cell library) needs to have the " Can be placed as annotation cell "
     toggle ON in order to be placed as an annotation cell. If that
     toggle is OFF, the active annotation scale is propagated only to
-    the annotations contained in that cell model. @Param[in] rOrigin
+    the annotations contained in that cell model. @Param(input) rOrigin
     the location to place the cell origin. If origin is NULL, the cell
     is placed at the (0, 0, 0) point in the current coordinate system.
-    @Param[in] scale points to a Dpoint3d structure holding the X, Y,
+    @Param(input) scale points to a Dpoint3d structure holding the X, Y,
     and (in 3D) Z scale factors to be applied to the cell elements
     before they are placed. If scale is NULL, the cell is placed at a
-    scale factor of 1.0. @Param[in] trueScale if true, use cell model
-    and master model units to scale the cell. @Param[in] rotMatrix the
+    scale factor of 1.0. @Param(input) trueScale if true, use cell model
+    and master model units to scale the cell. @Param(input) rotMatrix the
     rotation matrix that defines the orientation for cell placement.
     If rMatrix is NULL, the identity matrix is used. rMatrix does not
     necessarily need to be orthogonal or normalized. (Cells can be
-    placed skewed). @Param[in] attributes is an array of attribute
+    placed skewed). @Param(input) attributes is an array of attribute
     information to append to the cell header before it is placed. The
     first short of this array is the length, in shorts, of the
     attribute data. Note that attribute linkage lengths must be a
     multiple of four words. If attributes is NULL, the cell has no
-    attributes attached to the header. @Param[in] ggroup the graphic
+    attributes attached to the header. @Param(input) ggroup the graphic
     group number for the cell's elements. A value of 0 means that the
-    elements will not be part of a graphic group. @Param[in]
+    elements will not be part of a graphic group. @Param(input)
     relativeMode determines how the levels for the cell's elements are
     assigned. All elements for a point cell are assigned to baseLevel.
     If relativeMode is true, the lowest level used in the cell
     definition is assigned to baseLevel and all other element levels
     are adjusted accordingly. If relativeMode is false, the levels are
-    taken from the cell library unchanged. @Param[in] baseLevel
+    taken from the cell library unchanged. @Param(input) baseLevel
     determines how the levels for the cell's elements are assigned.
     All elements for a point cell are assigned to baseLevel. For a
     graphic cell, this is ignored if relativeMode is false. This is a
     level ID, gotten through functions such as Level.GetIdFromName.
-    Relative placement internally works by level numbers. @Param[in]
+    Relative placement internally works by level numbers. @Param(input)
     sharedFlag indicates whether the cell should be placed as shared
     or unshared. If sharedFlag is 0, an unshared cell is placed. If
     sharedFlag is 1, a shared cell is created. If sharedFlag is 2, the
     state of the user-specified shared flag is used. Cell.PlaceCell
     also creates and places the shared cell definition if it does not
-    exist in the file. @Param[in] cellName is the name of the cell to
-    be placed. @Param[in] library name of library or NULL. If the
+    exist in the file. @Param(input) cellName is the name of the cell to
+    be placed. @Param(input) library name of library or NULL. If the
     library is NULL, the cell will be searched for in the active cell
     library, then all files found on MS_CELLLIST. If the shared flag
     is 1, then the active file will be searched for a shared cell
@@ -275,7 +275,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_Cell_IsPointCell =R"doc(@Description Determine whether the cell cellHeader is a point cell.
-@Param[in] hdr cell header element @Return true if cellHeader is a
+@Param(input) hdr cell header element @Return true if cellHeader is a
 point cell, false for any other type.
 
 Remark:
@@ -288,9 +288,9 @@ another.
 
 Remark:
     s This function always try to convert nested cells to references
-    (see Cell.AddLibDescr). @Param[in] destLibrary the cell library
-    to copy the cell to. @Param[in] cellName the name of the cell to
-    copy. @Param[in] sourceLibrary the cell library to copy the cell
+    (see Cell.AddLibDescr). @Param(input) destLibrary the cell library
+    to copy the cell to. @Param(input) cellName the name of the cell to
+    copy. @Param(input) sourceLibrary the cell library to copy the cell
     from. @Return SUCCESS if the cell is copied, otherwise an error
     code.
 
@@ -306,18 +306,18 @@ listed in MS_CELLLIST and MS_BLOCKLIST if the searchAll parameter is
 true. The first cell found with the requested name will stop the
 search. This function differs from Cell.FindCell by the rights
 parameter which allows the caller to specify the desired permission
-level. @Param[out] library is the library where the cell was found, if
+level. @Param(output) library is the library where the cell was found, if
 the search was successful. This argument will be NULL if the cell was
-not found. @Param[in] preferredLib the cell library to search first,
-or NULL. @Param[in] cellName the name of the cell to search for.
-@Param[in] searchAll indicates whether all of the cell libraries in
+not found. @Param(input) preferredLib the cell library to search first,
+or NULL. @Param(input) cellName the name of the cell to search for.
+@Param(input) searchAll indicates whether all of the cell libraries in
 the MS_CELLLIST and MS_BLOCKLIST paths are to be searched. Setting
 this value to 0 indicates that only the preferredLib library is
 searched; setting this value to 1 indicates that all cell libraries
 are to be searched; setting this value to 2 indicates that all cell
 libraries are to be searched and messages generated as the search
 progresses. Messages are sent to the error display field in the
-MicroStation window. @Param[in] rights The level of rights that should
+MicroStation window. @Param(input) rights The level of rights that should
 be tested. See DgnFileObj.CheckRights for a description of the
 choices. @Return SUCCESS if the cell was found, otherwise
 MDLERR_CELLNOTFOUND.
@@ -336,11 +336,11 @@ search. @Remarks This function will only find cells which have export
 rights or better. Because of the rights limitation, protected
 libraries will be skipped and cells will be searched for through th
 rest of the path. To specify rights, see Cell.FindCellEx.
-@Param[out] library is the library where the cell was found, if the
+@Param(output) library is the library where the cell was found, if the
 search was successful. This argument will be NULL if the cell was not
-found. @Param[in] preferredLib the cell library to search first, or
-NULL. @Param[in] cellName the name of the cell to search for.
-@Param[in] searchAll indicates whether all of the cell libraries in
+found. @Param(input) preferredLib the cell library to search first, or
+NULL. @Param(input) cellName the name of the cell to search for.
+@Param(input) searchAll indicates whether all of the cell libraries in
 the MS_CELLLIST and MS_BLOCKLIST paths are to be searched. Setting
 this value to 0 indicates that only the preferredLib library is
 searched; setting this value to 1 indicates that all cell libraries
@@ -367,34 +367,34 @@ similarly. If txtNodeDscrPP is NULL, then empty text nodes will be
 lost. @Remarks If sharedFlag is 1 or 2 and the user has turned shared
 cells on, the function first searches the active file for a shared
 cell instance without reading the cell library. If no shared cell is
-found, then the library is searched. @Param[out] cellDscrPP cell
-element descriptor @Param[out] txtNodeDscrPP element descriptor for
-empty text nodes. If NULL, these text nodes are lost. @Param[in]
+found, then the library is searched. @Param(output) cellDscrPP cell
+element descriptor @Param(output) txtNodeDscrPP element descriptor for
+empty text nodes. If NULL, these text nodes are lost. @Param(input)
 rOrigin the location of the cell's origin. If origin is NULL, the cell
 is transformed to the (0, 0, 0) point in the current coordinate
-system. @Param[in] scale points to a Dpoint3d structure holding the X,
+system. @Param(input) scale points to a Dpoint3d structure holding the X,
 Y and (in 3D) Z scale factors to be applied to the cell's elements. If
-scale is NULL, the cell is not scaled. @Param[in] trueScale indicates
+scale is NULL, the cell is not scaled. @Param(input) trueScale indicates
 whether the cell definition and DGN file units are used in scaling the
 cell, resulting in cells that have the same size between models with
 different units. ACTIVEMODEL is assumed for the destination.
-@Param[in] rotMatrix is the rotation matrix that defines the cell's
+@Param(input) rotMatrix is the rotation matrix that defines the cell's
 orientation. If rMatrix is NULL, the identity matrix is used.
-@Param[in] attributes an array of attribute information to append to
+@Param(input) attributes an array of attribute information to append to
 the cell header. This parameter has been deprecated; please see the
 mdlLinkage functions to append attributes to the cell header.
-@Param[in] ggroup is the graphic group number for the cell's elements.
+@Param(input) ggroup is the graphic group number for the cell's elements.
 A value of 0 means that the elements will not be part of a graphic
-group. @Param[in] sharedFlag indicates whether the element descriptor
+group. @Param(input) sharedFlag indicates whether the element descriptor
 is for a shared or unshared cell. If sharedFlag is 0, an unshared cell
 is returned. If sharedFlag is 1, a shared cell is returned if found,
 otherwise an unshared cell. If sharedFlag is 2, the state of the user-
-specified shared flag is used. @Param[in] updateMasterFile indicates
+specified shared flag is used. @Param(input) updateMasterFile indicates
 that the cell is to be placed in the active model ref, so all
 necessary styles, etc. should be copied to the active file. If this
 parameter is set to false, then the display of the cell elements may
-not match the original model. @Param[in] cellName the name of the cell
-to be returned. @Param[in] library the library object containing the
+not match the original model. @Param(input) cellName the name of the cell
+to be returned. @Param(input) library the library object containing the
 cell. If this argument is NULL, the cell is searched for. It is
 usually acquired via Cell.FindCell or Cell.GetLibraryObject.
 @Return SUCCESS if the cell is read and cellDscrPP is valid.
@@ -410,9 +410,9 @@ Remark:
 
 static const char * __doc_MstnPlatform_Cell_GetLibraryObject =R"doc(@Description Returns a pointer to the cell library object of the given
 name. This is used by Cell.GetElmDscr, Cell.PlaceCell, and other
-functions that require a cell library handle. @Param[out] ppLibraryObj
-pointer to the cell library object. @Param[in] pLibName name of the
-cell library to find. @Param[in] unused Unused; pass false. @Return
+functions that require a cell library handle. @Param(output) ppLibraryObj
+pointer to the cell library object. @Param(input) pLibName name of the
+cell library to find. @Param(input) unused Unused; pass false. @Return
 SUCCESS if the library of the given name is found, otherwise ERROR.
 
 See also:
@@ -442,9 +442,9 @@ If relative mode is chosen, the baseLevelId is converted to a level
 code and all element level codes are adjusted by the difference
 between the base level code and lowest level code in the cell.
 
-@Param[in] elemDscr cell element descriptor @Param[in] pModelRef model
-ref of element descriptor @Param[in] relativeMode relative or absolute
-@Param[in] baseLevelId used for point cells and relative mode. This is
+@Param(input) elemDscr cell element descriptor @Param(input) pModelRef model
+ref of element descriptor @Param(input) relativeMode relative or absolute
+@Param(input) baseLevelId used for point cells and relative mode. This is
 a level number, not a level code. @Remarks This function is needed
 because Cell.GetElmDscr does not apply the above logic before it
 returns the cell's element descriptor. This functionality was left out
@@ -480,9 +480,9 @@ If relative mode is chosen, the all element level ids are adjusted by
 the difference between the lowest level id in the cell and the base
 level id provided.
 
-@Param[in] elemDscr cell element descriptor @Param[in] relativeMode
-true for relative level. @Param[in] baseLevel used for point cells and
-relative mode. @Param[in] library This is no longer used and can be
+@Param(input) elemDscr cell element descriptor @Param(input) relativeMode
+true for relative level. @Param(input) baseLevel used for point cells and
+relative mode. @Param(input) library This is no longer used and can be
 NULL. Instead the model ref from elemDscr->h.dgnModelRef is used.
 @Remarks This function is needed because Cell.GetElmDscr does not
 apply the above logic before it returns the cell's element descriptor.
@@ -501,18 +501,18 @@ Remark:
 static const char * __doc_MstnPlatform_Cell_Extract =R"doc(@Description Extracts the information from a cell header element. If
 any parameters are NULL, this function does not attempt to fill them
 in. All parameters are returned in the current (design file)
-coordinate system. @Param[out] origin is the cell origin. @Param[out]
+coordinate system. @Param(output) origin is the cell origin. @Param(output)
 shape returns an array of eight Dpoint3d's which represent the minimum
 bounding box for the cell in the coordinate system of the cell. This
 idea can be illustrated by using MicroStation's element selection tool
 to select a cell. MicroStation places handles on the boundary which
 defines the cell, and these handles correlate to the eight Dpoint3ds
 returned by Cell.Extract. Note that this must point to an array
-large enough to hold the 8 points. @Param[out] rMatrix the rotation
-matrix for the cell. @Param[out] scale the cell's X, Y and Z scale
-factors. @Param[out] cellName the cell's name in Unicode. @Param[in]
+large enough to hold the 8 points. @Param(output) rMatrix the rotation
+matrix for the cell. @Param(output) scale the cell's X, Y and Z scale
+factors. @Param(output) cellName the cell's name in Unicode. @Param(input)
 bufferSize if extracting cell's name, number of widechars name buffer
-can hold. This is ignored if cellName is NULL. @Param[in] cell cell
+can hold. This is ignored if cellName is NULL. @Param(input) cell cell
 element to extract information from. @Remarks The points in shape are
 transformed into the current coordinate system before they are
 returned. They do not necessarily represent a minimum bounding box in
@@ -529,7 +529,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_Cell_ExistsInLibrary =R"doc(@Description Indicates whether a cell with the specified name exists
-in the current cell library. @Param[in] cellName name of the cell to
+in the current cell library. @Param(input) cellName name of the cell to
 search for. @Return true if the cell name exists in the library;
 otherwise it returns false.
 
@@ -542,7 +542,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_Cell_DeleteInLibrary =R"doc(@Description Remove a cell from the current active cell library by
-name. @Param[in] cellName name of cell to be deleted. @Return SUCCESS
+name. @Param(input) cellName name of cell to be deleted. @Return SUCCESS
 if the specified cell was deleted or one of the following error
 values:MDLERR_CELLNOTFOUND, MDLERR_CELLEXISTS, MDLERR_INVALIDLIBRARY,
 MDLERR_NOCELLLIBRARY or MDLERR_FILEREADONLY.
@@ -554,13 +554,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_Cell_CreateFromFenceByType =R"doc(@Description Create a new cell in the current cell library that
 contains the elements in the fence. It creates the new cell from the
-current selection set if no fence is defined. @Param[in] cellName the
+current selection set if no fence is defined. @Param(input) cellName the
 name of the cell in the library. This must be less than
 DgnPlatform::MAX_CELLNAME_LENGTH characters, and must be valid as
-tested by Model.NameIsValid. @Param[in] descr is the cell
+tested by Model.NameIsValid. @Param(input) descr is the cell
 description; it may not exceed MAX_CELLDSCR_LENGTH characters.
-@Param[in] rOrigin the origin of the cell. If NULL is passed for
-cellOrigin, tcb->celor is used. @Param[in] cellType the type of cell
+@Param(input) rOrigin the origin of the cell. If NULL is passed for
+cellOrigin, tcb->celor is used. @Param(input) cellType the type of cell
 to create (point, graphic, parametric) @Remarks This function collects
 up all the elements in the fence or selection set and creates a cell
 element out of them. @Return SUCCESS or the error that occurred which
@@ -578,13 +578,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_Cell_CreateFromFence =R"doc(@Description Create a new cell in the current cell library that
 contains the elements in the fence. It creates the new cell from the
-current selection set if no fence is defined. @Param[in] cellName the
+current selection set if no fence is defined. @Param(input) cellName the
 name of the cell in the library. This must be less than
 DgnPlatform::MAX_CELLNAME_LENGTH characters, and must be valid as
-tested by Model.NameIsValid. @Param[in] descr is the cell
+tested by Model.NameIsValid. @Param(input) descr is the cell
 description; it may not exceed MAX_CELLDSCR_LENGTH characters.
-@Param[in] rOrigin the origin of the cell. If NULL is passed for
-cellOrigin, tcb->celor is used. @Param[in] pointCell true if the cell
+@Param(input) rOrigin the origin of the cell. If NULL is passed for
+cellOrigin, tcb->celor is used. @Param(input) pointCell true if the cell
 is to be a point cell, otherwise false. @Remarks This function
 collects up all the elements in the fence or selection set and creates
 a cell element out of them. @Return SUCCESS or the error that occurred
@@ -604,11 +604,11 @@ static const char * __doc_MstnPlatform_Cell_Create =R"doc(@Description Creates a
 This can be used as an orphan cell, or later added to a cell library
 using Cell.AddLibDescr. Typically this function is used to create a
 cell header, and Elmdscr.AppendDscr is then used to add elements.
-@Param[out] cellElm This is a pointer to a full MSElement union which
-is filled in. @Param[in] cellName the name of the cell; may be NULL.
-@Param[in] origin the origin of the cell. If NULL is passed for
+@Param(output) cellElm This is a pointer to a full MSElement union which
+is filled in. @Param(input) cellName the name of the cell; may be NULL.
+@Param(input) origin the origin of the cell. If NULL is passed for
 cellOrigin, the (0, 0, 0) point for the current coordinate system is
-used. @Param[in] pointCell true if the cell is to be a point cell,
+used. @Param(input) pointCell true if the cell is to be a point cell,
 otherwise false. @Return SUCCESS if the operation is completed
 successfully, otherwise ERROR
 
@@ -622,20 +622,20 @@ Remark:
 
 static const char * __doc_MstnPlatform_Cell_AttachLibraryEx =R"doc(@Description Attach a new cell library to the current design file. If
 a library is successfully attached, filename is set to the cell
-library's full file specification. @Param[out] filename name of cell
+library's full file specification. @Param(output) filename name of cell
 library opened. This should be a string buffer at least MAXFILELENGTH
-characters long. @Param[in] inputname is the name of the cell library.
+characters long. @Param(input) inputname is the name of the cell library.
 inputName may contain a path specification. However, if it does not,
 then MS_CELL and defaultDir (if defined) are searched for the file. If
 this parameter is NULL, then the active library is detached.
-@Param[in] defaultDir additional path to search. Can be NULL.
-@Param[in] fromkeyin if true, the path information from inputName is
+@Param(input) defaultDir additional path to search. Can be NULL.
+@Param(input) fromkeyin if true, the path information from inputName is
 used. If it is false, Cell.AttachLibraryEx assumes that inputName
 came from the information stored in the design file header (where the
 path information is not always correct), and it only uses the path
 information from inputName if the library cannot be found anywhere
 else. MDL applications should normally set fromKeyin to true.
-@Param[in] libraryFlag specifies how to handle the cell library if its
+@Param(input) libraryFlag specifies how to handle the cell library if its
 format is not up to date. If the cell library is a V7 cell library,
 then it can be upgraded. See for the possible values. @Return SUCCESS
 if the operation is completed and a cell library was attached,
@@ -653,14 +653,14 @@ static const char * __doc_MstnPlatform_Cell_AttachLibrary =R"doc(@Description At
 If a library is successfully attached, filename is set to the cell
 library's full file specification. If the library is a V7 cell library
 then this function will fail. It is the equivalent of calling
-Cell.AttachLibraryEx with LIBRARY_IgnoreV7Libraries. @Param[out]
+Cell.AttachLibraryEx with LIBRARY_IgnoreV7Libraries. @Param(output)
 filename name of cell library opened. This should be a string buffer
-at least MAXFILELENGTH characters long. @Param[in] inputname is the
+at least MAXFILELENGTH characters long. @Param(input) inputname is the
 name of the cell library. inputName may contain a path specification.
 However, if it does not, then MS_CELL and defaultDir (if defined) are
 searched for the file. If this parameter is NULL, then the active
-library is detached. @Param[in] defaultDir additional path to search.
-Can be NULL. @Param[in] fromkeyin if true, the path information from
+library is detached. @Param(input) defaultDir additional path to search.
+Can be NULL. @Param(input) fromkeyin if true, the path information from
 inputName is used. If it is false, Cell.AttachLibrary assumes that
 inputName came from the information stored in the design file header
 (where the path information is not always correct), and it only uses
@@ -680,12 +680,12 @@ Remark:
 
 static const char * __doc_MstnPlatform_Cell_AddLibDescr =R"doc(@Description Create a new cell in the currently attached cell library.
 This function also handles copying styles, dependencies, etc. into the
-library. @Param[in] cellEdP a cell element descriptor (type 2) to add
-to the library. @Param[in] cellType the type of the cell in the
+library. @Param(input) cellEdP a cell element descriptor (type 2) to add
+to the library. @Param(input) cellType the type of the cell in the
 library. Use CellAddType::FromContext to choose GRAPHIC or POINT based
 on the type of the cell. Otherwise, possible values for cellType are
 CellAddType::NormalCell for a normal graphic cell or
-CellAddType::PointCell for a point cell. @Param[in]
+CellAddType::PointCell for a point cell. @Param(input)
 convertNestedCellsToRefs if true, a nested cell with the same name as
 a cell (model) in the destination library will be replaced by a
 reference to that cell, which matches the behavior of the MicroStation

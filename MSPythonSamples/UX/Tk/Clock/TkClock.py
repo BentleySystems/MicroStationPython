@@ -12,7 +12,7 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
-#
+'''
 # Simple Clock Example which demonstrates a tkinter UX item containing a clock which doesnt block
 # the execution of Microstations input loop.
 #
@@ -22,20 +22,58 @@ from MSPyMstnPlatform import *
 # 
 # To workaround this use the tkinter.update method instead, this will return after processing all the tkinter UX events, then we can execute
 # a Microstation function mdlInput_pythonMainLoop to process the main input loop of Microstation.
-#
+'''
 
 s_root  = None
 s_clock = None
 
 def on_closing ():
+    """
+    Handle the event when the window is being closed.
+
+    This function destroys the root window, effectively closing the application.
+    It uses the global variable `s_root` to reference the root window.
+    """
     global s_root
     s_root.destroy()
 
 def update():
+    """
+    Update the clock display with the current time.
+
+    This function updates the text of the `s_clock` widget to the current time
+    formatted as hours, minutes, and seconds (HH:MM:SS). It then schedules
+    itself to be called again after 1000 milliseconds (1 second) to continuously
+    update the time display.
+
+    :return: None
+    """
     s_clock.config(text=time.strftime("%I:%M:%S"))
     s_clock.after(1000,update)
 
 def main ():
+    """
+    Main function to create and run a Tkinter-based clock application.
+    This function initializes the Tkinter root window, sets its properties,
+    creates a clock display using a Tkinter Label widget, and runs an infinite
+    loop to update the clock and handle user input.
+    Global Variables:
+    -----------------
+    s_root : tk.Tk
+        The Tkinter root window.
+    s_clock : tk.Label
+        The Tkinter Label widget used to display the clock time.
+    Functions:
+    ----------
+    on_closing():
+        Handles the window close event.
+    update():
+        Updates the clock display with the current time.
+    Notes:
+    ------
+    The function runs an infinite loop to continuously update the clock and
+    handle user input using the `PyCadInputQueue.PythonMainLoop()` function.
+    """
     # Declare two global variables
     global s_root
     global s_clock

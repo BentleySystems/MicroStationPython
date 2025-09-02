@@ -13,6 +13,9 @@
 #include <Bentley/bvector.h>
 #include <Bentley/bmap.h>
 #include <Bentley/BeConsole.h>
+#include <Bentley/stdcxx/rw/bpair.h>
+#include <utility>
+#include <tuple>
 
 #include <MsPythonCore\MSPython.h>
 

@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -15,10 +10,21 @@ import ctypes
 import sys
 
 '''
-Function to select elements by its RGBColor
-    userColor : Dict      RGB color values
+This sample demonstrates how to select elements by RGB color.
 '''
+
 def selectElementsbyColor(userColor):
+    """
+    Select elements in the active model by their RGB color.
+
+    This function iterates through all graphical elements in the active model,
+    checks their RGB color, and adds elements that match the specified color
+    to the selection set.
+
+    :param userColor: A dictionary containing the RGB values to match.
+                      Example: {'r': 255, 'g': 0, 'b': 0} for red color.
+    :type userColor: dict
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -52,9 +58,16 @@ def selectElementsbyColor(userColor):
             if (red   == userColor.get('r') and green == userColor.get('g') and blue  == userColor.get('b')):
                 selSetManager.AddElement(perElementRef,dgnModel)
 
-'''
-Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with 'Color' model 
-'''
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {len (agenda)} elements")
+    # iterate using __iter__ over the selection set printing the element ids of elements in the selection set
+    for editElementHandle in agenda:
+        print(f"  Element ID: {editElementHandle.GetElementId()}")
+        
+# Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with 'Color' model 
 #main
 if __name__ == "__main__":
     #highlight all the elements based on color

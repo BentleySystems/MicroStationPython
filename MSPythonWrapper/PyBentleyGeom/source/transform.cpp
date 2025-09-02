@@ -13,22 +13,22 @@
 static const char * __doc_Bentley_Geom_Transform_OffsetPointByColumn =R"doc(Adds column i of the matrix part of this instance to point in and
 places the result in out.
 
-Parameter ``[out]``:
+:param (output):
     out sum of in and column i
 
-Parameter ``[in]``:
+:param (input):
     in The base point for sum
 
-Parameter ``[in]``:
+:param (input):
     i The column index of matrix)doc";
 
 static const char * __doc_Bentley_Geom_Transform_ScaleDoubleArrayByXColumnMagnitude =R"doc(scale all values in an array of doubles by the magnitude of a
 specified column of the matrix.
 
-Parameter ``[in]``:
+:param (input):
     data array of doubles.
 
-Parameter ``[in]``:
+:param (input):
     n number of values.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_CorrectCoordinateFrameXYRange =R"doc(Input transforms placed " within " caller's geoemtry so that the
@@ -39,109 +39,109 @@ that local system. The coordinate frame then needs some combination of
 (a) move origin to lower left of the range, (b) rescale axes so that
 one or both of x,y directions scale to 01.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     localToWorld local to world transformation to modify.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     worldToLocal world to lcoal transformation to modify.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     localRange range of subject data.
 
-Parameter ``[in]``:
+:param (input):
     frameType identifies target scaling and origin.
 
-Parameter ``[out]``:
+:param (output):
     appliedTransformOldLocalToNewLocal (optional) the transfrom
     applied to modify initial local geometry to final local geometry)doc";
 
 static const char * __doc_Bentley_Geom_Transform_MultiplyTransformTranslation =R"doc(Multiply by a translation " from the left ":result = transformIn *
 (Identity, scaled translationIn)
 
-Parameter ``[in]``:
+:param (input):
     transformIn full transform for right factor.
 
-Parameter ``[in]``:
+:param (input):
     translationIn translation vector for right term
 
-Parameter ``[in]``:
+:param (input):
     scaleFactor scale factor for translation)doc";
 
 static const char * __doc_Bentley_Geom_Transform_MultiplyTranslationTransform =R"doc(Multiply by a translation " from the left ":result = (Identity, scaled
 translationIn) * transformIn
 
-Parameter ``[in]``:
+:param (input):
     translationIn translation vector for left term
 
-Parameter ``[in]``:
+:param (input):
     scaleFactor factor for translation
 
-Parameter ``[in]``:
+:param (input):
     transformIn full transform for right factor.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_ScaleCompleteRows =R"doc(Scale the complete rows by respective factors. (See also
 scaleMatrixColumns, scaleMatrixRows, which only act on the matrix
 part)
 
-Parameter ``[in]``:
+:param (input):
     transform The input transform.
 
-Parameter ``[in]``:
+:param (input):
     xscale The x column scale factor
 
-Parameter ``[in]``:
+:param (input):
     yscale The y column scale factor
 
-Parameter ``[in]``:
+:param (input):
     zscale The z column scale factor)doc";
 
 static const char * __doc_Bentley_Geom_Transform_ScaleMatrixRows =R"doc(Scale the rows of the matrix part by respective factors. Translation
 part is unaffected. (See also scaleMatrixColumns, scaleTransformRows)
 
-Parameter ``[in]``:
+:param (input):
     transform The input transform.
 
-Parameter ``[in]``:
+:param (input):
     xscale The x column scale factor
 
-Parameter ``[in]``:
+:param (input):
     yscale The y column scale factor
 
-Parameter ``[in]``:
+:param (input):
     zscale The z column scale factor)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitForwardAndInverseFromAxesAndOrigin =R"doc(Construct transforms between local and world for given origin and axis
 directions.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from local system to world.
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal transform from world to local system.
 
-Parameter ``[in]``:
+:param (input):
     axes coordinate directions of local system (relative to world)
 
-Parameter ``[in]``:
+:param (input):
     origin origin of local system (in world)
 
-Returns:
+:returns:
     true if axes were independent)doc";
 
 static const char * __doc_Bentley_Geom_Transform_ScaleMatrixColumns =R"doc(Scale the columns of the matrix part by respective factors.
 Translation part is unaffected. (See also scaleMatrixRows,
 scaleTransformRows)
 
-Parameter ``[in]``:
+:param (input):
     transform The input transform.
 
-Parameter ``[in]``:
+:param (input):
     xscale The x column scale factor
 
-Parameter ``[in]``:
+:param (input):
     yscale The y column scale factor
 
-Parameter ``[in]``:
+:param (input):
     zscale The z column scale factor)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromPrincipleAxisRotations =R"doc(Sets this instance to the transformation obtained by premultiplying
@@ -150,16 +150,16 @@ angles xrot, yrot and zrot. inTransform may be the same as this
 instance. Symbolically, given transform [M t] and rotation matrices
 X,Y,Z, the resulting transform is [X*Y*Z*M X*Y*Z*t]
 
-Parameter ``[in]``:
+:param (input):
     inTransform The base transformation
 
-Parameter ``[in]``:
+:param (input):
     xrot The x axis rotation, in radians
 
-Parameter ``[in]``:
+:param (input):
     yrot The y axis rotation, in radians
 
-Parameter ``[in]``:
+:param (input):
     zrot The z axis rotation, in radians)doc";
 
 static const char * __doc_Bentley_Geom_Transform_TranslateInLocalCoordinates =R"doc(Sets this instance to a transformation that has the same matrix part
@@ -176,136 +176,136 @@ identical to this instance. Symbolically, if in is the transform [R t]
 and the local origin coordinates x,y,z are in column vector p, the
 result is the transformation [R t+R*p].
 
-Parameter ``[in]``:
+:param (input):
     in The input transformation
 
-Parameter ``[in]``:
+:param (input):
     x The x-coordinate of the local origin
 
-Parameter ``[in]``:
+:param (input):
     y The y-coordinate of the local origin
 
-Parameter ``[in]``:
+:param (input):
     z The z-coordinate of the local origin)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetFixedPlane =R"doc( Compute the plane (if any) of points that are not
 affected by this transformation. Returns false if the fixed point set
 for the transform is empty, a single point, a line, or all points.
 
-Parameter ``[out]``:
+:param (output):
     fixedPoint A point on the line.
 
-Parameter ``[out]``:
+:param (output):
     planeVectorX a unit vector in the plane.
 
-Parameter ``[out]``:
+:param (output):
     planeVectorY another unit vector in the plane, perpendicular to
     pDirectionVectorX.
 
-Returns:
+:returns:
     true if the transformation has a fixed point.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetFixedLine =R"doc( Compute the line (if any) of points that are not affected
 by this transformation. Returns false if the fixed point set for the
 transform is empty, a single point, a plane, or all points.
 
-Parameter ``[out]``:
+:param (output):
     fixedPoint A point on the line.
 
-Parameter ``[out]``:
+:param (output):
     directionVector vector along the line.
 
-Returns:
+:returns:
     true if the transformation has a fixed point.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetAnyFixedPoint =R"doc( Compute any single point that remains unchanged by action
 of a transform. Note that a pure translation has no fixed points,
 while any other transformation does.
 
-Parameter ``[out]``:
+:param (output):
     fixedPoint Point that is not changed by the transformation.
 
-Returns:
+:returns:
     true if the transformation has a fixed point.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsUniformScaleAndRotateAroundLine =R"doc( Returns true if the transform is a uniform scale combined
 with a rotation. One, but not both, of the two steps may be null (unit
 scale or no rotation)
 
-Parameter ``[out]``:
+:param (output):
     fixedPoint fixed point of scaling. This is also a point on the
     line.
 
-Parameter ``[out]``:
+:param (output):
     directionVector vector in the direction of the rotation.
 
-Parameter ``[out]``:
+:param (output):
     radians rotation angle
 
-Parameter ``[out]``:
+:param (output):
     scale scale factor.
 
-Returns:
+:returns:
     true if the transformation has at least one of the scale, rotate
     effects.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsMirrorAboutPlane =R"doc( Returns true if the transform is a mirror with respect to
 a plane.
 
-Parameter ``[out]``:
+:param (output):
     planePoint Some point on the plane.
 
-Parameter ``[out]``:
+:param (output):
     unitNormal unit vector perpendicular to the plane.
 
-Returns:
+:returns:
     true if the transformation is a mirror.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsRotateAroundLine =R"doc( Returns true if the transform is a non-zero rotation
 around a line.
 
-Parameter ``[out]``:
+:param (output):
     fixedPoint a point on the line.
 
-Parameter ``[out]``:
+:param (output):
     directionVector vector in the line direction.
 
-Parameter ``[out]``:
+:param (output):
     radians rotation angle in radians.
 
-Returns:
+:returns:
     true if the transformation is a non-zero rotation.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsUniformScale =R"doc( Returns true if the transform is a uniform scale with
 scale factor other than 1.0.
 
-Parameter ``[out]``:
+:param (output):
     fixedPoint (If function result is true) the (one) point which
     remains in place in the transformation.
 
-Parameter ``[out]``:
+:param (output):
     scale The scale factor. If the transform is not a scale, this is
     returned as 1.0.
 
-Returns:
+:returns:
     true if the transformation is a uniform scale.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsTranslate =R"doc( Returns true if the transform is a simple translation.
 
-Parameter ``[out]``:
+:param (output):
     translation the translation vector. Zero of not a translation
     transform.
 
-Returns:
+:returns:
     true if the transformation is a pure translation.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsPlanar =R"doc( Returns true if transformation effects are entirely
 within the plane with given normal.
 
-Parameter ``[in]``:
+:param (input):
     normal The plane normal
 
-Returns:
+:returns:
     true if the transform has no effects perpendicular to planes with
     the given normal.)doc";
 
@@ -318,13 +318,13 @@ the primary axis. This is intended to be used with a crude (e.g.
 modern standards but were meant to be identity, rotation, or scaled
 rotations in the UOR era.
 
-Parameter ``[in]``:
+:param (input):
     dest result
 
-Parameter ``[in]``:
+:param (input):
     primaryAxis axis whose orientation and direction is preserved.
 
-Parameter ``[in]``:
+:param (input):
     tolerance relative tolerance for recognizing near-perpendicular
     conditions.)doc";
 
@@ -332,10 +332,10 @@ static const char * __doc_Bentley_Geom_Transform_IsRigidScale =R"doc( Returns tr
 body rotation, i.e. its transpose is its inverse and it has a positive
 determinant.
 
-Parameter ``[out]``:
+:param (output):
     scale scale factor.
 
-Returns:
+:returns:
     true if the transformation is rigid (no scale or shear in the
     matrix part))doc";
 
@@ -343,40 +343,40 @@ static const char * __doc_Bentley_Geom_Transform_IsRigid =R"doc( Returns true if
 body rotation, i.e. its transpose is its inverse and it has a positive
 determinant.
 
-Returns:
+:returns:
     true if the transformation is rigid (no scale or shear in the
     matrix part))doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsIdentity =R"doc( Returns true if the transform is the identity transform.
 
-Returns:
+:returns:
     true if the transformation is within tolerance of the identity.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_TransformImplicitPlane =R"doc(Transform the a,b,c,d components for an implicit plane. The plane
 equation format is ax+by+cz=d.
 
-Parameter ``[out]``:
+:param (output):
     aOut x coefficient in transformed plane equation
 
-Parameter ``[out]``:
+:param (output):
     bOut y coefficient in transformed plane equation
 
-Parameter ``[out]``:
+:param (output):
     cOut z coefficient in transformed plane equation
 
-Parameter ``[out]``:
+:param (output):
     dOut constant coefficient for equation.
 
-Parameter ``[in]``:
+:param (input):
     a The x coefficient in plane equation
 
-Parameter ``[in]``:
+:param (input):
     b The y coefficient in plane equation
 
-Parameter ``[in]``:
+:param (input):
     c The z coefficient in plane equation
 
-Parameter ``[in]``:
+:param (input):
     d The constant on right hand side of plane equation)doc";
 
 static const char * __doc_Bentley_Geom_Transform_SolveArray =R"doc(Solves the linear systems TX=B, where T is this instance, B is the
@@ -387,16 +387,16 @@ input/output point i, X[i] = Q (B[i] - t), where Q is the inverse of M
 (i.e., the i_th system is equivalent to MX[i] = B[i] - t). inPoint and
 outPoint may have identical addresses.
 
-Parameter ``[out]``:
+:param (output):
     outPoint column points of solution matrix to system
 
-Parameter ``[in]``:
+:param (input):
     inPoint The column points of constant matrix of system
 
-Parameter ``[in]``:
+:param (input):
     numPoints The number of input/output points
 
-Returns:
+:returns:
     false if the matrix part of this instance is singular.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_Solve =R"doc(Solves the linear system Tx=b, where T is this instance, b is the
@@ -406,55 +406,55 @@ x = Q (b - t), where Q is the inverse of M (i.e., the system is
 equivalent to Mx = b - t). inPoint and outPoint may have identical
 addresses.
 
-Parameter ``[out]``:
+:param (output):
     outPoint solution to system
 
-Parameter ``[in]``:
+:param (input):
     inPoint The constant point of the system
 
-Returns:
+:returns:
     false if the matrix part of this instance is singular.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_MultiplyWeighted =R"doc(Multiplies a " weighted point " in place. That is, the point is input
 and output as (wx,wy,wz,w) where x,y,z are the cartesian image
 coordinates.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     point point to be updated
 
-Parameter ``[in]``:
+:param (input):
     weight The weight)doc";
 
 static const char * __doc_Bentley_Geom_Transform_MultiplyTransposeMatrixOnly =R"doc(Multiplies the row vector constructed from components x,y,z times the
 matrix part of this instance. Symbolically, given transform [R t] and
 row vector p, the returned point is p*R.
 
-Parameter ``[out]``:
+:param (output):
     point result of point * matrix operation
 
-Parameter ``[in]``:
+:param (input):
     x The x component of the point
 
-Parameter ``[in]``:
+:param (input):
     y The y component of the point
 
-Parameter ``[in]``:
+:param (input):
     z The z component of the point)doc";
 
 static const char * __doc_Bentley_Geom_Transform_MultiplyMatrixOnly =R"doc(Multiplies the matrix part of this instance times the column vector
 constructed from components x,y,z. Symbolically, given transform [R t]
 and column vector p, the returned point is R*p.
 
-Parameter ``[out]``:
+:param (output):
     point result of matrix * point operation
 
-Parameter ``[in]``:
+:param (input):
     x The x component of the point
 
-Parameter ``[in]``:
+:param (input):
     y The y component of the point
 
-Parameter ``[in]``:
+:param (input):
     z The z component of the point)doc";
 
 static const char * __doc_Bentley_Geom_Transform_MultiplyTranspose =R"doc(Multiplies this instance times each column vector in inPoint, using
@@ -464,19 +464,19 @@ Symbolically, given transform [R t], each returned point has the
 equivalent form p*R + t, where p is a row vector. inPoint and outPoint
 may be the same.
 
-Parameter ``[out]``:
+:param (output):
     outPoint transformed points
 
-Parameter ``[in]``:
+:param (input):
     inPoint The input points
 
-Parameter ``[in]``:
+:param (input):
     numPoint The number of points)doc";
 
 static const char * __doc_Bentley_Geom_Transform_Multiply =R"doc( Multiplies a point by a transform, returning the result
 in place of the input point.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     point point to be updated)doc";
 
 static const char * __doc_Bentley_Geom_Transform_ColumnXMagnitude =R"doc(Return magnitude of X column. This is commonly considered as the scale
@@ -487,57 +487,57 @@ static const char * __doc_Bentley_Geom_Transform_Determinant =R"doc(Return the d
 static const char * __doc_Bentley_Geom_Transform_MaxDiff =R"doc( Returns the largest absolute value difference between
 corresponding coefficients
 
-Parameter ``[in]``:
+:param (input):
     otherTransform
 
-Returns:
+:returns:
     largest absolute difference between the two transforms)doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsEqual =R"doc( Returns true if two transforms have exact (bitwise)
 equality.
 
-Parameter ``[in]``:
+:param (input):
     transform2 The second transform
 
-Returns:
+:returns:
     true if the transforms are identical)doc";
 
 static const char * __doc_Bentley_Geom_Transform_MatrixColumnMagnitude =R"doc(return the magnitude of a column of the matrix.
 
-Parameter ``[in]``:
+:param (input):
     i column index. Adjusted cyclically if outside 012)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetMatrixRow =R"doc( Returns a row from the matrix part of the transformation.
 
-Parameter ``[out]``:
+:param (output):
     row row of matrix part.
 
-Parameter ``[in]``:
+:param (input):
     index column index)doc";
 
 static const char * __doc_Bentley_Geom_Transform_SetMatrixRow =R"doc( Set a column of the matrix part.
 
-Parameter ``[out]``:
+:param (output):
     row row data
 
-Parameter ``[in]``:
+:param (input):
     index column index)doc";
 
 static const char * __doc_Bentley_Geom_Transform_SetMatrixColumn =R"doc( Set a column of the matrix part.
 
-Parameter ``[out]``:
+:param (output):
     column column data
 
-Parameter ``[in]``:
+:param (input):
     index column index)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetMatrixColumn =R"doc( Returns a column from the matrix part of the
 transformation.
 
-Parameter ``[out]``:
+:param (output):
     column column of matrix part.
 
-Parameter ``[in]``:
+:param (input):
     index column index)doc";
 
 static const char * __doc_Bentley_Geom_Transform_SetFixedPoint =R"doc(Sets the translation part of this instance so that it leaves point
@@ -547,7 +547,7 @@ Symbolically, given transform [R t] and column vector p, the returned
 transform is [R p-R*p]. (The prior translation part is destroyed, and
 does not affect the result in any way.)
 
-Parameter ``[in]``:
+:param (input):
     point The point that is to remain fixed when multiplied by the
     modified transformation)doc";
 
@@ -560,12 +560,12 @@ translation part is overwritten, and the matrix part is unchanged.
 Symbolically, if point is u then this instance [R t] becomes the
 transformation [R u].
 
-Parameter ``[in]``:
+:param (input):
     point The vector to insert)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetTranslation =R"doc( Returns the translation (point) part of a transformation.
 
-Parameter ``[out]``:
+:param (output):
     point vector part of transformation)doc";
 
 static const char * __doc_Bentley_Geom_Transform_Translation =R"doc(Return the translation (aka origin) part as a DVec3d.)doc";
@@ -575,7 +575,7 @@ static const char * __doc_Bentley_Geom_Transform_Origin =R"doc(Return the origin
 static const char * __doc_Bentley_Geom_Transform_SetMatrix =R"doc( Overwrites the matrix part of a preexisting
 transformation. The translation part is unchanged.
 
-Parameter ``[in]``:
+:param (input):
     matrix The matrix to insert)doc";
 
 static const char * __doc_Bentley_Geom_Transform_Matrix =R"doc(Return the matrix part)doc";
@@ -584,99 +584,99 @@ static const char * __doc_Bentley_Geom_Transform_Get4Points =R"doc(Sets point0 t
 point3 to the x, y and z points (translations of columns of matrix
 part by origin) from this instance.
 
-Parameter ``[out]``:
+:param (output):
     point0 origin of transform coordinates
 
-Parameter ``[out]``:
+:param (output):
     point1 100 point of transform coordinates
 
-Parameter ``[out]``:
+:param (output):
     point2 010 point of transform coordinates
 
-Parameter ``[out]``:
+:param (output):
     point3 001 point of transform coordinates)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetOriginAndVectors =R"doc(Sets origin to the translation part, and sets vector0, vector1 vector2
 to the columns of this instance.
 
-Parameter ``[out]``:
+:param (output):
     origin origin of transform coordinates
 
-Parameter ``[out]``:
+:param (output):
     vector0 100 vector of transform coordinates
 
-Parameter ``[out]``:
+:param (output):
     vector1 010 vector of transform coordinates
 
-Parameter ``[out]``:
+:param (output):
     vector2 001 vector of transform coordinates)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetPointComponent =R"doc( Returns a value from a specified component of the point
 (translation) part of the transformation.
 
-Parameter ``[in]``:
+:param (input):
     row The index of point component to read. Indices are 0, 1, 2 for
     x, y, z)doc";
 
 static const char * __doc_Bentley_Geom_Transform_GetFromMatrixByRowAndColumn =R"doc( Returns a value from a specified row and column of the
 matrix part of the transformation.
 
-Parameter ``[in]``:
+:param (input):
     row The index of row to read. Row indices are 0, 1, 2.
 
-Parameter ``[in]``:
+:param (input):
     col The index of column to read. Column indices are 0, 1, 2.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitProduct =R"doc( Returns the product of two transformations. Symbolically,
 given transforms [R t] and [S u], return the product transform [R t][S
 u] = [R*S t+R*u].
 
-Parameter ``[in]``:
+:param (input):
     transform1 The first factor
 
-Parameter ``[in]``:
+:param (input):
     transform2 The second factor)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromProduct =R"doc( Returns the product of two transforms.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromProjectionToPlane =R"doc(Initialize a transform that projects to a plane.
 
-Parameter ``[in]``:
+:param (input):
     origin any point on the target plane.
 
-Parameter ``[in]``:
+:param (input):
     normal vector perpendicular to target plane)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromScalePerpendicularToPlane =R"doc(Initialize a transform that scales around a plane
 
-Parameter ``[in]``:
+:param (input):
     origin any point on the target plane
 
-Parameter ``[in]``:
+:param (input):
     normal vector perpendicular to target plane.
 
-Parameter ``[in]``:
+:param (input):
     scale scale factor. (e.g. 0.0 to project onto the plane, -1 to
     mirror))doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromMirrorPlane =R"doc(Initialize a transform that mirrors about a plane.
 
-Parameter ``[in]``:
+:param (input):
     origin any point on the mirror plane.
 
-Parameter ``[in]``:
+:param (input):
     normal vector perpendicular to mirror plane)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromLineAndRotationAngle =R"doc( Returns a transformation of rotation about a specified
 line.
 
-Parameter ``[in]``:
+:param (input):
     point0 The start point of the line
 
-Parameter ``[in]``:
+:param (input):
     point1 The end point of the line
 
-Parameter ``[in]``:
+:param (input):
     radians The rotation angle)doc";
 
 static const char * __doc_Bentley_Geom_Transform_From2Points =R"doc( Returns a transformation in the xy-plane with origin
@@ -684,16 +684,16 @@ origin, axis axisId towards xPoint, and the other axis perpendicular.
 If normalize is false, both axes have length equal to the distance
 between origin and xPoint.
 
-Parameter ``[in]``:
+:param (input):
     origin
 
-Parameter ``[in]``:
+:param (input):
     xPoint The target point of axis axisId of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     axisId The axis (x=0, y=1) that points from origin to xPoint
 
-Parameter ``[in]``:
+:param (input):
     normalize true to have coordinate system normalized)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromPlaneNormalToLine =R"doc( Returns a (possibly skewed) transformation with origin
@@ -701,31 +701,31 @@ origin, the axis axisId towards xPoint, and other axes perpendicular.
 If normalize is false, all axes have length equal to the distance
 between the two origin and xPoint. The axes may be skewed.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xPoint The target point of axis axisId of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     axisId The axis that points from origin to xPoint
 
-Parameter ``[in]``:
+:param (input):
     normalize true to have coordinate system normalized)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromFixedPointAndScaleFactors =R"doc( Returns a transformation with x,y,z scales around a fixed
 point.
 
-Parameter ``[in]``:
+:param (input):
     origin The fixed point.
 
-Parameter ``[in]``:
+:param (input):
     xScale x direction scale factor.
 
-Parameter ``[in]``:
+:param (input):
     yScale y direction scale factor.
 
-Parameter ``[in]``:
+:param (input):
     zScale z direction scale factor.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromPlaneOf3PointsZeroZ =R"doc( Returns a transformation with origin at origin, x-axis
@@ -734,13 +734,13 @@ zeros. All axes are unnormalized. There is no effort to detect zero
 length axes or degenerate points that define only a line or plane but
 not a full plane.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xPoint The 100 point of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 010 point of coordinate system)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromPlaneOf3Points =R"doc( Returns a transformation with origin at origin, x-axis
@@ -749,13 +749,13 @@ to the cross product of x and y axes. All axes are unnormalized. There
 is no effort to detect zero length axes or degenerate points that
 define only a line or plane but not a full coordinate system.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xPoint The 100 point of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 010 point of coordinate system)doc";
 
 static const char * __doc_Bentley_Geom_Transform_From4Points =R"doc( Returns a transformation with origin at origin, x-axis
@@ -764,16 +764,16 @@ origin to zPoint. All axes are unnormalized. There is no effort to
 detect zero length axes or degenerate points that define only a line
 or plane but not a full coordinate system. The axes may be skewed.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     xPoint The 100 point of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 010 point of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     zPoint The 001 point of transformed coordinates)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromOriginAndVectors =R"doc( Returns a transformation with origin at origin, x-axis
@@ -782,16 +782,16 @@ unnormalized. There is no effort to detect zero length axes or
 degenerate points that define only a line or plane but not a full
 coordinate system. The axes may be skewed.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     xVector The 100 point of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     yVector The 010 point of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     zVector The 001 point of transformed coordinates)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromPrincipleAxisRotations =R"doc(Sets this instance to the transformation obtained by premultiplying
@@ -800,52 +800,52 @@ angles xrot, yrot and zrot. inTransform may be the same as this
 instance. Symbolically, given transform M and rotation matrices X,Y,Z,
 the resulting transform is X*Y*Z*M
 
-Parameter ``[in]``:
+:param (input):
     inTransform The base transformation
 
-Parameter ``[in]``:
+:param (input):
     xrot The x axis rotation, in radians
 
-Parameter ``[in]``:
+:param (input):
     yrot The y axis rotation, in radians
 
-Parameter ``[in]``:
+:param (input):
     zrot The z axis rotation, in radians)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromAxisAndRotationAngle =R"doc( Returns a transformation of rotation about a specified
 ray, and also its derivative with respect to the angle.
 
-Parameter ``[in]``:
+:param (input):
     axis axis of rotation
 
-Parameter ``[in]``:
+:param (input):
     radians The rotation angle
 
-Parameter ``derivativeTransform``:
+:param derivativeTransform:
     transform mapping rotated point (anywhere) to direction vector at
     its destination.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromLineAndRotationAngle =R"doc( Returns a transformation of rotation about a specified
 line.
 
-Parameter ``[in]``:
+:param (input):
     point0 The start point of the line
 
-Parameter ``[in]``:
+:param (input):
     point1 The end point of the line
 
-Parameter ``[in]``:
+:param (input):
     radians The rotation angle)doc";
 
 static const char * __doc_Bentley_Geom_Transform_TryRangeMapping =R"doc( Returns a transformation that maps corners of the source
 range to corners of the destination range.
 
-Returns:
+:returns:
     false if either range is null or any direction of the sourceRange
     has zero length.)doc";
 
-static const char * __doc_Bentley_Geom_Transform_InvertRigidBodyTransformation =R"doc(Sets this instance to a matrix which is the inverse of in IN THE
-SPECIAL CASE WHERE in HAS ONLY PURE ROTATION OR MIRRORING IN ITS
+static const char * __doc_Bentley_Geom_Transform_InvertRigidBodyTransformation =R"doc(Sets this instance to a matrix which is the inverse of in (input) THE
+SPECIAL CASE WHERE in HAS ONLY PURE ROTATION OR MIRRORING (input) ITS
 ROTATIONAL PART. These special conditions allow the 'inversion' to be
 done by only a transposition and one matrix-times-point
 multiplication, rather than the full effort of inverting a general
@@ -863,7 +863,7 @@ the tranpose of the input transform's matrix part. Symbolically, given
 transform [R t] return transform [R^ (R^)*(-t)] where ^ indicates
 transposition.
 
-Parameter ``[in]``:
+:param (input):
     in The input transformation (TransformCR))doc";
 
 static const char * __doc_Bentley_Geom_Transform_ValidatedInverse =R"doc(Return the inverse of the instance transform. This is a modestly
@@ -871,34 +871,34 @@ expensive floating point computation (33 multiplies, 14 adds).
 Symbolically, given transform [R t] return transform [Q Q*(-t)] where
 Q is the inverse of matrix R.
 
-Returns:)doc";
+:returns:)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InverseOf =R"doc(Sets this instance to the inverse transform of in. in may be the same
 as this instance. This is a modestly expensive floating point
 computation (33 multiplies, 14 adds). Symbolically, given transform [R
 t] return transform [Q Q*(-t)] where Q is the inverse of matrix R.
 
-Parameter ``[in]``:
+:param (input):
     in The input transformation
 
 Remark:
     This is deprecated. Preferred call is{resutl =
     in.ValidatedInverse ();}
 
-Returns:
+:returns:
     true if transform is invertible)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitUniformScaleApproximation =R"doc( Construct a transform which preserves both a primary
 column directon and a secondary column plane. Scale all columns to
 length of primary axis.
 
-Parameter ``[in]``:
+:param (input):
     transform original matrix.
 
-Parameter ``[in]``:
+:param (input):
     primaryAxis axis to be retained.
 
-Parameter ``[in]``:
+:param (input):
     secondaryAxis axis defining plane to be maintained.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFrom2Points =R"doc( Returns a transformation in the xy-plane with origin
@@ -906,16 +906,16 @@ origin, axis axisId towards xPoint, and the other axis perpendicular.
 If normalize is false, both axes have length equal to the distance
 between origin and xPoint. //! //!
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xPoint The target point of axis axisId of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     axisId The axis (x=0, y=1) that points from origin to xPoint
 
-Parameter ``[in]``:
+:param (input):
     normalize true to have coordinate system normalized)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitNormalizedFrameFromOriginXPointYPoint =R"doc( Attempt to set up a coordinate frame origin at origin,
@@ -923,13 +923,13 @@ x-axis from origin to xPoint, y-axis in plane with yPoint, All axes
 are normalized. Return false with identity at origin if unable to do
 cross products.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xPoint The 100 point of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 010 point of coordinate system)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFrom3Points =R"doc(Sets this instance to a transformation in the xy-plane with origin at
@@ -938,13 +938,13 @@ All axes are unnormalized. There is no effort to detect zero length
 axes or degenerate points that define a line but not a full coordinate
 system. The axes may be skewed.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     xPoint The 10 point of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 01 point of transformed coordinates)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromOriginAndXVector =R"doc(Returns a transform with given origin and xVector. The yVector is a
@@ -961,35 +961,35 @@ origin and x,y-axes of the given lengths rotated counter-clockwise
 from standard position by the given angle. The z-coordinate of the
 origin is zero and the z-axis is unscaled.
 
-Parameter ``[in]``:
+:param (input):
     origin origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xAxisAngleRadians The ccw angle separating x-axis from its
     standard position
 
-Parameter ``[in]``:
+:param (input):
     xAxisLength The length of x-axis
 
-Parameter ``[in]``:
+:param (input):
     yAxisLength The length of y-axis)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromOriginAndLengths =R"doc( Returns a transformation in the xy-plane with origin
 origin and x,y-axes of given lengths. The z-coordinate of the origin
 is zero and the z-axis is unscaled.
 
-Parameter ``[in]``:
+:param (input):
     origin origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xAxisLength The length of x-axis
 
-Parameter ``[in]``:
+:param (input):
     yAxisLength The length of y-axis)doc";
 
 static const char * __doc_Bentley_Geom_Transform_Copy =R"doc( Returns a copy of a transformation.
 
-Parameter ``[in]``:
+:param (input):
     source The source transform)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromPlaneNormalToLine =R"doc( Returns a (possibly skewed) transformation with origin
@@ -997,16 +997,16 @@ origin, the axis axisId towards xPoint, and other axes perpendicular.
 If normalize is false, all axes have length equal to the distance
 between the two origin and xPoint. The axes may be skewed.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xPoint The target point of axis axisId of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     axisId The axis that points from origin to xPoint
 
-Parameter ``[in]``:
+:param (input):
     normalize true to have coordinate system normalized)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromPlaneOf3Points =R"doc( Returns a transformation with origin at origin, x-axis
@@ -1015,13 +1015,13 @@ to the cross product of x and y axes. All axes are unnormalized. There
 is no effort to detect zero length axes or degenerate points that
 define only a line or plane but not a full coordinate system.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     xPoint The 100 point of coordinate system
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 010 point of coordinate system)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFrom4Points =R"doc( Returns a transformation with origin at origin, x-axis
@@ -1030,44 +1030,44 @@ origin to zPoint. All axes are unnormalized. There is no effort to
 detect zero length axes or degenerate points that define only a line
 or plane but not a full coordinate system. The axes may be skewed.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     xPoint The 100 point of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     yPoint The 010 point of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     zPoint The 001 point of transformed coordinates)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromOriginXVectorYVectorSquareAndNormalize =R"doc( Returns a transformation with origin, x axis direction,
 and xy plane All axes are normalized and perpendicular.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     xVector direction for x axis
 
-Parameter ``[in]``:
+:param (input):
     yVector " In plane " direction for y axis. <returns>true if
     SquareAndOrthogonalizeColumns succeeds</returns>)doc";
 
 static const char * __doc_Bentley_Geom_Transform_IsTranslateScaleRotateAroundZ =R"doc(Return true if the transform a combination of only 2 thing:(1) move
 origin, (2) rotate around Z
 
-Parameter ``[out]``:
+:param (output):
     origin origin of frame.
 
-Parameter ``[out]``:
+:param (output):
     rigidAxes unit-length axes.
 
-Parameter ``[out]``:
+:param (output):
     scale scale factor on the original axes.
 
-Parameter ``[out]``:
+:param (output):
     radians positive rotation around Z)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFromOriginAndVectors =R"doc( Returns a transformation with origin at origin, x-axis
@@ -1076,55 +1076,55 @@ unnormalized. There is no effort to detect zero length axes or
 degenerate points that define only a line or plane but not a full
 coordinate system. The axes may be skewed.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     xVector The 100 vector of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     yVector The 010 vector of transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     zVector The 001 vector of transformed coordinates)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromRowValues =R"doc( Returns a transformation copying the double values
 directly into the rows of this instance.
 
-Parameter ``[in]``:
+:param (input):
     x00 The (0,0) entry of the matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x01 The (0,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x02 The (0,2) entry
 
-Parameter ``[in]``:
+:param (input):
     tx The x-coordinate of the translation part
 
-Parameter ``[in]``:
+:param (input):
     x10 The (1,0) entry
 
-Parameter ``[in]``:
+:param (input):
     x11 The (1,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x12 The (1,2) entry
 
-Parameter ``[in]``:
+:param (input):
     ty The y-coordinate of the translation part
 
-Parameter ``[in]``:
+:param (input):
     x20 The (2,0) entry
 
-Parameter ``[in]``:
+:param (input):
     x21 The (2,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x22 The (2,2) entry
 
-Parameter ``[in]``:
+:param (input):
     tz The z-coordinate of the translation part)doc";
 
 static const char * __doc_Bentley_Geom_Transform_FromMatrixAndFixedPoint =R"doc( Returns a transformation with given matrix part, and
@@ -1134,17 +1134,17 @@ itself. The resulting transformation will leave the fixed point
 unchanged and apply whatever effects are contained in the matrix as if
 the fixed point is the origin.
 
-Parameter ``[in]``:
+:param (input):
     matrix The matrix part
 
-Parameter ``[in]``:
+:param (input):
     origin The point that is to remain fixed when multiplied by the
     transformation.)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitFrom =R"doc( Returns a transformation with the given matrix part and a
 zero translation part.
 
-Parameter ``[in]``:
+:param (input):
     matrix The matrix part)doc";
 
 static const char * __doc_Bentley_Geom_Transform_InitIdentity =R"doc( returns an identity transformation, i.e. zero translation
@@ -1153,7 +1153,7 @@ part and identity matrix part.)doc";
 static const char * __doc_Bentley_Geom_Transform_From =R"doc( Returns a transformation with the given matrix part and a
 zero translation part.
 
-Parameter ``[in]``:
+:param (input):
     matrix The matrix part)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -1326,9 +1326,24 @@ void def_Transform(py::module_& m)
            self.Multiply(points.data(), (int) points.size());
            }, "points"_a, DOC(Bentley, Geom, Transform, Multiply));
 
+    c1.def("Multiply", [] (TransformCR self, py::list& points)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           self.Multiply(cppPoints.data(), (int) cppPoints.size());
+           CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+           }, "points"_a, DOC(Bentley, Geom, Transform, Multiply));
+
     c1.def("Multiply", [] (TransformCR self, DPoint3dArray& outPoints, DPoint3dArray const& inPoints)
            {
            self.Multiply(outPoints.data(), inPoints.data(), (int) inPoints.size());
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+
+    c1.def("Multiply", [] (TransformCR self, py::list& outPoints, py::list const& inPoints)
+           {
+           DPoint3dArray cppOutPoints;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+           self.Multiply(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+           CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
 
     c1.def("Multiply", py::overload_cast<DPoint2dR, DPoint2dCR>(&Transform::Multiply, py::const_), "result"_a, "point"_a, DOC(Bentley, Geom, Transform, Multiply));
@@ -1343,6 +1358,13 @@ void def_Transform(py::module_& m)
     c1.def("Multiply", [] (TransformCR self, DPoint3dArray& outPoints, DPoint2dArray const& inPoints)
            {
            self.Multiply(outPoints.data(), inPoints.data(), (int) inPoints.size());
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+
+    c1.def("Multiply", [] (TransformCR self, py::list& outPoints, DPoint2dArray const& inPoints)
+           {
+           DPoint3dArray cppOutPoints;
+           self.Multiply(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
+           CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
 
     c1.def("Multiply", py::overload_cast<DPoint2dR, DPoint3dCR>(&Transform::Multiply, py::const_), "result"_a, "point"_a, DOC(Bentley, Geom, Transform, Multiply));
@@ -1364,9 +1386,24 @@ void def_Transform(py::module_& m)
            self.MultiplyTranspose(outPoints.data(), inPoints.data(), (int) inPoints.size());
            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, MultiplyTranspose));
 
+    c1.def("MultiplyTranspose", [] (TransformCR self, py::list& outPoints, py::list const& inPoints)
+           {
+           DPoint3dArray cppOutPoints;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+           self.MultiplyTranspose(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+           CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, MultiplyTranspose));
+
     c1.def("MultiplyTranspose", [] (TransformCR self, DPoint3dArray& points)
            {
            self.MultiplyTranspose(points.data(), (int) points.size());
+           }, "points"_a, DOC(Bentley, Geom, Transform, MultiplyTranspose));
+
+    c1.def("MultiplyTranspose", [] (TransformCR self, py::list& points)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           self.MultiplyTranspose(cppPoints.data(), (int) cppPoints.size());
+           CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
            }, "points"_a, DOC(Bentley, Geom, Transform, MultiplyTranspose));
 
     c1.def("MultiplyMatrixOnly", py::overload_cast<DPoint3dR, double, double, double>(&Transform::MultiplyMatrixOnly, py::const_), "point"_a, "x"_a, "y"_a, "z"_a, DOC(Bentley, Geom, Transform, MultiplyMatrixOnly));
@@ -1385,9 +1422,25 @@ void def_Transform(py::module_& m)
            py::overload_cast<DPoint3dArray&, DPoint3dArray const&, DoubleArray const*>(&Transform::MultiplyWeighted, py::const_),
            "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
 
+    c1.def("MultiplyWeighted", [] (TransformCR self, py::list& weightedXYZOut, py::list const& weightedXYZIn, DoubleArray const* weights)
+           {
+           DPoint3dArray cppWeightedXYZOut;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZIn, cppWeightedXYZIn, DPoint3dArray, DPoint3d);
+           self.MultiplyWeighted(cppWeightedXYZOut, cppWeightedXYZIn, weights);
+           CONVERT_CPPARRAY_TO_PYLIST(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d);
+           }, "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
+
     c1.def("Solve", &Transform::Solve, "outPoint"_a, "inPoint"_a, DOC(Bentley, Geom, Transform, Solve));
     
     c1.def("SolveArray", py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&Transform::SolveArray, py::const_), "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, Transform, SolveArray));
+
+    c1.def("SolveArray", [] (TransformCR self, py::list& outXYZ, py::list const& inXYZ)
+           {
+           DPoint3dArray cppOutXYZ;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);
+           self.SolveArray(cppOutXYZ, cppInXYZ);
+           CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, Transform, SolveArray));
 
     c1.def("Multiply", py::overload_cast<DRange3dR, DRange3dCR>(&Transform::Multiply, py::const_), "outRange"_a, "inRange"_a, DOC(Bentley, Geom, Transform, Multiply));
     
@@ -1412,9 +1465,29 @@ void def_Transform(py::module_& m)
 
     c1.def("Multiply", py::overload_cast<DPoint4dArray&, DPoint4dArray const&>(&Transform::Multiply, py::const_), "xyzwOut"_a, "xyzwIn"_a, DOC(Bentley, Geom, Transform, Multiply));
     c1.def("Multiply", py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&Transform::Multiply, py::const_), "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, Transform, Multiply));
+    c1.def("Multiply", [](TransformCR self, py::list &outXYZ, py::list const &inXYZ)
+           {
+           DPoint3dArray cppOutXYZ;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);
+           self.Multiply(cppOutXYZ, cppInXYZ);
+           CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d); 
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, Transform, Multiply));
     c1.def("Multiply", py::overload_cast<DPoint2dArray&, DPoint2dArray const&>(&Transform::Multiply, py::const_), "xyOut"_a, "xyIn"_a, DOC(Bentley, Geom, Transform, Multiply));
     c1.def("Multiply", py::overload_cast<DPoint3dArray&, DPoint2dArray const&>(&Transform::Multiply, py::const_), "xyzOut"_a, "xyIn"_a, DOC(Bentley, Geom, Transform, Multiply));
+    c1.def("Multiply", [] (TransformCR self, py::list& outXYZ, DPoint2dArray const& inXY)
+           {
+           DPoint3dArray cppOutXYZ;
+           self.Multiply(cppOutXYZ, inXY); 
+           CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           }, "outXYZ"_a, "inXY"_a, DOC(Bentley, Geom, Transform, Multiply));
+    
     c1.def("Multiply", py::overload_cast<DPoint2dArray&, DPoint3dArray const&>(&Transform::Multiply, py::const_), "xyOut"_a, "xyzIn"_a, DOC(Bentley, Geom, Transform, Multiply));
+
+    c1.def("Multiply", [] (TransformCR self, DPoint2dArray& outXY, py::list const& inXYZ)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);
+           self.Multiply(outXY, cppInXYZ);
+           }, "outXY"_a, "inXYZ"_a, DOC(Bentley, Geom, Transform, Multiply));
 
     c1.def("IsIdentity", &Transform::IsIdentity, DOC(Bentley, Geom, Transform, IsIdentity));
     c1.def("IsRigid", &Transform::IsRigid, DOC(Bentley, Geom, Transform, IsRigid));

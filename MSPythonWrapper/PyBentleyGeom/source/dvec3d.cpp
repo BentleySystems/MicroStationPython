@@ -23,57 +23,57 @@ absolute and relative tolerance. points are equal if squared distance
 between is less than (squared abstol) plus (squared relTol) * sum of
 cmponent squares
 
-Parameter ``[in]``:
+:param (input):
     dataB second DVec3d
 
-Returns:
+:returns:
     true if within tolerance.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_IsEqual =R"doc( Test for exact equality between all components of two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     true if the vectors are identical.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_IsPerpendicularTo =R"doc( Tests if two vectors are perpendicular.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     true if vectors are perpendicular within tolerance)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_IsPositiveParallelTo =R"doc( Tests if two vectors are parallel and have positive dot
 product (opposites are NOT considered parallel)
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     true if the vectors are parallel within tolerance)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_IsParallelTo =R"doc( Tests if two vectors are parallel (opposites are
 considered parallel!)
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     true if the vectors are parallel within tolerance)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_IsVectorInCCWXYSector =R"doc( Test if the instance vector vector is " between " vector0
 and vector1, with CCW direction using only xy parts.
 
-Parameter ``[in]``:
+:param (input):
     vector0 The boundary vector.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The boundary vector.
 
-Returns:
+:returns:
     true if test vector is within the angle.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_IsVectorInCCWSector =R"doc( Test if the test vector vector is " between " vector0 and
@@ -81,16 +81,16 @@ vector1, with CCW direction resolved by an up vector. The cross
 product of vector0 and vector1 is considered the positive plane normal
 if its dot product with the up vector is positive.
 
-Parameter ``[in]``:
+:param (input):
     vector0 The boundary vector.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The boundary vector.
 
-Parameter ``[in]``:
+:param (input):
     upVector The out of plane vector.
 
-Returns:
+:returns:
     true if test vector is within the angle.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_IsVectorInSmallerSector =R"doc( Test a vector is " between " vector0 and vector1. If the
@@ -108,40 +108,40 @@ tolerances will cause " nearby " cases to be unpredictable. It is
 assumed that if the caller considers the " parallel " cases important
 they will be checked explicitly.
 
-Parameter ``[in]``:
+:param (input):
     vector0 The first boundary vector.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The second boundary vector.
 
-Returns:
+:returns:
     true if the test vector is within the angle.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_AngleAndAxisOfRotationFromVectorToVector =R"doc(Compute an axis and angle to rotate from the instance vector to a
 target.
 
-Parameter ``[out]``:
+:param (output):
     target direction that the instance is to rotate towards.
 
-Parameter ``[out]``:
+:param (output):
     axis returned axis of rotation
 
-Parameter ``[out]``:
+:param (output):
     radians returned rotation angle
 
-Returns:
+:returns:
     true if both vectors are nonzero.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_PlanarAngleTo =R"doc( Computes the signed angle between the projection of two
 vectors onto a plane with given normal.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Parameter ``[in]``:
+:param (input):
     planeNormal The plane normal vector
 
-Returns:
+:returns:
     The angle in plane)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_SignedAngleTo =R"doc( Computes the signed angle from one vector to another, in
@@ -151,13 +151,13 @@ plane of the vectors is viewed. To choose which side to view, go on
 the side whose normal has a positive dot product with the orientation
 vector. This angle can be between -pi and +pi.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Parameter ``[in]``:
+:param (input):
     orientationVector The vector used to determine orientation.
 
-Returns:
+:returns:
     The signed angle)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_AngleFromPerpendicular =R"doc( Returns the angle that two vectors deviate from being
@@ -167,82 +167,82 @@ static const char * __doc_Bentley_Geom_DVec3d_SmallerUnorientedAngleToXY =R"doc(
 the vectors and their negations and choosing the smaller. This angle
 is between 0 and pi/2.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The angle between vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_SmallerUnorientedAngleTo =R"doc( Returns the angle between two vectors, choosing the
 smaller of the two possible angles when both the vectors and their
 negations are considered. This angle is between 0 and pi/2.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The angle between the vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_AngleToXY =R"doc( Returns the angle from Vector1 to Vector2 using only xy
 parts. This angle is between -pi and +pi.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The angle between vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_AngleTo =R"doc( Returns the angle between two vectors. This angle is
 between 0 and pi. Rotating the first vector by this angle around the
 cross product between the vectors aligns it with the second vector.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The angle between the vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_GetPerpendicularParts =R"doc(Decompose hypotenuse into a vector parallel to the instance and a
 vector perpendicular to the instance.
 
-Parameter ``[in]``:
+:param (input):
     hypotenuse vector to decompose
 
-Parameter ``[out]``:
+:param (output):
     fraction position where hypotenuse projects onto the instance.
 
-Parameter ``[out]``:
+:param (output):
     parallelPart vector parallel to the instance
 
-Parameter ``[out]``:
+:param (output):
     perpendicularPart vector perpendicular to the instance)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_ProjectToPlane =R"doc(Find the projection of the instance vector to a plane defined by two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     vectorU u-direction vector of the plane.
 
-Parameter ``[in]``:
+:param (input):
     vectorV v-direction vector of the plane.
 
-Parameter ``[out]``:
+:param (output):
     uv fractional coordinates on vectors.
 
-Returns:
+:returns:
     false if plane vectors are not independent. In this case the
     method attempts to project to the longer plane vector, and sets
     the other fraction to 0. If that fails uv is 00.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_ProjectToVector =R"doc(Find the fraction at which the instance projects to a vector.
 
-Parameter ``[in]``:
+:param (input):
     targetVector target vector.
 
-Parameter ``[out]``:
+:param (output):
     fraction projection fraction
 
-Returns:
+:returns:
     false if targetVector has zero length. In this case the fraction
     is zero.)doc";
 
@@ -251,16 +251,16 @@ perpendicular unit vectors with the third (Z) vector in the direction
 of the given axis vector. If the given axis vector contains only
 zeros, a (0,0,1) vector is used instead.
 
-Parameter ``[out]``:
+:param (output):
     xAxis unit x direction vector
 
-Parameter ``[out]``:
+:param (output):
     yAxis unit y direction vector
 
-Parameter ``[out]``:
+:param (output):
     zAxis unit z direction vector
 
-Returns:
+:returns:
     true unless given vector has zero length.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_GetTriad =R"doc( Sets three vectors so that they are mutually
@@ -268,102 +268,102 @@ perpendicular, the third (Z) vector is identical to the given axis
 vector, and all have the same length. If the given axis vector
 contains only zeros, a (0,0,1) vector is used instead.
 
-Parameter ``[out]``:
+:param (output):
     xAxis x direction of the coordinate system
 
-Parameter ``[out]``:
+:param (output):
     yAxis y direction of the coordinate system
 
-Parameter ``[out]``:
+:param (output):
     zAxis z direction of the coordinate system
 
-Returns:
+:returns:
     true unless given vector is z zero vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_GetComponent =R"doc( Gets a single component of a vector. If the index is out
 of range 0,1,2, it is interpreted cyclically.
 
-Parameter ``[in]``:
+:param (input):
     index Indicates which component is accessed. The values are 0=x,
     1=y, 2=z. Other values are treated cyclically.
 
-Returns:
+:returns:
     The specified component of the vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_SetComponent =R"doc( Set one of three components (x,y,z) of the vector.
 
-Parameter ``[in]``:
+:param (input):
     a The component value.
 
-Parameter ``[in]``:
+:param (input):
     index Selects the the axis:0=x, 1=y, 2=z, others cyclic.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_CrossProductXY =R"doc( Return the (scalar) cross product of the xy parts of two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The 2d cross product.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_CrossProductMagnitude =R"doc(Compute the cross product with other and return is magnitude (but the
 cross product is not returned)
 
-Parameter ``[in]``:
+:param (input):
     other second vector of cross product)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DistanceXY =R"doc( Computes the distance between two vectors, using only x
 and y components.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The distance between the XY projections of the two vectors. (i.e.
     any z difference is ignored))doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DistanceSquaredXY =R"doc( Computes the squared distance between two vectors, using
 only the xy parts.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The squared distance between the XY projections of the two
     vectors. (i.e. any z difference is ignored))doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DistanceSquared =R"doc( Computes the squared distance between two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector.
 
-Returns:
+:returns:
     The squared distance between the vectors.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_Distance =R"doc( Computes the (cartesian) distance between two vectors
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The distance between vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_MaxAbs =R"doc( Finds the largest absolute value among the components of
 a vector.
 
-Returns:
+:returns:
     The largest absolute value among vector coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_MagnitudeSquaredXY =R"doc( Computes the squared magnitude of the xy part of a
 vector.
 
-Returns:
+:returns:
     The squared magnitude of the xy parts of the given vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_MagnitudeXY =R"doc( Computes the magnitude of the xy part of a vector.
 
-Returns:
+:returns:
     The magnitude of the xy parts of the given vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_ValidatedFractionOfProjection =R"doc( Returns fraction at which other projects onto this, in
@@ -374,12 +374,12 @@ default if squared magnitude is too small.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_MagnitudeSquared =R"doc( Computes the squared magnitude of a vector.
 
-Returns:
+:returns:
     The squared magnitude of the vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_Magnitude =R"doc( Computes the magnitude of a vector.
 
-Returns:
+:returns:
     The length of the vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_TripleProduct =R"doc( Computes the triple product of three vectors. The
@@ -393,244 +393,244 @@ rows. <LI>The (signed)volume of the parallelepiped whose 4 vertices
 are at the origin and at the ends of the 3 vectors placed at the
 origin. </UL>
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector.
 
-Parameter ``[in]``:
+:param (input):
     vector3 The third vector.
 
-Returns:
+:returns:
     The triple product)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DotProductMatrixColumn =R"doc(Returns the (scalar) dot product of this vector and a column of the
 matrix part of the transform.
 
-Parameter ``[in]``:
+:param (input):
     matrix
 
-Parameter ``[in]``:
+:param (input):
     index column index.
 
-Returns:
+:returns:
     The dot product of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DotProductMatrixRow =R"doc(Returns the (scalar) dot product of this vector and a row of the
 matrix part of the transform.
 
-Parameter ``[in]``:
+:param (input):
     matrix
 
-Parameter ``[in]``:
+:param (input):
     index row index.
 
-Returns:
+:returns:
     The dot product of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DotProductColumn =R"doc( Returns the (scalar) dot product of this vector and a
 column of a matrix.
 
-Parameter ``[in]``:
+:param (input):
     matrix
 
-Parameter ``[in]``:
+:param (input):
     index column index.
 
-Returns:
+:returns:
     The dot product of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DotProductRow =R"doc(Returns the (scalar) dot product of this vector and a row of a matrix.
 
-Parameter ``[in]``:
+:param (input):
     matrix
 
-Parameter ``[in]``:
+:param (input):
     index row index.
 
-Returns:
+:returns:
     The dot product of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DotProductXY =R"doc( Returns the (scalar) dot product of xy parts of two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The dot product of the xy parts of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DotProduct =R"doc( Returns the (scalar) dot product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The dot product of the two vectors)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_WeightedDifferenceCrossProduct =R"doc( Form the cross product of the weighted differences from
 base poitn to two targets
 
-Parameter ``[in]``:
+:param (input):
     basePoint The common base point (second point for differences)
 
-Parameter ``[in]``:
+:param (input):
     target1 The first target point.
 
-Parameter ``[in]``:
+:param (input):
     target2 The second target point.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_WeightedDifferenceOf =R"doc( Scale each (homogeneous) point by the other's weight and
 subtract, i.e. form (point1 * point2.w - point2 * point1.w). The
 weight term vanishes. Copy the xyz parts back as a vector.
 
-Parameter ``[in]``:
+:param (input):
     hPoint1 The first homogeneous point
 
-Parameter ``[in]``:
+:param (input):
     hPoint2 The second homogeneous point.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_Negate =R"doc( Computes a negated (opposite) vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be negated.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_SafeDivide =R"doc( Try to divide each component of a vector by a scalar. If
 the denominator near zero compared to any numerator component, return
 the original vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The initial vector.
 
-Parameter ``[in]``:
+:param (input):
     denominator The divisor.
 
-Returns:
+:returns:
     true if division is numerically safe.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_Scale =R"doc( Multiplies a vector by a scale factor.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be scaled.
 
-Parameter ``[in]``:
+:param (input):
     scale The scale factor.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromScale =R"doc( Returns a scalar multiple of a DVec3d
 
-Parameter ``[in]``:
+:param (input):
     vector input vector
 
-Parameter ``[in]``:
+:param (input):
     scale scale factor)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_Add =R"doc( Adds a vector to a pointer or vector, returns the result
 in place.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to add.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_SumOf =R"doc( Compute the sum of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The the first vector
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromInterpolateBilinear =R"doc( Returns a bilinear interpolation from corners
 (00)(10)(01)(11)
 
-Parameter ``[in]``:
+:param (input):
     vector00 vector at (0,0)
 
-Parameter ``[in]``:
+:param (input):
     vector10 vector at (1,0)
 
-Parameter ``[in]``:
+:param (input):
     vector01 vector at (0,1)
 
-Parameter ``[in]``:
+:param (input):
     vector11 vector at (1,1)
 
-Parameter ``[in]``:
+:param (input):
     u interpolation fraction for edges (vector00,vector10) and
     (vector01,vector11)
 
-Parameter ``[in]``:
+:param (input):
     v interpolation fraction for edges (vector00,vector10) and
     (vector10,vector11))doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_Interpolate =R"doc( Computes a vector whose position is given by a fractional
 argument and two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector0 The vector corresponding to fractionParameter of 0.
 
-Parameter ``[in]``:
+:param (input):
     fractionParameter The fractional parametric coordinate. 0.0 is the
     start of the segment, 1.0 is the end, 0.5 is middle
 
-Parameter ``[in]``:
+:param (input):
     vector1 The vector corresponding to fractionParameter of 1.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromInterpolate =R"doc( Returns an interpolated vector.
 
-Parameter ``[in]``:
+:param (input):
     vector0 vector at fraction 0
 
-Parameter ``[in]``:
+:param (input):
     fraction fraction from interpolation.
 
-Parameter ``[in]``:
+:param (input):
     vector1 vector at fraction 1)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromUnitPerpendicularXY =R"doc( Compute a unit vector perpendicular to the xy parts of
 given vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The source vector
 
-Returns:
+:returns:
     perpendicular vector, marked invalid if unable to divide.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_UnitPerpendicularXY =R"doc( Compute a unit vector perpendicular to the xy parts of
 given vector.
 
-Parameter ``[in]``:
+:param (input):
     vector The source vector
 
-Returns:
+:returns:
     true if the input vector has nonzero length)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_RotateXY =R"doc( Rotate a vector around the z axis.
 
-Parameter ``[in]``:
+:param (input):
     vector vector to rotate.
 
-Parameter ``[in]``:
+:param (input):
     theta The rotation angle.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromColumnCrossProduct =R"doc( return the cross product of vectors found in columns a
 matrix
 
-Parameter ``[in]``:
+:param (input):
     matrix source transform
 
-Parameter ``[in]``:
+:param (input):
     i first column index
 
-Parameter ``[in]``:
+:param (input):
     j second column index)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromMatrixColumnCrossProduct =R"doc( return the cross product of vectors found in columns of
 (the matrix part of) a transform.
 
-Parameter ``[in]``:
+:param (input):
     transform source transform
 
-Parameter ``[in]``:
+:param (input):
     i first column index
 
-Parameter ``[in]``:
+:param (input):
     j second column index)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_GeometricMeanCrossProduct =R"doc( Computes the cross product of two vectors and scales it
@@ -639,13 +639,13 @@ useful because it has the direction of the cross product (i.e. normal
 to the plane of the two vectors) and a size in between the two
 vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The The length of unscaled cross product.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_SizedCrossProduct =R"doc( Computes the cross product of the two parameter vectors
@@ -653,177 +653,177 @@ and scales it to a given length. The scaled vector is stored as the
 product vector, and the length of the original cross product vector is
 returned.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Parameter ``[in]``:
+:param (input):
     productLength The Desired length
 
-Returns:
+:returns:
     The The length of unscaled cross product.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_NormalizedCrossProduct =R"doc( Compute the normalized cross product of two vectors and
 return the length of the unnormalized cross product.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector
 
-Returns:
+:returns:
     The length of the original (prenormalization) cross product vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromNormalizedCrossProduct =R"doc( return the normalized cross product of vectors
 
-Parameter ``[in]``:
+:param (input):
     vector0 first vector
 
-Parameter ``[in]``:
+:param (input):
     vector1 second vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromNormalizedCrossProductToPoints =R"doc( Returns the (normalized vector) cross product of two
 vectors. The vectors are computed from the Origin to Target1 and
 Target2. If the cross product is zero, a zero vector is returned.
 
-Parameter ``[in]``:
+:param (input):
     origin The base point for computing vectors.
 
-Parameter ``[in]``:
+:param (input):
     target1 The target point for the first vector.
 
-Parameter ``[in]``:
+:param (input):
     target2 The target point for the second vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromCrossProductToPoints =R"doc( Returns the (vector) cross product of two vectors. The
 vectors are computed from the Origin to Target1 and Target2.
 
-Parameter ``[in]``:
+:param (input):
     origin The base point for computing vectors.
 
-Parameter ``[in]``:
+:param (input):
     target1 The target point for the first vector.
 
-Parameter ``[in]``:
+:param (input):
     target2 The target point for the second vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_CrossProductToPoints =R"doc( Sets the instance to the (vector) cross product of two
 vectors. The vectors are computed from the Origin to Target1 and
 Target2.
 
-Parameter ``[in]``:
+:param (input):
     origin The base point for computing vectors.
 
-Parameter ``[in]``:
+:param (input):
     target1 The target point for the first vector.
 
-Parameter ``[in]``:
+:param (input):
     target2 The target point for the second vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_CrossProduct =R"doc( Returns the (vector) cross product of two vectors.
 
-Parameter ``[in]``:
+:param (input):
     vector1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromCrossProduct =R"doc( return the cross product of vectors
 
-Parameter ``[in]``:
+:param (input):
     vector0 first vector
 
-Parameter ``[in]``:
+:param (input):
     vector1 second vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_XyzOf =R"doc( Sets the x,y, and z components of a DVec3d structure from
 the corresponding parts of a DPoint4d. Weight part of DPoint4d is not
 used.
 
-Parameter ``[in]``:
+:param (input):
     hPoint The homogeneous point)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_MultiplyTranspose =R"doc( Returns the product of a matrix transpose times a vector.
 
-Parameter ``[in]``:
+:param (input):
     matrix The the matrix.
 
-Parameter ``[in]``:
+:param (input):
     vector The known vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_Multiply =R"doc( Returns the product of a matrix times a vector.
 
-Parameter ``[in]``:
+:param (input):
     matrix The matrix.
 
-Parameter ``[in]``:
+:param (input):
     vector The known vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromRow =R"doc( return a (cyclically indexed) row of the matrix.
 
-Parameter ``[in]``:
+:param (input):
     matrix source
 
-Parameter ``[in]``:
+:param (input):
     i row index)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromColumn =R"doc( return a (cyclically indexed) column of the matrix.
 
-Parameter ``[in]``:
+:param (input):
     matrix source
 
-Parameter ``[in]``:
+:param (input):
     i column index)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromMatrixRow =R"doc( return a (cyclically indexed) row of the matrix part of a
 transform.
 
-Parameter ``[in]``:
+:param (input):
     transform source transform
 
-Parameter ``[in]``:
+:param (input):
     i row index)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromMatrixColumn =R"doc( return a (cyclically indexed) column of the matrix part
 of a transform.
 
-Parameter ``[in]``:
+:param (input):
     transform source transform
 
-Parameter ``[in]``:
+:param (input):
     i column index)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromTranslation =R"doc( return the translation xyz as a DVec3d (which you can
 pass as a DPoint3d where needed.)
 
-Parameter ``[in]``:
+:param (input):
     source source transform)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromXYAngleAndMagnitude =R"doc( Returns a DVec3d from given angle and distance in xy
 plane. Z part is set to zero.
 
-Parameter ``[in]``:
+:param (input):
     theta Angle from X axis to the vector, in the xy plane.
 
-Parameter ``[in]``:
+:param (input):
     magnitude Vector magnitude)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_Subtract =R"doc( Subtract two vectors, and return the result in place of
 the first.
 
-Parameter ``[in]``:
+:param (input):
     vector2 The vector to subtract.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_DifferenceOf =R"doc( Subtract coordinates of two vectors. (Compute Vector1 -
 Vector2)
 
-Parameter ``[in]``:
+:param (input):
     vector1 The first vector
 
-Parameter ``[in]``:
+:param (input):
     vector2 The second (subtracted) vector)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_NormalizedDifference =R"doc( Computes a unit vector in the direction of the difference
@@ -834,13 +834,13 @@ Remark:
     In the 0-length error case, the vector is set to (1,0,0) in the
     legacy microstation style.
 
-Parameter ``[in]``:
+:param (input):
     target The target point.
 
-Parameter ``[in]``:
+:param (input):
     origin The origin point.
 
-Returns:
+:returns:
     The length of original difference vector.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_ScaleToLength =R"doc( Scales a vector to specified length.
@@ -849,13 +849,13 @@ Remark:
     In the 0-length error case, the vector is set to (1,0,0) in the
     legacy microstation style.
 
-Parameter ``[in]``:
+:param (input):
     vector The original vector.
 
-Parameter ``[in]``:
+:param (input):
     length The requested length.
 
-Returns:
+:returns:
     The length prior to scaling.)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_ValidatedNormalize =R"doc( return a (possibly invalid) unit vector in the direction
@@ -868,13 +868,13 @@ Remark:
     In the 0-length error case, the vector is set to (1,0,0) in the
     legacy microstation style.
 
-Parameter ``[in]``:
+:param (input):
     source The vector to be normalized.
 
-Parameter ``[out]``:
+:param (output):
     magnitude The orignal magnitude of the source vector;
 
-Returns:
+:returns:
     true if the other vector length is large enough for
     DoubleOps::SafeDivide to compute 1/length.)doc";
 
@@ -884,10 +884,10 @@ Remark:
     In the 0-length error case, the vector is set to (1,0,0) in the
     legacy microstation style.
 
-Parameter ``[in]``:
+:param (input):
     vector The vector to be normalized.
 
-Returns:
+:returns:
     The length prior to normalization)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_FromRotateVectorAroundVector =R"doc( return a vector same length as source but rotated by
@@ -905,10 +905,10 @@ degrees CCW)doc";
 static const char * __doc_Bentley_Geom_DVec3d_FromStartEndNormalize =R"doc( Returns a vector from start towards end, normalized if
 nonzero.
 
-Parameter ``[in]``:
+:param (input):
     start start point
 
-Parameter ``[in]``:
+:param (input):
     end end point)doc";
 
 static const char * __doc_Bentley_Geom_DVec3d_UnitZ =R"doc( unit Z vector)doc";

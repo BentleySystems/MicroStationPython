@@ -1,11 +1,6 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
-import debugpy
 import sys
 
 from MSPyBentley import *
@@ -13,11 +8,17 @@ from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 
+'''
+Sample demonstrating how to export Schema files of active dgn file to a txt file
+'''
 
-'''
-Function to get list of schemas stored in
-'''
 def GetStoredSchemaList():
+    """
+    Get a list of schemas stored in the current DGN model and its reachable models.
+
+    :returns: List of schemas stored in the current DGN model and its reachable models.
+    :rtype: list
+    """
     #list to collect schema names
     schemaList = list()
     #Get dgnEC manager instance
@@ -39,7 +40,7 @@ def GetStoredSchemaList():
 
         #discover schemas
         infos = SchemaInfoArray()
-        mgr.DiscoverSchemas(infos, dgnFile)        
+        mgr.DiscoverSchemas(infos, dgnFile, ECSchemaPersistence.eECSCHEMAPERSISTENCE_Stored, DgnECHostType.eAll)        
         infoContainer = SchemaInfoArray()
         for info in infos:
             infoContainer.append(info)
@@ -59,10 +60,17 @@ def GetStoredSchemaList():
             schemaList.append(ecSchema)
     #return schemaList
     return schemaList
-'''
-Function to list Schemas of active dgn file to a txt file
-'''
+
 def ListSchema ():
+    """
+    List schemas of the active DGN file to a text file.
+
+    This function retrieves the list of schemas stored in the current DGN model and its reachable models.
+    It then writes the names of these schemas to a text file named 'listschema.txt' in the current working directory.
+    If no schemas are found, an informational message is displayed.
+
+    :returns: None
+    """
     print ('BEGIN: ListSchema() function called \n')
     #get list of stored schemas
     schemaList = GetStoredSchemaList()
@@ -80,12 +88,20 @@ def ListSchema ():
     msgShort = f'Found {len(schemaList)} schems in dgn'
     msgLong = f'Schema list: {filePath}'
     MessageCenter.ShowInfoMessage (msgShort, msgLong, False)
-        
-'''
-Function to export Schema files of active dgn file to current folder
-'''
-def ExportSchema ():
 
+    print ('End: ListSchema() function called \n')
+        
+def ExportSchema ():
+    """
+    Export schema files of the active DGN file to the current folder.
+
+    This function retrieves the list of schemas stored in the current DGN model and its reachable models.
+    It then exports these schemas to XML files in a folder named 'ECSchema' in the current working directory.
+    If a schema name is provided as a command-line argument, only that schema is exported.
+    If no schemas are found, an informational message is displayed.
+
+    :returns: None
+    """
     print ('BEGIN: ExportSchema() function called \n')
     #get stored schema list
     schemaList = GetStoredSchemaList()
@@ -133,6 +149,8 @@ def ExportSchema ():
         msgLong = f'Exported {len(expSchemaNames)} schemas at {currentPath}'
 
     MessageCenter.ShowInfoMessage (msgShort, msgLong, False)
+
+    print ('END: ExportSchema() function called \n')
 
 if __name__ == "__main__":
     keyinXml = os.path.dirname(__file__) + '/ECXSchema.commands.xml'

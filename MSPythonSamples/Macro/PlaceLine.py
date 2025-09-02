@@ -1,10 +1,5 @@
-# -*- coding: utf-8 -*-
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
 import math
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -12,9 +7,11 @@ from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 
-# This sample demos how to invoke the command by keyin. (Used: SendKeyin, SendDataPoint, SendReset)
-# 1. Invoke "Place Line" Command.
-# 2. Input 2 points.
+'''
+This sample demos how to invoke the command by keyin. (Used: SendKeyin, SendDataPoint, SendReset)
+1. Invoke "Place Line" Command.
+2. Input 2 points.
+'''
 
 #PyCadInputQueue.SendKeyin ("Place Line")
 

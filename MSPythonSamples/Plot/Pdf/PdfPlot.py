@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import math
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -12,9 +8,25 @@ from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 
 '''
-print the currently loaded design file independent of the MicroStation print dialog application.
+Example demonstrating how to print the currently loaded design file independent of the MicroStation print dialog application.
 '''
 def PrintToPDF():
+       """
+       Generates a PDF file from the current MicroStation environment.
+       This function initializes the print description to use the PDF printer driver
+       configuration, maximizes the print size to the currently selected paper size,
+       and creates a PDF file in the local temporary directory.
+       Steps:
+       1. Create a print description instance.
+       2. Initialize the print description with the PDF printer driver configuration.
+       3. Maximize the print size.
+       4. Create the PDF save path.
+       5. Delete any existing file with the same name.
+       6. Create the PDF file.
+       7. Print the file path of the generated PDF.
+       
+       :raises Exception: If there is an error during the PDF generation process.
+       """
        # Create a print description instance.
        printref = PrintDescriptionRef.Create()
        printDesc = printref.GetP()

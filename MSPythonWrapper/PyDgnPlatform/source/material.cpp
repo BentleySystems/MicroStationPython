@@ -13,34 +13,34 @@
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_HasInternalMaterials =R"doc(Returns if the file contains an internal material table with at least
 one material in it
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The file to look for internal materials in)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_CopyGeometryMapSharedCellDefs =R"doc(Copy the shared cell definitions associated with geometry maps between
 files
 
-Parameter ``destModelRef``:
+:param destModelRef:
     The destination model for the geometry map shared cells
 
-Parameter ``sourceModelRef``:
+:param sourceModelRef:
     The source model of the materials
 
-Returns:
+:returns:
     ERROR if the input arguments are invalid)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_GetProjectionGroupParameters =R"doc(Get the projection data associated with a projection NamedGroup
 
-Parameter ``origin``:
+:param origin:
     The origin of the projection in UORS
 
-Parameter ``size``:
+:param size:
     The size of the projection in UORS
 
-Parameter ``angles``:
+:param angles:
     The rotation applied to the projection
 
 
-Parameter ``group``:
+:param group:
     The named group representing the projection
 
 Returns (Tuple, 0):
@@ -58,25 +58,25 @@ Returns (Tuple, 2):
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_ModifyProjectionGroup =R"doc(Modify the projection data associated with a projection NamedGroup
 
-Parameter ``origin``:
+:param origin:
     The origin of the projection in UORS
 
-Parameter ``size``:
+:param size:
     The size of the projection in UORS
 
-Parameter ``angles``:
+:param angles:
     The rotation applied to the projection
 
-Parameter ``mode``:
+:param mode:
     The projection mode to be used
 
-Parameter ``variant``:
+:param variant:
     Any variation to the projection data
 
-Parameter ``group``:
+:param group:
     The named group representing the projection
 
-Returns:
+:returns:
     SUCCESS if the projection group data was modified)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_CreateProjectionGroup =R"doc(Create a Group based projection where a single projection is applied
@@ -84,78 +84,78 @@ to a set of elements. The method will create a NamedGroup with the
 supplied name and associate it with the element agenda passed in
 attaching the projection data to the NamedGroup
 
-Parameter ``origin``:
+:param origin:
     The origin of the projection in UORS
 
-Parameter ``size``:
+:param size:
     The size of the projection in UORS
 
-Parameter ``angles``:
+:param angles:
     The rotation applied to the projection
 
-Parameter ``mode``:
+:param mode:
     The projection mode to be used
 
-Parameter ``variant``:
+:param variant:
     Any variation to the projection data
 
-Parameter ``agenda``:
+:param agenda:
     The elements contained in the projection
 
-Parameter ``name``:
+:param name:
     The name of the projection
 
-Parameter ``modelRef``:
+:param modelRef:
     The model the projection NamedGroup is to be applied to
 
-Returns:
+:returns:
     SUCCESS if the projection group was created)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_GetProjectionParametersFromMaterial =R"doc(Get the projection parameters for an element when a material based
 projection is applied to the element
 
-Parameter ``eh``:
+:param eh:
     The element to calculate the projection data for
 
-Parameter ``material``:
+:param material:
     The material to extract the projection information from
 
-Parameter ``map``:
+:param map:
     The map used for the projection
 
-Parameter ``layer``:
+:param layer:
     The layer used for the projection
 
-Parameter ``params``:
+:param params:
     The calculated projection parameters
 
-Returns:
+:returns:
     SUCCESS if the projection parameters could be calculated)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_RevertMaterial =R"doc(Revert a material to its file state. This method only returns a
 changed material for material palettes which require a call to
 #FlushPalette in order to write the materials to file.
 
-Parameter ``materialId``:
+:param materialId:
     The id of the material to revert
 
-Parameter ``palette``:
+:param palette:
     The palette containing the material
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_SaveInternalPaletteAsExternal =R"doc(Save the materials in an internal palette as an external palette. This
 does not modify any materials or attachments.
 
-Parameter ``internalPalette``:
+:param internalPalette:
     internal palette to copy materials out of
 
-Parameter ``externalFileName``:
+:param externalFileName:
     external .pal file name to save materials into
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     modelref containing internal mateirals)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_ConvertInternalTableAndPalettesToExternal =R"doc(Convert an internal material table and all its palettes to an external
@@ -163,16 +163,16 @@ table using a single palette. This method will also convert all the
 elements which have internal material id linkages on them to be of the
 external type
 
-Parameter ``internalTable``:
+:param internalTable:
     The internal table to convert
 
-Parameter ``externalTableName``:
+:param externalTableName:
     The full path to the external (.mat) table
 
-Parameter ``paletteOutputFolder``:
+:param paletteOutputFolder:
     The folder where to put the generated .pal files
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.)doc";
 
@@ -181,35 +181,35 @@ table using a single palette. This method will also convert all the
 elements which have internal material id linkages on them to be of the
 external type
 
-Parameter ``internalTable``:
+:param internalTable:
     The internal table to convert
 
-Parameter ``externalTableName``:
+:param externalTableName:
     The full path to the external (.mat) table
 
-Parameter ``externalPalette``:
+:param externalPalette:
     The (.pal) palette to put the materials in
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_ConvertExternalTableAndPalettesToInternal =R"doc(Convert an external material table with external palettes to an
 internal table. Returning the new table
 
-Parameter ``externalTable``:
+:param externalTable:
     The table to internalize
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FlushPalette =R"doc(Flush the in memory contents of the palette to file.
 
-Parameter ``palette``:
+:param palette:
     The palette to flush
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.)doc";
 
@@ -226,137 +226,137 @@ persisted on a call to #SaveMaterial. If the return value is true the
 modified materials are maintained in memory until the #FlushPalette
 method is called
 
-Parameter ``palette``:
+:param palette:
     The palette)doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialManager_UnloadPalette =R"doc(Parameter ``palette``:
+static const char * __doc_Bentley_DgnPlatform_MaterialManager_UnloadPalette =R"doc(:param palette:
     The palette to unload
 
-Parameter ``option``:
+:param option:
     Options relating to how to process the attachments and assignments
 
-Parameter ``model``:
+:param model:
     The model containing the current material table)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_RenamePalette =R"doc(Rename a palette updating the materials in that palette. Returns the
 new paletteInfo object for the palette
 
-Parameter ``oldPalette``:
+:param oldPalette:
     The old palette name
 
-Parameter ``newName``:
+:param newName:
     The new paletteName.
 
-Parameter ``model``:
+:param model:
     The model containing the current material table)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_CreateEmptyPalFile =R"doc(Create an empty .pal material file
 
-Parameter ``moniker``:
+:param moniker:
     filename and path)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_GetPalettesInDgnLib =R"doc(Get the list of palettes contained within a dgn file
 
-Parameter ``paletteList``:
+:param paletteList:
     populated list of palettes
 
-Parameter ``dgnLibFilename``:
+:param dgnLibFilename:
     full path to the dgn file)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_GetPalettesInSearchPath =R"doc(Get a list of palettes in .dgnlib, .pal, .mli files found by the
 supplied environment variable
 
-Parameter ``paletteList``:
+:param paletteList:
     populated list of palettes
 
-Parameter ``envVar``:
+:param envVar:
     environment variable i.e. MS_MATERIAL)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindTexture =R"doc(Finds the full path for a given texture.
 
-Parameter ``textureName``:
+:param textureName:
     The filename of the texture
 
-Parameter ``renderDgnFile``:
+:param renderDgnFile:
     The file the texture is to be used in. The path of the dgn is also
     looked at when finding the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_GetPatternSearchPath =R"doc(Returns the location to use when searching for pattern texture files.
 
-Parameter ``renderDgnMoniker``:
+:param renderDgnMoniker:
     moniker for search path)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_GetMaterialSearchPath =R"doc(Returns the location to use when searching for external material
 palettes and tables.
 
-Parameter ``renderDgnMoniker``:
+:param renderDgnMoniker:
     moniker for search path)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_SetActiveTable =R"doc(Sets the material table as the active table for the specified model
 
-Parameter ``table``:
+:param table:
     The table to make active
 
-Parameter ``model``:
+:param model:
     The model to make the table active for)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_SaveTable =R"doc(Save a material table either to the dgn file or to an external .mat
 file
 
-Parameter ``table``:
+:param table:
     The table name to save)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_GetTableNameForId =R"doc(Get the name of the table for a give table id.
 
-Parameter ``name``:
+:param name:
     The name of the table
 
-Parameter ``sourceDgn``:
+:param sourceDgn:
     The dgn file to look in
 
-Parameter ``id``:
+:param id:
     The id of the table
 
-Returns:
+:returns:
     SUCCESS if the material table with the id was found)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_DeleteTableById =R"doc(Delete a material table from its id
 
-Parameter ``sourceDgn``:
+:param sourceDgn:
     The dgn file to look in
 
-Parameter ``id``:
+:param id:
     The id of the material table)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_DeleteTable =R"doc(Delete a material table from the dgn file
 
-Parameter ``sourceDgn``:
+:param sourceDgn:
     The dgn file to look in
 
-Parameter ``name``:
+:param name:
     The name of the table to delete
 
-Returns:
+:returns:
     SUCCESS if the table was found and deleted)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_GetTableList =R"doc(Get a list of material tables and their descriptions stored in the dgn
 file specified.
 
-Parameter ``tableNames``:
+:param tableNames:
     The list of table names
 
-Parameter ``descriptions``:
+:param descriptions:
     The list of table descriptions
 
-Parameter ``sourceDgn``:
+:param sourceDgn:
     The dgn file to look in)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_LoadPalTable =R"doc(Load the .mat material table for a given model
 
-Parameter ``model``:
+:param model:
     model to load the table for
 
-Parameter ``source``:
+:param source:
     If NULL the last stored material table name will be used to load.
     If that doesnt exist then a table name based on the dgn filename
     will be used. If not NULL then the specified .mat file will be
@@ -364,14 +364,14 @@ Parameter ``source``:
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_LoadActiveDgnTable =R"doc(Returns the active table stored in the dgn file for a given model
 
-Parameter ``sourceModel``:
+:param sourceModel:
     The model to load the table for)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_LoadActiveTable =R"doc(Returns the active material table for a given model. While all
 MaterialTables in a given file are shared between its models,
 individual models may have different tables active.
 
-Parameter ``model``:
+:param model:
     The model to load the table for)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_SaveMaterial =R"doc(Saves the specified material to the store specified by its palette. If
@@ -380,74 +380,74 @@ to create it. However, it is not guaranteed that all types of material
 stores can be created or written to. Also whilst the material will be
 saved to memory it may not be persisted into its file storage.
 
-Parameter ``materialId``:
+:param materialId:
     optional. The materialId generated for the material containing the
     elementId of the material and its name.
 
-Parameter ``material``:
+:param material:
     The material to be saved.
 
-Parameter ``suggestedFile``:
+:param suggestedFile:
     Supplying this argument improves performance if it matches the
     source of the material's palette and is not read-only. Optional.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_RenameMaterial =R"doc(Renames the specified material in the specified store. Returns ERROR
 if the material isn't found or the store can't be written to.
 
-Parameter ``existingId``:
+:param existingId:
     An identifier specifying the name and/or numeric ID of the
     material to rename. Numeric ID searches are faster and preferable
     when possible.
 
-Parameter ``oldPaletteName``:
+:param oldPaletteName:
     The palette the material is in
 
-Parameter ``newName``:
+:param newName:
     The new name for the specified material.
 
-Parameter ``newPaletteName``:
+:param newPaletteName:
     The new palette to put the material in
 
-Parameter ``store``:
+:param store:
     The location where the material is currently stored.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_DeleteMaterial =R"doc(Deletes the specified material from the specified store.
 
-Parameter ``id``:
+:param id:
     The material id of the material to find
 
-Parameter ``store``:
+:param store:
     The store to find the material in
 
-Returns:
+:returns:
     SUCCESS if the material was found and deleted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterialInPalette =R"doc(Find a material by name in a specific palette
 
-Parameter ``materialName``:
+:param materialName:
     The name of the material to find
 
-Parameter ``palette``:
+:param palette:
     The palette to find the material in
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterialsInPalette =R"doc(Find a list of materials in a palette
 
 
-Parameter ``materials``:
+:param materials:
     A list populated with the materials found
 
-Parameter ``palette``:
+:param palette:
     The palette to find the materials in
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.
 
-Parameter ``includeLibrary``:
+:param includeLibrary:
     Also load the materials from the library if one is specified on
     the paletteInfo
 
@@ -463,70 +463,70 @@ static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterialAttach
 should use the IMaterialProperties class for evaluating attachments as
 they could be stored on sub components of a complex element
 
-Parameter ``searchStatus``:
+:param searchStatus:
     Indicates the result of a search. OK to pass NULL.
 
-Parameter ``eh``:
+:param eh:
     The element handle to find the attachment on
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.
 
-Parameter ``loadSourceIfNotCached``:
+:param loadSourceIfNotCached:
     Attempt to load this source if it hasn't already been encountered
     by the MaterialManager. The materials in the DGN file pointed to
     by renderModelRef itself are loaded automatically along with any
     materials in its associated MaterialTable. Specifying false for
     this argument improves performance.
 
-Returns:
+:returns:
     The material pointer if the material is found otherwise NULL)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterialBySymbology =R"doc(Find a material in the active material table based on its assignment
 for level and color
 
-Parameter ``searchStatus``:
+:param searchStatus:
     Indicates the result of a search. OK to pass NULL.
 
-Parameter ``levelID``:
+:param levelID:
     The level id of the level the material is assigned to
 
-Parameter ``rawColor``:
+:param rawColor:
     The color of the assignment
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.
 
-Parameter ``useSymbologyOverride``:
+:param useSymbologyOverride:
     Search for materials which are assigned to the level override
 
-Parameter ``loadSourceIfNotCached``:
+:param loadSourceIfNotCached:
     Attempt to load this source if it hasn't already been encountered
     by the MaterialManager. The materials in the DGN file pointed to
     by renderModelRef itself are loaded automatically along with any
     materials in its associated MaterialTable. Specifying false for
     this argument improves performance.
 
-Parameter ``context``:
+:param context:
     Optional if not NULL will search on the contexts list of cached
     assignments for a faster lookup)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterialByNameFromAnySource =R"doc(Find a material or materials by its name from any material source
 
 
-Parameter ``materials``:
+:param materials:
     A list populated with the materials found
 
-Parameter ``name``:
+:param name:
     The material name to find
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.
 
-Parameter ``loadSourceIfNotCached``:
+:param loadSourceIfNotCached:
     Attempt to load this source if it hasn't already been encountered
     by the MaterialManager. The materials in the DGN file pointed to
     by renderModelRef itself are loaded automatically along with any
@@ -545,37 +545,37 @@ static const char * __doc_Bentley_DgnPlatform_MaterialManager_FindMaterial =R"do
 are cached after an initial search. The pointer returned is only valid
 as long as renderModelRef's DGN file is still loaded.
 
-Parameter ``searchStatus``:
+:param searchStatus:
     Indicates the result of a search. OK to pass NULL.
 
-Parameter ``id``:
+:param id:
     An identifier specifying the name and/or numeric ID of the
     material to be searched for. Numeric ID searches are faster and
     preferable when possible.
 
-Parameter ``source``:
+:param source:
     The document to search for the material in. If the document is an
     already loaded DGN file, passing that DGN instead of its moniker
     is faster.
 
-Parameter ``renderModelRef``:
+:param renderModelRef:
     The model that this material will be rendered in. This is used to
     set up units for texture mapping.
 
-Parameter ``loadSourceIfNotCached``:
+:param loadSourceIfNotCached:
     Attempt to load this source if it hasn't already been encountered
     by the MaterialManager. The materials in the DGN file pointed to
     by renderModelRef itself are loaded automatically along with any
     materials in its associated MaterialTable. Specifying false for
     this argument improves performance.
 
-Returns:
+:returns:
     The material if found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_SetMaxImageSize =R"doc(Set the maximum size of the texture to be returned by in the results
 structure
 
-Parameter ``size``:
+:param size:
     The maximum size of the texture to return in the results structure)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_GetMaxImageSize =R"doc(Get the maximum size of the texture to be returned by in the results
@@ -583,40 +583,40 @@ structure)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_SetElementRange =R"doc(Set the range of the eleement that the texture is applied to
 
-Parameter ``range``:
+:param range:
     The range of the element the texture is applied to)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_GetElementRange =R"doc(Get the range of the element that the texture is applied to)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_SetMaterialMapLayer =R"doc(Set the material layer for which the texture handler is evaluated for
 
-Parameter ``layer``:
+:param layer:
     The material map layer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_GetMaterialMapLayer =R"doc(Get the material layer of the texture handler for evaluation)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_SetMaterialMap =R"doc(Set the material map which contains the texture
 
-Parameter ``map``:
+:param map:
     The material map which contains the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_GetMaterialMap =R"doc(Get the material map that contains the texture for evaluation)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_SetMaterial =R"doc(Set the material that the texture is to be evaluated for
 
-Parameter ``material``:
+:param material:
     The material that contains the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_SetModelRef =R"doc(Set the modelref of the model being processed
 
-Parameter ``modelRef``:
+:param modelRef:
     The modelref being processed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_GetModelRef =R"doc(Get the modelref of the model being processed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_SetWantModifiedMaterialLayer =R"doc(Sets if the texture function has a material layer available to modify
 
-Parameter ``modifiedMaterialLayer``:
+:param modifiedMaterialLayer:
     True if the texture handler has a material layer it can modify)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_WantModifiedMaterialLayer =R"doc(Gets if the texture function has a material layer available to modify)doc";
@@ -624,7 +624,7 @@ static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_WantModifiedMa
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_SetReturnImage =R"doc(Sets if the texture function is to return an image for use as the
 texture
 
-Parameter ``returnImage``:
+:param returnImage:
     True if the texture function is to return an image)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_ReturnImage =R"doc(Is the texture function returning an image for use as the texture)doc";
@@ -633,7 +633,7 @@ static const char * __doc_Bentley_DgnPlatform_TextureFunctionInfo_GetViewNumber 
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionResults_SetModifiableLayer =R"doc(set the material layer that the texture evaluation method can modify
 
-Parameter ``layer``:
+:param layer:
     The layer to modify.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionResults_GetModifiableLayer =R"doc(The texture handler may want to modify the material layer associated
@@ -642,14 +642,14 @@ modifed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionResults_SetTextureRange =R"doc(Set the range of the image
 
-Parameter ``range``:
+:param range:
     The range of the texture image)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionResults_GetTextureRange =R"doc(Get the range of the image)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionResults_SetImage =R"doc(Set the image to use for the texture
 
-Parameter ``image``:
+:param image:
     The image to use for the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureFunctionResults_GetImage =R"doc(Get the image to use for the texture)doc";
@@ -658,13 +658,13 @@ static const char * __doc_Bentley_DgnPlatform_TextureImage_Create =R"doc(Create 
 appropriate size. If image is not NULL, will copy the image passed in
 into this allocated buffer.
 
-Parameter ``image``:
+:param image:
     NULL or the image to be returned
 
-Parameter ``imageSize``:
+:param imageSize:
     the size of the image in pixels
 
-Parameter ``hasAlpha``:
+:param hasAlpha:
     the image is an RGBARGBA buffer or an RGBRGB buffer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureImage_HasAlpha =R"doc(Returns if the image has an alpha value)doc";
@@ -677,75 +677,75 @@ static const char * __doc_Bentley_DgnPlatform_MaterialTable_GetPaletteList =R"do
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_AddPalette =R"doc(Add a material palette for use by this material table.
 
-Parameter ``[in]``:
+:param (input):
     palette The palette to add to this table.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_DeleteAssignment =R"doc(Delete an assignment from the material table
 
-Parameter ``[in]``:
+:param (input):
     assignment The assignment to delete
 
-Returns:
+:returns:
     SUCCESS if the assignment was found and deleted)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_FindAssignmentsByMaterial =R"doc(Find all the assignments which a given material will use.
 
-Parameter ``[in]``:
+:param (input):
     materialId The material id of the material whos assignments to
     find
 
-Parameter ``[in]``:
+:param (input):
     option The search options for finding assignments
 
-Returns:
+:returns:
     a list of material assignments which the material uses)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_FillMaterialAssignmentList =R"doc(Fill a list of all the assignments used in this material table
 
-Parameter ``[in]``:
+:param (input):
     list The list to populate with assignments from this table)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_FindAssignmentByMaterial =R"doc(Search for an assignment which the material id is used in based on the
 options passed in
 
-Parameter ``[in]``:
+:param (input):
     materialId The material id for the assignment to find
 
-Parameter ``[in]``:
+:param (input):
     option The search options for finding the assignments
 
-Returns:
+:returns:
     a pointer to a material assignment if its found or NULL)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_FindAssignmentBySymbology =R"doc(Find an assignment in this table by the symbology of an element
 
-Parameter ``[in]``:
+:param (input):
     levelID The level id of the assignment to find
 
-Parameter ``[in]``:
+:param (input):
     rawColor The color of the assignment to find
 
-Parameter ``[in]``:
+:param (input):
     dgnFile The dgn file which the assignment is for
 
-Returns:
+:returns:
     a pointer to a material assignment if its found or NULL)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_AddAssignment =R"doc(Adds the specified assignment to this table.
 
-Parameter ``[in]``:
+:param (input):
     assignment The assignment to add to this table.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_SetDescription =R"doc(Set the description of this material table
 
-Parameter ``[in]``:
+:param (input):
     description The description)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_GetDescription =R"doc(Get a description of this material table.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_SetName =R"doc(Set the name of this material table.
 
-Parameter ``[in]``:
+:param (input):
     name The name of the material table)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_GetName =R"doc(Get the name of the material table)doc";
@@ -753,12 +753,12 @@ static const char * __doc_Bentley_DgnPlatform_MaterialTable_GetName =R"doc(Get t
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_SetRenderDgn =R"doc(Set the dgn file which the tables assignments and palettes will be
 used for
 
-Parameter ``[in]``:
+:param (input):
     renderDgn The dgn file which the materials will be used for)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_SetSource =R"doc(Set the source fiel for the material table
 
-Parameter ``[in]``:
+:param (input):
     source The moniker to the material table file)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_GetSource =R"doc(Get the moniker which refers to the material table file)doc";
@@ -766,7 +766,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialTable_GetSource =R"doc(Get
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_Copy =R"doc(Copies all table properties (including source and associated DGN file)
 from rhs to this table.
 
-Parameter ``[in]``:
+:param (input):
     rhs The material table to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_InitDefaults =R"doc(Clears all table properties except for source and associated DGN file.)doc";
@@ -774,24 +774,24 @@ static const char * __doc_Bentley_DgnPlatform_MaterialTable_InitDefaults =R"doc(
 static const char * __doc_Bentley_DgnPlatform_MaterialTable_Create =R"doc(Create a material table for use with the dgn file. This is typically
 used for .mat material tables
 
-Parameter ``[in]``:
+:param (input):
     source The moniker which contains the file to use
 
-Parameter ``[in]``:
+:param (input):
     renderDgn The dgn file which this file is for
 
-Returns:
+:returns:
     a material table pointer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_SetMaterialName =R"doc(Set the name of the material which this assignment will use.
 
-Parameter ``[in]``:
+:param (input):
     materialName The name of the material which will be used by this
     assignment)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_SetMaterialElementId =R"doc(Set the ElementId of the materaial that this assignment will apply to
 
-Parameter ``[in]``:
+:param (input):
     elementID The element id of the material which will be used by
     this assignment)doc";
 
@@ -799,21 +799,21 @@ static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_GetColorMask =R
 
 static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_SetLevelName =R"doc(Set the level name which this assignment will use
 
-Parameter ``[in]``:
+:param (input):
     levelName The level name)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_GetLevelName =R"doc(Get the level name that this assignment applies to)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_SetMaterialId =R"doc(Set the material id that this assignment applies to
 
-Parameter ``[in]``:
+:param (input):
     materialID The material id to assign)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_GetMaterialId =R"doc(Get the material id this assignment uses)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_Copy =R"doc(Copy the contents of the assignment passed in into this assignment
 
-Parameter ``[in]``:
+:param (input):
     rhs The assignment to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialAssignment_InitDefaults =R"doc(Initialize this assignment to its default values)doc";
@@ -824,74 +824,74 @@ static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_ToString =R"doc(
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_FromString =R"doc(Set the mask to the colors based on the contents of the string
 
-Parameter ``[in]``:
+:param (input):
     colorRangeStr A string containing colors)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_FillColorIndexList =R"doc(Fill a list of all the color indicies used in this mask
 
-Parameter ``[in]``:
+:param (input):
     colorIndexList The list to populate with colors)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_ContainsRgbColor =R"doc(Does this mask contain the rgb color
 
-Parameter ``[in]``:
+:param (input):
     color The color to find
 
-Returns:
+:returns:
     True if this mask contains the color.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_ContainsColor =R"doc(Does this mask contain a reference to this color
 
-Parameter ``[in]``:
+:param (input):
     rawColor The color to find
 
-Parameter ``[in]``:
+:param (input):
     dgnFile The dgn file the color is used in for conversion
 
-Returns:
+:returns:
     True if this mask contains the color.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_ContainsAllColorIndices =R"doc(Does this color mask have all the color table indicies selected.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_RemoveRgbColor =R"doc(Remove an rgb color from the color mask
 
-Parameter ``[in]``:
+:param (input):
     color The color to remove)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_RemoveColor =R"doc(Remove a raw color from this mask
 
-Parameter ``[in]``:
+:param (input):
     rawColor The color to remove
 
-Parameter ``[in]``:
+:param (input):
     dgnFile The dgn file the color is used in for conversion)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_AddColor =R"doc(Add a raw color to this mask
 
-Parameter ``[in]``:
+:param (input):
     rawColor The color to add
 
-Parameter ``[in]``:
+:param (input):
     dgnFile The dgn file the color is used in for conversion)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_GetAllRgbColors =R"doc(Get all the Rgb Colors in this mask
 
-Parameter ``[in]``:
+:param (input):
     colorDefs Set whos contents to populate with the colors used)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_RemoveColorMask =R"doc(Remove the entries in the passed in color mask from this one
 
-Parameter ``[in]``:
+:param (input):
     rhs The mask to remove the entries from)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_AddRgbColor =R"doc(Add an rgb color to this mask
 
-Parameter ``[in]``:
+:param (input):
     color The color to add to the mask)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_AddColorMask =R"doc(Add the usages from the mask passed in to this color mask
 
-Parameter ``[in]``:
+:param (input):
     rhs The mask to add its colors to this mask)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_AddAllColorIndices =R"doc(Set all the color table entries to be used for this mask)doc";
@@ -900,19 +900,19 @@ static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_IsEmpty =R"doc(D
 
 static const char * __doc_Bentley_DgnPlatform_MaterialColorMask_Copy =R"doc(Copy the contents of the MaterialColorMask passed in into this object
 
-Parameter ``[in]``:
+:param (input):
     rhs The MaterialColorMask to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_SetElementId =R"doc(Set the element id of this material id.
 
-Parameter ``[in]``:
+:param (input):
     elementId The element id to set for this material id)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_GetElementId =R"doc(Get the element id associated with this material id)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_SetName =R"doc(Set the name associated with this material id
 
-Parameter ``[in]``:
+:param (input):
     name The name to set this material id to)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_GetName =R"doc(Get the name associated with this material id)doc";
@@ -921,35 +921,35 @@ static const char * __doc_Bentley_DgnPlatform_MaterialId_DeSerialize =R"doc(Dese
 required that a material id is persisted in a dgn file then this
 method should be used to create a MaterialId from the persisted data
 
-Parameter ``[in]``:
+:param (input):
     str The serialized material id
 
-Returns:
+:returns:
     SUCCESS if the string contained a valid material id)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_Serialize =R"doc(Serialize the contents of this material id into a string. If it is
 required that a material id is persisted in a dgn file then the string
 returned by this method is what should be stored.
 
-Parameter ``[in,``:
+:param [in,:
     out] str The serialized material id
 
-Returns:
+:returns:
     SUCCESS if the id could be serialized)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_IsNameOrIdValid =R"doc(Is either the name or the id of this id valid
 
-Returns:
+:returns:
     True if the name or the id are valid)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_IsValid =R"doc(Is this a valid material id
 
-Returns:
+:returns:
     True if the name and id are valid)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_Copy =R"doc(Copy the passed in material id contents into this object
 
-Parameter ``[in]``:
+:param (input):
     rhs The material to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialId_InitDefaults =R"doc(Set a material id to its default values, no name and invalid element
@@ -961,7 +961,7 @@ static const char * __doc_Bentley_DgnPlatform_Material_GetSettings =R"doc(Get th
 
 static const char * __doc_Bentley_DgnPlatform_Material_SetModelRef =R"doc(Set the modelRef that this material is to be used in
 
-Parameter ``[in]``:
+:param (input):
     modelRef The modelref the material is used in)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Material_GetPalette =R"doc(Get the Palette this material is located in)doc";
@@ -970,42 +970,42 @@ static const char * __doc_Bentley_DgnPlatform_Material_SetName =R"doc(Set the na
 is 30 characters - if the provided name exceeds that length, this
 function will return ERROR and the name will not be changed.
 
-Parameter ``[in]``:
+:param (input):
     name The name to set the material to.
 
-Returns:
+:returns:
     SUCCESS if the name was set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Material_Equals =R"doc(Return if this material is equal to the material passed to this
 method.
 
-Parameter ``[in]``:
+:param (input):
     rhs The material to compare to
 
-Parameter ``[in]``:
+:param (input):
     testModelRef True to also compare the modelref. If false the
     modelref wont be compared but all the other parameters will be
 
-Returns:
+:returns:
     True if the materials are equal)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Material_Copy =R"doc(Copy the contents of the passed in material into this material
 
-Parameter ``[in]``:
+:param (input):
     copyFrom Material to copy from)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Material_InitDefaults =R"doc(Initialize the material to a set of default values.
 
-Parameter ``[in]``:
+:param (input):
     modelRef The modelref which the material will be used in)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreviewCollection_AddPreview =R"doc(Add a preview to this collection. If a preview of this type already
 exists in the collection it will be replaced.
 
-Parameter ``[in]``:
+:param (input):
     type The preview type to add to the collection.
 
-Returns:
+:returns:
     A reference to the added preview)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreviewCollection_ClearAll =R"doc(Delete all the members from this collection)doc";
@@ -1013,69 +1013,69 @@ static const char * __doc_Bentley_DgnPlatform_MaterialPreviewCollection_ClearAll
 static const char * __doc_Bentley_DgnPlatform_MaterialPreviewCollection_Copy =R"doc(Clear the contents of this collection and copy the contents of the
 passed in collection into this one
 
-Parameter ``[in]``:
+:param (input):
     rhs The collection to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreviewCollection_InitDefaults =R"doc(Initialize this collection to its defaults.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_SetRenderMode =R"doc(Set the render mode used for this preview
 
-Parameter ``[in]``:
+:param (input):
     renderMode The render mode)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_GetRenderMode =R"doc(Get the render mode used for this preview.
 
-Returns:
+:returns:
     The render mode used for this preview.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_SetBrightness =R"doc(Set the brightness multiplier for this widget preview.
 
-Parameter ``[in]``:
+:param (input):
     brightness The brightness multiplier used for this preview.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_GetBrightness =R"doc(Get the brightness multiplier used for the tonemapping for this
 preview.
 
-Returns:
+:returns:
     the brightness multiplier used for this preview.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_SetExampleSize =R"doc(Set the size in UORS of this example widget
 
-Parameter ``[in]``:
+:param (input):
     size The size in uors of the example widget.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_GetExampleSize =R"doc(Get the size in UORS of the the example widget. A widget can be
 created with a specific size so the repeat of the textures across its
 surface can be precisely determined.
 
-Returns:
+:returns:
     the example size.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_SetSize =R"doc(Set the size of the preview image
 
-Parameter ``[in]``:
+:param (input):
     x The number of pixels in x
 
-Parameter ``[in]``:
+:param (input):
     y The number of pixels in y)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_GetSize =R"doc(Get the size of the preview image
 
-Returns:
+:returns:
     the preview image size)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_SetType =R"doc(Set the preview type for this MaterialPreview
 
-Parameter ``[in]``:
+:param (input):
     exampleType The example type that the material preview was
     rendered with.
 
-Parameter ``[in]``:
+:param (input):
     previewMode The preview mode.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_GetType =R"doc(Get the PreviewType of this MaterialPreview object
 
-Returns:
+:returns:
     The preview type of this object)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_ClearImage =R"doc(Clear the preview image)doc";
@@ -1083,25 +1083,25 @@ static const char * __doc_Bentley_DgnPlatform_MaterialPreview_ClearImage =R"doc(
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_Equals =R"doc(Compare this object to the MaterialPreview passed in based on the
 flags passed in
 
-Parameter ``[in]``:
+:param (input):
     rhs The MaterialPreview to compare.
 
-Parameter ``[in]``:
+:param (input):
     anyBrightness The comparison ignores the brightness value.
 
-Parameter ``[in]``:
+:param (input):
     anyExample The comparison ignores the example.
 
-Parameter ``[in]``:
+:param (input):
     anyRenderMode The comparison ignores the render mode
 
-Returns:
+:returns:
     True if the MaterialPreview's are equal)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_Copy =R"doc(Copy the contents of the the passed in MaterialPreview into this
 object.
 
-Parameter ``[in]``:
+:param (input):
     rhs The MaterialPreview to copy from)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialPreview_InitDefaults =R"doc(Initialize this object to default values for its members)doc";
@@ -1225,7 +1225,7 @@ void def_Material(py::module_& m)
     c1.def("SetImage", [] (MaterialPreview& self, py::bytes const& data)
            {
            std::string strData = (std::string) data;
-           self.SetImage((const byte*) strData.data(), strData.size());
+           self.SetImage((const Byte*) strData.data(), strData.size());
            }, "data"_a);
 
     c1.def("GetImageAsRGB", [] (MaterialPreview const& self, py::bytearray& data, Point2dCR size)
@@ -1234,7 +1234,7 @@ void def_Material(py::module_& m)
            size_t dataSize = size.x * size.y * 3;
            if (dataSize > 0)
                {
-               byte* outData = (byte*) _alloca(dataSize);
+               Byte* outData = (Byte*) _alloca(dataSize);
                retVal = self.GetImageAsRGB(outData, size);
                if (retVal == SUCCESS)
                    data = py::bytearray((const char*) outData, dataSize);
@@ -1248,7 +1248,7 @@ void def_Material(py::module_& m)
            size_t dataSize = size.x * size.y * 3;
            std::string strData = (std::string) data;
            if (dataSize == strData.size())
-               retVal = self.SetImageFromRGB((const byte*) strData.data(), size);
+               retVal = self.SetImageFromRGB((const Byte*) strData.data(), size);
 
            return retVal;
            }, "data"_a, "size"_a);
@@ -1501,7 +1501,7 @@ void def_Material(py::module_& m)
     c14.def_static("Create", [] (py::bytes const& data, Point2dCR imageSize, bool hasAlpha)
                    {
                    std::string strData = data.cast<std::string>();
-                   return TextureImage::Create((byte*) strData.data(), imageSize, hasAlpha);
+                   return TextureImage::Create((Byte*) strData.data(), imageSize, hasAlpha);
                    }, "data"_a, "imageSize"_a, "hasAlpha"_a, DOC(Bentley, DgnPlatform, TextureImage, Create));
 
     //===================================================================================

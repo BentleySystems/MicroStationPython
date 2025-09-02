@@ -16,9 +16,9 @@ not have a tag, then it is assigned a tag and the new tag value is
 returned in the newTagP argument. This function will return an error
 if the element descriptor has the complex bit set.
 
-@Param[out] newTagP is the new tag created by the function.
+@Param(output) newTagP is the new tag created by the function.
 @Param[in,out] elDscrP is the element descriptor to which the tag is
-added. @Param[in] modelRef indicates the model containing the element
+added. @Param(input) modelRef indicates the model containing the element
 receiving the tag. @Return SUCCESS if the operation is completed
 successfully, otherwise ERROR
 
@@ -32,7 +32,7 @@ Remark:
 
 static const char * __doc_MstnPlatform_Assoc_StripTag =R"doc(@Description Remove an association tag from a single element
 
-@Param[in] elemP element to strip tag from @Return SUCCESS if the
+@Param(input) elemP element to strip tag from @Return SUCCESS if the
 operation is complete successfully, ERROR otherwise
 
 See also:
@@ -45,9 +45,9 @@ Remark:
 
 static const char * __doc_MstnPlatform_Assoc_GetCurrent =R"doc(@Description Gets the current associative point.
 
-@Param[out] assoc the current association point @Param[out] pointP
-location of current association @Param[in] option Option (pass zero)
-@Param[in] createMask element categories not to create associations
+@Param(output) assoc the current association point @Param(output) pointP
+location of current association @Param(input) option Option (pass zero)
+@Param(input) createMask element categories not to create associations
 for, use ASSOC_CREATE_MASK_ defines or pass 0 to not restrict allowed
 associations. For example to create an associative dimension you would
 want to check that dimension associations are enabled so you would
@@ -65,10 +65,10 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_CreateBCurve =R"doc(@Description Creates an association that represents a point along a
 B-spline curve.
 
-@Param[out] assoc If a valid association is created, the association
-information is returned in assoc. @Param[in] u the parameter along the
-B-spline curve representing the associative point. @Param[in] path
-display path for the element. @Param[in] elemId used if path is
+@Param(output) assoc If a valid association is created, the association
+information is returned in assoc. @Param(input) u the parameter along the
+B-spline curve representing the associative point. @Param(input) path
+display path for the element. @Param(input) elemId used if path is
 NULL...i.e. creating assoc to element that has @Return SUCCESS (zero)
 if it is able to create a valid association. Otherwise, it returns a
 non-zero value.
@@ -87,10 +87,10 @@ headers, shared cells, text nodes and text elements. For elements
 other than these, an associative point representing the lower left-
 hand corner of the range block for the element is created.
 
-@Param[out] assoc If a valid association is created, the association
-information is returned in assoc. @Param[in] option Origin of
-association options. @Param[in] path display path for the element.
-@Param[in] elemId used if path is NULL...i.e. creating assoc to
+@Param(output) assoc If a valid association is created, the association
+information is returned in assoc. @Param(input) option Origin of
+association options. @Param(input) path display path for the element.
+@Param(input) elemId used if path is NULL...i.e. creating assoc to
 element that has @Return SUCCESS (zero) if it is able to create a
 valid association. Otherwise, it returns a non-zero value.
 
@@ -105,24 +105,24 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_CreateMline =R"doc(@Description Creates an association that represents a point on a
 multi-line element.
 
-@Param[out] assoc If a valid association is created, the association
-information is returned in assoc. @Param[in] vertex the index of the
-vertex directly preceding or at the association point. @Param[in]
+@Param(output) assoc If a valid association is created, the association
+information is returned in assoc. @Param(input) vertex the index of the
+vertex directly preceding or at the association point. @Param(input)
 nVertex the total number of vertices of the linear element. This
 parameter is optional, you can pass zero. If non-zero this value is
 used to avoid the association jumping as vertices are
-inserted/deleted. @Param[in] lineNo indicates which line in the multi-
+inserted/deleted. @Param(input) lineNo indicates which line in the multi-
 line is the association's object. This value is an index into the
 multi-line profile information that was copied into the multi-line
-from the tcb when the multi-line was created. @Param[in] offset the
+from the tcb when the multi-line was created. @Param(input) offset the
 distance from the specified vertex to the association point, measured
 along the work line and divided by the work line length. The
 information needed to calculate this parameter can be obtained using
 the Vec.... functions. offset is not used if joint is set to true.
-@Param[in] joint If joint is true, the association point is at the
+@Param(input) joint If joint is true, the association point is at the
 intersection of the line specified by lineNo and the joint vector is
 at vertex. In other words, the association point will always be on the
-joint. @Param[in] path display path for the element. @Param[in] elemId
+joint. @Param(input) path display path for the element. @Param(input) elemId
 used if path is NULL...i.e. creating assoc to element that has @Return
 SUCCESS (zero) if it is able to create a valid association. Otherwise,
 it returns a non-zero value.
@@ -138,24 +138,24 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_CreateIntersection =R"doc(@Description Create an intersection association between the two
 elements identified by the elemId1 and elemId2 parameters.
 
-@Param[out] assoc is the intersection association created by the
-operation. @Param[in] index is the index of the intersection between
+@Param(output) assoc is the intersection association created by the
+operation. @Param(input) index is the index of the intersection between
 the two elements where the association will be created. The number of
 intersections between two elements can be found via the
-Intersect.AllBetweenElms function. @Param[in] seg1 is the index of
-the segment of element 1 where the intersection occurs. @Param[in]
+Intersect.AllBetweenElms function. @Param(input) seg1 is the index of
+the segment of element 1 where the intersection occurs. @Param(input)
 seg2 is the index of the segment of element 2 where the intersection
-occurs. @Param[in] nSeg1 the number of vertices of element 1. This
+occurs. @Param(input) nSeg1 the number of vertices of element 1. This
 parameter is optional, you can pass zero. If non-zero this value is
 used to avoid the association jumping as vertices are
-inserted/deleted. @Param[in] nSeg2 the number of vertices of element
+inserted/deleted. @Param(input) nSeg2 the number of vertices of element
 2. This parameter is optional, you can pass zero. If non-zero this
 value is used to avoid the association jumping as vertices are
-inserted/deleted. @Param[in] path1 display path for the element1.
-@Param[in] path2 display path for the element2. @Param[in] elemId1
+inserted/deleted. @Param(input) path1 display path for the element1.
+@Param(input) path2 display path for the element2. @Param(input) elemId1
 used if path1 is NULL...i.e. creating assoc to element that has not
 been added to the file yet. No verification on the association can be
-done in this case. @Param[in] elemId2 used if path2 is NULL...i.e.
+done in this case. @Param(input) elemId2 used if path2 is NULL...i.e.
 creating assoc to element that has not been added to the file yet. No
 verification on the association can be done in this case. @Return
 returns SUCCESS if the operation is successful
@@ -177,16 +177,16 @@ Assoc.CreateKeypoint. Instead, this function automatically
 calculates the keypoint numerator and divisor based on inPoint and the
 specified segment of the linear element.
 
-@Param[out] assoc If a valid association is created, the association
-information is returned in assoc. @Param[in] inPoint is the location
+@Param(output) assoc If a valid association is created, the association
+information is returned in assoc. @Param(input) inPoint is the location
 on the specified linear element that is converted to an associative
-point. @Param[in] vertex is the index of the vertex directly preceding
-the associative point. @Param[in] nVertex the total number of vertices
+point. @Param(input) vertex is the index of the vertex directly preceding
+the associative point. @Param(input) nVertex the total number of vertices
 of the linear element. This parameter is optional, you can pass zero.
 If non-zero this value is used to avoid the association jumping as
-vertices are inserted/deleted. @Param[in] lineNo is a line number used
-for multi-lines only. @Param[in] path display path for the element.
-@Param[in] elemId used if path is NULL...i.e. creating assoc to
+vertices are inserted/deleted. @Param(input) lineNo is a line number used
+for multi-lines only. @Param(input) path display path for the element.
+@Param(input) elemId used if path is NULL...i.e. creating assoc to
 element that has not been added to the file yet. No verification on
 the association can be done in this case. @Return SUCCESS if a valid
 linear association is created. Otherwise an non-zero error status is
@@ -203,21 +203,21 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_CreateKeypoint =R"doc(@Description Creates an association that represents a point on a
 linear element.
 
-@Param[out] assoc If a valid association is created, the association
+@Param(output) assoc If a valid association is created, the association
 information is returned in assoc. Linear elements are lines, line
-strings and shapes. @Param[in] vertex the index of the vertex directly
-preceding the association point. @Param[in] nVertex the total number
+strings and shapes. @Param(input) vertex the index of the vertex directly
+preceding the association point. @Param(input) nVertex the total number
 of vertices of the linear element. This parameter is optional, you can
 pass zero. If non-zero this value is used to avoid the association
-jumping as vertices are inserted/deleted. @Param[in] numerator the
+jumping as vertices are inserted/deleted. @Param(input) numerator the
 distance from vertex number vertex in units of divisor as described
-below. Its range must be between 0 and 32767. @Param[in] divisor the
+below. Its range must be between 0 and 32767. @Param(input) divisor the
 number of units (segments) to be considered between the points at
 vertex and vertex+1. The values of numerator and divisor are used
 together as the fraction of the distance between the points at vertex
 and vertex+1, where the association point will be located. The
-denominator must be between 1 and 32767. @Param[in] path display path
-for the element. @Param[in] elemId used if path is NULL...i.e.
+denominator must be between 1 and 32767. @Param(input) path display path
+for the element. @Param(input) elemId used if path is NULL...i.e.
 creating assoc to element that has not been added to the file yet. No
 verification on the association can be done in this case. @Return
 returns SUCCESS (zero) if it is able to create a valid association.
@@ -234,8 +234,8 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_CreateArc =R"doc(@Description Creates an association that represents a point on an arc
 or ellipse element.
 
-@Param[out] assoc If a valid association is created, the association
-information is returned in assoc. @Param[in] angle the angle (in
+@Param(output) assoc If a valid association is created, the association
+information is returned in assoc. @Param(input) angle the angle (in
 radians) from the primary axis of the arc or ellipse to the
 association point. This argument is used only when the value of
 *keyPoint* is
@@ -244,11 +244,11 @@ association point. This argument is used only when the value of
 ASSOC_ARC_ANGLE
 ```
 
-@Param[in] keyPoint determines the type of association that is
+@Param(input) keyPoint determines the type of association that is
 created.  
 
-@Param[in] path display path for the element.
-@Param[in] elemId used if path is NULL...i.e. creating assoc to
+@Param(input) path display path for the element.
+@Param(input) elemId used if path is NULL...i.e. creating assoc to
 element that has not been added to the file yet. No verification on
 the association can be done in this case. 
 
@@ -266,7 +266,7 @@ Remark:
 
 static const char * __doc_MstnPlatform_Assoc_ResolveAssociations =R"doc(@Description Removes all association points from an element.
 
-@Param[in] elemP element to remove assoc point from. @Param[in]
+@Param(input) elemP element to remove assoc point from. @Param(input)
 modelRef the model that contains the element and the association.
 @Return SUCCESS (zero) if associative points removed. If the
 information is invalid, the function returns a non-zero value.
@@ -287,8 +287,8 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_RemovePoint =R"doc(@Description Removes from element. An Assoc.Create... function must
 create the information in assocPoint.
 
-@Param[in] elemP element to remove assoc point from. @Param[in]
-pointNum point number to remove. @Param[in] maxPoints total number of
+@Param(input) elemP element to remove assoc point from. @Param(input)
+pointNum point number to remove. @Param(input) maxPoints total number of
 points on element. @Return SUCCESS (zero) if point was associative and
 was removed. If the information is invalid, the function returns a
 non-zero value.
@@ -305,10 +305,10 @@ static const char * __doc_MstnPlatform_Assoc_GetPointFromElement =R"doc(@Descrip
 point that is returned in outPoint. An Assoc.Create... function
 must create the information in assocPoint.
 
-@Param[out] outPoint the point created by the function. @Param[in]
-elemP element to get the point from. @Param[in] pointNum point number
-to get. @Param[in] maxPoints total number of points on element.
-@Param[in] modelRef the model that contains the element and the
+@Param(output) outPoint the point created by the function. @Param(input)
+elemP element to get the point from. @Param(input) pointNum point number
+to get. @Param(input) maxPoints total number of points on element.
+@Param(input) modelRef the model that contains the element and the
 association. @Return SUCCESS (zero) if a valid point is created in
 dPoint. If the information in assocPoint is invalid, the function
 returns a non-zero value.
@@ -325,8 +325,8 @@ static const char * __doc_MstnPlatform_Assoc_GetPoint =R"doc(@Description Uses t
 point that is returned in outPoint. An Assoc.Create... function
 must create the information in assocPoint.
 
-@Param[out] outPoint the point created by the function. @Param[in]
-assoc association information used to create the point. @Param[in]
+@Param(output) outPoint the point created by the function. @Param(input)
+assoc association information used to create the point. @Param(input)
 modelRef the model that contains the element and the association.
 @Return SUCCESS (zero) if a valid point is created in dPoint. If the
 information in assocPoint is invalid, the function returns a non-zero
@@ -344,9 +344,9 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_VertexAddedOrRemoved =R"doc(@Description Adjust association point indices for the specified
 element.
 
-@Param[in] elemP element to add association information to @Param[in]
-pointNum index of point added/removed @Param[in] maxPoints max assoc
-pts on element @Param[in] inserted pass true is vertex has been added;
+@Param(input) elemP element to add association information to @Param(input)
+pointNum index of point added/removed @Param(input) maxPoints max assoc
+pts on element @Param(input) inserted pass true is vertex has been added;
 false if it's been removed @Return SUCCESS if the information is
 found, ERROR if an error occurs
 
@@ -360,9 +360,9 @@ Remark:
 
 static const char * __doc_MstnPlatform_Assoc_InsertPoint =R"doc(@Description Insert an association point to the specified element.
 
-@Param[in] elemP element to add association information to @Param[in]
-assocPointP Association information @Param[in] pointNum index of point
-to insert @Param[in] maxPoints max assoc pts on element @Return
+@Param(input) elemP element to add association information to @Param(input)
+assocPointP Association information @Param(input) pointNum index of point
+to insert @Param(input) maxPoints max assoc pts on element @Return
 SUCCESS if the information is found, ERROR if an error occurs
 
 See also:
@@ -376,9 +376,9 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_ExtractPoint =R"doc(@Description Extracts the association information from the specified
 point on the given element
 
-@Param[out] assoc Association information @Param[in] elemP element to
-extract point from @Param[in] pointNum index of point to extract
-@Param[in] maxPoints max assoc pts on element @Return SUCCESS if the
+@Param(output) assoc Association information @Param(input) elemP element to
+extract point from @Param(input) pointNum index of point to extract
+@Param(input) maxPoints max assoc pts on element @Return SUCCESS if the
 information is found, ERROR if an error occurs
 
 See also:
@@ -392,9 +392,9 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_TagElementValue =R"doc(@Description Assign a new tag value to the specified element if it
 doesn't already have one.
 
-@Param[out] tagValue is the tag value assigned to the element.
-@Param[in] elemP is the element that receives the tag. @Param[in]
-modelRef inidcates the model containing the element. @Param[in] inTag
+@Param(output) tagValue is the tag value assigned to the element.
+@Param(input) elemP is the element that receives the tag. @Param(input)
+modelRef inidcates the model containing the element. @Param(input) inTag
 is the input tag value, or zero. @Return SUCCESS if the operation
 completed successfully, otherwise ERROR.
 
@@ -411,9 +411,9 @@ elemID and, if found, return an element descriptor that contains the
 element and any child elements it might have if it is a complex
 element.
 
-@Param[out] outElDPP Return element descr or NULL @Param[out] filePosP
-Return file position or NULL @Param[in] tagValue Tag value to search
-for @Param[in] modelRef source of tagged element @Param[in]
+@Param(output) outElDPP Return element descr or NULL @Param(output) filePosP
+Return file position or NULL @Param(input) tagValue Tag value to search
+for @Param(input) modelRef source of tagged element @Param(input)
 expandShared expand shared cells @Return SUCCESS if the element is
 found and an element descriptor was successfully created.
 MDLERR_BADFILENUMBER is returned if modelRef is not valid. May return
@@ -430,11 +430,11 @@ Remark:
 static const char * __doc_MstnPlatform_Assoc_GetElement =R"doc(@Description Attempts to locate the element with the unique ID elemID
 in the model specified by modelRef.
 
-@Param[out] outElmP If found, the element is returned in element If
+@Param(output) outElmP If found, the element is returned in element If
 NULL is passed for element or filePos, the corresponding data is not
-returned. @Param[out] filePosP If found, the element's file position
-is returned in filePos. @Param[in] tagValue the tag (unique ID number)
-of the element that is the association's object (or root). @Param[in]
+returned. @Param(output) filePosP If found, the element's file position
+is returned in filePos. @Param(input) tagValue the tag (unique ID number)
+of the element that is the association's object (or root). @Param(input)
 modelRef indicates the model that the element is in. @Return SUCCESS
 (zero) if the requested element is located. If the function is unable
 to locate the element, it returns a non-zero value.

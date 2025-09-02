@@ -24,6 +24,7 @@ DEFINE_BVECTOR_TYPE(DPoint3dArray, DPoint3dVecArray);
 DEFINE_BVECTOR_TYPE(DPoint3dVecArray, DPoint3dVecVecArray);
 DEFINE_BVECTOR_TYPE(DVec3dArray, DVec3dVecArray);
 DEFINE_BVECTOR_TYPE(ICurvePrimitivePtr, ICurvePrimitiveArray);
+DEFINE_BVECTOR_TYPE(CurvePrimitivePtrPair, CurvePrimitivePtrPairArray);
 DEFINE_BVECTOR_TYPE(DSegment1d, DSegment1dArray);
 DEFINE_BVECTOR_TYPE(DSegment3d, DSegment3dArray);
 DEFINE_BVECTOR_TYPE(CurveLocationDetail, CurveLocationDetailArray);

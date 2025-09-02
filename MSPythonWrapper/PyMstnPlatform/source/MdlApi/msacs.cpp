@@ -13,28 +13,28 @@
 static const char * __doc_MstnPlatform_ACS_CreateElmdscrFromParams =R"doc(@description Creates an ACS element descriptor from the given
 parameters.
 
-Parameter ``edPP``:
+:param edPP:
     is the newly created ACS element descriptor, which you must free
     when done.
 
-Parameter ``type``:
+:param type:
     is one of the valid ACS type constants. Possible values are:<UL>
     <LI>ACS_TYPE_NONE <LI>ACS_TYPE_RECT <LI>ACS_TYPE_CYL
     <LI>ACS_TYPE_SPHERE </UL>
 
-Parameter ``originP``:
+:param originP:
     origin of the ACS.
 
-Parameter ``rotationP``:
+:param rotationP:
     rotation of the ACS.
 
-Parameter ``nameP``:
+:param nameP:
     name of the ACS.
 
-Parameter ``descriptionP``:
+:param descriptionP:
     the description of the ACS.
 
-Returns:
+:returns:
     SUCCESS if the element descriptor was created successfully,
     MDLERR_BADARG if any of the parameters was not valid.
 
@@ -45,15 +45,15 @@ Remark:
 
 static const char * __doc_MstnPlatform_ACS_SetTypeOfElmdscr =R"doc(@description Sets the ACS type of the ACS element descriptor.
 
-Parameter ``edP``:
+:param edP:
     ACS element descriptor which is being accessed
 
-Parameter ``acsTypeP``:
+:param acsTypeP:
     type to set in the ACS, and should be one of:<UL>
     <LI>ACS_TYPE_NONE <LI>ACS_TYPE_RECT <LI>ACS_TYPE_CYL
     <LI>ACS_TYPE_SPHERE </UL>
 
-Returns:
+:returns:
     SUCCESS if the element is an ACS element, MDLERR_BADARG if it is
     not.
 
@@ -67,15 +67,15 @@ Remark:
 
 static const char * __doc_MstnPlatform_ACS_GetTypeOfElmdscr =R"doc(@description Get the ACS type of the ACS element descriptor.
 
-Parameter ``acsTypeP``:
+:param acsTypeP:
     points to a variable which will contain one of the following
     values upon a return of SUCCESS. <UL> <LI>ACS_TYPE_NONE
     <LI>ACS_TYPE_RECT <LI>ACS_TYPE_CYL <LI>ACS_TYPE_SPHERE </UL>
 
-Parameter ``edP``:
+:param edP:
     points to the ACS element.
 
-Returns:
+:returns:
     SUCCESS if the element is an ACS element, MDLERR_BADARG if it is
     not.
 
@@ -91,14 +91,14 @@ static const char * __doc_MstnPlatform_ACS_GetCanonicalDescription =R"doc(@descr
 is the name string stripped of leading and trailing whitespace
 characters, whose length and content has been validated.
 
-Parameter ``canonicalP``:
+:param canonicalP:
     points to a string buffer where the canonized description is
     placed. This buffer should be MAX_ACS_DESCR_LENGTH MSWChars long.
 
-Parameter ``descrP``:
+:param descrP:
     ACS description to be canonized.
 
-Returns:
+:returns:
     SUCCESS unless the name string is too large (MDLERR_BADARG) or
     there is not enough memory to allocate working buffers
     (MDLERR_INSFMEMORY).
@@ -115,14 +115,14 @@ static const char * __doc_MstnPlatform_ACS_GetCanonicalName =R"doc(@description 
 the name string stripped of leading and trailing whitespace
 characters, whose length and content has been validated.
 
-Parameter ``canonicalP``:
+:param canonicalP:
     is a pointer to a string buffer where the canonized name is
     placed. This buffer should be MAX_ACS_NAME_LENGTH MSWChars long.
 
-Parameter ``nameP``:
+:param nameP:
     ACS name to be canonized.
 
-Returns:
+:returns:
     SUCCESS unless the name string is too large or there is not enough
     memory to allocate working buffers.
 
@@ -136,13 +136,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_ACS_SetDescriptionOfElmdscr =R"doc(@description Sets the description on the specified ACS element.
 
-Parameter ``edPP``:
+:param edPP:
     points to ACS element descriptor pointer.
 
-Parameter ``description``:
+:param description:
     points to a buffer where the description is stored.
 
-Returns:
+:returns:
     SUCCESS if the operation was completed successfully, otherwise
     ERROR.
 
@@ -156,13 +156,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_ACS_SetNameOfElmdscr =R"doc(@description Sets the name on the specified ACS element.
 
-Parameter ``edPP``:
+:param edPP:
     points to ACS element descriptor pointer.
 
-Parameter ``name``:
+:param name:
     points to a buffer where the name is stored.
 
-Returns:
+:returns:
     SUCCESS if the operation was completed successfully, otherwise
     ERROR.
 
@@ -176,14 +176,14 @@ Remark:
 
 static const char * __doc_MstnPlatform_ACS_GetDescriptionOfElmdscr =R"doc(@description Gets the description from the specified ACS element.
 
-Parameter ``acsDescriptionP``:
+:param acsDescriptionP:
     points to a buffer where the description is copied. This buffer
     should be MAX_ACS_DESCR_LENGTH MSWChars long
 
-Parameter ``edP``:
+:param edP:
     points to the ACS element to get the description from.
 
-Returns:
+:returns:
     SUCCESS if the operation was completed successfully, otherwise
     ERROR.
 
@@ -197,14 +197,14 @@ Remark:
 
 static const char * __doc_MstnPlatform_ACS_GetNameOfElmdscr =R"doc(@description Gets the name from the specified ACS element descriptor.
 
-Parameter ``acsNameP``:
+:param acsNameP:
     points to a buffer where the name is copied. This buffer should be
     MAX_ACS_NAME_LENGTH MSWChars long.
 
-Parameter ``edP``:
+:param edP:
     points to the ACS element to get the name from.
 
-Returns:
+:returns:
     SUCCESS if the operation was completed successfully, otherwise
     ERROR.
 
@@ -218,19 +218,19 @@ Remark:
 
 static const char * __doc_MstnPlatform_ACS_Locate =R"doc(@description Searches for an ACS using its assigned name.
 
-Parameter ``edPP``:
+:param edPP:
     Copy of ACS element descriptor. You must free it when done.
 
-Parameter ``filePosP``:
+:param filePosP:
     file position of the located ACS element.
 
-Parameter ``inName``:
+:param inName:
     name of the ACS element to find.
 
-Parameter ``modelRef``:
+:param modelRef:
     model to search for the ACS element.
 
-Returns:
+:returns:
     SUCCESS if the operation completed successfully, otherwise ERROR.
 
 See also:
@@ -244,16 +244,16 @@ Remark:
 static const char * __doc_MstnPlatform_ACS_SetCurrent =R"doc(@description Defines the ACS of the active model. <UL>
 <LI>ACS_RECTANGULAR <LI>ACS_CYLINDRICAL <LI>ACS_SPHERICAL </UL>
 
-Parameter ``originP``:
+:param originP:
     new ACS origin or pass NULL to leave unchanged
 
-Parameter ``rotMatrixP``:
+:param rotMatrixP:
     new ACS orientation or pass NULL to leave unchanged
 
-Parameter ``type``:
+:param type:
     new ACS type or pass NULL to leave unchanged
 
-Returns:
+:returns:
     SUCCESS if the coordinate system is successfully defined.
 
 See also:
@@ -270,13 +270,13 @@ MAX_ACS_NAME_LENGTH MSWChars, and the description can contain up to
 MAX_ACS_DESCR_LENGTH MSWChars. The user or an MDL application can
 recall saved coordinate systems with the ACS.AttachNamed function.
 
-Parameter ``name``:
+:param name:
     name of the ACS
 
-Parameter ``description``:
+:param description:
     description of the ACS
 
-Returns:
+:returns:
     SUCCESS if the coordinate system is successfully saved. If the
     coordinate system name already exists, the existing ACS is
     overwritten. If no ACS is active, MDLERR_NOACSDEFINED is returned.
@@ -294,24 +294,24 @@ type. @Remarks The coordinate system type is specified by one of the
 following types from msdefs.h:<UL> <LI>ACS_RECTANGULAR
 <LI>ACS_CYLINDRICAL <LI>ACS_SPHERICAL </UL>
 
-Parameter ``originP``:
+:param originP:
     current ACS origin
 
-Parameter ``rotMatrixP``:
+:param rotMatrixP:
     current ACS orientation
 
-Parameter ``typeP``:
+:param typeP:
     current ACS type
 
-Parameter ``nameP``:
+:param nameP:
     points to a buffer where the name is copied. This buffer should be
     MAX_ACS_NAME_LENGTH MSWChars long.
 
-Parameter ``descriptionP``:
+:param descriptionP:
     points to a buffer where the description is copied. This buffer
     should be MAX_ACS_DESCR_LENGTH MSWChars long
 
-Returns:
+:returns:
     SUCCESS if an ACS is active and MDLERR_NOACSDEFINED if no system
     is currently defined.
 
@@ -325,10 +325,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_ACS_DeleteNamed =R"doc(@description Deletes the named coordinate system specified.
 
-Parameter ``acsName``:
+:param acsName:
     name of the coordinate system
 
-Returns:
+:returns:
     SUCCESS if the coordinate system is successfully deleted and
     MDLERR_ACSNOTFOUND if the specified coordinate system is not
     found.
@@ -344,18 +344,18 @@ Remark:
 static const char * __doc_MstnPlatform_ACS_AttachNamed =R"doc(@description Attaches the named auxiliary coordinate system (ACS) to
 the active model.
 
-Parameter ``unparsed``:
+:param unparsed:
     the name of the coordinate system to attach
 
-Parameter ``useRot``:
+:param useRot:
     true means apply the rotation stored in the named ACS, and false
     means ignore it
 
-Parameter ``useOrg``:
+:param useOrg:
     true means apply the origin stored in the named ACS, and false
     means ignore it
 
-Returns:
+:returns:
     SUCCESS if the coordinate system is successfully attached and
     MDLERR_ACSNOTFOUND if the specified coordinate system is not
     found.

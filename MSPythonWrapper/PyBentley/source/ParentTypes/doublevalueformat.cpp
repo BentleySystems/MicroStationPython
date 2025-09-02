@@ -13,7 +13,7 @@
 static const char * __doc_Bentley_DoubleFormatter_ToString = R"doc(Use the settings defined in this formatter to convert a double value
 to a string.
 
-Parameter ``value``:
+:param value:
     value to format.)doc";
 
 static const char * __doc_Bentley_DoubleFormatter_Clone = R"doc(Construct a formatter which is a duplicate of an existing formatter.)doc";
@@ -25,7 +25,7 @@ static const char * __doc_Bentley_DoubleFormatter_GetTypeFromPrecision = R"doc(C
 static const char * __doc_Bentley_DoubleFormatterBase_SetLeadingZero = R"doc(Set the formatter's leading zero behavior. A leading zero is only
 included for values less than 1.0. Ex. " 0.5 " vs. " .5 "
 
-Parameter ``newVal``:
+:param newVal:
     pass true to include a leading zero for values less than 1.0)doc";
 
 static const char * __doc_Bentley_DoubleFormatterBase_SetThousandsSeparator = R"doc(Set the formatter's thousands separator.)doc";

@@ -25,7 +25,7 @@ static const char * __doc_Bentley_DgnPlatform_TextString_IsRscFont =R"doc(Determ
 
 static const char * __doc_Bentley_DgnPlatform_TextString_GetProperties =R"doc(Gets the formatting properties.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_TextString_SetOriginFromUserOrigin =R"doc(Sets the user origin of this instance. \note The internal cached data
+static const char * __doc_Bentley_DgnPlatform_TextString_SetOriginFromUserOrigin =R"doc(Sets the user origin of this instance.  The internal cached data
 is independent of user origin, so this can be changed after
 initialization.)doc";
 
@@ -37,7 +37,7 @@ static const char * __doc_Bentley_DgnPlatform_TextString_GetHeight =R"doc(Gets t
 
 static const char * __doc_Bentley_DgnPlatform_TextString_GetWidth =R"doc(Gets the width of the extents.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_TextString_GetExtents =R"doc(Gets the bounds of this entire instance in local coordinates. \note
+static const char * __doc_Bentley_DgnPlatform_TextString_GetExtents =R"doc(Gets the bounds of this entire instance in local coordinates. 
 The bounds computed are known as the " justification range ", and
 describe the bounds that are used for positioning and snapping. This
 is opposed to pure exact (black box) and nominal (cell box) ranges.)doc";
