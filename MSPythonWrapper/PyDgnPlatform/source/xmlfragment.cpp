@@ -29,7 +29,7 @@ void def_XmlFragment(py::module_& m)
     c0.def(py::init([](UInt8Array& buf, UInt16 appId, UInt16 appType)
                       {
                       size_t ulBufferSize = buf.size();
-                      return XmlFragment::ConstructFromBuffer((byte*)buf.data(), (UInt32)ulBufferSize, appId, appType); 
+                      return XmlFragment::ConstructFromBuffer((Byte*)buf.data(), (UInt32)ulBufferSize, appId, appType); 
                       }),"buf"_a, "appId"_a, "appType"_a);
 
     c0.def(py::init(&XmlFragment::ConstructFromXmlFragmentElement), "eh"_a);
@@ -74,7 +74,7 @@ void def_XmlFragment(py::module_& m)
 
     c0.def("GetStreamData", [](XmlFragment& self)
           { 
-          byte*  pBuf = nullptr;
+          Byte*  pBuf = nullptr;
           UInt32 bufSize(0);
           StatusInt ret = self.GetStreamData(&pBuf, &bufSize);
           return py::make_tuple(ret, py::cast(pBuf, py::return_value_policy::reference), bufSize);
@@ -100,7 +100,7 @@ void def_XmlFragment(py::module_& m)
     c1.def(py::init([](UInt8Array& buf, UInt16 appId, UInt16 appType)
             { 
             size_t ulBufferSize = buf.size();
-            return XmlFragmentList::ConstructFromBuffer((byte*)buf.data(), (UInt32)ulBufferSize, appId, appType);
+            return XmlFragmentList::ConstructFromBuffer((Byte*)buf.data(), (UInt32)ulBufferSize, appId, appType);
             }),"buf"_a, "appID"_a = 0, "appType"_a = 0);
     
     c1.def("Append", &XmlFragmentList::Append, "xmlFragment"_a);

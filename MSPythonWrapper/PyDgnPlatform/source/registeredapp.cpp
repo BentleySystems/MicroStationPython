@@ -19,20 +19,20 @@ static const char * __doc_Bentley_DgnPlatform_RegisteredAppCollection_WriteToFil
 
 static const char * __doc_Bentley_DgnPlatform_RegisteredAppCollection_DeleteRegisteredApp =R"doc(Deletes a RegisteredApp to the RegisteredAppCollection.
 
-Parameter ``registeredAppName``:
+:param registeredAppName:
     The name of the RegisteredApp to delete.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RegisteredAppCollection_AddRegisteredApp =R"doc(Adds a RegisteredApp to the RegisteredAppCollection.
 
-Parameter ``registeredAppName``:
+:param registeredAppName:
     The name for the RegisteredApp.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RegisteredAppCollection_FindByName =R"doc(Finds a RegisteredApp by name.
 
-Parameter ``registeredAppName``:
+:param registeredAppName:
     The name of the RegisteredApp to search for.
 
-Returns:
+:returns:
     The RegisteredAppPtr that references the RegisteredApp with the
     given name or NULL.
 

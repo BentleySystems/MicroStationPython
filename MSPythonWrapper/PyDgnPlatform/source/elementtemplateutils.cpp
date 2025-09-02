@@ -17,7 +17,7 @@ static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_WriteTemplate
 is used to write the template data initially and to write any changes
 to the element template data.
 
-Parameter ``templateNode``:
+:param templateNode:
     The cached ElementTemplateNode that contains the data to write.
     Returns ETSTATUS_Success if the templateNode can be written.)doc";
 
@@ -25,10 +25,10 @@ static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_AttachItemToE
 element. If the schema for the instance is not in the file it will be
 added to the file.
 
-Parameter ``elemRef``:
+:param elemRef:
     The element that is to receive the instance data.
 
-Parameter ``itemInstance``:
+:param itemInstance:
     The IECInstance data to be store on the element. Returns
     ETSTATUS_Success if the itemInstance can be added to the element.)doc";
 
@@ -36,20 +36,20 @@ static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_AddItemToTemp
 element template. If the schema for the instance is not in the file it
 will be added to the file.
 
-Parameter ``templateNode``:
+:param templateNode:
     The element template node that is to receive the instance data.
 
-Parameter ``itemInstance``:
+:param itemInstance:
     The IECInstance data to be store on the element. Returns
     ETSTATUS_Success if the itemInstance can be added to the element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_IsTemplateInUse =R"doc(Return true if the element template is reference by any graphic
 element in any loaded model.
 
-Parameter ``templateNode``:
+:param templateNode:
     The element template node to check.
 
-Parameter ``loadAllModels``:
+:param loadAllModels:
     If true then all models in the file containing the template node
     are loaded. This is the safest way to guarantee the template is
     not referenced although it could cause unloaded models to be
@@ -58,7 +58,7 @@ Parameter ``loadAllModels``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetTemplateNodeUsingDependentElement =R"doc(Return a pointer to an existing Element Template that is reference by
 the specified element.
 
-Parameter ``elementRef``:
+:param elementRef:
     The path of the element template to locate. Returns a valid
     ElementTemplateNodePtr if the element contains a template
     reference and the element template can be located.)doc";
@@ -67,10 +67,10 @@ static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_FindTemplateN
 a path and an owner. The owner is used to determine the file that
 contains the element template.
 
-Parameter ``elementTemplatePath``:
+:param elementTemplatePath:
     The path of the element template to locate.
 
-Parameter ``owner``:
+:param owner:
     The owner of the XDataTree used to cache the data. This is used to
     determine the DgnFile to search. Returns a valid
     ElementTemplateNodePtr if the template can be located.)doc";
@@ -78,10 +78,10 @@ Parameter ``owner``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_CreateByPath =R"doc(Create a new Element Template and return a pointer to the created
 node. If needed this method will create the parent template group(s).
 
-Parameter ``fullPath``:
+:param fullPath:
     The path of the element template to create.
 
-Parameter ``owner``:
+:param owner:
     The XDataTreeOwner that is to hold the element template. The owner
     is used to determine the owning DgnFile. Returns ETSTATUS_Success
     if the template can be created.
@@ -97,7 +97,7 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_DeleteTemplateNode =R"doc(Delete an Element Template. The method verifies the template is not
 referenced by any elements in any loaded models before deleting.
 
-Parameter ``templateNode``:
+:param templateNode:
     The cached element template node used to determine template
     ElementId and file. Returns ETSTATUS_Success if the template can
     be deleted.)doc";
@@ -108,7 +108,7 @@ template is not referenced by any graphic elements before deleting.
 See method IsTemplateInUse. It is recommended that DeleteTemplateNode
 be used.
 
-Parameter ``templateNode``:
+:param templateNode:
     The cached element template node used to determine template
     ElementId and file. Returns ETSTATUS_Success if the template can
     be deleted.)doc";
@@ -116,10 +116,10 @@ Parameter ``templateNode``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_ScheduleTemplateReferenceAttachment =R"doc(Schedule the attachment of a reference between an element and an
 element template.
 
-Parameter ``graphicElemHandle``:
+:param graphicElemHandle:
     The element that is to receive the element template reference.
 
-Parameter ``templateNode``:
+:param templateNode:
     The cached element template node. If the node is not in the same
     file as the graphicElemHandle then the template is copied to that
     file. Returns ETSTATUS_Success if the template reference can be
@@ -128,13 +128,13 @@ Parameter ``templateNode``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_SetReferencedTemplateID =R"doc(Create a reference between an element and an existing element template
 in the same file as the element.
 
-Parameter ``graphicElemHandle``:
+:param graphicElemHandle:
     The element that is to receive the element template reference.
 
-Parameter ``templateID``:
+:param templateID:
     The ElementId to the type 66 that holds the element template data.
 
-Parameter ``applyDefaultSymbology``:
+:param applyDefaultSymbology:
     If true the default symbology from the template is applied to the
     element. Returns ETSTATUS_Success if the template reference can be
     added to the element.)doc";
@@ -142,7 +142,7 @@ Parameter ``applyDefaultSymbology``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetReferencedTemplateIDFromHandle =R"doc(Return the ElementId for the Element Template referenced by the
 specified element.
 
-Parameter ``graphicElemHandle``:
+:param graphicElemHandle:
     The element that contains a reference to an element template.
     Returns 0 if the element does not contain an element template
     reference.)doc";
@@ -150,11 +150,11 @@ Parameter ``graphicElemHandle``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetReferencedTemplateID =R"doc(Return the ElementId for the Element Template referenced by the
 specified element.
 
-Parameter ``pTemplateID``:
+:param pTemplateID:
     Pointer to the ElementId of the host Type 66 element. If NULL the
     value is not returned.
 
-Parameter ``elemRef``:
+:param elemRef:
     The element that contains a reference to an element template.
     Returns ETSTATUS_Success if the template data can be extracted
 
@@ -170,15 +170,15 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetReferencedTemplateData =R"doc(Return both the full path and the ElementId for the Element Template
 referenced by the specified element.
 
-Parameter ``elementTemplatePath``:
+:param elementTemplatePath:
     Pointer to the WString to recieve the element template path. If
     NULL the value is not returned.
 
-Parameter ``templateId``:
+:param templateId:
     Pointer to the ElementId of the host Type 66 element. If NULL the
     value is not returned.
 
-Parameter ``elementRef``:
+:param elementRef:
     The element that contains a reference to an element template.
     
 Returns (Tuple, 0):
@@ -194,14 +194,14 @@ Returns (Tuple, 2):
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetTemplateIDFromPath =R"doc(Return the ElementId of the host type 66 element that hold element
 template data.
 
-Parameter ``pTemplateID``:
+:param pTemplateID:
     The ElementId to return
 
-Parameter ``wPath``:
+:param wPath:
     The path to the Element Template in the cache XDataTree that holds
     elment template data in the specified file..
 
-Parameter ``dgnFileP``:
+:param dgnFileP:
     The file that contains the element template definition. Returns
     
    
@@ -220,13 +220,13 @@ Returns (Tuple, 2):
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetPathForTemplate =R"doc(Return the full path for the Element Template referenced by the
 specified element.
 
-Parameter ``templatePath``:
+:param templatePath:
     The element template path.
 
-Parameter ``templateID``:
+:param templateID:
     The element of the Element Template host Type 66 element.
 
-Parameter ``modelRef``:
+:param modelRef:
     The modelRef used to determine the file that contains the element
     template. Returns ETSTATUS_Success if the template path can be
     extracted.)doc";
@@ -234,27 +234,27 @@ Parameter ``modelRef``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetReferencedTemplate =R"doc(Return pointer to the Element Template referenced by the specified
 element.
 
-Parameter ``elemRef``:
+:param elemRef:
     The element that contains a reference to an element template.
     Returns ETSTATUS_Success if the template path can be extracted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_GetPathForReferencedTemplate =R"doc(Return the full path for the Element Template referenced by the
 specified element.
 
-Parameter ``templatePath``:
+:param templatePath:
     The element template path.
 
-Parameter ``elemRef``:
+:param elemRef:
     The element that contains a reference to an element template.
     Returns ETSTATUS_Success if the template path can be extracted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_AttachMaterialLinkages =R"doc(Add Material Linkage for material specified in element template to
 specified element.
 
-Parameter ``graphicElemHandle``:
+:param graphicElemHandle:
     The element that is to recieve the material linkage.
 
-Parameter ``templateNode``:
+:param templateNode:
     The node containing a material specification Returns
     ETSTATUS_Success if material linkage can be attached.)doc";
 
@@ -262,7 +262,7 @@ static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_ScheduleTempl
 Element Template from graphic element. The removal is processed when
 the element is written to the file.
 
-Parameter ``graphicElemHandle``:
+:param graphicElemHandle:
     The element that contains a reference to an element template
     Returns ETSTATUS_Success if template reference removal is
     scheduled.)doc";
@@ -270,7 +270,7 @@ Parameter ``graphicElemHandle``:
 static const char * __doc_Bentley_DgnPlatform_ElementTemplateUtils_RemoveTemplateReferenceFromElement =R"doc(Remove reference to an Element Template from a persisted graphic
 element.
 
-Parameter ``elemRef``:
+:param elemRef:
     The element that contains a reference to an element template
     Returns ETSTATUS_Success if template reference can be removed.)doc";
 

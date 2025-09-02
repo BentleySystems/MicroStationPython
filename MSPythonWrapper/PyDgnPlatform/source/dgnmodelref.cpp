@@ -14,7 +14,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnModelRef_Is3d =R"doc(Query if t
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelRef_GetLevelCache =R"doc(Get the level cache for this model reference.
 
-Returns:
+:returns:
     a LevelCache. If this model is a
     Bentley::DgnPlatform::DgnAttachment, then the returned level cache
     will be a Bentley::DgnPlatform::DgnAttachmentLevelCache.)doc";
@@ -60,7 +60,7 @@ Remark:
     i.e., direct attachments. It does not recurse and look for nested
     attachments.
 
-Parameter ``attachmentID``:
+:param attachmentID:
     The element id of the attachment element
 
 See also:
@@ -71,68 +71,47 @@ The reachable set includes all elements in this model as well as all
 elements in models attached to this model, including nested
 attachments.
 
-Returns:
+:returns:
     A collection of Elements. <p><h3>Example:</h3>
-
-``
-DgnModelRefR model = ... ;
-for each (ElementHandle elem in model.GetReachableElements())
-  {
-   WString typeString;
-
-   elem.GetHandler().GetTypeName(typeString, 5000);
-
-   printf (" Reached element of type:% S \ n ", typeString.c_str());
-  }
-``)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelRef_GetReachableModelRefs =R"doc(Get an iterable collection of modelRefs that includes 'this' modelRef,
 its attachments and all nested attachments. The returned modelRefs can
 refer to missing attachments, so a NULL check is required to determine
 if each modelRef refers to an actual model.
 
-Returns:
+:returns:
     A collection of modelRefs. <p><h3>Example:</h3>
 
-``
-DgnModelRefR model = ... ;
-for each (DgnModelRefP modelRef in model.GetReachableModelRefs())
-   {
-    DgnFileP  file  = modelRef->GetDgnFileP();
-    DgnModelP model = modelRef->GetDgnModelP();
-
-    if (file && model)
-        printf (" Reached file % S, model % S \ n ", file->GetName(), model->GetModelName());
-   }
-``)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelRef_CreateDgnAttachment =R"doc(Attach the specified model in the specified file to this model. This
 creates a new Bentley::DgnPlatform::DgnAttachment.
 
-Parameter ``attachment``:
+:param attachment:
     newly created attachment
 
-Parameter ``moniker``:
+:param moniker:
     Identifies the document to be referenced
 
-Parameter ``modelName``:
+:param modelName:
     The model within the target file to be referenced
 
-Parameter ``loadCache``:
+:param loadCache:
     True to load the dgnModel.
 
-Returns:
+:returns:
     non-zero status if the reference could not be created. Typically,
-    the error will be one of:\li DGNOPEN_STATUS_FileNotFound The file
-    identified by *document* could not be found. \li
+    the error will be one of: DGNOPEN_STATUS_FileNotFound The file
+    identified by *document* could not be found. 
     DGNMODEL_STATUS_NotFound The model identified by *modelName* could
     not be found in the file. Other DGNOPEN errors could also be
     returned. @Remarks The parameters of the new
-    Bentley::DgnPlatform::DgnAttachment are set up as follows:\li
-    scale mode = true scale \li display, display raster = on if
-    primary attachment, off if nested attachment \li lstyle scale = on
-    for DWG, otherwise off \li origin and rotation = coincident \li
-    reference number = next available \li logical name = computed
+    Bentley::DgnPlatform::DgnAttachment are set up as follows:
+    scale mode = true scale  display, display raster = on if
+    primary attachment, off if nested attachment  lstyle scale = on
+    for DWG, otherwise off  origin and rotation = coincident 
+    reference number = next available  logical name = computed
     unique logical name @Remarks This function does not add the new
     attachment as an element to the model. Call
     Bentley::DgnPlatform::DgnAttachment::Write @Remarks If *fileName*

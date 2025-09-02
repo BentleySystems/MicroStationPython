@@ -17,12 +17,12 @@ static const char * __doc_Bentley_DgnPlatform_AccuSnap_DropEventHandler =R"doc(D
 this call, handler will not be notified of future AccuSnapHandler
 events.
 
-Parameter ``accuSnapHandler``:
+:param accuSnapHandler:
     the AccuSnapHandler to drop.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AccuSnap_AddEventHandler =R"doc(Add a new AccuSnapHandler to the list of installed AccuSnapHandlers.
 
-Parameter ``accuSnapHandler``:
+:param accuSnapHandler:
     New AccuSnapHandler to add)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AccuSnap_ResetButton =R"doc(Can be called by tools to advance to the next AccuSnap/AutoLocate hit
@@ -32,7 +32,7 @@ default implementation of DgnElementSetTool::_OnResetButton.)doc";
 static const char * __doc_Bentley_DgnPlatform_AccuSnap_Suspend =R"doc(Can be called by a tool to temporarily suspend Accusnap. Calls to this
 function should be paired.
 
-Parameter ``doSuspend``:
+:param doSuspend:
     true to suspend AccuSnap, false to resume it.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AccuSnap_Clear =R"doc(Clear the current AccuSnap/AutoLocate path so that it is no longer
@@ -41,10 +41,10 @@ snapped or hilited.)doc";
 static const char * __doc_Bentley_DgnPlatform_AccuSnap_SetComponentMode =R"doc(@note Resets to default value of ComponentMode::None whenever locate
 is enabled.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_AccuSnap_IsLocateEnabled =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_AccuSnap_IsLocateEnabled =R"doc(:returns:
     true if AutoLocate has been enabled by the current tool.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_AccuSnap_IsSnapEnabled =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_AccuSnap_IsSnapEnabled =R"doc(:returns:
     true if AccuSnap has been enabled by the current tool.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AccuSnap_EnableLocate =R"doc(Set the enabled state of AutoLocate for the current tool @note Even if
@@ -55,38 +55,38 @@ static const char * __doc_Bentley_DgnPlatform_AccuSnap_EnableSnap =R"doc(Set the
 yesNo is true, AccuSnap will not be enabled unless the user has also
 enabled it.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_AccuSnap_UserWantsLocates =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_AccuSnap_UserWantsLocates =R"doc(:returns:
     true if the user has enabled AutoLocate. Controlled by " Identify Elements Automatically " preference.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_AccuSnap_UserWantsSnaps =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_AccuSnap_UserWantsSnaps =R"doc(:returns:
     true if the user has enabled AccuSnap.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_AccuSnap_IsHot =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_AccuSnap_IsHot =R"doc(:returns:
     true if AccuSnap is currently active and snapped to an element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AccuSnap_IsActive =R"doc(Determine whether AccuSnap is currently active. To be active both the
 tool and the user must indicate that they want it.
 
-Parameter ``ev``:
+:param ev:
     The current button event. Used to check the modifier keys that can
     temporarily enable/disable AccuSnap.
 
-Returns:
+:returns:
     true if active.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TentativePoint_GetInstance =R"doc(Get the current TentativePoint instance.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TentativePoint_Clear =R"doc(Clear the current tentative point so that it is no longer active.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_TentativePoint_GetPoint =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_TentativePoint_GetPoint =R"doc(:returns:
     The current tentative point location as adjusted by the snap mode
     and locks.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_TentativePoint_IsSnapped =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_TentativePoint_IsSnapped =R"doc(:returns:
     true if the tentative point is currently active and snapped to an
     element.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_TentativePoint_IsActive =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_TentativePoint_IsActive =R"doc(:returns:
     true if the tentative point is currently active.)doc";
 
 //=======================================================================================

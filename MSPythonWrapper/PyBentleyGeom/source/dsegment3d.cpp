@@ -13,186 +13,186 @@ static const char * __doc_Bentley_Geom_DSegment3d_IntersectXY =R"doc(Return the 
 segments as viewed in XY. (z coordinates of the outputs pointA and
 pointB may differ)
 
-Parameter ``[out]``:
+:param (output):
     fractionA fractional position on segmentA
 
-Parameter ``[out]``:
+:param (output):
     fractionB fractional position on segmentB
 
-Parameter ``[out]``:
+:param (output):
     pointA point on segmentA
 
-Parameter ``[out]``:
+:param (output):
     pointB point on segmentB
 
-Parameter ``[in]``:
+:param (input):
     segmentA first line segment.
 
-Parameter ``[in]``:
+:param (input):
     segmentB second line segment.
 
-Returns:
+:returns:
     false if segments are parallel.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_ClosestApproachBoundedXY =R"doc(Find the closest approach of two bounded segments, considering only xy
 parts of distance
 
-Parameter ``[out]``:
+:param (output):
     fraction0 parameter on first segment
 
-Parameter ``[out]``:
+:param (output):
     fraction1 parameter on second segment
 
-Parameter ``[out]``:
+:param (output):
     point0 point on first ray.
 
-Parameter ``[out]``:
+:param (output):
     point1 point on second ray.
 
-Parameter ``[out]``:
+:param (output):
     segment0 first segment
 
-Parameter ``[out]``:
+:param (output):
     segment1 second segment)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_ClosestApproachUnbounded =R"doc(Find the closest approach of two unbounded segments
 
-Parameter ``[out]``:
+:param (output):
     fraction0 parameter on first segment.
 
-Parameter ``[out]``:
+:param (output):
     fraction1 parameter on second segment.
 
-Parameter ``[out]``:
+:param (output):
     point0 point on first ray.
 
-Parameter ``[out]``:
+:param (output):
     point1 point on second ray.
 
-Parameter ``[out]``:
+:param (output):
     segment0 first segment
 
-Parameter ``[out]``:
+:param (output):
     segment1 second segment
 
-Returns:
+:returns:
     false if parallel segments)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_ClosestApproachBounded =R"doc(Find the closest approach of two bounded segments
 
-Parameter ``[out]``:
+:param (output):
     fraction0 parameter on first segment.
 
-Parameter ``[out]``:
+:param (output):
     fraction1 parameter on second segment.
 
-Parameter ``[out]``:
+:param (output):
     point0 point on first ray.
 
-Parameter ``[out]``:
+:param (output):
     point1 point on second ray.
 
-Parameter ``[out]``:
+:param (output):
     segment0 first segment
 
-Parameter ``[out]``:
+:param (output):
     segment1 second segment)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_WireCentroid =R"doc(Compute the length (unit density) and wire centroid. Note that a zero
 length line has zero length but the (single) coordinate is a well
 defined centroid.
 
-Parameter ``[out]``:
+:param (output):
     length line length.
 
-Parameter ``[out]``:
+:param (output):
     centroid centroid point.
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start fraction for interval to measure.
 
-Parameter ``[in]``:
+:param (input):
     fraction1 end fraction for interval to measure.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_ClosestPointBoundedXY =R"doc(Find the closest point (projection or end), as viewed in xy plane,
 after applying optional transformation.
 
-Parameter ``[out]``:
+:param (output):
     closePoint closest point, in coordinates of the input segment.
 
-Parameter ``[out]``:
+:param (output):
     closeParam parameter at closest point
 
-Parameter ``[out]``:
+:param (output):
     distanceXY distance in transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     spacePoint world coordinates of test point.
 
-Parameter ``[in]``:
+:param (input):
     worldToLocal optional transformation.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_LengthToFraction =R"doc(Compute the fraction parameter corresponding to a specified arc length
 away from a specified start fraction. (inverse of fractions to
 arcStep)
 
-Parameter ``[out]``:
+:param (output):
     fraction1 fraction at end of interval.
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start fraction for interval to measure.
 
-Parameter ``[in]``:
+:param (input):
     arcStep arc length to move. Negative arc length moves backwards.
 
-Returns:
+:returns:
     true if the fractional step was computed.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_FractionToLength =R"doc(Compute the (signed) arc length between specified fractional
 parameters.
 
-Parameter ``[out]``:
+:param (output):
     arcLength computed arc length. Negative if fraction1<fraction0.
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start fraction for interval to measure.
 
-Parameter ``[in]``:
+:param (input):
     fraction1 end fraction for interval to measure.
 
-Returns:
+:returns:
     true if the arc length was computed.)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_Length =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DSegment3d_Length =R"doc(:returns:
     line segment length.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_InterpolateUniformArray =R"doc(Computes equidistant points along the segment.
 
-Parameter ``[out]``:
+:param (output):
     points array of computed points
 
-Parameter ``[in]``:
+:param (input):
     numPoints # points to compute.)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_SetPoint =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DSegment3d_SetPoint =R"doc(:param (output):
     pt returned point.
 
-Parameter ``[in]``:
+:param (input):
     index index of point to return.)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_GetPoint =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DSegment3d_GetPoint =R"doc(:param (output):
     pt returned point.
 
-Parameter ``[in]``:
+:param (input):
     index index of point to return.)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_FractionParameterToTangent =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DSegment3d_FractionParameterToTangent =R"doc(:param (output):
     point point on line at fractional parameter.
 
-Parameter ``[out]``:
+:param (output):
     tangent tangent vector at fractional parameter.
 
-Parameter ``[in]``:
+:param (input):
     param fractional parameter.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_PointToFractionParameter =R"doc( Returns the parameter at which a point projects to the
@@ -200,22 +200,22 @@ static const char * __doc_Bentley_Geom_DSegment3d_PointToFractionParameter =R"do
 greater than one mean the projection is outside the bounds of the line
 segment.
 
-Parameter ``[out]``:
+:param (output):
     param fraction where point projects to the line.
 
-Parameter ``[in]``:
+:param (input):
     point point to project to the line.)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_FractionToPoint =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DSegment3d_FractionToPoint =R"doc(:returns:
     point coordinates at fractional parameter.
 
-Parameter ``[in]``:
+:param (input):
     fraction fractional parameter)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_FractionParameterToPoint =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DSegment3d_FractionParameterToPoint =R"doc(:param (output):
     point coordinates at fractional parameter.
 
-Parameter ``[in]``:
+:param (input):
     param fractional parameter
 
 Remark:
@@ -223,109 +223,109 @@ Remark:
 
 static const char * __doc_Bentley_Geom_DSegment3d_SetEndPoint =R"doc(Set the " end " point for the line segment.
 
-Parameter ``point``:
+:param point:
     new end point.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_GetEndPoint =R"doc(Get end point from the line segment.
 
-Parameter ``[out]``:
+:param (output):
     pt end point of object.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_SetStartPoint =R"doc(Set the " start " point for the line segment.
 
-Parameter ``point``:
+:param point:
     new start point.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_GetStartPoint =R"doc(Get start point from the line segment.
 
-Parameter ``[out]``:
+:param (output):
     pt start point of object.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_Intersect =R"doc(Return the intersection of the (unbounded) segment with a plane.
 
-Parameter ``[in]``:
+:param (input):
     intPoint intersection point
 
-Parameter ``[in]``:
+:param (input):
     intParam parameter along the line
 
-Parameter ``[in]``:
+:param (input):
     plane plane (origin and normal)
 
-Returns:
+:returns:
     false if line, plane are parallel.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_ProjectPointBounded =R"doc(Project a point onto the bounded line in 3D. If nearest point of
 extended line is outside the 0..1 parameter range, returned values are
 optinally restricted to nearest endpoint.
 
-Parameter ``[out]``:
+:param (output):
     closestPoint point on extended line
 
-Parameter ``[out]``:
+:param (output):
     closestParam parameter for closest point
 
-Parameter ``[in]``:
+:param (input):
     point space point.
 
-Parameter ``[in]``:
+:param (input):
     extend0 true to extend backwards before 0
 
-Parameter ``[in]``:
+:param (input):
     extend1 true to extend forwards from 1)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_ProjectPointXY =R"doc(Project a point onto the extended line using only xy parts.
 
-Parameter ``[out]``:
+:param (output):
     closestPoint point on extended line
 
-Parameter ``[out]``:
+:param (output):
     closestParam parameter for closest point
 
-Parameter ``[in]``:
+:param (input):
     point space point.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_ProjectPoint =R"doc(Project a point onto the extended line in 3D.
 
-Parameter ``[out]``:
+:param (output):
     closestPoint point on extended line
 
-Parameter ``[out]``:
+:param (output):
     closestParam parameter for closest point
 
-Parameter ``[in]``:
+:param (input):
     point space point.)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_ProjectedParameterRange =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DSegment3d_ProjectedParameterRange =R"doc(:returns:
     range when projected to fraction space of the ray
 
-Parameter ``[in]``:
+:param (input):
     ray)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_GetRange =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DSegment3d_GetRange =R"doc(:param (output):
     range range of segment.
 
-Returns:
+:returns:
     always true)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_IsAlmostSinglePoint =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DSegment3d_IsAlmostSinglePoint =R"doc(:returns:
     true if endpoint are AlmostEqual())doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_IsSinglePoint =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DSegment3d_IsSinglePoint =R"doc(:returns:
     true if endpoint are identical (bitwise))doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_IsAlmostEqual =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DSegment3d_IsAlmostEqual =R"doc(:returns:
     true if AlmostEqual endpoints)doc";
 
-static const char * __doc_Bentley_Geom_DSegment3d_LengthSquared =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DSegment3d_LengthSquared =R"doc(:returns:
     squared length of the segment.)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_GetEndPoints =R"doc(Return the endpoints of the segment.
 
-Parameter ``[out]``:
+:param (output):
     point0 start point
 
-Parameter ``[out]``:
+:param (output):
     point1 end point)doc";
 
 static const char * __doc_Bentley_Geom_DSegment3d_InitProduct =R"doc( initialize as transform of other segment.)doc";

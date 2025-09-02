@@ -12,107 +12,107 @@
 
 static const char * __doc_Bentley_DgnPlatform_ShapeHandler_CreateShapeElement =R"doc(Create a new SHAPE_ELM with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``points``:
+:param points:
     input point buffer.
 
-Parameter ``numVerts``:
+:param numVerts:
     number of points.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated. Bentley Systems +---------------+---------------+-----
     ----------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LineStringHandler_CreateLineStringElement =R"doc(Create a new LINE_STRING_ELM with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``points``:
+:param points:
     input point buffer.
 
-Parameter ``numVerts``:
+:param numVerts:
     number of points.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated. Bentley Systems +---------------+---------------+-----
     ----------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LineHandler_CreateLineElement =R"doc(Create a new LINE_ELM with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``segment``:
+:param segment:
     start and end points of line.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated. Bentley Systems +---------------+---------------+-----
     ----------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointStringHandler_CreatePointStringElement =R"doc(Create a new POINT_STRING_ELM with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``points``:
+:param points:
     input point buffer.
 
-Parameter ``matrices``:
+:param matrices:
     optional array of per-point rotations (usually NULL).
 
-Parameter ``numVerts``:
+:param numVerts:
     number of points (and matrices if not NULL)
 
-Parameter ``disjoint``:
+:param disjoint:
     Whether point displays as disjoint or a continous linestring.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated. Bentley Systems +---------------+---------------+-----
     ----------+---------------+---------------+------)doc";
@@ -130,6 +130,13 @@ void def_LinearHandlers(py::module_& m)
                   {
                   return PointStringHandler::CreatePointStringElement(eeh, templateEh, points.data(), matrices.data(), points.size(), disjoint, is3d, modelRef);
                   }, "eeh"_a, "templateEh"_a, "points"_a, "matrices"_a, "disjoint"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, PointStringHandler, CreatePointStringElement));
+
+    c1.def_static("CreatePointStringElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, py::list const& points, bvector<RotMatrix> const& matrices, bool disjoint, bool is3d, DgnModelRefR modelRef)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                  return PointStringHandler::CreatePointStringElement(eeh, templateEh, cppPoints.data(), matrices.data(), cppPoints.size(), disjoint, is3d, modelRef);
+                  }, "eeh"_a, "templateEh"_a, "points"_a, "matrices"_a, "disjoint"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, PointStringHandler, CreatePointStringElement));
+
 
     c1.def_property_readonly_static("Instance", [] (py::object const&) { return std::unique_ptr< PointStringHandler, py::nodelete>(&PointStringHandler::GetInstance()); });
     c1.def_static("GetInstance", &PointStringHandler::GetInstance, py::return_value_policy::reference);
@@ -157,6 +164,14 @@ void def_LinearHandlers(py::module_& m)
                   return LineStringHandler::CreateLineStringElement(eeh, templateEh, points.data(), points.size(), is3d, modelRef);
                   }, "eeh"_a, "templateEh"_a, "points"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, LineStringHandler, CreateLineStringElement));
 
+
+    c4.def_static("CreateLineStringElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, py::list const& points, bool is3d, DgnModelRefR modelRef)
+                {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, dpoints, DPoint3dArray, DPoint3d);
+                return LineStringHandler::CreateLineStringElement(eeh, templateEh, dpoints.data(), dpoints.size(), is3d, modelRef);
+                }, "eeh"_a, "templateEh"_a, "points"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, LineStringHandler, CreateLineStringElement));
+
+
     c4.def_property_readonly_static("Instance", [] (py::object const&) { return std::unique_ptr< LineStringHandler, py::nodelete>(&LineStringHandler::GetInstance()); });
     c4.def_static("GetInstance", &LineStringHandler::GetInstance, py::return_value_policy::reference_internal);
 
@@ -167,6 +182,12 @@ void def_LinearHandlers(py::module_& m)
     c5.def_static("CreateShapeElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, DPoint3dArray const& points, bool is3d, DgnModelRefR modelRef)
                   {
                   return ShapeHandler::CreateShapeElement(eeh, templateEh, points.data(), points.size(), is3d, modelRef);
+                  }, "eeh"_a, "templateEh"_a, "points"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, ShapeHandler, CreateShapeElement));
+
+    c5.def_static("CreateShapeElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, py::list const& points, bool is3d, DgnModelRefR modelRef)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                  return ShapeHandler::CreateShapeElement(eeh, templateEh, cppPoints.data(), cppPoints.size(), is3d, modelRef);
                   }, "eeh"_a, "templateEh"_a, "points"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, ShapeHandler, CreateShapeElement));
     
     c5.def_property_readonly_static("Instance", [] (py::object const&) { return std::unique_ptr< ShapeHandler, py::nodelete>(&ShapeHandler::GetInstance()); });

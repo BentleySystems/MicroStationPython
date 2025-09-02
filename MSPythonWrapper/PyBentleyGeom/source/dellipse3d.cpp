@@ -13,117 +13,117 @@
 static const char * __doc_Bentley_Geom_DEllipse3d_Construct_Point_Direction_TangentXY =R"doc(Construct circular arc(s) with given start point and tangent, tangent
 to a given ray.
 
-Parameter ``[out]``:
+:param (output):
     ellipse constructed ellipses.
 
-Parameter ``[out]``:
+:param (output):
     fractionB parameters on the ray.
 
-Parameter ``[in]``:
+:param (input):
     pointA start ponit
 
-Parameter ``[in]``:
+:param (input):
     directionA start tangent
 
-Parameter ``[in]``:
+:param (input):
     rayB ray for tangency. The tangency can occur anywhere on the ray.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_TryConstruct_EdgePoint_XPoint_EdgePoint_XAngle =R"doc(Construct an ellipse (it is unique if it exists) with given x axis,
 start point, x axis point, and end point.
 
-Parameter ``[out]``:
+:param (output):
     ellipse constructed ellipse.
 
-Parameter ``[in]``:
+:param (input):
     edgePoint0 start point
 
-Parameter ``[in]``:
+:param (input):
     xPoint x axis extrema
 
-Parameter ``[in]``:
+:param (input):
     edgePoint1 end point
 
-Parameter ``[in]``:
+:param (input):
     xAngle angle from global x axis to ellipse x axis)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_Construct_XPoint_EdgePoint_EdgePoint_XRadius =R"doc(Construct (up to 3) ellipses defined by known primary radius, primary
 axis point, and two other edge points
 
-Parameter ``[out]``:
+:param (output):
     ellipses computed ellipses.
 
-Parameter ``[in]``:
+:param (input):
     xPoint x axis point
 
-Parameter ``[in]``:
+:param (input):
     edgePoint0 any other point on the ellipse.
 
-Parameter ``[in]``:
+:param (input):
     edgePoint1 any other point on the ellipse.
 
-Parameter ``[in]``:
+:param (input):
     a x axis radius.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_Construct_XRadius_YRadius_XPoint_EdgePoint =R"doc(Construct (up to 4) ellipses defined by known primary radii, primary
 axis point, and another edge point.
 
-Parameter ``[out]``:
+:param (output):
     ellipses computed ellipses.
 
-Parameter ``[in]``:
+:param (input):
     a x axis radius.
 
-Parameter ``[in]``:
+:param (input):
     b y axis radius.
 
-Parameter ``[in]``:
+:param (input):
     xPoint x axis point
 
-Parameter ``[in]``:
+:param (input):
     edgePoint any other point on the ellipse.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_WireCentroid =R"doc(Compute the length (unit density) and wire centroid. Note that an
 ellipse with zero sweephas zero length but the (single) coordinate is
 a well defined centroid.
 
-Parameter ``[out]``:
+:param (output):
     length length.
 
-Parameter ``[out]``:
+:param (output):
     centroid centroid point.
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start fraction of active part of sweep.
 
-Parameter ``[in]``:
+:param (input):
     fraction1 end fraction of active part of sweep.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_ClosestPointBoundedXY =R"doc(Find the closest point (projection or end), as viewed in xy plane,
 after applying optional transformation.
 
-Parameter ``[out]``:
+:param (output):
     closePoint closest point, in coordinates of the input segment.
 
-Parameter ``[out]``:
+:param (output):
     closeParam parameter at closest point
 
-Parameter ``[out]``:
+:param (output):
     distanceXY distance in transformed coordinates
 
-Parameter ``[in]``:
+:param (input):
     spacePoint world coordinates of test point.
 
-Parameter ``[in]``:
+:param (input):
     worldToLocal optional transformation.)doc";
 
-static const char * __doc_Bentley_Geom_DEllipse3d_AlignedRange =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DEllipse3d_AlignedRange =R"doc(:param (output):
     localToGlobal coordinate frame with origin at lower right of local
     range.
 
-Parameter ``[out]``:
+:param (output):
     globalToLocal transformation from world to local
 
-Parameter ``[out]``:
+:param (output):
     range ellipse range in the local coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetDGNFields2d =R"doc()doc";
@@ -131,178 +131,178 @@ static const char * __doc_Bentley_Geom_DEllipse3d_GetDGNFields2d =R"doc()doc";
 static const char * __doc_Bentley_Geom_DEllipse3d_GetDGNFields3d =R"doc(@description Fill in ellipse data from data fields in DGN 3d ellipse
 element.
 
-Parameter ``[out]``:
+:param (output):
     centerOUT center of ellipse.
 
-Parameter ``[out]``:
+:param (output):
     pQuatWXYZ quaternion for orthogonal frame. As per DGN convention,
     ordered WXYZ. If this is NULL, major and minor directions must be
     supplied as pDirection0 and pDirection90;
 
-Parameter ``[out]``:
+:param (output):
     directionX unit vector in ellipse x direction.
 
-Parameter ``[out]``:
+:param (output):
     directionY unit vector in ellipse y direction.
 
-Parameter ``[out]``:
+:param (output):
     rx scale factor (usually a true distance) for x direction.
 
-Parameter ``[out]``:
+:param (output):
     ry scale factor (usually a true distance) for y direction.
 
-Parameter ``[out]``:
+:param (output):
     startAngle start angle.
 
-Parameter ``[out]``:
+:param (output):
     sweepAngle sweep angle.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_InitFromDGNFields2d =R"doc(@description Fill in ellipse data from data fields in DGN 2d ellipse
 element.
 
-Parameter ``[in]``:
+:param (input):
     centerIN center of ellipse.
 
-Parameter ``[in]``:
+:param (input):
     direction0 ellipse x axis direction.
 
-Parameter ``[in]``:
+:param (input):
     rX scale factor for ellipse x direction.
 
-Parameter ``[in]``:
+:param (input):
     rY scale factor for ellipse y direction.
 
-Parameter ``[in]``:
+:param (input):
     startAngle start angle.
 
-Parameter ``[in]``:
+:param (input):
     sweepAngle sweep angle.
 
-Parameter ``[in]``:
+:param (input):
     zDepth z value for ellipse.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_InitFromDGNFields3d =R"doc(@description Fill in ellipse data from data fields in DGN 3d ellipse
 element.
 
-Parameter ``[in]``:
+:param (input):
     centerIN center of ellipse.
 
-Parameter ``[in]``:
+:param (input):
     directionX vector in the x axis direction. This is scaled by rX.
     (It is NOT normalized before scaling. In common use, it will be a
     unit vector.)
 
-Parameter ``[in]``:
+:param (input):
     directionY vector in the y axis direction. This is scaled by rY.
     (It is NOT normalized before scaling. In common use, it will be a
     unit vector.)
 
-Parameter ``[in]``:
+:param (input):
     rX scale factor (usually a true distance) for x direction.
 
-Parameter ``[in]``:
+:param (input):
     rY scale factor (usually a true distance) for y direction.
 
-Parameter ``[in]``:
+:param (input):
     startAngle start angle
 
-Parameter ``[in]``:
+:param (input):
     sweepAngle sweep angle)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_InitFromCenterMajorAxisPointAndThirdPoint =R"doc(@description Initialize an ellipse from center, primary axis point,
 and additional pass-though point.
 
-Parameter ``[in]``:
+:param (input):
     centerIN center point of ellipse.
 
-Parameter ``[in]``:
+:param (input):
     point0 point to appear at the zero degree point. The ellipse must
     pass through this point as a major or minor axis point, i.e. its
     tangent must be perpendicular to the vector from the center to
     this point.
 
-Parameter ``[in]``:
+:param (input):
     point1 additional pass-through point.
 
-Returns:
+:returns:
     false if center, point0 and point1 are not independent, or if
     point1 is too far away from center to allow ellipse constrution.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_XySweepProperties =R"doc(@description Compute area and swept angle as seen from given point.
 
-Parameter ``[out]``:
+:param (output):
     area swept area
 
-Parameter ``[out]``:
+:param (output):
     sweepOUT swept angle (in radians)
 
-Parameter ``[in]``:
+:param (input):
     point base point for sweep line.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_ClosestPointBounded =R"doc(@description Find the closest point on a bounded ellipse, considering
 both endpoints and perpendicular projections.
 
-Parameter ``[out]``:
+:param (output):
     minAngle angular parameter at closest point
 
-Parameter ``[out]``:
+:param (output):
     minDistanceSquared squared distance to closest point
 
-Parameter ``[out]``:
+:param (output):
     minPoint closest point
 
-Parameter ``[in]``:
+:param (input):
     point space point
 
-Returns:
+:returns:
     always true)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_ClosestPointXYBounded =R"doc(@description Find the closest point on a bounded ellipse, considering
 both endpoints and perpendicular projections, and ignoring z of both
 the ellipse and space point.
 
-Parameter ``[out]``:
+:param (output):
     minAngle angular parameter at closest point
 
-Parameter ``[out]``:
+:param (output):
     minDistanceSquared squared distance to closest point
 
-Parameter ``[out]``:
+:param (output):
     minPoint closest point
 
-Parameter ``[in]``:
+:param (input):
     point space point
 
-Returns:
+:returns:
     always true)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_IsCCWSweepXY =R"doc(@description Test if the XY projection of the ellipse is CCW when
 considering both the sweep sign and the vector directions.
 
-Returns:
+:returns:
     true if circular)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_IsCircularXY =R"doc(@description Test if the XY projection of the ellipse is circular.
 
-Returns:
+:returns:
     true if circular)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_IsCircular =R"doc(@description Test if the ellipse is circular.
 
-Returns:
+:returns:
     true if circular)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_SolveTangentsPerpendicularToVector =R"doc(@description Find angles at which the ellipse tangent vector is
 perpendicular to given vector.
 
-Parameter ``[out]``:
+:param (output):
     angles 0,1, or 2 angles. This is an array that must be allocated
     by the caller.
 
-Parameter ``[in]``:
+:param (input):
     vector perpendicular vector.
 
-Returns:
+:returns:
     The number of solutions, i.e. 0, 1, or 2)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_IntersectPlane =R"doc(@description Find intersections of a (full) ellipse with a plane.
@@ -317,20 +317,20 @@ Remark:
     cosine of angle <LI>y == sine of angle <LI>z == angle in radians
     </UL>
 
-Parameter ``[out]``:
+:param (output):
     trigPoints 2 points:cosine, sine, theta values of plane
     intersection
 
-Parameter ``[in]``:
+:param (input):
     plane homogeneous plane equation
 
-Returns:
+:returns:
     The number of intersections, i.e. 0, 1, or 2)doc";
 
-static const char * __doc_Bentley_Geom_DEllipse3d_ProjectedParameterRange =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DEllipse3d_ProjectedParameterRange =R"doc(:returns:
     range when projected to fraction space of the ray
 
-Parameter ``[in]``:
+:param (input):
     ray)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetLocalRange =R"doc(@description Compute the range of the ellipse in its own coordinate
@@ -340,12 +340,12 @@ Remark:
     s This depends on the start and sweep angles but not the center or
     axis coordinates.
 
-Parameter ``[out]``:
+:param (output):
     range computed range)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetRange =R"doc(@description Compute the xyz range limits of a 3D ellipse.
 
-Parameter ``[out]``:
+:param (output):
     range computed range)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FractionToLength =R"doc(@description Compute the (signed) arc length between specified
@@ -354,16 +354,16 @@ fractional parameters.
 Remark:
     s Fractions outside [0,1] return error.
 
-Parameter ``[out]``:
+:param (output):
     arcLength computed arc length. Negative if fraction1<fraction0.
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start fraction for interval to measure
 
-Parameter ``[in]``:
+:param (input):
     fraction1 end fraction for interval to measure
 
-Returns:
+:returns:
     true if the arc length was computed.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_InverseArcLength =R"doc(@description Return the sweep angle corresponding to an arc length.
@@ -372,24 +372,24 @@ Remark:
     s Negative returned sweep angle corresponds to arclength traversed
     in the opposite direction of the ellipse sweep.
 
-Parameter ``[in]``:
+:param (input):
     arcLength arc length to invert
 
-Returns:
+:returns:
     sweep angle)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_ArcLength =R"doc(@description Return arc length of ellipse.
 
-Returns:
+:returns:
     arc length of ellipse.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_TangentMagnitude =R"doc(@description Compute the magnitude of the tangent vector to the
 ellipse at the specified angle.
 
-Parameter ``[in]``:
+:param (input):
     theta angular parameter
 
-Returns:
+:returns:
     tangent magnitude)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetMajorMinorRangeMidlines =R"doc(@description Compute the range box of the ellipse in its major-minor
@@ -404,13 +404,13 @@ Remark:
     segment can be other than the start and end points of the
     ellipse.)
 
-Parameter ``[out]``:
+:param (output):
     longSegment longer axis of local conic range box
 
-Parameter ``[out]``:
+:param (output):
     shortSegment shorter axis of local conic range box
 
-Returns:
+:returns:
     size of the shorter dimension)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_InitWithPerpendicularAxes =R"doc(@description Make a copy of the source ellipse, altering the axis
@@ -420,72 +420,72 @@ perpendicular axes in the conventional major/minor axis form.
 Remark:
     s Inputs may be the same.
 
-Parameter ``[in]``:
+:param (input):
     source ellipse with unconstrained axes)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_SetSweep =R"doc(@description Set the start and sweep angles of the ellipse.
 
-Parameter ``[in]``:
+:param (input):
     startAngle start angle
 
-Parameter ``[in]``:
+:param (input):
     sweepIN sweep angle)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_SetLimits =R"doc(@description Set the start and end angles of the ellipse.
 
-Parameter ``[in]``:
+:param (input):
     startAngle start angle
 
-Parameter ``[in]``:
+:param (input):
     endAngle end angle)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetSweep =R"doc(@description Get the start and sweep angles of the ellipse.
 
-Parameter ``[out]``:
+:param (output):
     startAngle start angle
 
-Parameter ``[out]``:
+:param (output):
     sweepAngle sweep angle)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetLimits =R"doc(@description Get the start and end angles of the ellipse.
 
-Parameter ``[out]``:
+:param (output):
     startAngle start angle
 
-Parameter ``[out]``:
+:param (output):
     endAngle end angle)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_AngleToFraction =R"doc(@description Convert an angular parameter to a fraction of bounded arc
 length.
 
-Parameter ``[in]``:
+:param (input):
     angle angle (radians) to convert
 
-Returns:
+:returns:
     fractional parameter)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_IsAngleInSweep =R"doc(@description Test if a specified angle is within the sweep of the
 ellipse.
 
-Parameter ``[in]``:
+:param (input):
     angle angle (radians) to test
 
-Returns:
+:returns:
     true if angle is within the sweep angle of the elliptical arc.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_TestAndEvaluateTrigPairs =R"doc(@description Evaluate an ellipse at a number of (cosine, sine) pairs,
 removing pairs whose corresponding angle is not in range.
 
-Parameter ``[out]``:
+:param (output):
     point array of cartesian points
 
-Parameter ``[in]``:
+:param (input):
     trig array of local coords
 
-Parameter ``[in]``:
+:param (input):
     numPoint number of pairs
 
-Returns:
+:returns:
     number of points found to be in the angular range of the ellipse.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_EvaluateTrigPairs =R"doc(@description Evaluate an ellipse using given coefficients for the
@@ -495,48 +495,48 @@ Remark:
     s If the x,y components of the coefficients define a unit vector,
     the point is " on " the ellipse.
 
-Parameter ``[out]``:
+:param (output):
     point array of cartesian points
 
-Parameter ``[in]``:
+:param (input):
     trig array of local coords (e.g., (cos, sin)).
 
-Parameter ``[in]``:
+:param (input):
     numPoint number of pairs)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetStrokeCount =R"doc(@description Compute an estimated number of points needed to stroke a
 full ellipse to within the given chord height tolerance.
 
-Parameter ``[in]``:
+:param (input):
     nDefault default number of points on full ellipse
 
-Parameter ``[in]``:
+:param (input):
     nMax max number of points on full ellipse
 
-Parameter ``[in]``:
+:param (input):
     chordTol distance tolerance
 
-Parameter ``[in]``:
+:param (input):
     angleTol turning angle tolerance
 
-Returns:
+:returns:
     number of strokes required on the full ellipse)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_ProjectPointToPlane =R"doc(@description Project a point onto the plane of the ellipse.
 
-Parameter ``[out]``:
+:param (output):
     xYZNear projection of point onto ellipse plane
 
-Parameter ``[out]``:
+:param (output):
     coff0 coefficient on vector towards 0 degree point
 
-Parameter ``[out]``:
+:param (output):
     coff90 coefficient on vector towards 90 degree point
 
-Parameter ``[in]``:
+:param (input):
     xYZ point to project onto plane
 
-Returns:
+:returns:
     true if the plane is well defined.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_PointToAngle =R"doc(@description Compute the angular position of the point relative to the
@@ -546,10 +546,10 @@ Remark:
     s If the point is on the ellipse, this is the inverse of
     evaluating the ellipse at the angle.
 
-Parameter ``[in]``:
+:param (input):
     point point to evaluate
 
-Returns:
+:returns:
     angle in ellipse parameterization)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_PointToXYLocal =R"doc(@description Compute the local coordinates of a point in the skewed
@@ -562,73 +562,73 @@ Remark:
     and returning the coordinates of the intersection relative to the
     skewed axes of the ellipse.
 
-Parameter ``[out]``:
+:param (output):
     localPoint evaluated point. Coordinates x,y are multipliers for
     the ellipse axes. Coordinate z is height of the initial point from
     the plane of the ellipse.
 
-Parameter ``[in]``:
+:param (input):
     point point to convert to local coordinates
 
-Returns:
+:returns:
     true if ellipse axes are independent.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetXYLocalFrame =R"doc(@description Get the coordinate frame and inverse of an ellipse as
 viewed along the global z axis.
 
-Parameter ``[out]``:
+:param (output):
     frame transformation from (cosine, sine, z) coordinates to global
     xyz.
 
-Parameter ``[out]``:
+:param (output):
     inverse inverse of frame.
 
-Returns:
+:returns:
     true if the requested frames were returned.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetLocalFrame =R"doc(@description Get the coordinate frame for an ellipse. X,Y axes are at
 0 and 90 degrees. Z axis is perpendicular with magnitude equal to the
 geometric mean of the other two.
 
-Parameter ``[out]``:
+:param (output):
     frame transformation from (cosine, sine, z) coordinates to global
     xyz.
 
-Parameter ``[out]``:
+:param (output):
     inverse inverse of frame.
 
-Returns:
+:returns:
     true if the requested frames were returned.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_DeterminantJXY =R"doc(@description Compute the determinant of the Jacobian matrix for the
 transformation from local coordinates (cosine, sine) to global xy-
 coordinates.
 
-Returns:
+:returns:
     determinant of Jacobian.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FractionToAngle =R"doc(@description Convert a fractional parameter to ellipse
 parameterization angle.
 
-Parameter ``[in]``:
+:param (input):
     fraction fraction of angular range
 
-Returns:
+:returns:
     angular parameter)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FractionParameterToDerivatives =R"doc(@description Compute the ellipse xyz point and derivatives at a given
 fraction of the angular parametric range.
 
-Parameter ``[out]``:
+:param (output):
     point3dX point on ellipse
 
-Parameter ``[out]``:
+:param (output):
     dX second derivative vector
 
-Parameter ``[out]``:
+:param (output):
     ddX second derivative vector
 
-Parameter ``[in]``:
+:param (input):
     fraction fractional parameter for evaluation)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FractionToPoint =R"doc(return ellipse point at fractional position in its angular sweep.)doc";
@@ -636,30 +636,30 @@ static const char * __doc_Bentley_Geom_DEllipse3d_FractionToPoint =R"doc(return 
 static const char * __doc_Bentley_Geom_DEllipse3d_FractionParameterToPoint =R"doc(@description Compute the ellipse xyz point at a given fraction of the
 angular parametric range.
 
-Parameter ``[out]``:
+:param (output):
     point3dX point on ellipse
 
-Parameter ``[in]``:
+:param (input):
     fraction fractional parameter for evaluation)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_EvaluateEndPoints =R"doc(@description Compute the ellipse start and end points.
 
-Parameter ``[out]``:
+:param (output):
     startPoint start point of ellipse
 
-Parameter ``[out]``:
+:param (output):
     endPoint end point of ellipse)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_Evaluate =R"doc(@description Compute the ellipse xyz point at a given parametric (xy)
 coordinate.
 
-Parameter ``[out]``:
+:param (output):
     point evaluated point
 
-Parameter ``[in]``:
+:param (input):
     xx local x coordinate:cos(theta)
 
-Parameter ``[in]``:
+:param (input):
     yy local y coordinate:sin(theta))doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_RadiansToPoint =R"doc(@description return the point on the ellipse at parameteric angle.)doc";
@@ -676,59 +676,59 @@ radians), preserving direction of sweep.
 Remark:
     s Start angle is left unchanged.)doc";
 
-static const char * __doc_Bentley_Geom_DEllipse3d_IsAlmostEqual =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DEllipse3d_IsAlmostEqual =R"doc(:returns:
     true if AlmostEqual center, vectors, and angles.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_IsNearZeroRadius =R"doc(@description Test whether both vectors are near zero length.
 
-Returns:
+:returns:
     true if both radii are near zero.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_IsFullEllipse =R"doc(@description Test whether the ellipse is complete (2pi range).
 
-Returns:
+:returns:
     true if the ellipse is complete)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetScaledTransforms =R"doc(@description Extract major minor axis form of the ellipse.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld orthogonal frame with origin at center, xy axes n
     major and minor axes.
 
-Parameter ``[out]``:
+:param (output):
     r0 scale factor for column 0
 
-Parameter ``[out]``:
+:param (output):
     r1 scale factor for column 1
 
-Parameter ``[out]``:
+:param (output):
     theta0 start angle
 
-Parameter ``[out]``:
+:param (output):
     sweep sweep angle
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal inverse of localToWorld.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_GetScaledRotMatrix =R"doc(@description Extract major minor axis form of the ellipse.
 
-Parameter ``[out]``:
+:param (output):
     center ellipse center
 
-Parameter ``[out]``:
+:param (output):
     matrix columns 0, 1 are normalized ellipse basis vectors, column 2
     is their cross product
 
-Parameter ``[out]``:
+:param (output):
     r0 scale factor for column 0
 
-Parameter ``[out]``:
+:param (output):
     r1 scale factor for column 1
 
-Parameter ``[out]``:
+:param (output):
     theta0 start angle
 
-Parameter ``[out]``:
+:param (output):
     sweep sweep angle)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_SetStartEnd =R"doc(@description Set angular parameters to have given start and end
@@ -753,54 +753,54 @@ Remark:
     s Beware that the relation of supposed start/end points to the
     ellipse is ambiguous.
 
-Parameter ``[in]``:
+:param (input):
     startPoint new start point
 
-Parameter ``[in]``:
+:param (input):
     endPoint new end point
 
-Parameter ``[in]``:
+:param (input):
     ccw true to force counterclockwise direction, false for clockwise.
 
-Returns:
+:returns:
     true if the ellipse axes are independent. false if the ellipse is
     degenerate.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_InitArcFromPointTangentPoint =R"doc(@description Initialize a circular arc from start point, start
 tangent, and end point.
 
-Parameter ``[in]``:
+:param (input):
     startIN start point
 
-Parameter ``[in]``:
+:param (input):
     tangent start tangent
 
-Parameter ``[in]``:
+:param (input):
     end end point
 
-Returns:
+:returns:
     true if circular arc computed. false if start, end and tangent are
     colinear.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_InitArcFromPointPointArcLength =R"doc(@description Initialize a circlular arc from start point, end point,
 another vector which determines the plane, and the arc length.
 
-Parameter ``[in]``:
+:param (input):
     startIN start point
 
-Parameter ``[in]``:
+:param (input):
     end end point
 
-Parameter ``[in]``:
+:param (input):
     arcLength required arc length
 
-Parameter ``[in]``:
+:param (input):
     planeVector vector to be used to determine the plane of the arc.
     The plane is chosen so that it contains both the start-to-end
     vector and the plane vector, and the arc bulge is in the direction
     of the plane vector (rather than opposite).
 
-Returns:
+:returns:
     true if the arc length exceeds the chord length and the 2 points
     and plane vector determine a clear plane.)doc";
 
@@ -808,10 +808,10 @@ static const char * __doc_Bentley_Geom_DEllipse3d_FromRotatedAxes =R"doc(Return 
 vector0 and vector90 axes shifted so that the parametric start takes
 on specified value.
 
-Parameter ``[in]``:
+:param (input):
     source original ellipse.
 
-Parameter ``[in]``:
+:param (input):
     newStart the angle value that should be the start in the new
     ellispe.)doc";
 
@@ -825,7 +825,7 @@ Remark:
     coordinate will be negated, but its fractional position is
     maintained.
 
-Parameter ``[in]``:
+:param (input):
     source original ellipse)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromNegateVector90 =R"doc(Return an ellipse that sweeps the same points in space (with identical
@@ -835,7 +835,7 @@ normal))doc";
 static const char * __doc_Bentley_Geom_DEllipse3d_FromReversed =R"doc(Return an ellipse that sweeps the same points in space but in the
 reversed direction.
 
-Parameter ``[in]``:
+:param (input):
     source original ellipse)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromPerpendicularAxes =R"doc(Return an ellispe that sweeps the same points as source but has axes
@@ -844,20 +844,20 @@ perpendicular. This may choose a " small " adjustment of the axes even
 if the 90 degree axis ends up longer. Use FromMajorMinor to force the
 0 degree direction to be the larger axis.
 
-Parameter ``[in]``:
+:param (input):
     source original ellipse, in which vectors might be non
     perpendicular.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromCenterNormalRadius =R"doc(Return an (full 360 degree) circular arc with given center, plane
 normal, and radius.
 
-Parameter ``[in]``:
+:param (input):
     center ellipse center.
 
-Parameter ``[in]``:
+:param (input):
     normal plane normal.
 
-Parameter ``[in]``:
+:param (input):
     radius circle radius.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromMajorMinor =R"doc(Return an ellispe that sweeps the same points as source but has axes
@@ -865,7 +865,7 @@ adjusted so vectors to parametric 0 and 90 degree points are
 perpendicular and the 0 degree vector is the customary major (larger)
 direction.
 
-Parameter ``[in]``:
+:param (input):
     source original ellipse, in which vectors might be non
     perpendicular.)doc";
 
@@ -881,27 +881,27 @@ static const char * __doc_Bentley_Geom_DEllipse3d_FromArcCenterStartEnd =R"doc(R
 vector to given endTarget. Sweep angle is the smaller of the two
 possible sweeps.
 
-Parameter ``[in]``:
+:param (input):
     center circle center
 
-Parameter ``[in]``:
+:param (input):
     startPoint arc start point. This point determines the circle
     radius.
 
-Parameter ``[in]``:
+:param (input):
     endTarget Target point for end of circle. If it is at a different
     radius, the actual end point will be at the same radius as the
     start point.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromPointsOnArc =R"doc(@description Initialize an elliptical arc from 3 points.
 
-Parameter ``[in]``:
+:param (input):
     start start point
 
-Parameter ``[in]``:
+:param (input):
     middle mid point
 
-Parameter ``[in]``:
+:param (input):
     end end point)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromStartTangentNormalRadiusSweep =R"doc(Construct an arc from start point, start tangent, radius and sweep
@@ -910,106 +910,106 @@ static const char * __doc_Bentley_Geom_DEllipse3d_FromStartTangentNormalRadiusSw
 static const char * __doc_Bentley_Geom_DEllipse3d_FromPoints =R"doc(@description Returns a DEllipse3d with fill in ellipse data from
 center, 0 degree, and 90 degree points.
 
-Parameter ``[in]``:
+:param (input):
     center ellipse center
 
-Parameter ``[in]``:
+:param (input):
     point0 0 degree point
 
-Parameter ``[in]``:
+:param (input):
     point90 90 degree point
 
-Parameter ``[in]``:
+:param (input):
     theta0 start angle
 
-Parameter ``[in]``:
+:param (input):
     sweep sweep angle
 
-Returns:
+:returns:
     DEllipse3d object.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromXYMajorMinor =R"doc(@description Returns a DEllipse3d with fill in ellipse data from 2D
 major and minor axis lengths and the angle from the global to the
 local x-axis.
 
-Parameter ``[in]``:
+:param (input):
     cx center x coordinate
 
-Parameter ``[in]``:
+:param (input):
     cy center y coordinate
 
-Parameter ``[in]``:
+:param (input):
     cz z coordinate of all points on the ellipse
 
-Parameter ``[in]``:
+:param (input):
     rx radius along local x axis
 
-Parameter ``[in]``:
+:param (input):
     ry radius along local y axis
 
-Parameter ``[in]``:
+:param (input):
     thetaX angle from global x to local x
 
-Parameter ``[in]``:
+:param (input):
     theta0 start angle in parameter space
 
-Parameter ``[in]``:
+:param (input):
     sweep sweep angle
 
-Returns:
+:returns:
     DEllipse3d object.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromFractionInterval =R"doc(@description Return an ellipse defined by fractional start and end on
 a parent ellipse
 
-Parameter ``[in]``:
+:param (input):
     parent existing ellipse.
 
-Parameter ``[in]``:
+:param (input):
     startFraction fractional coordiante of new ellipse start on
     parent.
 
-Parameter ``[in]``:
+:param (input):
     endFraction fractional coordiante of new ellipse end on parent.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_FromCenterRadiusXY =R"doc(Return an xy-plane full circle with center and radius.)doc";
 
 static const char * __doc_Bentley_Geom_DEllipse3d_From =R"doc(@description Returns a DEllipse3d with given fields.
 
-Parameter ``[in]``:
+:param (input):
     cx center x coordinate
 
-Parameter ``[in]``:
+:param (input):
     cy center y coordinate
 
-Parameter ``[in]``:
+:param (input):
     cz center z coordinate
 
-Parameter ``[in]``:
+:param (input):
     ux x part of 0 degree vector
 
-Parameter ``[in]``:
+:param (input):
     uy y part of 0 degree vector
 
-Parameter ``[in]``:
+:param (input):
     uz z part of 0 degree vector
 
-Parameter ``[in]``:
+:param (input):
     vx x part of 90 degree vector
 
-Parameter ``[in]``:
+:param (input):
     vy y part of 90 degree vector
 
-Parameter ``[in]``:
+:param (input):
     vz z part of 90 degree vector
 
-Parameter ``[in]``:
+:param (input):
     theta0 start angle in parameter space
 
-Parameter ``[in]``:
+:param (input):
     sweep sweep angle
 
-Returns:
+:returns:
     DEllipse3d object.)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -1132,10 +1132,23 @@ void def_DEllipse3d(py::module_& m)
             {            
             return self.EvaluateTrigPairs(&point[0], &trig[0], numPoint);
             },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
+    c1.def("EvaluateTrigPairs", [](DEllipse3dCR self, py::list& point, DPoint2dArray const& trig, int numPoint)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cppPoint, DPoint3dArray, DPoint3d);            
+            self.EvaluateTrigPairs(&cppPoint[0], &trig[0], numPoint);
+            CONVERT_CPPARRAY_TO_PYLIST(point, cppPoint, DPoint3dArray, DPoint3d);
+            },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
     c1.def("TestAndEvaluateTrigPairs", [](DEllipse3dCR self, DPoint3dArray& point, DPoint2dArray const& trig, int numPoint)
             {
             return self.TestAndEvaluateTrigPairs(&point[0], &trig[0], numPoint);
             },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, TestAndEvaluateTrigPairs));
+    c1.def("TestAndEvaluateTrigPairs", [](DEllipse3dCR self, py::list& point, DPoint2dArray const& trig, int numPoint)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cppPoint, DPoint3dArray, DPoint3d);    
+            return self.TestAndEvaluateTrigPairs(&cppPoint[0], &trig[0], numPoint);
+            CONVERT_CPPARRAY_TO_PYLIST(point, cppPoint, DPoint3dArray, DPoint3d);    
+            },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, TestAndEvaluateTrigPairs));
+
     c1.def("IsAngleInSweep", &DEllipse3d::IsAngleInSweep, "angle"_a, DOC(Bentley, Geom, DEllipse3d, IsAngleInSweep));        
     c1.def("AngleToFraction", &DEllipse3d::AngleToFraction, "angle"_a, DOC(Bentley, Geom, DEllipse3d, AngleToFraction));
 

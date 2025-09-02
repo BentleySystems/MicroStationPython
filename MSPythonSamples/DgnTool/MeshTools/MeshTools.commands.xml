@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="CT_MAIN" CommandClass="MacroCommand" CommandWord="DEMO">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="CT_MAIN">
+            <Keyword CommandWord="PLACE" SubtableRef="CT_PLACE"/>
+        </KeyinTable>
+        <KeyinTable ID="CT_PLACE">
+            <Keyword CommandWord="FUNCTION"/>
+            <Keyword CommandWord="CLASS"/>
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="DEMO PLACE FUNCTION"                     Function="Place_MeshFunction" />
+        <KeyinHandler Keyin="DEMO PLACE CLASS"                     Function="Place_MeshClass" />
+    </KeyinHandlers>
+</KeyinTree>

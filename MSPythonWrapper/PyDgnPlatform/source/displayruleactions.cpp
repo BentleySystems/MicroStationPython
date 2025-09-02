@@ -11,83 +11,59 @@
 
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleOverrideAction_SetDisplayStyleIndex =R"doc(Sets index that represents DisplayStyle in the active file and should
-be used by this action. Bentley Systems +---------------+-------------
---+---------------+---------------+---------------+------)doc";
+be used by this action. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayStyleOverrideAction_GetDisplayStyleIndex =R"doc(Returns index that represents DisplayStyle in the active file and
-should be used by this action. Bentley Systems +---------------+------
----------+---------------+---------------+---------------+------)doc";
+should be used by this action. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_AreaPatternAction_SetParams =R"doc(Sets AreaPattern of an element that should be applied by this action.
-Bentley Systems +---------------+---------------+---------------+-----
-----------+---------------+------)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AreaPatternAction_GetParams =R"doc(Returns AreaPatternParams of an element that should be applied by this
-action. Bentley Systems +---------------+---------------+-------------
---+---------------+---------------+------)doc";
+action.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_ElementPriorityAction_SetElementPriority =R"doc(Sets whether element display should be off. Bentley Systems +---------
-------+---------------+---------------+---------------+---------------
-+------)doc";
+static const char * __doc_Bentley_DgnPlatform_ElementPriorityAction_SetElementPriority =R"doc(Sets whether element display should be off.
+)doc";
 
-static const char * __doc_Bentley_DgnPlatform_ElementPriorityAction_GetElementPriority =R"doc(Returns true if element display is off. Bentley Systems +-------------
---+---------------+---------------+---------------+---------------+---
----)doc";
+static const char * __doc_Bentley_DgnPlatform_ElementPriorityAction_GetElementPriority =R"doc(Returns true if element display is off. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_TransparencyOverrideAction_SetTransparency =R"doc(Sets transparency of an element that should be applied by this action.
-Bentley Systems +---------------+---------------+---------------+-----
-----------+---------------+------)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TransparencyOverrideAction_GetTransparency =R"doc(Returns transparency of an element that should be applied by this
-action. Bentley Systems +---------------+---------------+-------------
---+---------------+---------------+------)doc";
+action.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WeightOverrideAction_SetLineWeight =R"doc(Sets line weight of an element that should be applied by this action.
-Bentley Systems +---------------+---------------+---------------+-----
-----------+---------------+------)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WeightOverrideAction_GetLineWeight =R"doc(Returns line weight of an element that should be applied by this
-action. Bentley Systems +---------------+---------------+-------------
---+---------------+---------------+------)doc";
+action.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StyleOverrideAction_SetLineStyle =R"doc(Sets line style of an element that should be applied by this action.
-Bentley Systems +---------------+---------------+---------------+-----
-----------+---------------+------)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_StyleOverrideAction_GetLineStyle =R"doc(Returns line style of an element that should be applied by this
-action. Bentley Systems +---------------+---------------+-------------
---+---------------+---------------+------)doc";
+action.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FillColorOverrideAction_SetElementFillColor =R"doc(Sets fill color of an element that should be applied by this action.
-Bentley Systems +---------------+---------------+---------------+-----
-----------+---------------+------)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FillColorOverrideAction_GetElementFillColor =R"doc(Returns fill color of an element that should be applied by this
-action. Bentley Systems +---------------+---------------+-------------
---+---------------+---------------+------)doc";
+action.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ColorOverrideAction_SetElementColor =R"doc(Sets color of an element that should be applied by this action.
-Bentley Systems +---------------+---------------+---------------+-----
-----------+---------------+------)doc";
+)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ColorOverrideAction_GetElementColor =R"doc(Returns color of an element that should be applied by this action.
-Bentley Systems +---------------+---------------+---------------+-----
-----------+---------------+------)doc";
+)doc";
 
-static const char * __doc_Bentley_DgnPlatform_ElementDisplayAction_SetIsElementDisplayOff =R"doc(Sets whether element display should be off. Bentley Systems +---------
-------+---------------+---------------+---------------+---------------
-+------)doc";
+static const char * __doc_Bentley_DgnPlatform_ElementDisplayAction_SetIsElementDisplayOff =R"doc(Sets whether element display should be off. )doc";
 
-static const char * __doc_Bentley_DgnPlatform_ElementDisplayAction_IsElementDisplayOff =R"doc(Returns true if element display is off. Bentley Systems +-------------
---+---------------+---------------+---------------+---------------+---
----)doc";
+static const char * __doc_Bentley_DgnPlatform_ElementDisplayAction_IsElementDisplayOff =R"doc(Returns true if element display is off. )doc";
 
-static const char * __doc_Bentley_DgnPlatform_IDisplayRuleAction_Clone =R"doc(Creates exact copy of an instance. Bentley Systems +---------------+--
--------------+---------------+---------------+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_IDisplayRuleAction_Clone =R"doc(Creates exact copy of an instance.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_IDisplayRuleAction_GetActionId =R"doc(GetActionId should return unique Id of an action. Bentley Systems +---
-------------+---------------+---------------+---------------+---------
-------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_IDisplayRuleAction_GetActionId =R"doc(GetActionId should return unique Id of an action.)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

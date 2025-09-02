@@ -16,70 +16,70 @@ Remark:
     This may only be meaningful in context of range tree tests where
     some prior relationship among ranges is known to apply.
 
-Parameter ``[in]``:
+:param (input):
     newRange candidate for modified range relationship.
 
-Parameter ``[in]``:
+:param (input):
     outerRange containing range
 
-Returns:
+:returns:
     true if touching condition occurs.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_IntersectsWith =R"doc(Test if two ranges have strictly non-null overlap (intersection)
 
-Parameter ``[in]``:
+:param (input):
     range2 second range
 
-Returns:
+:returns:
     true if ranges overlap, false if not.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_Contains =R"doc( Test if a point is contained in a range.
 
-Parameter ``[in]``:
+:param (input):
     point point to test. (z is ignored)
 
-Returns:
+:returns:
     true if the point is in (or on boundary of))doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_IsContained =R"doc(Test if the given range is a (possible improper) subset of outerRange.
 
-Parameter ``[in]``:
+:param (input):
     outerRange outer range
 
-Returns:
+:returns:
     true if the given range is a (possibly improper) subset of
     outerRange.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_TryRangePointToFractions =R"doc(map a range point to the fractional coordinates. (0,0) is low point,
 (1,1) is high point.
 
-Parameter ``[out]``:
+:param (output):
     fractions fractional coordinates
 
-Parameter ``[in]``:
+:param (input):
     xy computed coordinates.
 
-Returns:
+:returns:
     false if range is null range or single point.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_TryFractionsToRangePoint =R"doc(map a fractional point to the range coordinates. (0,0) is low point,
 (1,1) is high point.
 
-Parameter ``[in]``:
+:param (input):
     fractions fractional coordinates
 
-Parameter ``[out]``:
+:param (output):
     xy computed coordinates.
 
-Returns:
+:returns:
     false if range is null range.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_IsEqual =R"doc( Test if two ranges are exactly equal.
 
-Parameter ``[in]``:
+:param (input):
     range1 second range
 
-Returns:
+:returns:
     true if ranges are identical in all components.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_IntersectRay =R"doc(Compute the intersection of a range cube and a ray.
@@ -87,40 +87,40 @@ static const char * __doc_Bentley_Geom_DRange2d_IntersectRay =R"doc(Compute the 
 If there is not a finite intersection, both params are set to 0 and
 and both points to point0.
 
-Parameter ``[out]``:
+:param (output):
     param0 ray parameter where cube is entered
 
-Parameter ``[out]``:
+:param (output):
     param1 ray parameter where cube is left
 
-Parameter ``[out]``:
+:param (output):
     point0 entry point
 
-Parameter ``[out]``:
+:param (output):
     point1 exit point
 
-Parameter ``[in]``:
+:param (input):
     start start point of ray
 
-Parameter ``[in]``:
+:param (input):
     direction direction of ray
 
-Returns:
+:returns:
     true if non-empty intersection.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_Get4Corners =R"doc(Generates a 4 point box around around a range cube. Point ordering is
 by " x varies fastest " --- 00, 10, 01, 11 for the unit range.
 
-Parameter ``[out]``:
+:param (output):
     box array of 4 points of the box)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_Get4Lines =R"doc(Extract the 4 bounding lines for a range rectangle, in origin normal
 form
 
-Parameter ``[out]``:
+:param (output):
     originArray array of line origins
 
-Parameter ``[out]``:
+:param (output):
     normalArray array of plane normals. Directions down, left, right,
     up.)doc";
 
@@ -130,7 +130,7 @@ static const char * __doc_Bentley_Geom_DRange2d_XLength =R"doc(Returns differenc
 
 static const char * __doc_Bentley_Geom_DRange2d_Area =R"doc(returns product of axis extents. No test for zero or negative axes.)doc";
 
-static const char * __doc_Bentley_Geom_DRange2d_IsPoint =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DRange2d_IsPoint =R"doc(:returns:
     true if high is less than or equal to low in every direction.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_IsEmpty =R"doc(Test if high component is (strictly) less than low in any direction.
@@ -140,13 +140,13 @@ low component is less than the corresponding high component)doc";
 static const char * __doc_Bentley_Geom_DRange2d_IntersectionExtentSquared =R"doc(Compute the intersection of given range with another range and return
 the extentSquared of the intersection range.
 
-Parameter ``[in]``:
+:param (input):
     range2 second range
 
-Returns:
+:returns:
     extentSquared() for the intersection range.)doc";
 
-static const char * __doc_Bentley_Geom_DRange2d_ExtentSquared =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DRange2d_ExtentSquared =R"doc(:returns:
     0 if null range (as decided by IsNull ()), otherwise sum of
     squared axis extents.)doc";
 
@@ -165,18 +165,18 @@ surface range, i.e. is known a priori to be 'forwards'. The clipping
 restricts unreliable range0 to the nominal surface range pRange1.
 range0 and pRange may be the same address. minMax must be different.
 
-Parameter ``[in]``:
+:param (input):
     range0 range to be restricted
 
-Parameter ``[in]``:
+:param (input):
     minMax allowable minmax range. Assumed to have low<high)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_UnionOf =R"doc(Form the union of two ranges.
 
-Parameter ``[in]``:
+:param (input):
     range1 first range.
 
-Parameter ``[in]``:
+:param (input):
     range2 second range.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_IntersectionOf =R"doc(Compute the intersection of two ranges and test if it is nonempty. If
@@ -187,35 +187,35 @@ Remark:
     (DRange2dCP, DRange2dCP) the result was uninitialized in the no-
     intersection case)
 
-Parameter ``[in]``:
+:param (input):
     range1 first range
 
-Parameter ``[in]``:
+:param (input):
     range2 second range
 
-Returns:
+:returns:
     same result as checkOverlap(range1,range2).)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_InitFromUnitArcSweep =R"doc(Initialize the range from an arc of the unit circle
 
-Parameter ``[in]``:
+:param (input):
     theta0 start angle
 
-Parameter ``[in]``:
+:param (input):
     sweep angular sweep)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_FromUnitArcSweep =R"doc(Initialize the range from an arc of the unit circle
 
-Parameter ``[in]``:
+:param (input):
     theta0 start angle
 
-Parameter ``[in]``:
+:param (input):
     sweep angular sweep)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_Extend =R"doc(Extends the coordinates of the range cube points in pRange so as to
 include the single additional point point.
 
-Parameter ``[in]``:
+:param (input):
     point new point to be included in the range.)doc";
 
 static const char * __doc_Bentley_Geom_DRange2d_Init =R"doc(Initializes a range cube with (inverted) large positive and negative
@@ -240,6 +240,10 @@ void def_DRange2d(py::module_& m)
     c1.def(py::init(py::overload_cast<DPoint2dCR>(DRange2d::From)), "point_a");
     c1.def(py::init(py::overload_cast<DRange3dCR>(DRange2d::From)), "range"_a);
     c1.def(py::init(py::overload_cast<DPoint3dArray const&>(DRange2d::From)), "points"_a);
+    c1.def_static("From", [](py::list const& points) {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+        return DRange2d::From(cppPoints);
+    }, "points"_a);
     c1.def(py::init(py::overload_cast<double, double>(DRange2d::From)), "x"_a, "y"_a);
     c1.def(py::init(py::overload_cast<DPoint2dCR, DPoint2dCR>(DRange2d::From)), "point0"_a, "point1"_a);
     c1.def(py::init(py::overload_cast<double, double, double, double>(DRange2d::From)), "x0"_a, "y0"_a, "x1"_a, "y1"_a);

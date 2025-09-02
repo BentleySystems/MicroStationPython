@@ -17,7 +17,7 @@ transaction. Since at any time multiple transactions can be reversed,
 it may take multiple calls to this method to reinstate all reversed
 operations.
 
-Returns:
+:returns:
     SUCCESS if a reversed transaction was reinstated, ERROR if no
     transactions were reversed.)doc";
 
@@ -37,20 +37,20 @@ TxnPos. This method is the same as calling ReverseToPos followed (on
 successful return) by ClearReversedTxns, and is provided as a
 convenience.
 
-Parameter ``pos``:
+:param pos:
     a TxnPos obtained from a previous call to GetCurrTxnPos.
 
-Parameter ``callRestartFunc``:
+:param callRestartFunc:
     whether to restart the current tool afterwards, only the current
     tool should pass false.
 
-Returns:
+:returns:
     SUCCESS if the transactions were reversed and cleared, ERROR if
     TxnPos is invalid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_GetCurrTxnPos =R"doc(Get the current TxnPos.
 
-Returns:
+:returns:
     the current TxnPos. This value can be saved and later used to
     reverse changes that happen after this time.
 
@@ -59,10 +59,10 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_ReverseToPos =R"doc(Reverse all element changes back to a previously saved TxnPos.
 
-Parameter ``pos``:
+:param pos:
     a TxnPos obtained from a previous call to GetCurrTxnPos.
 
-Returns:
+:returns:
     SUCCESS if the transactions were reversed, ERROR if TxnPos is
     invalid.
 
@@ -71,7 +71,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_ReverseAll =R"doc(Reverse all element changes back to the beginning of the session.
 
-Parameter ``prompt``:
+:param prompt:
     display a dialog warning the user of the severity of this action
     and giving an opportunity to cancel.)doc";
 
@@ -80,19 +80,19 @@ created by issuing the MicroStation " Mark " command.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_ReverseSingleTxn =R"doc(Reverse (undo) the most recent transaction.
 
-Parameter ``callRestartFunc``:
+:param callRestartFunc:
     whether to restart the current tool afterwards, only the current
     tool should pass false.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_ReverseTxns =R"doc(Reverse (undo) the most recent transaction(s).
 
-Parameter ``numActions``:
+:param numActions:
     the number of transactions to reverse. If numActions is greater
     than 1, the entire set of transactions will be reinstated together
     when/if ReinstateTxn is called (e.g., the user issues the
     MicroStation " REDO " command.)
 
-Parameter ``warnIfNotActiveModel``:
+:param warnIfNotActiveModel:
     Warn user if **any** elements in the about-to-be-reversed
     transaction are from a model other than the currently active
     model. The user may then choose to abort the operation. If false,
@@ -110,18 +110,18 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_RedoIsPossible =R"doc(Query if there are currently any reinstateable (redoable) changes in
 the Transaction Manager
 
-Returns:
+:returns:
     True if there are currently any reinstateable (redoable) changes
     in the Transaction Manager.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_HasEntries =R"doc(Query if there are currently any reversible (undoable) changes in the
 Transaction Manager
 
-Returns:
+:returns:
     true if there are currently any reversible (undoable) changes in
     the Transaction Manager.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_ITxnManager_GetCurrGroupStartPos =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_ITxnManager_GetCurrGroupStartPos =R"doc(:returns:
     The TxnPos of the beginning of the innermost Transaction Group. If
     no Transaction Group is active, the TxnPos will be zero.)doc";
 
@@ -137,7 +137,7 @@ changes is undone as a single action. Groups can be nested, and until
 the outermost group is closed, all element changes constitute a single
 transaction.
 
-Parameter ``startNewTxn``:
+:param startNewTxn:
     if true, and if there is no current Transaction Group, and if
     there are pending changes, then start a new group. Otherwise
     changes from this group are included with the previous changes.
@@ -164,7 +164,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_IsActive =R"doc(Query if the Transaction Manager is currently active
 
-Returns:
+:returns:
     True if the Transaction Manager is currently active.
 
 See also:
@@ -172,34 +172,34 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_DropTxnMonitor =R"doc(Drop a TxnMonitor. Releases reference to monitor.
 
-Parameter ``monitor``:
+:param monitor:
     a monitor to drop)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_AddTxnMonitor =R"doc(Add a TxnMonitor. Adds a reference to monitor.
 
-Parameter ``monitor``:
+:param monitor:
     a monitor to add)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_FindElement =R"doc(Find the pre-change state of an element in the undo buffer.
 
-Parameter ``model``:
+:param model:
     the model that contains or contained the element
 
-Parameter ``eid``:
+:param eid:
     the ElementId of the element to find
 
-Parameter ``start``:
+:param start:
     the start of the range to search
 
-Parameter ``end``:
+:param end:
     the end of the range to search
 
-Parameter ``action``:
+:param action:
     the type of change to search for)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxnManager_SetCurrentTxn =R"doc(Set the current ITxn
 
-Parameter ``newTxn``:
+:param newTxn:
     the ITxn implementation that is to handle changes in the current
     transaction)doc";
 
@@ -213,7 +213,7 @@ closing mark designates that all of the preceding changes are to be
 undone together as a single operation, and that future changes are to
 be undone separately.
 
-Parameter ``[in]``:
+:param (input):
     doValidate if true, calls ValidateCurrentTxn before committing the
     transaction.
 
@@ -233,16 +233,16 @@ static const char * __doc_Bentley_DgnPlatform_ITxnManager_GetManager =R"doc(Get 
 
 static const char * __doc_Bentley_DgnPlatform_ITxn_SaveModelProperties =R"doc(Update the model's properties
 
-Parameter ``model``:
+:param model:
     The model whose properties are to be saved.
 
-Parameter ``bSaveSettings``:
+:param bSaveSettings:
     If true, the non-undoable attributes of the model are also saved
     and journaled in undo. This is rarely needed. Normally, non-
     undoable attributes are not saved until the user does save
     settings and are not saved in the undo buffer.
 
-Parameter ``forceSave``:
+:param forceSave:
     If true, the equality comparison is skipped and model properties
     are saved even if no changes are found. This is needed when model
     is recreated and OnModelChange event have to be triggered.
@@ -260,7 +260,7 @@ static const char * __doc_Bentley_DgnPlatform_ITxn_DeleteModel =R"doc(Delete a m
 DgnFile::FindModelIdByName and model collections such as ModelIndex
 will *not* return a deleted model.
 
-Parameter ``dgnModel``:
+:param dgnModel:
     The DgnModel holding the model to be deleted.
 
 Remark:
@@ -281,23 +281,23 @@ is assigned the next available ModelId.
 
 
 
-Parameter ``file``:
+:param file:
     The file where the new model will be created.
 
-Parameter ``name``:
+:param name:
     The name of the model to be created. Must be unique.
 
-Parameter ``type``:
+:param type:
     Model type to create.
 
-Parameter ``is3D``:
+:param is3D:
     True to create 3D model else a 2D model is created.
 
-Parameter ``seedModel``:
+:param seedModel:
     Seed model used to set default model settings. If NULL then the
     Default model will be used as seed.
 
-Parameter ``modelId``:
+:param modelId:
     id for new model. Leave as INVALID_MODELID and it will be assigned
     a new valid id.
 
@@ -311,10 +311,10 @@ Returns (Tuple, 0):
 
 Returns (Tuple, 1):
 	err.if not NULL, *error* is set to a non-zero error status if the
-    return value is NULL. Possible values include:\li
+    return value is NULL. Possible values include:
     DGNMODEL_STATUS_InvalidModelName if name is NULL or cannot be used
-    as a model name \li DGNMODEL_STATUS_DuplicateModelName if an
-    existing model in this file already uses the specified name \li
+    as a model name  DGNMODEL_STATUS_DuplicateModelName if an
+    existing model in this file already uses the specified name 
     DGNMODEL_STATUS_NotFound if *seedModel* is NULL and if no default
     seed model can be found
 
@@ -324,17 +324,17 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_ITxn_ReplaceElement =R"doc(Replace an existing element in a model with a different one.
 
-Parameter ``el``:
+:param el:
     The element to be replaced.
 
-Parameter ``in``:
+:param in:
     The ElementRefP of the element to be replaced. Must be a valid
     existing element.
 
-Parameter ``opts``:
+:param opts:
     options
 
-Returns:
+:returns:
     SUCCESS if the element was replaced and out is non-NULL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxn_AddElement =R"doc(Add a new element to a model.
@@ -342,13 +342,13 @@ static const char * __doc_Bentley_DgnPlatform_ITxn_AddElement =R"doc(Add a new e
 Remark:
     s *newEl* must already be associated with a model.
 
-Parameter ``newEl``:
+:param newEl:
     The element to be added. Must hold an MSElementDescr.
 
-Parameter ``opts``:
+:param opts:
     options
 
-Returns:
+:returns:
     SUCCESS if the element was added or non-zero indicating failure.
     Possible reasons for failure include:-- *newEl* is not associated
     with a model, -- the model is not writable, -- the element handler
@@ -357,32 +357,32 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ITxn_DeleteElement =R"doc(Delete an element from a model.
 
-Parameter ``elem``:
+:param elem:
     The ElementRefP of the element to be deleted. Must be a valid
     existing element.
 
-Parameter ``opts``:
+:param opts:
     options
 
-Returns:
+:returns:
     SUCCESS if the element was deleted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ITxn_ReplaceXAttributeData =R"doc(Replace an existing XAttribute with a new value. The size of the
 XAttribute *can* change with this method.
 
-Parameter ``xAttr``:
+:param xAttr:
     An XAttributeHandle that refernces the XAttribute to replace.
 
-Parameter ``data``:
+:param data:
     The new data to save in the XAttribute.
 
-Parameter ``newSize``:
+:param newSize:
     The number of bytes in *data.*
 
-Parameter ``opts``:
+:param opts:
     options
 
-Returns:
+:returns:
     SUCCESS if the data in *xAttr* was replaced.
     DGNMODEL_STATUS_InvalidXattribute if xAttr was not valid. Remarks
     Implementation must use DependencyMgrXAttributeChangeTracker)doc";
@@ -390,22 +390,22 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_ITxn_ModifyXAttributeData =R"doc(Modify all or part of an existing XAttribute. The size of the
 XAttribute cannot be changed.
 
-Parameter ``xAttr``:
+:param xAttr:
     An XAttributeHandle that refernces the XAttribute to modify.
 
-Parameter ``data``:
+:param data:
     The new data to save in the XAttribute.
 
-Parameter ``start``:
+:param start:
     The starting byte number to replace with *data.*
 
-Parameter ``length``:
+:param length:
     The number of bytes to replace with *data.*
 
-Parameter ``opts``:
+:param opts:
     options
 
-Returns:
+:returns:
     SUCCESS if the data in *xAttr* was modified.
     DGNMODEL_STATUS_InvalidXattribute if xAttr was not valid. ERROR if
     attempting to write more data than exists in xAttr. Remarks
@@ -413,13 +413,13 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ITxn_DeleteXAttribute =R"doc(Delete an existing XAttribute from an element.
 
-Parameter ``xAttr``:
+:param xAttr:
     An XAttributeHandle that refernces the XAttribute to delete.
 
-Parameter ``opts``:
+:param opts:
     options
 
-Returns:
+:returns:
     SUCCESS if *xAttr* is valid and the XAttribute was deleted from
     the element. DGNMODEL_STATUS_InvalidXattribute if xAttr was not
     valid. Remarks Implementation must use
@@ -427,30 +427,30 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ITxn_AddXAttribute =R"doc(@name XAttributes Add a new XAttribute to an existing element.
 
-Parameter ``elRef``:
+:param elRef:
     The ElementRefP of the element.
 
-Parameter ``handlerId``:
+:param handlerId:
     The XAttributeHandlerId of the new XAttribute.
 
-Parameter ``xAttrId``:
+:param xAttrId:
     The XAttributeId of the new XAttribute. If INVALID_XATTR_ID, then
     a new, unique, id will be assigned. The value of the new id will
     be returned in *outXAttrId.*
 
-Parameter ``xAttrData``:
+:param xAttrData:
     A buffer of at least *length* bytes long that holds the value to
     be saved in the new XAttribute.
 
-Parameter ``length``:
+:param length:
     The number of bytes in xAttrData.
 
-Parameter ``outXAttrId``:
+:param outXAttrId:
     Optional, the id of the new XAttribute. This is necessary only if
     *xAttrId* is INVALID_XATTR_ID, in which case the new XAttribute is
     assigned a new unique id.
 
-Parameter ``opts``:
+:param opts:
     options Remarks Implementation must use
     DependencyMgrXAttributeChangeTracker
 
@@ -475,43 +475,43 @@ operation. This is a rare but drastic occurrence.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TxnMonitor__OnModelUndoRedo =R"doc(A model change is being undone or redone.
 
-Parameter ``model``:
+:param model:
     The model that is being changed.
 
-Parameter ``modelInfo``:
+:param modelInfo:
     The pre- or post-change properties of the model.
 
-Parameter ``reverseSettingsChanges``:
+:param reverseSettingsChanges:
     If true, the model's settings (usually non-undoable) are also
     being changed.
 
-Parameter ``isPreChange``:
+:param isPreChange:
     If true, undo/redo is about to be done. if false, undo/redo has
     been done.
 
-Parameter ``isUndo``:
+:param isUndo:
     If true, the model change is being undone. Else, the change is
     being redone.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TxnMonitor__OnModelChange =R"doc(The specified model has been changed.
 
-Parameter ``model``:
+:param model:
     The model that is being changed.
 
-Parameter ``modelInfo``:
+:param modelInfo:
     If *isPreChange* is true, then model's info has not been changed
     yet, and *modelInfo* is the info that will be adopted. If
     *isPreChange* is false, then model's info has been changed, and
     *modelInfo* is the info that it had before the change.
 
-Parameter ``isPreChange``:
+:param isPreChange:
     If true, the model is about to be changed. if false, the model has
     been changed.
 
-Parameter ``info``:
+:param info:
     What kind of change was made.
 
-Parameter ``cantBeUndoneFlag``:
+:param cantBeUndoneFlag:
     set this to true if the change should be non-undoable.
 
 Remark:
@@ -528,51 +528,51 @@ static const char * __doc_Bentley_DgnPlatform_TxnMonitor__OnTxnValidate =R"doc(T
 
 static const char * __doc_Bentley_DgnPlatform_TxnMonitor__OnUndoRedoFinished =R"doc(Undo or redo is finished.
 
-Parameter ``isUndo``:
+:param isUndo:
     True indicates undo. False indicates redo.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TxnMonitor__OnXAttributeUndoRedo =R"doc(An XAttribute change was undone or redone
 
-Parameter ``xattr``:
+:param xattr:
     The XAttribute that is being changed.
 
-Parameter ``originalChange``:
+:param originalChange:
     The change that is being undone or redone.
 
-Parameter ``isUndo``:
+:param isUndo:
     If true, the change is being undone. Else, the change is being
     redone.
 
-Parameter ``info``:
+:param info:
     What kind of change was made.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TxnMonitor__OnElementUndoRedo =R"doc(An element change was undone or redone
 
-Parameter ``afterUndoRedo``:
+:param afterUndoRedo:
     The element after the change or NULL for delete.
 
-Parameter ``beforeUndoRedo``:
+:param beforeUndoRedo:
     The element before the change or NULL for add.
 
-Parameter ``originalChange``:
+:param originalChange:
     The change that is being undone or redone
 
-Parameter ``isUndo``:
+:param isUndo:
     If true, the change is being undone. Else, the change is being
     redone.
 
-Parameter ``info``:
+:param info:
     What kind of change was made.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TxnMonitor__OnXAttributeChanged =R"doc(The specified XAttribute was changed
 
-Parameter ``attr``:
+:param attr:
     The XAttribute that was changed.
 
-Parameter ``info``:
+:param info:
     What kind of change was made.
 
-Parameter ``cantBeUndoneFlag``:
+:param cantBeUndoneFlag:
     Set this to true if the change should be non-undoable.
 
 Remark:
@@ -581,16 +581,16 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_TxnMonitor__OnElementChanged =R"doc(The specified element was changed
 
-Parameter ``newDscr``:
+:param newDscr:
     The element after the change or NULL for delete.
 
-Parameter ``oldDscr``:
+:param oldDscr:
     The element before the change or NULL for add.
 
-Parameter ``info``:
+:param info:
     What kind of change was made.
 
-Parameter ``cantBeUndoneFlag``:
+:param cantBeUndoneFlag:
     Set this to true if the change should be non-undoable.
 
 Remark:

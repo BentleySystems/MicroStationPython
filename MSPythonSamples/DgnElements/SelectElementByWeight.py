@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -15,10 +10,16 @@ import ctypes
 import sys
 
 '''
-Function to select elements by its weight
-    inputWeight : int      weight to select element
+This sample demonstrates how to Selects and highlights all graphical elements in the active model that match the specified weight
 '''
+
 def selectElementsbyWeight(inputWeight):
+    """
+    Selects and highlights all graphical elements in the active model that match the specified weight.
+
+    :param inputWeight: The weight of the elements to be selected.
+    :type inputWeight: int
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -45,7 +46,16 @@ def selectElementsbyWeight(inputWeight):
             if(weight == inputWeight):
                 #It will select highlight all elements added in selection set
                 selSetManager.AddElement(perElementRef,dgnModel)         
-
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {agenda.GetCount()} elements")
+    # iterate over the selection set printing the element ids of elements in the selection set
+    for i in range(agenda.GetCount()):
+        editElementHandle = agenda.GetEntry(i)
+        print (f"  Element ID: {editElementHandle.GetElementId()}")
+    
 
 #main
 if __name__ == "__main__":

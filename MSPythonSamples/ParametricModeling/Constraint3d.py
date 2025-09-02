@@ -14,14 +14,25 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
 '''
-Prerequisite: Open MSPythonSamples\\data\\SolidModeling.dgn to run this sample
+Sample demonstrating how to create fixed constraint for first cube, then create parallel and distance constraint for 2 faces of 2 cubes
+Prerequisite: Open MSPythonSamples\\data\\Constraint3d.dgn to run this sample
 '''
-
-
-'''
-Example to create fixed constraint for first cube, then create parallel and distance constraint for 2 faces of 2 cubes
-''' 
+ 
 def ExampleFixedParallelDistance():
+    """
+    Demonstrates the creation of fixed, parallel, and distance constraints between two 3D solid elements.
+    This function performs the following steps:
+    1. Retrieves the active DGN model reference.
+    2. Validates the first solid element and adds a fixed constraint to it.
+    3. Validates the second solid element.
+    4. Converts both solid elements to body representations.
+    5. Retrieves faces from both body representations.
+    6. Adds a parallel constraint between a face from each of the two solid elements.
+    7. Adds a distance constraint between the same faces and associates it with a variable "var1" if it exists.
+    
+    Returns:
+        bool: True if all constraints are successfully added, False otherwise.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModelRef()
     if (dgnModel is None):
         return
@@ -86,10 +97,25 @@ def ExampleFixedParallelDistance():
 
     return True
 
-'''
-Example to create perpendicular constraint for 2 faces of 2 cubes
-''' 
 def ExamplePerpendicular():
+    """
+    Example function to demonstrate adding a perpendicular constraint between two solid elements in a 3D model.
+    This function retrieves the active DGN model, converts two specified solid elements to bodies, 
+    extracts their faces, and then adds a perpendicular constraint between the first faces of the two bodies.
+    Returns:
+        bool: True if the perpendicular constraint is successfully added, False otherwise.
+    Steps:
+        1. Retrieve the active DGN model reference.
+        2. Validate the solid elements with IDs 1416 and 1417.
+        3. Convert the solid elements to body representations.
+        4. Extract faces from the body representations.
+        5. Add the perpendicular constraint between the first faces of the two bodies.
+    Raises:
+        None
+    Notes:
+        - The function assumes that the solid elements with IDs 1416 and 1417 exist in the active DGN model.
+        - The function prints an error message if the perpendicular constraint fails to be added.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModelRef()
     if (dgnModel is None):
         return
@@ -135,10 +161,20 @@ def ExamplePerpendicular():
 
     return True
 
-'''
-Example to create coincident constraint for 2 faces of 2 cubes, and set AntiAligned for coincident constraint settings
-''' 
 def ExampleCoincident():
+    """
+    Demonstrates the creation of a coincident constraint between two 3D solid elements in a DGN model.
+    This function performs the following steps:
+    1. Retrieves the active DGN model reference.
+    2. Validates the first solid element and sets a fixed constraint on it.
+    3. Validates the second solid element.
+    4. Converts both solid elements to body representations.
+    5. Retrieves the faces from both body representations.
+    6. Creates an anti-aligned coincident constraint between a face from each of the two bodies.
+    
+    Returns:
+        bool: True if the coincident constraint is successfully created, False otherwise.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModelRef()
     if (dgnModel is None):
         return
@@ -198,10 +234,23 @@ def ExampleCoincident():
 
     return True
 
-'''
-Example to create tangent constraint for 2 faces of one cylinder and one cube
-''' 
 def ExampleTangent():
+    """
+    Demonstrates how to add a tangent constraint between two 3D solid elements in a DGN model.
+    This function performs the following steps:
+    1. Retrieves the active DGN model reference.
+    2. Initializes two solid elements using their element IDs.
+    3. Converts the solid elements to body representations.
+    4. Extracts faces from the body representations of the solid elements.
+    5. Adds a tangent constraint between the first faces of the two solid elements.
+    
+    Returns:
+        bool: True if the tangent constraint is successfully added, False otherwise.
+    Raises:
+        None
+    Note:
+        This function assumes that the element IDs 1420 and 1427 correspond to a cube and a cylinder, respectively.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModelRef()
     if (dgnModel is None):
         return
@@ -247,10 +296,18 @@ def ExampleTangent():
 
     return True
 
-'''
-Example to create concentric constraint for 2 faces of 2 cylinders
-''' 
 def ExampleConcentric():
+    """
+    Example function to demonstrate adding a concentric constraint between two cylindrical elements.
+    This function retrieves the active DGN model, converts two specified solid elements to bodies,
+    extracts their faces, and then adds a concentric constraint between the first faces of the two bodies.
+    
+    Returns:
+        bool: True if the concentric constraint is successfully added, False otherwise.
+    Notes:
+        - The function assumes that the elements with IDs 1433 and 1435 are valid cylindrical elements.
+        - The function prints an error message if the concentric constraint fails to be added.
+    """
     dgnModel = ISessionMgr.GetActiveDgnModelRef()
     if (dgnModel is None):
         return
@@ -296,10 +353,21 @@ def ExampleConcentric():
 
     return True
 
-'''
-Function to create coincident constraint for 2 edges of 2 cubes
-''' 
 def setCoincident():
+    """
+    Sets a coincident constraint between two solid elements in the active DGN model.
+    This function performs the following steps:
+    1. Retrieves the active DGN model reference.
+    2. Validates the first solid element (ID: 1438).
+    3. Adds a fixed constraint to the first solid element.
+    4. Validates the second solid element (ID: 1439).
+    5. Converts both solid elements to body representations.
+    6. Retrieves edges from both solid bodies.
+    7. Adds a coincident constraint between the first edges of the two solid bodies.
+    
+    :returns: True if the coincident constraint is successfully added, False otherwise.
+    :rtype: bool
+    """
     dgnModel = ISessionMgr.GetActiveDgnModelRef()
     if (dgnModel is None):
         return
@@ -355,10 +423,23 @@ def setCoincident():
 
     return True
 
-'''
-Function to create angle constraint for 2 faces of 2 cubes
-''' 
 def setAngle():
+    """
+    Sets an angle constraint of 180 degrees between two solid elements in the active DGN model.
+    This function retrieves the active DGN model reference and attempts to create two solid elements
+    from the given element IDs. It then converts these elements to body representations and retrieves
+    their faces. An angle constraint of 180 degrees is added between the first faces of the two solid
+    elements.
+    
+    Returns:
+        bool: True if the angle constraint is successfully added, False otherwise.
+    Raises:
+        None
+    Notes:
+        - The function assumes that the element IDs 1438 and 1439 correspond to valid solid elements
+          in the active DGN model.
+        - The angle constraint is set to 180 degrees (π radians).
+    """
     dgnModel = ISessionMgr.GetActiveDgnModelRef()
     if (dgnModel is None):
         return
@@ -404,10 +485,16 @@ def setAngle():
 
     return True
 
-'''
-Example to first create coincident constraint for 2 edges of 2 cubes, then create angle constraint for 2 faces of the 2 cubes
-''' 
 def ExampleAngle():
+    """
+    Creates coincident and angle constraints for two cubes.
+    This function first creates a coincident constraint for two edges of the two cubes.
+    If the coincident constraint is successfully created, it then creates an angle constraint
+    for two faces of the two cubes. If either constraint creation fails, the function returns False.
+    
+    Returns:
+        bool: True if both constraints are successfully created, False otherwise.
+    """
     # Create coincident constraint for 2 edges of the 2 cubes
     if (not setCoincident()):
         return False

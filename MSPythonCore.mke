@@ -7,6 +7,7 @@
 #--------------------------------------------------------------------------------------
 appName             = MSPythonCore
 
+
 %if defined (BSIBUILD)
 MSPythonSrc         = $(SrcRoot)MSPython/
 %else
@@ -41,7 +42,7 @@ MultiCompileDepends = $(_MakeFileSpec)
 PchCompiland        = $(baseDir)MSPythonPCH.cpp
 PchOutputDir        = $(o)
 PchArgumentsDepends = $(MultiCompileDepends)
-PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302 -wd4471
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302 -wd4471 -wd4653 -wd4652 -wd4651
 
 %include $(MSPythonSrc)/build/publicSDK/PreCompileHeader.mki
 

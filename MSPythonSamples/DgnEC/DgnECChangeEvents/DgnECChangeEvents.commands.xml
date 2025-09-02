@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="DgnECEventList" CommandClass="MacroCommand" CommandWord="PyDgnECEvent">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="DgnECEventList">
+            <Keyword CommandWord="UserSchema" />
+            <Keyword CommandWord="ItemTypes" />
+        </KeyinTable>
+    </SubKeyinTables>
+
+    <KeyinHandlers>
+        <KeyinHandler Keyin="PyDgnECEvent UserSchema"               Function="UserSchemaInstancesChangeEvents" />
+        <KeyinHandler Keyin="PyDgnECEvent ItemTypes"                Function="ItemTypeInstancesChangeEvents" />
+    </KeyinHandlers>
+</KeyinTree>

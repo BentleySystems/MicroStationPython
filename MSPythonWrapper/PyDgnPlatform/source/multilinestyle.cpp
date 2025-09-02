@@ -12,40 +12,40 @@
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_SetMidCap =R"doc(Replace the Mid or Joint Cap symbology of the style.
 
-Parameter ``symb``:
+:param symb:
     The new symbology to use. Bentley Systems +-----------------------
     ---------------------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetMidCap =R"doc(Get a pointer to a copy of the Mid or Joint Cap symbology from the
 style.
 
-Returns:
+:returns:
     A pointer to the Mid or Joint Cap symbology. Bentley Systems +----
     ------------------------------------------------------------------
     ----------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_SetEndCap =R"doc(Replace the End Cap symbology of the style.
 
-Parameter ``symb``:
+:param symb:
     The new symbology to use. Bentley Systems +-----------------------
     ---------------------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetEndCap =R"doc(Get a pointer to a copy of the End Cap symbology from the style.
 
-Returns:
+:returns:
     A pointer to the End Cap symbology. Bentley Systems +-------------
     ------------------------------------------------------------------
     -------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_SetOrgCap =R"doc(Replace the Origin Cap symbology of the style.
 
-Parameter ``symb``:
+:param symb:
     The new symbology to use. Bentley Systems +-----------------------
     ---------------------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetOrgCap =R"doc(Get a pointer to a copy of the Origin Cap symbology from the style.
 
-Returns:
+:returns:
     A pointer to the Origin Cap symbology. Bentley Systems +----------
     ------------------------------------------------------------------
     ----------)doc";
@@ -56,217 +56,217 @@ static const char * __doc_Bentley_DgnPlatform_MultilineStyle_ClearProfiles =R"do
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_RemoveProfile =R"doc(Remove a profile line from the style.
 
-Parameter ``profileNum``:
+:param profileNum:
     The profile to remove. Valid values are 0 to
     GetProfileLineCount()-1.
 
-Returns:
+:returns:
     SUCCESS if the profile is removed Bentley Systems +---------------
     ------------------------------------------------------------------
     -----)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_InsertProfile =R"doc(Add a profile line to the style.
 
-Parameter ``profile``:
+:param profile:
     The profile to add.
 
-Parameter ``profileNum``:
+:param profileNum:
     The index to add the profile. Use -1 to add it at the end.
 
-Returns:
+:returns:
     SUCCESS if the profile is added. Bentley Systems +----------------
     ------------------------------------------------------------------
     ----)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_ReplaceProfile =R"doc(Replace the profile at a given location.
 
-Parameter ``profile``:
+:param profile:
     The new profile definition.
 
-Parameter ``profileNum``:
+:param profileNum:
     The profile of interest. Valid values are 0 to
     GetProfileLineCount()-1.
 
-Returns:
+:returns:
     A pointer to the profile object, or NULL if profileNum is out of
     range. Bentley Systems +------------------------------------------
     --------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetProfile =R"doc(Get a pointer to a copy of the profile line in the style.
 
-Parameter ``profileNum``:
+:param profileNum:
     The profile of interest. Valid values are 0 to
     GetProfileLineCount()-1.
 
-Returns:
+:returns:
     A pointer to the profile object, or NULL if profileNum is out of
     range. Bentley Systems +------------------------------------------
     --------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_SetEndAngle =R"doc(Set the end cap angle for the multi-line style.
 
-Parameter ``value``:
+:param value:
     The new end cap angle in radians. Bentley Systems +---------------
     ------------------------------------------------------------------
     -----)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetEndAngle =R"doc(Get the end cap angle for the multi-line style.
 
-Returns:
+:returns:
     The angle of the end cap line in radians. Bentley Systems +-------
     ------------------------------------------------------------------
     -------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_SetOriginAngle =R"doc(Set the origin cap angle for the multi-line style.
 
-Parameter ``value``:
+:param value:
     The new origin cap angle in radians. Bentley Systems +------------
     ------------------------------------------------------------------
     --------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetOriginAngle =R"doc(Get the origin cap angle for the multi-line style.
 
-Returns:
+:returns:
     The angle of the origin cap line in radians. Bentley Systems +----
     ------------------------------------------------------------------
     ----------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetProfileLineCount =R"doc(Get the number of multi-line profile lines in the style.
 
-Returns:
+:returns:
     The number of profile lines. Bentley Systems +--------------------
     ------------------------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_SetFilled =R"doc(Set the flag that determines if a multi-line is filled.
 
-Parameter ``value``:
+:param value:
     The new value for whether the multi-line is filled. Bentley
     Systems +---------------------------------------------------------
     -----------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetFilled =R"doc(Get the flag that determines if a multi-line is filled from the style.
 
-Returns:
+:returns:
     The whether the multi-line is filled. Bentley Systems +-----------
     ------------------------------------------------------------------
     ---------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_SetFillColor =R"doc(Set the fill color of the .
 
-Parameter ``value``:
+:param value:
     The new fill color. Bentley Systems +-----------------------------
     ---------------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetFillColor =R"doc(Get the fill color from the style. Note that a style can have a fill
 color but it won't show unless the element is filled. See GetFilled().
 
-Returns:
+:returns:
     The fill color. Bentley Systems +---------------------------------
     -----------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetFile =R"doc(Get the file associated with the multi-line style.
 
-Returns:
+:returns:
     The file associated with the style. Bentley Systems +-------------
     ------------------------------------------------------------------
     -------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetID =R"doc(Get the ID of the multi-line style.
 
-Returns:
+:returns:
     The ID of the style. Bentley Systems +----------------------------
     ----------------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_SetName =R"doc(Change the in-memory name of the style. This will not change the file
 until Replace is called.
 
-Parameter ``name``:
+:param name:
     The new name for the style. Bentley Systems +---------------------
     -----------------------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetName =R"doc(Get the name of the multi-line style.
 
-Returns:
+:returns:
     The name of the style. Bentley Systems +--------------------------
     ------------------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_RemapDependents =R"doc(Remap all the elements that reference one style to different style.
 
-Parameter ``destStyle``:
-    IN remap to this style.
+:param destStyle:
+    (input) remap to this style.
 
-Parameter ``sourceStyle``:
-    IN remap from this style.
+:param sourceStyle:
+    (input) remap from this style.
 
-Parameter ``file``:
-    IN file in which to search. +-------------------------------------
+:param file:
+    (input) file in which to search. +-------------------------------------
     -------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_HasDependants =R"doc(Tests whether any elements store a persistent reference to the style.
 
-Returns:
+:returns:
     true if there are dependents. Bentley Systems +-------------------
     ------------------------------------------------------------------
     -)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_Compare =R"doc(Compare two multi-line styles.
 
-Parameter ``style``:
+:param style:
     The style that will be compared.
 
-Returns:
+:returns:
     A property mask with bits set describing which parameters are
     different. Bentley Systems +--------------------------------------
     ------------------------------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_CopyValues =R"doc(Copy values from one multi-line style to another.
 
-Parameter ``style``:
+:param style:
     The style to copy values from.
 
-Returns:
+:returns:
     SUCCESS if the values are copied as requested. Bentley Systems +--
     ------------------------------------------------------------------
     ------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_Create =R"doc(Create a multi-line style object in memory.
 
-Parameter ``name``:
+:param name:
     A name for the style.
 
-Parameter ``file``:
+:param file:
     The file that the style will be associated with.
 
-Returns:
+:returns:
     A pointer to the new style or NULL if creation failed. Bentley
     Systems +---------------------------------------------------------
     -----------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_Replace =R"doc(Update a multi-line style in the file specified in the style.
 
-Parameter ``oldName``:
+:param oldName:
     When renaming a style, pass in the old style name to replace. In
     the common case where this parameter is NULL, it is assumed that
     the style retains its name.
 
-Parameter ``destFile``:
+:param destFile:
     The destination file. Can be NULL to write to the file where the
     style was read.
 
-Returns:
+:returns:
     SUCCESS if the style is successfully updated in the file. Bentley
     Systems +---------------------------------------------------------
     -----------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_Delete =R"doc(Delete a multi-line style from the file specified in the style.
 
-Parameter ``name``:
+:param name:
     The name of the style to delete.
 
-Parameter ``file``:
+:param file:
     The file that contains the style.
 
-Returns:
+:returns:
     SUCCESS if the style is successfully deleted from the file.
     Bentley Systems +-------------------------------------------------
     -------------------------------------)doc";
@@ -274,56 +274,56 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_Add =R"doc(Add a multi-line style to the file specified in the style. The style
 must have at least one profile defined or it will be an error.
 
-Returns:
+:returns:
     SUCCESS if the style is successfully added to the file. Bentley
     Systems +---------------------------------------------------------
     -----------------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_ReplaceSettings =R"doc(Gets the settings multi-line style from a file.
 
-Parameter ``settings``:
+:param settings:
     The style to save as the active settings.
 
-Parameter ``file``:
+:param file:
     The file to look in for the style.
 
-Returns:
+:returns:
     Pointer to the style or NULL if it is not found. Bentley Systems +
     ------------------------------------------------------------------
     --------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetSettings =R"doc(Gets the settings multi-line style from a file.
 
-Parameter ``file``:
+:param file:
     The file to look in for the style.
 
-Returns:
+:returns:
     Pointer to the style or NULL if it is not found. Bentley Systems +
     ------------------------------------------------------------------
     --------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetByName =R"doc(Get a multi-line style from a file by name.
 
-Parameter ``name``:
+:param name:
     The name of the style to get.
 
-Parameter ``file``:
+:param file:
     The file to look in for the style.
 
-Returns:
+:returns:
     Pointer to the style or NULL if it is not found. Bentley Systems +
     ------------------------------------------------------------------
     --------------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStyle_GetByID =R"doc(Get a multi-line style from a file by Style ID.
 
-Parameter ``id``:
+:param id:
     The style ID of the style to get.
 
-Parameter ``file``:
+:param file:
     The file to look in for the style.
 
-Returns:
+:returns:
     Pointer to the style or NULL if it is not found. Bentley Systems +
     ------------------------------------------------------------------
     --------------------)doc";
@@ -361,7 +361,7 @@ profiles.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_SetClass =R"doc(Set the class (drawing or construction) in the symbology
 
-Parameter ``conclass``:
+:param conclass:
     The new class. The only valid values are DgnElementClass::Primary
     or DgnElementClass::Construction.)doc";
 
@@ -370,13 +370,13 @@ static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_GetClass =R"doc
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_SetUseClass =R"doc(Set whether to use the class from the symbology (true) or from the
 header (false).
 
-Parameter ``val``:
+:param val:
     The new value for the use class symbology bit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_UsesClass =R"doc(Determine if the profile or cap uses the class value defined in this
 symbology
 
-Returns:
+:returns:
     True if the local class is used, false if the value from the
     element header is used.)doc";
 
@@ -387,13 +387,13 @@ static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_GetColor =R"doc
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_SetUseColor =R"doc(Set whether to use the color from the symbology (true) or from the
 header (false).
 
-Parameter ``val``:
+:param val:
     The new value for the use color symbology bit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_UsesColor =R"doc(Determine if the profile or cap uses the color value defined in this
 symbology
 
-Returns:
+:returns:
     True if the local color is used, false if the value from the
     element header is used.)doc";
 
@@ -404,13 +404,13 @@ static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_GetWeight =R"do
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_SetUseWeight =R"doc(Set whether to use the weight from the symbology (true) or from the
 header (false).
 
-Parameter ``val``:
+:param val:
     The new value for the use weight symbology bit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_UsesWeight =R"doc(Determine if the profile or cap uses the weight value defined in this
 symbology
 
-Returns:
+:returns:
     True if the local weight is used, false if the value from the
     element header is used.)doc";
 
@@ -426,13 +426,13 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_GetLinestyle =R"doc(Get the line style Id from the symbology.
 
-Returns:
+:returns:
     The line style Id)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_UsesLinestyle =R"doc(Determine if the profile or cap uses the line style value defined in
 this symbology
 
-Returns:
+:returns:
     True if the local line style Id is used, false if the value from
     the element header is used.)doc";
 
@@ -440,12 +440,12 @@ static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_SetLevel =R"doc
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_GetLevel =R"doc(Get the Level Id from the symbology.
 
-Returns:
+:returns:
     The level Id, or 0 if the element level is used.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_UsesLevel =R"doc(Determine if the profile or cap uses the locally defined level value
 
-Returns:
+:returns:
     True if the local level definition is used, false if the value
     from the element header is used.
 
@@ -456,94 +456,94 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_MultilineSymbology_Copy =R"doc(Duplicate a symbology
 
-Parameter ``other``:
+:param other:
     The symbology to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_CopyValues =R"doc(Copies the values from another property mask.
 
-Parameter ``other``:
+:param other:
     The property mask to copy.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_ClearAllBits =R"doc(Reset all the property flags to false.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_AnyBitSet =R"doc(Tests whether any of the flags are set.
 
-Returns:
+:returns:
     True if any bits are set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_SetProfileBit =R"doc(Get one of the MlinestylePropFlags flags for a cap multi-line property
 such as color or offset.
 
-Parameter ``profileIndex``:
+:param profileIndex:
     Which profile the property is associated with.
 
-Parameter ``item``:
+:param item:
     The property being queried
 
-Parameter ``bitValue``:
+:param bitValue:
     The new value for the property.
 
-Returns:
+:returns:
     SUCCESS if the bit is set in the mask.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_GetProfileBit =R"doc(Get one of the MlinestylePropFlags flags for a cap multi-line property
 such as color or offset.
 
-Parameter ``profileIndex``:
+:param profileIndex:
     Which profile the property is associated with.
 
-Parameter ``item``:
+:param item:
     The property being queried
 
-Returns:
+:returns:
     The value of the requested bit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_SetCapBit =R"doc(Get one of the MlinestylePropFlags flags for a cap multi-line property
 such as color or cap arc.
 
-Parameter ``capIndex``:
+:param capIndex:
     Which cap the property is associated with.
 
-Parameter ``item``:
+:param item:
     The property being queried
 
-Parameter ``bitValue``:
+:param bitValue:
     The new value for the property.
 
-Returns:
+:returns:
     SUCCESS if the bit is set in the mask.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_GetCapBit =R"doc(Get one of the MlinestylePropFlags flags for a cap multi-line property
 such as color or cap arc.
 
-Parameter ``capIndex``:
+:param capIndex:
     Which cap the property is associated with.
 
-Parameter ``item``:
+:param item:
     The property being queried
 
-Returns:
+:returns:
     The value of the requested bit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_SetGeneralBit =R"doc(Set one of the MlinestylePropFlags flags for an overall multi-line
 property such as origin angle or fill.
 
-Parameter ``item``:
+:param item:
     The property being set.
 
-Parameter ``bitValue``:
+:param bitValue:
     The new value for the property.
 
-Returns:
+:returns:
     SUCCESS if the bit is set in the mask.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MultilineStylePropMask_GetGeneralBit =R"doc(Get one of the MlinestylePropFlags flags for an overall multi-line
 property such as origin angle or fill.
 
-Parameter ``item``:
+:param item:
     The property being queried
 
-Returns:
+:returns:
     The value of the requested bit.)doc";
 
 //=======================================================================================

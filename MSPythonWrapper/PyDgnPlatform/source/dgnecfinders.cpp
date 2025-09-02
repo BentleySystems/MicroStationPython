@@ -19,10 +19,10 @@ can be a combination of multiple types.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScope_CreateScope =R"doc(Create a scope which finds instances accessible through a dgn file.
 
-Parameter ``file``:
+:param file:
     Dgn file to traverse from
 
-Parameter ``options``:
+:param options:
     The options structure controls how the scope is iterated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_SetSearchFileInstances =R"doc(Utility method to allow searching of instances from file header)doc";
@@ -31,14 +31,14 @@ static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_SetSearch
 
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_SetReachableModelOptions =R"doc(Set the how the scope scans a model and its attachments
 
-Parameter ``[in]``:
+:param (input):
     options Set an options pointer to override the default behavior)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_GetReachableModelOptions =R"doc(Get the how the scope scans a model and its attachments)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_SetSearchPublicChildren =R"doc(Set true to search for public children of element
 
-Parameter ``[in]``:
+:param (input):
     searchChildren if true will search for public children)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_GetSearchPublicChildren =R"doc(Get whether the scope will search for public children of elements.)doc";
@@ -46,7 +46,7 @@ static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_GetSearch
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_SetSearchAttachments =R"doc(Set true to look for instance in attachment of a scope containing a
 model. The behavior is dependant on GetReachableModelOptions
 
-Parameter ``[in]``:
+:param (input):
     includeAttachments Set true to look for attachments in the scope.
 
 Remark:
@@ -60,7 +60,7 @@ model.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_SetHostType =R"doc(Set the host type from which instances are generated
 
-Parameter ``[in]``:
+:param (input):
     hostType the type of instances to search for.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FindInstancesScopeOption_GetHostType =R"doc(Determine which type of instances to search for.)doc";

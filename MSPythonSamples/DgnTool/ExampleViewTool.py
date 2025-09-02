@@ -1,9 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 
 import os
 import pydoc
@@ -15,32 +11,36 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
 '''
-/*=================================================================================**//**
-* Example showing how to use DgnViewTool to write a viewing tool.
-* 
-* A simple viewing tool example that zooms the view and centers the accept.
-* Demonstrates using IndexedViewSet and IViewManager to update the view.
-* By default a DgnViewTool will exit on a reset button event.
-* 
-* @bsiclass                                                               Bentley Systems
-+===============+===============+===============+===============+===============+======*/
+Example demonstrating how to use DgnViewTool to write a viewing tool.
+
+A simple viewing tool example that zooms the view and centers the accept.
+Demonstrates using IndexedViewSet and IViewManager to update the view.
+By default a DgnViewTool will exit on a reset button event.
+
 '''
+
 class ExampleViewTool(DgnViewTool):
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def __init__(self, toolName, toolPrompt):
+        """
+        Initialize the ExampleViewTool.
+
+        :param toolName: The name of the tool.
+        :type toolName: str
+        :param toolPrompt: The prompt for the tool.
+        :type toolPrompt: str
+        """
         DgnViewTool.__init__(self, toolName, toolPrompt) # C++ base's __init__ must be called.        
         self.m_self = self # Keep self reference
     
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _OnDataButton(self, ev):
+        """
+        Handle the data button event.
+
+        :param ev: The event object containing information about the button event.
+        :type ev: DgnButtonEvent
+        :return: True if the event was handled successfully, False otherwise.
+        :rtype: bool
+        """
         vp = ev.GetViewport()
 
         if vp==None:
@@ -59,25 +59,19 @@ class ExampleViewTool(DgnViewTool):
 
         return True
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * Method to create and install a new instance of the tool. If InstallTool returns ERROR,
-    * the new tool instance will be freed/invalid. Never call delete on RefCounted classes.
-    *
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def InstallNewInstance(toolId, toolPrompt):
+        """
+        Create and install a new instance of the tool.
+
+        :param toolId: The ID of the tool.
+        :type toolId: str
+        :param toolPrompt: The prompt for the tool.
+        :type toolPrompt: str
+        """
+
         tool = ExampleViewTool(toolId, toolPrompt)
         tool.InstallTool()        
 
-'''
-/*=================================================================================**//**
-* Default entrypoint for current module unit.
-*
-* @bsiclass                                                               Bentley Systems
-+===============+===============+===============+===============+===============+======*/
-'''
 if __name__ == "__main__":
     ExampleViewTool.InstallNewInstance(0, 0)
 

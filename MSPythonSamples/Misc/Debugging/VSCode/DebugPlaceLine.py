@@ -1,16 +1,16 @@
-# -*- coding: utf-8 -*-
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
 import math
 from MSPyBentley import *
 from MSPyBentleyGeom import *
 from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
+
+
+'''
+Sample demonstrating how to debug a Python script using Debugpy in MicroStation
+''' 
 
 # Requires pip install debugpy
 import debugpy

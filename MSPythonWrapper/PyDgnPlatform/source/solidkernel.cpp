@@ -12,22 +12,22 @@
 
 static const char * __doc_Bentley_DgnPlatform_ISubEntity_GetSubEntityType =R"doc(Get the topology type for this sub-entity.
 
-Returns:
+:returns:
     The sub-entity type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISolidKernelEntity_PostMultiplyEntityTransformInPlace =R"doc(PostMultiply the entity transform by the supplied (solid) transform
 
-Parameter ``solidTransform``:
+:param solidTransform:
     The transform to post-multiply.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISolidKernelEntity_PreMultiplyEntityTransformInPlace =R"doc(PreMultiply the entity transform by the supplied (solid) transform
 
-Parameter ``uorTransform``:
+:param uorTransform:
     The transform to pre-multiply.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISolidKernelEntity_SetEntityTransform =R"doc(Changes the solid to uor transform for the entity.
 
-Parameter ``transform``:
+:param transform:
     The new solid to uor transform.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISolidKernelEntity_GetEntityTransform =R"doc(Get the body to uor transform for this entity. This transform can have
@@ -43,12 +43,12 @@ the target must also be within this 1 km size box. The body to uor
 translation allows for a solid that will typically have a basis point
 of 0,0,0 to be displayed at any uor location in a dgn model.
 
-Returns:
+:returns:
     The solid kernel to uor transform for the entity.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISolidKernelEntity_GetEntityType =R"doc(Get the body type for this entity.
 
-Returns:
+:returns:
     The solid kernel entity type.)doc";
 
 /*---------------------------------------------------------------------------------**//**

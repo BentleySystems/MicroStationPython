@@ -13,13 +13,13 @@
 static const char * __doc_Bentley_DgnPlatform_DisplayFilter_CreatePresentationFormFlagTest =R"doc(Creates a new DisplayFilter operator to test for a existence of the to
 the supplied form flag.
 
-Parameter ``formFlag``:
+:param formFlag:
     The form flag to test against.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayFilter_CreatePresentationFormIdTest =R"doc(Creates a new DisplayFilter operator to test for a match to the
 supplied formId.
 
-Parameter ``formId``:
+:param formId:
     The form Id to test against.)doc";
 
 /*---------------------------------------------------------------------------------**//**

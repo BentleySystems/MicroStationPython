@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -15,11 +10,18 @@ import ctypes
 import sys
 
 '''
-Function to iterate levels available on model
-    lvlName : str      Level Name
-    lvlId   : int      Level number
+This sample demonstrates how to selects elements based on their level and color
 '''
+
 def getLevelName(lvlName, lvlId):
+    """
+    Check if a level with the specified name and ID exists in the active model.
+
+    :param str lvlName: The name of the level to check.
+    :param int lvlId: The ID of the level to check.
+    :return: True if a level with the specified name and ID exists, False otherwise.
+    :rtype: bool
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     levelCache = ACTIVEMODEL.GetDgnFile().GetLevelCache()
@@ -33,12 +35,17 @@ def getLevelName(lvlName, lvlId):
 
     return False
 
-'''
-Function to select elements by its level and color
-    lvlName   : str      Level name
-    userColor : dict     RGB value
-'''
+
 def selectElementsbyLevelAndColor(lvlName, userColor):
+    """
+    Select elements in the active model based on their level and color.
+
+    :param lvlName: The name of the level to filter elements by.
+    :type lvlName: str
+    :param userColor: A dictionary containing the RGB values to filter elements by.
+                      The dictionary should have keys 'r', 'g', and 'b' for red, green, and blue respectively.
+    :type userColor: dict
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -78,10 +85,17 @@ def selectElementsbyLevelAndColor(lvlName, userColor):
                 green == userColor.get('g') and
                 blue  == userColor.get('b'))):
                  selSetManager.AddElement(perElementRef,dgnModel) 
-
-'''
-Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with 'Color' model 
-'''
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {agenda.GetCount()} elements")
+    # iterate over the selection set printing the element ids of elements in the selection set
+    for i in range(agenda.GetCount()):
+        editElementHandle = agenda.GetEntry(i)
+        print (f"  Element ID: {editElementHandle.GetElementId()}")
+    
+#Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with 'Color' model 
 #main
 if __name__ == "__main__":
     #highlight all the elements available on level "Default"

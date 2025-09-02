@@ -12,13 +12,13 @@
 
 static const char * __doc_MstnPlatform_BitMask_Dump =R"doc(@Description Dump specified bit-mask data into specified file
 
-Parameter ``pFileNameIn``:
-    IN file name to dump into
+:param pFileNameIn:
+    (input) file name to dump into
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Returns:
+:returns:
     SUCCESS
 
 Remark:
@@ -26,10 +26,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_GetNumBitsSet =R"doc(@Description Get the number of bits set to 1 in the bit mask.
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask for which to get number valid bits
+:param pBitMaskIn:
+    (input) bit-mask for which to get number valid bits
 
-Returns:
+:returns:
     The number of bits set
 
 Remark:
@@ -37,10 +37,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_GetNumValidBits =R"doc(@Description Get the number of valid bits in the bit mask.
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask for which to get number valid bits
+:param pBitMaskIn:
+    (input) bit-mask for which to get number valid bits
 
-Returns:
+:returns:
     the number of valid bits.
 
 Remark:
@@ -48,10 +48,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_AnyBitSet =R"doc(@Description Check if specified bit-mask has any bit set to true
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Returns:
+:returns:
     true if any bit is set
 
 Remark:
@@ -60,13 +60,13 @@ Remark:
 static const char * __doc_MstnPlatform_BitMask_TestBitMask =R"doc(@Description Check if two specified bit-masks have any bits which have
 the same value
 
-Parameter ``pBitMask1In``:
-    IN first bit mask
+:param pBitMask1In:
+    (input) first bit mask
 
-Parameter ``pBitMask2In``:
-    IN second bit mask
+:param pBitMask2In:
+    (input) second bit mask
 
-Returns:
+:returns:
     true if the bit-masks have any bit in common
 
 Remark:
@@ -74,13 +74,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_TestBit =R"doc(@Description Check if specified bit of bit-mask is set to true
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Parameter ``bitPositionIn``:
-    IN bit position to test
+:param bitPositionIn:
+    (input) bit position to test
 
-Returns:
+:returns:
     true if the bit at specified position is ON (true), false if not
 
 Remark:
@@ -88,13 +88,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_Equal =R"doc(@Description Check if two specified bit-masks are equal
 
-Parameter ``pBitMask1In``:
-    IN first bit mask
+:param pBitMask1In:
+    (input) first bit mask
 
-Parameter ``pBitMask2In``:
-    IN second bit mask
+:param pBitMask2In:
+    (input) second bit mask
 
-Returns:
+:returns:
     true if the bit-masks are equal, false if not
 
 Remark:
@@ -103,13 +103,13 @@ Remark:
 static const char * __doc_MstnPlatform_BitMask_GetHighestBit =R"doc(@Description Get the position of the highest possible bit in specified
 bit-mask that can be set without expanding the bit-mask
 
-Parameter ``pHighestPositionOut``:
-    OUT highest bit position possible without requiring an expansion
+:param pHighestPositionOut:
+    (output) highest bit position possible without requiring an expansion
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask array
+:param pBitMaskIn:
+    (input) bit-mask array
 
-Returns:
+:returns:
     ERROR if the highest bit cannot be got
 
 Remark:
@@ -117,10 +117,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_InvertAll =R"doc(@Description Invert value of all bits in specified bit-mask
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask array
+:param pBitMaskIn:
+    (input) bit-mask array
 
-Returns:
+:returns:
     ERROR if the bits cannot be inverted
 
 Remark:
@@ -128,13 +128,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_InvertBit =R"doc(@Description Invert value of specified bit in specified bit-mask
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask array
+:param pBitMaskIn:
+    (input) bit-mask array
 
-Parameter ``bitIndexIn``:
-    IN bit index to invert
+:param bitIndexIn:
+    (input) bit index to invert
 
-Returns:
+:returns:
     ERROR if the specified bit cannot be inverted
 
 Remark:
@@ -143,13 +143,13 @@ Remark:
 static const char * __doc_MstnPlatform_BitMask_SetAll =R"doc(@Description Set all bits in specified bit-mask to either true or
 false
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask array
+:param pBitMaskIn:
+    (input) bit-mask array
 
-Parameter ``bitFlagIn``:
-    IN bit flag, if false then set all bits off, else set all bits ON
+:param bitFlagIn:
+    (input) bit flag, if false then set all bits off, else set all bits ON
 
-Returns:
+:returns:
     ERROR if the bits cannot be set
 
 Remark:
@@ -160,16 +160,16 @@ operation. The logical operation may be BitMaskOperation::And,
 BitMaskOperation::Or, BitMaskOperation::Xor, BitMaskOperation::OrNot,
 BitMaskOperation::AndNot.
 
-Parameter ``pBitMaskOut``:
-    OUT destination bit-mask array and first operand
+:param pBitMaskOut:
+    (output) destination bit-mask array and first operand
 
-Parameter ``pBitMaskIn``:
-    IN second operand
+:param pBitMaskIn:
+    (input) second operand
 
-Parameter ``operation``:
-    IN operation code (see above)
+:param operation:
+    (input) operation code (see above)
 
-Returns:
+:returns:
     ERROR if the bits from specified string cannot be set
 
 Remark:
@@ -180,16 +180,16 @@ will a ", " delimited set of bit indices which are set to ON. Ranges of
 ON bit-indices will be returned in a range form (such as n1-n2). An
 example return string:1,10-15,20,31-35
 
-Parameter ``pStringOut``:
-    OUT pre-allocated string in which the bit-mask will be outputted
+:param pStringOut:
+    (output) pre-allocated string in which the bit-mask will be outputted
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Parameter ``indexOriginIn``:
-    IN index corresponding to lowest order bit (1 or 0)
+:param indexOriginIn:
+    (input) index corresponding to lowest order bit (1 or 0)
 
-Returns:
+:returns:
     ERROR if the bits from specified string cannot be set
 
 Remark:
@@ -204,19 +204,19 @@ the bit-mask will expand to fit-in the largest bit-position.
 size & do not want its size to exceed the specified value.
 " maxIndexIn " can be set to -1, in which case the argument is ignored.
 
-Parameter ``pBitMaskOut``:
-    OUT bit mask array
+:param pBitMaskOut:
+    (output) bit mask array
 
-Parameter ``pSourceStringIn``:
-    IN source string from which to parse the bit-mask information
+:param pSourceStringIn:
+    (input) source string from which to parse the bit-mask information
 
-Parameter ``indexOriginIn``:
-    IN index corresponding to lowest order bit (1 or 0)
+:param indexOriginIn:
+    (input) index corresponding to lowest order bit (1 or 0)
 
-Parameter ``maxIndexIn``:
-    IN maximum index to set
+:param maxIndexIn:
+    (input) maximum index to set
 
-Returns:
+:returns:
     ERROR if the bits from specified string cannot be set
 
 Remark:
@@ -227,13 +227,13 @@ resultant bit-mask will be of the same size as the specified source
 bit-mask. The default value of the resultant bit-mask will be set to
 be the same as that of the source bit-mask.
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Parameter ``pSourceBitMaskIn``:
-    IN source bit mask array
+:param pSourceBitMaskIn:
+    (input) source bit mask array
 
-Returns:
+:returns:
     ERROR if the bits from specified bit-mask cannot be set
 
 Remark:
@@ -242,16 +242,16 @@ Remark:
 static const char * __doc_MstnPlatform_BitMask_SetFromBitArray =R"doc(@Description Set bit-mask from specified bit-array. The resultant bit-
 mask will be of the same size as the specified bit-array.
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Parameter ``numValidBitsIn``:
-    IN number of bits that are valid in pBitArrayIn
+:param numValidBitsIn:
+    (input) number of bits that are valid in pBitArrayIn
 
-Parameter ``pBitArrayIn``:
-    IN bit array as an array of short-words
+:param pBitArrayIn:
+    (input) bit array as an array of short-words
 
-Returns:
+:returns:
     ERROR if the bit from bit-array cannot be set
 
 Remark:
@@ -260,19 +260,19 @@ Remark:
 static const char * __doc_MstnPlatform_BitMask_SetBitAtPositions =R"doc(@Description Set bit at specified array-position (bitIndexIn / 16) &
 bit-position in array (bitIndexIn % 16)
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Parameter ``arrayPositionIn``:
-    IN internal array position of bit index
+:param arrayPositionIn:
+    (input) internal array position of bit index
 
-Parameter ``bitPositionIn``:
-    IN internal bit position of bit index
+:param bitPositionIn:
+    (input) internal bit position of bit index
 
-Parameter ``bitFlagIn``:
-    IN bit value to set
+:param bitFlagIn:
+    (input) bit value to set
 
-Returns:
+:returns:
     ERROR if the bit at specified position cannot be set
 
 Remark:
@@ -283,19 +283,19 @@ bit-mask. If any of the specified bit-positions are outside the size
 of the bit-mask, then this function will expand the size of the input
 bit-mask to fit-in for the maximum possible bit-position.
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Parameter ``numBitInArray``:
-    IN number of bits in array
+:param numBitInArray:
+    (input) number of bits in array
 
-Parameter ``pBitIndexArrayIn``:
-    IN bit index array
+:param pBitIndexArrayIn:
+    (input) bit index array
 
-Parameter ``bitFlagIn``:
-    IN bit flag, if true then bit as on, else as off
+:param bitFlagIn:
+    (input) bit flag, if true then bit as on, else as off
 
-Returns:
+:returns:
     ERROR if the bits at specified positions cannot be set
 
 Remark:
@@ -306,16 +306,16 @@ specified bit-position is outside the size of the bit-mask, then this
 function will expand the size of the input bit-mask to fit in the bit-
 position.
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Parameter ``bitIndexIn``:
-    IN bit index to set
+:param bitIndexIn:
+    (input) bit index to set
 
-Parameter ``bitFlagIn``:
-    IN bit flag, if true then bit as on, else as off
+:param bitFlagIn:
+    (input) bit flag, if true then bit as on, else as off
 
-Returns:
+:returns:
     ERROR if the bit at specified position cannot be set
 
 Remark:
@@ -323,16 +323,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_GetBit =R"doc(@Description Get value at specified bit-position in bit-mask.
 
-Parameter ``pBitFlagOut``:
-    OUT bit flag, true then bit is on, else false
+:param pBitFlagOut:
+    (output) bit flag, true then bit is on, else false
 
-Parameter ``pBitMaskIn``:
-    IN bit mask array
+:param pBitMaskIn:
+    (input) bit mask array
 
-Parameter ``bitIndexIn``:
-    IN bit index to get
+:param bitIndexIn:
+    (input) bit index to get
 
-Returns:
+:returns:
     ERROR if the bit-position is outside the size of bit-mask
 
 Remark:
@@ -341,10 +341,10 @@ Remark:
 static const char * __doc_MstnPlatform_BitMask_GetDefaultBitValue =R"doc(@Description Get the default value for bits beyond the allocated
 number of bits in the bit mask.
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask for which to get defaultBitValue
+:param pBitMaskIn:
+    (input) bit-mask for which to get defaultBitValue
 
-Returns:
+:returns:
     the default bit value for pBitMaskIn
 
 Remark:
@@ -353,13 +353,13 @@ Remark:
 static const char * __doc_MstnPlatform_BitMask_SetDefaultBitValue =R"doc(@Description Set the default value for bits beyond the allocated
 number of bits in the bit mask.
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask for which to set defaultBitValue
+:param pBitMaskIn:
+    (input) bit-mask for which to set defaultBitValue
 
-Parameter ``defaultBitValueIn``:
-    IN the default value for bits in the mask.
+:param defaultBitValueIn:
+    (input) the default value for bits in the mask.
 
-Returns:
+:returns:
     ERROR if pBitMaskIn is NULL
 
 Remark:
@@ -370,13 +370,13 @@ specified number of bits. This function will only expand the specified
 the bit-mask to specified number of bits (conversely, will never
 contract the specified bit-mask)
 
-Parameter ``pBitMaskIn``:
-    IN bit-mask
+:param pBitMaskIn:
+    (input) bit-mask
 
-Parameter ``numBitIn``:
-    IN number of bits to ensure
+:param numBitIn:
+    (input) number of bits to ensure
 
-Returns:
+:returns:
     ERROR if the bit-mask structure cannot be expanded.
 
 Remark:
@@ -384,10 +384,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_Free =R"doc(@Description Free specified bit-mask & all its internal memory
 
-Parameter ``ppBitMaskIn``:
-    IN bit-mask structure to free
+:param ppBitMaskIn:
+    (input) bit-mask structure to free
 
-Returns:
+:returns:
     ERROR if the bit-mask structure cannot be freed
 
 Remark:
@@ -396,19 +396,19 @@ Remark:
 static const char * __doc_MstnPlatform_BitMask_CreateFromBitArray =R"doc(@Description Create a new bit-mask structure - initializes itself from
 input bit-array. Note:This function copies the input bit-array.
 
-Parameter ``ppBitMaskOut``:
-    OUT new bit-mask structure
+:param ppBitMaskOut:
+    (output) new bit-mask structure
 
-Parameter ``numValidBitsIn``:
-    IN number of bits that are valid in pBitArrayIn
+:param numValidBitsIn:
+    (input) number of bits that are valid in pBitArrayIn
 
-Parameter ``pBitArrayIn``:
-    IN bit array as an array of short-words
+:param pBitArrayIn:
+    (input) bit array as an array of short-words
 
-Parameter ``defaultBitValueIn``:
-    IN the default value for bits in the mask.
+:param defaultBitValueIn:
+    (input) the default value for bits in the mask.
 
-Returns:
+:returns:
     ERROR if the bit-mask structure cannot be created
 
 Remark:
@@ -416,10 +416,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_BitMask_Clone =R"doc(@Description Clone the specified BitMask.
 
-Parameter ``pBitMask``:
-    IN the BitMask to copy
+:param pBitMask:
+    (input) the BitMask to copy
 
-Returns:
+:returns:
     a deep copy of the BitMask or NULL if there was an error
 
 Remark:
@@ -437,7 +437,7 @@ END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE
 void def_msbitmask(py::module_& m)
     {
 
-    py::class_<Bentley::MstnPlatform::MSPython::BitMask> c1(m, "BitMask"); 
+    py::class_<Bentley::MstnPlatform::MSPython::BitMask> c1(m, "MSBitMask"); 
 
     c1.def_static("Create", [] (bool defaultBitValue)
           {

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="TextExample" CommandClass="MacroCommand" CommandWord="TEXTEXAMPLE">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+    <SubKeyinTables>
+        <KeyinTable ID="TextExample">
+            <Keyword CommandWord="CREATETEXTSTYLES" />
+            <Keyword CommandWord="CREATETEXT" SubtableRef="Example"/>
+        </KeyinTable>
+        <KeyinTable ID="Example">
+            <Keyword CommandWord="EXAMPLE1" SubtableRef="TextBlockType"/>
+            <Keyword CommandWord="EXAMPLE2" />
+        </KeyinTable>
+        <KeyinTable ID="TextBlockType">
+            <Keyword CommandWord="VERTICAL" />
+            <Keyword CommandWord="NORMAL" />
+            <Keyword CommandWord="UPSIDEDOWN" />
+            <Keyword CommandWord="BACKWARD" />
+        </KeyinTable>
+    </SubKeyinTables>
+    <KeyinHandlers>
+        <KeyinHandler Keyin="TEXTEXAMPLE CREATETEXTSTYLES"                     Function="CreateAllFourTextStyles" />
+        <KeyinHandler Keyin="TEXTEXAMPLE CREATETEXT EXAMPLE1 VERTICAL"                     Function="CreateText_Vertical" />
+        <KeyinHandler Keyin="TEXTEXAMPLE CREATETEXT EXAMPLE1 NORMAL"                     Function="CreateText_NORMAL" />
+        <KeyinHandler Keyin="TEXTEXAMPLE CREATETEXT EXAMPLE1 UPSIDEDOWN"                     Function="CreateText_UPSIDE_DOWN" />
+        <KeyinHandler Keyin="TEXTEXAMPLE CREATETEXT EXAMPLE1 BACKWARD"                     Function="CreateText_BACKWARDS" />
+        <KeyinHandler Keyin="TEXTEXAMPLE CREATETEXT EXAMPLE2"                     Function="CreateText_Example2" />
+    </KeyinHandlers>
+</KeyinTree>

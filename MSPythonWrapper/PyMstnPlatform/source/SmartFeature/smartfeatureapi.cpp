@@ -14,139 +14,139 @@
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureUtil_DrawDynamicSpinAxis =R"doc(Draw dynamic spin axis.
 
-Parameter ``axis``:
+:param axis:
     axis
 
-Parameter ``range``:
+:param range:
     range
 
-Parameter ``normal``:
+:param normal:
     normal
 
-Parameter ``viewport``:
+:param viewport:
     viewport)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureUtil_GetCurveVector =R"doc(Get CurveVector using elementHandle.
 
-Parameter ``curveVector``:
+:param curveVector:
     Output curve vector
 
-Parameter ``eh``:
+:param eh:
     Element used to get curve vector
 
-Parameter ``regionsOnly``:
+:param regionsOnly:
     only regions)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureUtil_GetCurveVectorPlane =R"doc(Get plane of supplied CurveVector.
 
-Parameter ``plane``:
+:param plane:
     output plane
 
-Parameter ``curveVector``:
+:param curveVector:
     of which plane has to retrieve
 
-Parameter ``point``:
+:param point:
     Point used on curve vector
 
-Parameter ``parallelIfLinear``:
+:param parallelIfLinear:
     Parallel option be used in case of linear)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateSolidNode =R"doc(Create Parametric Solid Node
 
-Parameter ``Input``:
+:param Input:
     element expected to be of type smart solid. Application need to
     ensure that element handle should of type smart solid
 
-Returns:
+:returns:
     Solid feature node)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateSizeFilter =R"doc(Create Size Filter Smart Feature Node.
 
-Parameter ``settings``:
+:param settings:
     Input data for Size Filter creation.
 
-Returns:
+:returns:
     Size Filter feature node)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateExtrudeAlongFeature =R"doc(Create Extrude Along Smart Feature node
 
-Parameter ``lockDirection``:
+:param lockDirection:
     If profile orientation needs to be locked in particular direction.
 
-Parameter ``scalePoint``:
+:param scalePoint:
     If extrusion needs scaling about some input point. Please refer
     the structure ExtrudeAlongSetting. User need to specify m_doscale
     and m_scale value in it.
 
-Parameter ``settings``:
+:param settings:
     Extrude along setting used to generatate extrusion
 
-Parameter ``createSheet``:
+:param createSheet:
     If true extrusion output will be sheet body in case of false it
     will be solid body.
 
-Returns:
+:returns:
     successfully created ExtrudeAlong parametric feature)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateCutFeature =R"doc(Create Cut Smart Feature node
 
-Parameter ``cutNode``:
+:param cutNode:
     Newly created cut feature node
 
-Parameter ``depthMode``:
+:param depthMode:
     Various depth options
 
-Parameter ``directionMode``:
+:param directionMode:
     The cut direction
 
-Parameter ``outsideProfile``:
+:param outsideProfile:
     With respect to profile
 
-Parameter ``depth``:
+:param depth:
     Depth distance (not applicable for depthMode = ALL.
 
-Parameter ``defaultNormal``:
+:param defaultNormal:
     The normal
 
-Returns:
+:returns:
     SUCCESS if Cut creation is successful)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateTrimFeature =R"doc(Create Trim Smart Feature node
 
-Parameter ``trimNode``:
+:param trimNode:
     Trim feature node
 
-Parameter ``face``:
+:param face:
     Face to trim from
 
-Returns:
+:returns:
     SUCCESS if feature is created successfully)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateDifferenceFeature =R"doc(Create Boolean-Difference Smart Feature node
 
-Parameter ``booleanNode``:
+:param booleanNode:
     Difference feature node
 
-Parameter ``subtractionPoint``:
+:param subtractionPoint:
     Subtraction point. The default argument with nullptr value
 
-Returns:
+:returns:
     SUCCESS if feature is created successfully)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateIntersectionFeature =R"doc(Create Boolean-Intersection Smart Feature node
 
-Parameter ``booleanNode``:
+:param booleanNode:
     Intersection feature node
 
-Returns:
+:returns:
     SUCCESS if feature is created successfully)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateUnionFeature =R"doc(Create Boolean-Union Smart Feature node
 
-Parameter ``booleanNode``:
+:param booleanNode:
     Union feature node
 
-Returns:
+:returns:
     SUCCESS if feature is created successfully)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateChamferFeature =R"doc(Obsoleted! Please use the another API named as CreateChamferFeature()
@@ -157,250 +157,250 @@ from this class itself.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateRevolveFeature =R"doc(Create Revolve parametric Feature.
 
-Parameter ``settings``:
+:param settings:
     Input data for Revolve creation
 
-Returns:
+:returns:
     Revolve feature node)doc";
 
 static const char * __doc_Bentley_MstnPlatform_FeatureCreate_CreateExtrudeFeature =R"doc(Create Extrude parametric Feature.
 
-Parameter ``settings``:
+:param settings:
     Input data for Extrude creation
 
-Returns:
+:returns:
     Extrude feature node)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_DropToLegacy =R"doc(Drop parametric feature to smart solid state
 
-Parameter ``agenda``:
+:param agenda:
     Dropped elements
 
-Parameter ``featureEh``:
+:param featureEh:
     Parametric solid element to drop
 
-Returns:
+:returns:
     SUCCESS if the drop is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_CollapseHistory =R"doc(Collapse feature tree
 
-Parameter ``eeh``:
+:param eeh:
     Parametric solid element
 
-Parameter ``featureTree``:
+:param featureTree:
     Feature tree
 
-Parameter ``featureNode``:
+:param featureNode:
     Feature node to collapse
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_WriteSmartFeature =R"doc(Write Smart Feature into the file.
 
-Parameter ``newFeatureEeh``:
+:param newFeatureEeh:
     Parametric solid element
 
-Parameter ``featureTree``:
+:param featureTree:
     Feature tree
 
-Parameter ``oldFeatureEeh``:
+:param oldFeatureEeh:
     Old feature element or Template element
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_ShowExternalLeaf =R"doc(Show external leaf
 
-Parameter ``featureEeh``:
+:param featureEeh:
     Parametric solid element
 
-Parameter ``leaf``:
+:param leaf:
     Element ref of leaf
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_HideExternalLeaf =R"doc(Hide external leaf
 
-Parameter ``featureEeh``:
+:param featureEeh:
     Parametric solid element
 
-Parameter ``leaf``:
+:param leaf:
     Element ref of leaf
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_GetFeaturesFromNodeIds =R"doc(Get feature by using node id
 
-Parameter ``featureTree``:
+:param featureTree:
     Feature tree
 
-Parameter ``features``:
+:param features:
     Features to be returned
 
-Parameter ``featureEh``:
+:param featureEh:
     Parametric Feature element
 
-Parameter ``nodeIdsSet``:
+:param nodeIdsSet:
     Features nodes
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_GetFeaturesFromNodeName =R"doc(Get feature by using node name
 
-Parameter ``featureTree``:
+:param featureTree:
     Feature tree
 
-Parameter ``features``:
+:param features:
     Features to be returned
 
-Parameter ``featureEh``:
+:param featureEh:
     Parametric Feature element
 
-Parameter ``nodeName``:
+:param nodeName:
     Feature node name
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_GetFeaturesFromSubEntities =R"doc(Get feature by supplying sub entities captured by UI
 
-Parameter ``featureTree``:
+:param featureTree:
     Feature tree
 
-Parameter ``features``:
+:param features:
     Features to be returned
 
-Parameter ``featureEh``:
+:param featureEh:
     Parametric Feature element
 
-Parameter ``subEntities``:
+:param subEntities:
     Subentity to get feature from
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_GetFeatureName =R"doc(Get feature name
 
-Parameter ``subEntity``:
+:param subEntity:
     subEntity used to precisely locate feature
 
-Parameter ``hostEh``:
+:param hostEh:
     Parametric Solid element
 
-Returns:
+:returns:
     Feature name)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_SaveTree =R"doc(Save smart feature tree on supplied element.
 
-Parameter ``out]``:
+:param out]:
     featureEeh Parametric Feature element
 
-Parameter ``featureTree``:
+:param featureTree:
     the tree to save on element
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_ExtractTree =R"doc(Get smart feature tree of supplied element.
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_DumpFeatureTree =R"doc(Print feature tree information for debug purpose
 
-Parameter ``label``:
+:param label:
     E.g. WPrintfString(L" Element:% d ", eh.GetElementId()
 
-Parameter ``eh``:
+:param eh:
     Parametric Feature element
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_DoRollBack =R"doc(Rollback feature
 
-Parameter ``out]``:
+:param out]:
     eeh Parametric Feature element
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_RemoveFeature =R"doc(Delete parametric feature
 
-Parameter ``eh``:
+:param eh:
     Parametric Feature element
 
-Parameter ``tree``:
+:param tree:
     Feature tree to use
 
-Parameter ``nodeToDelete``:
+:param nodeToDelete:
     Feature node to delete
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_AddFeature =R"doc(Add parametric feature
 
-Parameter ``out]``:
+:param out]:
     eeh Parametric Feature element
 
-Parameter ``feature``:
+:param feature:
     Feature node to add
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_GetOrCreateSmartFeature =R"doc(Get existing parametric feature otherwise create a new one.
 
-Parameter ``newFeatureEeh``:
+:param newFeatureEeh:
     Parametric solid element
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element
 
-Parameter ``destinationModelRef``:
+:param destinationModelRef:
     Model ref to create parametric feature
 
-Parameter ``oldFeatureEh``:
+:param oldFeatureEh:
     existing element handle on which parametric feature has to create
 
-Parameter ``mergeParametrics``:
+:param mergeParametrics:
     Merge Parameter option
 
-Parameter ``visible``:
+:param visible:
     Visible
 
-Parameter ``temporary``:
+:param temporary:
     Temporary
 
-Parameter ``profile``:
+:param profile:
     Whether element is profile or not
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_CreateSingleChildSmartFeature =R"doc(Create parametric feature having a single child.
 
-Parameter ``newFeatureEeh``:
+:param newFeatureEeh:
     Parametric solid element
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element
 
-Parameter ``destinationModelRef``:
+:param destinationModelRef:
     Model ref to create parametric feature
 
-Parameter ``oldFeatureEh``:
+:param oldFeatureEh:
     existing element handle on which parametric feature has to create
 
-Parameter ``node``:
+:param node:
     Feature node
 
-Returns:
+:returns:
     SUCCESS if the operation is successful.
 
 Remark:
@@ -408,10 +408,10 @@ Remark:
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureElement_IsSmartFeature =R"doc(Confirm whether supplied element is parametric feature.
 
-Parameter ``eh``:
+:param eh:
     Element to test
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_RelocateFeature =R"doc(Relocate feature node)doc";
@@ -451,22 +451,22 @@ SmartFeatureHandlerId enum.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetBody =R"doc(Acquire body of parametric feature.
 
-Parameter ``body``:
+:param body:
     Output body
 
-Parameter ``hostEh``:
+:param hostEh:
     Parametric Feature Element
 
-Parameter ``getSolids``:
+:param getSolids:
     solid output is required
 
-Parameter ``getSheets``:
+:param getSheets:
     sheet output is required
 
-Parameter ``applyHostTransform``:
+:param applyHostTransform:
     Apply Host tansform
 
-Parameter ``displayError``:
+:param displayError:
     Display error)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetHighestNodeId =R"doc(Get highest node id in smart feature tree)doc";
@@ -477,59 +477,59 @@ static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetDisabled =R"d
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_SetDisabled =R"doc(Disable the smart feature node.
 
-Parameter ``disabled``:
+:param disabled:
     Boolean value to disable)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_CanBeDisabled =R"doc(Whether node can be disabled?)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetParent =R"doc(Get parent
 
-Returns:
+:returns:
     SmartFeatureNodePtr of parent node)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetAllChildrenRecursively =R"doc(Get all children recursively
 
-Parameter ``allChildren``:
+:param allChildren:
     All children)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetChildren =R"doc(Get all children
 
-Returns:
+:returns:
     Smart Feature node vector of children)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetChildCount =R"doc(Get child count
 
-Returns:
+:returns:
     Child count)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetChild =R"doc(Get child
 
-Parameter ``index``:
+:param index:
     Child index
 
-Returns:
+:returns:
     SmartFeatureNodePtr of child node)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetParentOfHiddenExternalLeaf =R"doc(Get parent of hidden external leaf. E.g. Extrude feature is returned;
 in case of hidden profile
 
-Parameter ``externalLeafParent``:
+:param externalLeafParent:
     Parent node of external leaf
 
-Returns:
+:returns:
     SUCCESS if the operation is successful)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetLeaf =R"doc(Get leaf
 
-Parameter ``eh``:
+:param eh:
     leaf element handle
 
-Returns:
+:returns:
     SUCCESS if the operation is successful)doc";
 
 static const char * __doc_Bentley_MstnPlatform_SmartFeatureNode_GetNodeId =R"doc(Get node id
 
-Returns:
+:returns:
     Node id)doc";
 
 USING_NAMESPACE_SMARTFEATURE;

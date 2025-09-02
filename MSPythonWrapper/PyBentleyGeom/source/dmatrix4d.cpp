@@ -15,15 +15,15 @@ is assumed upper triangular. Method:Find the smallest diagonal. Set
 that entry in X to 1. Backsolve the linear system with RHS 0 and the
 chosen X component fixed.
 
-Parameter ``[out]``:
+:param (output):
     nullVector approximate null space vector.
 
-Parameter ``[out]``:
+:param (output):
     residual estimate of error in A*X. (Squared residual.))doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_IsAffine =R"doc(Tests if the instance has 0001 final row, within tolerance.
 
-Returns:
+:returns:
     true if matrix is approximately affine.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_IsIdentity =R"doc(Tests if pInstance is an identity transform and returns the bool
@@ -31,78 +31,78 @@ indicator. The matrix is considered an identity if the sum of squared
 components after subtracting 1 from the diagonals is less than a small
 tolerance
 
-Returns:
+:returns:
     true if matrix is approximately an identity.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_MaxAbsDiff =R"doc(Compute max absolute difference between various parts of matrices.
 
-Parameter ``[in]``:
+:param (input):
     other matrix to compare to.
 
-Parameter ``[out]``:
+:param (output):
     matrixDiff difference in matrix part.
 
-Parameter ``[out]``:
+:param (output):
     colDiff difference in final column XYZ part
 
-Parameter ``[out]``:
+:param (output):
     rowDiff difference in final row XYZ part
 
-Parameter ``[out]``:
+:param (output):
     weightDiff difference in final diagonal entry
 
-Returns:
+:returns:
     max absolute difference)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_MaxAbs =R"doc(Search the matrix for the entry with the largest absolute value.
 
-Returns:
+:returns:
     max absolute value entry in the matrix.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_GetBlocks =R"doc(Return matrix, final row, final column, and scalar parts
 
-Parameter ``[out]``:
+:param (output):
     products upper 3x3 part
 
-Parameter ``[out]``:
+:param (output):
     row xyz parts of final row
 
-Parameter ``[out]``:
+:param (output):
     column xyz parts of final column
 
-Parameter ``[out]``:
+:param (output):
     scalar ww entry.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_SweepMomentProducts =R"doc(Return the product matrix resulting from sweeping geometry with given
 baseProducts;
 
-Parameter ``[in]``:
+:param (input):
     baseProducts products integrated on base curve or area.
 
-Parameter ``[in]``:
+:param (input):
     sweepVector vector for sweep (extrusion)
 
-Returns:
+:returns:
     products for integration over swept body.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_ConvertInertiaProductsToPrincipalWireMoments =R"doc(Input matrix contains products of inertia{[xx,xy,xz,x; xy yy yz y; xz
 yz zz z; x y z v]}. returned values are centroid, principal directions
 and 2nd moment tensor entries (yy+zz,xx+zz,xx+yy)
 
-Parameter ``[in]``:
+:param (input):
     localToWorld transformation from local coordinate system (where
     the products were computed) to world
 
-Parameter ``[out]``:
+:param (output):
     length length
 
-Parameter ``[out]``:
+:param (output):
     centroid center of mass
 
-Parameter ``[out]``:
+:param (output):
     axes columns of this matrix are the principal x,y,z directions.
 
-Parameter ``[out]``:
+:param (output):
     momentTensorDiagonal tensor entries (inertias for rotation around
     each axis))doc";
 
@@ -110,20 +110,20 @@ static const char * __doc_Bentley_Geom_DMatrix4d_ConvertInertiaProductsToPrincip
 yz zz z; x y z v]}. returned values are centroid, principal directions
 and 2nd moment tensor entries (yy+zz,xx+zz,xx+yy)
 
-Parameter ``[in]``:
+:param (input):
     localToWorld transformation from local coordinate system (where
     the products were computed) to world
 
-Parameter ``[out]``:
+:param (output):
     area area
 
-Parameter ``[out]``:
+:param (output):
     centroid center of mass
 
-Parameter ``[out]``:
+:param (output):
     axes columns of this matrix are the principal x,y,z directions.
 
-Parameter ``[out]``:
+:param (output):
     momentTensorDiagonal tensor entries (inertias for rotation around
     each axis))doc";
 
@@ -131,16 +131,16 @@ static const char * __doc_Bentley_Geom_DMatrix4d_ConvertInertiaProductsToPrincip
 yz zz z; x y z v]}. returned values are centroid, principal directions
 and 2nd moment tensor entries (yy+zz,xx+zz,xx+yy)
 
-Parameter ``[out]``:
+:param (output):
     volume volume
 
-Parameter ``[out]``:
+:param (output):
     centroid center of mass
 
-Parameter ``[out]``:
+:param (output):
     axes columns of this matrix are the principal x,y,z directions.
 
-Parameter ``[out]``:
+:param (output):
     momentTensorDiagonal tensor entries (inertias for rotation around
     each axis))doc";
 
@@ -155,13 +155,13 @@ integrations were volume integrals, s is the determinant of the
 orientation part of T. If the integrations were area integrals in a
 plane, s is the jacobian of the plane-to-plane transformation.)
 
-Parameter ``[in]``:
+:param (input):
     transform transform to apply
 
-Parameter ``[in]``:
+:param (input):
     momentMatrix matrix{B}
 
-Parameter ``[in]``:
+:param (input):
     scaleFactor)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitSymmetricProduct =R"doc(Compute A = Bt * D * B where B is a matrix and D is a diagonal matrix
@@ -169,15 +169,15 @@ given as a vector. REMARK:This is a Very Bad Thing for numerical
 purposes. Are you sure you can't get your result without forming this
 product?
 
-Parameter ``[in]``:
+:param (input):
     sigma entries of diagonal matrix D
 
-Parameter ``[in]``:
+:param (input):
     B matrix B)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_Subtract =R"doc(Subtract a matrix (componentwise) from the instance
 
-Parameter ``[in]``:
+:param (input):
     delta matrix to subtract)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_CopyUpperTriangleToLower =R"doc(Copy all 6 values from the upper triangle to mirrored positions in the
@@ -185,213 +185,213 @@ lower triangle.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_AddSymmetricScaledOuterProduct =R"doc(Add [xx xy xz x; xy yy yz y; xz yz zz 1; x y z 1] * scale
 
-Parameter ``[in]``:
+:param (input):
     xyz x,y,z for products. Implicitly extened to DPoint4d [x,y,z,1]
     for products
 
-Parameter ``[in]``:
+:param (input):
     scale scale to apply to all terms.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_Scale =R"doc(Scale in place.
 
-Parameter ``[in]``:
+:param (input):
     scaleFactor scale to apply)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_Add =R"doc(Add a matrix (componentwise) to the instance.
 
-Parameter ``[in]``:
+:param (input):
     delta matrix to add)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_DifferenceOf =R"doc(Subtract two 4x4 matrices.
 
-Parameter ``[in]``:
+:param (input):
     A A matrix of A - B
 
-Parameter ``[in]``:
+:param (input):
     B B matrix of A - B)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitProduct =R"doc(Form the product of two 4x4 matrices.
 
-Parameter ``[in]``:
+:param (input):
     A first matrix of product A*B
 
-Parameter ``[in]``:
+:param (input):
     B second matrix of product A*B)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_PreMultiplyByTranslateAndScale =R"doc(Premultiply matirx A by a matrix with sx,sy,sz,1 on diagonal,
 tx,ty,tz,1 in last column
 
-Parameter ``[in]``:
+:param (input):
     tx 03 entry (x translate) of mutliplier.
 
-Parameter ``[in]``:
+:param (input):
     ty 13 entry (y translate) of multiplier.
 
-Parameter ``[in]``:
+:param (input):
     tz 23 entry (z translate) of multiplier.
 
-Parameter ``[in]``:
+:param (input):
     sx 00 entry (x scale) of multiplier.
 
-Parameter ``[in]``:
+:param (input):
     sy 11 entry (y scale) of multiplier.
 
-Parameter ``[in]``:
+:param (input):
     sz 22 entry (z scale) of multiplier.
 
-Parameter ``[in]``:
+:param (input):
     matrixA existing matrix)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_GetRows =R"doc(Copy data from a matrix rows to DPoint4d structures.
 
-Parameter ``[out]``:
+:param (output):
     row0 row 0 data. May be NULL.
 
-Parameter ``[out]``:
+:param (output):
     row1 row 1 data. May be NULL.
 
-Parameter ``[out]``:
+:param (output):
     row2 row 2 data. May be NULL.
 
-Parameter ``[out]``:
+:param (output):
     row3 row 3 data. May be NULL.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_GetRow =R"doc(Copy data from a matrix row to a DPoint4d structure.
 
-Parameter ``[out]``:
+:param (output):
     vec point copied from row
 
-Parameter ``[in]``:
+:param (input):
     i index of row 0 <= i<4 whose values are to be set)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_GetColumn =R"doc(Copy data from a matrix column to a DPoint4d structure.
 
-Parameter ``[out]``:
+:param (output):
     vec point copied from column
 
-Parameter ``[in]``:
+:param (input):
     i index of column 0 <= i<4 whose values are to be set)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_SwapRows =R"doc(Install a DPoint4d in an indicated column of an DMatrix4d.
 
-Parameter ``[in]``:
+:param (input):
     i first column index
 
-Parameter ``[in]``:
+:param (input):
     j second column index)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_SwapColumns =R"doc(Install a DPoint4d in an indicated column of an DMatrix4d.
 
-Parameter ``[in]``:
+:param (input):
     i first column index
 
-Parameter ``[in]``:
+:param (input):
     j second column index)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_SetColumn =R"doc(Install r0, r1, r2, r3 in an indicated column of an DMatrix4d.
 
-Parameter ``[in]``:
+:param (input):
     i index of column 0 <= i<4 whose values are to be set
 
-Parameter ``[in]``:
+:param (input):
     r0 row 0 value
 
-Parameter ``[in]``:
+:param (input):
     r1 row 1 value
 
-Parameter ``[in]``:
+:param (input):
     r2 row 2 value
 
-Parameter ``[in]``:
+:param (input):
     r3 row 3 value)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_SetRow =R"doc(Install c0, c1, c2, c3 in an indicated row of an DMatrix4d.
 
-Parameter ``[in]``:
+:param (input):
     i index of row 0 <= i<4 whose values are to be set
 
-Parameter ``[in]``:
+:param (input):
     c0 column 0 value
 
-Parameter ``[in]``:
+:param (input):
     c1 column 1 value
 
-Parameter ``[in]``:
+:param (input):
     c2 column 2 value
 
-Parameter ``[in]``:
+:param (input):
     c3 column 3 value)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_MultiplyTranspose =R"doc(Multiply the transformed matrix times points. (Equivalent to
 multiplying transposed points times the matrix.)
 
-Parameter ``[out]``:
+:param (output):
     outPoint Array of homogeneous products A^T *pPoint[i]
 
-Parameter ``[in]``:
+:param (input):
     inPoint Array of homogeneous points
 
-Parameter ``[in]``:
+:param (input):
     n number of points)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_MultiplyAffineVectors =R"doc(Matrix times vector multiplication, assume 0001 4th row and padding 3d
 data with 0 weight.
 
-Parameter ``[out]``:
+:param (output):
     out Destination array
 
-Parameter ``[in]``:
+:param (input):
     in Source array
 
-Parameter ``[in]``:
+:param (input):
     n number of vectors)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_MultiplyScaleAndTranslate =R"doc(Matrix*point multiplication, using full 4d points but assuming the
 matrix is has 3D only scaling and translation.
 
-Parameter ``[out]``:
+:param (output):
     outPoint Array of homogeneous products A*pPoint[i]
 
-Parameter ``[in]``:
+:param (input):
     inPoint Array of homogeneous points
 
-Parameter ``[in]``:
+:param (input):
     n number of points)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_MultiplyAffine =R"doc(Matrix*point multiplication, using full 4d points but assuming the
 matrix is affine, i.e. assume 0001 4th row.
 
-Parameter ``[out]``:
+:param (output):
     outPoint Array of homogeneous products A*pPoint[i]
 
-Parameter ``[in]``:
+:param (input):
     inPoint Array of homogeneous points
 
-Parameter ``[in]``:
+:param (input):
     n number of points)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_MultiplyAndNormalize =R"doc(Multiply an array of points by a matrix, using all components of both
 the matrix and the points.
 
-Parameter ``[out]``:
+:param (output):
     outPoint Array of products A*inPoint[i] normalized
 
-Parameter ``[in]``:
+:param (input):
     inPoint Array of points points
 
-Parameter ``[in]``:
+:param (input):
     n number of points)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_MultiplyAndRenormalize =R"doc(Multiply an array of points by a matrix, using all components of both
 the matrix and the points.
 
-Parameter ``[out]``:
+:param (output):
     outPoint Array of products A*pPoint[i] renormalized
 
-Parameter ``[in]``:
+:param (input):
     inPoint Array of points points
 
-Parameter ``[in]``:
+:param (input):
     n number of points)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_EvaluateImageGrid =R"doc(Evaluate pA*X for m*n points X arranged in a grid. The homogeneous
@@ -399,150 +399,150 @@ coordinates of the i,j point in the grid is (x0 + i, y0 + j, 0, 1) The
 returned point grid[i * m + j] is the xy components of the image of
 grid poitn ij AFTER normalization.
 
-Parameter ``[out]``:
+:param (output):
     grid Array of mXn mapped, normalized points
 
-Parameter ``[in]``:
+:param (input):
     x00 grid origin x
 
-Parameter ``[in]``:
+:param (input):
     y00 grid origin y
 
-Parameter ``[in]``:
+:param (input):
     m number of grid points in x direction
 
-Parameter ``[in]``:
+:param (input):
     n number of grid points in y direction
 
-Parameter ``[in]``:
+:param (input):
     tol relative tolerance for 0-weight tests. If 0, 1.0e-10 is used *)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_SymmetricEigenvectors =R"doc(Compute eigenvectors, assuming A is symmetric.
 
-Parameter ``[out]``:
+:param (output):
     Q orthogonal, unit eigenvectors.
 
-Parameter ``[out]``:
+:param (output):
     D corresponding eigenvalues.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_Multiply =R"doc(Matrix multiplication, using all components of both the matrix and the
 points.
 
-Parameter ``[out]``:
+:param (output):
     outPoint Array of homogeneous products A*inPoint[i]
 
-Parameter ``[in]``:
+:param (input):
     inPoint Array of homogeneous points
 
-Parameter ``[in]``:
+:param (input):
     n number of points)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_TransposeOf =R"doc(Transpose a 4x4 matrix.
 
-Parameter ``[in]``:
+:param (input):
     B original matrix)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitFromRowValues =R"doc(Copies the double values directly into the rows of this instance.
 
-Parameter ``[in]``:
+:param (input):
     x00 (0,0) entry of matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x01 (0,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x02 (0,2) entry
 
-Parameter ``[in]``:
+:param (input):
     x03 (0,3) entry
 
-Parameter ``[in]``:
+:param (input):
     x10 (1,0) entry of matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x11 (1,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x12 (1,2) entry
 
-Parameter ``[in]``:
+:param (input):
     x13 (1,3) entry
 
-Parameter ``[in]``:
+:param (input):
     x20 (2,0) entry of matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x21 (2,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x22 (2,2) entry
 
-Parameter ``[in]``:
+:param (input):
     x23 (2,3) entry
 
-Parameter ``[in]``:
+:param (input):
     x30 (3,0) entry of matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x31 (3,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x32 (3,2) entry
 
-Parameter ``[in]``:
+:param (input):
     x33 (3,3) entry)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitFromPerspective =R"doc(Fill a matrix with entries in the perspective row, otherwise an
 identity matrix.
 
-Parameter ``[in]``:
+:param (input):
     px x component
 
-Parameter ``[in]``:
+:param (input):
     py y component
 
-Parameter ``[in]``:
+:param (input):
     pz z component)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitFromTranslation =R"doc(Fill a 4x4 matrix with a given translation vector and otherwise an
 identity.
 
-Parameter ``[in]``:
+:param (input):
     tx x component
 
-Parameter ``[in]``:
+:param (input):
     ty y component
 
-Parameter ``[in]``:
+:param (input):
     tz z component)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitFrom =R"doc(Copy a RotMatrix into corresponding parts of a 4x4 matrix with 4th row
 and column both 0001.
 
-Parameter ``[in]``:
+:param (input):
     B 3x3 part to fill)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitFromColumnVectors =R"doc(Fill the affine part using xyz vectors for each column of the basis
 part and an xyz vector for the translation
 
-Parameter ``[in]``:
+:param (input):
     col0 data for column 0 of leading 3x3 submatrix
 
-Parameter ``[in]``:
+:param (input):
     col1 data for column 1 of leading 3x3 submatrix
 
-Parameter ``[in]``:
+:param (input):
     col2 data for column 2 of leading 3x3 submatrix
 
-Parameter ``[in]``:
+:param (input):
     translation data for translation part of matrix)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitFromScaleAndTranslation =R"doc(Fill the scale and translate entries in an otherwise identity matrix
 
-Parameter ``[in]``:
+:param (input):
     scale scale factor for each diagonal of leading 3x3 submatrix
 
-Parameter ``[in]``:
+:param (input):
     translation translation vector)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_InitIdentity =R"doc(initialize an identity matrix.)doc";
@@ -552,46 +552,46 @@ static const char * __doc_Bentley_Geom_DMatrix4d_FromZero =R"doc(Fill a matrix w
 static const char * __doc_Bentley_Geom_DMatrix4d_FromPerspective =R"doc(Fill a matrix with entries in the perspective row, otherwise an
 identity matrix.
 
-Parameter ``[in]``:
+:param (input):
     px x component
 
-Parameter ``[in]``:
+:param (input):
     py y component
 
-Parameter ``[in]``:
+:param (input):
     pz z component)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_FromTranslation =R"doc(Fill a 4x4 matrix with a given translation vector and otherwise an
 identity.
 
-Parameter ``[in]``:
+:param (input):
     tx x component
 
-Parameter ``[in]``:
+:param (input):
     ty y component
 
-Parameter ``[in]``:
+:param (input):
     tz z component)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_From =R"doc(Copy a RotMatrix into corresponding parts of a 4x4 matrix with 4th row
 and column both 0001.
 
-Parameter ``[in]``:
+:param (input):
     B 3x3 part to fill)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_FromColumnVectors =R"doc(Fill the affine part using xyz vectors for each column of the basis
 part and an xyz vector for the translation
 
-Parameter ``[in]``:
+:param (input):
     col0 data for column 0 of leading 3x3 submatrix
 
-Parameter ``[in]``:
+:param (input):
     col1 data for column 1 of leading 3x3 submatrix
 
-Parameter ``[in]``:
+:param (input):
     col2 data for column 2 of leading 3x3 submatrix
 
-Parameter ``[in]``:
+:param (input):
     translation data for translation part of matrix)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_From101WeightedProduct =R"doc(Promote 3 inputs to 4x4 carrier matrices, with respective scale terms
@@ -600,71 +600,71 @@ a transform is defined as A*F*C, and the derivative part of F is has
 nonzero derivative B only for its matrix part, A*B*C is the derivative
 4x4 matrix.
 
-Parameter ``[in]``:
+:param (input):
     transformA First term. Promoted to 4x4 with final row 0001.
 
-Parameter ``[in]``:
+:param (input):
     matrixB Second term. Promoted to 4x4 with final row 0000.
 
-Parameter ``[in]``:
+:param (input):
     transformC Third term. Promoted to 4x4 with final row 0001.)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_FromScaleAndTranslation =R"doc(Fill the scale and translate entries in an otherwise identity matrix
 
-Parameter ``[in]``:
+:param (input):
     scale scale factor for each diagonal of leading 3x3 submatrix
 
-Parameter ``[in]``:
+:param (input):
     translation translation vector)doc";
 
 static const char * __doc_Bentley_Geom_DMatrix4d_FromRowValues =R"doc(Copies the double values directly into the rows of this instance.
 
-Parameter ``[in]``:
+:param (input):
     x00 (0,0) entry of matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x01 (0,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x02 (0,2) entry
 
-Parameter ``[in]``:
+:param (input):
     x03 (0,3) entry
 
-Parameter ``[in]``:
+:param (input):
     x10 (1,0) entry of matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x11 (1,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x12 (1,2) entry
 
-Parameter ``[in]``:
+:param (input):
     x13 (1,3) entry
 
-Parameter ``[in]``:
+:param (input):
     x20 (2,0) entry of matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x21 (2,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x22 (2,2) entry
 
-Parameter ``[in]``:
+:param (input):
     x23 (2,3) entry
 
-Parameter ``[in]``:
+:param (input):
     x30 (3,0) entry of matrix (row, column)
 
-Parameter ``[in]``:
+:param (input):
     x31 (3,1) entry
 
-Parameter ``[in]``:
+:param (input):
     x32 (3,2) entry
 
-Parameter ``[in]``:
+:param (input):
     x33 (3,3) entry)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -769,6 +769,20 @@ void def_DMatrix4d(py::module_& m)
         self.MultiplyAndRenormalize(outPoints.data(), inPoints.data(), (int) inPoints.size());
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndRenormalize));
 
+    c1.def("MultiplyAndRenormalize", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+        {   
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+        if (cppOutPoints.size() < cppInPoints.size())
+            cppOutPoints.resize(cppInPoints.size());
+
+        self.MultiplyAndRenormalize(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndRenormalize));
+
 
     c1.def("MultiplyAndRenormalize", py::overload_cast<DPoint3dR, DPoint3dCR>(&DMatrix4d::MultiplyAndRenormalize, py::const_), "outPoint"_a, "inPoint"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndRenormalize));
 
@@ -781,6 +795,19 @@ void def_DMatrix4d(py::module_& m)
             outPoints.resize(inPoints.size());
 
         self.MultiplyAndNormalize(outPoints.data(), inPoints.data(), (size_t) inPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndNormalize));
+
+    c1.def("MultiplyAndNormalize", [] (DMatrix4dCR self, py::list& outPoints, DPoint4dArray const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        if (cppOutPoints.size() < inPoints.size())
+            cppOutPoints.resize(inPoints.size());
+
+        self.MultiplyAndNormalize(cppOutPoints.data(), inPoints.data(), (size_t) inPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndNormalize));
 
     c1.def("MultiplyAffine", [] (DMatrix4dCR self, DPoint4dArray& outPoints, DPoint4dArray const& inPoints)
@@ -815,6 +842,20 @@ void def_DMatrix4d(py::module_& m)
 
         self.MultiplyAffine(outPoints.data(), inPoints.data(), (int) inPoints.size());
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
+    
+    c1.def("MultiplyAffine", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+        if (cppOutPoints.size() < cppInPoints.size())
+            cppOutPoints.resize(cppInPoints.size());
+
+        self.MultiplyAffine(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
 
     c1.def("MultiplyAffineVectors", [] (DMatrix4dCR self, DPoint3dArray& outPoints, DPoint3dArray const& inPoints)
         {
@@ -825,6 +866,21 @@ void def_DMatrix4d(py::module_& m)
             outPoints.resize(inPoints.size());
 
         self.MultiplyAffineVectors(outPoints.data(), inPoints.data(), (int) inPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffineVectors));
+
+    c1.def("MultiplyAffineVectors", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+
+        if (cppOutPoints.size() < cppInPoints.size())
+            cppOutPoints.resize(cppInPoints.size());
+
+        self.MultiplyAffineVectors(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffineVectors));
 
     c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, DPoint3dArray& outPoints, DPoint3dArray const& inPoints)
@@ -838,6 +894,21 @@ void def_DMatrix4d(py::module_& m)
         self.MultiplyScaleAndTranslate(outPoints.data(), inPoints.data(), (int) inPoints.size());
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
 
+    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+    
+        if (cppOutPoints.size() < cppInPoints.size())
+            cppOutPoints.resize(cppInPoints.size());
+
+        self.MultiplyScaleAndTranslate(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
+
     c1.def("Multiply", [] (DMatrix4dCR self, DPoint4dArray& outPoints, DPoint3dArray const& inPoints, DoubleArray const& weight)
         {
         if (inPoints.empty())
@@ -847,6 +918,19 @@ void def_DMatrix4d(py::module_& m)
             outPoints.resize(inPoints.size());
 
         self.Multiply(outPoints.data(), inPoints.data(), weight.empty() ? nullptr : weight.data(), (int) inPoints.size());
+        }, "outPoints"_a, "inPoints"_a, "weight"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
+
+    c1.def("Multiply", [] (DMatrix4dCR self, DPoint4dArray& outPoints, py::list const& inPoints, DoubleArray const& weight)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+
+        if (outPoints.size() < cppInPoints.size())
+            outPoints.resize(cppInPoints.size());
+
+        self.Multiply(outPoints.data(), cppInPoints.data(), weight.empty() ? nullptr : weight.data(), (int) cppInPoints.size());
         }, "outPoints"_a, "inPoints"_a, "weight"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
 
     c1.def("Multiply", py::overload_cast<DPoint4dR, DPoint4dCR>(&DMatrix4d::Multiply, py::const_), "outPoint"_a, "inPoint"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));

@@ -1,10 +1,5 @@
-# -*- coding: utf-8 -*-
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
 import math
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -12,12 +7,22 @@ from MSPyECObjects import *
 from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 
-# This sample demos creating group hole by selecting outer and inner boundary. (Used:SendCommand, SendDataPointForLocate, SendDataPoint)
-# 1. Invoke "Group Hole" Command.
-# 2. Select outer and inner boundary element.
+'''
+This sample demonstrates creating group hole by selecting outer and inner boundary. (Used:SendCommand, SendDataPointForLocate, SendDataPoint)
+1. Invoke "Group Hole" Command.
+2. Select outer and inner boundary element.
+'''
 
 # Help method: Create a shape by points and add it to the active model
 def AddShape (points):
+    """
+    Adds a shape element to the active DGN model.
+
+    :param points: A list of points defining the shape.
+    :type points: list
+    :return: An EditElementHandle object if the shape is successfully added to the model, otherwise None.
+    :rtype: EditElementHandle or None
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     eeh = EditElementHandle()
     ShapeHandler.CreateShapeElement (eeh, None, points, ACTIVEMODEL.Is3d(), ACTIVEMODEL)

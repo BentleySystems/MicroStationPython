@@ -51,64 +51,64 @@ Angle::SmallAngle ()))doc";
 
 static const char * __doc_Bentley_Geom_Angle_TrigIntegrals =R"doc(Return integrals of [cc cs c; cs ss s; c s 1] from theta0 to theta1
 
-Parameter ``[in]``:
+:param (input):
     theta0 beginning of integration interval
 
-Parameter ``[in]``:
+:param (input):
     theta1 end of integration interval
 
-Parameter ``[out]``:
+:param (output):
     integrals symmetric matrix of integrals.)doc";
 
 static const char * __doc_Bentley_Geom_Angle_ConstructGivensWeights =R"doc(Construct cosine and sine of vector to (a,b). (Just normalize a and
 b.)
 
-Parameter ``[out]``:
+:param (output):
     cosine
 
-Parameter ``[out]``:
+:param (output):
     sine
 
-Parameter ``[in]``:
+:param (input):
     a
 
-Parameter ``[in]``:
+:param (input):
     b)doc";
 
-static const char * __doc_Bentley_Geom_Angle_ApplyGivensWeights =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_Angle_ApplyGivensWeights =R"doc(:param (output):
     aOut{(a,b) DOT (cos,sin)}
 
-Parameter ``[out]``:
+:param (output):
     bOut{(cross,sin) DOT (a,b)}
 
-Parameter ``[in]``:
+:param (input):
     a x coordiante
 
-Parameter ``[in]``:
+:param (input):
     b y coordinate
 
-Parameter ``[in]``:
+:param (input):
     cos cosine term of Givens rotation.
 
-Parameter ``[in]``:
+:param (input):
     sin sine term of Givens rotation.)doc";
 
-static const char * __doc_Bentley_Geom_Angle_Cyclic3dAxes =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_Angle_Cyclic3dAxes =R"doc(:param (output):
     i0 i adjusted to [0,1,2] with wraparound
 
-Parameter ``[out]``:
+:param (output):
     i1 i+1 adjusted to [0,1,2] with wraparound
 
-Parameter ``[out]``:
+:param (output):
     i2 i+2 adjusted to [0,1,2] with wraparound
 
-Parameter ``[in]``:
+:param (input):
     i initial axis)doc";
 
-static const char * __doc_Bentley_Geom_Angle_Cyclic3dAxis =R"doc(Returns:
+static const char * __doc_Bentley_Geom_Angle_Cyclic3dAxis =R"doc(:returns:
     i adjusted to [0,1,2] with wraparound.)doc";
 
-static const char * __doc_Bentley_Geom_Angle_Cyclic2dAxis =R"doc(Returns:
+static const char * __doc_Bentley_Geom_Angle_Cyclic2dAxis =R"doc(:returns:
     i adjusted to [0,1] with wraparound.)doc";
 
 static const char * __doc_Bentley_Geom_Angle_Asin =R"doc(Return asin of arg, but cap arg at +- 1)doc";
@@ -121,70 +121,70 @@ static const char * __doc_Bentley_Geom_Angle_Atan2 =R"doc(Return the arctan of n
 static const char * __doc_Bentley_Geom_Angle_EvaluateTrigCombination =R"doc(Evaluate{f(theta) = constCoff + cosCoff * cos(theta) + sinCoff *
 sin(theta)}
 
-Parameter ``[in]``:
+:param (input):
     constCoff constant coefficient
 
-Parameter ``[in]``:
+:param (input):
     cosCoff cosine coefficient
 
-Parameter ``[in]``:
+:param (input):
     sinCoff sine coefficient
 
-Parameter ``[in]``:
+:param (input):
     theta evaluation angle)doc";
 
 static const char * __doc_Bentley_Geom_Angle_TrigCombinationRange =R"doc(Find the min and max values of{f(theta) = constCoff + cosCoff *
 cos(theta) + sinCoff * sin(theta)} in [-pi,pi]
 
-Parameter ``[in]``:
+:param (input):
     constCoff constant coefficient
 
-Parameter ``[in]``:
+:param (input):
     cosCoff cosine coefficient
 
-Parameter ``[in]``:
+:param (input):
     sinCoff sine coefficient
 
-Parameter ``[in]``:
+:param (input):
     thetaMin angle where min occurs
 
-Parameter ``[in]``:
+:param (input):
     fMin minimum value
 
-Parameter ``[in]``:
+:param (input):
     thetaMax angle where max occurs
 
-Parameter ``[in]``:
+:param (input):
     fMax maximum value)doc";
 
 static const char * __doc_Bentley_Geom_Angle_TrigCombinationRangeInSweep =R"doc(Find the min and max values of{f(theta) = constCoff + cosCoff *
 cos(theta) + sinCoff * sin(theta)} in [thetaA, thetaB].
 
-Parameter ``[in]``:
+:param (input):
     constCoff constant coefficient
 
-Parameter ``[in]``:
+:param (input):
     cosCoff cosine coefficient
 
-Parameter ``[in]``:
+:param (input):
     sinCoff sine coefficient
 
-Parameter ``[in]``:
+:param (input):
     thetaA angle range limit
 
-Parameter ``[in]``:
+:param (input):
     sweep sweep angle
 
-Parameter ``[in]``:
+:param (input):
     thetaMin angle where min occurs
 
-Parameter ``[in]``:
+:param (input):
     fMin minimum value
 
-Parameter ``[in]``:
+:param (input):
     thetaMax angle where max occurs
 
-Parameter ``[in]``:
+:param (input):
     fMax maximum value)doc";
 
 static const char * __doc_Bentley_Geom_Angle_Rotate90UntilSmallAngle =R"doc(Find a vector that differs from (x0,y0) by a multiple of 90 degrees,

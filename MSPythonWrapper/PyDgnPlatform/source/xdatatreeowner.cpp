@@ -16,94 +16,94 @@ object.)doc";
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_GetStandaloneECEnabler =R"doc(Returns the StandaloneECEnabler that can be used to create IECInstance
 to store on an XDataTreeNode.
 
-Parameter ``fullSchemaName``:
+:param fullSchemaName:
     Name of Schema that define the ECClass specified by className.
 
-Parameter ``className``:
+:param className:
     Name of class to be created by enabler.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_ContainsNodes =R"doc(Returns true if the XDataTree of the specified type contains
 XDataTreeNodes.
 
-Parameter ``hid``:
+:param hid:
     HandlerId of XDataTree type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_GetNextAvailableName =R"doc(Returns the next available unique node name given a proposed name.
 
-Parameter ``baseName``:
+:param baseName:
     Proposed name for new node.
 
-Parameter ``parentId``:
+:param parentId:
     ElementId of parent node. Used to limit scope of unique name
     checking.
 
-Parameter ``handlerId``:
+:param handlerId:
     HandlerId of XDataTree type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_IsNodeElementReferenced =R"doc(Returns true if XDataTreeNode specified by the ElementId of its host
 type 66 element is referenced by any elements in any loaded models.
 
-Parameter ``nodeID``:
+:param nodeID:
     ElementId of host Type 66 element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_SortNodesByName =R"doc(Sorts the XDataTreeNodes in a tree by name. Typically the nodes are
 arranged by sort priority.
 
-Parameter ``parentNodeID``:
+:param parentNodeID:
     ElementId of parent node, pass 0 to sort root level nodes.
 
-Parameter ``hid``:
+:param hid:
     HandlerId of XDataTree type. Returns true if the nodes were
     sorted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_CopyNodeFromFile =R"doc(Copy XDataTreeNode into this XDataTreeOwner.
 
-Parameter ``sourceNode``:
+:param sourceNode:
     XDataTreeNode to be copied. Returns a pointer to the copied node
     in XDataTreeOwner.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_AddNewNode =R"doc(Create a new node in the XDataTree owner which creates a new type 66
 element to host the node data.
 
-Parameter ``nodeToAdd``:
+:param nodeToAdd:
     The XDataTreeNode to add to the owner.
 
-Parameter ``seedInstanceContainer``:
+:param seedInstanceContainer:
     If pointer to seed instance container is specified, the instances
     it contains are also written. Returns SUCCESS if successfull.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_FindNodeByPath =R"doc(Return a pointer to an existing XDataTreeNode.
 
-Parameter ``locatePath``:
+:param locatePath:
     The path of the node to locate.
 
-Parameter ``handlerId``:
+:param handlerId:
     The HandlerId of the type of XDataTree to search.
 
-Parameter ``pathSeparator``:
+:param pathSeparator:
     The path separator character used in the locatePath. This defaults
-    to " \ ". Returns a valid ElementTemplateNodePtr if the template can
+    to " \\ ". Returns a valid ElementTemplateNodePtr if the template can
     be located.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_FindXDataTree =R"doc(Returns a pointer of XDataTree that holds XDataTreeNodes a specific
 type.
 
-Parameter ``handlerId``:
+:param handlerId:
     HandlerId of XDataTree type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_GetXDataTree =R"doc(Returns a pointer of XDataTree that holds XDataTreeNodes a specific
 type. This call will create the XDataTree if necessary.
 
-Parameter ``handlerId``:
+:param handlerId:
     HandlerId of XDataTree type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_FindByElementId =R"doc(Returns XDataTreeNode pointer using ElementId of host Type 66 element
 and handlerId of XDataTree type.
 
-Parameter ``elementID``:
+:param elementID:
     ElementId of host Type 66 element.
 
-Parameter ``handlerId``:
+:param handlerId:
     HandlerId of XDataTree type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_IsReadOnly =R"doc(Returns true if the Owner is ReadOnly. WARNING:This may return false
@@ -111,27 +111,27 @@ for XDataTreeOwner associated with a read-only DgnFile!)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_DeleteNode =R"doc(Delete the specified node from the owner.
 
-Parameter ``node``:
+:param node:
     The cached XDataTreeNode to write.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_WriteXData =R"doc(Write the list of IECInstance held by the node to the owner which is
 typically a DgnFile. The instances are stored as ECXAttribute data.
 
-Parameter ``node``:
+:param node:
     The cached XDataTreeNode to write.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_WriteHeader =R"doc(Write the node header data to the owner which is typically a DgnFile.
 The header data consists of the node name, its parent, and sort
 priority.
 
-Parameter ``node``:
+:param node:
     The cached XDataTreeNode to write.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_Write =R"doc(Write the node to the owner which is typically a DgnFile. This writes
 both the node header data and the ECXAttribute instance data held by
 the node.
 
-Parameter ``node``:
+:param node:
     The cached XDataTreeNode to write.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeOwner_GetLabel =R"doc(Return label of XDataTreeOwner which is typically used as a display

@@ -12,14 +12,14 @@
 
 static const char * __doc_Bentley_DgnPlatform_FenceParams_Delete =R"doc(Frees a FenceParams instance.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_FenceParams_BuildAgenda =R"doc(Parameter ``agenda``:
+static const char * __doc_Bentley_DgnPlatform_FenceParams_BuildAgenda =R"doc(:param agenda:
     The list of elements that satisfied the fence criteria.
 
-Parameter ``searchList``:
+:param searchList:
     The list of candidate models to search for elements that pass the
     fence criteria.
 
-Returns:
+:returns:
     SUCCESS If one or more elements were found that satisfied the
     fence criteria. @note Populates agenda with un-clipped elements
     that satisfy the fence criteria. Set overlap mode to false and
@@ -131,6 +131,13 @@ void def_FenceParams(py::module_& m)
     c1.def("ClippingPointsFromRootPoints", [] (FenceParamsR self, DPoint2dArray& points1, DPoint3dArray& points2, ViewportP vp)
            {
            self.ClippingPointsFromRootPoints(points1.data(), points2.data(), (int) points1.size(), vp);
+           }, "points1"_a, "points2"_a, "vp"_a, DOC(Bentley, DgnPlatform, FenceParams, ClippingPointsFromRootPoints));
+
+    c1.def("ClippingPointsFromRootPoints", [] (FenceParamsR self, DPoint2dArray& points1, py::list& points2, ViewportP vp)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points2, cppPoints2, DPoint3dArray, DPoint3d); 
+           self.ClippingPointsFromRootPoints(points1.data(), cppPoints2.data(), (int) points1.size(), vp);
+           CONVERT_CPPARRAY_TO_PYLIST(points2, cppPoints2, DPoint3dArray, DPoint3d);
            }, "points1"_a, "points2"_a, "vp"_a, DOC(Bentley, DgnPlatform, FenceParams, ClippingPointsFromRootPoints));
 
     c1.def("IsCameraOn", &FenceParams::IsCameraOn, DOC(Bentley, DgnPlatform, FenceParams, IsCameraOn));

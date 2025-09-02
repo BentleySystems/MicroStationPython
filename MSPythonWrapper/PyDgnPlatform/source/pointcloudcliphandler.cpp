@@ -12,110 +12,110 @@
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_ClearAllClip =R"doc(Delete all the clip masks and clip boundaries of a point cloud.
 
-Returns:
+:returns:
     always SUCCESS)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_SetClipMaskList =R"doc(Set the list of clip masks of a point cloud.
 
-Parameter ``props``:
+:param props:
     PointCloudProperties of the point cloud for which the clip masks
     are set.
 
-Parameter ``clipBoxList``:
+:param clipBoxList:
     List of clip masks to set on the point cloud.
 
-Returns:
+:returns:
     always SUCCESS)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_GetClipMaskList =R"doc(Get the list of clip masks of a point cloud.
 
-Parameter ``props``:
+:param props:
     PointCloudProperties of the point cloud for which the clip masks
     are requested.
 
-Parameter ``clipBoxList``:
+:param clipBoxList:
     List of clip masks of the point cloud.
 
-Returns:
+:returns:
     always SUCCESS)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_ClearClipMask =R"doc(Delete all the clip masks of a point cloud.
 
-Returns:
+:returns:
     always SUCCESS)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_ClearClipMaskPolygon =R"doc(Delete the polygon clip masks of a point cloud.
 
-Returns:
+:returns:
     always SUCCESS)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_ClearClipBoundaryPolygon =R"doc(Delete the polygon clip boundaries of a point cloud.
 
-Returns:
+:returns:
     always SUCCESS)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_GetClipBoundaryPolygon =R"doc(Get the polygon clip boundaries of a point cloud.
 
-Parameter ``props``:
+:param props:
     PointCloudProperties of the point cloud for which the clip
     boundary is requested.
 
-Parameter ``clipPolygon``:
+:param clipPolygon:
     Clip boundary polygon
 
-Returns:
+:returns:
     ERROR if there is no clip boundary polygon applied to the point
     cloud. SUCCESS otherwise.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_SetClipBoundary =R"doc(Set the clip boundary of a point cloud after removing any existing
 clip boundary.
 
-Parameter ``props``:
+:param props:
     PointCloudProperties of the point cloud for which the clip
     boundary is set.
 
-Parameter ``clipBox``:
+:param clipBox:
     OrientedBox that defines the clip boundary.
 
-Returns:
+:returns:
     always SUCCESS)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_ClearClipBoundary =R"doc(Delete all the clip boundaries of a point cloud.
 
-Returns:
+:returns:
     always SUCCESS)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointCloudClipProperties_GetClipBoundary =R"doc(Get the list of clip boundaries of a point cloud.
 
-Parameter ``props``:
+:param props:
     PointCloudProperties of the point cloud for which the clip
     boundary is requested.
 
-Parameter ``clipBox``:
+:param clipBox:
     Clip boundary box
 
-Returns:
+:returns:
     ERROR if there is no clip boundary box applied to the point cloud.
     SUCCESS otherwise.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_OrientedBox_GetOrigin =R"doc(Get the origin of this OrientedBox.
 
-Returns:
+:returns:
     origin)doc";
 
 static const char * __doc_Bentley_DgnPlatform_OrientedBox_GetZVec =R"doc(Get the Z vector of this OrientedBox.
 
-Returns:
+:returns:
     Z vector)doc";
 
 static const char * __doc_Bentley_DgnPlatform_OrientedBox_GetYVec =R"doc(Get the Y vector of this OrientedBox.
 
-Returns:
+:returns:
     Y vector)doc";
 
 static const char * __doc_Bentley_DgnPlatform_OrientedBox_GetXVec =R"doc(Get the X vector of this OrientedBox.
 
-Returns:
+:returns:
     X vector)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -162,6 +162,12 @@ void def_PointCloudClipHandler(py::module_& m)
     c2.def("SetClipBoundary", 
            py::overload_cast<PointCloudPropertiesCR, DPoint3dArray const&>(&PointCloudClipProperties::SetClipBoundary), 
            "props"_a, "polygon"_a, DOC(Bentley, DgnPlatform, PointCloudClipProperties, SetClipBoundary));
+
+    c2.def("SetClipBoundary", [](PointCloudClipPropertiesR self, PointCloudPropertiesCR props, py::list const& polygon) 
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(polygon, cppPolygon, DPoint3dArray, DPoint3d);
+           return self.SetClipBoundary(props, cppPolygon);
+           }, "props"_a, "polygon"_a, DOC(Bentley, DgnPlatform, PointCloudClipProperties, SetClipBoundary));     
 
     c2.def("GetClipBoundaryPolygon", &PointCloudClipProperties::GetClipBoundaryPolygon, "props"_a, "clipPolygon"_a, DOC(Bentley, DgnPlatform, PointCloudClipProperties, GetClipBoundaryPolygon));
     c2.def("ClearClipBoundaryPolygon", &PointCloudClipProperties::ClearClipBoundaryPolygon, DOC(Bentley, DgnPlatform, PointCloudClipProperties, ClearClipBoundaryPolygon));

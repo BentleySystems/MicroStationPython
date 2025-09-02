@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 
 import os
 import math
@@ -14,11 +10,30 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
+'''
+Example demonstrating how to create multiple ellipses in the active DGN model.
+'''
 
-'''Create a set of ellipse in Microstation'''
 def createEllipseOverride1(basePoint, radius=100,
                            rotation=RotMatrix.FromRowValues(1,0,0,0,1,0,0,0,1),
                            count=10, step=5):
+    """
+    Creates multiple ellipses in the active DGN model.
+
+    :param basePoint: The center point for the ellipses.
+    :type basePoint: DPoint3d
+    :param radius: The initial radius of the ellipses.
+    :type radius: float
+    :param rotation: The rotation matrix for the ellipses.
+    :type rotation: RotMatrix
+    :param count: The number of ellipses to create.
+    :type count: int
+    :param step: The decrement step for the radius of each subsequent ellipse.
+    :type step: float
+
+    :returns: True if all ellipses are successfully created and added to the model, False otherwise.
+    :rtype: bool
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:
         return False
@@ -48,9 +63,25 @@ def createEllipseOverride1(basePoint, radius=100,
     return True
 
 
-'''Create a set of ellipse in Microstation'''
 def createEllipseOverride2(basePoint, radius=100, rotation=0,
                            count=10, step=5):
+    """
+    Creates multiple ellipses in the active DGN model with a specified rotation.
+
+    :param basePoint: The center point for the ellipses.
+    :type basePoint: DPoint3d
+    :param radius: The initial radius of the ellipses.
+    :type radius: float
+    :param rotation: The rotation angle for the ellipses.
+    :type rotation: float
+    :param count: The number of ellipses to create.
+    :type count: int
+    :param step: The decrement step for the radius of each subsequent ellipse.
+    :type step: float
+
+    :returns: True if all ellipses are successfully created and added to the model, False otherwise.
+    :rtype: bool
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:
         return False
@@ -80,9 +111,24 @@ def createEllipseOverride2(basePoint, radius=100, rotation=0,
     return True
 
 
-'''Create a set of ellipses in Microstation'''
+
 def createEllipseOverride3(basePoint, firstRadius=50,
                            count=10, step=5):
+    """
+    Creates multiple ellipses in the active DGN model with increasing radii.
+
+    :param basePoint: The center point for the ellipses.
+    :type basePoint: DPoint3d
+    :param firstRadius: The radius of the first ellipse.
+    :type firstRadius: float
+    :param count: The number of ellipses to create.
+    :type count: int
+    :param step: The increment step for the radius of each subsequent ellipse.
+    :type step: float
+
+    :returns: True if all ellipses are successfully created and added to the model, False otherwise.
+    :rtype: bool
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:
         return False

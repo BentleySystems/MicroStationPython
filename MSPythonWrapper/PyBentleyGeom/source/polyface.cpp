@@ -14,7 +14,7 @@ static const char * __doc_Bentley_Geom_PolyfaceVisitor_TryRecomputeNormals =R"do
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_TryAddVertexByReadIndex =R"doc(Go to the source mesh at specified readIndex. Bring all it's data into
 a new vertex in the visitor.
 
-Returns:
+:returns:
     false if not a valid readIndex for the client array, or if the
     client array has a zero (terminator) there, or if the client is
     not fully indexed.)doc";
@@ -37,29 +37,29 @@ current facet.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_TryFindCloseFacetPoint =R"doc(Test if a point is close to a facet.
 
-Parameter ``[in]``:
+:param (input):
     spacePoint test point.
 
-Parameter ``[in]``:
+:param (input):
     tolerance tolerance for identifying a hit.
 
-Parameter ``[out]``:
+:param (output):
     facetPoint point on facet.
 
 return true if a hit was found.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_TryFindFacetRayIntersection =R"doc(Test if ray pierces facet or come close to an edge or vertex.
 
-Parameter ``[in]``:
+:param (input):
     ray test ray.
 
-Parameter ``[in]``:
+:param (input):
     tolerance tolerance for edge/vertex passby
 
-Parameter ``[out]``:
+:param (output):
     facetPoint point on facet.
 
-Parameter ``[out]``:
+:param (output):
     rayFraction parameter along ray
 
 return true if a hit was found.)doc";
@@ -104,13 +104,13 @@ static const char * __doc_Bentley_Geom_PolyfaceVisitor_NumEdgesThisFace =R"doc(r
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_MoveToFacetByReadIndex =R"doc(Focus on facet with specified readIndex.
 
-Parameter ``[in]``:
+:param (input):
     readIndex readIndex in facet.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_GetReadIndex =R"doc(Return the readIndex (current position within client facets). This
 value can be used to return here via MoveToFacetByReadIndex
 
-Returns:
+:returns:
     readIndex in facet.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_TryGetLocalFrameAndRank =R"doc(Like TryGetLocalFrame, but with integer return type to distinguish
@@ -146,13 +146,13 @@ and its largest coordinate is positive and 1 or less.
 
 ul> Prefered x axis is parallel to the first edge.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from local to world
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal transform from world to local
 
-Parameter ``[in]``:
+:param (input):
     selector indicates preference for origin and scaling.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_AccumulateScaledData =R"doc(accumualted a (multiple of) all numeric data to a detail. Copy integer
@@ -164,20 +164,20 @@ static const char * __doc_Bentley_Geom_PolyfaceVisitor_TryDRay3dIntersectionToFa
 returns false if the facet does not have params or if there are not
 edges on both sides along the scan lines.
 
-Parameter ``[in]``:
+:param (input):
     ray ray to intersect with facet.
 
-Parameter ``[in]``:
+:param (input):
     detail all coordinate data at this parametric coordinate.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_TryParamToFacetLocationDetail =R"doc(Find a uv location within the facet. Compute all available data there.
 returns false if the facet does not have params or if there are not
 edges on both sides along the scan lines.
 
-Parameter ``[in]``:
+:param (input):
     uvParam pick parameter.
 
-Parameter ``[in]``:
+:param (input):
     detail all coordinate data at this parametric coordinate.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_AddCoordinatesFromFacetLocationDetail =R"doc(add coordinate data from a vertex described by a facet location
@@ -186,10 +186,10 @@ detail.)doc";
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_LoadVertexData =R"doc(Copy all data from a particular vertex (indexed within the visitor)
 into a facet location detail.
 
-Parameter ``[out]``:
+:param (output):
     detail destination for copied data.
 
-Parameter ``[in]``:
+:param (input):
     index index within data arrays for the visitor.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_ClearAllArrays =R"doc(Clear all arrays in the visitor.)doc";
@@ -198,41 +198,41 @@ static const char * __doc_Bentley_Geom_PolyfaceVisitor_TryParamToScanBrackets =R
 facet. returns false if the facet does not have params or if there are
 not edges on both sides along the scan lines.
 
-Parameter ``[in]``:
+:param (input):
     uvParam pick parameter.
 
-Parameter ``[in]``:
+:param (input):
     horizontalScanBracket edge crossing data to left and right of uv.
 
-Parameter ``[in]``:
+:param (input):
     verticalScanBracket edge crossign data below and above.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_AdvanceToFacetBySearchRay =R"doc(Call AdvanceToNextFace repeatedly, returning when a face is found
 within tolerance of a pick ray.
 
-Parameter ``[in]``:
+:param (input):
     ray ray
 
-Parameter ``[in]``:
+:param (input):
     tolerance proximity tolerance.
 
-Parameter ``[out]``:
+:param (output):
     facetPoint pierce point on facet.
 
-Parameter ``[out]``:
+:param (output):
     rayFraction parameter along ray. return false if all faces have
     been visited.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceVisitor_AdvanceToFacetBySearchPoint =R"doc(Call AdvanceToNextFace repeatedly, returning when a face is found
 within tolerance of search point.
 
-Parameter ``[in]``:
+:param (input):
     xyz search point
 
-Parameter ``[in]``:
+:param (input):
     tolerance proximity tolerance.
 
-Parameter ``[out]``:
+:param (output):
     facetPoint nearest point on facet
 
 return false if all faces have been visited.)doc";
@@ -301,13 +301,13 @@ index for the individual edge.
 * number of edges in the cluster. If collecting only unmatched edges,
 this normally be 1, but can be
 
-Parameter ``[out]``:
+:param (output):
     segments array of segment data.
 
-Parameter ``[in]``:
+:param (input):
     includeMatched true to include interior segemnts that have mates.
 
-Parameter ``[in]``:
+:param (input):
     returnSingleEdgeReadIndex if true, return read index to the base
     of the individual edge. If false, return readIndex for the entire
     facet. (The entire facet index is prefered for calling
@@ -317,28 +317,28 @@ static const char * __doc_Bentley_Geom_PolyfaceHeader_TryGetMaxSingleFacetLocalX
 size of any single facet, using the local coordinate system along the
 first edge of the facet for directions.
 
-Parameter ``[out]``:
+:param (output):
     xySize sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_TryGetMaxSingleFacetParamLength =R"doc(Compute the lengths of the longest u and v direction size of any
 single facet, looking only at the stored param.
 
-Parameter ``[out]``:
+:param (output):
     uvLength sizes in u, v directions.
 
-Returns:
+:returns:
     false if the facets do not have params)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_SelectBlockedIndices =R"doc(Copy selected blocks of read indices to a new blocked index array.
 
-Parameter ``[in]``:
+:param (input):
     blockedReadIndex Array of read indices with -1 as terminator
     between blocks that are to go to the same destination mesh.
 
-Parameter ``[in]``:
+:param (input):
     selectedReadIndex Array of read indices for choosing blocks.
 
-Parameter ``[in]``:
+:param (input):
     keepIfSelected indicates what to do with a block when it contains
     an index that is in the selectedReadIndexArray.
 
@@ -347,17 +347,17 @@ Parameter ``[in]``:
 * false means when a block contains a selected read indexc it is
 ignored.
 
-Parameter ``[out]``:
+:param (output):
     blockedReadIndexOut array containing only the accepted blocks)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_IsPlanarWithinSuperfacets =R"doc(Determines if each visible facet (a super facet) is planar within
 tolerance.
 
-Parameter ``[in]``:
+:param (input):
     tolerance. If a negative number is provided, the tolerance used is
     a small fraction of the diagonal range.
 
-Returns:
+:returns:
     true iff each super facet is planar within tolerance.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_SplitByFlood =R"doc(Return blocks of read indices for " islands " of facets surrounded by
@@ -396,28 +396,28 @@ partition.
 
 * BUT -- if both are zero, both are switched to 1.
 
-Parameter ``[out]``:
+:param (output):
     blockedReadIndexArray read indices for individual faces, separated
     by (-1).)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_PartitionReadIndicesByNormal =R"doc(Return indices of subsets with consistent forward and reverse
 visibility for given vector.
 
-Parameter ``[in]``:
+:param (input):
     vector viewing direction vector
 
-Parameter ``[out]``:
+:param (output):
     readIndices read indices for forward, reverse, and perpendicular
     facets
 
-Returns:
+:returns:
     false if vector is 000.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_MarkAllEdgesVisible =R"doc(Mark all edges visible.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_MarkTopologicalBoundariesVisible =R"doc(Expose topological boundaries
 
-Returns:
+:returns:
     true if any edges were changed.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_MarkInvisibleEdges =R"doc(Mark edges invisible (negative index) if dihedral angle between
@@ -430,12 +430,12 @@ static const char * __doc_Bentley_Geom_PolyfaceHeader_BuildPerFaceNormals =R"doc
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_ClearParameters =R"doc(Clear current param data.
 
-Parameter ``[in]``:
+:param (input):
     active active state (true/false) to be applied after clearing.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_ClearNormals =R"doc(Clear current normal data.
 
-Parameter ``[in]``:
+:param (input):
     active active state (true/false) to be applied after clearing.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_MarkDiagonalEdgesInvisible =R"doc(mark edges invisible by smoothAngle and silhoutte conditions, and
@@ -450,13 +450,13 @@ edges visible.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_BuildPerFaceParameters =R"doc(Compute local coordinates within each facet.
 
-Returns:
+:returns:
     true if parameters computed.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_AddIfMatchedLayout =R"doc(Add all content of source to this polyface. This does NOT attempt to
 recognize duplicate coordinate data.
 
-Returns:
+:returns:
     false if mismatched data -- e.g. arrays present on one but not the
     other.)doc";
 
@@ -464,11 +464,11 @@ static const char * __doc_Bentley_Geom_PolyfaceHeader_CopyFrom =R"doc(Clear curr
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_SweepToSolid =R"doc(Sweep the existing mesh promote to a solid
 
-Returns:
+:returns:
     false if the input mesh has inconsistent visibility -- i.e. side
     or mixture of forward and back facing facets.)doc";
 
-static const char * __doc_Bentley_Geom_PolyfaceHeader_LocalDecimation =R"doc(Returns:
+static const char * __doc_Bentley_Geom_PolyfaceHeader_LocalDecimation =R"doc(:returns:
     number of collapses.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CloneWithTVertexFixup =R"doc(Clone the meshes as a single mesh, inserting vertices along edges
@@ -492,8 +492,16 @@ index order.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CompactIndexArrays =R"doc(Revise index structure to minimize array lengths.
 
-Returns:
+:returns:
     true if any changes were made.)doc";
+
+static const char* __doc_Bentley_Geom_PolyfaceHeader_CompactArrays = R"doc(Trim excess capacity from the data and index vectors. No data is removed.
+
+:returns:
+    bytes trimmed
+
+:param (input):
+    call CompactIndexArrays first)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_AddEdgeChains =R"doc(Add Edge Chains)doc";
 
@@ -530,7 +538,7 @@ readIndices for the shuffled facets. li> Suppose a facet
 
 li> li>That facet will appear as [b c a SIZE_MAX]. ul>)doc";
 
-static const char * __doc_Bentley_Geom_PolyfaceHeader_OrientAndCollectManifoldComponents =R"doc([out] arrays of read indices within components [out] array of status
+static const char * __doc_Bentley_Geom_PolyfaceHeader_OrientAndCollectManifoldComponents =R"doc((output) arrays of read indices within components (output) array of status
 messages)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_FixupVertexNormalDirectionToFaceOrientation =R"doc(Inspect and correct the direction of " at vertex " normals relative to
@@ -566,7 +574,7 @@ static const char * __doc_Bentley_Geom_PolyfaceHeader_CreateIndexedMesh =R"doc(C
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CreateFixedBlockCoordinates =R"doc(Create a (smart pointer to a) new (empty) PolyfaceHeader, with each
 facet defined by 3 or 4 unindexed points as indicated by the arg.
 
-Returns:
+:returns:
     invalid if numPerFace is other than 3 or 4.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CloneWithSidePanelsInserted =R"doc(* Input an array of meshes expected to have boundary segments are
@@ -579,6 +587,21 @@ are present.
 * CreateSidePanelsForViewDirection creaates the panels
 
 * CloneWithTVertexFixup does touchup for extra vertices.)doc";
+
+static const char* __doc_Bentley_Geom_PolyfaceHeader_CreateDRange3dFaces = R"doc(* Create a mesh with the faces of a DRange3d, optionally transformed and triangulated
+If the transform has negative determinant, indices are shuffled to get outward normals.
+
+:returns:
+    a mesh with the faces of a DRange3d. 
+
+:param (input):
+    points to triangulate
+
+:param (input):
+    if true, add a (hidden) diagonal in each face.
+
+:param (input):
+    optional transform to apply.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CreateSidePanelsForViewDirection =R"doc(Input an array of meshes expected to have boundary segments are
 separated by " missing side panels " as viewed in a certain direction.
@@ -631,31 +654,31 @@ horizontal edge
 
 * on a face with a vertex on the x axis.
 
-Parameter ``[in]``:
+:param (input):
     radius radius of sphere
 
-Parameter ``[in]``:
+:param (input):
     polyhedronSelect integer selector, as enumerated above.
 
-Parameter ``[in]``:
+:param (input):
     radiusSelect control of sphere radius, as enumerated above.
 
-Parameter ``[in]``:
+:param (input):
     transform optional transform to place the sphere.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CreateXYTriangulation =R"doc(Create a triangulation of points as viewed in xy. Add the triangles to
 the polyface. (Other than sharing vertices with matched xy, this does
 not coordinate in any way with prior mesh contents.)
 
-Parameter ``[in]``:
+:param (input):
     points candidate points
 
-Parameter ``[in]``:
+:param (input):
     fringeExpansionFactor fractional factor (usually 0.10 to 0.20) for
     defining a surrounding rectangle. The z of this triangle is at the
     low z of all the points.
 
-Parameter ``[in]``:
+:param (input):
     retainFringeTriangles true to keep the fringe triangles. If false,
     any edge that reaches the outer rectangle is deleted.)doc";
 
@@ -663,19 +686,19 @@ static const char * __doc_Bentley_Geom_PolyfaceHeader_CreateTriangleGrid =R"doc(
 quadrilaterals defined by points in a grid, and then each quad is
 split to triangle.
 
-Returns:
+:returns:
     invalid if numPerRow<2.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CreateQuadGrid =R"doc(Create a (smart pointer to a) new (empty) PolyfaceHeader, with
 quadrilaterals defined by points in a grid.
 
-Returns:
+:returns:
     invalid if numPerRow<2.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CreateFixedBlockIndexed =R"doc(Create a (smart pointer to a) new (empty) PolyfaceHeader, with fixed
 number of indices per face
 
-Returns:
+:returns:
     invalid if numPerBlock is less than 3.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceHeader_CreateVariableSizeIndexed =R"doc(Create a (smart pointer to a) new (empty) PolyfaceHeader, with
@@ -778,7 +801,7 @@ static const char * __doc_Bentley_Geom_PolyfaceVectors_CopyAllActiveFlagsFrom =R
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_HasIndexErrors =R"doc(Apply various checks for indexing structure.
 
-Returns:
+:returns:
     true if any errors were found.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_IsSameStructureAndGeometry =R"doc(Test for AlmostEqual () conditions.)doc";
@@ -793,10 +816,10 @@ static const char * __doc_Bentley_Geom_PolyfaceQuery_DirectionalVolumeIntegrals 
 directional formulas that will give correct results (and confidence
 indicators) when " some " facets are missing
 
-Parameter ``[in]``:
+:param (input):
     polyface facets for integration
 
-Parameter ``[out]``:
+:param (output):
     pData array (allocated by caller) of various integrals:
 
 * pData[0], pData[1], pData[2] = view along respective axes. Use
@@ -808,50 +831,50 @@ absolute area, so result should be useful for setting tolerances.
 
 * pData[6] = full 3d area.
 
-Parameter ``[out]``:
+:param (output):
     directionalProducts array of products integrals wrt origin.
     Allocated by caller.
 
-Parameter ``[out]``:
+:param (output):
     origin origin used for directonal integrals. (Directional
     integrals are " from the principal " planes through this origin.))doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_HealVerticalPanels =R"doc(Attempt to heal vertical gaps in a mesh.
 
-Parameter ``[in]``:
+:param (input):
     polyface original polyface
 
-Parameter ``[in]``:
+:param (input):
     tryVerticalPanels true to seek pure vertical panels
 
-Parameter ``[in]``:
+:param (input):
     trySpaceTriangulation true to seek triangulation of any missing
     faces, as viewed from any direction found useful.
 
-Parameter ``[out]``:
+:param (output):
     healedPolyface modified polyface. This is NOT constructed if no
     panels can be added.
 
-Returns:
+:returns:
     number of facets added)doc";
 
-static const char * __doc_Bentley_Geom_PolyfaceQuery_ComputePunchXYByPlaneSets =R"doc([in] each facet of this is used as a " punch " [in] facets to be split
-by the punch. [out] (target intersect punch) [out] (target outsideOf
-punch) [out] optional meshes for debugging)doc";
+static const char * __doc_Bentley_Geom_PolyfaceQuery_ComputePunchXYByPlaneSets =R"doc((input) each facet of this is used as a " punch " (input) facets to be split
+by the punch. (output) (target intersect punch) (output) (target outsideOf
+punch) (output) optional meshes for debugging)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_ComputePunch =R"doc(@description " Punch " through target polygons.
 
-Parameter ``[in]``:
+:param (input):
     punch punch polygons
 
-Parameter ``[in]``:
+:param (input):
     target target polygons
 
-Parameter ``[in]``:
+:param (input):
     keepInside true to return the target mesh parts that are inside
     the punch, false to return outside parts.
 
-Parameter ``[out]``:
+:param (output):
     result punched mesh)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_ComputeUndercut =R"doc(@description Compute volumes where polyfaceB undercuts polyfaceA)doc";
@@ -864,21 +887,21 @@ static const char * __doc_Bentley_Geom_PolyfaceQuery_ClipToPlaneSetIntersection 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_SweepLinestringToMesh =R"doc(@description Compute intersections (line strings) of this mesh with a
 swept linestring
 
-Parameter ``[out]``:
+:param (output):
     xyzOut array of points on the intersection linestrings.
     DISCONNECTS separate multiple linestrings.
 
-Parameter ``[out]``:
+:param (output):
     linestringIndexOut for each xyzOut[i], the index of the input
     segment that it came from.
 
-Parameter ``[out]``:
+:param (output):
     meshIndexOut for each xyzOut[i], the mesh read index it came from.
 
-Parameter ``[in]``:
+:param (input):
     linestringPoints points to sweep.
 
-Parameter ``[in]``:
+:param (input):
     sweepDirection sweep direction)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_TryEvaluateEdge =R"doc(Try to convert the index and edge fraction of a
@@ -901,32 +924,34 @@ static const char * __doc_Bentley_Geom_PolyfaceQuery_IsClosedByEdgePairing =R"do
 static const char * __doc_Bentley_Geom_PolyfaceQuery_DrapeLinestring =R"doc(Project linestring in given direction to intersection with facets.
 Return as a curve vector.
 
-Parameter ``[in]``:
+:param (input):
     spacePoints points to project onto the polyface
 
-Parameter ``[in]``:
+:param (input):
     direction direction to project.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_PlaneSlice =R"doc(Cut with a plane. (Prototype) Return as a curve vector. Optionally
 structure as area-bounding loops.
 
-Parameter ``[in]``:
+:param (input):
     sectionPlane plane to cut the mesh.
 
-Parameter ``[in]``:
+:param (input):
     formRegions true to look for closed loops and structure the return
     as a loop or parity CurveVector.
 
-Parameter ``[in]``:
+:param (input):
     markEdgeFractions true to attache FacetEdgeLocationDetailVector to
-    the linestrings.)doc";
+    the linestrings.
+
+:param (input): skipOnPlaneFacets whether output lacks facets coplanar with sectionPlane.)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_CollectSegments =R"doc(Collect individual segments for each distinct edge.
 
-Parameter ``[out]``:
+:param (output):
     segments array to receive segments.
 
-Parameter ``[in]``:
+:param (input):
     omitInvisibles true to hide segments that are not visible (due to
     negated indices))doc";
 
@@ -936,13 +961,13 @@ Remark:
     s A face loop is reversed after the 1st index:the 2nd/last
     indices are swapped, the 3rd/penultimate indices are swapped, etc.
 
-Parameter ``[in]``:
+:param (input):
     iFirst 0-based offset to the first index in the face loop
 
-Parameter ``[in]``:
+:param (input):
     iLast 0-based offset to the last index of the face loop.
 
-Parameter ``[in]``:
+:param (input):
     normalArrayIndexAction selects action in normal array. This can be
 
 * IndexAction::None -- leave the index value unchanged
@@ -975,13 +1000,13 @@ the mesh is closed and all facets are simply connected planar, this is
 the moment around the origin. (The facets and volume are not require
 to be convex.)
 
-Parameter ``[in]``:
+:param (input):
     origin origin for tetrahedra.
 
-Parameter ``[out]``:
+:param (output):
     moments sum of (x,y,z) dV
 
-Returns:
+:returns:
     summed volume)doc";
 
 static const char * __doc_Bentley_Geom_PolyfaceQuery_SumTetrahedralVolumes =R"doc(Return the sum of tetrahedral volumes from the specified origin. If
@@ -1128,10 +1153,10 @@ static const char * __doc_Bentley_Geom_FacetLocationDetail_Zero =R"doc(Zero all 
 
 static const char * __doc_Bentley_Geom_BlockedVectorInt_MinMax =R"doc(Return min and max values in entire vector.
 
-Parameter ``[out]``:
+:param (output):
     minValue smallest value, INT_MAX if empty array.
 
-Parameter ``[out]``:
+:param (output):
     maxValue largest value, INT_MIN if empty array.)doc";
 
 static const char * __doc_Bentley_Geom_BlockedVectorInt_DelimitFace =R"doc(From given start position, find final (inclusive) position and
@@ -1191,6 +1216,7 @@ static const char * __doc_Bentley_Geom_FacetFaceData_Init =R"doc(restore to cons
 //=======================================================================================
 struct PyFacetCutFillHandler: FacetCutFillHandler
     {
+    using FacetCutFillHandler::FacetCutFillHandler;
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       2/2023
     +---------------+---------------+---------------+---------------+---------------+------*/
@@ -1228,6 +1254,7 @@ struct PyFacetCutFillHandler: FacetCutFillHandler
 //=======================================================================================
 struct IPyClipToPlaneSetOutput : PolyfaceQuery::IClipToPlaneSetOutput
     {
+    using PolyfaceQuery::IClipToPlaneSetOutput::IClipToPlaneSetOutput;
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       2/2023
     +---------------+---------------+---------------+---------------+---------------+------*/
@@ -1735,7 +1762,7 @@ void def_Polyface(py::module_& m)
            }, "readIndex"_a, "data"_a);
 
     c9.def("Clone", &PolyfaceQuery::Clone, DOC(Bentley, Geom, PolyfaceQuery, Clone));
-    c9.def("CloneAsVariableSizeIndexed", &PolyfaceQuery::CloneAsVariableSizeIndexed, "source"_a, DOC(Bentley, Geom, PolyfaceQuery, CloneAsVariableSizeIndexed));
+    c9.def("CloneAsVariableSizeIndexed", py::overload_cast<>(&PolyfaceQuery::CloneAsVariableSizeIndexed, py::const_), DOC(Bentley, Geom, PolyfaceQuery, CloneAsVariableSizeIndexed));
 
     c9.def("InspectFaces", [] (PolyfaceQueryCR self)
            {
@@ -1827,7 +1854,12 @@ void def_Polyface(py::module_& m)
            });
 
     c9.def("CollectSegments", &PolyfaceQuery::CollectSegments, "segments"_a, "omitInvisible"_a, DOC(Bentley, Geom, PolyfaceQuery, CollectSegments));
-    c9.def("PlaneSlice", &PolyfaceQuery::PlaneSlice, "sectionPlane"_a, "formRegions"_a, "markEdgeFraction"_a = false, DOC(Bentley, Geom, PolyfaceQuery, PlaneSlice));
+    c9.def("PlaneSlice", py::overload_cast<DPlane3dCR, bool, bool >(&PolyfaceQuery::PlaneSlice, py::const_),
+        "sectionPlane"_a, "formRegions"_a, "markEdgeFraction"_a = false, DOC(Bentley, Geom, PolyfaceQuery, PlaneSlice));
+
+    c9.def("PlaneSlice", py::overload_cast<DPlane3dCR, bool, bool, bool>(&PolyfaceQuery::PlaneSlice, py::const_),
+        "sectionPlane"_a, "formRegions"_a, "markEdgeFractions"_a, "skipOnPlaneFacets"_a, DOC(Bentley, Geom, PolyfaceQuery, PlaneSlice));
+
     c9.def("DrapeLinestring", &PolyfaceQuery::DrapeLinestring, "spacePoints"_a, "direction"_a, DOC(Bentley, Geom, PolyfaceQuery, DrapeLinestring));
     c9.def("IsClosedByEdgePairing", &PolyfaceQuery::IsClosedByEdgePairing, DOC(Bentley, Geom, PolyfaceQuery, IsClosedByEdgePairing));
     c9.def("HasFacets", &PolyfaceQuery::HasFacets, DOC(Bentley, Geom, PolyfaceQuery, HasFacets));
@@ -2036,6 +2068,8 @@ void def_Polyface(py::module_& m)
     c13.def_static("CreateVerticalPanelsBetweenSegments", &PolyfaceHeader::CreateVerticalPanelsBetweenSegments, "segments"_a);
     c13.def_static("CreateSidePanelsForViewDirection", &PolyfaceHeader::CreateSidePanelsForViewDirection, "meshes"_a, "viewDirection"_a, DOC(Bentley, Geom, PolyfaceHeader, CreateSidePanelsForViewDirection));
     c13.def_static("CloneWithSidePanelsInserted", &PolyfaceHeader::CloneWithSidePanelsInserted, "meshes"_a, "viewDirection"_a, DOC(Bentley, Geom, PolyfaceHeader, CloneWithSidePanelsInserted));
+    c13.def_static("CreateDRange3dFaces", &PolyfaceHeader::CreateDRange3dFaces, "range"_a, "triangulate"_a= false, "placement"_a = nullptr, DOC(Bentley, Geom, PolyfaceHeader, CreateDRange3dFaces));
+
 
     c13.def_static("VolumeFromBoreData", [](bvector<DSegment3d>& segments,
                                             bvector<ptrdiff_t>* topFacetReadIndex,
@@ -2067,6 +2101,8 @@ void def_Polyface(py::module_& m)
     c13.def("Triangulate", py::overload_cast<size_t, bool, Bentley::IPolyfaceVisitorFilter*>(&PolyfaceHeader::Triangulate), "maxEdge"_a, "hideNewEdges"_a, "filter"_a, DOC(Bentley, Geom, PolyfaceHeader, Triangulate));
 
     c13.def("CompactIndexArrays", &PolyfaceHeader::CompactIndexArrays, DOC(Bentley, Geom, PolyfaceHeader, CompactIndexArrays));
+    c13.def("CompactArrays", &PolyfaceHeader::CompactArrays, DOC(Bentley, Geom, PolyfaceHeader, CompactArrays));
+
     c13.def("Transform", py::overload_cast<TransformCR, bool>(&PolyfaceHeader::Transform), "transform"_a, "reverseIndicesIfMirrored"_a = true);    
 
     c13.def("ReverseNormals", &PolyfaceHeader::ReverseNormals, DOC(Bentley, Geom, PolyfaceHeader, ReverseNormals));
@@ -2096,13 +2132,31 @@ void def_Polyface(py::module_& m)
             py::overload_cast<DPoint3dArray const&, DVec3dArray const*, DPoint2dArray const*>(&PolyfaceHeader::AddPolygon),
             "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
 
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, py::list const& xyz, DVec3dArray const* normal, DPoint2dArray const* param)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+            return self.AddPolygon(cppxyz, normal, param);   
+            }, "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
+
     c13.def("AddPolygon",
             py::overload_cast<DPoint3dArray const&, PolyfaceVisitorR, IndexedParameterMap const&>(&PolyfaceHeader::AddPolygon),
             "xyz"_a, "visitor"_a, "mapping"_a);
 
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, py::list const& xyz, PolyfaceVisitorR visitor, IndexedParameterMap const& mapping)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+            return self.AddPolygon(cppxyz, visitor, mapping);   
+            }, "xyz"_a, "visitor"_a, "mapping"_a);
+
     c13.def("AddPolygon",
             py::overload_cast<DPoint3dArray const&, TransformCR, DVec3dCR, bool, bool>(&PolyfaceHeader::AddPolygon),
             "xyz"_a, "worldToParameterSpace"_a, "normal"_a, "compressNormal"_a, "reverseXYZ"_a);
+
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, py::list const& xyz, TransformCR worldToParameterSpace, DVec3dCR normal, bool compressNormal, bool reverseXYZ)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+            return self.AddPolygon(cppxyz, worldToParameterSpace, normal, compressNormal, reverseXYZ);   
+            }, "xyz"_a, "worldToParameterSpace"_a, "normal"_a, "compressNormal"_a, "reverseXYZ"_a);
 
     c13.def("SweepToSolid", &PolyfaceHeader::SweepToSolid, "sweepVector"_a, "triangulateSides"_a, DOC(Bentley, Geom, PolyfaceHeader, SweepToSolid));
     c13.def("CopyFrom", &PolyfaceHeader::CopyFrom, "source"_a, DOC(Bentley, Geom, PolyfaceHeader, CopyFrom));
@@ -2320,4 +2374,96 @@ void def_Polyface(py::module_& m)
     c14.def("ClearFacet", &PolyfaceVisitor::ClearFacet, DOC(Bentley, Geom, PolyfaceVisitor, ClearFacet));
     c14.def("TryAddVertexByReadIndex", &PolyfaceVisitor::TryAddVertexByReadIndex, "readIndex"_a, DOC(Bentley, Geom, PolyfaceVisitor, TryAddVertexByReadIndex));
     c14.def("TryRecomputeNormals", &PolyfaceVisitor::TryRecomputeNormals, DOC(Bentley, Geom, PolyfaceVisitor, TryRecomputeNormals));    
+    
+
+    //===================================================================================
+    // Mesh Styles
+    m.attr("MESH_ELM_STYLE_INDEXED_FACE_LOOPS") = MESH_ELM_STYLE_INDEXED_FACE_LOOPS;
+    m.attr("MESH_ELM_STYLE_POINT_CLOUD") = MESH_ELM_STYLE_POINT_CLOUD;
+    m.attr("MESH_ELM_STYLE_COORDINATE_TRIANGLES") = MESH_ELM_STYLE_COORDINATE_TRIANGLES;
+    m.attr("MESH_ELM_STYLE_COORDINATE_QUADS") = MESH_ELM_STYLE_COORDINATE_QUADS;
+    m.attr("MESH_ELM_STYLE_TRIANGLE_GRID") = MESH_ELM_STYLE_TRIANGLE_GRID;
+    m.attr("MESH_ELM_STYLE_QUAD_GRID") = MESH_ELM_STYLE_QUAD_GRID;
+    m.attr("MESH_ELM_STYLE_LARGE_MESH") = MESH_ELM_STYLE_LARGE_MESH;
+    m.attr("MESH_ELM_STYLE_QVXLARGE_TRI_MESH") = MESH_ELM_STYLE_QVXLARGE_TRI_MESH;
+    
+
+    //===================================================================================
+    // Matrix Tags 
+    m.attr("MATRIX_ELM_TAG_NONE") = MATRIX_ELM_TAG_NONE;
+    m.attr("MESH_ELM_TAG_NONE")   = MATRIX_ELM_TAG_NONE;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_VERTEX_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_VERTEX_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_COORDINATES") = MESH_ELM_TAG_VERTEX_COORDINATES;
+    m.attr("MESH_ELM_TAG_NORMAL_COORDINATES") = MESH_ELM_TAG_NORMAL_COORDINATES;
+    m.attr("MESH_ELM_TAG_UV_PARAMETERS") = MESH_ELM_TAG_UV_PARAMETERS;
+    m.attr("MESH_ELM_TAG_DOUBLE_COLOR") = MESH_ELM_TAG_DOUBLE_COLOR;
+    m.attr("MESH_ELM_TAG_FLOAT_COLOR") = MESH_ELM_TAG_FLOAT_COLOR;
+    m.attr("MESH_ELM_TAG_INT_COLOR") = MESH_ELM_TAG_INT_COLOR;
+    m.attr("MESH_ELM_TAG_TABLE_COLOR") = MESH_ELM_TAG_TABLE_COLOR;
+    m.attr("MESH_ELM_TAG_DENSITY") = MESH_ELM_TAG_DENSITY;
+    m.attr("MESH_ELM_TAG_PRESSURE") = MESH_ELM_TAG_PRESSURE;
+    m.attr("MESH_ELM_TAG_TEMPERATURE") = MESH_ELM_TAG_TEMPERATURE;
+    m.attr("MESH_ELM_TAG_DISPLACEMENT") = MESH_ELM_TAG_DISPLACEMENT;
+    m.attr("MESH_ELM_TAG_VELOCITY") = MESH_ELM_TAG_VELOCITY;
+    
+    // auxiliary index arrays: "by face loop"
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_NORMAL_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_NORMAL_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_UV_PARAMETER_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_UV_PARAMETER_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_DOUBLE_COLOR_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_DOUBLE_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_INT_COLOR_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_INT_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_TABLE_COLOR_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_TABLE_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_DENSITY_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_DENSITY_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_PRESSURE_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_PRESSURE_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_TEMPERATURE_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_TEMPERATURE_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_DISPLACEMENT_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_DISPLACEMENT_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_VELOCITY_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_VELOCITY_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_LOOP_TO_FACE_INDICES") = MESH_ELM_TAG_FACE_LOOP_TO_FACE_INDICES;
+    
+    /* auxiliary index arrays: "by face" */
+    m.attr("MESH_ELM_TAG_FACE_TO_NORMAL_INDICES") = MESH_ELM_TAG_FACE_TO_NORMAL_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_UV_PARAMETER_INDICES") = MESH_ELM_TAG_FACE_TO_UV_PARAMETER_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_DOUBLE_COLOR_INDICES") = MESH_ELM_TAG_FACE_TO_DOUBLE_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_INT_COLOR_INDICES") = MESH_ELM_TAG_FACE_TO_INT_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_TABLE_COLOR_INDICES") = MESH_ELM_TAG_FACE_TO_TABLE_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_DENSITY_INDICES") = MESH_ELM_TAG_FACE_TO_DENSITY_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_PRESSURE_INDICES") = MESH_ELM_TAG_FACE_TO_PRESSURE_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_TEMPERATURE_INDICES") = MESH_ELM_TAG_FACE_TO_TEMPERATURE_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_DISPLACEMENT_INDICES") = MESH_ELM_TAG_FACE_TO_DISPLACEMENT_INDICES;
+    m.attr("MESH_ELM_TAG_FACE_TO_VELOCITY_INDICES") = MESH_ELM_TAG_FACE_TO_VELOCITY_INDICES;
+    
+    /* auxiliary index arrays: "by vertex" */
+    m.attr("MESH_ELM_TAG_VERTEX_TO_NORMAL_INDICES") = MESH_ELM_TAG_VERTEX_TO_NORMAL_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_UV_PARAMETER_INDICES") = MESH_ELM_TAG_VERTEX_TO_UV_PARAMETER_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_DOUBLE_COLOR_INDICES") = MESH_ELM_TAG_VERTEX_TO_DOUBLE_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_INT_COLOR_INDICES") = MESH_ELM_TAG_VERTEX_TO_INT_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_TABLE_COLOR_INDICES") = MESH_ELM_TAG_VERTEX_TO_TABLE_COLOR_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_DENSITY_INDICES") = MESH_ELM_TAG_VERTEX_TO_DENSITY_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_PRESSURE_INDICES") = MESH_ELM_TAG_VERTEX_TO_PRESSURE_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_TEMPERATURE_INDICES") = MESH_ELM_TAG_VERTEX_TO_TEMPERATURE_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_DISPLACEMENT_INDICES") = MESH_ELM_TAG_VERTEX_TO_DISPLACEMENT_INDICES;
+    m.attr("MESH_ELM_TAG_VERTEX_TO_VELOCITY_INDICES") = MESH_ELM_TAG_VERTEX_TO_VELOCITY_INDICES;
+
+    //===================================================================================
+    //Matrix Index Families 
+    m.attr("MATRIX_ELM_INDEX_FAMILY_NONE") = MATRIX_ELM_INDEX_FAMILY_NONE;
+    
+    //===================================================================================
+    // Matrix Index Families (Mesh parents)  
+    m.attr("MESH_ELM_INDEX_FAMILY_NONE") = MESH_ELM_INDEX_FAMILY_NONE;
+    m.attr("MESH_ELM_INDEX_FAMILY_BY_FACE_LOOP") = MESH_ELM_INDEX_FAMILY_BY_FACE_LOOP;
+    m.attr("MESH_ELM_INDEX_FAMILY_BY_FACE") = MESH_ELM_INDEX_FAMILY_BY_FACE;
+    m.attr("MESH_ELM_INDEX_FAMILY_BY_VERTEX") = MESH_ELM_INDEX_FAMILY_BY_VERTEX;
+    
+    //===================================================================================
+    // Matrix Int Data Transform Types  
+    m.attr("MATRIX_DATA_ELM_INDEX_TYPE_BLOCK_NONE") = MATRIX_DATA_ELM_INDEX_TYPE_BLOCK_NONE;
+    m.attr("MATRIX_DATA_ELM_INDEX_TYPE_BLOCK_FIXED") = MATRIX_DATA_ELM_INDEX_TYPE_BLOCK_FIXED;
+    m.attr("MATRIX_DATA_ELM_INDEX_TYPE_BLOCK_VARIABLE") = MATRIX_DATA_ELM_INDEX_TYPE_BLOCK_VARIABLE;
+    
+    //===================================================================================
+    // Matrix Double Data Transform Types  
+    m.attr("MATRIX_DATA_ELM_TRANSFORM_TYPE_COORD_NONE") = MATRIX_DATA_ELM_TRANSFORM_TYPE_COORD_NONE;
+    m.attr("MATRIX_DATA_ELM_TRANSFORM_TYPE_COORD_POINT") = MATRIX_DATA_ELM_TRANSFORM_TYPE_COORD_POINT;
+    m.attr("MATRIX_DATA_ELM_TRANSFORM_TYPE_COORD_VECTOR") = MATRIX_DATA_ELM_TRANSFORM_TYPE_COORD_VECTOR;
+    m.attr("MATRIX_DATA_ELM_TRANSFORM_TYPE_COORD_COVECTOR") = MATRIX_DATA_ELM_TRANSFORM_TYPE_COORD_COVECTOR;
     }

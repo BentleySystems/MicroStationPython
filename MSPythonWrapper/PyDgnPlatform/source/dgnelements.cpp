@@ -1028,16 +1028,16 @@ void def_DgnElements(py::module_& m)
     c031.def_readwrite("yoffset", &Raster_comp::yoffset);
     c031.def_readwrite("numpixels", &Raster_comp::numpixels);
     c031.def_property("pixel",
-        [](Raster_comp& self) {return py::array_t<byte>{ 4, self.pixel, py::cast(self)}; },
-        [](Raster_comp& self, py::array_t<byte> const& arr) 
+        [](Raster_comp& self) {return py::array_t<Byte>{ 4, self.pixel, py::cast(self)}; },
+        [](Raster_comp& self, py::array_t<Byte> const& arr) 
         {
         py::buffer_info buf = arr.request();
-        auto* ptr = static_cast<byte*>(buf.ptr);
+        auto* ptr = static_cast<Byte*>(buf.ptr);
 
         if (4 != arr.size())
             return;
 
-        memcpy(self.pixel, ptr, 4 * sizeof(byte));
+        memcpy(self.pixel, ptr, 4 * sizeof(Byte));
         });
 
     //struct applicationElm

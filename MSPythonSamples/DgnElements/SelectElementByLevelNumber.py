@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
-
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 from MSPyBentley import *
 from MSPyBentleyGeom import *
 from MSPyECObjects import *
@@ -14,10 +8,19 @@ from MSPyDgnView import *
 import sys
 
 '''
-Function to select elements by its level number
-    userLevelNumber : int      Level number to select
+This sample demonstrates how to select elements by level number
 '''
+
 def selectElementsbyLevelNumber(userLevelNumber):
+    """
+    Select elements in the active model by their level number.
+
+    This function retrieves all graphical elements from the active model and adds 
+    elements with the specified level number to the selection set.
+
+    :param userLevelNumber: The level number to filter elements by.
+    :type userLevelNumber: int
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -32,7 +35,16 @@ def selectElementsbyLevelNumber(userLevelNumber):
         #It will select highlight all elements added in selection set 
         if levelId == userLevelNumber:
             selSetManager.AddElement(perElementRef,dgnModel)
-            
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {agenda.GetCount()} elements")
+    # iterate over the selection set printing the element ids of elements in the selection set
+    for i in range(agenda.GetCount()):
+        editElementHandle = agenda.GetEntry(i)
+        print (f"  Element ID: {editElementHandle.GetElementId()}")
+   
 
 
 #main

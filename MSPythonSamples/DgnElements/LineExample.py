@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
-
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 import os
 import math
 from MSPyBentley import *
@@ -15,8 +9,20 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
 
-'''Create level by given name in active model'''
+'''
+This sample demonstrates how to changes the color, linestyle, weight, and level of an element
+'''
+
 def createLevel(levelName):
+    """
+    Creates a level in the active DGN file if it does not already exist.
+
+    :param levelName: The name of the level to create.
+    :type levelName: str
+
+    :returns: The ID of the created or existing level if successful, False otherwise.
+    :rtype: int or bool
+    """
     dgnFile = ISessionMgr.GetActiveDgnFile()
     if dgnFile is None:
         return False
@@ -35,8 +41,23 @@ def createLevel(levelName):
     return LevelHandle.GetLevelId()
 
 
-'''Create a set of parallel lines in Microstation'''
+
 def createLine(basePoint, length=200, count=10, step=10):
+    """
+    Creates multiple lines in the active DGN model.
+
+    :param basePoint: The starting point for the first line.
+    :type basePoint: DPoint3d
+    :param length: The length of each line.
+    :type length: float
+    :param count: The number of lines to create.
+    :type count: int
+    :param step: The distance between the starting points of consecutive lines.
+    :type step: float
+
+    :returns: True if all lines are successfully created and added to the model, False otherwise.
+    :rtype: bool
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:
         return False
@@ -73,8 +94,18 @@ def createLine(basePoint, length=200, count=10, step=10):
     return True
 
 
-'''Change properties of the line element in active model'''
 def changeLineProperties():
+    """
+    Changes the properties of line elements in the active DGN model.
+
+    This function performs the following steps:
+    1. Creates a new level named "MyNewLevel".
+    2. Retrieves all graphical elements from the active DGN model.
+    3. Changes the color, linestyle, weight, and level of line elements.
+
+    :returns: True if the properties of all line elements are successfully changed, False otherwise.
+    :rtype: bool
+    """
     dgnModel = ISessionMgr.ActiveDgnModel
     if dgnModel is None:
         return False

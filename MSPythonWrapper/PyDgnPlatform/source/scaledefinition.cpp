@@ -28,17 +28,17 @@ static const char * __doc_Bentley_DgnPlatform_ScaleIteratorOptions_SetOrderAscen
 static const char * __doc_Bentley_DgnPlatform_ScaleDefinition_BuildScaleListForUI =R"doc(Build a list of ScaleDefinitions that can be used in scale pickers in
 the user interface. The list contains those scales
 
-Parameter ``includeScale``:
+:param includeScale:
     The current value, always included in the list (or NULL).
 
-Parameter ``restrictSystem``:
+:param restrictSystem:
     Only show scales relevant for the specified system. Use
     UnitSystem::Undefined to show scales regardless of system.
 
-Parameter ``alwaysAddCustom``:
+:param alwaysAddCustom:
     A custom row is added even if the include unit is found.
 
-Returns:
+:returns:
     A bvector containing the scales.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ScaleDefinition_FormatNameAsRatio =R"doc(Change the name of this scale to be a string that describes its
@@ -47,7 +47,7 @@ factor. For example 2.5:1)doc";
 static const char * __doc_Bentley_DgnPlatform_ScaleDefinition_GetUnitSystemMask =R"doc(Get the mask of unit systems associated with this sheet size. @Remarks
 The mask is used to catagorize this scale definition.
 
-Returns:
+:returns:
     The mask of unit systems)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ScaleDefinition_SetPostScale =R"doc(Change the scale's postScale.)doc";

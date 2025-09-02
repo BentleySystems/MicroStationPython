@@ -83,19 +83,19 @@ static const char * __doc_Bentley_Geom_CurveCurve_GetPartialCurveDetailPair =R"d
 arrays returned by CurveCurve::IntersectionsXY return false if index
 out of range or addresses something other than PartialCurveData.
 
-Parameter ``[in]``:
+:param (input):
     intersectionA first source vector
 
-Parameter ``[in]``:
+:param (input):
     intersectionB second source vector
 
-Parameter ``[in]``:
+:param (input):
     i index to acccess in source vectors.
 
-Parameter ``[out]``:
+:param (output):
     detailA data from intersectionA
 
-Parameter ``[out]``:
+:param (output):
     detailB data from intersectionB)doc";
 
 static const char * __doc_Bentley_Geom_CurveCurve_IsContained =R"doc(Test if interval i is contained in interval j.)doc";
@@ -107,76 +107,76 @@ static const char * __doc_Bentley_Geom_CurveVector_ReduceToCCWAreas =R"doc(Retur
 parity regions are fixed first. Then multiple regions in a union are
 combined.
 
-Parameter ``[in]``:
+:param (input):
     regionA input areas)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AreaAnalysis =R"doc(Return a curve vector containing the " inside " areas by various
 conditions.
 
-Parameter ``[in]``:
+:param (input):
     region Region that may have loops back over its area.
 
-Parameter ``[in]``:
+:param (input):
     select1 Rule for classifying single area:one of
     AreaSelect_Parity, AreaSelect_CCWPositiveWindingNumber,
     AreaSelect_CCWNonzeroWindingNumber,
     AreaSelect_CCWNegativeWindingNumber
 
-Parameter ``[in]``:
+:param (input):
     select2 Rule for combining leaf left results:One of
     BoolSelect_Parity, BoolSelect_Union, BoolSelect_Sum_Parity,
     BoolSelect_CCWPositiveWindingNumber,
     BoolSelect_CCWNonzeroWindingNumber,
     BoolSelect_CCWNegativeWindingNumber
 
-Parameter ``[in]``:
+:param (input):
     reverse to return the opposite set of faces.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AreaParity =R"doc(Return a curve vector containing the parity of input areas.
 
-Parameter ``[in]``:
+:param (input):
     regionA left operand
 
-Parameter ``[in]``:
+:param (input):
     regionB right operand
 
-Parameter ``[in,out]``:
+:param [in,out]:
     newToOld (optional) pointer to bvector to receive paring of new
     and old curves.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AreaIntersection =R"doc(Return a curve vector containing the intersection of input areas.
 
-Parameter ``[in]``:
+:param (input):
     regionA left operand
 
-Parameter ``[in]``:
+:param (input):
     regionB right operand
 
-Parameter ``[in,out]``:
+:param [in,out]:
     newToOld (optional) pointer to bvector to receive paring of new
     and old curves.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AreaDifference =R"doc(Return a curve vector containing the difference of input areas.
 
-Parameter ``[in]``:
+:param (input):
     regionA left operand
 
-Parameter ``[in]``:
+:param (input):
     regionB right operand
 
-Parameter ``[in,out]``:
+:param [in,out]:
     newToOld (optional) pointer to bvector to receive paring of new
     and old curves.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AreaUnion =R"doc(Return a curve vector containing the union of input areas.
 
-Parameter ``[in]``:
+:param (input):
     regionA left operand
 
-Parameter ``[in]``:
+:param (input):
     regionB right operand
 
-Parameter ``[in,out]``:
+:param [in,out]:
     newToOld (optional) pointer to bvector to receive paring of new
     and old curves.)doc";
 
@@ -207,7 +207,7 @@ loops.
 
 * Outer loops with holes are parity regions.
 
-Parameter ``[in]``:
+:param (input):
     fullGeometryCheck if true, perform all (expensive) tests for
     intersections among curves. When this is enabled, the returned
     curve vector is typically a (possibly significantly modified)
@@ -238,7 +238,7 @@ INOUT_Unknown if the CurveVector is not an area. (i.e. type
 BOUNDARY_TYPE_Outer, BOUNDARY_TYPE_Inner, BOUNDARY_TYPE_ParityRegion,
 or BOUNDARY_TYPE_Union
 
-Parameter ``[in]``:
+:param (input):
     xyz test point)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_PlaneSection =R"doc(Compute intersections of closed CurveVector with a plane and organize
@@ -246,10 +246,10 @@ as start end pairs by parity rules. Return as a single curve primitive
 (which may be child vector of multiple primitives) If there are no
 intersections the smart pointer is empty (IsValid () returns false)
 
-Parameter ``[in]``:
+:param (input):
     plane
 
-Parameter ``[in]``:
+:param (input):
     tolerance for on-plane decisions. If 0, a tolerance is computed
     based on the coordinates in the curve.)doc";
 
@@ -257,13 +257,13 @@ static const char * __doc_Bentley_Geom_CurveVector_AppendClosedCurvePlaneInterse
 as start end pairs by parity rules. Intersections are reported as
 CurveLocationDetailPairs for start and end of segments.
 
-Parameter ``[in]``:
+:param (input):
     plane
 
-Parameter ``[out]``:
+:param (output):
     intersections intersection details
 
-Parameter ``[in]``:
+:param (input):
     tolerance for on-plane decisions. If 0, a tolerance is computed
     based on the coordinates in the curve.)doc";
 
@@ -273,13 +273,13 @@ identical locations for both parts of the pair (SameCurveAndFraction)
 Curve-on-plane appears as CurveLocationDetailPair with curve,fraction
 data for start and end of on-plane sections.
 
-Parameter ``[in]``:
+:param (input):
     plane
 
-Parameter ``[out]``:
+:param (output):
     intersections intersection details
 
-Parameter ``[in]``:
+:param (input):
     tolerance for on-plane decisions. If 0, a tolerance is computed
     based on the coordinates in the curve.)doc";
 
@@ -338,37 +338,37 @@ negatives.)doc";
 static const char * __doc_Bentley_Geom_CurveVector_IsPlanarWithDefaultNormal =R"doc(Test if the contained curves are planar. If so, return transforms and
 local range.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld A coordinate frame somewhere on the curves. The
     curves are on the xy plane.
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal Inverse of localToWorld.
 
-Parameter ``[out]``:
+:param (output):
     range range of the curves when worldToLocal is applied.
 
-Parameter ``[in]``:
+:param (input):
     normal optional normal to resolve ambiguous cases. If this is
     NULL, any perpendicular to an ambiguous line will be used.
 
-Returns:
+:returns:
     true if range is computed and has small z component.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_IsPlanar =R"doc(Test if the contained curves are planar. If so, return transforms and
 local range.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld A coordinate frame somewhere on the curves. The
     curves are on the xy plane.
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal Inverse of localToWorld.
 
-Parameter ``[out]``:
+:param (output):
     range range of the curves when worldToLocal is applied.
 
-Returns:
+:returns:
     true if range is computed and has small z component.
 
 Remark:
@@ -401,15 +401,15 @@ static const char * __doc_Bentley_Geom_CurveVector_Length =R"doc(Sum lengths of 
 static const char * __doc_Bentley_Geom_CurveVector_GetStartPoint =R"doc(Return start point of the primitive (or first primitive in deep
 search)
 
-Parameter ``[out]``:
+:param (output):
     point start point.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_GetStartEnd =R"doc(Return first/last among children.
 
-Parameter ``[out]``:
+:param (output):
     pointA start point
 
-Parameter ``[out]``:
+:param (output):
     pointB end point)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AnnounceKeyPoints =R"doc(Search for various keypoints (as requested by the collector) During
@@ -419,13 +419,13 @@ paths)doc";
 static const char * __doc_Bentley_Geom_CurveVector_ClosestCurveOrRegionPoint =R"doc(Search for closest point on curve. If CV is a region type, also look
 for projection onto interior of the region.
 
-Parameter ``[in]``:
+:param (input):
     spacePoint fixed point of search
 
-Parameter ``[out]``:
+:param (output):
     curveOrRegionPoint computed point on curve or region interior.
 
-Returns:
+:returns:
     INOUT_On if the point is a curve point. INOUT_In if the point is a
     projection to the region interior. INOUT_Unknown for empty curve
     vector.)doc";
@@ -446,31 +446,35 @@ in the CurveVector. Intervals between successive distances can " jump "
 from one curve to the next. If curves to not connect head to tail, the
 gap is NOT filled -- measurement just picks up after the gap.
 
-Parameter ``[in]``:
+:param (input):
     distances vector of distances, all measured from the start of the
     first primitive.
 
-Parameter ``[out]``:
+:param (output):
     locations vector of locations. (This is NOT cleared at start --
     points are just added.))doc";
 
-static const char * __doc_Bentley_Geom_CurveVector_CollectLinearGeometry =R"doc(Add all strokes from the structure. This is intended to be called on
-structures with only lines and linestrings. The outer curve vector may
-be a single loop, parity region, or union region. AddLinearLoops
-recurses The regionsPoints[i] is an array of loops.
-regionsPoints[i][j] is loop j of regionsPoints[i].
+static const char * __doc_Bentley_Geom_CurveVector_CollectLinearGeometry =R"doc(Add strokes from the instance curves.
+* The output retains structure as complex as "union of multi-loop parity regions".
+* For a BOUNDARY_TYPE_None, each child is added recursively.
 
-Returns:
-    false if unexpected structure -- e.g. curves. --- was encountered.)doc";
+:regionsPoints [out]:
+    collection of collections of loops; regionsPoints[i] is an array of loops, regionPoints[i][j] is a loop, regionPoints[i][j][k] is a point of a loop.
+
+:strokeOptions [input]:
+    stroke options. If null all curved geometry is skipped.
+
+:returns:
+    true if and only if no geometry was skipped and no unexpected was structure encountered.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AddStrokePoints =R"doc(Add stroke points form all children to output. Strokes from all
 children are concatenated into the same vector, separated only by
 DISCONNECT points. Use Stroke() to get structured strokes.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     points growing vector of strokes.
 
-Parameter ``[in]``:
+:param (input):
     options options for stroke density. chordTolerance,
     angleTolerance, and maxEdgeLength will be used.)doc";
 
@@ -495,10 +499,10 @@ curve primitive. ul>)doc";
 static const char * __doc_Bentley_Geom_CurveVector_CreateDisk =R"doc(Create a (deep) curve vector structure for a complete elliptic
 (circular) disk.
 
-Parameter ``[in]``:
+:param (input):
     arc boundary ellipse
 
-Parameter ``[in]``:
+:param (input):
     boundaryType is one of
 
 * BOUNDARY_TYPE_Outer:force to counterclockwise and positive area as
@@ -513,28 +517,28 @@ own direction.
 * BOUNDARY_TYPE_UnionRegion, BOUNDARY_TYPE_ParityRegion create two-
 level structure with arc at second level with BOUNDARY_TYPE_Outer
 
-Parameter ``[in]``:
+:param (input):
     forceXYOrientation if true, reverse arc sweep so it acts as
     requested inner/outer in xy view.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_CreateRectangle =R"doc(Create a rectangle from xy corners.
 
-Parameter ``[in]``:
+:param (input):
     x0 start point x coordinate
 
-Parameter ``[in]``:
+:param (input):
     y0 start point y coordinate
 
-Parameter ``[in]``:
+:param (input):
     x1 opposite corner x coordinate
 
-Parameter ``[in]``:
+:param (input):
     y1 opposite corner y coordinate
 
-Parameter ``[in]``:
+:param (input):
     z z value for all points.
 
-Parameter ``[in]``:
+:param (input):
     boundaryType is one of
 
 * BOUNDARY_TYPE_Outer:force to counterclockwise and positive area
@@ -550,10 +554,10 @@ BOUNDARY_TYPE_Outer)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_CreateLinear =R"doc(Create a linestring or polygon from xyz data.
 
-Parameter ``[in]``:
+:param (input):
     points vertex coordinates points.
 
-Parameter ``[in]``:
+:param (input):
     boundaryType is one of
 
 * BOUNDARY_TYPE_Outer, or BOUNDARY_TYPE_INNER:Duplication forced on
@@ -564,7 +568,7 @@ first/last point. Orientation optionally enforced.
 * BOUNDARY_TYPE_UnionRegion, BOUNDARY_TYPE_ParityRegion create two-
 level structure with polygon at second level with BOUNDARY_TYPE_Outer.
 
-Parameter ``[in]``:
+:param (input):
     forceXYOrientation true to force outer and inner loops to have
     correct (CCW/CW) order.)doc";
 
@@ -574,47 +578,47 @@ multiply uv by the localToWorld transformation. To do this efficiently
 many times, call CloneInLocalCoordinates once and reuse the
 localToWorld transform.
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_GetAnyFrenetFrame =R"doc(Deep search for any curve primitive that has a well defined coordinate
 frame.
 
-Parameter ``[out]``:
+:param (output):
     frame coordinate frame with origin on a primitive.
 
-Returns:
+:returns:
     true if a primitive was found.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_CloneInLocalCoordinates =R"doc(Return curve copy and transforms for a local coordinate system related
 to the curves. The local x and y axes are parallel to the x and y axes
 of the Frenet frame at the curve start.
 
-Returns:
+:returns:
     curves transformed to local system.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld local to world transform
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal world to local transform
 
-Parameter ``[out]``:
+:param (output):
     localRange curve vector range in the local frame.
 
-Parameter ``[in]``:
+:param (input):
     frameType Selects how the geometry size is represented in the
     scale. ul> li>LOCAL_COORDINATE_SCALE_UnitAxesAtStart -- x,y,z
     columns in the transform are unit vectors. localRange values are
@@ -635,7 +639,7 @@ Parameter ``[in]``:
 static const char * __doc_Bentley_Geom_CurveVector_ProjectedParameterRange =R"doc(Return the range of ray parameters when contents of the CurveVector
 are projected to a ray. return DRange1d with range data.
 
-Parameter ``[in]``:
+:param (input):
     ray test ray.
 
 Remark:
@@ -662,57 +666,57 @@ Remark:
     Parity region moments are signed sum per area, assuming largest is
     outer and all others are inner (subtractive)
 
-Parameter ``[out]``:
+:param (output):
     centroid curve centroid
 
-Parameter ``[out]``:
+:param (output):
     area area of region.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_ComputeSecondMomentWireProducts =R"doc(Return the area, centroid, orientation, and principal moments,
 treating this as a wire
 
-Parameter ``[out]``:
+:param (output):
     products integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y z 1]
     dA)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_ComputeSecondMomentDifferentialWireRotationProducts =R"doc(Return the moment products [xx,xy,xz,xw; etc] of the wire as a
 differential rotational contribution
 
-Parameter ``[in]``:
+:param (input):
     rotationAxis the origin and z axis of the rotation.
 
-Parameter ``[out]``:
+:param (output):
     rotationToWorld transformation from rotation system (origin on
     rotation axis) to world. The products are base don local
     coordinates in the system.
 
-Parameter ``[out]``:
+:param (output):
     products products in the rotation system.
 
-Returns:
+:returns:
     false if invalid area for rotational sweep.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_ComputeSecondMomentDifferentialAreaRotationProducts =R"doc(Return the moment products [xx,xy,xz,xw; etc] of the area as a
 differential rotational slice.
 
-Parameter ``[in]``:
+:param (input):
     rotationAxis the origin and z axis of the rotation.
 
-Parameter ``[out]``:
+:param (output):
     rotationToWorld transformation from rotation system (origin on
     rotation axis) to world. The products are base don local
     coordinates in the system.
 
-Parameter ``[out]``:
+:param (output):
     products products in the rotation system.
 
-Returns:
+:returns:
     false if invalid area for rotational sweep.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_ComputeSecondMomentAreaProducts =R"doc(Return the area, centroid, orientation, and principal moments,
 treating this as a thin planar sheet.
 
-Parameter ``[out]``:
+:param (output):
     products integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y z 1]
     dA)doc";
 
@@ -732,13 +736,13 @@ Remark:
     If curves are non-planar, the centroid and normal are
     approximations with no particular guarantees.
 
-Parameter ``[out]``:
+:param (output):
     centroid curve centroid
 
-Parameter ``[out]``:
+:param (output):
     normal curve normal
 
-Parameter ``[out]``:
+:param (output):
     area area of region.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_WireCentroid =R"doc(Return the centroid of the contained curves, considered as wires.
@@ -746,10 +750,10 @@ static const char * __doc_Bentley_Geom_CurveVector_WireCentroid =R"doc(Return th
 computed. The boundary curves are used as wires.) return false if no
 curves are found.
 
-Parameter ``[out]``:
+:param (output):
     length curve length
 
-Parameter ``[out]``:
+:param (output):
     centroid curve centroid)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AppendSplitCurvesByPlane =R"doc(Return curves (not regions) that are below, above, and on a plane)doc";
@@ -758,7 +762,7 @@ static const char * __doc_Bentley_Geom_CurveVector_AppendSplitCurvesByRegion =R"
 
 static const char * __doc_Bentley_Geom_CurveVector_CountPrimitivesOfType =R"doc(Count primitives of specified type.
 
-Parameter ``[in]``:
+:param (input):
     targetType primitive type to count.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_AreaOffset =R"doc(return a (deep) clone with all areas increased or decreased according
@@ -807,11 +811,11 @@ static const char * __doc_Bentley_Geom_CurveVector_CloneWithFillets =R"doc(retur
 static const char * __doc_Bentley_Geom_CurveVector_CloneDereferenced =R"doc(Return a " deep copy " with PartialCurve primitives replaced by full
 curves.
 
-Parameter ``[in]``:
+:param (input):
     maximumDeref true to recurse through all steps of PartialCurve
     chains
 
-Parameter ``[in]``:
+:param (input):
     allowExtrapolation true to allow extension before/after endpoints.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_Clone =R"doc(Return a " deep copy ")doc";
@@ -823,12 +827,12 @@ of bounds.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_IsRectangle =R"doc(Query:Is this a rectangle?
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform with origin at start, x and y vectors to
     adjacent points, z vector unit normal. (i.e. the x and y vector
     lengths are the side lengths)
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal transform to map rectangle to 0..1 in each direction.)doc";
 
 static const char * __doc_Bentley_Geom_CurveVector_IsPhysicallyClosedPath =R"doc(Query:Is this a nominally open path but with matching start and end?)doc";
@@ -970,107 +974,37 @@ void def_CurveVector(py::module_& m)
                   py::overload_cast<DPoint3dArray const&, CurveVector::BoundaryType, bool>(&CurveVector::CreateLinear), 
                   "points"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Open, "forceXYOrientation"_a = false, DOC(Bentley, Geom, CurveVector, CreateLinear));
 
+    c1.def_static("CreateLinear", [] (py::list const &points, CurveVector::BoundaryType boundaryType, bool forceXYOrientation) {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint3dArray, DPoint3d);
+                  return CurveVector::CreateLinear(cpppoints, boundaryType, forceXYOrientation); }, "points"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Open, "forceXYOrientation"_a = false, DOC(Bentley, Geom, CurveVector, CreateLinear));
+
     c1.def_static("CreateLinear", [] (DPoint2dArray const& points, CurveVector::BoundaryType boundaryType, bool forceXYOrientation)
         {
         return CurveVector::CreateLinear(&points[0], points.size(), boundaryType, forceXYOrientation);
         }, "points"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Open, "forceXYOrientation"_a = false, DOC(Bentley, Geom, CurveVector, CreateLinear));
             
-    c1.def_static("CreateRectangle", &CurveVector::CreateRectangle, "x0"_a, "y0"_a, "x1"_a, "y1"_a, "z"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer);
-    c1.def_static("CreateRegularPolygonXY", &CurveVector::CreateRegularPolygonXY, "center"_a, "xDistance"_a, "numEdge"_a, "isOuterRadius"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer);
-    c1.def_static("CreateDisk", &CurveVector::CreateDisk, "arc"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer, "forceXYOrientation"_a = false);
-    c1.def("CloneAsBsplines", &CurveVector::CloneAsBsplines);
-
-    c1.def("Stroke", &CurveVector::Stroke, "options"_a);
-    c1.def("AddStrokePoints", &CurveVector::AddStrokePoints, "points"_a, "options"_a);
-    c1.def("CollectLinearGeometry", &CurveVector::CollectLinearGeometry, "regionsPoints"_a);
-    c1.def("AddSpacedPoints", &CurveVector::AddSpacedPoints, "distances"_a, "locations"_a);
-    c1.def("ToBsplineCurve", &CurveVector::ToBsplineCurve, "curve"_a);
-    c1.def("GetBsplineCurve", &CurveVector::GetBsplineCurve);
-
-    c1.def("ClosestPointBounded", py::overload_cast<DPoint3dCR, CurveLocationDetailR>(&CurveVector::ClosestPointBounded, py::const_), "spacePoint"_a, "location"_a);
-    c1.def("ClosestPointBounded", py::overload_cast<DPoint3dCR, CurveLocationDetailR, bool, bool>(&CurveVector::ClosestPointBounded, py::const_), "spacePoint"_a, "location"_a, "extend0"_a, "extend1"_a);
-    c1.def("ClosestPointBoundedXY", py::overload_cast<DPoint3dCR, DMatrix4dCP, CurveLocationDetailR>(&CurveVector::ClosestPointBoundedXY, py::const_), "spacePoint"_a, "worldToLocal"_a, "location"_a);
-    c1.def("ClosestPointBoundedXY", py::overload_cast<DPoint3dCR, DMatrix4dCP, CurveLocationDetailR, bool, bool>(&CurveVector::ClosestPointBoundedXY, py::const_), "spacePoint"_a, "worldToLocal"_a, "location"_a, "extend0"_a, "extend1"_a);            
-    c1.def("ClosestCurveOrRegionPoint", &CurveVector::ClosestCurveOrRegionPoint, "spacePoint"_a, "curveOrRegionPoint"_a);
-
-    c1.def("AnnounceKeyPoints", &CurveVector::AnnounceKeyPoints, "spacePoint"_a, "collector"_a, "extend0"_a, "extend1"_a);
-
-    c1.def("GetStartEnd", py::overload_cast<DPoint3dR, DPoint3dR>(&CurveVector::GetStartEnd, py::const_), "pointA"_a, "pointB"_a);
-    c1.def("GetStartEnd", py::overload_cast<DPoint3dR, DPoint3dR, DVec3dR, DVec3dR>(&CurveVector::GetStartEnd, py::const_), "pointA"_a, "pointB"_a, "unitTangentA"_a, "unitTangentB"_a);
-    c1.def("GetStartPoint", &CurveVector::GetStartPoint, "point"_a);
-
-    c1.def("Length", py::overload_cast<>(&CurveVector::Length, py::const_));
-    c1.def("Length", py::overload_cast<RotMatrixCP>(&CurveVector::Length, py::const_), "worldToLocal"_a);
-    c1.def("FastLength", &CurveVector::FastLength);
-
-    c1.def("MaxGapWithinPath", &CurveVector::MaxGapWithinPath);
-    c1.def("FastMaxAbs", &CurveVector::FastMaxAbs);
-    c1.def("IsSameStructure", &CurveVector::IsSameStructure, "other"_a);
-    c1.def("IsSameStructureAndGeometry", &CurveVector::IsSameStructureAndGeometry, "other"_a, "tolerance"_a = 0.0);
-
-    c1.def("GetRange", py::overload_cast<DRange3dR>(&CurveVector::GetRange, py::const_), "range"_a);
-    c1.def("GetRange", py::overload_cast<DRange3dR, TransformCR>(&CurveVector::GetRange, py::const_), "range"_a, "transform"_a);
-            
-    c1.def("IsPlanar", &CurveVector::IsPlanar, "localToWorld"_a, "worldToLocal"_a, "range"_a);
-    c1.def("IsPlanarWithDefaultNormal", &CurveVector::IsPlanarWithDefaultNormal, "localToWorld"_a, "worldToLocal"_a, "range"_a, "normal"_a);
-
-    c1.def("CyclicIndex", &CurveVector::CyclicIndex, "index"_a);            
-    c1.def("GetCyclic", &CurveVector::GetCyclic, "index"_a);
-
-    c1.def("CurveLocationDetailIndex", &CurveVector::CurveLocationDetailIndex, "location"_a);
-    c1.def("FindIndexOfPrimitive", &CurveVector::FindIndexOfPrimitive, "primitive"_a);
-    c1.def("FindParentOfPrimitive", &CurveVector::FindParentOfPrimitive, "primitive"_a);
-    c1.def("CurveLocationDetailCompare", &CurveVector::CurveLocationDetailCompare, "location0"_a, "location1"_a);
-    c1.def("ResolveTolerance", &CurveVector::ResolveTolerance, "tolerance"_a);    
-
-    c1.def("CloneBetweenCyclicIndexedFractions", &CurveVector::CloneBetweenCyclicIndexedFractions, "index0"_a, "fraction0"_a, "index1"_a, "fraction1"_a);
-
-    c1.def("CloneBetweenDirectedFractions", py::overload_cast<int, double, int, double, bool, bool>(&CurveVector::CloneBetweenDirectedFractions, py::const_), 
-                                            "index0"_a, "fraction0"_a, "index1"_a, "fraction1"_a, "allowExtrapolation"_a, "usePartialCurves"_a = false);
-    c1.def("CloneBetweenDirectedFractions", py::overload_cast<CurveLocationDetailCR, CurveLocationDetailCR, bool, bool>(&CurveVector::CloneBetweenDirectedFractions, py::const_), 
-                                            "location0"_a, "location1"_a, "allowExtrapolation"_a = false, "usePartialCurves"_a = false);
-
-    c1.def("CloneReversed", &CurveVector::CloneReversed);
-
-    c1.def("GenerateAllParts", &CurveVector::GenerateAllParts, "indexA"_a, "fractionA"_a, "indexB"_a, "fractionB"_a);
-    c1.def("ContainsNonLinearPrimitive", &CurveVector::ContainsNonLinearPrimitive);
-
-    c1.def("AppendCurvePlaneIntersections", &CurveVector::AppendCurvePlaneIntersections, "plane"_a, "intersections"_a, "tolerance"_a = 0.0);
-    c1.def("AppendClosedCurvePlaneIntersections", &CurveVector::AppendClosedCurvePlaneIntersections, "plane"_a, "intersections"_a, "tolerance"_a = 0.0);
-
-    c1.def("PlaneSection", &CurveVector::PlaneSection, "plane"_a, "tolerance"_a = 0.0);
-    c1.def("PointInOnOutXY", &CurveVector::PointInOnOutXY, "xyz"_a);
-    c1.def("RayPierceInOnOut", &CurveVector::RayPierceInOnOut, "ray"_a, "hitDetail"_a);
-    c1.def("TransformInPlace", &CurveVector::TransformInPlace, "transform"_a);
-    c1.def("ReverseCurvesInPlace", &CurveVector::ReverseCurvesInPlace);
-
-    c1.def("ConsolidateAdjacentPrimitives", py::overload_cast<>(&CurveVector::ConsolidateAdjacentPrimitives));
-    c1.def("ConsolidateAdjacentPrimitives", py::overload_cast<bool>(&CurveVector::ConsolidateAdjacentPrimitives), "doSimplifyLinestrings"_a);
-
-    c1.def("SimplifyLinestrings", &CurveVector::SimplifyLinestrings, "distanceTol"_a, "eliminateOverdraw"_a, "wrap"_a);
-    c1.def("FixupXYOuterInner", &CurveVector::FixupXYOuterInner, "fullGeometryCheck"_a = false);
-    c1.def("ReorderForSmallGaps", &CurveVector::ReorderForSmallGaps);
-    c1.def("AssembleChains", &CurveVector::AssembleChains);
-
-    c1.def("FlattenNestedUnionRegions", &CurveVector::FlattenNestedUnionRegions);
-    c1.def("HasNestedUnionRegion", &CurveVector::HasNestedUnionRegion);
-
-    c1.def_static("AreaUnion", &CurveVector::AreaUnion, "regionA"_a, "regionB"_a, "newToOld"_a = nullptr);
-    c1.def_static("AreaDifference", &CurveVector::AreaDifference, "regionA"_a, "regionB"_a, "newToOld"_a = nullptr);
-    c1.def_static("AreaIntersection", &CurveVector::AreaIntersection, "regionA"_a, "regionB"_a, "newToOld"_a = nullptr);
-    c1.def_static("AreaParity", &CurveVector::AreaParity, "regionA"_a, "regionB"_a, "newToOld"_a = nullptr);
-    c1.def_static("AreaAnalysis", &CurveVector::AreaAnalysis, "region"_a, "select1"_a, "select2"_a, "reverse"_a);
-
-    c1.def_static("ReduceToCCWAreas", &CurveVector::ReduceToCCWAreas, "regionA"_a);
-    c1.def_static("CreateXYHatch", &CurveVector::CreateXYHatch, "boundary"_a, "startPoint"_a, "angleRadians"_a, "spacing"_a, "selection"_a = 0);
-            
     c1.def_static("CreateRectangle", &CurveVector::CreateRectangle, "x0"_a, "y0"_a, "x1"_a, "y1"_a, "z"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer, DOC(Bentley, Geom, CurveVector, CreateRectangle));
+    
+    c1.def_static("CreateRegularPolygonXY", &CurveVector::CreateRegularPolygonXY, "center"_a, "xDistance"_a, "numEdge"_a, "isOuterRadius"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer);
+
     c1.def_static("CreateDisk", &CurveVector::CreateDisk, "arc"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Outer, "forceXYOrientation"_a = false, DOC(Bentley, Geom, CurveVector, CreateDisk));
     c1.def("CloneAsBsplines", &CurveVector::CloneAsBsplines, DOC(Bentley, Geom, CurveVector, CloneAsBsplines));
 
     c1.def("Stroke", &CurveVector::Stroke, "options"_a, DOC(Bentley, Geom, CurveVector, Stroke));
     c1.def("AddStrokePoints", &CurveVector::AddStrokePoints, "points"_a, "options"_a, DOC(Bentley, Geom, CurveVector, AddStrokePoints));
-    c1.def("CollectLinearGeometry", &CurveVector::CollectLinearGeometry, "regionsPoints"_a, DOC(Bentley, Geom, CurveVector, CollectLinearGeometry));
+
+    c1.def("CollectLinearGeometry",
+        py::overload_cast<bvector<bvector<bvector<DPoint3d>>>&>(&CurveVector::CollectLinearGeometry, py::const_),
+        "regionsPoints"_a, DOC(Bentley, Geom, CurveVector, CollectLinearGeometry));
+
+    c1.def("CollectLinearGeometry",
+        py::overload_cast<bvector<bvector<bvector<DPoint3d>>>&, IFacetOptionsP>(&CurveVector::CollectLinearGeometry, py::const_),
+        "regionsPoints"_a, "strokeOptions"_a, DOC(Bentley, Geom, CurveVector, CollectLinearGeometry));
+
+    c1.def("CollectLinearGeometry",
+        py::overload_cast<bvector<bvector<DPoint3d>>&, IFacetOptionsP>(&CurveVector::CollectLinearGeometry, py::const_),
+        "regionsPoints"_a, "strokeOptions"_a = nullptr, DOC(Bentley, Geom, CurveVector, CollectLinearGeometry));
+
     c1.def("AddSpacedPoints", &CurveVector::AddSpacedPoints, "distances"_a, "locations"_a, DOC(Bentley, Geom, CurveVector, AddSpacedPoints));
     c1.def("ToBsplineCurve", &CurveVector::ToBsplineCurve, "curve"_a, DOC(Bentley, Geom, CurveVector, ToBsplineCurve));
     c1.def("GetBsplineCurve", &CurveVector::GetBsplineCurve, DOC(Bentley, Geom, CurveVector, GetBsplineCurve));
@@ -1112,7 +1046,13 @@ void def_CurveVector(py::module_& m)
     c1.def("ResolveTolerance", &CurveVector::ResolveTolerance, "tolerance"_a, DOC(Bentley, Geom, CurveVector, ResolveTolerance));    
 
     c1.def("CloneBetweenCyclicIndexedFractions", &CurveVector::CloneBetweenCyclicIndexedFractions, "index0"_a, "fraction0"_a, "index1"_a, "fraction1"_a, DOC(Bentley, Geom, CurveVector, CloneBetweenCyclicIndexedFractions));
-    //c1.def("CloneBetweenDirectedFractions", &CurveVector::CloneBetweenDirectedFractions, "index0"_a, "fraction0"_a, "index1"_a, "fraction1"_a, "allowExtrapolation"_a, DOC(Bentley, Geom, CurveVector, CloneBetweenDirectedFractions));
+
+    c1.def("CloneBetweenDirectedFractions", py::overload_cast<int, double, int, double, bool, bool>(&CurveVector::CloneBetweenDirectedFractions, py::const_),
+        "index0"_a, "fraction0"_a, "index1"_a, "fraction1"_a, "allowExtrapolation"_a, "usePartialCurves"_a = false, DOC(Bentley, Geom, CurveVector, CloneBetweenDirectedFractions));
+    c1.def("CloneBetweenDirectedFractions", py::overload_cast<CurveLocationDetailCR, CurveLocationDetailCR, bool, bool>(&CurveVector::CloneBetweenDirectedFractions, py::const_),
+        "location0"_a, "location1"_a, "allowExtrapolation"_a = false, "usePartialCurves"_a = false, DOC(Bentley, Geom, CurveVector, CloneBetweenDirectedFractions));
+
+    
     c1.def("CloneReversed", &CurveVector::CloneReversed, DOC(Bentley, Geom, CurveVector, CloneReversed));
 
     c1.def("GenerateAllParts", &CurveVector::GenerateAllParts, "indexA"_a, "fractionA"_a, "indexB"_a, "fractionB"_a, DOC(Bentley, Geom, CurveVector, GenerateAllParts));
@@ -1134,6 +1074,9 @@ void def_CurveVector(py::module_& m)
     c1.def("FixupXYOuterInner", &CurveVector::FixupXYOuterInner, "fullGeometryCheck"_a = false, DOC(Bentley, Geom, CurveVector, FixupXYOuterInner));
     c1.def("ReorderForSmallGaps", &CurveVector::ReorderForSmallGaps, DOC(Bentley, Geom, CurveVector, ReorderForSmallGaps));
     c1.def("AssembleChains", &CurveVector::AssembleChains, DOC(Bentley, Geom, CurveVector, AssembleChains));
+
+    c1.def("FlattenNestedUnionRegions", &CurveVector::FlattenNestedUnionRegions);
+    c1.def("HasNestedUnionRegion", &CurveVector::HasNestedUnionRegion);
 
     c1.def_static("AreaUnion", &CurveVector::AreaUnion, "regionA"_a, "regionB"_a, "newToOld"_a = nullptr, DOC(Bentley, Geom, CurveVector, AreaUnion));
     c1.def_static("AreaDifference", &CurveVector::AreaDifference, "regionA"_a, "regionB"_a, "newToOld"_a = nullptr, DOC(Bentley, Geom, CurveVector, AreaDifference));

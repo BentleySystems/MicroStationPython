@@ -22,6 +22,10 @@ void def_Point(py::module_& m)
     c1.def(py::init<>());
     c1.def_readwrite("x", &Point2d::x);
     c1.def_readwrite("y", &Point2d::y);
+
+    c1.def_readwrite("X", &Point2d::x);
+    c1.def_readwrite("Y", &Point2d::y);
+
     c1.def("__repr__", [] (Point2dCR self) { return "[{}, {}]"_s.format(self.x, self.y); });
     c1.def("__copy__", [] (const Point2d& self) { return Point2d(self); });
     
@@ -33,6 +37,11 @@ void def_Point(py::module_& m)
     c2.def_readwrite("x", &Point3d::x);
     c2.def_readwrite("y", &Point3d::y);
     c2.def_readwrite("z", &Point3d::z);
+
+    c2.def_readwrite("X", &Point3d::x);
+    c2.def_readwrite("Y", &Point3d::y);
+    c2.def_readwrite("Z", &Point3d::z);
+
     c2.def("__repr__", [] (Point3dCR self) { return "[{}, {}, {}]"_s.format(self.x, self.y, self.z); });
     c2.def("__copy__", [] (const Point3d& self) { return Point3d(self); });
     }

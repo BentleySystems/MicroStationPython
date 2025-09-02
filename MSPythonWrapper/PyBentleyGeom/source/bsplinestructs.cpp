@@ -12,35 +12,35 @@
 static const char * __doc_Bentley_Geom_BCurveSegment_RefineCloseApproach =R"doc(Run newton iteration to move frctions to closest approach points.
 return true if iteration succeeeded.
 
-Parameter ``[in]``:
+:param (input):
     curveA first curve
 
-Parameter ``[in]``:
+:param (input):
     fractionAin initial fraction on curveA
 
-Parameter ``[in]``:
+:param (input):
     curveB second curve
 
-Parameter ``[in]``:
+:param (input):
     fractionBin initial fraction on curveB
 
-Parameter ``[in]``:
+:param (input):
     useWorkPoles true to iterate with the work poles, false for
     primaries
 
-Parameter ``[in]``:
+:param (input):
     xyOnly true to iterate on xy parts, false for xyz
 
-Parameter ``[out]``:
+:param (output):
     fractionAOut fraction on curveA
 
-Parameter ``[out]``:
+:param (output):
     xyzAOut point on curveA
 
-Parameter ``[out]``:
+:param (output):
     fractionBOut fraction on curveB
 
-Parameter ``[out]``:
+:param (output):
     xyzBOut point on curveB)doc";
 
 static const char * __doc_Bentley_Geom_BCurveSegment_Index =R"doc(Index (from start) in parent bspline)doc";
@@ -71,23 +71,23 @@ static const char * __doc_Bentley_Geom_BCurveSegment_TryGetPoleXYZ =R"doc(derfer
 
 static const char * __doc_Bentley_Geom_BCurveSegment_AddExtrema =R"doc(Find minmax params (in some or all dimensions)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     params receiver vector.
 
-Parameter ``[out]``:
+:param (output):
     range (optional) range observed at (a) points in the params and
     (b) endpoints.
 
-Parameter ``[in]``:
+:param (input):
     mapToKnots if true convert bezier params to knots.
 
-Parameter ``[in]``:
+:param (input):
     firstDimension first dimension (0,1,2) to examine.
 
-Parameter ``[in]``:
+:param (input):
     lastDimension last dimension (0,1,2) to examine.
 
-Parameter ``[in]``:
+:param (input):
     includeStartEnd true to force params 0 and 1 into the results.)doc";
 
 static const char * __doc_Bentley_Geom_BCurveSegment_BuildWorkPoles =R"doc(Transform primary poles into work poles.)doc";
@@ -101,28 +101,28 @@ the work poles rather than the primaries.)doc";
 
 static const char * __doc_Bentley_Geom_BCurveSegment_AddStrokes =R"doc(Add strokes to point and param arrays.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     points receives points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     params receives parameters.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     derivatives receives derivatives
 
-Parameter ``[in]``:
+:param (input):
     options stroke controls
 
-Parameter ``[in]``:
+:param (input):
     fractionA start fraction
 
-Parameter ``[in]``:
+:param (input):
     fractionB end fraction
 
-Parameter ``[in]``:
+:param (input):
     useWorkPoles true to stroke from work poles, false for primaries.
 
-Parameter ``[in]``:
+:param (input):
     curve curve pointer (for use in parameter mapping, if indicated by
     facet options))doc";
 

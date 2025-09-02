@@ -20,6 +20,7 @@ creating multiple sections at intervals along the line string using specific dra
 and for each section increment the name by 1.
 Interval can be set in the script.
 '''
+
 interval = 8.0                  #Master unit
 
 elementType = eLINE_STRING_ELM  #Line string

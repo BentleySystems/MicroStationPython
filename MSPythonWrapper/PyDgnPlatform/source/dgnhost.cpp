@@ -12,44 +12,44 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnHost_SetHostObject =R"doc(Set the value of a host-based variable identified by key.
 
-Parameter ``key``:
+:param key:
     The key that identifies this variable. Keys must always be static
     variables, as their values are assigned when they are first used
     and must remain the same for the entire run of a host program.
 
-Parameter ``val``:
+:param val:
     The value to be associated with key for this DgnHost.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnHost_GetHostObject =R"doc(Get the value of a host-based variable identified by key.
 
-Parameter ``key``:
+:param key:
     The key that identifies this variable. Keys must always be static
     variables, as their values are assigned when they are first used
     and must remain the same for the entire run of a host program.
 
-Returns:
+:returns:
     The value of the host variable identified by key. If the variable
     has never been set on this instance of DgnHost, the value will be
     0.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnHost_SetHostBoolVariable =R"doc(Set the value of a host-based boolean variable identified by key.
 
-Parameter ``key``:
+:param key:
     The key that identifies this variable. Keys must always be static
     variables, as their values are assigned when they are first used
     and must remain the same for the entire run of a host program.
 
-Parameter ``val``:
+:param val:
     The boolean value to be associated with key for this DgnHost.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnHost_GetHostBoolVariable =R"doc(Get the value of a host-based boolean variable identified by key.
 
-Parameter ``key``:
+:param key:
     The key that identifies this variable. Keys must always be static
     variables, as their values are assigned when they are first used
     and must remain the same for the entire run of a host program.
 
-Returns:
+:returns:
     The boolean value of the host variable identified by key. If the
     variable has never been set on this instance of DgnHost, the value
     will be 0.)doc";

@@ -12,13 +12,13 @@
 
 static const char * __doc_MstnPlatform_DgnFile_GetModelItemByName =R"doc(Retrieve the model index item using a model name.
 
-Parameter ``pDgnFile``:
+:param pDgnFile:
     The file containing the model.
 
-Parameter ``modelName``:
+:param modelName:
     The name of the model to retreive.
 
-Returns:
+:returns:
     NULL if the indicated model does not exist in the file, otherwise
     a pointer to the model index item. @Group " DgnFile Functions "
     @See ModelItem.GetData ModelItem.GetName
@@ -29,13 +29,13 @@ Remark:
 
 static const char * __doc_MstnPlatform_DgnFile_GetModelItemById =R"doc(Retrieve the model index item using a model ID.
 
-Parameter ``pDgnFile``:
+:param pDgnFile:
     The file containing the model.
 
-Parameter ``modelID``:
+:param modelID:
     The ID of the model to retreive.
 
-Returns:
+:returns:
     NULL if the indicated model does not exist in the file, otherwise
     a pointer to the model index item. @Group " DgnFile Functions "
     @See ModelItem.GetData ModelItem.GetName
@@ -52,12 +52,12 @@ models in the specified design file. Note, any DgnModelRefList created
 with this function must be freed by calling <a
 href=" usmthModelRefList.Free htm ">ModelRefList.Free</a>.
 
-Parameter ``DgnFile``:
+:param DgnFile:
     Is a reference to the design file containing the models to add to
     the list. @Remarks The returned model ref must be freed by the
     caller.
 
-Returns:
+:returns:
     A pointer to the DgnModelRefList that has an entry for each model
     in the design file. @Group " DgnFile Functions "
 
@@ -67,7 +67,7 @@ Remark:
 static const char * __doc_MstnPlatform_DgnFile_IsProtected =R"doc(@Description Check if the specified file is encrypted (e.g., for
 digital rights management)
 
-Parameter ``file``:
+:param file:
     the DgnFile of interest. @Return true if file is encrypted
 
 Remark:
@@ -94,9 +94,9 @@ read-only)
 * DgnPlatform::DGNFILE_RIGHT_Unlimited -- All rights, present and
 future
 
-Parameter ``DgnFile``:
-    the DgnFile of interest. @Param[in] rights the rights to query
-    @Param[in] displayError display error message in message center if
+:param DgnFile:
+    the DgnFile of interest. @Param(input) rights the rights to query
+    @Param(input) displayError display error message in message center if
     rights not granted? Else return ERROR silently @Return SUCCESS if
     all of the rights are granted.
 
@@ -106,7 +106,7 @@ Remark:
 )doc";
 
 static const char * __doc_MstnPlatform_DgnFile_HasPendingChanges =R"doc(@Description Determines if a design file has pending chages.
-@Param[in] DgnFile is a reference to the design file of interest
+@Param(input) DgnFile is a reference to the design file of interest
 @Return true if the design file has changes that have not been saved;
 false otherwise.
 

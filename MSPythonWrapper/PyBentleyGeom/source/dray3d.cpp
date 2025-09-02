@@ -12,113 +12,113 @@
 static const char * __doc_Bentley_Geom_DRay3d_IntersectZPlane =R"doc(Return the intersection of this ray with a specified z plane of a
 coordinate frame.
 
-Parameter ``[in]``:
+:param (input):
     frame coordinate frame, e.g. often called localWorldFrame for an
     object
 
-Parameter ``[in]``:
+:param (input):
     localZ z coordinate in local frame (e.g. 0 for local xy plane
     pierce point.)
 
-Parameter ``[out]``:
+:param (output):
     uvw local uvw coordinates. (w matches input z)
 
-Parameter ``[out]``:
+:param (output):
     t parameter along ray.
 
-Returns:
+:returns:
     true if the ray is not parallel to the plane)doc";
 
 static const char * __doc_Bentley_Geom_DRay3d_Intersect =R"doc(Return the intersection of the (unbounded) ray with a plane.
 
-Parameter ``[out]``:
+:param (output):
     intPoint intersection point
 
-Parameter ``[out]``:
+:param (output):
     intParam parameter along the ray
 
-Parameter ``[in]``:
+:param (input):
     plane plane (origin and normal)
 
-Returns:
+:returns:
     false if ray, plane are parallel.)doc";
 
-static const char * __doc_Bentley_Geom_DRay3d_ClosestApproachUnboundedRayUnboundedRay =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DRay3d_ClosestApproachUnboundedRayUnboundedRay =R"doc(:param (output):
     fractionA computed fraction on (unbounded) ray
 
-Parameter ``[out]``:
+:param (output):
     fractionB computed fraction on (bounded) segment
 
-Parameter ``[out]``:
+:param (output):
     pointA computed point on (unbounded) ray
 
-Parameter ``[out]``:
+:param (output):
     pointB computed point on (bounded) segment
 
-Parameter ``[in]``:
+:param (input):
     rayA unbounded ray
 
-Parameter ``[in]``:
+:param (input):
     rayB bounded segment
 
-Returns:
+:returns:
     false (with rayA start projected to rayB) if parallel rays.)doc";
 
-static const char * __doc_Bentley_Geom_DRay3d_ClosestApproachUnboundedRayBoundedSegment =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DRay3d_ClosestApproachUnboundedRayBoundedSegment =R"doc(:param (output):
     fractionRay computed fraction on (unbounded) ray
 
-Parameter ``[out]``:
+:param (output):
     fractionSegment computed fraction on (bounded) segment
 
-Parameter ``[out]``:
+:param (output):
     pointRay computed point on (unbounded) ray
 
-Parameter ``[out]``:
+:param (output):
     pointSegment computed point on (bounded) segment
 
-Parameter ``[in]``:
+:param (input):
     ray unbounded ray
 
-Parameter ``[in]``:
+:param (input):
     segment bounded segment)doc";
 
 static const char * __doc_Bentley_Geom_DRay3d_ProjectPointBounded =R"doc(Project a point onto the bounded line in 3D. If nearest point of
 extended line is outside the 0..1 parameter range, returned values are
 for nearest endpoint.
 
-Parameter ``[out]``:
+:param (output):
     closestPoint computed point
 
-Parameter ``[out]``:
+:param (output):
     closestParam fraction parameter at closest point.
 
-Parameter ``[in]``:
+:param (input):
     point space point)doc";
 
-static const char * __doc_Bentley_Geom_DRay3d_DirectionDotVector =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DRay3d_DirectionDotVector =R"doc(:param (input):
     vector
 
-Returns:
+:returns:
     dot product of (unnormalized) ray vector with input vector.)doc";
 
-static const char * __doc_Bentley_Geom_DRay3d_DirectionDotVectorToTarget =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DRay3d_DirectionDotVectorToTarget =R"doc(:param (input):
     target
 
-Returns:
+:returns:
     dot product of (unnormalized) ray vector with vector from ray
     origin to given point.)doc";
 
-static const char * __doc_Bentley_Geom_DRay3d_FractionParameterToPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DRay3d_FractionParameterToPoint =R"doc(:param (input):
     param fractional parameter
 
-Returns:
+:returns:
     evaluated point.)doc";
 
 static const char * __doc_Bentley_Geom_DRay3d_EvaluateEndPoints =R"doc(Return the origin and target of the ray.)doc";
 
 static const char * __doc_Bentley_Geom_DRay3d_InitFromPlanePlaneIntersection =R"doc(Initialize as intersection of two planes.
 
-Returns:
+:returns:
     false if planes are parallel.)doc";
 
 static const char * __doc_Bentley_Geom_DRay3d_InitFromOriginAndTarget =R"doc(Initialize a ray from 2d endpoints)doc";

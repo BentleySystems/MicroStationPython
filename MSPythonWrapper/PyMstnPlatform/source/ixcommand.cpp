@@ -13,7 +13,7 @@
 static const char * __doc_Bentley_MstnPlatform_IXCommand_IsAllowed =R"doc(Determines if this command is allowed to execute in the given product
 context.
 
-Returns:
+:returns:
     true if this command is allowed to execute in the given product
     context; otherwise, false.
 
@@ -22,66 +22,66 @@ Returns:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetAcceleratorString =R"doc(Gets the string representation of the accelerator value associated
 with this command.
 
-Parameter ``accelStr``:
+:param accelStr:
     the string representation of the accelerator.
 
-Returns:
+:returns:
     true if the command has an accelerator
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetAccelerator =R"doc(Sets the accelerator value associated with this command.
 
-Parameter ``accelerator``:
+:param accelerator:
     the accelerator value associated with this command
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetAccelerator =R"doc(Gets the accelerator value associated with this command.
 
-Returns:
+:returns:
     the accelerator value associated with this command
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetAttributes =R"doc(Sets the attributes associated with this command.
 
-Parameter ``attributes``:
+:param attributes:
     the attributes associated with this command
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetAttributes =R"doc(Gets the attributes associated with this command.
 
-Returns:
+:returns:
     the attributes associated with this command
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetFeatureTrackingId =R"doc(Sets the Feature Tracking GUID associated with this command.
 
-Parameter ``featureTrackingId``:
+:param featureTrackingId:
     Feature Tracking GUID.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetFeatureTrackingId =R"doc(Gets the Feature Tracking GUID associated with this command.
 
-Parameter ``featureTrackingId``:
+:param featureTrackingId:
     Feature Tracking GUID.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetUISyncEvents =R"doc(Sets the UISyncEvent associated with this command.
 
-Parameter ``expression``:
+:param expression:
     The UISyncEvent to be associated with this command.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetUISyncEvents =R"doc(Gets the UISyncEvent associated with this command.
 
-Parameter ``expression``:
+:param expression:
     Receives the UISyncEvent.
 
 )doc";
@@ -89,7 +89,7 @@ Parameter ``expression``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_HasMarkExpression =R"doc(Determines if this command has a Named Expression controlling Menu
 Mark state for any UI associate with this command.
 
-Returns:
+:returns:
     true if this command has a Named Expression controlling Menu Mark
     state; otherwise, false.
 
@@ -98,7 +98,7 @@ Returns:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_EvaluateMarkExpression =R"doc(Evaluates the Named Expression controlling Menu Mark state for any UI
 associated with this command.
 
-Parameter ``defaultValue``:
+:param defaultValue:
     The default MenuMarkType
 
 )doc";
@@ -106,7 +106,7 @@ Parameter ``defaultValue``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetMarkExpression =R"doc(Sets the Named Expression controlling Menu Mark state for any UI
 associated with this command.
 
-Parameter ``expression``:
+:param expression:
     the Named Expression controlling Menu Mark state.
 
 )doc";
@@ -114,7 +114,7 @@ Parameter ``expression``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetMarkExpression =R"doc(Gets the Named Expression controlling Menu Mark state for any UI
 associated with this command.
 
-Parameter ``expression``:
+:param expression:
     Receives the Named Expression.
 
 )doc";
@@ -122,7 +122,7 @@ Parameter ``expression``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_HasToggleExpression =R"doc(Determines if this command has a Named Expression controlling Toggle
 state for any UI associate with this command.
 
-Returns:
+:returns:
     true if this command has a Named Expression controlling Toggle
     state; otherwise, false.
 
@@ -131,7 +131,7 @@ Returns:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_EvaluateToggleExpression =R"doc(Evaluates the Named Expression controlling Toggle state for any UI
 associated with this command.
 
-Parameter ``defaultValue``:
+:param defaultValue:
     true if the command's UI should be toggled by default; otherwise,
     false.
 
@@ -140,7 +140,7 @@ Parameter ``defaultValue``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetToggleExpression =R"doc(Sets the Named Expression controlling Toggle state for any UI
 associated with this command.
 
-Parameter ``expression``:
+:param expression:
     the Named Expression controlling Toggle state.
 
 )doc";
@@ -148,7 +148,7 @@ Parameter ``expression``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetToggleExpression =R"doc(Gets the Named Expression controlling Toggle state for any UI
 associated with this command.
 
-Parameter ``expression``:
+:param expression:
     Receives the Named Expression.
 
 )doc";
@@ -156,7 +156,7 @@ Parameter ``expression``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_HasEnableExpression =R"doc(Determines if this command has a Named Expression controlling
 Enable/Disable for any UI associate with this command.
 
-Returns:
+:returns:
     true if this command has a Named Expression controlling
     Enable/Disable; otherwise, false.
 
@@ -165,7 +165,7 @@ Returns:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_EvaluateEnableExpression =R"doc(Evaluates the Named Expression controlling Enable/Disable for any UI
 associated with this command.
 
-Parameter ``defaultValue``:
+:param defaultValue:
     true if the command's UI should be enabled by default; otherwise,
     false.
 
@@ -174,7 +174,7 @@ Parameter ``defaultValue``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetEnableExpression =R"doc(Sets the Named Expression controlling Enable/Disable for any UI
 associated with this command.
 
-Parameter ``expression``:
+:param expression:
     the Named Expression controlling Enable/Disable.
 
 )doc";
@@ -182,7 +182,7 @@ Parameter ``expression``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetEnableExpression =R"doc(Gets the Named Expression controlling Enable/Disable for any UI
 associated with this command.
 
-Parameter ``expression``:
+:param expression:
     Receives the Named Expression.
 
 )doc";
@@ -190,7 +190,7 @@ Parameter ``expression``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_HasShowExpression =R"doc(Determines if this command has a Named Expression controlling
 Show/Hide for any UI associate with this command.
 
-Returns:
+:returns:
     true if this command has a Named Expression controlling Show/Hide;
     otherwise, false.
 
@@ -199,7 +199,7 @@ Returns:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_EvaluateShowExpression =R"doc(Evaluates the Named Expression controlling Show/Hide for any UI
 associated with this command.
 
-Parameter ``defaultValue``:
+:param defaultValue:
     true if the command's UI should be shown by default; otherwise,
     false.
 
@@ -208,7 +208,7 @@ Parameter ``defaultValue``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetShowExpression =R"doc(Sets the Named Expression controlling Show/Hide for any UI associated
 with this command.
 
-Parameter ``expression``:
+:param expression:
     the Named Expression controlling Show/Hide.
 
 )doc";
@@ -216,28 +216,28 @@ Parameter ``expression``:
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetShowExpression =R"doc(Gets the Named Expression controlling Show/Hide for any UI associated
 with this command.
 
-Parameter ``expression``:
+:param expression:
     Receives the Named Expression.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_GetIconName =R"doc(Gets the icon name for any UI associated with this command.
 
-Parameter ``iconName``:
+:param iconName:
     Receives the icon name.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_CanDisplayChanged =R"doc(Called when the CanDisplay status changes.
 
-Parameter ``newValue``:
+:param newValue:
     true if the command's UI can be displayed; otherwise, false.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetCanDisplay =R"doc(Sets a flag for whether the command's UI can be displayed.
 
-Parameter ``value``:
+:param value:
     true if the command's UI can be displayed; otherwise, false.
 
 )doc";
@@ -249,41 +249,41 @@ false.
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_CanDisplay =R"doc(Determines if any UI associated with this command can be displayed.
 
-Returns:
+:returns:
     true if the command's UI can be displayed; otherwise, false.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_CanExecuteChanged =R"doc(Called when the CanExecute status changes.
 
-Parameter ``newValue``:
+:param newValue:
     true if the command can be executed; otherwise, false.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_SetCanExecute =R"doc(Sets a flag for whether the command can be executed.
 
-Parameter ``value``:
+:param value:
     true if the command can be executed; otherwise, false.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_CanExecute =R"doc(Determines if the command can be executed.
 
-Returns:
+:returns:
     true if the command can be executed; otherwise, false.
 
 )doc";
 
 static const char * __doc_Bentley_MstnPlatform_IXCommand_ExecuteCmd =R"doc(Executes the command for this IXCommand.
 
-Parameter ``instance``:
+:param instance:
     The data context for this execute invocation
 
-Parameter ``unparsed``:
+:param unparsed:
     The string parameter for this execute invocation
 
-Returns:
+:returns:
     SUCCESS if the command was executed, or non-zero if an error
     occurred
 

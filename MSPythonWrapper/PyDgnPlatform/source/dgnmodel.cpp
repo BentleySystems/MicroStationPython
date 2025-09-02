@@ -17,13 +17,13 @@ static const char * __doc_Bentley_DgnPlatform_DgnModel_GetControlElmStart =R"doc
 static const char * __doc_Bentley_DgnPlatform_DgnModel_FindAppData =R"doc(Search for appData on this model that was added with the specified
 key.
 
-Returns:
+:returns:
     the DgnModelAppData with *key,* or NULL.
     @DotNetMethodCustomImplementation)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_DropAppData =R"doc(Remove appData from this model.
 
-Returns:
+:returns:
     SUCCESS if appData with key is found and was dropped.
 
 Remark:
@@ -32,7 +32,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_AddAppData =R"doc(@name DgnModelAppData Add (or replace) appData to this model.
 
-Returns:
+:returns:
     SUCCESS if appData was successfully added. Note that it is illegal
     to add or remove AppData from within any of the AppData " _On "
     methods. If an entry with *key* already exists, it will be dropped
@@ -40,7 +40,7 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_GetRange =R"doc(Get the spatial extent of all elements in this model.
 
-Parameter ``range``:
+:param range:
     Filled with the union of all of the ranges of the elements in
     model.)doc";
 
@@ -63,12 +63,12 @@ static const char * __doc_Bentley_DgnPlatform_DgnModel_GetElementsCollection =R"
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_Release =R"doc(Decrement the reference count of this model.
 
-Returns:
+:returns:
     the new reference count)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_AddRef =R"doc(Increment the reference count of this model.
 
-Returns:
+:returns:
     the new reference count)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_IsDictionaryModel =R"doc(Determine whether this model is a dictionary model.)doc";
@@ -76,7 +76,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnModel_IsDictionaryModel =R"doc(
 static const char * __doc_Bentley_DgnPlatform_DgnModel_GetFileLevelCache =R"doc(Get read-only access to levels defined in the DgnFile associated with
 this DgnModel.
 
-Returns:
+:returns:
     a const reference to the FileLevelCache of the DgnFile associated
     with this DgnModel. @note Since a DgnModel always has an open
     DgnFile (in contrast to a DgnModelRef, which can be a
@@ -86,10 +86,10 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_GetElementCount =R"doc(Get the number of elements in this model.
 
-Parameter ``sections``:
+:param sections:
     the DgnModel sections to include in the count.
 
-Returns:
+:returns:
     the number of elements in the requested sections of this model.
     @note The model must be filled before calling this method. The
     count only includes elements from filled sections. @note The
@@ -100,19 +100,19 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_IsFilled =R"doc(Determine whether this model has been " filled " from disk or not.
 
-Parameter ``sections``:
+:param sections:
     the DgnModelSections to test.
 
-Returns:
+:returns:
     the mask of the DgnModelSections that have been filled.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_Empty =R"doc(Empty the contents of this model.
 
-Parameter ``evenIfDirty``:
+:param evenIfDirty:
     If false, the DgnModel will not be emptied if there are unsaved
     changes.
 
-Parameter ``andFree``:
+:param andFree:
     If true, the DgnModel will not be able to be reloaded again.)doc";
 
 static const char* __doc_Bentley_DgnPlatform_DgnModel_FillSections = R"doc(Read elements from the physical file into this model.
@@ -126,10 +126,10 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnModel_SetModelInfo =R"doc(Sets ModelInfo to new one if possible. Fails if New ModelInfo is
 incompatible with current model. If successful, the ModelInfo will be
-updated to reflect any changes done internally. \li Cannot change
-2d/3d property. \li Cannot modify properties of a locked ModelInfo
-unless unlocking. \li Cannot modify properties of a read-only
-DgnModel. \li Cannot change to/from
+updated to reflect any changes done internally.  Cannot change
+2d/3d property.  Cannot modify properties of a locked ModelInfo
+unless unlocking.  Cannot modify properties of a read-only
+DgnModel.  Cannot change to/from
 DgnModelType::Extraction_Deprecated. Returns
 DGNMODEL_STATUS_InvalidModelTypeSwitch. If ModelType is Sheet or
 Drawing, this propagates the background color out to other models of
@@ -143,10 +143,10 @@ new one is used.)doc";
 static const char * __doc_Bentley_DgnPlatform_DgnModelAppData__OnSaveModelProperties =R"doc(Override this method to be notified when a model's properties are
 changed.
 
-Parameter ``host``:
+:param host:
     The host model.
 
-Parameter ``original``:
+:param original:
     The model's original properties)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelAppData__OnElementAdded =R"doc(Override this method to be notified when a (top-level) element is
@@ -155,14 +155,14 @@ added to the host DgnModel.
 Remark:
     s This is called before the element is added to the range index.
 
-Parameter ``host``:
+:param host:
     The host model.
 
-Parameter ``elem``:
+:param elem:
     The element that was just added to the host model. Note that only
     top-level elements are reported.
 
-Parameter ``isGraphicsList``:
+:param isGraphicsList:
     Is this element in the graphics list of the host model?)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelAppData__OnModelUnDelete =R"doc(Override this method to be notified after the persistent MicroStation
@@ -178,7 +178,7 @@ emptied. Won't be called unless #_OnEmpty returns false.)doc";
 static const char * __doc_Bentley_DgnPlatform_DgnModelAppData__OnEmpty =R"doc(Override this method to be notified when host DgnModel is about to be
 emptied.
 
-Returns:
+:returns:
     true to be dropped from host (_OnCleanup will be called.))doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelAppData__OnFilled =R"doc(Override this method to be notified after host DgnModel has been
@@ -267,6 +267,8 @@ void def_DgnModel(py::module_& m)
         // struct ElementsCollection
         py::class_<DgnModel::ElementsCollection> c10_1(m, "ElementsCollection");
         c10_1.def("__iter__", [](DgnModel::ElementsCollection& self) { return py::make_iterator(self.begin(), self.end()); }, py::keep_alive<0, 1>());
+        c10_1.def_property_readonly("Count", [](DgnModel::ElementsCollection& self) { return std::distance(self.begin(), self.end()); });
+        c10_1.def("__len__", [](DgnModel::ElementsCollection& self) { return std::distance(self.begin(), self.end()); });
         }
 
     c10.def_property_readonly("DgnComponentDefinitionHandler", &DgnModel::GetDgnComponentDefinitionHandler);

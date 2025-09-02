@@ -13,10 +13,10 @@
 static const char * __doc_Bentley_DgnPlatform_BSplineCurveHandler_IsValidInterpolationCurve =R"doc(Quick verification that the input MSInterpolationCurve has all the
 required information.
 
-Parameter ``curve``:
+:param curve:
     The curve to check.
 
-Returns:
+:returns:
     true if input curve appears valid. Bentley Systems +--------------
     -+---------------+---------------+---------------+---------------+
     ------)doc";
@@ -24,10 +24,10 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_BSplineCurveHandler_IsValidCurve =R"doc(Quick verification that the input MSBSplineCurve has all the required
 information.
 
-Parameter ``curve``:
+:param curve:
     The curve to check.
 
-Returns:
+:returns:
     true if input curve appears valid. Bentley Systems +--------------
     -+---------------+---------------+---------------+---------------+
     ------)doc";

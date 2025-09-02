@@ -51,12 +51,12 @@ static const char * __doc_Bentley_Geom_MSBsplineSurface_SetUParamsWithUniformKno
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_ComputeUniformVKnots =R"doc(Compute uniformly spaced knots. This uses counts from params.
 
-Returns:
+:returns:
     false if param counts are not set.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_ComputeUniformUKnots =R"doc(Compute uniformly spaced knots. This uses counts from params.
 
-Returns:
+:returns:
     false if param counts are not set.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_NormalizeSurface =R"doc(Scale and translate the parameter range of the surface and its
@@ -66,19 +66,19 @@ static const char * __doc_Bentley_Geom_MSBsplineSurface_TransformSurface =R"doc(
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_GetSupport =R"doc(Extract the poles and knots that support a single bezier patch ...
 
-Parameter ``[out]``:
+:param (output):
     outPoles{uOrder X vOrder} poles
 
-Parameter ``[out]``:
+:param (output):
     outUKnots{2*(uOrder-1)} knots
 
-Parameter ``[out]``:
+:param (output):
     outVKnots{2*(vOrder-1)} knots
 
-Parameter ``[in]``:
+:param (input):
     uIndex index of bezier to extract.
 
-Parameter ``[in]``:
+:param (input):
     vIndex index of bezier to extract. @DotNetMethodExclude)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_MakeBeziers =R"doc(Create a series of Bezier surfaces for the B-spline surface.)doc";
@@ -97,39 +97,39 @@ static const char * __doc_Bentley_Geom_MSBsplineSurface_MakeOpen =R"doc(Open the
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_CreateTubeSurface =R"doc(Create a surface swept along a trace curve.
 
-Parameter ``[in]``:
+:param (input):
     baseCurve base contour
 
-Parameter ``[in]``:
+:param (input):
     translateBaseCurve true to translate section, false to rotate with
     trace
 
-Parameter ``[in]``:
+:param (input):
     traceCurve path to sweep)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_CreateTrimmedDisk =R"doc(Create a planar (bilinear) surface for the parallelogram around the
 ellipse. Insert a trim curve for the ellipse.
 
-Parameter ``[in]``:
+:param (input):
     ellipse space ellipse)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_CreateRuled =R"doc(Create a linear sweep from a ruled surface between two curves. Fails
 (i.e. returns NULL) if the primitives have children or are not
 compatible.
 
-Parameter ``[in]``:
+:param (input):
     curveA first curve
 
-Parameter ``[in]``:
+:param (input):
     curveB second curve)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_CreateLinearSweep =R"doc(Create a linear sweep from a (single) base curve. Fails (i.e. returns
 NULL) if the primitive has children.
 
-Parameter ``[in]``:
+:param (input):
     primitive base curve to be swept
 
-Parameter ``[in]``:
+:param (input):
     delta sweep direction.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_InitFromPointsAndOrder =R"doc(Initialize the B-spline surface from point array and U/V order.)doc";
@@ -145,13 +145,13 @@ given direction.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_EvaluateNormalizedFrame =R"doc(Calculate a coordinate frame on the surface.
 
-Parameter ``[in]``:
+:param (input):
     u u parameter
 
-Parameter ``[in]``:
+:param (input):
     v v parameter.
 
-Parameter ``[out]``:
+:param (output):
     transform transform with (a) origin at surface point, (b) x axis
     in u direction, (c) y axis perpendicular to x and in the surface
     tangent plane, (d) z axis normal to surface. Return false if
@@ -236,7 +236,7 @@ static const char * __doc_Bentley_Geom_MSBsplineSurface_IsBidirectionalTranslati
 (If this is true, the v curves are also translations of the first v
 curve0)
 
-Parameter ``[in]``:
+:param (input):
     relativeTolerance tolerance as a fraction of the largest
     coordinate.)doc";
 
@@ -262,11 +262,11 @@ given direction.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_BoundaryLoopArea =R"doc(Return the area of a single boundary loop ..)doc";
 
-static const char * __doc_Bentley_Geom_MSBsplineSurface_SetOuterBoundaryActive =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_MSBsplineSurface_SetOuterBoundaryActive =R"doc(:param (input):
     active If true, the outer boundary is active as an (implicit) trim
     boundary, so the outermost explict boundary acts as a hole.)doc";
 
-static const char * __doc_Bentley_Geom_MSBsplineSurface_IsOuterBoundaryActive =R"doc(Returns:
+static const char * __doc_Bentley_Geom_MSBsplineSurface_IsOuterBoundaryActive =R"doc(:returns:
     the state of the outer boundary flag.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineSurface_DeleteBoundaries =R"doc(Remove all trim boundaries.)doc";
@@ -452,6 +452,11 @@ void def_MSBsplineSurface(py::module_& m)
 
     c1.def("AddTrimBoundary", py::overload_cast<DPoint2dArray const&>(&MSBsplineSurface::AddTrimBoundary), "uvPoints"_a, DOC(Bentley, Geom, MSBsplineSurface, AddTrimBoundary));
     c1.def("AddTrimBoundary", py::overload_cast<DPoint3dArray const&>(&MSBsplineSurface::AddTrimBoundary), "xyzPoints"_a, DOC(Bentley, Geom, MSBsplineSurface, AddTrimBoundary));
+    c1.def("AddTrimBoundary", [] (MSBsplineSurfaceR self, py::list const& xyzPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzPoints, cppxyzPoints, DPoint3dArray, DPoint3d);
+           return self.AddTrimBoundary(cppxyzPoints);
+           }, "xyzPoints"_a, DOC(Bentley, Geom, MSBsplineSurface, AddTrimBoundary));
     c1.def("DeleteBoundaries", &MSBsplineSurface::DeleteBoundaries, DOC(Bentley, Geom, MSBsplineSurface, DeleteBoundaries));
     
     c1.def("IsOuterBoundaryActive", &MSBsplineSurface::IsOuterBoundaryActive, DOC(Bentley, Geom, MSBsplineSurface, IsOuterBoundaryActive));
@@ -573,9 +578,23 @@ void def_MSBsplineSurface(py::module_& m)
            py::overload_cast<size_t, size_t, DoubleArray&, DoubleArray&, DPoint3dArray&>(&MSBsplineSurface::EvaluateUniformGrid, py::const_), 
            "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
 
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, DoubleArray& uParams, DoubleArray& vParams, py::list& gridPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
+           self.EvaluateUniformGrid(numUPoint, numVPoint, uParams, vParams, cppGridPoints);
+           CONVERT_CPPARRAY_TO_PYLIST(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
+           }, "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
+
     c1.def("EvaluateUniformGrid", 
            py::overload_cast<size_t, size_t, DPoint2dArray&, DPoint3dArray&>(&MSBsplineSurface::EvaluateUniformGrid, py::const_), 
            "numUPoint"_a, "numVPoint"_a, "uvParams"_a, "gridPoints"_a);
+
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, DPoint2dArray& uParams, py::list& gridPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
+           self.EvaluateUniformGrid(numUPoint, numVPoint, uParams, cppGridPoints);
+           CONVERT_CPPARRAY_TO_PYLIST(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
+           }, "numUPoint"_a, "numVPoint"_a, "uvParams"_a, "gridPoints"_a);
 
     c1.def("EvaluatePointAndUnitNormal", &MSBsplineSurface::EvaluatePointAndUnitNormal, "ray"_a, "u"_a, "v"_a, DOC(Bentley, Geom, MSBsplineSurface, EvaluatePointAndUnitNormal));
     c1.def("ControlPolygonFractionToKnot", &MSBsplineSurface::ControlPolygonFractionToKnot, "i"_a, "j"_a, "u"_a, "v"_a, DOC(Bentley, Geom, MSBsplineSurface, ControlPolygonFractionToKnot));
@@ -731,9 +750,23 @@ void def_MSBsplineSurface(py::module_& m)
            py::overload_cast<DPoint3dArray&, DoubleArray&, DPoint2dArray&, DRay3dCR>(&MSBsplineSurface::IntersectRay, py::const_),
            "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
 
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, py::list& intersectionPoints, DoubleArray& rayParameters, DPoint2dArray& surfaceParameters, DRay3dCR ray)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            self.IntersectRay(cppIntersectionPoints, rayParameters, surfaceParameters, ray);
+            CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
+
     c1.def("IntersectRay",
            py::overload_cast<DPoint3dArray&, DoubleArray&, DPoint2dArray&, DRay3dCR, DRange1dCR>(&MSBsplineSurface::IntersectRay, py::const_),
            "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
+
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, py::list& intersectionPoints, DoubleArray& rayParameters, DPoint2dArray& surfaceParameters, DRay3dCR ray, DRange1dCR rayInterval)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            self.IntersectRay(cppIntersectionPoints, rayParameters, surfaceParameters, ray);
+            CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
 
     c1.def("HasValidPoleAllocation", &MSBsplineSurface::HasValidPoleAllocation);
     c1.def("HasValidWeightAllocation", &MSBsplineSurface::HasValidWeightAllocation);

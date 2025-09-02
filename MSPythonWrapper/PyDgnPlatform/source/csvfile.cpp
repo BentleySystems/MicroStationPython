@@ -12,7 +12,7 @@
 
 static const char * __doc_Bentley_DgnPlatform_CsvFile_Open =R"doc(Open a CSV file for reading. Handle Locale, Utf8 or Utf16 encoding.
 
-Parameter ``fullFileSpec``:
+:param fullFileSpec:
     Name of the file to open.
 
 Returns (Tuple, 0):

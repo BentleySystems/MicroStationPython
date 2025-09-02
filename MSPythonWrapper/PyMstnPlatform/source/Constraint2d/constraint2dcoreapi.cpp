@@ -18,25 +18,25 @@ fixed.)doc";
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_Reverse =R"doc(@description Update constraint data assuming the curve's direction was
 reversed.
 
-Parameter ``[in]``:
+:param (input):
     elementRef A element to specify what curve's direction was
     reversed
 
-Parameter ``[in]``:
+:param (input):
     curveVector An optional update-to-date curve vector to set
     specific to *elementRef*
 
-Returns:
+:returns:
     True if any change was made, or false if not)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_RemoveInvalidConstraints =R"doc(@description Remove all invalid constraint data which are correlated
 to the the given element.
 
-Parameter ``[out]``:
+:param (output):
     invalidCount An integer to receive the number of invalid
     constraints
 
-Parameter ``[in]``:
+:param (input):
     elementRef Specify an element ref whose constraints will be
     removed)doc";
 
@@ -46,84 +46,84 @@ resolved.)doc";
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_RemoveElementRef =R"doc(@description Remove all constraint data which are correlated to the
 the given element.
 
-Parameter ``[in]``:
+:param (input):
     elementRef Specify an element ref whose constraints will be
     removed
 
-Returns:
+:returns:
     True if any removal occurred; otherwise false.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_CollateByElement =R"doc(@description Check and divide this constraint model into child per
 links among elements.
 
-Parameter ``[out]``:
+:param (output):
     childGroups Separate child constraint model whose member elements
     have links with each other.
 
-Returns:
+:returns:
     The number of child constraint models.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_Merge =R"doc(@description Merge another constraint model into this one. Identital
 data items will be excluded while merging.
 
-Parameter ``[in]``:
+:param (input):
     rhs A data instance to merge into.
 
-Returns:
+:returns:
     True if there are some items being merged into; otherwise False if
     nothing being merged.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_GetElementRefs =R"doc(@description Query all member elements.
 
-Parameter ``[out]``:
+:param (output):
     elementRefs A set receiving member elements.
 
-Returns:
+:returns:
     The number of member elements.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_IsComplete =R"doc(@description Determine if it is complete, i.e., its actual topology is
 identical to the datum description used.
 
-Returns:
+:returns:
     True if it is complete; otherwise False.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_IsResolved =R"doc(@description Determine if it is resolved, i.e., all member elements
 are available
 
-Returns:
+:returns:
     True if it is resolved; otherwise False.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_IsEmpty =R"doc(@description Determine if it is empty.
 
-Returns:
+:returns:
     True if it is empty; otherwise False.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolverData_Clear =R"doc(@description Clear all data and set to empty)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolver_GetResultCurveVector =R"doc(@description Get results for the given element
 
-Parameter ``[out]``:
+:param (output):
     resultCurve A curve vector reference to receive the result
 
-Parameter ``[in]``:
+:param (input):
     elementRef A reference to element to specify what element is to
     query)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolver_Evaluate =R"doc(@description Perform a evaluation
 
-Parameter ``[in]``:
+:param (input):
     dragInfos An array of dragging information representing direct
     changes.
 
-Parameter ``[in]``:
+:param (input):
     isDynamic A boolean indicating whether for " dynamic " purpose.
 
-Returns:
+:returns:
     SUCCESS if implemented successfully; otherwise ERROR if failed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolver_GetData =R"doc(@description Initialize model
 
-Parameter ``[in]``:
+:param (input):
     data The 2d constraint model to evaluate.
 
 Remark:
@@ -133,10 +133,10 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dSolver_SetData =R"doc(@description Initialize model
 
-Parameter ``[in]``:
+:param (input):
     data The 2d constraint model to evaluate.
 
-Parameter ``[in]``:
+:param (input):
     uorPerMaster A float-point value to specify the UOR unit in master
     unit
 
@@ -147,138 +147,138 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_Drag2dInfo_SetRadius =R"doc(@description Set radius
 
-Parameter ``radius``:
+:param radius:
     Radius)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Drag2dInfo_GetRadius =R"doc(@description Get radius
 
-Returns:
+:returns:
     Radius value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Drag2dInfo_SetMoveValue =R"doc(@description Set moving value
 
-Parameter ``value``:
+:param value:
     Moving value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Drag2dInfo_GetMoveValue =R"doc(@description Get moving value
 
-Returns:
+:returns:
     A vector representing the moving value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Drag2dInfo_SetDraggingTransform =R"doc(@description Set dragging transform type
 
-Parameter ``transformType``:
+:param transformType:
     Dragging transform type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Drag2dInfo_GetDraggingTransform =R"doc(@description Get dragging transform type
 
-Returns:
+:returns:
     Dragging transform type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Drag2dInfo_SetCurveEntityIdentifier =R"doc(@description Set curve identifier
 
-Parameter ``identifer``:
+:param identifer:
     Curve identifier)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Drag2dInfo_GetCurveEntityIdentifier =R"doc(@description Get curve identifier
 
-Returns:
+:returns:
     Curve identifier)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Dimension2dData_GetVariableName =R"doc(@description Get variable name
 
-Returns:
+:returns:
     A WString reference to the variable name)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Dimension2dData_SetVariableName =R"doc(@description Set variable name
 
-Parameter ``name``:
+:param name:
     Variable name)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Dimension2dData_GetDimensionValue =R"doc(@description Get dimension value
 
-Returns:
+:returns:
     Dimension value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Dimension2dData_SetDimensionValue =R"doc(@description Set a new dimension value
 
-Parameter ``value``:
+:param value:
     A new dimension value to set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dData_AddCurveIdentifier =R"doc(@description Add curve identifier
 
-Parameter ``id``:
+:param id:
     The id to be added)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dData_GetConstraintStatus =R"doc(@description Get the constraint status
 
-Returns:
+:returns:
     The constraint status)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dData_SetConstraintStatus =R"doc(@description Set the constraint status
 
-Parameter ``status``:
+:param status:
     A new constraint status to set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dData_GetConstraintType =R"doc(@description Get the constraint type
 
-Returns:
+:returns:
     The constraint type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_Constraint2dData_SetConstraintType =R"doc(@description Set the constraint type
 
-Parameter ``type``:
+:param type:
     The constraint type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_GetPointIndex =R"doc(@description Get the point index
 
-Returns:
+:returns:
     The point index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_SetPointIndex =R"doc(@description Set the point index in linestring
 
-Parameter ``pointIndex``:
+:param pointIndex:
     the point index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_ElementToCurveVector =R"doc(@cond DONTINCLUDEINDOC @endcond @description Get an editable curve
 vector of a given element
 
-Parameter ``[out]``:
+:param (output):
     curveVector The resultant curve vector
 
-Parameter ``[in]``:
+:param (input):
     eh An ElementHandle to specify a curve element)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_GetVertexType =R"doc(@description Get the vertex type
 
-Returns:
+:returns:
     The vertex type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_SetVertexType =R"doc(@description Set new vertex type
 
-Parameter ``vertexType``:
+:param vertexType:
     A new vertex type to set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_GetSubEdgeIndex =R"doc(@description Get the sub edge index
 
-Returns:
+:returns:
     The sub edge index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_SetSubEdgeIndex =R"doc(@description Set the sub edge index
 
-Parameter ``subEdgeIndex``:
+:param subEdgeIndex:
     the sub edge index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_GetEdgeId =R"doc(@description Get the edge id @retval NULL if failing to get)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_SetEdgeId =R"doc(@description Set the edge id
 
-Parameter ``edgeId``:
+:param edgeId:
     the edge id @note edgeId cannot be NULL)doc";
 
 static const char * __doc_Bentley_DgnPlatform_CurveEntityIdentifier_IsValid =R"doc(@description Test the CurveEntityIdentifier is valid or not
 
-Returns:
+:returns:
     True if it is valid, or False if not)doc";
 
 

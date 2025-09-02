@@ -8,6 +8,8 @@
 #pragma once
 #include "ScriptEngineManager.h"
 
+using namespace std;
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #define __EXPAND(x)                                      x
@@ -45,16 +47,127 @@ struct mspydelete {
 
 // Smart pointer declaration
 PYBIND11_DECLARE_HOLDER_TYPE(RefCountedBaseT, RefCountedPtr<RefCountedBaseT>, false);
+PYBIND11_DECLARE_HOLDER_TYPE(T, TempObjectOwner<T>, false);
 
 // Non-delete smart pointer
 #define DEFINE_NODELETE_HOLDER_TYPE(type) using type##Ptr = std::unique_ptr<type, py::nodelete>
+
+namespace std {
+    template <typename _Ty1, typename _Ty2>
+    struct tuple_size<Bentley::Bstdcxx::bpair<_Ty1, _Ty2>> : std::integral_constant<size_t, 2> {};
+
+    template<class _Ty1,class _Ty2>
+    struct tuple_element<0, Bentley::Bstdcxx::bpair<_Ty1, _Ty2> >
+        {	// struct to determine type of element 0 in pair
+        typedef _Ty1 type;
+        };
+
+    template<class _Ty1, class _Ty2>
+    struct tuple_element<1, Bentley::Bstdcxx::bpair<_Ty1, _Ty2> >
+        {	// struct to determine type of element 1 in pair
+        typedef _Ty2 type;
+        };
+
+    template <typename _Rtype, typename _Ty1, typename _Ty2>
+    constexpr _Rtype _Pair_get(Bentley::Bstdcxx::bpair<_Ty1, _Ty2>& _Pr, std::integral_constant<size_t, 0>) noexcept {
+        return _Pr.first;
+    }
+
+    template <typename _Rtype, typename _Ty1, typename _Ty2>
+    constexpr _Rtype _Pair_get(Bentley::Bstdcxx::bpair<_Ty1, _Ty2>& _Pr, std::integral_constant<size_t, 1>) noexcept {
+        return _Pr.second;
+    }
+
+    template<size_t _Idx,
+        class _Ty1,
+        class _Ty2> inline
+        constexpr typename tuple_element<_Idx, Bentley::Bstdcxx::bpair<_Ty1, _Ty2> >::type&
+        get (Bentley::Bstdcxx::bpair<_Ty1, _Ty2>& _Pr) noexcept
+        {	// get reference to element at _Idx in pair _Pr
+        typedef typename tuple_element<_Idx, pair<_Ty1, _Ty2> >::type& _Rtype;
+        return (_Pair_get<_Rtype>(_Pr, integral_constant<size_t, _Idx>()));
+        };
+
+    template<class _Ty1,
+        class _Ty2> inline
+        constexpr _Ty1& get(Bentley::Bstdcxx::bpair<_Ty1, _Ty2>& _Pr) noexcept
+        {	// get reference to element _Ty1 in pair _Pr
+        return (_STD get<0>(_Pr));
+        };
+
+    template<class _Ty2,
+        class _Ty1> inline
+        constexpr _Ty2& get(Bentley::Bstdcxx::bpair<_Ty1, _Ty2>& _Pr) noexcept
+        {	// get reference to element _Ty2 in pair _Pr
+        return (_STD get<1>(_Pr));
+        };
+
+    template<size_t _Idx,
+        class _Ty1,
+        class _Ty2> inline
+        constexpr typename tuple_element<_Idx, Bentley::Bstdcxx::bpair<_Ty1, _Ty2> >::type&&
+        get (Bentley::Bstdcxx::bpair<_Ty1, _Ty2>&& _Pr) noexcept
+        {	// get rvalue reference to element at _Idx in pair _Pr
+        typedef typename tuple_element<_Idx, pair<_Ty1, _Ty2> >::type&& _RRtype;
+        return (_STD forward<_RRtype>(_STD get<_Idx>(_Pr)));
+        };
+
+    template<class _Ty1,
+        class _Ty2> inline
+        constexpr _Ty1&& get(Bentley::Bstdcxx::bpair<_Ty1, _Ty2>&& _Pr) noexcept
+        {	// get rvalue reference to element _Ty1 in pair _Pr
+        return (_STD get<0>(_STD move(_Pr)));
+        };
+
+    template<class _Ty2,
+        class _Ty1> inline
+        constexpr _Ty2&& get(Bentley::Bstdcxx::bpair<_Ty1, _Ty2>&& _Pr) noexcept
+        {	// get rvalue reference to element _Ty2 in pair _Pr
+        return (_STD get<1>(_STD move(_Pr)));
+        };
+
+    template<size_t _Idx,
+        class _Ty1,
+        class _Ty2> inline
+        constexpr const typename tuple_element<_Idx, Bentley::Bstdcxx::bpair<_Ty1, _Ty2> >::type&
+        get (const Bentley::Bstdcxx::bpair<_Ty1, _Ty2>& _Pr) noexcept
+        {	// get const reference to element at _Idx in pair _Pr
+        typedef const typename tuple_element<_Idx, pair<_Ty1, _Ty2> >::type&
+            _Ctype;
+        return (_Pair_get<_Ctype>(_Pr, integral_constant<size_t, _Idx>()));
+        };
+
+    template<class _Ty1,
+        class _Ty2> inline
+        constexpr const _Ty1& get(const Bentley::Bstdcxx::bpair<_Ty1, _Ty2>& _Pr) noexcept
+        {	// get const reference to element _Ty1 in pair _Pr
+        return (_STD get<0>(_Pr));
+        }
+
+    template<class _Ty2,
+        class _Ty1> inline
+        constexpr const _Ty2& get(const Bentley::Bstdcxx::bpair<_Ty1, _Ty2>& _Pr) noexcept
+        {	// get const reference to element _Ty2 in pair _Pr
+        return (_STD get<1>(_Pr));
+        }
+}
 
 namespace PYBIND11_NAMESPACE {
     namespace detail {
         template <typename T>
         struct type_caster<boost::optional<T>> : optional_caster<boost::optional<T>> {};
+
+        template <typename T1, typename T2>
+        class type_caster<Bentley::Bstdcxx::bpair<T1, T2>> : public tuple_caster<Bentley::Bstdcxx::bpair, T1, T2> {};   
+
+        template <typename Key, typename Compare, typename Alloc>
+        struct type_caster<Bentley::bset<Key, Compare, 32, Alloc>>
+            : set_caster<Bentley::bset<Key, Compare, 32, Alloc>, Key> {};
     }
 }
+
+
+
 
 // PYBIND11_OVERRIDE with exception capture and has return value.
 #define PYBIND11_OVERRIDE_EXR(ret_type, cname, fn, error, ...)              \
@@ -215,3 +328,72 @@ py::class_<bvector<ValueType>, holder_type> bind_PointerVector(py::handle scope,
 
     return cls;
     }
+
+// Convert Python list to an existing C++ array
+template <typename arrayType, typename itemType>
+void ConvertPyListToCppArray(py::list const& pyList, arrayType& cppArray)
+{
+    cppArray.clear();
+    for (auto item : pyList)
+    {
+        if (!py::isinstance<itemType>(item))
+        {
+            throw std::invalid_argument("All items in the list must be of the correct item type");
+        }
+        auto cppItem = item.cast<itemType>();
+        cppArray.push_back(cppItem);
+    }
+}
+
+// Convert Python list to a new C++ array
+template <typename arrayType, typename itemType>
+arrayType ConvertPyListToCppArray(py::list const& pyList)
+{
+    arrayType cppArray;
+    for (auto item : pyList)
+    {
+        if (!py::isinstance<itemType>(item))
+        {
+            throw std::invalid_argument("All items in the list must be of the correct item type");
+        }
+        auto cppItem = item.cast<itemType>();
+        cppArray.push_back(cppItem);
+    }
+    return cppArray;
+}
+
+// Convert C++ array to an existing Python list
+template <typename arrayType, typename itemType>
+void ConvertCppArrayToPyList(py::list& pyList, arrayType const& cppArray)
+{
+    pyList.attr("clear")();
+    for (const itemType& item : cppArray)
+    {
+        pyList.append(py::cast(item));
+    }
+}
+
+// Convert C++ array to a new Python list
+template <typename arrayType, typename itemType>
+py::list ConvertCppArrayToPyList(arrayType const& cppArray)
+{
+    py::list pyList;
+    for (const itemType& item : cppArray)
+    {
+        pyList.append(py::cast(item));
+    }
+    return pyList;
+}
+
+// Macros
+#define CONVERT_PYLIST_TO_CPPARRAY(pyList, cppArray, cppArrayType, cppItemType) \
+    ConvertPyListToCppArray<cppArrayType, cppItemType>(pyList, cppArray);
+
+#define CONVERT_PYLIST_TO_NEW_CPPARRAY(pyList, cppArray, cppArrayType, cppItemType) \
+    cppArrayType cppArray = ConvertPyListToCppArray<cppArrayType, cppItemType>(pyList);
+
+#define CONVERT_CPPARRAY_TO_PYLIST(pyList, cppArray, cppArrayType, cppItemType) \
+    ConvertCppArrayToPyList<cppArrayType, cppItemType>(pyList, cppArray);
+
+#define CONVERT_CPPARRAY_TO_NEW_PYLIST(pyList, cppArray, cppArrayType, cppItemType) \
+    py::list pyList = ConvertCppArrayToPyList<cppArrayType, cppItemType>(cppArray);

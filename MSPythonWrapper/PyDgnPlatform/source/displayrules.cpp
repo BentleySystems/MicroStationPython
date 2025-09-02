@@ -10,65 +10,43 @@
 
 
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_IsUsedByDisplayStyle =R"doc(Returns true if DisplayRuleSet is used by given DisplayStyle. Bentley
-Systems +---------------+---------------+---------------+-------------
---+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_IsUsedByDisplayStyle =R"doc(Returns true if DisplayRuleSet is used by given DisplayStyle.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_Clone =R"doc(Creates exact copy of an instance. Bentley Systems +---------------+--
--------------+---------------+---------------+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_Clone =R"doc(Creates exact copy of an instance. )doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_GetDisplayRules =R"doc(Returns a list of DisplayRules. Bentley Systems +---------------+-----
-----------+---------------+---------------+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_GetDisplayRules =R"doc(Returns a list of DisplayRules. )doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_SetName =R"doc(Sets DisplayRuleSet name. Bentley Systems +---------------+-----------
-----+---------------+---------------+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_SetName =R"doc(Sets DisplayRuleSet name.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_GetName =R"doc(Returns DisplayRuleSet name. Bentley Systems +---------------+--------
--------+---------------+---------------+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRuleSet_GetName =R"doc(Returns DisplayRuleSet name. )doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRule_Clone =R"doc(Creates exact copy of an instance. Bentley Systems +---------------+--
--------------+---------------+---------------+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRule_Clone =R"doc(Creates exact copy of an instance. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayRule_GetActions =R"doc(Returns actions associated with this DisplayRule.
 
 See also:
-    IDisplayRuleAction for more details. Bentley Systems +------------
-    ---+---------------+---------------+---------------+--------------
-    -+------)doc";
+    IDisplayRuleAction for more details.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRule_SetConditionDescription =R"doc(Sets given ECExpression string condition description. Bentley Systems 
-+---------------+---------------+---------------+---------------+-----
-----------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRule_SetConditionDescription =R"doc(Sets given ECExpression string condition description. )doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRule_GetConditionDescription =R"doc(Returns ECExpression string condition description. Bentley Systems +--
--------------+---------------+---------------+---------------+--------
--------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRule_GetConditionDescription =R"doc(Returns ECExpression string condition description. )doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRule_SetCondition =R"doc(Sets given ECExpression string condition. Bentley Systems +-----------
-----+---------------+---------------+---------------+---------------+-
------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRule_SetCondition =R"doc(Sets given ECExpression string condition. )doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRule_GetCondition =R"doc(Returns ECExpression string condition. Bentley Systems +--------------
--+---------------+---------------+---------------+---------------+----
---)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRule_GetCondition =R"doc(Returns ECExpression string condition.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayRule_SetStopIfTrue =R"doc(Sets StopIfTrue value that controls whether rule processing should
-stop then this rule is met. Bentley Systems +---------------+---------
-------+---------------+---------------+---------------+------)doc";
+stop then this rule is met.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayRule_StopIfTrue =R"doc(Returns true if rule processing should stop then this rule is met.
-Bentley Systems +---------------+---------------+---------------+-----
-----------+---------------+------)doc";
+)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DisplayRule_SetIsEnabled =R"doc(Sets IsEnabled flag to given value. Bentley Systems +---------------+-
---------------+---------------+---------------+---------------+------)doc";
+static const char * __doc_Bentley_DgnPlatform_DisplayRule_SetIsEnabled =R"doc(Sets IsEnabled flag to given value. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DisplayRule_IsEnabled =R"doc(Identifies whether DisplayRule is enabled.
 
-Returns:
-    true if DisplayRule is enabled. Bentley Systems +---------------+-
-    --------------+---------------+---------------+---------------+---
-    ---)doc";
+:returns:
+    true if DisplayRule is enabled. )doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

@@ -31,6 +31,11 @@ void def_NoteHandler(py::module_& m)
     c1.def_static("CreateNote",
                   py::overload_cast<EditElementHandleR, EditElementHandleR, TextBlockCR, DimensionStyleCR, bool, DgnModelRefR, DPoint3dArray const&>(&NoteCellHeaderHandler::CreateNote),
                   "noteElem"_a, "leaderElement"_a, "text"_a, "dimStyle"_a, "is3d"_a, "modelRef"_a, "noteLeaderPoints"_a);
+    c1.def_static("CreateNote", [] (EditElementHandleR noteElem, EditElementHandleR leaderElement, TextBlockCR text, DimensionStyleCR dimStyle, bool is3d, DgnModelRefR modelRef, py::list const& noteLeaderPoints)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(noteLeaderPoints, cppNoteLeaderPoints, DPoint3dArray, DPoint3d);
+                  return NoteCellHeaderHandler::CreateNote(noteElem, leaderElement, text, dimStyle, is3d, modelRef, cppNoteLeaderPoints);
+                  }, "noteElem"_a, "leaderElement"_a, "text"_a, "dimStyle"_a, "is3d"_a, "modelRef"_a, "noteLeaderPoints"_a); 
     c1.def_static("AddToModel", &NoteCellHeaderHandler::AddToModel, "noteElement"_a, "leaderElement"_a, "dgnModel"_a);
     c1.def("GetNoteLeader", &NoteCellHeaderHandler::GetNoteLeader, "leader"_a, "noteElement"_a);
     c1.def("GetNoteDimensionStyle", &NoteCellHeaderHandler::GetNoteDimensionStyle, "noteElement"_a);

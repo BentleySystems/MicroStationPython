@@ -60,15 +60,15 @@ specified name, or nullptr if no such cell exists)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IParametricCellDefEventListener__OnParametricCellDefChange =R"doc(Invoked when a parametric cell definition-related event occurs
 
-Parameter ``before``:
+:param before:
     The state of the cell definition before the event, or null if this
     is a new cell definition.
 
-Parameter ``after``:
+:param after:
     The state of the cell definition after the event, or null if the
     cell definition was deleted.
 
-Parameter ``type``:
+:param type:
     The type of the event.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ParametricCellDefinition_DropEventListener =R"doc(Unregisters a listener previously registered with AddEventListener.)doc";

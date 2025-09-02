@@ -12,13 +12,13 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_DeleteRelationship =R"doc(Deletes an existing relationship between two DgnElementECInstance.
 
-Parameter ``sourceDgnInstance``:
+:param sourceDgnInstance:
     Source DgnElementECInstance.
 
-Parameter ``targetDgnInstance``:
+:param targetDgnInstance:
     Target DgnElementECInstance.
 
-Parameter ``relationshipClass``:
+:param relationshipClass:
     The class of the relationship that is to be deleted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_CreateRelationship =R"doc(Use this method to create a relationship between two
@@ -28,36 +28,36 @@ instances through
 
 
 
-Parameter ``relationshipEnabler``:
+:param relationshipEnabler:
     The relationship enablerA pointer to a WipRelationshipInstance
     that will contain any properties to be set in the relationship
     instance. that represents the attachment from A to B. See docs for
     DgnECManager::CreateInstanceOnElement.
 
-Parameter ``createdRelationship``:
+:param createdRelationship:
     Smart pointer to the IDgnECRelationshipInstance that was created
 
-Parameter ``relationshipEnabler``:
+:param relationshipEnabler:
     The relationship enabler
 
-Parameter ``wipRelationship``:
+:param wipRelationship:
     Pointer to a WipRelationshipInstance that will contain any
     properties to be set in the relationship instance. This should be
     set to NULL if no properties are to be set. This should be set to
     NULL if no properties are to be set.
 
-Parameter ``instanceA``:
+:param instanceA:
     DgnElementECInstance to be related to instanceB.
 
-Parameter ``instanceB``:
+:param instanceB:
     DgnElementECInstance to be related to instanceA.
 
-Parameter ``hostModelRef``:
+:param hostModelRef:
     Optional modelRef of element to receive relationship (may be
     different then either source or target host element). For future
     use.
 
-Parameter ``hostElementRef``:
+:param hostElementRef:
     Optional element to recieve relationship (may be different then
     either source or target host element). For future use.
 
@@ -94,49 +94,49 @@ Returns (Tuple):
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ObtainDgnECRelationshipEnabler =R"doc(Return pointer to the DgnECRelationshipEnabler for the specified
 relationship class.
 
-Parameter ``schemaName``:
+:param schemaName:
     The name of the schema containing the relationship class.
 
-Parameter ``className``:
+:param className:
     The name of the relationship class.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The dgnfile that the relationship is to be written to.
 
-Returns:
+:returns:
     Returns pointer to DgnECRelationshipEnabler or NULL if enabler
     cannot be found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_CreateWipRelationshipByName =R"doc(Return a WIP relationship instance that can be used to set
 relationship properties like Name and OrderId.
 
-Parameter ``schemaName``:
+:param schemaName:
     The name of the schema containing the relationship class.
 
-Parameter ``className``:
+:param className:
     The name of the relationship class.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The dgnfile that the relationship is to be written to.
 
-Returns:
+:returns:
     Returns a reference counted pointer to an
     StandaloneECRelationshipInstance.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_IsPickListProviderExists =R"doc(Check if PickList provider already exists.
 
-Parameter ``name``:
+:param name:
     Name of provider
 
-Returns:
+:returns:
     IPickListProviderR)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_GetPickListProviderDisplayLabel =R"doc(Get picklist provider configured for prooperty
 
-Parameter ``property``:
+:param property:
     ECProperty on which provider is configured.
 
-Returns:
+:returns:
     IPickListProviderR)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_GetPickListProvderNames =R"doc(Get list of names of PickList providers)doc";
@@ -144,107 +144,107 @@ static const char * __doc_Bentley_DgnPlatform_DgnECManager_GetPickListProvderNam
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ScheduleDeleteDgnECInstance =R"doc(Delete DgnECInstance from persistent ElementRef given the localId of
 the instance.
 
-Parameter ``element``:
+:param element:
     The element that serves as a host to the IECInstance.
 
-Parameter ``localId``:
+:param localId:
     LocalId that specifies the instance, this is typically the
     XAttributeId of the IECInstance
 
-Parameter ``ignoreElementOwnership``:
+:param ignoreElementOwnership:
     If true, the element will not be deleted even if the instance owns
     the element
 
-Parameter ``providerId``:
+:param providerId:
     ProviderId that specifies the provider for the IECInstance
 
-Returns:
+:returns:
     Retuns DELETEDGNECINSTANCE_Success if instance is deleted,
     DELETEDGNECINSTANCE_ProviderDoesNotSupportDelete if provider does
     not support delete.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_DeleteDgnECInstance =R"doc(Delete a DgnECInstance from an element.
 
-Parameter ``instanceIdStringP``:
+:param instanceIdStringP:
     Defines the instance to delete. This must be a fully specified
     InstanceId
 
-Parameter ``dependentModel``:
+:param dependentModel:
     The modelref that is used to evaluate the Persistent Element Path
     stored in the instanceId string.
 
-Parameter ``ignoreElementOwnership``:
+:param ignoreElementOwnership:
     If true, the host element will not be deleted even if it is owned
     by the deleted instance
 
-Returns:
+:returns:
     Returns DELETEDGNECINSTANCE_Success if instance is successfully
     deleted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_LocateSchemaInDgnFile =R"doc(Locate a schema in a design file. For normal files, looks only in the
 given dgnFile. For packaged i-models, will also look in embedded files
 
-Parameter ``schemaInfo``:
+:param schemaInfo:
     The SchemaInfo object that specifies the schema to locate.
 
-Parameter ``matchType``:
+:param matchType:
     The SchemaMatchType match type specification.
 
-Parameter ``includeDeliveredSchemas``:
+:param includeDeliveredSchemas:
     If true, and the schema is not persisted in the dgnFile, attempt
     to locate it among schemas delivered with DgnPlatform.
 
-Parameter ``includeReferenceAttachments``:
+:param includeReferenceAttachments:
     If true, and the schema is not persisted in the dgnFile, attempt
     to locate it among schemas available in reference attachments.
 
-Returns:
+:returns:
     A pointer to the located ECSchema or NULL if the schema cannot be
     found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_IsSchemaContainedWithinFile =R"doc(Returns whether a schema is contained within the file itself (and not
 within referenced attachments)
 
-Parameter ``schemaInfo``:
+:param schemaInfo:
     The SchemaInfo object that specifies the schema to look for.
 
-Parameter ``matchType``:
+:param matchType:
     The SchemaMatchType match type specification.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_DiscoverSchemasForModel =R"doc(Populate a vector of available schemas for a model and its reference
 attachments.
 
-Parameter ``schemaInfoVector``:
+:param schemaInfoVector:
     A vector of SchemInfo
 
-Parameter ``dgnModel``:
+:param dgnModel:
     The root model. This method looks in design file containing the
     root model. If includeReferenceAttachments is true then SchemaInfo
     found in all attached reference files are also added to the infos
     vector.
 
-Parameter ``scopeOption``:
+:param scopeOption:
     Flag that determines how reference file attachments are processed.
 
-Parameter ``persistence``:
+:param persistence:
     ECSchemaPersistence criterion (e.g.
     ECSCHEMAPERSISTENCE_Stored|External|All). Including externaly-
     persisted ECSchemas can be significantly slower.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_DiscoverSchemas =R"doc(Populate a vector of available schemas for a design file.
 
-Parameter ``infos``:
+:param infos:
     A vector of SchemInfo. Must be empty, initially
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The design file to search for schemas.
 
-Parameter ``persistence``:
+:param persistence:
     ECSchemaPersistence criterion (e.g.
     ECSCHEMAPERSISTENCE_Stored|External|All). Including externally-
     persisted ECSchemas can be significantly slower.
 
-Parameter ``hostType``:
+:param hostType:
     Optionally filter schemas according to the host type of the
     provider that supplies them.)doc";
 
@@ -252,68 +252,68 @@ static const char * __doc_Bentley_DgnPlatform_DgnECManager_FindRelationshipEntri
 the component information about the relationship, and not relationship
 instances
 
-Parameter ``rootElement``:
+:param rootElement:
     The element to search
 
-Parameter ``entries``:
+:param entries:
     The list of relationships)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_FindRelatedInstances =R"doc(Finds instances related to *sourceInstance* that match
 *classSpecifier*
 
-Parameter ``sourceInstance``:
+:param sourceInstance:
     The instance at one end of the relationship.
 
-Parameter ``relationshipClassSpecifier``:
+:param relationshipClassSpecifier:
     Specifies what relationships to traverse.
 
-Parameter ``createContext``:
+:param createContext:
     Context specifying options for loading the related instances, e.g.
     properties to select.
 
-Returns:
+:returns:
     An iterable for iterating over the related instances)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_FindInstanceOnElement =R"doc(Find a single DgnElementECInstance on a particular element. This is a
 convenience method.
 
-Parameter ``el``:
+:param el:
     The element to search
 
-Parameter ``ecClass``:
+:param ecClass:
     The class of the instance to find
 
-Parameter ``polymorphic``:
+:param polymorphic:
     If polymorphic is true then instances of class 'ecClass', or
     derived from 'ecClass' are returned.
 
-Returns:
+:returns:
     The first instance matching ecClass on el.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_GetInstanceCounts =R"doc(Get a count of the number of instances for each class specified
 
-Parameter ``scope``:
+:param scope:
     The scope to search for instances in
 
-Parameter ``requestedClasses``:
+:param requestedClasses:
     A list of SchemaNameClassName pairs. This list will be used to
     determine which classes to get counts for. If the list is empty,
     counts will be returned for all instances in the scope
 
-Parameter ``searchFlags``:
+:param searchFlags:
     If the requestedClasses list is empty, it will use the
     ECQueryProcessFlags to determine which instances to search for
 
-Returns:
+:returns:
     An iterable for iterating over the InstanceCountEntry results.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_FindInstances =R"doc(Find DgnElementECInstances in a DGN file using the supplied scope and
 query.
 
-Parameter ``scope``:
+:param scope:
     The scope specifies the set of elements to search for instances
 
-Parameter ``query``:
+:param query:
     Specifies what instances to return.
 
 
@@ -334,29 +334,29 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ObtainInstanceEnabler =R"doc(Find the ECN::ECEnabler that is handling a given ECN::ECClass in the
 given file
 
-Parameter ``ecClass``:
+:param ecClass:
     The ECN::ECClass for which you want an ECN::ECEnabler
 
-Parameter ``file``:
+:param file:
     The file in which the ECN::ECEnabler should be valid)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ObtainInstanceEnablerByName =R"doc(Find the ECN::ECEnabler that is handling a given a schema and class
 name in the given file
 
-Parameter ``schemaName``:
+:param schemaName:
     The name of the schema containing the class.
 
-Parameter ``className``:
+:param className:
     The name of an ECClass defined in the schema specified by
     schemaName.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The file in which the ECN::ECEnabler should be valid)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_GetProviderById =R"doc(Get a pointer to the IDgnECProvider that read and write IECInstances
 to a design file.
 
-Parameter ``providerId``:
+:param providerId:
     The Id of the provider. This is typically set to
     DgnECProviderId_ECXAttributes which is the value 0x56FF.)doc";
 
@@ -364,10 +364,10 @@ static const char * __doc_Bentley_DgnPlatform_DgnECManager_CreateECInstanceReadC
 IECInstance::ReadFromXmlString or similar methods that will read
 ECInstances that are compatible for persistence in the given dgnFile
 
-Parameter ``schema``:
+:param schema:
     The ECSchema of ECInstances expected to be read.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The dgnFile into which the ECInstances will be persisted. It will
     be used to find StandaloneInstanceEnablers for the instances)doc";
 
@@ -376,14 +376,14 @@ ImportSchema or returned by Bentley::ECN::IECSchemaLocater
 
 
 
-Parameter ``ecSchemaXmlFilename``:
+:param ecSchemaXmlFilename:
     The full file path/name of the ECSchemaXML file to read
 
-Parameter ``dgnFile``:
+:param dgnFile:
     ECSchema reading will look here when locating referenced
     ECSchemas... May be NULL.
 
-Parameter ``searchPaths``:
+:param searchPaths:
     Additional paths to search for referenced ECSchemas. Searched
     after the dgnFile, but before registered ExternalSchemaLocaters
 
@@ -398,14 +398,14 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ReadSchemaFromXmlString =R"doc(Load an ECSchema managed by the DgnECManager to be used with
 ImportSchema or returned by Bentley::ECN::IECSchemaLocater
 
-Parameter ``schemaAsXml``:
+:param schemaAsXml:
     A string holding ECSchemaXML to be parsed
 
-Parameter ``dgnFile``:
+:param dgnFile:
     ECSchema reading will look here when locating referenced
     ECSchemas... May be NULL.
 
-Parameter ``searchPaths``:
+:param searchPaths:
     Additional paths to search for referenced ECSchemas. Searched
     after the dgnFile, but before registered ExternalSchemaLocaters.
     
@@ -430,47 +430,47 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_RemoveECInstancesFromModel =R"doc(Remove ECInstances for the specified DGN model
 
-Parameter ``model``:
+:param model:
     The model from which to remove instances
 
-Parameter ``schemaName``:
+:param schemaName:
     The schema of the instances to remove (or NULL for any)
 
-Parameter ``className``:
+:param className:
     The class of the instances to remove (or NULL for any). Ignored if
     schemaName is not supplied.
 
-Parameter ``firstIndex``:
+:param firstIndex:
     The index of the first instance to remove as counted by those
     instance matching schemaName/className criteria
 
-Parameter ``count``:
+:param count:
     Including firstIndex, the total number of instances to remove (-1
     for all)
 
-Returns:
+:returns:
     The number of instances removed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_ReadECInstancesFromModel =R"doc(Remove Read ECInstances for the specified DGN model
 
-Parameter ``ecInstances``:
+:param ecInstances:
     Vector of instances that were read
 
-Parameter ``dgnModel``:
+:param dgnModel:
     The model from which to remove instances
 
-Returns:
+:returns:
     SUCCESS if ecInstance were associated with the specified model)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_AppendECInstancesToModel =R"doc(Append ECInstances to the specified DGN model
 
-Parameter ``ecInstances``:
+:param ecInstances:
     Vector of instances that are to be appended.
 
-Parameter ``dgnModel``:
+:param dgnModel:
     The model which is to receive instances
 
-Returns:
+:returns:
     The number of instances appended
 
 Remark:
@@ -489,13 +489,13 @@ static const char * __doc_Bentley_DgnPlatform_DgnECManager_GetManager =R"doc(Get
 static const char * __doc_Bentley_DgnPlatform_DgnECManager_FindRelationships =R"doc(Finds relationships defined for sourceInstance according to
 relationshipClassSpecifier
 
-Parameter ``sourceInstance``:
+:param sourceInstance:
     The instance for which to find relationships.
 
-Parameter ``relationshipClassSpecifier``:
+:param relationshipClassSpecifier:
     Specifies what relationships to traverse.
 
-Parameter ``relationshipPropertySpecifier``:
+:param relationshipPropertySpecifier:
     Properties to select for the relationship (optional = NULL).)doc";
 
 

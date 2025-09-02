@@ -22,7 +22,7 @@ Remark:
     custom properties may be referenced in expressions for print
     definition names and print output file names.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintSetEventHandler_PrePrintSetDefinition =R"doc(Called before processing each print definition when printing as a set.
@@ -36,7 +36,7 @@ Remark:
     by printer drivers only. Normal print event handlers should *not*
     attempt to change the output file name during this event.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintSetEventHandler_EndPrintSet =R"doc(Called after the last page in a print set has been completed.
@@ -49,10 +49,10 @@ Remark:
     even if the print job fails. Use param.GetIsSuccess to query the
     job status.
 
-Parameter ``param``:
+:param param:
     Event parameters.
 
-Returns:
+:returns:
     SUCCESS or ERROR.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintSetEventHandler_BeginPrintSet =R"doc(Called before the print engine begins work on the first page of a
@@ -67,10 +67,10 @@ Remark:
     yet, so no IPrintEngine or IPlotter calls are permitted during
     this event.
 
-Parameter ``param``:
+:param param:
     Event parameters.
 
-Returns:
+:returns:
     SUCCESS to continue print processing; ERROR to abort the plot.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PostPlotFileClosed =R"doc(Called during cleanup operations after plot processing has finished.
@@ -94,12 +94,12 @@ symbology.
 Remark:
     s This event may be invoked multiple times for a given element.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PostElementOutput =R"doc(Called after the specified element has been output.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PreElementOutput =R"doc(Called before the specified element has been output.
@@ -110,7 +110,7 @@ Remark:
     event. Elements ignored by BeginElement handlers will not be seen
     by the PreElementOutput/PostElementOutput events.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_EndElement =R"doc(Called when the print engine has finished output and post-processing
@@ -120,7 +120,7 @@ Remark:
     s The EndElement event is invoked for every element seen by
     BeginElement, even if that element was not printed.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_BeginElement =R"doc(Gives applications the opportunity to replace the element being
@@ -134,20 +134,20 @@ Remark:
     element descriptors hurts performance, simple symbology changes
     are best performed in the Resymbolize event.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PreDynamicViewClip =R"doc(Called before the plot begins to acquire the dynamic view clip for a
 model.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PreModel =R"doc(Called before the print engine begins scanning elements in the
 specified model, after plot structure setup for the model has been
 completed.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_OnNewModelRef =R"doc(Called before the specified model is printed, and before any of the
@@ -158,7 +158,7 @@ Remark:
     s This event provides the opportunity to prevent the model from
     printing before any of the setup processing has begun.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_GetColorTable =R"doc(Called just after the print engine gets the color table for a model.
@@ -169,7 +169,7 @@ Remark:
     black inversion and printer-driver-defined output colors are
     applied after this method returns.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PostElementScan =R"doc(Called just after the print engine finishes the element scanning loop.
@@ -178,7 +178,7 @@ Remark:
     s When printing in rasterized mode, this event is called once per
     tile.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PreElementScan =R"doc(Called just before the print engine begins the element scanning loop.
@@ -188,7 +188,7 @@ Remark:
     initialized. Note that when printing in rasterized mode, this
     event is called once for each tile.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PrePenChart =R"doc(Called during print engine setup, before the print engine plotter is
@@ -200,7 +200,7 @@ Remark:
     override the printer driver's pen setup before the print engine
     configures its pen chart and color table.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintEventHandler2_PrePrintDefinition =R"doc(Called before processing each print definition.
@@ -211,7 +211,7 @@ Remark:
     for Print Organizer. Primary purpose is to obtain the print output
     file name in the context of the Print Organizer worker process.
 
-Parameter ``param``:
+:param param:
     Event parameters.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDefCollectStateParam_CustomProperties =R"doc(Gets the collection of custom properties.)doc";
@@ -219,10 +219,10 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPrintDefCollectStateParam_
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDefCollectStateParam_SetCustomProperty =R"doc(Sets a custom property in the print definition that will be created or
 updated from the collected design state.
 
-Parameter ``name``:
+:param name:
     Custom property name.
 
-Parameter ``value``:
+:param value:
     Custom property value. If NULL or empty, property will be removed
     if defined.)doc";
 
@@ -1035,7 +1035,7 @@ public:
     * @bsimethod                                                                       6/2024
     * @remarks Returns array of 768 bytes.
     +---------------+---------------+---------------+---------------+---------------+------*/
-    virtual byte* ColorTable() override
+    virtual Byte* ColorTable() override
     {
     try
         {
@@ -1049,7 +1049,7 @@ public:
             if (strData.size()<1) 
                 return nullptr;
 
-            static byte clrTable[768];
+            static Byte clrTable[768];
 
             size_t bytesNum = strData.size() > 768 ? 768 : strData.size();
             memcpy(clrTable, (const void*)strData.data(), bytesNum);

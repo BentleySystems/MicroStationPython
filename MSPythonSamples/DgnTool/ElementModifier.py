@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 import os
 from MSPyBentley import *
@@ -14,48 +9,50 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
 '''
-/*=================================================================================**//**
-* Example showing how to use DgnElementSetTool to write a MODIFY ELEMENT tool.
-*
-* This tool will move the closest vertex on a line or linestring.
-* 
-* @bsiclass                                                               Bentley Systems
-+===============+===============+===============+===============+===============+======*/
+Example demonstrating how to use DgnElementSetTool to write a MODIFY ELEMENT tool.
+This tool will move the closest vertex on a line or linestring.
 '''
+
 class ElementModifier(DgnElementSetTool):
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def __init__(self, toolId):
+        """
+        Initialize the ElementModifier.
+
+        :param toolId: The ID of the tool.
+        :type toolId: int
+        """
         DgnElementSetTool.__init__(self, toolId) # C++ base's __init__ must be called.
         self.m_isDynamics = False
         self.m_ev = None
         self.m_self = self # Keep self referenced
     
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _DoGroups(self):
+        """
+        Determine if groups should be processed.
+
+        :returns: False, indicating single element selection without including graphic and named group members.
+        :rtype: bool
+        """
         return False # Pick single element, don't include graphic and named group members...
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _AllowSelection(self):
+        """
+        Determine if selection sets are allowed.
+
+        :returns: The selection set usage type.
+        :rtype: DgnElementSetTool.eUSES_SS_None
+        """
         return DgnElementSetTool.eUSES_SS_None # Don't support selection sets...
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def GetCloseVertex(self, location):
+        """
+        Get the closest vertex to the given location.
+
+        :param location: The location to find the closest vertex to.
+        :type location: LocationType
+        :returns: The index of the closest vertex.
+        :rtype: int
+        """
         nSegments = 1 # If it's not a linestring (ex. line) there's only a single segment.
 
         if ICurvePrimitive.eCURVE_PRIMITIVE_TYPE_LineString == location.curve.GetCurvePrimitiveType():
@@ -71,23 +68,33 @@ class ElementModifier(DgnElementSetTool):
         
         return closeVertex
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
+
     def _SetupForModify(self, ev, isDynamics):
+        """
+        Set up the modifier for modification.
+
+        :param ev: The event to be modified.
+        :type ev: EventType
+        :param isDynamics: Flag indicating if dynamics are enabled.
+        :type isDynamics: bool
+        :returns: True if setup is successful.
+        :rtype: bool
+        """
         self.m_isDynamics = isDynamics
         self.m_ev = ev
         
         return True
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
+
     def _OnElementModify(self, eeh):
+        """
+        Modify the given element.
+
+        :param eeh: The element to be modified.
+        :type eeh: EditElementHandle
+        :returns: The status of the modification.
+        :rtype: BentleyStatus
+        """
         # NOTE: Since we've already validated the element in OnPostLocate and don't support groups/selection sets we don't have to check it again here.
         locatePoint = DPoint3d()
         curve = ICurvePathQuery.ElementToCurveVector(eeh)
@@ -124,12 +131,17 @@ class ElementModifier(DgnElementSetTool):
         # Handler didn't choose to update itself, create a new element to represent the modified curve vector.
         return DraftingElementSchema.ToElement(eeh, curve, eeh, eeh.GetModelRef().Is3d(), eeh.GetModelRef())
         
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _OnPostLocate(self, path, cantAcceptReason):
+        """
+        Handle post-locate event to determine if the element can be accepted for modification.
+
+        :param path: The path of the located element.
+        :type path: ElementPath
+        :param cantAcceptReason: The reason why the element cannot be accepted.
+        :type cantAcceptReason: str
+        :returns: True if the element can be accepted, False otherwise.
+        :rtype: bool
+        """
         if not DgnElementSetTool._OnPostLocate(self, path, cantAcceptReason):
             return False
 
@@ -146,36 +158,28 @@ class ElementModifier(DgnElementSetTool):
         
         return False
      
-    '''    
-    /*---------------------------------------------------------------------------------**//**
-    * Install a new instance of the tool. Will be called in response to external events
-    * such as undo or by the base class from _OnReinitialize when the tool needs to be
-    * reset to it's initial state.
-    *
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def _OnRestartTool(self):
+        """
+        Install a new instance of the tool. Will be called in response to external events
+        such as undo or by the base class from _OnReinitialize when the tool needs to be
+        reset to its initial state.
+
+        :returns: None
+        """
         ElementModifier.InstallNewInstance(self.GetToolId())
      
-    '''
-    /*---------------------------------------------------------------------------------**//**
-    * Method to create and install a new instance of the tool. If InstallTool returns ERROR,
-    * the new tool instance will be freed/invalid. Never call delete on RefCounted classes.
-    *
-    * @bsimethod                                                              Bentley Systems
-    +---------------+---------------+---------------+---------------+---------------+------*/
-    '''
     def InstallNewInstance(toolId):
+        """
+        Create and install a new instance of the tool. If InstallTool returns ERROR,
+        the new tool instance will be freed/invalid. Never call delete on RefCounted classes.
+
+        :param toolId: The ID of the tool.
+        :type toolId: int
+        :returns: None
+        """
         tool = ElementModifier(toolId)
         tool.InstallTool()
 
-'''
-/*=================================================================================**//**
-* Default entrypoint for current module unit.
-*
-* @bsiclass                                                               Bentley Systems
-+===============+===============+===============+===============+===============+======*/
-'''
+
 if __name__ == "__main__":
     ElementModifier.InstallNewInstance(1)

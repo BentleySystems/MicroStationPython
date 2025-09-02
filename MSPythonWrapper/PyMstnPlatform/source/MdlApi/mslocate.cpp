@@ -15,8 +15,8 @@ the proximity of the test point, but **before** MicroStation applies
 the Search Criteria. <p> Whenever a primitive command is started, the
 locate user functions are cleared. Therefore, always call
 mdlState_startModifyCommand before calling SetPreLocateFunction. <p>
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetPostLocateFunction = R"doc(@Description Set up the locate function for all elements that are in
@@ -24,8 +24,8 @@ the proximity of the test point, **after** the element has already
 passed the Search Criteria. <p> Whenever a primitive command is
 started, the locate user functions are cleared. Therefore, always call
 mdlState_startModifyCommand before calling SetPostLocateFunction. <p>
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetAcceptFunction = R"doc(@Description Set up the locate function for when the user accepts the
@@ -34,8 +34,8 @@ argument to mdlState_startModifyCommand. <p> Whenever a primitive
 command is started, the locate user functions are cleared. Therefore,
 always call mdlState_startModifyCommand before calling
 SetAcceptFunction. <p> 
-@Param[in] newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set,or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetShowFunction = R"doc(@Description Set up the locate function to show the result of a
@@ -43,8 +43,8 @@ selection. This function is also set with the pShow argument to
 mdlState_startModifyCommand. <p> Whenever a primitive command is
 started, the locate user functions are cleared. Therefore, always call
 mdlState_startModifyCommand before calling SetShowFunction. <p>
-@Param[in] newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetCleanFunction = R"doc(@Description Set up the locate function to clean up the result of a
@@ -52,8 +52,8 @@ selection. This function is also set with the pClean argument to
 mdlState_startModifyCommand. <p> Whenever a primitive command is
 started, the locate user functions are cleared. Therefore, always call
 mdlState_startModifyCommand before calling SetCleanFunction. <p>
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetNotFoundFunction = R"doc(@Description Set up the locate function that is called whenever
@@ -61,20 +61,20 @@ MicroStation attempts to Locate an element, but no acceptable elements
 were found. <p> Whenever a primitive command is started, the locate
 user functions are cleared. Therefore, always call
 mdlState_startModifyCommand before calling SetNotFoundFunction. <p>
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetGlobalPreLocateFunction = R"doc(@Description This is the same as SetPreLocateFunction, except that
 this function is remains active regardless of the active command.
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetGlobalPostLocateFunction = R"doc(@Description This is the same as SetPostLocateFunction, except that
 this function is remains active regardless of the active command.
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The
 return value is the previous function that was set, or NULL.)doc";
 
@@ -83,8 +83,8 @@ MicroStation attempts to Locate an element, but no acceptable elements
 were found. <p> Whenever a primitive command is started, the locate
 user functions are cleared. Therefore, always call
 mdlState_startModifyCommand before calling SetSelectCmdFunction. <p>
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetOverridePathDescriptionFunction = R"doc(@Description Set up the locate function that is called to provide a
@@ -92,8 +92,8 @@ description of a DisplayPathCP for the user. <p> Whenever a primitive
 command is started, the locate user functions are cleared. Therefore,
 always call mdlState_startModifyCommand before calling
 SetOverridePathDescriptionFunction. <p> 
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_LocateCallback_SetElementDoubleClickFunction = R"doc(@Description Set up the locate function to respond to double-click
@@ -101,8 +101,8 @@ events on an element. <p> Whenever a primitive command is started, the
 locate user functions are cleared. Therefore, always call
 mdlState_startModifyCommand before calling
 SetElementDoubleClickFunction. <p> 
-@Param[in] newFunc The new function to call, or NULL. 
-@Param[in] funcID Unique ID of the callback function that user defines.
+@Param(input) newFunc The new function to call, or NULL. 
+@Param(input) funcID Unique ID of the callback function that user defines.
 @Return The return value is the previous function that was set, or NULL.)doc";
 
 typename OverridePathDescriptionCallbackHelper::OverridePathDescriptionFunctionType OverridePathDescriptionCallbackHelper::m_callbackFuncs[MAX_OVERRIDE_PATH_DESCRIPTION_CALLBACK_COUNT];

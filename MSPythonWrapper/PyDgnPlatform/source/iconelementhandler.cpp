@@ -35,7 +35,7 @@ void def_IconElementHandler(py::module_& m)
     c1.def_static("CreateFromData", [] (py::bytes const& data)
                   {
                   std::string strData = (std::string) data;
-                  return IconData::CreateFromData((const byte*) strData.data(), strData.size());
+                  return IconData::CreateFromData((const Byte*) strData.data(), strData.size());
                   }, "data"_a);
     c1.def_property_readonly("AspectRatio", &IconData::GetAspectRatio);
     c1.def("GetAspectRatio", &IconData::GetAspectRatio);

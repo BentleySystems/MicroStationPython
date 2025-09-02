@@ -1,14 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
-'''
-Running this sample needs to open GlassColor.dgn.
-This sample shows how to change the glass panels color from darker to lighter from the top row to bottom row.
-'''
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -18,9 +9,27 @@ from MSPyMstnPlatform import *
 from MSPyDgnView import *
 import random
 
+'''
+Running this sample needs to open GlassColor.dgn.
+This sample demonstrates how to change the glass panels color from darker to lighter from the top row to bottom row.
+'''
 
-''' Check whether the element color need to be changed. '''
 def needToChangeColor(msElement):
+    """
+    Determines if the color of the given MicroStation element needs to be changed.
+    The function checks if the element meets the following criteria:
+    - It is a graphic element.
+    - It is visible.
+    - It is not deleted.
+    - It is not a construction element.
+    - It is on the level "A-GLAZ" or "A-WALL-METL".
+    
+    :param msElement: The MicroStation element to check.
+    :type msElement: MicroStationElement
+    
+    :return: True if the element meets all the criteria for changing color, False otherwise.
+    :rtype: bool
+    """
     # Element should be graphic, visible, not deleted and not construction
     if ((not msElement.ehdr.isGraphics) or msElement.hdr.dhdr.props.b.invisible
         or msElement.ehdr.deleted or msElement.hdr.dhdr.props.b.elementClass != 0):
@@ -42,6 +51,16 @@ def needToChangeColor(msElement):
     return True
 
 def GetElementByXCoordinate():
+    """
+    Categorizes graphical elements by their x-coordinate in the active DGN model.
+    This function retrieves all graphical elements from the active DGN model and categorizes
+    them based on their x-coordinate. Elements that do not need their color changed are skipped.
+    The x-coordinate is rounded to the nearest multiple of 10,000,000 for categorization.
+    
+    Returns:
+        dict: A dictionary where the keys are the rounded x-coordinates and the values are lists
+              of element references that fall within that x-coordinate range.
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
     graphicalElements = dgnModel.GetGraphicElements()
@@ -61,8 +80,16 @@ def GetElementByXCoordinate():
 
     return categorizedElementsByX
 
-''' Change the glass panels color '''
 def ChangeGlassWallColor(graphicalElements):
+    """
+    Change the color and transparency of glass wall elements in a graphical model.
+    This function categorizes the provided graphical elements by their z-coordinate,
+    and then changes the color and transparency of each element in a gradient from
+    darker to lighter as the z-coordinate increases.
+
+    :param graphicalElements: A list of graphical element references to be processed.
+    :type graphicalElements: list
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
     categorizedElements = {}
@@ -97,6 +124,14 @@ def ChangeGlassWallColor(graphicalElements):
             transparency += 0.8/(len(categorizedElements) - 1)
 
 def ChangeGlassColor():
+    """
+    Change the color of glass walls from darker to lighter based on their X coordinates.
+
+    This function retrieves elements categorized by their X coordinates, sorts them in descending order,
+    and changes the color of each glass wall accordingly.
+
+    :return: None
+    """
     categorizedElementsByX = GetElementByXCoordinate()
     for xCoordinate in sorted(categorizedElementsByX, reverse=True):
         ChangeGlassWallColor(categorizedElementsByX[xCoordinate])

@@ -193,7 +193,7 @@ Returns (Tuple,1):
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetUorScale =R"doc(Obtain a scale factor needed to interpret style distance properties.
 
-Parameter ``destModel``:
+:param destModel:
     desired context for distance value. For distance properties, the
     method GetDoubleProp returns values in terms of the resolution of
     the default model of the style's file. In order to use that value
@@ -203,10 +203,10 @@ static const char * __doc_Bentley_DgnPlatform_DimensionStyle_ConvertToFile =R"do
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_Compare =R"doc(Compare this style object with another one.
 
-Parameter ``otherStyle``:
+:param otherStyle:
     The other style.
 
-Parameter ``compareOpts``:
+:param compareOpts:
     Options that control the comparison.
 
 Remark:
@@ -222,7 +222,7 @@ For example, if the style's extension color flag is OFF, that means
 the dimension's extension color will come from the header color. In
 that case, the style's extension color value is unused.
 
-Returns:
+:returns:
     A mask with 'on' bits representing each difference between the two
     styles. To quickly test if any difference exists use
     DimStylePropMask::AnyBitSet)doc";
@@ -249,25 +249,25 @@ static const char * __doc_Bentley_DgnPlatform_DimensionStyle_GetUnitsProp =R"doc
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_RemapDependents =R"doc(Remap all the elements that reference one style to different style.
 
-Parameter ``destStyle``:
-    IN remap to this style.
+:param destStyle:
+    (input) remap to this style.
 
-Parameter ``sourceStyle``:
-    IN remap from this style.
+:param sourceStyle:
+    (input) remap from this style.
 
-Parameter ``file``:
-    IN file in which to search.)doc";
+:param file:
+    (input) file in which to search.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_Delete =R"doc(Deletes a dimension style from a dgn file. This method will fail if
 any elements refer to the style.
 
-Parameter ``name``:
+:param name:
     The name of the style to delete.
 
-Parameter ``file``:
+:param file:
     The file from which to delete the style.
 
-Returns:
+:returns:
     SUCCESS if the style was removed.
 
 See also:
@@ -279,11 +279,11 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_Replace =R"doc(Replace an existing persistent DimensionStyle in a DgnFile. Will fail
 if there is not already a style with the same name.
 
-Parameter ``oldName``:
+:param oldName:
     The name of the style to replace. If NULL, the style will be
     overwrite the style with the same name as the style object.
 
-Parameter ``file``:
+:param file:
     The file in which to write the style. If NULL, the style will be
     written to the file stored in the style object.
 
@@ -292,13 +292,13 @@ Remark:
     in the style object, then the style object will be converted to
     the new file.
 
-Returns:
+:returns:
     SUCCESS if the style was written.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_Add =R"doc(Add this DimensionStyle to a DgnFile. Will fail if there is already a
 style with the same name.
 
-Parameter ``file``:
+:param file:
     The file in which to write the style. If NULL, the style will be
     written to the file stored in the style object.
 
@@ -307,7 +307,7 @@ Remark:
     in the style object, then the style object will be converted to
     the new file.
 
-Returns:
+:returns:
     SUCCESS if the style was written.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DimensionStyle_BuildList =R"doc(Create a list of all the styles in the specified file.)doc";
@@ -411,7 +411,7 @@ void def_DimensionStyle(py::module_& m)
     
     c3.def("GetAccuracyProp", [] (DimensionStyle const& self, DimStyleProp iProp)
            {
-           byte valueOut;
+           Byte valueOut;
            auto retVal = self.GetAccuracyProp(valueOut, iProp);
            return py::make_tuple(retVal, valueOut);
            }, "iProp"_a, DOC(Bentley, DgnPlatform, DimensionStyle, GetAccuracyProp));

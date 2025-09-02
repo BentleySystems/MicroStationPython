@@ -30,17 +30,17 @@ static const char * __doc_Bentley_DgnPlatform_SheetSizeIteratorOptions_SetOrderA
 static const char * __doc_Bentley_DgnPlatform_SheetSizeDefinition_BuildSheetSizeListForUI =R"doc(Build a list of SheetSizeDefinitions that can be used for pickers in
 the user interface. The list contains those sheet sizes
 
-Parameter ``includeSize``:
+:param includeSize:
     The current value, always included in the list (or NULL).
 
-Parameter ``restrictSystem``:
+:param restrictSystem:
     Only show sheet sizes relevant for the specified system. Use
     UnitSystem::Undefined to show scales regardless of system.
 
-Parameter ``alwaysAddCustom``:
+:param alwaysAddCustom:
     A custom row is added even if the include unit is found.
 
-Returns:
+:returns:
     A bvector containing the scales.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SheetSizeDefinition_SetInvalid =R"doc(Make this sheet size invalid)doc";

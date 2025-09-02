@@ -13,12 +13,12 @@ static const char * __doc_Bentley_Geom_DPoint4d_TryNormalizePointAndDerivatives 
 point and derivatives ul> li>The return is marked invalid if weight is
 zero. ul>
 
-Returns:
+:returns:
     origin and vectors after normalization.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_InitDisconnect =R"doc(Initialize a point with all coordinates as the disconnect value.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_IsDisconnect =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPoint4d_IsDisconnect =R"doc(:returns:
     true if the point has coordinates which indicate it is a
     disconnect (separator) ponit.)doc";
 
@@ -31,20 +31,20 @@ x*x + y*y + z*z + w*w = 1.
 
 The angle is returned within the closed interval [0,Pi].
 
-Parameter ``[out]``:
+:param (output):
     axis normalized axis of rotation
 
-Returns:
+:returns:
     rotation angle (in radians) between 0 and Pi, inclusive)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_MaxUnnormalizedXYZDiff =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPoint4d_MaxUnnormalizedXYZDiff =R"doc(:returns:
     largest absoluted value among xyz coordinates coordinates,
     ignoring weight.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_MaxAbsUnnormalizedXYZ =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPoint4d_MaxAbsUnnormalizedXYZ =R"doc(:returns:
     largest absoluted value among xyz coordinates, ignoring weight.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_MaxAbs =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPoint4d_MaxAbs =R"doc(:returns:
     largest absoluted value among point coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_AlmostEqualReversed =R"doc(test for nearly equal points in two arrays, reversing the second)doc";
@@ -54,209 +54,209 @@ static const char * __doc_Bentley_Geom_DPoint4d_AlmostEqual =R"doc(test for near
 static const char * __doc_Bentley_Geom_DPoint4d_IsEqual =R"doc(Exact equality test between points. (Also see method with same name
 but added tolerance argument.)
 
-Parameter ``[in]``:
+:param (input):
     vec2 vector
 
-Returns:
+:returns:
     true if the points are identical. (DPoint4dCR, double))doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_Negate =R"doc(Negate a point.
 
-Parameter ``[in]``:
+:param (input):
     point input point)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_Scale =R"doc(sets pOutVec to pInVec*scale.
 
-Parameter ``[in]``:
+:param (input):
     point input vector
 
-Parameter ``[in]``:
+:param (input):
     scale scale)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_NormalizePlaneOf =R"doc(Normalizes a homogeneous plane (by dividing through by the vector
 magnitude).
 
-Parameter ``[in]``:
+:param (input):
     plane0 homogeneous plane
 
-Returns:
+:returns:
     true unless normal is zero vector.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_NormalizeWeightInPlace =R"doc(Divide through by weight component.
 
-Returns:
+:returns:
     true if normalization succeeded)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_InitWithNormalizedWeight =R"doc(Initializes the instance by normalizing the weight of the source.
 
-Returns:
+:returns:
     true if normalization succeeded)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_GetProjectedXYZ =R"doc(Normalizes a homogeneous point (by dividing by w part.)
 
-Parameter ``[out]``:
+:param (output):
     rPoint normalized point
 
-Returns:
+:returns:
     true if normalization succeeded)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_SumOf =R"doc(Adds two homogeneous points.
 
-Parameter ``[in]``:
+:param (input):
     pt1 point 1
 
-Parameter ``[in]``:
+:param (input):
     pt2 point 2)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_DifferenceOf =R"doc(Subtract second point from first.
 
-Parameter ``[in]``:
+:param (input):
     point1 first point
 
-Parameter ``[in]``:
+:param (input):
     point2 second point)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_Subtract =R"doc(Subtract a vector from the instance.
 
-Parameter ``[in]``:
+:param (input):
     vector vector to subtract)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_Add =R"doc(Add a vector to the instance.
 
-Parameter ``[in]``:
+:param (input):
     vector vector to add)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_WeightedDifferenceOf =R"doc(Scale each point by the other's weight and return the difference)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_OriginAndNormalFromPlane =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DPoint4d_OriginAndNormalFromPlane =R"doc(:param (output):
     origin cartesian orign
 
-Parameter ``[out]``:
+:param (output):
     normal cartesian normal
 
-Returns:
+:returns:
     true if)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_PlaneFromOriginAndVectors =R"doc(Computes the homogeneous coordinate vector for a plane defined by a
 DPoint4d origin and a pair of 3D vectors.
 
-Parameter ``[out]``:
+:param (output):
     origin a point on the plane.
 
-Parameter ``[out]``:
+:param (output):
     vector0 a vector in the plane.
 
-Parameter ``[out]``:
+:param (output):
     vector1 another vector in the plane.
 
-Returns:
+:returns:
     false if origin, vectors are not independent.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_PlaneFrom3Points =R"doc(Computes the homogeneous coordinate vector for a plane defined by 3 3D
 points.
 
-Parameter ``[out]``:
+:param (output):
     origin origin point
 
-Parameter ``[out]``:
+:param (output):
     point1 another point on plane
 
-Parameter ``[out]``:
+:param (output):
     point2 another point on plane
 
-Returns:
+:returns:
     true if normal is well defined.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_PlaneFromOriginAndNormal =R"doc(Computes the homogeneous vector for a plane defined by 3D origin and
 normal. NOTE If the normal vector is null, a 0000 vector is returned.
 
-Parameter ``[out]``:
+:param (output):
     origin origin point
 
-Parameter ``[out]``:
+:param (output):
     normal normal vector
 
-Returns:
+:returns:
     true unless normal is null)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_GetXYW =R"doc(Copy the xyw components out of a homogeneous point. The z component
 not referenced. This is a copy, not a normalization.
 
-Parameter ``[out]``:
+:param (output):
     point xyw parts copied to xyz)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_GetXYZ =R"doc(Copy the xyz components out of a homogeneous point. The weight is not
 referenced, i.e. the xyz components are NOT normalized.
 
-Parameter ``[out]``:
+:param (output):
     point cartesian point)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_InitFrom =R"doc(Initializ a homogeneous point from a 3D point and separate weight.
 NOTE The xyz components copied unchanged, i.e. not multiplied by the
 weight.
 
-Parameter ``[in]``:
+:param (input):
     point cartesian point
 
-Parameter ``[in]``:
+:param (input):
     w weight component)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_FromInterpolate =R"doc(Interpolates between two homogeneous vectors. |
 
-Parameter ``[in]``:
+:param (input):
     point0 s=0 point
 
-Parameter ``[in]``:
+:param (input):
     s interpolation parameter
 
-Parameter ``[in]``:
+:param (input):
     point1 s=1 point
 
-Returns:
+:returns:
     interpolated point)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_Interpolate =R"doc(Interpolates between two homogeneous vectors. |
 
-Parameter ``[in]``:
+:param (input):
     point0 s=0 point
 
-Parameter ``[in]``:
+:param (input):
     s interpolation parameter
 
-Parameter ``[in]``:
+:param (input):
     point1 s=1 point)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_RealDistanceSquared =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DPoint4d_RealDistanceSquared =R"doc(:param (output):
     pDistanceSquared squared distance
 
-Parameter ``[in]``:
+:param (input):
     vec2 second point
 
-Returns:
+:returns:
     true iff the homogeneous point was properly normalized.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_RealDistanceXY =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DPoint4d_RealDistanceXY =R"doc(:param (output):
     distance distance between xy parts
 
-Parameter ``[in]``:
+:param (input):
     pointB other point.
 
-Returns:
+:returns:
     true iff the homogeneous points could be normalized)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_RealDistanceSquaredXY =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DPoint4d_RealDistanceSquaredXY =R"doc(:param (output):
     pDistanceSquared squared distance
 
-Parameter ``[in]``:
+:param (input):
     vec2 second point
 
-Returns:
+:returns:
     true iff the homogeneous point was properly normalized.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_RealDistance =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DPoint4d_RealDistance =R"doc(:param (input):
     vec2 second point
 
-Returns:
+:returns:
     distance between projections of two homnogeneous points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_EyePlaneTest =R"doc(Return the dot product of a plane normal and a vector 'to the
@@ -272,99 +272,99 @@ definition' Tinverse * (0,0,1,0)' i.e column 2 (zero based) of the
 composite viewing transform. (Note that the weight part can be
 nonzero.)
 
-Parameter ``[in]``:
+:param (input):
     origin any cartesian point on plane
 
-Parameter ``[in]``:
+:param (input):
     normal cartesian plane normal
 
-Returns:
+:returns:
     dot product of plane normal with vector towards eye.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_DotProductXYW =R"doc(Return the xyz dot product of two homogeneous points, i.e. ignore z.
 
-Parameter ``[in]``:
+:param (input):
     point second second
 
-Returns:
+:returns:
     dot product of two homogeneous points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_DotProductXYZ =R"doc(Return the xyz dot product of two homogeneous points, i.e. ignore w.
 
-Parameter ``[in]``:
+:param (input):
     point2 second point of dot product.
 
-Returns:
+:returns:
     dot product of two homogeneous points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_DotProductXY =R"doc(Return the dot product of only the xy parts of two homogeneous points.
 Ignore z, ignore w.
 
-Parameter ``[in]``:
+:param (input):
     point second point
 
-Returns:
+:returns:
     dot product of two homogeneous points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_DotProduct =R"doc(Return the full 4d (xyzw) dot product of two homogeneous points.
 
-Parameter ``[in]``:
+:param (input):
     point second point of dot product.
 
-Returns:
+:returns:
     dot product of two homogeneous points.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_MagnitudeXYZW =R"doc(magnitude as pure 4d point -- sqrt sum of squares.)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_GetComponent =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DPoint4d_GetComponent =R"doc(:param (input):
     index 0=x, 1=y, 2=z, 3=w, others cyclic
 
-Returns:
+:returns:
     specified component of the point or vector)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_SetComponent =R"doc(Set x,y,z or w component of a point.
 
-Parameter ``[in]``:
+:param (input):
     a component value
 
-Parameter ``[in]``:
+:param (input):
     index 0=x, 1=y, 2=z, 3=w, others cyclic)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_GetComponents =R"doc(Copies component data out of this instance into doubles pXCoord,
 pYCoord, pZCoord and pWCoord.
 
-Parameter ``[out]``:
+:param (output):
     xCoord x component
 
-Parameter ``[out]``:
+:param (output):
     yCoord y component
 
-Parameter ``[out]``:
+:param (output):
     zCoord z component
 
-Parameter ``[out]``:
+:param (output):
     wCoord w component)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_Init =R"doc(Fill a DPoint4d, using given xyz components and weight. All components
 are copied in directly -- the xyz components are not multiplied by the
 weight.
 
-Parameter ``[in]``:
+:param (input):
     source xyz components
 
-Parameter ``[in]``:
+:param (input):
     w w component)doc";
 
-static const char * __doc_Bentley_Geom_DPoint4d_SetComponents =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DPoint4d_SetComponents =R"doc(:param (input):
     xComponent x component
 
-Parameter ``[in]``:
+:param (input):
     yComponent y component
 
-Parameter ``[in]``:
+:param (input):
     zComponent z component
 
-Parameter ``[in]``:
+:param (input):
     wComponent w component)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_Zero =R"doc(zero out this point.)doc";
@@ -373,26 +373,26 @@ static const char * __doc_Bentley_Geom_DPoint4d_FromCrossProduct =R"doc(Return a
 
 static const char * __doc_Bentley_Geom_DPoint4d_FromMultiply =R"doc(Return product of 3d point with (possibly omitted) DMatrix4d
 
-Parameter ``[in]``:
+:param (input):
     matrix if missing, identity matrix is implied.
 
-Parameter ``[in]``:
+:param (input):
     point 3d point.)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_FromSumOf =R"doc(Return point with sum of scaled inputs)doc";
 
 static const char * __doc_Bentley_Geom_DPoint4d_From =R"doc(Return point with direct initialization
 
-Parameter ``[in]``:
+:param (input):
     x x coordinate
 
-Parameter ``[in]``:
+:param (input):
     y y coordinate
 
-Parameter ``[in]``:
+:param (input):
     z z coordinate
 
-Parameter ``[in]``:
+:param (input):
     w w coordinate)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -410,6 +410,11 @@ void def_DPoint4d(py::module_& m)
     c1.def_readwrite("y", &DPoint4d::y);
     c1.def_readwrite("z", &DPoint4d::z);
     c1.def_readwrite("w", &DPoint4d::w);
+
+    c1.def_readwrite("X", &DPoint4d::x);
+    c1.def_readwrite("Y", &DPoint4d::y);
+    c1.def_readwrite("Z", &DPoint4d::z);
+    c1.def_readwrite("W", &DPoint4d::w);
 
     c1.def(py::init(py::overload_cast<double, double, double, double>(&DPoint4d::From)), "x"_a, "y"_a, "z"_a, "w"_a);
     c1.def(py::init(py::overload_cast<DPoint3dCR, double>(&DPoint4d::From)), "xyz"_a, "w"_a);

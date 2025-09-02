@@ -23,43 +23,43 @@ static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawScanRange =R"doc(D
 static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawStyledCurveVector2d =R"doc(Draw a 2d curve vector using the current Linestyle. If there is no
 current Linestyle, draw a solid curve vector.
 
-Parameter ``curve``:
+:param curve:
     curve geometry
 
-Parameter ``zDepth``:
+:param zDepth:
     Z depth value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawStyledCurveVector3d =R"doc(Draw a curve vector using the current Linestyle. If there is no
 current Linestyle, draw a solid curve vector.
 
-Parameter ``curve``:
+:param curve:
     curve geometry)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawStyledBSplineCurve3d =R"doc(Draw a BSpline curve using the current Linestyle. If there is no
 current Linestyle, draw a solid BSpline.
 
-Parameter ``curve``:
+:param curve:
     bspline curve parameters)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawStyledBSplineCurve2d =R"doc(Draw a 2d BSpline curve using the current Linestyle. If there is no
 current Linestyle, draw a solid BSpline.
 
-Parameter ``curve``:
+:param curve:
     bspline curve parameters
 
-Parameter ``zDepth``:
+:param zDepth:
     Z depth value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawStyledArc3d =R"doc(Draw a 3D elliptical arc using the current Linestyle. If there is no
 current Linestyle, draw a solid arc.
 
-Parameter ``ellipse``:
+:param ellipse:
     The arc data.
 
-Parameter ``isEllipse``:
+:param isEllipse:
     Treat full sweep as ellipse not arc.
 
-Parameter ``range``:
+:param range:
     Array of 2 points with the range (min followed by max) of the arc.
     This argument is optional and is only used to speed processing. If
     you do not already have the range, pass NULL.)doc";
@@ -67,16 +67,16 @@ Parameter ``range``:
 static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawStyledArc2d =R"doc(Draw a 2D elliptical arc using the current Linestyle. If there is no
 current Linestyle, draw a solid arc.
 
-Parameter ``ellipse``:
+:param ellipse:
     The arc data.
 
-Parameter ``isEllipse``:
+:param isEllipse:
     Treat full sweep as ellipse not arc.
 
-Parameter ``zDepth``:
+:param zDepth:
     Z depth value.
 
-Parameter ``range``:
+:param range:
     Array of 2 points with the range (min followed by max) of the arc.
     This argument is optional and is only used to speed processing. If
     you do not already have the range, pass NULL.)doc";
@@ -84,126 +84,126 @@ Parameter ``range``:
 static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawStyledLineString3d =R"doc(Draw a 3D linestring using the current Linestyle, if any. If there is
 no current Linestyle, draw a solid linestring.
 
-Parameter ``nPts``:
+:param nPts:
     Number of vertices in ``pts.``
 
-Parameter ``pts``:
+:param pts:
     Array of points in linestring
 
-Parameter ``range``:
+:param range:
     Array of 2 points with the range (min followed by max) of the
     vertices in ``points.`` This argument is optional and is only used
     to speed processing. If you do not already have the range of your
     points, pass NULL.
 
-Parameter ``closed``:
+:param closed:
     Do point represent a shape or linestring.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_DrawStyledLineString2d =R"doc(Draw a 2D linestring using the current Linestyle, if any. If there is
 no current Linestyle, draw a solid linestring.
 
-Parameter ``nPts``:
+:param nPts:
     Number of vertices in ``pts.``
 
-Parameter ``pts``:
+:param pts:
     Array of points in linestring.
 
-Parameter ``zDepth``:
+:param zDepth:
     Display priority for all vertices.
 
-Parameter ``range``:
+:param range:
     Array of 2 points with the range (min followed by max) of the
     vertices in ``points.`` This argument is optional and is only used
     to speed processing. If you do not already have the range of your
     points, pass NULL.
 
-Parameter ``closed``:
+:param closed:
     Do point represent a shape or linestring.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_CheckICachedDraw =R"doc(Check whether we are creating a cached presentation.
 
-Returns:
+:returns:
     true if we're in the process of creating a cache presentation.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetICachedDraw =R"doc(Get the ICachedDraw interface for this ViewContext.
 
-Returns:
+:returns:
     the ICachedDraw for this context.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetIDrawGeom =R"doc(Get the IDrawGeom interface for this ViewContext. Applications should
 use this method to draw geometry in Draw methods.
 
-Returns:
+:returns:
     the IDrawGeom for this context)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetIViewDraw =R"doc(Get the IViewDraw interface for this ViewContext. Usually, but not
 always, this will be the IViewDraw from the viewport to which this
 context is attached.
 
-Returns:
+:returns:
     the IViewDraw for this context)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_SetNonSnappable =R"doc(Set geometry displayed to this view to be non-snappable
 
-Parameter ``unsnappable``:
+:param unsnappable:
     The non-snappable status.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_SetLocatePriority =R"doc(Set the locate priority for displayed geometry.
 
-Parameter ``priority``:
+:param priority:
     Hit Priority)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_SetIndexedLinePattern =R"doc(Set the line pattern in the given material from the given color index.
 
-Parameter ``elemMatSymb``:
+:param elemMatSymb:
     ElemMatSymb in which to change the line pattern.
 
-Parameter ``index``:
+:param index:
     Line style index between 0 and 7. @note This is just a helper
     method that calls ElemMatSymb::SetIndexedRasterPattern.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_SetIndexedLineWidth =R"doc(Set the line width in the given material from the given color index.
 
-Parameter ``elemMatSymb``:
+:param elemMatSymb:
     ElemMatSymb in which to change the line width.
 
-Parameter ``index``:
+:param index:
     Line weight between 0 and 31. @note This is just a helper method
     that calls ElemMatSymb::SetWidth)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_SetIndexedFillColor =R"doc(Set the fill color in the given material from the given color index.
 method instead of modifying ElemMatSymb directly.
 
-Parameter ``elemMatSymb``:
+:param elemMatSymb:
     ElemMatSymb in which to change the fill color.
 
-Parameter ``index``:
+:param index:
     Color table index value between 0 and 255. @note This is just a
     helper method that calls ElemMatSymb::SetIndexedFillColorTBGR.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_SetIndexedLineColor =R"doc(Set the line color in the given material from the given color index.
 
-Parameter ``elemMatSymb``:
+:param elemMatSymb:
     ElemMatSymb in which to change the line color.
 
-Parameter ``index``:
+:param index:
     Color table index value between 0 and 255. @note This is just a
     helper method that calls ElemMatSymb::SetIndexedLineColorTBGR.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetIndexedLineWidth =R"doc(Do a line width lookup in the current lineweight to width table.
 
-Parameter ``index``:
+:param index:
     Line weight between 0 and 31.
 
-Returns:
+:returns:
     line width in pixels)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetIndexedColor =R"doc(Do a color lookup in the current color table.
 
-Parameter ``index``:
+:param index:
     Color table index value between 0 and 255.
 
-Returns:
+:returns:
     RGBA value for index from current color table.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_ActivateOverrideMatSymb =R"doc(Change the Override ElemMatSymb for this context.)doc";
@@ -211,7 +211,7 @@ static const char * __doc_Bentley_DgnPlatform_ViewContext_ActivateOverrideMatSym
 static const char * __doc_Bentley_DgnPlatform_ViewContext_CookElemDisplayParams =R"doc(Perform the full operation of extracting the ElemDisplayParams from an
 element then calling CookDisplayParams and CookDisplayParamsOverrides.
 
-Parameter ``element``:
+:param element:
     The element to cook and output @note Does not call
     ActivateOverrideMatSymb.
 
@@ -229,17 +229,17 @@ ElemMatSymb. @note Calls ActivateMatSymb on the output.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetCurrentDisplayParams =R"doc(Get the current ElemDisplayParams.
 
-Returns:
+:returns:
     the current ElemDisplayParams.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetOverrideMatSymb =R"doc(Get the current OvrMatSymb .
 
-Returns:
+:returns:
     the current OvrMatSymb.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetElemMatSymb =R"doc(Get the current ElemMatSymb.
 
-Returns:
+:returns:
     the current ElemMatSymb. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetLevelClassMask =R"doc(Get the current LevelClassMask for this context. When a ViewContext is
@@ -247,7 +247,7 @@ first attached, the LevelClassMask is initialized from the Viewport.
 However, during the course of an operation the LevelClassMask in the
 context may be changed from its initial value.
 
-Returns:
+:returns:
     the current LevelClassMask for this ViewContext.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetDisplayPriority =R"doc(Calculate the display priority value for a given element. Display
@@ -255,7 +255,7 @@ priority is based on the priority value stored in the element header,
 the priority value of the element's level, and the priority value of
 the current model.
 
-Returns:
+:returns:
     the display priority for element. For 3D views, display priority
     is always 0.)doc";
 
@@ -270,7 +270,7 @@ DisplayPath will only be non-NULL when the context is being used to
 " re - display " an existing path. During Updates, for example, the source
 DisplayPath will be NULL.
 
-Returns:
+:returns:
     the DisplayPath for this ViewContext. @note see discussion of
     DisplayPaths in the MDL documentation.)doc";
 
@@ -280,7 +280,7 @@ can be used to tell the path from the Root model through parent
 ElementRefs to the current ElementRefP (e.g. for components of shared
 cells.)
 
-Returns:
+:returns:
     the current DisplayPath for this ViewContext. @note see discussion
     of DisplayPaths in the MDL documentation.)doc";
 
@@ -292,13 +292,13 @@ static const char * __doc_Bentley_DgnPlatform_ViewContext_GetViewport =R"doc(Get
 do not always have to be attached to an Viewport, so therefore callers
 must always test the result of this call for NULL.
 
-Returns:
+:returns:
     the Viewport. NULL if not attached to a Viewport.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetDrawPurpose =R"doc(Get the DrawPurpose specified when this ViewContext was attached to
 the current Viewport.
 
-Returns:
+:returns:
     the DrawPurpose specified in the call to DrawContext#Attach
     (drawcontext.h))doc";
 
@@ -307,7 +307,7 @@ is first attached to a Viewport, the current DgnModelRefP is the Root
 model of the Viewport. However, traversing the references for a
 Viewport the current model changes.
 
-Returns:
+:returns:
     the current DgnModelRefP for this ViewContext)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_SetViewFlags =R"doc(Sets the current state of the ViewFlags for this context's output.)doc";
@@ -318,7 +318,7 @@ ViewFlags are initialized from the Viewport's viewflags. However,
 during the course of an operation, the viewflags for the output may be
 different than those on the Viewport.
 
-Returns:
+:returns:
     the current state of the viewflags for this ViewContext.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_PopTransformClip =R"doc(Remove the most recently pushed coordinate system and clip, restoring
@@ -327,7 +327,7 @@ the local coordinate system to its previous state.)doc";
 static const char * __doc_Bentley_DgnPlatform_ViewContext_PushActiveTransform =R"doc(Push a Transform in master coordinates, creating a new local
 coordinate system and clip region.
 
-Parameter ``trans``:
+:param trans:
     the transform to push. May be NULL.
 
 See also:
@@ -337,13 +337,13 @@ static const char * __doc_Bentley_DgnPlatform_ViewContext_PushViewIndependentOri
 system will be aligned with the X,Y plane of the view coordinate
 system, oriented about the given origin.
 
-Parameter ``origin``:
+:param origin:
     Origin for rotation, in the *current* local coordinate system.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_PushClipPlanes =R"doc(Push a Transform and (optionally) a set of clip planes., creating a
 new local coordinate system and clip region.
 
-Parameter ``clipPlanes``:
+:param clipPlanes:
     Clipping planes to push. The clip region is the union of all
     convex sets in the set.
 
@@ -352,7 +352,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_PushClip =R"doc(@name Pushing and Popping Cand Clips Push a ClipVector
 
-Parameter ``clip``:
+:param clip:
     A clipping vector to push. The clip region is the intersection of
     all clipPrimitives in the vector.
 
@@ -361,7 +361,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_PushTransform =R"doc(@name Pushing and Popping Tranforms and Clips Push a Transform
 
-Parameter ``trans``:
+:param trans:
     Transform to push.
 
 See also:
@@ -373,7 +373,7 @@ text, text nodes, point cells). They do this by pushing the inverse of
 the current view-to-local transformation via
 #PushViewIndependentOrigin.
 
-Returns:
+:returns:
     true if the current local coordinate system is a view independent
     transform.)doc";
 
@@ -382,13 +382,13 @@ coordinate system. This method can be used to approximate how large
 geometry in local coordinates will appear in DgnCoordSystem::View
 units.
 
-Parameter ``origin``:
+:param origin:
     The point at which the pixel size is calculated. This point is
     only relevant in camera views, where local coordinates closer to
     the eye are larger than those further from the eye. May be NULL,
     in which case the center of the view is used.
 
-Returns:
+:returns:
     the length, in the current coordinate system units, of a unit
     bvector in the x direction in DgnCoordSystem::View, starting at
     ``origin.``)doc";
@@ -396,138 +396,138 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetLocalToFrustumTrans =R"doc(Retrieve a copy of the transform from the local coordinate system at
 the specified index into DgnCoordSystem::Frustum.
 
-Parameter ``trans``:
+:param trans:
     Transform from local coordinate system at the specified index to
     DgnCoordSystem::Frustum
 
-Parameter ``index``:
+:param index:
     Index into transform stack to return transform for.
 
-Returns:
+:returns:
     SUCCESS if there is a local coordinate system.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetCurrFrustumToLocalTrans =R"doc(Retrieve a copy of the transform from the DgnCoordSystem::Frustum to
 current local coordinate system.
 
-Parameter ``trans``:
+:param trans:
     Transform from DgnCoordSystem::Frustum to current local coordinate
     system
 
-Returns:
+:returns:
     SUCCESS if there is a current local coordinate system.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_GetCurrLocalToFrustumTrans =R"doc(Retrieve a copy of the transform from the current local coordinate
 system into DgnCoordSystem::Frustum.
 
-Parameter ``trans``:
+:param trans:
     Transform from current local coordinate system to
     DgnCoordSystem::Frustum
 
-Returns:
+:returns:
     SUCCESS if there is a current local coordinate system.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_ViewToFrustum =R"doc(Transfrom an array of points in DgnCoordSystem::View into
 DgnCoordSystem::Frustum.
 
-Parameter ``frustumPts``:
+:param frustumPts:
     An array to receive the transformed points. Must be dimensioned to
     hold ``nPts`` points.
 
-Parameter ``viewPts``:
+:param viewPts:
     Input array in DgnCoordSystem::View.
 
-Parameter ``nPts``:
+:param nPts:
     Number of points in both arrays.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_FrustumToView =R"doc(Transfrom an array of points in DgnCoordSystem::Frustum into
 DgnCoordSystem::View.
 
-Parameter ``viewPts``:
+:param viewPts:
     An array to receive the transformed points. Must be dimensioned to
     hold ``nPts`` points.
 
-Parameter ``frustumPts``:
+:param frustumPts:
     Input array in DgnCoordSystem::Frustum.
 
-Parameter ``nPts``:
+:param nPts:
     Number of points in both arrays.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_ViewToNpc =R"doc(Transfrom an array of points in DgnCoordSystem::View into
 DgnCoordSystem::Npc.
 
-Parameter ``npcPts``:
+:param npcPts:
     An array to receive the transformed points. Must be dimensioned to
     hold ``nPts`` points.
 
-Parameter ``viewPts``:
+:param viewPts:
     Input array in DgnCoordSystem::View.
 
-Parameter ``nPts``:
+:param nPts:
     Number of points in both arrays.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_NpcToView =R"doc(Transfrom an array of points in DgnCoordSystem::Npc into
 DgnCoordSystem::View.
 
-Parameter ``viewPts``:
+:param viewPts:
     An array to receive the transformed points. Must be dimensioned to
     hold ``nPts`` points.
 
-Parameter ``npcPts``:
+:param npcPts:
     Input array in DgnCoordSystem::Npc.
 
-Parameter ``nPts``:
+:param nPts:
     Number of points in both arrays.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_ViewToLocal =R"doc(Transfrom an array of points in DgnCoordSystem::View into the current
 local coordinate system.
 
-Parameter ``localPts``:
+:param localPts:
     An array to receive the transformed points. Must be dimensioned to
     hold ``nPts`` points.
 
-Parameter ``viewPts``:
+:param viewPts:
     Input array in DgnCoordSystem::View.
 
-Parameter ``nPts``:
+:param nPts:
     Number of points in both arrays.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_FrustumToLocal =R"doc(Transfrom an array of points in DgnCoordSystem::Frustum into the
 current local coordinate system.
 
-Parameter ``localPts``:
+:param localPts:
     An array to receive the transformed points. Must be dimensioned to
     hold ``nPts`` points.
 
-Parameter ``frustumPts``:
+:param frustumPts:
     Input array in DgnCoordSystem::Frustum.
 
-Parameter ``nPts``:
+:param nPts:
     Number of points in both arrays.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_LocalToView =R"doc(Transfrom an array of points in the current local coordinate system
 into DgnCoordSystem::View coordinates.
 
-Parameter ``viewPts``:
+:param viewPts:
     An array to receive the points in DgnCoordSystem::View. Must be
     dimensioned to hold ``nPts`` points.
 
-Parameter ``localPts``:
+:param localPts:
     Input array in current local coordinates,
 
-Parameter ``nPts``:
+:param nPts:
     Number of points in both arrays.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ViewContext_LocalToFrustum =R"doc(Transfrom an array of points in the current local coordinate system
 into DgnCoordSystem::Frustum coordinates.
 
-Parameter ``frustumPts``:
+:param frustumPts:
     An array to receive the points in DgnCoordSystem::Frustum. Must be
     dimensioned to hold ``nPts`` points.
 
-Parameter ``localPts``:
+:param localPts:
     Input array in current local coordinates,
 
-Parameter ``nPts``:
+:param nPts:
     Number of points in both arrays.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_SetUserPurpose =R"doc(Set user Purpose for this element MSWCharCP string value to be set as
@@ -536,7 +536,7 @@ Purpose for clip element Bentley Systems +---------------+------------
 
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetUserPurpose =R"doc(Get user Purpose
 
-Returns:
+:returns:
     SUCCESS if user Purpose is stored in the clip element Bentley
     Systems +---------------+---------------+---------------+---------
     ------+---------------+------)doc";
@@ -547,7 +547,7 @@ set as discipline for clip element. Bentley Systems +---------------+-
 
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetUserDiscipline =R"doc(Get user Discipline
 
-Returns:
+:returns:
     SUCCESS if user discipline is stored in the clip element Bentley
     Systems +---------------+---------------+---------------+---------
     ------+---------------+------)doc";
@@ -555,7 +555,7 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetClipMaskElementRef =R"doc(Get ElementRef of clip mask element DgnModelRefP modelRef of the model
 of clip object
 
-Returns:
+:returns:
     ElementRef of the clip mask element Bentley Systems +-------------
     --+---------------+---------------+---------------+---------------
     +------)doc";
@@ -563,7 +563,7 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetClipBoundElementRef =R"doc(Get ElementRef of clip boundary element modelRef of the model of clip
 object
 
-Returns:
+:returns:
     ElementRef of the Clip element Bentley Systems +---------------+--
     -------------+---------------+---------------+---------------+----
     --)doc";
@@ -571,7 +571,7 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetClipMaskElemHandle =R"doc(Get %Element handle of clip Mask element EditElemHandleR modelRef of
 the target model DgnModelRefP modelRef of the model of clip object
 
-Returns:
+:returns:
     SUCCESS if EditElemHandle is found Bentley Systems +--------------
     -+---------------+---------------+---------------+---------------+
     ------)doc";
@@ -579,7 +579,7 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetClipBoundElemHandle =R"doc(Get %Element handle of clip boundary element modelRef of the target
 model modelRef of the model of clip object
 
-Returns:
+:returns:
     SUCCESS if EditElemHandle is found Bentley Systems +--------------
     -+---------------+---------------+---------------+---------------+
     ------)doc";
@@ -587,13 +587,13 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_Remap =R"doc(Remap Forward, Bacward, Cut, Outside and Overall display styles of the
 source modelRef to target modelRef
 
-Parameter ``target``:
+:param target:
     modelRef of the target model
 
-Parameter ``source``:
+:param source:
     modelRef of the source model
 
-Returns:
+:returns:
     SUCCESS if Ids are mapped successfully Bentley Systems +----------
     -----+---------------+---------------+---------------+------------
     ---+------)doc";
@@ -601,10 +601,10 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_RemapToParent =R"doc(Remap Forward, Bacward, Cut, Outside and Overall display styles of the
 Modelref to its parent
 
-Parameter ``modelRef``:
+:param modelRef:
     of the parent of this model
 
-Returns:
+:returns:
     SUCCESS if Ids are mapped successfully Bentley Systems +----------
     -----+---------------+---------------+---------------+------------
     ---+------)doc";
@@ -612,13 +612,13 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_From =R"doc(Create object of DynamicViewSettings from existing object of
 DynamicViewSettings
 
-Parameter ``source``:
+:param source:
     constant reference to source DynamicViewSettings
 
-Parameter ``filter``:
+:param filter:
     PFXAttributeFilter callback function
 
-Parameter ``retainUniqueXAttr``:
+:param retainUniqueXAttr:
     Pass this value as true if you want XAttributes of source
     DynamicViewSettings object to be copied to destination
     DynamicViewSettings object. Bentley Systems +---------------+-----
@@ -627,97 +627,97 @@ Parameter ``retainUniqueXAttr``:
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_Init =R"doc(initialize DynamicViewSettings Bentley Systems +---------------+------
 ---------+---------------+---------------+---------------+------)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_SetFromParent =R"doc(Parameter ``value``:
+static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_SetFromParent =R"doc(:param value:
     true if DynamicViewSettings of this modelRef are same as parent's
     DynamicViewSettings Bentley Systems +---------------+-------------
     --+---------------+---------------+---------------+------)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetFromParent =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetFromParent =R"doc(:returns:
     returns true if DynamicViewSettings of this modelRef are same as
     parent's DynamicViewSettings Bentley Systems +---------------+----
     -----------+---------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_SetViewHandlerId =R"doc(sets the view handler Id
 
-Parameter ``handlerId``:
+:param handlerId:
     XAttributeHandlerId of the view element Bentley Systems +---------
     ------+---------------+---------------+---------------+-----------
     ----+------)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetViewHandlerId =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetViewHandlerId =R"doc(:returns:
     returns the view handler Id Bentley Systems +---------------+-----
     ----------+---------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_SetLevelOfDetail =R"doc(sets level of dtail.
 
-Parameter ``levelOfDetail``:
+:param levelOfDetail:
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetLevelOfDetail =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetLevelOfDetail =R"doc(:returns:
     returns level of dtail. Bentley Systems +---------------+---------
     ------+---------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_SetDisplayStyleIndex =R"doc(sets index into the display style table
 
-Parameter ``index``:
+:param index:
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetDisplayStyleIndex =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetDisplayStyleIndex =R"doc(:returns:
     returns index into the display style table Bentley Systems +------
     ---------+---------------+---------------+---------------+--------
     -------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_SetClipMaskElementId =R"doc(set ElementID of the clip mask element
 
-Parameter ``newId``:
+:param newId:
     ElementID of the clip mask element Bentley Systems +--------------
     -+---------------+---------------+---------------+---------------+
     ------)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetClipMaskElementId =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetClipMaskElementId =R"doc(:returns:
     returns ElementID of the clip mask element Bentley Systems +------
     ---------+---------------+---------------+---------------+--------
     -------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_SetClipBoundElementId =R"doc(set ElementID of the clip boundary element
 
-Parameter ``newId``:
+:param newId:
     ElementID of the clip boundary element Bentley Systems +----------
     -----+---------------+---------------+---------------+------------
     ---+------)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetClipBoundElementId =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DynamicViewSettings_GetClipBoundElementId =R"doc(:returns:
     returns ElementID of the clip boundary element Bentley Systems +--
     -------------+---------------+---------------+---------------+----
     -----------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XAttributesHolder_GetXAttribute =R"doc(Find XAttribute on this element with xAttrId
 
-Parameter ``pSize``:
+:param pSize:
     size of the XAttribute
 
-Parameter ``handlerId``:
+:param handlerId:
     XAttributeHandlerId of the XAttribute
 
-Parameter ``xAttrId``:
+:param xAttrId:
     UInt32 ID of the XAttribute
 
-Returns:
+:returns:
     void pointer pointing to XAttribute data Bentley Systems +--------
     -------+---------------+---------------+---------------+----------
     -----+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XAttributesHolder_DeleteXAttribute =R"doc(Remove an XAttribute from element
 
-Parameter ``handlerId``:
+:param handlerId:
     XAttributeHandlerId of the XAttribute
 
-Parameter ``xAttrId``:
+:param xAttrId:
     UInt32 ID of the XAttribute
 
-Returns:
+:returns:
     SUCCESS if XAttribute is added without any error Bentley Systems +
     ---------------+---------------+---------------+---------------+--
     -------------+------)doc";
@@ -874,6 +874,18 @@ void def_ViewContext(py::module_& m)
                self.LocalToFrustum(frustumPts.data(), localPts.data(), (int) nPts);
            }, "frustumPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToFrustum));
 
+    c6.def("LocalToFrustum", [] (ViewContext const& self, py::list& frustumPts, py::list const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppLocalPts.size();
+           if (cppFrustumPts.size() < nPts)
+               cppFrustumPts.resize(nPts);
+           if (nPts > 0)
+               self.LocalToFrustum(cppFrustumPts.data(), cppLocalPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           }, "frustumPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToFrustum));
+
     c6.def("LocalToView", [] (ViewContext const& self, DPoint4dArray& viewPts, DPoint3dArray const& localPts)
            {
            size_t nPts = localPts.size();
@@ -881,6 +893,16 @@ void def_ViewContext(py::module_& m)
                viewPts.resize(nPts);
            if (nPts > 0)
                self.LocalToView(viewPts.data(), localPts.data(), (int) nPts);
+           }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
+
+    c6.def("LocalToView", [] (ViewContext const& self, DPoint4dArray& viewPts, py::list const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppLocalPts.size();
+           if (viewPts.size() < nPts)
+               viewPts.resize(nPts);
+           if (nPts > 0)
+               self.LocalToView(viewPts.data(), cppLocalPts.data(), (int) nPts);
            }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
 
     c6.def("LocalToView", [] (ViewContext const& self, DPoint3dArray& viewPts, DPoint3dArray const& localPts)
@@ -892,6 +914,18 @@ void def_ViewContext(py::module_& m)
                self.LocalToView(viewPts.data(), localPts.data(), (int) nPts);
            }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
 
+    c6.def("LocalToView", [] (ViewContext const& self, py::list& viewPts, py::list const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppLocalPts.size();
+           if (cppViewPts.size() < nPts)
+               cppViewPts.resize(nPts);
+           if (nPts > 0)
+               self.LocalToView(cppViewPts.data(), cppLocalPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
+
     c6.def("FrustumToLocal", [] (ViewContext const& self, DPoint3dArray& localPts, DPoint3dArray const& frustumPts)
            {
            size_t nPts = frustumPts.size();
@@ -899,6 +933,18 @@ void def_ViewContext(py::module_& m)
                localPts.resize(nPts);
            if (nPts > 0)
                self.FrustumToLocal(localPts.data(), frustumPts.data(), (int) nPts);
+           }, "localPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToLocal));
+
+    c6.def("FrustumToLocal", [] (ViewContext const& self, py::list& localPts, py::list const& frustumPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppFrustumPts.size();
+           if (cppLocalPts.size() < nPts)
+               cppLocalPts.resize(nPts);
+           if (nPts > 0)
+               self.FrustumToLocal(cppLocalPts.data(), cppFrustumPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
            }, "localPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToLocal));
 
     c6.def("ViewToLocal", [] (ViewContext const& self, DPoint3dArray& localPts, DPoint4dArray const& viewPts)
@@ -910,6 +956,17 @@ void def_ViewContext(py::module_& m)
                self.ViewToLocal(localPts.data(), viewPts.data(), (int) nPts);
            }, "localPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToLocal));
 
+    c6.def("ViewToLocal", [] (ViewContext const& self, py::list& localPts, DPoint4dArray const& viewPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           size_t nPts = viewPts.size();
+           if (cppLocalPts.size() < nPts)
+               cppLocalPts.resize(nPts);
+           if (nPts > 0)
+               self.ViewToLocal(cppLocalPts.data(), viewPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           }, "localPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToLocal));
+
     c6.def("ViewToLocal", [] (ViewContext const& self, DPoint3dArray& localPts, DPoint3dArray const& viewPts)
            {
            size_t nPts = viewPts.size();
@@ -917,6 +974,18 @@ void def_ViewContext(py::module_& m)
                localPts.resize(nPts);
            if (nPts > 0)
                self.ViewToLocal(localPts.data(), viewPts.data(), (int) nPts);
+           }, "localPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToLocal));
+
+    c6.def("ViewToLocal", [] (ViewContext const& self, py::list& localPts, py::list const& viewPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppViewPts.size();
+           if (cppLocalPts.size() < nPts)
+               cppLocalPts.resize(nPts);
+           if (nPts > 0)
+               self.ViewToLocal(cppLocalPts.data(), cppViewPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
            }, "localPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToLocal));
 
     c6.def("NpcToView", [] (ViewContext const& self, DPoint3dArray& viewPts, DPoint3dArray const& npcPts)
@@ -928,6 +997,18 @@ void def_ViewContext(py::module_& m)
                self.NpcToView(viewPts.data(), npcPts.data(), (int) nPts);
            }, "viewPts"_a, "npcPts"_a, DOC(Bentley, DgnPlatform, ViewContext, NpcToView));
 
+    c6.def("NpcToView", [] (ViewContext const& self, py::list& viewPts, py::list const& npcPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppNpcPts.size();
+           if (cppViewPts.size() < nPts)
+               cppViewPts.resize(nPts);
+           if (nPts > 0)
+               self.NpcToView(cppViewPts.data(), cppNpcPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           }, "viewPts"_a, "npcPts"_a, DOC(Bentley, DgnPlatform, ViewContext, NpcToView));
+
     c6.def("ViewToNpc", [] (ViewContext const& self, DPoint3dArray& npcPts, DPoint3dArray const& viewPts)
            {
            size_t nPts = viewPts.size();
@@ -935,6 +1016,18 @@ void def_ViewContext(py::module_& m)
                npcPts.resize(nPts);
            if (nPts > 0)
                self.ViewToNpc(npcPts.data(), viewPts.data(), (int) nPts);
+           }, "npcPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToNpc));
+
+    c6.def("ViewToNpc", [] (ViewContext const& self, py::list& npcPts, py::list const& viewPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppViewPts.size();
+           if (cppNpcPts.size() < nPts)
+               cppNpcPts.resize(nPts);
+           if (nPts > 0)
+               self.ViewToNpc(cppNpcPts.data(), cppViewPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
            }, "npcPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToNpc));
 
     c6.def("FrustumToView", [] (ViewContext const& self, DPoint4dArray& viewPts, DPoint3dArray const& frustumPts)
@@ -946,6 +1039,16 @@ void def_ViewContext(py::module_& m)
                self.FrustumToView(viewPts.data(), frustumPts.data(), (int) nPts);
            }, "viewPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToView));
 
+    c6.def("FrustumToView", [] (ViewContext const& self, DPoint4dArray& viewPts, py::list const& frustumPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppFrustumPts.size();
+           if (viewPts.size() < nPts)
+               viewPts.resize(nPts);
+           if (nPts > 0)
+               self.FrustumToView(viewPts.data(), cppFrustumPts.data(), (int) nPts);
+           }, "viewPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToView));
+
     c6.def("FrustumToView", [] (ViewContext const& self, bvector<Point2d>& viewPts, DPoint3dArray const& frustumPts)
            {
            size_t nPts = frustumPts.size();
@@ -954,6 +1057,16 @@ void def_ViewContext(py::module_& m)
            if (nPts > 0)
                self.FrustumToView(viewPts.data(), frustumPts.data(), (int) nPts);
            }, "viewPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToView));    
+
+    c6.def("FrustumToView", [] (ViewContext const& self, bvector<Point2d>& viewPts, py::list const& frustumPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppFrustumPts.size();
+           if (viewPts.size() < nPts)
+               viewPts.resize(nPts);
+           if (nPts > 0)
+               self.FrustumToView(viewPts.data(), cppFrustumPts.data(), (int) nPts);
+           }, "viewPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToView));
 
     c6.def("ViewToFrustum", [] (ViewContext const& self, DPoint3dArray& frustumPts, DPoint4dArray const& viewPts)
            {
@@ -964,6 +1077,17 @@ void def_ViewContext(py::module_& m)
                self.ViewToFrustum(frustumPts.data(), viewPts.data(), (int) nPts);
            }, "frustumPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToFrustum));
 
+    c6.def("ViewToFrustum", [] (ViewContext const& self, py::list& frustumPts, DPoint4dArray const& viewPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           size_t nPts = viewPts.size();
+           if (cppFrustumPts.size() < nPts)
+               cppFrustumPts.resize(nPts);
+           if (nPts > 0)
+               self.ViewToFrustum(cppFrustumPts.data(), viewPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           }, "frustumPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToFrustum));
+
     c6.def("ViewToFrustum", [] (ViewContext const& self, DPoint3dArray& frustumPts, DPoint3dArray const& viewPts)
            {
            size_t nPts = viewPts.size();
@@ -971,6 +1095,18 @@ void def_ViewContext(py::module_& m)
                frustumPts.resize(nPts);
            if (nPts > 0)
                self.ViewToFrustum(frustumPts.data(), viewPts.data(), (int) nPts);
+           }, "frustumPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToFrustum));
+
+    c6.def("ViewToFrustum", [] (ViewContext const& self, py::list& frustumPts, py::list const& viewPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppViewPts.size();
+           if (cppFrustumPts.size() < nPts)
+               cppFrustumPts.resize(nPts);
+           if (nPts > 0)
+               self.ViewToFrustum(cppFrustumPts.data(), cppViewPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
            }, "frustumPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToFrustum));
     
     c6.def_property_readonly("CurrLocalToFrustumTransform", &ViewContext::GetCurrLocalToFrustumTransformCP);
@@ -1072,6 +1208,12 @@ void def_ViewContext(py::module_& m)
     c6.def("DrawStyledLineString3d", [] (ViewContext& self, DPoint3dArray const& pts, DPoint3dCP range, bool closed)
            {
            self.DrawStyledLineString3d((int) pts.size(), pts.data(), range, closed);
+           }, "pts"_a, "range"_a, "closed"_a = false, DOC(Bentley, DgnPlatform, ViewContext, DrawStyledLineString3d));
+
+    c6.def("DrawStyledLineString3d", [] (ViewContext& self, py::list const& pts, DPoint3dCP range, bool closed)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(pts, cppPts, DPoint3dArray, DPoint3d);
+           self.DrawStyledLineString3d((int) cppPts.size(), cppPts.data(), range, closed);
            }, "pts"_a, "range"_a, "closed"_a = false, DOC(Bentley, DgnPlatform, ViewContext, DrawStyledLineString3d));
 
     c6.def("DrawStyledArc2d", &ViewContext::DrawStyledArc2d, "ellipse"_a, "isEllipse"_a, "zDepth"_a, "range"_a, DOC(Bentley, DgnPlatform, ViewContext, DrawStyledArc2d));

@@ -13,44 +13,44 @@ static const char * __doc_Bentley_Geom_DPlane3d_Intersect3Planes =R"doc(Compute 
 distance from origin. ul> li>All normals are ASSUMED to be unit
 length.
 
-Returns:
+:returns:
     valid point if the three normals are independent. Otherwise
     returns origin of planeA, but marked invalid.)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_InitFromArray =R"doc( Compute the origin and normal so the plane passes
 (approximiately) through the array of points.
 
-Parameter ``[in]``:
+:param (input):
     points array of points defining the plane
 
-Returns:
+:returns:
     true if the points define a clear plane (and are close to it!!!)
     false if the points are (a) closely clustered, (b) nearly
     colinear, or (c) not close to a single plane.)doc";
 
-static const char * __doc_Bentley_Geom_DPlane3d_EvaluateRange =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPlane3d_EvaluateRange =R"doc(:returns:
     min and max signed evaluations among points in an array.
 
-Parameter ``[in]``:
+:param (input):
     points points to search
 
-Parameter ``[in]``:
+:param (input):
     n number of points
 
-Parameter ``[out]``:
+:param (output):
     maxIndex index where (signed) max occurs.
 
-Parameter ``[out]``:
+:param (output):
     minIndex index where (signed) min occurs.)doc";
 
-static const char * __doc_Bentley_Geom_DPlane3d_EvaluateMaxAbs =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPlane3d_EvaluateMaxAbs =R"doc(:returns:
     The maximum absolute value of plane evaluation among points in an
     array.
 
-Parameter ``[in]``:
+:param (input):
     points points to search
 
-Parameter ``[in]``:
+:param (input):
     n number of points.)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_EvaluateVector =R"doc( Dot the plane normal with the given vector.
@@ -60,10 +60,10 @@ Remark:
     of altitude change due to motion along by this vector. If not, it
     is a scaled distance.
 
-Parameter ``[in]``:
+:param (input):
     vector vector for evaluation
 
-Returns:
+:returns:
     dot product)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_Evaluate =R"doc( Dot the plane normal with the vector from the plane
@@ -73,27 +73,27 @@ Remark:
     s If the plane normal is a unit vector, this is the true distance
     from the plane to the point. If not, it is a scaled distance.
 
-Parameter ``[in]``:
+:param (input):
     point point for evaluation
 
-Returns:
+:returns:
     dot product)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_ProjectPoint =R"doc( Project a (generally off-plane) point onto the plane.
 
-Parameter ``[out]``:
+:param (output):
     projection projection of point onto the plane
 
-Parameter ``[in]``:
+:param (input):
     point point to project to plane
 
-Returns:
+:returns:
     true if the plane has a well defined normal.)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_IsZero =R"doc( Test if the numeric entries in the plane are all
 absolutely zero (no tolerances).
 
-Returns:
+:returns:
     true if the plane contains only zero coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_Zero =R"doc( Fill the plane data with zeros.)doc";
@@ -105,66 +105,66 @@ Remark:
     the plane equation with negated d, i.e. ax+by+cz+d=0. If so, pass
     in (a,b,c,-d).
 
-Parameter ``[out]``:
+:param (output):
     coffA 4D plane x-coefficient
 
-Parameter ``[out]``:
+:param (output):
     coffB 4D plane y-coefficient
 
-Parameter ``[out]``:
+:param (output):
     coffC 4D plane z-coefficient
 
-Parameter ``[out]``:
+:param (output):
     coffD 4D plane constant coefficient)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_GetDPoint4d =R"doc( Return the plane as a DPoint4d.
 
-Parameter ``[out]``:
+:param (output):
     hPlane 4D plane coefficients)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_Init =R"doc( Extract origin and normal from 4D plane coefficients.
 
-Parameter ``[in]``:
+:param (input):
     hPlane 4D plane coefficients
 
-Returns:
+:returns:
     true if plane has a nonzero normal)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_InitFrom3Points =R"doc( Initialize with first point as origin, normal as
 unnormalized cross product of vectors to 2nd and 3rd points.
 
-Parameter ``[in]``:
+:param (input):
     origin origin point
 
-Parameter ``[in]``:
+:param (input):
     xPoint first point in plane (e.g., x-axis point)
 
-Parameter ``[in]``:
+:param (input):
     yPoint second point in plane (e.g., y-axis point))doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_Normalize =R"doc( Normalize the plane vector.
 
-Returns:
+:returns:
     true if normal vector has nonzero length.)doc";
 
 static const char * __doc_Bentley_Geom_DPlane3d_InitFromOriginAndNormal =R"doc( Store origin and unnormalized vector.
 
-Parameter ``[in]``:
+:param (input):
     x0 x-coordinate of origin point
 
-Parameter ``[in]``:
+:param (input):
     y0 y-coordinate of origin point
 
-Parameter ``[in]``:
+:param (input):
     z0 z-coordinate of origin point
 
-Parameter ``[in]``:
+:param (input):
     ux x-coordinate of normal vector
 
-Parameter ``[in]``:
+:param (input):
     uy y-coordinate of normal vector
 
-Parameter ``[in]``:
+:param (input):
     uz z-coordinate of normal vector)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -213,15 +213,33 @@ void def_DPlane3d(py::module_& m)
     c1.def("Evaluate", &DPlane3d::Evaluate, "point"_a, DOC(Bentley, Geom, DPlane3d, Evaluate));
     c1.def("EvaluateVector", &DPlane3d::EvaluateVector, "vector"_a, DOC(Bentley, Geom, DPlane3d, EvaluateVector));
     c1.def("EvaluateMaxAbs", py::overload_cast<DPoint3dArray const&>(&DPlane3d::EvaluateMaxAbs, py::const_), "points"_a, DOC(Bentley, Geom, DPlane3d, EvaluateMaxAbs));
+    c1.def("EvaluateMaxAbs", [](DPlane3dCR self, py::list const& points)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+        return self.EvaluateMaxAbs(cppPoints);
+        }, "points"_a, DOC(Bentley, Geom, DPlane3d, EvaluateMaxAbs));
     c1.def("EvaluateRange", [] (DPlane3dCR self, DPoint3dArray const& points)
         {
         size_t minIndex, maxIndex;
         DRange1d range = self.EvaluateRange(points, minIndex, maxIndex);
         return py::make_tuple(range, minIndex, maxIndex);
         }, "points"_a, DOC(Bentley, Geom, DPlane3d, EvaluateRange));
-
+    
+    c1.def("EvaluateRange", [] (DPlane3dCR self, py::list const& points)
+        {
+        size_t minIndex, maxIndex;
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+        DRange1d range = self.EvaluateRange(cppPoints, minIndex, maxIndex);
+        return py::make_tuple(range, minIndex, maxIndex);
+        }, "points"_a, DOC(Bentley, Geom, DPlane3d, EvaluateRange));
     c1.def("InitFromArray", py::overload_cast<DPoint3dArray const&>(&DPlane3d::InitFromArray), "points"_a, DOC(Bentley, Geom, DPlane3d, InitFromArray));
 
+    c1.def("InitFromArray", [] (DPlane3d& self, py::list const& points)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+        return self.InitFromArray(cppPoints);
+        }, "points"_a, DOC(Bentley, Geom, DPlane3d, InitFromArray));
+       
     c1.def_static("Intersect3Planes",
                   py::overload_cast<DVec3dCR, double, DVec3dCR, double, DVec3dCR, double>(&DPlane3d::Intersect3Planes),
                   "unitNormalA"_a, "distanceA"_a, "unitNormalB"_a, "distanceB"_a, "unitNormalC"_a, "distanceC"_a, DOC(Bentley, Geom, DPlane3d, Intersect3Planes));

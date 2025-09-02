@@ -11,21 +11,21 @@
 
 
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_DisclosePointers =R"doc(Reports all elements referenced by this path. This function differs
-from EvaluateElement in several ways:\li EvaluateElement returns only
+from EvaluateElement in several ways: EvaluateElement returns only
 the root element, while this function returns the root element *and*
 all of the intermediate elements used to reach the root. If this path
 includes DgnAttachments, shared cell definitions, feature solid
-headers, etc., they are reported by this function. \li EvaluateElement
+headers, etc., they are reported by this function.  EvaluateElement
 reports the modelref of the root element, while this function does
-not. \li EvaluateElement will fail if the root element or any
+not.  EvaluateElement will fail if the root element or any
 intermediate element is deleted. This function will return deleted
 elements, if they were deleted within the same session. This can be
 helpful when validating relationships in the course of a transaction.
 
-Parameter ``refs``:
+:param refs:
     Where to store root ElementRefs.
 
-Parameter ``dependentModel``:
+:param dependentModel:
     The model that contains the dependent element.
 
 Remark:
@@ -40,20 +40,20 @@ then there is no need to call #OnPreprocessCopyRemapIds.)doc";
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_OnPreprocessCopyRemapIds =R"doc(Phase II of copying a persistent display path:remap the display's IDs
 to copied root elements
 
-Parameter ``hostElement``:
+:param hostElement:
     The host element.
 
-Parameter ``unused``:
+:param unused:
     For future use. Always pass false.
 
-Parameter ``defaultToOriginal``:
+:param defaultToOriginal:
     If root has not been copied, should the copied path point to the
     original root?
 
-Parameter ``opt``:
+:param opt:
     How to handle pointers between models.
 
-Returns:
+:returns:
     non-zero error status if the remapping failed and the displaypath
     should be dropped.
 
@@ -66,16 +66,16 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_OnPreprocessCopy =R"doc(Phase I of copying a persistent display path:deep-copy root elements
 and/or replace stored IDs with remap keys
 
-Parameter ``opt``:
+:param opt:
     How to handle pointers between models.
 
-Parameter ``cc``:
+:param cc:
     The copy context.
 
-Parameter ``hostElement``:
+:param hostElement:
     The element that contains the XAttribute.
 
-Returns:
+:returns:
     non-zero error status if the display path cannot be copied and
     should be dropped
 
@@ -96,25 +96,25 @@ elements are in different models and/or root is a shared cell
 instance, then this function will detect that the path points to the
 DgnAttachment element(s), the shared cell definition element, etc.
 
-Parameter ``root``:
+:param root:
     The element to look for.
 
-Parameter ``dependentModel``:
+:param dependentModel:
     The model that contains the dependent element.
 
-Returns:
+:returns:
     true if *root* appears anywhere in the path, or false if it does
     not appear or if the path could not be evaluated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_EqualElementRef =R"doc(Test if *root* is the root element of this path
 
-Parameter ``root``:
+:param root:
     The element to find
 
-Parameter ``dependentModel``:
+:param dependentModel:
     The model that contains the dependent element.
 
-Returns:
+:returns:
     true if *root* is the root element of this path. False if the root
     is a different element or if the path could not be evaluated.
 
@@ -134,10 +134,10 @@ want to learn more about a path that fails to evaluate.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_EvaluateElementRef =R"doc(Get the root element.
 
-Parameter ``dependentModel``:
+:param dependentModel:
     The model that contains the dependent element.
 
-Returns:
+:returns:
     an element handle that identifies the root element or an invalid
     handle if the path could not be evaluated.
 
@@ -153,11 +153,11 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_EvaluateElementFromHost =R"doc(Get the root element.
 
-Returns:
+:returns:
     an ElementHandle that identifies the root element or an invalid
     handle if the path could not be evaluated.
 
-Parameter ``referenceHolder``:
+:param referenceHolder:
     Identifies the dependent element. This is normally the element
     that owns the XAttribute that contains this PeristentElementPath.
 
@@ -167,32 +167,32 @@ Remark:
     useful if you have an ElementHandle that identifies the dependent
     element element but a) you are not sure if the handle contains a
     model or an element ref, and b) you don't care if the returned
-    handle has a model or not. \li If *referenceHolder* has a
+    handle has a model or not.  If *referenceHolder* has a
     DgnModelRef, then this function calls EvaluateElement
-    (DgnModelRefP). \li Else, if *referenceHolder* has an ElementRefP,
-    then this function calls EvaluateElementRef. \li Else, this
+    (DgnModelRefP).  Else, if *referenceHolder* has an ElementRefP,
+    then this function calls EvaluateElementRef.  Else, this
     function returns an invalid EditElementHandle.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_EvaluateElement =R"doc(Get the root element.
 
-Parameter ``dependentModel``:
+:param dependentModel:
     The model that contains the dependent element.
 
-Returns:
+:returns:
     an ElementHandle that identifies the root element or an invalid
     handle if the path could not be evaluated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_GetDisplayPath =R"doc(Resolve the reference to the root element.
 
-Parameter ``dependentModel``:
+:param dependentModel:
     The model that contains the dependent element.
 
-Returns:
+:returns:
     NULL if the root element is not found or not available.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_ToWString =R"doc(Serialize the state of this PersistentElementPath
 
-Returns:
+:returns:
     string that captures the persistent state of PersistentElementPath
 
 See also:
@@ -200,10 +200,10 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_PersistentElementPath_FromWString =R"doc(Recreate a PersistentElementPath from stored state
 
-Parameter ``source``:
+:param source:
     Previously stored state.
 
-Returns:
+:returns:
     non-zero error status if the state is invalid
 
 See also:
@@ -286,7 +286,7 @@ void def_PersistentElementPath(py::module_& m)
     c1.def("Load", [] (PersistentElementPath& self, py::bytes const& data)
            {
            std::string strData = data.cast<std::string>();
-           return self.Load((byte const*) strData.data(), strData.size());
+           return self.Load((Byte const*) strData.data(), strData.size());
            }, "data"_a);
 
     c1.def("FromWString", &PersistentElementPath::FromWString, "source"_a, DOC(Bentley, DgnPlatform, PersistentElementPath, FromWString));

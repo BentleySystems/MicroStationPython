@@ -14,34 +14,34 @@ static const char * __doc_MstnPlatform_MSElementDescr_Fillet =R"doc(@description
 the specified elements. Optionally, a template element can be
 specified from which the symbology settings are copied.
 
-Parameter ``fillet``:
+:param fillet:
     is the element descriptor for the fillet arc element after it is
     created.
 
-Parameter ``pTemplate``:
+:param pTemplate:
     is an element from which the symbology settings are copied to the
     fillet arc.
 
-Parameter ``in0EdP``:
+:param in0EdP:
     is the first element to fillet.
 
-Parameter ``in1EdP``:
+:param in1EdP:
     is the second element to fillet.
 
-Parameter ``inputRadius``:
+:param inputRadius:
     is the desired fillet arc radius.
 
-Parameter ``inputPoint``:
+:param inputPoint:
     indicates which fillet is desired by proximity. For example, if
     the elements to fillet include two intersecting lines, there are
     four possible fillets that could be created (assuming the radius
     value does not preclude any of the four). The fillet closest to
     the given point is the fillet that is selected and created.
 
-Parameter ``inputRotMatrix``:
+:param inputRotMatrix:
     is the rotation matrix to apply to the fillet. This may be NULL.
 
-Returns:
+:returns:
     SUCCESS if the fillet can be created, otherwise ERROR.
 
 Remark:
@@ -56,14 +56,14 @@ element the symbology values for color, weight, style, level, graphic
 group number and class. If the element is not a graphic element only
 its level will be printed.
 
-Parameter ``edP``:
+:param edP:
     is the element descriptor to get the information from to print.
 
-Parameter ``currentIndent``:
+:param currentIndent:
     is the number of character spaces to indent the information before
     printing.
 
-Returns:
+:returns:
     Always returns SUCCESS
 
 Remark:
@@ -73,10 +73,10 @@ Remark:
 
 static const char * __doc_MstnPlatform_MSElementDescr_HasLineStyle =R"doc(@description Queries if an element descriptor has line style.
 
-Parameter ``lineStyleEdP``:
+:param lineStyleEdP:
     is the element descriptor to query.
 
-Returns:
+:returns:
     true if the elements descriptor has line style.
 
 Remark:
@@ -88,10 +88,10 @@ static const char * __doc_MstnPlatform_MSElementDescr_IsGroupedHole =R"doc(@desc
 element; i.e., an element that has a hole punched in it (such as can
 be created with MSElementDescr.CreateShapeWithHoles).
 
-Parameter ``groupEdP``:
+:param groupEdP:
     is the element descriptor to query.
 
-Returns:
+:returns:
     true if the elements descriptor is a grouped hole element.
 
 See also:
@@ -106,10 +106,10 @@ static const char * __doc_MstnPlatform_MSElementDescr_IsOpen =R"doc(@description
 i.e., a line, line string, curve, open B-Spline curve or complex
 chain.
 
-Parameter ``edP``:
+:param edP:
     is the element descriptor to query.
 
-Returns:
+:returns:
     true if the element descriptor is an open element.
 
 See also:
@@ -124,10 +124,10 @@ Remark:
 static const char * __doc_MstnPlatform_MSElementDescr_IsClosed =R"doc(@description Queries if an element descriptor is a closed element;
 i.e., a shape, complex shape, ellipse or closed B-spline curve.
 
-Parameter ``edP``:
+:param edP:
     is the element descriptor to query.
 
-Returns:
+:returns:
     true if the element descriptor is a closed element.
 
 See also:
@@ -144,31 +144,31 @@ the open element, edP. Valid element types include lines, linestrings,
 arcs, curves, B-spline curves, multilines, complex chains and complex
 shapes.
 
-Parameter ``startP``:
+:param startP:
     the starting point for the curve; pass NULL for argument if you do
     not need or want this value.
 
-Parameter ``startTangentP``:
+:param startTangentP:
     start tangent
 
-Parameter ``endP``:
+:param endP:
     the ending point for the curve; pass NULL for argument if you do
     not need or want this value.
 
-Parameter ``endTangentP``:
+:param endTangentP:
     end tangent
 
-Parameter ``edP``:
+:param edP:
     element descriptor
 
-Parameter ``modelRef``:
+:param modelRef:
     is used only if the input element is a multiline.
 
 Remark:
     s This function is included in the object library mdllib.ml. This
     library must be linked into any application calling this function.
 
-Returns:
+:returns:
     Returns SUCCESS if the element is successfully reversed and
     MDLERR_BADTYPE if the element type is invalid.
 
@@ -182,16 +182,16 @@ that the viewMask argument determines the views in which element
 descriptor is displayed (see Element.DisplayInSelectedViews for a
 discussion of viewMask).
 
-Parameter ``elemDescr``:
+:param elemDescr:
     pointer to elemDscr displayed
 
-Parameter ``modelRef``:
+:param modelRef:
     element source
 
-Parameter ``drawMode``:
+:param drawMode:
     drawing mode
 
-Parameter ``viewMask``:
+:param viewMask:
     one bit per view
 
 See also:
@@ -208,22 +208,22 @@ except that the viewMask argument determines the views in which
 element descriptor is displayed (see Element.DisplayInSelectedViews
 for a discussion of viewMask).
 
-Parameter ``filePos``:
+:param filePos:
     file position of element
 
-Parameter ``modelRef``:
+:param modelRef:
     element source
 
-Parameter ``elP``:
+:param elP:
     optional
 
-Parameter ``drawMode``:
+:param drawMode:
     drawing mode
 
-Parameter ``viewMask``:
+:param viewMask:
     one bit per view
 
-Returns:
+:returns:
     Returns SUCCESS if the element is displayed and ERROR if filePos
     is invalid.
 
@@ -244,16 +244,16 @@ element descriptor does not exist, pass NULL for elemDscrP and
 MicroStation will re-read the elements from the cache. Doing so adds
 some overhead, so always pass the element descriptor if it exists.
 
-Parameter ``elemDescr``:
+:param elemDescr:
     element descr to delete
 
-Parameter ``filePos``:
+:param filePos:
     file position
 
-Parameter ``modelRef``:
+:param modelRef:
     the model containing the element(s)
 
-Parameter ``display``:
+:param display:
     If display is true, MicroStation erases the elements from the
     screen as it deletes them. Otherwise, it does not erase them.
 
@@ -261,7 +261,7 @@ Remark:
     s MicroStation remembers the MSElementDescr.UndoableDelete function,
     so the user can undo it.
 
-Returns:
+:returns:
     If the element is deleted, returns SUCCESS. If it fails, it sets
     mdlErrno and returns one of the following:MDLERR_READONLY,
     MDLERR_WRITEINHIBIT, MDLERR_BADELEMENT or MDLERR_MODIFYCOMPLEX.
@@ -281,13 +281,13 @@ elemDscrP and MicroStation will re-read the elements from the cache.
 Doing so adds some overhead to MSElementDescr.UndoableDelete, so always
 pass the element descriptor if it exists.
 
-Parameter ``elemDescrP``:
+:param elemDescrP:
     element descr to delete
 
-Parameter ``filePos``:
+:param filePos:
     file position
 
-Parameter ``display``:
+:param display:
     If display is true, MicroStation erases the elements from the
     screen as it deletes them. Otherwise, it does not erase them.
 
@@ -295,7 +295,7 @@ Remark:
     s MicroStation remembers the MSElementDescr.UndoableDelete function,
     so the user can undo it.
 
-Returns:
+:returns:
     If the element is deleted, returns SUCCESS. If it fails, it sets
     mdlErrno and returns one of the following:MDLERR_READONLY,
     MDLERR_WRITEINHIBIT, MDLERR_BADELEMENT or MDLERR_MODIFYCOMPLEX.
@@ -312,13 +312,13 @@ static const char * __doc_MstnPlatform_MSElementDescr_Rewrite =R"doc(@descriptio
 to by oldElemDscrP with the new element(s) pointed to by newElemDscrP
 at file position filePos.
 
-Parameter ``newElemDscr``:
+:param newElemDscr:
     new elements
 
-Parameter ``oldElemDscr``:
+:param oldElemDscr:
     for compatibility with previous releases. Ignored, just pass NULL!
 
-Parameter ``filePos``:
+:param filePos:
     file position
 
 Remark:
@@ -338,7 +338,7 @@ Remark:
     s MicroStation remembers the MSElementDescr.Rewrite function, so the
     user can undo it.
 
-Returns:
+:returns:
     Returns the file position of the element added to the design file.
     If the two elements are the same size, this file position is the
     same as filePos.
@@ -361,13 +361,13 @@ that the element is extruded by the thickness distance. The
 MSElementDescr.GetThicknessEdP function will return a solid or surface
 element that represents an element with thickness
 
-Parameter ``edP``:
+:param edP:
     a planar element with a non-zero thickness.
 
-Parameter ``modelRef``:
+:param modelRef:
     the modelRef for the element.
 
-Returns:
+:returns:
     If the element has a non-zero thickness then a surface or solid
     element representing the extrusion, else NULL is returned.
 
@@ -380,22 +380,22 @@ static const char * __doc_MstnPlatform_MSElementDescr_PointAtDistance =R"doc(@de
 the element. All input parameters are specified in the current
 coordinate system.
 
-Parameter ``position``:
+:param position:
     point on element
 
-Parameter ``tangent``:
+:param tangent:
     tangent direction
 
-Parameter ``inputDistance``:
+:param inputDistance:
     distance along elm
 
-Parameter ``edP``:
+:param edP:
     element
 
-Parameter ``inputTolerance``:
+:param inputTolerance:
     stroking tolerance
 
-Returns:
+:returns:
     Returns SUCCESS if it functions correctly and a non-zero error
     status otherwise.
 
@@ -406,16 +406,16 @@ Remark:
 
 static const char * __doc_MstnPlatform_MSElementDescr_OrientationExt =R"doc(@description return a natural coordinate frame for the element.
 
-Parameter ``pTransform``:
+:param pTransform:
     coordinate frame.
 
-Parameter ``pSourceDescr``:
+:param pSourceDescr:
     source element
 
-Parameter ``modelRef``:
+:param modelRef:
     source model ref.
 
-Returns:
+:returns:
     SUCCESS for graphic elements which allow an orientation.
 
 Remark:
@@ -426,31 +426,31 @@ Remark:
 static const char * __doc_MstnPlatform_MSElementDescr_ExtractNormalWithTolerance =R"doc(@description Used to find the normal vector of an element, with user-
 defined tolerance for planarity test.
 
-Parameter ``normal``:
+:param normal:
     is a vector normal to the element.
 
-Parameter ``point``:
+:param point:
     is a point on the element.
 
-Parameter ``edP``:
+:param edP:
     is the element to which the normal will be found.
 
-Parameter ``inputDefaultNormal``:
+:param inputDefaultNormal:
     is a reference vector used only if the element normal is
     ambiguous, as is the case for a line element. In this case,
     inputDefaultNormal is a default vector in the plane of the line
     and the returned normal.
 
-Parameter ``absTol``:
+:param absTol:
     is a user-defined absTol tolerance.
 
-Parameter ``localRelTol``:
+:param localRelTol:
     is a user-defined local tolerance.
 
-Parameter ``globalRelTol``:
+:param globalRelTol:
     is a user-defined global tolerance.
 
-Returns:
+:returns:
     SUCCESS if the normal vector is returned, MDLERR_NONPLANARELEMENT
     if an average normal vector is returned.
 
@@ -463,22 +463,22 @@ See also:
 static const char * __doc_MstnPlatform_MSElementDescr_ExtractNormalTight =R"doc(@description Used to find the normal vector of an element, with tight
 tolerance for planarity test.
 
-Parameter ``normal``:
+:param normal:
     is a vector normal to the element.
 
-Parameter ``point``:
+:param point:
     is a point on the element.
 
-Parameter ``edP``:
+:param edP:
     is the element to which the normal will be found.
 
-Parameter ``inputDefaultNormal``:
+:param inputDefaultNormal:
     is a reference vector used only if the element normal is
     ambiguous, as is the case for a line element. In this case,
     inputDefaultNormal is a default vector in the plane of the line
     and the returned normal.
 
-Returns:
+:returns:
     SUCCESS if the normal vector is returned, MDLERR_NONPLANARELEMENT
     if an average normal vector is returned.
 
@@ -492,22 +492,22 @@ static const char * __doc_MstnPlatform_MSElementDescr_ExtractNormal =R"doc(@desc
 incredibly coarse classic IGDS/Microstation tolerance of 100 UORS. Use
 MSElementDescr.ExtractNormalTight to get a tighter tolerance.
 
-Parameter ``normal``:
+:param normal:
     is a vector normal to the element.
 
-Parameter ``point``:
+:param point:
     is a point on the element.
 
-Parameter ``edP``:
+:param edP:
     is the element to which the normal will be found.
 
-Parameter ``inputDefaultNormal``:
+:param inputDefaultNormal:
     is a reference vector used only if the element normal is
     ambiguous, as is the case for a line element. In this case,
     inputDefaultNormal is a default vector in the plane of the line
     and the returned normal.
 
-Returns:
+:returns:
     SUCCESS if the normal vector is returned, MDLERR_NONPLANARELEMENT
     if an average normal vector is returned.
 
@@ -525,16 +525,16 @@ that points to the element at position filePos from modelRef. If the
 element does not exist, pass NULL.
 
 
-Parameter ``filePos``:
+:param filePos:
     file position
 
-Parameter ``modelRef``:
+:param modelRef:
     element source
 
-Parameter ``el``:
+:param el:
     element (or NULL)
 
-Parameter ``drawMode``:
+:param drawMode:
     determines how MicroStation displays the element(s). @Remarks
     Possible values for drawMode are as follows:<table border=" 1 ">
     <caption></caption> <tr> <th>drawMode</th> <th>drawMode field
@@ -543,7 +543,7 @@ Parameter ``drawMode``:
     <td>Erase the element(s).</td> </tr> <tr> <td>HILITE</td> <td>Draw
     the element(s) in the current highlight color.</td> </tr> </table>
 
-Returns:
+:returns:
     Returns SUCCESS if the element is read and displayed and ERROR if
     filePos is invalid.
 
@@ -560,13 +560,13 @@ static const char * __doc_MstnPlatform_MSElementDescr_DisplaySingle =R"doc(@desc
 that it displays a single element descriptor and will not display the
 elements pointed to by elemDescr->next.
 
-Parameter ``elemDescr``:
+:param elemDescr:
     element to display
 
-Parameter ``modelRef``:
+:param modelRef:
     element source
 
-Parameter ``drawMode``:
+:param drawMode:
     display mode @Remarks Possible values for drawMode are as follows:
     <table border=" 1 "> <caption></caption> <tr> <th>drawMode</th>
     <th>drawMode field meaning</th> </tr> <tr>
@@ -586,14 +586,14 @@ Remark:
 static const char * __doc_MstnPlatform_MSElementDescr_DisplayInView =R"doc(@description Used to display the contents of the specified element
 descriptor in the specified view window using the given drawing mode.
 
-Parameter ``edP``:
+:param edP:
     is the element descriptor indicating the element to draw in the
     given view.
 
-Parameter ``modelRef``:
+:param modelRef:
     indicates the model containing the element.
 
-Parameter ``drawMode``:
+:param drawMode:
     is one of the drawing mode values. @Remarks Possible values for
     drawMode are as follows:<table border=" 1 "> <caption></caption>
     <tr> <th>drawMode</th> <th>drawMode field meaning</th> </tr> <tr>
@@ -602,7 +602,7 @@ Parameter ``drawMode``:
     element(s).</td> </tr> <tr> <td>HILITE</td> <td>Draw the
     element(s) in the current highlight color.</td> </tr> </table>
 
-Parameter ``gwP``:
+:param gwP:
     window to display element in
 
 See also:
@@ -618,17 +618,17 @@ in the views specified by viewMask if the descriptors modelRef can be
 reached from the root modelRef of the view. Useful for displaying
 changes in dependency callbacks.
 
-Parameter ``elemDescr``:
+:param elemDescr:
     elements to display
 
-Parameter ``drawMode``:
+:param drawMode:
     determines how MicroStation displays the element(s).
 
-Parameter ``activeModel``:
+:param activeModel:
     determines the display transformation and clipping to be applied
     to the element(s) as they are drawn.
 
-Parameter ``viewMask``:
+:param viewMask:
     which views to display in @Remarks Possible values for drawMode
     are as follows:<table border=" 1 "> <caption></caption> <tr>
     <th>drawMode</th> <th>drawMode field meaning</th> </tr> <tr>
@@ -650,14 +650,14 @@ Remark:
 static const char * __doc_MstnPlatform_MSElementDescr_Display =R"doc(@description Displays the element descriptor pointed to by elemDscrP
 in all active views.
 
-Parameter ``elemDescr``:
+:param elemDescr:
     elements to display
 
-Parameter ``modelRef``:
+:param modelRef:
     determines the display transformation and clipping to be applied
     to the element(s) as they are drawn.
 
-Parameter ``drawMode``:
+:param drawMode:
     determines how MicroStation displays the element(s). @Remarks
     Possible values for drawMode are as follows:<table border=" 1 ">
     <caption></caption> <tr> <th>drawMode</th> <th>drawMode field
@@ -684,13 +684,13 @@ element is from the active design file the various asynch hooks are
 called and the element is recorded in the undo buffer. The supplied
 modelRef must be open for write access.
 
-Parameter ``elemDescr``:
+:param elemDescr:
     appended to file
 
-Parameter ``modelRef``:
+:param modelRef:
     the model to append to.
 
-Returns:
+:returns:
     Returns SUCCESS if the element is appended successfully and ERROR
     otherwise. If an error occurs, the file position is set to zero
     and the global variable mdlErrno is set to the specific error
@@ -720,10 +720,10 @@ Remark:
     s MicroStation remembers the MSElementDescr.Add and MSElementDescr.Append
     functions, so the user can undo them.
 
-Parameter ``elemDescrP``:
+:param elemDescrP:
     appended to file
 
-Returns:
+:returns:
     Returns the file position of the first element added to the design
     file. If an error occurs, the file position is set to zero and the
     global variable mdlErrno is set to the specific error cause.
@@ -753,10 +753,10 @@ Remark:
     s MicroStation remembers the MSElementDescr.Add and MSElementDescr.Append
     functions, so the user can undo them.
 
-Parameter ``elemDescr``:
+:param elemDescr:
     added to file
 
-Returns:
+:returns:
     Returns the file position of the first element added to the design
     file. If an error occurs, the file position is set to zero and the
     global variable mdlErrno is set to the specific error cause.
@@ -771,7 +771,7 @@ See also:
 
 
 BEGIN_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE
-struct MSElementDescr {};
+struct mdlElmdscrFunc {};
 END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE
 
 
@@ -780,8 +780,7 @@ END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE
 +---------------+---------------+---------------+---------------+---------------+------*/
 void def_mselmdsc(py::module_& m)
     {
-
-    py::class_<Bentley::MstnPlatform::MSPython::MSElementDescr> c1(m, "MSElementDescr"); 
+    py::class_<Bentley::MstnPlatform::MSPython::mdlElmdscrFunc> c1(m, "mdlElmdscrFunc");
 
     c1.def_static("GetFilePos", &mdlElmdscr_getFilePos, "elDscr"_a);
     c1.def_static("IsPersistent", &mdlElmdscr_isPersistent, "elDscr"_a);
@@ -1033,6 +1032,22 @@ void def_mselmdsc(py::module_& m)
               points.resize(nPoints);
               std::copy(pPnts, pPnts + nPoints, points.begin());
               dlmSystem_mdlFree(pPnts);
+              }
+          return retVal;
+          }, "points"_a, "edP"_a, "tol"_a);
+
+    c1.def_static("Stroke", [] (py::list& points, MSElementDescrP edP, double tol)
+          {
+          DPoint3dArray cppPoints;
+          DPoint3dP pPnts = nullptr;
+          int nPoints = 0;
+          auto retVal = mdlElmdscr_stroke(&pPnts, &nPoints, edP, tol);
+          if (retVal == SUCCESS && nullptr != pPnts && nPoints > 0)
+              {
+              cppPoints.resize(nPoints);
+              std::copy(pPnts, pPnts + nPoints, cppPoints.begin());
+              dlmSystem_mdlFree(pPnts);
+              CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
               }
           return retVal;
           }, "points"_a, "edP"_a, "tol"_a);

@@ -13,104 +13,104 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnECUnit_FromID =R"doc(Initialize from invariant ID.
 
-Parameter ``id``:
+:param id:
     Invariant ID string
 
-Returns:
+:returns:
     A DgnECUnit corresponding to the invariant ID. Does not validate
     ECUnit names against the schema.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnECUnit_GetID =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnECUnit_GetID =R"doc(:returns:
     the invariant ID of this unit.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnECUnit_GetWorkingUnit =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnECUnit_GetWorkingUnit =R"doc(:returns:
     the working unit associated with this DgnECUnit)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnECUnit_GetECUnitName =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnECUnit_GetECUnitName =R"doc(:returns:
     the name of the ECUnit, or NULL if not an ECUnit)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnECUnit_IsWorkingUnit =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnECUnit_IsWorkingUnit =R"doc(:returns:
     true if this unit specifies a working unit)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnECUnit_IsECUnit =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnECUnit_IsECUnit =R"doc(:returns:
     true if this unit represents an ECUnit. Does not validate the unit
     name actually exists in the standard units schema)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnECUnit_IsSpecified =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnECUnit_IsSpecified =R"doc(:returns:
     true if this unit represents an ECUnit or a Working Unit)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECTypeAdapter_GetForArrayMember =R"doc(Obtain a type adapter for members of the specified array property. If
 the property specifies a MemberExtendedType custom attribute, it will
 be used to locate the type adapter.
 
-Parameter ``arrayProperty``:
+:param arrayProperty:
     The array property for which to obtain a member type adapter
 
-Returns:
+:returns:
     a type adapter for members of the specified array property)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECTypeAdapter_GetForProperty =R"doc(Obtain a type adapter for the specified property. If the property
 specifies an ExtendType custom attribute, it will be used to locate
 the type adapter.
 
-Parameter ``ecProperty``:
+:param ecProperty:
     The property for which to obtain a type adapter
 
-Returns:
+:returns:
     a type adapter for the specified property)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECTypeAdapter_GetStandardValues =R"doc(Get a list of strings representing permissible values for this
 property
 
-Parameter ``values``:
+:param values:
     Permissible values, as a list of user-friendly strings
 
-Parameter ``context``:
+:param context:
     The context under which to evaluate
 
-Returns:
+:returns:
     true if the list of permissible values was populated successfully)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECTypeAdapter_Validate =R"doc(Determine if the proposed value is valid for the ECProperty specified
 by the context
 
-Parameter ``v``:
+:param v:
     The proposed value
 
-Parameter ``context``:
+:param context:
     The context in which to evaluate
 
-Returns:
+:returns:
     true if the value is valid for the property)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECStandaloneTypeAdapterContext_ReInitialize =R"doc(Re-initialize this context If instance can be cast to DgnECInstance
 and the file/modelRef/elemRef arguments are NULL, they will be taken
 from the DgnECInstance
 
-Parameter ``ecproperty``:
+:param ecproperty:
     The ECProperty the type adapter will operate on
 
-Parameter ``instance``:
+:param instance:
     The IECInstance which will supply the property values
 
-Parameter ``accessString``:
+:param accessString:
     The access string of the property within the instance.
 
-Parameter ``componentIndex``:
+:param componentIndex:
     For point properties, the component index (x=0,y=1,z=2) if the
     type adapter should operate only on a single component of the
     point
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The DgnFile from which the property value originated
 
-Parameter ``modelRef``:
+:param modelRef:
     The DgnModelRef associated with the property value
 
-Parameter ``elemRef``:
+:param elemRef:
     The ElementRef associated with the property value
 
-Returns:
+:returns:
     true if the context was successfully re-initialized)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnECTypeAdapterContext_CreateStandalone =R"doc(Create a context for an IECInstance. If the instance can be cast to
@@ -119,30 +119,30 @@ will be taken from the DgnECInstance Standalone contexts can be re-
 initialized and re-used, which is useful for avoiding repeated
 allocations.
 
-Parameter ``ecproperty``:
+:param ecproperty:
     The ECProperty the type adapter will operate on
 
-Parameter ``instance``:
+:param instance:
     The IECInstance which will supply the property values
 
-Parameter ``accessString``:
+:param accessString:
     The access string of the property within the instance.
 
-Parameter ``componentIndex``:
+:param componentIndex:
     For point properties, the component index (x=0,y=1,z=2) if the
     type adapter should operate only on a single component of the
     point
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The DgnFile from which the property value originated
 
-Parameter ``modelRef``:
+:param modelRef:
     The DgnModelRef associated with the property value
 
-Parameter ``elemRef``:
+:param elemRef:
     The ElementRef associated with the property value
 
-Returns:
+:returns:
     a reusable context which can be passed to an IDgnECTypeAdapter)doc";
 
 

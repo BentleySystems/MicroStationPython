@@ -13,10 +13,10 @@ static const char * __doc_Bentley_Geom_GraphicsPoint_Zero =R"doc(Set entire poin
 
 static const char * __doc_Bentley_Geom_GraphicsPoint_GetNormalized =R"doc( normalize the (homogenous) point into caller's point.
 
-Parameter ``[out]``:
+:param (output):
     xyz receives coordinates
 
-Returns:
+:returns:
     false if weight is zero. (xyz still copied))doc";
 
 static const char * __doc_Bentley_Geom_GraphicsPoint_SetLoopBreak =R"doc(set or clear the flag identifying this point as a loop break. (aka
@@ -43,7 +43,7 @@ points within a bspline.)doc";
 static const char * __doc_Bentley_Geom_GraphicsPoint_SetPointPreserveWeight =R"doc( Set point, but DIVIDE xyz part by weight. (i.e. caller
 has been carrying point as wx,wy,wz,w)
 
-Parameter ``[in]``:
+:param (input):
     inputPoint coordinates in wx,wy,wz form.)doc";
 
 /*---------------------------------------------------------------------------------**//**

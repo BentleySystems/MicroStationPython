@@ -178,7 +178,26 @@ struct PyDgnRegionElementTool : DgnRegionElementTool
         * @bsimethod                                                                       2/2023
         +---------------+---------------+---------------+---------------+---------------+------*/            
         virtual void _GetToolName(WStringR name) override
-            { PYBIND11_OVERRIDE_EX(void, DgnRegionElementTool, _GetToolName, name); }
+            {
+            try
+                {
+                py::gil_scoped_acquire gil;
+                py::function func = py::get_override(this, "_GetToolName");
+                if (func)
+                    {
+                    auto obj = func(name);
+                    auto tuple = obj.cast<WString>();
+                    name = tuple;
+                    }
+                else
+                    __super::_GetToolName(name);
+
+                }
+            catch (std::exception& ex)
+                {
+                ScriptEngineManager::Get().InjectException(ex);
+                }
+            }
 
         /*---------------------------------------------------------------------------------**//**
         * @bsimethod                                                                       2/2023

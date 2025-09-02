@@ -81,6 +81,10 @@ void def_MstnDefs(py::module_& m);
 
 void def_GuiView(py::module_& m);
 
+void def_GeospatialContextAPI(py::module_& m);
+void def_GeospatialContextImportServicesAPI(py::module_& m);
+void def_GeospatialContextExportServicesAPI(py::module_& m);
+
 /*---------------------------------------------------------------------------------**//**
 * Module definition.
 * @bsimethod                                                                       2/2023
@@ -140,7 +144,7 @@ PYBIND11_MODULE(MSPyMstnPlatform, m)
     def_viewgroup(m);
     def_filtertable(m);
     def_dgnlib(m);
-    //def_mselmdsc(m);
+    def_mselmdsc(m);
     def_changetrack(m);
     def_global(m);
     def_dlogitem(m);
@@ -152,6 +156,10 @@ PYBIND11_MODULE(MSPyMstnPlatform, m)
     def_MstnDefs(m);
 
     def_GuiView(m);
+
+    def_GeospatialContextAPI(m);
+    def_GeospatialContextImportServicesAPI(m);
+    def_GeospatialContextExportServicesAPI(m);
     }
 
 

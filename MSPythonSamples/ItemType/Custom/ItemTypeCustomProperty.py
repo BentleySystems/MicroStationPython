@@ -1,9 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 
 from MSPyBentley import *
@@ -13,15 +9,41 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
+
+'''
+This sample demonstrates how to add key-in commands and use those commands to add custom property to item type.
+'''
+
 g_itemTypeLib = None
 g_customStructType = None
 g_eeh = EditElementHandle()
 g_myItemTypeName = str('MyItemType')
 
-'''
-Function to create Item type library, item type and custom property type
-'''
+
 def CreateLibWithArrayStructAndArrayofStruct ():
+    """
+    Create an Item type library, item type, and custom property type.
+
+    This function performs the following steps:
+    
+    1. Creates an Item type library.
+    2. Adds an item type to the library.
+    3. Adds an array property to the item type.
+    4. Creates a custom property type named 'Struct' with two properties:
+       - Prop1 (String)
+       - Prop2 (Integer)
+    5. Adds a property with the custom type 'Struct' to the item type.
+    6. Adds an array of the custom type 'Struct' to the item type.
+    7. Writes the item type library to the active DGN file.
+
+    Globals:
+        g_itemTypeLib (ItemTypeLibrary): The global item type library.
+        g_customStructType (CustomPropertyType): The global custom property type.
+        g_myItemTypeName (str): The global item type name.
+
+    Returns:
+        None
+    """
     global g_itemTypeLib
     global g_customStructType
     global g_myItemTypeName
@@ -61,10 +83,28 @@ def CreateLibWithArrayStructAndArrayofStruct ():
 
     print ('END: Created Successfully \n')
 
-'''
-Function to create a line element
-'''
+
 def CreateLine (dgnmodel, x1, y1, x2, y2):
+    """
+    Create a line element in the specified DGN model.
+
+    :param dgnmodel: The DGN model where the line element will be created.
+    :type dgnmodel: DgnModel
+    :param x1: The x-coordinate of the start point of the line.
+    :type x1: float
+    :param y1: The y-coordinate of the start point of the line.
+    :type y1: float
+    :param x2: The x-coordinate of the end point of the line.
+    :type x2: float
+    :param y2: The y-coordinate of the end point of the line.
+    :type y2: float
+    :return: True if the line element was successfully created and added to the model, False otherwise.
+    :rtype: bool
+
+    Globals:
+        g_eeh (ElementHandle): The global element handle.
+
+    """
     global g_eeh
     segment = DSegment3d (x1, y1, 0.0, x2, y2, 0.0)
     if BentleyStatus.eSUCCESS != LineHandler.CreateLineElement(g_eeh, None, segment, dgnmodel.Is3d(), dgnmodel):
@@ -74,10 +114,30 @@ def CreateLine (dgnmodel, x1, y1, x2, y2):
     g_eeh.AddToModel()
     return True
 
-'''
-* This function reads the entries set on an element and update it.
-'''
+
 def ReadAndUpdateProperty ():
+    """
+    Read the entries set on an element and update it.
+
+    This function performs the following steps:
+
+    1. Checks if the item type library is created.
+    2. Creates a line element in the active DGN model.
+    3. Attaches a custom item to the element.
+    4. Sets values for array properties.
+    5. Sets values for struct properties.
+    6. Sets values for array of struct properties.
+    7. Reads and prints the values from the properties.
+
+    Globals:
+        g_itemTypeLib (ItemTypeLibrary): The global item type library.
+        g_customStructType (CustomPropertyType): The global custom property type.
+        g_myItemTypeName (str): The global item type name.
+        g_eeh (ElementHandle): The global element handle.
+
+    Returns:
+        None
+    """
     global g_itemTypeLib
     global g_customStructType
     global g_myItemTypeName

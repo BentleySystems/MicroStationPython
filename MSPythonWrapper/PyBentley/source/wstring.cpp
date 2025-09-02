@@ -8,15 +8,16 @@
 #include "MSPythonPCH.h"
 #include <Bentley/WString.h>
 #include <OpqueTypes_Bentley.h>
+#include <pybind11/stl.h>
 
 static const char *__doc_Bentley_WString_AssignA =
 R"doc(Define the contents of this WString from a CharCP using the current
 system locale
 
-Parameter ``in``:
+:param in:
     The ASCII string
 
-Returns:
+:returns:
     Reference to this string.)doc";
 
 static const char *__doc_Bentley_WString_AssignUtf8 =
@@ -31,10 +32,10 @@ Returns:
 static const char *__doc_Bentley_WString_AssignUtf16 =
 R"doc(Define the contents of this WString from a Utf8CP
 
-Parameter ``in``:
+:param in:
     The Utf8 string. May be NULL.
 
-Returns:
+:returns:
     Reference to this string.)doc";
 
 static const char *__doc_Bentley_WString_AppendA =
@@ -54,10 +55,10 @@ R"doc(Append a Utf8 character array to this WString. This will create a
 WString internally, so if you are appending a character constant it is
 more efficient to use append (L"string to append").
 
-Parameter ``in``:
+:param in:
     The multibyte string
 
-Returns:
+:returns:
     Reference to this string.)doc";
 
 static const char *__doc_Bentley_WString_GetMaxLocaleCharBytes =
@@ -70,13 +71,13 @@ static const char *__doc_Bentley_WString_GetWCharCP = R"doc(Equivalent to c_str)
 static const char *__doc_Bentley_WString_substr =
 R"doc(Get a substring.
 
-Parameter ``__pos``:
+:param __pos:
     Index of first character (default 0).
 
-Parameter ``__n``:
+:param __n:
     Number of characters in substring (default remainder).
 
-Returns:
+:returns:
     The new string.
 
 Throws:
@@ -100,11 +101,11 @@ Parameter ``other``:
 static const char *__doc_Bentley_WString_CompareToI_2 =
 R"doc(Perform a case-insensitive comparison.
 
-Returns:
+:returns:
     0 if the strings are equal (ignoring case), or -1 or 1 if this
     string should come before or after *other.*
 
-Parameter ``other``:
+:param other:
     The other string.)doc";
 
 static const char *__doc_Bentley_WString_CompareTo =
@@ -120,11 +121,11 @@ Parameter ``other``:
 static const char *__doc_Bentley_WString_CompareTo_2 =
 R"doc(Perform a (case-sensitive) comparison.
 
-Returns:
+:returns:
     0 if the strings are equal, or -1 or 1 if this string should come
     before or after *other.*
 
-Parameter ``other``:
+:param other:
     The other string.)doc";
 
 static const char *__doc_Bentley_WString_StartsWith = R"doc(Determines if this instance starts with the provided string.)doc";
@@ -159,10 +160,10 @@ case.)doc";
 static const char *__doc_Bentley_WString_Equals =
 R"doc(Test for equality with another string.
 
-Returns:
+:returns:
     true if the strings are equal.
 
-Parameter ``other``:
+:param other:
     The other string.)doc";
 
 static const char *__doc_Bentley_WString_Equals_2 =
@@ -177,10 +178,10 @@ Parameter ``other``:
 static const char *__doc_Bentley_WString_EqualsI =
 R"doc(Test for equality with another string, ignoring case.
 
-Returns:
+:returns:
     true if the strings are equal (ignoring case).
 
-Parameter ``other``:
+:param other:
     The other string.)doc";
 
 static const char *__doc_Bentley_WString_EqualsI_2 =
@@ -195,10 +196,10 @@ Parameter ``other``:
 static const char *__doc_Bentley_WString_Contains =
 R"doc(Test for whether this string contains another string.
 
-Parameter ``other``:
+:param other:
     The other string.
 
-Returns:
+:returns:
     true if this string contains the other string.)doc";
 
 static const char *__doc_Bentley_WString_Contains_2 =
@@ -213,10 +214,10 @@ Returns:
 static const char *__doc_Bentley_WString_ContainsI =
 R"doc(Test for whether this string contains another string, ignoring case.
 
-Parameter ``other``:
+:param other:
     The other string.
 
-Returns:
+:returns:
     true if this string contains the other string.)doc";
 
 static const char *__doc_Bentley_WString_ContainsI_2 =
@@ -257,13 +258,13 @@ static const char *__doc_Bentley_WString_ReplaceI =
 R"doc(Replace first occurrence of findString with replaceString, ignoring
 case.
 
-Parameter ``findString``:
+:param findString:
     The substring to find.
 
-Parameter ``replaceString``:
+:param replaceString:
     The replacement string.
 
-Returns:
+:returns:
     true is a replacement is made.)doc";
 
 static const char *__doc_Bentley_WString_FindI =
@@ -300,11 +301,11 @@ considered obsolete.)doc";
 static const char *__doc_Bentley_Utf8String_CompareToI =
 R"doc(Perform a case-insensitive comparison.
 
-Returns:
+:returns:
     0 if the strings are equal (ignoring case), or -1 or 1 if this
     string should come before or after *other.*
 
-Parameter ``other``:
+:param other:
     The other string.)doc";
 
 static const char *__doc_Bentley_Utf8String_CompareToI_2 =
@@ -322,11 +323,11 @@ Parameter ``other``:
 static const char *__doc_Bentley_Utf8String_CompareTo =
 R"doc(Perform a (case-sensitive) comparison.
 
-Returns:
+:returns:
     0 if the strings are equal, or -1 or 1 if this string should come
     before or after *other.*
 
-Parameter ``other``:
+:param other:
     The other string.)doc";
 
 static const char *__doc_Bentley_Utf8String_CompareTo_2 =
@@ -342,10 +343,10 @@ Parameter ``other``:
 static const char *__doc_Bentley_Utf8String_Equals =
 R"doc(Test for equality with another string.
 
-Returns:
+:returns:
     true if the strings are equal.
 
-Parameter ``other``:
+:param other:
     The other string.)doc";
 
 static const char *__doc_Bentley_Utf8String_Equals_2 =
@@ -360,10 +361,10 @@ Parameter ``other``:
 static const char *__doc_Bentley_Utf8String_EqualsI =
 R"doc(Test for equality with another string, ignoring case.
 
-Returns:
+:returns:
     true if the strings are equal (ignoring case).
 
-Parameter ``other``:
+:param other:
     The other string.)doc";
 
 static const char *__doc_Bentley_Utf8String_EqualsI_2 =
@@ -410,16 +411,16 @@ static const char *__doc_Bentley_Utf8String_ToLowerChar = R"doc(Equivalent to to
 static const char *__doc_Bentley_Utf8String_GetNextToken =
 R"doc(Reads the next token delimited by any character in *delims* or \0.
 
-Parameter ``next``:
+:param next:
     set to next token, if found, or cleared if not
 
-Parameter ``delims``:
+:param delims:
     the characters that could delimit the tokens
 
-Parameter ``offset``:
+:param offset:
     where to start search
 
-Returns:
+:returns:
     1 beyond the end of the current token or npos if token not found
     Example
 
@@ -474,6 +475,7 @@ void def_WString(py::module_& m)
     
     py::bind_map< WStringWStringMap >(m, "WStringWStringMap", py::module_local(false));
     py::bind_map< WStringWCharMap >(m, "WStringWCharMap", py::module_local(false));
+    py::bind_map< IntIntMap >(m, "IntIntMap", py::module_local(false));
 
     c2.def(py::init<>());
     c2.def(py::init<WCharCP>(), "str"_a);
@@ -586,4 +588,6 @@ void def_WString(py::module_& m)
     c3.def_static("ToLowerChar", &Utf8String::ToLowerChar, "c"_a, DOC(Bentley, Utf8String, ToLowerChar));
     c3.def("ToLower", &Utf8String::ToLower, DOC(Bentley, Utf8String, ToLower));
     c3.def("GetNextToken", &Utf8String::GetNextToken, "next"_a, "delims"_a, "offset"_a,  DOC(Bentley, Utf8String, GetNextToken)); 
+
+
     }

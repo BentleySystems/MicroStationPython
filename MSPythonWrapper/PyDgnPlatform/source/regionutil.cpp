@@ -13,7 +13,7 @@
 static const char * __doc_Bentley_DgnPlatform_RegionGraphicsContext_Create =R"doc(Create an instance of an RegionGraphicsContext for the purpose of
 creating closed regions by flood or boolean operation.
 
-Returns:
+:returns:
     A reference counted pointer to a RegionGraphicsContext.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RegionGraphicsContext_GetAssociativeRegion =R"doc(Return region result as an associative region element. @note The
@@ -66,6 +66,12 @@ void def_RegionUtil(py::module_& m)
     c2.def("Flood", [] (RegionGraphicsContext& self, DgnModelRefR targetModel, ElementAgendaCR in, TransformCP inTrans, DPoint3dArray const& seedPoints)
            {
            return self.Flood(targetModel, in, inTrans, seedPoints.data(), seedPoints.size());
+           }, "targetModel"_a, "in"_a, "inTrans"_a, "seedPoints"_a, DOC(Bentley, DgnPlatform, RegionGraphicsContext, Flood));
+
+   c2.def("Flood", [] (RegionGraphicsContext& self, DgnModelRefR targetModel, ElementAgendaCR in, TransformCP inTrans, py::list const& seedPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(seedPoints, cppSeedPoints, DPoint3dArray, DPoint3d);
+           return self.Flood(targetModel, in, inTrans, cppSeedPoints.data(), cppSeedPoints.size());
            }, "targetModel"_a, "in"_a, "inTrans"_a, "seedPoints"_a, DOC(Bentley, DgnPlatform, RegionGraphicsContext, Flood));
 
     c2.def("Boolean",

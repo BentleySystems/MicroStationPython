@@ -15,19 +15,19 @@ instance is an{s} range that is live. This is usually initialized to
 InfiniteRange before clipping.{xA,xB} is an interval of the{x}
 space. (xA and xB are not required to be sorted.}
 
-Parameter ``[in]``:
+:param (input):
     x0 ray start coordinate in this dimension
 
-Parameter ``[in]``:
+:param (input):
     dxds Rate of change of ray in this dimension.
 
-Parameter ``[in]``:
+:param (input):
     xA x limit
 
-Parameter ``[in]``:
+:param (input):
     xB x limit.
 
-Returns:
+:returns:
     true if interval is nonempty at return.)doc";
 
 static const char * __doc_Bentley_Geom_DRange1d_LengthSum =R"doc( Sum the interval lengths)doc";
@@ -87,7 +87,7 @@ possibly empty) subset of{other} range.)doc";
 static const char * __doc_Bentley_Geom_DRange1d_StrictlyNonEmptyFractionalIntersection =R"doc( Compute intersection of the instance with rangeB. Return
 the intersection as fractions of the instance.
 
-Returns:
+:returns:
     true if the fractional intersection is more than single point.)doc";
 
 static const char * __doc_Bentley_Geom_DRange1d_FromUnion =R"doc( return the (possibly null) union of two ranges.)doc";

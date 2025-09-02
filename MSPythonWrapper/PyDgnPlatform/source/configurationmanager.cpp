@@ -12,23 +12,23 @@
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_MonitorString =R"doc(Get and update a string ConfigurationVariable.
 
-Parameter ``monitor``:
+:param monitor:
     A reference to a static IVariableMonitorP variable that is used
     both to hold the IVariableMonitorP in case it is needed by the
     caller, and to detect whether the monitor has been initialized on
     subsequent calls.
 
-Parameter ``string``:
+:param string:
     A reference to the string that will be set and updated by this
     method. After the initial call, the variable is set to the value
     stored in the configuration variable. If the configuration
     variable is subsequently changed, either by changing projects or
     directly by the user, the boolean variable referenced is updated.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The configuration variable to monitor.
 
-Returns:
+:returns:
     The method returns the value reference by the " value " parameter.
     @note You must ensure that both the value and monitor parameters
     references static variables, or make sure that you call
@@ -39,33 +39,33 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_MonitorInteger =R"doc(Get and update a ConfigurationVariable that represents an integer
 value.
 
-Parameter ``monitor``:
+:param monitor:
     A reference to a static IVariableMonitorP variable that is used
     both to hold the IVariableMonitorP in case it is needed by the
     caller, and to detect whether the monitor has been initialized on
     subsequent calls.
 
-Parameter ``value``:
+:param value:
     A reference to the integer that will be set and updated by this
     method. After the initial call, the variable is set to the value
     stored in the configuration variable. If the configuration
     variable is subsequently changed, either by changing projects or
     directly by the user, the boolean variable referenced is updated.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The configuration variable to monitor.
 
-Parameter ``defaultValue``:
+:param defaultValue:
     The default that value is set to if the configuration variable is
     not defined.
 
-Parameter ``minimumValue``:
+:param minimumValue:
     The minimum that value can be set to.
 
-Parameter ``maximumValue``:
+:param maximumValue:
     The maximum that value can be set to.
 
-Returns:
+:returns:
     The method returns the value reference by the " value " parameter.
     @note You must ensure that both the value and monitor parameters
     references static variables, or make sure that you call
@@ -76,27 +76,27 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_MonitorBoolean =R"doc(Get and update a ConfigurationVariable that represents a boolean
 value.
 
-Parameter ``monitor``:
+:param monitor:
     A reference to a static IVariableMonitorP variable that is used
     both to hold the IVariableMonitorP in case it is needed by the
     caller, and to detect whether the monitor has been initialized on
     subsequent calls.
 
-Parameter ``value``:
+:param value:
     A reference to the boolean that will be set and updated by this
     method. After the initial call, the variable is set to the value
     stored in the configuration variable. If the configuration
     variable is subsequently changed, either by changing projects or
     directly by the user, the boolean variable referenced is updated.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The configuration variable to monitor.
 
-Parameter ``defaultValue``:
+:param defaultValue:
     The default that value is set to if the configuration variable is
     not defined.
 
-Returns:
+:returns:
     The method returns the value reference by the " value " parameter.
     @note The value of a configuration variable is considered true if
     the it translates to " 1 ", " true ", or " on " (case insensitive).
@@ -110,14 +110,14 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_RemoveMonitor =R"doc(Remove a ConfigurationVariable Monitor.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The configuration variable to monitor.
 
-Parameter ``monitor``:
+:param monitor:
     The instance of the class that implements IVariableMonitor that is
     to be removed as a monitor.
 
-Returns:
+:returns:
     The method will fail if the configuration variable is not defined,
     or if the implementation of ConfigurationManager cannot monitor
     variables. The Macro system ConfigurationManager is able to
@@ -128,13 +128,13 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_MonitorVariable =R"doc(Monitor a ConfigurationVariable for changes.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The configuration variable to monitor.
 
-Parameter ``monitor``:
+:param monitor:
     An instance of a class that implements IVariableMonitor.
 
-Returns:
+:returns:
     The method will fail if the configuration variable is not defined,
     or if the implementation of ConfigurationManager cannot monitor
     variables. The Macro system ConfigurationManager is able to
@@ -145,53 +145,53 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_IterateThroughVariables =R"doc(Iterate through all config variables and call the delegate for each.
 
-Parameter ``delegate``:
+:param delegate:
     The delegate to call for each config variable.
 
-Returns:
+:returns:
     SUCCESS if the variables could be iterated through.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_UndefineVariable =R"doc(Undefine (remove) the configuration variable.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The name of the variable to undefine. @note This method cannot be
     used to remove configuration values that come from operating
     system environment variables.
 
-Returns:
+:returns:
     SUCCESS if the variable is successfully deleted. This method will
     fail if the variable is not defined.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_DefineVariable =R"doc(Define a configuration variable. If the variable already exists, its
 value is redefined.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     Name of the configuration variable. Must not be NULL.
 
-Parameter ``cfgValue``:
+:param cfgValue:
     The new value. Must not be NULL.
 
-Parameter ``level``:
+:param level:
     level of configuration variable. Typically, use
     #ConfigurationVariableLevel::User.
 
-Returns:
+:returns:
     SUCCESS if the variable is successfully defined.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_GetVariable =R"doc(Get the value for a configuration variable in a WString.
 
-Parameter ``cfgValue``:
+:param cfgValue:
     The WString to fill with the fully expanded value of the
     configuration variable.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The name of the configuration variable to retrieve.
 
-Parameter ``level``:
+:param level:
     level of configuration variable. Typically, use
     #ConfigurationVariableLevel::User.
 
-Returns:
+:returns:
     SUCCESS if the configuration variable was defined and its value is
     in ``cfgValue.`` On failure, ``cfgValue`` will be empty.
 
@@ -201,10 +201,10 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_IsVariableDefinedAndFalse =R"doc(Check for a configuration variable defined to a " false " value.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The name of the configuration variable to check.
 
-Returns:
+:returns:
     true if ``cfgVarName`` is defined to " 0 ", " false ", or " off " (case
     insensitive).
 
@@ -213,34 +213,34 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_IsVariableDefinedAndTrue =R"doc(Check for a configuration variable defined to a " true " value.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The name of the configuration variable to check.
 
-Returns:
+:returns:
     true if ``cfgVarName`` is defined to " 1 ", " true ", or " on " (case
     insensitive).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_IsVariableDefined =R"doc(Check for the existence of a configuration variable.
 
-Parameter ``cfgVarName``:
+:param cfgVarName:
     The name of the configuration variable to check.
 
-Returns:
+:returns:
     true if ``cfgVarName`` is defined.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_GetNameForTempFile =R"doc(Generate a unique name for a temporary file.
 
-Parameter ``tempFileName``:
+:param tempFileName:
     The name for a temporary file. Should be MAX_PATH chars in size.
 
-Parameter ``partialPathName``:
+:param partialPathName:
     intermediate dirs you want between %tmp% and the filename
     generated.
 
-Parameter ``prefixString``:
+:param prefixString:
     up to 3 chars of this will be used in the generated filename
 
-Returns:
+:returns:
     SUCCESS, if the directory for the temporary file exists or was
     created. @note This method does not create a temporary file, it
     merely returns a name that can be used to create a temporary file.)doc";
@@ -249,21 +249,21 @@ static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_GetLocalTempD
 This directory can optionally be a subdirectory of
 #GetLocalTempDirectoryBaseName.
 
-Parameter ``tempDir``:
+:param tempDir:
     The name of temporary directory. This must be MAX_PATH chars in
     size.
 
-Parameter ``subDirName``:
+:param subDirName:
     Optional subdirectory relative to default temp directory. If non-
     NULL, this subdirectory will be created.
 
-Returns:
+:returns:
     NULL if no temporary directory available.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ConfigurationManager_GetLocalTempDirectoryBaseName =R"doc(Return the root of the local directory that can be used to store
 temporary files. This directory must have write access.
 
-Returns:
+:returns:
     NULL if no temporary directory available.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IConfigVariableIteratorDelegate_EachConfigVariable =R"doc(Called for each configuration variable.)doc";
@@ -271,7 +271,7 @@ static const char * __doc_Bentley_DgnPlatform_IConfigVariableIteratorDelegate_Ea
 static const char * __doc_Bentley_DgnPlatform_IVariableMonitor__MonitorStopped =R"doc(Called to inform of the IVariableMonitor that the configuration
 monitor has been stopped for the configuraion variable.
 
-Parameter ``variableName``:
+:param variableName:
     The Configuration Variable name. @note Typical behavior is to
     delete this instance of IVariableMonitor. In the case where one
     IVariableMonitor instance is used to monitor multiple
@@ -284,10 +284,10 @@ Parameter ``variableName``:
 static const char * __doc_Bentley_DgnPlatform_IVariableMonitor__VariableRootUndefined =R"doc(Called to inform that a Configuration variable this this Configuration
 variable depends on was undefined.
 
-Parameter ``variableName``:
+:param variableName:
     The Configuration Variable name.
 
-Parameter ``rootVariableName``:
+:param rootVariableName:
     The Configuration Variable name of the undefined root. @note The
     variable that was undefined may be an " ancestor " configuration
     variable, i.e., not a direct root of this configuration variable,
@@ -295,16 +295,16 @@ Parameter ``rootVariableName``:
 
 static const char * __doc_Bentley_DgnPlatform_IVariableMonitor__VariableUndefined =R"doc(Called to inform that a Configuration variable was undefined.
 
-Parameter ``variableName``:
+:param variableName:
     The Configuration Variable name.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IVariableMonitor__VariableRootChanged =R"doc(Called to inform that a Configuration variable that this Configuration
 variable depends on was redefined.
 
-Parameter ``variableName``:
+:param variableName:
     The Configuration Variable name.
 
-Parameter ``rootVariableName``:
+:param rootVariableName:
     The Configuration Variable name of the changed root. @note The
     variable that was changed may be an " ancestor " configuration
     variable, i.e., not a direct root of this configuration variable,
@@ -312,7 +312,7 @@ Parameter ``rootVariableName``:
 
 static const char * __doc_Bentley_DgnPlatform_IVariableMonitor__VariableChanged =R"doc(Called to inform that a Configuration variable was redefined.
 
-Parameter ``variableName``:
+:param variableName:
     The Configuration Variable name.)doc";
 
 //=======================================================================================

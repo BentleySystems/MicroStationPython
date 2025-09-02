@@ -12,12 +12,12 @@
 
 static const char * __doc_Bentley_DateTime_IsLeapYear = R"doc(Indicates whether the specified year is a leap year or not
 
-Returns:
+:returns:
     true, if ``year`` is a leap year. false, otherwise.)doc";
 
 static const char * __doc_Bentley_DateTime_GetDayOfYear = R"doc(Gets the day of the year of this DateTime object.
 
-Returns:
+:returns:
     Day of the year or 0 if the DateTime object is not valid (see
     DateTime::IsValid))doc";
 
@@ -27,7 +27,7 @@ Remark:
     s Only call this method if the DateTime is valid (see
     DateTime::IsValid)
 
-Returns:
+:returns:
     Day of the week)doc";
 
 static const char * __doc_Bentley_DateTime_GetHectoNanosecond = R"doc(Gets the hecto-nanosecond component of this DateTime object.
@@ -35,7 +35,7 @@ static const char * __doc_Bentley_DateTime_GetHectoNanosecond = R"doc(Gets the h
 Remark:
     s 1 hecto-nanosecond is 1e-7 seconds.
 
-Returns:
+:returns:
     Hecto-nanoseconds (0 through 9,999,999))doc";
 
 static const char * __doc_Bentley_DateTime_GetMillisecond = R"doc(Gets the milliseconds component of this DateTime object.
@@ -44,37 +44,37 @@ Remark:
     s The hecto-nanoseconds are truncated (not rounded) at the
     millisecond position.
 
-Returns:
+:returns:
     Milliseconds (0 through 999))doc";
 
 static const char * __doc_Bentley_DateTime_GetMinute = R"doc(Gets the minute component of this DateTime object.
 
-Returns:
+:returns:
     Minutes (0 through 59))doc";
 
 static const char * __doc_Bentley_DateTime_GetHour = R"doc(Gets the hour component of this DateTime object.
 
-Returns:
+:returns:
     Hours (0 through 59))doc";
 
 static const char * __doc_Bentley_DateTime_GetDay = R"doc(Gets the day component of this DateTime object.
 
-Returns:
+:returns:
     Day in the month (1 through the number in GetMonth))doc";
 
 static const char * __doc_Bentley_DateTime_GetMonth = R"doc(Gets the month component of this DateTime object.
 
-Returns:
+:returns:
     Month (1 through 12).)doc";
 
 static const char * __doc_Bentley_DateTime_GetYear = R"doc(Gets the year component of this DateTime object.
 
-Returns:
+:returns:
     Year (negative if BCE, positive otherwise).)doc";
 
 static const char * __doc_Bentley_DateTime_GetInfo = R"doc(Gets meta data about this DateTime object.
 
-Returns:
+:returns:
     DateTime::Info of this DateTime object.)doc";
 
 static const char * __doc_Bentley_DateTime_FromString = R"doc(Parses an ISO 8601 date time string into a DateTime instance.
@@ -87,13 +87,13 @@ Remark:
     delimiter), which allows to parse SQL-99 date time literals
     (specifies the space delimiter)
 
-Parameter ``dateTime``:
+:param dateTime:
     the resulting DateTime instance
 
-Parameter ``dateTimeIso8601``:
+:param dateTimeIso8601:
     the ISO 8601 date time string to parse
 
-Returns:
+:returns:
     SUCCESS, if parsing was successful. ERROR, otherwise)doc";
 
 static const char * __doc_Bentley_DateTime_ToString = R"doc(Converts the value of this DateTime into a string representation.
@@ -102,7 +102,7 @@ Remark:
     s The resulting string is formatted according to the ISO8601
     standard. Second fractions are rounded to milliseconds.
 
-Returns:
+:returns:
     String representation of this DateTime object. An empty string is
     returned if this date time info object is not valid (see
     DateTime::IsValid ))doc";
@@ -113,7 +113,7 @@ Remark:
     s The resulting string is formatted according to the ISO8601
     standard. Second fractions are rounded to milliseconds.
 
-Returns:
+:returns:
     String representation of this DateTime object. An empty string is
     returned if this date time info object is not valid (see
     DateTime::IsValid ))doc";
@@ -121,93 +121,93 @@ Returns:
 static const char * __doc_Bentley_DateTime_CommonEraTicksToJulianDay = R"doc(Computes the Julian Day number from the given Common Era ticks. The
 Common Era begins at 0001-01-01 00:00:00 UTC.
 
-Parameter `` in ``:
+:param  in :
     commonEraTicks Common Era ticks in hecto-nanoseconds
 
-Returns:
+:returns:
     Julian Day number in hecto-nanoseconds)doc";
 
 static const char * __doc_Bentley_DateTime_JulianDayToCommonEraTicks = R"doc(Computes Common Era ticks from the given the Julian Day number. The
 Common Era begins at 0001-01-01 00:00:00 UTC.
 
-Parameter `` in ``:
+:param  in :
     julianDayInHectoNanoseconds Julian Day number
 
-Returns:
+:returns:
     Common Era ticks in hecto-nanoseconds)doc";
 
 static const char * __doc_Bentley_DateTime_FromCommonEraTicks = R"doc(Computes the DateTime from the given Common Era ticks. The Common Era
 begins at 0001-01-01 00:00:00 UTC.
 
-Parameter `` out ``:
+:param  out :
     dateTime Resulting DateTime object (on the proleptic Gregorian
     calendar)
 
-Parameter `` in ``:
+:param  in :
     commonEraTicks Common Era ticks in hecto-nanoseconds
 
-Parameter `` in ``:
+:param  in :
     targetInfo DateTime::Info the resulting DateTime should have
 
-Returns:
+:returns:
     SUCCESS if computation was successful. ERROR in case of errors,
     e.g. if computation of local time zone offset failed.)doc";
 
 static const char * __doc_Bentley_DateTime_UnixMillisecondsToJulianDay = R"doc(Computes the Julian Day number from the given Unix milliseconds.
 
-Parameter `` in ``:
+:param  in :
     unixMilliseconds Unix milliseconds. Negative numbers indicate
     dates before the Unix epoch.
 
-Returns:
+:returns:
     Julian Day number in hecto-nanoseconds)doc";
 
 static const char * __doc_Bentley_DateTime_JulianDayToUnixMilliseconds = R"doc(Computes the Unix milliseconds from the given Julian Day number.
 
-Parameter `` in ``:
+:param  in :
     julianDayInHectoNanoseconds Julian day in hecto-
     nanoseconds.unixMilliseconds Unix milliseconds.
 
-Returns:
+:returns:
     Unix milliseconds. Negative numbers indicate dates before the Unix
     epoch.)doc";
 
 static const char * __doc_Bentley_DateTime_FromUnixMilliseconds = R"doc(Creates a DateTime in UTC from the given Unix epoch milliseconds
 
-Parameter `` out ``:
+:param  out :
     dateTime The resulting DateTime object on the proleptic Gregorian
     calendar (in UTC).
 
-Parameter `` in ``:
+:param  in :
     unixMilliseconds The Unix epoch milliseconds. Negative if they
     refer to a date before the Unix epoch (1970-01-01 00:00:00 UTC)
 
-Returns:
+:returns:
     SUCCESS if conversion was successful. ERROR otherwise)doc";
 
 static const char * __doc_Bentley_DateTime_ToLocalTime = R"doc(Converts this UTC DateTime to local time
 
-Parameter `` out ``:
+:param  out :
     localDateTime Resulting DateTime object in local time
 
-Returns:
+:returns:
     SUCCESS if successful. ERROR in case of errors, e.g. if this date
     time instance is invalid (see DateTime::IsValid) or if computation
     of local time zone offset failed.)doc";
 
 static const char * __doc_Bentley_DateTime_ToUtc = R"doc(Converts this local DateTime to UTC
 
-Parameter `` out ``:
+:param  out :
     utcDateTime Resulting DateTime object in UTC
 
-Returns:
+:returns:
     SUCCESS if successful. ERROR in case of errors, e.g. if this date
     time instance is invalid (see DateTime::IsValid) or if computation
     of local time zone offset failed.)doc";
 
 static const char * __doc_Bentley_DateTime_GetCurrentTime = R"doc(Gets the current system time in local time.
 
-Returns:
+:returns:
     Current system time in local time)doc";
 
 static const char * __doc_Bentley_DateTime_Compare = R"doc(Compares two DateTimes. This method internally converts the DateTime
@@ -216,13 +216,13 @@ this method can return an error (see DateTime::CompareResult). This is
 also the reason why the class does not provide comparison operators
 other than equality and inequality.
 
-Parameter `` in ``:
+:param  in :
     lhs Left-hand side DateTime
 
-Parameter `` in ``:
+:param  in :
     rhs Right-hand side DateTime
 
-Returns:
+:returns:
     A CompareResult value.)doc";
 
 static const char * __doc_Bentley_DateTime_IsValid = R"doc(Indicates whether this DateTime instance is a valid date/time or not.
@@ -231,19 +231,19 @@ Remark:
     s Using the default constructor creates an invalid date time as
     none of the components have been set.
 
-Returns:
+:returns:
     true, if the DateTime instance is valid, false otherwise)doc";
 
 
 
 static const char * __doc_Bentley_DateTime_GetSecond = R"doc(Gets the second component of this DateTime object.
 
-Returns:
+:returns:
     Seconds (0 through 59))doc";
 
 static const char * __doc_Bentley_DateTime_GetCurrentTimeUtc = R"doc(Gets the current system time in UTC.
 
-Returns:
+:returns:
     Current system time in UTC)doc";
 
 /*---------------------------------------------------------------------------------**//**

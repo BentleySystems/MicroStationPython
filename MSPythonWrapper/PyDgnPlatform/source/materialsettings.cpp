@@ -12,13 +12,13 @@
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetPBREmissiveColor =R"doc(Set the PBR emissive color for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetPBREmissiveColor =R"doc(Get the PBR emissive color for the material)doc";
@@ -26,7 +26,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetPBREmissiveCol
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetPBRAmbientOcclusionMapScale =R"doc(Set the scale factor affecting the appearance of the Ambient Occlusion
 map
 
-Parameter ``[in]``:
+:param (input):
     intensity The Ambient Occlusion map scale factor value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetPBRAmbientOcclusionMapScale =R"doc(Defines the scale factor affecting the appearance of the Ambient
@@ -34,21 +34,21 @@ Occlusion map)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetPBRNormalMapScale =R"doc(Set the scale factor affecting the appearance of the Normal map
 
-Parameter ``[in]``:
+:param (input):
     intensity The normal map scale factor value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetPBRNormalMapScale =R"doc(Defines the scale factor affecting the appearance of the Normal map)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetPBRHeightMapScale =R"doc(Set the scale factor affecting the appearance of the height map
 
-Parameter ``[in]``:
+:param (input):
     intensity The height map scale factor value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetPBRHeightMapScale =R"doc(Defines the scale factor affecting the appearance of the height map)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetPBRRoughness =R"doc(Set the surface roughness
 
-Parameter ``[in]``:
+:param (input):
     intensity The surface roughness value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetPBRRoughness =R"doc(Defines the amount of incoming light that is scattered in all
@@ -57,7 +57,7 @@ directions equally.)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetPBRMetalInsulatorRatio =R"doc(Set the property for the surface being metallic or dialectric, Rusty
 surfaces is where this value would be inbetween 0 & 1
 
-Parameter ``[in]``:
+:param (input):
     intensity The diffuse value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetPBRMetalInsulatorRatio =R"doc(get the property for the surface being metallic or dialectric, Rusty
@@ -68,7 +68,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_IsPBRMaterial =R"
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetUseCutSectionMaterial =R"doc(Set if this material is to be used as a separate material for cut
 sections.
 
-Parameter ``[in]``:
+:param (input):
     useCutSectionMaterial True to use a separate material for cut
     sections.)doc";
 
@@ -81,7 +81,7 @@ for a material name is 30 characters - if the provided name exceeds
 that length, this function will return ERROR and the name will not be
 changed.
 
-Parameter ``[in]``:
+:param (input):
     name The material name to be used for cut sections.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetCutSectionMaterialName =R"doc(Get the material name for a material to be used for cut sections.)doc";
@@ -145,7 +145,7 @@ maintained when programmatically setting values.)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetBackFaceCulling =R"doc(Set how the faces of the elements are to be treated when processing
 for luxology export
 
-Parameter ``[in]``:
+:param (input):
     backFaceCulling How the element is to be processed)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetBackFaceCulling =R"doc(Get how the faces of the elements are to be treated when processing
@@ -153,14 +153,14 @@ for luxology export)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetBlurRefractions =R"doc(Set if the blurry refraction values are to be used for this material
 
-Parameter ``[in]``:
+:param (input):
     blurRefractions True to blur reflections)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_BlurRefractions =R"doc(Are refractions to be blurred)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetBlurReflections =R"doc(Set if the blurry reflection values are to be used for this material
 
-Parameter ``[in]``:
+:param (input):
     blurReflections True to blur reflections)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_BlurReflections =R"doc(Are reflections to be blurred.)doc";
@@ -170,7 +170,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetRefractionRoug
 See also:
     GetRefractionRoughness ()
 
-Parameter ``[in]``:
+:param (input):
     roughness The roughness percentage. 0% is no blurry refractions.
     100% is maximum blur.)doc";
 
@@ -181,7 +181,7 @@ refraction rays fired.)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetAbsorptionDistance =R"doc(Set the distance in meters that a ray must pass through to attain 100%
 of the transparent color
 
-Parameter ``[in]``:
+:param (input):
     absorption The absorption distance)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetAbsorptionDistance =R"doc(Colored transparent surfaces produce different tints of color based on
@@ -191,7 +191,7 @@ attain the transparent color)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetDissolveAmount =R"doc(Set the Dissolve amount.
 
-Parameter ``[in]``:
+:param (input):
     dissolve The percetange dissolve amount)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetDissolveAmount =R"doc(Dissolve makes the object fade from view. 100% dissolve will make the
@@ -199,7 +199,7 @@ object invisible)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetReflectionFresnel =R"doc(Set the reflection fresnel
 
-Parameter ``[in]``:
+:param (input):
     fresnel The reflection fresnel)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetReflectionFresnel =R"doc(Get the reflection frenel.)doc";
@@ -209,7 +209,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetScatterDistanc
 See also:
     GetScatterDistanceInMeters ()
 
-Parameter ``[in]``:
+:param (input):
     scatterDistance The distance light must travel through the surface
     to be tinted to the translucency color)doc";
 
@@ -222,7 +222,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetFrontWeighting
 See also:
     GetFrontWeightingAmount ()
 
-Parameter ``[in]``:
+:param (input):
     frontWeighting The front weighting amount. as a percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetFrontWeightingAmount =R"doc(The Front Weighting setting with bias the subsurface scattering
@@ -232,7 +232,7 @@ than 50% they scatter away from the light.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetAnisotropyAmount =R"doc(Set the percentage amount of Anisotropy a surface has.
 
-Parameter ``[in]``:
+:param (input):
     anisotropy The anisotropy amount for the surface)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetAnisotropyAmount =R"doc(The Anisotropy value affects highlights, simulating the effect of
@@ -242,7 +242,7 @@ directions of the scratches. This is a percentage value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetClearcoatAmount =R"doc(Set the clearcoat percentage amount for the material.
 
-Parameter ``[in]``:
+:param (input):
     clearcoat The clearcoat amount)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetClearcoatAmount =R"doc(Get the clearcoat amount for the material. Clearcoat is a simulation
@@ -254,7 +254,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetDispersionAmou
 See also:
     GetDispersionAmount ()
 
-Parameter ``[in]``:
+:param (input):
     dispersion The dispersion amount)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetDispersionAmount =R"doc(Dispersion is the differing of refraction values for different
@@ -264,7 +264,7 @@ for diamond its 0.44)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetDisplacementDistanceInMillimeters =R"doc(Set the maximum displacement distance in millimeters
 
-Parameter ``[in]``:
+:param (input):
     distance The maximum displacement distance when using a
     displacement map)doc";
 
@@ -273,7 +273,7 @@ that the displacement can reach)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetSubsurfaceSamples =R"doc(Set the number of samples for subsurface scattering/Translucency.
 
-Parameter ``[in]``:
+:param (input):
     samples The number of subsurface samples)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetSubsurfaceSamples =R"doc(Get the number of samples used for subsurface scattering/Translucency.)doc";
@@ -281,7 +281,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetSubsurfaceSamp
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetRefractionRays =R"doc(Set the number of transmitted rays generated when an incoming ray hits
 a surface.
 
-Parameter ``[in]``:
+:param (input):
     rays The number of transmitted rays)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetRefractionRays =R"doc(When blurry refraction is used this specifies the number of
@@ -290,7 +290,7 @@ transmitted rays generated when an incoming ray hits a surface.)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetReflectionRays =R"doc(Set the number of reflection rays generated when an incoming ray hits
 a surface.
 
-Parameter ``[in]``:
+:param (input):
     rays The number of reflection rays)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetReflectionRays =R"doc(When blurry reflections are used this specifies the number of
@@ -298,14 +298,14 @@ reflection rays generated when an incoming ray hits a surface.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetIsVisible =R"doc(Set if elements which use this material are visible
 
-Parameter ``[in]``:
+:param (input):
     isVisible True if elements which use this material are visible)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_IsVisible =R"doc(Are elements which use this material visible or invisible)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetCastsShadows =R"doc(Set if elements which use this material cast shadows
 
-Parameter ``[in]``:
+:param (input):
     castsShadows True if shadows are cast)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_CastsShadows =R"doc(Do elements which use this material cast shadows)doc";
@@ -313,7 +313,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_CastsShadows =R"d
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetTranslucencyScale =R"doc(Set the amount of light that penetrates the surface but is scattered
 through out it
 
-Parameter ``[in]``:
+:param (input):
     scale The amount of light scattered on entering an object. 0
     (None) 1 (All))doc";
 
@@ -323,7 +323,7 @@ through out it)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetGlowIntensity =R"doc(Set the amount of light emmited by this material in
 lumens/meterSquared
 
-Parameter ``[in]``:
+:param (input):
     intensity The glow value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetGlowIntensity =R"doc(Returns the amount of light emitted by this material in
@@ -334,7 +334,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetRefractIndex =
 See also:
     GetRefractIndex ()
 
-Parameter ``[in]``:
+:param (input):
     index The refractive index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetRefractIndex =R"doc(This is the refractive index of the material. It controls how light
@@ -342,7 +342,7 @@ changes direction as it passes through a transparent object.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetSpecularIntensity =R"doc(Set the amount of incoming light which is specularly reflected
 
-Parameter ``[in]``:
+:param (input):
     intensity The specular value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetSpecularIntensity =R"doc(Defines the amount of incoming light that is reflected in the opposite
@@ -351,21 +351,21 @@ direction of the incoming light. Values may range from 0 (dull) to 1
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetRoundedEdgeWidth =R"doc(Set the rounded edge width value.
 
-Parameter ``[in]``:
+:param (input):
     roundedEdgeWidth The rounded edge width value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetRoundedEdgeWidth =R"doc(Defines the rounded edge width value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetDiffuseRoughness =R"doc(Set the diffuse roughness value.
 
-Parameter ``[in]``:
+:param (input):
     diffuseRoughness The diffuse roughness value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetDiffuseRoughness =R"doc(Defines the diffuse roughness value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetDiffuseIntensity =R"doc(Set the amount of incoming light reflected in all directions equally
 
-Parameter ``[in]``:
+:param (input):
     intensity The diffuse value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetDiffuseIntensity =R"doc(Defines the amount of incoming light that is reflected in all
@@ -377,7 +377,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetTransmitIntens
 See also:
     GetTransmitIntensity ()
 
-Parameter ``[in]``:
+:param (input):
     intensity The transmit value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetTransmitIntensity =R"doc(Defines the amount of light which is specularly passed through the
@@ -388,7 +388,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetReflectIntensi
 See also:
     GetReflectIntensity ()
 
-Parameter ``[in]``:
+:param (input):
     intensity The reflect value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetReflectIntensity =R"doc(Defines the amount of incoming light from other objects in the scene
@@ -399,7 +399,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetFinishScale =R
 See also:
     GetFinishScale ()
 
-Parameter ``[in]``:
+:param (input):
     scale The finish value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetFinishScale =R"doc(Get the finish value for the material. Small values result in rough
@@ -409,147 +409,147 @@ surfaces with narrow specular highlights. Can vary from 1 (Rough) to
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetAmbientIntensity =R"doc(Set the ambient intensity of the material
 
-Parameter ``[in]``:
+:param (input):
     intensity The ambient intensity of the material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetAmbientIntensity =R"doc(Get the ambient intensity of the material.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetExitColor =R"doc(Set the exit color for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetExitColor =R"doc(Get the exit color for the material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetReflectColor =R"doc(Set the reflect color for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetReflectColor =R"doc(Get the reflect color for the material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetGlowColor =R"doc(Set the glow color for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetGlowColor =R"doc(Get the glow color for the material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetTranslucencyColor =R"doc(Set the translucent color for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetTranslucencyColor =R"doc(Get the translucent color for the material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetTransmitColor =R"doc(Set the transmit color for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetTransmitColor =R"doc(Get the transmit color for the material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetSpecularColor =R"doc(Set the specular color for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetSpecularColor =R"doc(Get the specular color for the material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetBaseColor =R"doc(Set the base (diffuse color) for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetBaseColor =R"doc(Get the base (diffuse color) for the material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasTransmitIntensity =R"doc(Set if the material has a transmit value
 
-Parameter ``[in]``:
+:param (input):
     hasTransmitIntensity True if the material has a transmit value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_HasTransmitIntensity =R"doc(Get if the material has a transmit value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasReflectIntensity =R"doc(Set if the material has a reflect value
 
-Parameter ``[in]``:
+:param (input):
     hasReflectIntensity True if the material has a reflect value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_HasReflectIntensity =R"doc(Get if the material has a reflect value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasRefractIndex =R"doc(Set if this material has a refractive index
 
-Parameter ``[in]``:
+:param (input):
     hasRefractIndex True if the material has a refractive index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_HasRefractIndex =R"doc(Get if this material has a Refractive index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasFinishScale =R"doc(Set if this material has a finish value
 
-Parameter ``[in]``:
+:param (input):
     hasFinishScale True if the material has a finish value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_HasFinishScale =R"doc(Does this material use a finish value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasSpecularIntensity =R"doc(Set if the material has a specular intensity value
 
-Parameter ``[in]``:
+:param (input):
     hasSpecularIntensity True if the material has a specular intensity)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_HasSpecularIntensity =R"doc(Does the material have a speculat intensity value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasDiffuseIntensity =R"doc(Set if the material has a diffuse intensity
 
-Parameter ``[in]``:
+:param (input):
     hasDiffuseIntensity True if the material has a diffuse intensity)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_HasDiffuseIntensity =R"doc(Does the material have a diffuse intensity value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasExitColor =R"doc(Set if the material has an exit color
 
-Parameter ``[in]``:
+:param (input):
     hasExitColor True if the material has an exit color, false and its
     calculated)doc";
 
@@ -559,7 +559,7 @@ be used to simplify complex transparency calculations)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasReflectColor =R"doc(Set if the material has a fixed reflect color or if it derives the
 reflect color from the specular color
 
-Parameter ``[in]``:
+:param (input):
     hasReflectColor True if the reflect color is in this class, false,
     if it is derived from the specular color)doc";
 
@@ -569,7 +569,7 @@ reflect color from the specular color)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasGlowColor =R"doc(Get if the material has a fixed glow color or if it derives the glow
 color from the base color
 
-Parameter ``[in]``:
+:param (input):
     hasGlowColor True if the glow color is in this class, false if it
     is derived from the base color)doc";
 
@@ -579,7 +579,7 @@ color from the base color)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasTranslucencyColor =R"doc(Set if the material has a fixed translucency color or if it derives
 the translucency color from the base color
 
-Parameter ``[in]``:
+:param (input):
     hasTranslucencyColor True if the translucency color is in this
     class, false if it is derived from the base color)doc";
 
@@ -589,7 +589,7 @@ the translucency color from the base color)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasTransmitColor =R"doc(Set if the material has a fixed transmit color or if it derives the
 transmit color from the specular color
 
-Parameter ``[in]``:
+:param (input):
     hasTransmitColor True if the transmit color is in this class,
     false, if it is derived from the specular color)doc";
 
@@ -599,7 +599,7 @@ transmit color from the specular color)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasSpecularColor =R"doc(Set if the material has a fixed specular color or if it derives its
 specular color from the base color
 
-Parameter ``[in]``:
+:param (input):
     hasSpecularColor True if the specular color is in this class,
     false to get the color from the base color)doc";
 
@@ -609,7 +609,7 @@ specular color from the base color)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetHasBaseColor =R"doc(Set if the material has a fixed base color or if it derives its color
 from the element color
 
-Parameter ``[in]``:
+:param (input):
     hasBaseColor True to use the base color in this class, false to
     get the color from the element)doc";
 
@@ -620,7 +620,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetMaps =R"doc(Ge
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_SetUseFur =R"doc(Switch on/off the use of fur for this material
 
-Parameter ``[in]``:
+:param (input):
     useFur True to enable the use of fur)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_UseFur =R"doc(Is the fur object enabled for this material)doc";
@@ -639,7 +639,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialSettings_GetShaders =R"doc
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_Copy =R"doc(Copy the material settings from the method argument into this object
 
-Parameter ``[in]``:
+:param (input):
     rhs The object to copy from)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialSettings_InitDefaults =R"doc(Initialize default material settings. This will remove all maps and
@@ -650,7 +650,7 @@ static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetRefractInde
 See also:
     GetRefractIndex ()
 
-Parameter ``[in]``:
+:param (input):
     index The refractive index)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetRefractIndex =R"doc(This is the refractive index of the material. It controls how light
@@ -658,13 +658,13 @@ changes direction as it passes through a transparent object.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetEmissiveColor =R"doc(Set the PBR emissive color for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetEmissiveColor =R"doc(Get the PBR emissive color for the material)doc";
@@ -672,7 +672,7 @@ static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetEmissiveCol
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetAmbientOcclusionMapScale =R"doc(Set the scale factor affecting the appearance of the Ambient Occlusion
 map
 
-Parameter ``[in]``:
+:param (input):
     intensity The Ambient Occlusion map scale factor value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetAmbientOcclusionMapScale =R"doc(Defines the scale factor affecting the appearance of the Ambient
@@ -680,21 +680,21 @@ Occlusion map)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetNormalMapScale =R"doc(Set the scale factor affecting the appearance of the Normal map
 
-Parameter ``[in]``:
+:param (input):
     intensity The normal map scale factor value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetNormalMapScale =R"doc(Defines the scale factor affecting the appearance of the Normal map)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetHeightMapScale =R"doc(Set the scale factor affecting the appearance of the Normal map
 
-Parameter ``[in]``:
+:param (input):
     intensity The normal map scale factor value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetHeightMapScale =R"doc(Defines the scale factor affecting the appearance of the height map)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetRoughness =R"doc(Set the surface roughness
 
-Parameter ``[in]``:
+:param (input):
     intensity The surface roughness value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetRoughness =R"doc(Defines the amount of incoming light that is scattered in all
@@ -703,7 +703,7 @@ directions equally.)doc";
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetMetalInsulatorRatio =R"doc(Set the property for the surface being metallic or dialectric, Rusty
 surfaces is where this value would be inbetween 0 & 1
 
-Parameter ``[in]``:
+:param (input):
     intensity The diffuse value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetMetalInsulatorRatio =R"doc(get the property for the surface being metallic or dialectric, Rusty
@@ -714,7 +714,7 @@ static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetTransmitInt
 See also:
     GetTransmitIntensity ()
 
-Parameter ``[in]``:
+:param (input):
     intensity The transmit value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_GetTransmitIntensity =R"doc(Defines the amount of light which is specularly passed through the
@@ -722,19 +722,19 @@ material. Can vary from 0 (None) to 1 (Full))doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetBaseColor =R"doc(Set the base (diffuse color) for the material
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PBRMaterialSettings_SetHasBaseColor =R"doc(Set if the material has a fixed base color or if it derives its color
 from the element color
 
-Parameter ``[in]``:
+:param (input):
     hasBaseColor True to use the base color in this class, false to
     get the color from the element)doc";
 
@@ -749,26 +749,26 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShaderCollection_AddShader
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShaderCollection_GetTopShader =R"doc(get the first shader in this collection)doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialShaderCollection_GetMaterial =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_MaterialShaderCollection_GetMaterial =R"doc(:returns:
     The containing material for these shaders.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShaderCollection_Copy =R"doc(Copy the collection from the method argument into this collection
 
-Parameter ``[in]``:
+:param (input):
     rhs The collection to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShaderCollection_InitDefaults =R"doc(Initialize this collection to the default empty collection)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetEffect =R"doc(Set the shader effect for this shader.
 
-Parameter ``[in]``:
+:param (input):
     effect The shader effect)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetEffect =R"doc(Get the shader effect for this shader)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetBlendMode =R"doc(Set the blend mode for this shader
 
-Parameter ``[in]``:
+:param (input):
     blendMode The blend mode to use)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetBlendMode =R"doc(Get the blend mode between this shader and other shaders which use the
@@ -779,7 +779,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIndirectIllumina
 See also:
     GetIndirectIlluminationType ()
 
-Parameter ``[in]``:
+:param (input):
     type The type of indirect illumation calculation)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetIndirectIlluminationType =R"doc(This setting allows the type of indirect illumination calculation to
@@ -788,7 +788,7 @@ that the material will default to using the render setting value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetOpacity =R"doc(Set the opacity of the shader
 
-Parameter ``[in]``:
+:param (input):
     opacity The opacity of the shader)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetOpacity =R"doc(Get the opacity of the shader. Changing this value will affect the
@@ -799,7 +799,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIndirectIllumina
 See also:
     GetIndirectIlluminationMultiplier ()
 
-Parameter ``[in]``:
+:param (input):
     multiplier The multiplier value as a percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetIndirectIlluminationMultiplier =R"doc(Indirect Light comes from global illumination sources such as luminous
@@ -813,7 +813,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetDirectIlluminati
 See also:
     GetDirectIlluminationMultiplier ()
 
-Parameter ``[in]``:
+:param (input):
     multiplier The multiplier value as a percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetDirectIlluminationMultiplier =R"doc(The direct illumation multiplier provides the ability to globally
@@ -826,7 +826,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetShadingRate =R"d
 See also:
     GetShadingRate ()
 
-Parameter ``[in]``:
+:param (input):
     shadingRate The shading rate in pixels to use)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetShadingRate =R"doc(The Shading Rate determines how finely to shade each pixel in the
@@ -843,7 +843,7 @@ amount of evaluation by 4 times.)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIsVisibleToRefractionRays =R"doc(Sets if the geometry which uses this material is visible in
 refractions
 
-Parameter ``[in]``:
+:param (input):
     isVisible True if the geometry which uses this material visible in
     refractions)doc";
 
@@ -853,7 +853,7 @@ refractions)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIsVisibleToOcclusionRays =R"doc(Sets if the geometry which uses this material is visible to occlusion
 rays
 
-Parameter ``[in]``:
+:param (input):
     isVisible True if the geometry which uses this material visible to
     occlusion rays)doc";
 
@@ -862,7 +862,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShader_IsVisibleToOcclusio
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIsVisibleToReflectionRays =R"doc(Sets if the geometry which uses this material is visible in
 reflections
 
-Parameter ``[in]``:
+:param (input):
     isVisible True if the geometry which uses this material visible in
     reflections)doc";
 
@@ -871,7 +871,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShader_IsVisibleToReflecti
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIsVisibleToIndirectRays =R"doc(Sets if the geometry which uses this material visible to indirect
 illumination
 
-Parameter ``[in]``:
+:param (input):
     isVisible True if the geometry which uses this material visible to
     indirect illumination)doc";
 
@@ -880,7 +880,7 @@ illumination)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIsVisibleToCamera =R"doc(Sets if the geometry which uses this material visible to the camera
 
-Parameter ``[in]``:
+:param (input):
     isVisible True if the geometry using this material is visible to
     the camera)doc";
 
@@ -888,19 +888,19 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShader_IsVisibleToCamera =
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetCastsShadows =R"doc(Sets if the geometry which uses this material casts shadows
 
-Parameter ``[in]``:
+:param (input):
     castsShadows True for the geometry using this material to cast
     shadows)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetReceivesShadows =R"doc(Sets if the geometry which uses this material recieves shadows.
 
-Parameter ``[in]``:
+:param (input):
     receivesShadows True to make geometry using this material recieve
     shadows)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIsInverted =R"doc(Set the inverted state for the shader
 
-Parameter ``[in]``:
+:param (input):
     isInverted True to invert the shader)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_IsInverted =R"doc(Is the shader inverted. This produces a negative effect in the image
@@ -908,14 +908,14 @@ for the layer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetType =R"doc(Set the shader type
 
-Parameter ``[in]``:
+:param (input):
     type The type of the shader)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetType =R"doc(Get the shader type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_SetIsEnabled =R"doc(Set this shader to be enabled
 
-Parameter ``[in]``:
+:param (input):
     isEnabled True to enable this shader)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_IsEnabled =R"doc(Is the shader enabled)doc";
@@ -924,7 +924,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialShader_GetMaterial =R"doc(
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_Copy =R"doc(Copy the contents of the passed in shader into this object
 
-Parameter ``[in]``:
+:param (input):
     rhs The object to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialShader_InitDefaults =R"doc(Initialize the shader to the default values.)doc";
@@ -934,7 +934,7 @@ returns the palette the material comes from)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetFurMaterialName =R"doc(Set the name of the material to use on the fur strands
 
-Parameter ``[in]``:
+:param (input):
     name The name of the fur material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetFurMaterialName =R"doc(If the fur object uses a material to be applied to the fur strands
@@ -942,7 +942,7 @@ this method will return the name of the material.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetFurBillboard =R"doc(Set the fur billboard setting
 
-Parameter ``[in]``:
+:param (input):
     billboard The type of billboarding to use)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetFurBillboard =R"doc(Get the fur billboard setting.)doc";
@@ -952,7 +952,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetSegmentCount =R"doc
 See also:
     GetSegmentCount ()
 
-Parameter ``[in]``:
+:param (input):
     count The number of segments in a fur strand)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetSegmentCount =R"doc(Get the number of segments in each strand of fur. More segments will
@@ -961,7 +961,7 @@ geometry)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetFurGuides =R"doc(Set the type of fur guides
 
-Parameter ``[in]``:
+:param (input):
     guides The type of fur guides. At this point only FURGUIDES_None
     is supported)doc";
 
@@ -973,7 +973,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetType =R"doc(Set the
 See also:
     GetType ()
 
-Parameter ``[in]``:
+:param (input):
     type The fur type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetType =R"doc(This setting returns what type of geometry is created for the fur
@@ -984,7 +984,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetRate =R"doc(Set the
 See also:
     GetRate ()
 
-Parameter ``[in]``:
+:param (input):
     rate The rate at which Adaptive Sampling reduces the strands)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetRate =R"doc(The fur rate specifies the threshold that Adaptive Sampling uses to
@@ -996,7 +996,7 @@ recede into the distance.)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetClumpRangeInMeters =R"doc(Set the clump range. This is the range at which the strands will
 gather together
 
-Parameter ``[in]``:
+:param (input):
     range The clump range in meters)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetClumpRangeInMeters =R"doc(Get the clump range. This is the range at which the strands will
@@ -1004,7 +1004,7 @@ gather together)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetClumpScale =R"doc(Set the clump scale percentage
 
-Parameter ``[in]``:
+:param (input):
     scale The scale of the clumping)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetClumpScale =R"doc(Determines closeness of fur clumps. Increasing this percentage will
@@ -1012,7 +1012,7 @@ cause the tips of the strands to gather together)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetGuideLengthInMeters =R"doc(Set the length of the guide in meters
 
-Parameter ``[in]``:
+:param (input):
     length The length of the guide)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetGuideLengthInMeters =R"doc(This value allows the adjustment of the length of the fur without
@@ -1021,7 +1021,7 @@ adjusting the guide itself)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetGuideRangeInMeters =R"doc(Set the range around the root guild where the strands will be
 generated
 
-Parameter ``[in]``:
+:param (input):
     range The range in meters around where the root guide will be
     generated)doc";
 
@@ -1043,7 +1043,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetCurls =R"doc(Set th
 See also:
     SetCurls
 
-Parameter ``[in]``:
+:param (input):
     curls The curls percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetCurls =R"doc(The curls setting adds a corkscrew swirl to the strands. Samall
@@ -1055,7 +1055,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetRootBend =R"doc(Set
 See also:
     GetRootBend ()
 
-Parameter ``[in]``:
+:param (input):
     rootBend The root bend percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetRootBend =R"doc(This value affects the direction the strand grows from its base
@@ -1068,7 +1068,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetFlex =R"doc(Set the
 See also:
     GetFlex ()
 
-Parameter ``[in]``:
+:param (input):
     flex The flex percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetFlex =R"doc(The flex setting adds bending to the strands as if they were affected
@@ -1081,7 +1081,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetSizeJitter =R"doc(S
 See also:
     GetSizeJitter ()
 
-Parameter ``[in]``:
+:param (input):
     jitter The jitter percentage for)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetSizeJitter =R"doc(This setting will randomize the overall size of each strand. Values
@@ -1092,7 +1092,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetDirectionJitter =R"
 See also:
     GetDirectionJitter ()
 
-Parameter ``[in]``:
+:param (input):
     jitter The jitter percentage for direction)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetDirectionJitter =R"doc(This setting will randomize the angle of rotation for the root of a
@@ -1106,7 +1106,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetPositionJitter =R"d
 See also:
     GetPositionJitter ()
 
-Parameter ``[in]``:
+:param (input):
     jitter The jitter percentage for position)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetPositionJitter =R"doc(This setting will increase the randomness of the root positions of
@@ -1117,7 +1117,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetGrowthJitter =R"doc
 See also:
     GetGrowthJitter ()
 
-Parameter ``[in]``:
+:param (input):
     jitter The jitter percentage for growth)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetGrowthJitter =R"doc(This setting will increase the randomness of a strand along its
@@ -1129,7 +1129,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetStripRotation =R"do
 See also:
     GetStripRotation ()
 
-Parameter ``[in]``:
+:param (input):
     rotation The rotation percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetStripRotation =R"doc(This will randomy rotate individual fur strands at their root. The
@@ -1138,7 +1138,7 @@ percentage where. 100% means 180 degrees)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetOffsetInMeters =R"doc(Set the offset from the surface that the strands are generated at
 
-Parameter ``[in]``:
+:param (input):
     offset The offset in meters from the surface)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetOffsetInMeters =R"doc(The offset will shift the fur strands away from their surface by the
@@ -1149,7 +1149,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetTaperScale =R"doc(S
 See also:
     GetTaperScale ()
 
-Parameter ``[in]``:
+:param (input):
     taper The percentage reduction along the width)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetTaperScale =R"doc(This value allows the user to narrow the width of individual strands
@@ -1160,7 +1160,7 @@ tips with no thickness)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetWidthScale =R"doc(Set the width of the individual strand at its root. Expressed as a
 percentage of the spacing distance.
 
-Parameter ``[in]``:
+:param (input):
     width The width percentage of the fur strand at its root)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetWidthScale =R"doc(Get the width of individual strands at the root. Expressed as a
@@ -1168,21 +1168,21 @@ percentage of the spacing distance.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetLengthInMeters =R"doc(Set the length of each fur strand from its root to tip
 
-Parameter ``[in]``:
+:param (input):
     length The length in meters of the strand)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetLengthInMeters =R"doc(Get the length of each fur strand from its root to tip)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetSpacingInMeters =R"doc(Set the average space between individual fur strands
 
-Parameter ``[in]``:
+:param (input):
     spacing The space between fur strands)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetSpacingInMeters =R"doc(Get the average space between individual fur strands)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetUseFrustumCulling =R"doc(Set if fur wont be generated outside the view frustum.
 
-Parameter ``[in]``:
+:param (input):
     frustumCulling True to enable frustum culling)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_UseFrustumCulling =R"doc(This setting if enabled will stop fur being generated outside of the
@@ -1192,7 +1192,7 @@ reflections)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetUseFurMaterial =R"doc(Sets if the material for use on the fur strands is used
 
-Parameter ``[in]``:
+:param (input):
     useFurMaterial The setting for using a fur material)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_UseFurMaterial =R"doc(Get if a material to be used for the fur strands)doc";
@@ -1202,7 +1202,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetUseHairShader =R"do
 See also:
     UseHairShader ()
 
-Parameter ``[in]``:
+:param (input):
     useHairShader True to use the hair shader)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_UseHairShader =R"doc(Use the hair shader. This shader will alter the render characteristics
@@ -1213,7 +1213,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetUseAutoFading =R"do
 See also:
     UseAutoFading ()
 
-Parameter ``[in]``:
+:param (input):
     useAutoFading True to use auto fading)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_UseAutoFading =R"doc(This works with 'Adaptive Sampling' by fading fibers in and out when
@@ -1222,7 +1222,7 @@ for animated sequences.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetRemoveBaseSurface =R"doc(Set if the surface that the fur was generated on is displayed
 
-Parameter ``[in]``:
+:param (input):
     removeBase True to remove the surface the fur was generated on)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_RemoveBaseSurface =R"doc(Get if the surface that the fur was generated on is displayed)doc";
@@ -1232,47 +1232,47 @@ static const char * __doc_Bentley_DgnPlatform_MaterialFur_SetUseAdaptiveSampling
 See also:
     UseAdaptiveSampling ()
 
-Parameter ``[in]``:
+:param (input):
     useAdaptive True to use adaptive sampling)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_UseAdaptiveSampling =R"doc(Enabling 'Adaptive Sampling' will decrease the density of a fur layer
 as it recedes away from the camera as based on the 'Fur Rate')doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetMaterial =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_MaterialFur_GetMaterial =R"doc(:returns:
     The containing material for this fur.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_Copy =R"doc(Copy the settings in the object passed in into this object
 
-Parameter ``[in]``:
+:param (input):
     rhs The fur object to copy from)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialFur_InitDefaults =R"doc(Initialize this fur object with the default settings)doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialMapCollection_GetMaterial =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_MaterialMapCollection_GetMaterial =R"doc(:returns:
     The containing material for these maps.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapCollection_AddMap =R"doc(Add a map of the specified type to the collection. If a map of this
 type is already associated with this material, it will be replaced.
 
-Parameter ``[in]``:
+:param (input):
     type The type of the map to add
 
-Returns:
+:returns:
     The map added)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapCollection_DeleteMap =R"doc(Delete a map from the collection
 
-Parameter ``[in]``:
+:param (input):
     type The type of the map to delete)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapCollection_Copy =R"doc(Copy the collection of maps passed in into this collection.
 
-Parameter ``[in]``:
+:param (input):
     rhs The collection to copy from)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapCollection_InitDefaults =R"doc(Initialize this collection of maps to an empty list)doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialMap_GetMaterial =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_MaterialMap_GetMaterial =R"doc(:returns:
     The containing material for this map.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_GetLayers =R"doc(Get the collection of layers contained by this map If GetLinkType ()
@@ -1281,13 +1281,13 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMap_GetLayers =R"doc(Get t
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_SetProjectionScale =R"doc(Set the scale of the projection If GetLinkType () != MapType_None the
 linked maps value will be returned/set
 
-Parameter ``[in]``:
+:param (input):
     x The x size
 
-Parameter ``[in]``:
+:param (input):
     y The y size
 
-Parameter ``[in]``:
+:param (input):
     z The z size)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_GetProjectionScale =R"doc(Get the scale of the projection If GetLinkType () != MapType_None the
@@ -1297,13 +1297,13 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMap_SetProjectionRotation 
 GetLinkType () != MapType_None the linked maps value will be
 returned/set
 
-Parameter ``[in]``:
+:param (input):
     x The x angle
 
-Parameter ``[in]``:
+:param (input):
     y The y angle
 
-Parameter ``[in]``:
+:param (input):
     z The z angle)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_GetProjectionRotation =R"doc(Get the projection rotation for the map. The angles are in degrees If
@@ -1315,13 +1315,13 @@ valid for MapMode::DirectionalDrape and after map types. If
 GetLinkType () != MapType_None the linked maps value will be
 returned/set
 
-Parameter ``[in]``:
+:param (input):
     x The x offset
 
-Parameter ``[in]``:
+:param (input):
     y The y offset
 
-Parameter ``[in]``:
+:param (input):
     z The z offset)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_GetProjectionOffset =R"doc(Get the projection offset for the map. The projection offset is only
@@ -1332,7 +1332,7 @@ returned/set)doc";
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_SetLinkedMapInvertOverride =R"doc(If the map is linked then the layers can have different invert values
 from the linked map. Set the override value for a linked map
 
-Parameter ``[in]``:
+:param (input):
     invert The invert value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_GetLinkedMapInvertOverride =R"doc(If the map is linked then the layers can have different invert values
@@ -1343,7 +1343,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMap_SetValue =R"doc(Set th
 See also:
     GetValue ()
 
-Parameter ``[in]``:
+:param (input):
     value The value, For bump maps, it expresses the height of the
     map. For pattern maps, it expresses the weight of the pattern)doc";
 
@@ -1353,7 +1353,7 @@ weight of the pattern relative to the base material color.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_SetIsEnabled =R"doc(Set if this map is enabled
 
-Parameter ``[in]``:
+:param (input):
     isEnabled True to enable the map, false to disable it)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_IsEnabled =R"doc(Get if this map is enabled.)doc";
@@ -1370,15 +1370,15 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMap_Copy =R"doc(Copy the c
 everything except the map's type - map type must be set when a map is
 first created.
 
-Parameter ``[in]``:
+:param (input):
     rhs The map to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMap_InitDefaults =R"doc(Initialize the map to its default values)doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialMapLayerCollection_GetMaterial =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_MaterialMapLayerCollection_GetMaterial =R"doc(:returns:
     The containing material for these layers.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialMapLayerCollection_GetMap =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_MaterialMapLayerCollection_GetMap =R"doc(:returns:
     The containing map for these layers.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayerCollection_GetLastDataLayer =R"doc(Get the last data layer (image/procedrual/cell) in the collection)doc";
@@ -1391,22 +1391,22 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayerCollection_GetTopL
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayerCollection_InitDefaults =R"doc(Initialize the collection to the default values)doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetMap =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetMap =R"doc(:returns:
     The containing map for this layer.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetMaterial =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetMaterial =R"doc(:returns:
     The containing material for this layer.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetColumnSpacing =R"doc(Set the row spacing for geometry maps
 
-Parameter ``[in]``:
+:param (input):
     rowSpacing The row spacing in the units for the map)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetColumnSpacing =R"doc(Get the column spacing for geometry maps)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetRowSpacing =R"doc(Set the row spacing for geometry maps
 
-Parameter ``[in]``:
+:param (input):
     rowSpacing The row spacing in the units for the map)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetRowSpacing =R"doc(Get the row spacing for geometry maps)doc";
@@ -1420,14 +1420,14 @@ See also:
     GetFileName () More than one image is used only when the layer
     type is LAYERTYPE_TextureReplicator
 
-Returns:
+:returns:
     The set of images to be used by this layer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_AddTextureReplicator =R"doc(Add a texture replicator to this layer. If one exists already then it
 will be replaced. The layer should also have the type
 LAYERTYPE_TextureReplicator set;
 
-Returns:
+:returns:
     The texture replicator added)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_ClearLxoProcedure =R"doc(Remove the procedure from this layer)doc";
@@ -1435,35 +1435,35 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_ClearLxoProcedure
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_AddLxoProcedure =R"doc(Add an LxoProcedure for this layer. If an LxoProcedure already exists
 for this map, it will be replaced.
 
-Parameter ``[in]``:
+:param (input):
     type The type of procedure to add
 
-Returns:
+:returns:
     The newly created procedure)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetOperatorStringValue =R"doc(Set the string value associated with an operator layer
 
-Parameter ``[in]``:
+:param (input):
     value The string value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetOperatorStringValue =R"doc(Get a string value associated with an operator layer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetOperatorColorValue =R"doc(Set the color value associated with an operator layer
 
-Parameter ``[in]``:
+:param (input):
     red The red component
 
-Parameter ``[in]``:
+:param (input):
     green The green component
 
-Parameter ``[in]``:
+:param (input):
     blue The blue component)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetOperatorColorValue =R"doc(Get the color value associated with an operator layer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetOperatorDoubleValue =R"doc(Set the double value associated with an operator layer
 
-Parameter ``[in]``:
+:param (input):
     value The double value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetOperatorDoubleValue =R"doc(Get the double value associated with an operator layer)doc";
@@ -1473,7 +1473,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetType =R"doc(Se
 See also:
     GetType ()
 
-Parameter ``[in]``:
+:param (input):
     type The layer type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetType =R"doc(Get the type of this layer. Layers are accumulated together to produce
@@ -1494,7 +1494,7 @@ before returning to the main stack to carry on the calculation)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetTextureFilterType =R"doc(Set the texture filter type to be used
 
-Parameter ``[in]``:
+:param (input):
     type The texture filter type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetTextureFilterType =R"doc(Get the texture filtering type to be used)doc";
@@ -1504,7 +1504,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetMinimumSpot =R
 See also:
     GetMinimumSpot ()
 
-Parameter ``[in]``:
+:param (input):
     minimumSpot The spot size on the surface)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetMinimumSpot =R"doc(Get the size on the surface which will be sampled for the texture when
@@ -1517,7 +1517,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetAntialiasStren
 See also:
     GetAntiAliasStrength ()
 
-Parameter ``[in]``:
+:param (input):
     antialiasStrength The antialiasing strength as a percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetAntialiasStrength =R"doc(Active only when antialiasing is used. This setting will allow you to
@@ -1529,7 +1529,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetHighValue =R"d
 See also:
     GetLowValue ()
 
-Parameter ``[in]``:
+:param (input):
     highValue The high value as a percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetHighValue =R"doc(Get the effective value of pixels which will be 255,255,255 rgb
@@ -1542,7 +1542,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetLowValue =R"do
 See also:
     GetLowValue ()
 
-Parameter ``[in]``:
+:param (input):
     lowValue The low value as a percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetLowValue =R"doc(The Low/High values provide a means for users to re-map the total
@@ -1559,7 +1559,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetIsBackgroundTr
 See also:
     IsBackgroundTransparent ()
 
-Parameter ``[in]``:
+:param (input):
     isTransparent True if the first pixel in the image is to be used
     as a transparent pixel for the rest of the image)doc";
 
@@ -1573,21 +1573,21 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_IsCapped =R"doc(i
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetIsInverted =R"doc(Set if the texture RGB pixel values are to be inverted
 
-Parameter ``[in]``:
+:param (input):
     isInverted Set to true to invert the image)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_IsInverted =R"doc(Get if the texture RGB pixel values are inverted)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetGamma =R"doc(Set the gamma adjustment to apply to the texture
 
-Parameter ``[in]``:
+:param (input):
     gamma Gamma value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetGamma =R"doc(Get the gamma adjustment to apply to the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetOpacity =R"doc(Set the opacity of this layer
 
-Parameter ``[in]``:
+:param (input):
     opacity The opacity of the layer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetOpacity =R"doc(Get the opacity of this layer (0-1 range). Note that if there is only
@@ -1598,13 +1598,13 @@ adjusted to units of the map's scale, with the sign of the x
 coordinate reversed. This is how the material map editor presents the
 actual stored (GetOffsetR) value to the user
 
-Parameter ``[in]``:
+:param (input):
     x The x texture offset
 
-Parameter ``[in]``:
+:param (input):
     y The y texture offset
 
-Parameter ``[in]``:
+:param (input):
     z The z texture offset. Only used for 3d procedural textures)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetAdjustedOffset =R"doc(These values express the offset value adjusted to units of the map's
@@ -1612,52 +1612,52 @@ scale, with the sign of the x coordinate reversed. This is how the
 material map editor presents the actual stored (GetOffsetR) value to
 the user
 
-Parameter ``[out]``:
+:param (output):
     offset The offset of the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetOffset =R"doc(Set the offset for the texture based on the units specified
 
-Parameter ``[in]``:
+:param (input):
     x The x texture offset
 
-Parameter ``[in]``:
+:param (input):
     y The y texture offset
 
-Parameter ``[in]``:
+:param (input):
     z The z texture offset. Only used for 3d procedural textures)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetOffset =R"doc(Get the offset for the texture based on the units specified)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetScale =R"doc(Set the scale of the texture based on the units
 
-Parameter ``[in]``:
+:param (input):
     x The x texture scale
 
-Parameter ``[in]``:
+:param (input):
     y The y texture scale
 
-Parameter ``[in]``:
+:param (input):
     z The z texture scale. Only used for 3d procedural textures)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetScale =R"doc(Get the scale of the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetRotation =R"doc(Set the rotation angle for the texture in degrees
 
-Parameter ``[in]``:
+:param (input):
     rotation The rotation angle to be used)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetRotation =R"doc(Get the rotation angle for the texture in degrees)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetUnits =R"doc(Set the units used for the texture sizing
 
-Parameter ``[in]``:
+:param (input):
     units The units to use)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetUnits =R"doc(Get the units used for the texture sizing)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetMode =R"doc(Set the UV texture coordinate generation mode
 
-Parameter ``[in]``:
+:param (input):
     mode The texture coordinate generation mode to use)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetMode =R"doc(Get the UV, texture coordinate generation mode)doc";
@@ -1665,7 +1665,7 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetMode =R"doc(Ge
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetFileName =R"doc(Set the filename for the layer. This is only for if the layer type is
 LAYERTYPE_Image
 
-Parameter ``[in]``:
+:param (input):
     fileName The filename of the image)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetFileName =R"doc(If the layer is of type LAYERTYPE_Image this method will return the
@@ -1673,7 +1673,7 @@ filename for the image. Otherwise it will return an empty string)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetIsAntialiasing =R"doc(Sets if the texture image will be antialiased
 
-Parameter ``[in]``:
+:param (input):
     antialiasing True to antialias the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_IsAntialiasing =R"doc(Is the texture image to be antialiased)doc";
@@ -1681,14 +1681,14 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_IsAntialiasing =R
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetIsSnappable =R"doc(Sets if the geometry map cell texture repeated on the element is
 snappable
 
-Parameter ``[in]``:
+:param (input):
     isSnappable True if the cell is snappable)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_IsSnappable =R"doc(Is the geometry map cell texture snapppable)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetUseCellColors =R"doc(Sets the geometry map to use the colors from the cell
 
-Parameter ``[in]``:
+:param (input):
     useCellColors True for the geometry map to use the colors from the
     cell element)doc";
 
@@ -1696,14 +1696,14 @@ static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_UseCellColors =R"
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetIsProjectionLocked =R"doc(Set if the projection size is locked
 
-Parameter ``[in]``:
+:param (input):
     isLocked The lock value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_IsProjectionLocked =R"doc(Get if the projection size is locked)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetLockSize =R"doc(Set if the size lock is enabled
 
-Parameter ``[in]``:
+:param (input):
     lockSize The size lock value)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetLockSize =R"doc(Get if the size lock is enabled. Size lock will force the x,y,z size
@@ -1711,49 +1711,49 @@ to be the same)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetRepeatV =R"doc(Set if the texture is repeated in the V texture axis
 
-Parameter ``[in]``:
+:param (input):
     repeat True if the texture is repeated)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetRepeatV =R"doc(Get if the texture is repeated in the V texture axis)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetRepeatU =R"doc(Set if the texture is repeated in the U texture axis
 
-Parameter ``[in]``:
+:param (input):
     repeat True if the texture is repeated)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetRepeatU =R"doc(Get if the texture is repeated in the U texture axis)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetMirrorU =R"doc(Set if the texture is mirrored in the U texture axis
 
-Parameter ``[in]``:
+:param (input):
     mirror True of the texxture is mirrored)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetMirrorU =R"doc(Get if the texture is mirrored in the U texture axis)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetFlipU =R"doc(Sets if the texture is flipped in the U texture axis
 
-Parameter ``[in]``:
+:param (input):
     flip True to flip the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_GetFlipU =R"doc(Gets if the texture is flipped in the U texture axis)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_SetIsEnabled =R"doc(Sets if this layer is enabled
 
-Parameter ``[in]``:
+:param (input):
     isEnabled Sets this object enabled)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_IsEnabled =R"doc(Is this layer enabled.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_Copy =R"doc(Copy the contents of the supplied object into this
 
-Parameter ``[in]``:
+:param (input):
     rhs The object to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialMapLayer_InitDefaults =R"doc(Initialize default values for this layer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_SetLibrary =R"doc(Sets the document that this palette was originally derived from.
 
-Parameter ``[in]``:
+:param (input):
     library The document that this palette was originally derived
     from.)doc";
 
@@ -1761,39 +1761,39 @@ static const char * __doc_Bentley_DgnPlatform_PaletteInfo_GetLibrary =R"doc(Retu
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_SetType =R"doc(Set the type of this palette
 
-Parameter ``[in]``:
+:param (input):
     type The type of the palette)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_GetType =R"doc(Get the type of this palette)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_SetSource =R"doc(Set the file moniker for the palette
 
-Parameter ``[in]``:
+:param (input):
     source The moniker to set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_GetSource =R"doc(Get the file moniker for the palette)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_SetName =R"doc(Set the name of this palette
 
-Parameter ``[in]``:
+:param (input):
     name The name to set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_GetName =R"doc(Get the name of this palette)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_Copy =R"doc(Copy the settings from the passed in object into this PaletteInfo
 
-Parameter ``[in]``:
+:param (input):
     rhs Object to copy from)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PaletteInfo_Equals =R"doc(Compare this PaletteInfo to the passed in PaletteInfo for equality
 
-Parameter ``[in]``:
+:param (input):
     rhs the object to compare to
 
-Parameter ``[in]``:
+:param (input):
     testLibrary Include testing if the library monikers are equal
 
-Returns:
+:returns:
     True if the objects are equal)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_DeleteSurfaceParticleGenerator =R"doc(Delete the surface particle generator associated with this texture
@@ -1808,7 +1808,7 @@ replicator)doc";
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_SetIsLocalNormalAttenuation =R"doc(Sets the attenuation of the texture based on the surface normal at the
 particle location
 
-Parameter ``[in]``:
+:param (input):
     localNormalAttenuation True to use normal attenuation)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_IsLocalNormalAttenuation =R"doc(Attenuation of the texture is based on the surface normal at the
@@ -1817,7 +1817,7 @@ particle location)doc";
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_SetIsLocalProjection =R"doc(Sets the replicated texture to warp to the contour of the surface it
 is on
 
-Parameter ``[in]``:
+:param (input):
     localProjection True for the local normal projection to be used)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_IsLocalProjection =R"doc(When enabled the replicated texture is warped to the contour of the
@@ -1829,7 +1829,7 @@ angle applied in
 See also:
     GetRotation ()
 
-Parameter ``[in]``:
+:param (input):
     rotation The random rotation angle in radians)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_GetRandomRotation =R"doc(Get the random angle value in radians which can adjust the rotation
@@ -1843,7 +1843,7 @@ static const char * __doc_Bentley_DgnPlatform_TextureReplicator_SetRotation =R"d
 See also:
     GetRotation ()
 
-Parameter ``[in]``:
+:param (input):
     rotation The rotation to apply in radians)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_GetRotation =R"doc(Get the image rotation in radians. Each repeated texture is aligned to
@@ -1855,7 +1855,7 @@ static const char * __doc_Bentley_DgnPlatform_TextureReplicator_SetRandomSize =R
 See also:
     GetRandomSize ()
 
-Parameter ``[in]``:
+:param (input):
     size The random size percentage applied to the clones. 0% is no
     random size change.)doc";
 
@@ -1867,7 +1867,7 @@ static const char * __doc_Bentley_DgnPlatform_TextureReplicator_SetFallOffGain =
 See also:
     GetFallOffGain ()
 
-Parameter ``[in]``:
+:param (input):
     gain The gradient of the falloff as a percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_GetFallOffGain =R"doc(Get the gradient of the falloff transition. 100% is a hard edge lower
@@ -1878,7 +1878,7 @@ static const char * __doc_Bentley_DgnPlatform_TextureReplicator_SetFallOffBias =
 See also:
     GetFallOffBias ()
 
-Parameter ``[in]``:
+:param (input):
     bias The amount of fade applied to the texture as a percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_GetFallOffBias =R"doc(Get the amount of fade applied to the texture from its center to the
@@ -1888,7 +1888,7 @@ the transparency to the center of the texture)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_SetParticleSize =R"doc(Set the size of individual cloned images.
 
-Parameter ``[in]``:
+:param (input):
     size The size of the individual images)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_GetParticleSize =R"doc(Get the size of individual cloned images. Larger values result in
@@ -1897,28 +1897,28 @@ larger image areas.)doc";
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_Copy =R"doc(Copy the contents of the texture replicator passed in into this
 texture replicator.
 
-Parameter ``[in]``:
+:param (input):
     rhs The texture replicator to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextureReplicator_InitDefaults =R"doc(Initialize the texture replicator to its default values)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_SetRandomSeed =R"doc(Set the seed value for the randomizer algorithm for placing particles.
 
-Parameter ``[in]``:
+:param (input):
     seed The seed value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_GetRandomSeed =R"doc(Get the seed value for the randomizer algorithm for placing particles.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_SetMaximumParticles =R"doc(Set the maximum number of particles to be generated
 
-Parameter ``[in]``:
+:param (input):
     maximumParticles The maximum number of particles.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_GetMaximumParticles =R"doc(Get the maximum number of particles to be generated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_SetScaleFactor =R"doc(Set the scale factor percentage applied to replicated textures.
 
-Parameter ``[in]``:
+:param (input):
     scaleFactor The scale factor percentage to apply to the textures.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_GetScaleFactor =R"doc(Get the scale factor percentage applied to replicated textures. This
@@ -1926,7 +1926,7 @@ allows the size of the replicated textures to be modified.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_SetParticleDensity =R"doc(Set the particle density multiplier percentage.
 
-Parameter ``[in]``:
+:param (input):
     density The particle density percentage)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_GetParticleDensity =R"doc(Get the particle density multiplier percentage. This will allow a
@@ -1935,7 +1935,7 @@ simple way to control the number of replicas over a surface)doc";
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_SetMinimumSpacingInMillimeters =R"doc(Set the minimum allowed spacing between particles on a surface in
 millimeters
 
-Parameter ``[in]``:
+:param (input):
     minimumSpacing The minimum spacing)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_GetMinimumSpacingInMillimeters =R"doc(Get the minimum allowed spacing between particles on a surface in
@@ -1943,7 +1943,7 @@ millimeters)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_SetAverageSpacingInMillimeters =R"doc(Set the average spacing between particles on a surface in millimeters
 
-Parameter ``[in]``:
+:param (input):
     averageSpacing The average spacing)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_GetAverageSpacingInMillimeters =R"doc(Get the average spacing between particles on a surface in millimeters)doc";
@@ -1951,7 +1951,7 @@ static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_GetAverag
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_Copy =R"doc(Copy the contents of the surface particle generator passed in into
 this surface particle generator.
 
-Parameter ``[in]``:
+:param (input):
     rhs The surface particle generator to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceParticleGenerator_InitDefaults =R"doc(Initialize the surface particle generator to its default values)doc";
@@ -3172,11 +3172,4 @@ void def_MaterialSettings(py::module_& m)
     c14.def_property("PBREmissiveColor", &MaterialSettings::GetPBREmissiveColorR, [] (MaterialSettings& self, RgbFactorCR color) { self.SetPBREmissiveColor(color.red, color.green, color.blue); });
     c14.def("GetPBREmissiveColor", &MaterialSettings::GetPBREmissiveColorR, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, MaterialSettings, GetPBREmissiveColor));
     c14.def("SetPBREmissiveColor", &MaterialSettings::SetPBREmissiveColor, "red"_a, "green"_a, "blue"_a, DOC(Bentley, DgnPlatform, MaterialSettings, SetPBREmissiveColor));
-
-    py::class_<Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >> c15(m, "MapTypeToMaterialMapPair", py::multiple_inheritance());
-    c15.def_property_readonly("First", [](Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >& self) {return self.first; });
-    c15.def_property_readonly("Second", [](Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >& self) {return self.second; });
-
-    //c15.def("GetFirst", [](Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >& self) {return self.first; });
-   //c15.def("GetSecond", [](Bentley::Bstdcxx::bpair<Bentley::DgnPlatform::MaterialMap::MapType const, Bentley::RefCountedPtr<Bentley::DgnPlatform::MaterialMap> >& self) {return self.second; });
-    }
+  }

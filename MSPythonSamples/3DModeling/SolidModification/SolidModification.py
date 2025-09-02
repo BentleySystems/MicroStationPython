@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -13,11 +9,15 @@ from MSPyMstnPlatform import *
 from MSPyDgnView import *
 import ctypes
 import sys
-import debugpy
 import os
-import pytest
 import shutil
 import math
+
+'''
+Samples demonstrating how to modify solid
+Prerequisite: Open MSPythonSamples\\data\\SolidModeling.dgn  
+'''
+
 '''
 Imprint solid using  profile
     solidId  : Integer   Solid which needs to be imprinted
@@ -1557,18 +1557,9 @@ def primitiveToSmartSolid(bodyId):
     # If any of the above steps fail, return False indicating failure
     return False
 
-'''
-Prerequisite: Open MSPythonSamples\\data\\SolidModeling.dgn  
-'''
+
 #main
 if __name__ == "__main__":
-    #import debugpy
-    #debugpy.listen(('0.0.0.0',5678), in_process_debug_adapter=True)
-    #print("Waiting for debugger attach")
-    #debugpy.wait_for_client()
-    #debugpy.breakpoint()
-    #print('break on this line')
-
     #highlight all the elements with type 
     if(True != imprintSolidUsingProfile(1401, 1408)):
         print("Imprint operation failed")

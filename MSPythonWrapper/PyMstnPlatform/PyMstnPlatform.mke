@@ -39,7 +39,7 @@ MultiCompileDepends = $(_MakeFileSpec)
 PchCompiland        = $(MSPythonSrc)/MSPythonPCH.cpp
 PchOutputDir        = $(o)
 PchArgumentsDepends = $(MultiCompileDepends)
-PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302 -wd4471 -wd5205
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302 -wd4471 -wd5205 -wd4653 -wd4652 -wd4651
 %include $(MSPythonSrc)/build/publicSDK/PreCompileHeader.mki
 
 
@@ -179,6 +179,12 @@ $(o)IPrinterDriver$(oext)                   : $(PyMstnSource)Plot/IPrinterDriver
 
 $(o)guiview$(oext)                          : $(PyMstnSource)GUI/guiview.cpp $(PyMstnDependencies) ${MultiCompileDepends}
 
+$(o)geocontextApi$(oext)                    : $(PyMstnSource)GeospatialContext/geocontextApi.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)importServicesApi$(oext)                : $(PyMstnSource)GeospatialContext/importServicesApi.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
+$(o)exportServicesApi$(oext)                : $(PyMstnSource)GeospatialContext/exportServicesApi.cpp $(PyMstnDependencies) ${MultiCompileDepends}
+
 %include MultiCppCompileGo.mki
 
 CCPchOpts =
@@ -217,7 +223,9 @@ LINKER_LIBRARIES            = $(PythonLibName) \
                               $(ContextSubpartsLibs)MSPythonCore.lib \
                               $(ContextSubpartsLibs)ImageLib.lib \
                               $(ContextSubpartsLibs)Bentley.PrintFoundation.lib \
-                              $(ContextSubpartsLibs)Bentley.PrintDefinitions.lib
+                              $(ContextSubpartsLibs)Bentley.PrintDefinitions.lib \
+                              $(ContextSubpartsLibs)GeospatialContextAPI.lib \
+                              $(ContextSubpartsLibs)mspsolid.lib
 
 DLM_CONTEXT_LOCATION        = $(BuildContext)Delivery/
 DLM_LIB_CONTEXT_LOCATION    = $(BuildContext)Delivery/

@@ -12,55 +12,55 @@
 
 static const char * __doc_Bentley_DgnPlatform_OleCellHeaderHandler_GetScale =R"doc(Query the display scale for the ole data.
 
-Parameter ``eh``:
-    IN The element to query.
+:param eh:
+    (input) The element to query.
 
-Parameter ``scale``:
-    OUT display scale.
+:param scale:
+    (output) display scale.
 
-Returns:
+:returns:
     SUCCESS if extracted data is valid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_OleCellHeaderHandler_GetSourceSize =R"doc(Query the source data size for the ole data.
 
-Parameter ``eh``:
-    IN The element to query.
+:param eh:
+    (input) The element to query.
 
-Parameter ``sourceSize``:
-    OUT Source data size.
+:param sourceSize:
+    (output) Source data size.
 
-Parameter ``label``:
-    OUT Unit label for source data size.
+:param label:
+    (output) Unit label for source data size.
 
-Returns:
+:returns:
     SUCCESS if extracted data is valid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_OleCellHeaderHandler_GetSize =R"doc(Query extents, center, and orientation of the ole element.
 
-Parameter ``eh``:
-    IN The element to query.
+:param eh:
+    (input) The element to query.
 
-Parameter ``size``:
-    OUT Extents of ole element (optional).
+:param size:
+    (output) Extents of ole element (optional).
 
-Parameter ``center``:
-    OUT Center of ole element (optional).
+:param center:
+    (output) Center of ole element (optional).
 
-Parameter ``rMatrix``:
-    OUT Orientation of ole element (optional).
+:param rMatrix:
+    (output) Orientation of ole element (optional).
 
-Returns:
+:returns:
     SUCCESS if extracted data is valid.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_OleCellHeaderHandler_IsOleElement =R"doc(Test if the supplied element is an ole cell element.
 
-Parameter ``eh``:
-    IN The element to test.
+:param eh:
+    (input) The element to test.
 
-Parameter ``info``:
-    OUT ole information (optional).
+:param info:
+    (output) ole information (optional).
 
-Returns:
+:returns:
     true if eh is a valid ole element.)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -189,6 +189,13 @@ void def_OleCellHeaderHandler(py::module_& m)
                   {
                   std::string strData = oleData.cast<std::string>();
                   return OleCellHeaderHandler::CreateOleElement(eeh, info, name, description, shape.data(), (void const*) strData.data(), strData.size(), is3d, modelRef);
+                  }, "eeh"_a, "info"_a, "name"_a, "description"_a, "shape"_a, "oldData"_a, "is3d"_a, "modelRef"_a);
+
+    c5.def_static("CreateOleElement", [] (EditElementHandleR eeh, DgnOleInfo const* info, WCharCP name, WCharCP description, py::list const& shape, py::bytes const& oleData, bool is3d, DgnModelRefR modelRef)
+                  {
+                  std::string strData = oleData.cast<std::string>();
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(shape, cppShape, DPoint3dArray, DPoint3d);
+                  return OleCellHeaderHandler::CreateOleElement(eeh, info, name, description, cppShape.data(), (void const*) strData.data(), strData.size(), is3d, modelRef);
                   }, "eeh"_a, "info"_a, "name"_a, "description"_a, "shape"_a, "oldData"_a, "is3d"_a, "modelRef"_a);
 
     c5.def_property_readonly_static("Instance", [] (py::object const&) { return std::unique_ptr< OleCellHeaderHandler, py::nodelete>(&OleCellHeaderHandler::GetInstance()); });

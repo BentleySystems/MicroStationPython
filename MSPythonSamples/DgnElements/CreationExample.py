@@ -14,6 +14,9 @@ from DgnAttachmentExample import *
 from AcsExample import *
 from NamedGroupExample import *
 
+'''
+Samples demonstrating how to create elements: line, linestring, arc, ellipse, rasterattachment,dgnattachment, acs, namedgroup
+''' 
 
 if __name__ == "__main__":
     if True != createLine(DPoint3d(0, 0, 0)):

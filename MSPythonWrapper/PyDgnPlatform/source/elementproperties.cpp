@@ -13,35 +13,35 @@
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_ApplyTemplate =R"doc(Set element properties to match properties of the supplied template
 element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to change the properties of.
 
-Parameter ``templateEh``:
+:param templateEh:
     The element to match the properties of. @note The template element
     is expected to be from the same model as the element to change.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_ApplyElemDisplayParams =R"doc(Set element properties using the supplied ElemDisplayParams.
 
-Parameter ``eeh``:
+:param eeh:
     The element to change the properties of.
 
-Parameter ``params``:
+:param params:
     The ElemDisplayParams to apply.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetLocked =R"doc(Assign or clear the locked flag of the supplied element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to change the properties of.
 
-Parameter ``locked``:
+:param locked:
     the locked flag to use.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetGraphicGroup =R"doc(Assign or clear the graphic group number of the supplied element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to change the properties of.
 
-Parameter ``gg``:
+:param gg:
     the graphic group number to use, 0 to remove element from group.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetChangeEntireElement =R"doc(Whether to change just the base property values or all property values
@@ -50,7 +50,7 @@ and multilines store more than one color, style, etc. It is also
 possible that no part of the element displays using the base property
 value.
 
-Parameter ``changeAll``:
+:param changeAll:
     true to change all property values. @note The default behavior is
     to just change the base property values,
     PROPSCALLBACK_FLAGS_IsBaseID.
@@ -60,7 +60,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetFont =R"doc(Set remapper object to change the font of an element.
 
-Parameter ``font``:
+:param font:
     the new font to use @note If the element supports and has an SHX
     big font, it will be removed, and the provided font will be the
     sole font used by the element.)doc";
@@ -69,58 +69,58 @@ static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetThickne
 is used to display planar elements as extrusions in 3d when the view
 is not aligned with the extrude direction bvector.
 
-Parameter ``thickness``:
+:param thickness:
     New thickness value.
 
-Parameter ``direction``:
+:param direction:
     Extrude direction, required for lines, optional for elements with
     well defined normal.
 
-Parameter ``isCapped``:
+:param isCapped:
     true to display closed curves as capped solids instead of surface.
 
-Parameter ``alwaysUseDirection``:
+:param alwaysUseDirection:
     true to use direction even for elements with a well defined normal
     (skewed extrusions). @note This property is supported by simple
     open and closed curves, text, and multilines.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetTransparency =R"doc(Set remapper object to change the transparency of an element.
 
-Parameter ``transparency``:
+:param transparency:
     New transparency value, 0.0 for fully opaque.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetDisplayPriority =R"doc(Set remapper object to change the display priority of an element.
 
-Parameter ``priority``:
+:param priority:
     New display priority value. @note Only applicable for 2d elements,
     will be ignored by 3d elements.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetElementClass =R"doc(Set remapper object to change the class type of an element.
 
-Parameter ``elmClass``:
+:param elmClass:
     New element class (Typically just primary/construction).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetLevel =R"doc(Set remapper object to change the level of an element.
 
-Parameter ``level``:
+:param level:
     New level id.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetWeight =R"doc(Set remapper object to change the weight of an element.
 
-Parameter ``weight``:
+:param weight:
     New weight value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetLinestyle =R"doc(Set remapper object to change the linestyle of an element.
 
-Parameter ``style``:
+:param style:
     New linestyle id.
 
-Parameter ``lsParams``:
+:param lsParams:
     Modifiers for custom linestyle (or NULL).)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetFillColor =R"doc(Set remapper object to change just the solid fill color of an element.
 
-Parameter ``fillColor``:
+:param fillColor:
     New fill color value. @note Will not add fill to an element that
     is currently un-filled. Fill colors announced to color callback
     using PROPSCALLBACK_FLAGS_IsBackgroundID.
@@ -130,7 +130,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_SetColor =R"doc(Set remapper object to change the colors of an element.
 
-Parameter ``color``:
+:param color:
     New color value. @note For opaque filled elements changing the
     element color will also change the fill color so that it continues
     to match the outline color. The same behavior is also true for
@@ -139,26 +139,26 @@ Parameter ``color``:
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesSetter_Apply =R"doc(Apply the property values supplied through the various set methods to
 the input element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to change the properties of.
 
-Returns:
+:returns:
     true if the element was changed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesGetter_GetLocked =R"doc(Get the locked flag of the supplied element.
 
-Parameter ``eh``:
+:param eh:
     The element to get the locked property of.
 
-Returns:
+:returns:
     true if locked bit is set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesGetter_GetGraphicGroup =R"doc(Get the graphic group number of the supplied element.
 
-Parameter ``eh``:
+:param eh:
     The element to get the graphic group number of.
 
-Returns:
+:returns:
     graphic group number of the supplied element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ElementPropertiesGetter_GetThickness =R"doc(Get element extrude thickness.)doc";

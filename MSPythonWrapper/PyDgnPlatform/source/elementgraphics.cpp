@@ -12,7 +12,7 @@
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__OutputGraphics =R"doc(Allow processor to output graphics to it's process methods.
 
-Parameter ``context``:
+:param context:
     The current view context.
 
 Remark:
@@ -24,30 +24,30 @@ static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__GetDraw
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__GetFacetOptionsP =R"doc(Allow processor to override the default facet options.
 
-Returns:
+:returns:
     A pointer to facet option structure to use or NULL to use default
     options.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessFacets =R"doc(Collect output for surfaces and solids as facets.
 
-Parameter ``meshData``:
+:param meshData:
     The indexed polyface data.
 
-Parameter ``isFilled``:
+:param isFilled:
     The wireframe display of the mesh has opaque fill.
 
 Remark:
     s Only called if _ProcessAsFacets returns true.
 
-Returns:
+:returns:
     SUCCESS if handled.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessBody =R"doc(Collect output for surfaces and solids using a solid kernel entity.
 
-Parameter ``entity``:
+:param entity:
     The solid kernel entity.
 
-Parameter ``attachments``:
+:param attachments:
     Optional face color/material attachment information. @note
     Requires host implementation of SolidsKernelAdmin methods that
     take or return a ISolidKernelEntity.
@@ -55,49 +55,49 @@ Parameter ``attachments``:
 Remark:
     s Only called if _ProcessAsBody returns true.
 
-Returns:
+:returns:
     SUCCESS if handled.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessSurface =R"doc(Collect output as a bspline surface.
 
-Parameter ``surface``:
+:param surface:
     The bspline surface data.
 
-Returns:
+:returns:
     SUCCESS if handled, return ERROR to output according to
     _ProcessBody, _ProcessFacets, and _ProcessCurveVector rules.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessSolidPrimitive =R"doc(Collect output as a solid primitive.
 
-Parameter ``primitive``:
+:param primitive:
     The solid primitive data.
 
-Returns:
+:returns:
     SUCCESS if handled, return ERROR to output according to
     _ProcessBody, _ProcessFacets, and _ProcessCurveVector rules.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessCurveVector =R"doc(Collect output as a CurveVector.
 
-Parameter ``curves``:
+:param curves:
     The curve data.
 
-Parameter ``isFilled``:
+:param isFilled:
     A closed path or region should have opaque fill.
 
-Returns:
+:returns:
     SUCCESS if handled, ERROR to output individual curves through
     _ProcessCurvePrimitive.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessCurvePrimitive =R"doc(Collect output as a single curve component.
 
-Parameter ``curve``:
+:param curve:
     The curve data.
 
-Parameter ``isClosed``:
+:param isClosed:
     The data is from a closed path or region instead of a physically
     closed path.
 
-Parameter ``isFilled``:
+:param isFilled:
     A closed path or region should have opaque fill.
 
 Remark:
@@ -108,43 +108,43 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessTextString =R"doc(Collect output as text.
 
-Parameter ``text``:
+:param text:
     The text data.
 
-Returns:
+:returns:
     SUCCESS if handled, ERROR to output glyph graphics through
     _ProcessCurveVector.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__AnnounceElemDisplayParams =R"doc(Supply the current symbology used to generate the ElemMatSym values.
 
-Parameter ``displayParams``:
+:param displayParams:
     The symbology to apply to subsequent process calls.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__AnnounceElemMatSymb =R"doc(Supply the current symbology that subsequent geometry is displayed
 with.
 
-Parameter ``matSymb``:
+:param matSymb:
     The symbology to apply to subsequent process calls.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__AnnounceTransform =R"doc(Supply the current transform that subsequent geometry is displayed
 through.
 
-Parameter ``trans``:
+:param trans:
     The transform to apply to subsequent process calls.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__AnnounceContext =R"doc(Supply the current context that is processing the geometry.
 
-Parameter ``context``:
+:param context:
     The current view context.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessAsBody =R"doc(Process surfaces and solids not handled directly or are clipped
 through _ProcessBody.
 
-Parameter ``isCurved``:
+:param isCurved:
     Graphics output would contain non-linear edge and/or non-planar
     face geometry.
 
-Returns:
+:returns:
     true to output solid kernel entities for surface and solid
     geometry. If returning false, facets will be output if
     _ProcessAsFacets returns true, otherwise edge and face isoline
@@ -161,10 +161,10 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ProcessAsFacets =R"doc(Process surfaces and solids not handled directly or are clipped
 through _ProcessFaceta.
 
-Parameter ``isPolyface``:
+:param isPolyface:
     facets are from a call to DrawPolyface, ex. mesh element.
 
-Returns:
+:returns:
     true to output facets for surface and solid geometry. If returning
     false, edge and face isoline curves will be output through
     _ProcessCurveVector.
@@ -177,12 +177,12 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__WantClipping =R"doc(Controls whether to output clipped graphics if any clipping is pushed
 by display.
 
-Returns:
+:returns:
     true to output clipped graphics.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementGraphicsProcessor__ExpandPatterns =R"doc(Controls whether pattern graphics will be output.
 
-Returns:
+:returns:
     true to output pattern and hatch graphics, false to skip patterns.)doc";
 
 //=======================================================================================

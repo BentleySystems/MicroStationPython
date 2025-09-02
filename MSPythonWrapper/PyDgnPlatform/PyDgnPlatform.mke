@@ -36,7 +36,7 @@ MultiCompileDepends = $(_MakeFileSpec)
 PchCompiland        = $(MSPythonSrc)/MSPythonPCH.cpp
 PchOutputDir        = $(o)
 PchArgumentsDepends = $(MultiCompileDepends)
-PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302   -wd4471 -wd5205
+PchExtraOptions     + -Zm170 -wd4456 -wd4457 -wd4459 -wd4311 -wd4312  -wd4302   -wd4471 -wd5205 -wd4653 -wd4652 -wd4651
 %include $(MSPythonSrc)/build/publicSDK/PreCompileHeader.mki
 
 
@@ -134,11 +134,11 @@ $(o)dgnitemindex$(oext)                 : $(PyDgnPlatformSource)dgnitemindex.cpp
 
 $(o)dgnlinkhandler$(oext)               : $(PyDgnPlatformSource)dgnlinkhandler.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
+$(o)dgnlinktree$(oext)                  : $(PyDgnPlatformSource)dgnlinktree.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
 $(o)dgnlinkmanager$(oext)               : $(PyDgnPlatformSource)dgnlinkmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)dgnlinks$(oext)                     : $(PyDgnPlatformSource)dgnlinks.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
-
-$(o)dgnlinktree$(oext)                  : $(PyDgnPlatformSource)dgnlinktree.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)dgnmodel$(oext)                     : $(PyDgnPlatformSource)dgnmodel.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
@@ -449,6 +449,8 @@ $(o)doublevalueformat$(oext)            : $(PyBentleySource)ParentTypes/doubleva
 $(o)iviewmanager$(oext)                 : $(PyDgnViewSource)ParentTypes/iviewmanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)dgnecchangemanager$(oext)           : $(PyDgnPlatformSource)dgnecchangemanager.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
+$(o)ScanCriteria$(oext)                 : $(PyDgnPlatformSource)ScanCriteria.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 %include MultiCppCompileGo.mki
 

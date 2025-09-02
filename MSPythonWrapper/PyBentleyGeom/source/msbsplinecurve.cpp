@@ -20,20 +20,20 @@ static const char * __doc_Bentley_Geom_MSBsplineCurve_AreSameWeights =R"doc(Comp
 static const char * __doc_Bentley_Geom_MSBsplineCurve_ApproximateAnyCurve =R"doc(This routine computes a B-spline curve approximated the old one.
 return ERROR if no results.
 
-Parameter ``[in]``:
+:param (input):
     pIn Input G1 curve.
 
-Parameter ``[in]``:
+:param (input):
     tolerance Geometric tolerance, this should be in general the chord
     height tol.
 
-Parameter ``[in]``:
+:param (input):
     order Desired degree of the pOut, 4 is recommended.
 
-Parameter ``[in]``:
+:param (input):
     parametrization CHORDLENGTH = 2, CENTRIPETAL = 3.
 
-Parameter ``[in]``:
+:param (input):
     bMaintainEndTangents true to maintain the end tangents.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_InitFromBeziers =R"doc(Create a B-spline curve from a series of Bezier curve.)doc";
@@ -64,13 +64,13 @@ of the curve onto a ray return range whose low and high values are the
 extreme parameters (in ray fractions) of the projection of the curve
 onto the ray.
 
-Parameter ``[in]``:
+:param (input):
     ray ray to project to
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start of active part of the curve
 
-Parameter ``[in]``:
+:param (input):
     fraction1 end of active part of the curve)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_GetRange =R"doc(Get the range of the B-spline curve.)doc";
@@ -101,64 +101,64 @@ static const char * __doc_Bentley_Geom_MSBsplineCurve_CreateFromPointsAndOrder =
 static const char * __doc_Bentley_Geom_MSBsplineCurve_AllParallellTangentsXY =R"doc(Find all curve points X where the tangents is parallel to the given
 vector.
 
-Parameter ``[out]``:
+:param (output):
     points array to receive points.
 
-Parameter ``[out]``:
+:param (output):
     fractions array to receive fraction parameters.
 
-Parameter ``[in]``:
+:param (input):
     vector given direction.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_AllTangents =R"doc(For space point Q, find all curve points X where line XQ is tangent to
 the curve.
 
-Parameter ``[out]``:
+:param (output):
     points array to receive points.
 
-Parameter ``[out]``:
+:param (output):
     fractions array to receive fraction parameters.
 
-Parameter ``[in]``:
+:param (input):
     spacePoint space point.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_AllTangentsXY =R"doc(For space point Q (spacePoint), find all curve points X where line XQ
 is tangent to the curve.
 
-Parameter ``[out]``:
+:param (output):
     points array to receive points.
 
-Parameter ``[out]``:
+:param (output):
     fractions array to receive fraction parameters.
 
-Parameter ``[in]``:
+:param (input):
     spacePoint space point.
 
-Parameter ``[in]``:
+:param (input):
     matrix optional transformation into viewing space.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_GetStrokeCount =R"doc(Compute stroke count)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_PointsAtUniformArcLength =R"doc(Compute points at uniform arclength steps.
 
-Parameter ``[out]``:
+:param (output):
     points array to receive points.
 
-Parameter ``[out]``:
+:param (output):
     fractions array to receive fractions.
 
-Parameter ``[in]``:
+:param (input):
     numPoints number of points.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_PointsAtUniformFractions =R"doc(Compute strokes at uniform fraction step.
 
-Parameter ``[out]``:
+:param (output):
     points array to receive points.
 
-Parameter ``[out]``:
+:param (output):
     fractions array to receive fractions.
 
-Parameter ``[in]``:
+:param (input):
     numPoints number of points.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_ExtractEndPoints =R"doc(Extract the start or end point of the B-spline curve.)doc";
@@ -176,21 +176,21 @@ static const char * __doc_Bentley_Geom_MSBsplineCurve_MakeOpen =R"doc(Open the c
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_AddCuspsXY =R"doc(Find full cusps as viewed in xy.
 
-Parameter ``[out]``:
+:param (output):
     points array to receive xyz of cusps.
 
-Parameter ``[out]``:
+:param (output):
     fractionParameters array to receive fraction parameters of cusps.
 
-Parameter ``[in]``:
+:param (input):
     matrix optional transformation into viewing space.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_AddCusps =R"doc(Find full 3d cusps.
 
-Parameter ``[out]``:
+:param (output):
     points array to receive xyz of cusps.
 
-Parameter ``[out]``:
+:param (output):
     fractionParameters array to receive fraction parameters of cusps.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_ComputeInflectionPointsXY =R"doc(Calculate the parameters and location of the all inflection points of
@@ -217,10 +217,10 @@ multiplicity knot returns true for the function but marks the interval
 as null. Normal usage is to loop over all beziers in a bspline but
 skip processing the null intervals.
 
-Parameter ``[out]``:
+:param (output):
     segment a filled BCurveSegment.
 
-Parameter ``[in]``:
+:param (input):
     bezierSelect selects a bezier interval within the bspline
     @DotNetMethodExclude)doc";
 
@@ -327,7 +327,7 @@ B-spline curve at a particular fraction.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_ComputeUniformKnots =R"doc(Compute uniformly spaced knots. This uses counts from params.
 
-Returns:
+:returns:
     false if param counts are not set.)doc";
 
 static const char * __doc_Bentley_Geom_MSBsplineCurve_CopyFrom =R"doc()doc";
@@ -433,9 +433,21 @@ void def_MSBsplineCurve(py::module_& m)
                   py::overload_cast<DPoint3dArray const&, DoubleArray const*, DoubleArray const*, int, bool, bool>(&MSBsplineCurve::CreateFromPolesAndOrder),
                   "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
 
+   c1.def_static("CreateFromPolesAndOrder", [](py::list const& poles, DoubleArray const* weight, DoubleArray const* knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cpppoles, DPoint3dArray, DPoint3d);
+        return MSBsplineCurve::CreateFromPolesAndOrder(cpppoles, weight, knots, order, closed, inputPolesAlreadyWeighted);
+        }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+
     c1.def_static("CreateFromPolesAndOrder", [](DPoint3dArray const& poles, int order, bool closed = true)
         {
         return MSBsplineCurve::CreateFromPolesAndOrder(poles.data(), (int)poles.size(), order, closed);
+        }, "poles"_a, "order"_a, "closed"_a = true);
+
+    c1.def_static("CreateFromPolesAndOrder", [](py::list const& poles, int order, bool closed = true)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cpppoles, DPoint3dArray, DPoint3d);
+        return MSBsplineCurve::CreateFromPolesAndOrder(cpppoles.data(), (int)cpppoles.size(), order, closed);
         }, "poles"_a, "order"_a, "closed"_a = true);
 
     c1.def_static("CreateFromPolesAndOrder", [](DPoint2dArray const& poles, int order, bool closed = true)
@@ -522,10 +534,23 @@ void def_MSBsplineCurve(py::module_& m)
     c1.def("FractionToPoints",
            py::overload_cast<DPoint3dArray&, size_t>(&MSBsplineCurve::FractionToPoints),
            "points"_a, "numPoints"_a);
+    c1.def("FractionToPoint", [](MSBsplineCurveR self, py::list& points, size_t numPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           self.FractionToPoints(cppPoints, numPoints);
+           CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+           },"points"_a, "numPoints"_a);
 
     c1.def("FractionToPoints",
            py::overload_cast<DPoint3dArray&, DoubleArray&>(&MSBsplineCurve::FractionToPoints),
            "points"_a, "fractions"_a);
+
+    c1.def("FractionToPoint", [](MSBsplineCurveR self, py::list& points, DoubleArray& fractions)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           self.FractionToPoints(cppPoints, fractions);
+           CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+           },"points"_a, "fractions"_a);
 
     c1.def("GetFrenetFrame", [] (MSBsplineCurveCR self, DVec3dArray frame, DPoint3dR point, double u)
            {
@@ -727,6 +752,11 @@ void def_MSBsplineCurve(py::module_& m)
         
 
      c1.def("ComputeInflectionPoints", py::overload_cast<DPoint3dArray&, DoubleArray&>(&MSBsplineCurve::ComputeInflectionPoints), "points"_a, "params"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeInflectionPoints));
+     c1.def("ComputeInflectionPoints", [](MSBsplineCurveR self, py::list &points, DoubleArray &params)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.ComputeInflectionPoints(cppPoints, params);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "points"_a, "params"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeInflectionPoints));
      c1.def("ComputeInflectionPointsXY", &MSBsplineCurve::ComputeInflectionPointsXY, "points"_a, "params"_a, "transform"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeInflectionPointsXY));
 
      c1.def("AddPlaneIntersections",
@@ -779,17 +809,43 @@ void def_MSBsplineCurve(py::module_& m)
             py::overload_cast<DPoint3dArray&, double, double, double, bool>(&MSBsplineCurve::AddStrokes, py::const_),
             "points"_a, "chordTol"_a = 0.0, "angleTol"_a = 0.20, "maxEdgeLength"_a = 0.0, "includeStartPoint"_a = true);
 
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, py::list& points, double chordTol, double angleTol, double maxEdgeLength, bool includeStartPoint)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.AddStrokes(cppPoints, chordTol, angleTol, maxEdgeLength, includeStartPoint);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+            }, "points"_a, "chordTol"_a = 0.0, "angleTol"_a = 0.20, "maxEdgeLength"_a = 0.0, "includeStartPoint"_a = true);
+  
      c1.def("AddStrokes",
             py::overload_cast<DPoint3dArray&, DVec3dArray*, DoubleArray*, double, double, double, bool, CurveParameterMapping>(&MSBsplineCurve::AddStrokes, py::const_),
             "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "chordTol"_a = 0.0, "angleTol"_a = 0.20, "maxEdgeLength"_a = 0.0, "includeStartPoint"_a = true, "parameterSelect"_a = CURVE_PARAMETER_MAPPING_CurveKnot);
+
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, py::list &points, DVec3dArray *derivatives, DoubleArray *params, double chordTol, double angleTol, double c, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.AddStrokes(cppPoints, derivatives, params, chordTol, angleTol, c, includeStartPoint, parameterSelect);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "chordTol"_a = 0.0, "angleTol"_a = 0.20, "c"_a = 0.0, "includeStartPoint"_a = true, "parameterSelect"_a = CURVE_PARAMETER_MAPPING_CurveKnot);
 
      c1.def("AddStrokes",
             py::overload_cast<IFacetOptionsCR, DPoint3dArray&, DVec3dArray*, DoubleArray*, bool>(&MSBsplineCurve::AddStrokes, py::const_),
             "options"_a, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "includeStart"_a = true);
 
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, py::list &points, DVec3dArray *derivatives, DoubleArray *params, bool includeStart)
+            {
+             CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+             self.AddStrokes(options, cppPoints, derivatives, params, includeStart);
+             CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "options"_a, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "includeStart"_a = true);
+
      c1.def("AddStrokes",
             py::overload_cast<size_t, DPoint3dArray&, DVec3dArray*, DoubleArray*, bool, CurveParameterMapping>(&MSBsplineCurve::AddStrokes, py::const_),
             "numPoints"_a, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "includeStartPoint"_a = true, "parameterSelect"_a = CURVE_PARAMETER_MAPPING_CurveKnot);
+
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, py::list& points, DVec3dArray* derivatives, DoubleArray* params, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.AddStrokes(numPoints, cppPoints, derivatives, params, includeStartPoint, parameterSelect);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+            }, "numPoints"_a, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "includeStartPoint"_a = true, "parameterSelect"_a = CURVE_PARAMETER_MAPPING_CurveKnot);
 
      c1.def("PointsAtUniformFractions", &MSBsplineCurve::PointsAtUniformFractions, "points"_a, "fractions"_a, "numPoints"_a, DOC(Bentley, Geom, MSBsplineCurve, PointsAtUniformFractions));
      c1.def("PointsAtUniformArcLength", &MSBsplineCurve::PointsAtUniformArcLength, "points"_a, "fractions"_a, "numPoints"_a, DOC(Bentley, Geom, MSBsplineCurve, PointsAtUniformArcLength));
@@ -819,9 +875,21 @@ void def_MSBsplineCurve(py::module_& m)
             return self.CreateFromPointsAndOrder (pointArray.data(), (int)pointArray.size(), order, closed);
             }, "pointArray"_a, "order"_a, "closed"_a = false, DOC(Bentley, Geom, MSBsplineCurve, CreateFromPointsAndOrder));
 
+     c1.def("CreateFromPointsAndOrder", [](MSBsplineCurveR self, py::list const &pointArray, int order, bool closed)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(pointArray, cppPoints, DPoint3dArray, DPoint3d);
+            return self.CreateFromPointsAndOrder (cppPoints.data(), (int)cppPoints.size(), order, closed);
+            }, "pointArray"_a, "order"_a, "closed"_a = false, DOC(Bentley, Geom, MSBsplineCurve, CreateFromPointsAndOrder));
+
      c1.def("Populate",
             py::overload_cast<DPoint3dArray const&, DoubleArray const*, DoubleArray const*, int, bool, bool>(&MSBsplineCurve::Populate),
             "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
+
+     c1.def("Populate", [](MSBsplineCurveR self, py::list const& pointVector, DoubleArray const* weightVector, DoubleArray const* knotVector, int order, bool closed, bool inputPolesAlreadyWeighted)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(pointVector, cppPoints, DPoint3dArray, DPoint3d);
+           return self.Populate(cppPoints, weightVector, knotVector, order, closed, inputPolesAlreadyWeighted);
+           }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
 
      c1.def("AppendCurve", &MSBsplineCurve::AppendCurve, "inCurve"_a, DOC(Bentley, Geom, MSBsplineCurve, AppendCurve));
      c1.def("IsSameGeometry", &MSBsplineCurve::IsSameGeometry, "other"_a, DOC(Bentley, Geom, MSBsplineCurve, IsSameGeometry));
@@ -870,9 +938,21 @@ void def_MSBsplineCurve(py::module_& m)
             self.InitFromPoints(&points[0], (int)points.size()); 
             }, "points"_a);
 
+     c1.def("InitFromPoints", [] (MSBsplineCurveR self, py::list const& points)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.InitFromPoints(&cppPoints[0], (int)cppPoints.size()); 
+            }, "points"_a);
+
      c1.def("InitAkima", [] (MSBsplineCurveR self, DPoint3dArray const& points, bool compressPoints)
             {
             self.InitAkima(&points[0], points.size(), compressPoints);
+            }, "points"_a, "compressPoints"_a);
+
+     c1.def("InitAkima", [] (MSBsplineCurveR self, py::list const& points, bool compressPoints)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.InitAkima(&cppPoints[0], cppPoints.size(), compressPoints);
             }, "points"_a, "compressPoints"_a);
 
      c1.def("InitFromBeziers", &MSBsplineCurve::InitFromBeziers, "beziers"_a, DOC(Bentley, Geom, MSBsplineCurve, InitFromBeziers));
@@ -896,6 +976,13 @@ void def_MSBsplineCurve(py::module_& m)
             {
              size_t numPoints = points.size();
              self.InitFromInterpolatePoints(points.data(), (int)numPoints, parametrization, endControl, sTangent, eTangent, keepTanMag, order);
+            }, "points"_a, "parameterization"_a, "endControl"_a, "sTangent"_a, "eTangent"_a, "keepTanMag"_a, "order"_a);
+
+     c1.def("InitFromInterpolatePoints", [](MSBsplineCurve& self, py::list const& points, int parametrization, bool endControl, DVec3dCP sTangent, DVec3dCP eTangent, bool keepTanMag, int order)
+            {
+             CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+             size_t numPoints = cppPoints.size();
+             self.InitFromInterpolatePoints(cppPoints.data(), (int)numPoints, parametrization, endControl, sTangent, eTangent, keepTanMag, order);
             }, "points"_a, "parameterization"_a, "endControl"_a, "sTangent"_a, "eTangent"_a, "keepTanMag"_a, "order"_a);
 
      c1.def_static("SampleG1CurveByPoints",

@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -15,10 +10,19 @@ import ctypes
 import sys
 
 '''
-Function to select elements by its perimeter
-    inputperimeter : float      perimeter
+This sample demonstrates how to select elements by perimeter
 '''
+
 def selectElementsbyPerimeter(inputPerimeter):
+    """
+    Select elements from the active model based on their perimeter.
+
+    This function retrieves all graphical elements from the active model and checks their perimeter.
+    If the perimeter of an element is less than the specified input perimeter, the element is added to the selection set.
+
+    :param inputPerimeter: The perimeter value to compare against the elements' perimeters.
+    :type inputPerimeter: float
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -58,9 +62,17 @@ def selectElementsbyPerimeter(inputPerimeter):
                         break
                 else:
                      break
-'''
-Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '2D Metric Design' model 
-'''
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {len (agenda)} elements")
+    # iterate using __iter__ over the selection set printing the element ids of elements in the selection set
+    for editElementHandle in agenda:
+        print(f"  Element ID: {editElementHandle.GetElementId()}")
+
+
+#Prerequisite: Open MSPythonSamples\data\SelectExample.dgn with '2D Metric Design' model 
 #main
 if __name__ == "__main__":
     #highlight all the elements with type 

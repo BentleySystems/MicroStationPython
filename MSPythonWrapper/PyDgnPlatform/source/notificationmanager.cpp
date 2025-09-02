@@ -13,37 +13,37 @@
 static const char * __doc_Bentley_DgnPlatform_NotificationManager_SetDispatchEvents =R"doc(Set a flag to dispatch events to update the host Message Center during
 a long-running process.
 
-Parameter ``value``:
+:param value:
     Indicates whether to dispatch events during a long-running
     process.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NotificationManager_OpenMessageBox =R"doc(Output a MessageBox and wait for response from the user.
 
-Parameter ``mbType``:
+:param mbType:
     The MessageBox type.
 
-Parameter ``message``:
+:param message:
     The message to display.
 
-Parameter ``icon``:
+:param icon:
     The MessageBox icon type.
 
-Returns:
+:returns:
     the response from the user.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NotificationManager_OutputMessage =R"doc(Output a message and/or alert to the user.
 
-Parameter ``message``:
+:param message:
     The message details.
 
-Returns:
+:returns:
     SUCCESS if the message was displayed, ERROR if an invalid priority
     is specified.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NotificationManager_OutputPrompt =R"doc(Output a prompt to the user. A 'prompt' is intended to indicate an
 action the user should take to proceed.
 
-Parameter ``prompt``:
+:param prompt:
     The prompt string.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NotifyMessageDetails_GetDetailedMsg =R"doc(Get the detailed message for this NotifyMessageDetails.)doc";

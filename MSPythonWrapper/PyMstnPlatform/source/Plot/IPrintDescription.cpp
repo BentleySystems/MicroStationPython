@@ -12,7 +12,7 @@
 
 static const char * __doc_Bentley_MstnPlatform_Print_PrintDescriptionRef_Copy =R"doc(Copy the print definition instance.
 
-Parameter ``copyPlotter``:
+:param copyPlotter:
     If False, print definitions will share plotter instance.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_PrintDescriptionRef_Create =R"doc(Create an unintialized print description instance.
@@ -143,7 +143,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_RotateFor
 Remark:
     s Print origin and size are automatically adjusted.
 
-Parameter ``allowOrientationChange``:
+:param allowOrientationChange:
     True to allow paper orientation change.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_SetPlotRotation =R"doc(Sets the print rotation in radians (range -PI to PI).
@@ -239,11 +239,11 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_GetPaperO
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_GetPaperDimensions =R"doc(Gets printable and/or total paper size.
 
-Parameter ``printableSize``:
+:param printableSize:
     Size of usable paper area (overall - unprintable margins). May be
     NULL.
 
-Parameter ``totalSize``:
+:param totalSize:
     Overall paper size. May be NULL.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_SetFormSizeY =R"doc(Sets the Y size (vertical size) of the form.
@@ -277,7 +277,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_IsFenceDe
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_SetFenceFromFitRange =R"doc(Calculates a fence from the range of all elements in the active model
 and applies it to the print definition.
 
-Parameter ``fitAll``:
+:param fitAll:
     True to include references in the range calculation.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_SetFenceFromTCB =R"doc(Applies the fence defined in the active session to the print
@@ -285,7 +285,7 @@ description.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_SetViewIndex =R"doc(Sets the print description view index.
 
-Parameter ``viewIndex``:
+:param viewIndex:
     view index (range 0-7).)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_GetViewIndex =R"doc(Gets the print description view index.)doc";
@@ -335,7 +335,7 @@ size, orientation, and number of copies.)doc";
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_UpdateAfterPrinterChange =R"doc(Updates the print description following a change to the Windows
 printer in the underlying Plotter instance.
 
-Parameter ``preserveRasterQuality``:
+:param preserveRasterQuality:
     True to keep the current raster quality factor.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_UpdateFromTCB =R"doc(Updates the print description from the active MicroStation session.)doc";
@@ -350,7 +350,7 @@ Remark:
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDescription_InitializeFromTCB =R"doc(Initializes a print description instance using settings from the
 active session and the specified printer driver configuration file.
 
-Parameter ``pltcfgLfs``:
+:param pltcfgLfs:
     Name of a printer driver configuration (.pltcfg or .plt) file to
     use to initialize the print description.)doc";
 
@@ -364,13 +364,13 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPrintDefinition_GetPlotter
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPrintDefinition_SetPlotter =R"doc(Change the print definition plotter.
 
-Parameter ``plotter``:
+:param plotter:
     New plotter. The caller retains ownership.
 
-Parameter ``preserveLayout``:
+:param preserveLayout:
     If true, will attempt to preserve existing paper size, scale, etc.
 
-Parameter ``identicalPlotters``:
+:param identicalPlotters:
     If true, caller guarantees that Plotter instance is from identical
     .pltcfg.)doc";
 
@@ -1610,7 +1610,15 @@ void def_IPrintDescription(py::module_& m)
     c4.def("GetViewDependentFence", [](IPrintDescription& self, DPoint2dArray& dp2dArray) {}, "dp2dArray"_a);
     c4.def("SetViewDependentFence", [](IPrintDescription& self, const DPoint2dArray& dp2dArray) {return ERROR;}, "dp2dArray"_a);
     c4.def("GetViewIndependentFence", [](IPrintDescription& self, DPoint3dArray& dp3dArray) {}, "dp3dArray"_a);
+    c4.def("GetViewIndependentFence", [](IPrintDescription &self, py::list& dp3dArray)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(dp3dArray, cppDp3dArray, DPoint3dArray, DPoint3d)
+           int numPoints = 0;
+           self.GetViewIndependentFence(&numPoints, cppDp3dArray.data());
+           CONVERT_CPPARRAY_TO_PYLIST(dp3dArray, cppDp3dArray, DPoint3dArray, DPoint3d);
+           }, "dp3dArray"_a);
     c4.def("SetViewIndependentFence", [](IPrintDescription& self, const DPoint3dArray& dp3dArray) {return ERROR; }, "dp3dArray"_a);
+    c4.def("SetViewIndependentFence", [](IPrintDescription& self, const py::list& dp3dArray) {return ERROR; }, "dp3dArray"_a);
     c4.def("GetViewIndependentWorkingFence", [](IPrintDescription& self, DPoint3dArray& dp3dArray) {}, "dp3dArray"_a);
 
     c4.def("IsFenceDefined", &IPrintDescription::IsFenceDefined, DOC(Bentley, MstnPlatform, Print, IPrintDescription, IsFenceDefined));

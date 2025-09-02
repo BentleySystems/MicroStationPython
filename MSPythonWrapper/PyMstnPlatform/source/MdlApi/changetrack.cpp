@@ -17,13 +17,13 @@ called whenever an element is directly changed in MicroStation.
 callbacks for the same event. If <code>newFunc</code> is NULL, then
 *all* callbacks for this event for this MDL application are removed.
 To remove callback individually use ChangeTrackCallback.RemoveChangedFunction. 
-@Param[in] newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_RemoveChangedFunction = R"doc(@Description Removes a callback function previously installed using
 ChangeTrackCallback.AddChangedFunction 
-@Param[in] oldFunc The callback function to remove.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) oldFunc The callback function to remove.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_AddUndoRedoFunction = R"doc(@Description An MDL application can use this to set a function to be
 called whenever an element is changed by either the Undo or Redo
@@ -32,13 +32,13 @@ application can have multiple callbacks for the same event. If
 <code>newFunc</code> is NULL, then *all* callbacks for this event for
 this MDL application are removed. To remove callback individually use
 ChangeTrackCallback.RemoveUndoRedoFunction.
-@Param[in] newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_RemoveUndoRedoFunction = R"doc(@Description Removes a callback function previously installed using
 ChangeTrackCallback.AddUndoRedoFunction 
-@Param[in] oldFunc The callback function to remove.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) oldFunc The callback function to remove.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_AddXAttributeChangedFunction = R"doc(@Description An MDL application can use this to set a function to be
 called whenever an XAttribute is directly changed in MicroStation.
@@ -47,13 +47,13 @@ callbacks for the same event. If <code>newFunc</code> is NULL, then
 *all* callbacks for this event for this MDL application are removed.
 To remove callback individually use
 ChangeTrackCallback.RemoveXAttributeChangedFunction. 
-@Param[in] newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_RemoveXAttributeChangedFunction = R"doc(@Description Removes a callback function previously installed using
 ChangeTrackCallback.AddXAttributeChangedFunction 
-@Param[in] oldFunc The callback function to remove.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) oldFunc The callback function to remove.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_AddUndoRedoXAttributeFunction = R"doc(@Description An MDL application can use this to set a function to be
 called whenever an XAttribute is changed by either the Undo or Redo
@@ -62,13 +62,13 @@ application can have multiple callbacks for the same event. If
 <code>newFunc</code> is NULL, then *all* callbacks for this event for
 this MDL application are removed. To remove callback individually use
 ChangeTrackCallback.RemoveXAttributeUndoRedoFunction. 
-@Param[in]newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input)newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_RemoveUndoRedoXAttributeFunction = R"doc(@Description Removes a callback function previously installed using
 ChangeTrackCallback.AddXAttributeUndoRedoFunction 
-@Param[in] oldFunc The callback function to remove.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) oldFunc The callback function to remove.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_AddUndoRedoFinishedFunction = R"doc(@Description An MDL application can use this to set a function to be
 called after undo or redo command has completed. This means that all
@@ -78,13 +78,13 @@ multiple callbacks for the same event. If <code>newFunc</code> is
 NULL, then *all* callbacks for this event for this MDL application are
 removed. To remove callback individually use
 ChangeTrackCallback.RemoveUndoRedoFinishedFunction. 
-@Param[in] newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_RemoveUndoRedoFinishedFunction = R"doc(@Description Removes a callback function previously installed using
 ChangeTrackCallback.AddUndoRedoFinishedFunction 
-@Param[in] oldFunc The callback function to remove.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) oldFunc The callback function to remove.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_AddMarkFunction = R"doc(@Description An MDL application can use this to set a function to be
 called when a change track "mark" happens. A mark signals the end of a
@@ -95,13 +95,13 @@ callbacks for the same event. If <code>newFunc</code> is NULL, then
 *all* callbacks for this event for this MDL application are removed.
 To remove callback individually use
 ChangeTrackCallback.RemoveMarkFunction. 
-@Param[in] newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_RemoveMarkFunction = R"doc(@Description Removes a callback function previously installed using
 ChangeTrackCallback.AddMarkFunction 
-@Param[in] oldFunc The callback function to remove.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) oldFunc The callback function to remove.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_AddTransientChangedFunction = R"doc(@Description An MDL application can use this to set a function to be
 called when a transient element is directly changed in MicroStation.
@@ -110,13 +110,13 @@ callbacks for the same event. If <code>newFunc</code> is NULL, then
 *all* callbacks for this event for this MDL application are removed.
 To remove callback individually use
 ChangeTrackCallback.RemoveTransientChangedFunction. 
-@Param[in] newFunc The new function to call, or NULL.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) newFunc The new function to call, or NULL.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 static const char* __doc_Bentley_MstnPlatform_ChangeTrackCallback_RemoveTransientChangedFunction = R"doc(@Description Removes a callback function previously installed using
 ChangeTrackCallback.AddTransientChangedFunction 
-@Param[in] oldFunc The callback function to remove.
-@Param[in] funcID Unique ID of the callback function that user defines.)doc";
+@Param(input) oldFunc The callback function to remove.
+@Param(input) funcID Unique ID of the callback function that user defines.)doc";
 
 using namespace std;
 

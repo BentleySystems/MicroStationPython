@@ -27,7 +27,7 @@ static const char * __doc_Bentley_DgnPlatform_FileLevelCache_GetHighestUsedLevel
 
 static const char * __doc_Bentley_DgnPlatform_FileLevelCache_GetHighestUsedLevelId =R"doc(Get the highest used LevelId in this level cache.
 
-Parameter ``includeLibraries``:
+:param includeLibraries:
     If true, get the highest use LevelId in the level cache and all of
     its associated level libraries.)doc";
 
@@ -36,24 +36,24 @@ static const char * __doc_Bentley_DgnPlatform_FileLevelCache_SetLevelReadOnly =R
 static const char * __doc_Bentley_DgnPlatform_FileLevelCache_RemoveLevel =R"doc(Remove a level from the cache Example:
 LevelCacheCodeSamples_RemoveLevel
 
-Parameter ``next``:
+:param next:
     The next level in the level cache. Useful when deleting levels
     while iterating a level cache. Pass NULL if you do not want to
     know the next level.
 
-Parameter ``level``:
+:param level:
     The level to remove. *Becomes invalid.*
 
-Returns:
+:returns:
     Non-zero error status if the level cannot be removed:
 
 Remark:
-    s If this function succeeds, the input level becomes invalid. \li
+    s If this function succeeds, the input level becomes invalid. 
     LevelCacheErrorCode::CannotFindLevel - The specified level is
-    invalid or is not from this level cache. \li
+    invalid or is not from this level cache. 
     LevelCacheErrorCode::TableIsReadOnly - The level table is read-
-    only \li LevelCacheErrorCode::LevelIsReadOnly - The level itself
-    is read-only \li LevelCacheErrorCode::LevelIsUsed - The level is
+    only  LevelCacheErrorCode::LevelIsReadOnly - The level itself
+    is read-only  LevelCacheErrorCode::LevelIsUsed - The level is
     in use)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FileLevelCache_CopyLevel =R"doc(Copy the specified level from another file into the level cache of
@@ -71,21 +71,21 @@ Remark:
     The new level is *always* assigned a new internal LevelId. The
     source level's LevelId is never copied.
 
-Returns:
+:returns:
     A handle to the newly created level or an invalid handle if
     creation or copying failed. To detect failure, call the handle's
     LevelDefinition::IsValid method. If that returns false, call
-    LevelDefinition::GetStatus method and check for:\li
+    LevelDefinition::GetStatus method and check for:
     LevelCacheErrorCode::LevelNameIsDuplicate - the name of the source
-    level is already used by an existing level in this cache \li
+    level is already used by an existing level in this cache 
     LevelCacheErrorCode::LevelCodeIsDuplicate - the LevelCode of the
-    source level is already used by a level in this cache \li
+    source level is already used by a level in this cache 
     LevelCacheErrorCode::CannotFindLevel - the source level is invalid
 
-Parameter ``source``:
+:param source:
     The source level to copy.
 
-Parameter ``replaceDuplicateLevelCode``:
+:param replaceDuplicateLevelCode:
     [optional] if true, and the level code is a duplicate, assign a
     new level code. @param)doc";
 
@@ -94,30 +94,30 @@ LEVEL_DEFAULT_LEVEL_CODE and LEVEL_DEFAULT_LEVEL_ID)doc";
 
 static const char * __doc_Bentley_DgnPlatform_FileLevelCache_CreateLevel =R"doc(Create a level in this level cache.
 
-Parameter ``levelName``:
+:param levelName:
     Name to be assigned to the new level. Pass NULL if level is to
     have no name.
 
-Parameter ``levelCode``:
+:param levelCode:
     Code to be assigned to the new level. Pass LEVEL_NULL_CODE to have
     this LevelCache generate and assign a LevelCode to the new level.
 
-Parameter ``idIn``:
+:param idIn:
     Internal LevelId to be assigned to the new level. Pass
     LEVEL_NULL_ID to have this LevelCache generate and assign a
     LevelId to the new level.
 
-Returns:
+:returns:
     A handle to the newly created level or an invalid handle if
     creation failed. To detect failure, call the handle's
     LevelDefinition::IsValid method. If that returns false, call
-    LevelDefinition::GetStatus method and check for:\li
+    LevelDefinition::GetStatus method and check for:
     LevelCacheErrorCode::LevelIdIsDuplicate - *i* is a LevelId already
-    used by a level in this cache \li
+    used by a level in this cache 
     LevelCacheErrorCode::LevelNameIsDuplicate - *n* is a name that is
-    already used by a level in this cache \li
+    already used by a level in this cache 
     LevelCacheErrorCode::LevelNameIsInvalid - *n* contains invalid
-    characters. See LevelUtils::ContainsInvalidCharacters \li
+    characters. See LevelUtils::ContainsInvalidCharacters 
     LevelCacheErrorCode::LevelCodeIsDuplicate - *c* is a LevelCode
     already used by a level in this cache)doc";
 
@@ -127,11 +127,11 @@ Remark:
     s If the levelCache is changed by the operation, the changes are
     written according to the writeChanges argument.
 
-Parameter ``context``:
+:param context:
     The property-editing context to apply to all levels in the
     LevelCache
 
-Parameter ``writeChanges``:
+:param writeChanges:
     Controls whether changes are written to the file.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PersistentLevelCache_IsDirty =R"doc(Returns true if this level cache or any level definition in it has
@@ -140,35 +140,35 @@ been modified since it was created or since the last call to Write.)doc";
 static const char * __doc_Bentley_DgnPlatform_PersistentLevelCache_Write =R"doc(Write this level cache, including all of the level definitions that it
 contains, to the file that contains it.
 
-Returns:
+:returns:
     non-zero error status if the file update failed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LevelCache_SetPersistHiddenState =R"doc(Set if the " hidden " state of individual levels is persisted when
 converting to element.
 
-Parameter ``persistStateIn``:
+:param persistStateIn:
     If true, then the " hidden " state of individual levels is persisted)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LevelCache_IsHiddenStatePersisted =R"doc(Check if the " hidden " state of individual levels is persisted when
 converting to element.
 
-Returns:
+:returns:
     true if the hidden state of individual levels is persisted)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LevelCache_EqualLevelData =R"doc(Compare this level cache to *rhs.*
 
-Parameter ``rhs``:
+:param rhs:
     the other level cache
 
-Parameter ``compareElementIds``:
+:param compareElementIds:
     If true, the ElementIds of the levels are also compared. Defaults
     to false.
 
-Parameter ``compareAttributesMask``:
+:param compareAttributesMask:
     Optional bit mask to specify what level properties to compare.
     Defaults to all properties.
 
-Returns:
+:returns:
     true if the levels in this level match the levels in *rhs.*
 
 Remark:
@@ -200,48 +200,48 @@ static const char * __doc_Bentley_DgnPlatform_LevelCache_ComputeHighestUsedLevel
 
 static const char * __doc_Bentley_DgnPlatform_LevelCache_GetLevelCount =R"doc(Returns the count of level definitions in this cache.
 
-Parameter ``includeLibraries``:
+:param includeLibraries:
     If true, get the total count of levels in the level cache and all
     of its associated level libraries.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LevelCache_GetLevelByDisplayName =R"doc(Look up a level definition by its (formatted) display name
 
-Parameter ``levelDisplayName``:
+:param levelDisplayName:
     The name to look up
 
-Parameter ``includeLibraries``:
+:param includeLibraries:
     if true, search associated level libraries for levelName in
     addition to this LevelCache.
 
-Returns:
+:returns:
     A handle to the level or an invalid handle if no level by this
     name was not found. Check the value of LevelHandle::IsValid to
     detect failure.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LevelCache_GetLevelByName =R"doc(Look up a level definition by its user-defined name
 
-Parameter ``levelName``:
+:param levelName:
     The name to look up
 
-Parameter ``includeLibraries``:
+:param includeLibraries:
     if true, search associated level libraries for levelName in
     addition to this LevelCache.
 
-Returns:
+:returns:
     A handle to the level or an invalid handle if no level by this
     name was not found. Check the value of LevelHandle::IsValid to
     detect failure.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_LevelCache_GetLevelByCode =R"doc(Look up a level definition by its user-defined LevelCode
 
-Parameter ``levelCode``:
+:param levelCode:
     The level code to look up
 
-Parameter ``includeLibraries``:
+:param includeLibraries:
     if true, search associated level libraries for levelCode in
     addition to this LevelCache.
 
-Returns:
+:returns:
     A handle to the level or an invalid handle if no level with this
     code was not found. Check the value of LevelHandle::IsValid to
     detect failure.)doc";
@@ -250,14 +250,14 @@ static const char * __doc_Bentley_DgnPlatform_LevelCache_GetLevel =R"doc(Look up
 LevelCacheCodeSamples_GetElementLevelDefinition Example:
 LevelCacheCodeSamples_GetByLevelColor
 
-Parameter ``levelId``:
+:param levelId:
     the level Id to look up
 
-Parameter ``includeLibraries``:
+:param includeLibraries:
     if true, search associated level libraries for levelId in addition
     to this LevelCache.
 
-Returns:
+:returns:
     A handle to the level or an invalid handle if *levelId* was not
     found. Check the value of LevelHandle::IsValid to detect failure.)doc";
 
@@ -267,27 +267,27 @@ static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetPlotStyle =R"do
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetTransparency =R"doc(Set the level display transparency.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetDisplayPriority =R"doc(Set the level display priority.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetLocate =R"doc(Specify if elements on this level may be located.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetFrozen =R"doc(Specify if elements on this level are frozen.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetElementAccess =R"doc(Specify access restrictions to be applied to elements on this level
 
-Parameter ``access``:
+:param access:
     can be one of:-- LevelElementAccess::All:Elements on the level
     have all access. This is the default mode --
     LevelElementAccess::Locked:Elements on the level are locked. They
@@ -295,86 +295,86 @@ Parameter ``access``:
     be added to the level - once added they are immediately locked.
     The level can be set active.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetHidden =R"doc(Specify if this level is hidden, i.e., should not be shown to the
 user.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetSnap =R"doc(Specify if elements on this level may be snapped to.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetByCell =R"doc(*TBD...*)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetPlot =R"doc(Specify if elements on this level should be plotted.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetDisplay =R"doc(Specify if elements on this level should be displayed.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetOverrideMaterialOn =R"doc(Specify if level material should be used when applying level
 symbology.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetOverrideWeightOn =R"doc(Specify if level weight should be used when applying level symbology.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetOverrideLineStyleOn =R"doc(Specify if level style should be used when applying level symbology.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetOverrideColorOn =R"doc(Specify if level color should be used when applying level symbology.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetByLevelMaterial =R"doc(Set the material to use when an element's material is defined as " by - level ".
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetByLevelWeight =R"doc(Set the weight to use when an element's weight is defined as " by - level ".
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetByLevelLineStyle =R"doc(Set the style to use when an element's style is defined as " by - level ".
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetByLevelColor =R"doc(Set the color to use when an element's color is defined as " by - level ".
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetOverrideMaterial =R"doc(Set the material to use when applying level symbology.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetOverrideWeight =R"doc(Set the weight to use when applying level symbology.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetOverrideColor =R"doc(Set the color to use when applying level symbology.
 
-Returns:
+:returns:
     true if the new value is different from the current value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_CopyLevelData =R"doc(Copy attribute values from *sourceLevel* to this level.
@@ -386,41 +386,41 @@ Remark:
     methods can fail. You cannot change a level's ID. Call CreateLevel
     in order to create a level with a specified LevelId.
 
-Parameter ``sourceLevel``:
+:param sourceLevel:
     The level to copy from.
 
-Parameter ``m``:
+:param m:
     [optional] Identifies the properties to copy.
 
-Returns:
+:returns:
     true if any property value was actually modified)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetDescription =R"doc(Change the description of this level.
 
-Returns:
+:returns:
     true if the new description is different from the old.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetLevelCode =R"doc(Change the LevelCode of this level.
 
-Parameter ``levelCode``:
+:param levelCode:
     The level code to set.
 
-Parameter ``autoGenerated``:
+:param autoGenerated:
     If true, then the system does not attempt to retain this Level
     Code. If false, the system retains that level code from library
     levels.
 
-Returns:
-    \li LevelCacheErrorCode::TableIsReadOnly - The level table is
-    read-only \li LevelCacheErrorCode::LevelCodeIsDuplicate - *code*
+:returns:
+     LevelCacheErrorCode::TableIsReadOnly - The level table is
+    read-only  LevelCacheErrorCode::LevelCodeIsDuplicate - *code*
     is a LevelCode that is already used by another level in this cache)doc";
 
 static const char * __doc_Bentley_DgnPlatform_EditLevelHandle_SetName =R"doc(Change the name of this level.
 
-Returns:
-    \li LevelCacheErrorCode::TableIsReadOnly - The level table is
-    read-only \li LevelCacheErrorCode::LevelNameIsDuplicate - *name*
-    is a name that is already used by another level in this cache \li
+:returns:
+     LevelCacheErrorCode::TableIsReadOnly - The level table is
+    read-only  LevelCacheErrorCode::LevelNameIsDuplicate - *name*
+    is a name that is already used by another level in this cache 
     LevelCacheErrorCode::LevelNameIsInvalid - *name* contains invalid
     characters. See LevelUtils::ContainsInvalidCharacters)doc";
 
@@ -442,7 +442,7 @@ static const char * __doc_Bentley_DgnPlatform_LevelHandle_GetFrozen =R"doc(Query
 
 static const char * __doc_Bentley_DgnPlatform_LevelHandle_GetElementAccess =R"doc(Query access restrictions to be applied to elements on this level.
 
-Returns:
+:returns:
     -- LevelElementAccess::All:Elements on the level have all access.
     This is the default mode -- LevelElementAccess::Locked:Elements
     on the level are locked. They can be copied, but cannot be
@@ -489,16 +489,16 @@ static const char * __doc_Bentley_DgnPlatform_LevelHandle_GetOverrideColor =R"do
 static const char * __doc_Bentley_DgnPlatform_LevelHandle_EqualLevelData =R"doc(Compare the data contained this level definition to the data contained
 in *sourceLevel.*
 
-Returns:
+:returns:
     true if the specified attributes match.
 
-Parameter ``differences``:
+:param differences:
     [optional] if not NULL, records the attributes that do not match.
 
-Parameter ``sourceLevel``:
+:param sourceLevel:
     The level to which this level is to be compared.
 
-Parameter ``attributesToCompare``:
+:param attributesToCompare:
     [optional] if not NULL, specifies which attributes to compare. If
     null, all attributes are compared.
 
@@ -547,7 +547,7 @@ static const char * __doc_Bentley_DgnPlatform_LevelHandle_GetLevelId =R"doc(Get 
 
 static const char * __doc_Bentley_DgnPlatform_LevelDefinitionLineStyle_GetStyleParams =R"doc(Get the parameters to be used with this line style.
 
-Returns:
+:returns:
     false if this definition does not include parameters to be used
     with this line style.)doc";
 

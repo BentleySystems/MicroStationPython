@@ -13,23 +13,23 @@
 static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_AddChildComplete =R"doc(Update the shared cell definitions range and component count once all
 child elements have been added.
 
-Parameter ``eeh``:
+:param eeh:
     The shared cell definition element.
 
-Returns:
+:returns:
     SUCCESS if the shared cell definition has children and it's range
     was sucessfully updated. Bentley Systems +---------------+--------
     -------+---------------+---------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_AddChildElement =R"doc(Add another element as a child of the shared cell definition.
 
-Parameter ``eeh``:
+:param eeh:
     The shared cell definition to add the child to.
 
-Parameter ``childEeh``:
+:param childEeh:
     The child element to add.
 
-Returns:
+:returns:
     SUCCESS if child is suitable for a shared cell definition
     component and was successfully added. @note childEeh will be
     invalid after this call unless it represents a persistent element.
@@ -42,18 +42,18 @@ AddChildElement to add child elements to the definition, and
 AddChildComplete once all children have been added to finish the
 shared cell definition creation.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``cellName``:
+:param cellName:
     Name of the new shared cell definition element which may be NULL
     if creating an anonymous shared cell definition.
 
-Parameter ``is3d``:
+:param is3d:
     Initialize the 2d or 3d element structure, typically
     modelRef->Is3d ().
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Will be returned from
     eeh.GetModelRef () and later used by AddChildComplete to updating
     the element's range. @note To create an anonymous shared cell
@@ -65,13 +65,13 @@ static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_SetDimRotatio
 nested shared cells with regards to whether to use the instance
 rotation or parent rotation when creating a new element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``rotateDimView``:
+:param rotateDimView:
     Dimension rotation flag.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHAREDCELL_DEF_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -80,13 +80,13 @@ static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_SetDimScaleOp
 displayed through a scaled shared cell instance when creating a new
 element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``nondefaultScaleForDims``:
+:param nondefaultScaleForDims:
     Dimenion scale flag.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHAREDCELL_DEF_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -95,13 +95,13 @@ static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_SetMlineScale
 when displayed through a scaled shared cell instance when creating a
 new element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``scaleMultilines``:
+:param scaleMultilines:
     Multiline offset scale flag.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHAREDCELL_DEF_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -109,13 +109,13 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_SetDescription =R"doc(Set the given shared cell definition element's description when
 creating a new element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``descr``:
+:param descr:
     New shared cell definition description.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHAREDCELL_DEF_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -123,13 +123,13 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_SetName =R"doc(Set the given shared cell definition element's name when creating a
 new element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``cellName``:
+:param cellName:
     New shared cell definition name.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHAREDCELL_DEF_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -137,13 +137,13 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_SetAnonymous =R"doc(Set the anonymouse cell status when creating a new shared cell
 definition.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``isAnonymous``:
+:param isAnonymous:
     false for named shared cell, true for anonymous.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHAREDCELL_DEF_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -151,26 +151,26 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_SetAnnotation =R"doc(Set the annotation cell status when creating a new shared cell
 definition.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``isAnnotation``:
+:param isAnnotation:
     New annotation cell status.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHAREDCELL_DEF_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SharedCellDefHandler_SetPointCell =R"doc(Set the point cell status when creating a new shared cell definition.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``isPointCell``:
+:param isPointCell:
     New point cell status.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHAREDCELL_DEF_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -178,10 +178,10 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SharedCellHandler_CreateSharedCellComplete =R"doc(Update the shared cell's range from the instance's transform and
 shared cell definition.
 
-Parameter ``eeh``:
+:param eeh:
     The shared cell element.
 
-Returns:
+:returns:
     SUCCESS if the shared cell definition exists and the range was
     sucessfully updated. @note Requires that the shared cell
     definition already exists in the destination model.
@@ -195,14 +195,14 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_SharedCellHandler_SetDefinitionID =R"doc(Set the shared cell definition id for the supplied shared cell
 instance when creating a new element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``elemID``:
+:param elemID:
     ElementId of the shared cell defintion to associate this instance
     to.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHARED_CELL_ELM and element was updated. @note
     Named shared cells may have an explicit dependency to their
     definition, however this is not required and normally reserved
@@ -213,13 +213,13 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SharedCellHandler_SetDescription =R"doc(Set the given shared cell element's description when creating a new
 element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``descr``:
+:param descr:
     New cell description.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHARED_CELL_ELM and element was updated. @note
     A description that is common to all shared cell intances should be
     stored once on the shared cell definition, not on each instance.
@@ -228,13 +228,13 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_SharedCellHandler_SetName =R"doc(Set the given shared cell element's name when creating a new element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``cellName``:
+:param cellName:
     New cell name.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHARED_CELL_ELM and element was updated.
     Bentley Systems +---------------+---------------+---------------+-
     --------------+---------------+------)doc";
@@ -242,13 +242,13 @@ Returns:
 static const char * __doc_Bentley_DgnPlatform_SharedCellHandler_SetPointCell =R"doc(Set the given shared cell element's point cell status when creating a
 new element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``isPointCell``:
+:param isPointCell:
     New point cell status.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHARED_CELL_ELM and element was updated. @note
     Could affect shared cell's range. If creating a new instance or
     modifying an existing instance caller is expected to call
@@ -261,13 +261,13 @@ static const char * __doc_Bentley_DgnPlatform_SharedCellHandler_SetSharedCellOve
 visiting the components of the shared cell definition when creating a
 new element.
 
-Parameter ``eeh``:
+:param eeh:
     The element to modify.
 
-Parameter ``overrides``:
+:param overrides:
     The new shared cell overrides.
 
-Returns:
+:returns:
     SUCCESS if eeh is a SHARED_CELL_ELM and element was updated. @note
     Could affect shared cell's range. If creating a new instance or
     modifying an existing instance caller is expected to call

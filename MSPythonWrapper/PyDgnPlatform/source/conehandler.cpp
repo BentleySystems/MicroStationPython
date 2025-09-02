@@ -13,34 +13,34 @@
 
 static const char * __doc_Bentley_DgnPlatform_ConeHandler_CreateConeElement =R"doc(Create a new CONE_ELM with the supplied parameters.
 
-Parameter ``eeh``:
+:param eeh:
     The new element.
 
-Parameter ``templateEh``:
+:param templateEh:
     Template element to use for symbology; if NULL defaults are used.
 
-Parameter ``topRadius``:
+:param topRadius:
     cone top radius
 
-Parameter ``bottomRadius``:
+:param bottomRadius:
     cone base radius
 
-Parameter ``topCenter``:
+:param topCenter:
     center point of top
 
-Parameter ``bottomCenter``:
+:param bottomCenter:
     center point of base
 
-Parameter ``rotation``:
+:param rotation:
     specifies the skew rotation to apply to top/base circles.
 
-Parameter ``isCapped``:
+:param isCapped:
     true for solid cone.
 
-Parameter ``modelRef``:
+:param modelRef:
     Model to associate this element with. Required to compute range.
 
-Returns:
+:returns:
     SUCCESS if a valid element is created and range was sucessfully
     calculated. Bentley Systems +--------------+--------------+-------
     --------+----------------+-------------)doc";

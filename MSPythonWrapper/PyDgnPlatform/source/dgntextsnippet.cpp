@@ -12,124 +12,124 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_IsSame =R"doc(Checks if the input DgnTextSnippetCategory is the same
 
-Returns:
+:returns:
     true if the Categrory is the same else returns false)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_GetECInstance =R"doc(Get ECInstance
 
-Returns:
+:returns:
     ECInstance related to the category.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_GetTextFavorites =R"doc(Get Text Snippet
 
-Parameter ``snippets``:
+:param snippets:
     TextFavorites get from file.
 
-Parameter ``category``:
+:param category:
     Category to get TextFavorites from.
 
-Parameter ``file``:
+:param file:
     Assigned file.
 
-Returns:
+:returns:
     Status of GetTextFavorites.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_BuildCategoryTreeFromFile =R"doc(Get catogories from file.
 
-Parameter ``name``:
+:param name:
     Name of category.
 
-Parameter ``file``:
+:param file:
     Assigned file.
 
-Parameter ``categories``:
+:param categories:
     Categories build from file.
 
-Returns:
+:returns:
     Status of BuildCategoryTreeFromFile.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_Delete =R"doc(Deletes a DgnTextSnippetCategory from the file.
 
-Parameter ``fileIn``:
+:param fileIn:
     Assigned file.
 
-Returns:
+:returns:
     Status of Delete.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_Replace =R"doc(Replace DgnTextSnippetCategory in file
 
-Parameter ``fileIn``:
+:param fileIn:
     Assigned file.
 
-Returns:
+:returns:
     Status of Replace.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_Add =R"doc(Add DgnTextSnippetCategory to file
 
-Parameter ``fileIn``:
+:param fileIn:
     Assigned file.
 
-Returns:
+:returns:
     Status of Add.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_RemoveSubCategory =R"doc(Remove sub-category
 
-Parameter ``name``:
+:param name:
     Category name.
 
-Returns:
+:returns:
     Status of RemoveSubCategory.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_GetSubCategories =R"doc(Get sub-categories
 
-Returns:
+:returns:
     vector of sub categories.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_AddSubCategory =R"doc(Add sub-category
 
-Parameter ``subCategory``:
+:param subCategory:
     sub-Category.
 
-Returns:
+:returns:
     Status of AddSubCategory.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_IsSubCategoryExist =R"doc(Check if sub category exist
 
-Parameter ``subCategory``:
+:param subCategory:
     sub-Category.
 
-Returns:
+:returns:
     True if sub category exists, else False.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_SetParentCategory =R"doc(Set the name of the parent category.
 
-Parameter ``parent``:
+:param parent:
     category.
 
-Returns:
+:returns:
     Status of SetParentCategory.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_GetParentCategory =R"doc(Get the name of the parent category
 
-Returns:
+:returns:
     Name of parent category.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_SetName =R"doc(Set the name of this category
 
-Parameter ``name``:
+:param name:
     Name of category.
 
-Returns:
+:returns:
     Status of SetName.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_GetName =R"doc(Get the name of this category
 
-Returns:
+:returns:
     Name of category.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetCategory_GetFile =R"doc(Get the file associated with this category.
 
-Returns:
+:returns:
     The file associated with this category.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetPropertyMask_ResetFlags =R"doc(Reset all the property flags to false.)doc";
@@ -142,75 +142,75 @@ static const char * __doc_Bentley_DgnPlatform_DgnTextSnippetPropertyMask_GetProp
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippet_Compare =R"doc(Compares the snippet with the provided one.
 
-Parameter ``snippet``:
-    IN snippet to be comapred against.
+:param snippet:
+    (input) snippet to be comapred against.
 
-Returns:
+:returns:
     DgnTextSnippetPropertyMaskPtr Pointer filled with differences.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippet_CopyValues =R"doc(Copies the values into the current snippet from another snippet.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippet_GetByID =R"doc(Looks up the snippet from the given file.
 
-Parameter ``id``:
-    IN snippet ID to be fetched.
+:param id:
+    (input) snippet ID to be fetched.
 
-Parameter ``file``:
+:param file:
     file in which to search.
 
-Returns:
+:returns:
     snippet pointer if found else null.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippet_GetByName =R"doc(Looks up the snippet from the given file.
 
-Parameter ``name``:
-    IN name to lookup for.
+:param name:
+    (input) name to lookup for.
 
-Parameter ``file``:
-    IN file in which to search.
+:param file:
+    (input) file in which to search.
 
-Returns:
+:returns:
     snippet pointer if found else null.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippet_Replace =R"doc(* Saves the snippet to the file.
 
-Parameter ``oldName``:
-    IN oldName to look up the snippet if the snippet was renamed.
+:param oldName:
+    (input) oldName to look up the snippet if the snippet was renamed.
 
-Parameter ``file``:
-    IN If no file is provided, the file pointer in snippet is used to
+:param file:
+    (input) If no file is provided, the file pointer in snippet is used to
     determine the file in which it is saved.
 
-Returns:
+:returns:
     status. Note:it returns ERROR if a snippet cannot be found or if
     replace fails.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippet_Delete =R"doc(Deletes a DgnTextSnippet from the snippet file.
 
-Parameter ``name``:
-    IN name to lookup for.
+:param name:
+    (input) name to lookup for.
 
-Parameter ``file``:
-    IN file in which to search.)doc";
+:param file:
+    (input) file in which to search.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippet_Add =R"doc(Creates a snippet in the given file.
 
-Parameter ``file``:
-    IN file pointer for the target snippet.
+:param file:
+    (input) file pointer for the target snippet.
 
-Returns:
+:returns:
     status. Note:it returns ERROR if a snippet is already present)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTextSnippet_Create =R"doc(Create an in memory representation of any empty snippet with respect
 to the given file.
 
-Parameter ``name``:
-    IN name of the new snippet. Can be empty.
+:param name:
+    (input) name of the new snippet. Can be empty.
 
-Parameter ``file``:
-    IN The file where the snippet will be stored.
+:param file:
+    (input) The file where the snippet will be stored.
 
-Returns:
+:returns:
     A snippet pointer for the template snippet. NULL if it is
     unsuccessful.)doc";
 

@@ -53,14 +53,14 @@ to the model via SetModelInfo, if the type has changed, we force the
 ModelInfo BackgroundColor to be consistent with other model's of the
 same type. This applies to Sheet and Drawing models.
 
-Parameter ``modelType``:
+:param modelType:
     The new model type.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ModelInfo_GetModelType =R"doc(Get the type of this model.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ModelInfo_SetAnnotationScaleFactor =R"doc(Set the annotation scale factor.
 
-Returns:
+:returns:
     ERROR if the input <= 0.0 @See SetIsUseAnnotationScaleOn. @See
     SetPropagateAnnotationScale. @Remarks This is a property.)doc";
 
@@ -122,7 +122,7 @@ static const char * __doc_Bentley_DgnPlatform_ModelInfo_GetDescription =R"doc(Ge
 
 static const char * __doc_Bentley_DgnPlatform_ModelInfo_SetName =R"doc(Set the name of the model - whitespace is trimmed.
 
-Returns:
+:returns:
     ERROR if length> MAX_MODEL_NAME_LENGTH or if the name is invalid.
     @See IsNameValid @Remarks This is a property.)doc";
 
@@ -169,7 +169,7 @@ do nothing.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ModelInfo_SetLineStyleScale =R"doc(Sets LineStyle scale.
 
-Returns:
+:returns:
     ERROR if <= 0.0.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ModelInfo_GetLineStyleScale =R"doc(Gets the line style scale. The returned value may be the model line
@@ -178,7 +178,7 @@ LineStyleScaleMode. @See GetLineStyleScaleMode)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ModelInfo_SetAzimuth =R"doc(Sets rotation Azimuth.
 
-Returns:
+:returns:
     ERROR if<-180.0 or> 180.0.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ModelInfo_GetAzimuth =R"doc(@See SetAzimuth)doc";

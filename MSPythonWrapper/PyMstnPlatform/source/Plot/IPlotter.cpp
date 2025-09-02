@@ -27,7 +27,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetEngineColorFrom
 Remark:
     s Should only be called only during print processing.
 
-Parameter ``colorIndex``:
+:param colorIndex:
     Color table index (range 0-255))doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetEngineColorFromPen =R"doc(Gets the effective print color for the given pen number.
@@ -35,7 +35,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetEngineColorFrom
 Remark:
     s Should only be called only during print processing.
 
-Parameter ``pen``:
+:param pen:
     Pen number (range 0-255))doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetEngineLineStyle =R"doc(Gets print engine line style pattern in dots for a particular index.
@@ -43,7 +43,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetEngineLineStyle
 Remark:
     s Should only be called only during print processing.
 
-Parameter ``styleIndex``:
+:param styleIndex:
     Line style index (range 0-(MAX_LINESTYLES+NumExtLineStyles-1)))doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_SetEngineLineWidth =R"doc(Sets the print engine line width for a particular weight index.
@@ -55,10 +55,10 @@ Remark:
     width table or elsewhere. Should only be called only during print
     processing.
 
-Parameter ``weight``:
+:param weight:
     Weight index (range 0 to 31)
 
-Parameter ``lineWidthDots``:
+:param lineWidthDots:
     New print width in dots.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetEngineLineWidth =R"doc(Gets the print engine line width for a particular weight.
@@ -69,7 +69,7 @@ Remark:
     print width may come from the color-index-to-width table or
     elsewhere. Should only be called only during print processing.
 
-Parameter ``weight``:
+:param weight:
     Weight index (range 0 to 31).)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_SetEngineError =R"doc(Sets the current error code in the Plotter instance. Should only be
@@ -80,20 +80,20 @@ called only during print processing.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_FindBestFitForm =R"doc(Gets the form that best fits the specified width and height.
 
-Parameter ``requestWidthDots``:
+:param requestWidthDots:
     Requested form width in dots.
 
-Parameter ``requestHeightDots``:
+:param requestHeightDots:
     Requested form height in dots.
 
-Parameter ``requestUnits``:
+:param requestUnits:
     Indicates preference for standard ANSI or ISO forms; must be
     PlotUnits::in or PlotUnits::mm.
 
-Parameter ``bestFitFormIndexP``:
+:param bestFitFormIndexP:
     Returns index of the form that best fits the requested size.
 
-Parameter ``selectedFormFitsP``:
+:param selectedFormFitsP:
     Returns True if the selected form accomodates the requested size
     without clipping. May be NULL.)doc";
 
@@ -184,11 +184,11 @@ Remark:
     s This value is converted into pixels by the print engine at the
     time of print processing, taking into account the paper size line
     style scale factor. Should be called prior to starting the print
-    engine. param styleIndex[in] Line style index (range 0-7). param
-    lineStyle[in] New line style definition.)doc";
+    engine. param styleIndex(input) Line style index (range 0-7). param
+    lineStyle(input) New line style definition.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetLineStyle =R"doc(Gets the print line style for the specified line style index. param
-styleIndex[in] Line style index (range 0-7).)doc";
+styleIndex(input) Line style index (range 0-7).)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_SetLineWidth =R"doc(Sets the line width in physical units for the specified weight.
 
@@ -198,47 +198,47 @@ Remark:
     width scale factor. Should be called prior to starting the print
     engine.
 
-Parameter ``weight``:
+:param weight:
     (range 0-31).
 
-Parameter ``units``:
+:param units:
     Units for physical width.
 
-Parameter ``width``:
+:param width:
     New physical width.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetLineWidth =R"doc(Gets the line width in physical units for the specified weight.
 
-Parameter ``weight``:
+:param weight:
     (range 0-31).
 
-Parameter ``unitsP``:
+:param unitsP:
     Units for physical width.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetRasterCompression =R"doc(Gets a constant reference to the RasterCompression structure.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_SetPenSetup =R"doc(Call to set pen characteristics for a particular pen number.
 
-Parameter ``pen``:
+:param pen:
     Pen number (range 0-255), where 0=background pen
 
-Parameter ``penSetup``:
+:param penSetup:
     Input pen setup structure.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetPenSetup =R"doc(Gets pen characteristics for a particular pen number.
 
-Parameter ``pen``:
+:param pen:
     Pen number (range 0-255), where 0=background pen)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetIsPenColorDefined =R"doc(Indicates whether the particular pen color was set in the printer
 driver configuration file.
 
-Parameter ``pen``:
+:param pen:
     Pen number (range 0-255), where 0=background pen)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_GetPenColor =R"doc(Gets the color for a particular pen number.
 
-Parameter ``pen``:
+:param pen:
     Pen number (range 0-255), where 0=background pen)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotter_SetPenFromColorIndex =R"doc(Sets the pen number corresponding to the given color table index.)doc";
@@ -311,7 +311,7 @@ Remark:
     s This setting has no effect on non-rasterized OLE objects, e.g.
     those output by the system printer driver in non-rasterized mode.
 
-Parameter ``value``:
+:param value:
     Range 0.0<value <= 1.0.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotRasterizedParam_GetQuality =R"doc(Gets the ratio of rasterized plot resolution over vector plot
@@ -320,7 +320,7 @@ resolution.)doc";
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotRasterizedParam_SetQuality =R"doc(Sets the ratio of rasterized plot resolution over vector plot
 resolution.
 
-Parameter ``value``:
+:param value:
     Range 0.0<value <= 1.0.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotFontMapList_RemoveAllFontMaps =R"doc(Removes all font maps.)doc";
@@ -357,30 +357,30 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_RemoveAllF
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_RemoveForm =R"doc(Removes a form from the list.
 
-Parameter ``formListIndex``:
+:param formListIndex:
     Index into the form list, or -1 for current form.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_AppendForm =R"doc(Creates a new form in the list.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_GetFormByPaperSizeNumber =R"doc(Gets information about a particular form paper size number.
 
-Parameter ``searchPaperSizeNumber``:
+:param searchPaperSizeNumber:
     Paper size number to search for.
 
-Parameter ``formListIndexP``:
+:param formListIndexP:
     Returned index into the form list of new form (may be NULL).)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_GetFormByName =R"doc(Gets information about a particular form name.
 
-Parameter ``searchName``:
+:param searchName:
     Form name to search for.
 
-Parameter ``formListIndexP``:
+:param formListIndexP:
     Returned index into the form list of new form (may be NULL).)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_GetFormByIndex =R"doc(Gets information about a particular form index.
 
-Parameter ``formListIndex``:
+:param formListIndex:
     Index into the form list, or -1 for current form.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_GetDefaultFormIndex =R"doc(Gets the index of the default form in the form list. Will be -1 if no
@@ -392,7 +392,7 @@ static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_GetCurrent
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_SetCurrentForm =R"doc(Sets the current form in the form list.
 
-Parameter ``formListIndex``:
+:param formListIndex:
     Index into the form list, or -1 for current form.)doc";
 
 static const char * __doc_Bentley_MstnPlatform_Print_IPlotterFormList_GetNumForms =R"doc(Gets the number of forms defined for the plotter.)doc";
@@ -874,7 +874,7 @@ public:
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       6/2024
     +---------------+---------------+---------------+---------------+---------------+------*/
-    virtual void WriteCommand(byte const* buffer, int numBytes) override
+    virtual void WriteCommand(Byte const* buffer, int numBytes) override
         {   
         if (!buffer || numBytes < 1)
             return;
@@ -899,7 +899,7 @@ public:
     /*---------------------------------------------------------------------------------**//**
     * @bsimethod                                                                       6/2024
     +---------------+---------------+---------------+---------------+---------------+------*/
-    virtual void WriteString(byte const* buffer) override
+    virtual void WriteString(Byte const* buffer) override
         {
         size_t numBytes(0);
 

@@ -5,7 +5,16 @@ from MSPyDgnPlatform import *
 from MSPyMstnPlatform import *
 from MSPyDgnView import *
 from math import radians
+import os
 
+'''
+Example demonstrating how to place Cell
+Prerequisite : Run the sample on PlaceCell.dgn
+'''
+
+DataDir = os.path.join(os.path.dirname(__file__), "../data")
+celLibraryName = BeFileName(os.path.join(DataDir, "CellFromLibrary.cel")) # Path to the cell library
+cellName = "ARROW"  # Name of the cell to be placed
 
 """
 Retrieve B-spline elements from the active model and delete other elements that are not B-splines.
@@ -50,6 +59,8 @@ Place cells along a B-spline curve at specific intervals.
 :return: None
 """
 def placeCells():
+    global celLibraryName, cellName  # Reference global variables
+
     # Retrieve the B-spline element from the active model
     bSpline = getActiveModelGraphicalElements()
     if not bSpline:
@@ -69,8 +80,7 @@ def placeCells():
     setDistance = 200000
 
     # Specify the location of the cell library to attach
-    celLibraryName = BeFileName(r"C:/ProgramData/Bentley/MicroStation 2024/Configuration/Organization/Cell/test_cell_26112024.cel")
-    Cell.AttachLibrary(fileName=BeFileName(), inputName=celLibraryName, defaultDir=r"C:/ProgramData/Bentley/MicroStation 2024/Configuration/Organization/Cell", fromKeyin=0)
+    Cell.AttachLibrary(fileName=BeFileName(), inputName=celLibraryName, defaultDir=DataDir, fromKeyin=0)
 
     # Loop through and place cells at different points along the B-spline curve
     for i in range(count):
@@ -97,8 +107,7 @@ def placeCells():
         relativeMode = False  # Whether the position is relative to other elements
         baseLevel = 0  # Level ID (0 if not used)
         sharedFlag = 1  # Set to 1 for shared cell
-        cellName = "circles"  # Name of the cell to be placed
-
+  
         # Attempt to place the cell at the calculated location with the specified attributes
         try:
             result = Cell.PlaceCell(
@@ -112,15 +121,12 @@ def placeCells():
                 baseLevel=baseLevel,  # Level ID for the cell
                 sharedFlag=sharedFlag,  # Shared cell flag
                 cellName=cellName,  # Name of the cell
-                library=dgnFile  # Reference to the DGN file library
+                library=None  # Reference to the DGN file library, or None to search for the cell in the active cell library
             )
         except Exception as e:
             print(f"Error placing cell: {e}")  # Print any error that occurs during cell placement
         
 
-"""
-Prerequisite : Run the sample on PlaceCell.dgn
-"""
 # Main execution point
 if __name__ == "__main__":
     placeCells()  # Call the function to place cells along the B-spline curve

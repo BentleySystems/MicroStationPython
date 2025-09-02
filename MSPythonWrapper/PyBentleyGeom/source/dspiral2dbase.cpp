@@ -163,265 +163,265 @@ DSpiral2dBase::TransitionType_Italian indicate a strict test L<2*R
 
 * other types have no restrictions.
 
-Parameter ``[in]``:
-    lengthFromInflection [in] distance along spiral starting at
+:param (input):
+    lengthFromInflection (input) distance along spiral starting at
     inflection and ending at finalRadius.
 
-Parameter ``[in]``:
-    finalRadius [in] final radius
+:param (input):
+    finalRadius (input) final radius
 
-Parameter ``[in]``:
-    spiralType [in] spiral type.
+:param (input):
+    spiralType (input) spiral type.
 
-Parameter ``[in]``:
+:param (input):
     lengthFactor expansion or reduction factor to apply to the allowed
     length. +---------------+---------------+---------------+---------
     ------+------)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_SymmetricPointShoulderTargetTransition =R"doc( compute 2 spirals.
 
-Parameter ``[in]``:
+:param (input):
     startPoint start point
 
-Parameter ``[in]``:
+:param (input):
     shoulderPoint target point for first and last tangents
 
-Parameter ``[in]``:
+:param (input):
     targetPoint target point for last tangent
 
-Parameter ``[in,out]``:
+:param [in,out]:
     spiralA On input, a spiral of the desired type. On output all
     fields are set.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     spiralB On input, a spiral of the desired type. On output all
     fields are set.
 
-Parameter ``[out]``:
+:param (output):
     junctionPoint transition between spirals. This is the max
     curvature point.
 
-Parameter ``[out]``:
+:param (output):
     endPoint end of second spiral.
 
-Returns:
+:returns:
     false if unable to construct)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_SymmetricLineSpiralSpiralLineTransition =R"doc( compute spirals and arc to make a line-to-line
 transition.
 
-Parameter ``[in]``:
+:param (input):
     lineAPoint point on line A.
 
-Parameter ``[in]``:
+:param (input):
     lineBPoint point on line B.
 
-Parameter ``[in]``:
+:param (input):
     lineLineIntersection intersection of lines.
 
-Parameter ``[in]``:
+:param (input):
     length length of spiral from line A to junction
 
-Parameter ``[in,out]``:
+:param [in,out]:
     spiralA On input, a spiral of the desired type. On output all
     fields are set.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     spiralB On input, a spiral of the desired type. On output all
     fields are set.
 
-Parameter ``[out]``:
+:param (output):
     lineToSpiralA tangency point from line to spiral
 
-Parameter ``[out]``:
+:param (output):
     lineToSpiralB tangency point from line to spiral
 
-Parameter ``[out]``:
+:param (output):
     spiralToSpiral tangency point from spiral to to spiral
 
-Parameter ``[out]``:
+:param (output):
     junctionRadius radius at transition between the spirals.
 
-Returns:
+:returns:
     false if unable to construct)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_LineSpiralArcSpiralLineTransition =R"doc( compute spirals and arc to make a line-to-line
 transition.
 
-Parameter ``[in]``:
+:param (input):
     lineAPoint point on line A.
 
-Parameter ``[in]``:
+:param (input):
     lineBPoint point on line B.
 
-Parameter ``[in]``:
+:param (input):
     lineLineIntersection intersection of lines.
 
-Parameter ``[in]``:
+:param (input):
     radius radius for circular part of transition.
 
-Parameter ``[in]``:
+:param (input):
     lengthA length of spiral from line A to circle.
 
-Parameter ``[in]``:
+:param (input):
     lengthB length of spiral from line B to circle.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     spiralA On input, a spiral of the desired type. On output all
     fields are set.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     spiralB On input, a spiral of the desired type. On output all
     fields are set.
 
-Parameter ``[out]``:
+:param (output):
     lineToSpiralA tangency point from line to spiral
 
-Parameter ``[out]``:
+:param (output):
     spiralAToArc tangency point from spiral to arc
 
-Parameter ``[out]``:
+:param (output):
     lineToSpiralB tangency point from line to spiral
 
-Parameter ``[out]``:
+:param (output):
     spiralBToArc tangency point from spiral to arc
 
-Parameter ``[out]``:
+:param (output):
     arc arc between spirals.
 
-Returns:
+:returns:
     false if unable to construct)doc";
 
-static const char * __doc_Bentley_Geom_DSpiral2dBase_EvaluateTwoTermClothoidSeriesAtDistanceInStandardOrientation =R"doc([in] distance for evaluation [in] nominal length. ASSUMED NONZERO [in]
-exit curvature. ASSUMED NONZERO [out] coordinates on spiral [out]
-first derivative wrt distance [out] second derivative wrt distance
-[out] third derivative wrt distance)doc";
+static const char * __doc_Bentley_Geom_DSpiral2dBase_EvaluateTwoTermClothoidSeriesAtDistanceInStandardOrientation =R"doc((input) distance for evaluation (input) nominal length. ASSUMED NONZERO (input)
+exit curvature. ASSUMED NONZERO (output) coordinates on spiral (output)
+first derivative wrt distance (output) second derivative wrt distance
+(output) third derivative wrt distance)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_ClosestPoint =R"doc( Compute the closest spiral point for a given space point.
 
-Parameter ``[in]``:
+:param (input):
     spiral spiral to evaluate.
 
-Parameter ``[in]``:
+:param (input):
     startFraction start fraction of search range
 
-Parameter ``[in]``:
+:param (input):
     endFraction endFraction of search range
 
-Parameter ``[in]``:
+:param (input):
     spiralToWorld transform placing the spiral local coordinates into
     the world coordinate system
 
-Parameter ``[in]``:
+:param (input):
     spacePoint world coordinates of space point.
 
-Parameter ``[out]``:
+:param (output):
     spiralPoint world coordinates of closest point on spiral
 
-Parameter ``[out]``:
+:param (output):
     spiralFraction fractional coordinates of closest point on spiral
 
-Parameter ``[out]``:
+:param (output):
     minDistance distance from space point to spiralPoint.
 
-Returns:
+:returns:
     false if unable to construct)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_GetIntervalCount =R"doc(Return an interval count for stroking or integration. Except for
 degenerate single interval cases, the interval count is always even.
 That is the possible values are
 
-Parameter ``[in]``:
+:param (input):
     spiral spiral being queried.
 
-Parameter ``[in]``:
+:param (input):
     startFraction start of interval to stroke.
 
-Parameter ``[in]``:
+:param (input):
     endFraction end of interval to stroke.
 
-Parameter ``[in]``:
+:param (input):
     maxRadians max turn between strokes.
 
-Parameter ``[in]``:
+:param (input):
     minInterval smallest number of intervals.
 
-Parameter ``[in]``:
+:param (input):
     maxStrokeLength largest stroke size. Recommended 10 meters)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_StrokeToAnnouncer =R"doc( Integrate the vector displacements of a clothoid over a
 fractional interval. This uses the angles, curvatures, and length.
 
-Parameter ``[in]``:
+:param (input):
     spiral spiral to stroke
 
-Parameter ``[in]``:
+:param (input):
     startFraction start fraction for integral.
 
-Parameter ``[in]``:
+:param (input):
     endFraction end fraction for integral.
 
-Parameter ``[in]``:
+:param (input):
     maxRadians maximum bearing change between computed points. A
     default is used if 0.0 is passed.
 
-Parameter ``[in]``:
+:param (input):
     F object with a method F->Announce (f, uv) called to announce
     fraction and coordinate as computed.
 
-Parameter ``[out]``:
+:param (output):
     errorBound estimated bound on error.
 
-Parameter ``[out]``:
+:param (output):
     minInterval smallest number of intervals allowed
 
-Parameter ``[out]``:
+:param (output):
     maxStrokeLength maximum allowed stroke length
 
-Returns:
+:returns:
     false if point integration failed)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_Stroke =R"doc( Integrate the vector displacements of a clothoid from its
 start point to multiple points up to its end point. This uses the
 angles, curvatures, and length.
 
-Parameter ``[in]``:
+:param (input):
     spiral spiral to stroke
 
-Parameter ``[in]``:
+:param (input):
     maxRadians maximum bearing change between computed points.
     Recommended value is 0.08.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pDXY buffer to receive points.
 
-Parameter ``[out]``:
+:param (output):
     numDXY number of points computed.
 
-Parameter ``[in]``:
+:param (input):
     maxDXY maximum number of points to compute. If zero or negative,
     only the final vector is stored (and pDXY is assumed to be valid
     for one vector).
 
-Parameter ``[out]``:
+:param (output):
     errorBound estimated bound on error.
 
-Returns:
+:returns:
     false if point buffer exceeded.)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_SetBearingCurvatureLengthBearing =R"doc( Set start bearing, start curvature, length, and end
 curvature. (Compute end bearing)
 
-Parameter ``[in]``:
+:param (input):
     theta0 start bearing
 
-Parameter ``[in]``:
+:param (input):
     curvature0 start curvature
 
-Parameter ``[in]``:
+:param (input):
     length arc length
 
-Parameter ``[in]``:
+:param (input):
     theta1 end bearing)doc";
 
 static const char * __doc_Bentley_Geom_DSpiral2dBase_CreateBearingCurvatureLengthCurvature =R"doc(invoke appropriate concrete class constructor ...)doc";

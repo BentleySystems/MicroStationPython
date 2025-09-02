@@ -23,7 +23,7 @@ static const char * __doc_Bentley_DgnPlatform_XAttributeHandle_GetElementRef =R"
 
 static const char * __doc_Bentley_DgnPlatform_XAttributeHandle_IsValid =R"doc(Determine whether this XAttributeHandle is valid or not.
 
-Returns:
+:returns:
     true if this XAttributeHandle is valid. If this method returns
     false, all other methods on this XAttributeHandle will fail or
     crash.)doc";

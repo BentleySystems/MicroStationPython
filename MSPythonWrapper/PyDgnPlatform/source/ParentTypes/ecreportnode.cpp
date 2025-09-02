@@ -31,7 +31,7 @@ static const char * __doc_Bentley_DgnPlatform_ReportCategoryNode_From =R"doc(Ext
 static const char * __doc_Bentley_DgnPlatform_ReportDefinitionNode_SetIncludeItemTypeOption =R"doc(Set IncludeItemTypeOption which is used for selecting used or
 all/unreferenced classes for report.
 
-Parameter ``IncludeItemTypeOption``:
+:param IncludeItemTypeOption:
     the IncludeItemTypeOption to be set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ReportDefinitionNode_GetIncludeItemTypeOption =R"doc(Get IncludeItemTypeOption which is used for selecting used or
@@ -40,7 +40,7 @@ all/unreferenced classes for report. Returns the IncludeItemTypeOption)doc";
 static const char * __doc_Bentley_DgnPlatform_ReportDefinitionNode_SetSelectionScopeOption =R"doc(Set SelectionScopeOption which is used for report all, by fence, or by
 current selection
 
-Parameter ``selectionScopeOption``:
+:param selectionScopeOption:
     the SelectionScopeOption to be set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ReportDefinitionNode_GetSelectionScopeOption =R"doc(Get SelectionScopeOption which is used for report all, by fence, or by
@@ -99,7 +99,7 @@ static const char * __doc_Bentley_DgnPlatform_ReportDefinitionNode_GetScopeType 
 static const char * __doc_Bentley_DgnPlatform_ReportScope_SetIncludeItemTypeOption =R"doc(Set SetIncludeItemTypeOption which is used for selecting used or
 all/unreferenced classes for report.
 
-Parameter ``includeItemTypeOption``:
+:param includeItemTypeOption:
     the IncludeItemTypeOption to be set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ReportScope_GetIncludeItemTypeOption =R"doc(Get IncludeItemTypeOption which is used for selecting used or
@@ -108,7 +108,7 @@ all/unreferenced classes for report. Returns the IncludeItemTypeOption)doc";
 static const char * __doc_Bentley_DgnPlatform_ReportScope_SetSelectionScopeOption =R"doc(Set SelectionScopeOption which is used for report all, by fence, or by
 current selection
 
-Parameter ``selectionScopeOption``:
+:param selectionScopeOption:
     the SelectionScopeOption to be set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ReportScope_GetSelectionScopeOption =R"doc(Get SelectionScopeOption which is used for report all, by fence, or by
@@ -372,7 +372,6 @@ void def_ECReportNode(py::module_& m)
     c5.def_property_readonly("Accessor", py::overload_cast<>(&ReportColumnAccessor::GetAccessor));
     c5.def("GetAccessor", py::overload_cast<>(&ReportColumnAccessor::GetAccessor), py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, ReportColumnAccessor, GetAccessor));
     
-    c5.def_property_readonly("ArrayOption", &ReportColumnAccessor::GetArrayOption);
     c5.def("GetArrayOption", &ReportColumnAccessor::GetArrayOption, DOC(Bentley, DgnPlatform, ReportColumnAccessor, GetArrayOption));
     
     c5.def_property_readonly("ArrayAccessors", py::overload_cast<>(&ReportColumnAccessor::GetArrayAccessors));
@@ -453,6 +452,7 @@ void def_ECReportNode(py::module_& m)
     py::class_< DgnECHostSpecification> c8(m, "DgnECHostSpecification");
     py::bind_vector<bvector< DgnECHostSpecification>>(m, "DgnECHostSpecificationArray", py::module_local(false));
 
+    c8.def(py::init<>());
     c8.def_property("PrimaryClasses", py::overload_cast<>(&DgnECHostSpecification::GetPrimaryClasses), py::cpp_function(&DgnECHostSpecification::SetPrimaryClasses, py::keep_alive<1, 2>()));
     c8.def("GetPrimaryClasses", py::overload_cast<>(&DgnECHostSpecification::GetPrimaryClasses), py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, DgnECHostSpecification, GetPrimaryClasses));
     c8.def("SetPrimaryClasses", &DgnECHostSpecification::SetPrimaryClasses, "classes"_a, py::keep_alive<1, 2>(), DOC(Bentley, DgnPlatform, DgnECHostSpecification, SetPrimaryClasses));
@@ -518,7 +518,6 @@ void def_ECReportNode(py::module_& m)
     c10.def("InitForDefaultModel", &ReportScope::InitForDefaultModel, "moniker"_a, "refOut"_a = ReportScope::ReferencedModelOption::None, DOC(Bentley, DgnPlatform, ReportScope, InitForDefaultModel));
     c10.def("InitForModel", &ReportScope::InitForModel, "modelName"_a, "moniker"_a, "refOut"_a = ReportScope::ReferencedModelOption::None, DOC(Bentley, DgnPlatform, ReportScope, InitForModel));
     
-    c10.def_property_readonly("Type", &ReportScope::GetType);
     c10.def("GetType", &ReportScope::GetType, DOC(Bentley, DgnPlatform, ReportScope, GetType));
     
     c10.def_property_readonly("Location", &ReportScope::GetLocation);
@@ -527,24 +526,24 @@ void def_ECReportNode(py::module_& m)
     c10.def_property_readonly("Qualifier", &ReportScope::GetQualifier);
     c10.def("GetQualifier", &ReportScope::GetQualifier, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, ReportScope, GetQualifier));
     
-    c10.def_property_readonly("ReferencedModelOption", &ReportScope::GetReferencedModelOption);
     c10.def("GetReferencedModelOption", &ReportScope::GetReferencedModelOption, DOC(Bentley, DgnPlatform, ReportScope, GetReferencedModelOption));
     
     c10.def("IncludesChildElements", &ReportScope::IncludesChildElements, DOC(Bentley, DgnPlatform, ReportScope, IncludesChildElements));    
     c10.def("SetReferencedModelOption", &ReportScope::SetReferencedModelOption, "opt"_a, DOC(Bentley, DgnPlatform, ReportScope, SetReferencedModelOption));
     c10.def("SetIncludeChildElements", &ReportScope::SetIncludeChildElements, "include"_a, DOC(Bentley, DgnPlatform, ReportScope, SetIncludeChildElements));
     
-    c10.def_property("SelectionScopeOption", &ReportScope::GetSelectionScopeOption, &ReportScope::SetSelectionScopeOption);
     c10.def("GetSelectionScopeOption", &ReportScope::GetSelectionScopeOption, DOC(Bentley, DgnPlatform, ReportScope, GetSelectionScopeOption));
     c10.def("SetSelectionScopeOption", &ReportScope::SetSelectionScopeOption, "options"_a, DOC(Bentley, DgnPlatform, ReportScope, SetSelectionScopeOption));
     
-    c10.def_property("IncludeItemTypeOption", &ReportScope::GetIncludeItemTypeOption, &ReportScope::SetIncludeItemTypeOption);
     c10.def("GetIncludeItemTypeOption", &ReportScope::GetIncludeItemTypeOption, DOC(Bentley, DgnPlatform, ReportScope, GetIncludeItemTypeOption));
     c10.def("SetIncludeItemTypeOption", &ReportScope::SetIncludeItemTypeOption, "options"_a, DOC(Bentley, DgnPlatform, ReportScope, SetIncludeItemTypeOption));
 
     //===================================================================================
     // struct ReportDefinitionNode
     py::class_< ReportDefinitionNode, ReportDefinitionNodePtr, ECReportNode> c11(m, "ReportDefinitionNode");
+
+
+    c11.def(py::init(&ReportDefinitionNode::From), "node"_a, DOC(Bentley, DgnPlatform, ReportDefinitionNode, From));
 
     c11.def_property_readonly("ScopeType", &ReportDefinitionNode::GetScopeType);
     c11.def("GetScopeType", &ReportDefinitionNode::GetScopeType, DOC(Bentley, DgnPlatform, ReportDefinitionNode, GetScopeType));
@@ -577,7 +576,6 @@ void def_ECReportNode(py::module_& m)
     
     c11.def_static("FindById", &ReportDefinitionNode::FindById, "id"_a, "dgnFile"_a, DOC(Bentley, DgnPlatform, ReportDefinitionNode, FindById));
     c11.def_static("FindByPath", &ReportDefinitionNode::FindByPath, "path"_a, "dgnFile"_a, DOC(Bentley, DgnPlatform, ReportDefinitionNode, FindByPath));
-    c11.def_static("From", &ReportDefinitionNode::From, "node"_a, DOC(Bentley, DgnPlatform, ReportDefinitionNode, From));
     c11.def("GetSelectionScopeOption", &ReportDefinitionNode::GetSelectionScopeOption, DOC(Bentley, DgnPlatform, ReportDefinitionNode, GetSelectionScopeOption));
     c11.def("SetSelectionScopeOption", &ReportDefinitionNode::SetSelectionScopeOption, "option"_a, DOC(Bentley, DgnPlatform, ReportDefinitionNode, SetSelectionScopeOption));
     c11.def("GetIncludeItemTypeOption", &ReportDefinitionNode::GetIncludeItemTypeOption, DOC(Bentley, DgnPlatform, ReportDefinitionNode, GetIncludeItemTypeOption));
@@ -587,8 +585,8 @@ void def_ECReportNode(py::module_& m)
     // struct ReportCategoryNode
     py::class_< ReportCategoryNode, ReportCategoryNodePtr, ECReportNode> c12(m, "ReportCategoryNode");
 
+    c12.def(py::init(&ReportCategoryNode::From), "node"_a, DOC(Bentley, DgnPlatform, ReportCategoryNode, From));
     c12.def(py::init(&ReportCategoryNode::Create), "name"_a, "sortPriority"_a, "dgnFile"_a);
-    c12.def_static("From", &ReportCategoryNode::From, "node"_a, DOC(Bentley, DgnPlatform, ReportCategoryNode, From));
     c12.def_static("FindByName", &ReportCategoryNode::FindByName, "name"_a, "dgnFile"_a, DOC(Bentley, DgnPlatform, ReportCategoryNode, FindByName));
     c12.def("CreateReportDefinition", py::overload_cast<WCharCP, int>(&ReportCategoryNode::CreateReportDefinition), "name"_a, "sortPriority"_a, DOC(Bentley, DgnPlatform, ReportCategoryNode, CreateReportDefinition));
     c12.def("CreateReportDefinition", py::overload_cast<WCharCP, int, bool>(&ReportCategoryNode::CreateReportDefinition), "name"_a, "sortPriority"_a, "hideEmptyRow"_a, DOC(Bentley, DgnPlatform, ReportCategoryNode, CreateReportDefinition));
@@ -656,6 +654,7 @@ void def_ECReportNode(py::module_& m)
     // struct ReportDefinitionCollection
     py::class_< ReportDefinitionCollection> c23(m, "ReportDefinitionCollection");
 
+    c23.def(py::init<>());
     c23.def(py::init<DgnFileR>(), "dgnFile"_a);
     c23.def_property_readonly("Count", [] (ReportDefinitionCollection& self) { return std::distance(self.begin(), self.end()); });
     c23.def("__len__", [] (ReportDefinitionCollection& self) { return std::distance(self.begin(), self.end()); });

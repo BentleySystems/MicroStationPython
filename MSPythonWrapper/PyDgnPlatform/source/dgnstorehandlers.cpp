@@ -13,11 +13,11 @@
 static const char * __doc_Bentley_DgnPlatform_TagSetHandler_ExtractTagDefs =R"doc(Extract all the tag definitions associated with a given tagset
 element.
 
-Parameter ``eh``:
-    IN tagset element.
+:param eh:
+    (input) tagset element.
 
-Parameter ``tagDefs``:
-    OUT an array of tagset definition pointers.
+:param tagDefs:
+    (output) an array of tagset definition pointers.
 
 Remark:
     s The caller must free the allocated memory @See
@@ -25,63 +25,63 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_TagSetHandler_ExtractTagDefByName =R"doc(Get the tag definition of a tagsetelement by name.
 
-Parameter ``eh``:
-    IN tagset element.
+:param eh:
+    (input) tagset element.
 
-Parameter ``tagDef``:
-    OUT tagset definition.
+:param tagDef:
+    (output) tagset definition.
 
-Parameter ``name``:
-    IN name of the tag set)doc";
+:param name:
+    (input) name of the tag set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagSetHandler_ExtractTagDefByID =R"doc(Get the tag definition of a tagsetelement by id.
 
-Parameter ``eh``:
-    IN tagset element.
+:param eh:
+    (input) tagset element.
 
-Parameter ``tagDef``:
-    OUT tagset definition.
+:param tagDef:
+    (output) tagset definition.
 
-Parameter ``tagDefID``:
-    IN Id to look up the tagset element.)doc";
+:param tagDefID:
+    (input) Id to look up the tagset element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagSetHandler_SetReportName =R"doc(Sets the name of tag set report.
 
-Parameter ``name``:
-    IN report name of the tag set
+:param name:
+    (input) report name of the tag set
 
-Parameter ``eeh``:
+:param eeh:
     INOUT tagset element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagSetHandler_SetSetName =R"doc(Sets the name of tag set.
 
-Parameter ``name``:
-    IN name of the tag set
+:param name:
+    (input) name of the tag set
 
-Parameter ``eeh``:
+:param eeh:
     INOUT tagset element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagSetHandler_GetByName =R"doc(Look up a tag set element based on Id.
 
-Parameter ``setName``:
-    IN name of the tag set
+:param setName:
+    (input) name of the tag set
 
-Parameter ``dgnFile``:
-    IN file in which to search for the tagset.
+:param dgnFile:
+    (input) file in which to search for the tagset.
 
-Parameter ``eeh``:
-    OUT tagset element.)doc";
+:param eeh:
+    (output) tagset element.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TagSetHandler_GetByID =R"doc(Look up a tag set element based on Id.
 
-Parameter ``uniqueId``:
-    IN Id to be looked up.
+:param uniqueId:
+    (input) Id to be looked up.
 
-Parameter ``dgnFile``:
-    IN file in which to search for the tagset.
+:param dgnFile:
+    (input) file in which to search for the tagset.
 
-Parameter ``eeh``:
-    OUT tagset element.)doc";
+:param eeh:
+    (output) tagset element.)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

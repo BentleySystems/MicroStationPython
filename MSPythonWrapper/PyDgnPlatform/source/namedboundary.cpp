@@ -12,19 +12,19 @@
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundaryGroup_FindElementById =R"doc(Search a particular named boundary group by element id of the group.
 
-Parameter ``elementId``:
-    IN element id of named boundary group
+:param elementId:
+    (input) element id of named boundary group
 
-Parameter ``model``:
-    IN the model to which the named boundary group belongs.)doc";
+:param model:
+    (input) the model to which the named boundary group belongs.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundaryGroup_FindByName =R"doc(Search a particular named boundary group by name of the group.
 
-Parameter ``groupName``:
-    IN the named boundary group to be searched.
+:param groupName:
+    (input) the named boundary group to be searched.
 
-Parameter ``model``:
-    IN the model to which the named boundary group belongs.)doc";
+:param model:
+    (input) the model to which the named boundary group belongs.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundaryGroup_WriteToFile =R"doc(Saves the named boundary group. After every performed on the named
 boundary group, its important to implement this, in order to save the
@@ -32,8 +32,8 @@ changes.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundaryGroup_Delete =R"doc(Deletes the named boundary group.
 
-Parameter ``retainBoundariesAsOrphans``:
-    IN decides whether after the delete operation the named group
+:param retainBoundariesAsOrphans:
+    (input) decides whether after the delete operation the named group
     elements within the group would independently exist as orphan
     named boundaries or not.)doc";
 
@@ -74,7 +74,7 @@ static const char * __doc_Bentley_DgnPlatform_NamedBoundaryGroup_SetName =R"doc(
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundaryGroup_GetName =R"doc(gets the name of the named boundary .)doc";
 
-static const char * __doc_Bentley_DgnPlatform_INamedBoundaryGroupMemberVisitor_VisitMember =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_INamedBoundaryGroupMemberVisitor_VisitMember =R"doc(:returns:
     SUCCESS to continue traversal, or ERROR to abort)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_SetIgnoreMarginForViewSync =R"doc(Sets whether to ignore the clip margins while creating saved view from
@@ -83,46 +83,46 @@ this named boundary.)doc";
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_GetIgnoreMarginForViewSync =R"doc(Gets whether to ignore clip margins while creating saved view from
 this named boundary.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_NamedBoundary_FindByIndex =R"doc(Parameter ``modelRef``:
-    IN indicates the file containing the boundary.
+static const char * __doc_Bentley_DgnPlatform_NamedBoundary_FindByIndex =R"doc(:param modelRef:
+    (input) indicates the file containing the boundary.
 
-Parameter ``index``:
-    IN index from where the named boundary would be retrieved
+:param index:
+    (input) index from where the named boundary would be retrieved
 
-Returns:
+:returns:
     SUCCESS if the named boundary is successfully found at given index
     else returns an appropriate error status.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_FindOrphanByName =R"doc(Find orphan named boundary element.
 
-Parameter ``name``:
-    IN The boundary name.
+:param name:
+    (input) The boundary name.
 
-Parameter ``modelRef``:
-    IN indicates the file containing the boundary.
+:param modelRef:
+    (input) indicates the file containing the boundary.
 
-Returns:
+:returns:
     SUCCESS if the named boundary is successfully found else returns
     an appropriate error status .)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_FindByName =R"doc(Find named boundary element.
 
-Parameter ``name``:
-    IN The boundary name.
+:param name:
+    (input) The boundary name.
 
-Parameter ``parentGroup``:
-    IN parent group to search in. NULL to find in all boundaries.
+:param parentGroup:
+    (input) parent group to search in. NULL to find in all boundaries.
 
-Parameter ``modelRef``:
-    IN indicates the file containing the boundary.
+:param modelRef:
+    (input) indicates the file containing the boundary.
 
-Returns:
+:returns:
     SUCCESS if the named boundary is successfully found else returns
     an appropriate error status .)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_GetParentGroup =R"doc(If this named boundary is part of a group, returns the parent group.
 
-Returns:
+:returns:
     parent group, or NULL if boundary is orphan)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_Save =R"doc(Saves the named boundary to file.
@@ -134,13 +134,13 @@ Remark:
     AddToModel (). Instead, call Save () to save the element, and then
     call GetElement () to get the persistent ElementRef.
 
-Returns:
+:returns:
     SUCCESS if the boundary is successfully saved else returns an
     appropriate error status.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_Delete =R"doc(Deletes the named boundary
 
-Returns:
+:returns:
     SUCCESS if the named boundary is successfully deleted and an
     appropriate error status otherwise.)doc";
 
@@ -149,18 +149,18 @@ named boundary group, cloned named boundary will not be added to that
 groupe implecitely. Cloned NamedBoundary will have to be added to the
 group explecitely.
 
-Parameter ``newName``:
-    IN name of new boundary
+:param newName:
+    (input) name of new boundary
 
-Parameter ``srcBoundary``:
-    IN source boundary to be cloned)doc";
+:param srcBoundary:
+    (input) source boundary to be cloned)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_GetFromGraphicalElement =R"doc(Get associated NamedBoundary from graphical element
 
-Parameter ``el``:
-    IN ElementHandle of the graphical element.
+:param el:
+    (input) ElementHandle of the graphical element.
 
-Returns:
+:returns:
     a named boundary pointer if no named boundary associated return
     NULL.)doc";
 
@@ -180,7 +180,7 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_SetGraphicalElement =R"doc(Sets the named Boundary to the particular type of graphical element it
 represents.
 
-Returns:
+:returns:
     SUCCESS if element is closed shape element else ERROR.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundary_GetGraphicalElement =R"doc(Gets the graphical element which the named boundary represents.But
@@ -234,12 +234,12 @@ associated to a named boundary)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundaryClipDepths_SetFlipDirection =R"doc(Set the flag that indicates direction of clipping
 
-Parameter ``flipDirection``:
-    IN set the flip direction.)doc";
+:param flipDirection:
+    (input) set the flip direction.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundaryClipDepths_GetFlipDirection =R"doc(Get the flag that indicates direction of clipping
 
-Returns:
+:returns:
     return whether direction of clipping depth is flipped.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedBoundaryClipDepths_SetCropBack =R"doc(Set the flag that indicates whether back clipping should be infinite

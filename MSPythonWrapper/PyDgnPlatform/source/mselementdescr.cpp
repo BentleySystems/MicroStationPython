@@ -14,7 +14,7 @@ static const char * __doc_Bentley_DgnPlatform_MSElementDescr_AddToChain =R"doc(A
 create a chain of non-complex elements in chainElem, but that
 technique is strongly discouraged. Instead, use an ElementAgenda.
 
-Parameter ``newElem``:
+:param newElem:
     The MSElementDescr to add. @note The difference between
     #AppendDescr and #AddToChain is that #AppendDescr requires the
     MSElementDescr to hold a single complex element and #AddToChain
@@ -32,10 +32,10 @@ zero.)doc";
 static const char * __doc_Bentley_DgnPlatform_MSElementDescr_Validate =R"doc(Updates complex header element information based on current
 components.
 
-Parameter ``modelRef``:
+:param modelRef:
     Element source.
 
-Parameter ``ignoreIsValid``:
+:param ignoreIsValid:
     Perform validation even if h.isValid is true. (ex. Application
     modifies component elements directly)
 
@@ -48,10 +48,10 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_MSElementDescr_AppendDescr =R"doc(Adds ``newDscr`` to the end of this msElementDescr.
 
-Parameter ``newDscr``:
+:param newDscr:
     The MSElementDescr to add.
 
-Returns:
+:returns:
     SUCCESS if newDscr is appended to this msElementDescr,
     DGNELEMENT_STATUS_NotCmplxHdr if this msElementDescr does not hold
     a complex header.
@@ -62,10 +62,10 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_MSElementDescr_AppendElement =R"doc(Allocates a new element descriptor from an existing element and append
 to the end of an existing element descriptor
 
-Parameter ``element``:
+:param element:
     Element to append.
 
-Returns:
+:returns:
     A pointer to the new descriptor if the element is successfully
     inserted and NULL otherwise.)doc";
 
@@ -74,7 +74,7 @@ MSElementDescr. If this MSElementDescr is a component of a complex
 element, its previous/next/etc. pointers are spliced to point to
 ``newDscr.``
 
-Parameter ``newDscr``:
+:param newDscr:
     The new MSElementDescr to replace this one. @note This
     MSElementDescr is Released (and is no longer valid) after this
     call. @note If the original MSElementDescr has an
@@ -89,10 +89,10 @@ and this MSElementDescr is Released. If this MSElementDescr is a
 component of a complex element, the previous/next/etc. pointers are
 spliced to the MSElementDescr returned by this method.
 
-Parameter ``element``:
+:param element:
     The new element to be held by a (potentially) new MSElementDescr.
 
-Returns:
+:returns:
     A pointer to the MSElementDescr holding ``element.`` This may
     either point to this MSElementDescr or a new one. @note This
     MSElementDescr is Released (and is no longer valid) after this
@@ -108,19 +108,19 @@ static const char * __doc_Bentley_DgnPlatform_MSElementDescr_Duplicate =R"doc(Al
 static const char * __doc_Bentley_DgnPlatform_MSElementDescr_Allocate =R"doc(Allocate a new MSElementDescr holding a copy of the supplied
 MSElement.
 
-Parameter ``element``:
+:param element:
     The existing element.
 
-Parameter ``modelRef``:
+:param modelRef:
     The value for the dgnModelRef member of the new MSElementDescr.
 
-Parameter ``myHeader``:
+:param myHeader:
     The parent MSElementDescr to which the new MSElementDescr is
     attached. This method sets the myHeader field in the new
     MSElementDescr to this value. Generally this should be NULL unless
     #AppendDescr cannot be used.
 
-Returns:
+:returns:
     A pointer to the new MSElementDescr, or NULL if ``element`` is not
     a valid MicroStation element.)doc";
 

@@ -12,29 +12,29 @@
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_AddMember =R"doc(Adds a member to the NamedGroup.
 
-Parameter ``elementID``:
+:param elementID:
     ElementId of the member to add.
 
-Parameter ``modelRef``:
+:param modelRef:
     ModelRef of the member to add.
 
-Parameter ``memberFlags``:
+:param memberFlags:
     MemberFlags that apply to this member.
 
-Returns:
+:returns:
     NG_Success, or one of the NamedGroupStatus values if there is an
     error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetGroupsContaining =R"doc(Gets a list of ElementRefs representing NamedGroups that contain the
 designated member.
 
-Parameter ``groups``:
+:param groups:
     The list of NamedGroups.
 
-Parameter ``memberElementRef``:
+:param memberElementRef:
     The member to look for.
 
-Returns:
+:returns:
     The number of ElementRefs added to list.
 
 Remark:
@@ -43,21 +43,21 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_CountGroupsContaining =R"doc(Counts the named groups that contain the given elementRef
 
-Parameter ``memberElementRef``:
+:param memberElementRef:
     The member to look for.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_AnyGroupContains =R"doc(Returns true if any named group contains the given elementRef.
 
-Parameter ``memberElementRef``:
+:param memberElementRef:
     The member we are looking for.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_IsMemberOf =R"doc(Returns true if the given elementRef / modelRef belongs to the named
 group.
 
-Parameter ``elementRef``:
+:param elementRef:
     The elementRef of the tested element.
 
-Parameter ``modelRef``:
+:param modelRef:
     The modelRef of the tested element.
 
 Remark:
@@ -66,36 +66,36 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_TraverseRelatedMembers =R"doc(Traverse elements that are related to a given element through
 NamedGroup membership.
 
-Parameter ``memberElementRef``:
+:param memberElementRef:
     ElementRefP of element for which related members are to be
     traversed.
 
-Parameter ``memberModelRef``:
+:param memberModelRef:
     The ModelRef containing memberElementRef.
 
-Parameter ``memberOf``:
+:param memberOf:
     The NamedGroup that contains the member. The only use that is made
     of this argument is to pass it to the
     INamedGroupMemberMemberVisitor::VisitMember method when
     VisitMember is called for memberElementRef. It can be NULL if the
     VisitMember method of visitor is prepared for that case.
 
-Parameter ``baseModelRef``:
+:param baseModelRef:
     The ModelRef at the root of the traversal. Usually the root parent
     of memberModelRef.
 
-Parameter ``visitor``:
+:param visitor:
     An instance of a class implementing the INamedGroupMemberVisitor
     interface.
 
-Parameter ``traverseType``:
+:param traverseType:
     The type of traversal. See MemberTraverseType.
 
-Parameter ``groupLock``:
+:param groupLock:
     True if groupLock should be considered to be on. This matters for
     MemberTraverseType::Manipulate and MemberTraverseType::Copy only.
 
-Parameter ``startOperation``:
+:param startOperation:
     If true, the method calls #PrepareForOperation / #DoneOperation
     appropriately. Otherwise it is assumed that the caller is
     correctly calling #PrepareForOperation / #DoneOperation.
@@ -107,22 +107,22 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_TraverseMembers =R"doc(Traverse the members of a NamedGroup
 
-Parameter ``visitor``:
+:param visitor:
     An instance of a class implementing the INamedGroupMemberVisitor
     interface.
 
-Parameter ``traverseType``:
+:param traverseType:
     The type of traversal. See MemberTraverseType.
 
-Parameter ``groupLock``:
+:param groupLock:
     True if groupLock should be considered to be on. This matters for
     MemberTraverseType::Manipulate and MemberTraverseType::Copy only.
 
-Parameter ``startOperation``:
+:param startOperation:
     If true, the method calls #PrepareForOperation / #DoneOperation
     appropriately.
 
-Returns:
+:returns:
     NG_Success, or one of the NamedGroupStatus values if there is an
     error.
 
@@ -133,18 +133,18 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_DeleteFromFile =R"doc(Delete this NamedGroup from the file.
 
-Returns:
+:returns:
     NG_Success, or one of the NamedGroupStatus values if there is an
     error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_WriteToFile =R"doc(Write this NamedGroup to the DgnFile.
 
-Parameter ``overwriteExisting``:
+:param overwriteExisting:
     True if the caller expects there to be a NamedGroup with the same
     name in the file, and wants to overwrite that NamedGroup with this
     one.
 
-Returns:
+:returns:
     NG_Success, or one of the NamedGroupStatus values if there is an
     error.
 
@@ -164,10 +164,10 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetContainedGroups =R"doc(Gets a list of ElementRefs representing NamedGroups contained within
 this NamedGroup.
 
-Parameter ``groups``:
+:param groups:
     The list of NamedGroups.
 
-Returns:
+:returns:
     The number of ElementRefs added to list.
 
 Remark:
@@ -178,7 +178,7 @@ static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetContainedGroupCount 
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_SetDefaultMemberFlags =R"doc(Sets the Default NamedGroupMemberFlags for this NamedGroup.
 
-Parameter ``flags``:
+:param flags:
     The new default NamedGroupMemberFlags for this NamedGroup.
 
 Remark:
@@ -193,7 +193,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_SetFlags =R"doc(Sets the NamedGroupFlags for this NamedGroup.
 
-Parameter ``flags``:
+:param flags:
     The new flags for this NamedGroup.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetFlags =R"doc(Gets the NamedGroupFlags for this NamedGroup.)doc";
@@ -202,7 +202,7 @@ static const char * __doc_Bentley_DgnPlatform_NamedGroup_ContainsGroups =R"doc(R
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_SetType =R"doc(Set the type of this NamedGroup.
 
-Parameter ``type``:
+:param type:
     The new type for this NamedGroup.
 
 Remark:
@@ -219,14 +219,14 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_SetDescription =R"doc(Set the description of this NamedGroup.
 
-Parameter ``description``:
+:param description:
     The new description for this NamedGroup.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetDescription =R"doc(Gets the description of this NamedGroup.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_SetName =R"doc(Sets the name of this NamedGroup.
 
-Parameter ``name``:
+:param name:
     The new name for this NamedGroup.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetName =R"doc(Gets the name of this NamedGroup.)doc";
@@ -235,16 +235,16 @@ static const char * __doc_Bentley_DgnPlatform_NamedGroup_RemoveAllMembers =R"doc
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_RemoveMember =R"doc(Removes a member from this NamedGroup.
 
-Parameter ``index``:
+:param index:
     The member to remove.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetMemberCount =R"doc(Gets the member counts for this NamedGroup.
 
-Parameter ``graphicMembers``:
+:param graphicMembers:
     The number of graphic elements in the NamedGroup. If that
     information isn't needed, pass NULL.
 
-Parameter ``groupMembers``:
+:param groupMembers:
     The number of child NamedGroups in the NamedGroup. If that
     information isn't needed, pass NULL.
 
@@ -256,16 +256,16 @@ persistent storage of the NamedGroup.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_FindMemberByElementRef =R"doc(Finds a NamedGroupMember from its ElementRefP.
 
-Parameter ``index``:
+:param index:
     The member index. If the index is not needed, pass NULL.
 
-Parameter ``elementRef``:
+:param elementRef:
     The desired member's elementRef.
 
-Parameter ``modelRef``:
+:param modelRef:
     The desired member's modelRef.
 
-Returns:
+:returns:
     The NamedGroupMember or NULL if the the NamedGroup does not
     contain a Member with that ElementRefP.
 
@@ -279,7 +279,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetMember =R"doc(Returns a NamedGroupMember by index.
 
-Parameter ``index``:
+:param index:
     The member index.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_GetRootModelRef =R"doc(Gets the model that the NamedGroup came from.)doc";
@@ -292,14 +292,14 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_PrepareForOperation =R"doc(Prepare the host system for an operation that can possibly traverse
 NamedGroups members.
 
-Parameter ``rootModel``:
+:param rootModel:
     The root model for the NamedGroups that may be traversed.
 
-Parameter ``traverseType``:
+:param traverseType:
     The type of traversal that will be used, which determines the
     scope of potential members.
 
-Returns:
+:returns:
     NG_Success if the previous call to PrepareForOperation was matched
     by a call to #DoneOperation, otherwise NG_OperationInProgress.
 
@@ -325,10 +325,10 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_NamedGroup_Create =R"doc(Creates a new instance of NamedGroup from the element that persists
 it.
 
-Parameter ``source``:
+:param source:
     ElementHandle referencing the persistent NamedGroup element.
 
-Parameter ``rootModelRef``:
+:param rootModelRef:
     The model containing the NamedGroup element.
 
 Returns (Tuple, 0):
@@ -342,16 +342,16 @@ Returns (Tuple, 1)`:
 static const char * __doc_Bentley_DgnPlatform_INamedGroupMemberVisitor_VisitMember =R"doc(The method called for each NamedGroup member that meets the traversal
 criteria.
 
-Parameter ``member``:
+:param member:
     The current NamedGroupMember.
 
-Parameter ``namedGroup``:
+:param namedGroup:
     The NamedGroup.
 
-Parameter ``index``:
+:param index:
     The index of the member within the NamedGroup.
 
-Returns:
+:returns:
     A member of the MemberTraverseStatus enumeration.
 
 Remark:
@@ -373,7 +373,7 @@ static const char * __doc_Bentley_DgnPlatform_NamedGroupMember_GetFlags =R"doc(G
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroupMember_IsDirectFarReference =R"doc(Returns true if this NamedGroupMember is a Direct Far Reference.
 
-Parameter ``rootModelRef``:
+:param rootModelRef:
     The rootModelRef of the NamedGroup. NamedGroupMembers do not keep
     a pointer to the NamedGroup they are a member of, so this argument
     must be supplied by the caller. remarks A direct far reference is
@@ -382,7 +382,7 @@ Parameter ``rootModelRef``:
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroupMember_IsFarReference =R"doc(Returns true if this NamedGroupMember is a Far Reference.
 
-Parameter ``rootModelRef``:
+:param rootModelRef:
     The rootModelRef of the NamedGroup. NamedGroupMembers do not keep
     a pointer to the NamedGroup they are a member of, so this argument
     must be supplied by the caller. remarks A far reference is a
@@ -391,10 +391,10 @@ Parameter ``rootModelRef``:
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroupCollection_GetUniqueNameFromBase =R"doc(Gets a unique name for a NamedGroup given a " base " name.
 
-Parameter ``uniqueName``:
+:param uniqueName:
     The generated uniqueName.
 
-Parameter ``baseName``:
+:param baseName:
     The base name.
 
 Remark:
@@ -405,32 +405,32 @@ Remark:
     Otherwise returns the next unused name in the sequence baseName-1,
     baseName-2, etc.
 
-Returns:
+:returns:
     NG_Success, or one of the NamedGroupStatus values if there is an
     error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroupCollection_NameUnused =R"doc(Returns true if the name tested is unique within this
 NamedGroupCollection.
 
-Parameter ``name``:
+:param name:
     The name to test)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroupCollection_FindByElementId =R"doc(Finds a NamedGroup by the ElementId of the element that stores the
 NamedGroup.
 
-Parameter ``elementID``:
+:param elementID:
     The elementID of the NamedGroup to search for.
 
-Returns:
+:returns:
     The NamedGroupPtr that references the NamedGroup with the given
     name or NULL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NamedGroupCollection_FindByName =R"doc(Finds a NamedGroup by name.
 
-Parameter ``name``:
+:param name:
     The name of the NamedGroup to search for.
 
-Returns:
+:returns:
     The NamedGroupPtr that references the NamedGroup with the given
     name or NULL.
 

@@ -12,13 +12,13 @@
 
 static const char * __doc_Bentley_DgnPlatform_IBRepEdit_SetBRepDataEntity =R"doc(Update element from bRep data.
 
-Parameter ``eeh``:
+:param eeh:
     Source element
 
-Parameter ``entity``:
+:param entity:
     solid kernel entity data.
 
-Returns:
+:returns:
     SUCCESS if the element was updated.)doc";
 
 /*---------------------------------------------------------------------------------**//**

@@ -1,9 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+﻿# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 import pytest
 from MSPyBentley import *

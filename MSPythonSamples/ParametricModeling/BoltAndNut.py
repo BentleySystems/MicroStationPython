@@ -15,15 +15,24 @@ import PSampUtility
 import VariableAndVariation
 import ParametricSolid
 
+'''
+Sample demonstrating how to create bolts, nuts, screws using parametric solid
+'''
+
 def createVariables(dgnModel):
     """
-    Creates variables for parametric modeling, and associate them with expressions.
-
-    Args:
-        dgnModel (DgnModel): The DgnModel object.
-
-    Returns:
-        bool: True if the variables are created successfully, False otherwise.
+    Creates variables in the given design model.
+    This function creates three variables in the specified design model using the 
+    VariableAndVariation module. The variables are defined as follows:
+    - var1: A distance parameter with a value of 500.
+    - var2: A distance parameter with a value of 250, defined with an expression based on var1.
+    - var3: A distance parameter with a value of 250, defined with an expression based on half of var1.
+    
+    :param dgnModel: The design model in which to create the variables.
+    :type dgnModel: object
+    
+    :return: Returns True upon successful creation of the variables.
+    :rtype: bool
     """
     VariableAndVariation.CreateVariable("var1", ParameterType.eDistance, 500, dgnModel) 
     VariableAndVariation.CreateVariableWithExpression("var2", ParameterType.eDistance, 250, "var1", dgnModel) 
@@ -33,17 +42,19 @@ def createVariables(dgnModel):
 
 def getFeatureChamferNode(ehh, edgeIndex, length, angle):
     """
-    Creates a chamfer feature on a specific edge of a solid body.
-
-    Parameters:
-    - ehh: The element handle of the solid body.
-    - edgeIndex: The index of the edge to be chamfered.
-    - length: The length of the chamfer.
-    - angle: The angle of the chamfer.
-
-    Returns:
-    - featureNode: The feature node representing the chamfer feature.
-
+    Creates a chamfer feature node on a specified edge of a solid element.
+    
+    :param ehh: The element handle of the solid element.
+    :type ehh: ElementHandle
+    :param edgeIndex: The index of the edge to be chamfered.
+    :type edgeIndex: int
+    :param length: The length of the chamfer.
+    :type length: float
+    :param angle: The angle of the chamfer.
+    :type angle: float
+    
+    :return: The created chamfer feature node if successful, otherwise False.
+    :rtype: FeatureNode or bool
     """
     status, solid = SolidUtil.Convert.ElementToBody(ehh, True, True, False) # Convert element to body
     if BentleyStatus.eERROR == status:
@@ -61,18 +72,19 @@ def getFeatureChamferNode(ehh, edgeIndex, length, angle):
 
 def createBaseCircle(center, radius, dgnModel, radiusConstraintVariable):
     """
-    Creates a base circle with the given center and radius and adds it to the specified dgnModel,
-    set fixed construction and radius constraint, and associate radius constraint with variable "var2".
-
-    Args:
-        center: The center point of the circle.
-        radius: The radius of the circle.
-        dgnModel: The dgnModel to which the circle will be added.
-		radiusConstraintVariable: The variable name for the radius constraint.
-
-    Returns:
-        The created base circle element.
-
+    Create a base circle in the given model with fixed and radius constraints.
+    
+    :param center: The center point of the circle.
+    :type center: Point3d
+    :param radius: The radius of the circle.
+    :type radius: float
+    :param dgnModel: The design model where the circle will be created.
+    :type dgnModel: DgnModelRef
+    :param radiusConstraintVariable: The variable to associate with the radius constraint.
+    :type radiusConstraintVariable: ConstraintVariable
+    
+    :return: The created circle element.
+    :rtype: ElementHandle
     """
     elems = ElementAgenda()
     primitiveIds = Int32Array()
@@ -92,16 +104,22 @@ def createBaseCircle(center, radius, dgnModel, radiusConstraintVariable):
 
 def createBaseLine(start, end, eehCircle, dgnModel):
     """
-    Creates a baseline between two points and adds constraints to the base circle and base line.
-
-    Args:
-        start (Point3d): The starting point of the baseline.
-        end (Point3d): The ending point of the baseline.
-        eehCircle (ElementHandle): The base circle element.
-        dgnModel (DgnModel): The model to which the elements will be added.
-
-    Returns:
-        ElementHandle: The created baseline element.
+    Create a base line in the given model and add constraints to it.
+    This function creates a line between the given start and end points in the specified model.
+    It then adds a fixed constraint to the line. Additionally, it adds a constraint to ensure
+    that the center point of the given circle is on the created line.
+    
+    :param start: The start point of the line.
+    :type start: Point3d
+    :param end: The end point of the line.
+    :type end: Point3d
+    :param eehCircle: The element handle of the circle to be constrained.
+    :type eehCircle: ElementHandle
+    :param dgnModel: The model in which the line is to be created.
+    :type dgnModel: DgnModelRef
+    
+    :return: The element handle of the created line.
+    :rtype: ElementHandle
     """
     elems = ElementAgenda()
     primitiveIds = Int32Array()
@@ -133,14 +151,18 @@ def createBaseLine(start, end, eehCircle, dgnModel):
 
 def createShapeCutProfile(eehCircle, dgnModel):
     """
-    Creates a shape as a cut profile to cut the bolt head.
-
-    Args:
-        eehCircle (ElementHandle): The base circle element.
-        dgnModel (DgnModel): The DgnModel to add the shape to.
-
-    Returns:
-        ElementHandle: The created shape cut profile element.
+    Create a shape cut profile to cut the bolt head and add constraints to form a regular hexagon.
+    This function creates a shape cut profile using a set of points and adds it to the given model.
+    It then adds constraints to ensure the shape is a regular hexagon with all vertices coincident
+    with a base circle and all edges equal in length.
+    
+    :param eehCircle: The element handle of the base circle.
+    :type eehCircle: ElementHandle
+    :param dgnModel: The design model to which the shape cut profile will be added.
+    :type dgnModel: DgnModel
+    
+    :return: The element handle of the created shape cut profile.
+    :rtype: ElementHandle
     """
     elems = ElementAgenda()
     primitiveIds = Int32Array()
@@ -204,17 +226,23 @@ def createShapeCutProfile(eehCircle, dgnModel):
 
 def createExtrudeProfileBoltScrew(center, radius, eehBaseCircle, dgnModel, radiusConstraintVariable):
     """
-    Creates an extrude profile for a bolt screw.
-
-    Args:
-        center (Point3d): The center point of the extrude profile.
-        radius (float): The radius of the extrude profile.
-        eehBaseCircle (ElementHandle): The base circle element.
-        dgnModel (DgnModel): The model reference.
-        radiusConstraintVariable (str): The variable name for the radius constraint.
-
-    Returns:
-        ElementHandle: The extrude profile bolt screw element.
+    Create an extruded profile for a bolt screw and add constraints.
+    This function creates an elliptical profile for a bolt screw, adds it to the given model,
+    and applies radius and concentric constraints to it.
+    
+    :param center: The center point of the ellipse.
+    :type center: Point3d
+    :param radius: The radius of the ellipse.
+    :type radius: float
+    :param eehBaseCircle: The element handle of the base circle.
+    :type eehBaseCircle: ElementHandle
+    :param dgnModel: The design model to which the ellipse will be added.
+    :type dgnModel: DgnModelRef
+    :param radiusConstraintVariable: The variable for the radius constraint.
+    :type radiusConstraintVariable: Variable
+    
+    :return: The element handle of the created elliptical profile.
+    :rtype: ElementHandle
     """
     elems = ElementAgenda()
 
@@ -232,17 +260,23 @@ def createExtrudeProfileBoltScrew(center, radius, eehBaseCircle, dgnModel, radiu
 
 def createExtrudeProfileBoltHead(center, radius, eehBaseCircle, dgnModel, radiusConstraintVariable):
     """
-    Creates an extrude profile for a bolt head.
-
-    Args:
-        center (DPoint3d): The center coordinates of the bolt head.
-        radius (float): The radius of the bolt head.
-        eehBaseCircle (object): The base circle element.
-        dgnModel (DgnModel): The model to add the bolt head profile to.
-        radiusConstraintVariable (str): The variable name for the radius constraint.
-
-    Returns:
-        object: The extrude profile of the bolt head.
+    Create an extrude profile for a bolt head and add constraints.
+    This function creates an elliptical profile for a bolt head, adds it to the given model,
+    and applies radius and concentric constraints.
+    
+    :param center: The center point of the ellipse.
+    :type center: Point3d
+    :param radius: The radius of the ellipse.
+    :type radius: float
+    :param eehBaseCircle: The base circle element handle.
+    :type eehBaseCircle: ElementHandle
+    :param dgnModel: The design model to which the ellipse will be added.
+    :type dgnModel: DgnModelRef
+    :param radiusConstraintVariable: The variable for the radius constraint.
+    :type radiusConstraintVariable: Variable
+    
+    :return: The element handle of the created extrude profile bolt head.
+    :rtype: ElementHandle
     """
     elems = ElementAgenda()
 
@@ -260,17 +294,21 @@ def createExtrudeProfileBoltHead(center, radius, eehBaseCircle, dgnModel, radius
 
 def createBoltHeadFromProfile(eehExtrudeProfileBoltHead, eehShapeCutProfile, height, chamferLength, chamferAngle):
     """
-    Creates a bolt head from a given profiles by performing extrusion, chamfering, and cutting operations.
-
-    Args:
-        eehExtrudeProfileBoltHead (ElementHandle): The extrude profile of the bolt head.
-        eehShapeCutProfile (ElementHandle): The shape cut profile.
-        height (float): The height of the bolt head.
-        chamferLength (float): The length of the chamfer.
-        chamferAngle (float): The angle of the chamfer.
-
-    Returns:
-        ElementHandle: The element handle of the cut feature representing the bolt head, or None if the creation fails.
+    Creates a bolt head from a given profile by extruding it, applying a chamfer, and cutting it to form a regular hexagon.
+    
+    :param eehExtrudeProfileBoltHead: The profile to be extruded for the bolt head.
+    :type eehExtrudeProfileBoltHead: ElementHandle
+    :param eehShapeCutProfile: The profile used to cut the extruded bolt head.
+    :type eehShapeCutProfile: ElementHandle
+    :param height: The height to extrude the bolt head profile.
+    :type height: float
+    :param chamferLength: The length of the chamfer to be applied to the bolt head.
+    :type chamferLength: float
+    :param chamferAngle: The angle of the chamfer to be applied to the bolt head.
+    :type chamferAngle: float
+    
+    :return: The handle to the final bolt head element after extrusion, chamfering, and cutting.
+    :rtype: EditElementHandle or None
     """
     # Extrude the bolt head profile as the bolt head
     ehhBoltHeadExtruded = ParametricSolid.CreateSmartFeatureElementExtrude(eehExtrudeProfileBoltHead, height)
@@ -311,13 +349,13 @@ def createBoltHeadFromProfile(eehExtrudeProfileBoltHead, eehShapeCutProfile, hei
 
 def createBoltScrewFromProfile(eehExtrudeProfileBoltScrew):
     """
-    Creates a bolt screw from the given extrude profile by performing extrusion and chamfering operations
-
-    Args:
-        eehExtrudeProfileBoltScrew (EditElementHandle): The extrude profile of the bolt screw.
-
-    Returns:
-        EditElementHandle: The element handle to the created bolt screw if successful, None otherwise.
+    Creates a bolt screw from a given profile by extruding it and applying a chamfer feature.
+    
+    :param eehExtrudeProfileBoltScrew: The profile to be extruded into a bolt screw.
+    :type eehExtrudeProfileBoltScrew: ElementHandle
+    
+    :return: The handle to the chamfered bolt screw element, or None if the operation fails.
+    :rtype: EditElementHandle or None
     """
     ehhBoltScrewExtruded = ParametricSolid.CreateSmartFeatureElementExtrude(eehExtrudeProfileBoltScrew, -1500)
     chamferFeatureNode = getFeatureChamferNode(ehhBoltScrewExtruded, 0, 50, 45)
@@ -338,14 +376,15 @@ def createBoltScrewFromProfile(eehExtrudeProfileBoltScrew):
 
 def unionBoltHeadAndScrew(ehhBoltHead, ehhBoltScrew):
     """
-    Creates a union feature by combining the bolt head and bolt screw.
-
-    Args:
-        ehhBoltHead (EditElementHandle): The EditElementHandle of the bolt head.
-        ehhBoltScrew (EditElementHandle): The EditElementHandle of the bolt screw.
-
-    Returns:
-        EditElementHandle: The EditElementHandle of the created union feature, or None if creation fails.
+    Unites the bolt head and screw into a single smart feature element.
+    
+    :param ehhBoltHead: The element handle for the bolt head.
+    :type ehhBoltHead: ElementHandle
+    :param ehhBoltScrew: The element handle for the bolt screw.
+    :type ehhBoltScrew: ElementHandle
+    
+    :return: The combined bolt element handle if successful, otherwise None.
+    :rtype: EditElementHandle or None
     """
     status, unionFeatureNode = FeatureCreate.CreateUnionFeature()
     if (unionFeatureNode is None):
@@ -369,10 +408,23 @@ def unionBoltHeadAndScrew(ehhBoltHead, ehhBoltScrew):
 
 def ExampleCreateBolt(boltModel):
     """
-    Creates a bolt using parametric modeling techniques.
-
-    Returns:
-        bool: True if the bolt creation is successful, False otherwise.
+    Creates a bolt model with specified parameters.
+    
+    :param boltModel: The model to which the bolt will be added.
+    :type boltModel: object
+    
+    :return: True if the bolt creation is successful, False otherwise.
+    :rtype: bool
+    The function performs the following steps:
+    1. Creates variables for the bolt.
+    2. Creates a base circle and sets constraints.
+    3. Creates horizontal and vertical base lines.
+    4. Creates an extrusion profile for the bolt head and sets constraints.
+    5. Creates a shape for the cut profile.
+    6. Creates an extrusion profile for the bolt screw and sets constraints.
+    7. Creates the bolt head from the extrusion and cut profiles.
+    8. Creates the bolt screw from the extrusion profile.
+    9. Unions the bolt head and bolt screw together.
     """
     dgnModel = boltModel
     if (dgnModel is None):
@@ -433,17 +485,21 @@ def ExampleCreateBolt(boltModel):
 
 def createShapeRevolutionProfile(eehLineZ, dgnModel, varName1, varName2):
     """
-    Creates a shape revolution profile for revolving nut.
-
-    Args:
-        eehLineZ (ElementHandle): The element handle of the line element.
-        dgnModel (DgnModel): The model to which the elements will be added.
-        varName1 (str): The variable name which will associate to the distance constraint of inner radius.
-        varName1 (str): The variable name which will associate to the distance constraint of outer radius..
-
-    Returns:
-        ElementHandle: The element handle of the shape revolution profile.
-
+    Create a shape revolution profile and add constraints to it.
+    This function creates a shape to be used as a cut profile for cutting a bolt head.
+    It then adds various constraints to the shape and returns the created shape element.
+    
+    :param eehLineZ: The element handle for the Z-axis line.
+    :type eehLineZ: ElementHandle
+    :param dgnModel: The design model to which the shape will be added.
+    :type dgnModel: DgnModel
+    :param varName1: The variable name for the first distance constraint.
+    :type varName1: str
+    :param varName2: The variable name for the second distance constraint.
+    :type varName2: str
+    
+    :return: The created shape revolution profile element handle.
+    :rtype: ElementHandle
     """
     elems = ElementAgenda()
     primitiveIds = Int32Array()
@@ -504,16 +560,19 @@ def createShapeRevolutionProfile(eehLineZ, dgnModel, varName1, varName2):
 
 def createNutFromProfiles(eehShapeRevolutionProfile, eehShapeCutProfile, chamferLength, chamferAngle):
     """
-    Creates a nut from given profiles and parameters.
-
-    Args:
-        eehShapeRevolutionProfile: The revolution profile for creating the nut.
-        eehShapeCutProfile: The cut profile for creating the nut.
-        chamferLength: The length of  chamfer feature.
-        chamferAngle: The angle of chamfer feature.
-
-    Returns:
-        The created nut as an EditElementHandle, or None if the creation fails.
+    Creates a nut from given profiles by performing a series of geometric operations.
+    
+    :param eehShapeRevolutionProfile: The profile used for the revolution shape of the nut.
+    :type eehShapeRevolutionProfile: ElementHandle
+    :param eehShapeCutProfile: The profile used for cutting the nut to form a hexagon.
+    :type eehShapeCutProfile: ElementHandle
+    :param chamferLength: The length of the chamfer to be applied to the nut.
+    :type chamferLength: float
+    :param chamferAngle: The angle of the chamfer to be applied to the nut.
+    :type chamferAngle: float
+    
+    :return: The handle to the final nut element, or None if the creation failed.
+    :rtype: EditElementHandle or None
     """
     status, curveVector = SmartFeatureUtil.GetCurveVector (eehShapeRevolutionProfile, True)
     if (BentleyStatus.eSUCCESS != status or curveVector is None):
@@ -571,13 +630,23 @@ def createNutFromProfiles(eehShapeRevolutionProfile, eehShapeCutProfile, chamfer
 
 def ExampleCreateNut(nutModel):
     """
-    Creates a parametric nut in the given nutModel.
-
-    Parameters:
-    nutModel (DgnModel): The model in which the parametric will be created.
-
-    Returns:
-    bool: True if the nut model is successfully created, False otherwise.
+    Creates a nut model with specified parameters.
+    
+    :param nutModel: The model to which the nut will be added.
+    :type nutModel: object
+    
+    :return: True if the nut creation is successful, False otherwise.
+    :rtype: bool
+    
+    This function performs the following steps:
+    1. Creates base circle as construction type, sets fixed constraint, sets radius constraint, and associates variable "var2".
+    2. Creates horizontal base line as construction type.
+    3. Creates vertical base line as construction type.
+    4. Creates z-axis base line as construction type.
+    5. Creates a shape as revolution profile with variable names for inner radius and outer radius.
+    6. Creates a shape as cut profile.
+    7. Creates the nut with the given revolution profile and cut profile.
+    If any of the creation steps fail, the function returns False.
     """
     dgnModel = nutModel
     if (dgnModel is None):
@@ -628,6 +697,18 @@ def ExampleCreateNut(nutModel):
     return True
 
 def RunSamples():
+    """
+    Run sample functions to create and display bolt and nut models.
+    
+    This function performs the following steps:
+    1. Creates or retrieves a model named "BoltModel" and activates it.
+    2. Calls the ExampleCreateBolt function to create a bolt in the "BoltModel".
+    3. Creates or retrieves a model named "NutModel" and activates it.
+    4. Calls the ExampleCreateNut function to create a nut in the "NutModel".
+    
+    Returns:
+        None
+    """
     boltModel = PSampUtility.GetOrCreateModel("BoltModel", True)
     ModelRef.ActivateAndDisplay(boltModel)
     ExampleCreateBolt(boltModel)

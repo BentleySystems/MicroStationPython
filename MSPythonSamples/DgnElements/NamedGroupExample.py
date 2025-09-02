@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 import os
 import math
@@ -14,9 +9,24 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
+'''
+This sample demonstrates how to create a named group
+'''
 
-'''Create namedgroup in Microstation'''
 def createNamedGroup(basePoint, groupName="MyNamedGroup1", groupDesc="My Named Group1"):
+    """
+    Creates a named group in the active DGN model and adds a line element to it.
+
+    :param basePoint: The starting point for the line element.
+    :type basePoint: DPoint3d
+    :param groupName: The name of the named group to create.
+    :type groupName: str
+    :param groupDesc: The description of the named group to create.
+    :type groupDesc: str
+
+    :returns: True if the named group and line element are successfully created and added to the model, False otherwise.
+    :rtype: bool
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     if ACTIVEMODEL is None:
         return False

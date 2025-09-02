@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -15,10 +10,21 @@ import ctypes
 import sys
 
 '''
-Function to select elements by its volume
-    inputVolume : float      volume
+This sample demonstrates how to select elements based on their volume.
 '''
+
 def selectElementsbyVolume(inputVolume):
+    """
+    Select elements from the active model based on their volume.
+
+    This function iterates through all graphical elements in the active model,
+    calculates their volume, and adds them to the selection set if their volume
+    is less than the specified input volume.
+
+    :param inputVolume: The volume threshold for selecting elements. Elements with a volume
+                        less than this value will be added to the selection set.
+    :type inputVolume: float
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -59,9 +65,16 @@ def selectElementsbyVolume(inputVolume):
                 else:
                      break
 
-'''
-Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with '3D Data' model
-'''
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {len (agenda)} elements")
+    # iterate using __iter__ over the selection set printing the element ids of elements in the selection set
+    for editElementHandle in agenda:
+        print(f"  Element ID: {editElementHandle.GetElementId()}")
+        
+#Prerequisite: Open MSPythonSamples\\data\\SelectExample.dgn with '3D Data' model
 #main
 if __name__ == "__main__":
     #highlight all the elements with type 

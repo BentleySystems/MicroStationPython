@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ECSchema schemaName="Simple" nameSpacePrefix="demo" version="01.00" xmlns="http://www.bentley.com/schemas/Bentley.ECXML.2.0">
+  <ECClass typeName="Widget" isDomainClass="True">
+    <ECProperty propertyName="Manufacturer" typeName="string" />
+  </ECClass>
+  <ECClass typeName="Gadget" isDomainClass="True">
+    <ECProperty propertyName="Manufacturer" typeName="string" />
+  </ECClass>
+  <ECRelationshipClass typeName="WidgetHasGadgets" description="WidgetHasGadgets" isDomainClass="True" strength="referencing" strengthDirection="forward">
+    <Source cardinality="(1,1)" roleLabel="has Gadgets" polymorphic="False">
+      <Class class="Widget" />
+    </Source>
+    <Target cardinality="(1,N)" roleLabel="are held by Widget" polymorphic="False">
+      <Class class="Gadget" />
+    </Target>
+  </ECRelationshipClass>
+</ECSchema>

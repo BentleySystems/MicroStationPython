@@ -18,8 +18,7 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
-
-#
+'''
 # Simple Clock Example which demonstrates a PyQt5 UX window containing a clock which doesnt block
 # the execution of Microstations input loop.
 #
@@ -28,17 +27,28 @@ from MSPyMstnPlatform import *
 #
 # Registering a timer with a 0 start interval will cause the timer method to execute every time the Qt Windows event loop finishes. Calling PyCadInputQueue.PythonMainLoop 
 # from the timer will allow Microstation's input loop to execute allowing use of the Microstation UX whilst the Qt window is displayed.
-#
-# 
-#
+'''
 
 def dump(obj):
-  for attr in dir(obj):
-    print("obj.%s = %r" % (attr, getattr(obj, attr)))
+    """
+    Print all attributes of an object and their values.
+
+    :param obj: The object whose attributes are to be printed.
+    :type obj: object
+    """
+    for attr in dir(obj):
+        print("obj.%s = %r" % (attr, getattr(obj, attr)))
 
 class MainWindow(QMainWindow):
     # Initialize the main window class
     def __init__(self):
+        """
+        Initialize the main window for the PyQt5 clock application.
+        This constructor sets up the main window with a title, background color, size, 
+        and ensures it stays on top of other windows. It also creates a QLabel widget 
+        to display the current time, sets its appearance, and initializes a QTimer 
+        to update the clock every second.
+        """
         # Call the parent class's constructor to initialize the main window
         super().__init__()
         
@@ -88,10 +98,27 @@ class MainWindow(QMainWindow):
         self.timer.start (1000)
 
     def updateClock(self):
+        """
+        Update the clock display with the current time.
+
+        This method retrieves the current time formatted as a string in the
+        12-hour format (HH:MM:SS) and updates the text of the label widget
+        to display this time.
+        """
         self.label.setText (time.strftime("%I:%M:%S"))
 
 
 def updateMstn ():
+    """
+    Update the MicroStation environment by processing the Python main loop.
+
+    This function calls the `PythonMainLoop` method from the `PyCadInputQueue`
+    module to ensure that the MicroStation environment is updated with any
+    pending Python commands or inputs.
+
+    Returns:
+        None
+    """
     PyCadInputQueue.PythonMainLoop()
 
 if __name__ == "__main__":  # check if this script is being run directly (not imported as a module)

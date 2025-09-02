@@ -17,10 +17,25 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
+
+'''
+Sample demonstrating how to run a Python terminal in MicroStation
+'''
+
 s_winDestroy = False
 s_root = tk.Tk()
 
 def on_closing ():
+    """
+    Handles the closing event of the terminal window.
+
+    This function sets the global variable `s_winDestroy` to True and 
+    destroys the root window `s_root`.
+
+    Globals:
+        s_winDestroy (bool): A flag indicating whether the window has been destroyed.
+        s_root (Tk): The root window of the terminal.
+    """
     global s_winDestroy
     global s_root
     s_root.destroy()
@@ -28,6 +43,17 @@ def on_closing ():
 
 class History(list):
     def __getitem__(self, index):
+        """
+        Retrieve an item from the list at the specified index.
+
+        :param index: The index of the item to retrieve.
+        :type index: int
+        
+        :return: The item at the specified index, or None if the index is out of range.
+        :rtype: Any
+        
+        :raises IndexError: If the index is out of range.
+        """
         try:
             return list.__getitem__(self, index)
         except IndexError:
@@ -36,6 +62,23 @@ class History(list):
 
 class TextConsole(tk.Text):
     def __init__(self, master, **kw):
+        """
+        Initialize the Terminal widget.
+        :param master: The parent widget.
+        :type master: tkinter.Widget
+        :param kw: Additional keyword arguments for configuring the Text widget.
+        :keyword width: The width of the terminal (default is 150).
+        :keyword wrap: The wrap mode of the text (default is 'word').
+        :keyword prompt1: The primary prompt string (default is '>>> ').
+        :keyword prompt2: The secondary prompt string (default is '... ').
+        :keyword banner: The banner text displayed at the start (default is 'Python <version>\n').
+        :ivar history: An instance of the History class to manage command history.
+        :ivar _hist_item: The current history item index.
+        :ivar _hist_match: The current history match string.
+        :ivar _console: An instance of InteractiveConsole to execute commands.
+        :ivar _prompt1: The primary prompt string.
+        :ivar _prompt2: The secondary prompt string.
+        """
         kw.setdefault('width', 150)
         kw.setdefault('wrap', 'word')
         kw.setdefault('prompt1', '>>> ')
@@ -67,11 +110,23 @@ class TextConsole(tk.Text):
         self.bind('<Return>', self.on_return)
         self.bind('<BackSpace>', self.on_backspace)
         self.bind('<Control-c>', self.on_ctrl_c)
-        self.bind('<Control-z>', self.on_ctrl_z)
+        self.bind('<Control-d>', self.on_ctrl_d)
         self.bind('<<Paste>>', self.on_paste)
 
     def on_ctrl_c(self, event):
-        """Copy selected code, removing prompts first"""
+        """
+        Handle the Ctrl+C event to copy selected code to the clipboard, removing prompts first.
+
+        :param event: The event object associated with the Ctrl+C action.
+        :type event: Event
+
+        This method processes the selected text in the terminal, removes any leading prompt characters,
+        and then copies the cleaned text to the clipboard. The method identifies the prompts using
+        `self._prompt1` and `self._prompt2` attributes.
+
+        :return: Returns 'break' to indicate that the event has been handled.
+        :rtype: str
+        """
         sel = self.tag_ranges('sel')
         if sel:
             txt = self.get('sel.first', 'sel.last').splitlines()
@@ -87,13 +142,27 @@ class TextConsole(tk.Text):
             self.clipboard_append('\n'.join(lines))
         return 'break'
     
-    def on_ctrl_z(self, event=None):
-        """Handle Ctrl+z key press"""
+    def on_ctrl_d(self, event=None):
+        """Handle Ctrl+d key press"""
         on_closing()
         return 'break'
 
     def on_paste(self, event):
-        """Paste commands"""
+        """
+        Handle the paste event in the terminal.
+
+        This method is triggered when a paste action is performed. It checks if the 
+        current cursor position is before the 'input' mark and, if so, prevents the 
+        paste action. If there is a selected text, it deletes the selection before 
+        pasting the clipboard content at the current cursor position. After inserting 
+        the clipboard content, it updates the command input.
+
+        :param event: The event object associated with the paste action.
+        :type event: Event
+        
+        :return: A string indicating whether to break the default event handling.
+        :rtype: str
+        """
         if self.compare('insert', '<', 'input'):
             return "break"
         sel = self.tag_ranges('sel')
@@ -105,7 +174,15 @@ class TextConsole(tk.Text):
         return 'break'
 
     def prompt(self, result=False):
-        """Insert a prompt"""
+        """
+        Display a prompt in the terminal.
+
+        This method inserts a prompt string at the end of the terminal's text widget.
+        Depending on the value of the `result` parameter, it will insert either `_prompt1` or `_prompt2`.
+
+        :param result: If True, insert `_prompt2`. Otherwise, insert `_prompt1`. Defaults to False.
+        :type result: bool
+        """
         if result:
             self.insert('end', self._prompt2, 'prompt')
         else:
@@ -113,7 +190,22 @@ class TextConsole(tk.Text):
         self.mark_set('input', 'end-1c')
 
     def on_key_press(self, event):
-        """Prevent text insertion in command history"""
+        """
+        Handle key press events in the terminal.
+
+        This method processes key press events and performs actions based on the 
+        current cursor position and the key pressed. If the cursor is before the 
+        'input' mark and the key pressed is not 'Left' or 'Right', it moves the 
+        cursor to the end of the input line. If the key pressed is not an 
+        alphanumeric character, the event is ignored.
+
+        :param event: The key press event containing information about the key 
+                      pressed.
+        :type event: Event
+        
+        :return: 'break' if the key pressed is not alphanumeric, otherwise None.
+        :rtype: str or None
+        """
         if self.compare('insert', '<', 'input') and event.keysym not in ['Left', 'Right']:
             self._hist_item = len(self.history)
             self.mark_set('insert', 'input lineend')
@@ -121,13 +213,40 @@ class TextConsole(tk.Text):
                 return 'break'
 
     def on_key_release(self, event):
-        """Reset history scrolling"""
+        """
+        Handle key release events to reset history scrolling.
+
+        This method is triggered when a key is released. It checks if the current 
+        cursor position is before the 'input' mark and if the released key is not 
+        one of the arrow keys ('Left', 'Right'). If both conditions are met, it 
+        resets the history item index to the length of the history.
+
+        :param event: The event object containing information about the key release.
+        :type event: Event
+        
+        :return: 'break' if the conditions are met to stop further event processing.
+        :rtype: str or None
+        """
         if self.compare('insert', '<', 'input') and event.keysym not in ['Left', 'Right']:
             self._hist_item = len(self.history)
             return 'break'
 
     def on_up(self, event):
-        """Handle up arrow key press"""
+        """
+        Handle the up arrow key press event.
+
+        This method is triggered when the up arrow key is pressed. It performs the following actions:
+        
+        - If the cursor is before the 'input' mark, it moves the cursor to the end and breaks the operation.
+        - If the cursor is at the start of the input line, it navigates through the command history.
+        - It matches the current input line with the history items and updates the input with the matched history item if found.
+
+        :param event: The event object associated with the key press.
+        :type event: Event
+        
+        :return: 'break' to indicate that the event has been handled.
+        :rtype: str
+        """
         if self.compare('insert', '<', 'input'):
             self.mark_set('insert', 'end')
             return 'break'
@@ -150,7 +269,22 @@ class TextConsole(tk.Text):
             return 'break'
 
     def on_down(self, event):
-        """Handle down arrow key press"""
+        """
+        Handle down arrow key press event.
+
+        This method is triggered when the down arrow key is pressed. It performs the following actions:
+        
+        - If the cursor is before the 'input' mark, it moves the cursor to the end and breaks the event handling.
+        - If the cursor is at the end of the line, it navigates through the command history to find a matching item.
+          - If a matching item is found, it inserts the command and sets the cursor position.
+          - If no matching item is found, it resets the history index and clears the input, inserting the current line.
+
+        :param event: The event object associated with the key press.
+        :type event: Event
+        
+        :return: 'break' to indicate that the event has been handled.
+        :rtype: str
+        """
         if self.compare('insert', '<', 'input'):
             self.mark_set('insert', 'end')
             return 'break'
@@ -172,7 +306,21 @@ class TextConsole(tk.Text):
             return 'break'
 
     def on_tab(self, event):
-        """Handle tab key press"""
+        """
+        Handle tab key press event.
+
+        This method is triggered when the tab key is pressed. It performs different actions based on the current cursor position and selection:
+        
+        - If the cursor is before the 'input' mark, it moves the cursor to the end of the 'input' line.
+        - If there is a text selection, it indents each selected line by inserting four spaces at the beginning.
+        - If there is no selection and the character before the cursor is not alphanumeric or a period, it inserts four spaces at the cursor position.
+
+        :param event: The event object associated with the tab key press.
+        :type event: Event
+        
+        :return: A string "break" to indicate that the event has been handled.
+        :rtype: str
+        """
         if self.compare('insert', '<', 'input'):
             self.mark_set('insert', 'input lineend')
             return "break"
@@ -192,7 +340,19 @@ class TextConsole(tk.Text):
         return "break"
 
     def on_shift_return(self, event):
-        """Handle Shift+Return key press"""
+        """
+        Handle Shift+Return key press event.
+
+        This method is triggered when the Shift+Return keys are pressed. It checks the 
+        position of the cursor and either moves the cursor to the end of the input line 
+        or executes the current commands.
+
+        :param event: The event object containing information about the key press event.
+        :type event: Event
+        
+        :return: 'break' if the cursor is moved to the end of the input line, otherwise None.
+        :rtype: str or None
+        """
         if self.compare('insert', '<', 'input'):
             self.mark_set('insert', 'input lineend')
             return 'break'
@@ -203,7 +363,18 @@ class TextConsole(tk.Text):
             self.eval_current(True)
 
     def on_return(self, event=None):
-        """Handle Return key press"""
+        """
+        Handle Return key press.
+
+        This method is triggered when the Return (Enter) key is pressed. It performs
+        different actions based on the current cursor position relative to the 'input' mark.
+
+        :param event: The event object associated with the key press, defaults to None.
+        :type event: Event, optional
+        
+        :return: Always returns 'break' to indicate that the event has been handled.
+        :rtype: str
+        """
         if self.compare('insert', '<', 'input'):
             self.mark_set('insert', 'input lineend')
             return 'break'
@@ -214,12 +385,36 @@ class TextConsole(tk.Text):
         return 'break'
 
     def on_ctrl_return(self, event=None):
-        """Handle Ctrl+Return key press"""
+        """
+        Handle the Ctrl+Return key press event.
+
+        This method inserts a new line followed by a secondary prompt 
+        at the current cursor position in the terminal.
+
+        :param event: The event object associated with the key press, defaults to None.
+        :type event: optional
+        
+        :return: A string 'break' to indicate that the event has been handled.
+        :rtype: str
+        """
         self.insert('insert', '\n' + self._prompt2, 'prompt')
         return 'break'
 
     def on_backspace(self, event):
-        """Handle delete key press"""
+        """
+        Handle the backspace key press event.
+
+        This method processes the backspace key press to delete characters
+        or selected text in a text widget. It ensures that the cursor does
+        not move before the 'input' mark and handles deletion of spaces
+        according to indentation rules.
+
+        :param event: The event object associated with the backspace key press.
+        :type event: Event
+        
+        :returns: A string 'break' to indicate that the event has been handled.
+        :rtype: str
+        """
         if self.compare('insert', '<=', 'input'):
             self.mark_set('insert', 'input lineend')
             return 'break'
@@ -235,7 +430,12 @@ class TextConsole(tk.Text):
         return 'break'
 
     def insert_cmd(self, cmd):
-        """Insert lines of code, adding prompts"""
+        """
+        Insert lines of code into the terminal, adding prompts.
+
+        :param cmd: The command string to be inserted, which can contain multiple lines.
+        :type cmd: str
+        """
         input_index = self.index('input')
         self.delete('input', 'end')
         lines = cmd.splitlines()
@@ -251,7 +451,19 @@ class TextConsole(tk.Text):
         self.see('end')
 
     def eval_current(self, auto_indent=False):
-        """Evaluate code"""
+        """
+        Evaluate the current code in the terminal.
+
+        :param auto_indent: If True, automatically indent the next line based on the previous line, defaults to False
+        :type auto_indent: bool, optional
+        
+        :return: None
+        :rtype: NoneType
+
+        This method retrieves the current input from the terminal, processes it, and executes it in an interactive console.
+        It handles multi-line commands, redirects stdout and stderr, and displays the output or errors in the terminal.
+        If the command is incomplete, it waits for the rest of the code. It also manages command history and auto-indentation.
+        """
         index = self.index('input')
         lines = self.get('input', 'insert lineend').splitlines() # commands to execute
         self.mark_set('insert', 'insert lineend')
@@ -312,6 +524,25 @@ class TextConsole(tk.Text):
             self.prompt()
 
 def main ():  # Define a function called "main"
+    """
+    Main function to initialize and run the Microstation Python Shell.
+
+    This function sets up the main window for the Microstation Python Shell,
+    creates an instance of the TextConsole class, and starts the main event loop.
+    It also registers a callback function for the window close event.
+
+    Global Variables:
+    -----------------
+    s_winDestroy : bool
+        A flag to control the termination of the main event loop.
+    s_root : tkinter.Tk
+        The root window of the application.
+
+    Notes:
+    ------
+    The function runs an infinite loop that updates the root window and processes
+    the Python main event loop until `s_winDestroy` is set to True.
+    """
     global s_winDestroy  # Declare two global variables
     global s_root
     console = TextConsole(s_root)  # Create an instance of TextConsole class

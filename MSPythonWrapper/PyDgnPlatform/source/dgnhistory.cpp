@@ -41,8 +41,8 @@ static const char * __doc_Bentley_DgnPlatform_CommitInfo_SetUserName =R"doc(Set 
 static const char * __doc_Bentley_DgnPlatform_RevisionNumber_Parse =R"doc(Construct a revision number from a string entered according to the
 default n.m format
 
-Parameter ``str``:
-    IN the string to parse
+:param str:
+    (input) the string to parse
 
 See also:
     FormatCustom)doc";
@@ -50,33 +50,33 @@ See also:
 static const char * __doc_Bentley_DgnPlatform_RevisionNumber_ParseCustom =R"doc(Construct a revision number from a string entered according to a
 custom format
 
-Parameter ``fmt``:
-    IN the custom format specifier
+:param fmt:
+    (input) the custom format specifier
 
-Parameter ``str``:
-    IN the string to parse
+:param str:
+    (input) the string to parse
 
 See also:
     FormatCustom)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RevisionNumber_FormatCustom =R"doc(Format a history revision number according to the specified format
 
-Parameter ``fmt``:
+:param fmt:
     The format specifier.
 
-Returns:
+:returns:
     formatted string
 
 See also:
     Format, ParseCustom Bentley Systems +---------------+-------------
     --+---------------+---------------+---------------+------
 
-Parameter ``fmt``:
-    IN the custom format specifier)doc";
+:param fmt:
+    (input) the custom format specifier)doc";
 
 static const char * __doc_Bentley_DgnPlatform_RevisionNumber_Format =R"doc(Format a history revision number using the default n.m format.
 
-Returns:
+:returns:
     formatted string
 
 See also:

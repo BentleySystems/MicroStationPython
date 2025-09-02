@@ -12,13 +12,13 @@
 
 static const char * __doc_Bentley_DgnPlatform_TextTableHandler_IsTableNameExist =R"doc(Check if there is a table which name is same as the input tableName.
 
-Parameter ``tableName``:
+:param tableName:
     The table name to find.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The dgn file in which we are searching the table name.
 
-Returns:
+:returns:
     true if the table name exists, false for not.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTableHandler_CreateTextTableElement =R"doc(Create a new element that stores the state of the input table object.)doc";
@@ -41,36 +41,36 @@ with the specified number of empty rows and columns. The clone will
 retain the table's symbology properties but none of the overrides
 associated with specific rows, columns, or cells.
 
-Parameter ``rowCount``:
+:param rowCount:
     The number of rows in the cloned table.
 
-Parameter ``columnCount``:
+:param columnCount:
     The number of columns in the cloned table.
 
-Parameter ``model``:
+:param model:
     The destination model.
 
-Returns:
+:returns:
     An empty clone of the table with the specified number of rows and
     columns.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTable_Create =R"doc(Create a new table from scratch. All table properties will be
 initialized to safe default values.
 
-Parameter ``rowCount``:
-    IN The number of rows in the table.
+:param rowCount:
+    (input) The number of rows in the table.
 
-Parameter ``columnCount``:
-    IN The number of columns in the table.
+:param columnCount:
+    (input) The number of columns in the table.
 
-Parameter ``textStyleId``:
-    IN The default TextStyle.
+:param textStyleId:
+    (input) The default TextStyle.
 
-Parameter ``backupTextHeight``:
-    IN Used when textStyleId refers to a style with zero text height.
+:param backupTextHeight:
+    (input) Used when textStyleId refers to a style with zero text height.
 
-Parameter ``model``:
-    IN Used as context for textStyleId and UOR sizes.)doc";
+:param model:
+    (input) Used as context for textStyleId and UOR sizes.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTable_SetHeight =R"doc(Get the overrall height of this table. Each row will be resized
 proportionally to its original size in the table. Will fail if the
@@ -92,40 +92,40 @@ the column widths. This method ignores the effects of table breaking.)doc";
 static const char * __doc_Bentley_DgnPlatform_TextTable_SetEdgeSymbology =R"doc(Change the edge line symbology used to draw the edges of a collection
 of cells.
 
-Parameter ``symb``:
-    IN The symbology to apply to the specified edges.
+:param symb:
+    (input) The symbology to apply to the specified edges.
 
-Parameter ``edges``:
-    IN Specifies which edges to change.
+:param edges:
+    (input) Specifies which edges to change.
 
-Parameter ``cells``:
-    IN Specifies which cells to change.)doc";
+:param cells:
+    (input) Specifies which cells to change.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTable_GetEdgeSymbology =R"doc(Get the edge line symbologies used to draw the edges of a collection
 of cells.
 
-Parameter ``symb``:
-    OUT A list of unique symbologies from the requested edges.
+:param symb:
+    (output) A list of unique symbologies from the requested edges.
 
-Parameter ``edges``:
-    IN Specifies which edges to query.
+:param edges:
+    (input) Specifies which edges to query.
 
-Parameter ``cells``:
-    IN Specifies which cells to query.)doc";
+:param cells:
+    (input) Specifies which cells to query.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTable_MergeCells =R"doc(Change the row and/or column span of a cell. This will fail if it
 would consume a part of another merged cell.
 
-Parameter ``root``:
-    IN The upper left cell index of the merged cell.
+:param root:
+    (input) The upper left cell index of the merged cell.
 
-Parameter ``numRows``:
-    IN the number of rows that will be spanned by the merged cell.
+:param numRows:
+    (input) the number of rows that will be spanned by the merged cell.
 
-Parameter ``numCols``:
-    IN the number of columns that will be spanned by the merged cell.
+:param numCols:
+    (input) the number of columns that will be spanned by the merged cell.
 
-Returns:
+:returns:
     ERROR if the merging could not be done.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTable_GetCellCollection =R"doc(Get a collection that can be used to iterate all the cells in the
@@ -143,12 +143,12 @@ static const char * __doc_Bentley_DgnPlatform_TextTable_InsertColumn =R"doc(Inse
 directly before (to the left of) or after (to the right of) the seed
 column.
 
-Parameter ``indexOfSeedColumn``:
-    IN The seed columns's properties but not its contents will be
+:param indexOfSeedColumn:
+    (input) The seed columns's properties but not its contents will be
     copied to form the new column.
 
-Parameter ``dir``:
-    IN The location of the new column either before or after the seed
+:param dir:
+    (input) The location of the new column either before or after the seed
     column.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTable_DeleteRow =R"doc(Delete an existing row from the table.)doc";
@@ -156,12 +156,12 @@ static const char * __doc_Bentley_DgnPlatform_TextTable_DeleteRow =R"doc(Delete 
 static const char * __doc_Bentley_DgnPlatform_TextTable_InsertRow =R"doc(Insert a new row into the table. It is only possible to insert
 directly before (above) or after (below) the seed row.
 
-Parameter ``indexOfSeedRow``:
-    IN The seed row's properties but not its contents will be copied
+:param indexOfSeedRow:
+    (input) The seed row's properties but not its contents will be copied
     to form the new row.
 
-Parameter ``dir``:
-    IN The location of the new row either before or after the seed
+:param dir:
+    (input) The location of the new row either before or after the seed
     row.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTable_ClearDefaultTextWeight =R"doc(Remove the default text weight. This is the opposite of
@@ -319,10 +319,10 @@ columns of any other type. - All body columns must occur after all
 header columns but before all footer columns. - All footer columns
 must occur after all columns of any other type.
 
-Parameter ``type``:
-    IN new type
+:param type:
+    (input) new type
 
-Returns:
+:returns:
     ERROR if the type could not be set. See the rules above.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTableColumn_GetHeaderFooterType =R"doc(Get the type of this column. The column's type controls the default
@@ -357,10 +357,10 @@ title rows but before all rows of any other type. - All body rows must
 occur after all title and header rows but before all footer rows. -
 All footer rows must occur after all rows of any other type.
 
-Parameter ``type``:
-    IN new type
+:param type:
+    (input) new type
 
-Returns:
+:returns:
     ERROR if the type could not be set. See the rules above.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTableRow_GetHeaderFooterType =R"doc(Get the type of this row. The row's type controls the default
@@ -395,20 +395,20 @@ columns. That cell's Top edge may have two different symbologies. This
 method is similiar to TextTable::GetEdgeSymbology except that it only
 works on one cell.
 
-Parameter ``symb``:
-    OUT List of unique symbologies on the requested edges of this
+:param symb:
+    (output) List of unique symbologies on the requested edges of this
     cell.
 
-Parameter ``edges``:
-    IN Edges from which to report. Interior, InteriorHorizontal and
+:param edges:
+    (input) Edges from which to report. Interior, InteriorHorizontal and
     InteriorVertical are ignored.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextTableCell_GetFillSymbology =R"doc(Get the fill override property stored on this cell. If the cell
 doesn't store an override its displayed fill will be based on the
 default behavior of its row. See TextTable::GetDefaultFill.
 
-Parameter ``symb``:
-    OUT if (false == symb.HasFillVisible) this cell uses its row's
+:param symb:
+    (output) if (false == symb.HasFillVisible) this cell uses its row's
     default fill. Otherwise use symb.GetFillVisible and
     symb.GetFillColor to get the cell's fill override.)doc";
 
@@ -821,7 +821,7 @@ void def_TextTableHandler(py::module_& m)
     // struct TextTableCellCollection
     py::class_< TextTableCellCollection> c8(m, "TextTableCellCollection");
 
-    //c8.def("__iter__", [] (TextTableCellCollection& self) { return py::make_iterator(self.begin(), self.end()); }, py::keep_alive<0, 1>());
+    c8.def("__iter__", [] (TextTableCellCollection& self) { return py::make_iterator(self.begin(), self.end()); }, py::keep_alive<0, 1>());
 
     //===================================================================================
     // struct TextTable

@@ -23,26 +23,26 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_DgnFontManager_CreateKnownFontList =R"doc(Create a FontList with the fonts in the system FontCatalogs,
 optionally limited by a filter.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     If this argument is non-NULL, the FontList will also include any
     missing Fonts in the font table of this file.
 
-Parameter ``filter``:
+:param filter:
     A filter to limit list to only fonts of a certain category.
 
-Returns:
+:returns:
     A Ptr to the newly created list.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontManager_VisitAllSystemFonts =R"doc(Visit all fonts in the system FontCatalogs, optionally with a filter
 applied.
 
-Parameter ``visitor``:
+:param visitor:
     The DgnFontVisitor to be called for each known font in the system.
 
-Parameter ``filter``:
+:param filter:
     A filter to limit visits to only fonts of interest.
 
-Returns:
+:returns:
     true of ``visitor`` returned true to stop the traversal, false
     otherwise.)doc";
 
@@ -51,23 +51,23 @@ are initialized at startup and remain valid for the entire
 MicroStation session. That is, for a given ``fontName,`` this method
 will always return the same value if the Font exists.
 
-Parameter ``fontName``:
+:param fontName:
     The name of the Font to find.
 
-Parameter ``filter``:
+:param filter:
     Limit the search to specific categories of Fonts.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontManager_ResolveFontNum =R"doc(Resolve a Font for a given DgnFile and font number. This is merely a
 convenience routine that retrieves the DgnFontNumMap from the DgnFile
 and calls DgnFontNumMap::ResolveFont on it.
 
-Parameter ``fontNum``:
+:param fontNum:
     The fontNumber of interest.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The DgnFile of interest.
 
-Returns:
+:returns:
     A reference to the Font or the default font if the font is not
     found.)doc";
 
@@ -75,13 +75,13 @@ static const char * __doc_Bentley_DgnPlatform_DgnFontManager_GetFontByNumber =R"
 convenience routine that retrieves the DgnFontNumMap from the DgnFile
 and calls DgnFontNumMap::GetFont on it.
 
-Parameter ``fontNum``:
+:param fontNum:
     The fontNumber of interest.
 
-Parameter ``dgnFile``:
+:param dgnFile:
     The DgnFile of interest.
 
-Returns:
+:returns:
     the Font or NULL if not found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontManager_GetDecoratorFont =R"doc(Get a Font that matches the font used in dialog boxes. This can be
@@ -100,21 +100,21 @@ Configuration File and is used to render missing RSC Fonts.)doc";
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_CreateUsedFontList =R"doc(Create a FontList with the fonts in this table, optionally limited by
 a filter.
 
-Parameter ``filter``:
+:param filter:
     A filter to limit list to only fonts of a certain category.
 
-Returns:
+:returns:
     A Ptr to the newly created list.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_FindFontByName =R"doc(Find a Font in this table by name, optionally limited by a filter.
 
-Parameter ``fontName``:
+:param fontName:
     Search for the font with this name.
 
-Parameter ``filter``:
+:param filter:
     A filter to limit search to only fonts of a certain category.
 
-Returns:
+:returns:
     A pointer to the font with name ``fontName,`` or NULL if not
     found.
 
@@ -128,13 +128,13 @@ Returns (Tuple, 1):
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_VisitFonts =R"doc(Visit all fonts in this table, optionally with a filter applied.
 
-Parameter ``visitor``:
+:param visitor:
     The DgnFontVisitor to be called for each font in the table
 
-Parameter ``filter``:
+:param filter:
     A filter to limit visits to only fonts of interest.
 
-Returns:
+:returns:
     true of ``visitor`` returned true to stop the traversal, false
     otherwise.)doc";
 
@@ -142,10 +142,10 @@ static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_GetFontNumber =R"doc
 Optionally adds the Font to the table if it does not already exist.
 
 
-Parameter ``font``:
+:param font:
     The Font whose number is to be determined.
 
-Parameter ``addIfNotFound``:
+:param addIfNotFound:
     If true, and if ``font`` is not already in the table, add it and
     assign it a font number.
 
@@ -163,10 +163,10 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_DgnFontNumMap_ResolveFont =R"doc(Get a Font for a given font number. Returns a default Font if no font
 exists for that value.
 
-Parameter ``fontNum``:
+:param fontNum:
     The font number to interpret.
 
-Returns:
+:returns:
     A Font for ``fontNum.`` The font will either be the value in this
     table or a default Font.)doc";
 
@@ -175,7 +175,7 @@ backslashes; this will ensure a call to
 DgnFont::CompressEscapeSequences will not disturb them.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFont_CompressEscapeSequences =R"doc(Scans the input string for character code escape sequences (e.g.
-" \ 65 "), and converts them to corresponding characters (e.g. " A ").)doc";
+" \\ 65 "), and converts them to corresponding characters (e.g. " A ").)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFont_ExpandRscFractions =R"doc(Scans the input string for fraction code points, and converts them to
 corresponding fraction strings (e.g. " 1 / 2 "), as identified by this
@@ -200,7 +200,7 @@ is specified in the Font Configuration File.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFont_GetFractionFromCharCode =R"doc(Convert a fraction glyph code in this Font into the fraction values.
 
-Parameter ``glyphCode``:
+:param glyphCode:
     The glyph code of the fraction to be interpreted.
 
 Returns (Tuple,0):
@@ -219,17 +219,17 @@ Returns (Tuple,2):
 
 static const char * __doc_Bentley_DgnPlatform_DgnFont_GetCharCodeFromFraction =R"doc(Convert a fraction into a glyph code in this Font, if possible.
 
-Parameter ``numerator``:
+:param numerator:
     The numerator of the fraction
 
-Parameter ``denominator``:
+:param denominator:
     The denominator of the fraction
 
-Parameter ``reduce``:
+:param reduce:
     If true, first reduce the fraction to least common denominator
     before attempting conversion.
 
-Returns:
+:returns:
     the character code of the fraction in this Font, or 0 if no
     appropriate fraction character exists.)doc";
 
@@ -270,22 +270,22 @@ File.)doc";
 static const char * __doc_Bentley_DgnPlatform_DgnFont_IsMissingFontReported =R"doc(If the font is " missing " from the system, check whether the user has
 been notified about the missing font.
 
-Returns:
+:returns:
     true if the user is notified about the " missing " Font.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFont_IsPresent =R"doc(Determine whether this Font is present on the system.
 
-Returns:
+:returns:
     true if the Font is present, and false if this is a " missing "
     font.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFont_IsCharacterPresent =R"doc(Determine whether a character (in the font encoding, commonly called a
 " glyph code ") exists in this font.
 
-Parameter ``glyphCode``:
+:param glyphCode:
     the glyph code to check.
 
-Returns:
+:returns:
     true if ``glyphCode`` is present)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFontNamedSymbol_GetCodePoint =R"doc(Gets the code point of the symbol; this is specific to the font.)doc";

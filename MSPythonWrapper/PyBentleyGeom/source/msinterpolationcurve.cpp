@@ -48,6 +48,12 @@ void def_MSInterpolationCurve(py::module_& m)
            py::overload_cast<DPoint3dArray&, bool, double, DPoint3d*, bool, bool, bool, bool>(&MSInterpolationCurve::InitFromPointsAndEndTangents),
            "inPoints"_a, "removeData"_a, "removeTol"_a, "endTangents"_a, "closedCurve"_a, "colinearTangents"_a, "chordLenTangents"_a, "naturalTangents"_a);
 
+    c1.def("InitFromPointsAndEndTangents", [](MSInterpolationCurveR self, py::list& inPoints, bool removeData, double removeTol, DPoint3d* endTangents, bool closedCurve, bool colinearTangents, bool chordLenTangents, bool naturalTangents)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+           return self.InitFromPointsAndEndTangents(cppInPoints, removeData, removeTol, endTangents, closedCurve, colinearTangents, chordLenTangents, naturalTangents);
+           }, "inPoints"_a, "removeData"_a, "removeTol"_a, "endTangents"_a, "closedCurve"_a, "colinearTangents"_a, "chordLenTangents"_a, "naturalTangents"_a);
+
     c1.def("Populate", [] (MSInterpolationCurveR self, int order, bool periodic, int isChordLenKnots, int isColinearTangents, int isChordLenTangents, int isNaturalTangents,
                            DPoint3dArray const& fitPoints, DoubleArray const& knots, DVec3dCP pStartTangent, DVec3dCP pEndTangent)
            {
@@ -55,6 +61,15 @@ void def_MSInterpolationCurve(py::module_& m)
                                        fitPoints.data(), (int) fitPoints.size(), knots.data(), (int) knots.size(), pStartTangent, pEndTangent);
            return retVal;
            }, "order"_a, "periodic"_a, "isChordLenKnots"_a, "isColinearTangents"_a, "isChordLenTangents"_a, "isNaturalTangents"_a, "fitPoints"_a, "knots"_a, "startTangent"_a, "endTangent"_a);
+
+    c1.def("Populate", [] (MSInterpolationCurveR self, int order, bool periodic, int isChordLenKnots, int isColinearTangents, int isChordLenTangents, int isNaturalTangents,
+              py::list const& fitPoints, DoubleArray const& knots, DVec3dCP pStartTangent, DVec3dCP pEndTangent)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(fitPoints, cppFitPoints, DPoint3dArray, DPoint3d);
+           auto retVal = self.Populate(order, periodic, isChordLenKnots, isColinearTangents, isChordLenTangents, isNaturalTangents,
+                          cppFitPoints.data(), (int) cppFitPoints.size(), knots.data(), (int) knots.size(), pStartTangent, pEndTangent);
+           return retVal;
+           }, "order"_a, "periodic"_a, "isChordLenKnots"_a, "isColinearTangents"_a, "isChordLenTangents"_a, "isNaturalTangents"_a, "fitPoints"_a, "knots"_a, "startTangent"_a, "endTangent"_a);          
 
     c1.def("Populate", [] (MSInterpolationCurveR self, int order, bool periodic, int isChordLenKnots, int isColinearTangents, int isChordLenTangents, int isNaturalTangents,
                            std::vector<DPoint3d> const& fitPoints, std::vector<double> const& knots)

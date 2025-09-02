@@ -10,10 +10,10 @@
 
 
 
-static const char * __doc_Bentley_MstnPlatform_BaseWindow_SetTitle =R"doc(Sets the title for the Window. @Param[in] title The new title for the
+static const char * __doc_Bentley_MstnPlatform_BaseWindow_SetTitle =R"doc(Sets the title for the Window. @Param(input) title The new title for the
 Window)doc";
 
-static const char * __doc_Bentley_MstnPlatform_BaseWindow_GetTitle =R"doc(Gets the title for the Window. @Param[out] title A WString that
+static const char * __doc_Bentley_MstnPlatform_BaseWindow_GetTitle =R"doc(Gets the title for the Window. @Param(output) title A WString that
 receives a copy of the Window's title)doc";
 
 static const char * __doc_Bentley_MstnPlatform_BaseWindow_GetDoubleBufferContext =R"doc(Returns the double-buffer context for the Window)doc";

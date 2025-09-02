@@ -13,14 +13,14 @@
 static const char * __doc_Bentley_DgnPlatform_DimensionTextPartId_Create =R"doc(Create a new dimension text part. Will fail if partType or partSubType
 are not valid text parts.
 
-Parameter ``partSegment``:
-    IN segment number
+:param partSegment:
+    (input) segment number
 
-Parameter ``partType``:
-    IN part type
+:param partType:
+    (input) part type
 
-Parameter ``partSubType``:
-    IN part subtype)doc";
+:param partSubType:
+    (input) part subtype)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DimensionTextPartId_GetPartSubType =R"doc(Queries the part sub type associated with this part.)doc";
 

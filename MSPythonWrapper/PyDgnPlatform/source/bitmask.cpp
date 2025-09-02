@@ -12,104 +12,104 @@
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_ToString =R"doc(Create a string representing the contents of this BitMask.
 
-Parameter ``outString``:
+:param outString:
     The string that is filled in.
 
-Parameter ``indexOrigin``:
+:param indexOrigin:
     If asString true, this indicates the index value of the lowest
     bit. Must be 0 or 1.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_LogicalOperation =R"doc(Sets this BitMask to the logical operation specified between this
 BitMask and the argument.
 
-Parameter ``rhs``:
+:param rhs:
     The right hand operand of the And operation.
 
-Parameter ``operation``:
+:param operation:
     The operation to perform. @note If necessary, the capacity of this
     BitMask is increased.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_AnyBitSet =R"doc(Returns true if any bit in this BitMask is true.
 
-Returns:
+:returns:
     true if any bit is true. @note This tests bits up to the Capacity
     of the BitMask. If Capacity is 0, it returns the DefaultBitValue.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_GetNumBitsSet =R"doc(The count of bits that are true in this BitMask.
 
-Returns:
+:returns:
     The number of true bits.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_SetFromString =R"doc(Sets this BitMask from a string containing the bits that are true.
 
-Parameter ``sourceString``:
+:param sourceString:
     The string containing integers that are the bits to set to true.
     It is of the form n,m,...p-q,r-s
 
-Parameter ``indexOrigin``:
+:param indexOrigin:
     Either 0 or 1. The value is subtracted from each integer specified
     in sourceString.
 
-Parameter ``maxIndex``:
+:param maxIndex:
     The maximum value that is allowed in sourceString.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_SetFromBitArray =R"doc(Sets this BitMask from source data.
 
-Parameter ``numValidBits``:
+:param numValidBits:
     The number of valid bits in the input bitArray
 
-Parameter ``bitArray``:
+:param bitArray:
     An array of at least (numValidBits+15)%16 UInt16's that contain
     the values. @note If necessary, the capacity of this BitMask is
     increased.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_SetFromBitMask =R"doc(Copies the contents of the given BitMask to this BitMask.
 
-Parameter ``source``:
+:param source:
     The BitMask to copy the contents of.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_SetBits =R"doc(Sets the bits specified to the value specified.
 
-Parameter ``arraySize``:
+:param arraySize:
     The number of entries in bitIndexArray.
 
-Parameter ``bitIndexArray``:
+:param bitIndexArray:
     An array of bit indexes.
 
-Parameter ``value``:
+:param value:
     The value to set. @note If necessary, the capacity of this BitMask
     is increased.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_OrNot =R"doc(Sets this BitMask to the logical Or of this Bitmask and the inverse
 the argument.
 
-Parameter ``rhs``:
+:param rhs:
     The right hand operand of the OrNot operation. @note If necessary,
     the capacity of this BitMask is increased to that of rhs.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_AndNot =R"doc(Sets this BitMask to the logical And this Bitmask and the insverse of
 the argument.
 
-Parameter ``rhs``:
+:param rhs:
     The right hand operand of the AndNot operation. @note If
     necessary, the capacity of this BitMask is increased to that of
     rhs.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_XOr =R"doc(Sets this BitMask to the logical Xor of this Bitmask and the argument.
 
-Parameter ``rhs``:
+:param rhs:
     The right hand operand of the XOr operation. @note If necessary,
     the capacity of this BitMask is increased to that of rhs.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_And =R"doc(Sets this BitMask to the logical And of this Bitmask and the argument.
 
-Parameter ``rhs``:
+:param rhs:
     The right hand operand of the And operation. @note If necessary,
     the capacity of this BitMask is increased to that of rhs.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_Or =R"doc(Sets this BitMask to the logical Or of this Bitmask and the argument.
 
-Parameter ``rhs``:
+:param rhs:
     The right hand operand of the Or operation. @note If necessary,
     the capacity of this BitMask is increased to that of rhs.)doc";
 
@@ -117,7 +117,7 @@ static const char * __doc_Bentley_DgnPlatform_BitMask_InvertAll =R"doc(Inverts a
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_Invert =R"doc(Inverts the specified bit of this BitMask.
 
-Parameter ``bitIndex``:
+:param bitIndex:
     The bit to set to invert.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_ClearAll =R"doc(Sets all bits of this BitMask to false.)doc";
@@ -126,23 +126,23 @@ static const char * __doc_Bentley_DgnPlatform_BitMask_SetAll =R"doc(Sets all bit
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_SetBit =R"doc(Sets a bit of this BitMask to the specified value.
 
-Parameter ``bitIndex``:
+:param bitIndex:
     The bit to set.
 
-Parameter ``value``:
+:param value:
     The value to set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_Test =R"doc(Tests a bit of this BitMask.
 
-Parameter ``bitIndex``:
+:param bitIndex:
     The bit to test.
 
-Returns:
+:returns:
     The value of the bit.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_SetDefaultBitValue =R"doc(Sets this BitMask's default bit value.
 
-Parameter ``value``:
+:param value:
     The default bit value.
 
 See also:
@@ -150,7 +150,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_GetDefaultBitValue =R"doc(Gets this BitMask's default bit value.
 
-Returns:
+:returns:
     The value of the default bit.
 
 See also:
@@ -158,7 +158,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_EnsureCapacity =R"doc(Sets this BitMask's capacity to at least the value specified.
 
-Parameter ``numBits``:
+:param numBits:
     The number of bits required. @note If the current capacity is
     greater than or equal to numBits, the call does nothing. <br>If
     the current capacity is less than numBits, the newly added bits
@@ -169,7 +169,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_SetCapacity =R"doc(Sets this BitMasks' capacity to exactly the value specified.
 
-Parameter ``numBits``:
+:param numBits:
     The number of bits required. @note If the current capacity is less
     than numBits, the newly added bits are set to the default value.
 
@@ -178,7 +178,7 @@ See also:
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_GetCapacity =R"doc(Gets the capacity of this BitMask.
 
-Returns:
+:returns:
     The capacity of this BitMask.
 
 See also:
@@ -188,22 +188,33 @@ static const char * __doc_Bentley_DgnPlatform_BitMask_Free =R"doc(Frees this Bit
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_FreeAndClear =R"doc(Convenience method to Free a BitMask.
 
-Parameter ``bitMask``:
+:param bitMask:
     A pointer to a BitMask that is is to be freed. The pointer can
     point to a NULL value. The value of the pointer is set to zero
     after the BitMask is freed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_BitMask_Clone =R"doc(Creates a new BitMask instance from an existing BitMask.
 
-Parameter ``source``:
+:param source:
     The BitMask that is copied.
 
-Returns:
+:returns:
     The copied BitMask. @note The caller is responsible for freeing
     the BitMask using the #Free method.
 
 See also:
     SetFromBitMask.)doc";
+
+static const char* __doc_Bentley_DgnPlatform_BitMask_Create = R"doc(Creates a new BitMask instance.
+
+Parameter ``defaultBitValue``:
+      The value used for bits higher than the BitMask capacity (see #GetCapacity).
+
+Returns:
+    The newly created BitMask. @note The initial capacity is zero.<br>The caller is responsible for freeing the BitMask using the #Free method.
+
+See also:
+    EnsureCapacity.)doc";
 
 // BitMask deleter for std::unique_ptr
 struct BitMask_Deleter { void operator()(BitMask *mask) { if (nullptr != mask) mask->Free(); } };
@@ -228,6 +239,7 @@ void def_BitMask(py::module_& m)
     py::class_< BitMask, std::unique_ptr<BitMask, BitMask_Deleter> > c1(m, "BitMask");
 
     c1.def(py::init(&BitMask::Create), "defaultBitValue"_a);
+    c1.def_static("Create", &BitMask::Create, "defaultBitValue"_a, DOC(Bentley, DgnPlatform, BitMask, Create));
     c1.def_static("Clone", &BitMask::Clone, "source"_a, DOC(Bentley, DgnPlatform, BitMask, Clone));
     
     c1.def_static("FreeAndClear", [] (BitMaskP bitMask)

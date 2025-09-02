@@ -11,43 +11,43 @@
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_SilhouetteCurves =R"doc(Return curves which are silhoutte curves OTHER than hard edges
 
-Parameter ``[in]``:
+:param (input):
     eyePoint For flat view, the view direction with weight=0. For
     perspective, the eye point with weight=1.
 
-Parameter ``[in]``:
+:param (input):
     curves silhouette curves.
 
-Returns:
+:returns:
     return false if not implemented. return true if implemented -- but
     curves may still be empty.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_ComputeSecondMomentVolumeProducts =R"doc(Return the various integrated products for moment calculations. The
 primitive is treated as a volume
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_ComputeSecondMomentAreaProducts =R"doc(Return the various integrated products for area moment calculations.
 The primitive is treated as a thin shell.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_ComputeFacetedPrincipalAreaMoments =R"doc(Return the volume, centroid, orientation, and principal momentsof the
@@ -57,26 +57,26 @@ Remark:
     This method only attempts faceted computations. Use
     ComputePrincipalMoments to get exact moments.
 
-Parameter ``[in]``:
+:param (input):
     options optional controls for facets
 
-Parameter ``[in]``:
+:param (input):
     options optional controls for facet density.
 
-Parameter ``[out]``:
+:param (output):
     area surface area
 
-Parameter ``[out]``:
+:param (output):
     centroid centroid
 
-Parameter ``[out]``:
+:param (output):
     axes columns of this matrix are the principal directions.
 
-Parameter ``[out]``:
+:param (output):
     momentxyz moments (yy+zz,xx+zz,xx+yy) around the principal
     directions.
 
-Returns:
+:returns:
     false if (a) solid primitive is not capped or (b) facets failed.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_ComputePrincipalAreaMoments =R"doc(Return the volume, centroid, orientation, and principal moments of the
@@ -86,20 +86,20 @@ Remark:
     This method only attempts " exact " computations. Use
     ComputeFacetedPrincipalMoments to get approximate moments.
 
-Parameter ``[out]``:
+:param (output):
     area surface area
 
-Parameter ``[out]``:
+:param (output):
     centroid centroid
 
-Parameter ``[out]``:
+:param (output):
     axes columns of this matrix are the principal directions.
 
-Parameter ``[out]``:
+:param (output):
     momentxyz moments (yy+zz,xx+zz,xx+yy) around the principal
     directions.
 
-Returns:
+:returns:
     false if (a) solid primitive is not capped or (b) high accuracy
     moments are not supported for this type.)doc";
 
@@ -110,26 +110,26 @@ Remark:
     This method only attempts faceted computations. Use
     ComputePrincipalMoments to get exact moments.
 
-Parameter ``[in]``:
+:param (input):
     options optional controls for facets
 
-Parameter ``[in]``:
+:param (input):
     options optional controls for facet density.
 
-Parameter ``[out]``:
+:param (output):
     volume volume
 
-Parameter ``[out]``:
+:param (output):
     centroid centroid
 
-Parameter ``[out]``:
+:param (output):
     axes columns of this matrix are the principal directions.
 
-Parameter ``[out]``:
+:param (output):
     momentxyz moments (yy+zz,xx+zz,xx+yy) around the principal
     directions.
 
-Returns:
+:returns:
     false if (a) solid primitive is not capped or (b) facets failed.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_ComputePrincipalMoments =R"doc(Return the volume, centroid, orientation, and principal moments using
@@ -139,20 +139,20 @@ Remark:
     This method only attempts " exact " computations. Use
     ComputeFacetedPrincipalMoments to get approximate moments.
 
-Parameter ``[out]``:
+:param (output):
     volume volume
 
-Parameter ``[out]``:
+:param (output):
     centroid centroid
 
-Parameter ``[out]``:
+:param (output):
     axes columns of this matrix are the principal directions.
 
-Parameter ``[out]``:
+:param (output):
     momentxyz moments (yy+zz,xx+zz,xx+yy) around the principal
     directions.
 
-Returns:
+:returns:
     false if (a) solid primitive is not capped or (b) high accuracy
     moments are not supported for this type.)doc";
 
@@ -164,7 +164,7 @@ and change it to the simple type. Tests for rotational sweeps that are
 a sphere or torus as well as ruled sweeps that are a box, cone, or
 extrusion.
 
-Returns:
+:returns:
     true if input primitive was simplified.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_TransformInPlace =R"doc(Transform in place.)doc";
@@ -174,44 +174,44 @@ static const char * __doc_Bentley_Geom_ISolidPrimitive_Clone =R"doc(Deep copy.)d
 static const char * __doc_Bentley_Geom_ISolidPrimitive_TryGetMaxUVLength =R"doc(Compute the lengths of the longest u and v direction sections of a
 single face of a solid primitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face.
 
-Parameter ``[in]``:
+:param (input):
     uvLength sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_GetConstantUSection =R"doc(Copy a section at constant u of a single face to a single
 ICurvePrimitive. This is usually a single primitive, but can have a
 disjoint, multi-component child for cut of non-convex cap,
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction u fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_GetConstantVSection =R"doc(Copy a section curve at constant v of a single face to a single
 ICurvePrimitive. This is usually a single primitive, but can have a
 disjoint, multi-component child for cut of non-convex cap.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction v fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_GetFaceIndices =R"doc(Fill an array containing all the valid face indices for this
 primitive.
 
-Parameter ``[out]``:
+:param (output):
     indices array of FaceIndices of all faces of the solid.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_GetFace =R"doc(Copy a single face to a new object.
 
-Parameter ``[in]``:
+:param (input):
     indices indices of face.
 
-Returns:
+:returns:
     IGeometryPtr with representing a single face. End caps will always
     return as CurveVectorPtr. Planar side faces will return as
     CurveVectorPtr. Cylindrical side faces will return as
@@ -222,60 +222,60 @@ Returns:
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_TryUVFractionToXYZ =R"doc(convert u,v fraction on specified face to xyz and derivatives.
 
-Parameter ``[in]``:
+:param (input):
     faceIndices face selection indices
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
-static const char * __doc_Bentley_Geom_ISolidPrimitive_ClosestPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_ISolidPrimitive_ClosestPoint =R"doc(:param (input):
     spacePoint search for point close to here and on the solid surface
 
-Parameter ``[out]``:
+:param (output):
     pickDetail closest point data.
 
-Returns:
+:returns:
     false if not supported.)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_AddCurveIntersections =R"doc(Compute intersections with curves and add to the data array.
 
-Parameter ``[in]``:
+:param (input):
     curves
 
-Parameter ``[in,out]``:
+:param [in,out]:
     curvePoints growing array of curve points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     solidPoints growing array of solid points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     messages array of error messages)doc";
 
 static const char * __doc_Bentley_Geom_ISolidPrimitive_AddRayIntersections =R"doc(Compute intersections with a ray and add to the pickData.
 
-Parameter ``[in]``:
+:param (input):
     ray origin and direction
 
-Parameter ``[in]``:
+:param (input):
     minParameter smallest parameter of pick. (e.g. 0 for picking along
     a positive ray from an eyepoint)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pickData growing array of picks.
 
-Parameter ``[in]``:
+:param (input):
     parentId caller's id for this solid. Will be placed in each
     pickData entry has parentId.)doc";
 
@@ -348,36 +348,36 @@ static const char * __doc_Bentley_Geom_ISolidPrimitive_GetSolidPrimitiveType =R"
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_SilhouetteCurves =R"doc(Return curves which are silhoutte curves OTHER than hard edges
 
-Returns:
+:returns:
     return false if not implemented. return true if implemented -- but
     curves may still be empty.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_ComputeSecondMomentVolumeProducts =R"doc(Return the various integrated products for moment calculations. The
 primitive is treated as a volume
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_ComputeSecondMomentAreaProducts =R"doc(Return the various integrated products for area moment calculations.
 The primitive is treated as a thin shell.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_TransformInPlace =R"doc(Transform in place.)doc";
@@ -387,38 +387,38 @@ static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_Clone =R"doc(Copy to 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_TryGetMaxUVLength =R"doc(Compute the lengths of the longest u and v direction sections of a
 single face of a solid primitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face.
 
-Parameter ``[in]``:
+:param (input):
     uvLength sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_GetConstantUSection =R"doc(Copy a section at constant u of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction u fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_GetConstantVSection =R"doc(Copy a section curve at constant v of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction v fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_GetFaceIndices =R"doc(Fill a list of all possible face indices.
 
-Parameter ``[out]``:
+:param (output):
     indices array of selectors for the faces.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_GetFace =R"doc(Return a single face of the solid primitive
 
-Parameter ``indices``:
+:param indices:
     integer selectors for the face. <remarks>Face orientation
     convention pre> ul> li>There is a natural " forward " direction
     along section curves. li>There is a natural " direction " to the
@@ -431,60 +431,60 @@ Parameter ``indices``:
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_TryUVFractionToXYZ =R"doc(convert u,v fraction on specified face to xyz and derivatives.
 
-Parameter ``[in]``:
+:param (input):
     faceIndices face selection indices
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
-static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_ClosestPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_ClosestPoint =R"doc(:param (input):
     spacePoint search for point close to here and on the solid surface
 
-Parameter ``[out]``:
+:param (output):
     pickDetail closest point data.
 
-Returns:
+:returns:
     false if not supported.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_AddCurveIntersections =R"doc(Compute intersections with curves and add to the data array.
 
-Parameter ``[in]``:
+:param (input):
     curves
 
-Parameter ``[in,out]``:
+:param [in,out]:
     curvePoints growing array of curve points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     solidPoints growing array of solid points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     messages array of error messages)doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_AddRayIntersections =R"doc(Compute intersections with a ray and add to the pickData.
 
-Parameter ``[in]``:
+:param (input):
     ray origin and direction
 
-Parameter ``[in]``:
+:param (input):
     minParameter smallest parameter of pick. (e.g. 0 for picking along
     a positive ray from an eyepoint)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pickData growing array of picks.
 
-Parameter ``[in]``:
+:param (input):
     parentId caller's id for this solid. Will be placed in each
     pickData entry has parentId.)doc";
 
@@ -501,32 +501,32 @@ static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_GetRange =R"doc(Retur
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_TryGetCurvePair =R"doc(Get the lower and upper curves of a specified face.
 
-Parameter ``[in]``:
+:param (input):
     indices face indices
 
-Parameter ``[out]``:
+:param (output):
     curveA lower curve of face
 
-Parameter ``[out]``:
+:param (output):
     curveB upper curve of face
 
-Returns:
+:returns:
     false if indices is not a valid ruled face. (Caps return false))doc";
 
 static const char * __doc_Bentley_Geom_DgnRuledSweepDetail_AddSection =R"doc(Add (capture) a section.)doc";
 
-static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_SetRadius =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_SetRadius =R"doc(:param (input):
     radius
 
-Parameter ``[in]``:
+:param (input):
     type of radius.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_GetRadius =R"doc(Return the radius
 
-Parameter ``[out]``:
+:param (output):
     radius
 
-Parameter ``[in]``:
+:param (input):
     type of radius.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_ComputeVRuleCount =R"doc(Compute v rule count for a given sweep angle and desired number of v
@@ -536,36 +536,36 @@ static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_HasRealCaps =R"d
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_SilhouetteCurves =R"doc(Return curves which are silhoutte curves OTHER than hard edges
 
-Returns:
+:returns:
     return false if not implemented. return true if implemented -- but
     curves may still be empty.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_ComputeSecondMomentVolumeProducts =R"doc(Return the various integrated products for moment calculations. The
 primitive is treated as a volume
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_ComputeSecondMomentAreaProducts =R"doc(Return the various integrated products for area moment calculations.
 The primitive is treated as a thin shell.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_TransformInPlace =R"doc(Transform in place.)doc";
@@ -575,134 +575,134 @@ static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_Clone =R"doc(Cop
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_TryGetMaxUVLength =R"doc(Compute the lengths of the longest u and v direction sections of a
 single face of a solid primitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face.
 
-Parameter ``[in]``:
+:param (input):
     uvLength sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_GetConstantUSection =R"doc(Copy a section at constant u of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction u fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_GetConstantVSection =R"doc(Copy a section curve at constant v of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction v fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_GetFaceIndices =R"doc(Fill a list of all possible face indices.
 
-Parameter ``[out]``:
+:param (output):
     indices array of selectors for the faces.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_GetFace =R"doc(Return a single face of the solid primitive
 
-Parameter ``indices``:
+:param indices:
     integer selectors for the face.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_TryUVFractionToXYZ =R"doc(convert u,v fraction on specified face to xyz and derivatives.
 
-Parameter ``[in]``:
+:param (input):
     faceIndices face selection indices
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
-static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_ClosestPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_ClosestPoint =R"doc(:param (input):
     spacePoint search for point close to here and on the solid surface
 
-Parameter ``[out]``:
+:param (output):
     pickDetail closest point data.
 
-Returns:
+:returns:
     false if not supported.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_AddCurveIntersections =R"doc(Compute intersections with curves and add to the data array.
 
-Parameter ``[in]``:
+:param (input):
     curves
 
-Parameter ``[in,out]``:
+:param [in,out]:
     curvePoints growing array of curve points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     solidPoints growing array of solid points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     messages array of error messages)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_AddRayIntersections =R"doc(Compute intersections with a ray and add to the pickData.
 
-Parameter ``[in]``:
+:param (input):
     ray origin and direction
 
-Parameter ``[in]``:
+:param (input):
     minParameter smallest parameter of pick. (e.g. 0 for picking along
     a positive ray from an eyepoint)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pickData growing array of picks.
 
-Parameter ``[in]``:
+:param (input):
     parentId caller's id for this solid. Will be placed in each
     pickData entry has parentId.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_TryGetRotationAxis =R"doc(Get the axis of rotation, negated if necessary to force a positive
 sweep angle.
 
-Parameter ``center``:
-    OUT center of rotation.
+:param center:
+    (output) center of rotation.
 
-Parameter ``axis``:
-    OUT axis of rotation.
+:param axis:
+    (output) axis of rotation.
 
-Parameter ``sweepRadians``:
-    OUT angle of rotation.)doc";
+:param sweepRadians:
+    (output) angle of rotation.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_VFractionToProfile =R"doc(Fractional profile curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_GetVFractionTransform =R"doc(Get transform from base cap to fractional v position.
 
-Parameter ``[out]``:
+:param (output):
     transform transform to rotate a point.
 
-Parameter ``[out]``:
+:param (output):
     derivativeTransform Derivative with respect to vFraction. The
     output of derivativeTransform * xyz is a vector, not a point !!!
     (If viewed as a 4x4 matrix, its ww entry is zero)
 
-Parameter ``[in]``:
+:param (input):
     vFraction fraction of sweep angle.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_GetTransforms =R"doc(return transforms for the coordinate frame with z axis on the line of
 rotation.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld translation part is is a point on the axis; z
     direction is the rotation axis.
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal inverse transform.)doc";
 
 static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_IsClosedVolume =R"doc(Test if this is a closed volume.)doc";
@@ -718,36 +718,36 @@ static const char * __doc_Bentley_Geom_DgnRotationalSweepDetail_GetRange =R"doc(
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_SilhouetteCurves =R"doc(Return curves which are silhoutte curves OTHER than hard edges
 
-Returns:
+:returns:
     return false if not implemented. return true if implemented -- but
     curves may still be empty.)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_ComputeSecondMomentVolumeProducts =R"doc(Return the various integrated products for moment calculations. The
 primitive is treated as a volume
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_ComputeSecondMomentAreaProducts =R"doc(Return the various integrated products for area moment calculations.
 The primitive is treated as a thin shell.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_TransformInPlace =R"doc(Transform in place.)doc";
@@ -757,106 +757,106 @@ static const char * __doc_Bentley_Geom_DgnExtrusionDetail_Clone =R"doc(Copy to a
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_TryGetMaxUVLength =R"doc(Compute the lengths of the longest u and v direction sections of a
 single face of a solid primitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face.
 
-Parameter ``[in]``:
+:param (input):
     uvLength sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_GetConstantUSection =R"doc(Copy a section at constant u of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction u fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_GetConstantVSection =R"doc(Copy a section curve at constant v of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction v fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_GetFaceIndices =R"doc(Fill a list of all possible face indices.
 
-Parameter ``[out]``:
+:param (output):
     indices array of selectors for the faces.)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_GetFace =R"doc(Return a single face of the solid primitive
 
-Parameter ``indices``:
+:param indices:
     integer selectors for the face.)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_TryGetExtrusionFrame =R"doc(Compute coordinate frames aligned with the extrusion vector.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform with orign at first point of base curve, z
     vector along extrusion direction, xy vectors arbitrary
     perpendiculars.
 
-Parameter ``[out]``:
+:param (output):
     worldToLocal inverse of local to world)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_TryUVFractionToXYZ =R"doc(convert u,v fraction on specified face to xyz and derivatives.
 
-Parameter ``[in]``:
+:param (input):
     faceIndices face selection indices
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
-static const char * __doc_Bentley_Geom_DgnExtrusionDetail_ClosestPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DgnExtrusionDetail_ClosestPoint =R"doc(:param (input):
     spacePoint search for point close to here and on the solid surface
 
-Parameter ``[out]``:
+:param (output):
     pickDetail closest point data.
 
-Returns:
+:returns:
     false if not supported.)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_AddCurveIntersections =R"doc(Compute intersections with curves and add to the data array.
 
-Parameter ``[in]``:
+:param (input):
     curves
 
-Parameter ``[in,out]``:
+:param [in,out]:
     curvePoints growing array of curve points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     solidPoints growing array of solid points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     messages array of error messages)doc";
 
 static const char * __doc_Bentley_Geom_DgnExtrusionDetail_AddRayIntersections =R"doc(Compute intersections with a ray and add to the pickData.
 
-Parameter ``[in]``:
+:param (input):
     ray origin and direction
 
-Parameter ``[in]``:
+:param (input):
     minParameter smallest parameter of pick. (e.g. 0 for picking along
     a positive ray from an eyepoint)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pickData growing array of picks.
 
-Parameter ``[in]``:
+:param (input):
     parentId caller's id for this solid. Will be placed in each
     pickData entry has parentId.)doc";
 
@@ -882,36 +882,36 @@ to relate it back to world.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_SilhouetteCurves =R"doc(Return curves which are silhoutte curves OTHER than hard edges
 
-Returns:
+:returns:
     return false if not implemented. return true if implemented -- but
     curves may still be empty.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_ComputeSecondMomentVolumeProducts =R"doc(Return the various integrated products for moment calculations. The
 primitive is treated as a volume
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_ComputeSecondMomentAreaProducts =R"doc(Return the various integrated products for area moment calculations.
 The primitive is treated as a thin shell.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_TransformInPlace =R"doc(Transform in place.)doc";
@@ -921,96 +921,96 @@ static const char * __doc_Bentley_Geom_DgnSphereDetail_Clone =R"doc(Copy to a ne
 static const char * __doc_Bentley_Geom_DgnSphereDetail_TryGetMaxUVLength =R"doc(Compute the lengths of the longest u and v direction sections of a
 single face of a solid primitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face.
 
-Parameter ``[in]``:
+:param (input):
     uvLength sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_GetConstantUSection =R"doc(Copy a section at constant u of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction u fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_GetConstantVSection =R"doc(Copy a section curve at constant v of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction v fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_GetFaceIndices =R"doc(Fill a list of all possible face indices.
 
-Parameter ``[out]``:
+:param (output):
     indices array of selectors for the faces.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_GetFace =R"doc(Return a single face of the solid primitive
 
-Parameter ``indices``:
+:param indices:
     integer selectors for the face.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_TryUVFractionToXYZ =R"doc(convert u,v fraction on specified face to xyz and derivatives.
 
-Parameter ``[in]``:
+:param (input):
     faceIndices face selection indices
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
-static const char * __doc_Bentley_Geom_DgnSphereDetail_ClosestPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DgnSphereDetail_ClosestPoint =R"doc(:param (input):
     spacePoint search for point close to here and on the solid surface
 
-Parameter ``[out]``:
+:param (output):
     pickDetail closest point data.
 
-Returns:
+:returns:
     false if not supported.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_AddCurveIntersections =R"doc(Compute intersections with curves and add to the data array.
 
-Parameter ``[in]``:
+:param (input):
     curves
 
-Parameter ``[in,out]``:
+:param [in,out]:
     curvePoints growing array of curve points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     solidPoints growing array of solid points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     messages array of error messages)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_AddRayIntersections =R"doc(Compute intersections with a ray and add to the pickData.
 
-Parameter ``[in]``:
+:param (input):
     ray origin and direction
 
-Parameter ``[in]``:
+:param (input):
     minParameter smallest parameter of pick. (e.g. 0 for picking along
     a positive ray from an eyepoint)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pickData growing array of picks.
 
-Parameter ``[in]``:
+:param (input):
     parentId caller's id for this solid. Will be placed in each
     pickData entry has parentId.)doc";
 
@@ -1018,14 +1018,14 @@ static const char * __doc_Bentley_Geom_DgnSphereDetail_VFractionToUSectionDEllip
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_UFractionToVSectionDEllipse3d =R"doc(Return the ellipse on the meridian at fractional position.)doc";
 
-static const char * __doc_Bentley_Geom_DgnSphereDetail_TryGetRotationAxis =R"doc(Parameter ``center``:
-    OUT center of rotation.
+static const char * __doc_Bentley_Geom_DgnSphereDetail_TryGetRotationAxis =R"doc(:param center:
+    (output) center of rotation.
 
-Parameter ``axis``:
-    OUT axis of rotation.
+:param axis:
+    (output) axis of rotation.
 
-Parameter ``sweepRadians``:
-    OUT angle of rotation.)doc";
+:param sweepRadians:
+    (output) angle of rotation.)doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_GetNonUniformTransforms =R"doc(Return (nonuniform) transforms for normalized system where sphere
 radius is 1.)doc";
@@ -1040,23 +1040,23 @@ static const char * __doc_Bentley_Geom_DgnSphereDetail_LatitudeToVFraction =R"do
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_IsRealCap =R"doc(Test if caps are active and the indicated cap is not at a pole)doc";
 
-static const char * __doc_Bentley_Geom_DgnSphereDetail_GetSweepLimits =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DgnSphereDetail_GetSweepLimits =R"doc(:param (output):
     latitude0 latitude at start of sweep.
 
-Parameter ``[out]``:
+:param (output):
     latitude1 latitude at end of sweep.
 
-Parameter ``[out]``:
+:param (output):
     z0 z coordinate at start of sweep.
 
-Parameter ``[out]``:
+:param (output):
     z1 z coordinate at end of sweep.
 
-Parameter ``[in]``:
+:param (input):
     forceSweepNorth true to exchange if necessary to make sweep south
     to north.
 
-Returns:
+:returns:
     false if no sweep limits (full sphere))doc";
 
 static const char * __doc_Bentley_Geom_DgnSphereDetail_IsTrueRotationAroundZ =R"doc(Return true (with supporting local coordinate frame) iff this is a
@@ -1083,59 +1083,59 @@ static const char * __doc_Bentley_Geom_DgnBoxDetail_IsBlock =R"doc(Test if the D
 size data, using caller-specifed fractional coordinates to indicate
 position of origin in reference system.
 
-Parameter ``[out]``:
+:param (output):
     origin local coordinates origin
 
-Parameter ``[out]``:
+:param (output):
     unitAxes transform (with orthogonal axes)
 
-Parameter ``[out]``:
+:param (output):
     localDiagonal the box edge lengths.
 
-Parameter ``[in]``:
+:param (input):
     originXFraction fractional position of the unitAxes origin along
     the x edge.
 
-Parameter ``[in]``:
+:param (input):
     originYFraction fractional position of the unitAxes origin along
     the y edge.
 
-Parameter ``[in]``:
+:param (input):
     originZFraction fractional position of the unitAxes origin along
     the z edge.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_SilhouetteCurves =R"doc(Return curves which are silhoutte curves OTHER than hard edges
 
-Returns:
+:returns:
     return false if not implemented. return true if implemented -- but
     curves may still be empty.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_ComputeSecondMomentVolumeProducts =R"doc(Return the various integrated products for moment calculations. The
 primitive is treated as a volume
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_ComputeSecondMomentAreaProducts =R"doc(Return the various integrated products for area moment calculations.
 The primitive is treated as a thin shell.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_TransformInPlace =R"doc(Transform in place.)doc";
@@ -1145,102 +1145,102 @@ static const char * __doc_Bentley_Geom_DgnBoxDetail_Clone =R"doc(Copy to a new (
 static const char * __doc_Bentley_Geom_DgnBoxDetail_TryGetMaxUVLength =R"doc(Compute the lengths of the longest u and v direction sections of a
 single face of a solid primitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face.
 
-Parameter ``[in]``:
+:param (input):
     uvLength sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_GetConstantUSection =R"doc(Copy a section at constant u of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction u fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_GetConstantVSection =R"doc(Copy a section curve at constant v of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction v fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_GetFaceIndices =R"doc(Fill a list of all possible face indices.
 
-Parameter ``[out]``:
+:param (output):
     indices array of selectors for the faces.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_GetFace =R"doc(Return a single face of the solid primitive
 
-Parameter ``indices``:
+:param indices:
     integer selectors for the face.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_TryUVFractionToXYZ =R"doc(convert u,v fraction on specified face to xyz and derivatives.
 
-Parameter ``[in]``:
+:param (input):
     faceIndices face selection indices
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
-static const char * __doc_Bentley_Geom_DgnBoxDetail_ClosestPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DgnBoxDetail_ClosestPoint =R"doc(:param (input):
     spacePoint search for point close to here and on the solid surface
 
-Parameter ``[out]``:
+:param (output):
     pickDetail closest point data.
 
-Returns:
+:returns:
     false if not supported.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_AddCurveIntersections =R"doc(Compute intersections with curves and add to the data array.
 
-Parameter ``[in]``:
+:param (input):
     curves
 
-Parameter ``[in,out]``:
+:param [in,out]:
     curvePoints growing array of curve points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     solidPoints growing array of solid points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     messages array of error messages)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_AddRayIntersections =R"doc(Compute intersections with a ray and add to the pickData.
 
-Parameter ``[in]``:
+:param (input):
     ray origin and direction
 
-Parameter ``[in]``:
+:param (input):
     minParameter smallest parameter of pick. (e.g. 0 for picking along
     a positive ray from an eyepoint)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pickData growing array of picks.
 
-Parameter ``[in]``:
+:param (input):
     parentId caller's id for this solid. Will be placed in each
     pickData entry has parentId.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_GetCorners =R"doc(Return 8 corners of the box. x varies fastest, then y then z.
 
-Parameter ``[out]``:
+:param (output):
     corners 8 corner coordinates.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_ParameterizationSign =R"doc(Return +1 or -1 that matches the volume sign after integration over
@@ -1262,79 +1262,79 @@ is on z=0. (bx,by) is on z=1;)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_InitFromCenterAndSize =R"doc(Initialize box detail fields from center and size.
 
-Parameter ``[in]``:
+:param (input):
     center center of box in XYZ
 
-Parameter ``[in]``:
+:param (input):
     size total range in XYZ
 
-Parameter ``[in]``:
+:param (input):
     capped true if closed top and bottom.)doc";
 
 static const char * __doc_Bentley_Geom_DgnBoxDetail_InitFromCenters =R"doc(Initialize box detail fields specifying top/base centers instead of
 origins...
 
-Parameter ``[in]``:
+:param (input):
     baseCenter center of base rectangle
 
-Parameter ``[in]``:
+:param (input):
     topCenter center of Top rectangle
 
-Parameter ``[in]``:
+:param (input):
     vectorX X vector of base plane
 
-Parameter ``[in]``:
+:param (input):
     vectorY Y vector of base plane
 
-Parameter ``[in]``:
+:param (input):
     baseX x size at base
 
-Parameter ``[in]``:
+:param (input):
     baseY y size at base
 
-Parameter ``[in]``:
+:param (input):
     topX X size at top
 
-Parameter ``[in]``:
+:param (input):
     topY y size at top
 
-Parameter ``[in]``:
+:param (input):
     capped true if closed top and bottom.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_SetDetailCoordinatesFromFractionalizedConeCoordinates =R"doc(set point, uv coordinates, and uv derivatives vectors)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_SilhouetteCurves =R"doc(Return curves which are silhoutte curves OTHER than hard edges
 
-Returns:
+:returns:
     return false if not implemented. return true if implemented -- but
     curves may still be empty.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_ComputeSecondMomentVolumeProducts =R"doc(Return the various integrated products for moment calculations. The
 primitive is treated as a volume
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_ComputeSecondMomentAreaProducts =R"doc(Return the various integrated products for area moment calculations.
 The primitive is treated as a thin shell.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_TransformInPlace =R"doc(Transform in place.)doc";
@@ -1344,96 +1344,96 @@ static const char * __doc_Bentley_Geom_DgnConeDetail_Clone =R"doc(Copy to a new 
 static const char * __doc_Bentley_Geom_DgnConeDetail_TryGetMaxUVLength =R"doc(Compute the lengths of the longest u and v direction sections of a
 single face of a solid primitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face.
 
-Parameter ``[in]``:
+:param (input):
     uvLength sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_GetConstantUSection =R"doc(Copy a section at constant u of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction u fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_GetConstantVSection =R"doc(Copy a section curve at constant v of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction v fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_GetFaceIndices =R"doc(Fill a list of all possible face indices.
 
-Parameter ``[out]``:
+:param (output):
     indices array of selectors for the faces.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_GetFace =R"doc(Return a single face of the solid primitive
 
-Parameter ``indices``:
+:param indices:
     integer selectors for the face.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_TryUVFractionToXYZ =R"doc(convert u,v fraction on specified face to xyz and derivatives.
 
-Parameter ``[in]``:
+:param (input):
     faceIndices face selection indices
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
-static const char * __doc_Bentley_Geom_DgnConeDetail_ClosestPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DgnConeDetail_ClosestPoint =R"doc(:param (input):
     spacePoint search for point close to here and on the solid surface
 
-Parameter ``[out]``:
+:param (output):
     pickDetail closest point data.
 
-Returns:
+:returns:
     false if not supported.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_AddCurveIntersections =R"doc(Compute intersections with curves and add to the data array.
 
-Parameter ``[in]``:
+:param (input):
     curves
 
-Parameter ``[in,out]``:
+:param [in,out]:
     curvePoints growing array of curve points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     solidPoints growing array of solid points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     messages array of error messages)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_AddRayIntersections =R"doc(Compute intersections with a ray and add to the pickData.
 
-Parameter ``[in]``:
+:param (input):
     ray origin and direction
 
-Parameter ``[in]``:
+:param (input):
     minParameter smallest parameter of pick. (e.g. 0 for picking along
     a positive ray from an eyepoint)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pickData growing array of picks.
 
-Parameter ``[in]``:
+:param (input):
     parentId caller's id for this solid. Will be placed in each
     pickData entry has parentId.)doc";
 
@@ -1446,32 +1446,32 @@ static const char * __doc_Bentley_Geom_DgnConeDetail_IsRealCap =R"doc(Test if ca
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_GetSilhouettes =R"doc(Return the rule lines which are silhouettes as viewed.
 
-Parameter ``[out]``:
+:param (output):
     segmentA first silhouette line
 
-Parameter ``[out]``:
+:param (output):
     segmentB second silhouette line
 
-Parameter ``[in]``:
+:param (input):
     viewToLocal matrix that positions the cone for viewing along the z
     axis.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_FractionToRule =R"doc(Return the rule line section at a fraction around the circular
 sections.
 
-Parameter ``[in]``:
+:param (input):
     fraction fractional position around the cone.
 
-Parameter ``[out]``:
+:param (output):
     segment rule line)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_FractionToSection =R"doc(Return the ellipse cross section at a fraction along the rotation
 axis.
 
-Parameter ``[in]``:
+:param (input):
     fraction fractional position alont the z axis.
 
-Parameter ``[out]``:
+:param (output):
     ellipse the section ellipse.)doc";
 
 static const char * __doc_Bentley_Geom_DgnConeDetail_GetTransforms =R"doc(Try to set up a nonsingular coordinate frame. Returns false if centerB
@@ -1499,36 +1499,36 @@ it back to world.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_SilhouetteCurves =R"doc(Return curves which are silhoutte curves OTHER than hard edges
 
-Returns:
+:returns:
     return false if not implemented. return true if implemented -- but
     curves may still be empty.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_ComputeSecondMomentVolumeProducts =R"doc(Return the various integrated products for moment calculations. The
 primitive is treated as a volume
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_ComputeSecondMomentAreaProducts =R"doc(Return the various integrated products for area moment calculations.
 The primitive is treated as a thin shell.
 
-Parameter ``[out]``:
+:param (output):
     localToWorld transform from preferred system where the products
     are most easily computed to world.
 
-Parameter ``[out]``:
+:param (output):
     localProducts integrated [xx xy xz x; xy yy yz y; xz yz zz z; x y
     z 1] dA
 
-Returns:
+:returns:
     false if unable to compute.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_TransformInPlace =R"doc(Transform in place.)doc";
@@ -1538,122 +1538,122 @@ static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_Clone =R"doc(Copy to a
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_TryGetMaxUVLength =R"doc(Compute the lengths of the longest u and v direction sections of a
 single face of a solid primitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face.
 
-Parameter ``[out]``:
+:param (output):
     uvLength sizes in u, v directions.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_GetConstantUSection =R"doc(Copy a section at constant u of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction u fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_GetConstantVSection =R"doc(Copy a section curve at constant v of a single face to a single
 ICurvePrimitive.
 
-Parameter ``[in]``:
+:param (input):
     indices selects face
 
-Parameter ``[in]``:
+:param (input):
     fraction v fraction for section curve)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_GetFaceIndices =R"doc(Fill a list of all possible face indices.
 
-Parameter ``[out]``:
+:param (output):
     indices array of selectors for the faces.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_GetFace =R"doc(Return a single face of the solid primitive
 
-Parameter ``indices``:
+:param indices:
     integer selectors for the face.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_TryUVFractionToXYZ =R"doc(convert u,v fraction on specified face to xyz and derivatives.
 
-Parameter ``[in]``:
+:param (input):
     faceIndices face selection indices
 
-Parameter ``[in]``:
+:param (input):
     uFraction fractional coordinate in u direction.
 
-Parameter ``[in]``:
+:param (input):
     vFraction fractional coordinate in v direction.
 
-Parameter ``[out]``:
+:param (output):
     xyz point on face.
 
-Parameter ``[out]``:
+:param (output):
     dXdu derivative of face point wrt uFraction.
 
-Parameter ``[out]``:
+:param (output):
     dXdv derivative of face point wrt vFraction.)doc";
 
-static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_ClosestPoint =R"doc(Parameter ``[in]``:
+static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_ClosestPoint =R"doc(:param (input):
     spacePoint search for point close to here and on the solid surface
 
-Parameter ``[out]``:
+:param (output):
     pickDetail closest point data.
 
-Returns:
+:returns:
     false if not supported.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_AddCurveIntersections =R"doc(Compute intersections with curves and add to the data array.
 
-Parameter ``[in]``:
+:param (input):
     curves
 
-Parameter ``[in,out]``:
+:param [in,out]:
     curvePoints growing array of curve points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     solidPoints growing array of solid points.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     messages array of error messages)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_AddRayIntersections =R"doc(Compute intersections with a ray and add to the pickData.
 
-Parameter ``[in]``:
+:param (input):
     ray origin and direction
 
-Parameter ``[in]``:
+:param (input):
     minParameter smallest parameter of pick. (e.g. 0 for picking along
     a positive ray from an eyepoint)
 
-Parameter ``[in,out]``:
+:param [in,out]:
     pickData growing array of picks.
 
-Parameter ``[in]``:
+:param (input):
     parentId caller's id for this solid. Will be placed in each
     pickData entry has parentId.)doc";
 
-static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_TryGetFrame =R"doc(Parameter ``[out]``:
+static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_TryGetFrame =R"doc(:param (output):
     center center of rotation.
 
-Parameter ``[out]``:
+:param (output):
     axes coordinate axes, xy in major plane, z through hole.
 
-Parameter ``[out]``:
+:param (output):
     radiusA major radius (elbow radius)
 
-Parameter ``[out]``:
+:param (output):
     radiusB minor radius (pipe diameter)
 
-Parameter ``[out]``:
+:param (output):
     sweepRadians angle of rotation.)doc";
 
-static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_TryGetRotationAxis =R"doc(Parameter ``center``:
-    OUT center of rotation.
+static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_TryGetRotationAxis =R"doc(:param center:
+    (output) center of rotation.
 
-Parameter ``axis``:
-    OUT axis of rotation.
+:param axis:
+    (output) axis of rotation.
 
-Parameter ``sweepRadians``:
-    OUT angle of rotation.)doc";
+:param sweepRadians:
+    (output) angle of rotation.)doc";
 
 static const char * __doc_Bentley_Geom_DgnTorusPipeDetail_VFractionToUSectionDEllipse3d =R"doc(Return full ellipse on minor hoop at fractional position along minor
 circle.)doc";
@@ -1771,6 +1771,18 @@ void def_SolidPrimitive(py::module_& m)
            double rMinor = 0;
            double sweepRadians = 0;
            self.IntersectCurveLocal(curve, curveFractions, normalizedConePoints, localToWorld, worldToLocal, rMajor, rMinor, sweepRadians, boundedConeZ);
+           return py::make_tuple(rMajor, rMinor, sweepRadians);
+           }, "curve"_a, "curveFractions"_a, "normalizedConePoints"_a, "localToWorld"_a, "worldToLocal"_a, "boundedConeZ"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, IntersectCurveLocal));
+
+    c1.def("IntersectCurveLocal", [] (DgnTorusPipeDetailCR self, ICurvePrimitiveCR curve, DoubleArray& curveFractions, py::list& normalizedConePoints,
+                                      TransformR localToWorld, TransformR worldToLocal, bool boundedConeZ)
+           {
+           double rMajor = 0;
+           double rMinor = 0;
+           double sweepRadians = 0;
+           DPoint3dArray cppNormalizedConePoints;
+           self.IntersectCurveLocal(curve, curveFractions, cppNormalizedConePoints, localToWorld, worldToLocal, rMajor, rMinor, sweepRadians, boundedConeZ);
+           CONVERT_CPPARRAY_TO_PYLIST(normalizedConePoints, cppNormalizedConePoints, DPoint3dArray, DPoint3d);
            return py::make_tuple(rMajor, rMinor, sweepRadians);
            }, "curve"_a, "curveFractions"_a, "normalizedConePoints"_a, "localToWorld"_a, "worldToLocal"_a, "boundedConeZ"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, IntersectCurveLocal));
 
@@ -1931,6 +1943,12 @@ void def_SolidPrimitive(py::module_& m)
     c3.def("ParameterizationSign", &DgnBoxDetail::ParameterizationSign, DOC(Bentley, Geom, DgnBoxDetail, ParameterizationSign));
 
     c3.def("GetCorners", py::overload_cast<DPoint3dArray&>(&DgnBoxDetail::GetCorners, py::const_), "corners"_a, DOC(Bentley, Geom, DgnBoxDetail, GetCorners));
+    c3.def("GetCorners", [] (DgnBoxDetailCR self, py::list& corners)
+           {
+           DPoint3dArray cppCorners;
+           self.GetCorners(cppCorners);
+           CONVERT_CPPARRAY_TO_PYLIST(corners, cppCorners, DPoint3dArray, DPoint3d);
+           }, "corners"_a, DOC(Bentley, Geom, DgnBoxDetail, GetCorners));
     c3.def("GetCorners", py::overload_cast<DPoint3dP>(&DgnBoxDetail::GetCorners, py::const_), "corners"_a, DOC(Bentley, Geom, DgnBoxDetail, GetCorners));
     c3.def("AddRayIntersections", &DgnBoxDetail::AddRayIntersections, "pickData"_a, "ray"_a, "parentId"_a, "minParameter"_a, DOC(Bentley, Geom, DgnBoxDetail, AddRayIntersections));
 

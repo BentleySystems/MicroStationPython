@@ -17,7 +17,7 @@ static const char * __doc_Bentley_DgnPlatform_AreaParser_Clone =R"doc(Construct 
 static const char * __doc_Bentley_DgnPlatform_AreaOrVolumeParser_ToValue =R"doc(Parse a string into a distance value in uors.
 
 
-Parameter ``in``:
+:param in:
     input string.
 
 Returns (Tuple, 0):
@@ -49,7 +49,7 @@ the PointParser.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PointParser_ToValue =R"doc(Parse a string into a point value in uors.
 
-Parameter ``in``:
+:param in:
     input string. 
 Returns (Tuple, 0):
 	retVal. SUCCESS if parsed successfully. ERROR otherwise..
@@ -63,10 +63,10 @@ static const char * __doc_Bentley_DgnPlatform_PointParser_Clone =R"doc(Construct
 
 static const char * __doc_Bentley_DgnPlatform_DistanceParser_ToValue =R"doc(Parse a string into a distance value in uors.
 
-Parameter ``out``:
+:param out:
     resulting distance in uors if successfully parsed.
 
-Parameter ``in``:
+:param in:
     input string. 
 
 Returns (Tuple, 0):
@@ -89,7 +89,7 @@ static const char * __doc_Bentley_DgnPlatform_DistanceParser_Clone =R"doc(Constr
 static const char * __doc_Bentley_DgnPlatform_DirectionParser_ToValue =R"doc(Parse a string into a direction value in degrees.
 
 
-Parameter ``in``:
+:param in:
     input string. 
 
 Returns (Tuple, 0):
@@ -135,7 +135,7 @@ static const char * __doc_Bentley_DgnPlatform_DirectionParser_Clone =R"doc(Const
 static const char * __doc_Bentley_DgnPlatform_AngleParser_ToValue =R"doc(Parse a string into an angle value in degrees.
 
 
-Parameter ``in``:
+:param in:
     input string.
 
 Returns (Tuple, 0):
@@ -149,7 +149,7 @@ Returns (Tuple, 1) :
 static const char * __doc_Bentley_DgnPlatform_AngleParser_SetAngleMode =R"doc(Sets the angle mode for parsing the input string. AngleMode::Degrees,
 AngleMode::DegMin, and AngleMode::DegMinSec, are all treated the same.
 
-Parameter ``mode``:
+:param mode:
     The mode to set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_AngleParser_GetAngleMode =R"doc(Gets the angle mode for parsing the input string. AngleMode::Degrees,
@@ -160,7 +160,7 @@ static const char * __doc_Bentley_DgnPlatform_AngleParser_Clone =R"doc(Construct
 static const char * __doc_Bentley_DgnPlatform_DoubleParser_ToValue =R"doc(Parse a string into a numeric value.
 
 
-Parameter ``in``:
+:param in:
     input string.
 
 Returns (Tuple, 0):

@@ -13,17 +13,17 @@
 
 static const char * __doc_Bentley_DgnPlatform_ElementAgenda_Insert =R"doc(Insert an element into this ElementAgenda.
 
-Parameter ``eeh``:
+:param eeh:
     The EditElementHandle that is to be inserted into this agenda; if
     it has a descriptor, it will be extracted and used; otherwise an
     element ref will be used. If neither are present, nothing is
     added.
 
-Parameter ``atHead``:
+:param atHead:
     If true, put this in at the head (front) of the agenda, otherwise
     put it at the end. Passing false is more efficient.
 
-Returns:
+:returns:
     A pointer to the EditElementHandle within the ElementAgenda
     holding ``elDscr.`` @note If the EditElementHandle you provide has
     a descriptor, this will extract and then own the descriptor; you
@@ -38,21 +38,21 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_ElementAgenda_Find =R"doc(Attempt to find an ElementRefP/DgnModelRef pair in this ElementAgenda.
 
-Parameter ``elRef``:
+:param elRef:
     The ElementRefP part of the pair.
 
-Parameter ``modelRef``:
+:param modelRef:
     The DgnModelRef part of the pair.
 
-Parameter ``startIndex``:
+:param startIndex:
     The index of the first entry to be considered for the Find
     operation.
 
-Parameter ``endIndex``:
+:param endIndex:
     The index of the last entry to be considered for the Find
     operation.
 
-Returns:
+:returns:
     A pointer to the EditElementHandle holding the pair, or NULL if
     not found.)doc";
 
@@ -71,7 +71,7 @@ static const char * __doc_Bentley_DgnPlatform_ElementAgenda_SetCapacity =R"doc(S
 number of entries to the agenda, and if you know how many there will
 be, then calling this method first can improve performance.
 
-Parameter ``nEntries``:
+:param nEntries:
     Set the array hold at least this number of entries.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IElementAgendaEvents__OnRedrawGroupEvent =R"doc(Called to allow listener to participate in element set dynamics. See
@@ -228,7 +228,7 @@ void def_ElementAgenda(py::module_& m)
     py::class_< ElemAgendaEntry, EditElementHandle> c4(m, "ElemAgendaEntry");
 
     c4.def(py::init<>());
-    c4.def(py::init<ElementRefP, DgnModelRefP>(), "elRef"_a, "modelRef"_a);
+    c4.def(py::init<ElementRefP, DgnModelRefP>(), "elRef"_a, "modelRef"_a = nullptr, py::keep_alive<1, 2>(), py::keep_alive<1, 3>());
     c4.def(py::init<ElementHandleCR, bool>(), "from"_a, "duplicateDescr"_a);        
 
     //===================================================================================

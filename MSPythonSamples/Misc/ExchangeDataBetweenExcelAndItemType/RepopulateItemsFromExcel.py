@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -13,12 +9,27 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 import pandas as pd
 
+
 '''
-/*---------------------------------------------------------------------------------**//**
-* @bsimethod                                                              Bentley Systems
-+---------------+---------------+---------------+---------------+---------------+------*/
+Samples demonstrating how to repopulate item type data to excel
 '''
+
 def RepopulateItemsFromExcel(file_path=''):
+    """
+    Repopulates item type properties in a DGN file from an Excel file.
+    This function reads data from an Excel file and updates the properties of 
+    'Title Block' item type instances in the active DGN file. The Excel file 
+    should have a column named 'Design File' to filter rows corresponding to 
+    the current DGN file and a column named 'Element ID' to match instances.
+    
+    :param file_path: The path to the Excel file. If not provided, defaults to 
+                      'TitleBlock.xlsx' in the same directory as this script.
+                      (default: '')
+    :type file_path: str
+    
+    :raises FileNotFoundError: If the specified Excel file does not exist.
+    :return: None
+    """
     # Get the active DGN file from the session manager
     dgnFile = ISessionMgr.ActiveDgnFile
 

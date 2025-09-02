@@ -12,7 +12,7 @@
 
 static const char * __doc_Bentley_DgnPlatform_ExtendedElementHandler_ClearPresentation =R"doc(Clear presentation graphics.
 
-Parameter ``eh``:
+:param eh:
     The element to clear presentation graphics from.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ExtendedElementHandler_ValidatePresentation =R"doc(Generate or update presentation to match the current state of the
@@ -21,10 +21,10 @@ generate the presentation. It is not necessary to call this method if
 the default extended element transaction handler is used and
 _AutoGeneratePresentation returns true.
 
-Parameter ``eh``:
+:param eh:
     The element.
 
-Returns:
+:returns:
     SUCCESS if the presentation is validated sucessfully.)doc";
 
 

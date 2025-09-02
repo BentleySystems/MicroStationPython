@@ -12,266 +12,266 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkStringUserData_SetString =R"doc(Sets the user data
 
-Parameter ``newValue``:
+:param newValue:
     the value which we want to set)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkStringUserData_GetString =R"doc(Gets the user data string value
 
-Returns:
+:returns:
     the user data as a string)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PDFRegionLink_GetMatch =R"doc(Get the matching sequence from link
 
-Returns:
+:returns:
     the sequence number)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PDFRegionLink_GetTargetName =R"doc(Gets the target link name.
 
-Returns:
+:returns:
     the target name)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PDFRegionLink_GetTitle =R"doc(Gets the word pdf region title
 
-Returns:
+:returns:
     the pdf region title)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PDFRegionLink_HeadingInfo =R"doc(Gets the word heading informations
 
-Returns:
+:returns:
     the word heading infromations)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PDFRegionLink_SetHeadingInfo =R"doc(Sets the heading info to link
 
-Parameter ``info``:
+:param info:
     a word heading info)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PDFRegionLink_SetTarget =R"doc(Sets the target link.
 
-Parameter ``regionType``:
+:param regionType:
     a pdf region type
 
-Parameter ``name``:
+:param name:
     pdf region link
 
-Parameter ``sequenceNumber``:
+:param sequenceNumber:
     a sequence number of heading)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PDFRegionLink_PeekBookmarkTree =R"doc(Gets bookmark of tree
 
-Returns:
+:returns:
     the tree pointer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_PDFRegionLink_SetBranch =R"doc(Sets the branch to which this link will be attached.
 
-Parameter ``branch``:
+:param branch:
     of the tree)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ExcelSheetLink_SetSheetName =R"doc(Sets a sheet name to link
 
-Parameter ``name``:
+:param name:
     is name of sheet)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ExcelSheetLink_GetSheetName =R"doc(Gets a sheet name from link
 
-Returns:
+:returns:
     sheet name from link)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordBookmarkLink_GetMatch =R"doc(Gets the matching sequence from link
 
-Returns:
+:returns:
     the sequence number)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordBookmarkLink_GetStyle =R"doc(Gets the target style of link
 
-Returns:
+:returns:
     the target style)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordBookmarkLink_GetTargetName =R"doc(Gets the target name of link
 
-Returns:
+:returns:
     the target name)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordBookmarkLink_GetTitle =R"doc(Gets the word heading title
 
-Returns:
+:returns:
     the heading title)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordBookmarkLink_SetTarget =R"doc(Sets the target to link
 
-Parameter ``regionType``:
+:param regionType:
     a word region type
 
-Parameter ``name``:
+:param name:
     word heading name
 
-Parameter ``sequenceNumber``:
+:param sequenceNumber:
     a sequence number of heading)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordBookmarkLink_GetTargetType =R"doc(Gets the word region type
 
-Returns:
+:returns:
     the word region type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_GetMatch =R"doc(Gets the matching sequence from link
 
-Returns:
+:returns:
     the sequence number)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_GetStyle =R"doc(Gets the target style of link
 
-Returns:
+:returns:
     the target style)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_GetTargetName =R"doc(Gets the target name of link
 
-Returns:
+:returns:
     the target name)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_GetTitle =R"doc(Gets the word heading title
 
-Returns:
+:returns:
     the heading title)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_HeadingInfo =R"doc(Gets the word heading informations
 
-Returns:
+:returns:
     the word heading infromations)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_SetHeadingInfo =R"doc(Sets the heading info to link
 
-Parameter ``info``:
+:param info:
     a word heading info)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_SetTarget =R"doc(Sets the target to link
 
-Parameter ``regionType``:
+:param regionType:
     a word region type
 
-Parameter ``headingName``:
+:param headingName:
     word heading name
 
-Parameter ``sequenceNumber``:
+:param sequenceNumber:
     a sequence number of heading)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_GetTargetType =R"doc(Gets the word region type
 
-Returns:
+:returns:
     the word region type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_PeekBookmarkTree =R"doc(Gets the bookmark of tree
 
-Returns:
+:returns:
     the tree pointer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WordHeadingLink_SetBranch =R"doc(Sets a branch to link where this is going to be attached.
 
-Parameter ``branch``:
+:param branch:
     of the tree)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetLink_SetLinkTreeKey =R"doc(Set the link key into the link.
 
-Parameter ``treeKey``:
+:param treeKey:
     key of target linkset)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetLink_GetLinkTreeKey =R"doc(Get the linkset key.
 
-Returns:
+:returns:
     the tree key of target linkset)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetLink_SetFileLink =R"doc(Set a file link into the linkset link.
 
-Parameter ``fileLink``:
+:param fileLink:
     a file link which needs to be attached to linkset link
 
-Returns:
+:returns:
     SUCCESS if it succeeds)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetLink_SetLinkSetName =R"doc(Set the linkset name into the link.
 
-Parameter ``linkSetName``:
+:param linkSetName:
     name of the linkset)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetLink_GetLinkSetName =R"doc(Get the name of the linkset.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetLink_SetLinkSetPath =R"doc(Set the link set path into the link.
 
-Parameter ``linksetPath``:
+:param linksetPath:
     a linkset path)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSetLink_GetLinkSetPath =R"doc(Get the linkset path.
 
-Returns:
+:returns:
     the linkset path of the link)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnConfigVarExpressionLink_GetExpressionValue =R"doc(Get the expression value which this link consists of.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnConfigVarExpressionLink_SetFilter =R"doc(Sets the filter expresssion in the link.
 
-Parameter ``filterExpression``:
+:param filterExpression:
     filter string)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnConfigVarExpressionLink_GetFilter =R"doc(Gets the filter string from link.
 
-Returns:
+:returns:
     the filter string)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnConfigVarExpressionLink_SetExpression =R"doc(Sets the expression to link
 
-Parameter ``configVarExpression``:
+:param configVarExpression:
     an expression which needs to be set to link.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnConfigVarExpressionLink_GetExpression =R"doc(Gets the expression from link.
 
-Returns:
+:returns:
     the expression string.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnURLLink_SetAddress =R"doc(Destructor Set the URL address in the link
 
-Parameter ``urlAddress``:
+:param urlAddress:
     a URL address)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnRegionLink_SetModelLink =R"doc(Parameter ``model``:
+static const char * __doc_Bentley_DgnPlatform_DgnRegionLink_SetModelLink =R"doc(:param model:
     a model link)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnRegionLink_GetTargetType =R"doc(Gets the type of target link.
 
-Returns:
+:returns:
     the type of target which links have)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnRegionLink_GetTargetName =R"doc(Gets the name of the target link.
 
-Returns:
+:returns:
     the name of target)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnRegionLink_SetTargetSubType =R"doc(Sets the region Sub Type link to the target link.
 
-Parameter ``targetSubType``:
+:param targetSubType:
     a Sub-type of target(eg. Plan, Elevation etc.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnRegionLink_GetTargetSubType =R"doc(Gets the Sub-Type of target link if it is a Saved View Link
 
-Returns:
+:returns:
     the Sub-Type (Plan, Elevation, Detail etc.) of target link)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnRegionLink_SetTarget =R"doc(Sets the region link to the target link.
 
-Parameter ``targetType``:
+:param targetType:
     a type of target
 
-Parameter ``targetName``:
+:param targetName:
     the name of the target)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelLink_SetFileLink =R"doc(Set a file link in the model link
 
-Parameter ``fileLink``:
+:param fileLink:
     a file link which needs to be attached to model link
 
-Returns:
+:returns:
     SUCCESS if it succeeds else it returns FAIL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelLink_SetMarkupModel =R"doc(Set the markup model property in the link
 
-Parameter ``isMarkup``:
+:param isMarkup:
     has the value true/false depending on which the markup status of
     the link is decided.)doc";
 
@@ -279,93 +279,93 @@ static const char * __doc_Bentley_DgnPlatform_DgnModelLink_SetModelType =R"doc(S
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelLink_SetModelName =R"doc(Set the model name in the link to which the model has been associated.
 
-Parameter ``modelName``:
+:param modelName:
     the name of the model)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnModelLink_GetModelName =R"doc(Get the model name from link.
 
-Returns:
+:returns:
     the name of model to which this link is associated)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFolderLink_GetMoniker =R"doc(Get the document moniker from link
 
-Returns:
+:returns:
     the folder moniker in which link has been associated)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFolderLink_SetMoniker =R"doc(Set the folder moniker to a link
 
-Parameter ``folderMoniker``:
+:param folderMoniker:
     a folder moniker where this link is going to be attached)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFileLink_SetMoniker =R"doc(Sets the document moniker to a link
 
-Parameter ``moniker``:
+:param moniker:
     the document moniker where this links is going to be attached
 
-Parameter ``createRelativePath``:
+:param createRelativePath:
     a boolean to specify whether to create a relative path.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnGenericLink_SetMoniker =R"doc(Set the document moniker to a link
 
-Parameter ``moniker``:
+:param moniker:
     the document moniker where this link is going to attached
 
-Parameter ``createRelativePath``:
+:param createRelativePath:
     by default its going to true, for creating portable path)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnGenericLink_GetMoniker =R"doc(Get the document moniker from link
 
-Returns:
+:returns:
     the document moniker in which link has been associated)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnGenericLink_IsFileBasedLink =R"doc(Check whether link is file based or not)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkBookmarkProvider_LoadBookmarkTree =R"doc(Load the book mark tree
 
-Returns:
+:returns:
     the link tree pointer)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkUserData_IsPersistent =R"doc(Check if the user data is persistent.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkUserData_GetSubID =R"doc(Get the sub-application ID for the user data.
 
-Returns:)doc";
+:returns:)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkUserData_GetAppID =R"doc(Get the application ID
 
-Returns:
+:returns:
     the application ID)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkUserData_Copy =R"doc(Copy link user data
 
-Returns:
+:returns:
     the object of type DgnLinkUserData)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkSet_Copy =R"doc(Copy the link set to the destination branch)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLink_GetBookmarkProvider =R"doc(It will return the bookmark provider
 
-Returns:
+:returns:
     the DgnLinkBookmarkProvider object)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLink_HasSameTarget =R"doc(To check whether links has same target
 
-Parameter ``anotherLink``:
+:param anotherLink:
     the link which needs to be verified
 
-Returns:
+:returns:
     status in true/false mode)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLink_BuildSuggestedName =R"doc(Build the unique link name in the context of the tree where it is
 going to be attached.
 
-Parameter ``contextParent``:
+:param contextParent:
     tree branch where it is going to attach
 
-Parameter ``fullContext``:
+:param fullContext:
     it will describes whether it will be in full context or not
 
-Returns:
+:returns:
     the link name)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLink_GetTargetAncestry =R"doc(Get the target sepecifications for the link and its parent target as
@@ -373,28 +373,28 @@ well.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLink_GetTargetSpec =R"doc(Get the target specification.
 
-Returns:
+:returns:
     the target specification)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLink_GetShortDescription =R"doc(Get the short description for this link.
 
-Returns:
+:returns:
     the string which is basically a shrot description of link)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLink_IsTargetFullyQualified =R"doc(Check if target is fully qualified, if not returns a reason.
 
-Parameter ``reason``:
+:param reason:
     String which describes the reason
 
-Returns:
+:returns:
     True/False)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLink_IsTargetValid =R"doc(Check if target is valid.
 
-Parameter ``logger``:
+:param logger:
     A link validation object
 
-Returns:
+:returns:
     the status of function in true/false)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkFollowLog_AppendToLogString =R"doc(This method can be used to append a string to existing log object.)doc";
@@ -402,50 +402,50 @@ static const char * __doc_Bentley_DgnPlatform_DgnLinkFollowLog_AppendToLogString
 static const char * __doc_Bentley_DgnPlatform_DgnLinkFollowLog_GetLogString =R"doc(It will give the log string which has been generated while calling log
 object
 
-Returns:
+:returns:
     the log string)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkFollowLog_SetErrorString =R"doc(Set the error string to object from given string)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkFollowLog_GetErrorString =R"doc(Get the error string.
 
-Returns:
+:returns:
     string which represents the error.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkTargetSpec_Compare =R"doc(This method can be used to compare the two targets
 
-Parameter ``targetSpec``:
+:param targetSpec:
     A target which can be compared against the other.
 
-Returns:
+:returns:
     comparison result in true/false)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkTargetSpec_GetLocationString =R"doc(Get the location string. @ returns the target location)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkTargetSpec_GetNameString =R"doc(Get the string that defines the target name
 
-Returns:
+:returns:
     target name)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkTargetSpec_GetTypeString =R"doc(Get the string that describes the type
 
-Returns:
+:returns:
     the string which describes the type)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkTargetSpec_GetAncestryKey =R"doc(Get the ancestry key
 
-Returns:
+:returns:
     the ancestry key)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkECInstanceAdapter_ToECInstance =R"doc(Create the EC instance for the object
 
-Returns:
+:returns:
     a pointr to IECInstancePtr)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnLinkECInstanceAdapter_FromECInstance =R"doc(Create object from the EC instance. This method can be used to fill
 the Object from given ECinstance and treeSpec
 
-Returns:
+:returns:
     SUCCESS if it is properly able to fill the data)doc";
 
 /*---------------------------------------------------------------------------------**//**
@@ -683,9 +683,7 @@ void def_DgnLinks(py::module_& m)
 
     //===================================================================================
     // struct DgnConfigVarExpressionLink
-    py::class_< DgnConfigVarExpressionLink
-        , DgnLink
-    > c15(m, "DgnConfigVarExpressionLink");
+    py::class_< DgnConfigVarExpressionLink, DgnLink> c15(m, "DgnConfigVarExpressionLink");
     
     c15.def_property("Expression", &DgnConfigVarExpressionLink::GetExpression, &DgnConfigVarExpressionLink::SetExpression);
     c15.def("GetExpression", &DgnConfigVarExpressionLink::GetExpression, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, DgnConfigVarExpressionLink, GetExpression));

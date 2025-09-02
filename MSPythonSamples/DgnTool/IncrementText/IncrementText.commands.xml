@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="Text" CommandClass="MacroCommand" CommandWord="Text">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="Text">
+            <Keyword CommandWord="INCREMENT" />
+        </KeyinTable>
+    </SubKeyinTables>
+    
+    <KeyinHandlers>
+        <KeyinHandler Keyin="TEXT INCREMENT"                     Function="initializeTextIncrement" />
+    </KeyinHandlers>
+</KeyinTree>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="Tag" CommandClass="MacroCommand" CommandWord="TAG">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="Tag">
+            <Keyword CommandWord="CREATETAGSET" />
+        </KeyinTable>
+    </SubKeyinTables>
+    
+    <KeyinHandlers>
+        <KeyinHandler Keyin="TAG CREATETAGSET"                     Function="tagsExample_createTagSet" />
+    </KeyinHandlers>
+</KeyinTree>

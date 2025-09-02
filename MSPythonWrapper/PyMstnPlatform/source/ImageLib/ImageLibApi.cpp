@@ -594,8 +594,8 @@ void def_ImageLibAPI(py::module_& m)
 
     c1.def_static("resize", [](Point2dR outputsize, py::bytearray& inputImageR, Point2dR inputsize)
         {
-		byte* imageMapP;
-		int retVal = mdlImage_resize (&imageMapP, &outputsize, (byte*)inputImageR.data(), &inputsize);
+		Byte* imageMapP;
+		int retVal = mdlImage_resize (&imageMapP, &outputsize, (Byte*)inputImageR.data(), &inputsize);
 
         py::bytearray imageMap;
 
@@ -618,7 +618,7 @@ void def_ImageLibAPI(py::module_& m)
 
     c1.def_static("readFileToRGB", [](WCharCP fileName, DgnPlatform::ImageFileFormat fileType, boost::optional<Point2d> requestedSize)
         {
-		byte *imageBufferP = nullptr;
+		Byte *imageBufferP = nullptr;
         Point2d outputSize;
 
         int retVal = mdlImage_readFileToRGB(&imageBufferP, &outputSize, fileName, fileType, requestedSize.get_ptr ());
@@ -637,11 +637,11 @@ void def_ImageLibAPI(py::module_& m)
                                              py::bytearray& imageBufferR, DgnPlatform::CompressionType compressType, 
                                              DgnPlatform::CompressionRatio compressRatio, boost::optional<py::bytearray> transparency)
         {
-        byte* transP = nullptr;
+        Byte* transP = nullptr;
         if (transparency.get_ptr())
-            transP = (byte*)(transparency.get_ptr()->data());
+            transP = (Byte*)(transparency.get_ptr()->data());
                       
-        return mdlImage_extCreateFileFromRGB (name, type, colorMode, &sizeR, (byte*)imageBufferR.data(), compressType, compressRatio, transP);
+        return mdlImage_extCreateFileFromRGB (name, type, colorMode, &sizeR, (Byte*)imageBufferR.data(), compressType, compressRatio, transP);
         }, "name"_a, "type"_a, "colorMode"_a, "sizeR"_a, "imageBufferR"_a, "compressType"_a, "compressRatio"_a, "transparency"_a, DOC(mdlImage_extCreateFileFromRGB));
 
     c1.def_static("getExtension", [](DgnPlatform::ImageFileFormat type)
@@ -684,12 +684,12 @@ void def_ImageLibAPI(py::module_& m)
     c1.def_static("typeFromExtension", &mdlImage_typeFromExtension, "fileName"_a, DOC(mdlImage_typeFromExtension));
     c1.def_static("applyGamma", [](py::bytearray& rgb, Point2dR sizeR, double gamma)
         {
-        mdlImage_applyGamma((byte*)rgb.data(), (byte*)rgb.data(), &sizeR, gamma);
+        mdlImage_applyGamma((Byte*)rgb.data(), (Byte*)rgb.data(), &sizeR, gamma);
         }, "rgb"_a, "sizeR"_a, "gamma"_a, DOC(mdlImage_applyGamma));
 
     c1.def_static("negate", [](py::bytearray& rgb, Point2dR sizeR)
         {
-        mdlImage_negate((byte*)rgb.data(), (byte*)rgb.data(), &sizeR);
+        mdlImage_negate((Byte*)rgb.data(), (Byte*)rgb.data(), &sizeR);
         }, "rgb"_a, "sizeR"_a, DOC(mdlImage_negate));
 
 
@@ -698,22 +698,22 @@ void def_ImageLibAPI(py::module_& m)
         int             bufsize = mdlImage_memorySize (&outSizeR, imageFormat);
         py::bytearray   out = py::bytearray(nullptr, bufsize);
 
-        int retVal = mdlImage_extractSubImage((byte*)out.data(), &outSizeR, (byte*)inR.data(), &inSizeR, &rectR, imageFormat);
+        int retVal = mdlImage_extractSubImage((Byte*)out.data(), &outSizeR, (Byte*)inR.data(), &inSizeR, &rectR, imageFormat);
 
         return py::make_tuple(retVal, out);
         }, "outSizeR"_a, "inR"_a, "inSizeR"_a, "rectR"_a, "imageFormat"_a, DOC(mdlImage_extractSubImage));
 
     c1.def_static("tintImage", [](py::bytearray& imageR, Point2dR imageSizeR, RgbColorDef* tintRGBP)
         {
-        mdlImage_tintImage((byte*)imageR.data(), &imageSizeR, tintRGBP);
+        mdlImage_tintImage((Byte*)imageR.data(), &imageSizeR, tintRGBP);
         }, "imageR"_a, "imageSizeR"_a, "tintRGBP"_a, DOC(mdlImage_tintImage));
 
     c1.def_static("rotate", [](py::bytearray& inpBufferR, Point2dR imageSizeR, int imageFormat, int rotation)
         {
-        byte        *outBufferP = nullptr;
+        Byte        *outBufferP = nullptr;
         Point2d     outSize;
 
-        int retVal = mdlImage_rotate(&outBufferP, &outSize, (byte*)inpBufferR.data(), &imageSizeR, imageFormat, rotation);
+        int retVal = mdlImage_rotate(&outBufferP, &outSize, (Byte*)inpBufferR.data(), &imageSizeR, imageFormat, rotation);
 
         py::bytearray outImage;
 
@@ -721,7 +721,7 @@ void def_ImageLibAPI(py::module_& m)
             {
             int bufsize = mdlImage_memorySize (&outSize, imageFormat);
             outImage = py::bytearray((const char*)outBufferP, bufsize);
-            mdlImage_freeImage((byte*)outBufferP, &outSize, imageFormat);
+            mdlImage_freeImage((Byte*)outBufferP, &outSize, imageFormat);
             }
 
         return py::make_tuple(retVal, outImage, outSize);
@@ -729,7 +729,7 @@ void def_ImageLibAPI(py::module_& m)
 
     c1.def_static("mirror", [](py::bytearray& rgb, Point2dR imageSizeR, int imageFormat, bool vertical)
         {
-        return mdlImage_mirror((byte*)rgb.data(), &imageSizeR, imageFormat, vertical);
+        return mdlImage_mirror((Byte*)rgb.data(), &imageSizeR, imageFormat, vertical);
 
         }, "rgb"_a, "imageSizeR"_a, "imageFormat"_a, "vertical"_a, DOC(mdlImage_mirror));
 
@@ -743,19 +743,19 @@ void def_ImageLibAPI(py::module_& m)
         int             bufsize = mdlImage_memorySize (&imageSizeR, imgFmt);
         py::bytearray   imageMap = py::bytearray(nullptr, bufsize);
 
-        int retVal =  mdlImage_RGBToRGBSeparate((byte*)imageMap.data (), (byte*)rgbInterlacedR.data(), &imageSizeR, colorMode);
+        int retVal =  mdlImage_RGBToRGBSeparate((Byte*)imageMap.data (), (Byte*)rgbInterlacedR.data(), &imageSizeR, colorMode);
 
         return py::make_tuple(retVal, imageMap); 
         }, "rgbInterlacedR"_a, "imageSizeR"_a, "colorMode"_a, DOC(mdlImage_RGBToRGBSeparate));
 
     c1.def_static("RGBToRGBSeparateInPlace", [](py::bytearray& rgb, Point2dR imageSizeR, DgnPlatform::ImageColorMode colorMode)
         {
-        return mdlImage_RGBToRGBSeparate((byte*)rgb.data(), (byte*)rgb.data(), &imageSizeR, colorMode);
+        return mdlImage_RGBToRGBSeparate((Byte*)rgb.data(), (Byte*)rgb.data(), &imageSizeR, colorMode);
         }, "rgb"_a, "imageSizeR"_a, "colorMode"_a, DOC(mdlImage_RGBToRGBSeparateInPlace));
 
     c1.def_static("RGBSeparateToRGBInPlace", [](py::bytearray& rgb, Point2dR imageSizeR, DgnPlatform::ImageColorMode colorMode)
         {
-        return mdlImage_RGBSeparateToRGB((byte*)rgb.data(), (byte*)rgb.data(), &imageSizeR, colorMode);
+        return mdlImage_RGBSeparateToRGB((Byte*)rgb.data(), (Byte*)rgb.data(), &imageSizeR, colorMode);
         }, "rgb"_a, "imageSizeR"_a, "colorMode"_a, DOC(mdlImage_RGBSeparateToRGBInPlace));
 
     c1.def_static("RGBSeparateToBGR", []( py::bytearray& rgbSeparate, Point2dR imageSizeR, DgnPlatform::ImageColorMode colorMode)
@@ -764,7 +764,7 @@ void def_ImageLibAPI(py::module_& m)
         int             bufsize = mdlImage_memorySize (&imageSizeR, imgFmt);
         py::bytearray   imageMap = py::bytearray(nullptr, bufsize);
 
-        int retVal = mdlImage_RGBSeparateToBGR((byte*)imageMap.data(), (byte*)rgbSeparate.data(), &imageSizeR, colorMode);
+        int retVal = mdlImage_RGBSeparateToBGR((Byte*)imageMap.data(), (Byte*)rgbSeparate.data(), &imageSizeR, colorMode);
 
         return py::make_tuple(retVal, imageMap);
         }, "rgbSeparate"_a, "imageSizeR"_a, "colorMode"_a, DOC(mdlImage_RGBSeparateToBGR));
@@ -777,7 +777,7 @@ void def_ImageLibAPI(py::module_& m)
 
     c1.def_static("saveViewToRGB", [](Point2dR imageSizeR, int renderMode, bool stereo, bool antialias, int view)
         {
-        byte* imageMapP = nullptr;    
+        Byte* imageMapP = nullptr;    
 
         int retVal = mdlImage_saveViewToRGB(&imageMapP, &imageSizeR, renderMode, stereo, antialias, view);
 
@@ -793,7 +793,7 @@ void def_ImageLibAPI(py::module_& m)
     
     c1.def_static("saveViewToRGBA", [](Point2dR imageSizeR, int renderMode, bool stereo, bool antialias, int view)
         {
-        byte* imageMapP = nullptr;    
+        Byte* imageMapP = nullptr;    
 
         int retVal = mdlImage_saveViewToRGBA(&imageMapP, &imageSizeR, renderMode, stereo, antialias, view);
 

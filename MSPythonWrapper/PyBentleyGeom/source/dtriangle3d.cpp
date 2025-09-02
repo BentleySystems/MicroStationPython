@@ -10,7 +10,7 @@
 
 
 
-static const char * __doc_Bentley_Geom_DPlane3dByVectors_ProjectPoint =R"doc(Returns:
+static const char * __doc_Bentley_Geom_DPlane3dByVectors_ProjectPoint =R"doc(:returns:
     u,v coordinates of the projection. This is marked valid in the
     usual case of independent (nonzero, non-parallel) plane vectors.
 
@@ -66,7 +66,7 @@ diagonal, left with CCW loop direction.)doc";
 static const char * __doc_Bentley_Geom_DTriangle3d_ClosestPointUnbounded =R"doc(return uv and xyz coordinates of the projection to the unbounded plane
 of the triangle.
 
-Returns:
+:returns:
     false if axes are not independent.)doc";
 
 static const char * __doc_Bentley_Geom_DTriangle3d_GetVectorsFromOrigin =R"doc(Return the two edge vectors outward from the origin.)doc";

@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2022 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -14,11 +10,18 @@ from MSPyDgnView import *
 import sys
 
 '''
-Function to iterate levels available on model
-    lvlName : str      Level Name
-    lvlId   : int      Level number
+This sample demonstrates how to select elements by level name
 '''
+
 def getLevelName(lvlName, lvlId):
+    """
+    Check if a level with the specified name and ID exists in the active model.
+
+    :param str lvlName: The name of the level to search for.
+    :param int lvlId: The ID of the level to search for.
+    :return: True if a level with the specified name and ID exists, False otherwise.
+    :rtype: bool
+    """    
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     levelCache = ACTIVEMODEL.GetDgnFile().GetLevelCache()
@@ -32,11 +35,12 @@ def getLevelName(lvlName, lvlId):
 
     return False
 
-'''
-Function to select elements by its level number
-    userLevelNumber : int      Level number to select
-'''
 def selectElementsbyLevelName(userLevelName):
+    """
+    Select and highlight all graphical elements in the active model that belong to the specified level name.
+
+    :param str userLevelName: The name of the level to select elements from.
+    """
     #Get active model
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     dgnModel = ACTIVEMODEL.GetDgnModel()
@@ -56,7 +60,16 @@ def selectElementsbyLevelName(userLevelName):
         #It will select highlight all elements added in selection set 
         if bMatch:
             selSetManager.AddElement(perElementRef,dgnModel)
-
+    #Get the selected elements from the selection set manager
+    agenda = ElementAgenda()
+    selSetManager.BuildAgenda(agenda)
+    # Print the number of selected elements
+    print (f"Selected {agenda.GetCount()} elements")
+    # iterate over the selection set printing the element ids of elements in the selection set
+    for i in range(agenda.GetCount()):
+        editElementHandle = agenda.GetEntry(i)
+        print (f"  Element ID: {editElementHandle.GetElementId()}")
+   
 
 #main
 if __name__ == "__main__":

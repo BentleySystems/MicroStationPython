@@ -14,22 +14,22 @@ static const char * __doc_Bentley_DgnPlatform_DgnFolder_IsInSameRepository =R"do
 repository as this DgnFolder of the file, and optionally prompt the
 user for whether to overwrite the file or not.
 
-Returns:
+:returns:
     true if both are in the same repository, false if not
 
-Parameter ``compareFolder``:
+:param compareFolder:
     A pointer to a DgnFolder object used for comparison)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFolder_CreateNew =R"doc(Create a new folder in DMS. Returns DgnFolder object if the folder was
 successfully created or accepted existing one.
 
-Parameter ``status``:
+:param status:
     If NULL is returned, this gives an indication why.
 
-Parameter ``folderName``:
+:param folderName:
     The name for the new folder.
 
-Parameter ``parentFolderMoniker``:
+:param parentFolderMoniker:
     The moniker of the parent folder under which this new folder
     should be created.)doc";
 
@@ -37,14 +37,14 @@ static const char * __doc_Bentley_DgnPlatform_DgnFolder_CreateFromMoniker =R"doc
 existing folder. This method would typically be used to either query
 the contents of a folder or to create additional contents.
 
-Returns:
+:returns:
     A DgnFolder that represents the existing folder. On failure, NULL
     is returned.
 
-Parameter ``status``:
+:param status:
     If NULL is returned, this gives an indication of why.
 
-Parameter ``moniker``:
+:param moniker:
     The moniker string which specifies the location and name of the
     folder.)doc";
 
@@ -89,7 +89,7 @@ the portable name if not. @See DgnDocumentMoniker::ResolveFileName)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_GetMyAccess =R"doc(Get the current access for this client. My access is the access I have
 as a user right now. For example, if the document is checked out to
-me, I have exclusive write access; if the document is IN, I have no
+me, I have exclusive write access; if the document is (input), I have no
 access.
 
 Remark:
@@ -98,7 +98,7 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_GetAvailableAccess =R"doc(Get the highest available access for this client. Available access is
 the highest access I can get right now. For example, if the document
-is out to someone else, I have read-only access; if it is IN, I have
+is out to someone else, I have read-only access; if it is (input), I have
 the access based on the document permissions.
 
 Remark:
@@ -117,10 +117,10 @@ static const char * __doc_Bentley_DgnPlatform_DgnDocument_IsInSameRepository =R"
 repository as this DgnDocument of the file, and optionally prompt the
 user for whether to overwrite the file or not.
 
-Returns:
+:returns:
     true if both are in the same repository, false if not
 
-Parameter ``compareDocument``:
+:param compareDocument:
     A pointer to a DgnDocument object used for comparison)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_IsSameFile =R"doc(Query if this document and *other* refer to the same file. Calls
@@ -206,23 +206,23 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_CreateNew =R"doc(Create a new document in DMS. Returns DgnDocument object if the
 document was created.
 
-Parameter ``status``:
+:param status:
     If NULL is returned, this gives an indication why.
 
-Parameter ``documentName``:
+:param documentName:
     The name for the new document.
 
-Parameter ``parentFolderMoniker``:
+:param parentFolderMoniker:
     The moniker of the parent folder under which this new folder
     should be created.
 
-Parameter ``defFileId``:
+:param defFileId:
     Identifies the type of file being created.
 
-Parameter ``overwriteMode``:
+:param overwriteMode:
     Specifies what to do if the document already exists.
 
-Parameter ``options``:
+:param options:
     Create Options.
 
 Returns (Tuple, 0):
@@ -236,36 +236,36 @@ Returns (Tuple, 1):
 static const char * __doc_Bentley_DgnPlatform_DgnDocument_CreateForNewFile =R"doc(Create a new DgnDocument object to represent a new file in the native
 file system. Optionally, test for the existence of a local file by the
 same name, and optionally prompt the user for whether to overwrite the
-file or not. <p>*\b* NB:The caller should call
+file or not.  NB:The caller should call
 DgnDocument::OnNewFileCreated after creating the new disk file.
 
-Parameter ``status``:
+:param status:
     If NULL is returned, this gives an indication of why. The possible
     values are:- DGNFETCH_STATUS_FileAlreadyExists - the file already
     exists and overwrite was not specified. -
     DGNFETCH_STATUS_AccessViolation - the file already exists and
     could not be overwritten.
 
-Parameter ``documentName``:
+:param documentName:
     The name for the file or document created
 
-Parameter ``searchPath``:
+:param searchPath:
     The base path used for relative searches or NULL to ignore this
     parameter. A search path may contain one or more configuration
     variables, directory paths, and/or file paths.
 
-Parameter ``defFileId``:
+:param defFileId:
     Identifies the type of file being created.
 
-Parameter ``wDefaultFileName``:
+:param wDefaultFileName:
     Specifies the default drive, path, filename, and/or extension to
     be used when locating an existing file from a partially specified
     name.
 
-Parameter ``overwriteMode``:
+:param overwriteMode:
     Specifies what to do if the document already exists.
 
-Parameter ``options``:
+:param options:
     Create Options.
 
 Remark:
@@ -294,26 +294,26 @@ DgnDocumentMonikerPtr  moniker = CreateMonikerFromFileName (fileName, NULL, envv
 DgnDocumentP openedDoc = CreateFromMoniker (status, *moniker, defFileId, fetchMode, fetchOptions);
 ``
 
-Parameter ``status``:
+:param status:
     If NULL is returned, this gives an indication of why:-
     DGNFETCH_STATUS_FileNotFound:the file could not be found
 
-Parameter ``fileName``:
+:param fileName:
     The name of the existing file.
 
-Parameter ``searchPath``:
+:param searchPath:
     The base path used for relative searches or NULL to ignore this
     parameter. A search path may contain one or more configuration
     variables, directory paths, and/or file paths.
 
-Parameter ``defFileId``:
+:param defFileId:
     Identifies the type of file being opened.
 
-Parameter ``fetchMode``:
+:param fetchMode:
     Specifies the access that should be requested when fetching the
     DgnDocument from the DMS.
 
-Parameter ``fetchOptions``:
+:param fetchOptions:
     Fetch options
 
 Remark:
@@ -337,24 +337,24 @@ data from the document. The document manager will optionally fetch the
 document from the repository.
 
 
-Parameter ``status``:
+:param status:
     If NULL is returned, this gives an indication of why:-
     DGNFETCH_STATUS_FileNotFound:the file could not be found - ERROR:
     the moniker is invalid
 
-Parameter ``moniker``:
+:param moniker:
     The moniker string which specifies the location and name of the
     document.
 
-Parameter ``defFileId``:
+:param defFileId:
     Gives the caller a way to tell the document manager about the
     intended use of this document. See the list of ids in deffiles.h
 
-Parameter ``fetchMode``:
+:param fetchMode:
     Specifies the access that should be requested when fetching the
     DgnDocument from the DMS.
 
-Parameter ``fetchOptions``:
+:param fetchOptions:
     Fetch options
 
 Remark:
@@ -387,11 +387,11 @@ Returns (Tuple, 1) :
 static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_ResolveFolderName =R"doc(Get the folder name appropriate for directory based APIs, usually a
 fully qualified folder path. Searches the file system. Can fail.
 
-Parameter ``status``:
+:param status:
     If non-null, a non-zero error status if the search for the file
     failed. Possible values are:- ERROR - the moniker is invalid
 
-Parameter ``dontRetryIfFailed``:
+:param dontRetryIfFailed:
     This parameter controls what this method will do if it tried and
     failed to find the folder in a previous call. If true, then this
     method will not try again to resolve the directory path. If false,
@@ -414,27 +414,27 @@ Returns  (Tuple, 0):
 static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_Clone =R"doc(Create a new DgnDocumentMoniker object that is a copy of the
 DgnDocumentMoniker passed in.
 
-Parameter ``source``:
+:param source:
     The DgnDocumentMoniker to copy.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_CreateFromURI =R"doc(Create a folder moniker from the given URI.
 
-Returns:
+:returns:
     Folder moniker. It can be null in case of an error.
 
-Parameter ``uri``:
+:param uri:
     URI for the document.
 
-Parameter ``basePath``:
+:param basePath:
     Base path for the moniker)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_CreateFromFolderName =R"doc(Create a new DgnFolderMoniker object that refers to a folder in the
 native file system.
 
-Parameter ``folderName``:
+:param folderName:
     Identifies a disk file
 
-Parameter ``searchPath``:
+:param searchPath:
     The base path used for relative searches or NULL to ignore this
     parameter. A search path may contain one or more configuration
     variables, directory paths, and/or file paths.)doc";
@@ -443,20 +443,20 @@ static const char * __doc_Bentley_DgnPlatform_DgnFolderMoniker_Create =R"doc(Cre
 additional context information. This method is typically used to find
 a document from a previously persisted moniker.
 
-Returns:
+:returns:
     A DgnFolderMoniker object that contains the information stored in
     the given string.
 
-Parameter ``externalizedState``:
+:param externalizedState:
     The externalized state of the moniker. @See
     DgnBaseMoniker::Externalize
 
-Parameter ``searchPath``:
+:param searchPath:
     The base path used for relative searches or NULL to ignore this
     parameter. A search path may contain one or more configuration
     variables, directory paths, and/or file paths.
 
-Parameter ``fullPathFirst``:
+:param fullPathFirst:
     Pass true to give preference to the fullpath in the moniker.
     Usually false.)doc";
 
@@ -480,12 +480,12 @@ static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_ResolveFileName
 appropriate for filename based APIs, usually a fully qualified file
 path. Searches the file system. Can fail.
 
-Parameter ``status``:
+:param status:
     If non-null, a non-zero error status if the search for the file
     failed. Possible values are:- DGNFETCH_STATUS_FileNotFound - the
     file could not be found - ERROR - the moniker is invalid
 
-Parameter ``dontRetryIfFailed``:
+:param dontRetryIfFailed:
     This parameter controls what this method will do if it tried and
     failed to find the file in a previous call. If true, then this
     method will not try again to resolve the file. If false, then this
@@ -506,104 +506,104 @@ Returns (Tuple, 0):
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_Clone =R"doc(Create a new DgnDocumentMoniker object that is a copy of the
 DgnDocumentMoniker passed in.
 
-Parameter ``source``:
+:param source:
     The DgnDocumentMoniker to copy.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_CreateFromURI =R"doc(Create a document moniker from the given URI.
 
-Returns:
+:returns:
     Document moniker. It can be null in case of an error.
 
-Parameter ``uri``:
+:param uri:
     URI for the document.
 
-Parameter ``basePath``:
+:param basePath:
     Base path for the moniker)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_CreatePackagedFileMonikerFromPackageFileMoniker =R"doc(Create a new DgnDocumentMoniker object that refers to a packaged file
 embedded inside a package file that exists in the native file system.
 
-Returns:
+:returns:
     A DgnDocumentMoniker object that contains the information for a
     packaged file
 
-Parameter ``packageMoniker``:
+:param packageMoniker:
     A moniker for the Package file in the file system
 
-Parameter ``embeddedId``:
+:param embeddedId:
     Index for the packaged file embedded in the package
 
-Parameter ``embedName``:
+:param embedName:
     Name for packaged file embedded in the package)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_CreatePackagedFileMonikerFromFileName =R"doc(Create a new DgnDocumentMoniker object that refers to a packaged file
 embedded inside a package file that exists in the native file system.
 
-Returns:
+:returns:
     A DgnDocumentMoniker object that contains the information for a
     packaged file
 
-Parameter ``packageFilePortableName``:
+:param packageFilePortableName:
     Identifies the Package file in the file system
 
-Parameter ``packageFilefullPath``:
+:param packageFilefullPath:
     Identifies the Package file in the file system with the full path
     specified
 
-Parameter ``embeddedId``:
+:param embeddedId:
     Index for the packaged file embedded in the package
 
-Parameter ``embedName``:
+:param embedName:
     Name for packaged file embedded in the package
 
-Parameter ``providerID``:
+:param providerID:
     provider id of the moniker
 
-Parameter ``isRelative``:
+:param isRelative:
     true if the path is relative
 
-Parameter ``searchPath``:
+:param searchPath:
     The base path used for relative searches or NULL to ignore this
     parameter. A search path may contain one or more configuration
     variables, directory paths, and/or file paths.
 
-Parameter ``findFullPathFirst``:
+:param findFullPathFirst:
     Pass true to give preference to the fullpath in the moniker.
     Usually false.
 
-Parameter ``customXMLString``:
+:param customXMLString:
     Optional xml string.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_CreatePortableMoniker =R"doc(Create a DgnDocumentMoniker object that refers to a disk file in the
 native file system in a " portable " way.
 
-Parameter ``userEnteredPath``:
+:param userEnteredPath:
     The file name that the user keyed in. If not NULL, as much as
     possible of it is used to generate the portable name in the
     DgnDocumentMoniker.
 
-Parameter ``fullPath``:
+:param fullPath:
     Identifies the disk file to which the portable moniker should
     point. This is often the full file name as returned from the File
     Open dialog box.
 
-Parameter ``basePath``:
+:param basePath:
     The base path that the caller will use relative searches for the
     file represented by the portable moniker. If the portable moniker
     is to be persisted in a DgnFile, basePath is usually the path of
     that DgnFile.
 
-Parameter ``directoryConfigVar``:
+:param directoryConfigVar:
     A configuration variable that points to the directory that holds
     the file. If this is not NULL, then the portable name is stored as
     directoryConfigVar:filename.ext.
 
-Parameter ``searchPath``:
+:param searchPath:
     The search path used to locate the file referred to by the
     moniker. This is used to locate the file, particularly when
     fullPath is NULL.
 
-Parameter ``relativePref``:
+:param relativePref:
     If true, and userEnteredPath is NULL, attempts to make the
     portableName a relative path from basePath to fullPath. If false
     and userEnteredPath is not NULL, removes relative path information
@@ -615,10 +615,10 @@ Parameter ``relativePref``:
 static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_CreateFromFileName =R"doc(Create a new DgnDocumentMoniker object that refers to disk file in the
 native file system.
 
-Parameter ``fileName``:
+:param fileName:
     Identifies a disk file
 
-Parameter ``searchPath``:
+:param searchPath:
     The base path used for relative searches or NULL to ignore this
     parameter. A search path may contain one or more configuration
     variables, directory paths, and/or file paths. @note If the
@@ -635,20 +635,20 @@ static const char * __doc_Bentley_DgnPlatform_DgnDocumentMoniker_Create =R"doc(C
 additional context information. This method is typically used to find
 a document from a previously persisted moniker.
 
-Returns:
+:returns:
     A DgnDocumentMoniker object that contains the information stored
     in the given string.
 
-Parameter ``externalizedState``:
+:param externalizedState:
     The externalized state of the moniker. @See
     DgnBaseMoniker::Externalize
 
-Parameter ``searchPath``:
+:param searchPath:
     The base path used for relative searches or NULL to ignore this
     parameter. A search path may contain one or more configuration
     variables, directory paths, and/or file paths.
 
-Parameter ``fullPathFirst``:
+:param fullPathFirst:
     Pass true to give preference to the fullpath in the moniker.
     Usually false.)doc";
 
@@ -732,26 +732,26 @@ static const char * __doc_Bentley_DgnPlatform_DgnBaseMoniker_Compare =R"doc(Lexi
 
 static const char * __doc_Bentley_DgnPlatform_DgnBaseMoniker_SearchForFile =R"doc(Search for a file in the native file system
 
-Parameter ``searchStatus``:
+:param searchStatus:
     The result of the search
 
-Parameter ``inFileName``:
+:param inFileName:
     The filename to search for. May be fully qualified or relative.
 
-Parameter ``fullPath``:
+:param fullPath:
     The last known fully qualified file path of the target file.
     Optional.
 
-Parameter ``searchPath``:
+:param searchPath:
     A semicolon-delimited list of directory paths to search for a
     relative file name. Optional.
 
-Parameter ``fullPathFirst``:
+:param fullPathFirst:
     Should the search try *fullPath* first? Otherwise, the search
     looks for *inFileName* in the specified paths first and then falls
     back on *fullPath.*
 
-Parameter ``searchAsFolder``:
+:param searchAsFolder:
     Search for a folder/directory rather than a file?
 
 Returns (Tuple, 0):

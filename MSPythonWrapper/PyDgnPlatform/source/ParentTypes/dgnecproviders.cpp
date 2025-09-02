@@ -14,10 +14,10 @@ static const char * __doc_Bentley_DgnPlatform_IDgnECProvider_FindECClassesOnElem
 and sets a flag as to whether the primary instance on the element is
 of that class.
 
-Parameter ``rootElement``:
+:param rootElement:
     The element to search
 
-Parameter ``infos``:
+:param infos:
     The list of schemaNameclassName pairs)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_GetDgnFile =R"doc(The Dgnfile through which this schema info was found.)doc";
@@ -26,17 +26,17 @@ static const char * __doc_Bentley_DgnPlatform_SchemaInfo_GetSchemaKey =R"doc(Get
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_SetVersionMinor =R"doc(Set minor version number
 
-Parameter ``versionMinor``:
+:param versionMinor:
     Minor version number.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_SetVersionMajor =R"doc(Set major version number
 
-Parameter ``versionMajor``:
+:param versionMajor:
     Major version number.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_SetElementCheckSum =R"doc(Set CheckSum value
 
-Parameter ``checkSum``:
+:param checkSum:
     Used to determine if schemas with same name and version are really
     the same.)doc";
 
@@ -44,21 +44,21 @@ static const char * __doc_Bentley_DgnPlatform_SchemaInfo_GetElementCheckSum =R"d
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_SetStoredSchema =R"doc(Set Stored value
 
-Parameter ``isStoredSchema``:
+:param isStoredSchema:
     Used to determine if schemas was stored in the design file.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_IsStoredSchema =R"doc(Test whether the schema is persisted to the file.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_SetLocation =R"doc(Set location
 
-Parameter ``location``:
+:param location:
     Specifies the filename that held the schema)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_GetLocation =R"doc(Get the location of the schema if external.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_SetProviderName =R"doc(Set provider name
 
-Parameter ``providerName``:
+:param providerName:
     Specifies the provider name that handles data from the schema
     (ECXAttributes/ECXData).)doc";
 
@@ -66,7 +66,7 @@ static const char * __doc_Bentley_DgnPlatform_SchemaInfo_GetProviderName =R"doc(
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_SetSchemaName =R"doc(Set schema name
 
-Parameter ``schemaName``:
+:param schemaName:
     Schema name.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SchemaInfo_GetSchemaName =R"doc(Get the schema name)doc";

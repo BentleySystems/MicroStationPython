@@ -12,7 +12,7 @@
 
 static const char * __doc_Bentley_DgnPlatform_IDgnSettings_GetCurrentSettings =R"doc(Static method to find an object which can answer IDgnSettings queries.
 
-Returns:
+:returns:
     Returns a reference to an object that can execute Get methods to
     find various ApplicationSettings objects. Bentley Systems +-------
     -------+--------------+---------------+----------------+----------
@@ -20,29 +20,29 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_IDgnSettings_DoesModelSettingsElmExist =R"doc(Tests for existence of the ApplicationSettings element for a model.
 
-Parameter ``cache``:
+:param cache:
     pointer to the cache of the model of interest
 
-Returns:
+:returns:
     true if an application settings element exists for the model
     Bentley Systems +--------------+--------------+---------------+---
     -------------+-------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnSettings_GetModelApplicationSettings =R"doc(Get the ApplicationSettings element for a model.
 
-Parameter ``cache``:
+:param cache:
     pointer to the cache of the model of interest
 
-Returns:
+:returns:
     ApplicationSettings Bentley Systems +--------------+--------------
     +---------------+----------------+-------------)doc";
 
 static const char * __doc_Bentley_DgnPlatform_IDgnSettings_GetFileApplicationSettings =R"doc(Get the ApplicationSettings element for a DgnFile.
 
-Parameter ``file``:
+:param file:
     file of interest
 
-Returns:
+:returns:
     ApplicationSettings Bentley Systems +--------------+--------------
     +---------------+----------------+-------------)doc";
 
@@ -51,7 +51,7 @@ method should be used rather than directly adding XAttributes to the
 setting element since it writes non-undoably (so your settings won't
 be part of a transaction and therefore reversed by the Undo command.)
 
-Parameter ``handlerId``:
+:param handlerId:
     the id of the DgnPlatform::XAttributeHandler for this setting.
     While the Id is mandatory, it is not necessary to actually
     implement an DgnPlatform::XAttributeHandler just to save settings
@@ -59,13 +59,13 @@ Parameter ``handlerId``:
     allows applications to participate in change merging of their
     settings data.
 
-Parameter ``settingId``:
+:param settingId:
     an id for this settting (this should be non-zero).
 
-Parameter ``settingData``:
+:param settingData:
     the setting data
 
-Parameter ``size``:
+:param size:
     the number of bytes in settingData Bentley Systems +--------------
     +--------------+---------------+----------------+-------------)doc";
 

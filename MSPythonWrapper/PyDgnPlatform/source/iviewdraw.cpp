@@ -263,7 +263,7 @@ persistent elements)doc";
 
 static const char * __doc_Bentley_DgnPlatform_MaterialUVDetail_Copy =R"doc(Copy the contents of the argument object into this object
 
-Parameter ``rhs``:
+:param rhs:
     Object to copy)doc";
 
 static const char * __doc_Bentley_DgnPlatform_QVAliasMaterialId_GetId =R"doc(Get the id for the generated Qv Material)doc";
@@ -792,6 +792,12 @@ void def_IViewDraw(py::module_& m)
             self.DrawLineString3d((int)points.size(), points.data(), range);
             }, "points"_a, "range"_a);
 
+    c14.def("DrawLineString3d", [] (IDrawGeom& self, py::list const& points, DPoint3dCP range)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.DrawLineString3d((int)cppPoints.size(), cppPoints.data(), range);
+            }, "points"_a, "range"_a);
+
     c14.def("DrawLineString2d", [] (IDrawGeom& self, DPoint2dArray const& points, double zDepth, DPoint2dCP range)
             {
             self.DrawLineString2d((int)points.size(), points.data(), zDepth, range);
@@ -802,6 +808,12 @@ void def_IViewDraw(py::module_& m)
             self.DrawPointString3d((int)points.size(), points.data(), range);
             }, "points"_a, "range"_a);
 
+    c14.def("DrawPointString3d", [] (IDrawGeom& self, py::list const& points, DPoint3dCP range)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.DrawPointString3d((int)cppPoints.size(), cppPoints.data(), range);
+            }, "points"_a, "range"_a);
+
     c14.def("DrawPointString2d", [] (IDrawGeom& self, DPoint2dArray const& points, double zDepth, DPoint2dCP range)
             {
             self.DrawPointString2d((int) points.size(), points.data(), zDepth, range);
@@ -810,6 +822,12 @@ void def_IViewDraw(py::module_& m)
     c14.def("DrawShape3d", [] (IDrawGeom& self, DPoint3dArray const& points, bool filled, DPoint3dCP range)
             {
             self.DrawShape3d((int) points.size(), points.data(), filled, range);
+            }, "points"_a, "filled"_a, "range"_a);
+
+    c14.def("DrawShape3d", [] (IDrawGeom& self, py::list const& points, bool filled, DPoint3dCP range)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            self.DrawShape3d((int) cppPoints.size(), cppPoints.data(), filled, range);
             }, "points"_a, "filled"_a, "range"_a);
 
     c14.def("DrawShape2d", [] (IDrawGeom& self, DPoint2dArray const& points, bool filled, double zDepth, DPoint2dCP range)
@@ -852,13 +870,13 @@ void def_IViewDraw(py::module_& m)
     c15.def("DrawRaster2d", [] (IViewDraw& self, std::array<DPoint2d, 4> const& points, int pitch, int numTexelsX, int numTexelsY, int enableAlpha, int format, py::bytes const& texels, double zDepth, DPoint2dCP range)
             {
             std::string strData = (std::string) texels;
-            self.DrawRaster2d(points.data(), pitch, numTexelsX, numTexelsY, enableAlpha, format, (byte const*) strData.data(), zDepth, range);
+            self.DrawRaster2d(points.data(), pitch, numTexelsX, numTexelsY, enableAlpha, format, (Byte const*) strData.data(), zDepth, range);
             }, "points"_a, "pitch"_a, "numTexelsX"_a, "numTexelsY"_a, "enableAlpha"_a, "format"_a, "texels"_a, "zDepth"_a, "range"_a);
 
     c15.def("DrawRaster", [] (IViewDraw& self, std::array<DPoint3d, 4> const& points, int pitch, int numTexelsX, int numTexelsY, int enableAlpha, int format, py::bytes const& texels, DPoint3dCP range)
             {
             std::string strData = (std::string) texels;
-            self.DrawRaster(points.data(), pitch, numTexelsX, numTexelsY, enableAlpha, format, (byte const*) strData.data(), range);
+            self.DrawRaster(points.data(), pitch, numTexelsX, numTexelsY, enableAlpha, format, (Byte const*) strData.data(), range);
             }, "points"_a, "pitch"_a, "numTexelsX"_a, "numTexelsY"_a, "enableAlpha"_a, "format"_a, "texels"_a, "range"_a);
 
     c15.def("DrawPointCloud", &IViewDraw::DrawPointCloud, "drawParams"_a);

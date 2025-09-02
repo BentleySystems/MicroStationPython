@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<KeyinTree xmlns="http://www.bentley.com/schemas/1.0/MicroStation/AddIn/KeyinTree.xsd">
+    <RootKeyinTable ID="root">
+        <Keyword SubtableRef="Convert" CommandClass="MacroCommand" CommandWord="CONVERT">
+            <Options Required="true" />
+        </Keyword>
+    </RootKeyinTable>
+
+    <SubKeyinTables>
+        <KeyinTable ID="Convert">
+            <Keyword CommandWord="UNIT" />
+        </KeyinTable>
+    </SubKeyinTables>
+    
+    <KeyinHandlers>
+        <KeyinHandler Keyin="CONVERT UNIT"                     Function="unitConvertion" />
+    </KeyinHandlers>
+</KeyinTree>

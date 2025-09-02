@@ -16,7 +16,7 @@ static const char * __doc_Bentley_DgnPlatform_SpriteLocation_GetLocation =R"doc(
 
 static const char * __doc_Bentley_DgnPlatform_SpriteLocation_IsActive =R"doc(Determine whether this Sprite Location is currently active.
 
-Returns:
+:returns:
     true if this Sprite Location is currently active.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_SpriteLocation_DecorateViewport =R"doc(If this Sprite Location is active for the specified Viewport, draw its
@@ -35,16 +35,16 @@ Sprite Definition in the Viewport. Rather, subsequent calls to
 Sprite. This Sprite Location remains active until #Deactivate is
 called.
 
-Parameter ``sprite``:
+:param sprite:
     The Sprite Definition to draw at this SpriteLocation
 
-Parameter ``viewport``:
+:param viewport:
     The Viewport onto which the Sprite Definition is drawn
 
-Parameter ``location``:
+:param location:
     The x,y posistion in DgnCoordSystem::View
 
-Parameter ``transparency``:
+:param transparency:
     The transparency to draw the Sprite (0=opaque, 255=invisible))doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISprite_GetUseAlpha =R"doc(Get whether to use the alpha channel for this Sprite Definition. If
@@ -54,14 +54,14 @@ set.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISprite_GetSize =R"doc(Get the size (in pixels) of this Sprite Definition.
 
-Parameter ``size``:
-    OUT the size in pixels of this sprite definition.)doc";
+:param size:
+    (output) the size in pixels of this sprite definition.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_ISprite_GetHotSpot =R"doc(Get the X,Y position of the hotspot for this Sprite Definition (0,0 is
 the upper left corner). Often this will be the middle of the Sprite.
 
-Parameter ``hotspot``:
-    OUT the hotspot for this sprite definition)doc";
+:param hotspot:
+    (output) the hotspot for this sprite definition)doc";
 
 /*---------------------------------------------------------------------------------**//**
 * @bsimethod                                                                       2/2023

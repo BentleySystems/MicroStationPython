@@ -24,23 +24,23 @@ view border, implement as an IconCmdX and setup
 HOOKITEMID_ViewBorderIconCmdHook in order to be passed the view number
 as unparsedP.
 
-Parameter ``sourceFoundP``:
-    OUT Source of preferred viewport.
+:param sourceFoundP:
+    (output) Source of preferred viewport.
 
-Parameter ``unparsedP``:
-    IN unparsed string containing a view number or NULL.
+:param unparsedP:
+    (input) unparsed string containing a view number or NULL.
 
-Parameter ``sourceToSearch``:
-    IN Mask of allow sources for preferred viewport,
+:param sourceToSearch:
+    (input) Mask of allow sources for preferred viewport,
     PREFERRED_VIEW_Unparsed only used as an output, assumed if
     unparsedP isn't NULL.
 
-Returns:
+:returns:
     Preferred viewport for tool or NULL.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTool_SetModifierKeyTransitionState =R"doc(Called to set the current modifier transition state.
 
-Returns:
+:returns:
     The id of the current command promnpt. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTool_GetModifierKeyTransitionState =R"doc(Called to get the previous modifier transition state.
@@ -61,23 +61,23 @@ Returns (Tuple, 3):
 
 static const char * __doc_Bentley_DgnPlatform_DgnTool_ResetCurrentQualifierMask =R"doc(Internal method to reset the current qualifier mask.
 
-Parameter ``mask``:
-    IN New qualifier mask. )doc";
+:param mask:
+    (input) New qualifier mask. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTool_SetAdjustedDataPoint =R"doc(Call to set an adjusted point as the last datapoint location. This is
 the location that precision key-ins and axis/isometric lock will use.
 
-Parameter ``ev``:
-    IN new button event.)doc";
+:param ev:
+    (input) new button event.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTool_GetCurrentDgnButtonEvent =R"doc(Call to get a button event representing the current cursor location.
 
-Parameter ``ev``:
-    IN Current button event.)doc";
+:param ev:
+    (input) Current button event.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnTool_InstallTool =R"doc(Call to make this tool instance the current active command.
 
-Returns:
+:returns:
     SUCCESS if new tool instance is now the current command.
 
 See also:
@@ -94,16 +94,16 @@ static const char * __doc_Bentley_DgnPlatform_DgnTool_GetToolId =R"doc(Not used 
 static const char * __doc_Bentley_DgnPlatform_DgnMouseWheelEvent_GetWheelDelta =R"doc(Get the " delta " movement of the mouse wheel (see Microsoft
 documentation on mouse wheel events for units.))doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_GetKeyModifiers =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_GetKeyModifiers =R"doc(:returns:
     the complete key modifier mask when this event occurred.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_IsAltKey =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_IsAltKey =R"doc(:returns:
     true if an Altkey was pressed when this event occurred.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_IsShiftKey =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_IsShiftKey =R"doc(:returns:
     true if a Shift key was pressed when this event occurred.)doc";
 
-static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_IsControlKey =R"doc(Returns:
+static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_IsControlKey =R"doc(:returns:
     true if a Control key was pressed when this event occurred.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnButtonEvent_GetButtonSource =R"doc(Get the " input source " for this event. See Inputq_element#hdr.source

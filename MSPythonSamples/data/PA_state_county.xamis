@@ -1,0 +1,392 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<BentleyAMISFile>
+  <URL>https://mapservices.pasda.psu.edu/server/rest/services/pasda/PennDOT/MapServer</URL>
+  <VERSION>1</VERSION>
+  <currentVersion>10.91</currentVersion>
+  <serviceDescription>
+  </serviceDescription>
+  <mapName>Layers</mapName>
+  <description>
+  </description>
+  <copyrightText>
+  </copyrightText>
+  <supportsDynamicLayers>true</supportsDynamicLayers>
+  <layers>
+    <id>0</id>
+    <name>Pa Interstate Mile Markers 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <layers>
+    <id>1</id>
+    <name>PA Tpk Toll Plazas 2008_08</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryMultipoint</geometryType>
+  </layers>
+  <layers>
+    <id>2</id>
+    <name>Pa Administrative State Roads 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolyline</geometryType>
+  </layers>
+  <layers>
+    <id>3</id>
+    <name>Pa Local Roads 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolyline</geometryType>
+  </layers>
+  <layers>
+    <id>4</id>
+    <name>Pa State Roads 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolyline</geometryType>
+  </layers>
+  <layers>
+    <id>5</id>
+    <name>Pa Traffic 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolyline</geometryType>
+  </layers>
+  <layers>
+    <id>6</id>
+    <name>Pa Congressional 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>7</id>
+    <name>Pa County 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>true</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>8</id>
+    <name>Pa Engineering District 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>9</id>
+    <name>Pa House 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>10</id>
+    <name>Pa Municipalities 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>11</id>
+    <name>Pa School Districts 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>12</id>
+    <name>Pa Senatorial 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>13</id>
+    <name>Pa State 2023_01</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>14</id>
+    <name>Pa Urban Areas 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>15</id>
+    <name>Pa MPO RPO Planning 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolygon</geometryType>
+  </layers>
+  <layers>
+    <id>16</id>
+    <name>PA Interstate Highway Exits 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <layers>
+    <id>17</id>
+    <name>Pa Facilities 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <layers>
+    <id>18</id>
+    <name>Pa Intermodal 2020_08</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <layers>
+    <id>19</id>
+    <name>PA RMS BONDS 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolyline</geometryType>
+  </layers>
+  <layers>
+    <id>20</id>
+    <name>PA RMS POSTED 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolyline</geometryType>
+  </layers>
+  <layers>
+    <id>21</id>
+    <name>Pa Bridges 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <layers>
+    <id>22</id>
+    <name>Pa Rail Lines 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolyline</geometryType>
+  </layers>
+  <layers>
+    <id>23</id>
+    <name>Pa At Grade Intersections 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <layers>
+    <id>24</id>
+    <name>Pa Drain Pipes 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <layers>
+    <id>25</id>
+    <name>Pa Railroad Crossings 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <layers>
+    <id>26</id>
+    <name>Pa Transportation Improvement Projects - Line 2023_03</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPolyline</geometryType>
+  </layers>
+  <layers>
+    <id>27</id>
+    <name>PA Transportation Improvement Projects - Point 2023_04</name>
+    <parentLayerId>-1</parentLayerId>
+    <defaultVisibility>false</defaultVisibility>
+    <subLayerIds />
+    <minScale>0</minScale>
+    <maxScale>0</maxScale>
+    <type>Feature Layer</type>
+    <geometryType>esriGeometryPoint</geometryType>
+  </layers>
+  <spatialReference>
+    <wkid>4269</wkid>
+    <latestWkid>4269</latestWkid>
+  </spatialReference>
+  <singleFusedMapCache>false</singleFusedMapCache>
+  <initialExtent>
+    <xmin>-81.624012490236069</xmin>
+    <ymin>40.581869101142232</ymin>
+    <xmax>-72.7619781276817</xmax>
+    <ymax>44.113602352639916</ymax>
+    <spatialReference>
+      <wkid>4269</wkid>
+      <latestWkid>4269</latestWkid>
+    </spatialReference>
+  </initialExtent>
+  <fullExtent>
+    <xmin>-80.624837429491265</xmin>
+    <ymin>39.681865881279926</ymin>
+    <xmax>-74.65071161502776</xmax>
+    <ymax>42.285202411956014</ymax>
+    <spatialReference>
+      <wkid>4269</wkid>
+      <latestWkid>4269</latestWkid>
+    </spatialReference>
+  </fullExtent>
+  <minScale>0</minScale>
+  <maxScale>0</maxScale>
+  <units>esriDecimalDegrees</units>
+  <supportedImageFormatTypes>PNG32,PNG24,PNG,JPG,DIB,TIFF,EMF,PS,PDF,GIF,SVG,SVGZ,BMP</supportedImageFormatTypes>
+  <documentInfo>
+    <Title>
+    </Title>
+    <Author>
+    </Author>
+    <Comments>
+    </Comments>
+    <Subject>
+    </Subject>
+    <Category>
+    </Category>
+    <AntialiasingMode>None</AntialiasingMode>
+    <TextAntialiasingMode>Force</TextAntialiasingMode>
+    <Keywords>
+    </Keywords>
+  </documentInfo>
+  <capabilities>Map,Query,Data</capabilities>
+  <supportedQueryFormats>JSON, geoJSON</supportedQueryFormats>
+  <exportTilesAllowed>false</exportTilesAllowed>
+  <referenceScale>0</referenceScale>
+  <datumTransformations>
+    <geoTransforms>
+      <wkid>108001</wkid>
+      <latestWkid>1241</latestWkid>
+      <transformForward>true</transformForward>
+      <name>NAD_1927_To_NAD_1983_NADCON</name>
+    </geoTransforms>
+  </datumTransformations>
+  <datumTransformations>
+    <geoTransforms>
+      <wkid>108001</wkid>
+      <latestWkid>1241</latestWkid>
+      <transformForward>false</transformForward>
+      <name>NAD_1927_To_NAD_1983_NADCON</name>
+    </geoTransforms>
+  </datumTransformations>
+  <supportsDatumTransformation>true</supportsDatumTransformation>
+  <maxRecordCount>1000</maxRecordCount>
+  <maxImageHeight>4096</maxImageHeight>
+  <maxImageWidth>4096</maxImageWidth>
+  <supportedExtensions>KmlServer, WMSServer</supportedExtensions>
+</BentleyAMISFile>

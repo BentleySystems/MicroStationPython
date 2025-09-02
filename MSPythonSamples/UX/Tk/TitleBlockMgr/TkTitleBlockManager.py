@@ -1,9 +1,5 @@
-﻿# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+﻿# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 
 import tkinter as tk
@@ -39,9 +35,25 @@ Action:
 '''
 
 def on_closing(root):
+    """
+    Handle the event when the window is closing.
+
+    This function is called when the window's close button is clicked. It 
+    destroys the root window, effectively closing the application.
+
+    :param root: The root window of the Tkinter application.
+    :type root: tkinter.Tk
+    """
     root.destroy()
 
 def select(text, index):
+    """
+    Opens a file dialog to select or save an Excel file and updates the given text widget with the selected file path.
+    :param text: The Tkinter text widget to update with the selected file path.
+    :type text: tkinter.Text
+    :param index: Determines the type of file dialog to open. If 0, opens a save dialog; otherwise, opens an open dialog.
+    :type index: int
+    """
     if index == 0:
         file_path = filedialog.asksaveasfilename(initialfile="TitleBlock.xlsx", filetypes=[("Excel Workbook", "*.xlsx")], defaultextension=".xlsx")
     else:
@@ -56,6 +68,18 @@ def select(text, index):
     text.config(state="disabled")
 
 def start(file_path, index):
+    """
+    Starts the process based on the provided file path and index.
+    Depending on the index value, this function either verifies the database path or selects the database file.
+    If the file path is not provided, it shows an informational message.
+    If the index is 0, it extracts item types to an Excel file and updates the database.
+    If the index is not 0, it repopulates items from an Excel file, sends a key-in command to update fields, and updates the design file.
+    
+    :param file_path: The path to the file to be processed.
+    :type file_path: str
+    :param index: The index to determine the operation mode (0 for database update, non-0 for design file update).
+    :type index: int
+    """
     if index == 0:
         msg = "Please verify database path"
     else:
@@ -74,12 +98,38 @@ def start(file_path, index):
         messagebox.showinfo("Info", "Design file updated!")
 
 def edit(file_path):
+    """
+    Open the specified file for editing if it exists, otherwise show an info message.
+
+    :param file_path: The path to the file to be edited.
+    :type file_path: str
+    """
     if os.path.isfile(file_path):
         os.startfile(file_path)
     else:
         messagebox.showinfo("Info", "Please select database file to edit")
 
 def titleBlockManager():
+    """
+    Initializes and runs the Title Block Manager GUI.
+    This function creates a Tkinter window with various widgets to manage title blocks.
+    It includes labels, a combobox, text field, and buttons for selecting actions, 
+    starting processes, and editing the database. The window is set to be always on top 
+    and handles the window close event with a custom function.
+    Widgets:
+        - Label for action selection.
+        - Label for database selection.
+        - Read-only combobox for choosing between "Export to database" and "Import from database".
+        - Disabled text field for displaying selected database path.
+        - Button for selecting a database path.
+        - Button for starting the selected action.
+        - Button for editing the database.
+    The function runs an update loop to keep the GUI responsive and processes input 
+    from the PyCadInputQueue.
+    Note:
+        The function assumes the existence of `on_closing`, `select`, `start`, and `edit` 
+        functions, as well as the `PyCadInputQueue` module.
+    """
     root = tk.Tk()
     root.title("Title Block Manager")
     root.attributes("-topmost", 1)

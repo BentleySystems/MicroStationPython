@@ -16,19 +16,19 @@
 static const char * __doc_Bentley_Geom_ICurvePrimitive_AddRuledSurfaceRayIntersections =R"doc(Compute intersections of a ray with a ruled surface between two
 primitves.
 
-Returns:
+:returns:
     false if primitives are not compatible
 
-Parameter ``[out]``:
+:param (output):
     pickData array to receive picks
 
-Parameter ``[in]``:
+:param (input):
     curveA first curve
 
-Parameter ``[in]``:
+:param (input):
     curveB second curve
 
-Parameter ``[in]``:
+:param (input):
     ray ray)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_GetStrokeCount =R"doc(Return the number of strokes needed to approximate this curve
@@ -38,33 +38,33 @@ static const char * __doc_Bentley_Geom_ICurvePrimitive_AddStrokes =R"doc(Stroke 
 a strokable primitive -- Line, Arc, Bspline, Spiral, Akima, or partial
 curve. false for non-strokable -- i.e. child vector or point vector.
 
-Parameter ``[in,out]``:
+:param [in,out]:
     points growing vector of strokes.
 
-Parameter ``[in]``:
+:param (input):
     options stroke tolerance.
 
-Parameter ``[in]``:
+:param (input):
     includeStartPoint if false, do NOT put start point in the output.
 
-Parameter ``[in]``:
+:param (input):
     startFraction start of partial curve interval.
 
-Parameter ``[in]``:
+:param (input):
     endFraction end of partial curve interval.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_WireCentroid =R"doc(Return the centroid of (a portion of) the curve.
 
-Parameter ``[out]``:
+:param (output):
     length curve length
 
-Parameter ``[out]``:
+:param (output):
     centroid curve centroid
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start fraction of active part of sweep.
 
-Parameter ``[in]``:
+:param (input):
     fraction1 end fraction of active part of sweep.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_AppendCurveBilinearPatchIntersections =R"doc(Return intesections of curve primitive with a bilinear patch)doc";
@@ -77,13 +77,13 @@ parts of the pair (SameCurveAndFraction) Curve-on-plane appears as
 CurveLocationDetailPair with curve,fraction data for start and end of
 on-plane sections.
 
-Parameter ``[in]``:
+:param (input):
     plane
 
-Parameter ``[out]``:
+:param (output):
     intersections intersection details
 
-Parameter ``[in]``:
+:param (input):
     tolerance for on-plane decisions. If 0, a tolerance is computed
     based on the coordinates in the curve.)doc";
 
@@ -94,7 +94,7 @@ static const char * __doc_Bentley_Geom_ICurvePrimitive_TransformInPlace =R"doc(T
 static const char * __doc_Bentley_Geom_ICurvePrimitive_IsPeriodicFractionSpace =R"doc(Return true if the curve is part of a (possibly larger) periodic
 curve.
 
-Parameter ``[out]``:
+:param (output):
     period period as a multiple of the bounded curve's fraction space.
     For example, a quarter arc has a period of 4.)doc";
 
@@ -112,15 +112,15 @@ static const char * __doc_Bentley_Geom_ICurvePrimitive_TrySetStart =R"doc(Modify
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_GetStartPoint =R"doc(Return first primitive in a deep search.
 
-Parameter ``[out]``:
+:param (output):
     point start point.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_GetStartEnd =R"doc(return the start and end points of the curve
 
-Parameter ``[out]``:
+:param (output):
     pointA start point
 
-Parameter ``[out]``:
+:param (output):
     pointB end point
 
 Remark:
@@ -130,13 +130,13 @@ Remark:
 static const char * __doc_Bentley_Geom_ICurvePrimitive_ClosestPointBoundedXY =R"doc(Find closest point, measuring in xy plane after applying a (possibly
 perspective) transform to both the curve and space point.
 
-Parameter ``[in]``:
+:param (input):
     spacePoint reference point.
 
-Parameter ``[in]``:
+:param (input):
     worldToLocal optional transform.
 
-Parameter ``[out]``:
+:param (output):
     location details of closest point. See ClosestPointBounded.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_AnnounceKeyPoints =R"doc(Search for various keypoints (as requested by the collector) During
@@ -146,28 +146,28 @@ paths)doc";
 static const char * __doc_Bentley_Geom_ICurvePrimitive_ClosestPointBounded =R"doc(Find the closest point to a space point. return false if not a simple
 curve. (EXAMPLE:ChildCurveVector)
 
-Parameter ``[in]``:
+:param (input):
     spacePoint reference point.
 
-Parameter ``[out]``:
+:param (output):
     fraction fractional position at closest point.
 
-Parameter ``[out]``:
+:param (output):
     curvePoint coordinates on curve)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_PointAtSignedDistanceFromFraction =R"doc(Attempt to move a specified distance from given fraction.
 
-Parameter ``[in]``:
+:param (input):
     startFraction starting position.
 
-Parameter ``[in]``:
+:param (input):
     signedDistance distance for attempted move.
 
-Parameter ``[in]``:
+:param (input):
     allowExtension controls extended behaior of line, arc, and
     linestring.
 
-Parameter ``[out]``:
+:param (output):
     location fraction and point after move.{a} field indicates actual
     signed distance moved (which may be less than request!!)
 
@@ -181,13 +181,13 @@ extensible fraction spaces will SILENTLY clamp the fractions to 0..1.
 return false if this is not a parameterized curve (EXAMPLE:A
 ChildCurveVector)
 
-Parameter ``[in]``:
+:param (input):
     startFraction starting position for partial curve.
 
-Parameter ``[in]``:
+:param (input):
     endFraction end position for partial curve.
 
-Parameter ``[out]``:
+:param (output):
     signedDistance distance along curve, negative if fraction
     direction is reversed.)doc";
 
@@ -215,13 +215,13 @@ acceptable.)doc";
 static const char * __doc_Bentley_Geom_ICurvePrimitive_ProjectedParameterRange =R"doc(Return the range the primitive projected onto a ray. return DRange1d
 with range data.
 
-Parameter ``[in]``:
+:param (input):
     ray test ray.
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start fraction of active part.
 
-Parameter ``[in]``:
+:param (input):
     fraction1 end fraction of active part.
 
 Remark:
@@ -241,27 +241,27 @@ static const char * __doc_Bentley_Geom_ICurvePrimitive_GetRange =R"doc(Return ra
 static const char * __doc_Bentley_Geom_ICurvePrimitive_FastLength =R"doc(Compute a fast approximation of curve length. return false if no
 measurable curves.
 
-Parameter ``[out]``:
+:param (output):
     length curve length. For ChildCurveVector, length of contained
     curves is summed.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_Length =R"doc(Compute curve length. return false if no measurable curves.
 
-Parameter ``[out]``:
+:param (output):
     length curve length. For ChildCurveVector, length of contained
     curves is summed.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_FractionToFrenetFrame =R"doc(Evaluate curve point at fractional position within its parameter
 space.
 
-Returns:
+:returns:
     false if this is not a parameterized curve (EXAMPLE:A
     ChildCurveVector)
 
-Parameter ``[in]``:
+:param (input):
     f evaluation fraction.
 
-Parameter ``[out]``:
+:param (output):
     frame Coordinate frame with origin on curve, x direction along
     curve, y direction in curvature plane, z direction perpendicular.)doc";
 
@@ -270,13 +270,13 @@ component. (For anything except a linestring, componentIndex is
 ignored and this is equivalent to FractionToPoint) return false if
 this is not a parameterized curve (EXAMPLE:A ChildCurveVector)
 
-Parameter ``[in]``:
+:param (input):
     componentIndex index of the component to evaluate.
 
-Parameter ``[in]``:
+:param (input):
     f evaluation fraction.
 
-Parameter ``[out]``:
+:param (output):
     point point on curve.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_FractionToPointWithTwoSidedDerivative =R"doc(Evaluate curve fractional position within its parameter space.
@@ -290,18 +290,18 @@ points and bspline knots.
 return false if this is not a parameterized curve (EXAMPLE:A
 ChildCurveVector)
 
-Parameter ``[in]``:
+:param (input):
     f evaluation fraction.
 
-Parameter ``[out]``:
+:param (output):
     point point on curve.
 
-Parameter ``[out]``:
+:param (output):
     derivativeA first derivative with respect to the fractional
     coordinate, taken on the inbound (lower parameter) side of the
     parameter.
 
-Parameter ``[out]``:
+:param (output):
     derivativeB first derivative with respect to the fractional
     coordinate, taken on the outbound (higher parameter) side of the
     parameter.)doc";
@@ -310,10 +310,10 @@ static const char * __doc_Bentley_Geom_ICurvePrimitive_FractionToPoint =R"doc(Ev
 false if this is not a parameterized curve (EXAMPLE:A
 ChildCurveVector)
 
-Parameter ``[in]``:
+:param (input):
     f evaluation fraction.
 
-Parameter ``[out]``:
+:param (output):
     point point on curve.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateChildCurveVector_SwapFromSource =R"doc(Create a child vector; contents of source are taken, source itself is
@@ -327,30 +327,30 @@ refcounted child.)doc";
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CloneDereferenced =R"doc(Return a (deep) clone with all partial curves replaced by complete
 curves.
 
-Parameter ``[in]``:
+:param (input):
     maximumDeref true to recurse through all steps of PartialCurve
     chains
 
-Parameter ``[in]``:
+:param (input):
     allowExtrapolation true to allow extension before/after endpoints.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CloneAsSingleOffsetPrimitiveXY =R"doc(Return an offset primitive. This operates only on single primtives
 that can offset to another single primitive.
 
-Parameter ``[in]``:
+:param (input):
     options contains tolerance for bspline and ellipse offset.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CloneBetweenFractions =R"doc(Return a copy of a subset. The fraction interval may be high to low;
 fraction clamping respects the interval direction. return null pointer
 if fraction clamping resulted in zero-length interval.
 
-Parameter ``[in]``:
+:param (input):
     fractionA start of returned invterval.
 
-Parameter ``[in]``:
+:param (input):
     fractionB end of returned interval.
 
-Parameter ``[in]``:
+:param (input):
     allowExtrapolation If false, out of bounds values are clamped.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CloneComponent =R"doc(Return a copy of a component. Component index only applies to
@@ -361,30 +361,30 @@ static const char * __doc_Bentley_Geom_ICurvePrimitive_Clone =R"doc(Return a dee
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateInterpolationBetweenCurves =R"doc(Create a curve that is interpolated between parents.
 
-Parameter ``[in]``:
+:param (input):
     curveA first curve
 
-Parameter ``[in]``:
+:param (input):
     curveB second curve
 
-Parameter ``[in]``:
+:param (input):
     fraction interpolation position.
 
-Returns:
+:returns:
     null curve pointer if curves are not compatible for interpolation.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreatePartialCurve =R"doc(Allocate and fill a reference to a portion of a parent curve.
 
-Parameter ``[in]``:
+:param (input):
     parentCurve pointer to another curve.
 
-Parameter ``[in]``:
+:param (input):
     fraction0 start of active portion of parent.
 
-Parameter ``[in]``:
+:param (input):
     fraction1 end of active portion of parent.
 
-Parameter ``[in]``:
+:param (input):
     index application data.
 
 Remark:
@@ -398,144 +398,144 @@ point (which may be outside the active fractional subset). ul>)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateSpiralBearingCurvatureLengthCurvature =R"doc(Allocate and fill a spiral curve.
 
-Parameter ``[in]``:
+:param (input):
     startRadians bearing at start
 
-Parameter ``[in]``:
+:param (input):
     startCurvature curvature at start (or 0 if flat)
 
-Parameter ``[in]``:
+:param (input):
     length length along spiral
 
-Parameter ``[in]``:
+:param (input):
     endCurvature curvature at end (or 0 if flat)
 
-Parameter ``[in]``:
+:param (input):
     transitionType (see DSpiral2dBase)
 
-Parameter ``[in]``:
+:param (input):
     frame placement frame
 
-Parameter ``[in]``:
+:param (input):
     fractionA start fraction for active portion of curve
 
-Parameter ``[in]``:
-    fractionB end fraction for active portion of curve @praam [in]
+:param (input):
+    fractionB end fraction for active portion of curve @praam (input)
     extraData type-specific extra data.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateSpiralBearingRadiusLengthRadius =R"doc(Allocate and fill a spiral curve.
 
-Parameter ``[in]``:
+:param (input):
     startRadians bearing at start
 
-Parameter ``[in]``:
+:param (input):
     startRadius radius at start (or 0 if flat)
 
-Parameter ``[in]``:
+:param (input):
     length length along spiral
 
-Parameter ``[in]``:
+:param (input):
     endRadius radius at end (or 0 if flat)
 
-Parameter ``[in]``:
+:param (input):
     transitionType (see DSpiral2dBase)
 
-Parameter ``[in]``:
+:param (input):
     frame placement frame
 
-Parameter ``[in]``:
+:param (input):
     fractionA start fraction for active portion of curve
 
-Parameter ``[in]``:
-    fractionB end fraction for active portion of curve @praam [in]
+:param (input):
+    fractionB end fraction for active portion of curve @praam (input)
     extraData type-specific extra data.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateSpiralBearingRadiusBearingRadius =R"doc(Allocate and fill a spiral curve.
 
-Parameter ``[in]``:
+:param (input):
     startRadians bearing at start
 
-Parameter ``[in]``:
+:param (input):
     startRadius radius at start (or 0 of flat)
 
-Parameter ``[in]``:
+:param (input):
     endRadians bearing at end
 
-Parameter ``[in]``:
+:param (input):
     endRadius radius at end (or 0 if flat)
 
-Parameter ``[in]``:
+:param (input):
     transitionType (see DSpiral2dBase)
 
-Parameter ``[in]``:
+:param (input):
     frame placement frame
 
-Parameter ``[in]``:
+:param (input):
     fractionA start fraction for active portion of curve
 
-Parameter ``[in]``:
-    fractionB end fraction for active portion of curve @praam [in]
+:param (input):
+    fractionB end fraction for active portion of curve @praam (input)
     extraData type-specific extra data.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateSpiralBearingCurvatureBearingCurvature =R"doc(Allocate and fill a spiral curve.
 
-Parameter ``[in]``:
+:param (input):
     startRadians bearing at start
 
-Parameter ``[in]``:
+:param (input):
     startCurvature curvature at start (or 0 of flat)
 
-Parameter ``[in]``:
+:param (input):
     endRadians bearing at end
 
-Parameter ``[in]``:
+:param (input):
     endCurvature curvature at end (or 0 if flat)
 
-Parameter ``[in]``:
+:param (input):
     transitionType (see DSpiral2dBase)
 
-Parameter ``[in]``:
+:param (input):
     frame placement frame
 
-Parameter ``[in]``:
+:param (input):
     fractionA start fraction for active portion of curve
 
-Parameter ``[in]``:
+:param (input):
     fractionB end fraction for active portion of curve)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateSpiral =R"doc(Allocate and fill a spiral curve.
 
-Parameter ``[in]``:
+:param (input):
     spiral spiral structure (to be cloned -- caller still responsible
     for deallocation)
 
-Parameter ``[in]``:
+:param (input):
     frame placement frame
 
-Parameter ``[in]``:
+:param (input):
     fractionA start fraction for active portion of curve
 
-Parameter ``[in]``:
+:param (input):
     fractionB end fraction for active portion of curve)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateRectangle =R"doc(Create a rectangle from xy corners.
 
-Parameter ``[in]``:
+:param (input):
     x0 start point x coordinate
 
-Parameter ``[in]``:
+:param (input):
     y0 start point y coordinate
 
-Parameter ``[in]``:
+:param (input):
     x1 opposite corner x coordinate
 
-Parameter ``[in]``:
+:param (input):
     y1 opposite corner y coordinate
 
-Parameter ``[in]``:
+:param (input):
     z z value for all points.
 
-Parameter ``[in]``:
+:param (input):
     areaSignPreference is one of
 
 * any positive integer to force positive xy areLa.
@@ -546,64 +546,64 @@ Parameter ``[in]``:
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreatePointString =R"doc(Allocate and fill a new point string
 
-Parameter ``[in]``:
+:param (input):
     points coordinates to copy into the primitive
 
-Parameter ``[in]``:
+:param (input):
     nPoints number of points)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateAkimaCurve =R"doc(Allocate and fill a new akima curve
 
-Parameter ``[in]``:
+:param (input):
     points akima control points to copy into the primitive. First two
     and final two points are slope end condition controls. Others are
     pass-through.
 
-Parameter ``[in]``:
+:param (input):
     nPoints control point count.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateInterpolationCurveSwapFromSource =R"doc(Allocate and fill a new interpolation curve
 
-Parameter ``[in]``:
+:param (input):
     fitCurve source curve. Data is swapped into the curve. input
     fitCurve is zeroed.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateInterpolationCurve =R"doc(Allocate and fill a new interpolation curve
 
-Parameter ``[in]``:
+:param (input):
     fitCurve source curve. Data is COPIED into the new object. Caller
     is still responsible for freeing the input fitCurve.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateBsplineCurveSwapFromSource =R"doc(Allocate and fill a new bspline curve
 
-Parameter ``[in]``:
+:param (input):
     curve source curve. Bits (including pointers) are copied to the
     CurvePrimtive. source curve is zeroed -- caller has no " free "
     responsibilities.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateBsplineCurve =R"doc(Allocate and fill a new bspline curve
 
-Parameter ``[in]``:
+:param (input):
     curve source curve. A copy (clone, repeat allocation of memory) of
     the curve is placed into the new object. Caller is still
     responsible for freeing the input curve.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateArc =R"doc(Allocate and fill a new elliptic arc
 
-Parameter ``[in]``:
+:param (input):
     ellipse source ellipse.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateLineString =R"doc(Allocate and fill a new linestring
 
-Parameter ``[in]``:
+:param (input):
     points source coordinates.
 
-Parameter ``[in]``:
+:param (input):
     nPoints point count.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_CreateLine =R"doc(Allocate and fill a new line segemnt.
 
-Parameter ``[in]``:
+:param (input):
     segment source segment.)doc";
 
 static const char * __doc_Bentley_Geom_ICurvePrimitive_TryAddLineStringPoint =R"doc(If this is a linestring, add a point.)doc";
@@ -642,7 +642,7 @@ void def_CurvePrimitive(py::module_& m)
         //===================================================================================
         // Enum CurvePrimitiveType
         py::enum_<ICurvePrimitive::CurvePrimitiveType>(c1, "CurvePrimitiveType", py::arithmetic())
-            .value("eCURVE_PRIMITIVE_TYPE_Invalid", ICurvePrimitive::CURVE_PRIMITIVE_TYPE_Line)
+            .value("eCURVE_PRIMITIVE_TYPE_Invalid", ICurvePrimitive::CURVE_PRIMITIVE_TYPE_Invalid)
             .value("eCURVE_PRIMITIVE_TYPE_Line", ICurvePrimitive::CURVE_PRIMITIVE_TYPE_Line)
             .value("eCURVE_PRIMITIVE_TYPE_LineString", ICurvePrimitive::CURVE_PRIMITIVE_TYPE_LineString)
             .value("eCURVE_PRIMITIVE_TYPE_Arc", ICurvePrimitive::CURVE_PRIMITIVE_TYPE_Arc)
@@ -732,6 +732,10 @@ void def_CurvePrimitive(py::module_& m)
 
     c1.def_static("CreateLine", &ICurvePrimitive::CreateLine, "segment"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateLine));
     c1.def_static("CreateLineString", py::overload_cast<DPoint3dArray const&>(&ICurvePrimitive::CreateLineString), "points"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateLineString));
+    c1.def_static("CreateLineString", []( py::list const& points){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint3dArray, DPoint3d)
+        return ICurvePrimitive::CreateLineString(cpppoints);
+    }, "points"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateLineString));
     c1.def_static("CreateArc", &ICurvePrimitive::CreateArc, "ellipse"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateArc));
     c1.def_static("CreateBsplineCurve", py::overload_cast<MSBsplineCurveCR>(&ICurvePrimitive::CreateBsplineCurve), "curve"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateBsplineCurve));
     c1.def_static("CreateBsplineCurveSwapFromSource", &ICurvePrimitive::CreateBsplineCurveSwapFromSource, "curve"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateBsplineCurveSwapFromSource));
@@ -743,7 +747,18 @@ void def_CurvePrimitive(py::module_& m)
                   return ICurvePrimitive::CreateAkimaCurve(&points[0], points.size());
                   }, "points"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateAkimaCurve));
 
+    c1.def_static("CreateAkimaCurve", [](py::list const& points)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint3dArray, DPoint3d); 
+                  return ICurvePrimitive::CreateAkimaCurve(&cpppoints[0], cpppoints.size()); 
+                  }, "points"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateAkimaCurve));
+
     c1.def_static("CreatePointString", py::overload_cast<DPoint3dArray&>(&ICurvePrimitive::CreatePointString), "points"_a, DOC(Bentley, Geom, ICurvePrimitive, CreatePointString));
+    c1.def_static("CreatePointString", [](py::list const& points)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint3dArray, DPoint3d); 
+                  return ICurvePrimitive:: CreatePointString(cpppoints); 
+                  }, "points"_a, DOC(Bentley, Geom, ICurvePrimitive, CreatePointString));
     c1.def_static("CreateRectangle", &ICurvePrimitive::CreateRectangle, "x0"_a, "y0"_a, "x1"_a, "y1"_a, "z"_a, "areaSignPreference"_a = 0, DOC(Bentley, Geom, ICurvePrimitive, CreateRectangle));
     c1.def_static("CreateSpiral", &ICurvePrimitive::CreateSpiral, "spiral"_a, "frame"_a, "fractionA"_a, "fractionB"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiral));
     c1.def_static("CreateXYCatenaryVertexCoefficientSignedDistanceLimits", &ICurvePrimitive::CreateXYCatenaryVertexCoefficientSignedDistanceLimits, "a"_a, "basis"_a, "s0"_a, "s1"_a);
@@ -963,6 +978,12 @@ void def_CurvePrimitive(py::module_& m)
     c1.def("AddStrokes",
            py::overload_cast<DPoint3dArray&, IFacetOptionsR, bool, double, double>(&ICurvePrimitive::AddStrokes, py::const_),
            "points"_a, "options"_a, "includeStartPoint"_a = true, "startFraction"_a = 0.0, "endFraction"_a = 1.0, DOC(Bentley, Geom, ICurvePrimitive, AddStrokes));
+
+    c1.def("AddStrokes", [](ICurvePrimitiveCR self, py::list &points, IFacetOptionsR options, bool includeStartPoint, double startFraction, double endFraction)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint3dArray, DPoint3d); 
+            return self.AddStrokes(cpppoints, options, includeStartPoint, startFraction, endFraction); 
+           }, "points"_a, "options"_a, "includeStartPoint"_a = true, "startFraction"_a = 0.0, "endFraction"_a = 1.0, DOC(Bentley, Geom, ICurvePrimitive, AddStrokes));
 
     c1.def("AddStrokes",
            py::overload_cast<DPoint3dDoubleUVCurveArrays&, IFacetOptionsCR, double, double>(&ICurvePrimitive::AddStrokes, py::const_),

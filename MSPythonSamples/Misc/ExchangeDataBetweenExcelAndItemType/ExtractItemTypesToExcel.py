@@ -1,9 +1,5 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2023 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
+
 import os
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -14,6 +10,8 @@ from MSPyMstnPlatform import *
 import pandas as pd
 
 '''
+Example demonstrating how to extract Item Types and export them into excel.
+
 Running this sample needs to open ExchangeDataBetweenExcelAndItemType.dgn or other design
 file includes title block item.
 Command file 'Extract Item Types to Excel.txt' and 'Repopulate Items from Excel.txt' would
@@ -29,6 +27,20 @@ to re-populate the title block Item Types with the new information.
 +---------------+---------------+---------------+---------------+---------------+------*/
 '''
 def ExtractItemTypesToExcel(file_path=''):
+    """
+    Extracts item types from the active DGN file and exports them to an Excel file.
+    This function retrieves instances of the 'Title Block' item type from the active DGN file
+    and exports their properties to an Excel file. If a file path is provided, the data is
+    saved to that file; otherwise, it is saved to 'TitleBlock.xlsx' in the same directory
+    as the script.
+    
+    :param file_path: The file path for the output Excel file. If not provided, defaults to 'TitleBlock.xlsx'.
+    :type file_path: str, optional
+    
+    :raises FileNotFoundError: If the specified file path does not exist.
+    :raises ValueError: If there is an issue with retrieving item types or properties.
+    :return: None
+    """
     # Get the active DGN file from the session manager
     dgnFile = ISessionMgr.ActiveDgnFile
 

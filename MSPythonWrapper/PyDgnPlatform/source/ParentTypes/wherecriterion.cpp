@@ -14,16 +14,16 @@ static const char * __doc_Bentley_DgnPlatform_WhereCriterion_ComparePrimitiveVal
 function will call PromoteValueToPrimitiveType in order to convert the
 values to compatible types, if possible.
 
-Returns:
+:returns:
     true if the values satisfy the comparison.
 
-Parameter ``lhs``:
+:param lhs:
     the value on the left
 
-Parameter ``rhs``:
+:param rhs:
     the value on the right
 
-Parameter ``op``:
+:param op:
     how to compare the values
 
 Remark:
@@ -37,17 +37,17 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_PromoteValueToPrimitiveType =R"doc(Utility to do simple primitive type conversions.
 
-Returns:
+:returns:
     value converted to type type wanted or an *uninitialized* value if
-    the conversion could not be done. Supported conversions:\li
+    the conversion could not be done. Supported conversions:
     PRIMITIVETYPE_Boolean -> PRIMITIVETYPE_Integer,
-    PRIMITIVETYPE_Double, PRIMITIVETYPE_Long \li PRIMITIVETYPE_Integer
-    -> PRIMITIVETYPE_Double, PRIMITIVETYPE_Long \li
+    PRIMITIVETYPE_Double, PRIMITIVETYPE_Long  PRIMITIVETYPE_Integer
+    -> PRIMITIVETYPE_Double, PRIMITIVETYPE_Long 
     PRIMITIVETYPE_String -> PRIMITIVETYPE_Integer,
-    PRIMITIVETYPE_Double, PRIMITIVETYPE_Long \li PRIMITIVETYPE_Long ->
+    PRIMITIVETYPE_Double, PRIMITIVETYPE_Long  PRIMITIVETYPE_Long ->
     cannot be converted to any other type. However, a request to
     convert PRIMITIVETYPE_Long to an integer type is not considered an
-    error and will return the input value unchanged. \li
+    error and will return the input value unchanged. 
     PRIMITIVETYPE_Double -> cannot be converted to any other type.
     However, a request to convert PRIMITIVETYPE_Double to an integer
     type is not considered an error and will return the input value
@@ -66,75 +66,75 @@ values for this instance.)doc";
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateLogicalOr =R"doc(Create a WhereCriterion that ORs two criteria together. @See
 CreateComparison.
 
-Parameter ``lhs``:
+:param lhs:
     a criterion to evalute
 
-Parameter ``rhs``:
+:param rhs:
     a criterion to evalute)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateLogicalAnd =R"doc(Create a WhereCriterion that ANDs two criteria together. @See
 CreateComparison.
 
-Parameter ``lhs``:
+:param lhs:
     a criterion to evalute
 
-Parameter ``rhs``:
+:param rhs:
     a criterion to evalute)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateLogical =R"doc(Create a WhereCriterion that combines the results of other criteria.
 @See CreateComparison, CreateRelatedCriterion
 
-Parameter ``lhs``:
+:param lhs:
     a criterion to evalute
 
-Parameter ``op``:
+:param op:
     how to combine the criteria
 
-Parameter ``rhs``:
+:param rhs:
     a criterion to evalute)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateRelatedCriterion =R"doc(Create a WhereCriterion that applies a criterion to a related
 instance. @See CreateLogical
 
-Parameter ``lhs``:
+:param lhs:
     a related instance
 
-Parameter ``rhs``:
+:param rhs:
     a criterion to apply to the related instance)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateRelatedInstanceFinder =R"doc(Create an agent that looks up a related instance, nested in another
 related instance.
 
-Parameter ``source``:
+:param source:
     Optional. The nested relationship to start from. If NULL, then
     this function will traverse *targetRelationship* on the current
     instance. If not NULL, then this function will evaluate *source*
     against the current instance in order to get a related instance
     and then traverse *targetRelationship* on the related instance.
 
-Parameter ``targetRelationship``:
+:param targetRelationship:
     The kind of relationship to look for
 
-Parameter ``relationshipCriterion``:
+:param relationshipCriterion:
     Optional. How to select instances of the specified relationship
     class.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateNonNullPropertyTest =R"doc(Create a WhereCriterion which evaluates true if the specified property
 value exists and is not null
 
-Parameter ``accessString``:
+:param accessString:
     The access string of the ECProperty
 
-Parameter ``arrayIndex``:
+:param arrayIndex:
     The array index, if the property is an array; or else -1)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateNullPropertyTest =R"doc(Create a WhereCriterion which evaluates true if the specified property
 value does not exist or is null
 
-Parameter ``accessString``:
+:param accessString:
     The access string of the ECProperty
 
-Parameter ``arrayIndex``:
+:param arrayIndex:
     The array index, if the property is an array; or else -1)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreatePropertyComparison =R"doc(Create a WhereCriterion that compares a named ECProperty to a known
@@ -142,13 +142,13 @@ value. This is a convenience method that just returns
 (*WhereExpression::CreatePropertyExpression (ecPropertyName), op,
 *WhereExpression::CreateConstant (value))
 
-Parameter ``ecPropertyName``:
+:param ecPropertyName:
     Name of the ECProperty
 
-Parameter ``op``:
+:param op:
     Comparison operator, e.g. WhereCriterion::EQ, etc.
 
-Parameter ``value``:
+:param value:
     ECValue to compare)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateComparison =R"doc(Create a WhereCriterion that compares the values of two expressions.
@@ -156,17 +156,17 @@ static const char * __doc_Bentley_DgnPlatform_WhereCriterion_CreateComparison =R
 See also:
     CreatePropertyExpression, CreateLogical
 
-Parameter ``lhs``:
+:param lhs:
     left side WhereExpression to evaluate
 
-Parameter ``op``:
+:param op:
     how to compare the values of the expressions, e.g.
     WhereCriterion::EQ, etc
 
-Parameter ``rhs``:
+:param rhs:
     right side WhereExpression to evaluate
 
-Parameter ``isCaseSensitive``:
+:param isCaseSensitive:
     If true, the match will do a case sensitive match. Otherwise, it
     will be case insensitive.)doc";
 
@@ -194,10 +194,10 @@ Remark:
     s If the value of the property is an array, then the array itself
     is the value of this expression.
 
-Parameter ``accessString``:
+:param accessString:
     identifies the property
 
-Parameter ``useDisplayValue``:
+:param useDisplayValue:
     if true, the property value will be round-tripped from its display
     value)doc";
 
@@ -205,13 +205,13 @@ static const char * __doc_Bentley_DgnPlatform_WhereExpression_CreateConstantSet 
 used as the right side of the IS_IN operator. @See CreateConstant,
 CreateComparison.
 
-Parameter ``s``:
+:param s:
     The set constant values)doc";
 
 static const char * __doc_Bentley_DgnPlatform_WhereExpression_CreateConstant =R"doc(Create an expression that holds a constant value. This is useful for
 testing property values. @See CreateConstantSet, CreateComparison.
 
-Parameter ``v``:
+:param v:
     The value of the constant)doc";
 
 /*---------------------------------------------------------------------------------**//**

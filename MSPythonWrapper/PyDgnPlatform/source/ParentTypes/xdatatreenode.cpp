@@ -12,33 +12,33 @@
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_Create =R"doc(Create and return a new XDataTreeNode.
 
-Parameter ``name``:
+:param name:
     The name of the new node.
 
-Parameter ``sortPriority``:
+:param sortPriority:
     The sortPriority of the new node. If -1 if passed in the next
     available value is used.
 
-Parameter ``allowChildNodes``:
+:param allowChildNodes:
     Boolean the specifies if this node should allow children.
 
-Parameter ``parentNodeP``:
+:param parentNodeP:
     Pointer to the parent node or NULL if root node.
 
-Parameter ``owner``:
+:param owner:
     The owner of the node. The owner can be determined by the
     DgnFileP. See XDataTreeManager::GetDgnXDataTreeOwner.
 
-Parameter ``handlerId``:
+:param handlerId:
     The HandlerId that specifies the XDataTree type.
 
-Parameter ``seedInstances``:
+:param seedInstances:
     Pointer to a seed container of IECInstances.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_GetECInstanceByClassName =R"doc(Return a pointer to an IECIntance that is held in the node
 XInstanceContainer.
 
-Parameter ``className``:
+:param className:
     The class name to compare. This assumes that the
     XInstanceContainer only contains a single instance from a
     particular class.)doc";
@@ -46,21 +46,21 @@ Parameter ``className``:
 static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_GetECInstanceBySchemaName =R"doc(Return a pointer to an IECIntance that is held in the node
 XInstanceContainer.
 
-Parameter ``fullSchemaName``:
+:param fullSchemaName:
     The schema name to compare. This assumes that the
     XInstanceContainer only contains a single instance from a
     particular schema.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_FindByElementId =R"doc(Return a reference counted pointer to an XDataTreeNode.
 
-Parameter ``elemID``:
+:param elemID:
     The ElementId of the Type 66 element that holds the element
     template XAttribute data.
 
-Parameter ``handlerId``:
+:param handlerId:
     The HandlerId that specifies the XDataTree type to search.
 
-Parameter ``owner``:
+:param owner:
     The owner of the node. The owner can be determined by the
     DgnFileP. See XDataTreeManager::GetDgnXDataTreeOwner.)doc";
 
@@ -97,7 +97,7 @@ the node.)doc";
 static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_SetSortPriority =R"doc(Set the Sort Priority which is used to determine the position of the
 node under its parent node.
 
-Parameter ``sortPriority``:
+:param sortPriority:
     The new priority value.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_GetSortPriority =R"doc(Return the Sort Priority which is used to determine the postion of the
@@ -111,7 +111,7 @@ static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_AllowChildNodes =R"d
 static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_SetName =R"doc(Set the name of the XDataTreeNode. The node must be written to persist
 the change.
 
-Parameter ``name``:
+:param name:
     The new name for the node.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_XDataTreeNode_GetFullPath =R"doc(Return the full heirarchial path to the XDataTreeNode.)doc";
@@ -125,16 +125,16 @@ the created node.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NameTreeNode_AddChild =R"doc(Add a new child node a return pointer to it.
 
-Parameter ``name``:
+:param name:
     The name of the child node to create.
 
-Parameter ``id``:
+:param id:
     The ElementId of the child node. @Return a RefCounted pointer to
     the created node.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_NameTreeNode_LocateChild =R"doc(Return a child node with a specific name.
 
-Parameter ``name``:
+:param name:
     The name of the child node to locate.)doc";
 
 /*---------------------------------------------------------------------------------**//**

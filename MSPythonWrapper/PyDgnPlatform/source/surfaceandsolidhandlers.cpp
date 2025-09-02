@@ -12,18 +12,18 @@
 
 static const char * __doc_Bentley_DgnPlatform_SurfaceOrSolidHandler_IsValidProfileType =R"doc(Check the supplied element to determine if it is an acceptable type
 for use as a projection or revolution profile. Valid elements are open
-curve, closed curves, and regions of the following types:\li LINE_ELM
-\li LINE_STRING_ELM \li SHAPE_ELM \li CURVE_ELM \li CMPLX_STRING_ELM
-\li CMPLX_SHAPE_ELM \li ELLIPSE_ELM \li ARC_ELM \li BSPLINE_CURVE_ELM
-\li CELL_HEADER_ELM that returns true from
-GroupedHoleHandler::IsGroupedHole. \li SURFACE_ELM when create method
-is called to continue an existing surface. \li SOLID_ELM when create
+curve, closed curves, and regions of the following types: LINE_ELM
+ LINE_STRING_ELM  SHAPE_ELM  CURVE_ELM  CMPLX_STRING_ELM
+ CMPLX_SHAPE_ELM  ELLIPSE_ELM  ARC_ELM  BSPLINE_CURVE_ELM
+ CELL_HEADER_ELM that returns true from
+GroupedHoleHandler::IsGroupedHole.  SURFACE_ELM when create method
+is called to continue an existing surface.  SOLID_ELM when create
 method is called to continue an existing solid. <p>
 
-Parameter ``eh``:
+:param eh:
     The element to check.
 
-Returns:
+:returns:
     true if element is valid candidate. Bentley Systems +-------------
     --+---------------+---------------+---------------+---------------
     +------)doc";

@@ -50,13 +50,13 @@ vertical axis.)doc";
 static const char * __doc_Bentley_DgnPlatform_TextStringProperties_SetIsVertical =R"doc(Sets the vertical flag. @note This controls MicroStation vertical text
 layout logic, which simply takes the glyphs from a normal font as-is,
 and effectively assumes soft line feeds after each character. This
-does not work with \@... TrueType fonts, which have special glyphs for
+does not work with . TrueType fonts, which have special glyphs for
 more correct vertical text.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextStringProperties_IsVertical =R"doc(Gets the vertical flag. @note This controls MicroStation vertical text
 layout logic, which simply takes the glyphs from a normal font as-is,
 and effectively assumes soft line feeds after each character. This
-does not work with \@... TrueType fonts, which have special glyphs for
+does not work with  TrueType fonts, which have special glyphs for
 more correct vertical text.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_TextStringProperties_ShouldShowOverline =R"doc(Determines if an overline should be drawn for the associated piece of

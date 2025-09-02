@@ -12,10 +12,10 @@
 
 static const char * __doc_Bentley_BeFileListIterator_GetNextFileName = R"doc(Retrieve the next filename found from the path list.
 
-Parameter ``name``:
+:param name:
     The name of the next valid file from the path list.
 
-Returns:
+:returns:
     SUCCESS if the name returned is valid, ERROR if there are no more
     files.)doc";
 

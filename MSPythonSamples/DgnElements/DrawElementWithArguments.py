@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-'''
-/*--------------------------------------------------------------------------------------+
-| $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
-+--------------------------------------------------------------------------------------*/
-'''
+# $Copyright: (c) 2024 Bentley Systems, Incorporated. All rights reserved. $
 
 from MSPyBentley import *
 from MSPyBentleyGeom import *
@@ -13,6 +8,8 @@ from MSPyMstnPlatform import *
 import sys
 
 '''
+ Sample demonstrating how to pass arguments to python script. 
+ 
  In Python, you can use sys.argv to handle command line arguments passed to a Python script.
  argv[0] is the script name, so you can get your own arguments begin from argv[1].
  This sample shows how to draw Line or Circle with different arguments.
@@ -37,6 +34,16 @@ import sys
 
 # Draw a line with given start point and end point
 def drawLine(startPoint, endPoint):
+    """
+    Draws a line between two points in the active DGN model.
+
+    :param startPoint: The starting point of the line.
+    :type startPoint: Point3d
+    :param endPoint: The ending point of the line.
+    :type endPoint: Point3d
+
+    :returns: None
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     eeh = EditElementHandle()
     seg = DSegment3d(startPoint, endPoint)
@@ -45,6 +52,16 @@ def drawLine(startPoint, endPoint):
 
 # Draw a circle with given center point and radius
 def drawCircle(centerPoint, radius):
+    """
+    Draws a circle in the active DGN model.
+
+    :param centerPoint: The center point of the circle.
+    :type centerPoint: Point3d
+    :param radius: The radius of the circle.
+    :type radius: float
+
+    :returns: None
+    """
     ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
     eeh = EditElementHandle()
     ell = DEllipse3d.FromCenterRadiusXY(centerPoint, radius)

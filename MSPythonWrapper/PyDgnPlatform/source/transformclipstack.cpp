@@ -114,6 +114,12 @@ void def_TransformClipStack(py::module_& m)
            return self.ClassifyPoints(points.data(), points.size(), ignoreMasks);
            }, "points"_a, "ignoreMasks"_a = false, DOC(Bentley, DgnPlatform, TransformClipStack, ClassifyPoints));
 
+    c1.def("ClassifyPoints", [] (TransformClipStack const& self, py::list const& points, bool ignoreMasks)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           return self.ClassifyPoints(cppPoints.data(), cppPoints.size(), ignoreMasks);
+           }, "points"_a, "ignoreMasks"_a = false, DOC(Bentley, DgnPlatform, TransformClipStack, ClassifyPoints));
+
     c1.def("GetRayIntersection", [] (TransformClipStack const& self, DPoint3dCR point, DVec3dCR direction)
            {
            double intersectDistance = 0;

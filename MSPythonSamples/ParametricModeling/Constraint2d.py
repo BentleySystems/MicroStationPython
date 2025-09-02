@@ -18,9 +18,19 @@ import ParametricSolid
 
 
 '''
-Function to add ConstraintData to Model
-'''
+Sample demonstrating how to create 2D constraints
+''' 
+
 def addConstraintDataToModel(solverData):
+    """
+    Adds constraint data to the model using the provided solver data.
+    
+    :param solverData: The solver data to be added to the model.
+    :type solverData: SolverData
+    
+    :return: True if the constraint data was successfully added, False otherwise.
+    :rtype: bool
+    """
     elementRefs = ElementRefPArray()
     solverData.GetElementRefs(elementRefs)
 
@@ -35,6 +45,23 @@ def addConstraintDataToModel(solverData):
     return True
 
 def createComplexShapeAndAdd2Model(points, center, isClosed, dgnModel, add2Model):
+    """
+    Creates a complex shape from given points and adds it to the model.
+    
+    :param points: List of points to define the shape.
+    :type points: list
+    :param center: Center point for the arc.
+    :type center: Point
+    :param isClosed: Flag to indicate if the shape is closed.
+    :type isClosed: bool
+    :param dgnModel: The model to which the shape will be added.
+    :type dgnModel: DgnModel
+    :param add2Model: Flag to indicate if the shape should be added to the model.
+    :type add2Model: bool
+    
+    :return: The handle to the created complex shape element, or None if creation failed.
+    :rtype: EditElementHandle or None
+    """
     if (dgnModel is None):
         return None
 
@@ -62,10 +89,21 @@ def createComplexShapeAndAdd2Model(points, center, isClosed, dgnModel, add2Model
     return eeh
 
 
-'''
-Function to create CurveEntityIdentifier
-'''
 def createLineCurveEntityId(point1, point2):
+    """
+    Creates a line curve entity identifier from two points.
+    This function creates a line between two given points and adds it to the active DGN model.
+    It then converts the created line element to a curve vector and returns a CurveEntityIdentifier
+    if successful.
+    
+    :param point1: The starting point of the line.
+    :type point1: Point2d
+    :param point2: The ending point of the line.
+    :type point2: Point2d
+    
+    :return: A CurveEntityIdentifier if the line creation and conversion are successful, otherwise None.
+    :rtype: CurveEntityIdentifier or None
+    """
     lineEh = PSampUtility.CreateLineAndAdd2Model(point1, point2, ISessionMgr.GetActiveDgnModel(), True)
     if(lineEh is None):
         return None
@@ -82,21 +120,41 @@ def createLineCurveEntityId(point1, point2):
                                    )
 
 
-'''
-Function to add radius 2D constraint to element,
-you can specifi a variable to the constraint, so that the constraint will use the variable value as radius
-if variable name is empty, then new value specified will be used as the radius constraint
-'''
 def AddRadiusConstraintToElement(profileEditElementHandle, newValue, varName):
+    """
+    Adds a radius constraint to a given profile element.
+
+    :param profileEditElementHandle: Handle to the profile element to which the radius constraint will be added.
+    :type profileEditElementHandle: ProfileEditElementHandle
+    :param newValue: The new radius value to be set.
+    :type newValue: float
+    :param varName: The variable name associated with the radius constraint.
+    :type varName: str
+    
+    :return: Result of the constraint addition operation.
+    :rtype: ConstraintResult
+    """
     ModelRef.ActivateAndDisplay(profileEditElementHandle.GetModelRef())
     elems = ElementAgenda() # Define element agenda
     elems.Insert(profileEditElementHandle.GetElementRef(), profileEditElementHandle.GetModelRef()) # Add element ref to element agenda
     return Constraint2dManager.AddConstraint(elems, Constraint2dType.eRadius, 0, 0, 0, 0, newValue, varName) # Add constraint
 
-'''
-Example to show how to append a perpendicular constraint on two lines
-'''
 def ExampleConstraintPerpendicular():
+    """
+    Creates two perpendicular line entities and adds a perpendicular constraint between them.
+    This function performs the following steps:
+    1. Creates two line entities using `createLineCurveEntityId`:
+       - The first line is created from (0.0, 0.0) to (100000.0, 0.0).
+       - The second line is created from (150000.0, 0.0) to (150000.0, 100000.0).
+    2. Checks if the line entities were created successfully. If not, the function returns.
+    3. Creates a perpendicular constraint using `Constraint2dData` and adds the line entities to it.
+    4. Adds the constraint data to a `Constraint2dSolverData` object.
+    5. Adds the constraint data to the model using `addConstraintDataToModel`.
+    6. Evaluates the constraint model and updates the related member elements using `Constraint2dManager.EvaluateAndUpdate`.
+
+    Returns:
+        None
+    """
     curveEntityId1 = createLineCurveEntityId(DPoint3d.From(0.0,0.0), DPoint3d.From(100000.0,0.0))
     curveEntityId2 = createLineCurveEntityId(DPoint3d.From(150000.0,0.0), DPoint3d.From(150000.0,100000.0))
     if (curveEntityId1 is None or curveEntityId2 is None):
@@ -118,10 +176,23 @@ def ExampleConstraintPerpendicular():
     isDynamic = False
     Constraint2dManager.EvaluateAndUpdate (solverData, ISessionMgr.GetActiveDgnModel(), noChanges, isDynamic, None)
 
-'''
-Example for 2D constraint: Fix, Parallel, Equal, Coincident, Perpendicular and Angle 
-''' 
 def ExampleConstraintFixParallelEqualCoincidentPerpendicularAngle():
+    """
+    Demonstrates the creation of various 2D constraints in a DGN model.
+    This function performs the following steps:
+    1. Draws the first line from (0.0, 0.0) to (0.0, -100000.0).
+    2. Draws the second line starting from (100000.0, 0.0) and ending at (50000.0, -50000.0).
+    3. Draws a linestring with three points, starting from the end of the second line.
+    4. Adds a fixed constraint to the first line.
+    5. Adds a parallel constraint between the first and second lines.
+    6. Adds an equal length constraint between the first and second lines.
+    7. Adds a coincident constraint between the second line and the linestring.
+    8. Adds a perpendicular constraint between the second line and the linestring.
+    9. Adds an angle constraint of 135 degrees to the linestring.
+    
+    Returns:
+        None
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
     if (dgnModel is None):
         return
@@ -175,10 +246,21 @@ def ExampleConstraintFixParallelEqualCoincidentPerpendicularAngle():
     elems.Insert(ehLineString.GetElementRef(), ehLineString.GetModelRef())
     Constraint2dManager.AddConstraint(elems, Constraint2dType.eAngle, 0, 1, 0, 0, 135.0*3.1415 / 180.0)
 
-'''
-Example for 2D constraint: Concentric And Tangent
-''' 
 def ExampleConstraintConcentricAndTangent():
+    """
+    Demonstrates the creation of various 2D geometric shapes and the application of concentric and tangent constraints 
+    between them in a DGN model.
+    The function performs the following steps:
+    1. Retrieves the active DGN model.
+    2. Creates a complex shape using a set of predefined points and adds it to the model.
+    3. Creates three circles and one arc with specified centers and radii, and adds them to the model.
+    4. Applies concentric constraints between the created circles.
+    5. Applies tangent constraints between the complex shape and the first circle, the complex shape and the ellipse, 
+       and the complex shape and the arc.
+    
+    Returns:
+        None
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
     if (dgnModel is None):
         return
@@ -233,10 +315,21 @@ def ExampleConstraintConcentricAndTangent():
     elems.Insert(eehArc.GetElementRef(), eehArc.GetModelRef())
     Constraint2dManager.AddConstraint(elems, Constraint2dType.eTangent)
 
-'''
-Example for 2D constraint: Distance And EqualDistance
-''' 
 def ExampleConstraintDistanceAndEqualDistance():
+    """
+    Demonstrates the creation of lines and the application of distance and equal distance constraints 
+    in a 2D parametric modeling environment.
+    This function performs the following steps:
+    1. Retrieves the active DGN model.
+    2. Draws three lines at specified coordinates.
+    3. Applies a distance constraint to the third line.
+    4. Applies an equal distance constraint to all three lines.
+    The constraints are managed using the `Constraint2dManager` and the elements are handled using 
+    the `ElementAgenda`.
+    
+    Returns:
+        None
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
     if (dgnModel is None):
         return
@@ -268,10 +361,25 @@ def ExampleConstraintDistanceAndEqualDistance():
     elems.Insert(eeh3.GetElementRef(), eeh3.GetModelRef())
     Constraint2dManager.AddConstraint(elems, Constraint2dType.eEqual_Distance)
 
-'''
-Example for 2D constraint: Area, Perimeter, Radius And MajorRadius
-''' 
 def ExampleConstraintAreaPerimeterRadiusAndMajorRadius():
+    """
+    Demonstrates the creation of various geometric shapes (circles, arc, ellipse) and 
+    the application of 2D constraints (area, perimeter, major radius, radius) to them 
+    in a DGN model.
+    The function performs the following steps:
+    1. Retrieves the active DGN model.
+    2. Draws a circle at the base point with a specified radius.
+    3. Draws a second circle offset from the base point.
+    4. Draws an arc at a specified offset from the base point.
+    5. Draws an ellipse at a specified offset from the base point.
+    6. Adds an area constraint to the first circle.
+    7. Adds a perimeter constraint to the second circle.
+    8. Adds a major radius constraint to the ellipse.
+    9. Adds a radius constraint to the arc.
+    
+    Returns:
+        None
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
     if (dgnModel is None):
         return
@@ -315,10 +423,18 @@ def ExampleConstraintAreaPerimeterRadiusAndMajorRadius():
     elems.Insert(eehArc.GetElementRef(), eehArc.GetModelRef())
     Constraint2dManager.AddConstraint(elems, Constraint2dType.eRadius, 0, 0, 0, 0, 40000)
 
-'''
-Example for Distance constraint with variable
-''' 
 def ExampleConstraintDistanceWithVariable():
+    """
+    Demonstrates how to create a distance constraint with a variable in a DGN model.
+    This function performs the following steps:
+    1. Retrieves the active DGN model.
+    2. Draws a line from a base point to a specified end point.
+    3. Creates a variable with a specified name and value.
+    4. Adds a distance constraint to the created line using the variable.
+    
+    Returns:
+        None
+    """
     dgnModel = ISessionMgr.GetActiveDgnModel()
     if (dgnModel is None):
         return
@@ -339,10 +455,16 @@ def ExampleConstraintDistanceWithVariable():
     elems.Insert(eeh.GetElementRef(), eeh.GetModelRef())
     Constraint2dManager.AddConstraint(elems, Constraint2dType.eDistance, 0, 0, 0, 0, value, varName)
 
-'''
-Example to show how to create a cylinder by extruding a circle which has a 2D radius constraint
-'''
 def ExampleExtrudeFeatureWithRadiusConstraint(dgnModel):
+    """
+    Creates a parametric solid cylinder by extruding a circle profile with a radius constraint.
+    
+    :param dgnModel: The design model in which the elements will be created.
+    :type dgnModel: object
+    
+    :return: The created parametric solid cylinder or None if the operation fails.
+    :rtype: object or None
+    """
     if (dgnModel is None):
         return None
 
@@ -361,6 +483,20 @@ def ExampleExtrudeFeatureWithRadiusConstraint(dgnModel):
     return ParametricSolid.CreateSmartFeatureElementExtrude(profileEditElementHandle)
 
 def RunSamples(index = 1):
+    """
+    Run sample constraint functions based on the provided index.
+
+    :param index: An integer representing the sample to run. Defaults to 1.
+                    The valid values are:
+                    0 - Run ExampleExtrudeFeatureWithRadiusConstraint.
+                    1 - Run ExampleConstraintPerpendicular.
+                    2 - Run ExampleConstraintConcentricAndTangent.
+                    3 - Run ExampleConstraintFixParallelEqualCoincidentPerpendicularAngle.
+                    4 - Run ExampleConstraintDistanceAndEqualDistance.
+                    5 - Run ExampleConstraintAreaPerimeterRadiusAndMajorRadius.
+                    6 - Run ExampleConstraintDistanceWithVariable.
+                    7 - Run ExampleConstraintConcentricAndTangent.
+    """
     if (1 == index):
         ExampleConstraintPerpendicular()
     elif(2 == index):
@@ -373,6 +509,8 @@ def RunSamples(index = 1):
         ExampleConstraintAreaPerimeterRadiusAndMajorRadius()
     elif(6 == index):
         ExampleConstraintDistanceWithVariable()
+    elif(7 == index):
+        ExampleConstraintConcentricAndTangent()
     elif(0 == index):
         if (ExampleExtrudeFeatureWithRadiusConstraint(ISessionMgr.GetActiveDgnModel()) is None):
             print("Return false when calling ExampleExtrudeFeatureWithRadiusConstraint()")

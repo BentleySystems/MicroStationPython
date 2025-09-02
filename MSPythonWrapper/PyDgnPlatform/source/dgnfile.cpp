@@ -12,18 +12,18 @@
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_GetLastActiveModelId =R"doc(Get the ModelId of the last active model
 
-Returns:
+:returns:
     The ModelId of the last active model, or INVALID_MODELID if there
     is no active model)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_GetModelBackgroundColor =R"doc(Get the background color for all models of the given type.
 
-Returns:
+:returns:
     ERROR if type is not found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_SetModelBackgroundColor =R"doc(Set the background color for all models of a given type.
 
-Returns:
+:returns:
     ERROR if type is not found.
 
 Remark:
@@ -37,16 +37,16 @@ static const char * __doc_Bentley_DgnPlatform_DgnFile_GetViewGroups =R"doc(Get a
 static const char * __doc_Bentley_DgnPlatform_DgnFile_IsSameFile =R"doc(Check if two fully qualified file-names represent the same physical
 file.
 
-Parameter ``fileName1``:
+:param fileName1:
     Fully qualified name of first file
 
-Parameter ``fileName2``:
+:param fileName2:
     Fully qualified name of second file
 
-Parameter ``compareMask``:
+:param compareMask:
     Mask which controls degree of comparison
 
-Returns:
+:returns:
     true if the two files represent the same file
 
 Remark:
@@ -67,17 +67,17 @@ Remark:
 static const char * __doc_Bentley_DgnPlatform_DgnFile_FindAppData =R"doc(Search for the DgnFileAppData on this DgnFile with ``key.`` See
 discussion of keys in #AddAppData.
 
-Returns:
+:returns:
     A pointer to the DgnFileAppData object with ``key.`` NULL if not
     found. @DotNetMethodExclude)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_DropAppData =R"doc(Remove a DgnFileAppData object from this DgnFile by its key.
 
-Parameter ``key``:
+:param key:
     The key to find the appropriate DgnFileAppData. See discussion of
     keys in #AddAppData.
 
-Returns:
+:returns:
     SUCCESS if a DgnFileAppData object with ``key`` was found and was
     dropped. ERROR if no DgnFileAppData with ``key`` exists. @note
     After the DgnFileAppData object is removed, its
@@ -90,7 +90,7 @@ to store data that is specific to this DgnFile, as it can be retrieved
 quickly through a pointer to this DgnFile and because its lifecycle
 can be made to match the DgnFile.
 
-Parameter ``key``:
+:param key:
     A unique key to differentiate ``appData`` from all of the other
     DgnFileAppData objects stored on this DgnFile. By convention,
     uniqueness is enforced by using the address of a (any) static
@@ -100,11 +100,11 @@ Parameter ``key``:
     that's OK, the only thing important about ``key`` is that it be
     unique.
 
-Parameter ``appData``:
+:param appData:
     The application's instance of a subclass of DgnFileAppData to
     store on this DgnFile.
 
-Returns:
+:returns:
     SUCCESS if ``appData`` was successfully added to this DgnFile.
     Note that it is not legal to add or drop DgnFileAppData to/from
     this DgnFile from within any of the methods of DgnFileAppData.
@@ -112,14 +112,14 @@ Returns:
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_CopyModelContents =R"doc(Copy the contents of one model into another
 
-Parameter ``destModel``:
+:param destModel:
     The destination of the copy. Should be a newly created model that
     is empty.
 
-Parameter ``sourceModel``:
+:param sourceModel:
     The model to be copied.
 
-Parameter ``dictionaryElements``:
+:param dictionaryElements:
     A list of elements from the dictionaryModel that should be copied.
     Generally, these are ViewGroups or NamedViews.
 
@@ -130,10 +130,10 @@ Remark:
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_DeleteModel =R"doc(Delete a model (calls ITxn::DeleteModel).
 
-Parameter ``model``:
+:param model:
     DgnModel to delete
 
-Returns:
+:returns:
     SUCCESS if the model was successfully deleted)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_GetSignatureCount =R"doc(Get the number of digital signatures in this file.)doc";
@@ -175,7 +175,7 @@ GetDocument)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_GetDocument =R"doc(Get the DgnDocument associated with this file.
 
-Returns:
+:returns:
     the DgnDocument associated with this file, or NULL @note This
     method returns NULL if this DgnFile does not represent a file or
     any actual document. For example, this DgnFile might be a
@@ -186,13 +186,13 @@ before calling this method. @See ProcessChanges)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_GetUniqueModelName =R"doc(Generate a model name that is not currently in use in this file
 
-Parameter ``uniqueModelName``:
+:param uniqueModelName:
     unique name that was generated, if possible
 
-Parameter ``baseName``:
+:param baseName:
     base model name to start with (optional)
 
-Parameter ``forCopy``:
+:param forCopy:
     If the object with the new name is a copy of the object of
     'baseName', then new name will be built with " - Copy " suffix)doc";
 
@@ -201,10 +201,10 @@ static const char * __doc_Bentley_DgnPlatform_DgnFile_SetTransactable =R"doc(All
 static const char * __doc_Bentley_DgnPlatform_DgnFile_DoSaveTo =R"doc(Save the DgnFile to a new physical file with the given file name.
 After this call, this file continues to refer to the original file.
 
-Parameter ``newFileName``:
+:param newFileName:
     The new file name
 
-Parameter ``format``:
+:param format:
     The file format. Only DgnFileFormatType::V8 is supported unless
     hosted by MicroStation.
 
@@ -216,11 +216,11 @@ to disk if appropriate. If the " abandon changes " flag is on for this
 file, then all of the DgnModels are emptied. After this call,
 #HasPendingChanges will return false.
 
-Parameter ``reason``:
+:param reason:
     The reason the changes are being processed. This reason will be
     passed to listeners so they can take appropriate action.
 
-Parameter ``timestamp``:
+:param timestamp:
     The time (in milliseconds since 1/1/1970 - see
     BeTimeUtilities::GetCurrentTimeAsUnixMillisDouble) to be saved in
     the header and returned by GetLastFileTime. This is supplied by
@@ -248,7 +248,7 @@ the disk. @See ProcessChanges)doc";
 static const char * __doc_Bentley_DgnPlatform_DgnFile_LoadModelById =R"doc(Search this file for a model with the specific ModelId, loading from
 disk if necessary.
 
-Parameter ``modelID``:
+:param modelID:
     The ModelId of the model of interest. @See FillSectionsInModel
     @See GetLoadedModelsCollection @See GetModelIndex @See
     GetDictionaryModel
@@ -266,7 +266,7 @@ static const char * __doc_Bentley_DgnPlatform_DgnFile_GetDefaultModelId =R"doc(G
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_FindModelIdByName =R"doc(Find the ModelId of the model with the specified name.
 
-Returns:
+:returns:
     The model's ModelId or INVALID_MODELID if not found.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_GetDictionaryModel =R"doc(Get the dictionary model for this file. @See
@@ -293,12 +293,12 @@ reference to the file and if there are no outstanding references to
 models loaded from this file, then the associated disk file is close
 and this object is deleted.
 
-Returns:
+:returns:
     the new reference count)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFile_AddRef =R"doc(Increment the reference count of this file.
 
-Returns:
+:returns:
     the new reference count)doc";
 
 static const char* __doc_Bentley_DgnPlatform_DgnFile_GetModelIndex = R"doc(Detect what models are stored in a file. @See LoadModelById, GetModelIndex,
@@ -314,46 +314,46 @@ DgnFileAppData is dropped from the DgnFile. Do not delete your
 DgnFileAppData in this method. Instead, return true and delete your
 DgnFileAppData in your _OnCleanup method.
 
-Parameter ``host``:
+:param host:
     The host DgnFile on which this DgnFileAppData resides.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFileAppData__OnModelUnDeleted =R"doc(This method is called after a model has been undeleted from the
 DgnFile on which this DgnFileAppData resides.
 
-Parameter ``host``:
+:param host:
     The host DgnFile on which this DgnFileAppData resides.
 
-Parameter ``modelID``:
+:param modelID:
     The model that is being deleted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFileAppData__OnModelDelete =R"doc(This method is called before and after a model is deleted from the
 DgnFile on which this DgnFileAppData resides.
 
-Parameter ``host``:
+:param host:
     The host DgnFile on which this DgnFileAppData resides.
 
-Parameter ``when``:
+:param when:
     The phase of the save operation.
 
-Parameter ``modelID``:
+:param modelID:
     The model that is being deleted.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFileAppData__OnSave =R"doc(This method is called before and after a " Save " operation is performed
 on the DgnFile on which this DgnFileAppData resides.
 
-Parameter ``host``:
+:param host:
     The host DgnFile on which this DgnFileAppData resides.
 
-Parameter ``when``:
+:param when:
     The phase of the save operation.
 
-Parameter ``changesFlag``:
+:param changesFlag:
     The type of save operation being performed.
 
-Parameter ``reason``:
+:param reason:
     The reason the Save was initiated.
 
-Parameter ``timestamp``:
+:param timestamp:
     The time the save operation was initiated.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_DgnFileAppData__OnCleanup =R"doc(This method is called whenever this object is removed from its host
@@ -362,7 +362,7 @@ DgnFile::DropAppData, or because the DgnFile itself is being deleted
 (in which case all of its DgnFileAppData is notified **before** the
 DgnFile is deleted).
 
-Parameter ``host``:
+:param host:
     The host DgnFile on which this DgnFileAppData resided.)doc";
 
 

@@ -13,11 +13,11 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_SetPaperScal
 Cartesian coordinates and makes measurements unreliable. Its use is
 not recommended. The default and recommended value is 1.0.
 
-Parameter ``paperScale``:
-    IN The new Paper Scale value.
+:param paperScale:
+    (input) The new Paper Scale value.
 
-Parameter ``modelRef``:
-    IN The model that this GCS came from.)doc";
+:param modelRef:
+    (input) The model that this GCS came from.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_GetPaperScale =R"doc(Gets the Paper Scale for this GCS. The Paper scale affects the
 Cartesian coordinates and makes measurements unreliable. Its use is
@@ -25,19 +25,19 @@ not recommended.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_RemoveEventHandler =R"doc(Removes a coordinate system event handler.
 
-Parameter ``handler``:
-    IN The event handler. )doc";
+:param handler:
+    (input) The event handler. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_SetEventHandler =R"doc(Sets a coordinate system event handler.
 
-Parameter ``handler``:
-    IN The event handler.)doc";
+:param handler:
+    (input) The event handler.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_ReloadGeoReferences =R"doc(Method that reloads geographically transformed and geographically
 projected references, responding to GCS changes in modelRef.
 
-Parameter ``modelRef``:
-    IN The modelRef for which the GCS has changed.)doc";
+:param modelRef:
+    (input) The modelRef for which the GCS has changed.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_FromCache =R"doc(Factory method that constructs an DgnGCS instance by attempting to
 locate the element that saves the geographic coordinate system
@@ -46,21 +46,21 @@ on those parameters. If the DgnGCS for a particular DgnModel has
 previously been requested, it is cached and this call is very
 efficient.
 
-Parameter ``cache``:
-    IN The DgnModel
+:param cache:
+    (input) The DgnModel
 
-Parameter ``primaryCoordSys``:
-    IN true to find the primary coordinate system, false to find the
+:param primaryCoordSys:
+    (input) true to find the primary coordinate system, false to find the
     " reference " coordinate system. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_DeleteFromModel =R"doc(Permanently deletes the saved Geographic Coordinate System parameters
 saved in the model.
 
-Parameter ``modelRef``:
-    IN The model to delete from.
+:param modelRef:
+    (input) The model to delete from.
 
-Parameter ``primaryCoordSys``:
-    IN true to delete the primary coordinate system, false to delete
+:param primaryCoordSys:
+    (input) true to delete the primary coordinate system, false to delete
     the " reference " coordinate system.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_FromModel =R"doc(Factory method that constructs an DgnGCS instance by attempting to
@@ -69,11 +69,11 @@ parameters in the model, and creating the instance based on those
 parameters. If the DgnGCS for a particular model has previously been
 requested, it is cached and this call is very efficient.
 
-Parameter ``modelRef``:
-    IN The model to look in.
+:param modelRef:
+    (input) The model to look in.
 
-Parameter ``primaryCoordSys``:
-    IN true to find the primary coordinate system, false to find the
+:param primaryCoordSys:
+    (input) true to find the primary coordinate system, false to find the
     " reference " coordinate system. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_ToModel =R"doc(Writes the GCS parameters to the model. Some GCS are not storable in a
@@ -82,73 +82,73 @@ datum refering to grid file paths with more than 75 characters long.
 Also GCS with custom datum defining more than one chained geodetic
 transform cannot be stored.
 
-Parameter ``modelRef``:
-    IN The model to write the GCS to.
+:param modelRef:
+    (input) The model to write the GCS to.
 
-Parameter ``primaryCoordSys``:
-    IN true to write as the primary coordinate system, false to write
+:param primaryCoordSys:
+    (input) true to write as the primary coordinate system, false to write
     as the " reference " coordinate system.
 
-Parameter ``writeToFile``:
-    IN true to save to the file, false to save only as cached.
+:param writeToFile:
+    (input) true to save to the file, false to save only as cached.
 
-Parameter ``reprojectData``:
-    IN true if the data in the model is to be reprojected from the
+:param reprojectData:
+    (input) true if the data in the model is to be reprojected from the
     existing GCS to the new GCS.
 
-Parameter ``reportProblems``:
-    IN true if reprojection problems should be reported to the user.
+:param reportProblems:
+    (input) true if reprojection problems should be reported to the user.
 
 Remark:
     s If writeToFile is false, reprojectData is ignored and the data
     in the model is not reprojected.
 
-Returns:
+:returns:
     ERROR if the GCS cannot be stored in the model. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_GetDisplayName =R"doc(Gets a name suitable for display in user interface.
 
-Parameter ``outputBuffer``:
-    OUT Buffer to hold the projection name.
+:param outputBuffer:
+    (output) Buffer to hold the projection name.
 
-Parameter ``bufferSize``:
-    IN dimension of outputBuffer. )doc";
+:param bufferSize:
+    (input) dimension of outputBuffer. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_GetProjectionName =R"doc(Gets the localized name of the Geographic Projection used in the
 Coordinate System.
 
-Parameter ``outputBuffer``:
-    OUT Buffer to hold the projection name.
+:param outputBuffer:
+    (output) Buffer to hold the projection name.
 
-Parameter ``bufferSize``:
-    IN dimension of outputBuffer. )doc";
+:param bufferSize:
+    (input) dimension of outputBuffer. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_GetLocalTransform =R"doc(Calculates the best approximate transform that can be applied at the
 elementOrigin to transform coordinates from this GCS's design
 coordinates to those of the destination GCS.
 
-Parameter ``outTransform``:
-    OUT The calculated Transform.
+:param outTransform:
+    (output) The calculated Transform.
 
-Parameter ``elementOrigin``:
-    IN The point, in design coordinates (UORs) of this GCS, at which
+:param elementOrigin:
+    (input) The point, in design coordinates (UORs) of this GCS, at which
     the transform will be applied.
 
-Parameter ``extent``:
-    IN The extent, in design coordinates (UORs) of a bvector that
+:param extent:
+    (input) The extent, in design coordinates (UORs) of a bvector that
     tells the span of the data to which the transform will be applied.
     If NULL, a reasonable guess is used.
 
-Parameter ``doRotate``:
-    IN true to allow rotation in the transform.
+:param doRotate:
+    (input) true to allow rotation in the transform.
 
-Parameter ``doScale``:
-    IN true to allow scaling in the transform.
+:param doScale:
+    (input) true to allow scaling in the transform.
 
-Parameter ``destMstnGCS``:
-    OUT The destination DgnGCS .
+:param destMstnGCS:
+    (output) The destination DgnGCS .
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code if elementOrigin could not be
     reprojected. )doc";
 
@@ -156,11 +156,11 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_GetLinearTra
 elementOrigin to transform coordinates from this GCS's design
 coordinates to those of the destination Base GCS.
 
-Parameter ``outTransform``:
-    OUT The calculated Transform.
+:param outTransform:
+    (output) The calculated Transform.
 
-Parameter ``extent``:
-    IN The extent in design coordinates (UORs) of this GCS to use to
+:param extent:
+    (input) The extent in design coordinates (UORs) of this GCS to use to
     find the transform. This extent must of course be valid (not
     empty) but shall also define an extent no less than 0.01 of the
     linear units of the input GCS wide in all dimensions. If the input
@@ -168,13 +168,13 @@ Parameter ``extent``:
     0.0000001 (1e-07) degrees for the first two ordinate and
     0.01[Meter] for the elevation (z) ordinate.
 
-Parameter ``maxError``:
-    OUT If provided receives the max error observed over the extent
+:param maxError:
+    (output) If provided receives the max error observed over the extent
 
-Parameter ``meanError``:
-    OUT If provided receives the mean error observed over the extent
+:param meanError:
+    (output) If provided receives the mean error observed over the extent
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code if elementOrigin could not be
     reprojected. )doc";
 
@@ -182,167 +182,167 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_ReprojectUor
 this model to the 2d design coordinates (UORs) of the design file
 associated with destMstnGCS.
 
-Parameter ``outUorsDest``:
-    OUT An array dimensioned to numPoints to hold the calculated UORs.
+:param outUorsDest:
+    (output) An array dimensioned to numPoints to hold the calculated UORs.
 
-Parameter ``outLatLongDest``:
-    OUT An optional array that will be filled with the geographic
+:param outLatLongDest:
+    (output) An optional array that will be filled with the geographic
     coordinates in the datum of the destMstnGCS. If not NULL, the
     array must be dimensioned to numPoints.
 
-Parameter ``outLatLongSrc``:
-    OUT An optional array that will be filled with the geographic
+:param outLatLongSrc:
+    (output) An optional array that will be filled with the geographic
     coordinates in the datum of this GCS. If not NULL, the array must
     be dimensioned to numPoints.
 
-Parameter ``inUors``:
-    IN An array holding the input points in design file coordinaates.
+:param inUors:
+    (input) An array holding the input points in design file coordinaates.
 
-Parameter ``numPoints``:
-    IN The number of points in inUors.
+:param numPoints:
+    (input) The number of points in inUors.
 
-Parameter ``destMstnGCS``:
-    OUT The destination DgnGCS .
+:param destMstnGCS:
+    (output) The destination DgnGCS .
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code if any of the points could not be
     reprojected. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_LatLongFromUors2D =R"doc(Calculates the longitude, latitude from 2d design coordinates (UORS).
 
-Parameter ``outLatLong``:
-    OUT The calculated longitude,latitude in the datum of this GCS.
+:param outLatLong:
+    (output) The calculated longitude,latitude in the datum of this GCS.
 
-Parameter ``inUors``:
-    IN The input design coordinates. )doc";
+:param inUors:
+    (input) The input design coordinates. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_UorsFromLatLong2D =R"doc(Calculates the 2d design coordinates (UORS) of the input
 Longitude/Latitude point.
 
-Parameter ``outUors``:
-    OUT The calculated design coordinates.
+:param outUors:
+    (output) The calculated design coordinates.
 
-Parameter ``inLatLong``:
-    IN The longitude,latitude in the datum of this GCS. )doc";
+:param inLatLong:
+    (input) The longitude,latitude in the datum of this GCS. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_ReprojectUors =R"doc(Reprojects an array of points in the design coordinates (UORs) of this
 model to the design coordinates (UORs) of the design file associated
 with destMstnGCS.
 
-Parameter ``outUorsDest``:
-    OUT An array dimensioned to numPoints to hold the calculated UORs.
+:param outUorsDest:
+    (output) An array dimensioned to numPoints to hold the calculated UORs.
 
-Parameter ``outLatLongDest``:
-    OUT An optional array that will be filled with the geographic
+:param outLatLongDest:
+    (output) An optional array that will be filled with the geographic
     coordinates in the datum of the destMstnGCS. If not NULL, the
     array must be dimensioned to numPoints.
 
-Parameter ``outLatLongSrc``:
-    OUT An optional array that will be filled with the geographic
+:param outLatLongSrc:
+    (output) An optional array that will be filled with the geographic
     coordinates in the datum of this GCS. If not NULL, the array must
     be dimensioned to numPoints.
 
-Parameter ``inUors``:
-    IN An array holding the input points in design file coordinaates.
+:param inUors:
+    (input) An array holding the input points in design file coordinaates.
 
-Parameter ``numPoints``:
-    IN The number of points in inUors.
+:param numPoints:
+    (input) The number of points in inUors.
 
-Parameter ``destMstnGCS``:
-    OUT The destination DgnGCS .
+:param destMstnGCS:
+    (output) The destination DgnGCS .
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code if any of the points could not be
     reprojected. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_LatLongFromUorsXYZ =R"doc(Calculates the longitude, latitude, and elevation from design
 coordinates (UORS) interpreted as XYZ coordinates.
 
-Parameter ``outLatLong``:
-    OUT The calculated longitude,latitude,elevation in the datum of
+:param outLatLong:
+    (output) The calculated longitude,latitude,elevation in the datum of
     this GCS.
 
-Parameter ``inUors``:
-    IN The input design coordinates.
+:param inUors:
+    (input) The input design coordinates.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code if any of the points could not be
     reprojected. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_LatLongFromUors =R"doc(Calculates the longitude, latitude, and elevation from design
 coordinates (UORS).
 
-Parameter ``outLatLong``:
-    OUT The calculated longitude,latitude,elevation in the datum of
+:param outLatLong:
+    (output) The calculated longitude,latitude,elevation in the datum of
     this GCS.
 
-Parameter ``inUors``:
-    IN The input design coordinates.
+:param inUors:
+    (input) The input design coordinates.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code if any of the points could not be
     reprojected. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_UorsFromLatLong =R"doc(Calculates the design coordinates (UORS) of the input
 Longitude/Latitude/Elevation point.
 
-Parameter ``outUors``:
-    OUT The calculated design coordinates.
+:param outUors:
+    (output) The calculated design coordinates.
 
-Parameter ``inLatLong``:
-    IN The longitude,latitude,elevation in the datum of this GCS.
+:param inLatLong:
+    (input) The longitude,latitude,elevation in the datum of this GCS.
 
-Returns:
+:returns:
     SUCCESS or a CS_MAP error code if any of the points could not be
     reprojected. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_UorsFromCartesian2D =R"doc(Calculates the design coordinates (UORs) from cartesian coordinates in
 the units specified by the GCS.
 
-Parameter ``outUors``:
-    OUT The calculated design coordinates.
+:param outUors:
+    (output) The calculated design coordinates.
 
-Parameter ``inCartesian``:
+:param inCartesian:
     INOUT The cartesian coordinates in the units specified in the GCS.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_UorsFromCartesian =R"doc(Calculates the design coordinates (UORs) from cartesian coordinates in
 the units specified by the GCS.
 
-Parameter ``outUors``:
-    OUT The calculated design coordinates.
+:param outUors:
+    (output) The calculated design coordinates.
 
-Parameter ``inCartesian``:
+:param inCartesian:
     INOUT The cartesian coordinates in the units specified in the GCS.)doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_CartesianFromUors2D =R"doc(Calculates the cartesian coordinates in the units specified by the GCS
 from design coordinates (UORs).
 
-Parameter ``outCartesian``:
-    OUT The calculated cartesian coordinates in the units specified in
+:param outCartesian:
+    (output) The calculated cartesian coordinates in the units specified in
     the GCS.
 
-Parameter ``inUors``:
-    IN The design coordinates. )doc";
+:param inUors:
+    (input) The design coordinates. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_CartesianFromUors =R"doc(Calculates the cartesian coordinates in the units specified by the GCS
 from design coordinates (UORs).
 
-Parameter ``outCartesian``:
-    OUT The calculated cartesian coordinates in the units specified in
+:param outCartesian:
+    (output) The calculated cartesian coordinates in the units specified in
     the GCS.
 
-Parameter ``inUors``:
-    IN The design coordinates. )doc";
+:param inUors:
+    (input) The design coordinates. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_DgnGCS_CreateGCS =R"doc(Creates an instance of DgnGCS for the given model, looking up the
 Coordinate System parameters from the Coordinate System Library by
 name.
 
-Parameter ``coordinateSystemName``:
-    IN The common name of the coordinate system..
+:param coordinateSystemName:
+    (input) The common name of the coordinate system..
 
-Parameter ``modelRef``:
-    IN The modelRef to use for the design file unit defintion.
+:param modelRef:
+    (input) The modelRef to use for the design file unit defintion.
 
 Remark:
     s The DgnGCS instance is not stored in the designated modelRef -)doc";
@@ -351,108 +351,108 @@ static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_IGeoCoordinateEvent
 geocoordinated state. For example if it is changed between
 " Projected ", " AEC Transform ", and " No ".
 
-Parameter ``modelRef``:
-    IN The modelRef of the reference that's getting changed.
+:param modelRef:
+    (input) The modelRef of the reference that's getting changed.
 
-Parameter ``oldState``:
-    IN The old state. 0 for no geocoordination, 1 for Projected, 2 for
+:param oldState:
+    (input) The old state. 0 for no geocoordination, 1 for Projected, 2 for
     AEC transformed.
 
-Parameter ``newState``:
-    IN The new state. )doc";
+:param newState:
+    (input) The new state. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_IGeoCoordinateEventHandler_BeforeReferenceGeoCoordinationChanged =R"doc(This method is called before a reference geocoordinated state is
 changed. For example if it is changed between " Projected ", " AEC Transform ", and " No ".
 
-Parameter ``modelRef``:
-    IN The modelRef of the reference that's getting changed.
+:param modelRef:
+    (input) The modelRef of the reference that's getting changed.
 
-Parameter ``oldState``:
-    IN The old state. 0 for no geocoordination, 1 for Projected, 2 for
+:param oldState:
+    (input) The old state. 0 for no geocoordination, 1 for Projected, 2 for
     AEC transformed.
 
-Parameter ``newState``:
-    IN The new state. )doc";
+:param newState:
+    (input) The new state. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_IGeoCoordinateEventHandler_AfterCoordinateSystemDeleted =R"doc(This method is called after the GeoCoordinate system in a model has
 been deleted.
 
-Parameter ``currentGCS``:
-    IN The GeoCoordinateSystem that was deleted.
+:param currentGCS:
+    (input) The GeoCoordinateSystem that was deleted.
 
-Parameter ``modelRef``:
-    IN The modelRef for which the GCS was deleted.
+:param modelRef:
+    (input) The modelRef for which the GCS was deleted.
 
-Parameter ``primaryCoordSys``:
-    IN true if deleted the primary coordinate system, false if deleted
+:param primaryCoordSys:
+    (input) true if deleted the primary coordinate system, false if deleted
     the " reference " coordinate system. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_IGeoCoordinateEventHandler_BeforeCoordinateSystemDeleted =R"doc(This method is called before the GeoCoordinate system in a model is
 deleted.
 
-Parameter ``currentGCS``:
-    IN The GeoCoordinateSystem that is about to be deleted.
+:param currentGCS:
+    (input) The GeoCoordinateSystem that is about to be deleted.
 
-Parameter ``modelRef``:
-    IN The modelRef for which the GCS is changing.
+:param modelRef:
+    (input) The modelRef for which the GCS is changing.
 
-Parameter ``primaryCoordSys``:
-    IN true if deleting the primary coordinate system, false if
+:param primaryCoordSys:
+    (input) true if deleting the primary coordinate system, false if
     deleting the " reference " coordinate system.
 
-Returns:
+:returns:
     SUCCESS or a nonzero error code to abort deletion of the
     coordinate system. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_IGeoCoordinateEventHandler_AfterCoordinateSystemChanged =R"doc(This method is called after the GeoCoordinate system of a model has
 been changed.
 
-Parameter ``oldGCS``:
-    IN The previous GeoCoordinateSystem (NULL if there is none).
+:param oldGCS:
+    (input) The previous GeoCoordinateSystem (NULL if there is none).
 
-Parameter ``newGCS``:
-    IN The new GeoCoordinateSystem.
+:param newGCS:
+    (input) The new GeoCoordinateSystem.
 
-Parameter ``modelRef``:
-    IN The modelRef for which the GCS changed.
+:param modelRef:
+    (input) The modelRef for which the GCS changed.
 
-Parameter ``primaryCoordSys``:
-    IN true if changed the primary coordinate system, false if changed
+:param primaryCoordSys:
+    (input) true if changed the primary coordinate system, false if changed
     the " reference " coordinate system.
 
-Parameter ``writtenToFile``:
-    IN true if changes written to the file, false if change saved only
+:param writtenToFile:
+    (input) true if changes written to the file, false if change saved only
     as cached.
 
-Parameter ``reprojectData``:
-    IN true if the data in the model was reprojected from the existing
+:param reprojectData:
+    (input) true if the data in the model was reprojected from the existing
     GCS to the new GCS. )doc";
 
 static const char * __doc_Bentley_DgnPlatform_GeoCoordinates_IGeoCoordinateEventHandler_BeforeCoordinateSystemChanged =R"doc(This method is called before the GeoCoordinate system of a model is
 changed.
 
-Parameter ``oldGCS``:
-    IN The existing GeoCoordinateSystem (NULL if there is none).
+:param oldGCS:
+    (input) The existing GeoCoordinateSystem (NULL if there is none).
 
-Parameter ``newGCS``:
-    IN The new GeoCoordinateSystem.
+:param newGCS:
+    (input) The new GeoCoordinateSystem.
 
-Parameter ``modelRef``:
-    IN The modelRef for which the GCS is changing.
+:param modelRef:
+    (input) The modelRef for which the GCS is changing.
 
-Parameter ``primaryCoordSys``:
-    IN true if changing the primary coordinate system, false if
+:param primaryCoordSys:
+    (input) true if changing the primary coordinate system, false if
     changing the " reference " coordinate system.
 
-Parameter ``writingToFile``:
-    IN true if changes will be written to the file, false if change
+:param writingToFile:
+    (input) true if changes will be written to the file, false if change
     saved only as cached.
 
-Parameter ``reprojectData``:
-    IN true if the data in the model will be reprojected from the
+:param reprojectData:
+    (input) true if the data in the model will be reprojected from the
     existing GCS to the new GCS.
 
-Returns:
+:returns:
     SUCCESS or a nonzero error code to abort the change of the
     coordinate system. )doc";
 
