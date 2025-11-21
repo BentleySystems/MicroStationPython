@@ -13,10 +13,50 @@ from MSPyDgnView import *
 from MSPyMstnPlatform import *
 import PSampUtility
 import VariableAndVariation
+import ParametricSolid
 
 '''
-Example demonstrating how to create I-beam profile with 2D constraint
-''' 
+Example demonstrating how to create 3D I-beam profile with 2D constraint
+'''
+
+class ElementRotate(DgnElementSetTool):
+    def __init__(self, toolId):
+        """
+        Initializes an instance of the class.
+
+        :param toolId: The unique identifier for the tool.
+        :type toolId: int
+        """
+        DgnElementSetTool.__init__(self, toolId) # C++ base's __init__ must be called.
+        self.m_point = DPoint3d()
+        self.m_rad = 0.0
+    
+    def getAnchorPoints(self):
+        """
+        Calculates and sets the anchor point and radial angle for the object.
+        This method determines the anchor point by retrieving it from the base class
+        and calculates the radial angle based on the difference between the accept point
+        and the current button event point. The calculated values are stored in the 
+        object's attributes.
+        
+        :return: True if the anchor point is successfully retrieved and processed, False otherwise.
+        :rtype: bool
+        """
+        anchorPt = DPoint3d()
+
+        # Base class saves the location that was used to accept the element, selection set, or fence.
+        if not self._GetAnchorPoint(anchorPt):
+            return False
+
+        vec = DVec3d()
+        
+        # Setup vector from accept point to this button event point.
+        vec.DifferenceOf(DPoint3d(), anchorPt)
+
+        self.m_rad = DVec2d(1, 0).AngleTo(DVec2d(vec.x, vec.y))
+        self.m_point = anchorPt
+
+        return True
 
 def createVariables(dgnModel):
     """
@@ -41,18 +81,18 @@ def createVariables(dgnModel):
 
 def ExampleCreateIbeamProfile():
     """
-    Creates an I-beam profile in the active DGN model.
+    Creates an I-beam profile in a parametric modeling environment.
     This function performs the following steps:
-    1. Creates variables used for the I-beam profile.
-    2. Creates a base line as a construction element.
-    3. Adds fixed constraints to the base line to fix its direction and base point.
-    4. Creates lines for the I-beam profile without adding them to the model.
-    5. Creates a complex shape header and adds the I-beam profile lines to it.
-    6. Adds the complex shape to the model.
-    7. Adds various constraints (equal, parallel, perpendicular, equal distance, distance, and coincident) to the lines in the complex shape.
+    - Creates variables for the I-beam profile.
+    - Constructs a base line as a construction element and applies fixed constraints to it.
+    - Creates the lines that define the I-beam profile and adds them to a complex shape.
+    - Adds various constraints (e.g., equal, parallel, perpendicular, distance, coincident) 
+      to ensure the geometric relationships between the base line and the I-beam profile lines.
+    - Rotates the I-beam profile based on anchor points and a calculated rotation angle.
+    - Extrudes the I-beam profile to create a 3D parametric solid and applies the rotation transformation.
     
-    Returns:
-        bool: True if the I-beam profile is successfully created and added to the model, False otherwise.
+    :return: True if the I-beam profile is successfully created and added to the model, False otherwise.
+    :rtype: bool
     """
     dgnModel = ISessionMgr.GetActiveDgnModel()
 
@@ -310,6 +350,17 @@ def ExampleCreateIbeamProfile():
     vertexTypes.extend((VertexType.eStart, VertexType.eEdge))
     Constraint2dManager.AddConstraint(elems, Constraint2dType.eCoincident, primitiveIds, subIndexs, vertexTypes)
 
+    # Rotate the I-beam profile based on anchor points and a calculated rotation angle
+    rotateElementParameters = ElementRotate(1)
+    rotateElementParameters.getAnchorPoints()
+    tInfo = TransformInfo(Transform.FromLineAndRotationAngle(rotateElementParameters.m_point, rotateElementParameters.m_point + DVec3d(1, 0, 0), rotateElementParameters.m_rad))
+    
+    # Extrude the I-beam profile to create a 3D parametric solid and apply the rotation transformation
+    ehhExtruded = ParametricSolid.CreateSmartFeatureElementExtrude(eehChainHeader, 5000000)
+    eehChainHeader.DeleteFromModel()
+    oldRef = ehhExtruded.ElementRef
+    ehhExtruded.GetHandler(eMISSING_HANDLER_PERMISSION_Transform).ApplyTransform(ehhExtruded, tInfo)
+    ehhExtruded.ReplaceInModel(oldRef)
     return True
 
 if __name__ == "__main__":

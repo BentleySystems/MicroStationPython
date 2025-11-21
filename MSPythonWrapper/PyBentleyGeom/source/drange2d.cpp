@@ -241,15 +241,27 @@ void def_DRange2d(py::module_& m)
     c1.def(py::init(py::overload_cast<DRange3dCR>(DRange2d::From)), "range"_a);
     c1.def(py::init(py::overload_cast<DPoint3dArray const&>(DRange2d::From)), "points"_a);
     c1.def_static("From", [](py::list const& points) {
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-        return DRange2d::From(cppPoints);
-    }, "points"_a);
+        if (!points.empty()) {
+            py::object first = points[0];
+            if (py::isinstance<DPoint3d>(first)) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                return DRange2d::From(cppPoints);
+            } else if (py::isinstance<DPoint2d>(first)) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+                return DRange2d::From(cppPoints);
+            } else {
+                throw std::invalid_argument("List must contain DPoint2d or DPoint3d objects.");
+            }
+        } else {
+            DPoint3dArray cppPoints;
+            return DRange2d::From(cppPoints);
+        }
+    }, "points"_a);    
     c1.def(py::init(py::overload_cast<double, double>(DRange2d::From)), "x"_a, "y"_a);
     c1.def(py::init(py::overload_cast<DPoint2dCR, DPoint2dCR>(DRange2d::From)), "point0"_a, "point1"_a);
     c1.def(py::init(py::overload_cast<double, double, double, double>(DRange2d::From)), "x0"_a, "y0"_a, "x1"_a, "y1"_a);
     c1.def(py::init(py::overload_cast<DPoint2dCR, DPoint2dCR, DPoint2dCR>(DRange2d::From)), "point0"_a, "point1"_a, "point2"_a);
     c1.def(py::init(py::overload_cast<DPoint2dArray const&>(DRange2d::From)), "points"_a);
-
     c1.def_property("low", [](DRange2d& self) {return self.low; }, [](DRange2d& self, DPoint2dCR low) {return self.low = low; });
     c1.def_property("high", [](DRange2d& self) {return self.high; }, [](DRange2d& self, DPoint2dCR high) {return self.high = high; });
 
@@ -263,6 +275,13 @@ void def_DRange2d(py::module_& m)
            {
            if (!points.empty())
                self.Extend(points.data(), (int)points.size());
+           }, "points"_a, DOC(Bentley, Geom, DRange2d, Extend));
+
+    c1.def("Extend", [] (DRange2dR self, py::list const& points)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+           if (!cppPoints.empty())
+               self.Extend(cppPoints.data(), (int)cppPoints.size());
            }, "points"_a, DOC(Bentley, Geom, DRange2d, Extend));
 
     c1.def("Extend", py::overload_cast<double>(&DRange2d::Extend), "extend"_a, DOC(Bentley, Geom, DRange2d, Extend));
@@ -298,11 +317,56 @@ void def_DRange2d(py::module_& m)
            self.Get4Lines(originArray.data(), normalArray.data());
            }, "originalArray"_a, "normalArray"_a, DOC(Bentley, Geom, DRange2d, Get4Lines));
 
+    c1.def("Get4Lines", [] (DRange2dCR self, py::list& originArray, DPoint2dArray& normalArray)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(originArray, cppOriginArray, DPoint2dArray, DPoint2d);
+           if (cppOriginArray.size() < 4)
+               cppOriginArray.resize(4);
+           if (normalArray.size() < 4)
+               normalArray.resize(4);
+
+           self.Get4Lines(cppOriginArray.data(), normalArray.data());
+           CONVERT_CPPARRAY_TO_PYLIST(originArray, cppOriginArray, DPoint2dArray, DPoint2d);
+           }, "originalArray"_a, "normalArray"_a, DOC(Bentley, Geom, DRange2d, Get4Lines));
+
+    c1.def("Get4Lines", [] (DRange2dCR self, DPoint2dArray& originArray, py::list& normalArray)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(normalArray, cppNormalArray, DPoint2dArray, DPoint2d);
+           if (originArray.size() < 4)
+               originArray.resize(4);
+           if (cppNormalArray.size() < 4)
+               cppNormalArray.resize(4);
+
+           self.Get4Lines(originArray.data(), cppNormalArray.data());
+           CONVERT_CPPARRAY_TO_PYLIST(normalArray, cppNormalArray, DPoint2dArray, DPoint2d);
+           }, "originalArray"_a, "normalArray"_a, DOC(Bentley, Geom, DRange2d, Get4Lines));
+
+    c1.def("Get4Lines", [] (DRange2dCR self, py::list& originArray, py::list& normalArray)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(originArray, cppOriginArray, DPoint2dArray, DPoint2d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(normalArray, cppNormalArray, DPoint2dArray, DPoint2d);
+           if (cppOriginArray.size() < 4)
+               cppOriginArray.resize(4);
+           if (cppNormalArray.size() < 4)
+                cppNormalArray.resize(4);
+           self.Get4Lines(cppOriginArray.data(), cppNormalArray.data());
+           CONVERT_CPPARRAY_TO_PYLIST(originArray, cppOriginArray, DPoint2dArray, DPoint2d);
+           CONVERT_CPPARRAY_TO_PYLIST(normalArray, cppNormalArray, DPoint2dArray, DPoint2d);
+           }, "originalArray"_a, "normalArray"_a, DOC(Bentley, Geom, DRange2d, Get4Lines));
+
     c1.def("Get4Corners", [] (DRange2dCR self, DPoint2dArray& box)
            {
            if (box.size() < 4)
                box.resize(4);
            self.Get4Corners(box.data());
+           }, "box"_a, DOC(Bentley, Geom, DRange2d, Get4Corners));
+    c1.def("Get4Corners", [] (DRange2dCR self, py::list& box)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(box, cppBox, DPoint2dArray, DPoint2d);
+           if (cppBox.size() < 4)
+               cppBox.resize(4);
+           self.Get4Corners(cppBox.data());
+           CONVERT_CPPARRAY_TO_PYLIST(box, cppBox, DPoint2dArray, DPoint2d);
            }, "box"_a, DOC(Bentley, Geom, DRange2d, Get4Corners));
 
     c1.def("IntersectRay", [] (DRange2dCR self, DPoint2dCR start, DPoint2dCR direction)

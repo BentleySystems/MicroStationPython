@@ -329,34 +329,46 @@ py::class_<bvector<ValueType>, holder_type> bind_PointerVector(py::handle scope,
     return cls;
     }
 
-// Convert Python list to an existing C++ array
+template <typename T>
+T ConvertItemFromPyObject(const py::handle& item) {
+    if (!py::isinstance<T>(item)) {
+        throw std::invalid_argument("All items in the list must be of the correct item type");
+    }
+    return item.cast<T>();
+}
+
+inline double ConvertItemFromPyObject(const py::handle& item) {
+    if (!PyFloat_Check(item.ptr()) && !PyLong_Check(item.ptr())) {
+        throw std::invalid_argument("Expected all items to be convertible to double");
+    }
+    return item.cast<double>();
+}
+
+template <typename T>
+py::object ConvertItemToPyObject(const T& item) {
+    return py::cast(item);
+}
+
+inline py::object ConvertItemToPyObject(const double& item) {
+    return py::float_(item);
+}
+
+//Convert Python list to an existing C++ array
 template <typename arrayType, typename itemType>
-void ConvertPyListToCppArray(py::list const& pyList, arrayType& cppArray)
-{
+void ConvertPyListToCppArray(const py::list& pyList, arrayType& cppArray) {
     cppArray.clear();
-    for (auto item : pyList)
-    {
-        if (!py::isinstance<itemType>(item))
-        {
-            throw std::invalid_argument("All items in the list must be of the correct item type");
-        }
-        auto cppItem = item.cast<itemType>();
+    for (const auto& item : pyList) {
+        itemType cppItem = ConvertItemFromPyObject<itemType>(item);
         cppArray.push_back(cppItem);
     }
 }
 
 // Convert Python list to a new C++ array
 template <typename arrayType, typename itemType>
-arrayType ConvertPyListToCppArray(py::list const& pyList)
-{
+arrayType ConvertPyListToCppArray(const py::list& pyList) {
     arrayType cppArray;
-    for (auto item : pyList)
-    {
-        if (!py::isinstance<itemType>(item))
-        {
-            throw std::invalid_argument("All items in the list must be of the correct item type");
-        }
-        auto cppItem = item.cast<itemType>();
+    for (const auto& item : pyList) {
+        itemType cppItem = ConvertItemFromPyObject<itemType>(item);
         cppArray.push_back(cppItem);
     }
     return cppArray;
@@ -364,23 +376,19 @@ arrayType ConvertPyListToCppArray(py::list const& pyList)
 
 // Convert C++ array to an existing Python list
 template <typename arrayType, typename itemType>
-void ConvertCppArrayToPyList(py::list& pyList, arrayType const& cppArray)
-{
+void ConvertCppArrayToPyList(py::list& pyList, const arrayType& cppArray) {
     pyList.attr("clear")();
-    for (const itemType& item : cppArray)
-    {
-        pyList.append(py::cast(item));
+    for (const itemType& item : cppArray) {
+        pyList.append(ConvertItemToPyObject(item));
     }
 }
 
 // Convert C++ array to a new Python list
 template <typename arrayType, typename itemType>
-py::list ConvertCppArrayToPyList(arrayType const& cppArray)
-{
+py::list ConvertCppArrayToPyList(const arrayType& cppArray) {
     py::list pyList;
-    for (const itemType& item : cppArray)
-    {
-        pyList.append(py::cast(item));
+    for (const itemType& item : cppArray) {
+        pyList.append(ConvertItemToPyObject(item));
     }
     return pyList;
 }

@@ -1608,14 +1608,32 @@ void def_IPrintDescription(py::module_& m)
     c4.def("SetFenceFromTCB", &IPrintDescription::SetFenceFromTCB, DOC(Bentley, MstnPlatform, Print, IPrintDescription, SetFenceFromTCB));
     c4.def("SetFenceFromFitRange", &IPrintDescription::SetFenceFromFitRange, "fitAll"_a, DOC(Bentley, MstnPlatform, Print, IPrintDescription, SetFenceFromFitRange));
     c4.def("GetViewDependentFence", [](IPrintDescription& self, DPoint2dArray& dp2dArray) {}, "dp2dArray"_a);
+    c4.def("GetViewDependentFence", [](IPrintDescription& self, py::list& dp2dArray) 
+        {
+        if(dp2dArray.empty()){
+         return;
+        }
+        else{
+         CONVERT_PYLIST_TO_NEW_CPPARRAY(dp2dArray, cppDp2dArray, DPoint2dArray, DPoint2d)
+         int numPoints = static_cast<int>(cppDp2dArray.size());
+         self.GetViewDependentFence(&numPoints, cppDp2dArray.data());
+         CONVERT_CPPARRAY_TO_PYLIST(dp2dArray, cppDp2dArray, DPoint2dArray, DPoint2d);
+        }
+        }, "dp3dArray"_a);
     c4.def("SetViewDependentFence", [](IPrintDescription& self, const DPoint2dArray& dp2dArray) {return ERROR;}, "dp2dArray"_a);
+    c4.def("SetViewDependentFence", [](IPrintDescription& self, const py::list& dp2dArray) {return ERROR;}, "dp2dArray"_a);
     c4.def("GetViewIndependentFence", [](IPrintDescription& self, DPoint3dArray& dp3dArray) {}, "dp3dArray"_a);
     c4.def("GetViewIndependentFence", [](IPrintDescription &self, py::list& dp3dArray)
            {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(dp3dArray, cppDp3dArray, DPoint3dArray, DPoint3d)
-           int numPoints = 0;
-           self.GetViewIndependentFence(&numPoints, cppDp3dArray.data());
-           CONVERT_CPPARRAY_TO_PYLIST(dp3dArray, cppDp3dArray, DPoint3dArray, DPoint3d);
+           if(dp3dArray.empty()){
+            return;
+           }
+           else{
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(dp3dArray, cppDp3dArray, DPoint3dArray, DPoint3d)
+            int numPoints = static_cast<int>(cppDp3dArray.size());
+            self.GetViewIndependentFence(&numPoints, cppDp3dArray.data());
+            CONVERT_CPPARRAY_TO_PYLIST(dp3dArray, cppDp3dArray, DPoint3dArray, DPoint3d);
+           }
            }, "dp3dArray"_a);
     c4.def("SetViewIndependentFence", [](IPrintDescription& self, const DPoint3dArray& dp3dArray) {return ERROR; }, "dp3dArray"_a);
     c4.def("SetViewIndependentFence", [](IPrintDescription& self, const py::list& dp3dArray) {return ERROR; }, "dp3dArray"_a);

@@ -54,6 +54,8 @@ PyDgnPlatformDependencies  = $(dependencies) \
 
 PyDgnPlatformTestUtilitiesSource        = $(PyhonWrapper)PyDgnPlatform/testUtilities/
 
+$(o)pyViewContextTest$(oext)            : $(PyDgnPlatformTestUtilitiesSource)pyViewContextTest.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
+
 $(o)pyECTestHelpers$(oext)              : $(PyDgnPlatformTestUtilitiesSource)pyECTestHelpers.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}
 
 $(o)MSPyDgnPlatformTest$(oext)          : $(PyDgnPlatformTestUtilitiesSource)MSPyDgnPlatformTest.cpp $(PyDgnPlatformDependencies) ${MultiCompileDepends}

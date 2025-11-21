@@ -356,10 +356,60 @@ void def_DRange3d(py::module_& m)
     c1.def(py::init(py::overload_cast<double, double, double>(&DRange3d::From)), "x"_a, "y"_a, "z"_a);
     c1.def(py::init(py::overload_cast<double, double, double, double, double, double>(&DRange3d::From)), "x0"_a, "y0"_a, "z0"_a, "x1"_a, "y1"_a, "z1"_a);
     c1.def(py::init(py::overload_cast<DPoint2dArray const&, double>(&DRange3d::From)), "points"_a, "zVal"_a);
+    c1.def(py::init([](py::list const& points, double zVal) {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+        return DRange3d::From(cppPoints, zVal); }), "points"_a, "zVal"_a);
     c1.def(py::init(py::overload_cast<DPoint3dArray const&>(&DRange3d::From)), "points"_a);
-    c1.def_static("From",([](py::list const& points) {
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-        return DRange3d::From(cppPoints); }), "points"_a);
+    c1.def(py::init([](py::list const &points)
+        {    
+            if (points.empty()) {
+                DPoint3dArray cppPoints;
+                return DRange3d::From(cppPoints);
+            }
+            auto first = points[0];
+            if (py::isinstance<DPoint3d>(first)) {
+                DPoint3dArray cppPoints = ConvertPyListToCppArray<DPoint3dArray, DPoint3d>(points);
+                return DRange3d::From(cppPoints);
+            }
+            if (py::isinstance<DPoint4d>(first)) {
+                DPoint4dArray cppPoints = ConvertPyListToCppArray<DPoint4dArray, DPoint4d>(points);
+                return DRange3d::From(cppPoints);
+            }
+            // List[list[DPoint3d]]
+            if (py::isinstance<py::list>(first)) {
+                py::list innerList = py::cast<py::list>(first);
+                if (py::len(innerList) > 0 && py::isinstance<DPoint3d>(innerList[0])) {
+                   
+                    DPoint3dVecArray cppPoints;
+                    for (auto arrHandle : points) {
+                        py::list arr = py::cast<py::list>(arrHandle); 
+                        DPoint3dArray cppArr = ConvertPyListToCppArray<DPoint3dArray, DPoint3d>(arr);
+                        cppPoints.push_back(cppArr);
+                    }
+                    return DRange3d::From(cppPoints);
+                }
+                // List[list[list[DPoint3d]]]
+                if (py::isinstance<py::list>(innerList[0])) {
+                    py::list innerInnerList = py::cast<py::list>(innerList[0]);
+                    if (py::len(innerInnerList) > 0 && py::isinstance<DPoint3d>(innerInnerList[0])) {
+                        DPoint3dVecVecArray cppPoints;
+                        for (auto vecArrayHandle : points) {
+                            py::list vecArray = py::cast<py::list>(vecArrayHandle);
+                            DPoint3dVecArray cppVecArray;
+                            for (auto arrHandle : vecArray) {
+                                py::list arr = py::cast<py::list>(arrHandle);
+                                DPoint3dArray cppArr = ConvertPyListToCppArray<DPoint3dArray, DPoint3d>(arr);
+                                cppVecArray.push_back(cppArr);
+                            }
+                            cppPoints.push_back(cppVecArray);
+                        }
+                        return DRange3d::From(cppPoints);
+                    }
+                }
+            }  
+            throw std::invalid_argument("Unsupported input type for DRange3d constructor."); 
+        }), "points"_a);
+
     c1.def(py::init(py::overload_cast<DPoint4dArray const&>(&DRange3d::From)), "points"_a);
     c1.def(py::init(py::overload_cast<DPoint3dVecArray const&>(&DRange3d::From)), "points"_a);
     c1.def(py::init(py::overload_cast<DPoint3dVecVecArray const&>(&DRange3d::From)), "points"_a);
@@ -373,9 +423,22 @@ void def_DRange3d(py::module_& m)
                   return DRange3d::From(transform, points.data(), weights.data(), (int) points.size());
                   }), "transform"_a, "points"_a, "weights"_a);
     c1.def(py::init(py::overload_cast<TransformCR, DPoint3dArray const&>(&DRange3d::From)), "transform"_a, "points"_a);
-    c1.def_static("From", ([](TransformCR transform, py::list const& points) {
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-        return DRange3d::From(transform, cppPoints);
+    c1.def(py::init([](TransformCR transform, py::list const& points) {
+        if(points.empty()){
+            DPoint3dArray cppPoints;
+            return DRange3d::From(transform, cppPoints);
+        }
+        else if(py::isinstance<DPoint3d>(points[0])){
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            return DRange3d::From(transform, cppPoints);
+        }
+        else if(py::isinstance<DPoint4d>(points[0])){
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint4dArray, DPoint4d);
+            return DRange3d::From(transform, cppPoints);
+        }
+        else {
+            throw std::invalid_argument("Unsupported input type for DRange3d constructor.");
+        }
     }), "transform"_a, "points"_a);
     c1.def(py::init(py::overload_cast<TransformCR, DPoint4dArray const&>(&DRange3d::From)), "transform"_a, "points"_a);
 
@@ -390,17 +453,43 @@ void def_DRange3d(py::module_& m)
     c1.def("Extend", py::overload_cast<DPoint4dCR>(&DRange3d::Extend), "point"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<double, double, double>(&DRange3d::Extend), "x"_a, "y"_a, "z"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<DPoint2dArray const&, double>(&DRange3d::Extend), "points"_a, "zVal"_a, DOC(Bentley, Geom, DRange3d, Extend));
+    c1.def("Extend", [](DRange3dR self, py::list const& points, double zVal)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+           self.Extend(cppPoints, zVal); }, "points"_a, "zVal"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<DPoint3dArray const&>(&DRange3d::Extend), "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", [](DRange3dR self, py::list const& points)
            {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-           self.Extend(cppPoints); }, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
+            if(points.empty()){
+                DPoint3dArray cppPoints;
+                self.Extend(cppPoints);
+            }
+            else if(py::isinstance<DPoint3d>(points[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                self.Extend(cppPoints);
+            }
+            else if(py::isinstance<DPoint4d>(points[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint4dArray, DPoint4d);
+                self.Extend(cppPoints);
+            }
+            }, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<DPoint4dArray const&>(&DRange3d::Extend), "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<TransformCR, DPoint3dArray const&>(&DRange3d::Extend), "transform"_a, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", [](DRange3dR self, TransformCR transform, py::list const& points)
            {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-           self.Extend(transform, cppPoints); }, "transform"_a, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
+            if(points.empty()){
+                DPoint3dArray cppPoints;
+                self.Extend(transform, cppPoints); 
+            }
+            else if(py::isinstance<DPoint3d>(points[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                self.Extend(transform, cppPoints); 
+            }
+            else if(py::isinstance<DPoint4d>(points[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint4dArray, DPoint4d);
+                self.Extend(transform, cppPoints); 
+            }
+           }, "transform"_a, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));
     c1.def("Extend", py::overload_cast<TransformCR, DPoint4dArray const&>(&DRange3d::Extend), "transform"_a, "points"_a, DOC(Bentley, Geom, DRange3d, Extend));    
 
     c1.def("Extend", [] (DRange3dR self, TransformCR transform, std::vector<DPoint3d> const& points, std::vector<double> const& weights)
@@ -445,6 +534,15 @@ void def_DRange3d(py::module_& m)
            self.Get6Planes(&planes[0], normalLength);
            }, "planes"_a, "normalLength"_a = 1.0, DOC(Bentley, Geom, DRange3d, Get6Planes));
 
+    c1.def("Get6Planes", [] (DRange3dCR self, py::list& planes, double normalLength)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(planes, cppPlanes, DPlane3dArray, DPlane3d);
+           if (cppPlanes.size() < 6)
+               cppPlanes.resize(6);
+           self.Get6Planes(&cppPlanes[0], normalLength);
+           CONVERT_CPPARRAY_TO_PYLIST(planes, cppPlanes, DPlane3dArray, DPlane3d);
+           }, "planes"_a, "normalLength"_a = 1.0, DOC(Bentley, Geom, DRange3d, Get6Planes));
+
     c1.def("Get6Planes", [] (DRange3dCR self, DPoint3dArray& origins, DPoint3dArray& normals)
            {
            if (origins.size() < 6) origins.resize(6);
@@ -461,6 +559,24 @@ void def_DRange3d(py::module_& m)
            self.Get6Planes(&cppOrigins[0], &cppNormals[0]);
            CONVERT_CPPARRAY_TO_PYLIST(origins, cppOrigins, DPoint3dArray, DPoint3d);
            CONVERT_CPPARRAY_TO_PYLIST(normals, cppNormals, DPoint3dArray, DPoint3d); 
+           }, "origins"_a, "normals"_a = 1.0, DOC(Bentley, Geom, DRange3d, Get6Planes));
+
+    c1.def("Get6Planes", [] (DRange3dCR self, DPoint3dArray& origins, py::list& normals)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(normals, cppNormals, DPoint3dArray, DPoint3d); 
+           if (origins.size() < 6) origins.resize(6);
+           if (cppNormals.size() < 6) cppNormals.resize(6);
+           self.Get6Planes(&origins[0], &cppNormals[0]);
+           CONVERT_CPPARRAY_TO_PYLIST(normals, cppNormals, DPoint3dArray, DPoint3d); 
+           }, "origins"_a, "normals"_a = 1.0, DOC(Bentley, Geom, DRange3d, Get6Planes));
+
+    c1.def("Get6Planes", [] (DRange3dCR self, py::list& origins, DPoint3dArray& normals)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(origins, cppOrigins, DPoint3dArray, DPoint3d);
+           if (cppOrigins.size() < 6) cppOrigins.resize(6);
+           if (normals.size() < 6) normals.resize(6);
+           self.Get6Planes(&cppOrigins[0], &normals[0]);
+           CONVERT_CPPARRAY_TO_PYLIST(origins, cppOrigins, DPoint3dArray, DPoint3d);
            }, "origins"_a, "normals"_a = 1.0, DOC(Bentley, Geom, DRange3d, Get6Planes));
 
     c1.def("GetEdges", &DRange3d::GetEdges, "edges"_a, DOC(Bentley, Geom, DRange3d, GetEdges));

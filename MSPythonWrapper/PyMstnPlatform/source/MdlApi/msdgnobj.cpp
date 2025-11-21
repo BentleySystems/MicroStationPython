@@ -10,7 +10,7 @@
 
 
 
-static const char * __doc_MstnPlatform_DgnFile_GetModelItemByName =R"doc(Retrieve the model index item using a model name.
+static const char * __doc_MstnPlatform_MstnDgnFile_GetModelItemByName =R"doc(Retrieve the model index item using a model name.
 
 :param pDgnFile:
     The file containing the model.
@@ -27,7 +27,7 @@ static const char * __doc_MstnPlatform_DgnFile_GetModelItemByName =R"doc(Retriev
 Remark:
     )doc";
 
-static const char * __doc_MstnPlatform_DgnFile_GetModelItemById =R"doc(Retrieve the model index item using a model ID.
+static const char * __doc_MstnPlatform_MstnDgnFile_GetModelItemById =R"doc(Retrieve the model index item using a model ID.
 
 :param pDgnFile:
     The file containing the model.
@@ -44,10 +44,10 @@ static const char * __doc_MstnPlatform_DgnFile_GetModelItemById =R"doc(Retrieve 
 Remark:
     )doc";
 
-static const char * __doc_MstnPlatform_DgnFile_GetModelCount =R"doc(Remark:
+static const char * __doc_MstnPlatform_MstnDgnFile_GetModelCount =R"doc(Remark:
     )doc";
 
-static const char * __doc_MstnPlatform_DgnFile_GetModelRefList =R"doc(Create a DgnModelRefList containing an entry for each of the loaded
+static const char * __doc_MstnPlatform_MstnDgnFile_GetModelRefList =R"doc(Create a DgnModelRefList containing an entry for each of the loaded
 models in the specified design file. Note, any DgnModelRefList created
 with this function must be freed by calling <a
 href=" usmthModelRefList.Free htm ">ModelRefList.Free</a>.
@@ -64,7 +64,7 @@ href=" usmthModelRefList.Free htm ">ModelRefList.Free</a>.
 Remark:
     )doc";
 
-static const char * __doc_MstnPlatform_DgnFile_IsProtected =R"doc(@Description Check if the specified file is encrypted (e.g., for
+static const char * __doc_MstnPlatform_MstnDgnFile_IsProtected =R"doc(@Description Check if the specified file is encrypted (e.g., for
 digital rights management)
 
 :param file:
@@ -75,7 +75,7 @@ Remark:
 
 )doc";
 
-static const char * __doc_MstnPlatform_DgnFile_CheckRights =R"doc(@Description Check if the specified rights are granted to the current
+static const char * __doc_MstnPlatform_MstnDgnFile_CheckRights =R"doc(@Description Check if the specified rights are granted to the current
 user for the specified file.
 
 Remark:
@@ -105,7 +105,7 @@ Remark:
 
 )doc";
 
-static const char * __doc_MstnPlatform_DgnFile_HasPendingChanges =R"doc(@Description Determines if a design file has pending chages.
+static const char * __doc_MstnPlatform_MstnDgnFile_HasPendingChanges =R"doc(@Description Determines if a design file has pending chages.
 @Param(input) DgnFile is a reference to the design file of interest
 @Return true if the design file has changes that have not been saved;
 false otherwise.
@@ -115,7 +115,7 @@ Remark:
 
 )doc";
 
-static const char * __doc_MstnPlatform_DgnFile_GetMasterFile =R"doc(@Description Get the DgnFile for the current master file. @Return
+static const char * __doc_MstnPlatform_MstnDgnFile_GetMasterFile =R"doc(@Description Get the DgnFile for the current master file. @Return
 The DgnFileP for the current master file.
 
 Remark:
@@ -125,7 +125,7 @@ Remark:
 
 
 BEGIN_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE
-struct DgnFile {};
+struct MstnDgnFile {};
 END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE
 
 /*---------------------------------------------------------------------------------**//**
@@ -134,10 +134,10 @@ END_BENTLEY_MSTNPLATFORM_MSPYTHON_NAMESPACE
 void def_msdgnobj(py::module_& m)
     {
 
-    py::class_<Bentley::MstnPlatform::MSPython::DgnFile> c1(m, "DgnFile"); 
+    py::class_<Bentley::MstnPlatform::MSPython::MstnDgnFile> c1(m, "MstnDgnFile");
 
-    c1.def_static("GetMasterFile", &mdlDgnFileObj_getMasterFile, py::return_value_policy::reference, DOC(MstnPlatform, DgnFile, GetMasterFile));
-    c1.def_static("HasPendingChanges", &mdlDgnFileObj_hasPendingChanges, "DgnFile"_a, DOC(MstnPlatform, DgnFile, HasPendingChanges));
+    c1.def_static("GetMasterFile", &mdlDgnFileObj_getMasterFile, py::return_value_policy::reference, DOC(MstnPlatform, MstnDgnFile, GetMasterFile));
+    c1.def_static("HasPendingChanges", &mdlDgnFileObj_hasPendingChanges, "DgnFile"_a, DOC(MstnPlatform, MstnDgnFile, HasPendingChanges));
 
     c1.def_static("CreateModel", [] (DgnFileP dgnFileObj, DgnModelRefP seedModelRef, WCharCP modelName, WCharCP modelDescr, bool FromSeedForModelAndIs3d, DgnModelType modelType, bool Is3d)
           {
@@ -163,12 +163,12 @@ void def_msdgnobj(py::module_& m)
         .value("eMESSAGE_DEST_WarningDialog", MESSAGE_DEST_WarningDialog)
         .export_values();
 
-    c1.def_static("CheckRights", &mdlDgnFileObj_checkRights, "dgnFileObj"_a, "rights"_a, "displayError"_a, DOC(MstnPlatform, DgnFile, CheckRights));
-    c1.def_static("IsProtected", &mdlDgnFileObj_isProtected, "dgnFileObj"_a, DOC(MstnPlatform, DgnFile, IsProtected));
-    c1.def_static("GetModelRefList", &mdlDgnFileObj_getModelRefList, "dgnFileObj"_a, py::return_value_policy::reference, DOC(MstnPlatform, DgnFile, GetModelRefList));
-    c1.def_static("GetModelCount", &mdlDgnFileObj_getModelCount, "dgnFileObj"_a, DOC(MstnPlatform, DgnFile, GetModelCount));
-    c1.def_static("GetModelItemById", &mdlDgnFileObj_getModelItemById, "dgnFileObj"_a, "modelId"_a, py::return_value_policy::reference, DOC(MstnPlatform, DgnFile, GetModelItemById));
-    c1.def_static("GetModelItemByName", &mdlDgnFileObj_getModelItemByName, "dgnFileObj"_a, "modelName"_a, py::return_value_policy::reference, DOC(MstnPlatform, DgnFile, GetModelItemByName));
+    c1.def_static("CheckRights", &mdlDgnFileObj_checkRights, "dgnFileObj"_a, "rights"_a, "displayError"_a, DOC(MstnPlatform, MstnDgnFile, CheckRights));
+    c1.def_static("IsProtected", &mdlDgnFileObj_isProtected, "dgnFileObj"_a, DOC(MstnPlatform, MstnDgnFile, IsProtected));
+    c1.def_static("GetModelRefList", &mdlDgnFileObj_getModelRefList, "dgnFileObj"_a, py::return_value_policy::reference, DOC(MstnPlatform, MstnDgnFile, GetModelRefList));
+    c1.def_static("GetModelCount", &mdlDgnFileObj_getModelCount, "dgnFileObj"_a, DOC(MstnPlatform, MstnDgnFile, GetModelCount));
+    c1.def_static("GetModelItemById", &mdlDgnFileObj_getModelItemById, "dgnFileObj"_a, "modelId"_a, py::return_value_policy::reference, DOC(MstnPlatform, MstnDgnFile, GetModelItemById));
+    c1.def_static("GetModelItemByName", &mdlDgnFileObj_getModelItemByName, "dgnFileObj"_a, "modelName"_a, py::return_value_policy::reference, DOC(MstnPlatform, MstnDgnFile, GetModelItemByName));
 
     c1.def_static("GetVersion", [] (DgnFileP dgnFileObj)
           {

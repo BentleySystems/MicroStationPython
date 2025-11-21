@@ -111,6 +111,14 @@ void def_DgnECFinders(py::module_& m)
                   py::overload_cast<bvector<DgnModelRefP> const& ,FindInstancesScopeOptionCR, DgnFileR>(&FindInstancesScope::CreateScope),
                   "models"_a, "options"_a, "file"_a, DOC(Bentley, DgnPlatform, FindInstancesScope, CreateScope));
 
+    c7.def_static("CreateScope", [](py::list const& models, FindInstancesScopeOptionCR options, DgnFileR file){
+        bvector<DgnModelRefP> cppModels;
+        for (const auto& item : models) {
+            cppModels.push_back(item.cast<DgnModelRefP>());
+        }
+        return FindInstancesScope::CreateScope(cppModels, options, file);
+    }, "models"_a, "options"_a, "file"_a, DOC(Bentley, DgnPlatform, FindInstancesScope, CreateScope));
+
     c7.def_static("CreateScope",
                   py::overload_cast<DgnModelRefR, FindInstancesScopeOptionCR>(&FindInstancesScope::CreateScope),
                   "modelRef"_a, "options"_a, DOC(Bentley, DgnPlatform, FindInstancesScope, CreateScope));

@@ -91,6 +91,12 @@ void def_TransformClipStack(py::module_& m)
            self.PushClipPlanes(planes.data(), planes.size());
            }, "planes"_a, DOC(Bentley, DgnPlatform, TransformClipStack, PushClipPlanes));
 
+    c1.def("PushClipPlanes", [] (TransformClipStack& self, py::list const& planes)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(planes, cppPlanes, bvector<ClipPlane>, ClipPlane);
+           self.PushClipPlanes(cppPlanes.data(), cppPlanes.size());
+           }, "planes"_a, DOC(Bentley, DgnPlatform, TransformClipStack, PushClipPlanes));
+
     c1.def("PushClipPlaneSets", &TransformClipStack::PushClipPlaneSets, "planes"_a, DOC(Bentley, DgnPlatform, TransformClipStack, PushClipPlaneSets));
     c1.def("PushIdentity", &TransformClipStack::PushIdentity, DOC(Bentley, DgnPlatform, TransformClipStack, PushIdentity));
 

@@ -6,7 +6,7 @@
 |
 +--------------------------------------------------------------------------------------*/
 #include "MSPythonPCH.h"
-
+#include <Geom/DTriangle3d.h>
 
 
 static const char * __doc_Bentley_Geom_DPoint4d_TryNormalizePointAndDerivatives =R"doc(Return point and vectors that are the cartesian image of a homoegneous
@@ -555,9 +555,41 @@ void def_DPoint4d(py::module_& m)
                   py::overload_cast<DPoint4dArray const&, DPoint4dArray const&, double, double>(&DPoint4d::AlmostEqual),
                   "dataA"_a, "dataB"_a, "xyzTol"_a, "wTol"_a, DOC(Bentley, Geom, DPoint4d, AlmostEqual));
 
+    c1.def_static("AlmostEqual", [](py::list const& dataA, DPoint4dArray const& dataB, double xyzTol, double wTol){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(dataA, cppDataA, DPoint4dArray, DPoint4d);
+        return DPoint4d::AlmostEqual(cppDataA, dataB, xyzTol, wTol);
+    }, "dataA"_a, "dataB"_a, "xyzTol"_a, "wTol"_a, DOC(Bentley, Geom, DPoint4d, AlmostEqual));
+
+    c1.def_static("AlmostEqual", [](DPoint4dArray const& dataA, py::list const& dataB, double xyzTol, double wTol){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(dataB, cppDataB, DPoint4dArray, DPoint4d);
+        return DPoint4d::AlmostEqual(dataA, cppDataB, xyzTol, wTol);
+    }, "dataA"_a, "dataB"_a, "xyzTol"_a, "wTol"_a, DOC(Bentley, Geom, DPoint4d, AlmostEqual));
+    
+    c1.def_static("AlmostEqual", [](py::list const& dataA, py::list const& dataB, double xyzTol, double wTol){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(dataA, cppDataA, DPoint4dArray, DPoint4d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(dataB, cppDataB, DPoint4dArray, DPoint4d);
+        return DPoint4d::AlmostEqual(cppDataA, cppDataB, xyzTol, wTol);
+    }, "dataA"_a, "dataB"_a, "xyzTol"_a, "wTol"_a, DOC(Bentley, Geom, DPoint4d, AlmostEqual));
+
     c1.def_static("AlmostEqualReversed",
                   py::overload_cast<DPoint4dArray const&, DPoint4dArray const&, double, double>(&DPoint4d::AlmostEqualReversed),
                   "dataA"_a, "dataB"_a, "xyzTol"_a, "wTol"_a, DOC(Bentley, Geom, DPoint4d, AlmostEqualReversed));    
+
+    c1.def_static("AlmostEqualReversed", [](py::list const& dataA, DPoint4dArray const& dataB, double xyzTol, double wTol){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(dataA, cppDataA, DPoint4dArray, DPoint4d);
+        return DPoint4d::AlmostEqualReversed(cppDataA, dataB, xyzTol, wTol);
+    }, "dataA"_a, "dataB"_a, "xyzTol"_a, "wTol"_a, DOC(Bentley, Geom, DPoint4d, AlmostEqualReversed));
+
+    c1.def_static("AlmostEqualReversed", [](DPoint4dArray const& dataA, py::list const& dataB, double xyzTol, double wTol){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(dataB, cppDataB, DPoint4dArray, DPoint4d);
+        return DPoint4d::AlmostEqualReversed(dataA, cppDataB, xyzTol, wTol);
+    }, "dataA"_a, "dataB"_a, "xyzTol"_a, "wTol"_a, DOC(Bentley, Geom, DPoint4d, AlmostEqualReversed));
+    
+    c1.def_static("AlmostEqualReversed", [](py::list const& dataA, py::list const& dataB, double xyzTol, double wTol){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(dataA, cppDataA, DPoint4dArray, DPoint4d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(dataB, cppDataB, DPoint4dArray, DPoint4d);
+        return DPoint4d::AlmostEqualReversed(cppDataA, cppDataB, xyzTol, wTol);
+    }, "dataA"_a, "dataB"_a, "xyzTol"_a, "wTol"_a, DOC(Bentley, Geom, DPoint4d, AlmostEqualReversed));
 
     c1.def("MaxAbs", &DPoint4d::MaxAbs, DOC(Bentley, Geom, DPoint4d, MaxAbs));
     c1.def("MaxAbsUnnormalizedXYZ", &DPoint4d::MaxAbsUnnormalizedXYZ, DOC(Bentley, Geom, DPoint4d, MaxAbsUnnormalizedXYZ));

@@ -17,6 +17,11 @@ import win32gui
 from PyQt5 import QtCore
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLineEdit, QCheckBox, QPushButton
 
+"""
+This script defines a tool and a GUI application for modifying edges in a DGN model. 
+It provides functionality to blend edges with a specified radius and optionally allow tangent edges.
+"""
+
 class ModifyEdge(LocateSubEntityTool, DgnElementSetTool):
     def __init__(self, toolId, promptId, radius, allowTangentEdges):
         """
@@ -150,38 +155,27 @@ class ModifyEdge(LocateSubEntityTool, DgnElementSetTool):
         # NOTE: Simple count test is sufficient(w/o also checking TryGetAsBRep) as override of _Collect and _OnProcess methods have tool only collecting BRep solids.
         return self.IsElementValidForOperation(element, path, cantAcceptReason) and 1 == ElementGraphicsTool.GetElementGraphicsCacheCount(element) and not ElementGraphicsTool.IsGeometryMissing(element)
 
-    def _OnElementModify(self, elementHandle):
+    def GetSmartFeatureNode(self, elementHandle, ev):
         """
-        Modify the given element by creating and writing a smart feature element.
+        GetSmartFeatureNode(elementHandle, ev)
 
-        :param elementHandle: The handle of the element to be modified.
+        Creates a blend feature node by identifying edges and faces from a given element handle 
+        and event, and applying a specified radius to the blend.
+
+        :param elementHandle: The handle to the element to be processed.
         :type elementHandle: ElementHandle
-        
-        :returns: None
-        :rtype: None
-        """
-        featureNode = self.GetSmartFeatureNode(elementHandle)
-        newEditElementHandle = EditElementHandle()
-        controlFlags = BoolArray()
-        controlFlags.append(False)
-        controlFlags.append(False)
-        controlFlags.append(False)
-        childElementToControlFlagsMap = {elementHandle.GetElementRef(): controlFlags}
-        status = SmartFeatureElement.CreateAndWriteSmartFeatureElement(newEditElementHandle, elementHandle, elementHandle.ModelRef, featureNode[1], childElementToControlFlagsMap)
-        if status == BentleyStatus.eSUCCESS:
-            MessageCenter.ShowInfoMessage("Edges are modified successfully.", "", False)
-        else:
-            MessageCenter.ShowErrorMessage("Edges are not modified.", "", False)
+        :param ev: The event used for locating sub-entities.
+        :type ev: Event
 
-    def GetSmartFeatureNode(self, elementHandle):
-        """
-        Generate a smart feature node by blending edges of a solid body.
-
-        :param elementHandle: Handle to the element to be converted to a solid body.
-        :type elementHandle: ElementHandle
-        
-        :return: A feature node created by blending the edges of the solid body.
+        :return: A feature node representing the blend feature created.
         :rtype: FeatureNode
+
+        :raises SolidUtilError: If the conversion of the element to a body fails.
+        :raises FeatureCreateError: If the creation of the blend feature fails.
+
+        :note:
+            - The radius for the blend is calculated based on the model's unit of resolution (UOR).
+            - The function supports tangent edges if `self.m_blendEdgeAllowTangentEdges` is set to True.
         """
         edgeList = ISubEntityPtrArray()
         solid = SolidUtil.Convert.ElementToBody(elementHandle, True, True, False)   # Convert the profile element to a body
@@ -190,8 +184,59 @@ class ModifyEdge(LocateSubEntityTool, DgnElementSetTool):
         model = self.modelRef.GetDgnModel()
         radius = model.GetModelInfo().UorPerMeter * radius
         isSmoothEdges = self.m_blendEdgeAllowTangentEdges
-        featureNode = FeatureCreate.CreateBlendFeature(edgeList, radius, isSmoothEdges)
+        faceIds = FaceIdArray()
+        intersectEntitiesNative = ISubEntityPtrArray()
+        intersectPtsNative = DPoint3dArray()
+        intersectParamsNative = DPoint2dArray()
+        LocateSubEntityTool().DoPickSubEntities(elementHandle, ev, intersectEntitiesNative, intersectPtsNative, intersectParamsNative)
+        for entity in intersectEntitiesNative:
+            faceId = SolidUtil.TopologyID.IdFromFace(entity, False)
+            faceIds.append(faceId[1])
+        edge = EdgeId()
+        edge.SetFaces(faceIds[0], faceIds[1])
+        edgeIdArray = EdgeIdArray()
+        edgeIdArray.append(edge)
+        featureNode = FeatureCreate.CreateBlendFeature(edgeIdArray, radius, isSmoothEdges)
         return featureNode
+
+    def _OnDataButton(self, ev):
+        """
+        Handles the data button event to modify edges in a DGN model.
+        This method performs the following steps:
+        1. Retrieves the active DGN model reference.
+        2. Displays a message indicating whether the DGN model was successfully selected.
+        3. Locates an element based on the event and creates an `ElementHandle` for it.
+        4. Retrieves a smart feature node associated with the element.
+        5. Creates a mapping of child elements to control flags.
+        6. Attempts to create and write a smart feature element to modify edges.
+        7. Displays a success or error message based on the operation's outcome.
+        :param ev: The event object containing information about the data button event.
+        :type ev: Event
+        """
+        ACTIVEMODEL = ISessionMgr.ActiveDgnModelRef
+        self.dgnModel = ACTIVEMODEL.GetDgnModel()
+        if self.dgnModel != None:
+            MessageCenter.ShowInfoMessage("DGN Model selected successfully.", "", False)
+        else:
+            MessageCenter.ShowErrorMessage("No DGN Model selected.", "", False)
+        
+        path = self._DoLocate(ev, True, ComponentMode.eInnermost)
+        solidEditElementHandle = ElementHandle(path.GetHeadElem(), path.GetRoot())
+        elementHandle = ElementHandle(solidEditElementHandle.ElementId, ACTIVEMODEL)
+        newEditElementHandle = EditElementHandle()
+        featureNode = self.GetSmartFeatureNode(elementHandle, ev)
+        controlFlags = BoolArray()
+        controlFlags.append(False)
+        controlFlags.append(False)
+        controlFlags.append(False)
+        childElementToControlFlagsMap = {elementHandle.GetElementRef(): controlFlags}
+        status = SmartFeatureElement.CreateAndWriteSmartFeatureElement(newEditElementHandle, elementHandle, ACTIVEMODEL, featureNode, childElementToControlFlagsMap)
+        if status == BentleyStatus.eSUCCESS:
+            MessageCenter.ShowInfoMessage("Edges are modified successfully.", "", False)
+            return
+        else:
+            MessageCenter.ShowErrorMessage("Edges are not modified.", "", False)
+            return
 
     def InstallNewInstance(toolId, radius = 0, allowTangentEdges = False):
         """
@@ -296,6 +341,11 @@ class ModifyEdgeForm(QMainWindow):
 
         self.setWindowTitle("Modify Edge Samples")
         self.setGeometry(10, 10, 400, 140)
+        # Center the window on the screen
+        screen_geometry = QApplication.desktop().screenGeometry()
+        x = (screen_geometry.width() - self.width()) // 2
+        y = (screen_geometry.height() - self.height()) // 2
+        self.move(x, y)
 
         # Create textbox
         self.textbox = QLineEdit(self)

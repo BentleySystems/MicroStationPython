@@ -41,7 +41,7 @@ class MyModalEventHandler(IPyModalDialogEvents):
 
 
 def test_GetMasterFile ():
-    assert (str (DgnFile.GetMasterFile ().GetFileName ()) == str (ISessionMgr.GetMasterDgnFile ().GetFileName ()))
+    assert (str (MstnDgnFile.GetMasterFile ().GetFileName ()) == str (ISessionMgr.GetMasterDgnFile ().GetFileName ()))
 
 ''' Find ModelId by name  ''' 
 def test_FindModelIDByName ():
@@ -62,7 +62,7 @@ def test_FindModelIDByName ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    ret = DgnFile.FindModelIDByName (DgnFile.GetMasterFile (), "Close mesh to volume")
+    ret = MstnDgnFile.FindModelIDByName (MstnDgnFile.GetMasterFile (), "Close mesh to volume")
 
     assert (BentleyStatus.eSUCCESS == ret[0])
     assert (2 == ret[1])
@@ -86,7 +86,7 @@ def test_FindElemByID ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    elRef = DgnFile.FindElemByID (DgnFile.GetMasterFile (), 130163, False)
+    elRef = MstnDgnFile.FindElemByID (MstnDgnFile.GetMasterFile (), 130163, False)
 
     assert (None != elRef)
     assert (130163 == elRef.GetElementId ())
@@ -110,7 +110,7 @@ def test_HasPendingChanges ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    changes = DgnFile.HasPendingChanges (DgnFile.GetMasterFile ())
+    changes = MstnDgnFile.HasPendingChanges (MstnDgnFile.GetMasterFile ())
     assert (changes == False)
 
 ''' Get File Version  ''' 
@@ -131,7 +131,7 @@ def test_GetVersion ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    ret = DgnFile.GetVersion (DgnFile.GetMasterFile ())
+    ret = MstnDgnFile.GetVersion (MstnDgnFile.GetMasterFile ())
     format = DgnFileFormatType.eV8
     major = 8
     minor = 9
@@ -159,7 +159,7 @@ def test_IsProtected ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    ret = DgnFile.IsProtected (DgnFile.GetMasterFile ())
+    ret = MstnDgnFile.IsProtected (MstnDgnFile.GetMasterFile ())
     assert (ret == False)
 
 ''' Get the number of models in the file  ''' 
@@ -180,7 +180,7 @@ def test_GetModelCount ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    count = DgnFile.GetModelCount (DgnFile.GetMasterFile ())
+    count = MstnDgnFile.GetModelCount (MstnDgnFile.GetMasterFile ())
 
     assert (count == 2)
 
@@ -202,7 +202,7 @@ def test_GetModelItemById ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    modelIndexItem = DgnFile.GetModelItemById (DgnFile.GetMasterFile (), 2)
+    modelIndexItem = MstnDgnFile.GetModelItemById (MstnDgnFile.GetMasterFile (), 2)
 
     assert (modelIndexItem != None)
 
@@ -226,7 +226,7 @@ def test_GetModelItemByName ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    modelIndexItem = DgnFile.GetModelItemByName (DgnFile.GetMasterFile (), "Close mesh to volume")
+    modelIndexItem = MstnDgnFile.GetModelItemByName (MstnDgnFile.GetMasterFile (), "Close mesh to volume")
 
     assert (modelIndexItem != None)
 
@@ -251,10 +251,10 @@ def test_GetModelRefList ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    modelrefList = DgnFile.GetModelRefList (DgnFile.GetMasterFile ())
+    modelrefList = MstnDgnFile.GetModelRefList (MstnDgnFile.GetMasterFile ())
 
     for model in modelrefList:
-        assert (model.GetDgnFile () == DgnFile.GetMasterFile ())
+        assert (model.GetDgnFile () == MstnDgnFile.GetMasterFile ())
 
 ''' Create a new model in the dgn file  ''' 
 def test_CreateModel ():
@@ -279,7 +279,7 @@ def test_CreateModel ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    ret = DgnFile.CreateModel (DgnFile.GetMasterFile (), None, "New Model", "New Model Test", False, DgnModelType.eNormal, True)
+    ret = MstnDgnFile.CreateModel (MstnDgnFile.GetMasterFile (), None, "New Model", "New Model Test", False, DgnModelType.eNormal, True)
 
     assert (ret[0] == BentleyStatus.eSUCCESS)
     assert (None != ret[1])
@@ -304,7 +304,7 @@ def test_CheckRights ():
 
     PyEventsHandler.RemoveModalDialogEventsHandler (modalEvents)
 
-    ret = DgnFile.CheckRights (DgnFile.GetMasterFile (), DgnFileRights.eDGNFILE_RIGHT_Edit, MessageDestination.eMESSAGE_DEST_None)
+    ret = MstnDgnFile.CheckRights (MstnDgnFile.GetMasterFile (), DgnFileRights.eDGNFILE_RIGHT_Edit, MessageDestination.eMESSAGE_DEST_None)
 
     assert (ret == BentleyStatus.eSUCCESS)
 

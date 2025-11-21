@@ -304,18 +304,24 @@ bool ScriptEngineManager::AddNotifier(ScriptNotifierP notifier)
     UstnScriptNotifier* beConsole = dynamic_cast<UstnScriptNotifier*> (notifier);
     bool isBeConsole = (nullptr != beConsole) ? true : false;
 
+    bool isActiveExist(false);
+
+    for (auto& it0 : *m_sinkList)
+        if (it0->GetActive())
+            {
+            isActiveExist = true;
+            break;
+            }
+
     if (isBeConsole)
         {
-        notifier->SetActive(true);
+        if (!isActiveExist)
+            notifier->SetActive(true);
         }
     else
         {
         for (auto& it0 : *m_sinkList)
-             {
-             beConsole = dynamic_cast<UstnScriptNotifier*> (it0);
-             if (nullptr == beConsole)
-                it0->SetActive(false);
-             }
+            it0->SetActive(false);
 
         notifier->SetActive(true);
         }

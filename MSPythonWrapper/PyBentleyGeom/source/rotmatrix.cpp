@@ -1245,18 +1245,75 @@ void def_RotMatrix(py::module_& m)
            py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&RotMatrix::Multiply, py::const_),
            "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
 
-    c1.def("Multiply", [] (RotMatrixCR self, py::list& xyzOut, py::list const& xyzIn)
-           {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzIn, cppxyzIn, DPoint3dArray, DPoint3d);
-           self.Multiply(cppxyzOut, cppxyzIn);
-           CONVERT_CPPARRAY_TO_PYLIST(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
-           }, "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
-
     c1.def("Multiply",
            py::overload_cast<DPoint2dArray&, DPoint2dArray const&>(&RotMatrix::Multiply, py::const_),
            "xyOut"_a, "xyIn"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
-        
+
+    c1.def("Multiply", [] (RotMatrixCR self, py::list& xyzwOut, py::list const& xyzwIn)
+           {
+            if(xyzwIn.empty()){
+                return;
+            }
+            if(py::isinstance<DPoint4d>(xyzwIn[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzwOut, cppOut, DPoint4dArray, DPoint4d);
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzwIn, cppIn, DPoint4dArray, DPoint4d);
+                self.Multiply(cppOut, cppIn);
+                CONVERT_CPPARRAY_TO_PYLIST(xyzwOut, cppOut, DPoint4dArray, DPoint4d);
+            } else if(py::isinstance<DPoint3d>(xyzwIn[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzwOut, cppOut, DPoint3dArray, DPoint3d);
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzwIn, cppIn, DPoint3dArray, DPoint3d);
+                self.Multiply(cppOut, cppIn);
+                CONVERT_CPPARRAY_TO_PYLIST(xyzwOut, cppOut, DPoint3dArray, DPoint3d);
+            } else if(py::isinstance<DPoint2d>(xyzwIn[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzwOut, cppOut, DPoint2dArray, DPoint2d);
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzwIn, cppIn, DPoint2dArray, DPoint2d);
+                self.Multiply(cppOut, cppIn);
+                CONVERT_CPPARRAY_TO_PYLIST(xyzwOut, cppOut, DPoint2dArray, DPoint2d);    
+            } 
+            else {
+                throw std::runtime_error("Unsupported type in list for RotMatrix::Multiply");
+            }
+           }, "xyOut"_a, "xyIn"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
+
+    c1.def("Multiply", [] (RotMatrixCR self, py::list& outRange, DPoint4dArray const& inRange)
+           {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(outRange, cppOutRange, DPoint4dArray, DPoint4d);
+              self.Multiply(cppOutRange, inRange);
+              CONVERT_CPPARRAY_TO_PYLIST(outRange, cppOutRange, DPoint4dArray, DPoint4d);
+           }, "outRange"_a, "inRange"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
+
+    c1.def("Multiply", [] (RotMatrixCR self, py::list& outRange, DPoint3dArray const& inRange)
+           {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(outRange, cppOutRange, DPoint3dArray, DPoint3d);
+              self.Multiply(cppOutRange, inRange);
+              CONVERT_CPPARRAY_TO_PYLIST(outRange, cppOutRange, DPoint3dArray, DPoint3d);
+           }, "outRange"_a, "inRange"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
+
+    c1.def("Multiply", [] (RotMatrixCR self, py::list& outRange, DPoint2dArray const& inRange)
+           {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(outRange, cppOutRange, DPoint2dArray, DPoint2d);
+              self.Multiply(cppOutRange, inRange);
+              CONVERT_CPPARRAY_TO_PYLIST(outRange, cppOutRange, DPoint2dArray, DPoint2d);
+           }, "outRange"_a, "inRange"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
+
+    c1.def("Multiply", [] (RotMatrixCR self, DPoint4dArray& outXYZ, py::list const& inXYZ)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint4dArray, DPoint4d);
+           self.Multiply(outXYZ, cppInXYZ);
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
+
+    c1.def("Multiply", [] (RotMatrixCR self, DPoint3dArray& outXYZ, py::list const& inXYZ)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);
+           self.Multiply(outXYZ, cppInXYZ);
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
+
+    c1.def("Multiply", [] (RotMatrixCR self, DPoint2dArray& outXYZ, py::list const& inXYZ)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint2dArray, DPoint2d);
+           self.Multiply(outXYZ, cppInXYZ);
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, Multiply));
+
     c1.def("MultiplyTranspose", py::overload_cast<DPoint3dR, DPoint3dCR>(&RotMatrix::MultiplyTranspose, py::const_), "result"_a, "point"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
     c1.def("MultiplyTranspose", py::overload_cast<DPoint3dR>(&RotMatrix::MultiplyTranspose, py::const_), "point"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
     c1.def("MultiplyTranspose", py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&RotMatrix::MultiplyTranspose, py::const_), "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
@@ -1266,6 +1323,19 @@ void def_RotMatrix(py::module_& m)
            CONVERT_PYLIST_TO_NEW_CPPARRAY(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
            CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);  
            self.MultiplyTranspose(cppOutXYZ, cppInXYZ);
+           CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
+
+    c1.def("MultiplyTranspose", [] (RotMatrixCR self, DPoint3dArray& outXYZ, py::list const& inXYZ)
+           {  
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);  
+           self.MultiplyTranspose(outXYZ, cppInXYZ);
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
+
+    c1.def("MultiplyTranspose", [] (RotMatrixCR self, py::list& outXYZ, DPoint3dArray const& inXYZ)
+           {  
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           self.MultiplyTranspose(cppOutXYZ, inXYZ);
            CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
            }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, RotMatrix, MultiplyTranspose));
 
@@ -1279,6 +1349,19 @@ void def_RotMatrix(py::module_& m)
            CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
            CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzIn, cppxyzIn, DPoint3dArray, DPoint3d);
            self.SolveArray(cppxyzOut, cppxyzIn);
+           CONVERT_CPPARRAY_TO_PYLIST(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
+           }, "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, SolveArray));
+
+    c1.def("SolveArray", [] (RotMatrixCR self, DPoint3dArray& xyzOut, py::list const& xyzIn)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzIn, cppxyzIn, DPoint3dArray, DPoint3d);
+           self.SolveArray(xyzOut, cppxyzIn);
+           }, "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, SolveArray));
+
+    c1.def("SolveArray", [] (RotMatrixCR self, py::list& xyzOut, DPoint3dArray const& xyzIn)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
+           self.SolveArray(cppxyzOut, xyzIn);
            CONVERT_CPPARRAY_TO_PYLIST(xyzOut, cppxyzOut, DPoint3dArray, DPoint3d);
            }, "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, RotMatrix, SolveArray));
 
@@ -1306,6 +1389,15 @@ void def_RotMatrix(py::module_& m)
            if (data.size() < 4)
                data.resize(4);
            self.GetRowValuesXY(data.data());
+           }, DOC(Bentley, Geom, RotMatrix, GetRowValuesXY));
+
+    c1.def("GetRowValuesXY", [] (RotMatrixCR self, py::list& data)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(data, dataArray, DoubleArray, double);
+           if (dataArray.size() < 4)
+               dataArray.resize(4);
+           self.GetRowValuesXY(dataArray.data());
+           CONVERT_CPPARRAY_TO_PYLIST(data, dataArray, DoubleArray, double);
            }, DOC(Bentley, Geom, RotMatrix, GetRowValuesXY));
 
     c1.def("Determinant", &RotMatrix::Determinant, DOC(Bentley, Geom, RotMatrix, Determinant));
@@ -1395,6 +1487,15 @@ void def_RotMatrix(py::module_& m)
            if (wxyzQuat.size() < 4)
                wxyzQuat.resize(4);               
            self.GetQuaternion(wxyzQuat.data(), transpose);
+           }, "wxyzQuat"_a, "transpose"_a, DOC(Bentley, Geom, RotMatrix, GetQuaternion));
+
+    c1.def("GetQuaternion", [] (RotMatrixCR self, py::list& wxyzQuat, bool transpose)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(wxyzQuat, cppwxyzQuat, DoubleArray, double);
+           if (cppwxyzQuat.size() < 4)
+               cppwxyzQuat.resize(4);               
+           self.GetQuaternion(cppwxyzQuat.data(), transpose);
+           CONVERT_CPPARRAY_TO_PYLIST(wxyzQuat, cppwxyzQuat, DoubleArray, double);
            }, "wxyzQuat"_a, "transpose"_a, DOC(Bentley, Geom, RotMatrix, GetQuaternion));
 
     c1.def("GetRotationAngleAndVector", &RotMatrix::GetRotationAngleAndVector, "axis"_a, DOC(Bentley, Geom, RotMatrix, GetRotationAngleAndVector));

@@ -725,6 +725,13 @@ void def_FacetOptions(py::module_& m)
            return py::make_tuple(bOk, count);
            }, "poles"_a, "index0"_a, "order"_a, DOC(Bentley, Geom, IFacetOptions, BezierStrokeCount));
 
+    c1.def("BezierStrokeCount", [](IFacetOptionsCR self, py::list const& poles, size_t index0, int order) {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cppPoles, DPoint4dArray, DPoint4d);
+           size_t count = 0;
+           bool bOk = self.BezierStrokeCount(cppPoles, index0, order, count);
+           return py::make_tuple(bOk, count);
+        }, "poles"_a, "index0"_a, "order"_a, DOC(Bentley, Geom, IFacetOptions, BezierStrokeCount));
+        
     c1.def("SegmentStrokeCount", &IFacetOptions::SegmentStrokeCount, "segment"_a, DOC(Bentley, Geom, IFacetOptions, SegmentStrokeCount));            
     c1.def("DistanceStrokeCount", &IFacetOptions::DistanceStrokeCount, "distance"_a, DOC(Bentley, Geom, IFacetOptions, DistanceStrokeCount));            
     c1.def("DistanceAndTurnStrokeCount", py::overload_cast<double, double>(&IFacetOptions::DistanceAndTurnStrokeCount, py::const_), "distance"_a, "turnRadians"_a, DOC(Bentley, Geom, IFacetOptions, DistanceAndTurnStrokeCount));            
@@ -838,6 +845,34 @@ void def_FacetOptions(py::module_& m)
            self.AddRowMajorQuadGrid(_points, _normals, _params, numPerRow, numRow, forceTriangles);
            }, "points"_a, "normals"_a, "params"_a, "numPerRow"_a, "numRow"_a, "forceTriangles"_a = false, DOC(Bentley, Geom, IPolyfaceConstruction, AddRowMajorQuadGrid));
 
+    c2.def("AddRowMajorQuadGrid", [] (IPolyfaceConstructionR self, py::list const& points, std::vector<DVec3d> const& normals, std::vector<DPoint2d> const& params, size_t numPerRow, size_t numRow, bool forceTriangles)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           DPoint3dCP _points = cppPoints.empty() ? nullptr : cppPoints.data();
+           DVec3dCP _normals = normals.empty() ? nullptr : normals.data();
+           DPoint2dCP _params = params.empty() ? nullptr : params.data();
+           self.AddRowMajorQuadGrid(_points, _normals, _params, numPerRow, numRow, forceTriangles);
+           }, "points"_a, "normals"_a, "params"_a, "numPerRow"_a, "numRow"_a, "forceTriangles"_a = false, DOC(Bentley, Geom, IPolyfaceConstruction, AddRowMajorQuadGrid));
+           
+    c2.def("AddRowMajorQuadGrid", [] (IPolyfaceConstructionR self, std::vector<DPoint3d> const& points, std::vector<DVec3d> const& normals, py::list const& params, size_t numPerRow, size_t numRow, bool forceTriangles)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DPoint2dArray, DPoint2d);
+           DPoint3dCP _points = points.empty() ? nullptr : points.data();
+           DVec3dCP _normals = normals.empty() ? nullptr : normals.data();
+           DPoint2dCP _params = cppParams.empty() ? nullptr : cppParams.data();
+           self.AddRowMajorQuadGrid(_points, _normals, _params, numPerRow, numRow, forceTriangles);
+           }, "points"_a, "normals"_a, "params"_a, "numPerRow"_a, "numRow"_a, "forceTriangles"_a = false, DOC(Bentley, Geom, IPolyfaceConstruction, AddRowMajorQuadGrid));
+
+    c2.def("AddRowMajorQuadGrid", [] (IPolyfaceConstructionR self, py::list const& points, std::vector<DVec3d> const& normals, py::list const& params, size_t numPerRow, size_t numRow, bool forceTriangles)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DPoint2dArray, DPoint2d);
+           DPoint3dCP _points = cppPoints.empty() ? nullptr : cppPoints.data();
+           DVec3dCP _normals = normals.empty() ? nullptr : normals.data();
+           DPoint2dCP _params = cppParams.empty() ? nullptr : cppParams.data();
+           self.AddRowMajorQuadGrid(_points, _normals, _params, numPerRow, numRow, forceTriangles);
+           }, "points"_a, "normals"_a, "params"_a, "numPerRow"_a, "numRow"_a, "forceTriangles"_a = false, DOC(Bentley, Geom, IPolyfaceConstruction, AddRowMajorQuadGrid));
+
     c2.def("AddTriStrip", [] (IPolyfaceConstructionR self, std::vector<DPoint3d> const& points, std::vector<DVec3d> const& normals, std::vector<DPoint2d> const& params, bool firstTriangle012)
            {
            DPoint3dCP _points = points.empty() ? nullptr : points.data();
@@ -857,6 +892,20 @@ void def_FacetOptions(py::module_& m)
            CONVERT_CPPARRAY_TO_PYLIST(pointA, cppPointA, DPoint3dArray, DPoint3d);
            }, "pointA"_a, "tangentA"_a, "step"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddLinearSweep));
 
+    c2.def("AddLinearSweep", [](IPolyfaceConstruction& self, DPoint3dArray& pointA, py::list& tangentA, DVec3dCR step) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(tangentA, cppTangentA, DVec3dArray, DVec3d);
+            self.AddLinearSweep(pointA, cppTangentA, step);
+            CONVERT_CPPARRAY_TO_PYLIST(tangentA, cppTangentA, DVec3dArray, DVec3d);
+        }, "pointA"_a, "tangentA"_a, "step"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddLinearSweep));
+        
+    c2.def("AddLinearSweep", [](IPolyfaceConstruction& self, py::list& pointA, py::list& tangentA, DVec3dCR step) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(pointA, cppPointA, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(tangentA, cppTangentA, DVec3dArray, DVec3d);
+            self.AddLinearSweep(cppPointA, cppTangentA, step);
+            CONVERT_CPPARRAY_TO_PYLIST(pointA, cppPointA, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(tangentA, cppTangentA, DVec3dArray, DVec3d);
+        }, "pointA"_a, "tangentA"_a, "step"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddLinearSweep));
+
     c2.def("AddRotationalSweep", 
            py::overload_cast<CurveVectorPtr, DPoint3dCR, DVec3dCR, double, bool>(&IPolyfaceConstruction::AddRotationalSweep), 
            "curve"_a, "center"_a, "axis"_a, "totalSweep"_a, "capped"_a, DOC(Bentley, Geom, IPolyfaceConstruction, AddRotationalSweep));
@@ -870,20 +919,43 @@ void def_FacetOptions(py::module_& m)
            return py::make_tuple(bOk, numLoop);
            }, "curves"_a, "points"_a, "tangents"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
 
-    c2.def("StrokeWithDoubledPointsAtCorners", [] (IPolyfaceConstructionR self, CurveVectorCR curves, py::list& points, DVec3dArray& tangents)
-           {
-           size_t numLoop = 0;
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-           bool bOk = self.StrokeWithDoubledPointsAtCorners(curves, cppPoints, tangents, numLoop);
-           CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
-           return py::make_tuple(bOk, numLoop);
-           }, "curves"_a, "points"_a, "tangents"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
+    c2.def("StrokeWithDoubledPointsAtCorners", [](IPolyfaceConstructionR& self, CurveVectorCR curves, py::list& points, DVec3dArray& tangents) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            size_t numLoop = 0;
+            bool bOk = self.StrokeWithDoubledPointsAtCorners(curves, cppPoints, tangents, numLoop);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+            return py::make_tuple(bOk, numLoop);
+        }, "curves"_a, "points"_a, "tangents"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
+        
+    c2.def("StrokeWithDoubledPointsAtCorners", [](IPolyfaceConstructionR& self, CurveVectorCR curves, DPoint3dArray& points, py::list& tangents) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(tangents, cppTangents, DVec3dArray, DVec3d);
+            size_t numLoop = 0;
+            bool bOk = self.StrokeWithDoubledPointsAtCorners(curves, points, cppTangents, numLoop);
+            CONVERT_CPPARRAY_TO_PYLIST(tangents, cppTangents, DVec3dArray, DVec3d);
+            return py::make_tuple(bOk, numLoop);
+        }, "curves"_a, "points"_a, "tangents"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
+  
+    c2.def("StrokeWithDoubledPointsAtCorners", [](IPolyfaceConstructionR& self, CurveVectorCR curves, py::list& points, py::list& tangents) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(tangents, cppTangents, DVec3dArray, DVec3d);
+            size_t numLoop = 0;
+            bool bOk = self.StrokeWithDoubledPointsAtCorners(curves, cppPoints, cppTangents, numLoop);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(tangents, cppTangents, DVec3dArray, DVec3d);
+            return py::make_tuple(bOk, numLoop);
+        }, "curves"_a, "points"_a, "tangents"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
 
     c2.def("StrokeWithDoubledPointsAtCorners",
            py::overload_cast<CurveVectorCR, DPoint3dVecArray&, DVec3dVecArray&, DoubleArray&>(&IPolyfaceConstruction::StrokeWithDoubledPointsAtCorners),
            "curves"_a, "points"_a, "tangent"_a, "curveLengths"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
-
-            
+        
+    c2.def("StrokeWithDoubledPointsAtCorners", [](IPolyfaceConstructionR& self, CurveVectorCR curves, DPoint3dVecArray& points, DVec3dVecArray& tangents, py::list& curveLengths) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curveLengths, cppCurveLengths, DoubleArray, double);
+            bool bOk = self.StrokeWithDoubledPointsAtCorners(curves, points, tangents, cppCurveLengths);
+            CONVERT_CPPARRAY_TO_PYLIST(curveLengths, cppCurveLengths, DoubleArray, double);
+            return bOk;
+        }, "curves"_a, "points"_a, "tangents"_a, "curveLengths"_a, DOC(Bentley, Geom, IPolyfaceConstruction, StrokeWithDoubledPointsAtCorners));
+        
     c2.def("Stroke", [] (IPolyfaceConstructionR self, CurveVectorCR curves, bvector<DPoint3d>& points)
            {
            size_t numLoop = 0;
@@ -940,9 +1012,21 @@ void def_FacetOptions(py::module_& m)
            py::overload_cast<DVec3dArray&, size_t, size_t, UInt64Array&>(&IPolyfaceConstruction::FindOrAddNormals),
            "point"_a, "n"_a, "numWrap"_a, "index"_a, DOC(Bentley, Geom, IPolyfaceConstruction, FindOrAddNormals));
 
+    c2.def("FindOrAddNormals", [](IPolyfaceConstructionR& self, py::list& point, size_t n, size_t numWrap, UInt64Array& index) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cppPoint, DVec3dArray, DVec3d);
+            self.FindOrAddNormals(cppPoint, n, numWrap, index);
+            CONVERT_CPPARRAY_TO_PYLIST(point, cppPoint, DVec3dArray, DVec3d);
+        }, "point"_a, "n"_a, "numWrap"_a, "index"_a, DOC(Bentley, Geom, IPolyfaceConstruction, FindOrAddNormals));
+
     c2.def("FindOrAddParams", [] (IPolyfaceConstructionR self, DPoint2dArray const& params, UInt64Array& index)
            {
            self.FindOrAddParams(&params[0], params.size(), index);
+           }, "params"_a, "index"_a, DOC(Bentley, Geom, IPolyfaceConstruction, FindOrAddParams));
+
+    c2.def("FindOrAddParams", [] (IPolyfaceConstructionR self, py::list const& params, UInt64Array& index)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DPoint2dArray, DPoint2d);
+           self.FindOrAddParams(&cppParams[0], cppParams.size(), index);
            }, "params"_a, "index"_a, DOC(Bentley, Geom, IPolyfaceConstruction, FindOrAddParams));
 
     c2.def("AddPointIndexFan",
@@ -984,7 +1068,21 @@ void def_FacetOptions(py::module_& m)
            py::overload_cast<DPoint2dArray&, DRange2dR, DRange2dR, double, double, Transform*>(&IPolyfaceConstruction::RemapPseudoDistanceParams),
            "params"_a, "distanceRange"_a, "paramRange"_a, "xDistanceFactor"_a, "yDistanceFactor"_a, "transform"_a, DOC(Bentley, Geom, IPolyfaceConstruction, RemapPseudoDistanceParams));
 
+    c2.def("RemapPseudoDistanceParams", [] (IPolyfaceConstructionR self, py::list& params, DRange2dR distanceRange, DRange2dR paramRange, double xDistanceFactor, double yDistanceFactor, Transform* transform)
+           {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DPoint2dArray, DPoint2d);
+              return self.RemapPseudoDistanceParams(cppParams, distanceRange, paramRange, xDistanceFactor, yDistanceFactor, transform);
+              CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DPoint2dArray, DPoint2d);
+           } ,"params"_a, "distanceRange"_a, "paramRange"_a, "xDistanceFactor"_a, "yDistanceFactor"_a, "transform"_a, DOC(Bentley, Geom, IPolyfaceConstruction, RemapPseudoDistanceParams));
+ 
     c2.def("RemapPseudoDistanceParams",
            py::overload_cast<DPoint2dArray&, DRange2dR, DRange2dR, double, double>(&IPolyfaceConstruction::RemapPseudoDistanceParams),
-           "params"_a, "distanceRange"_a, "paramRange"_a, "xDistanceFactor"_a, "yDistanceFactor"_a, DOC(Bentley, Geom, IPolyfaceConstruction, RemapPseudoDistanceParams));    
+           "params"_a, "distanceRange"_a, "paramRange"_a, "xDistanceFactor"_a, "yDistanceFactor"_a, DOC(Bentley, Geom, IPolyfaceConstruction, RemapPseudoDistanceParams));   
+           
+    c2.def("RemapPseudoDistanceParams", [] (IPolyfaceConstructionR self, py::list& params, DRange2dR distanceRange, DRange2dR paramRange, double xDistanceFactor, double yDistanceFactor)
+           {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DPoint2dArray, DPoint2d);
+              return self.RemapPseudoDistanceParams(cppParams, distanceRange, paramRange, xDistanceFactor, yDistanceFactor);
+              CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DPoint2dArray, DPoint2d);
+           } ,"params"_a, "distanceRange"_a, "paramRange"_a, "xDistanceFactor"_a, "yDistanceFactor"_a, DOC(Bentley, Geom, IPolyfaceConstruction, RemapPseudoDistanceParams));
     }

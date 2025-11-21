@@ -330,7 +330,6 @@ void def_msplot(py::module_& m)
         .value("eToDevice", PlotDestination::ToDevice)
         .value("eToPlotFile", PlotDestination::ToPlotFile)
         .value("eToMetaFile", PlotDestination::ToMetaFile)
-        .value("eToIpserver", PlotDestination::ToIpserver)
         .export_values();
 
     //===================================================================================

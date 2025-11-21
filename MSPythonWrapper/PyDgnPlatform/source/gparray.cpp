@@ -215,8 +215,17 @@ void def_GPArray(py::module_& m)
 
     c2.def("Add", [] (GPArray& self, py::list const& points)
            {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-           self.Add(cppPoints.data(), (int) cppPoints.size());
+            if(points.empty()){
+                return;
+            }
+            else if(py::isinstance<DPoint2d>(points[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+                self.Add(cppPoints.data(), (int) cppPoints.size());
+            }
+            else if(py::isinstance<DPoint3d>(points[0])){
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                self.Add(cppPoints.data(), (int) cppPoints.size());
+            }
            }, "points"_a);
 
     c2.def("Add", [] (GPArray& self, DPoint2dArray const& points)

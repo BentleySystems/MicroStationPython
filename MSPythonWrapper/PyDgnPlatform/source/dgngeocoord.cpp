@@ -552,38 +552,68 @@ void def_DgnGCS(py::module_& m)
     c1.def("LatLongFromUors", &DgnGCS::LatLongFromUors, "outLatLong"_a, "inUors"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, LatLongFromUors));
     c1.def("LatLongFromUorsXYZ", &DgnGCS::LatLongFromUorsXYZ, "outLatLong"_a, "inUors"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, LatLongFromUorsXYZ));
 
-    c1.def("ReprojectUors", [](DgnGCS const& self, DPoint3dCP inUors, int numPoints, DgnGCSCR destMstnGCS)
+    c1.def("ReprojectUors", [](DgnGCS const& self, const DPoint3dArray& inUors, DgnGCSCR destMstnGCS)
         {
         ReprojectStatus status;
         DPoint3d outUorsDest; 
         GeoPoint outLatLongDest, outLatLongSrc;
 
-        status = self.ReprojectUors(&outUorsDest, &outLatLongDest, &outLatLongSrc, inUors, numPoints, destMstnGCS);
+        status = self.ReprojectUors(&outUorsDest, &outLatLongDest, &outLatLongSrc, inUors.data(), (int)inUors.size(), destMstnGCS);
         return py::make_tuple(status, outUorsDest, outLatLongDest, outLatLongSrc);
-        }, "inUors"_a, "numPoints"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors));
+        }, "inUors"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors));
+        
+    c1.def("ReprojectUors", [](DgnGCS const& self, const py::list& inUors, DgnGCSCR destMstnGCS)
+        {
+        ReprojectStatus status;
+        DPoint3d outUorsDest; 
+        GeoPoint outLatLongDest, outLatLongSrc;
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inUors, cppInUors, DPoint3dArray, DPoint3d);
+        status = self.ReprojectUors(&outUorsDest, &outLatLongDest, &outLatLongSrc, cppInUors.data(), (int)cppInUors.size(), destMstnGCS);
+        return py::make_tuple(status, outUorsDest, outLatLongDest, outLatLongSrc);
+        }, "inUors"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors));
 
-    c1.def("ReprojectUors", [](DgnGCS const & self, DPoint3dCP inUors, int numPoints, GeoCoordInterpretation interpretation, DgnGCSCR destMstnGCS)
+    c1.def("ReprojectUors", [](DgnGCS const & self, const DPoint3dArray& inUors, GeoCoordInterpretation interpretation, DgnGCSCR destMstnGCS)
         {
         ReprojectStatus status;
         DPoint3d outUorsDest; 
         GeoPoint outLatLongDest, outLatLongSrc;
 
-        status = self.ReprojectUors(&outUorsDest, &outLatLongDest, &outLatLongSrc, inUors, numPoints, interpretation, destMstnGCS);
+        status = self.ReprojectUors(&outUorsDest, &outLatLongDest, &outLatLongSrc, inUors.data(), (int)inUors.size(), interpretation, destMstnGCS);
         return py::make_tuple(status, outUorsDest, outLatLongDest, outLatLongSrc);
-        }, "inUors"_a, "numPoints"_a, "interpretation"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors));
+        }, "inUors"_a, "interpretation"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors));
+
+    c1.def("ReprojectUors", [](DgnGCS const & self, const py::list& inUors, GeoCoordInterpretation interpretation, DgnGCSCR destMstnGCS)
+        {
+        ReprojectStatus status;
+        DPoint3d outUorsDest; 
+        GeoPoint outLatLongDest, outLatLongSrc;
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inUors, cppInUors, DPoint3dArray, DPoint3d);
+        status = self.ReprojectUors(&outUorsDest, &outLatLongDest, &outLatLongSrc, cppInUors.data(), (int)cppInUors.size(), interpretation, destMstnGCS);
+        return py::make_tuple(status, outUorsDest, outLatLongDest, outLatLongSrc);
+        }, "inUors"_a, "interpretation"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors));
 
     c1.def("UorsFromLatLong2D", &DgnGCS::UorsFromLatLong2D, "outUors"_a, "inLatLong"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, UorsFromLatLong2D));
     c1.def("LatLongFromUors2D", &DgnGCS::LatLongFromUors2D, "outLatLong"_a, "inUors"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, LatLongFromUors2D));
 
-    c1.def("ReprojectUors2D", [](DgnGCS& self, DPoint2dCP inUors, int numPoints, DgnGCSCR destMstnGCS)
+    c1.def("ReprojectUors2D", [](DgnGCS& self, const DPoint2dArray& inUors, DgnGCSCR destMstnGCS)
         {
         ReprojectStatus status;
         DPoint2d outUorsDest; 
         GeoPoint2d outLatLongDest, outLatLongSrc;
 
-        status = self.ReprojectUors2D(&outUorsDest, &outLatLongDest, &outLatLongSrc, inUors, numPoints, destMstnGCS);
+        status = self.ReprojectUors2D(&outUorsDest, &outLatLongDest, &outLatLongSrc, inUors.data(), (int)inUors.size(), destMstnGCS);
         return py::make_tuple(status, outUorsDest, outLatLongDest, outLatLongSrc);
-        }, "inUors"_a, "numPoints"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors2D));
+        }, "inUors"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors2D));
+
+    c1.def("ReprojectUors2D", [](DgnGCS& self, const py::list& inUors, DgnGCSCR destMstnGCS)
+        {
+        ReprojectStatus status;
+        DPoint2d outUorsDest; 
+        GeoPoint2d outLatLongDest, outLatLongSrc;
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inUors, cppInUors, DPoint2dArray, DPoint2d);
+        status = self.ReprojectUors2D(&outUorsDest, &outLatLongDest, &outLatLongSrc, cppInUors.data(), (int)cppInUors.size(), destMstnGCS);
+        return py::make_tuple(status, outUorsDest, outLatLongDest, outLatLongSrc);
+        }, "inUors"_a, "destMstnGCS"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, DgnGCS, ReprojectUors2D));
 
     c1.def("GetLinearTransformToBaseGCS", [](DgnGCS& self, DRange3dCR extent, BaseGCSCR destBaseGCS)
         {

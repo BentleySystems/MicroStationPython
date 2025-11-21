@@ -9,13 +9,6 @@ from MSPyMstnPlatform import *
 
 '''
 Example demonstrating how to implement a tool to create surface element.
-
-Prerequisite: Open MSPythonSamples\\data\\CreateSurfaceBySweep.dgn
-
-For this example, you need to:
-1. Select a curve element as a path.
-2. Select a profile element.
-3. The tool will create a surface element by sweeping the profile along the path.
 '''
 class SurfaceCreator(DgnElementSetTool):
 

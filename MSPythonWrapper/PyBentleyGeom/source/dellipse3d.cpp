@@ -1130,12 +1130,24 @@ void def_DEllipse3d(py::module_& m)
     //c1.def("EvaluateTrigPairs", &DEllipse3d::EvaluateTrigPairs, "point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
     c1.def("EvaluateTrigPairs", [](DEllipse3dCR self, DPoint3dArray& point, DPoint2dArray const& trig, int numPoint)
             {            
-            return self.EvaluateTrigPairs(&point[0], &trig[0], numPoint);
+            self.EvaluateTrigPairs(&point[0], &trig[0], numPoint);
             },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
     c1.def("EvaluateTrigPairs", [](DEllipse3dCR self, py::list& point, DPoint2dArray const& trig, int numPoint)
-            {
-            CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cppPoint, DPoint3dArray, DPoint3d);            
+            {  
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cppPoint, DPoint3dArray, DPoint3d);          
             self.EvaluateTrigPairs(&cppPoint[0], &trig[0], numPoint);
+            CONVERT_CPPARRAY_TO_PYLIST(point, cppPoint, DPoint3dArray, DPoint3d);
+            },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
+    c1.def("EvaluateTrigPairs", [](DEllipse3dCR self, DPoint3dArray& point, py::list const& trig, int numPoint)
+            { 
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(trig, cppTrig, DPoint2dArray, DPoint2d);         
+            self.EvaluateTrigPairs(&point[0], &cppTrig[0], numPoint);
+            },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
+    c1.def("EvaluateTrigPairs", [](DEllipse3dCR self, py::list& point, py::list const& trig, int numPoint)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cppPoint, DPoint3dArray, DPoint3d); 
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(trig, cppTrig, DPoint2dArray, DPoint2d);        
+            self.EvaluateTrigPairs(&cppPoint[0], &cppTrig[0], numPoint);
             CONVERT_CPPARRAY_TO_PYLIST(point, cppPoint, DPoint3dArray, DPoint3d);
             },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, EvaluateTrigPairs));
     c1.def("TestAndEvaluateTrigPairs", [](DEllipse3dCR self, DPoint3dArray& point, DPoint2dArray const& trig, int numPoint)
@@ -1145,10 +1157,19 @@ void def_DEllipse3d(py::module_& m)
     c1.def("TestAndEvaluateTrigPairs", [](DEllipse3dCR self, py::list& point, DPoint2dArray const& trig, int numPoint)
             {
             CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cppPoint, DPoint3dArray, DPoint3d);    
-            return self.TestAndEvaluateTrigPairs(&cppPoint[0], &trig[0], numPoint);
-            CONVERT_CPPARRAY_TO_PYLIST(point, cppPoint, DPoint3dArray, DPoint3d);    
+            return self.TestAndEvaluateTrigPairs(&cppPoint[0], &trig[0], numPoint);    
             },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, TestAndEvaluateTrigPairs));
-
+    c1.def("TestAndEvaluateTrigPairs", [](DEllipse3dCR self, DPoint3dArray& point, py::list const& trig, int numPoint)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(trig, cppTrig, DPoint2dArray, DPoint2d);
+            return self.TestAndEvaluateTrigPairs(&point[0], &cppTrig[0], numPoint);
+            },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, TestAndEvaluateTrigPairs));
+    c1.def("TestAndEvaluateTrigPairs", [](DEllipse3dCR self, py::list& point, py::list const& trig, int numPoint)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(point, cppPoint, DPoint3dArray, DPoint3d); 
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(trig, cppTrig, DPoint2dArray, DPoint2d);
+            return self.TestAndEvaluateTrigPairs(&cppPoint[0], &cppTrig[0], numPoint);
+            },"point"_a, "trig"_a, "numPoint"_a, DOC(Bentley, Geom, DEllipse3d, TestAndEvaluateTrigPairs));
     c1.def("IsAngleInSweep", &DEllipse3d::IsAngleInSweep, "angle"_a, DOC(Bentley, Geom, DEllipse3d, IsAngleInSweep));        
     c1.def("AngleToFraction", &DEllipse3d::AngleToFraction, "angle"_a, DOC(Bentley, Geom, DEllipse3d, AngleToFraction));
 

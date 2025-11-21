@@ -556,6 +556,10 @@ void def_DSpiral2dBase(py::module_& m)
     c2.def(py::init<>());
     c2.def(py::init(py::overload_cast<int>(&DSpiral2dBase::Create)), "transitionType"_a);
     c2.def(py::init(py::overload_cast<int, DoubleArray const&>(&DSpiral2dBase::Create)), "transitionType"_a, "extraData"_a);
+    c2.def(py::init([](int transitionType, py::list const& extraData){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(extraData, cppExtraData, DoubleArray, double);
+        return DSpiral2dBase::Create(transitionType, cppExtraData);
+    }), "transitionType"_a, "extraData"_a);
     c2.def(py::init(&DSpiral2dBase::CreateWithNominalLength), "transitionType"_a, "parameter"_a);    
 
     c2.attr("TransitionType_Unknown") = DSpiral2dBase::TransitionType_Unknown;
@@ -605,6 +609,11 @@ void def_DSpiral2dBase(py::module_& m)
                   py::overload_cast<int, double, double, double, double, DoubleArray const&>(&DSpiral2dBase::CreateBearingCurvatureBearingCurvature),
                   "transitionType"_a, "startRadians"_a, "startCurvature"_a, "endRadians"_a, "endCurvature"_a, "extraData"_a, DOC(Bentley, Geom, DSpiral2dBase, CreateBearingCurvatureBearingCurvature));
 
+     c2.def_static("CreateBearingCurvatureBearingCurvature", [](int transitionType, double startRadians, double startCurvature, double endRadians, double endCurvature, py::list const& extraData) {
+                   CONVERT_PYLIST_TO_NEW_CPPARRAY(extraData, cppExtraData, DoubleArray, double);
+                   return DSpiral2dBase::CreateBearingCurvatureBearingCurvature(transitionType, startRadians, startCurvature, endRadians, endCurvature, cppExtraData);
+                }, "transitionType"_a, "startRadians"_a, "startCurvature"_a, "endRadians"_a, "endCurvature"_a, "extraData"_a, DOC(Bentley, Geom, DSpiral2dBase, CreateBearingCurvatureBearingCurvature));
+                
     c2.def_static("CreateBearingCurvatureLengthCurvature",
                   py::overload_cast<int, double, double, double, double>(&DSpiral2dBase::CreateBearingCurvatureLengthCurvature),
                   "transitionType"_a, "startRadians"_a, "startCurvature"_a, "length"_a, "endCurvature"_a, DOC(Bentley, Geom, DSpiral2dBase, CreateBearingCurvatureLengthCurvature));
@@ -613,6 +622,11 @@ void def_DSpiral2dBase(py::module_& m)
                   py::overload_cast<int, double, double, double, double, DoubleArray const&>(&DSpiral2dBase::CreateBearingCurvatureLengthCurvature),
                   "transitionType"_a, "startRadians"_a, "startCurvature"_a, "length"_a, "endCurvature"_a, "extraData"_a, DOC(Bentley, Geom, DSpiral2dBase, CreateBearingCurvatureLengthCurvature));
 
+    c2.def_static("CreateBearingCurvatureLengthCurvature", [](int transitionType, double startRadians, double startCurvature, double length, double endCurvature, py::list const& extraData) {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(extraData, cppExtraData, DoubleArray, double);
+                  return DSpiral2dBase::CreateBearingCurvatureLengthCurvature(transitionType, startRadians, startCurvature, length, endCurvature, cppExtraData);
+                }, "transitionType"_a, "startRadians"_a, "startCurvature"_a, "length"_a, "endCurvature"_a, "extraData"_a, DOC(Bentley, Geom, DSpiral2dBase, CreateBearingCurvatureLengthCurvature));
+                
     c2.def_static("DefaultStrokeAngle", &DSpiral2dBase::DefaultStrokeAngle);    
             
     c2.def("SetBearingAndCurvatureLimits", &DSpiral2dBase::SetBearingAndCurvatureLimits, "theta0"_a, "curvature0"_a, "theta1"_a, "curvature1"_a);
@@ -697,6 +711,30 @@ void def_DSpiral2dBase(py::module_& m)
         return py::make_tuple(bOk, errorBound);
         }, "spiral"_a, "startFraction"_a, "endFraction"_a, "maxRadians"_a, "uvPoints"_a, "fractions"_a, "maxStrokeLength"_a = DEFAULT_SPIRAL_MAX_STROKE_LENGTH);
 
+    c2.def_static("Stroke", [](DSpiral2dBase& spiral, double startFraction, double endFraction, double maxRadians, py::list& uvPoints, py::list& fractions, double maxStrokeLength = DEFAULT_SPIRAL_MAX_STROKE_LENGTH) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(uvPoints, cppUvPoints, DVec2dArray, DVec2d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(fractions, cppFractions, DoubleArray, double);
+        
+            double errorBound = 0;
+            bool bOk = DSpiral2dBase::Stroke(spiral, startFraction, endFraction, maxRadians, cppUvPoints, cppFractions, errorBound, maxStrokeLength);
+                
+            return py::make_tuple(bOk, errorBound);
+        }, "spiral"_a, "startFraction"_a, "endFraction"_a, "maxRadians"_a, "uvPoints"_a, "fractions"_a, "maxStrokeLength"_a = DEFAULT_SPIRAL_MAX_STROKE_LENGTH);
+        
+    c2.def_static("Stroke", [](DSpiral2dBase& spiral, double startFraction, double endFraction, double maxRadians, py::list& uvPoints, DoubleArray& fractions, double maxStrokeLength = DEFAULT_SPIRAL_MAX_STROKE_LENGTH) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(uvPoints, cppUvPoints, DVec2dArray, DVec2d);       
+            double errorBound = 0;
+            bool bOk = DSpiral2dBase::Stroke(spiral, startFraction, endFraction, maxRadians, cppUvPoints, fractions, errorBound, maxStrokeLength);       
+            return py::make_tuple(bOk, errorBound);
+        }, "spiral"_a, "startFraction"_a, "endFraction"_a, "maxRadians"_a, "uvPoints"_a, "fractions"_a, "maxStrokeLength"_a = DEFAULT_SPIRAL_MAX_STROKE_LENGTH);
+
+    c2.def_static("Stroke", [](DSpiral2dBase& spiral, double startFraction, double endFraction, double maxRadians, DVec2dArray& uvPoints, py::list& fractions, double maxStrokeLength = DEFAULT_SPIRAL_MAX_STROKE_LENGTH) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(fractions, cppFractions, DoubleArray, double);
+            double errorBound = 0;
+            bool bOk = DSpiral2dBase::Stroke(spiral, startFraction, endFraction, maxRadians, uvPoints, cppFractions, errorBound, maxStrokeLength);     
+            return py::make_tuple(bOk, errorBound);
+        }, "spiral"_a, "startFraction"_a, "endFraction"_a, "maxRadians"_a, "uvPoints"_a, "fractions"_a, "maxStrokeLength"_a = DEFAULT_SPIRAL_MAX_STROKE_LENGTH);   
+        
     c2.def_static("StrokeToAnnouncer", [] (DSpiral2dBase &spiral, double startFraction, double endFraction, double maxRadians, AnnounceDoubleDPoint2dR F, int minInterval, double maxStrokeLength)
         {
         double errorBound = 0;

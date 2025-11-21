@@ -116,6 +116,7 @@ always:
     set RCCODEPAGE=$(RCCODEPAGE)
     set SrcRoot=$(SrcRoot)
     set PythonDir=$(PythonDir)
+    set USE_CPP_17_OR_HIGHER=1
     set DEFAULT_TARGET_PROCESSOR_ARCHITECTURE=$(DEFAULT_TARGET_PROCESSOR_ARCHITECTURE)
     REM This puts the output in a conveniently deletable place
     set MSMDE_OUTPUT=$(OutBuildDir)$(ExampleBuildDir)/

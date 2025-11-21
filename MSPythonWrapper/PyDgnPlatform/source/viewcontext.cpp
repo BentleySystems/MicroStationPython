@@ -886,6 +886,27 @@ void def_ViewContext(py::module_& m)
            CONVERT_CPPARRAY_TO_PYLIST(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
            }, "frustumPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToFrustum));
 
+    c6.def("LocalToFrustum", [] (ViewContext const& self, DPoint3dArray& frustumPts, py::list const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppLocalPts.size();
+           if (frustumPts.size() < nPts)
+               frustumPts.resize(nPts);
+           if (nPts > 0)
+               self.LocalToFrustum(frustumPts.data(), cppLocalPts.data(), (int) nPts);
+           }, "frustumPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToFrustum));
+
+    c6.def("LocalToFrustum", [] (ViewContext const& self, py::list& frustumPts, DPoint3dArray const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           size_t nPts = localPts.size();
+           if (cppFrustumPts.size() < nPts)
+               cppFrustumPts.resize(nPts);
+           if (nPts > 0)
+               self.LocalToFrustum(cppFrustumPts.data(), localPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           }, "frustumPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToFrustum));
+
     c6.def("LocalToView", [] (ViewContext const& self, DPoint4dArray& viewPts, DPoint3dArray const& localPts)
            {
            size_t nPts = localPts.size();
@@ -905,6 +926,31 @@ void def_ViewContext(py::module_& m)
                self.LocalToView(viewPts.data(), cppLocalPts.data(), (int) nPts);
            }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
 
+    c6.def("LocalToView", [] (ViewContext const& self, py::list& viewPts, DPoint3dArray const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+           size_t nPts = localPts.size();
+           if (cppViewPts.size() < nPts)
+               cppViewPts.resize(nPts);
+           if (nPts > 0){
+               self.LocalToView(cppViewPts.data(), localPts.data(), (int) nPts);
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+           }
+           }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
+
+    c6.def("LocalToView", [] (ViewContext const& self, py::list& viewPts, py::list const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppLocalPts.size();
+           if (cppViewPts.size() < nPts)
+               cppViewPts.resize(nPts);
+           if (nPts > 0){
+               self.LocalToView(cppViewPts.data(), cppLocalPts.data(), (int) nPts);
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+           }
+           }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
+
     c6.def("LocalToView", [] (ViewContext const& self, DPoint3dArray& viewPts, DPoint3dArray const& localPts)
            {
            size_t nPts = localPts.size();
@@ -912,6 +958,27 @@ void def_ViewContext(py::module_& m)
                viewPts.resize(nPts);
            if (nPts > 0)
                self.LocalToView(viewPts.data(), localPts.data(), (int) nPts);
+           }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
+
+    c6.def("LocalToView", [] (ViewContext const& self, DPoint3dArray& viewPts, py::list const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppLocalPts.size();
+           if (viewPts.size() < nPts)
+               viewPts.resize(nPts);
+           if (nPts > 0)
+               self.LocalToView(viewPts.data(), cppLocalPts.data(), (int) nPts);
+           }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
+
+    c6.def("LocalToView", [] (ViewContext const& self, py::list& viewPts, DPoint3dArray const& localPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           size_t nPts = localPts.size();
+           if (cppViewPts.size() < nPts)
+               cppViewPts.resize(nPts);
+           if (nPts > 0)
+               self.LocalToView(cppViewPts.data(), localPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
            }, "viewPts"_a, "localPts"_a, DOC(Bentley, DgnPlatform, ViewContext, LocalToView));
 
     c6.def("LocalToView", [] (ViewContext const& self, py::list& viewPts, py::list const& localPts)
@@ -933,6 +1000,27 @@ void def_ViewContext(py::module_& m)
                localPts.resize(nPts);
            if (nPts > 0)
                self.FrustumToLocal(localPts.data(), frustumPts.data(), (int) nPts);
+           }, "localPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToLocal));
+
+    c6.def("FrustumToLocal", [] (ViewContext const& self, DPoint3dArray& localPts, py::list const& frustumPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppFrustumPts.size();
+           if (localPts.size() < nPts)
+               localPts.resize(nPts);
+           if (nPts > 0)
+               self.FrustumToLocal(localPts.data(), cppFrustumPts.data(), (int) nPts);
+           }, "localPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToLocal));
+
+    c6.def("FrustumToLocal", [] (ViewContext const& self, py::list& localPts, DPoint3dArray const& frustumPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           size_t nPts = frustumPts.size();
+           if (cppLocalPts.size() < nPts)
+               cppLocalPts.resize(nPts);
+           if (nPts > 0)
+               self.FrustumToLocal(cppLocalPts.data(), frustumPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
            }, "localPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToLocal));
 
     c6.def("FrustumToLocal", [] (ViewContext const& self, py::list& localPts, py::list const& frustumPts)
@@ -967,6 +1055,23 @@ void def_ViewContext(py::module_& m)
            CONVERT_CPPARRAY_TO_PYLIST(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
            }, "localPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToLocal));
 
+    c6.def("ViewToLocal", [] (ViewContext const& self, DPoint3dArray& localPts, py::list const& viewPts)
+           {
+           size_t nPts = len(viewPts);
+           if (localPts.size() < nPts)
+               localPts.resize(nPts);
+           if (nPts > 0){
+                if (py::isinstance<DPoint3d>(viewPts[0])){
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+                    self.ViewToLocal(localPts.data(), cppViewPts.data(), (int) nPts);
+                }
+                else if (py::isinstance<DPoint4d>(viewPts[0])){
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+                    self.ViewToLocal(localPts.data(), cppViewPts.data(), (int) nPts);
+                }
+           }
+           }, "localPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToLocal));
+
     c6.def("ViewToLocal", [] (ViewContext const& self, DPoint3dArray& localPts, DPoint3dArray const& viewPts)
            {
            size_t nPts = viewPts.size();
@@ -979,13 +1084,20 @@ void def_ViewContext(py::module_& m)
     c6.def("ViewToLocal", [] (ViewContext const& self, py::list& localPts, py::list const& viewPts)
            {
            CONVERT_PYLIST_TO_NEW_CPPARRAY(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
-           size_t nPts = cppViewPts.size();
+           size_t nPts = len(viewPts);
            if (cppLocalPts.size() < nPts)
                cppLocalPts.resize(nPts);
-           if (nPts > 0)
-               self.ViewToLocal(cppLocalPts.data(), cppViewPts.data(), (int) nPts);
-           CONVERT_CPPARRAY_TO_PYLIST(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           if (nPts > 0){
+                if (py::isinstance<DPoint3d>(viewPts[0])){
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+                    self.ViewToLocal(cppLocalPts.data(), cppViewPts.data(), (int) nPts);
+                }
+                else if (py::isinstance<DPoint4d>(viewPts[0])){
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+                    self.ViewToLocal(cppLocalPts.data(), cppViewPts.data(), (int) nPts);
+                }
+                CONVERT_CPPARRAY_TO_PYLIST(localPts, cppLocalPts, DPoint3dArray, DPoint3d);
+           }
            }, "localPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToLocal));
 
     c6.def("NpcToView", [] (ViewContext const& self, DPoint3dArray& viewPts, DPoint3dArray const& npcPts)
@@ -995,6 +1107,27 @@ void def_ViewContext(py::module_& m)
                viewPts.resize(nPts);
            if (nPts > 0)
                self.NpcToView(viewPts.data(), npcPts.data(), (int) nPts);
+           }, "viewPts"_a, "npcPts"_a, DOC(Bentley, DgnPlatform, ViewContext, NpcToView));
+
+    c6.def("NpcToView", [] (ViewContext const& self, py::list& viewPts, DPoint3dArray const& npcPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           size_t nPts = npcPts.size();
+           if (cppViewPts.size() < nPts)
+               cppViewPts.resize(nPts);
+           if (nPts > 0)
+               self.NpcToView(cppViewPts.data(), npcPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           }, "viewPts"_a, "npcPts"_a, DOC(Bentley, DgnPlatform, ViewContext, NpcToView));
+
+    c6.def("NpcToView", [] (ViewContext const& self, DPoint3dArray& viewPts, py::list const& npcPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppNpcPts.size();
+           if (viewPts.size() < nPts)
+               viewPts.resize(nPts);
+           if (nPts > 0)
+               self.NpcToView(viewPts.data(), cppNpcPts.data(), (int) nPts);
            }, "viewPts"_a, "npcPts"_a, DOC(Bentley, DgnPlatform, ViewContext, NpcToView));
 
     c6.def("NpcToView", [] (ViewContext const& self, py::list& viewPts, py::list const& npcPts)
@@ -1030,6 +1163,27 @@ void def_ViewContext(py::module_& m)
            CONVERT_CPPARRAY_TO_PYLIST(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
            }, "npcPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToNpc));
 
+    c6.def("ViewToNpc", [] (ViewContext const& self, DPoint3dArray& npcPts, py::list const& viewPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppViewPts.size();
+           if (npcPts.size() < nPts)
+               npcPts.resize(nPts);
+           if (nPts > 0)
+               self.ViewToNpc(npcPts.data(), cppViewPts.data(), (int) nPts);
+           }, "npcPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToNpc));
+
+    c6.def("ViewToNpc", [] (ViewContext const& self, py::list& npcPts, DPoint3dArray const& viewPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+           size_t nPts = viewPts.size();
+           if (cppNpcPts.size() < nPts)
+               cppNpcPts.resize(nPts);
+           if (nPts > 0)
+               self.ViewToNpc(cppNpcPts.data(), viewPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+           }, "npcPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToNpc));
+
     c6.def("FrustumToView", [] (ViewContext const& self, DPoint4dArray& viewPts, DPoint3dArray const& frustumPts)
            {
            size_t nPts = frustumPts.size();
@@ -1047,6 +1201,29 @@ void def_ViewContext(py::module_& m)
                viewPts.resize(nPts);
            if (nPts > 0)
                self.FrustumToView(viewPts.data(), cppFrustumPts.data(), (int) nPts);
+           }, "viewPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToView));
+
+    c6.def("FrustumToView", [] (ViewContext const& self, py::list& viewPts, DPoint3dArray const& frustumPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+           size_t nPts = frustumPts.size();
+           if (cppViewPts.size() < nPts)
+               cppViewPts.resize(nPts);
+           if (nPts > 0)
+               self.FrustumToView(cppViewPts.data(), frustumPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+           }, "viewPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToView));
+
+    c6.def("FrustumToView", [] (ViewContext const& self, py::list& viewPts, py::list const& frustumPts)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+           size_t nPts = cppFrustumPts.size();
+           if (cppViewPts.size() < nPts)
+               cppViewPts.resize(nPts);
+           if (nPts > 0)
+               self.FrustumToView(cppViewPts.data(), cppFrustumPts.data(), (int) nPts);
+           CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
            }, "viewPts"_a, "frustumPts"_a, DOC(Bentley, DgnPlatform, ViewContext, FrustumToView));
 
     c6.def("FrustumToView", [] (ViewContext const& self, bvector<Point2d>& viewPts, DPoint3dArray const& frustumPts)
@@ -1088,6 +1265,23 @@ void def_ViewContext(py::module_& m)
            CONVERT_CPPARRAY_TO_PYLIST(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
            }, "frustumPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToFrustum));
 
+    c6.def("ViewToFrustum", [] (ViewContext const& self, DPoint3dArray& frustumPts, py::list const& viewPts)
+           {
+           size_t nPts = viewPts.size();
+           if (frustumPts.size() < nPts)
+               frustumPts.resize(nPts);
+           if (nPts > 0){
+              if(py::isinstance<DPoint3d>(viewPts[0])){
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+                  self.ViewToFrustum(frustumPts.data(), cppViewPts.data(), (int) nPts);
+              }
+              else if (py::isinstance<DPoint4d>(viewPts[0])){
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+                  self.ViewToFrustum(frustumPts.data(), cppViewPts.data(), (int) nPts);
+              }
+            }
+           }, "frustumPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToFrustum));
+
     c6.def("ViewToFrustum", [] (ViewContext const& self, DPoint3dArray& frustumPts, DPoint3dArray const& viewPts)
            {
            size_t nPts = viewPts.size();
@@ -1100,13 +1294,20 @@ void def_ViewContext(py::module_& m)
     c6.def("ViewToFrustum", [] (ViewContext const& self, py::list& frustumPts, py::list const& viewPts)
            {
            CONVERT_PYLIST_TO_NEW_CPPARRAY(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
-           size_t nPts = cppViewPts.size();
+           size_t nPts = len(viewPts);
            if (cppFrustumPts.size() < nPts)
                cppFrustumPts.resize(nPts);
-           if (nPts > 0)
-               self.ViewToFrustum(cppFrustumPts.data(), cppViewPts.data(), (int) nPts);
-           CONVERT_CPPARRAY_TO_PYLIST(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+            if (nPts > 0){
+                if(py::isinstance<DPoint3d>(viewPts[0])){
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+                    self.ViewToFrustum(cppFrustumPts.data(), cppViewPts.data(), (int) nPts);
+                }
+                else if (py::isinstance<DPoint4d>(viewPts[0])){
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+                    self.ViewToFrustum(cppFrustumPts.data(), cppViewPts.data(), (int) nPts);
+                }
+                CONVERT_CPPARRAY_TO_PYLIST(frustumPts, cppFrustumPts, DPoint3dArray, DPoint3d);
+            }
            }, "frustumPts"_a, "viewPts"_a, DOC(Bentley, DgnPlatform, ViewContext, ViewToFrustum));
     
     c6.def_property_readonly("CurrLocalToFrustumTransform", &ViewContext::GetCurrLocalToFrustumTransformCP);
@@ -1203,6 +1404,12 @@ void def_ViewContext(py::module_& m)
     c6.def("DrawStyledLineString2d", [] (ViewContext& self, DPoint2dArray const& pts, double zDepth, DPoint2dCP range, bool closed)
            {
            self.DrawStyledLineString2d((int) pts.size(), pts.data(), zDepth, range, closed);
+           }, "pts"_a, "zDepth"_a, "range"_a, "closed"_a = false, DOC(Bentley, DgnPlatform, ViewContext, DrawStyledLineString2d));
+
+    c6.def("DrawStyledLineString2d", [] (ViewContext& self, py::list const& pts, double zDepth, DPoint2dCP range, bool closed)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(pts, cppPts, DPoint2dArray, DPoint2d);
+           self.DrawStyledLineString2d((int) cppPts.size(), cppPts.data(), zDepth, range, closed);
            }, "pts"_a, "zDepth"_a, "range"_a, "closed"_a = false, DOC(Bentley, DgnPlatform, ViewContext, DrawStyledLineString2d));
 
     c6.def("DrawStyledLineString3d", [] (ViewContext& self, DPoint3dArray const& pts, DPoint3dCP range, bool closed)

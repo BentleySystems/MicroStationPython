@@ -317,28 +317,124 @@ void def_ClipPlaneSet(py::module_& m)
     c1.def("ReloadSweptConvexPolygon", &ConvexClipPlaneSet::ReloadSweptConvexPolygon, "points"_a, "sweepDirection"_a, "sideSelect"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ReloadSweptConvexPolygon));
 
     c1.def("ConvexPolygonClip", py::overload_cast<DPoint3dArray const&, DPoint3dArray&, DPoint3dArray&>(&ConvexClipPlaneSet::ConvexPolygonClip, py::const_), "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
-    c1.def("ConvexPolygonClip", py::overload_cast<DPoint3dArray const&, DPoint3dArray&, DPoint3dArray&, int>(&ConvexClipPlaneSet::ConvexPolygonClip, py::const_), "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
 
-    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const& input, py::list& output,  py::list& work)
-        {
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const &input, py::list &output, py::list &work)
+    {
         CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
         CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
-        DPoint3dArray cppOutput;
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(output, cppOutput, DPoint3dArray, DPoint3d);
         self.ConvexPolygonClip(cppInput, cppOutput, cppWork);
         CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d);
-        }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+    }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
 
-    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const& input, py::list& output,  py::list& work, int onPlaneHandling)
-        {
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const &input, py::list &output, DPoint3dArray &work)
+    {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(output, cppOutput, DPoint3dArray, DPoint3d);
+        self.ConvexPolygonClip(cppInput, cppOutput, work);
+        CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d);
+    }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const &input, DPoint3dArray &output, py::list &work)
+    {
         CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
         CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
-        DPoint3dArray cppOutput;
+        self.ConvexPolygonClip(cppInput, output, cppWork);
+    }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, DPoint3dArray const &input, py::list &output, py::list &work)
+    {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(output, cppOutput, DPoint3dArray, DPoint3d);
+           self.ConvexPolygonClip(input, cppOutput, cppWork);
+           CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d); 
+    }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, DPoint3dArray const &input, DPoint3dArray &output, py::list &work)
+    {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
+            self.ConvexPolygonClip(input, output, cppWork); 
+    }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, DPoint3dArray const &input, py::list &output, DPoint3dArray &work)
+    {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(output, cppOutput, DPoint3dArray, DPoint3d);
+            self.ConvexPolygonClip(input, cppOutput, work);
+            CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d); 
+    }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const &input, DPoint3dArray &output, DPoint3dArray &work)
+    {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
+            self.ConvexPolygonClip(cppInput, output, work); 
+    }, "input"_a, "output"_a, "work"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", py::overload_cast<DPoint3dArray const&, DPoint3dArray&, DPoint3dArray&, int>(&ConvexClipPlaneSet::ConvexPolygonClip, py::const_), "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const &input, py::list &output, py::list &work, int onPlaneHandling)
+    {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(output, cppOutput, DPoint3dArray, DPoint3d);
         self.ConvexPolygonClip(cppInput, cppOutput, cppWork, onPlaneHandling);
         CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d);
-        }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+    }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const &input, py::list &output, DPoint3dArray &work, int onPlaneHandling)
+    {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(output, cppOutput, DPoint3dArray, DPoint3d);
+        self.ConvexPolygonClip(cppInput, cppOutput, work, onPlaneHandling);
+        CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d);
+    }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const &input, DPoint3dArray &output, py::list &work, int onPlaneHandling)
+    {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
+        self.ConvexPolygonClip(cppInput, output, cppWork, onPlaneHandling);
+    }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, DPoint3dArray const &input, py::list &output, py::list &work, int onPlaneHandling)
+    {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(output, cppOutput, DPoint3dArray, DPoint3d);
+           self.ConvexPolygonClip(input, cppOutput, cppWork, onPlaneHandling);
+           CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d); }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, DPoint3dArray const &input, DPoint3dArray &output, py::list &work, int onPlaneHandling)
+    {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppWork, DPoint3dArray, DPoint3d);
+            self.ConvexPolygonClip(input, output, cppWork, onPlaneHandling); }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, DPoint3dArray const &input, py::list &output, DPoint3dArray &work, int onPlaneHandling)
+    {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(output, cppOutput, DPoint3dArray, DPoint3d);
+            self.ConvexPolygonClip(input, cppOutput, work, onPlaneHandling);
+            CONVERT_CPPARRAY_TO_PYLIST(output, cppOutput, DPoint3dArray, DPoint3d); }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
+
+    c1.def("ConvexPolygonClip", [](ConvexClipPlaneSetCR self, py::list const &input, DPoint3dArray &output, DPoint3dArray &work, int onPlaneHandling)
+    {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(input, cppInput, DPoint3dArray, DPoint3d);
+            self.ConvexPolygonClip(cppInput, output, work, onPlaneHandling); }, "input"_a, "output"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, ConvexPolygonClip));
 
     c1.def("AppendIntervals", py::overload_cast<DEllipse3dCR, DSegment1dArray*, double>(&ConvexClipPlaneSet::AppendIntervals, py::const_), "arc"_a, "intervals"_a, "planeSign"_a = 1.0, DOC(Bentley, Geom, ConvexClipPlaneSet, AppendIntervals));
+
+    c1.def("AppendIntervals", [](ConvexClipPlaneSetCR self, DEllipse3dCR arc, py::list intervals, double planeSign = 1.0){
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(intervals, cppIntervals, DSegment1dArray, DSegment1d);
+           bool isIntervals = self.AppendIntervals(arc, &cppIntervals, planeSign);
+           CONVERT_CPPARRAY_TO_PYLIST(intervals, cppIntervals, DSegment1dArray, DSegment1d);
+           return isIntervals;
+    }, "arc"_a, "intervals"_a, "planeSign"_a = 1.0, DOC(Bentley, Geom, ConvexClipPlaneSet, AppendIntervals));
+
     c1.def("AppendIntervals", py::overload_cast<MSBsplineCurveCR, DSegment1dArray*>(&ConvexClipPlaneSet::AppendIntervals, py::const_), "curve"_a, "intervals"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, AppendIntervals));
+
+    c1.def("AppendIntervals", [](ConvexClipPlaneSetCR self, MSBsplineCurveCR curve, py::list intervals){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(intervals, cppIntervals, DSegment1dArray, DSegment1d);
+        bool isIntervals = self.AppendIntervals(curve, &cppIntervals);
+        CONVERT_CPPARRAY_TO_PYLIST(intervals, cppIntervals, DSegment1dArray, DSegment1d);
+        return isIntervals;
+    }, "curve"_a, "intervals"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, AppendIntervals));
 
     c1.def("AppendCrossings", py::overload_cast<CurveVectorCR, bvector<CurveLocationDetailPair>&>(&ConvexClipPlaneSet::AppendCrossings, py::const_), "curves"_a, "crossings"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, AppendCrossings));
     c1.def("AppendCrossings", py::overload_cast<ICurvePrimitiveCR, bvector<CurveLocationDetailPair>&>(&ConvexClipPlaneSet::AppendCrossings, py::const_), "curve"_a, "crossings"_a, DOC(Bentley, Geom, ConvexClipPlaneSet, AppendCrossings));
@@ -407,8 +503,26 @@ void def_ClipPlaneSet(py::module_& m)
     c2.def("IsAnyPointInOrOn", py::overload_cast<MSBsplineCurveCR>(&ClipPlaneSet::IsAnyPointInOrOn, py::const_), "curve"_a, DOC(Bentley, Geom, ClipPlaneSet, IsAnyPointInOrOn));
 
     c2.def("AppendIntervals", py::overload_cast<DSegment3dCR, DSegment1dArray&>(&ClipPlaneSet::AppendIntervals, py::const_), "segment"_a, "intervals"_a, DOC(Bentley, Geom, ClipPlaneSet, AppendIntervals));
+   
+    c2.def("AppendIntervals", [](ClipPlaneSetCR self, DSegment3dCR segment, py::list& intervals){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(intervals, cppIntervals, DSegment1dArray, DSegment1d);
+        self.AppendIntervals(segment, cppIntervals);
+        CONVERT_CPPARRAY_TO_PYLIST(intervals, cppIntervals, DSegment1dArray, DSegment1d);
+    }, "segment"_a, "intervals"_a, DOC(Bentley, Geom, ClipPlaneSet, AppendIntervals));
+
     c2.def("AppendIntervals", py::overload_cast<DEllipse3dCR, DSegment1dArray&>(&ClipPlaneSet::AppendIntervals, py::const_), "arc"_a, "intervals"_a, DOC(Bentley, Geom, ClipPlaneSet, AppendIntervals));
+
+    c2.def("AppendIntervals", [](ClipPlaneSetCR self, DEllipse3dCR arc, py::list& intervals){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(intervals, cppIntervals, DSegment1dArray, DSegment1d);
+        self.AppendIntervals(arc, cppIntervals);
+        CONVERT_CPPARRAY_TO_PYLIST(intervals, cppIntervals, DSegment1dArray, DSegment1d); }, "arc"_a, "intervals"_a, DOC(Bentley, Geom, ClipPlaneSet, AppendIntervals));
+
     c2.def("AppendIntervals", py::overload_cast<MSBsplineCurveCR, DSegment1dArray&>(&ClipPlaneSet::AppendIntervals, py::const_), "curve"_a, "intervals"_a, DOC(Bentley, Geom, ClipPlaneSet, AppendIntervals));
+
+    c2.def("AppendIntervals", [](ClipPlaneSetCR self, MSBsplineCurveCR curve, py::list& intervals){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(intervals, cppIntervals, DSegment1dArray, DSegment1d);
+        self.AppendIntervals(curve, cppIntervals);
+        CONVERT_CPPARRAY_TO_PYLIST(intervals, cppIntervals, DSegment1dArray, DSegment1d); }, "curve"_a, "intervals"_a, DOC(Bentley, Geom, ClipPlaneSet, AppendIntervals));
 
     c2.def("AppendCrossings", py::overload_cast<CurveVectorCR, bvector<CurveLocationDetailPair>&>(&ClipPlaneSet::AppendCrossings, py::const_), "curves"_a, "crossings"_a, DOC(Bentley, Geom, ClipPlaneSet, AppendCrossings));
     c2.def("AppendCrossings", py::overload_cast<ICurvePrimitiveCR, bvector<CurveLocationDetailPair>&>(&ClipPlaneSet::AppendCrossings, py::const_), "curve"_a, "crossings"_a, DOC(Bentley, Geom, ClipPlaneSet, AppendCrossings));

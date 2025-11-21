@@ -396,6 +396,17 @@ void def_BSIQuadrature(py::module_& m)
            self.EvaluateVectorIntegrand(t, pF.data());
            }, "t"_a, "pF"_a, py::call_guard<py::gil_scoped_release>());
 
+    c1.def("EvaluateVectorIntegrand", [] (BSIVectorIntegrand& self, double t, py::list& pF)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(pF, cppPF, DoubleArray, double)
+           size_t nItem = (size_t) self.GetVectorIntegrandCount();
+           if (cppPF.size() < nItem)
+               cppPF.resize(nItem);
+
+           self.EvaluateVectorIntegrand(t, cppPF.data());     
+           CONVERT_CPPARRAY_TO_PYLIST(pF, cppPF, DoubleArray, double)
+           }, "t"_a, "pF"_a);
+
     c1.def("VectorIntegrandCount", &BSIVectorIntegrand::GetVectorIntegrandCount);
 
     //===================================================================================
@@ -411,6 +422,18 @@ void def_BSIQuadrature(py::module_& m)
 
            return self.AnnounceIntermediateIntegral(t, pIntegrals.data());
            }, "t"_a, "pIntegrals"_a, py::call_guard<py::gil_scoped_release>());
+
+    c2.def("AnnounceIntermediateIntegral", [] (BSIIncrementalVectorIntegrand& self, double t, py::list& pIntegrals)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(pIntegrals, cppPIntegrals, DoubleArray, double)
+           size_t nItem = (size_t) self.GetVectorIntegrandCount();
+           if (cppPIntegrals.size() < nItem)
+               cppPIntegrals.resize(nItem);
+
+           bool isIntegral = self.AnnounceIntermediateIntegral(t, cppPIntegrals.data());
+           CONVERT_CPPARRAY_TO_PYLIST(pIntegrals, cppPIntegrals, DoubleArray, double);
+           return isIntegral;
+           }, "t"_a, "pIntegrals"_a);
     
     //===================================================================================
     // class BSIVectorIntegrandXY
@@ -425,6 +448,17 @@ void def_BSIQuadrature(py::module_& m)
 
            self.EvaluateVectorIntegrand(x, y, pF.data());
            }, "x"_a, "y"_a, "pF"_a, py::call_guard < py::gil_scoped_release>());
+
+    c3.def("EvaluateVectorIntegrand", [] (BSIVectorIntegrandXY& self, double x, double y, py::list& pF)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(pF, cppPF, DoubleArray, double);
+           size_t nItem = (size_t) self.GetVectorIntegrandCount();
+           if (cppPF.size() < nItem)
+               cppPF.resize(nItem);
+
+           self.EvaluateVectorIntegrand(x, y, cppPF.data());
+           CONVERT_CPPARRAY_TO_PYLIST(pF, cppPF, DoubleArray, double);
+           }, "x"_a, "y"_a, "pF"_a);
 
     c3.def("VectorIntegrandCount", &BSIVectorIntegrandXY::GetVectorIntegrandCount);
 
@@ -470,6 +504,17 @@ void def_BSIQuadrature(py::module_& m)
            self.AccumulateWeightedSums(function, t0, t1, pSums.data(), numInterval);
            }, "function"_a, "t0"_a, "t1"_a, "pSums"_a, "numInterval"_a, DOC(Bentley, Geom, BSIQuadraturePoints, AccumulateWeightedSums));
 
+    c4.def("AccumulateWeightedSums", [] (BSIQuadraturePoints& self, BSIVectorIntegrand& function, double t0, double t1, py::list& pSums, int numInterval)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(pSums, cppPSums, DoubleArray, double)
+           size_t nItem = (size_t) function.GetVectorIntegrandCount();
+           if (cppPSums.size() < nItem)
+               cppPSums.resize(nItem);
+
+           self.AccumulateWeightedSums(function, t0, t1, cppPSums.data(), numInterval);
+           CONVERT_CPPARRAY_TO_PYLIST(pSums, cppPSums, DoubleArray, double);
+           }, "function"_a, "t0"_a, "t1"_a, "pSums"_a, "numInterval"_a, DOC(Bentley, Geom, BSIQuadraturePoints, AccumulateWeightedSums));
+
     c4.def("IntegrateWithRombergExtrapolation", [] (BSIQuadraturePointsR self, BSIIncrementalVectorIntegrand &function, double t0, double t1, uint32_t numInterval)
         {
         double totalErrorBound = 0;
@@ -508,6 +553,20 @@ void def_BSIQuadrature(py::module_& m)
                }
            });
 
+    c5.def("AccumulateWeightedSums", [] (BSITriangleQuadraturePoints& self, BSIVectorIntegrandXY& function, py::list& pSums)
+           {
+           int nCount = function.GetVectorIntegrandCount();
+           if (nCount > 0)
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(pSums, cppPSums, DoubleArray, double)
+               if (nCount > (int) cppPSums.size())
+                   cppPSums.resize((size_t) nCount);
+
+               self.AccumulateWeightedSums(function, cppPSums.data());
+               CONVERT_CPPARRAY_TO_PYLIST(pSums, cppPSums, DoubleArray, double);
+               }
+           });
+
     c5.def("AccumulateWeightedSumsMapped", [] (BSITriangleQuadraturePoints& self, BSIVectorIntegrandXY& function, DoubleArray& pSums, double ax, double ay, double bx, double by, double cx, double cy)
            {
            int nCount = function.GetVectorIntegrandCount();
@@ -517,6 +576,20 @@ void def_BSIQuadrature(py::module_& m)
                    pSums.resize((size_t) nCount);
 
                self.AccumulateWeightedSumsMapped(function, pSums.data(), ax, ay, bx, by, cx, cy);
+               }
+           });
+
+    c5.def("AccumulateWeightedSumsMapped", [] (BSITriangleQuadraturePoints& self, BSIVectorIntegrandXY& function, py::list& pSums, double ax, double ay, double bx, double by, double cx, double cy)
+           {
+           int nCount = function.GetVectorIntegrandCount();
+           if (nCount > 0)
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(pSums, cppPSums, DoubleArray, double)
+               if (nCount > (int) cppPSums.size())
+                   cppPSums.resize((size_t) nCount);
+
+               self.AccumulateWeightedSumsMapped(function, cppPSums.data(), ax, ay, bx, by, cx, cy);
+               CONVERT_CPPARRAY_TO_PYLIST(pSums, cppPSums, DoubleArray, double)
                }
            });
     }

@@ -113,6 +113,14 @@ void def_ClipPrimitive(py::module_& m)
         },
         "points"_a, "outside"_a, "zLow"_a, "zHigh"_a, "transformFromClip"_a, "invisible"_a = false, DOC(Bentley, DgnPlatform, ClipPrimitive, CreateFromShape));
     
+    c2.def_static("CreateFromShape",
+            [](py::list const& points, bool outside, boost::optional<double> zLow, boost::optional<double> zHigh, TransformCP transformFromClip, bool invisible)
+            {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d)
+                return ClipPrimitive::CreateFromShape(&cppPoints[0], cppPoints.size(), outside, zLow.get_ptr(), zHigh.get_ptr(), transformFromClip, invisible);
+            },
+            "points"_a, "outside"_a, "zLow"_a, "zHigh"_a, "transformFromClip"_a, "invisible"_a = false, DOC(Bentley, DgnPlatform, ClipPrimitive, CreateFromShape));
+        
     c2.def_static("CreateFromClipPlanes", &ClipPrimitive::CreateFromClipPlanes, "planes"_a, "invisible"_a = false, DOC(Bentley, DgnPlatform, ClipPrimitive, CreateFromClipPlanes));
 
     c2.def_static("CreateFromGPA", 
@@ -185,6 +193,12 @@ void def_ClipPrimitive(py::module_& m)
     c2.def("ClassifyPointContainment", [] (ClipPrimitiveCR self, std::vector<DPoint3d> const& points, bool ignoreMasks)
            {
            return self.ClassifyPointContainment(points.data(), points.size(), ignoreMasks);
+           }, "points"_a, "ignoreMasks"_a = false, DOC(Bentley, DgnPlatform, ClipPrimitive, ClassifyPointContainment));
+
+    c2.def("ClassifyPointContainment", [] (ClipPrimitiveCR self, py::list const& points, bool ignoreMasks)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, std::vector<DPoint3d>, DPoint3d)
+           return self.ClassifyPointContainment(cppPoints.data(), cppPoints.size(), ignoreMasks);
            }, "points"_a, "ignoreMasks"_a = false, DOC(Bentley, DgnPlatform, ClipPrimitive, ClassifyPointContainment));
 
     c2.def("TransformToClip", &ClipPrimitive::TransformToClip, "point"_a, DOC(Bentley, DgnPlatform, ClipPrimitive, TransformToClip));

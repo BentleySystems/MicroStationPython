@@ -9,6 +9,8 @@
 #include <PSolid/PSolidCoreAPI.h>
 #include <Mstn/SmartFeature/SmartFeatureAPI.h>
 #include <Mstn/SmartFeature/SmartFeatureBaseDefs.h>
+
+#include <Pybind11/numpy.h>
 #include <Mstn/SmartFeature/SmartFeature.r.h>
 
 USING_NAMESPACE_SMARTFEATURE;
@@ -43,6 +45,128 @@ void def_SmartFeature_r(py::module_& m)
                     [] (ChamferEdgeSettings const& self) { return (bool) self.m_reversed; },
                     [] (ChamferEdgeSettings& self, bool mode) { self.m_reversed = (UInt32) mode; });
 
+    c4.def(py::init<>());
+    c4.def(py::init<DgnModelR>(), "dgnModel"_a);
+
+    c4.def("GetDistances", [](ChamferEdgeSettings& self)
+        {
+        double dis1, dis2;
+        self.GetDistances(dis1, dis2);
+        return py::make_tuple(dis1, dis2);
+        });
+
+    c4.def("SetDistance", &ChamferEdgeSettings::SetDistance, "distance"_a);
+    c4.def("SetDistance2", &ChamferEdgeSettings::SetDistance2, "distance"_a);
+    c4.def("Scale", &ChamferEdgeSettings::Scale, "scale"_a);
+
+    //===================================================================================
+    // struct ExtrudeAlongSettings
+    py::class_< ExtrudeAlongSettings> c5(m, "ExtrudeAlongSettings");
+
+    c5.def(py::init<>());
+    c5.def(py::init<DgnModelR>(), "dgnModel"_a);
+
+    c5.def_readwrite("version", &ExtrudeAlongSettings::m_version);
+    c5.def_readwrite("scale", &ExtrudeAlongSettings::m_scale);
+    c5.def_readwrite("twistAngle", &ExtrudeAlongSettings::m_twistAngle);
+
+    c5.def_property("doScale",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_doScale; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_doScale = (UInt32)value; });
+
+    c5.def_property("doTwist",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_doTwist; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_doTwist = (UInt32)value; });
+
+    c5.def_property("alignParallel",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_alignParallel; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_alignParallel = (UInt32)value; });
+
+    c5.def_property("doLockProfileRotation",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_doLockProfileRotation; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_doLockProfileRotation = (UInt32)value; });
+
+    c5.def_property("lockProfileDirection",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_lockProfileDirection; },
+        [](ExtrudeAlongSettings& self, UInt32 value) { self.m_lockProfileDirection = value; });
+
+    c5.def_property("profileLeafMode",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_profileLeafMode; },
+        [](ExtrudeAlongSettings& self, UInt32 value) { self.m_profileLeafMode = value; });
+
+    c5.def_property("pathLeafMode",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_pathLeafMode; },
+        [](ExtrudeAlongSettings& self, UInt32 value) { self.m_pathLeafMode = value; });
+
+    c5.def_property("selfRepair",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_selfRepair; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_selfRepair = (UInt32)value; });
+
+    c5.def_property("useActiveAttributes",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_useActiveAttributes; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_useActiveAttributes = (UInt32)value; });
+
+    c5.def_property("thicknessMode",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_thicknessMode; },
+        [](ExtrudeAlongSettings& self, UInt32 value) { self.m_thicknessMode = value; });
+
+    c5.def_property("invertPath",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_invertPath; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_invertPath = (UInt32)value; });
+
+    c5.def_property("useFractions",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_useFractions; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_useFractions = (UInt32)value; });
+
+    c5.def_property("doStartDistance",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_doStartDistance; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_doStartDistance = (UInt32)value; });
+
+    c5.def_property("doEndDistance",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_doEndDistance; },
+        [](ExtrudeAlongSettings& self, bool value) { self.m_doEndDistance = (UInt32)value; });
+
+    c5.def_property("type",
+        [](ExtrudeAlongSettings const& self) { return (bool)self.m_type; },
+        [](ExtrudeAlongSettings& self, UInt32 value) { self.m_type = value; });
+
+    c5.def_readwrite("thickness", &ExtrudeAlongSettings::m_thickness);
+    c5.def_property("distances",
+        [](ExtrudeAlongSettings& self) {return py::array_t<double>{ 2, self.m_distances, py::cast(self)}; },
+        [](ExtrudeAlongSettings& self, py::array_t<double> const& arr)
+        {
+            py::buffer_info buf = arr.request();
+            auto* ptr = static_cast<double*>(buf.ptr);
+
+            if (2 != arr.size())
+                return;
+
+            memcpy(self.m_distances, ptr, 2 * sizeof(UInt32));
+        });
+
+    //===================================================================================
+    // struct SizeFilterSettings
+    py::class_< SizeFilterSettings> c6(m, "SizeFilterSettings");
+
+    c6.def(py::init<>());
+    c6.def(py::init<DgnModelR>(), "dgnModel"_a);
+    c6.def("Scale", &SizeFilterSettings::Scale, "scale"_a);
+
+    c6.def_readwrite("blendRadius", &SizeFilterSettings::m_blendRadius);
+    c6.def_readwrite("holeDiameter", &SizeFilterSettings::m_holeDiameter);
+    c6.def_readwrite("faceSize", &SizeFilterSettings::m_faceSize);
+
+    c6.def_property("doBlendRadius",
+        [](SizeFilterSettings const& self) { return (bool)self.m_doBlendRadius; },
+        [](SizeFilterSettings& self, bool value) { self.m_doBlendRadius = (UInt32)value; });
+
+    c6.def_property("doHoleDiameter",
+        [](SizeFilterSettings const& self) { return (bool)self.m_doHoleDiameter; },
+        [](SizeFilterSettings& self, bool value) { self.m_doHoleDiameter = (UInt32)value; });
+
+    c6.def_property("doFaceSize",
+        [](SizeFilterSettings const& self) { return (bool)self.m_doFaceSize; },
+        [](SizeFilterSettings& self, bool value) { self.m_doFaceSize = (UInt32)value; });
 
     //===================================================================================
     // struct ExtrudeSettings
@@ -220,19 +344,32 @@ void def_SmartFeature_r(py::module_& m)
     c25.def(py::init<>());
     c25.def(py::init<DgnModelR>(), "dgnModel"_a);
 
-    c24.def_property("circularProfile",
+    c25.def_property("circularProfile",
                      [] (ExtrudeAlongProfileSetting const& self) { return (bool) self.m_circularProfile; },
                      [] (ExtrudeAlongProfileSetting& self, bool mode) { self.m_circularProfile = (UInt32) mode; });
 
-    c24.def_property("doInsideDiameter",
+    c25.def_property("doInsideDiameter",
                      [] (ExtrudeAlongProfileSetting const& self) { return (bool) self.m_doInsideDiameter; },
                      [] (ExtrudeAlongProfileSetting& self, bool mode) { self.m_doInsideDiameter = (UInt32) mode; });
 
-    c24.def_property("doOutsideDiameter",
+    c25.def_property("doOutsideDiameter",
                      [] (ExtrudeAlongProfileSetting const& self) { return (bool) self.m_doOutsideDiameter; },
                      [] (ExtrudeAlongProfileSetting& self, bool mode) { self.m_doOutsideDiameter = (UInt32) mode; });
 
-    c24.def_property("doEditmode",
+    c25.def_property("doEditmode",
                      [] (ExtrudeAlongProfileSetting const& self) { return (bool) self.m_doEditmode; },
-                     [] (ExtrudeAlongProfileSetting& self, bool mode) { self.m_doEditmode = (UInt32) mode; });    
-    }
+                     [] (ExtrudeAlongProfileSetting& self, bool mode) { self.m_doEditmode = (UInt32) mode; });
+
+    c25.def_property("diameter",
+        [](ExtrudeAlongProfileSetting& self) {return py::array_t<double>{ 2, self.m_diameter, py::cast(self)}; },
+        [](ExtrudeAlongProfileSetting& self, py::array_t<double> const& arr)
+        {
+            py::buffer_info buf = arr.request();
+            auto* ptr = static_cast<double*>(buf.ptr);
+
+            if (2 != arr.size())
+                return;
+
+            memcpy(self.m_diameter, ptr, 2 * sizeof(double));
+        });
+  }

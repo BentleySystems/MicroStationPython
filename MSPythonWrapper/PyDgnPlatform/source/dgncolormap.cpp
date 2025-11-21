@@ -255,6 +255,12 @@ void def_DgnColorMap(py::module_& m)
         return DgnColorMap::CreateFromRgbColors(colors.data ());
         }, "colors"_a, DOC(Bentley, DgnPlatform, DgnColorMap, CreateFromRgbColors));
 
+    c1.def_static("CreateFromRgbColors", [](py::list const& colors)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(colors, cppColors, std::vector<RgbColorDef>, RgbColorDef)
+        return DgnColorMap::CreateFromRgbColors(cppColors.data ());
+        }, "colors"_a, DOC(Bentley, DgnPlatform, DgnColorMap, CreateFromRgbColors));
+
     c1.def_static("CreateFromTbgrColors", [](UInt32Array& colors)
         {
         return DgnColorMap::CreateFromTbgrColors(colors.data());

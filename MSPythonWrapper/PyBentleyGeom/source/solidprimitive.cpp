@@ -1746,9 +1746,55 @@ void def_SolidPrimitive(py::module_& m)
            py::overload_cast<CurveVectorCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnTorusPipeDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, AddCurveIntersections));
 
+    c1.def("AddCurveIntersections", [](DgnTorusPipeDetailCR self, CurveVectorCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, AddCurveIntersections));
+
+    c1.def("AddCurveIntersections", [](DgnTorusPipeDetailCR self, CurveVectorCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, AddCurveIntersections));
+
+    c1.def("AddCurveIntersections", [](DgnTorusPipeDetailCR self, CurveVectorCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, AddCurveIntersections));
+
     c1.def("AddCurveIntersections",
            py::overload_cast<ICurvePrimitiveCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnTorusPipeDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, AddCurveIntersections));
+    
+    c1.def("AddCurveIntersections", [](DgnTorusPipeDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, AddCurveIntersections));
+
+   c1.def("AddCurveIntersections", [](DgnTorusPipeDetailCR self, ICurvePrimitiveCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, AddCurveIntersections));
+
+   c1.def("AddCurveIntersections", [](DgnTorusPipeDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, AddCurveIntersections));
 
     c1.def("ClosestPoint", &DgnTorusPipeDetail::ClosestPoint, "spacePoint"_a, "pickDetail"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, ClosestPoint));
     c1.def("TryUVFractionToXYZ", &DgnTorusPipeDetail::TryUVFractionToXYZ, "faceIndices"_a, "uFraction"_a, "vFraction"_a, "xyz"_a, "dXdu"_a, "dXdv"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, TryUVFractionToXYZ));
@@ -1783,6 +1829,32 @@ void def_SolidPrimitive(py::module_& m)
            DPoint3dArray cppNormalizedConePoints;
            self.IntersectCurveLocal(curve, curveFractions, cppNormalizedConePoints, localToWorld, worldToLocal, rMajor, rMinor, sweepRadians, boundedConeZ);
            CONVERT_CPPARRAY_TO_PYLIST(normalizedConePoints, cppNormalizedConePoints, DPoint3dArray, DPoint3d);
+           return py::make_tuple(rMajor, rMinor, sweepRadians);
+           }, "curve"_a, "curveFractions"_a, "normalizedConePoints"_a, "localToWorld"_a, "worldToLocal"_a, "boundedConeZ"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, IntersectCurveLocal));
+
+    c1.def("IntersectCurveLocal", [] (DgnTorusPipeDetailCR self, ICurvePrimitiveCR curve, py::list& curveFractions, DPoint3dArray& normalizedConePoints,
+                                      TransformR localToWorld, TransformR worldToLocal, bool boundedConeZ)
+           {
+           double rMajor = 0;
+           double rMinor = 0;
+           double sweepRadians = 0;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curveFractions, cppCurveFractions, DoubleArray, double);
+           self.IntersectCurveLocal(curve, cppCurveFractions, normalizedConePoints, localToWorld, worldToLocal, rMajor, rMinor, sweepRadians, boundedConeZ);
+           CONVERT_CPPARRAY_TO_PYLIST(curveFractions, cppCurveFractions, DoubleArray, double);
+           return py::make_tuple(rMajor, rMinor, sweepRadians);
+           }, "curve"_a, "curveFractions"_a, "normalizedConePoints"_a, "localToWorld"_a, "worldToLocal"_a, "boundedConeZ"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, IntersectCurveLocal));
+
+    c1.def("IntersectCurveLocal", [] (DgnTorusPipeDetailCR self, ICurvePrimitiveCR curve, py::list& curveFractions, py::list& normalizedConePoints,
+                                      TransformR localToWorld, TransformR worldToLocal, bool boundedConeZ)
+           {
+           double rMajor = 0;
+           double rMinor = 0;
+           double sweepRadians = 0;
+           DPoint3dArray cppNormalizedConePoints;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curveFractions, cppCurveFractions, DoubleArray, double);
+           self.IntersectCurveLocal(curve, cppCurveFractions, cppNormalizedConePoints, localToWorld, worldToLocal, rMajor, rMinor, sweepRadians, boundedConeZ);
+           CONVERT_CPPARRAY_TO_PYLIST(normalizedConePoints, cppNormalizedConePoints, DPoint3dArray, DPoint3d);
+           CONVERT_CPPARRAY_TO_PYLIST(curveFractions, cppCurveFractions, DoubleArray, double);
            return py::make_tuple(rMajor, rMinor, sweepRadians);
            }, "curve"_a, "curveFractions"_a, "normalizedConePoints"_a, "localToWorld"_a, "worldToLocal"_a, "boundedConeZ"_a, DOC(Bentley, Geom, DgnTorusPipeDetail, IntersectCurveLocal));
 
@@ -1854,9 +1926,55 @@ void def_SolidPrimitive(py::module_& m)
            py::overload_cast<CurveVectorCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnConeDetail::AddCurveIntersections, py::const_), 
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnConeDetail, AddCurveIntersections));
 
+    c2.def("AddCurveIntersections", [](DgnConeDetailCR self, CurveVectorCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnConeDetail, AddCurveIntersections));
+
+   c2.def("AddCurveIntersections", [](DgnConeDetailCR self, CurveVectorCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnConeDetail, AddCurveIntersections));
+
+   c2.def("AddCurveIntersections", [](DgnConeDetailCR self, CurveVectorCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnConeDetail, AddCurveIntersections));
+
     c2.def("AddCurveIntersections",
            py::overload_cast<ICurvePrimitiveCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnConeDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnConeDetail, AddCurveIntersections));
+
+    c2.def("AddCurveIntersections", [](DgnConeDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnConeDetail, AddCurveIntersections));
+
+   c2.def("AddCurveIntersections", [](DgnConeDetailCR self, ICurvePrimitiveCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnConeDetail, AddCurveIntersections));
+
+   c2.def("AddCurveIntersections", [](DgnConeDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnConeDetail, AddCurveIntersections));
 
     c2.def("ClosestPoint", &DgnConeDetail::ClosestPoint, "spacePoint"_a, "pickDetail"_a, DOC(Bentley, Geom, DgnConeDetail, ClosestPoint));
     c2.def("TryUVFractionToXYZ", &DgnConeDetail::TryUVFractionToXYZ, "faceIndices"_a, "uFraction"_a, "vFraction"_a, "xyz"_a, "dXdu"_a, "dXdv"_a, DOC(Bentley, Geom, DgnConeDetail, TryUVFractionToXYZ));
@@ -1956,9 +2074,55 @@ void def_SolidPrimitive(py::module_& m)
            py::overload_cast<CurveVectorCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnBoxDetail::AddCurveIntersections, py::const_), 
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnBoxDetail, AddCurveIntersections));
 
+    c3.def("AddCurveIntersections", [](DgnBoxDetailCR self, CurveVectorCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnBoxDetail, AddCurveIntersections));
+
+   c3.def("AddCurveIntersections", [](DgnBoxDetailCR self, CurveVectorCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnBoxDetail, AddCurveIntersections));
+
+   c3.def("AddCurveIntersections", [](DgnBoxDetailCR self, CurveVectorCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnBoxDetail, AddCurveIntersections));
+
     c3.def("AddCurveIntersections",
            py::overload_cast<ICurvePrimitiveCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnBoxDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnBoxDetail, AddCurveIntersections));
+
+    c3.def("AddCurveIntersections", [](DgnBoxDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnBoxDetail, AddCurveIntersections));
+
+   c3.def("AddCurveIntersections", [](DgnBoxDetailCR self, ICurvePrimitiveCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnBoxDetail, AddCurveIntersections));
+
+   c3.def("AddCurveIntersections", [](DgnBoxDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnBoxDetail, AddCurveIntersections));
 
     c3.def("ClosestPoint", &DgnBoxDetail::ClosestPoint, "spacePoint"_a, "pickDetail"_a, DOC(Bentley, Geom, DgnBoxDetail, ClosestPoint));
     c3.def("TryUVFractionToXYZ", &DgnBoxDetail::TryUVFractionToXYZ, "faceIndices"_a, "uFraction"_a, "vFraction"_a, "xyz"_a, "dXdu"_a, "dXdv"_a, DOC(Bentley, Geom, DgnBoxDetail, TryUVFractionToXYZ));
@@ -2052,9 +2216,57 @@ void def_SolidPrimitive(py::module_& m)
     c4.def("AddCurveIntersections",
            py::overload_cast<CurveVectorCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnSphereDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnSphereDetail, AddCurveIntersections));
+
+    c4.def("AddCurveIntersections", [](DgnSphereDetailCR self, CurveVectorCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnSphereDetail, AddCurveIntersections));
+
+   c4.def("AddCurveIntersections", [](DgnSphereDetailCR self, CurveVectorCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnSphereDetail, AddCurveIntersections));
+
+   c4.def("AddCurveIntersections", [](DgnSphereDetailCR self, CurveVectorCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnSphereDetail, AddCurveIntersections));
+
     c4.def("AddCurveIntersections",
            py::overload_cast<ICurvePrimitiveCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnSphereDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnSphereDetail, AddCurveIntersections));
+
+    c4.def("AddCurveIntersections", [](DgnSphereDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnSphereDetail, AddCurveIntersections));
+
+   c4.def("AddCurveIntersections", [](DgnSphereDetailCR self, ICurvePrimitiveCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnSphereDetail, AddCurveIntersections));
+
+   c4.def("AddCurveIntersections", [](DgnSphereDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnSphereDetail, AddCurveIntersections));
+
     c4.def("ClosestPoint", &DgnSphereDetail::ClosestPoint, "spacePoint"_a, "pickDetail"_a, DOC(Bentley, Geom, DgnSphereDetail, ClosestPoint));
     c4.def("TryUVFractionToXYZ", &DgnSphereDetail::TryUVFractionToXYZ, "faceIndices"_a, "uFraction"_a, "vFraction"_a, "xyz"_a, "dXdu"_a, "dXdv"_a, DOC(Bentley, Geom, DgnSphereDetail, TryUVFractionToXYZ));
     c4.def("GetFace", &DgnSphereDetail::GetFace, "indices"_a, DOC(Bentley, Geom, DgnSphereDetail, GetFace));
@@ -2106,9 +2318,57 @@ void def_SolidPrimitive(py::module_& m)
     c5.def("AddCurveIntersections",
            py::overload_cast<CurveVectorCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnExtrusionDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnExtrusionDetail, AddCurveIntersections));
+    
+    c5.def("AddCurveIntersections", [](DgnExtrusionDetailCR self, CurveVectorCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnExtrusionDetail, AddCurveIntersections));
+
+   c5.def("AddCurveIntersections", [](DgnExtrusionDetailCR self, CurveVectorCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnExtrusionDetail, AddCurveIntersections));
+
+   c5.def("AddCurveIntersections", [](DgnExtrusionDetailCR self, CurveVectorCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnExtrusionDetail, AddCurveIntersections));
+           
     c5.def("AddCurveIntersections",
            py::overload_cast<ICurvePrimitiveCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnExtrusionDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnExtrusionDetail, AddCurveIntersections));
+
+    c5.def("AddCurveIntersections", [](DgnExtrusionDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnExtrusionDetail, AddCurveIntersections));
+
+   c5.def("AddCurveIntersections", [](DgnExtrusionDetailCR self, ICurvePrimitiveCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnExtrusionDetail, AddCurveIntersections));
+
+   c5.def("AddCurveIntersections", [](DgnExtrusionDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnExtrusionDetail, AddCurveIntersections));
+           
     c5.def("ClosestPoint", &DgnExtrusionDetail::ClosestPoint, "spacePoint"_a, "pickDetail"_a, DOC(Bentley, Geom, DgnExtrusionDetail, ClosestPoint));
     c5.def("TryUVFractionToXYZ", &DgnExtrusionDetail::TryUVFractionToXYZ, "faceIndices"_a, "uFraction"_a, "vFraction"_a, "xyz"_a, "dXdu"_a, "dXdv"_a, DOC(Bentley, Geom, DgnExtrusionDetail, TryUVFractionToXYZ));
     c5.def("TryGetExtrusionFrame", &DgnExtrusionDetail::TryGetExtrusionFrame, "localToWorld"_a, "worldToLocal"_a, DOC(Bentley, Geom, DgnExtrusionDetail, TryGetExtrusionFrame));
@@ -2172,9 +2432,57 @@ void def_SolidPrimitive(py::module_& m)
     c6.def("AddCurveIntersections",
            py::overload_cast<CurveVectorCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnRotationalSweepDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, AddCurveIntersections));
+    
+    c6.def("AddCurveIntersections", [](DgnRotationalSweepDetailCR self, CurveVectorCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, AddCurveIntersections));
+
+    c6.def("AddCurveIntersections", [](DgnRotationalSweepDetailCR self, CurveVectorCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, AddCurveIntersections));
+
+    c6.def("AddCurveIntersections", [](DgnRotationalSweepDetailCR self, CurveVectorCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, AddCurveIntersections));
+
     c6.def("AddCurveIntersections",
            py::overload_cast<ICurvePrimitiveCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnRotationalSweepDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, AddCurveIntersections));
+
+    c6.def("AddCurveIntersections", [](DgnRotationalSweepDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, AddCurveIntersections));
+
+   c6.def("AddCurveIntersections", [](DgnRotationalSweepDetailCR self, ICurvePrimitiveCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, AddCurveIntersections));
+
+   c6.def("AddCurveIntersections", [](DgnRotationalSweepDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, AddCurveIntersections));
+
     c6.def("ClosestPoint", &DgnRotationalSweepDetail::ClosestPoint, "spacePoint"_a, "pickDetail"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, ClosestPoint));
     c6.def("TryUVFractionToXYZ", &DgnRotationalSweepDetail::TryUVFractionToXYZ, "faceIndices"_a, "uFraction"_a, "vFraction"_a, "xyz"_a, "dXdu"_a, "dXdv"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, TryUVFractionToXYZ));
     c6.def("GetFace", &DgnRotationalSweepDetail::GetFace, "indices"_a, DOC(Bentley, Geom, DgnRotationalSweepDetail, GetFace));
@@ -2220,6 +2528,10 @@ void def_SolidPrimitive(py::module_& m)
     py::class_< DgnRuledSweepDetail> c7(m, "DgnRuledSweepDetail");
 
     c7.def(py::init<CurveVectorArray&, bool>(), "sectionCurves"_a, "capped"_a);
+    c7.def(py::init([](py::list& sectionCurves, bool capped){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(sectionCurves, cppSectionCurves, CurveVectorArray, CurveVectorPtr);
+        return DgnRuledSweepDetail(cppSectionCurves, capped);
+    }), "sectionCurves"_a, "capped"_a);
     c7.def(py::init<CurveVectorPtr, CurveVectorPtr, bool>(), "sectionA"_a, "sectionB"_a, "capped"_a);
     c7.def(py::init<>());
 
@@ -2237,9 +2549,57 @@ void def_SolidPrimitive(py::module_& m)
     c7.def("AddCurveIntersections",
            py::overload_cast<CurveVectorCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnRuledSweepDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, AddCurveIntersections));
+
+    c7.def("AddCurveIntersections", [](DgnRuledSweepDetailCR self, CurveVectorCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, AddCurveIntersections));
+
+    c7.def("AddCurveIntersections", [](DgnRuledSweepDetailCR self, CurveVectorCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, AddCurveIntersections));
+
+    c7.def("AddCurveIntersections", [](DgnRuledSweepDetailCR self, CurveVectorCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, AddCurveIntersections));
+
     c7.def("AddCurveIntersections",
            py::overload_cast<ICurvePrimitiveCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&DgnRuledSweepDetail::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, AddCurveIntersections));
+
+    c7.def("AddCurveIntersections", [](DgnRuledSweepDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, AddCurveIntersections));
+
+   c7.def("AddCurveIntersections", [](DgnRuledSweepDetailCR self, ICurvePrimitiveCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, AddCurveIntersections));
+
+   c7.def("AddCurveIntersections", [](DgnRuledSweepDetailCR self, ICurvePrimitiveCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, AddCurveIntersections));
+
     c7.def("ClosestPoint", &DgnRuledSweepDetail::ClosestPoint, "spacePoint"_a, "pickDetail"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, ClosestPoint));
     c7.def("TryUVFractionToXYZ", &DgnRuledSweepDetail::TryUVFractionToXYZ, "faceIndices"_a, "uFraction"_a, "vFraction"_a, "xyz"_a, "dXdu"_a, "dXdv"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, TryUVFractionToXYZ));
     c7.def("GetFace", &DgnRuledSweepDetail::GetFace, "indices"_a, DOC(Bentley, Geom, DgnRuledSweepDetail, GetFace));
@@ -2307,9 +2667,57 @@ void def_SolidPrimitive(py::module_& m)
     c8.def("AddCurveIntersections",
            py::overload_cast<CurveVectorCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&ISolidPrimitive::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, ISolidPrimitive, AddCurveIntersections));
+
+    c8.def("AddCurveIntersections", [](ISolidPrimitiveCR self, CurveVectorCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, ISolidPrimitive, AddCurveIntersections));
+
+    c8.def("AddCurveIntersections", [](ISolidPrimitiveCR self, CurveVectorCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, ISolidPrimitive, AddCurveIntersections));
+
+    c8.def("AddCurveIntersections", [](ISolidPrimitiveCR self, CurveVectorCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+            CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+            CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+            }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, ISolidPrimitive, AddCurveIntersections));
+
     c8.def("AddCurveIntersections",
            py::overload_cast<ICurvePrimitiveCR, CurveLocationDetailArray&, SolidLocationDetailArray&, MeshAnnotationVector&>(&ISolidPrimitive::AddCurveIntersections, py::const_),
            "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, ISolidPrimitive, AddCurveIntersections));
+
+    c8.def("AddCurveIntersections", [](ISolidPrimitiveCR self, ICurvePrimitiveCR curves, py::list& curvePoints, SolidLocationDetailArray& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, solidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, ISolidPrimitive, AddCurveIntersections));
+
+   c8.def("AddCurveIntersections", [](ISolidPrimitiveCR self, ICurvePrimitiveCR curves, CurveLocationDetailArray& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, curvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, ISolidPrimitive, AddCurveIntersections));
+
+   c8.def("AddCurveIntersections", [](ISolidPrimitiveCR self, ICurvePrimitiveCR curves, py::list& curvePoints, py::list& solidPoints, MeshAnnotationVector& messages)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           self.AddCurveIntersections(curves, cppCurvePoints, cppSolidPoints, messages);
+           CONVERT_CPPARRAY_TO_PYLIST(curvePoints, cppCurvePoints, CurveLocationDetailArray, CurveLocationDetail);
+           CONVERT_CPPARRAY_TO_PYLIST(solidPoints, cppSolidPoints, SolidLocationDetailArray, SolidLocationDetail);
+           }, "curves"_a, "curvePoints"_a, "solidPoints"_a, "messages"_a, DOC(Bentley, Geom, ISolidPrimitive, AddCurveIntersections));
+
     c8.def("ClosestPoint", &ISolidPrimitive::ClosestPoint, "spacePoint"_a, "pickDetail"_a, DOC(Bentley, Geom, ISolidPrimitive, ClosestPoint));
     c8.def("TryUVFractionToXYZ", &ISolidPrimitive::TryUVFractionToXYZ, "faceIndices"_a, "uFraction"_a, "vFraction"_a, "xyz"_a, "dXdu"_a, "dXdv"_a, DOC(Bentley, Geom, ISolidPrimitive, TryUVFractionToXYZ));
     c8.def("GetFace", &ISolidPrimitive::GetFace, "indices"_a, DOC(Bentley, Geom, ISolidPrimitive, GetFace));

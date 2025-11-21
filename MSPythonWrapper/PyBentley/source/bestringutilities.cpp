@@ -150,9 +150,29 @@ void def_BeStringUtilities(py::module_& m)
                   BeStringUtilities::Split(str.GetWCharCP(), delimiters.GetWCharCP(), tokens);
                   }, "str"_a, "delimiters"_a, "tokens"_a, DOC(Bentley, BeStringUtilities, Split), DOC(Bentley, BeStringUtilities, Split));
 
+    c1.def_static("Split", [](WStringCR str, WStringCR delimiters, py::list& tokens)
+                  {
+                  if(tokens.empty()){
+                    throw std::invalid_argument("token cannot be empty.");
+                  }
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(tokens, cppTokens, WStringArray, WString);
+                  BeStringUtilities::Split(str.GetWCharCP(), delimiters.GetWCharCP(), cppTokens);
+                  CONVERT_CPPARRAY_TO_PYLIST(tokens, cppTokens, WStringArray, WString);
+                  }, "str"_a, "delimiters"_a, "tokens"_a, DOC(Bentley, BeStringUtilities, Split), DOC(Bentley, BeStringUtilities, Split));
+
     c1.def_static("Split", [](WStringCR str, WStringCR delimiters, WStringCR escapeChars, WStringArray& tokens)
                   {
-                  BeStringUtilities::Split(str.GetWCharCP(), delimiters.GetWCharCP(), tokens);
+                  BeStringUtilities::Split(str.GetWCharCP(), delimiters.GetWCharCP(), escapeChars.GetWCharCP(), tokens);
+                  }, "str"_a, "delimiters"_a, "escapeChars"_a,"tokens"_a, DOC(Bentley, BeStringUtilities, Split), DOC(Bentley, BeStringUtilities, Split));
+
+    c1.def_static("Split", [](WStringCR str, WStringCR delimiters, WStringCR escapeChars, py::list& tokens)
+                  {
+                  if(tokens.empty()){
+                    throw std::invalid_argument("token cannot be empty.");
+                  }
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(tokens, cppTokens, WStringArray, WString);
+                  BeStringUtilities::Split(str.GetWCharCP(), delimiters.GetWCharCP(), escapeChars.GetWCharCP(), cppTokens);
+                  CONVERT_CPPARRAY_TO_PYLIST(tokens, cppTokens, WStringArray, WString);
                   }, "str"_a, "delimiters"_a, "escapeChars"_a,"tokens"_a, DOC(Bentley, BeStringUtilities, Split), DOC(Bentley, BeStringUtilities, Split));
 
     c1.def_static("Join", &BeStringUtilities::Join, "strings"_a, "delimiter"_a, DOC(Bentley, BeStringUtilities, Join));
@@ -160,6 +180,13 @@ void def_BeStringUtilities(py::module_& m)
     c1.def_static("ParseArguments", [](WStringArray& subStrings, WStringCR inString, WStringCR auxDelimiters)
                   {
                   return BeStringUtilities::ParseArguments(subStrings, inString.GetWCharCP(), auxDelimiters.GetWCharCP());
+                  }, "subStrings"_a, "inString"_a, "auxDelimiters"_a, DOC(Bentley, BeStringUtilities, ParseArguments), DOC(Bentley, BeStringUtilities, ParseArguments));
+
+    c1.def_static("ParseArguments", [](py::list& subStrings, WStringCR inString, WStringCR auxDelimiters)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(subStrings, cppsubStrings, WStringArray, WString)
+                  BeStringUtilities::ParseArguments(cppsubStrings, inString.GetWCharCP(), auxDelimiters.GetWCharCP());
+                  CONVERT_CPPARRAY_TO_PYLIST(subStrings, cppsubStrings, WStringArray, WString)
                   }, "subStrings"_a, "inString"_a, "auxDelimiters"_a, DOC(Bentley, BeStringUtilities, ParseArguments), DOC(Bentley, BeStringUtilities, ParseArguments));
 
     c1.def_static("FormatUInt64", [](WString& dest, UInt64 val, HexFormatOptions opts, UInt8 width, UInt8 precision)

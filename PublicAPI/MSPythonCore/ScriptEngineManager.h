@@ -120,6 +120,8 @@ struct ScriptEngine
      virtual ScriptValuePtr      eval(WCharCP expr, ScriptContext* global = nullptr, ScriptContext* locals = nullptr) = 0;
      virtual void                exec(WCharCP stms, WCharCP funcName, ScriptContext* global = nullptr, ScriptContext* locals = nullptr) = 0;
      virtual void                eval_file(WCharCP fileName, WCharCP funcName, ScriptContext* global = nullptr, ScriptContext* locals = nullptr) = 0;                
+     virtual void                evalPYC(WStringCR pythonFileName, ScriptContext* global = nullptr, ScriptContext* locals = nullptr) = 0;
+
     };
 
 //=======================================================================================

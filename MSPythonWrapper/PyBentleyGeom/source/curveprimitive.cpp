@@ -769,6 +769,12 @@ void def_CurvePrimitive(py::module_& m)
                   py::overload_cast<int, double, double, double, double, TransformCR, double, double, DoubleArray const&>(&ICurvePrimitive::CreateSpiralBearingRadiusBearingRadius),
                   "transitionType"_a, "startRadians"_a, "startRadius"_a, "endRadians"_a, "endRadius"_a, "frame"_a, "fractionA"_a, "fractionB"_a, "extraData"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingRadiusBearingRadius));
 
+    c1.def_static("CreateSpiralBearingRadiusBearingRadius", [](int transitionType, double startRadians, double startRadius, double endRadians, double endRadius, TransformCR frame, double fractionA, double fractionB, py::list const& extraData)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(extraData, cppExtraData, DoubleArray, double); 
+                  return ICurvePrimitive:: CreateSpiralBearingRadiusBearingRadius(transitionType, startRadians, startRadius, endRadians, endRadius, frame, fractionA, fractionB, cppExtraData);
+                  }, "transitionType"_a, "startRadians"_a, "startRadius"_a, "endRadians"_a, "endRadius"_a, "frame"_a, "fractionA"_a, "fractionB"_a, "extraData"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingRadiusBearingRadius));
+
     c1.def_static("CreateSpiralBearingRadiusBearingRadius",
                   py::overload_cast<int, double, double, double, double, TransformCR, double, double>(&ICurvePrimitive::CreateSpiralBearingRadiusBearingRadius),
                   "transitionType"_a, "startRadians"_a, "startRadius"_a, "endRadians"_a, "endRadius"_a, "frame"_a, "fractionA"_a, "fractionB"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingRadiusBearingRadius));
@@ -776,6 +782,13 @@ void def_CurvePrimitive(py::module_& m)
     c1.def_static("CreateSpiralBearingRadiusLengthRadius",
                   py::overload_cast<int, double, double, double, double, TransformCR, double, double, DoubleArray const&>(&ICurvePrimitive::CreateSpiralBearingRadiusLengthRadius),
                   "transitionType"_a, "startRadians"_a, "startRadius"_a, "length"_a, "endRadius"_a, "frame"_a, "fractionA"_a, "fractionB"_a, "extraData"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingRadiusLengthRadius));
+
+    c1.def_static("CreateSpiralBearingRadiusLengthRadius", [](int transitionType, double startRadians, double startRadius, double length, double endRadius, TransformCR frame, double fractionA, double fractionB, py::list const& extraData)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(extraData, cppExtraData, DoubleArray, double); 
+                  return ICurvePrimitive:: CreateSpiralBearingRadiusLengthRadius(transitionType, startRadians, startRadius, length, endRadius, frame, fractionA, fractionB, cppExtraData);
+                  }, "transitionType"_a, "startRadians"_a, "startRadius"_a, "length"_a, "endRadius"_a, "frame"_a, "fractionA"_a, "fractionB"_a, "extraData"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingRadiusLengthRadius));
+
     c1.def_static("CreateSpiralBearingRadiusLengthRadius",
                   py::overload_cast<int, double, double, double, double, TransformCR, double, double>(&ICurvePrimitive::CreateSpiralBearingRadiusLengthRadius),
                   "transitionType"_a, "startRadians"_a, "startRadius"_a, "length"_a, "endRadius"_a, "frame"_a, "fractionA"_a, "fractionB"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingRadiusLengthRadius));
@@ -783,6 +796,12 @@ void def_CurvePrimitive(py::module_& m)
     c1.def_static("CreateSpiralBearingCurvatureLengthCurvature",
                   py::overload_cast<int, double, double, double, double, TransformCR, double, double, DoubleArray const&>(&ICurvePrimitive::CreateSpiralBearingCurvatureLengthCurvature),
                   "transitionType"_a, "startRadians"_a, "startCurvature"_a, "length"_a, "endCurvature"_a, "frame"_a, "fractionA"_a, "fractionB"_a, "extraData"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingCurvatureLengthCurvature));
+
+    c1.def_static("CreateSpiralBearingCurvatureLengthCurvature", [](int transitionType, double startRadians, double startCurvature, double length, double endCurvature, TransformCR frame, double fractionA, double fractionB, py::list const& extraData) -> ICurvePrimitivePtr {
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(extraData, cppExtraData, DoubleArray, double); 
+                    return ICurvePrimitive::CreateSpiralBearingCurvatureLengthCurvature(transitionType, startRadians, startCurvature, length, endCurvature, frame, fractionA, fractionB, cppExtraData);
+                }, "transitionType"_a, "startRadians"_a, "startCurvature"_a, "length"_a, "endCurvature"_a, "frame"_a, "fractionA"_a, "fractionB"_a, "extraData"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingCurvatureLengthCurvature));
+                
     c1.def_static("CreateSpiralBearingCurvatureLengthCurvature",
                   py::overload_cast<int, double, double, double, double, TransformCR, double, double>(&ICurvePrimitive::CreateSpiralBearingCurvatureLengthCurvature),
                   "transitionType"_a, "startRadians"_a, "startCurvature"_a, "length"_a, "endCurvature"_a, "frame"_a, "fractionA"_a, "fractionB"_a, DOC(Bentley, Geom, ICurvePrimitive, CreateSpiralBearingCurvatureLengthCurvature));
@@ -960,8 +979,22 @@ void def_CurvePrimitive(py::module_& m)
            "plane"_a, "intersections"_a, "tolerance"_a = 0.0, DOC(Bentley, Geom, ICurvePrimitive, AppendCurvePlaneIntersections));
 
     c1.def("AppendCurvePlaneIntersections",
+            [](ICurvePrimitiveCR self, DPlane3dCR plane, py::list& pyIntersections, double tolerance = 0.0) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(pyIntersections, intersections, CurveLocationDetailPairArray, CurveLocationDetailPair);
+                self.AppendCurvePlaneIntersections(plane, intersections, tolerance);
+                CONVERT_CPPARRAY_TO_PYLIST(pyIntersections, intersections, CurveLocationDetailPairArray, CurveLocationDetailPair);
+            }, "plane"_a, "intersections"_a, "tolerance"_a = 0.0, DOC(Bentley, Geom, ICurvePrimitive, AppendCurvePlaneIntersections));
+
+    c1.def("AppendCurvePlaneIntersections",
            py::overload_cast<DPlane3dByVectorsCR, UVBoundarySelect, CurveAndSolidLocationDetailArray&>(&ICurvePrimitive::AppendCurvePlaneIntersections, py::const_),
            "plane"_a, "bounded"_a, "intersections"_a, DOC(Bentley, Geom, ICurvePrimitive, AppendCurvePlaneIntersections));
+     
+    c1.def("AppendCurvePlaneIntersections",
+        [](ICurvePrimitiveCR self, DPlane3dByVectorsCR plane, UVBoundarySelect bounded, py::list& pyIntersections) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(pyIntersections, intersections, CurveAndSolidLocationDetailArray, CurveAndSolidLocationDetail);
+            self.AppendCurvePlaneIntersections(plane, bounded, intersections);
+            CONVERT_CPPARRAY_TO_PYLIST(pyIntersections, intersections, CurveAndSolidLocationDetailArray, CurveAndSolidLocationDetail);
+        },  "plane"_a, "bounded"_a, "intersections"_a, DOC(Bentley, Geom, ICurvePrimitive, AppendCurvePlaneIntersections));
 
     c1.def("AppendCurveRangeIntersections", &ICurvePrimitive::AppendCurveRangeIntersections, "range"_a, "intersections"_a, DOC(Bentley, Geom, ICurvePrimitive, AppendCurveRangeIntersections));
 

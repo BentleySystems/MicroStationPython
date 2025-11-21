@@ -538,7 +538,14 @@ void def_DgnECManager(py::module_& m)
            py::overload_cast<DgnModelR, bvector<ECN::IECInstancePtr>&>(&DgnECManager::RemoveECInstancesFromModel),
            "model"_a, "instancesToRemove"_a, DOC(Bentley, DgnPlatform, DgnECManager, RemoveECInstancesFromModel));
 
-
+    c4.def("RemoveECInstancesFromModel", [](DgnECManagerR self, DgnModelR model, py::list& instancesToRemove){
+        bvector<ECN::IECInstancePtr> cppInstancesToRemove;
+        for (const auto& item : instancesToRemove) {
+            cppInstancesToRemove.push_back(item.cast<ECN::IECInstancePtr>());
+        }
+        return self.RemoveECInstancesFromModel(model, cppInstancesToRemove);
+    }, "model"_a, "instancesToRemove"_a, DOC(Bentley, DgnPlatform, DgnECManager, RemoveECInstancesFromModel));
+ 
     c4.def("ImportSchema",
            py::overload_cast<ECN::ECSchemaR, DgnFileR, bool, bool>(&DgnECManager::ImportSchema),
            "schema"_a, "dgnFile"_a, "isExternalSchema"_a = false, "importReferencedSchemas"_a = true);
@@ -561,10 +568,26 @@ void def_DgnECManager(py::module_& m)
            return py::make_tuple(retVal, schema);
            }, "schemaAsXml"_a, "dgnFile"_a, "searchPaths"_a = nullptr, DOC(Bentley, DgnPlatform, DgnECManager, ReadSchemaFromXmlString));
 
+    c4.def("ReadSchemaFromXmlString", [] (DgnECManager& self, WCharCP schemaAsXml, DgnFileP dgnFile, py::list searchPaths)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(searchPaths, cppSearchPaths, bvector<WString>, WString);
+           ECN::ECSchemaPtr schema;
+           auto retVal = self.ReadSchemaFromXmlString(schema, schemaAsXml, dgnFile, &cppSearchPaths);
+           return py::make_tuple(retVal, schema);
+           }, "schemaAsXml"_a, "dgnFile"_a, "searchPaths"_a = nullptr, DOC(Bentley, DgnPlatform, DgnECManager, ReadSchemaFromXmlString));
+
     c4.def("ReadSchemaFromXmlFile", [] (DgnECManager& self, WCharCP ecSchemaXmlFilename, DgnFileP dgnFile, bvector<WString>* searchPaths)
            {
            ECN::ECSchemaPtr schemaHolder;
            auto retVal = self.ReadSchemaFromXmlFile(schemaHolder, ecSchemaXmlFilename, dgnFile, searchPaths);
+           return py::make_tuple(retVal, schemaHolder);
+           }, "ecSchemaXmlFilename"_a, "dgnFile"_a, "searchPaths"_a = nullptr, DOC(Bentley, DgnPlatform, DgnECManager, ReadSchemaFromXmlFile));
+
+    c4.def("ReadSchemaFromXmlFile", [] (DgnECManager& self, WCharCP ecSchemaXmlFilename, DgnFileP dgnFile, py::list searchPaths)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(searchPaths, cppSearchPaths, bvector<WString>, WString);
+           ECN::ECSchemaPtr schemaHolder;
+           auto retVal = self.ReadSchemaFromXmlFile(schemaHolder, ecSchemaXmlFilename, dgnFile, &cppSearchPaths);
            return py::make_tuple(retVal, schemaHolder);
            }, "ecSchemaXmlFilename"_a, "dgnFile"_a, "searchPaths"_a = nullptr, DOC(Bentley, DgnPlatform, DgnECManager, ReadSchemaFromXmlFile));
 

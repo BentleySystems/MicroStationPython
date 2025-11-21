@@ -188,6 +188,12 @@ void def_DgnStoreHandlers(py::module_& m)
                   return TagSetHandler::Create(eeh, &tagDefs[0], numTagDefs, setName, reportName, assignNewIds, file, ownerID);
                   }, "eeh"_a, "tagDefs"_a, "numTagDefs"_a, "setName"_a, "reportName"_a, "assignNewIds"_a, "file"_a, "ownerID"_a = 0);
 
+    c2.def_static("Create", [] (EditElementHandleR eeh, py::list& tagDefs, UInt32 numTagDefs, WCharCP setName, WCharCP reportName, bool assignNewIds, DgnFileR file, int ownerID)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(tagDefs, cppTagDefs, bvector<DgnTagDefinition>, DgnTagDefinition);
+                  return TagSetHandler::Create(eeh, &cppTagDefs[0], numTagDefs, setName, reportName, assignNewIds, file, ownerID);
+                  }, "eeh"_a, "tagDefs"_a, "numTagDefs"_a, "setName"_a, "reportName"_a, "assignNewIds"_a, "file"_a, "ownerID"_a = 0);
+
     c2.def_static("GetByID", &TagSetHandler::GetByID, "eeh"_a, "uniqueId"_a, "dgnFile"_a, DOC(Bentley, DgnPlatform, TagSetHandler, GetByID));
 
     c2.def_property_readonly_static("Instance", [] (py::object const&) { return std::unique_ptr<TagSetHandler, py::nodelete>(&TagSetHandler::GetInstance()); });

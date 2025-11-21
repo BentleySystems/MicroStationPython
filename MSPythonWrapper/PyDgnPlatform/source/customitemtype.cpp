@@ -411,9 +411,10 @@ void def_CustomItemType(py::module_& m)
 
     c1.def("SupportsCustomType", &CustomProperty::SupportsCustomType, DOC(Bentley, DgnPlatform, CustomProperty, SupportsCustomType));    
     
-    c1.def_property("Name", &CustomProperty::GetName, &CustomProperty::SetName);
+    c1.def_property("Name", [](const CustomProperty& self) { return self.GetName(); }, [](CustomProperty& self, const WCharCP name) { self.SetName(name); });
     c1.def("GetName", &CustomProperty::GetName, py::return_value_policy::reference_internal, DOC(Bentley, DgnPlatform, CustomProperty, GetName));
-    c1.def("SetName", &CustomProperty::SetName, "name"_a, DOC(Bentley, DgnPlatform, CustomProperty, SetName));
+    c1.def("SetName", py::overload_cast<WCharCP>(&CustomProperty::SetName), "name"_a, DOC(Bentley, DgnPlatform, CustomProperty, SetName));
+    c1.def("SetName", py::overload_cast<WCharCP, bool>(&CustomProperty::SetName), "name"_a, "updateRefProperties"_a, DOC(Bentley, DgnPlatform, CustomProperty, SetName));
     
     c1.def_property("Array", &CustomProperty::IsArray, &CustomProperty::SetIsArray);
     c1.def("IsArray", &CustomProperty::IsArray, DOC(Bentley, DgnPlatform, CustomProperty, IsArray));
