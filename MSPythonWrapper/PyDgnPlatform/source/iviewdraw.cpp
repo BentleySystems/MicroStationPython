@@ -431,6 +431,28 @@ void def_IViewDraw(py::module_& m)
            self.SetKeys((UInt16) nItem, colors.data(), values.data());
            }, "colors"_a, "values"_a, DOC(Bentley, DgnPlatform, GradientSymb, SetKeys));
 
+    c2.def("SetKeys", [] (GradientSymb& self, bvector< RgbColorDef> const& colors, py::list const& values)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(values, cppValues, DoubleArray, double);
+           size_t nItem = __min(colors.size(), cppValues.size());
+           self.SetKeys((UInt16) nItem, colors.data(), cppValues.data());
+           }, "colors"_a, "values"_a, DOC(Bentley, DgnPlatform, GradientSymb, SetKeys));
+
+    c2.def("SetKeys", [] (GradientSymb& self, py::list const& colors, DoubleArray const& values)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(colors, cppColors, bvector<RgbColorDef>, RgbColorDef);
+           size_t nItem = __min(cppColors.size(), values.size());
+           self.SetKeys((UInt16) nItem, cppColors.data(), values.data());
+           }, "colors"_a, "values"_a, DOC(Bentley, DgnPlatform, GradientSymb, SetKeys));
+
+    c2.def("SetKeys", [] (GradientSymb& self, py::list const& colors, py::list const& values)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(colors, cppColors, bvector<RgbColorDef>, RgbColorDef);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(values, cppValues, DoubleArray, double);
+           size_t nItem = __min(cppColors.size(), cppValues.size());
+           self.SetKeys((UInt16) nItem, cppColors.data(), cppValues.data());
+           }, "colors"_a, "values"_a, DOC(Bentley, DgnPlatform, GradientSymb, SetKeys));
+
     //===================================================================================
     // struct QVAliasMaterialId
     py::class_< QVAliasMaterialId, QVAliasMaterialIdPtr> c3(m, "QVAliasMaterialId");
@@ -803,6 +825,12 @@ void def_IViewDraw(py::module_& m)
             self.DrawLineString2d((int)points.size(), points.data(), zDepth, range);
             }, "points"_a, "zDepth"_a, "range"_a);
 
+    c14.def("DrawLineString2d", [] (IDrawGeom& self, py::list const& points, double zDepth, DPoint2dCP range)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+            self.DrawLineString2d((int)cppPoints.size(), cppPoints.data(), zDepth, range);
+            }, "points"_a, "zDepth"_a, "range"_a);
+
     c14.def("DrawPointString3d", [] (IDrawGeom& self, DPoint3dArray const& points, DPoint3dCP range)
             {
             self.DrawPointString3d((int)points.size(), points.data(), range);
@@ -819,6 +847,12 @@ void def_IViewDraw(py::module_& m)
             self.DrawPointString2d((int) points.size(), points.data(), zDepth, range);
             }, "points"_a, "zDepth"_a, "range"_a);
 
+    c14.def("DrawPointString2d", [] (IDrawGeom& self, py::list const& points, double zDepth, DPoint2dCP range)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+            self.DrawPointString2d((int) cppPoints.size(), cppPoints.data(), zDepth, range);
+            }, "points"_a, "zDepth"_a, "range"_a);
+
     c14.def("DrawShape3d", [] (IDrawGeom& self, DPoint3dArray const& points, bool filled, DPoint3dCP range)
             {
             self.DrawShape3d((int) points.size(), points.data(), filled, range);
@@ -833,6 +867,12 @@ void def_IViewDraw(py::module_& m)
     c14.def("DrawShape2d", [] (IDrawGeom& self, DPoint2dArray const& points, bool filled, double zDepth, DPoint2dCP range)
             {
             self.DrawShape2d((int) points.size(), points.data(), filled, zDepth, range);
+            }, "points"_a, "filled"_a, "zDepth"_a, "range"_a);
+
+    c14.def("DrawShape2d", [] (IDrawGeom& self, py::list const& points, bool filled, double zDepth, DPoint2dCP range)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+            self.DrawShape2d((int) cppPoints.size(), cppPoints.data(), filled, zDepth, range);
             }, "points"_a, "filled"_a, "zDepth"_a, "range"_a);
 
     c14.def("DrawArc3d", &IDrawGeom::DrawArc3d, "ellipse"_a, "isEllipse"_a, "filled"_a, "range"_a);

@@ -182,6 +182,13 @@ void def_PointCloudClipHandler(py::module_& m)
            py::overload_cast<PointCloudPropertiesCR, DPoint3dVecArray&>(&PointCloudClipProperties::GetClipMaskList, py::const_), 
            "props"_a, "clipPolygonList"_a, DOC(Bentley, DgnPlatform, PointCloudClipProperties, GetClipMaskList));
 
+    c2.def("GetClipMaskList", [](PointCloudClipPropertiesCR self, PointCloudPropertiesCR props, py::list& clipPolygonList){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(clipPolygonList, cppClipPolygonList, DPoint3dVecArray, DPoint3dArray);
+        auto result = self.GetClipMaskList(props, cppClipPolygonList);
+        CONVERT_CPPARRAY_TO_PYLIST(clipPolygonList, cppClipPolygonList, DPoint3dVecArray, DPoint3dArray);
+        return result;
+    }, "props"_a, "clipPolygonList"_a, DOC(Bentley, DgnPlatform, PointCloudClipProperties, GetClipMaskList));
+
     c2.def("SetClipMaskList", 
            py::overload_cast<PointCloudPropertiesCR, OrientedBoxListCR>(&PointCloudClipProperties::SetClipMaskList),
            "props"_a, "clipBoxList"_a, DOC(Bentley, DgnPlatform, PointCloudClipProperties, SetClipMaskList));
@@ -189,6 +196,11 @@ void def_PointCloudClipHandler(py::module_& m)
     c2.def("SetClipMaskList",
            py::overload_cast<PointCloudPropertiesCR, DPoint3dVecArray const&>(&PointCloudClipProperties::SetClipMaskList), 
            "props"_a, "clipPolygonList"_a, DOC(Bentley, DgnPlatform, PointCloudClipProperties, SetClipMaskList));
+
+    c2.def("SetClipMaskList", [](PointCloudClipPropertiesR self, PointCloudPropertiesCR props, py::list const& clipPolygonList){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(clipPolygonList, cppClipPolygonList, DPoint3dVecArray, DPoint3dArray);
+        self.SetClipMaskList(props, cppClipPolygonList);
+    }, "props"_a, "clipPolygonList"_a, DOC(Bentley, DgnPlatform, PointCloudClipProperties, SetClipMaskList));
 
     c2.def("ClearAllClip", &PointCloudClipProperties::ClearAllClip, DOC(Bentley, DgnPlatform, PointCloudClipProperties, ClearAllClip));
 

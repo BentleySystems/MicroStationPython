@@ -162,19 +162,44 @@ void def_ClipPlane(py::module_& m)
     c1.def("ConvexPolygonClipInPlace", [](ClipPlaneCR self, py::list& xyz, py::list const& work, int onPlaneHandling)
         {
         CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppwork, DPoint3dArray, DPoint3d);
-        DPoint3dArray cppxyz;
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
         self.ConvexPolygonClipInPlace(cppxyz, cppwork, onPlaneHandling);
+        CONVERT_CPPARRAY_TO_PYLIST(xyz, cppxyz, DPoint3dArray, DPoint3d);
+        }, "xyz"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
+
+    c1.def("ConvexPolygonClipInPlace", [](ClipPlaneCR self, DPoint3dArray& xyz, py::list const& work, int onPlaneHandling)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppwork, DPoint3dArray, DPoint3d);
+        self.ConvexPolygonClipInPlace(xyz, cppwork, onPlaneHandling);
+        }, "xyz"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
+
+    c1.def("ConvexPolygonClipInPlace", [](ClipPlaneCR self, py::list& xyz, DPoint3dArray& work, int onPlaneHandling)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+        self.ConvexPolygonClipInPlace(cppxyz, work, onPlaneHandling);
         CONVERT_CPPARRAY_TO_PYLIST(xyz, cppxyz, DPoint3dArray, DPoint3d);
         }, "xyz"_a, "work"_a, "onPlaneHandling"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
 
     c1.def("ConvexPolygonClipInPlace", [](ClipPlaneCR self, py::list& xyz, py::list const& work)
         {
         CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppwork, DPoint3dArray, DPoint3d);
-        DPoint3dArray cppxyz;
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
         self.ConvexPolygonClipInPlace(cppxyz, cppwork);
         CONVERT_CPPARRAY_TO_PYLIST(xyz, cppxyz, DPoint3dArray, DPoint3d);
         },"xyz"_a, "work"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
 
+    c1.def("ConvexPolygonClipInPlace", [](ClipPlaneCR self, DPoint3dArray& xyz, py::list const& work)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(work, cppwork, DPoint3dArray, DPoint3d);
+        self.ConvexPolygonClipInPlace(xyz, cppwork);
+        },"xyz"_a, "work"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
+
+    c1.def("ConvexPolygonClipInPlace", [](ClipPlaneCR self, py::list& xyz, DPoint3dArray& work)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+        self.ConvexPolygonClipInPlace(cppxyz, work);
+        CONVERT_CPPARRAY_TO_PYLIST(xyz, cppxyz, DPoint3dArray, DPoint3d);
+        },"xyz"_a, "work"_a, DOC(Bentley, Geom, ClipPlane, ConvexPolygonClipInPlace));
 
     c1.def("PolygonCrossings", &ClipPlane::PolygonCrossings, "xyz"_a, "crossings"_a, DOC(Bentley, Geom, ClipPlane, PolygonCrossings));
 

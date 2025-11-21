@@ -1929,9 +1929,35 @@ void def_Polyface(py::module_& m)
                   py::overload_cast<PolyfaceQueryR, PolyfaceQueryR, PolyfaceHeaderArray&>(&PolyfaceQuery::MergeAndCollectVolumes),
                   "meshA"_a, "meshB"_a, "enclosedVolumes"_a);
 
+    c9.def_static("MergeAndCollectVolumes", [](PolyfaceQueryR meshA, PolyfaceQueryR meshB, py::list& enclosedVolumes) {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(enclosedVolumes, cppEnclosedVolumes, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                  PolyfaceQuery::MergeAndCollectVolumes(meshA, meshB, cppEnclosedVolumes);
+                  CONVERT_CPPARRAY_TO_PYLIST(enclosedVolumes, cppEnclosedVolumes, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                }, "meshA"_a, "meshB"_a, "enclosedVolumes"_a);
+                
     c9.def_static("MergeAndCollectVolumes",
                   py::overload_cast<PolyfaceHeaderArray&, PolyfaceHeaderArray&>(&PolyfaceQuery::MergeAndCollectVolumes),
                   "inputMesh"_a, "enclosedVolumes"_a);
+
+    c9.def_static("MergeAndCollectVolumes", [](py::list& inputMesh, PolyfaceHeaderArray& enclosedVolumes) {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(inputMesh, cppInputMesh, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                  PolyfaceQuery::MergeAndCollectVolumes(cppInputMesh, enclosedVolumes);
+                  CONVERT_CPPARRAY_TO_PYLIST(inputMesh, cppInputMesh, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                }, "inputMesh"_a, "enclosedVolumes"_a);
+
+    c9.def_static("MergeAndCollectVolumes", [](PolyfaceHeaderArray& inputMesh, py::list& enclosedVolumes) {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(enclosedVolumes, cppEnclosedVolumes, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                  PolyfaceQuery::MergeAndCollectVolumes(inputMesh, cppEnclosedVolumes);
+                  CONVERT_CPPARRAY_TO_PYLIST(enclosedVolumes, cppEnclosedVolumes, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                }, "inputMesh"_a, "enclosedVolumes"_a);
+
+    c9.def_static("MergeAndCollectVolumes", [](py::list& inputMesh, py::list& enclosedVolumes) {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(inputMesh, cppInputMesh, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(enclosedVolumes, cppEnclosedVolumes, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                  PolyfaceQuery::MergeAndCollectVolumes(cppInputMesh, cppEnclosedVolumes);
+                  CONVERT_CPPARRAY_TO_PYLIST(enclosedVolumes, cppEnclosedVolumes, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                  CONVERT_CPPARRAY_TO_PYLIST(inputMesh, cppInputMesh, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+                }, "inputMesh"_a, "enclosedVolumes"_a);
 
     c9.def_static("SelectMeshesByVolumeSign", &PolyfaceQuery::SelectMeshesByVolumeSign,
                   "inputVolumes"_a, "negativeVolumeMeshes"_a, "zeroVolumeMeshes"_a, "positiveVolumeMeshes"_a);
@@ -2137,6 +2163,79 @@ void def_Polyface(py::module_& m)
             CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
             return self.AddPolygon(cppxyz, normal, param);   
             }, "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, DPoint3dArray const& xyz, DVec3dArray const* normal, py::list const* param)
+            {
+            if (param) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(*param, cppParam, DPoint2dArray, DPoint2d);
+                return self.AddPolygon(xyz, normal, &cppParam);
+            } else {
+                return self.AddPolygon(xyz, normal, nullptr);
+            } 
+            }, "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, py::list const& xyz, DVec3dArray const* normal, py::list const* param)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+            if (param) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(*param, cppParam, DPoint2dArray, DPoint2d);
+                return self.AddPolygon(cppxyz, normal, &cppParam);
+            } else {
+                return self.AddPolygon(cppxyz, normal, nullptr);
+            }  
+            }, "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
+
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, DPoint3dArray const &xyz, py::list const *normal, DPoint2dArray const *param)
+            {
+        if (normal) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(*normal, cppNormal, DVec3dArray, DVec3d);
+            return self.AddPolygon(xyz, &cppNormal, param);
+        } else {
+            return self.AddPolygon(xyz, nullptr, param);
+        } }, "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
+
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, py::list const &xyz, py::list const *normal, DPoint2dArray const *param)
+            {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+        if (normal) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(*normal, cppNormal, DVec3dArray, DVec3d);
+            return self.AddPolygon(cppxyz, &cppNormal, param);
+        } else {
+            return self.AddPolygon(cppxyz, nullptr, param);
+        } }, "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
+
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, DPoint3dArray const &xyz, py::list const *normal, py::list const *param)
+            {
+        DVec3dArray cppNormal;
+        DPoint2dArray cppParam;
+        DVec3dArray* normalPtr = nullptr;
+        DPoint2dArray* paramPtr = nullptr;
+    
+        if (normal) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(*normal, cppNormal, DVec3dArray, DVec3d);
+            normalPtr = &cppNormal;
+        }
+        if (param) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(*param, cppParam, DPoint2dArray, DPoint2d);
+            paramPtr = &cppParam;
+        }
+        return self.AddPolygon(xyz, normalPtr, paramPtr); }, "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
+
+    c13.def("AddPolygon", [](PolyfaceHeaderR self, py::list const &xyz, py::list const *normal, py::list const *param)
+            {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+        DVec3dArray cppNormal;
+        DPoint2dArray cppParam;
+        DVec3dArray* normalPtr = nullptr;
+        DPoint2dArray* paramPtr = nullptr;
+    
+        if (normal) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(*normal, cppNormal, DVec3dArray, DVec3d);
+            normalPtr = &cppNormal;
+        }
+        if (param) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(*param, cppParam, DPoint2dArray, DPoint2d);
+            paramPtr = &cppParam;
+        }
+        return self.AddPolygon(cppxyz, normalPtr, paramPtr); }, "xyz"_a, "normal"_a = nullptr, "param"_a = nullptr);
 
     c13.def("AddPolygon",
             py::overload_cast<DPoint3dArray const&, PolyfaceVisitorR, IndexedParameterMap const&>(&PolyfaceHeader::AddPolygon),
@@ -2183,6 +2282,12 @@ void def_Polyface(py::module_& m)
             py::overload_cast<size_t, size_t, PolyfaceHeaderArray&>(&PolyfaceHeader::PartitionByXYRange),
             "targetFaceCount"_a, "targetMeshCount"_a, "submeshArray"_a);
 
+    c13.def("PartitionByXYRange", [](PolyfaceHeaderR self, size_t targetFaceCount, size_t targetMeshCount, py::list &submeshArrayList) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(submeshArrayList, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            bool result = self.PartitionByXYRange(targetFaceCount, targetMeshCount, cppSubmeshArray);
+            CONVERT_CPPARRAY_TO_PYLIST(submeshArrayList, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            return result; }, "targetFaceCount"_a, "targetMeshCount"_a, "submeshArray"_a);
+
     c13.def("PartitionByXYRange",
             py::overload_cast<size_t, size_t, Int64Array&>(&PolyfaceHeader::PartitionByXYRange),
             "targetFaceCount"_a, "targetMeshCount"_a, "blockedReadIndexArray"_a);
@@ -2191,6 +2296,12 @@ void def_Polyface(py::module_& m)
             py::overload_cast<size_t, size_t, PolyfaceHeaderArray&>(&PolyfaceHeader::PartitionMaintainFaceOrder),
             "targetFaceCount"_a, "targetMeshCount"_a, "submeshArray"_a);
 
+    c13.def("PartitionMaintainFaceOrder", [](PolyfaceHeaderR self, size_t targetFaceCount, size_t targetMeshCount, py::list &submeshArray) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(submeshArray, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            bool result = self.PartitionMaintainFaceOrder(targetFaceCount, targetMeshCount, cppSubmeshArray);
+            CONVERT_CPPARRAY_TO_PYLIST(submeshArray, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            return result; }, "targetFaceCount"_a, "targetMeshCount"_a, "submeshArray"_a);
+
     c13.def("PartitionMaintainFaceOrder",
             py::overload_cast<size_t, size_t, Int64Array&>(&PolyfaceHeader::PartitionMaintainFaceOrder),
             "targetFaceCount"_a, "targetMeshCount"_a, "blockedReadIndexArray"_a);
@@ -2198,6 +2309,12 @@ void def_Polyface(py::module_& m)
     c13.def("PartitionByConnectivity",
             py::overload_cast<int, PolyfaceHeaderArray&>(&PolyfaceHeader::PartitionByConnectivity, py::const_),
             "connectivityType"_a, "submeshArray"_a);
+
+    c13.def("PartitionByConnectivity", [](PolyfaceHeaderCR self, int connectivityType, py::list& submeshArray){
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(submeshArray, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            bool result = self.PartitionByConnectivity(connectivityType, cppSubmeshArray);
+            CONVERT_CPPARRAY_TO_PYLIST(submeshArray, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            return result; }, "connectivityType"_a, "submeshArray"_a);
 
     c13.def("PartitionByConnectivity",
             py::overload_cast<int, Int64Array&>(&PolyfaceHeader::PartitionByConnectivity, py::const_),
@@ -2210,9 +2327,23 @@ void def_Polyface(py::module_& m)
             py::overload_cast<Int64Array&, PolyfaceHeaderArray&>(&PolyfaceHeader::CopyPartitions, py::const_),
             "blockedReadIndex"_a, "submeshArray"_a);
 
+    c13.def("CopyPartitions", [](PolyfaceHeaderCR self, Int64Array& blockedReadIndex, py::list& submeshArray) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(submeshArray, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            bool result = self.CopyPartitions(blockedReadIndex, cppSubmeshArray);
+            CONVERT_CPPARRAY_TO_PYLIST(submeshArray, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            return result;
+        }, "blockedReadIndex"_a, "submeshList"_a);
+            
     c13.def("CopyPartitions",
             py::overload_cast<Int64VecArray&, PolyfaceHeaderArray&>(&PolyfaceHeader::CopyPartitions, py::const_),
             "blockedReadIndex"_a, "submeshArray"_a);
+
+    c13.def("CopyPartitions", [](PolyfaceHeaderCR self, Int64VecArray& blockedReadIndex, py::list& submeshArray) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(submeshArray, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            bool result = self.CopyPartitions(blockedReadIndex, cppSubmeshArray);
+            CONVERT_CPPARRAY_TO_PYLIST(submeshArray, cppSubmeshArray, PolyfaceHeaderArray, PolyfaceHeaderPtr);
+            return result;
+        }, "blockedReadIndex"_a, "submeshArray"_a);
 
     c13.def("IsPlanarWithinSuperfacets", &PolyfaceHeader::IsPlanarWithinSuperfacets, "tolerance"_a = -1.0, DOC(Bentley, Geom, PolyfaceHeader, IsPlanarWithinSuperfacets));
     c13.def_static("SelectBlockedIndices", &PolyfaceHeader::SelectBlockedIndices, "blockedReadIndex"_a, "selectedReadIndex"_a, "keepIfSelected"_a, "blockedReadIndexOut"_a, DOC(Bentley, Geom, PolyfaceHeader, SelectBlockedIndices));

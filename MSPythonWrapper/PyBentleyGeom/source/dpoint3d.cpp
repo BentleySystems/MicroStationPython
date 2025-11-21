@@ -1003,16 +1003,68 @@ void def_DPoint3d(py::module_& m)
         DPoint3d::MultiplyArrayByScales(outPoints.data(), inPoints.data(), scales.data(), (int) scales.size());            
         }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
 
-    c1.def_static("MultiplyArrayByScales", [] (py::list& outPoints, py::list const& inPoints, DoubleArray& scales)
-        {
-        if (outPoints.size() != inPoints.size() || inPoints.size() != scales.size() || scales.empty())
-            return;
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
-        DPoint3d::MultiplyArrayByScales(cppOutPoints.data(), cppInPoints.data(), scales.data(), (int) scales.size());   
-        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints,  DPoint3dArray, DPoint3d);         
+    c1.def_static("MultiplyArrayByScales", [] (py::list& outList, DPoint3dArray const& inPoints, DoubleArray& scales) {
+            if (outList.size() != inPoints.size() || inPoints.size() != scales.size() || scales.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outList, cppOut, DPoint3dArray, DPoint3d);
+            DPoint3d::MultiplyArrayByScales(cppOut.data(), inPoints.data(), scales.data(), (int)scales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outList, cppOut, DPoint3dArray, DPoint3d);
         }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
-
+    
+    c1.def_static("MultiplyArrayByScales", [] (DPoint3dArray& outPoints, py::list const& inList, DoubleArray& scales) {
+            if (outPoints.size() != inList.size() || inList.size() != scales.size() || scales.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inList, cppIn, DPoint3dArray, DPoint3d);
+            DPoint3d::MultiplyArrayByScales(outPoints.data(), cppIn.data(), scales.data(), (int)scales.size());
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
+    
+    c1.def_static("MultiplyArrayByScales", [] (DPoint3dArray& outPoints, DPoint3dArray const& inPoints, py::list& scaleList) {
+            if (outPoints.size() != inPoints.size() || inPoints.size() != scaleList.size() || scaleList.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(scaleList, cppScales, DoubleArray, double);
+            DPoint3d::MultiplyArrayByScales(outPoints.data(), inPoints.data(), cppScales.data(), (int)cppScales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(scaleList, cppScales, DoubleArray, double);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
+    
+    c1.def_static("MultiplyArrayByScales", [] (py::list& outList, py::list const& inList, DoubleArray& scales) {
+            if (outList.size() != inList.size() || inList.size() != scales.size() || scales.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inList, cppIn, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outList, cppOut, DPoint3dArray, DPoint3d);
+            DPoint3d::MultiplyArrayByScales(cppOut.data(), cppIn.data(), scales.data(), (int)scales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outList, cppOut, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
+    
+    c1.def_static("MultiplyArrayByScales", [] (py::list& outList, DPoint3dArray const& inPoints, py::list& scaleList) {
+            if (outList.size() != inPoints.size() || inPoints.size() != scaleList.size() || scaleList.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(scaleList, cppScales, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outList, cppOut, DPoint3dArray, DPoint3d);
+            DPoint3d::MultiplyArrayByScales(cppOut.data(), inPoints.data(), cppScales.data(), (int)cppScales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outList, cppOut, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(scaleList, cppScales, DoubleArray, double);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
+    
+    c1.def_static("MultiplyArrayByScales", [] (DPoint3dArray& outPoints, py::list const& inList, py::list& scaleList) {
+            if (outPoints.size() != inList.size() || inList.size() != scaleList.size() || scaleList.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inList, cppIn, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(scaleList, cppScales, DoubleArray, double);
+            DPoint3d::MultiplyArrayByScales(outPoints.data(), cppIn.data(), cppScales.data(), (int)cppScales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(scaleList, cppScales, DoubleArray, double);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
+    
+    c1.def_static("MultiplyArrayByScales", [] (py::list outList, py::list inList, py::list scaleList) {
+            if (outList.size() != inList.size() || inList.size() != scaleList.size() || scaleList.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inList, cppIn, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(scaleList, cppScales, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outList, cppOut, DPoint3dArray, DPoint3d);
+            DPoint3d::MultiplyArrayByScales(cppOut.data(), cppIn.data(), cppScales.data(), (int)cppScales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outList, cppOut, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(scaleList, cppScales, DoubleArray, double);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, MultiplyArrayByScales));
+    
     c1.def_static("DivideArrayByScales", [] (DPoint3dArray& outPoints, DPoint3dArray const& inPoints, DoubleArray& scales)
         {
         if (outPoints.size() != inPoints.size() || inPoints.size() != scales.size() || scales.empty())
@@ -1021,17 +1073,68 @@ void def_DPoint3d(py::module_& m)
         DPoint3d::DivideArrayByScales(outPoints.data(), inPoints.data(), scales.data(), (int) scales.size());
         }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
 
-    c1.def_static("DivideArrayByScales", [] (py::list& outPoints, py::list const& inPoints, DoubleArray& scales)
-        {
-        if (outPoints.size() != inPoints.size() || inPoints.size() != scales.size() || scales.empty())
-            return;
-
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
-
-        DPoint3d::DivideArrayByScales(cppOutPoints.data(), cppInPoints.data(), scales.data(), (int) scales.size());
-        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints,  DPoint3dArray, DPoint3d);
+    c1.def_static("DivideArrayByScales", [] (py::list& outList, DPoint3dArray const& inPoints, DoubleArray& scales) {
+            if (outList.size() != inPoints.size() || inPoints.size() != scales.size() || scales.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outList, cppOut, DPoint3dArray, DPoint3d);
+            DPoint3d::DivideArrayByScales(cppOut.data(), inPoints.data(), scales.data(), (int)scales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outList, cppOut, DPoint3dArray, DPoint3d);
         }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
+    
+    c1.def_static("DivideArrayByScales", [] (DPoint3dArray& outPoints, py::list const& inList, DoubleArray& scales) {
+            if (outPoints.size() != inList.size() || inList.size() != scales.size() || scales.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inList, cppIn, DPoint3dArray, DPoint3d);
+            DPoint3d::DivideArrayByScales(outPoints.data(), cppIn.data(), scales.data(), (int)scales.size());
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
+    
+    c1.def_static("DivideArrayByScales", [] (DPoint3dArray& outPoints, DPoint3dArray const& inPoints, py::list& scaleList) {
+            if (outPoints.size() != inPoints.size() || inPoints.size() != scaleList.size() || scaleList.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(scaleList, cppScales, DoubleArray, double);
+            DPoint3d::DivideArrayByScales(outPoints.data(), inPoints.data(), cppScales.data(), (int)cppScales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(scaleList, cppScales, DoubleArray, double);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
+    
+    c1.def_static("DivideArrayByScales", [] (py::list& outList, py::list const& inList, DoubleArray& scales) {
+            if (outList.size() != inList.size() || inList.size() != scales.size() || scales.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inList, cppIn, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outList, cppOut, DPoint3dArray, DPoint3d);
+            DPoint3d::DivideArrayByScales(cppOut.data(), cppIn.data(), scales.data(), (int)scales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outList, cppOut, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
+    
+    c1.def_static("DivideArrayByScales", [] (py::list& outList, DPoint3dArray const& inPoints, py::list& scaleList) {
+            if (outList.size() != inPoints.size() || inPoints.size() != scaleList.size() || scaleList.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(scaleList, cppScales, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outList, cppOut, DPoint3dArray, DPoint3d);
+            DPoint3d::DivideArrayByScales(cppOut.data(), inPoints.data(), cppScales.data(), (int)cppScales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outList, cppOut, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(scaleList, cppScales, DoubleArray, double);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
+    
+    c1.def_static("DivideArrayByScales", [] (DPoint3dArray& outPoints, py::list const& inList, py::list& scaleList) {
+            if (outPoints.size() != inList.size() || inList.size() != scaleList.size() || scaleList.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inList, cppIn, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(scaleList, cppScales, DoubleArray, double);
+            DPoint3d::DivideArrayByScales(outPoints.data(), cppIn.data(), cppScales.data(), (int)cppScales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(scaleList, cppScales, DoubleArray, double);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
+    
+    c1.def_static("DivideArrayByScales", [] (py::list outList, py::list inList, py::list scaleList) {
+            if (outList.size() != inList.size() || inList.size() != scaleList.size() || scaleList.empty())
+                return;
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inList, cppIn, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(scaleList, cppScales, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outList, cppOut, DPoint3dArray, DPoint3d);
+            DPoint3d::DivideArrayByScales(cppOut.data(), cppIn.data(), cppScales.data(), (int)cppScales.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outList, cppOut, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(scaleList, cppScales, DoubleArray, double);
+        }, "outPoints"_a, "inPoints"_a, "scales"_a, DOC(Bentley, Geom, DPoint3d, DivideArrayByScales));
+
     c1.def_static("FromProduct", py::overload_cast<TransformCR, double, double, double>(&DPoint3d::FromProduct), "transform"_a, "x"_a, "y"_a, "z"_a, DOC(Bentley, Geom, DPoint3d, FromProduct));
     c1.def_static("FromProduct", py::overload_cast<TransformCR, DPoint3dCR>(&DPoint3d::FromProduct), "transform"_a, "point"_a, DOC(Bentley, Geom, DPoint3d, FromProduct));
     c1.def_static("FromInterpolate", &DPoint3d::FromInterpolate, "pointA"_a, "fraction"_a, "pointB"_a, DOC(Bentley, Geom, DPoint3d, FromInterpolate));

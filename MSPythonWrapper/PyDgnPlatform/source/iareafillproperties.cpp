@@ -48,6 +48,14 @@ void def_IAreaFillProperties(py::module_& m)
            return py::make_tuple(retVal, params);
            }, "eh"_a, "hatchDefLines"_a, "origin"_a, "index"_a);
 
+    c1.def("GetPattern", [] (IAreaFillPropertiesQuery const& self, ElementHandleCR eh, py::list hatchDefLinesP, DPoint3dP originP, int index)
+           {
+           PatternParamsPtr params;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(hatchDefLinesP, hatchDefLines, bvector<DwgHatchDefLine>, DwgHatchDefLine);
+           auto retVal = self.GetPattern(eh, params, &hatchDefLines, originP, index);
+           return py::make_tuple(retVal, params);
+           }, "eh"_a, "hatchDefLines"_a, "origin"_a, "index"_a);
+
     //===================================================================================
     // struct IAreaFillPropertiesEdit
     py::class_< IAreaFillPropertiesEdit, std::unique_ptr< IAreaFillPropertiesEdit, py::nodelete>, IAreaFillPropertiesQuery> c2(m, "IAreaFillPropertiesEdit");

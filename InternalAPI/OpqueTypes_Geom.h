@@ -51,3 +51,5 @@ DEFINE_BVECTOR_TYPE(FloatRgb, FloatRgbArray);
 DEFINE_BVECTOR_TYPE(RgbFactor, RgbFactorArray);
 DEFINE_BVECTOR_TYPE(FacetFaceData, FacetFaceDataArray);
 DEFINE_BVECTOR_TYPE(PolyfaceEdgeChain, PolyfaceEdgeChainArray);
+DEFINE_BVECTOR_TYPE(GeoPoint, GeoPointArray);
+DEFINE_BVECTOR_TYPE(GeoPoint2d, GeoPoint2dArray);

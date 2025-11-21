@@ -454,8 +454,18 @@ void def_MSBsplineSurface(py::module_& m)
     c1.def("AddTrimBoundary", py::overload_cast<DPoint3dArray const&>(&MSBsplineSurface::AddTrimBoundary), "xyzPoints"_a, DOC(Bentley, Geom, MSBsplineSurface, AddTrimBoundary));
     c1.def("AddTrimBoundary", [] (MSBsplineSurfaceR self, py::list const& xyzPoints)
            {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzPoints, cppxyzPoints, DPoint3dArray, DPoint3d);
-           return self.AddTrimBoundary(cppxyzPoints);
+              if(xyzPoints.empty()){
+                     return self.AddTrimBoundary(DPoint3dArray());
+              }
+              else if(py::isinstance<DPoint3d>(xyzPoints[0])){
+                     CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzPoints, cppxyzPoints, DPoint3dArray, DPoint3d);
+                     return self.AddTrimBoundary(cppxyzPoints);
+              }else if(py::isinstance<DPoint2d>(xyzPoints[0])){
+                     CONVERT_PYLIST_TO_NEW_CPPARRAY(xyzPoints, cppxyzPoints, DPoint2dArray, DPoint2d);
+                     return self.AddTrimBoundary(cppxyzPoints);
+              }else{
+                     throw std::invalid_argument("Unsupported point type in list. Expected DPoint2d or DPoint3d.");
+              }
            }, "xyzPoints"_a, DOC(Bentley, Geom, MSBsplineSurface, AddTrimBoundary));
     c1.def("DeleteBoundaries", &MSBsplineSurface::DeleteBoundaries, DOC(Bentley, Geom, MSBsplineSurface, DeleteBoundaries));
     
@@ -578,13 +588,57 @@ void def_MSBsplineSurface(py::module_& m)
            py::overload_cast<size_t, size_t, DoubleArray&, DoubleArray&, DPoint3dArray&>(&MSBsplineSurface::EvaluateUniformGrid, py::const_), 
            "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
 
-    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, DoubleArray& uParams, DoubleArray& vParams, py::list& gridPoints)
-           {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
-           self.EvaluateUniformGrid(numUPoint, numVPoint, uParams, vParams, cppGridPoints);
-           CONVERT_CPPARRAY_TO_PYLIST(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, DoubleArray& uParams, DoubleArray& vParams, py::list& gridPoints) 
+           { 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d); 
+              self.EvaluateUniformGrid(numUPoint, numVPoint, uParams, vParams, cppGridPoints); 
+              CONVERT_CPPARRAY_TO_PYLIST(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d); 
            }, "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
-
+           
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, DoubleArray& uParams, py::list& vParamsList, DPoint3dArray& gridPoints) 
+           { 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(vParamsList, cppVParams, DoubleArray, double); 
+              self.EvaluateUniformGrid(numUPoint, numVPoint, uParams, cppVParams, gridPoints); 
+           }, "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
+           
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, py::list& uParamsList, DoubleArray& vParams, DPoint3dArray& gridPoints) 
+           { 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(uParamsList, cppUParams, DoubleArray, double); 
+              self.EvaluateUniformGrid(numUPoint, numVPoint, cppUParams, vParams, gridPoints); 
+           }, "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
+           
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, py::list& uParamsList, py::list& vParamsList, DPoint3dArray& gridPoints) 
+           { 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(uParamsList, cppUParams, DoubleArray, double); 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(vParamsList, cppVParams, DoubleArray, double); 
+              self.EvaluateUniformGrid(numUPoint, numVPoint, cppUParams, cppVParams, gridPoints); 
+           }, "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
+           
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, py::list& uParamsList, DoubleArray& vParams, py::list& gridPointsList) 
+           {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(uParamsList, cppUParams, DoubleArray, double); 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPointsList, cppGridPoints, DPoint3dArray, DPoint3d); 
+              self.EvaluateUniformGrid(numUPoint, numVPoint, cppUParams, vParams, cppGridPoints); 
+              CONVERT_CPPARRAY_TO_PYLIST(gridPointsList, cppGridPoints, DPoint3dArray, DPoint3d); 
+           }, "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
+           
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, DoubleArray& uParams, py::list& vParamsList, py::list& gridPointsList) 
+           { 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(vParamsList, cppVParams, DoubleArray, double); 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPointsList, cppGridPoints, DPoint3dArray, DPoint3d); 
+              self.EvaluateUniformGrid(numUPoint, numVPoint, uParams, cppVParams, cppGridPoints); 
+              CONVERT_CPPARRAY_TO_PYLIST(gridPointsList, cppGridPoints, DPoint3dArray, DPoint3d); 
+           }, "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
+           
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, py::list& uParamsList, py::list& vParamsList, py::list& gridPointsList) 
+           { 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(uParamsList, cppUParams, DoubleArray, double); 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(vParamsList, cppVParams, DoubleArray, double); 
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPointsList, cppGridPoints, DPoint3dArray, DPoint3d); 
+              self.EvaluateUniformGrid(numUPoint, numVPoint, cppUParams, cppVParams, cppGridPoints); 
+              CONVERT_CPPARRAY_TO_PYLIST(gridPointsList, cppGridPoints, DPoint3dArray, DPoint3d); 
+           }, "numUPoint"_a, "numVPoint"_a, "uParams"_a, "vParams"_a, "gridPoints"_a);
+           
     c1.def("EvaluateUniformGrid", 
            py::overload_cast<size_t, size_t, DPoint2dArray&, DPoint3dArray&>(&MSBsplineSurface::EvaluateUniformGrid, py::const_), 
            "numUPoint"_a, "numVPoint"_a, "uvParams"_a, "gridPoints"_a);
@@ -594,6 +648,22 @@ void def_MSBsplineSurface(py::module_& m)
            CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
            self.EvaluateUniformGrid(numUPoint, numVPoint, uParams, cppGridPoints);
            CONVERT_CPPARRAY_TO_PYLIST(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
+           }, "numUPoint"_a, "numVPoint"_a, "uvParams"_a, "gridPoints"_a);
+
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, py::list& uParams, py::list& gridPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(uParams, cppuParams, DPoint2dArray, DPoint2d);
+           self.EvaluateUniformGrid(numUPoint, numVPoint, cppuParams, cppGridPoints);
+           CONVERT_CPPARRAY_TO_PYLIST(gridPoints, cppGridPoints, DPoint3dArray, DPoint3d);
+           CONVERT_CPPARRAY_TO_PYLIST(uParams, cppuParams, DPoint2dArray, DPoint2d);
+           }, "numUPoint"_a, "numVPoint"_a, "uvParams"_a, "gridPoints"_a);
+
+    c1.def("EvaluateUniformGrid", [] (MSBsplineSurfaceCR self, size_t numUPoint, size_t numVPoint, py::list& uParams, DPoint3dArray& gridPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(uParams, cppuParams, DPoint2dArray, DPoint2d);
+           self.EvaluateUniformGrid(numUPoint, numVPoint, cppuParams, gridPoints);
+           CONVERT_CPPARRAY_TO_PYLIST(uParams, cppuParams, DPoint2dArray, DPoint2d);
            }, "numUPoint"_a, "numVPoint"_a, "uvParams"_a, "gridPoints"_a);
 
     c1.def("EvaluatePointAndUnitNormal", &MSBsplineSurface::EvaluatePointAndUnitNormal, "ray"_a, "u"_a, "v"_a, DOC(Bentley, Geom, MSBsplineSurface, EvaluatePointAndUnitNormal));
@@ -637,6 +707,13 @@ void def_MSBsplineSurface(py::module_& m)
     c1.def_static("CreateLinearSweep", py::overload_cast<MSBsplineCurveCR, DVec3dCR>(&MSBsplineSurface::CreateLinearSweep), "primitive"_a, "delta"_a, DOC(Bentley, Geom, MSBsplineSurface, CreateLinearSweep));
     c1.def_static("CreateLinearSweep", py::overload_cast<MSBsplineSurfacePtrArray&, CurveVectorCR, DVec3dCR>(&MSBsplineSurface::CreateLinearSweep), "surfaces"_a, "baseCurves"_a, "delta"_a, DOC(Bentley, Geom, MSBsplineSurface, CreateLinearSweep));
 
+    c1.def_static("CreateLinearSweep", [] (py::list& surfaces, CurveVectorCR baseCurves, DVec3dCR delta) {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaces, cppSurfaces, MSBsplineSurfacePtrArray, MSBsplineSurfacePtr);
+           bool result = MSBsplineSurface::CreateLinearSweep(cppSurfaces, baseCurves, delta);
+           CONVERT_CPPARRAY_TO_PYLIST(surfaces, cppSurfaces, MSBsplineSurfacePtrArray, MSBsplineSurfacePtr);
+           return result;
+       }, "surfaces"_a, "baseCurves"_a, "delta"_a, DOC(Bentley, Geom, MSBsplineSurface, CreateLinearSweep));
+
     c1.def_static("CreateRuled", &MSBsplineSurface::CreateRuled, "curveA"_a, "curveB"_a, DOC(Bentley, Geom, MSBsplineSurface, CreateRuled));
 
     c1.def_static("CreateRotationalSweep", 
@@ -650,6 +727,14 @@ void def_MSBsplineSurface(py::module_& m)
     c1.def_static("CreateRotationalSweep",
                   py::overload_cast<MSBsplineSurfacePtrArray&, CurveVectorCR, DPoint3dCR, DVec3dCR, double>(&MSBsplineSurface::CreateRotationalSweep),
                   "surfaces"_a, "baseCurves"_a, "center"_a, "axis"_a, "sweepRadians"_a);
+
+    c1.def_static("CreateRotationalSweep", [] (py::list surfacesList, CurveVectorCR baseCurves, DPoint3dCR center, DVec3dCR axis, double sweepRadians)
+                     {
+                         CONVERT_PYLIST_TO_NEW_CPPARRAY(surfacesList, cppSurfaces, MSBsplineSurfacePtrArray, MSBsplineSurfacePtr);
+                         bool result = MSBsplineSurface::CreateRotationalSweep(cppSurfaces, baseCurves, center, axis, sweepRadians);
+                         CONVERT_CPPARRAY_TO_PYLIST(surfacesList, cppSurfaces, MSBsplineSurfacePtrArray, MSBsplineSurfacePtr);
+                         return result;
+                     }, "surfaces"_a, "baseCurves"_a, "center"_a, "axis"_a, "sweepRadians"_a);
 
     c1.def_static("CreateTrimmedDisk", &MSBsplineSurface::CreateTrimmedDisk, "ellipse"_a, DOC(Bentley, Geom, MSBsplineSurface, CreateTrimmedDisk));
     c1.def_static("CreateTubeSurface", &MSBsplineSurface::CreateTubeSurface, "baseCurve"_a, "translateBaseCurve"_a, "traceCurve"_a, DOC(Bentley, Geom, MSBsplineSurface, CreateTubeSurface));
@@ -701,10 +786,26 @@ void def_MSBsplineSurface(py::module_& m)
                   py::overload_cast<MSBsplineSurfacePtrArray&, CurveVectorCR, IFacetOptionsP>(&MSBsplineSurface::CreateTrimmedSurfaces),
                   "surfaces"_a, "source"_a, "options"_a = nullptr);
 
+    c1.def_static("CreateTrimmedSurfaces", [] (py::list surfacesList, CurveVectorCR source, IFacetOptionsP options)
+                  {
+                      CONVERT_PYLIST_TO_NEW_CPPARRAY(surfacesList, cppSurfaces, MSBsplineSurfacePtrArray, MSBsplineSurfacePtr);
+                      bool result = MSBsplineSurface::CreateTrimmedSurfaces(cppSurfaces, source, options);
+                      CONVERT_CPPARRAY_TO_PYLIST(surfacesList, cppSurfaces, MSBsplineSurfacePtrArray, MSBsplineSurfacePtr);
+                      return result;
+                  }, "surfaces"_a, "source"_a, "options"_a = nullptr);
+              
     c1.def_static("CreateTrimmedSurfaces",
                   py::overload_cast<MSBsplineSurfacePtrArray&, ISolidPrimitiveCR, IFacetOptionsP>(&MSBsplineSurface::CreateTrimmedSurfaces),
                   "surfaces"_a, "source"_a, "options"_a = nullptr);
-
+    
+    c1.def_static("CreateTrimmedSurfaces", [] (py::list surfacesList, ISolidPrimitiveCR source, IFacetOptionsP options)
+                  {
+                      CONVERT_PYLIST_TO_NEW_CPPARRAY(surfacesList, cppSurfaces, MSBsplineSurfacePtrArray, MSBsplineSurfacePtr);
+                      bool result = MSBsplineSurface::CreateTrimmedSurfaces(cppSurfaces, source, options);
+                      CONVERT_CPPARRAY_TO_PYLIST(surfacesList, cppSurfaces, MSBsplineSurfacePtrArray, MSBsplineSurfacePtr);
+                      return result;
+                  }, "surfaces"_a, "source"_a, "options"_a = nullptr);
+              
     c1.def("GetUnstructuredBoundaryCurves",
            py::overload_cast<double, bool>(&MSBsplineSurface::GetUnstructuredBoundaryCurves, py::const_),
            "tolerance"_a, "cubicFit"_a);
@@ -757,6 +858,58 @@ void def_MSBsplineSurface(py::module_& m)
             CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
            }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
 
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, DPoint3dArray& intersectionPoints, DoubleArray& rayParameters, py::list& surfaceParameters, DRay3dCR ray)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+            self.IntersectRay(intersectionPoints, rayParameters, cppSurfaceParameters, ray);
+            CONVERT_CPPARRAY_TO_PYLIST(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
+
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, py::list& intersectionPoints, DoubleArray& rayParameters, py::list& surfaceParameters, DRay3dCR ray)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+            self.IntersectRay(cppIntersectionPoints, rayParameters, cppSurfaceParameters, ray);
+            CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
+
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, DPoint3dArray& intersectionPoints, py::list& rayParameters, DPoint2dArray& surfaceParameters, DRay3dCR ray)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(rayParameters, cppRayParameters, DoubleArray, double);
+            self.IntersectRay(intersectionPoints, cppRayParameters, surfaceParameters, ray);
+            CONVERT_CPPARRAY_TO_PYLIST(rayParameters, cppRayParameters, DoubleArray, double);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
+          
+    c1.def("IntersectRay", [] (MSBsplineSurfaceCR self, DPoint3dArray& intersectionPoints, py::list& rayParameters, py::list& surfaceParameters, DRay3dCR ray)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(rayParameters, cppRayParameters, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+            self.IntersectRay(intersectionPoints, cppRayParameters, cppSurfaceParameters, ray);
+            CONVERT_CPPARRAY_TO_PYLIST(rayParameters, cppRayParameters, DoubleArray, double);
+            CONVERT_CPPARRAY_TO_PYLIST(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
+          
+    c1.def("IntersectRay", [] (MSBsplineSurfaceCR self, py::list& intersectionPoints, py::list& rayParameters, DPoint2dArray& surfaceParameters, DRay3dCR ray)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(rayParameters, cppRayParameters, DoubleArray, double);
+            self.IntersectRay(cppIntersectionPoints, cppRayParameters, surfaceParameters, ray);
+            CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(rayParameters, cppRayParameters, DoubleArray, double);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
+          
+    c1.def("IntersectRay",[] (MSBsplineSurfaceCR self, py::list& intersectionPoints, py::list& rayParameters, py::list& surfaceParameters, DRay3dCR ray)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(rayParameters, cppRayParameters, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+            self.IntersectRay(cppIntersectionPoints, cppRayParameters, cppSurfaceParameters, ray);
+            CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(rayParameters, cppRayParameters, DoubleArray, double);
+            CONVERT_CPPARRAY_TO_PYLIST(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a);
+          
     c1.def("IntersectRay",
            py::overload_cast<DPoint3dArray&, DoubleArray&, DPoint2dArray&, DRay3dCR, DRange1dCR>(&MSBsplineSurface::IntersectRay, py::const_),
            "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
@@ -764,9 +917,59 @@ void def_MSBsplineSurface(py::module_& m)
     c1.def("IntersectRay", [](MSBsplineSurfaceCR self, py::list& intersectionPoints, DoubleArray& rayParameters, DPoint2dArray& surfaceParameters, DRay3dCR ray, DRange1dCR rayInterval)
            {
             CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
-            self.IntersectRay(cppIntersectionPoints, rayParameters, surfaceParameters, ray);
+            self.IntersectRay(cppIntersectionPoints, rayParameters, surfaceParameters, ray, rayInterval);
             CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
            }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, DPoint3dArray& intersectionPoints, DoubleArray& rayParameters, py::list& surfaceParameters, DRay3dCR ray, DRange1dCR rayInterval)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+            self.IntersectRay(intersectionPoints, rayParameters, cppSurfaceParameters, ray, rayInterval);
+            CONVERT_CPPARRAY_TO_PYLIST(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, py::list& intersectionPoints, DoubleArray& rayParameters, py::list& surfaceParameters, DRay3dCR ray, DRange1dCR rayInterval)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+            self.IntersectRay(cppIntersectionPoints, rayParameters, cppSurfaceParameters, ray, rayInterval);
+            CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
+
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, DPoint3dArray& intersectionPoints, py::list& rayParameters, DPoint2dArray& surfaceParameters, DRay3dCR ray, DRange1dCR rayInterval)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(rayParameters, cppRayParameters, DoubleArray, double);
+            self.IntersectRay(intersectionPoints, cppRayParameters, surfaceParameters, ray, rayInterval);
+            CONVERT_CPPARRAY_TO_PYLIST(rayParameters, cppRayParameters, DoubleArray, double);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
+          
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, DPoint3dArray& intersectionPoints, py::list& rayParameters, py::list& surfaceParameters, DRay3dCR ray, DRange1dCR rayInterval)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(rayParameters, cppRayParameters, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+            self.IntersectRay(intersectionPoints, cppRayParameters, cppSurfaceParameters, ray, rayInterval);
+            CONVERT_CPPARRAY_TO_PYLIST(rayParameters, cppRayParameters, DoubleArray, double);
+            CONVERT_CPPARRAY_TO_PYLIST(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
+          
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, py::list& intersectionPoints, py::list& rayParameters, DPoint2dArray& surfaceParameters, DRay3dCR ray, DRange1dCR rayInterval)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(rayParameters, cppRayParameters, DoubleArray, double);
+            self.IntersectRay(cppIntersectionPoints, cppRayParameters, surfaceParameters, ray, rayInterval);
+            CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(rayParameters, cppRayParameters, DoubleArray, double);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a);
+          
+    c1.def("IntersectRay", [](MSBsplineSurfaceCR self, py::list& intersectionPoints, py::list& rayParameters, py::list& surfaceParameters, DRay3dCR ray, DRange1dCR rayInterval)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(rayParameters, cppRayParameters, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+            self.IntersectRay(cppIntersectionPoints, cppRayParameters, cppSurfaceParameters, ray, rayInterval);
+            CONVERT_CPPARRAY_TO_PYLIST(intersectionPoints, cppIntersectionPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(rayParameters, cppRayParameters, DoubleArray, double);
+            CONVERT_CPPARRAY_TO_PYLIST(surfaceParameters, cppSurfaceParameters, DPoint2dArray, DPoint2d);
+           }, "intersectionPoints"_a, "rayParameters"_a, "surfaceParameters"_a, "ray"_a, "rayInterval"_a); 
 
     c1.def("HasValidPoleAllocation", &MSBsplineSurface::HasValidPoleAllocation);
     c1.def("HasValidWeightAllocation", &MSBsplineSurface::HasValidWeightAllocation);

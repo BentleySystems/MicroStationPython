@@ -890,6 +890,12 @@ void def_CurveVector(py::module_& m)
     c1.def(py::init(py::overload_cast<CurveVector::BoundaryType>(&CurveVector::Create)), "boundaryType"_a);
     c1.def(py::init(py::overload_cast<CurveVector::BoundaryType, ICurvePrimitivePtr>(&CurveVector::Create)), "boundaryType"_a, "primitive"_a);
     c1.def(py::init(py::overload_cast<DSegment3dArray const&>(&CurveVector::Create)), "segments"_a);
+    
+    c1.def(py::init([](py::list const& segments){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(segments, cppSegments, DSegment3dArray, DSegment3d);
+        return CurveVector::Create(cppSegments);
+    }), "segments"_a);
+    
     c1.def(py::init(py::overload_cast<ICurvePrimitivePtr, CurveVector::BoundaryType>(&CurveVector::Create)), "child"_a, "boundaryType"_a);
 
     c1.def("HasSingleCurvePrimitive", &CurveVector::HasSingleCurvePrimitive, DOC(Bentley, Geom, CurveVector, HasSingleCurvePrimitive));
@@ -974,9 +980,23 @@ void def_CurveVector(py::module_& m)
                   py::overload_cast<DPoint3dArray const&, CurveVector::BoundaryType, bool>(&CurveVector::CreateLinear), 
                   "points"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Open, "forceXYOrientation"_a = false, DOC(Bentley, Geom, CurveVector, CreateLinear));
 
-    c1.def_static("CreateLinear", [] (py::list const &points, CurveVector::BoundaryType boundaryType, bool forceXYOrientation) {
-                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint3dArray, DPoint3d);
-                  return CurveVector::CreateLinear(cpppoints, boundaryType, forceXYOrientation); }, "points"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Open, "forceXYOrientation"_a = false, DOC(Bentley, Geom, CurveVector, CreateLinear));
+    c1.def_static("CreateLinear", [] (py::list const &points, CurveVector::BoundaryType boundaryType, bool forceXYOrientation) 
+    {
+        if (points.empty()) {
+            return CurveVector::CreateLinear((DPoint3d*)NULL, 0, boundaryType, forceXYOrientation);
+        }
+            
+        py::object first = points[0];
+        if (py::isinstance<DPoint2d>(first)) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint2dArray, DPoint2d);
+            return CurveVector::CreateLinear(&cpppoints[0], cpppoints.size(), boundaryType, forceXYOrientation);
+        } else if (py::isinstance<DPoint3d>(first)) {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cpppoints, DPoint3dArray, DPoint3d);
+            return CurveVector::CreateLinear(cpppoints, boundaryType, forceXYOrientation);
+        } else {
+            throw std::invalid_argument("Unsupported point type in list. Expected DPoint2d or DPoint3d.");
+        }
+        }, "points"_a, "boundaryType"_a = CurveVector::BOUNDARY_TYPE_Open, "forceXYOrientation"_a = false, DOC(Bentley, Geom, CurveVector, CreateLinear));
 
     c1.def_static("CreateLinear", [] (DPoint2dArray const& points, CurveVector::BoundaryType boundaryType, bool forceXYOrientation)
         {
@@ -1190,18 +1210,42 @@ void def_CurveVector(py::module_& m)
                   py::overload_cast<ICurvePrimitiveR, ICurvePrimitiveR, double, bool, FilletDetailArray&>(&CurveCurve::CollectFilletArcs),
                   "curveA"_a, "curveB"_a, "radius"_a, "extend"_a, "arcs"_a);
 
+    c2.def_static("CollectFilletArcs", [](ICurvePrimitiveR curveA, ICurvePrimitiveR curveB, double radius, bool extend, py::list& arcs){
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(arcs, cppArcs, FilletDetailArray, CurveCurve::FilletDetail);
+                  CurveCurve::CollectFilletArcs(curveA, curveB, radius, extend, cppArcs);
+                  CONVERT_CPPARRAY_TO_PYLIST(arcs, cppArcs, FilletDetailArray, CurveCurve::FilletDetail);
+                 }, "curveA"_a, "curveB"_a, "radius"_a, "extend"_a, "arcs"_a);
+  
     c2.def_static("CollectFilletArcs",
                   py::overload_cast<CurveVectorCR, CurveVectorCR, double, bool, FilletDetailArray&>(&CurveCurve::CollectFilletArcs),
                   "chainA"_a, "chainB"_a, "radius"_a, "extend"_a, "arcs"_a);
+
+    c2.def_static("CollectFilletArcs", [](CurveVectorCR chainA, CurveVectorCR chainB, double radius, bool extend, py::list &arcs)
+                  {
+                 CONVERT_PYLIST_TO_NEW_CPPARRAY(arcs, cppArcs, FilletDetailArray, CurveCurve::FilletDetail);
+                 CurveCurve::CollectFilletArcs(chainA, chainB, radius, extend, cppArcs);
+                 CONVERT_CPPARRAY_TO_PYLIST(arcs, cppArcs, FilletDetailArray, CurveCurve::FilletDetail); }, "chainA"_a, "chainB"_a, "radius"_a, "extend"_a, "arcs"_a);
 
     c2.def_static("CollectBlends",
                   py::overload_cast<ICurvePrimitiveR, ICurvePrimitiveR, BlendType, double, double, bool, BlendDetailArray&>(&CurveCurve::CollectBlends),
                   "curveA"_a, "curveB"_a, "blendType"_a, "distanceA"_a, "distanceB"_a, "extend"_a, "blendCurves"_a);
 
+    c2.def_static("CollectBlends", [](ICurvePrimitiveR curveA, ICurvePrimitiveR curveB, BlendType blendType, double distanceA, double distanceB, bool extend, py::list &blendCurves)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(blendCurves, cppBlendCurves, BlendDetailArray, BlendDetail);
+                  CurveCurve::CollectBlends(curveA, curveB, blendType, distanceA, distanceB, extend, cppBlendCurves);
+                  CONVERT_CPPARRAY_TO_PYLIST(blendCurves, cppBlendCurves, BlendDetailArray, BlendDetail); }, "curveA"_a, "curveB"_a, "blendType"_a, "distanceA"_a, "distanceB"_a, "extend"_a, "blendCurves"_a);
+
     c2.def_static("CollectBlends",
                   py::overload_cast<CurveVectorCR, CurveVectorCR, BlendType, double, double, bool, BlendDetailArray&>(&CurveCurve::CollectBlends),
                   "chainA"_a, "chainB"_a, "blendType"_a, "distanceA"_a, "distanceB"_a, "extend"_a, "blendCurves"_a);
-            
+
+    c2.def_static("CollectBlends", [](CurveVectorCR chainA, CurveVectorCR chainB, BlendType blendType, double distanceA, double distanceB, bool extend, py::list& blendCurves) {
+                   CONVERT_PYLIST_TO_NEW_CPPARRAY(blendCurves, cppBlendCurves, BlendDetailArray, BlendDetail);
+                   CurveCurve::CollectBlends(chainA, chainB, blendType, distanceA, distanceB, extend, cppBlendCurves);
+                   CONVERT_CPPARRAY_TO_PYLIST(blendCurves, cppBlendCurves, BlendDetailArray, BlendDetail); 
+                }, "chainA"_a, "chainB"_a, "blendType"_a, "distanceA"_a, "distanceB"_a, "extend"_a, "blendCurves"_a);
+                     
     c2.def_static("TransverseRegionIntersectionSegments", &CurveCurve::TransverseRegionIntersectionSegments, "regionA"_a, "regionB"_a, "segments"_a, DOC(Bentley, Geom, CurveCurve, TransverseRegionIntersectionSegments));
     c2.def_static("IntersectRotatedCurveSpaceCurve", &CurveCurve::IntersectRotatedCurveSpaceCurve, "worldToLocal"_a, "rotatedCurve"_a, "spaceCurve"_a, "detailA"_a, "detailB"_a, DOC(Bentley, Geom, CurveCurve, IntersectRotatedCurveSpaceCurve));
 

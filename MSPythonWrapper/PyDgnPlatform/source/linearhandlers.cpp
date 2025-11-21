@@ -137,6 +137,18 @@ void def_LinearHandlers(py::module_& m)
                   return PointStringHandler::CreatePointStringElement(eeh, templateEh, cppPoints.data(), matrices.data(), cppPoints.size(), disjoint, is3d, modelRef);
                   }, "eeh"_a, "templateEh"_a, "points"_a, "matrices"_a, "disjoint"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, PointStringHandler, CreatePointStringElement));
 
+    c1.def_static("CreatePointStringElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, DPoint3dArray const& points, py::list const& matrices, bool disjoint, bool is3d, DgnModelRefR modelRef)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(matrices, cppMatrices, bvector<RotMatrix>, RotMatrix);
+                  return PointStringHandler::CreatePointStringElement(eeh, templateEh, points.data(), cppMatrices.data(), points.size(), disjoint, is3d, modelRef);
+                  }, "eeh"_a, "templateEh"_a, "points"_a, "matrices"_a, "disjoint"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, PointStringHandler, CreatePointStringElement));
+
+    c1.def_static("CreatePointStringElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, py::list const& points, py::list const& matrices, bool disjoint, bool is3d, DgnModelRefR modelRef)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(matrices, cppMatrices, bvector<RotMatrix>, RotMatrix);
+                  return PointStringHandler::CreatePointStringElement(eeh, templateEh, cppPoints.data(), cppMatrices.data(), cppPoints.size(), disjoint, is3d, modelRef);
+                  }, "eeh"_a, "templateEh"_a, "points"_a, "matrices"_a, "disjoint"_a, "is3d"_a, "modelRef"_a, DOC(Bentley, DgnPlatform, PointStringHandler, CreatePointStringElement));
 
     c1.def_property_readonly_static("Instance", [] (py::object const&) { return std::unique_ptr< PointStringHandler, py::nodelete>(&PointStringHandler::GetInstance()); });
     c1.def_static("GetInstance", &PointStringHandler::GetInstance, py::return_value_policy::reference);

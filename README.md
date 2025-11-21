@@ -11,7 +11,7 @@ To build the MicroStation Python binding you need the following :
 Once you have these you will need to set some extra environment variables in your MicroStation SDK Developer Shell these are :
 
     BMAKE_OPT= -I<Location of build/PublicSDK> -I <Location of SDK Includes>
-    BB_DEFAULT_TOOLSET=VS2022
+    BB_DEFAULT_TOOLSET=VS2019
     SrcRoot=<Location of MicrostationPython source code>C:\src\MicroStationPython\
     OutRoot=<Location of the build artifacts>
     PythonDir=<Location of Python installation>
@@ -20,7 +20,7 @@ Once you have these you will need to set some extra environment variables in you
 An example of this is :
 
   set BMAKE_OPT= -I C:\src\MicroStationPython\build\PublicSDK\ -I C:\MicroStation2024SDK\include\
-  set BB_DEFAULT_TOOLSET=VS2022  
+  set BB_DEFAULT_TOOLSET=VS2019  
   set SrcRoot=C:\src\MicroStationPython\
   set OutRoot=C:\out\MicroStationPython\
   set PythonDir=C:\Python312\

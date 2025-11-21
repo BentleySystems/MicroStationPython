@@ -8,10 +8,24 @@ from MSPyDgnPlatform import *
 from MSPyDgnView import *
 from MSPyMstnPlatform import *
 
-'''
-Example demonstrating the process of adding nested complex element types in the active DGN model.
-Performs transformations, appends descriptors, and updates elements as needed.
-'''
+"""
+This class defines the `DrawComplexElement` tool, which is used to create and modify
+complex elements in a MicroStation DGN model. It supports various element types and
+provides functionality for transformations, nesting, and appending descriptors.
+
+Usage Steps:
+1. Open a DGN file in MicroStation.
+2. Create a complex element in the DGN model.
+3. Activate the `DrawComplexElement` tool.
+4. Select the complex element to modify or nest.
+5. Accept the operation.
+
+Key Features:
+- Supports multiple element types for modification and nesting.
+- Applies transformations and creates new elements as needed.
+- Interacts with the active DGN model to manipulate elements.
+- Provides user prompts for selection and acceptance of elements.
+"""
 
 eMESH_HEADER_ELM = 105
 eEXTENDED_ELM = 106
@@ -103,15 +117,19 @@ class DrawComplexElement(DgnElementSetTool):
             if BentleyStatus.eERROR == MSElementDescr.Allocate(chainHeaderEditElementHandler.Element, ACTIVEMODEL, chainDscr):
                 return BentleyStatus.eERROR
 
-            m_points = [DPoint3d(0.0, 0.0, 0.0), DPoint3d(1000000.0, 0.0, 0.0), DPoint3d(1000000.0, 1000000.0, 0.0)]
             lines0 = EditElementHandle()
             lines1 = EditElementHandle()
             lines2 = EditElementHandle()
             Lines = [lines0, lines1, lines2]
+            # Get Origin.
+            disHandler = elementHandle.GetHandler(eMISSING_HANDLER_PERMISSION_Transform)
+            ptOrigin = DPoint3d()
+            disHandler.GetTransformOrigin(complexShapeEditElementHandler, ptOrigin)
+
             # Create lines for complex shape.
             for j in range(0, 2):
-                point1 = m_points[j]
-                point2 = m_points[j+1]
+                point1 = DPoint3d(ptOrigin.x + ptOrigin.y, 0.0, 0.0)
+                point2 = DPoint3d(ptOrigin.x, 0.0, 0.0)
                 segment = DSegment3d(point1, point2)
                 LineHandler.CreateLineElement(Lines[j], None, segment, dgnModel.Is3d(), dgnModel)
                 elementLine = Lines[j].Element
@@ -134,8 +152,9 @@ class DrawComplexElement(DgnElementSetTool):
                 return BentleyStatus.eERROR
             ptOrigin = DPoint3d()
             ptOrigin = textBlock.GetUserOrigin()
-            ptOrigin.x += 100000
-            ptOrigin.y += 100000
+            ptOrigin.x = 45000000
+            ptOrigin.y = 0
+            ptOrigin.z = 0
             textBlock.SetUserOrigin(ptOrigin)
             textEditElementHandle = EditElementHandle()
             TextHandlerBase.CreateElement(textEditElementHandle, None, textBlock)
@@ -149,7 +168,11 @@ class DrawComplexElement(DgnElementSetTool):
         if eCMPLX_STRING_ELM == elementHandle.GetElementType():
             complexStringEditElementHandle = EditElementHandle(elementHandle.ElementId, dgnModel)
             lineEditElementHandle = EditElementHandle()
-            segment = DSegment3d(DPoint3d(0.0, 0.0, 0.0), DPoint3d(100.0, 0.0, 0.0))
+            # Get Origin.
+            disHandler = elementHandle.GetHandler(eMISSING_HANDLER_PERMISSION_Transform)
+            ptOrigin = DPoint3d()
+            disHandler.GetTransformOrigin(complexStringEditElementHandle, ptOrigin)
+            segment = DSegment3d(DPoint3d(ptOrigin.x+ptOrigin.y, 0.0, 0.0), DPoint3d(ptOrigin.x, 0.0, 0.0))
             LineHandler.CreateLineElement(lineEditElementHandle, None, segment, dgnModel.Is3d(), dgnModel)
             elementLine = lineEditElementHandle.Element
             
@@ -173,9 +196,10 @@ class DrawComplexElement(DgnElementSetTool):
             extendElementEditElementHandle = EditElementHandle(elementHandle.ElementId, dgnModel)
 
             ptOrigin = DPoint3d()
-            disHandler.GetTransformOrigin(extendElementEditElementHandle, ptOrigin)
-            ptOrigin.x += 100000
-            ptOrigin.y += 100000
+            elementHandle.DisplayHandler.GetTransformOrigin(extendElementEditElementHandle, ptOrigin)
+            ptOrigin.x = 200000
+            ptOrigin.y = -18000000
+            ptOrigin.z = 0
 
             transform = Transform()
             transform.InitIdentity()
@@ -196,7 +220,7 @@ class DrawComplexElement(DgnElementSetTool):
             points = DPoint3dArray()
             # Add the points to the surface type18 element.
             points.extend((DPoint3d(0.0, 0.0, 0.0), DPoint3d(1000000.0, 0.0, 0.0), DPoint3d(1000000., 1000000., 0.0), DPoint3d(0.0, 900000.0, 0.0)))
-            origin = DPoint3d(0.0, 0.0, 0)
+            origin = DPoint3d(0.0, 0.0, 0.0)
             extrudeVector = DVec3d.From(0., 0., 2000000)
 
             shapeElement = ShapeHandler.CreateShapeElement(shape, None, points, dgnModel.Is3d(), dgnModel)
@@ -214,7 +238,7 @@ class DrawComplexElement(DgnElementSetTool):
         if eMESH_HEADER_ELM == elementHandle.GetElementType():
             existingMeshEditElementHandle = EditElementHandle(elementHandle.ElementId, dgnModel)
             points = DPoint3dArray()
-            points.extend((DPoint3d(0.0, 0.0, 0.0), DPoint3d(1000000.0, 0.0, 0.0), DPoint3d(1000000., 1000000., 0.0), DPoint3d(0.0, 900000.0, 0.0)))
+            points.extend((DPoint3d(9000000.0, 0.0, 0.0), DPoint3d(11000000.0, 0.0, 0.0), DPoint3d(11000000.0, 2000000.0, 0.0), DPoint3d(9000000.0, 1800000.0, 0.0)))
             nestedMesh = PolyfaceHeader.CreateVariableSizeIndexed()
             nestedMesh.AddPolygon(points)
             nestedMesh.Triangulate()
@@ -296,8 +320,9 @@ class DrawComplexElement(DgnElementSetTool):
 
         if elHandle.Element.IsComplexHeader():
             return True
-
         if eEXTENDED_ELM == elHandle.GetElementType():
+            return True
+        if eTEXT_NODE_ELM == elHandle.GetElementType() or eTEXT_ELM == elHandle.GetElementType():
             return True
         return False
 

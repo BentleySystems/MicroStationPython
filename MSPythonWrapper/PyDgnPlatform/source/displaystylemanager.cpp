@@ -200,7 +200,7 @@ static const char * __doc_Bentley_DgnPlatform_DisplayStyle_CopySettingsTo =R"doc
 mapping indices to ensure that they are compatible with the provided
 file. @note This is a low-level method, and is only inteded to be used
 with DgnPlatform. Users of the PowerPlatform should use
-IViewManager::ApplyDisplayStyleToView instead. @note The provided file
+DisplayStyleManager::ApplyDisplayStyleToView instead. @note The provided file
 should match the view's root.
 
 :param viewInfo:

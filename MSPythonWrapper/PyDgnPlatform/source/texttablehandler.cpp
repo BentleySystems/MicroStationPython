@@ -751,7 +751,7 @@ void def_TextTableHandler(py::module_& m)
     c5.def_property("Orientation", &TextTableCell::GetOrientation, &TextTableCell::SetOrientation);
     c5.def("GetOrientation", &TextTableCell::GetOrientation, DOC(Bentley, DgnPlatform, TextTableCell, GetOrientation));
     c5.def("SetOrientation", &TextTableCell::SetOrientation, "orientation"_a, DOC(Bentley, DgnPlatform, TextTableCell, SetOrientation));
-    
+
     c5.def_property("Margins", &TextTableCell::GetMargins, &TextTableCell::SetMargins);
     c5.def("GetMargins", &TextTableCell::GetMargins, DOC(Bentley, DgnPlatform, TextTableCell, GetMargins));
     c5.def("SetMargins", &TextTableCell::SetMargins, "margin"_a, DOC(Bentley, DgnPlatform, TextTableCell, SetMargins));
@@ -927,7 +927,7 @@ void def_TextTableHandler(py::module_& m)
     c9.def_property("DefaultCellOrientation", &TextTable::GetDefaultCellOrientation, &TextTable::SetDefaultCellOrientation);
     c9.def("GetDefaultCellOrientation", &TextTable::GetDefaultCellOrientation, DOC(Bentley, DgnPlatform, TextTable, GetDefaultCellOrientation));
     c9.def("SetDefaultCellOrientation", &TextTable::SetDefaultCellOrientation, "orientation"_a, DOC(Bentley, DgnPlatform, TextTable, SetDefaultCellOrientation));
-    
+
     c9.def("GetTextStyleId", &TextTable::GetTextStyleId, "region"_a, DOC(Bentley, DgnPlatform, TextTable, GetTextStyleId));    
     c9.def("GetDefaultFill", &TextTable::GetDefaultFill, "symb"_a, "rows"_a, DOC(Bentley, DgnPlatform, TextTable, GetDefaultFill));
     

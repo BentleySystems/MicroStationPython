@@ -97,6 +97,25 @@ void def_CurveHandler(py::module_& m)
                   return status;  
                   }, "tangentPts"_a, "points"_a, DOC(Bentley, DgnPlatform, CurveHandler, GetStartTangentPoints));
 
+    c1.def_static("GetStartTangentPoints", [] (DPoint3dArray& tangentPts, py::list& points)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                  if (tangentPts.size() < 2)
+                      tangentPts.resize(2);
+                  BentleyStatus status = CurveHandler::GetStartTangentPoints(tangentPts.data(), cppPoints.data(), cppPoints.size());
+                  return status;  
+                  }, "tangentPts"_a, "points"_a, DOC(Bentley, DgnPlatform, CurveHandler, GetStartTangentPoints));
+
+    c1.def_static("GetStartTangentPoints", [] (py::list& tangentPts, DPoint3dArray& points)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(tangentPts, cppTangentPts, DPoint3dArray, DPoint3d);
+                  if (cppTangentPts.size() < 2)
+                      cppTangentPts.resize(2);
+                  BentleyStatus status = CurveHandler::GetStartTangentPoints(cppTangentPts.data(), points.data(), points.size());
+                  CONVERT_CPPARRAY_TO_PYLIST(tangentPts, cppTangentPts, DPoint3dArray, DPoint3d);
+                  return status;  
+                  }, "tangentPts"_a, "points"_a, DOC(Bentley, DgnPlatform, CurveHandler, GetStartTangentPoints));
+
     c1.def_static("GetEndTangentPoints", [] (DPoint3dArray& tangentPts, DPoint3dArray& points)
                   {
                   if (tangentPts.size() < 2)
@@ -114,7 +133,26 @@ void def_CurveHandler(py::module_& m)
                   CONVERT_CPPARRAY_TO_PYLIST(tangentPts, cppTangentPts, DPoint3dArray, DPoint3d);
                   return status;
                   }, "tangentPts"_a, "points"_a, DOC(Bentley, DgnPlatform, CurveHandler, GetEndTangentPoints));
-    
+
+    c1.def_static("GetEndTangentPoints", [] (DPoint3dArray& tangentPts, py::list& points)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+                  if (tangentPts.size() < 2)
+                      tangentPts.resize(2);
+                  BentleyStatus status =  CurveHandler::GetEndTangentPoints(tangentPts.data(), cppPoints.data(), cppPoints.size());
+                  return status;
+                  }, "tangentPts"_a, "points"_a, DOC(Bentley, DgnPlatform, CurveHandler, GetEndTangentPoints));
+
+    c1.def_static("GetEndTangentPoints", [] (py::list& tangentPts, DPoint3dArray& points)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(tangentPts, cppTangentPts, DPoint3dArray, DPoint3d);
+                  if (cppTangentPts.size() < 2)
+                      cppTangentPts.resize(2);
+                  BentleyStatus status =  CurveHandler::GetEndTangentPoints(cppTangentPts.data(), points.data(), points.size());
+                  CONVERT_CPPARRAY_TO_PYLIST(tangentPts, cppTangentPts, DPoint3dArray, DPoint3d);
+                  return status;
+                  }, "tangentPts"_a, "points"_a, DOC(Bentley, DgnPlatform, CurveHandler, GetEndTangentPoints));
+
     c1.def_static("CreateCurveElement", [] (EditElementHandleR eeh, ElementHandleCP templateEh, DPoint3dArray const& points, bool is3d, DgnModelRefR modelRef)
                   {
                   return CurveHandler::CreateCurveElement(eeh, templateEh, points.data(), points.size(), is3d, modelRef);

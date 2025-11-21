@@ -250,6 +250,13 @@ void def_WhereCriterion(py::module_& m)
                   return WhereExpression::CreateConstantSet(s_);
                   }, "s"_a, DOC(Bentley, DgnPlatform, WhereExpression, CreateConstantSet));
 
+    c2.def_static("CreateConstantSet", [] (py::list const& s)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(s, cppS, bvector<WString>, WString);
+                  bset<WString> s_(cppS.begin(), cppS.end());
+                  return WhereExpression::CreateConstantSet(s_);
+                  }, "s"_a, DOC(Bentley, DgnPlatform, WhereExpression, CreateConstantSet));
+
     c2.def_static("CreateConstantSet", [] (bvector<Int64> const& s)
                   {
                   bset<Int64> s_(s.begin(), s.end());
@@ -259,6 +266,13 @@ void def_WhereCriterion(py::module_& m)
     c2.def_static("CreateConstantSet", [] (bvector<double> const& s)
                   {
                   bset<double> s_(s.begin(), s.end());
+                  return WhereExpression::CreateConstantSet(s_);
+                  }, "s"_a, DOC(Bentley, DgnPlatform, WhereExpression, CreateConstantSet));
+
+    c2.def_static("CreateConstantSet", [] (py::list const& s)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(s, cppS, bvector<double>, double);
+                  bset<double> s_(cppS.begin(), cppS.end());
                   return WhereExpression::CreateConstantSet(s_);
                   }, "s"_a, DOC(Bentley, DgnPlatform, WhereExpression, CreateConstantSet));
 

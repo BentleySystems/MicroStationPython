@@ -12,6 +12,7 @@
 * @bsimethod                                                                       2/2024
 +---------------+---------------+---------------+---------------+---------------+------*/
 void def_ECTestHelpers(py::module_& m);
+void def_ViewContextTest(py::module_& m);
 
 /*---------------------------------------------------------------------------------**//**
 * Module definition.
@@ -23,6 +24,7 @@ PYBIND11_MODULE(MSPyDgnPlatformTest, m)
     m.doc() = "Pybind11 wrapper for ECTestHelpers for python test";
 
     def_ECTestHelpers (m);
+    def_ViewContextTest(m);
     }
 
 

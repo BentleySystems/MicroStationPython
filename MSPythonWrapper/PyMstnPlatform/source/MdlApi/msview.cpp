@@ -1875,10 +1875,11 @@ void def_msview(py::module_& m)
         }, "viewName"_a, "viewNameSpace"_a, DOC(mdlView, findNamed));
 
     c10.def_static("getDefaultFlags", &mdlView_getDefaultFlags, "viewFlags"_a, DOC(mdlView, getDefaultFlags));
+
     c10.def_static("fitToFence", [](DPoint2dArray& fencePts, int viewIndex)
-    {
-    return mdlView_fitToFence(fencePts.data(), viewIndex, (UInt32)fencePts.size());
-    }, "fencePts"_a, "viewIndex"_a, DOC(mdlView, fitToFence));
+        {
+        return mdlView_fitToFence(fencePts.data(), viewIndex, (UInt32)fencePts.size());
+        }, "fencePts"_a, "viewIndex"_a, DOC(mdlView, fitToFence));
 
     c10.def_static("fitViewToRange", &mdlView_fitViewToRange, "min"_a, "max"_a, "options"_a, "viewIndex"_a, DOC(mdlView, fitViewToRange));
     c10.def_static("treatAs3D", &mdlView_treatAs3D, "viewIndex"_a, DOC(mdlView, treatAs3D));

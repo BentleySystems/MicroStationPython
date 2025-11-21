@@ -433,22 +433,68 @@ void def_MSBsplineCurve(py::module_& m)
                   py::overload_cast<DPoint3dArray const&, DoubleArray const*, DoubleArray const*, int, bool, bool>(&MSBsplineCurve::CreateFromPolesAndOrder),
                   "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
 
-   c1.def_static("CreateFromPolesAndOrder", [](py::list const& poles, DoubleArray const* weight, DoubleArray const* knots, int order, bool closed, bool inputPolesAlreadyWeighted)
-        {
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cpppoles, DPoint3dArray, DPoint3d);
-        return MSBsplineCurve::CreateFromPolesAndOrder(cpppoles, weight, knots, order, closed, inputPolesAlreadyWeighted);
-        }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+    c1.def_static("CreateFromPolesAndOrder", [](py::list const &poles, DoubleArray const *weights, DoubleArray const *knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cppPoles, DPoint3dArray, DPoint3d);
+                  return MSBsplineCurve::CreateFromPolesAndOrder(cppPoles, weights, knots, order, closed, inputPolesAlreadyWeighted); }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
 
+    c1.def_static("CreateFromPolesAndOrder", [](DPoint3dArray const &poles, py::list const &weights, DoubleArray const *knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+                  return MSBsplineCurve::CreateFromPolesAndOrder(poles, &cppWeights, knots, order, closed, inputPolesAlreadyWeighted); }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+
+    c1.def_static("CreateFromPolesAndOrder", [](DPoint3dArray const &poles, DoubleArray const *weights, py::list const &knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(knots, cppKnots, DoubleArray, double);
+                  return MSBsplineCurve::CreateFromPolesAndOrder(poles, weights, &cppKnots, order, closed, inputPolesAlreadyWeighted); }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+
+    c1.def_static("CreateFromPolesAndOrder", [](py::list const &poles, py::list const &weights, DoubleArray const *knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cppPoles, DPoint3dArray, DPoint3d);
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+                  return MSBsplineCurve::CreateFromPolesAndOrder(cppPoles, &cppWeights, knots, order, closed, inputPolesAlreadyWeighted); }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+
+    c1.def_static("CreateFromPolesAndOrder", [](py::list const &poles, DoubleArray const *weights, py::list const &knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cppPoles, DPoint3dArray, DPoint3d);
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(knots, cppKnots, DoubleArray, double);
+                  return MSBsplineCurve::CreateFromPolesAndOrder(cppPoles, weights, &cppKnots, order, closed, inputPolesAlreadyWeighted); }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+
+    c1.def_static("CreateFromPolesAndOrder", [](DPoint3dArray const &poles, py::list const &weights, py::list const &knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(knots, cppKnots, DoubleArray, double);
+                  return MSBsplineCurve::CreateFromPolesAndOrder(poles, &cppWeights, &cppKnots, order, closed, inputPolesAlreadyWeighted); }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+
+    c1.def_static("CreateFromPolesAndOrder", [](py::list const &poles, py::list const &weights, py::list const &knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+                  {
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cppPoles, DPoint3dArray, DPoint3d);
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+                  CONVERT_PYLIST_TO_NEW_CPPARRAY(knots, cppKnots, DoubleArray, double);
+                  return MSBsplineCurve::CreateFromPolesAndOrder(cppPoles, &cppWeights, &cppKnots, order, closed, inputPolesAlreadyWeighted); }, "poles"_a, "weights"_a, "knots"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a = true);
+              
     c1.def_static("CreateFromPolesAndOrder", [](DPoint3dArray const& poles, int order, bool closed = true)
         {
         return MSBsplineCurve::CreateFromPolesAndOrder(poles.data(), (int)poles.size(), order, closed);
         }, "poles"_a, "order"_a, "closed"_a = true);
 
-    c1.def_static("CreateFromPolesAndOrder", [](py::list const& poles, int order, bool closed = true)
-        {
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cpppoles, DPoint3dArray, DPoint3d);
-        return MSBsplineCurve::CreateFromPolesAndOrder(cpppoles.data(), (int)cpppoles.size(), order, closed);
-        }, "poles"_a, "order"_a, "closed"_a = true);
+    c1.def_static("CreateFromPolesAndOrder", [](py::list const &poles, int order, bool closed = true)
+              {
+              if (poles.empty())
+                     return MSBsplineCurve::CreateFromPolesAndOrder((DPoint2d*)NULL, 0, order, closed);
+              else{
+                     if(py::isinstance<DPoint3d>(poles[0])){
+                            CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cpppoles, DPoint3dArray, DPoint3d);
+                            return MSBsplineCurve::CreateFromPolesAndOrder(cpppoles.data(), (int)cpppoles.size(), order, closed);
+                     }
+                     else if(py::isinstance<DPoint2d>(poles[0])){
+                            CONVERT_PYLIST_TO_NEW_CPPARRAY(poles, cpppoles, DPoint2dArray, DPoint2d);
+                            return MSBsplineCurve::CreateFromPolesAndOrder(cpppoles.data(), (int)cpppoles.size(), order, closed);
+                     }
+                     else{
+                            throw std::invalid_argument("Invalid pole type");
+                     }
+              } }, "poles"_a, "order"_a, "closed"_a = true);
 
     c1.def_static("CreateFromPolesAndOrder", [](DPoint2dArray const& poles, int order, bool closed = true)
         {
@@ -545,18 +591,41 @@ void def_MSBsplineCurve(py::module_& m)
            py::overload_cast<DPoint3dArray&, DoubleArray&>(&MSBsplineCurve::FractionToPoints),
            "points"_a, "fractions"_a);
 
-    c1.def("FractionToPoint", [](MSBsplineCurveR self, py::list& points, DoubleArray& fractions)
-           {
+    c1.def("FractionToPoints", [] (MSBsplineCurve& self, py::list& points, DoubleArray& fractions) {
            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
            self.FractionToPoints(cppPoints, fractions);
            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
-           },"points"_a, "fractions"_a);
+          }, "points"_a, "fractions"_a);
+          
+    c1.def("FractionToPoints", [] (MSBsplineCurve& self, DPoint3dArray& points, py::list& fractions) {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(fractions, cppFractions, DoubleArray, double);
+           self.FractionToPoints(points, cppFractions);
+           CONVERT_CPPARRAY_TO_PYLIST(fractions, cppFractions, DoubleArray, double);
+          }, "points"_a, "fractions"_a);
+          
+    c1.def("FractionToPoints", [] (MSBsplineCurve& self, py::list& points, py::list& fractions) {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(fractions, cppFractions, DoubleArray, double);
+           self.FractionToPoints(cppPoints, cppFractions);
+           CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+           CONVERT_CPPARRAY_TO_PYLIST(fractions, cppFractions, DoubleArray, double);
+          }, "points"_a, "fractions"_a);
 
     c1.def("GetFrenetFrame", [] (MSBsplineCurveCR self, DVec3dArray frame, DPoint3dR point, double u)
            {
            double curvature = 0;
            double torsion = 0;
            MSBsplineStatus retVal = self.GetFrenetFrame(frame.data(), point, curvature, torsion, u);
+           return py::make_tuple(retVal, curvature, torsion);
+           }, "frame"_a, "point"_a, "u"_a);
+
+    c1.def("GetFrenetFrame", [] (MSBsplineCurveCR self, py::list frame, DPoint3dR point, double u)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(frame, cppFrame, DVec3dArray, DVec3d);
+           double curvature = 0;
+           double torsion = 0;
+           MSBsplineStatus retVal = self.GetFrenetFrame(cppFrame.data(), point, curvature, torsion, u);
+           CONVERT_CPPARRAY_TO_PYLIST(frame, cppFrame, DVec3dArray, DVec3d);
            return py::make_tuple(retVal, curvature, torsion);
            }, "frame"_a, "point"_a, "u"_a);
 
@@ -573,6 +642,19 @@ void def_MSBsplineCurve(py::module_& m)
 
             delete[] pDervs;
             pDervs = nullptr;
+            });
+
+    c1.def("ComputeDerivatives", [](MSBsplineCurveCR self, py::list& dervs, int numDervs, double u)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(dervs, cppDervs, DVec3dArray, DVec3d);
+            DVec3d* pDervs = new DVec3d[numDervs+1];
+            self.ComputeDerivatives (pDervs , numDervs, u);
+            for (int i = 0; i < numDervs+1; i++)
+                cppDervs.push_back (pDervs[i]);
+
+            delete[] pDervs;
+            pDervs = nullptr;
+            CONVERT_CPPARRAY_TO_PYLIST(dervs, cppDervs, DVec3dArray, DVec3d);
             });
 
     c1.def("ClosestPoint", [] (MSBsplineCurveCR self, DPoint3dR curvePoint, DPoint3dCR spacePoint)
@@ -652,8 +734,31 @@ void def_MSBsplineCurve(py::module_& m)
                   {
                   size_t lowActiveIndex, highActiveIndex;
                   MSBsplineCurve::CompressKnots(inKnot, order, outKnot, multiplicities, lowActiveIndex, highActiveIndex);
-                  return py::make_tuple(lowActiveIndex, highActiveIndex);
-                  }, "inKnot"_a, "order"_a, "outKnot"_a, "multiplicities"_a);
+                  return py::make_tuple(lowActiveIndex, highActiveIndex); }, "inKnot"_a, "order"_a, "outKnot"_a, "multiplicities"_a);
+
+    c1.def_static("CompressKnots", [](py::list inKnot, int order, py::list outKnot, UInt64Array &multiplicities)
+                  {
+                     CONVERT_PYLIST_TO_NEW_CPPARRAY(inKnot, cppInKnot, DoubleArray, double);
+                     CONVERT_PYLIST_TO_NEW_CPPARRAY(outKnot, cppOutKnot, DoubleArray, double);
+                     size_t lowActiveIndex, highActiveIndex;
+                     MSBsplineCurve::CompressKnots(cppInKnot, order, cppOutKnot, multiplicities, lowActiveIndex, highActiveIndex);
+                     CONVERT_CPPARRAY_TO_PYLIST(outKnot, cppOutKnot, DoubleArray, double);
+                     return py::make_tuple(lowActiveIndex, highActiveIndex); }, "inKnot"_a, "order"_a, "outKnot"_a, "multiplicities"_a);
+
+    c1.def_static("CompressKnots", [](py::list inKnot, int order, DoubleArray &outKnot, UInt64Array &multiplicities)
+                  {
+                     CONVERT_PYLIST_TO_NEW_CPPARRAY(inKnot, cppInKnot, DoubleArray, double);
+                     size_t lowActiveIndex, highActiveIndex;
+                     MSBsplineCurve::CompressKnots(cppInKnot, order, outKnot, multiplicities, lowActiveIndex, highActiveIndex);
+                     return py::make_tuple(lowActiveIndex, highActiveIndex); }, "inKnot"_a, "order"_a, "outKnot"_a, "multiplicities"_a);
+
+    c1.def_static("CompressKnots", [](DoubleArray const &inKnot, int order, py::list outKnot, UInt64Array &multiplicities)
+                  {
+                     CONVERT_PYLIST_TO_NEW_CPPARRAY(outKnot, cppOutKnot, DoubleArray, double);
+                     size_t lowActiveIndex, highActiveIndex;
+                     MSBsplineCurve::CompressKnots(inKnot, order, cppOutKnot, multiplicities, lowActiveIndex, highActiveIndex);
+                     CONVERT_CPPARRAY_TO_PYLIST(outKnot, cppOutKnot, DoubleArray, double);
+                     return py::make_tuple(lowActiveIndex, highActiveIndex); }, "inKnot"_a, "order"_a, "outKnot"_a, "multiplicities"_a);
 
     c1.def("GetKnots", &MSBsplineCurve::GetPoles4d, "outData"_a, DOC(Bentley, Geom, MSBsplineCurve, GetKnots));
 
@@ -748,40 +853,966 @@ void def_MSBsplineCurve(py::module_& m)
            double actualSignedDistance = 0;
            bool bOk = self.FractionAtSignedDistance(worldToLocal, startParam, signedDistance, endParam, actualSignedDistance);
            return py::make_tuple(bOk, endParam, actualSignedDistance);
-           }, "worldToLocal"_a, "startParam"_a, "signedDistance"_a);      
-        
+           }, "worldToLocal"_a, "startParam"_a, "signedDistance"_a);
 
-     c1.def("ComputeInflectionPoints", py::overload_cast<DPoint3dArray&, DoubleArray&>(&MSBsplineCurve::ComputeInflectionPoints), "points"_a, "params"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeInflectionPoints));
-     c1.def("ComputeInflectionPoints", [](MSBsplineCurveR self, py::list &points, DoubleArray &params)
-            {
-            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-            self.ComputeInflectionPoints(cppPoints, params);
-            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "points"_a, "params"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeInflectionPoints));
-     c1.def("ComputeInflectionPointsXY", &MSBsplineCurve::ComputeInflectionPointsXY, "points"_a, "params"_a, "transform"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeInflectionPointsXY));
+    c1.def("ComputeInflectionPoints", py::overload_cast<DPoint3dArray &, DoubleArray &>(&MSBsplineCurve::ComputeInflectionPoints), "points"_a, "params"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeInflectionPoints));
 
-     c1.def("AddPlaneIntersections",
+    c1.def("ComputeInflectionPoints", [] (MSBsplineCurveR self, py::list& points, py::list& params) {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       MSBsplineStatus status = self.ComputeInflectionPoints(cppPoints, cppParams);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double);
+       return status; }, "points"_a, "params"_a);
+
+    c1.def("ComputeInflectionPoints", [] (MSBsplineCurveR self, py::list& points, DoubleArray & params) {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       MSBsplineStatus status = self.ComputeInflectionPoints(cppPoints, params);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       return status; }, "points"_a, "params"_a);
+
+    c1.def("ComputeInflectionPoints", [] (MSBsplineCurveR self, DPoint3dArray & points, py::list& params) {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       MSBsplineStatus status = self.ComputeInflectionPoints(points, cppParams);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double);
+       return status; }, "points"_a, "params"_a);
+
+    c1.def("ComputeInflectionPointsXY", &MSBsplineCurve::ComputeInflectionPointsXY, "points"_a, "params"_a, "transform"_a, DOC(Bentley, Geom, MSBsplineCurve, ComputeInflectionPointsXY));
+
+    c1.def("AddPlaneIntersections",
             py::overload_cast<DPoint3dArray*, DoubleArray*, DPlane3dCR>(&MSBsplineCurve::AddPlaneIntersections, py::const_),
             "point"_a, "fractionParameters"_a, "plane"_a);
+
+    c1.def("AddPlaneIntersections", [] (MSBsplineCurveCR self, py::list points, py::list params, DPlane3dCR plane) {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+              self.AddPlaneIntersections(&cppPoints, &cppParams, plane);
+              CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+              CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "point"_a, "fractionParameters"_a, "plane"_a);
+
+    c1.def("AddPlaneIntersections", [] (MSBsplineCurveCR self, py::list points, DoubleArray * params, DPlane3dCR plane) {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+              self.AddPlaneIntersections(&cppPoints, params, plane);
+              CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "point"_a, "fractionParameters"_a, "plane"_a);
+
+    c1.def("AddPlaneIntersections", [] (MSBsplineCurveCR self, DPoint3dArray * points, py::list params, DPlane3dCR plane) {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+              self.AddPlaneIntersections(points, &cppParams, plane);
+              CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "point"_a, "fractionParameters"_a, "plane"_a);
 
      c1.def("AddPlaneIntersections",
             py::overload_cast<DPoint3dArray*, DoubleArray*, DPoint4dCR>(&MSBsplineCurve::AddPlaneIntersections, py::const_),
             "point"_a, "fractionParameters"_a, "planeCoeffs"_a);
 
-    c1.def("AddLineIntersectionsXY", 
+     c1.def("AddPlaneIntersections", [] (MSBsplineCurveCR self, py::list points, py::list params, DPoint4dCR plane) {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+              self.AddPlaneIntersections(&cppPoints, &cppParams, plane);
+              CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+              CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "point"_a, "fractionParameters"_a, "plane"_a);
+
+     c1.def("AddPlaneIntersections", [] (MSBsplineCurveCR self, py::list points, DoubleArray * params, DPoint4dCR plane) {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+              self.AddPlaneIntersections(&cppPoints, params, plane);
+              CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "point"_a, "fractionParameters"_a, "plane"_a);
+
+     c1.def("AddPlaneIntersections", [] (MSBsplineCurveCR self, DPoint3dArray * points, py::list params, DPoint4dCR plane) {
+              CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+              self.AddPlaneIntersections(points, &cppParams, plane);
+              CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "point"_a, "fractionParameters"_a, "plane"_a);
+
+     c1.def("AddLineIntersectionsXY",
             py::overload_cast<DPoint3dArray*, DoubleArray*, DPoint3dArray*, DoubleArray*, DSegment3dCR, bool, DMatrix4dCP>(&MSBsplineCurve::AddLineIntersectionsXY, py::const_),
             "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
 
-    c1.def("AddLineIntersectionsXY", 
+     // 1) list, list, list, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, py::list cf, py::list lp, py::list lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, &cppCF, &cppLP, &cppLF, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 2) list, list, list, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, py::list cf, py::list lp, DoubleArray *lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(&cppCP, &cppCF, &cppLP, lf, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 3) list, list, array, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, py::list cf, DPoint3dArray *lp, py::list lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, &cppCF, lp, &cppLF, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 4) list, list, array, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, py::list cf, DPoint3dArray *lp, DoubleArray *lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, &cppCF, lp, lf, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 5) list, array, list, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, DoubleArray *cf, py::list lp, py::list lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, cf, &cppLP, &cppLF, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 6) list, array, list, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, DoubleArray *cf, py::list lp, DoubleArray *lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(&cppCP, cf, &cppLP, lf, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 7) list, array, array, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, DoubleArray *cf, DPoint3dArray *lp, py::list lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, cf, lp, &cppLF, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 8) list, array, array, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, DoubleArray *cf, DPoint3dArray *lp, DoubleArray *lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(&cppCP, cf, lp, lf, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 9) array, list, list, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, py::list cf, py::list lp, py::list lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, &cppCF, &cppLP, &cppLF, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 10) array, list, list, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, py::list cf, py::list lp, DoubleArray *lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(cp, &cppCF, &cppLP, lf, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 11) array, list, array, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, py::list cf, DPoint3dArray *lp, py::list lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, &cppCF, lp, &cppLF, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 12) array, list, array, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, py::list cf, DPoint3dArray *lp, DoubleArray *lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, &cppCF, lp, lf, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 13) array, array, list, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, DoubleArray *cf, py::list lp, py::list lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, cf, &cppLP, &cppLF, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 14) array, array, list, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, DoubleArray *cf, py::list lp, DoubleArray *lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(cp, cf, &cppLP, lf, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     // 15) array, array, array, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, DoubleArray *cf, DPoint3dArray *lp, py::list lf, DSegment3dCR seg, bool ext, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, cf, lp, &cppLF, seg, ext, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment"_a, "matrix"_a);
+
+     c1.def("AddLineIntersectionsXY",
             py::overload_cast<DPoint3dArray*, DoubleArray*, DPoint3dArray*, DoubleArray*, DSegment3dCR, bool, bool, DMatrix4dCP>(&MSBsplineCurve::AddLineIntersectionsXY, py::const_),
             "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 1) list, list, list, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, py::list cf, py::list lp, py::list lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, &cppCF, &cppLP, &cppLF, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 2) list, list, list, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, py::list cf, py::list lp, DoubleArray *lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(&cppCP, &cppCF, &cppLP, lf, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 3) list, list, array, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, py::list cf, DPoint3dArray *lp, py::list lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, &cppCF, lp, &cppLF, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 4) list, list, array, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, py::list cf, DPoint3dArray *lp, DoubleArray *lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, &cppCF, lp, lf, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 5) list, array, list, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, DoubleArray *cf, py::list lp, py::list lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, cf, &cppLP, &cppLF, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 6) list, array, list, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, DoubleArray *cf, py::list lp, DoubleArray *lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(&cppCP, cf, &cppLP, lf, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 7) list, array, array, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, DoubleArray *cf, DPoint3dArray *lp, py::list lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(&cppCP, cf, lp, &cppLF, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 8) list, array, array, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, py::list cp, DoubleArray *cf, DPoint3dArray *lp, DoubleArray *lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cp, cppCP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(&cppCP, cf, lp, lf, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cp, cppCP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 9) array, list, list, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, py::list cf, py::list lp, py::list lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, &cppCF, &cppLP, &cppLF, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 10) array, list, list, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, py::list cf, py::list lp, DoubleArray *lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(cp, &cppCF, &cppLP, lf, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 11) array, list, array, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, py::list cf, DPoint3dArray *lp, py::list lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, &cppCF, lp, &cppLF, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 12) array, list, array, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, py::list cf, DPoint3dArray *lp, DoubleArray *lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(cf, cppCF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, &cppCF, lp, lf, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(cf, cppCF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 13) array, array, list, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, DoubleArray *cf, py::list lp, py::list lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, cf, &cppLP, &cppLF, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 14) array, array, list, array
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, DoubleArray *cf, py::list lp, DoubleArray *lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lp, cppLP, DPoint3dArray, DPoint3d);
+       self.AddLineIntersectionsXY(cp, cf, &cppLP, lf, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(lp, cppLP, DPoint3dArray, DPoint3d); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
+
+     // 15) array, array, array, list
+     c1.def("AddLineIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *cp, DoubleArray *cf, DPoint3dArray *lp, py::list lf, DSegment3dCR seg, bool ext0, bool ext1, DMatrix4dCP mat)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lf, cppLF, DoubleArray, double);
+       self.AddLineIntersectionsXY(cp, cf, lp, &cppLF, seg, ext0, ext1, mat);
+       CONVERT_CPPARRAY_TO_PYLIST(lf, cppLF, DoubleArray, double); }, "curvePoints"_a, "curveFractions"_a, "linePoints"_a, "lineFractions"_a, "segment"_a, "extendSegment0"_a, "extendSegment1"_a, "matrix"_a);
 
      c1.def("AddLinestringIntersectionsXY", 
             py::overload_cast<DPoint3dArray*, DoubleArray*, DPoint3dArray*, DoubleArray*, DPoint3dArray const&, DMatrix4dCP>(&MSBsplineCurve::AddLinestringIntersectionsXY, py::const_),
             "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+  
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, bPts, bFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, py::list bPts, py::list bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, &cppBPts, &cppBFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, py::list bPts, DoubleArray *bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, &cppBPts, bFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, DPoint3dArray *bPts, py::list bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, bPts, &cppBFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, bPts, bFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, py::list bPts, py::list bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, &cppBPts, &cppBFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, py::list bPts, DoubleArray *bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, &cppBPts, bFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, DPoint3dArray *bPts, py::list bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, bPts, &cppBFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, bPts, bFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, py::list bPts, py::list bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, &cppBPts, &cppBFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, py::list bPts, DoubleArray *bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, &cppBPts, bFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, DPoint3dArray *bPts, py::list bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, bPts, &cppBFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, py::list bPts, py::list bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, &cppBPts, &cppBFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, py::list bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, &cppBPts, bFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, DPoint3dArray *bPts, py::list bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, bPts, &cppBFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, bPts, bFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, py::list bPts, py::list bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, &cppBPts, &cppBFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, py::list bPts, py::list bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, &cppBPts, &cppBFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, py::list bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, &cppBPts, bFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, DPoint3dArray *bPts, py::list bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, bPts, &cppBFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, py::list bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, &cppBPts, bFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, py::list bPts, py::list bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, &cppBPts, &cppBFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d)0;
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, py::list bPts, DoubleArray *bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, &cppBPts, bFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, DPoint3dArray *bPts, py::list bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, bPts, &cppBFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, DPoint3dArray *bPts, py::list bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, bPts, &cppBFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, DPoint3dArray *lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, bPts, bFracs, *lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, py::list bPts, py::list bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, &cppBPts, &cppBFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, py::list bPts, DoubleArray *bFracs, DPoint3dArray *lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, &cppBPts, bFracs, *lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, DPoint3dArray *bPts, py::list bFracs, DPoint3dArray const &lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, bPts, &cppBFracs, lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, DPoint3dArray *lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, bPts, bFracs, *lineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
+
+    c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, py::list lineString, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, bPts, bFracs, cppLineString, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "matrix"_a);
 
      c1.def("AddLinestringIntersectionsXY",
-            py::overload_cast<DPoint3dArray*, DoubleArray*, DPoint3dArray*, DoubleArray*, DPoint3dArray const&, bool, DMatrix4dCP>(&MSBsplineCurve::AddLinestringIntersectionsXY, py::const_),
+            py::overload_cast<DPoint3dArray *, DoubleArray *, DPoint3dArray *, DoubleArray *, DPoint3dArray const &, bool, DMatrix4dCP>(&MSBsplineCurve::AddLinestringIntersectionsXY, py::const_),
             "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 1) list, list, list, list, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, py::list bPts, py::list bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, &cppBPts, &cppBFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 2) list, list, list, list, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, py::list bPts, py::list bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, &cppBPts, &cppBFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 3) list, list, list, array, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, py::list bPts, DoubleArray *bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, &cppBPts, bFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 4) list, list, list, array, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, py::list bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, &cppBPts, bFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 5) list, list, array, list, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, DPoint3dArray *bPts, py::list bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, bPts, &cppBFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 6) list, list, array, list, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, DPoint3dArray *bPts, py::list bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, bPts, &cppBFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 7) list, list, array, array, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, bPts, bFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 8) list, list, array, array, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, py::list aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, &cppAFracs, bPts, bFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 9) list, array, list, list, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, py::list bPts, py::list bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, &cppBPts, &cppBFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 10) list, array, list, list, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, py::list bPts, py::list bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, &cppBPts, &cppBFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 11) list, array, list, array, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, py::list bPts, DoubleArray *bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, &cppBPts, bFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 12) list, array, list, array, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, py::list bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, &cppBPts, bFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 13) list, array, array, list, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, DPoint3dArray *bPts, py::list bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, bPts, &cppBFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 14) list, array, array, list, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, DPoint3dArray *bPts, py::list bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, bPts, &cppBFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 15) list, array, array, array, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, bPts, bFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 16) list, array, array, array, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, py::list aPts, DoubleArray *aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aPts, cppAPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(&cppAPts, aFracs, bPts, bFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aPts, cppAPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 17) array, list, list, list, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, py::list bPts, py::list bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, &cppBPts, &cppBFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 18) array, list, list, list, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, py::list bPts, py::list bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, &cppBPts, &cppBFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 19) array, list, list, array, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, py::list bPts, DoubleArray *bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, &cppBPts, bFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 20) array, list, list, array, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, py::list bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, &cppBPts, bFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 21) array, list, array, list, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, DPoint3dArray *bPts, py::list bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, bPts, &cppBFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 22) array, list, array, list, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, DPoint3dArray *bPts, py::list bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, bPts, &cppBFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 23) array, list, array, array, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, bPts, bFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 24) array, list, array, array, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, py::list aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(aFracs, cppAFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, &cppAFracs, bPts, bFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(aFracs, cppAFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 25) array, array, list, list, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, py::list bPts, py::list bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, &cppBPts, &cppBFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 26) array, array, list, list, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, py::list bPts, py::list bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, &cppBPts, &cppBFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 27) array, array, list, array, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, py::list bPts, DoubleArray *bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, &cppBPts, bFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 28) array, array, list, array, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, py::list bPts, DoubleArray *bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bPts, cppBPts, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, &cppBPts, bFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bPts, cppBPts, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 29) array, array, array, list, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, DPoint3dArray *bPts, py::list bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, bPts, &cppBFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+     // 30) array, array, array, list, array
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, DPoint3dArray *bPts, py::list bFracs, DPoint3dArray const &lineString, bool extend, DMatrix4dCP matrix)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(bFracs, cppBFracs, DoubleArray, double);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, bPts, &cppBFracs, lineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(bFracs, cppBFracs, DoubleArray, double); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
+
+      // 31) array, array, array, array, list
+     c1.def("AddLinestringIntersectionsXY", [](MSBsplineCurveCR self, DPoint3dArray *aPts, DoubleArray *aFracs, DPoint3dArray *bPts, DoubleArray *bFracs, py::list lineString, bool extend, DMatrix4dCP matrix)
+      {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(lineString, cppLineString, DPoint3dArray, DPoint3d);
+       self.AddLinestringIntersectionsXY(aPts, aFracs, bPts, bFracs, cppLineString, extend, matrix);
+       CONVERT_CPPARRAY_TO_PYLIST(lineString, cppLineString, DPoint3dArray, DPoint3d); }, "curveAPoints"_a, "curveAFractions"_a, "curveBPoints"_a, "curveBFractions"_a, "lineString"_a, "extendLineString"_a, "matrix"_a);
 
      c1.def("AddArcIntersectionsXY", &MSBsplineCurve::AddArcIntersectionsXY,
             "curvePoints"_a, "curveFractions"_a, "ellipsePoints"_a, "ellipseFractions"_a, "arc"_a, "extendConic"_a, "matrix"_a);
@@ -820,32 +1851,190 @@ void def_MSBsplineCurve(py::module_& m)
             py::overload_cast<DPoint3dArray&, DVec3dArray*, DoubleArray*, double, double, double, bool, CurveParameterMapping>(&MSBsplineCurve::AddStrokes, py::const_),
             "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "chordTol"_a = 0.0, "angleTol"_a = 0.20, "maxEdgeLength"_a = 0.0, "includeStartPoint"_a = true, "parameterSelect"_a = CURVE_PARAMETER_MAPPING_CurveKnot);
 
-     c1.def("AddStrokes", [](MSBsplineCurveCR self, py::list &points, DVec3dArray *derivatives, DoubleArray *params, double chordTol, double angleTol, double c, bool includeStartPoint, CurveParameterMapping parameterSelect)
+     // 1) list, list, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, py::list points, py::list derivatives, py::list params, double chordTol, double angleTol, double maxEdgeLength, bool includeStartPoint, CurveParameterMapping parameterSelect)
             {
-            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-            self.AddStrokes(cppPoints, derivatives, params, chordTol, angleTol, c, includeStartPoint, parameterSelect);
-            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "chordTol"_a = 0.0, "angleTol"_a = 0.20, "c"_a = 0.0, "includeStartPoint"_a = true, "parameterSelect"_a = CURVE_PARAMETER_MAPPING_CurveKnot);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(cppPoints, &cppDerivatives, &cppParams, chordTol, angleTol, maxEdgeLength, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "points"_a, "derivatives"_a, "params"_a, "chordTol"_a, "angleTol"_a, "maxEdgeLength"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 2) list, list, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, py::list points, py::list derivatives, DoubleArray *params, double chordTol, double angleTol, double maxEdgeLength, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       self.AddStrokes(cppPoints, &cppDerivatives, params, chordTol, angleTol, maxEdgeLength, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d);}, "points"_a, "derivatives"_a, "params"_a, "chordTol"_a, "angleTol"_a, "maxEdgeLength"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 3) list, array, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, py::list points, DVec3dArray *derivatives, py::list params, double chordTol, double angleTol, double maxEdgeLength, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(cppPoints, derivatives, &cppParams, chordTol, angleTol, maxEdgeLength, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "points"_a, "derivatives"_a, "params"_a, "chordTol"_a, "angleTol"_a, "maxEdgeLength"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 4) list, array, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, py::list points, DVec3dArray *derivatives, DoubleArray *params, double chordTol, double angleTol, double maxEdgeLength, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       self.AddStrokes(cppPoints, derivatives, params, chordTol, angleTol, maxEdgeLength, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "points"_a, "derivatives"_a, "params"_a, "chordTol"_a, "angleTol"_a, "maxEdgeLength"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 5) array, list, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, DPoint3dArray &points, py::list derivatives, py::list params, double chordTol, double angleTol, double maxEdgeLength, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(points, &cppDerivatives, &cppParams, chordTol, angleTol, maxEdgeLength, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "points"_a, "derivatives"_a, "params"_a, "chordTol"_a, "angleTol"_a, "maxEdgeLength"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 6) array, list, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, DPoint3dArray &points, py::list derivatives, DoubleArray *params, double chordTol, double angleTol, double maxEdgeLength, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       self.AddStrokes(points, &cppDerivatives, params, chordTol, angleTol, maxEdgeLength, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d);}, "points"_a, "derivatives"_a, "params"_a, "chordTol"_a, "angleTol"_a, "maxEdgeLength"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 7) array, array, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, DPoint3dArray &points, DVec3dArray *derivatives, py::list params, double chordTol, double angleTol, double maxEdgeLength, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(points, derivatives, &cppParams, chordTol, angleTol, maxEdgeLength, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "points"_a, "derivatives"_a, "params"_a, "chordTol"_a, "angleTol"_a, "maxEdgeLength"_a, "includeStartPoint"_a, "parameterSelect"_a);
 
      c1.def("AddStrokes",
             py::overload_cast<IFacetOptionsCR, DPoint3dArray&, DVec3dArray*, DoubleArray*, bool>(&MSBsplineCurve::AddStrokes, py::const_),
             "options"_a, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "includeStart"_a = true);
 
-     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, py::list &points, DVec3dArray *derivatives, DoubleArray *params, bool includeStart)
+     // 1) list, list, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, py::list points, py::list derivatives, py::list params, bool includeStart)
             {
-             CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-             self.AddStrokes(options, cppPoints, derivatives, params, includeStart);
-             CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "options"_a, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "includeStart"_a = true);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(options, cppPoints, &cppDerivatives, &cppParams, includeStart);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "options"_a, "points"_a, "derivatives"_a, "params"_a, "includeStart"_a);
+
+     // 2) list, list, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, py::list points, py::list derivatives, DoubleArray *params, bool includeStart)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       self.AddStrokes(options, cppPoints, &cppDerivatives, params, includeStart);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d); }, "options"_a, "points"_a, "derivatives"_a, "params"_a, "includeStart"_a);
+
+     // 3) list, array, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, py::list points, DVec3dArray *derivatives, py::list params, bool includeStart)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(options, cppPoints, derivatives, &cppParams, includeStart);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "options"_a, "points"_a, "derivatives"_a, "params"_a, "includeStart"_a);
+
+     // 4) list, array, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, py::list points, DVec3dArray *derivatives, DoubleArray *params, bool includeStart)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       self.AddStrokes(options, cppPoints, derivatives, params, includeStart);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "options"_a, "points"_a, "derivatives"_a, "params"_a, "includeStart"_a);
+
+     // 5) array, list, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, DPoint3dArray &points, py::list derivatives, py::list params, bool includeStart)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(options, points, &cppDerivatives, &cppParams, includeStart);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "options"_a, "points"_a, "derivatives"_a, "params"_a, "includeStart"_a);
+
+     // 6) array, list, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, DPoint3dArray &points, py::list derivatives, DoubleArray *params, bool includeStart)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       self.AddStrokes(options, points, &cppDerivatives, params, includeStart);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d); }, "options"_a, "points"_a, "derivatives"_a, "params"_a, "includeStart"_a);
+
+     // 7) array, array, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, IFacetOptionsCR options, DPoint3dArray &points, DVec3dArray *derivatives, py::list params, bool includeStart)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(options, points, derivatives, &cppParams, includeStart);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "options"_a, "points"_a, "derivatives"_a, "params"_a, "includeStart"_a);
 
      c1.def("AddStrokes",
             py::overload_cast<size_t, DPoint3dArray&, DVec3dArray*, DoubleArray*, bool, CurveParameterMapping>(&MSBsplineCurve::AddStrokes, py::const_),
             "numPoints"_a, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "includeStartPoint"_a = true, "parameterSelect"_a = CURVE_PARAMETER_MAPPING_CurveKnot);
 
-     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, py::list& points, DVec3dArray* derivatives, DoubleArray* params, bool includeStartPoint, CurveParameterMapping parameterSelect)
+     // 1) list, list, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, py::list points, py::list derivatives, py::list params, bool includeStartPoint, CurveParameterMapping parameterSelect)
             {
-            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
-            self.AddStrokes(numPoints, cppPoints, derivatives, params, includeStartPoint, parameterSelect);
-            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
-            }, "numPoints"_a, "points"_a, "derivatives"_a = nullptr, "params"_a = nullptr, "includeStartPoint"_a = true, "parameterSelect"_a = CURVE_PARAMETER_MAPPING_CurveKnot);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(numPoints, cppPoints, &cppDerivatives, &cppParams, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "numPoints"_a, "points"_a, "derivatives"_a, "params"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 2) list, list, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, py::list points, py::list derivatives, DoubleArray *params, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       self.AddStrokes(numPoints, cppPoints, &cppDerivatives, params, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d); }, "numPoints"_a, "points"_a, "derivatives"_a, "params"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 3) list, array, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, py::list points, DVec3dArray *derivatives, py::list params, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(numPoints, cppPoints, derivatives, &cppParams, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "numPoints"_a, "points"_a, "derivatives"_a, "params"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 4) list, array, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, py::list points, DVec3dArray *derivatives, DoubleArray *params, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       self.AddStrokes(numPoints, cppPoints, derivatives, params, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d); }, "numPoints"_a, "points"_a, "derivatives"_a, "params"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 5) array, list, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, DPoint3dArray &points, py::list derivatives, py::list params, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(numPoints, points, &cppDerivatives, &cppParams, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "numPoints"_a, "points"_a, "derivatives"_a, "params"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 6) array, list, array
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, DPoint3dArray &points, py::list derivatives, DoubleArray *params, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(derivatives, cppDerivatives, DVec3dArray, DVec3d);
+       self.AddStrokes(numPoints, points, &cppDerivatives, params, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(derivatives, cppDerivatives, DVec3dArray, DVec3d); }, "numPoints"_a, "points"_a, "derivatives"_a, "params"_a, "includeStartPoint"_a, "parameterSelect"_a);
+
+     // 7) array, array, list
+     c1.def("AddStrokes", [](MSBsplineCurveCR self, size_t numPoints, DPoint3dArray &points, DVec3dArray *derivatives, py::list params, bool includeStartPoint, CurveParameterMapping parameterSelect)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(params, cppParams, DoubleArray, double);
+       self.AddStrokes(numPoints, points, derivatives, &cppParams, includeStartPoint, parameterSelect);
+       CONVERT_CPPARRAY_TO_PYLIST(params, cppParams, DoubleArray, double); }, "numPoints"_a, "points"_a, "derivatives"_a, "params"_a, "includeStartPoint"_a, "parameterSelect"_a);
 
      c1.def("PointsAtUniformFractions", &MSBsplineCurve::PointsAtUniformFractions, "points"_a, "fractions"_a, "numPoints"_a, DOC(Bentley, Geom, MSBsplineCurve, PointsAtUniformFractions));
      c1.def("PointsAtUniformArcLength", &MSBsplineCurve::PointsAtUniformArcLength, "points"_a, "fractions"_a, "numPoints"_a, DOC(Bentley, Geom, MSBsplineCurve, PointsAtUniformArcLength));
@@ -885,11 +2074,74 @@ void def_MSBsplineCurve(py::module_& m)
             py::overload_cast<DPoint3dArray const&, DoubleArray const*, DoubleArray const*, int, bool, bool>(&MSBsplineCurve::Populate),
             "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
 
-     c1.def("Populate", [](MSBsplineCurveR self, py::list const& pointVector, DoubleArray const* weightVector, DoubleArray const* knotVector, int order, bool closed, bool inputPolesAlreadyWeighted)
-           {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(pointVector, cppPoints, DPoint3dArray, DPoint3d);
-           return self.Populate(cppPoints, weightVector, knotVector, order, closed, inputPolesAlreadyWeighted);
-           }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
+     // 1) list, list, list
+     c1.def("Populate", [](MSBsplineCurve & self, py::list points, py::list weights, py::list knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+     {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(knots, cppKnots, DoubleArray, double);
+            MSBsplineStatus status = self.Populate(cppPoints, &cppWeights, &cppKnots, order, closed, inputPolesAlreadyWeighted);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(weights, cppWeights, DoubleArray, double);
+            CONVERT_CPPARRAY_TO_PYLIST(knots, cppKnots, DoubleArray, double);
+            return status;
+     }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
+
+     // 2) list, list, array
+     c1.def("Populate", [](MSBsplineCurve & self, py::list points, py::list weights, DoubleArray const *knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+     {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+            MSBsplineStatus status = self.Populate(cppPoints, &cppWeights, knots, order, closed, inputPolesAlreadyWeighted);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(weights, cppWeights, DoubleArray, double);
+            return status;
+     }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
+
+     // 3) list, array, list
+     c1.def("Populate",  [](MSBsplineCurve & self, py::list points, DoubleArray const *weights, py::list knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+     {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(knots, cppKnots, DoubleArray, double);
+            MSBsplineStatus status = self.Populate(cppPoints, weights, &cppKnots, order, closed, inputPolesAlreadyWeighted);
+            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+            CONVERT_CPPARRAY_TO_PYLIST(knots, cppKnots, DoubleArray, double);
+            return status;
+     }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
+
+     // 4) list, array, array
+     c1.def("Populate", [](MSBsplineCurve &self, py::list points, DoubleArray const *weights, DoubleArray const *knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+       MSBsplineStatus status = self.Populate(cppPoints, weights, knots, order, closed, inputPolesAlreadyWeighted);
+       CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
+       return status; }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
+
+     // 5) array, list, list
+     c1.def("Populate", [](MSBsplineCurve &self, DPoint3dArray const &points, py::list weights, py::list knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(knots, cppKnots, DoubleArray, double);
+       MSBsplineStatus status = self.Populate(points, &cppWeights, &cppKnots, order, closed, inputPolesAlreadyWeighted);
+       CONVERT_CPPARRAY_TO_PYLIST(weights, cppWeights, DoubleArray, double);
+       CONVERT_CPPARRAY_TO_PYLIST(knots, cppKnots, DoubleArray, double);
+       return status; }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
+
+     // 6) array, list, array
+     c1.def("Populate", [](MSBsplineCurve &self, DPoint3dArray const &points, py::list weights, DoubleArray const *knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+       MSBsplineStatus status = self.Populate(points, &cppWeights, knots, order, closed, inputPolesAlreadyWeighted);
+       CONVERT_CPPARRAY_TO_PYLIST(weights, cppWeights, DoubleArray, double);
+       return status; }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
+
+     // 7) array, array, list
+     c1.def("Populate", [](MSBsplineCurve &self, DPoint3dArray const &points, DoubleArray const *weights, py::list knots, int order, bool closed, bool inputPolesAlreadyWeighted)
+            {
+       CONVERT_PYLIST_TO_NEW_CPPARRAY(knots, cppKnots, DoubleArray, double);
+       MSBsplineStatus status = self.Populate(points, weights, &cppKnots, order, closed, inputPolesAlreadyWeighted);
+       CONVERT_CPPARRAY_TO_PYLIST(knots, cppKnots, DoubleArray, double);
+       return status; }, "pointVector"_a, "weightVector"_a, "knotVector"_a, "order"_a, "closed"_a, "inputPolesAlreadyWeighted"_a);
 
      c1.def("AppendCurve", &MSBsplineCurve::AppendCurve, "inCurve"_a, DOC(Bentley, Geom, MSBsplineCurve, AppendCurve));
      c1.def("IsSameGeometry", &MSBsplineCurve::IsSameGeometry, "other"_a, DOC(Bentley, Geom, MSBsplineCurve, IsSameGeometry));
@@ -960,6 +2212,12 @@ void def_MSBsplineCurve(py::module_& m)
      c1.def("InitFromDPoint4dArray", [] (MSBsplineCurveR self, DPoint4dArray const& points, int order)
             {
             self.InitFromDPoint4dArray(&points[0], (int) points.size(), order);
+            }, "points"_a, "order"_a);
+
+    c1.def("InitFromDPoint4dArray", [] (MSBsplineCurveR self, py::list const& points, int order)
+            {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint4dArray, DPoint4d);
+            return self.InitFromDPoint4dArray(&cppPoints[0], (int) cppPoints.size(), order);
             }, "points"_a, "order"_a);
 
      c1.def("ApproximateAnyCurve", &MSBsplineCurve::ApproximateAnyCurve, "inCurve"_a, "tolerance"_a, "order"_a, "parameterization"_a, "bMaintainEndTangents"_a, DOC(Bentley, Geom, MSBsplineCurve, ApproximateAnyCurve));

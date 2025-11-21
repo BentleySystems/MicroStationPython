@@ -16,6 +16,7 @@ void def_GeoPoint(py::module_& m)
     //===================================================================================
     // struct GeoPoint
     py::class_<GeoPoint> c0(m, "GeoPoint");
+    py::bind_vector< GeoPointArray >(m, "GeoPointArray", py::module_local(false));
 
     c0.def_readwrite("longitude", &GeoPoint::longitude);
     c0.def_readwrite("latitude", &GeoPoint::latitude);
@@ -27,6 +28,7 @@ void def_GeoPoint(py::module_& m)
     //===================================================================================
     // struct GeoPoint2d
     py::class_<GeoPoint2d> c1(m, "GeoPoint2d");
+    py::bind_vector< GeoPoint2dArray >(m, "GeoPoint2dArray", py::module_local(false));
 
     c1.def_readwrite("longitude", &GeoPoint2d::longitude);
     c1.def_readwrite("latitude", &GeoPoint2d::latitude);

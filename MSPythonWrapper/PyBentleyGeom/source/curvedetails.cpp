@@ -590,8 +590,22 @@ void def_CurveDetails(py::module_& m)
     c9.def("InitFromPrincipalAxesOfPoints", py::overload_cast<DPoint4dArray const&>(&LocalRange::InitFromPrincipalAxesOfPoints), "xyzw"_a);
 
     c9.def("InitFromPrincipalAxesOfPoints", [](LocalRange& self, py::list const& xyz)
-           { CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
-            return self.InitFromPrincipalAxesOfPoints(cppxyz); }, "xyz"_a);
+           { 
+            if(xyz.empty())
+                return false;
+
+            if(py::isinstance<DPoint3d>(xyz[0])){
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint3dArray, DPoint3d);
+               return self.InitFromPrincipalAxesOfPoints(cppxyz);
+            }
+            else if(py::isinstance<DPoint4d>(xyz[0])){
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(xyz, cppxyz, DPoint4dArray, DPoint4d);
+               return self.InitFromPrincipalAxesOfPoints(cppxyz);
+            }
+            else{
+                throw std::invalid_argument("Invalid list.");
+            }
+           }, "xyz"_a);
 
     c9.def("DistanceOutside", &LocalRange::DistanceOutside, "spacePoint"_a);
 

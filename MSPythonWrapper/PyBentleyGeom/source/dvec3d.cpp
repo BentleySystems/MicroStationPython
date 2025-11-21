@@ -55,11 +55,23 @@ product (opposites are NOT considered parallel)
 :returns:
     true if the vectors are parallel within tolerance)doc";
 
-static const char * __doc_Bentley_Geom_DVec3d_IsParallelTo =R"doc( Tests if two vectors are parallel (opposites are
+static const char * __doc_Bentley_Geom_DVec3d_IsParallelTo_V1 =R"doc( Tests if two vectors are parallel (opposites are
 considered parallel!)
 
 :param (input):
     vector2 The second vector
+
+:returns:
+    true if the vectors are parallel within Angle::SmallAngle() tolerance)doc";
+
+static const char* __doc_Bentley_Geom_DVec3d_IsParallelTo_V2 = R"doc( Tests if two vectors are parallel (opposites are
+considered parallel!)
+
+:param (input):
+    vector2 The second vector
+
+:param (input):
+    tolerance angular tolerance in radians
 
 :returns:
     true if the vectors are parallel within tolerance)doc";
@@ -1186,7 +1198,10 @@ void def_DVec3d(py::module_& m)
     c1.def("IsVectorInSmallerSector", &DVec3d::IsVectorInSmallerSector, "vector0"_a, "vector1"_a, DOC(Bentley, Geom, DVec3d, IsVectorInSmallerSector));
     c1.def("IsVectorInCCWSector", &DVec3d::IsVectorInCCWSector, "vector0"_a, "vector1"_a, "vector2"_a, DOC(Bentley, Geom, DVec3d, IsVectorInCCWSector));
     c1.def("IsVectorInCCWXYSector", &DVec3d::IsVectorInCCWXYSector, "vector1"_a, "vector2"_a, DOC(Bentley, Geom, DVec3d, IsVectorInCCWXYSector));
-    c1.def("IsParallelTo", &DVec3d::IsParallelTo, "vector2"_a, DOC(Bentley, Geom, DVec3d, IsParallelTo));
+
+    c1.def("IsParallelTo", py::overload_cast<DVec3dCR>(&DVec3d::IsParallelTo, py::const_), "vector2"_a, DOC(Bentley, Geom, DVec3d, IsParallelTo, V1));
+    c1.def("IsParallelTo", py::overload_cast<DVec3dCR, double>(&DVec3d::IsParallelTo, py::const_), "vector2"_a, "tolerance"_a, DOC(Bentley, Geom, DVec3d, IsParallelTo, V2));
+
     c1.def("IsPositiveParallelTo", &DVec3d::IsPositiveParallelTo, "vector2"_a, DOC(Bentley, Geom, DVec3d, IsPositiveParallelTo));
     c1.def("IsPerpendicularTo", &DVec3d::IsPerpendicularTo, "vector2"_a, DOC(Bentley, Geom, DVec3d, IsPerpendicularTo));
     c1.def("IsEqual", py::overload_cast<DVec3dCR>(&DVec3d::IsEqual, py::const_), "vector2"_a, DOC(Bentley, Geom, DVec3d, IsEqual));

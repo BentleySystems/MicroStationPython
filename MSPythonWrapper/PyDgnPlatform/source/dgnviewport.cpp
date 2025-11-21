@@ -369,6 +369,29 @@ void def_DgnViewport(py::module_& m)
                }
            }, "viewPts"_a, "npcPts"_a);
 
+    c3.def("NpcToView", [] (Viewport const& self, py::list& viewPts, DPoint3dArray const& npcPts)
+           {
+           if (!npcPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               if (cppViewPts.size() < npcPts.size())
+                   cppViewPts.resize(npcPts.size());
+               self.NpcToView(&cppViewPts[0], &npcPts[0], (int) npcPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               }
+           }, "viewPts"_a, "npcPts"_a);
+
+    c3.def("NpcToView", [] (Viewport const& self, DPoint3dArray& viewPts, py::list const& npcPts)
+           {
+           if (!npcPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+               if (viewPts.size() < cppNpcPts.size())
+                   viewPts.resize(cppNpcPts.size());
+               self.NpcToView(&viewPts[0], &cppNpcPts[0], (int) cppNpcPts.size());
+               }
+           }, "viewPts"_a, "npcPts"_a);
+
     c3.def("NpcToView", [] (Viewport const& self, py::list& viewPts, py::list const& npcPts)
            {
            if (!npcPts.empty())
@@ -394,6 +417,29 @@ void def_DgnViewport(py::module_& m)
                if (npcPts.size() < viewPts.size())
                    npcPts.resize(viewPts.size());
                self.ViewToNpc(&npcPts[0], &viewPts[0], (int) viewPts.size());
+               }
+           }, "npcPts"_a, "viewPts"_a);
+
+    c3.def("ViewToNpc", [] (Viewport const& self, py::list& npcPts, DPoint3dArray const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+               if (cppNpcPts.size() < viewPts.size())
+                   cppNpcPts.resize(viewPts.size());
+               self.ViewToNpc(&cppNpcPts[0], &viewPts[0], (int) viewPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+               }
+           }, "npcPts"_a, "viewPts"_a);
+
+    c3.def("ViewToNpc", [] (Viewport const& self, DPoint3dArray& npcPts, py::list const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               if (npcPts.size() < cppViewPts.size())
+                   npcPts.resize(cppViewPts.size());
+               self.ViewToNpc(&npcPts[0], &cppViewPts[0], (int) cppViewPts.size());
                }
            }, "npcPts"_a, "viewPts"_a);
 
@@ -425,6 +471,29 @@ void def_DgnViewport(py::module_& m)
                }
            }, "rootPts"_a, "npcPts"_a);
 
+    c3.def("NpcToRoot", [] (Viewport const& self, DPoint3dArray& rootPts, py::list const& npcPts)
+           {
+           if (!npcPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+               if (rootPts.size() < cppNpcPts.size())
+                    rootPts.resize(cppNpcPts.size());
+               self.NpcToRoot(&rootPts[0], &cppNpcPts[0], (int) cppNpcPts.size());
+               }
+           }, "rootPts"_a, "npcPts"_a);
+
+    c3.def("NpcToRoot", [] (Viewport const& self, py::list& rootPts, DPoint3dArray const& npcPts)
+           {
+           if (!npcPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               if (cppRootPts.size() < npcPts.size())
+                    cppRootPts.resize(npcPts.size());
+               self.NpcToRoot(&cppRootPts[0], &npcPts[0], (int) npcPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               }
+           }, "rootPts"_a, "npcPts"_a);
+
     c3.def("NpcToRoot", [] (Viewport const& self, py::list& rootPts, py::list const& npcPts)
            {
            if (!npcPts.empty())
@@ -450,6 +519,29 @@ void def_DgnViewport(py::module_& m)
                if (npcPts.size() < rootPts.size())
                    npcPts.resize(rootPts.size());
                self.RootToNpc(&npcPts[0], &rootPts[0], (int) rootPts.size());
+               }
+           }, "npcPts"_a, "rootPts"_a);
+
+    c3.def("RootToNpc", [] (Viewport const& self, py::list& npcPts, DPoint3dArray const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+               if (cppNpcPts.size() < rootPts.size())
+                   cppNpcPts.resize(rootPts.size());
+               self.RootToNpc(&cppNpcPts[0], &rootPts[0], (int) rootPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(npcPts, cppNpcPts, DPoint3dArray, DPoint3d);
+               }
+           }, "npcPts"_a, "rootPts"_a);
+
+    c3.def("RootToNpc", [] (Viewport const& self, DPoint3dArray& npcPts, py::list const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               if (npcPts.size() < cppRootPts.size())
+                   npcPts.resize(cppRootPts.size());
+               self.RootToNpc(&npcPts[0], &cppRootPts[0], (int) cppRootPts.size());
                }
            }, "npcPts"_a, "rootPts"_a);
 
@@ -492,6 +584,31 @@ void def_DgnViewport(py::module_& m)
                }
            }, "viewPts"_a, "rootPts"_a);
 
+    c3.def("RootToView", [] (Viewport const& self, py::list& viewPts, DPoint3dArray const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+               if (cppViewPts.size() < rootPts.size())
+                   cppViewPts.resize(rootPts.size());
+               self.RootToView(&cppViewPts[0], &rootPts[0], (int) rootPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+               }
+           }, "viewPts"_a, "rootPts"_a);
+
+    c3.def("RootToView", [] (Viewport const& self, py::list& viewPts, py::list const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               if (cppViewPts.size() < cppRootPts.size())
+                   cppViewPts.resize(cppRootPts.size());
+               self.RootToView(&cppViewPts[0], &cppRootPts[0], (int) cppRootPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+               }
+           }, "viewPts"_a, "rootPts"_a);
+
     c3.def("RootToView", [] (Viewport const& self, DPoint4d& viewPt, DPoint3d const& rootPt)
            {
            self.RootToView(&viewPt, &rootPt, 1);
@@ -519,6 +636,30 @@ void def_DgnViewport(py::module_& m)
                }
            }, "rootPts"_a, "npcPts"_a);
 
+    c3.def("ViewToRoot", [] (Viewport const& self, DPoint3dArray& rootPts, py::list const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+               if (rootPts.size() < cppViewPts.size())
+                   rootPts.resize(cppViewPts.size());
+               self.ViewToRoot(&rootPts[0], &cppViewPts[0], (int) cppViewPts.size());
+               }
+           }, "rootPts"_a, "npcPts"_a);
+
+    c3.def("ViewToRoot", [] (Viewport const& self, py::list& rootPts, py::list const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint4dArray, DPoint4d);
+               if (cppRootPts.size() < cppViewPts.size())
+                   cppRootPts.resize(cppViewPts.size());
+               self.ViewToRoot(&cppRootPts[0], &cppViewPts[0], (int) cppViewPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               }
+           }, "rootPts"_a, "npcPts"_a);
+
     c3.def("ViewToRoot", [] (Viewport const& self, DPoint3d& rootPt, DPoint4d const& viewPt)
            {
            self.ViewToRoot(&rootPt, &viewPt, 1);
@@ -531,6 +672,29 @@ void def_DgnViewport(py::module_& m)
                if (viewPts.size() < rootPts.size())
                    viewPts.resize(rootPts.size());
                self.RootToView(&viewPts[0], &rootPts[0], (int) rootPts.size());
+               }
+           }, "viewPts"_a, "rootPts"_a);
+
+    c3.def("RootToView", [] (Viewport const& self, DPoint3dArray& viewPts, py::list const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               if (viewPts.size() < cppRootPts.size())
+                   viewPts.resize(cppRootPts.size());
+               self.RootToView(&viewPts[0], &cppRootPts[0], (int) cppRootPts.size());
+               }
+           }, "viewPts"_a, "rootPts"_a);
+
+    c3.def("RootToView", [] (Viewport const& self, py::list& viewPts, DPoint3dArray const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               if (cppViewPts.size() < rootPts.size())
+                   cppViewPts.resize(rootPts.size());
+               self.RootToView(&cppViewPts[0], &rootPts[0], (int) rootPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
                }
            }, "viewPts"_a, "rootPts"_a);
 
@@ -561,6 +725,31 @@ void def_DgnViewport(py::module_& m)
                self.RootToView2d(&viewPts[0], &rootPts[0], (int) rootPts.size());
                }
            }, "viewPts"_a, "rootPts"_a);
+    
+    c3.def("RootToView2d", [] (Viewport const& self, py::list& viewPts, DPoint3dArray const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint2dArray, DPoint2d);
+               if (cppViewPts.size() < rootPts.size())
+                   cppViewPts.resize(rootPts.size());
+               self.RootToView2d(&cppViewPts[0], &rootPts[0], (int) rootPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint2dArray, DPoint2d);
+               }
+           }, "viewPts"_a, "rootPts"_a);
+          
+    c3.def("RootToView2d", [] (Viewport const& self, py::list& viewPts, py::list const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint2dArray, DPoint2d);
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               if (cppViewPts.size() < cppRootPts.size())
+                   cppViewPts.resize(cppRootPts.size());
+               self.RootToView2d(&cppViewPts[0], &cppRootPts[0], (int) cppRootPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint2dArray, DPoint2d);
+               }
+           }, "viewPts"_a, "rootPts"_a);
 
     c3.def("RootToView2d", [] (Viewport const& self, DPoint2dArray& viewPts, py::list const& rootPts)
            {
@@ -585,6 +774,29 @@ void def_DgnViewport(py::module_& m)
                if (rootPts.size() < viewPts.size())
                    rootPts.resize(viewPts.size());
                self.ViewToRoot(&rootPts[0], &viewPts[0], (int) viewPts.size());
+               }
+           }, "rootPts"_a, "npcPts"_a);
+
+    c3.def("ViewToRoot", [] (Viewport const& self, DPoint3dArray& rootPts, py::list const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               if (rootPts.size() < cppViewPts.size())
+                   rootPts.resize(cppViewPts.size());
+               self.ViewToRoot(&rootPts[0], &cppViewPts[0], (int) cppViewPts.size());
+               }
+           }, "rootPts"_a, "npcPts"_a);
+
+    c3.def("ViewToRoot", [] (Viewport const& self, py::list& rootPts, DPoint3dArray const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               if (cppRootPts.size() < viewPts.size())
+                   cppRootPts.resize(viewPts.size());
+               self.ViewToRoot(&cppRootPts[0], &viewPts[0], (int) viewPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
                }
            }, "rootPts"_a, "npcPts"_a);
 
@@ -628,6 +840,29 @@ void def_DgnViewport(py::module_& m)
                }
            }, "viewPts"_a, "activePts"_a);
 
+    c3.def("ActiveToView", [] (Viewport const& self, DPoint3dArray& viewPts, py::list const& activePts)
+           {
+           if (!activePts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(activePts, cppActivePts, DPoint3dArray, DPoint3d);
+               if (viewPts.size() < cppActivePts.size())
+                   viewPts.resize(cppActivePts.size());
+               self.ActiveToView(&viewPts[0], &cppActivePts[0], (int) cppActivePts.size());
+               }
+           }, "viewPts"_a, "activePts"_a);
+
+    c3.def("ActiveToView", [] (Viewport const& self, py::list& viewPts, DPoint3dArray const& activePts)
+           {
+           if (!activePts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               if (cppViewPts.size() < activePts.size())
+                   cppViewPts.resize(activePts.size());
+               self.ActiveToView(&cppViewPts[0], &activePts[0], (int) activePts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               }
+           }, "viewPts"_a, "activePts"_a);
+
     c3.def("ActiveToView", [] (Viewport const& self, DPoint3d& viewPt, DPoint3d const& activePt)
            {
            self.ActiveToView(&viewPt, &activePt, 1);
@@ -652,6 +887,29 @@ void def_DgnViewport(py::module_& m)
                if (cppActivePts.size() < cppViewPts.size())
                    cppActivePts.resize(cppViewPts.size());
                self.ViewToActive(&cppActivePts[0], &cppViewPts[0], (int) cppViewPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(activePts, cppActivePts, DPoint3dArray, DPoint3d);
+               }
+           }, "activePts"_a, "viewPts"_a);
+
+    c3.def("ViewToActive", [] (Viewport const& self, DPoint3dArray& activePts, py::list const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               if (activePts.size() < cppViewPts.size())
+                   activePts.resize(cppViewPts.size());
+               self.ViewToActive(&activePts[0], &cppViewPts[0], (int) cppViewPts.size());
+               }
+           }, "activePts"_a, "viewPts"_a);
+
+    c3.def("ViewToActive", [] (Viewport const& self, py::list& activePts, DPoint3dArray const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(activePts, cppActivePts, DPoint3dArray, DPoint3d);
+               if (cppActivePts.size() < viewPts.size())
+                   cppActivePts.resize(viewPts.size());
+               self.ViewToActive(&cppActivePts[0], &viewPts[0], (int) viewPts.size());
                CONVERT_CPPARRAY_TO_PYLIST(activePts, cppActivePts, DPoint3dArray, DPoint3d);
                }
            }, "activePts"_a, "viewPts"_a);
@@ -684,6 +942,29 @@ void def_DgnViewport(py::module_& m)
                }
            }, "rootPts"_a, "activePts"_a);
 
+    c3.def("ActiveToRoot", [] (Viewport const& self, DPoint3dArray& rootPts, py::list const& activePts)
+           {
+           if (!activePts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(activePts, cppActivePts, DPoint3dArray, DPoint3d);
+               if (rootPts.size() < cppActivePts.size())
+                   rootPts.resize(cppActivePts.size());
+               self.ActiveToRoot(&rootPts[0], &cppActivePts[0], (int) cppActivePts.size());
+               }
+           }, "rootPts"_a, "activePts"_a);
+
+    c3.def("ActiveToRoot", [] (Viewport const& self, py::list& rootPts, DPoint3dArray const& activePts)
+           {
+           if (!activePts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               if (cppRootPts.size() < activePts.size())
+                   cppRootPts.resize(activePts.size());
+               self.ActiveToRoot(&cppRootPts[0], &activePts[0], (int) activePts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               }
+           }, "rootPts"_a, "activePts"_a);
+
     c3.def("ActiveToRoot", [] (Viewport const& self, DPoint3d& rootPt, DPoint3d const& activePt)
            {
            self.ActiveToRoot(&rootPt, &activePt, 1);
@@ -708,6 +989,30 @@ void def_DgnViewport(py::module_& m)
                if (cppActivePts.size() < cppRootPts.size())
                    cppActivePts.resize(cppRootPts.size());
                self.RootToActive(&cppActivePts[0], &cppRootPts[0], (int) cppRootPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(activePts, cppActivePts, DPoint3dArray, DPoint3d);
+               }
+           }, "activePts"_a, "rootPts"_a);
+
+    c3.def("RootToActive", [] (Viewport const& self, DPoint3dArray& activePts, py::list const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(rootPts, cppRootPts, DPoint3dArray, DPoint3d);
+               if (activePts.size() < cppRootPts.size())
+                   activePts.resize(cppRootPts.size());
+               self.RootToActive(&activePts[0], &cppRootPts[0], (int) cppRootPts.size());
+               }
+           }, "activePts"_a, "rootPts"_a);
+
+    c3.def("RootToActive", [] (Viewport const& self, py::list& activePts, DPoint3dArray const& rootPts)
+           {
+           if (!rootPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(activePts, cppActivePts, DPoint3dArray, DPoint3d);
+               if (cppActivePts.size() < rootPts.size())
+                   cppActivePts.resize(rootPts.size());
+               self.RootToActive(&cppActivePts[0], &rootPts[0], (int) rootPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(activePts, cppActivePts, DPoint3dArray, DPoint3d);
                }
            }, "activePts"_a, "rootPts"_a);
 
@@ -742,6 +1047,29 @@ void def_DgnViewport(py::module_& m)
                }
            }, "screenPts"_a, "viewPts"_a);
 
+    c3.def("ViewToScreen", [] (Viewport const& self, DPoint3dArray& screenPts, py::list const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               if (screenPts.size() < cppViewPts.size())
+                   screenPts.resize(cppViewPts.size());
+               self.ViewToScreen(&screenPts[0], &cppViewPts[0], (int) cppViewPts.size());
+               }
+           }, "screenPts"_a, "viewPts"_a);
+
+    c3.def("ViewToScreen", [] (Viewport const& self, py::list& screenPts, DPoint3dArray const& viewPts)
+           {
+           if (!viewPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(screenPts, cppScreenPts, DPoint3dArray, DPoint3d);
+               if (cppScreenPts.size() < viewPts.size())
+                   cppScreenPts.resize(viewPts.size());
+               self.ViewToScreen(&cppScreenPts[0], &viewPts[0], (int) viewPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(screenPts, cppScreenPts, DPoint3dArray, DPoint3d);
+               }
+           }, "screenPts"_a, "viewPts"_a);
+
     c3.def("ViewToScreen", [] (Viewport const& self, DPoint3d& screenPt, DPoint3d const& viewPt)
            {
            self.ViewToScreen(&screenPt, &viewPt, 1);
@@ -766,6 +1094,29 @@ void def_DgnViewport(py::module_& m)
                if (cppViewPts.size() < cppScreenPts.size())
                    cppViewPts.resize(cppScreenPts.size());
                self.ScreenToView(&cppViewPts[0], &cppScreenPts[0], (int) cppScreenPts.size());
+               CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               }
+           }, "viewPts"_a, "screenPts"_a);
+
+    c3.def("ScreenToView", [] (Viewport const& self, DPoint3dArray& viewPts, py::list const& screenPts)
+           {
+           if (!screenPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(screenPts, cppScreenPts, DPoint3dArray, DPoint3d);
+               if (viewPts.size() < cppScreenPts.size())
+                   viewPts.resize(cppScreenPts.size());
+               self.ScreenToView(&viewPts[0], &cppScreenPts[0], (int) cppScreenPts.size());
+               }
+           }, "viewPts"_a, "screenPts"_a);
+
+    c3.def("ScreenToView", [] (Viewport const& self, py::list& viewPts, DPoint3dArray const& screenPts)
+           {
+           if (!screenPts.empty())
+               {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
+               if (cppViewPts.size() < screenPts.size())
+                   cppViewPts.resize(screenPts.size());
+               self.ScreenToView(&cppViewPts[0], &screenPts[0], (int) screenPts.size());
                CONVERT_CPPARRAY_TO_PYLIST(viewPts, cppViewPts, DPoint3dArray, DPoint3d);
                }
            }, "viewPts"_a, "screenPts"_a);

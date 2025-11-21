@@ -78,6 +78,14 @@ void def_RegionUtil(py::module_& m)
            py::overload_cast<DgnModelRefR, bvector<CurveVectorPtr> const&, RegionType>(&RegionGraphicsContext::Boolean),
            "targetModel"_a, "in"_a, "operation"_a, DOC(Bentley, DgnPlatform, RegionGraphicsContext, Boolean));
 
+    c2.def("Boolean", [](RegionGraphicsContextR self, DgnModelRefR targetModel, py::list const& in, RegionType operation){
+       bvector<CurveVectorPtr> cppIn;
+       for (const auto& item : in) {
+            cppIn.push_back(item.cast<CurveVectorPtr>());
+       }
+       return self.Boolean(targetModel, cppIn, operation);
+    }, "targetModel"_a, "in"_a, "operation"_a, DOC(Bentley, DgnPlatform, RegionGraphicsContext, Boolean));
+   
     c2.def("Boolean",
            py::overload_cast<DgnModelRefR, ElementAgendaCR, TransformCP, RegionType>(&RegionGraphicsContext::Boolean),
            "targetModel"_a, "in"_a, "inTrans"_a, "operation"_a, DOC(Bentley, DgnPlatform, RegionGraphicsContext, Boolean));

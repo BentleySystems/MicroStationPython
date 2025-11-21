@@ -8,6 +8,8 @@
 #include "MSPythonPCH.h"
 #include "..\\MsPythonCore.r.h"
 #include <iostream>
+#include <fstream>
+#include <vector>
 // Default entry point function for script
 #define DEFAULT_FUNC_NAME       L"PyMain"
 
@@ -695,6 +697,128 @@ void print_dict(const py::dict& dict)
         std::cout << "key=" << std::string(py::str(item.first)) << ", "
                   << "value=" << std::string(py::str(item.second)) << std::endl;
     std::cout << std::endl;
+    }
+
+    /*---------------------------------------------------------------------------------**//*** 
+ @bsimethod                                                                       2/2023 
+ +---------------+---------------+---------------+---------------+---------------+------*/ 
+void PythonScriptEngine::evalPYC(WStringCR pythonFileName, ScriptContext* global, ScriptContext* locals)
+    {
+    ScriptContextPtr globalCtx(global), localCtx(locals);
+    py::dict globalDict, localDict;
+
+    if (m_engineProcessing)
+        {
+        ScriptEngineManager::Get().InjectError("Cannot have two instances of Python executing at the same time");
+        return ;
+        }
+    // Create context when necessary
+    if (globalCtx.IsNull())
+        globalCtx = createContext(true);
+    if (localCtx.IsNull())
+        localCtx = createContext(false);
+
+    // Obtain py::dict from context that is specific for PyEngine
+    auto pyGlobalDict = dynamic_cast<PythonScriptContext*>(globalCtx.get());
+    if (nullptr != pyGlobalDict)
+        globalDict = pyGlobalDict->m_dict;
+
+    auto pyLocalDict = dynamic_cast<PythonScriptContext*>(localCtx.get());
+    if (nullptr != pyLocalDict)
+        localDict = pyLocalDict->m_dict;
+    m_engineProcessing = true;
+    // Evaluate expression and capture return value.
+    ScriptEngineManager::Get().ClearException();
+    try
+        {
+        // Convert WString to std::string for file operations
+        std::string pyc_file_path;
+        Utf8String temp;
+        temp.Assign(pythonFileName.c_str());
+        pyc_file_path = temp.c_str();
+
+        // Get the __main__ module and backup its current dictionary
+        py::module main_module = py::module::import("__main__");
+        py::dict original_main_dict = main_module.attr("__dict__");
+        
+        // Create a backup of the original dictionary
+        py::dict backup_dict = original_main_dict.cast<py::dict>();
+        
+        // Temporarily replace __main__.__dict__ with our custom globalDict
+        // First, copy essential built-ins to our globalDict if they don't exist
+        if (!globalDict.contains("__builtins__"))
+            {
+            if (original_main_dict.contains("__builtins__"))
+                {
+                globalDict["__builtins__"] = original_main_dict["__builtins__"];
+                }
+            else
+                {
+                py::module builtins_module = py::module::import("builtins");
+                globalDict["__builtins__"] = builtins_module;
+                }
+            }
+        if (!globalDict.contains("__name__"))
+            {
+            globalDict["__name__"] = "__main__";
+            }
+        if (!globalDict.contains("__file__"))
+            {
+            globalDict["__file__"] = py::cast(pyc_file_path);
+            }
+            
+        // Replace the main module's dictionary
+        main_module.attr("__dict__").attr("clear")();
+        main_module.attr("__dict__").attr("update")(globalDict);
+
+        // Open the .pyc file
+        FILE* fp = fopen(pyc_file_path.c_str(), "rb");
+        if (!fp) 
+            {
+            // Restore original dictionary before returning
+            main_module.attr("__dict__").attr("clear")();
+            main_module.attr("__dict__").attr("update")(backup_dict);
+            
+            ScriptEngineManager::Get().InjectError("Cannot open PYC file");
+            m_engineProcessing = false;
+            return ;
+            }
+
+        // Set up compilation flags for .pyc files
+        PyCompilerFlags flags;
+        flags.cf_flags = 0;
+
+        // Execute the .pyc file using PyRun_SimpleFileExFlags
+        // This will now use our custom globalDict via __main__.__dict__
+        mdlErrno = 0;
+        int result = PyRun_SimpleFileExFlags(fp, pyc_file_path.c_str(), 1, &flags);
+        
+        // Copy any new variables back to our globalDict
+        py::dict updated_main_dict = main_module.attr("__dict__");
+        for (auto item : updated_main_dict)
+            {
+            globalDict[item.first] = item.second;
+            }
+        
+        // Restore the original __main__ dictionary
+        main_module.attr("__dict__").attr("clear")();
+        main_module.attr("__dict__").attr("update")(backup_dict);
+        
+        if (result != 0) 
+            {
+            ScriptEngineManager::Get().InjectError("Error executing PYC file");
+            mdlErrno = MDLERR_PYTHONEXECUTIONERROR;
+            }        
+        }
+    catch (py::error_already_set& err)
+        {
+        ScriptEngineManager::Get().InjectException(err);
+        mdlErrno = MDLERR_PYTHONEXECUTIONERROR;
+        }
+
+    m_engineProcessing = false;    
+
+
     }
 
 /*---------------------------------------------------------------------------------**//*** 

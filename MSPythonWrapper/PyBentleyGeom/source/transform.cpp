@@ -1333,40 +1333,166 @@ void def_Transform(py::module_& m)
            CONVERT_CPPARRAY_TO_PYLIST(points, cppPoints, DPoint3dArray, DPoint3d);
            }, "points"_a, DOC(Bentley, Geom, Transform, Multiply));
 
-    c1.def("Multiply", [] (TransformCR self, DPoint3dArray& outPoints, DPoint3dArray const& inPoints)
-           {
-           self.Multiply(outPoints.data(), inPoints.data(), (int) inPoints.size());
-           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+    c1.def("Multiply", py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&Transform::Multiply, py::const_), "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, Transform, Multiply));      
 
-    c1.def("Multiply", [] (TransformCR self, py::list& outPoints, py::list const& inPoints)
-           {
-           DPoint3dArray cppOutPoints;
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
-           self.Multiply(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
-           CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
-           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
-
-    c1.def("Multiply", py::overload_cast<DPoint2dR, DPoint2dCR>(&Transform::Multiply, py::const_), "result"_a, "point"_a, DOC(Bentley, Geom, Transform, Multiply));
-    
     c1.def("Multiply", [] (TransformCR self, DPoint2dArray& outPoints, DPoint2dArray const& inPoints)
            {
            self.Multiply(outPoints.data(), inPoints.data(), (int) inPoints.size());
            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
 
-    c1.def("Multiply", py::overload_cast<DPoint3dR, DPoint2dCR>(&Transform::Multiply, py::const_), "result"_a, "point"_a, DOC(Bentley, Geom, Transform, Multiply));
-    
     c1.def("Multiply", [] (TransformCR self, DPoint3dArray& outPoints, DPoint2dArray const& inPoints)
            {
            self.Multiply(outPoints.data(), inPoints.data(), (int) inPoints.size());
            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
 
-    c1.def("Multiply", [] (TransformCR self, py::list& outPoints, DPoint2dArray const& inPoints)
+    c1.def("Multiply", [](TransformCR self, py::list &outPoints, py::list const &inPoints)
            {
-           DPoint3dArray cppOutPoints;
-           self.Multiply(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
+            if(inPoints.empty())
+                return;   
+            else if(py::isinstance<DPoint3d>(inPoints[0]))
+                {
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+                    if(outPoints.empty())
+                        {
+                            DPoint3dArray cppOutPoints(inPoints.size());
+                            self.Multiply(cppOutPoints, cppInPoints);
+                            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);  
+                        }
+                    else if(py::isinstance<DPoint3d>(outPoints[0]))
+                        {
+                            CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+                            self.Multiply(cppOutPoints, cppInPoints);
+                            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+                        }
+                    else
+                        {
+                            throw std::invalid_argument("Invalid input type");
+                        }
+                }
+            else if(py::isinstance<DPoint2d>(inPoints[0]))
+                {
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint2dArray, DPoint2d);
+                    if(outPoints.empty()){
+                        DPoint3dArray cppOutPoints(inPoints.size());
+                        self.Multiply(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+                        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+                    }
+                    else if(py::isinstance<DPoint2d>(outPoints[0])){
+                        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint2dArray, DPoint2d);
+                        self.Multiply(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+                        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint2dArray, DPoint2d);
+                    }
+                    else if(py::isinstance<DPoint3d>(outPoints[0])){
+                        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+                        self.Multiply(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+                        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+                    }
+                    else{
+                        throw std::invalid_argument("Invalid input type");
+                    }
+                }
+            else if(py::isinstance<DPoint4d>(inPoints[0]))
+                {
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+                    self.Multiply(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+                    CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);    
+                }
+            else{
+                throw std::invalid_argument("Invalid input type");
+            } }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+
+    c1.def("Multiply", [] (TransformCR self, py::list& outPoints, DPoint3dArray const& inPoints)
+           {
+            if(inPoints.empty())
+                return;
+
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+           self.Multiply(cppOutPoints, inPoints);
            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
 
+    c1.def("Multiply", [](TransformCR self, DPoint3dArray& outPoints, py::list const& inPoints)
+           {
+               if (inPoints.empty())
+                   return;
+               else if (py::isinstance<DPoint3d>(inPoints[0]))
+               {
+                   CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+                   self.Multiply(outPoints, cppInPoints);
+               }
+               else if (py::isinstance<DPoint2d>(inPoints[0]))
+               {
+                   CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint2dArray, DPoint2d);
+                   self.Multiply(outPoints.data(), cppInPoints.data(), (int)cppInPoints.size());
+               }
+               else
+               {
+                   throw std::invalid_argument("Unsupported input point type. Expected DPoint2d or DPoint3d.");
+               }
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+
+    c1.def("Multiply", [](TransformCR self, DPoint2dArray& outPoints, py::list const& inPoints)
+           {
+               if (inPoints.empty())
+                   return;
+           
+               else if (py::isinstance<DPoint2d>(inPoints[0]))
+               {
+                   CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint2dArray, DPoint2d);
+                   self.Multiply(outPoints.data(), cppInPoints.data(), (int)cppInPoints.size());
+               }
+               else
+               {
+                   throw std::invalid_argument("Unsupported input type. Expected list of DPoint2d.");
+               }
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+           
+    c1.def("Multiply", [](TransformCR self, py::list& outPoints, DPoint2dArray const& inPoints)
+           {
+                if (inPoints.empty())
+                     return;
+                else if (outPoints.size() ==0)
+                {
+                    DPoint2dArray cppOutPoints(inPoints.size());
+                    self.Multiply(cppOutPoints.data(), inPoints.data(), (int)inPoints.size());
+                    CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint2dArray, DPoint2d);
+                }
+                else if (py::isinstance<DPoint2d>(outPoints[0]))
+                {
+                    DPoint2dArray cppOutPoints;
+                    self.Multiply(cppOutPoints.data(), inPoints.data(), (int)inPoints.size());
+                    CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint2dArray, DPoint2d);
+                }
+                else if (py::isinstance<DPoint3d>(outPoints[0]))
+                {
+                    DPoint3dArray cppOutPoints;
+                    self.Multiply(cppOutPoints.data(), inPoints.data(), (int)inPoints.size());
+                    CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+                }
+                else
+                {
+                    throw std::invalid_argument("Unsupported input type.");
+                }
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+
+    c1.def("Multiply", [](TransformCR self, DPoint4dArray& outPoints, py::list const& inPoints)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+            self.Multiply(outPoints.data(), cppInPoints.data(), (int)cppInPoints.size());
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+
+    c1.def("Multiply", [](TransformCR self, py::list& outPoints, DPoint4dArray const& inPoints)
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+            self.Multiply(cppOutPoints.data(), inPoints.data(), (int)inPoints.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, Multiply));
+           
+    c1.def("Multiply", py::overload_cast<DPoint2dR, DPoint2dCR>(&Transform::Multiply, py::const_), "result"_a, "point"_a, DOC(Bentley, Geom, Transform, Multiply));
+    
+    c1.def("Multiply", py::overload_cast<DPoint3dR, DPoint2dCR>(&Transform::Multiply, py::const_), "result"_a, "point"_a, DOC(Bentley, Geom, Transform, Multiply));
+    
     c1.def("Multiply", py::overload_cast<DPoint2dR, DPoint3dCR>(&Transform::Multiply, py::const_), "result"_a, "point"_a, DOC(Bentley, Geom, Transform, Multiply));
     
     c1.def("Multiply", [] (TransformCR self, DPoint2dArray& outPoints, DPoint2dArray const& inPoints)
@@ -1388,9 +1514,22 @@ void def_Transform(py::module_& m)
 
     c1.def("MultiplyTranspose", [] (TransformCR self, py::list& outPoints, py::list const& inPoints)
            {
-           DPoint3dArray cppOutPoints;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
            CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
            self.MultiplyTranspose(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+           CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, MultiplyTranspose));
+
+    c1.def("MultiplyTranspose", [] (TransformCR self, DPoint3dArray& outPoints, py::list const& inPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+           self.MultiplyTranspose(outPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+           }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, MultiplyTranspose));
+
+    c1.def("MultiplyTranspose", [] (TransformCR self, py::list& outPoints, DPoint3dArray const& inPoints)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+           self.MultiplyTranspose(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, Transform, MultiplyTranspose));
 
@@ -1424,22 +1563,80 @@ void def_Transform(py::module_& m)
 
     c1.def("MultiplyWeighted", [] (TransformCR self, py::list& weightedXYZOut, py::list const& weightedXYZIn, DoubleArray const* weights)
            {
-           DPoint3dArray cppWeightedXYZOut;
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZIn, cppWeightedXYZIn, DPoint3dArray, DPoint3d);
-           self.MultiplyWeighted(cppWeightedXYZOut, cppWeightedXYZIn, weights);
-           CONVERT_CPPARRAY_TO_PYLIST(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d);
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d); 
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZIn, cppWeightedXYZIn, DPoint3dArray, DPoint3d);
+               self.MultiplyWeighted(cppWeightedXYZOut, cppWeightedXYZIn, weights);
+               CONVERT_CPPARRAY_TO_PYLIST(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d);
            }, "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
-
+           
+    c1.def("MultiplyWeighted", [] (TransformCR self, DPoint3dArray& weightedXYZOut, py::list const& weightedXYZIn, DoubleArray const* weights)
+           {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZIn, cppWeightedXYZIn, DPoint3dArray, DPoint3d);
+               self.MultiplyWeighted(weightedXYZOut, cppWeightedXYZIn, weights);
+           }, "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
+           
+    c1.def("MultiplyWeighted", [] (TransformCR self, py::list& weightedXYZOut, DPoint3dArray const& weightedXYZIn, DoubleArray const* weights)
+           {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d); 
+               self.MultiplyWeighted(cppWeightedXYZOut, weightedXYZIn, weights);
+               CONVERT_CPPARRAY_TO_PYLIST(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d);
+           }, "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
+           
+    c1.def("MultiplyWeighted", [] (TransformCR self, py::list& weightedXYZOut, py::list const& weightedXYZIn, py::list const& weights)
+           {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d); 
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZIn, cppWeightedXYZIn, DPoint3dArray, DPoint3d);
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+               self.MultiplyWeighted(cppWeightedXYZOut, cppWeightedXYZIn, &cppWeights);
+               CONVERT_CPPARRAY_TO_PYLIST(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d);
+           }, "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
+           
+    c1.def("MultiplyWeighted", [] (TransformCR self, DPoint3dArray& weightedXYZOut, py::list const& weightedXYZIn, py::list const& weights)
+           {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZIn, cppWeightedXYZIn, DPoint3dArray, DPoint3d);
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+               self.MultiplyWeighted(weightedXYZOut, cppWeightedXYZIn, &cppWeights);
+           }, "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
+           
+    c1.def("MultiplyWeighted", [] (TransformCR self, py::list& weightedXYZOut, DPoint3dArray const& weightedXYZIn, py::list const& weights)
+           {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d); 
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+               self.MultiplyWeighted(cppWeightedXYZOut, weightedXYZIn, &cppWeights);
+               CONVERT_CPPARRAY_TO_PYLIST(weightedXYZOut, cppWeightedXYZOut, DPoint3dArray, DPoint3d);
+           }, "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
+           
+    c1.def("MultiplyWeighted", [] (TransformCR self, DPoint3dArray& weightedXYZOut, DPoint3dArray const& weightedXYZIn, py::list const& weights)
+           {
+               CONVERT_PYLIST_TO_NEW_CPPARRAY(weights, cppWeights, DoubleArray, double);
+               self.MultiplyWeighted(weightedXYZOut, weightedXYZIn, &cppWeights);
+           }, "weightedXYZOut"_a, "weightedXYZIn"_a, "weights"_a, DOC(Bentley, Geom, Transform, MultiplyWeighted));
+           
     c1.def("Solve", &Transform::Solve, "outPoint"_a, "inPoint"_a, DOC(Bentley, Geom, Transform, Solve));
     
     c1.def("SolveArray", py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&Transform::SolveArray, py::const_), "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, Transform, SolveArray));
 
     c1.def("SolveArray", [] (TransformCR self, py::list& outXYZ, py::list const& inXYZ)
            {
-           DPoint3dArray cppOutXYZ;
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
            CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);
-           self.SolveArray(cppOutXYZ, cppInXYZ);
+           auto result = self.SolveArray(cppOutXYZ, cppInXYZ);
            CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           return result;
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, Transform, SolveArray));
+
+    c1.def("SolveArray", [] (TransformCR self, DPoint3dArray& outXYZ, py::list const& inXYZ)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);
+           return self.SolveArray(outXYZ, cppInXYZ);
+           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, Transform, SolveArray));
+
+    c1.def("SolveArray", [] (TransformCR self, py::list& outXYZ, DPoint3dArray const& inXYZ)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           auto result = self.SolveArray(cppOutXYZ, inXYZ);
+           CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
+           return result;
            }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, Transform, SolveArray));
 
     c1.def("Multiply", py::overload_cast<DRange3dR, DRange3dCR>(&Transform::Multiply, py::const_), "outRange"_a, "inRange"_a, DOC(Bentley, Geom, Transform, Multiply));
@@ -1462,32 +1659,6 @@ void def_Transform(py::module_& m)
         bool bOk = self.TransformImplicitPlane(aOut, bOut, cOut, dOut, a, b, c, d);
         return py::make_tuple(bOk, aOut, bOut, cOut, dOut);
         }, "a"_a, "b"_a, "c"_a, "d"_a, DOC(Bentley, Geom, Transform, TransformImplicitPlane));
-
-    c1.def("Multiply", py::overload_cast<DPoint4dArray&, DPoint4dArray const&>(&Transform::Multiply, py::const_), "xyzwOut"_a, "xyzwIn"_a, DOC(Bentley, Geom, Transform, Multiply));
-    c1.def("Multiply", py::overload_cast<DPoint3dArray&, DPoint3dArray const&>(&Transform::Multiply, py::const_), "xyzOut"_a, "xyzIn"_a, DOC(Bentley, Geom, Transform, Multiply));
-    c1.def("Multiply", [](TransformCR self, py::list &outXYZ, py::list const &inXYZ)
-           {
-           DPoint3dArray cppOutXYZ;
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);
-           self.Multiply(cppOutXYZ, cppInXYZ);
-           CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d); 
-           }, "outXYZ"_a, "inXYZ"_a, DOC(Bentley, Geom, Transform, Multiply));
-    c1.def("Multiply", py::overload_cast<DPoint2dArray&, DPoint2dArray const&>(&Transform::Multiply, py::const_), "xyOut"_a, "xyIn"_a, DOC(Bentley, Geom, Transform, Multiply));
-    c1.def("Multiply", py::overload_cast<DPoint3dArray&, DPoint2dArray const&>(&Transform::Multiply, py::const_), "xyzOut"_a, "xyIn"_a, DOC(Bentley, Geom, Transform, Multiply));
-    c1.def("Multiply", [] (TransformCR self, py::list& outXYZ, DPoint2dArray const& inXY)
-           {
-           DPoint3dArray cppOutXYZ;
-           self.Multiply(cppOutXYZ, inXY); 
-           CONVERT_CPPARRAY_TO_PYLIST(outXYZ, cppOutXYZ, DPoint3dArray, DPoint3d);
-           }, "outXYZ"_a, "inXY"_a, DOC(Bentley, Geom, Transform, Multiply));
-    
-    c1.def("Multiply", py::overload_cast<DPoint2dArray&, DPoint3dArray const&>(&Transform::Multiply, py::const_), "xyOut"_a, "xyzIn"_a, DOC(Bentley, Geom, Transform, Multiply));
-
-    c1.def("Multiply", [] (TransformCR self, DPoint2dArray& outXY, py::list const& inXYZ)
-           {
-           CONVERT_PYLIST_TO_NEW_CPPARRAY(inXYZ, cppInXYZ, DPoint3dArray, DPoint3d);
-           self.Multiply(outXY, cppInXYZ);
-           }, "outXY"_a, "inXYZ"_a, DOC(Bentley, Geom, Transform, Multiply));
 
     c1.def("IsIdentity", &Transform::IsIdentity, DOC(Bentley, Geom, Transform, IsIdentity));
     c1.def("IsRigid", &Transform::IsRigid, DOC(Bentley, Geom, Transform, IsRigid));

@@ -195,6 +195,11 @@ void def_DRange1d(py::module_& m)
     c1.def("Extend", py::overload_cast<double>(&DRange1d::Extend), "valueA"_a, DOC(Bentley, Geom, DRange1d, Extend));
     c1.def("Extend", py::overload_cast<double, double>(&DRange1d::Extend), "valueA"_a, "valueB"_a, DOC(Bentley, Geom, DRange1d, Extend));
     c1.def("Extend", py::overload_cast<DoubleArray&>(&DRange1d::Extend), "values"_a, DOC(Bentley, Geom, DRange1d, Extend));
+    c1.def("Extend", [](DRange1d& self, py::list& values){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(values, cppValues, DoubleArray, double);
+        self.Extend(cppValues);
+        CONVERT_CPPARRAY_TO_PYLIST(values, cppValues, DoubleArray, double);
+    }, "values"_a, DOC(Bentley, Geom, DRange1d, Extend));
     c1.def("Extend", py::overload_cast<DRange1dCR>(&DRange1d::Extend), "other"_a, DOC(Bentley, Geom, DRange1d, Extend));
 
     c1.def("ExtendBySignedShift", &DRange1d::ExtendBySignedShift, "tol"_a, DOC(Bentley, Geom, DRange1d, ExtendBySignedShift));
@@ -202,7 +207,11 @@ void def_DRange1d(py::module_& m)
     c1.def("IntersectInPlace", &DRange1d::IntersectInPlace, "other"_a, DOC(Bentley, Geom, DRange1d, IntersectInPlace));
 
     c1.def_static("FromIntersection", py::overload_cast<DRange1dCR, DRange1dCR>(&DRange1d::FromIntersection), "rangeA"_a, "rangeB"_a, DOC(Bentley, Geom, DRange1d, FromIntersection));
-    c1.def_static("FromIntersection", py::overload_cast<DRange1dArray&>(&DRange1d::FromIntersection), "data"_a, DOC(Bentley, Geom, DRange1d, FromIntersection));            
+    c1.def_static("FromIntersection", py::overload_cast<DRange1dArray&>(&DRange1d::FromIntersection), "data"_a, DOC(Bentley, Geom, DRange1d, FromIntersection));   
+    c1.def_static("FromIntersection", [](py::list& data){
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(data, cppData, DRange1dArray, DRange1d);
+        return DRange1d::FromIntersection(cppData);
+    }, "data"_a, DOC(Bentley, Geom, DRange1d, FromIntersection));                     
     c1.def_static("FromUnion", &DRange1d::FromUnion, "rangeA"_a, "rangeB"_a, DOC(Bentley, Geom, DRange1d, FromUnion));
 
     c1.def("StrictlyNonEmptyFractionalIntersection", &DRange1d::StrictlyNonEmptyFractionalIntersection, "rangeB"_a, "fractionalIntersection"_a, DOC(Bentley, Geom, DRange1d, StrictlyNonEmptyFractionalIntersection));

@@ -2470,8 +2470,6 @@ void def_BaseGCS(py::module_& m)
     //===================================================================================
     //Struct BaseGCS
     py::class_< BaseGCS, RefCountedPtr<BaseGCS>> c0(m, "BaseGCS");
-    py::bind_vector< bvector<GeoPoint> >(m, "GeoPointVector", py::module_local(false));
-    py::bind_vector< bvector<GeoPoint2d> >(m, "GeoPoint2dVector", py::module_local(false));
 
     c0.def(py::init(py::overload_cast<>(&BaseGCS::CreateGCS)));
     c0.def(py::init(py::overload_cast<WCharCP>(&BaseGCS::CreateGCS)), "coordinateSystemKeyName"_a);
@@ -3043,8 +3041,28 @@ void def_BaseGCS(py::module_& m)
     c0.def("LatLongFromCartesian", &BaseGCS::LatLongFromCartesian, "outLatLong"_a, "inCartesian"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, LatLongFromCartesian));
     c0.def("LatLongFromCartesian2D", &BaseGCS::LatLongFromCartesian2D, "outLatLong"_a, "inCartesian"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, LatLongFromCartesian2D));
     c0.def("UnitsFromMeters", &BaseGCS::UnitsFromMeters, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, UnitsFromMeters));
-    c0.def("CheckGeoPointRange", &BaseGCS::CheckGeoPointRange, "points"_a, "numPoints"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, CheckGeoPointRange));
-    c0.def("CheckCartesianRange", &BaseGCS::CheckCartesianRange, "points"_a, "numPoints"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, CheckCartesianRange));
+    
+    c0.def("CheckGeoPointRange", [](BaseGCSCR self, const GeoPointArray& points)
+        {
+        return self.CheckGeoPointRange(*points.data(), (int)points.size());
+        },"points"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, CheckGeoPointRange));
+
+    c0.def("CheckGeoPointRange", [](BaseGCSCR self, const py::list& points)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, GeoPointArray, GeoPoint);
+        return self.CheckGeoPointRange(*cppPoints.data(), (int)cppPoints.size());
+        },"points"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, CheckGeoPointRange));
+     
+    c0.def("CheckGeoPointRange", [](BaseGCSCR self, const DPoint3dArray& points)
+        {
+        return self.CheckCartesianRange(*points.data(), (int)points.size());
+        }, "points"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, CheckGeoPointRange));
+
+    c0.def("CheckGeoPointRange", [](BaseGCSCR self, const py::list& points)
+        {       
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint3dArray, DPoint3d);
+        return self.CheckCartesianRange(*cppPoints.data(), (int)cppPoints.size());
+        }, "points"_a, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, CheckGeoPointRange));
 
     c0.def_property("ReprojectElevation", &BaseGCS::GetReprojectElevation, &BaseGCS::SetReprojectElevation);
     c0.def("GetReprojectElevation", &BaseGCS::GetReprojectElevation, DOC(Bentley, DgnPlatform, GeoCoordinates, BaseGCS, GetReprojectElevation));

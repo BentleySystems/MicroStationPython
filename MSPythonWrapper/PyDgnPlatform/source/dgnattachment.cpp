@@ -999,6 +999,12 @@ void def_DgnAttachment(py::module_& m)
         {
         return self.SetClipBoundFromViewPoints(points.data(), (UInt32)points.size(), viewRotMatrix, viewOrigin, viewActiveZ, discardClipMasks);
         },"points"_a, "viewRotMatrix"_a, "viewOrigin"_a, "viewActiveZ"_a, "discardClipMasks"_a);
+    
+    c2.def("SetClipBoundFromViewPoints", [](DgnAttachmentR self, const py::list& points, RotMatrixCR viewRotMatrix, DPoint3dR viewOrigin, double viewActiveZ, bool discardClipMasks)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+        return self.SetClipBoundFromViewPoints(cppPoints.data(), (UInt32)cppPoints.size(), viewRotMatrix, viewOrigin, viewActiveZ, discardClipMasks);
+        },"points"_a, "viewRotMatrix"_a, "viewOrigin"_a, "viewActiveZ"_a, "discardClipMasks"_a);
 
     c2.def("SetClipBoundFromViewPoints", [](DgnAttachmentR self, const py::list& pyPoints, RotMatrixCR viewRotMatrix, DPoint3dR viewOrigin, double viewActiveZ, bool discardClipMasks)
         {

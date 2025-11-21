@@ -126,6 +126,12 @@ void def_FenceParams(py::module_& m)
            return self.StoreClippingPoints(outside, points.data(), (int) points.size());
            }, "outside"_a, "points"_a, DOC(Bentley, DgnPlatform, FenceParams, StoreClippingPoints));
 
+    c1.def("StoreClippingPoints", [] (FenceParamsR self, bool outside, py::list& points)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points, cppPoints, DPoint2dArray, DPoint2d);
+           return self.StoreClippingPoints(outside, cppPoints.data(), (int) cppPoints.size());
+           }, "outside"_a, "points"_a, DOC(Bentley, DgnPlatform, FenceParams, StoreClippingPoints));
+
     c1.def("StoreClippingElement", &FenceParams::StoreClippingElement, "eh"_a, "outside"_a, DOC(Bentley, DgnPlatform, FenceParams, StoreClippingElement));
     
     c1.def("ClippingPointsFromRootPoints", [] (FenceParamsR self, DPoint2dArray& points1, DPoint3dArray& points2, ViewportP vp)
@@ -137,6 +143,22 @@ void def_FenceParams(py::module_& m)
            {
            CONVERT_PYLIST_TO_NEW_CPPARRAY(points2, cppPoints2, DPoint3dArray, DPoint3d); 
            self.ClippingPointsFromRootPoints(points1.data(), cppPoints2.data(), (int) points1.size(), vp);
+           CONVERT_CPPARRAY_TO_PYLIST(points2, cppPoints2, DPoint3dArray, DPoint3d);
+           }, "points1"_a, "points2"_a, "vp"_a, DOC(Bentley, DgnPlatform, FenceParams, ClippingPointsFromRootPoints));
+
+    c1.def("ClippingPointsFromRootPoints", [] (FenceParamsR self, py::list& points1, DPoint3dArray& points2, ViewportP vp)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points1, cppPoints1, DPoint2dArray, DPoint2d);
+           self.ClippingPointsFromRootPoints(cppPoints1.data(), points2.data(), (int) points1.size(), vp);
+           CONVERT_CPPARRAY_TO_PYLIST(points1, cppPoints1, DPoint2dArray, DPoint2d);
+           }, "points1"_a, "points2"_a, "vp"_a, DOC(Bentley, DgnPlatform, FenceParams, ClippingPointsFromRootPoints));
+
+    c1.def("ClippingPointsFromRootPoints", [] (FenceParamsR self, py::list& points1, py::list& points2, ViewportP vp)
+           {
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points1, cppPoints1, DPoint2dArray, DPoint2d);
+           CONVERT_PYLIST_TO_NEW_CPPARRAY(points2, cppPoints2, DPoint3dArray, DPoint3d); 
+           self.ClippingPointsFromRootPoints(cppPoints1.data(), cppPoints2.data(), (int) cppPoints1.size(), vp);
+           CONVERT_CPPARRAY_TO_PYLIST(points1, cppPoints1, DPoint2dArray, DPoint2d);
            CONVERT_CPPARRAY_TO_PYLIST(points2, cppPoints2, DPoint3dArray, DPoint3d);
            }, "points1"_a, "points2"_a, "vp"_a, DOC(Bentley, DgnPlatform, FenceParams, ClippingPointsFromRootPoints));
 

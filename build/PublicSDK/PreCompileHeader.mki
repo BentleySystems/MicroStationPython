@@ -68,6 +68,11 @@
 #                          has been included in a /CLR section of your makefile (i.e. a section where compileForCLRStart.mki
 #                          has been included already).
 #
+%if defined(IS_VERACODE_SRC_BUILD)
+    incDir = $[@dir $(PchCompiland)]
+    CCompOpts + -I$(incDir)
+%endif
+
 %if !defined (PchCompiland)
     %error You must define PchCompiland to be the fully qualified name of the .cpp or .c file to host the header precompilation.
 %endif

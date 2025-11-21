@@ -715,18 +715,6 @@ void def_DMatrix4d(py::module_& m)
 
     c1.def("TransposeOf", &DMatrix4d::TransposeOf, "B"_a, DOC(Bentley, Geom, DMatrix4d, TransposeOf));
 
-    c1.def("Multiply", [] (DMatrix4dCR self, DPoint4dArray& outPoints, DPoint4dArray const& inPoints)
-        {
-        if (inPoints.empty())
-            return;
-
-        if (outPoints.size() < inPoints.size())
-            outPoints.resize(inPoints.size());
-
-        self.Multiply(outPoints.data(), inPoints.data(), (int) inPoints.size());
-        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
-
-
     c1.def("Multiply", py::overload_cast<DPoint3dCR, double>(&DMatrix4d::Multiply), "xyz"_a, "w"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
 
     c1.def("SymmetricEigenvectors", &DMatrix4d::SymmetricEigenvectors, "Q"_a, "D"_a, DOC(Bentley, Geom, DMatrix4d, SymmetricEigenvectors));
@@ -740,6 +728,49 @@ void def_DMatrix4d(py::module_& m)
             outPoints.resize(inPoints.size());
 
         self.Multiply(outPoints.data(), inPoints.data(), (int) inPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
+
+    c1.def("Multiply", [](DMatrix4dCR self, py::list &outPoints, py::list const &inPoints)
+           {
+           if (!inPoints.empty())
+                {
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+                    CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+
+                    if (cppOutPoints.size() < cppInPoints.size())
+                        cppOutPoints.resize(cppInPoints.size());
+
+                    self.Multiply(cppOutPoints.data(), cppInPoints.data(), (int)cppInPoints.size());
+
+                    CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+                } 
+            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
+
+    c1.def("Multiply", [](DMatrix4dCR self, DPoint4dArray &outPoints, py::list const &inPoints)
+           {
+           if (!inPoints.empty())
+                {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+
+                if (outPoints.size() < cppInPoints.size())
+                    outPoints.resize(cppInPoints.size());
+
+                self.Multiply(outPoints.data(), cppInPoints.data(), (int)cppInPoints.size());
+                } 
+            }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
+
+    c1.def("Multiply", [](DMatrix4dCR self, py::list &outPoints, DPoint4dArray const &inPoints)
+           {
+           if (!inPoints.empty())
+           {
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+            if (cppOutPoints.size() < inPoints.size())
+                cppOutPoints.resize(inPoints.size());
+
+            self.Multiply(cppOutPoints.data(), inPoints.data(), (int)inPoints.size());
+
+            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+           } 
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
 
     c1.def("Multiply", [] (DMatrix4dCR self, GraphicsPointVec& outPoints, GraphicsPointVec const& inPoints)
@@ -756,6 +787,12 @@ void def_DMatrix4d(py::module_& m)
     c1.def("EvaluateImageGrid", [] (DMatrix4dCR self, DPoint2dArray& grid, double x00, double y00, int m, int n, double tol)
         {
         return self.EvaluateImageGrid(grid.data(), x00, y00, m, n, tol);
+        }, "grid"_a, "x00"_a, "y00"_a, "m"_a, "n"_a, "tol"_a, DOC(Bentley, Geom, DMatrix4d, EvaluateImageGrid));
+
+    c1.def("EvaluateImageGrid", [] (DMatrix4dCR self, py::list& grid, double x00, double y00, int m, int n, double tol)
+        {
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(grid, cppGrid, DPoint2dArray, DPoint2d);
+        return self.EvaluateImageGrid(cppGrid.data(), x00, y00, m, n, tol);
         }, "grid"_a, "x00"_a, "y00"_a, "m"_a, "n"_a, "tol"_a, DOC(Bentley, Geom, DMatrix4d, EvaluateImageGrid));
 
     c1.def("MultiplyAndRenormalize", [] (DMatrix4dCR self, DPoint3dArray& outPoints, DPoint3dArray const& inPoints)
@@ -783,6 +820,30 @@ void def_DMatrix4d(py::module_& m)
         CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndRenormalize));
 
+    c1.def("MultiplyAndRenormalize", [] (DMatrix4dCR self, DPoint3dArray& outPoints, py::list const& inPoints)
+        {   
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+        if (outPoints.size() < cppInPoints.size())
+            outPoints.resize(cppInPoints.size());
+
+        self.MultiplyAndRenormalize(outPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndRenormalize));
+
+    c1.def("MultiplyAndRenormalize", [] (DMatrix4dCR self, py::list& outPoints, DPoint3dArray const& inPoints)
+        {   
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        if (cppOutPoints.size() < inPoints.size())
+            cppOutPoints.resize(inPoints.size());
+
+        self.MultiplyAndRenormalize(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndRenormalize));
 
     c1.def("MultiplyAndRenormalize", py::overload_cast<DPoint3dR, DPoint3dCR>(&DMatrix4d::MultiplyAndRenormalize, py::const_), "outPoint"_a, "inPoint"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndRenormalize));
 
@@ -810,6 +871,32 @@ void def_DMatrix4d(py::module_& m)
         CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndNormalize));
 
+    c1.def("MultiplyAndNormalize", [] (DMatrix4dCR self, DPoint3dArray& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+        if (outPoints.size() < cppInPoints.size())
+            outPoints.resize(cppInPoints.size());
+
+        self.MultiplyAndNormalize(outPoints.data(), cppInPoints.data(), (size_t) cppInPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndNormalize));
+
+    c1.def("MultiplyAndNormalize", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+        if (cppOutPoints.size() < cppInPoints.size())
+            cppOutPoints.resize(cppInPoints.size());
+
+        self.MultiplyAndNormalize(cppOutPoints.data(), cppInPoints.data(), (size_t) cppInPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAndNormalize));
+
     c1.def("MultiplyAffine", [] (DMatrix4dCR self, DPoint4dArray& outPoints, DPoint4dArray const& inPoints)
         {
         if (inPoints.empty())
@@ -821,16 +908,30 @@ void def_DMatrix4d(py::module_& m)
         self.MultiplyAffine(outPoints.data(), inPoints.data(), (int) inPoints.size());
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
 
-    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, DPoint4dArray& outPoints, DPoint4dArray const& inPoints)
+    c1.def("MultiplyAffine", [] (DMatrix4dCR self, py::list& outPoints, DPoint4dArray const& inPoints)
         {
         if (inPoints.empty())
             return;
 
-        if (outPoints.size() < inPoints.size())
-            outPoints.resize(inPoints.size());
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+        if (cppOutPoints.size() < inPoints.size())
+            cppOutPoints.resize(inPoints.size());
 
-        self.MultiplyScaleAndTranslate(outPoints.data(), inPoints.data(), (int) inPoints.size());
-        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
+        self.MultiplyAffine(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
+
+    c1.def("MultiplyAffine", [] (DMatrix4dCR self, DPoint4dArray& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d)
+        if (outPoints.size() < cppInPoints.size())
+            outPoints.resize(cppInPoints.size());
+
+        self.MultiplyAffine(outPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
 
     c1.def("MultiplyAffine", [] (DMatrix4dCR self, DPoint3dArray& outPoints, DPoint3dArray const& inPoints)
         {
@@ -843,18 +944,56 @@ void def_DMatrix4d(py::module_& m)
         self.MultiplyAffine(outPoints.data(), inPoints.data(), (int) inPoints.size());
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
     
-    c1.def("MultiplyAffine", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+    c1.def("MultiplyAffine", [] (DMatrix4dCR self, DPoint3dArray& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d)
+        if (outPoints.size() < cppInPoints.size())
+            outPoints.resize(cppInPoints.size());
+
+        self.MultiplyAffine(outPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
+
+    c1.def("MultiplyAffine", [] (DMatrix4dCR self, py::list& outPoints, DPoint3dArray const& inPoints)
         {
         if (inPoints.empty())
             return;
 
         CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
-        if (cppOutPoints.size() < cppInPoints.size())
-            cppOutPoints.resize(cppInPoints.size());
+        if (cppOutPoints.size() < inPoints.size())
+            cppOutPoints.resize(inPoints.size());
 
-        self.MultiplyAffine(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        self.MultiplyAffine(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
         CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
+
+    c1.def("MultiplyAffine", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        if(py::isinstance<DPoint3d>(inPoints[0])){
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+
+            if (cppOutPoints.size() < cppInPoints.size())
+                cppOutPoints.resize(cppInPoints.size());
+
+            self.MultiplyAffine(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }
+        else if(py::isinstance<DPoint4d>(inPoints[0])){
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+
+            if (cppOutPoints.size() < cppInPoints.size())
+                cppOutPoints.resize(cppInPoints.size());
+                
+            self.MultiplyAffine(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+        }
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffine));
 
     c1.def("MultiplyAffineVectors", [] (DMatrix4dCR self, DPoint3dArray& outPoints, DPoint3dArray const& inPoints)
@@ -883,6 +1022,69 @@ void def_DMatrix4d(py::module_& m)
         CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffineVectors));
 
+    c1.def("MultiplyAffineVectors", [] (DMatrix4dCR self, py::list& outPoints, DPoint3dArray const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        if (cppOutPoints.size() < inPoints.size())
+            cppOutPoints.resize(inPoints.size());
+
+        self.MultiplyAffineVectors(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffineVectors));
+
+    c1.def("MultiplyAffineVectors", [] (DMatrix4dCR self, DPoint3dArray& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+
+        if (outPoints.size() < cppInPoints.size())
+            outPoints.resize(cppInPoints.size());
+
+        self.MultiplyAffineVectors(outPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyAffineVectors));
+
+    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, DPoint4dArray& outPoints, DPoint4dArray const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        if (outPoints.size() < inPoints.size())
+            outPoints.resize(inPoints.size());
+
+        self.MultiplyScaleAndTranslate(outPoints.data(), inPoints.data(), (int) inPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
+
+    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, py::list& outPoints, DPoint4dArray const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+    
+        if (cppOutPoints.size() < inPoints.size())
+            cppOutPoints.resize(inPoints.size());
+
+        self.MultiplyScaleAndTranslate(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
+
+    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, DPoint4dArray& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        if (outPoints.size() < inPoints.size())
+            outPoints.resize(inPoints.size());
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints,DPoint4dArray, DPoint4d);
+
+        self.MultiplyScaleAndTranslate(outPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
+
     c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, DPoint3dArray& outPoints, DPoint3dArray const& inPoints)
         {
         if (inPoints.empty())
@@ -894,19 +1096,57 @@ void def_DMatrix4d(py::module_& m)
         self.MultiplyScaleAndTranslate(outPoints.data(), inPoints.data(), (int) inPoints.size());
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
 
-    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, py::list& outPoints, DPoint3dArray const& inPoints)
         {
         if (inPoints.empty())
             return;
 
         CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
     
-        if (cppOutPoints.size() < cppInPoints.size())
-            cppOutPoints.resize(cppInPoints.size());
+        if (cppOutPoints.size() < inPoints.size())
+            cppOutPoints.resize(inPoints.size());
 
-        self.MultiplyScaleAndTranslate(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        self.MultiplyScaleAndTranslate(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
         CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
+
+    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, DPoint3dArray& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        if (outPoints.size() < inPoints.size())
+            outPoints.resize(inPoints.size());
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints,DPoint3dArray, DPoint3d);
+
+        self.MultiplyScaleAndTranslate(outPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
+
+    c1.def("MultiplyScaleAndTranslate", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        if(py::isinstance<DPoint3d>(inPoints[0])){
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+
+            if (cppOutPoints.size() < cppInPoints.size())
+                cppOutPoints.resize(cppInPoints.size());
+
+            self.MultiplyScaleAndTranslate(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint3dArray, DPoint3d);    
+        }
+        else if(py::isinstance<DPoint4d>(inPoints[0])){
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+            CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+
+            if (cppOutPoints.size() < cppInPoints.size())
+                cppOutPoints.resize(cppInPoints.size());
+
+            self.MultiplyScaleAndTranslate(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+            CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);    
+        }
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyScaleAndTranslate));
 
     c1.def("Multiply", [] (DMatrix4dCR self, DPoint4dArray& outPoints, DPoint3dArray const& inPoints, DoubleArray const& weight)
@@ -920,18 +1160,98 @@ void def_DMatrix4d(py::module_& m)
         self.Multiply(outPoints.data(), inPoints.data(), weight.empty() ? nullptr : weight.data(), (int) inPoints.size());
         }, "outPoints"_a, "inPoints"_a, "weight"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
 
-    c1.def("Multiply", [] (DMatrix4dCR self, DPoint4dArray& outPoints, py::list const& inPoints, DoubleArray const& weight)
+    c1.def("Multiply", [](DMatrix4dCR self, py::list& outPoints, py::list const& inPoints, py::list const& weight)
         {
-        if (inPoints.empty())
-            return;
+            if (!inPoints.empty()) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(weight, cppWeight, DoubleArray, double);
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
 
-        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+                if (cppOutPoints.size() < cppInPoints.size())
+                    cppOutPoints.resize(cppInPoints.size());
 
-        if (outPoints.size() < cppInPoints.size())
-            outPoints.resize(cppInPoints.size());
+                self.Multiply(cppOutPoints.data(), cppInPoints.data(), cppWeight.empty() ? nullptr : cppWeight.data(), (int) cppInPoints.size());
+                CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+            }
+        }, "outPoints"_a, "inPoints"_a, "weight"_a);
 
-        self.Multiply(outPoints.data(), cppInPoints.data(), weight.empty() ? nullptr : weight.data(), (int) cppInPoints.size());
+    c1.def("Multiply", [](DMatrix4dCR self, py::list& outPoints, py::list const& inPoints, DoubleArray const& weight)
+        {
+            if (!inPoints.empty()) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+
+                if (cppOutPoints.size() < cppInPoints.size())
+                    cppOutPoints.resize(cppInPoints.size());
+
+                self.Multiply(cppOutPoints.data(), cppInPoints.data(), weight.empty() ? nullptr : weight.data(), (int) cppInPoints.size());
+                CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+            }
+        }, "outPoints"_a, "inPoints"_a, "weight"_a);
+
+    c1.def("Multiply", [](DMatrix4dCR self, py::list& outPoints, DPoint3dArray const& inPoints, py::list const& weight)
+        {
+            if (!inPoints.empty()) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(weight, cppWeight, DoubleArray, double);
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+
+                if (cppOutPoints.size() < inPoints.size())
+                    cppOutPoints.resize(inPoints.size());
+
+                self.Multiply(cppOutPoints.data(), inPoints.data(), cppWeight.empty() ? nullptr : cppWeight.data(), (int) inPoints.size());
+                CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+            }
+        }, "outPoints"_a, "inPoints"_a, "weight"_a);
+
+    c1.def("Multiply", [](DMatrix4dCR self, DPoint4dArray& outPoints, py::list const& inPoints, py::list const& weight)
+        {
+            if (!inPoints.empty()) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(weight, cppWeight, DoubleArray, double);
+
+                if (outPoints.size() < cppInPoints.size())
+                    outPoints.resize(cppInPoints.size());
+
+                self.Multiply(outPoints.data(), cppInPoints.data(), cppWeight.empty() ? nullptr : cppWeight.data(), (int) cppInPoints.size());
+            }
+        }, "outPoints"_a, "inPoints"_a, "weight"_a);
+
+    c1.def("Multiply", [] (DMatrix4dCR self, py::list& outPoints, DPoint3dArray const& inPoints, DoubleArray const& weight)
+        {
+            if (!inPoints.empty()) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+
+                if (cppOutPoints.size() < inPoints.size())
+                    cppOutPoints.resize(inPoints.size());
+
+                self.Multiply(cppOutPoints.data(), inPoints.data(), weight.empty() ? nullptr : weight.data(), (int) inPoints.size());
+                CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+            }
         }, "outPoints"_a, "inPoints"_a, "weight"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
+
+    c1.def("Multiply", [](DMatrix4dCR self, DPoint4dArray& outPoints, py::list const& inPoints, DoubleArray const& weight)
+        {
+            if (!inPoints.empty()) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint3dArray, DPoint3d);
+
+                if (outPoints.size() < cppInPoints.size())
+                    outPoints.resize(cppInPoints.size());
+
+                self.Multiply(outPoints.data(), cppInPoints.data(), weight.empty() ? nullptr : weight.data(), (int) cppInPoints.size());
+            }
+        }, "outPoints"_a, "inPoints"_a, "weight"_a);
+
+    c1.def("Multiply", [](DMatrix4dCR self, DPoint4dArray& outPoints, DPoint3dArray const& inPoints, py::list const& weight)
+        {
+            if (!inPoints.empty()) {
+                CONVERT_PYLIST_TO_NEW_CPPARRAY(weight, cppWeight, DoubleArray, double);
+
+                if (outPoints.size() < inPoints.size())
+                    outPoints.resize(inPoints.size());
+
+                self.Multiply(outPoints.data(), inPoints.data(), cppWeight.empty() ? nullptr : cppWeight.data(), (int) inPoints.size());
+            }
+        }, "outPoints"_a, "inPoints"_a, "weight"_a);
 
     c1.def("Multiply", py::overload_cast<DPoint4dR, DPoint4dCR>(&DMatrix4d::Multiply, py::const_), "outPoint"_a, "inPoint"_a, DOC(Bentley, Geom, DMatrix4d, Multiply));
 
@@ -944,6 +1264,48 @@ void def_DMatrix4d(py::module_& m)
             outPoints.resize(inPoints.size());
 
         self.MultiplyTranspose(outPoints.data(), inPoints.data(), (int) inPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyTranspose));
+
+    c1.def("MultiplyTranspose", [] (DMatrix4dCR self, py::list& outPoints, DPoint4dArray const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+
+        if (cppOutPoints.size() < inPoints.size())
+            cppOutPoints.resize(inPoints.size());
+
+        self.MultiplyTranspose(cppOutPoints.data(), inPoints.data(), (int) inPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyTranspose));
+
+    c1.def("MultiplyTranspose", [] (DMatrix4dCR self, DPoint4dArray& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        if (outPoints.size() < inPoints.size())
+            outPoints.resize(inPoints.size());
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+
+        self.MultiplyTranspose(outPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyTranspose));
+
+    c1.def("MultiplyTranspose", [] (DMatrix4dCR self, py::list& outPoints, py::list const& inPoints)
+        {
+        if (inPoints.empty())
+            return;
+
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
+        CONVERT_PYLIST_TO_NEW_CPPARRAY(inPoints, cppInPoints, DPoint4dArray, DPoint4d);
+
+        if (cppOutPoints.size() < cppInPoints.size())
+            cppOutPoints.resize(cppInPoints.size());
+
+        self.MultiplyTranspose(cppOutPoints.data(), cppInPoints.data(), (int) cppInPoints.size());
+        CONVERT_CPPARRAY_TO_PYLIST(outPoints, cppOutPoints, DPoint4dArray, DPoint4d);
         }, "outPoints"_a, "inPoints"_a, DOC(Bentley, Geom, DMatrix4d, MultiplyTranspose));
 
     c1.def("SetRow", py::overload_cast<int, double, double, double, double>(&DMatrix4d::SetRow), "i"_a, "c0"_a, "c1"_a, "c2"_a, "c3"_a, DOC(Bentley, Geom, DMatrix4d, SetRow));
